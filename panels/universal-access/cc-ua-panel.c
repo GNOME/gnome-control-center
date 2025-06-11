@@ -42,16 +42,15 @@
 #include "cc-ua-zoom-page.h"
 #include "cc-ua-resources.h"
 
-struct _CcUaPanel
-{
-  CcPanel    parent_instance;
+struct _CcUaPanel {
+  CcPanel parent_instance;
 
-  AdwSwitchRow       *show_ua_menu_row;
-  CcListRow          *seeing_row;
-  CcListRow          *hearing_row;
-  CcListRow          *typing_row;
-  CcListRow          *mouse_row;
-  CcListRow          *zoom_row;
+  AdwSwitchRow *show_ua_menu_row;
+  CcListRow *seeing_row;
+  CcListRow *hearing_row;
+  CcListRow *typing_row;
+  CcListRow *mouse_row;
+  CcListRow *zoom_row;
 
   GSettings *a11y_settings;
 };

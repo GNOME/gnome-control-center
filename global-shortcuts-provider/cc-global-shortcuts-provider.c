@@ -38,8 +38,7 @@
 #include "cc-util.h"
 #include "control-center-global-shortcuts-provider.h"
 
-struct _CcGlobalShortcutsProvider
-{
+struct _CcGlobalShortcutsProvider {
   GObject parent;
 
   CcSettingsGlobalShortcutsProvider *skeleton;
@@ -49,8 +48,7 @@ struct _CcGlobalShortcutsProvider
   GHashTable *dialogs;
 };
 
-typedef enum
-{
+typedef enum {
   MATCH_NONE,
   MATCH_PREFIX,
   MATCH_SUBSTRING
@@ -69,19 +67,16 @@ handle_dialog_done (CcGlobalShortcutsProvider *self,
 
   invocation = g_hash_table_lookup (self->dialogs, shortcut_dialog);
 
-  if (response)
-    {
-      cc_settings_global_shortcuts_provider_complete_bind_shortcuts (self->skeleton,
-                                                                     invocation,
-                                                                     g_variant_ref_sink (response));
-    }
-  else
-    {
-      g_dbus_method_invocation_return_error (invocation,
-                                             G_DBUS_ERROR,
-                                             G_DBUS_ERROR_ACCESS_DENIED,
-                                             "Access denied");
-    }
+  if (response) {
+    cc_settings_global_shortcuts_provider_complete_bind_shortcuts (self->skeleton,
+                                                                   invocation,
+                                                                   g_variant_ref_sink (response));
+  } else {
+    g_dbus_method_invocation_return_error (invocation,
+                                           G_DBUS_ERROR,
+                                           G_DBUS_ERROR_ACCESS_DENIED,
+                                           "Access denied");
+  }
 }
 
 static void
@@ -100,7 +95,7 @@ handle_bind_shortcuts (CcGlobalShortcutsProvider *self,
                        const char                *parent_window,
                        GVariant                  *shortcuts)
 {
-  g_autoptr(CcGlobalShortcutDialog) shortcut_dialog = NULL;
+  g_autoptr (CcGlobalShortcutDialog) shortcut_dialog = NULL;
 
   shortcut_dialog =
     cc_global_shortcut_dialog_new (app_id,
@@ -126,8 +121,8 @@ static void
 cc_global_shortcuts_provider_init (CcGlobalShortcutsProvider *self)
 {
   self->dialogs = g_hash_table_new_full (NULL, NULL,
-                                         (GDestroyNotify) gtk_window_destroy,
-                                         (GDestroyNotify) g_object_unref);
+                                         (GDestroyNotify)gtk_window_destroy,
+                                         (GDestroyNotify)g_object_unref);
   self->skeleton = cc_settings_global_shortcuts_provider_skeleton_new ();
 
   g_signal_connect_swapped (self->skeleton, "handle-bind-shortcuts",

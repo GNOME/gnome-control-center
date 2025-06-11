@@ -36,15 +36,14 @@
  * @short_description: WWAN network type selection dialog
  */
 
-#define CC_TYPE_WWAN_MODE_ROW (cc_wwan_mode_row_get_type())
+#define CC_TYPE_WWAN_MODE_ROW (cc_wwan_mode_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcWwanModeRow, cc_wwan_mode_row, CC, WWAN_MODE_ROW, GtkListBoxRow)
 
-struct _CcWwanModeDialog
-{
-  GtkDialog      parent_instance;
+struct _CcWwanModeDialog {
+  GtkDialog parent_instance;
 
-  CcWwanDevice  *device;
-  GtkListBox    *network_mode_list;
+  CcWwanDevice *device;
+  GtkListBox *network_mode_list;
   CcWwanModeRow *selected_row;
 
   MMModemMode preferred;
@@ -64,12 +63,11 @@ enum {
 
 static GParamSpec *properties[N_PROPS];
 
-struct _CcWwanModeRow
-{
-  GtkListBoxRow  parent_instance;
-  GtkImage      *ok_emblem;
-  MMModemMode    allowed;
-  MMModemMode    preferred;
+struct _CcWwanModeRow {
+  GtkListBoxRow parent_instance;
+  GtkImage *ok_emblem;
+  MMModemMode allowed;
+  MMModemMode preferred;
 };
 
 G_DEFINE_TYPE (CcWwanModeRow, cc_wwan_mode_row, GTK_TYPE_LIST_BOX_ROW)
@@ -107,17 +105,14 @@ cc_wwan_mode_dialog_ok_clicked_cb (CcWwanModeDialog *self)
 {
   g_assert (CC_IS_WWAN_MODE_DIALOG (self));
 
-  if (self->selected_row)
-    {
-      cc_wwan_device_set_current_mode (self->device,
-                                       self->selected_row->allowed,
-                                       self->selected_row->preferred,
-                                       NULL, NULL, NULL);
-    }
-  else
-    {
-      g_return_if_reached ();
-    }
+  if (self->selected_row) {
+    cc_wwan_device_set_current_mode (self->device,
+                                     self->selected_row->allowed,
+                                     self->selected_row->preferred,
+                                     NULL, NULL, NULL);
+  } else {
+    g_return_if_reached ();
+  }
 
   gtk_window_close (GTK_WINDOW (self));
 }
@@ -185,25 +180,23 @@ cc_wwan_mode_dialog_update (CcWwanModeDialog *self)
 
   g_assert (CC_IS_WWAN_MODE_DIALOG (self));
 
-  if (!cc_wwan_device_get_supported_modes (self->device, &allowed, NULL))
-    {
-      g_warning ("No modes supported by modem");
-      return;
-    }
+  if (!cc_wwan_device_get_supported_modes (self->device, &allowed, NULL)) {
+    g_warning ("No modes supported by modem");
+    return;
+  }
 
-  for (i = 0; i < G_N_ELEMENTS (modes); i++)
-    {
-      GtkWidget *row;
+  for (i = 0; i < G_N_ELEMENTS (modes); i++) {
+    GtkWidget *row;
 
-      if ((modes[i][0] & allowed) != modes[i][0])
-        continue;
+    if ((modes[i][0] & allowed) != modes[i][0])
+      continue;
 
-      if (modes[i][1] && !(modes[i][1] & allowed))
-        continue;
+    if (modes[i][1] && !(modes[i][1] & allowed))
+      continue;
 
-      row = cc_wwan_mode_dialog_row_new (self, modes[i][0], modes[i][1]);
-      gtk_list_box_append (GTK_LIST_BOX (self->network_mode_list), row);
-    }
+    row = cc_wwan_mode_dialog_row_new (self, modes[i][0], modes[i][1]);
+    gtk_list_box_append (GTK_LIST_BOX (self->network_mode_list), row);
+  }
 }
 
 static void
@@ -214,15 +207,14 @@ cc_wwan_mode_dialog_set_property (GObject      *object,
 {
   CcWwanModeDialog *self = CC_WWAN_MODE_DIALOG (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_DEVICE:
       self->device = g_value_dup_object (value);
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -252,12 +244,10 @@ static void
 cc_wwan_mode_dialog_update_mode (CcWwanModeRow    *row,
                                  CcWwanModeDialog *self)
 {
-  if (self->allowed == row->allowed && self->preferred == row->preferred)
-    {
-      self->selected_row = row;
-      gtk_widget_set_visible (GTK_WIDGET (row->ok_emblem), TRUE);
-    }
-  else
+  if (self->allowed == row->allowed && self->preferred == row->preferred) {
+    self->selected_row = row;
+    gtk_widget_set_visible (GTK_WIDGET (row->ok_emblem), TRUE);
+  } else
     gtk_widget_set_visible (GTK_WIDGET (row->ok_emblem), FALSE);
 }
 
@@ -266,11 +256,10 @@ cc_wwan_mode_dialog_show (GtkWidget *widget)
 {
   CcWwanModeDialog *self = CC_WWAN_MODE_DIALOG (widget);
 
-  if(!cc_wwan_device_get_current_mode (self->device, &self->allowed, &self->preferred))
-    {
-      g_warning ("Can't get allowed and preferred wwan modes");
-      goto end;
-    }
+  if(!cc_wwan_device_get_current_mode (self->device, &self->allowed, &self->preferred)) {
+    g_warning ("Can't get allowed and preferred wwan modes");
+    goto end;
+  }
 
   self->selected_row = NULL;
 
@@ -279,7 +268,7 @@ cc_wwan_mode_dialog_show (GtkWidget *widget)
        child = gtk_widget_get_next_sibling (child))
     cc_wwan_mode_dialog_update_mode (CC_WWAN_MODE_ROW (child), self);
 
- end:
+end:
   GTK_WIDGET_CLASS (cc_wwan_mode_dialog_parent_class)->show (widget);
 }
 
@@ -290,7 +279,7 @@ cc_wwan_mode_dialog_class_init (CcWwanModeDialogClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->set_property = cc_wwan_mode_dialog_set_property;
-  object_class->constructed  = cc_wwan_mode_dialog_constructed;
+  object_class->constructed = cc_wwan_mode_dialog_constructed;
   object_class->dispose = cc_wwan_mode_dialog_dispose;
 
   widget_class->show = cc_wwan_mode_dialog_show;

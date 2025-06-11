@@ -23,23 +23,22 @@
 #include "cc-display-arrangement.h"
 #include "cc-display-config.h"
 
-struct _CcDisplayArrangement
-{
-  GtkDrawingArea    object;
+struct _CcDisplayArrangement {
+  GtkDrawingArea object;
 
-  CcDisplayConfig  *config;
+  CcDisplayConfig *config;
 
-  cairo_matrix_t    to_widget;
-  cairo_matrix_t    to_actual;
+  cairo_matrix_t to_widget;
+  cairo_matrix_t to_actual;
 
-  gboolean          drag_active;
+  gboolean drag_active;
   CcDisplayMonitor *selected_output;
   CcDisplayMonitor *prelit_output;
   /* Starting position of cursor inside the monitor. */
-  gdouble           drag_anchor_x;
-  gdouble           drag_anchor_y;
+  gdouble drag_anchor_x;
+  gdouble drag_anchor_y;
 
-  guint             major_snap_distance;
+  guint major_snap_distance;
 };
 
 typedef struct _CcDisplayArrangement CcDisplayArrangement;
@@ -59,13 +58,13 @@ typedef enum {
 } SnapDirection;
 
 typedef struct {
-  cairo_matrix_t     to_widget;
-  guint              major_snap_distance;
-  gdouble            dist_x;
-  gdouble            dist_y;
-  gint               mon_x;
-  gint               mon_y;
-  SnapDirection      snapped;
+  cairo_matrix_t to_widget;
+  guint major_snap_distance;
+  gdouble dist_x;
+  gdouble dist_y;
+  gint mon_x;
+  gint mon_y;
+  SnapDirection snapped;
 } SnapData;
 
 #define MARGIN_PX  0
@@ -86,13 +85,12 @@ apply_rotation_to_geometry (CcDisplayMonitor *output,
   CcDisplayRotation rotation;
 
   rotation = cc_display_monitor_get_rotation (output);
-  if ((rotation == CC_DISPLAY_ROTATION_90) || (rotation == CC_DISPLAY_ROTATION_270))
-    {
-      int tmp;
-      tmp = *h;
-      *h = *w;
-      *w = tmp;
-    }
+  if ((rotation == CC_DISPLAY_ROTATION_90) || (rotation == CC_DISPLAY_ROTATION_270)) {
+    int tmp;
+    tmp = *h;
+    *h = *w;
+    *w = tmp;
+  }
 }
 
 /* get_geometry */
@@ -104,22 +102,18 @@ get_scaled_geometry (CcDisplayConfig  *config,
                      int              *w,
                      int              *h)
 {
-  if (cc_display_monitor_is_active (output))
-    {
-      cc_display_monitor_get_geometry (output, x, y, w, h);
-    }
-  else
-    {
-      cc_display_monitor_get_geometry (output, x, y, NULL, NULL);
-      cc_display_mode_get_resolution (cc_display_monitor_get_preferred_mode (output), w, h);
-    }
+  if (cc_display_monitor_is_active (output)) {
+    cc_display_monitor_get_geometry (output, x, y, w, h);
+  } else {
+    cc_display_monitor_get_geometry (output, x, y, NULL, NULL);
+    cc_display_mode_get_resolution (cc_display_monitor_get_preferred_mode (output), w, h);
+  }
 
-  if (cc_display_config_is_layout_logical (config))
-    {
-      double scale = cc_display_monitor_get_scale (output);
-      *w = round (*w / scale);
-      *h = round (*h / scale);
-    }
+  if (cc_display_config_is_layout_logical (config)) {
+    double scale = cc_display_monitor_get_scale (output);
+    *w = round (*w / scale);
+    *h = round (*h / scale);
+  }
 
   apply_rotation_to_geometry (output, w, h);
 }
@@ -143,23 +137,22 @@ get_bounding_box (CcDisplayConfig *config,
   *max_h = 0;
 
   outputs = cc_display_config_get_monitors (config);
-  for (l = outputs; l; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      int x, y, w, h;
+  for (l = outputs; l; l = l->next) {
+    CcDisplayMonitor *output = l->data;
+    int x, y, w, h;
 
-      if (!cc_display_monitor_is_useful (output))
-        continue;
+    if (!cc_display_monitor_is_useful (output))
+      continue;
 
-      get_scaled_geometry (config, output, &x, &y, &w, &h);
+    get_scaled_geometry (config, output, &x, &y, &w, &h);
 
-      *x1 = MIN (*x1, x);
-      *y1 = MIN (*y1, y);
-      *x2 = MAX (*x2, x + w);
-      *y2 = MAX (*y2, y + h);
-      *max_w = MAX (*max_w, w);
-      *max_h = MAX (*max_h, h);
-    }
+    *x1 = MIN (*x1, x);
+    *y1 = MIN (*y1, y);
+    *x2 = MAX (*x2, x + w);
+    *y2 = MAX (*y2, y + h);
+    *max_w = MAX (*max_w, w);
+    *max_h = MAX (*max_h, h);
+  }
 }
 
 static void
@@ -178,12 +171,14 @@ monitor_get_drawing_rect (CcDisplayArrangement *self,
   *x2 = *x1 + *x2;
   *y2 = *y1 + *y2;
 
-  x = *x1; y = *y1;
+  x = *x1;
+  y = *y1;
   cairo_matrix_transform_point (&self->to_widget, &x, &y);
   *x1 = round (x);
   *y1 = round (y);
 
-  x = *x2; y = *y2;
+  x = *x2;
+  y = *y2;
   cairo_matrix_transform_point (&self->to_widget, &x, &y);
   *x2 = round (x);
   *y2 = round (y);
@@ -191,13 +186,13 @@ monitor_get_drawing_rect (CcDisplayArrangement *self,
 
 
 static void
-get_snap_distance (SnapData  *snap_data,
-                   gint       mon_x,
-                   gint       mon_y,
-                   gint       new_x,
-                   gint       new_y,
-                   gdouble   *dist_x,
-                   gdouble   *dist_y)
+get_snap_distance (SnapData *snap_data,
+                   gint      mon_x,
+                   gint      mon_y,
+                   gint      new_x,
+                   gint      new_y,
+                   gdouble  *dist_x,
+                   gdouble  *dist_y)
 {
   gdouble local_dist_x, local_dist_y;
 
@@ -213,14 +208,14 @@ get_snap_distance (SnapData  *snap_data,
 }
 
 static void
-maybe_update_snap (SnapData       *snap_data,
-                   gint            mon_x,
-                   gint            mon_y,
-                   gint            new_x,
-                   gint            new_y,
-                   SnapDirection   snapped,
-                   SnapDirection   major_axis,
-                   gint            minor_unlimited)
+maybe_update_snap (SnapData      *snap_data,
+                   gint           mon_x,
+                   gint           mon_y,
+                   gint           new_x,
+                   gint           new_y,
+                   SnapDirection  snapped,
+                   SnapDirection  major_axis,
+                   gint           minor_unlimited)
 {
   SnapDirection update_snap = SNAP_DIR_NONE;
   gdouble dist_x, dist_y;
@@ -231,96 +226,81 @@ maybe_update_snap (SnapData       *snap_data,
 
   /* Snap by the variable max snap distance on the major axis, ensure the
    * minor axis is below the minimum snapping distance (often just zero). */
-  switch (major_axis)
-    {
-      case SNAP_DIR_X:
-        if (dist_x > snap_data->major_snap_distance)
+  switch (major_axis) {
+    case SNAP_DIR_X:
+      if (dist_x > snap_data->major_snap_distance)
+        return;
+      if (dist_y > MINOR_SNAP_DISTANCE) {
+        if (new_y > mon_y && minor_unlimited <= 0)
           return;
-        if (dist_y > MINOR_SNAP_DISTANCE)
-          {
-            if (new_y > mon_y && minor_unlimited <= 0)
-              return;
-            if (new_y < mon_y && minor_unlimited >= 0)
-              return;
-          }
-        break;
-
-      case SNAP_DIR_Y:
-        if (dist_y > snap_data->major_snap_distance)
+        if (new_y < mon_y && minor_unlimited >= 0)
           return;
-        if (dist_x > MINOR_SNAP_DISTANCE)
-          {
-            if (new_x > mon_x && minor_unlimited <= 0)
-              return;
-            if (new_x < mon_x && minor_unlimited >= 0)
-              return;
-          }
-        break;
+      }
+      break;
 
-      default:
-        g_assert_not_reached();
-    }
+    case SNAP_DIR_Y:
+      if (dist_y > snap_data->major_snap_distance)
+        return;
+      if (dist_x > MINOR_SNAP_DISTANCE) {
+        if (new_x > mon_x && minor_unlimited <= 0)
+          return;
+        if (new_x < mon_x && minor_unlimited >= 0)
+          return;
+      }
+      break;
 
-  if (snapped == SNAP_DIR_BOTH)
-    {
-      if (snap_data->snapped == SNAP_DIR_NONE)
-        update_snap = SNAP_DIR_BOTH;
-
-      /* Update, if this is closer on the main axis. */
-      if (((major_axis == SNAP_DIR_X) && (dist_x < snap_data->dist_x)) ||
-          ((major_axis == SNAP_DIR_Y) && (dist_y < snap_data->dist_y)))
-        {
-          update_snap = SNAP_DIR_BOTH;
-        }
-
-      /* Also update if we were only snapping in one direction earlier and it
-       * is better or equally good. */
-      if ((snap_data->snapped == SNAP_DIR_X && (dist <= snap_data->dist_x)) ||
-          (snap_data->snapped == SNAP_DIR_Y && (dist <= snap_data->dist_y)))
-        {
-          update_snap = SNAP_DIR_BOTH;
-        }
-
-      /* Also allow a minor axis to be added if the first axis remains identical. */
-      if (((snap_data->snapped == SNAP_DIR_X) && (major_axis == SNAP_DIR_X) && (new_x == snap_data->mon_x)) ||
-          ((snap_data->snapped == SNAP_DIR_Y) && (major_axis == SNAP_DIR_Y) && (new_y == snap_data->mon_y)))
-        {
-          update_snap = SNAP_DIR_BOTH;
-        }
-    }
-  else if (snapped == SNAP_DIR_X)
-    {
-      if (dist_x < snap_data->dist_x || (snap_data->snapped & SNAP_DIR_X) == SNAP_DIR_NONE)
-        update_snap = SNAP_DIR_X;
-    }
-  else if (snapped == SNAP_DIR_Y)
-    {
-      if (dist_y < snap_data->dist_y || (snap_data->snapped & SNAP_DIR_Y) == SNAP_DIR_NONE)
-        update_snap = SNAP_DIR_Y;
-    }
-  else
-    {
+    default:
       g_assert_not_reached ();
+  }
+
+  if (snapped == SNAP_DIR_BOTH) {
+    if (snap_data->snapped == SNAP_DIR_NONE)
+      update_snap = SNAP_DIR_BOTH;
+
+    /* Update, if this is closer on the main axis. */
+    if (((major_axis == SNAP_DIR_X) && (dist_x < snap_data->dist_x)) ||
+        ((major_axis == SNAP_DIR_Y) && (dist_y < snap_data->dist_y))) {
+      update_snap = SNAP_DIR_BOTH;
     }
 
-  if (update_snap & SNAP_DIR_X)
-    {
-      snap_data->dist_x = dist_x;
-      snap_data->mon_x = new_x;
-      snap_data->snapped = snap_data->snapped | SNAP_DIR_X;
+    /* Also update if we were only snapping in one direction earlier and it
+     * is better or equally good. */
+    if ((snap_data->snapped == SNAP_DIR_X && (dist <= snap_data->dist_x)) ||
+        (snap_data->snapped == SNAP_DIR_Y && (dist <= snap_data->dist_y))) {
+      update_snap = SNAP_DIR_BOTH;
     }
-  if (update_snap & SNAP_DIR_Y)
-    {
-      snap_data->dist_y = dist_y;
-      snap_data->mon_y = new_y;
-      snap_data->snapped = snap_data->snapped | SNAP_DIR_Y;
+
+    /* Also allow a minor axis to be added if the first axis remains identical. */
+    if (((snap_data->snapped == SNAP_DIR_X) && (major_axis == SNAP_DIR_X) && (new_x == snap_data->mon_x)) ||
+        ((snap_data->snapped == SNAP_DIR_Y) && (major_axis == SNAP_DIR_Y) && (new_y == snap_data->mon_y))) {
+      update_snap = SNAP_DIR_BOTH;
     }
+  } else if (snapped == SNAP_DIR_X) {
+    if (dist_x < snap_data->dist_x || (snap_data->snapped & SNAP_DIR_X) == SNAP_DIR_NONE)
+      update_snap = SNAP_DIR_X;
+  } else if (snapped == SNAP_DIR_Y) {
+    if (dist_y < snap_data->dist_y || (snap_data->snapped & SNAP_DIR_Y) == SNAP_DIR_NONE)
+      update_snap = SNAP_DIR_Y;
+  } else {
+    g_assert_not_reached ();
+  }
+
+  if (update_snap & SNAP_DIR_X) {
+    snap_data->dist_x = dist_x;
+    snap_data->mon_x = new_x;
+    snap_data->snapped = snap_data->snapped | SNAP_DIR_X;
+  }
+  if (update_snap & SNAP_DIR_Y) {
+    snap_data->dist_y = dist_y;
+    snap_data->mon_y = new_y;
+    snap_data->snapped = snap_data->snapped | SNAP_DIR_Y;
+  }
 }
 
 static void
-find_best_snapping (CcDisplayConfig   *config,
-                    CcDisplayMonitor  *snap_output,
-                    SnapData          *snap_data)
+find_best_snapping (CcDisplayConfig  *config,
+                    CcDisplayMonitor *snap_output,
+                    SnapData         *snap_data)
 {
   GList *outputs, *l;
   gint x1, y1, x2, y2;
@@ -335,101 +315,94 @@ find_best_snapping (CcDisplayConfig   *config,
 #define OVERLAP(_s1, _s2, _t1, _t2) ((_s1) <= (_t2) && (_t1) <= (_s2))
 
   outputs = cc_display_config_get_monitors (config);
-  for (l = outputs; l; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      gint _x1, _y1, _x2, _y2, _h, _w;
-      gint bottom_snap_pos;
-      gint top_snap_pos;
-      gint left_snap_pos;
-      gint right_snap_pos;
-      gdouble dist_x, dist_y;
-      gdouble tmp;
+  for (l = outputs; l; l = l->next) {
+    CcDisplayMonitor *output = l->data;
+    gint _x1, _y1, _x2, _y2, _h, _w;
+    gint bottom_snap_pos;
+    gint top_snap_pos;
+    gint left_snap_pos;
+    gint right_snap_pos;
+    gdouble dist_x, dist_y;
+    gdouble tmp;
 
-      if (output == snap_output)
-        continue;
+    if (output == snap_output)
+      continue;
 
-      if (!cc_display_monitor_is_useful (output))
-        continue;
+    if (!cc_display_monitor_is_useful (output))
+      continue;
 
-      get_scaled_geometry (config, output, &_x1, &_y1, &_w, &_h);
-      _x2 = _x1 + _w;
-      _y2 = _y1 + _h;
+    get_scaled_geometry (config, output, &_x1, &_y1, &_w, &_h);
+    _x2 = _x1 + _w;
+    _y2 = _y1 + _h;
 
-      top_snap_pos = _y1 - h;
-      bottom_snap_pos = _y2;
-      left_snap_pos = _x1 - w;
-      right_snap_pos = _x2;
+    top_snap_pos = _y1 - h;
+    bottom_snap_pos = _y2;
+    left_snap_pos = _x1 - w;
+    right_snap_pos = _x2;
 
-      dist_y = 9999;
-      /* overlap on the X axis */
-      if (OVERLAP (x1, x2, _x1, _x2))
-        {
-          get_snap_distance (snap_data, x1, y1, x1, top_snap_pos, NULL, &dist_y);
-          get_snap_distance (snap_data, x1, y1, x1, bottom_snap_pos, NULL, &tmp);
-          dist_y = MIN(dist_y, tmp);
-        }
+    dist_y = 9999;
+    /* overlap on the X axis */
+    if (OVERLAP (x1, x2, _x1, _x2)) {
+      get_snap_distance (snap_data, x1, y1, x1, top_snap_pos, NULL, &dist_y);
+      get_snap_distance (snap_data, x1, y1, x1, bottom_snap_pos, NULL, &tmp);
+      dist_y = MIN (dist_y, tmp);
+    }
 
-      dist_x = 9999;
-      /* overlap on the Y axis */
-      if (OVERLAP (y1, y2, _y1, _y2))
-        {
-          get_snap_distance (snap_data, x1, y1, left_snap_pos, y1, &dist_x, NULL);
-          get_snap_distance (snap_data, x1, y1, right_snap_pos, y1, &tmp, NULL);
-          dist_x = MIN(dist_x, tmp);
-        }
+    dist_x = 9999;
+    /* overlap on the Y axis */
+    if (OVERLAP (y1, y2, _y1, _y2)) {
+      get_snap_distance (snap_data, x1, y1, left_snap_pos, y1, &dist_x, NULL);
+      get_snap_distance (snap_data, x1, y1, right_snap_pos, y1, &tmp, NULL);
+      dist_x = MIN (dist_x, tmp);
+    }
 
-      /* We only snap horizontally or vertically to an edge of the same monitor */
-      if (dist_y < dist_x)
-        {
-          maybe_update_snap (snap_data, x1, y1, x1, top_snap_pos, SNAP_DIR_Y, SNAP_DIR_Y, 0);
-          maybe_update_snap (snap_data, x1, y1, x1, bottom_snap_pos, SNAP_DIR_Y, SNAP_DIR_Y, 0);
-        }
-      else if (dist_x < 9999)
-        {
-          maybe_update_snap (snap_data, x1, y1, left_snap_pos, y1, SNAP_DIR_X, SNAP_DIR_X, 0);
-          maybe_update_snap (snap_data, x1, y1, right_snap_pos, y1, SNAP_DIR_X, SNAP_DIR_X, 0);
-        }
+    /* We only snap horizontally or vertically to an edge of the same monitor */
+    if (dist_y < dist_x) {
+      maybe_update_snap (snap_data, x1, y1, x1, top_snap_pos, SNAP_DIR_Y, SNAP_DIR_Y, 0);
+      maybe_update_snap (snap_data, x1, y1, x1, bottom_snap_pos, SNAP_DIR_Y, SNAP_DIR_Y, 0);
+    } else if (dist_x < 9999) {
+      maybe_update_snap (snap_data, x1, y1, left_snap_pos, y1, SNAP_DIR_X, SNAP_DIR_X, 0);
+      maybe_update_snap (snap_data, x1, y1, right_snap_pos, y1, SNAP_DIR_X, SNAP_DIR_X, 0);
+    }
 
-      /* Left/right edge identical on the top */
-      maybe_update_snap (snap_data, x1, y1, _x1, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
-      maybe_update_snap (snap_data, x1, y1, _x2 - w, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+    /* Left/right edge identical on the top */
+    maybe_update_snap (snap_data, x1, y1, _x1, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+    maybe_update_snap (snap_data, x1, y1, _x2 - w, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+
+    /* Left/right edge identical on the bottom */
+    maybe_update_snap (snap_data, x1, y1, _x1, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+    maybe_update_snap (snap_data, x1, y1, _x2 - w, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+
+    /* Top/bottom edge identical on the left */
+    maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+    maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y2 - h, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+
+    /* Top/bottom edge identical on the right */
+    maybe_update_snap (snap_data, x1, y1, right_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+    maybe_update_snap (snap_data, x1, y1, right_snap_pos, _y2 - h, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+
+    /* If snapping is infinite, then add snapping points with minimal overlap
+     * to prevent detachment.
+     * This is similar to the above but simply re-defines the snapping pos
+     * to have only minimal overlap */
+    if (snap_data->major_snap_distance == G_MAXUINT) {
+      /* Hanging over the left/right edge on the top */
+      maybe_update_snap (snap_data, x1, y1, _x1 - w + MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 1);
+      maybe_update_snap (snap_data, x1, y1, _x2 - MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, -1);
 
       /* Left/right edge identical on the bottom */
-      maybe_update_snap (snap_data, x1, y1, _x1, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
-      maybe_update_snap (snap_data, x1, y1, _x2 - w, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+      maybe_update_snap (snap_data, x1, y1, _x1 - w + MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 1);
+      maybe_update_snap (snap_data, x1, y1, _x2 - MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, -1);
 
       /* Top/bottom edge identical on the left */
-      maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
-      maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y2 - h, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
+      maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, 1);
+      maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, -1);
 
       /* Top/bottom edge identical on the right */
-      maybe_update_snap (snap_data, x1, y1, right_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
-      maybe_update_snap (snap_data, x1, y1, right_snap_pos, _y2 - h, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
-
-      /* If snapping is infinite, then add snapping points with minimal overlap
-       * to prevent detachment.
-       * This is similar to the above but simply re-defines the snapping pos
-       * to have only minimal overlap */
-      if (snap_data->major_snap_distance == G_MAXUINT)
-        {
-          /* Hanging over the left/right edge on the top */
-          maybe_update_snap (snap_data, x1, y1, _x1 - w + MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 1);
-          maybe_update_snap (snap_data, x1, y1, _x2 - MIN_OVERLAP, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, -1);
-
-          /* Left/right edge identical on the bottom */
-          maybe_update_snap (snap_data, x1, y1, _x1 - w + MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 1);
-          maybe_update_snap (snap_data, x1, y1, _x2 - MIN_OVERLAP, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, -1);
-
-          /* Top/bottom edge identical on the left */
-          maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, 1);
-          maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, -1);
-
-          /* Top/bottom edge identical on the right */
-          maybe_update_snap (snap_data, x1, y1, right_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, 1);
-          maybe_update_snap (snap_data, x1, y1, right_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, -1);
-        }
+      maybe_update_snap (snap_data, x1, y1, right_snap_pos, _y1 - h + MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, 1);
+      maybe_update_snap (snap_data, x1, y1, right_snap_pos, _y2 - MIN_OVERLAP, SNAP_DIR_BOTH, SNAP_DIR_X, -1);
     }
+  }
 
 #undef OVERLAP
 }
@@ -450,26 +423,26 @@ cc_display_arrangement_update_matrices (CcDisplayArrangement *self)
   get_bounding_box (self->config, &x1, &y1, &x2, &y2, &max_w, &max_h);
   gtk_widget_get_allocation (GTK_WIDGET (self), &allocation);
 
-  scale_h = (gdouble) (allocation.width - 2 * MARGIN_PX) / (x2 - x1 + max_w * 2 * MARGIN_MON);
-  scale_w = (gdouble) (allocation.height - 2 * MARGIN_PX) / (y2 - y1 + max_h * 2 * MARGIN_MON);
+  scale_h = (gdouble)(allocation.width - 2 * MARGIN_PX) / (x2 - x1 + max_w * 2 * MARGIN_MON);
+  scale_w = (gdouble)(allocation.height - 2 * MARGIN_PX) / (y2 - y1 + max_h * 2 * MARGIN_MON);
 
   scale = MIN (scale_h, scale_w);
 
   cairo_matrix_init_identity (&self->to_widget);
   cairo_matrix_translate (&self->to_widget, allocation.width / 2.0, allocation.height / 2.0);
   cairo_matrix_scale (&self->to_widget, scale, scale);
-  cairo_matrix_translate (&self->to_widget, - (x1 + x2) / 2.0, - (y1 + y2) / 2.0);
+  cairo_matrix_translate (&self->to_widget, -(x1 + x2) / 2.0, -(y1 + y2) / 2.0);
 
   self->to_actual = self->to_widget;
   cairo_matrix_invert (&self->to_actual);
 }
 
-static CcDisplayMonitor*
+static CcDisplayMonitor *
 cc_display_arrangement_find_monitor_at (CcDisplayArrangement *self,
                                         gint                  x,
                                         gint                  y)
 {
-  g_autoptr(GList) outputs = NULL;
+  g_autoptr (GList) outputs = NULL;
   GList *l;
 
   outputs = g_list_copy (cc_display_config_get_monitors (self->config));
@@ -477,19 +450,18 @@ cc_display_arrangement_find_monitor_at (CcDisplayArrangement *self,
   if (self->selected_output)
     outputs = g_list_prepend (outputs, self->selected_output);
 
-  for (l = outputs; l; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      gint x1, y1, x2, y2;
+  for (l = outputs; l; l = l->next) {
+    CcDisplayMonitor *output = l->data;
+    gint x1, y1, x2, y2;
 
-      if (!cc_display_monitor_is_useful (output))
-        continue;
+    if (!cc_display_monitor_is_useful (output))
+      continue;
 
-      monitor_get_drawing_rect (self, output, &x1, &y1, &x2, &y2);
+    monitor_get_drawing_rect (self, output, &x1, &y1, &x2, &y2);
 
-      if (x >= x1 && x <= x2 && y >= y1 && y <= y2)
-        return output;
-    }
+    if (x >= x1 && x <= x2 && y >= y1 && y <= y2)
+      return output;
+  }
 
   return NULL;
 }
@@ -515,7 +487,7 @@ cc_display_arrangement_draw (GtkDrawingArea *drawing_area,
 {
   CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (drawing_area);
   GtkStyleContext *context = gtk_widget_get_style_context (GTK_WIDGET (self));
-  g_autoptr(GList) outputs = NULL;
+  g_autoptr (GList) outputs = NULL;
   GList *l;
 
   if (!self->config)
@@ -531,111 +503,109 @@ cc_display_arrangement_draw (GtkDrawingArea *drawing_area,
     outputs = g_list_prepend (outputs, self->selected_output);
   outputs = g_list_reverse (outputs);
 
-  for (l = outputs; l; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      GtkStateFlags state = GTK_STATE_FLAG_NORMAL;
-      GtkBorder border, padding, margin;
-      gint x1, y1, x2, y2;
-      gint w, h;
-      gint num;
+  for (l = outputs; l; l = l->next) {
+    CcDisplayMonitor *output = l->data;
+    GtkStateFlags state = GTK_STATE_FLAG_NORMAL;
+    GtkBorder border, padding, margin;
+    gint x1, y1, x2, y2;
+    gint w, h;
+    gint num;
 
-      if (!cc_display_monitor_is_useful (output))
-        continue;
+    if (!cc_display_monitor_is_useful (output))
+      continue;
 
-      gtk_style_context_save (context);
-      cairo_save (cr);
+    gtk_style_context_save (context);
+    cairo_save (cr);
 
-      gtk_style_context_add_class (context, "monitor");
+    gtk_style_context_add_class (context, "monitor");
 
-      if (output == self->selected_output)
-        state |= GTK_STATE_FLAG_SELECTED;
-      if (output == self->prelit_output)
-        state |= GTK_STATE_FLAG_PRELIGHT;
+    if (output == self->selected_output)
+      state |= GTK_STATE_FLAG_SELECTED;
+    if (output == self->prelit_output)
+      state |= GTK_STATE_FLAG_PRELIGHT;
 
-      gtk_style_context_set_state (context, state);
-      if (cc_display_monitor_is_primary (output) || cc_display_config_is_cloning (self->config))
-        gtk_style_context_add_class (context, "primary");
+    gtk_style_context_set_state (context, state);
+    if (cc_display_monitor_is_primary (output) || cc_display_config_is_cloning (self->config))
+      gtk_style_context_add_class (context, "primary");
 
-      /* Set in cc-display-panel.c */
-      num = cc_display_monitor_get_ui_number (output);
+    /* Set in cc-display-panel.c */
+    num = cc_display_monitor_get_ui_number (output);
 
-      monitor_get_drawing_rect (self, output, &x1, &y1, &x2, &y2);
-      w = x2 - x1;
-      h = y2 - y1;
+    monitor_get_drawing_rect (self, output, &x1, &y1, &x2, &y2);
+    w = x2 - x1;
+    h = y2 - y1;
 
-      cairo_translate (cr, x1, y1);
+    cairo_translate (cr, x1, y1);
 
-      gtk_style_context_get_margin (context, &margin);
+    gtk_style_context_get_margin (context, &margin);
 
-      cairo_translate (cr, margin.left, margin.top);
+    cairo_translate (cr, margin.left, margin.top);
 
-      w -= margin.left + margin.right;
-      h -= margin.top + margin.bottom;
+    w -= margin.left + margin.right;
+    h -= margin.top + margin.bottom;
 
-      gtk_render_background (context, cr, 0, 0, w, h);
-      gtk_render_frame (context, cr, 0, 0, w, h);
+    gtk_render_background (context, cr, 0, 0, w, h);
+    gtk_render_frame (context, cr, 0, 0, w, h);
+
+    gtk_style_context_get_border (context, &border);
+    gtk_style_context_get_padding (context, &padding);
+
+    w -= border.left + border.right + padding.left + padding.right;
+    h -= border.top + border.bottom + padding.top + padding.bottom;
+
+    cairo_translate (cr, border.left + padding.left, border.top + padding.top);
+
+    if (num > 0) {
+      PangoLayout *layout;
+      g_autofree gchar *number_str = NULL;
+      PangoRectangle extents;
+      GdkRGBA color;
+      gdouble text_width, text_padding;
+
+      gtk_style_context_add_class (context, "monitor-label");
+      gtk_style_context_remove_class (context, "monitor");
 
       gtk_style_context_get_border (context, &border);
       gtk_style_context_get_padding (context, &padding);
 
-      w -= border.left + border.right + padding.left + padding.right;
-      h -= border.top + border.bottom + padding.top + padding.bottom;
+      cairo_translate (cr, w / 2, h / 2);
+
+      number_str = g_strdup_printf ("%d", num);
+      layout = gtk_widget_create_pango_layout (GTK_WIDGET (self), number_str);
+      pango_layout_get_extents (layout, NULL, &extents);
+
+      h = (extents.height - extents.y) / PANGO_SCALE;
+      text_width = (extents.width - extents.x) / PANGO_SCALE;
+      w = MAX (text_width, h - padding.left - padding.right);
+      text_padding = w - text_width;
+
+      w += border.left + border.right + padding.left + padding.right;
+      h += border.top + border.bottom + padding.top + padding.bottom;
+
+      /* Enforce evenness */
+      if ((w % 2) != 0)
+        w++;
+      if ((h % 2) != 0)
+        h++;
+
+      cairo_translate (cr, -w / 2, -h / 2);
+
+      gtk_render_background (context, cr, 0, 0, w, h);
+      gtk_render_frame (context, cr, 0, 0, w, h);
 
       cairo_translate (cr, border.left + padding.left, border.top + padding.top);
+      cairo_translate (cr, extents.x + text_padding / 2, 0);
 
-      if (num > 0)
-        {
-          PangoLayout *layout;
-          g_autofree gchar *number_str = NULL;
-          PangoRectangle extents;
-          GdkRGBA color;
-          gdouble text_width, text_padding;
+      gtk_style_context_get_color (context, &color);
+      gdk_cairo_set_source_rgba (cr, &color);
 
-          gtk_style_context_add_class (context, "monitor-label");
-          gtk_style_context_remove_class (context, "monitor");
-
-          gtk_style_context_get_border (context, &border);
-          gtk_style_context_get_padding (context, &padding);
-
-          cairo_translate (cr, w / 2, h / 2);
-
-          number_str = g_strdup_printf ("%d", num);
-          layout = gtk_widget_create_pango_layout (GTK_WIDGET (self), number_str);
-          pango_layout_get_extents (layout, NULL, &extents);
-
-          h = (extents.height - extents.y) / PANGO_SCALE;
-          text_width = (extents.width - extents.x) / PANGO_SCALE;
-          w = MAX (text_width, h - padding.left - padding.right);
-          text_padding = w - text_width;
-
-          w += border.left + border.right + padding.left + padding.right;
-          h += border.top + border.bottom + padding.top + padding.bottom;
-
-          /* Enforce evenness */
-          if ((w % 2) != 0)
-                  w++;
-          if ((h % 2) != 0)
-                  h++;
-
-          cairo_translate (cr, - w / 2, - h / 2);
-
-          gtk_render_background (context, cr, 0, 0, w, h);
-          gtk_render_frame (context, cr, 0, 0, w, h);
-
-          cairo_translate (cr, border.left + padding.left, border.top + padding.top);
-          cairo_translate (cr, extents.x + text_padding / 2, 0);
-
-          gtk_style_context_get_color (context, &color);
-          gdk_cairo_set_source_rgba (cr, &color);
-
-          gtk_render_layout (context, cr, 0, 0, layout);
-          g_object_unref (layout);
-        }
-
-      gtk_style_context_restore (context);
-      cairo_restore (cr);
+      gtk_render_layout (context, cr, 0, 0, layout);
+      g_object_unref (layout);
     }
+
+    gtk_style_context_restore (context);
+    cairo_restore (cr);
+  }
 }
 
 static gboolean
@@ -665,12 +635,11 @@ on_click_gesture_pressed_cb (CcDisplayArrangement *self,
 
   cc_display_arrangement_set_selected_output (self, output);
 
-  if (cc_display_config_count_useful_monitors (self->config) > 1)
-    {
-      self->drag_active = TRUE;
-      self->drag_anchor_x = event_x - mon_x;
-      self->drag_anchor_y = event_y - mon_y;
-    }
+  if (cc_display_config_count_useful_monitors (self->config) > 1) {
+    self->drag_active = TRUE;
+    self->drag_anchor_x = event_x - mon_x;
+    self->drag_anchor_y = event_y - mon_y;
+  }
 
   return TRUE;
 }
@@ -718,20 +687,19 @@ on_motion_controller_motion_cb (CcDisplayArrangement *self,
   if (cc_display_config_count_useful_monitors (self->config) <= 1)
     return FALSE;
 
-  if (!self->drag_active)
-    {
-      CcDisplayMonitor *output;
-      output = cc_display_arrangement_find_monitor_at (self, x, y);
+  if (!self->drag_active) {
+    CcDisplayMonitor *output;
+    output = cc_display_arrangement_find_monitor_at (self, x, y);
 
-      gtk_widget_set_cursor_from_name (GTK_WIDGET (self),
-                                       output != NULL ? "fleur" : NULL);
-      if (self->prelit_output != output)
-        gtk_widget_queue_draw (GTK_WIDGET (self));
+    gtk_widget_set_cursor_from_name (GTK_WIDGET (self),
+                                     output != NULL ? "fleur" : NULL);
+    if (self->prelit_output != output)
+      gtk_widget_queue_draw (GTK_WIDGET (self));
 
-      self->prelit_output = output;
+    self->prelit_output = output;
 
-      return FALSE;
-    }
+    return FALSE;
+  }
 
   g_assert (self->selected_output);
 
@@ -769,8 +737,7 @@ cc_display_arrangement_get_property (GObject    *object,
 {
   CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_CONFIG:
       g_value_set_object (value, self->config);
       break;
@@ -781,7 +748,7 @@ cc_display_arrangement_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -792,8 +759,7 @@ cc_display_arrangement_set_property (GObject      *object,
 {
   CcDisplayArrangement *obj = CC_DISPLAY_ARRANGEMENT (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_CONFIG:
       cc_display_arrangement_set_config (obj, g_value_get_object (value));
       break;
@@ -804,7 +770,7 @@ cc_display_arrangement_set_property (GObject      *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -872,13 +838,13 @@ cc_display_arrangement_init (CcDisplayArrangement *self)
   self->major_snap_distance = MAJOR_SNAP_DISTANCE;
 }
 
-CcDisplayArrangement*
+CcDisplayArrangement *
 cc_display_arrangement_new (CcDisplayConfig *config)
 {
   return g_object_new (CC_TYPE_DISPLAY_ARRANGEMENT, "config", config, NULL);
 }
 
-CcDisplayConfig*
+CcDisplayConfig *
 cc_display_arrangement_get_config (CcDisplayArrangement *self)
 {
   return self->config;
@@ -892,41 +858,37 @@ cc_display_arrangement_set_config (CcDisplayArrangement *self,
   GList *outputs, *l;
   guint i;
 
-  if (self->config)
-    {
-      outputs = cc_display_config_get_monitors (self->config);
-      for (l = outputs; l; l = l->next)
-        {
-          CcDisplayMonitor *output = l->data;
+  if (self->config) {
+    outputs = cc_display_config_get_monitors (self->config);
+    for (l = outputs; l; l = l->next) {
+      CcDisplayMonitor *output = l->data;
 
-          g_signal_handlers_disconnect_by_data (output, self);
-        }
+      g_signal_handlers_disconnect_by_data (output, self);
     }
+  }
   g_clear_object (&self->config);
 
   self->drag_active = FALSE;
 
   /* Listen to all the signals */
-  if (config)
-    {
-      self->config = g_object_ref (config);
+  if (config) {
+    self->config = g_object_ref (config);
 
-      outputs = cc_display_config_get_monitors (self->config);
-      for (l = outputs; l; l = l->next)
-        {
-          CcDisplayMonitor *output = l->data;
+    outputs = cc_display_config_get_monitors (self->config);
+    for (l = outputs; l; l = l->next) {
+      CcDisplayMonitor *output = l->data;
 
-          for (i = 0; i < G_N_ELEMENTS (signals); ++i)
-            g_signal_connect_object (output, signals[i], G_CALLBACK (on_output_changed_cb), self, G_CONNECT_SWAPPED);
-        }
+      for (i = 0; i < G_N_ELEMENTS (signals); ++i)
+        g_signal_connect_object (output, signals[i], G_CALLBACK (on_output_changed_cb), self, G_CONNECT_SWAPPED);
     }
+  }
 
   cc_display_arrangement_set_selected_output (self, NULL);
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_CONFIG]);
 }
 
-CcDisplayMonitor*
+CcDisplayMonitor *
 cc_display_arrangement_get_selected_output (CcDisplayArrangement *self)
 {
   return self->selected_output;
@@ -968,25 +930,23 @@ try_snap_output (CcDisplayConfig  *config,
 
   find_best_snapping (config, output, &snap_data);
 
-  if (x != snap_data.mon_x || y != snap_data.mon_y)
-    {
-      cc_display_monitor_set_position (output, snap_data.mon_x, snap_data.mon_y);
-      return TRUE;
-    }
+  if (x != snap_data.mon_x || y != snap_data.mon_y) {
+    cc_display_monitor_set_position (output, snap_data.mon_x, snap_data.mon_y);
+    return TRUE;
+  }
 
   return FALSE;
 }
 
 void
-cc_display_config_snap_outputs (CcDisplayConfig  *config)
+cc_display_config_snap_outputs (CcDisplayConfig *config)
 {
   GList *l;
 
   if (cc_display_config_count_useful_monitors (config) <= 1)
     return;
 
-  for (l = cc_display_config_get_monitors (config); l; l = l->next)
-    {
-      try_snap_output (config, l->data);
-    }
+  for (l = cc_display_config_get_monitors (config); l; l = l->next) {
+    try_snap_output (config, l->data);
+  }
 }

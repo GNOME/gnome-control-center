@@ -44,32 +44,31 @@
  * @include: "cc-wwan-device.h"
  */
 
-struct _CcWwanDevice
-{
-  GObject      parent_instance;
+struct _CcWwanDevice {
+  GObject parent_instance;
 
-  MMObject    *mm_object;
-  MMModem     *modem;
-  MMSim       *sim;
+  MMObject *mm_object;
+  MMModem *modem;
+  MMSim *sim;
   MMModem3gpp *modem_3gpp;
 
-  const char  *operator_code; /* MCCMNC */
-  GError      *error;
+  const char *operator_code;  /* MCCMNC */
+  GError *error;
 
   /* Building with NetworkManager is optional,
    * so #NMclient type can’t be used here.
    */
-  GObject      *nm_client; /* An #NMClient */
-  CcWwanData   *wwan_data;
+  GObject *nm_client;      /* An #NMClient */
+  CcWwanData *wwan_data;
 
-  gulong      modem_3gpp_id;
-  gulong      modem_3gpp_locks_id;
+  gulong modem_3gpp_id;
+  gulong modem_3gpp_locks_id;
 
   /* Enabled locks like PIN, PIN2, PUK, etc. */
   MMModem3gppFacility locks;
 
-  CcWwanState  registration_state;
-  gboolean     network_is_manual;
+  CcWwanState registration_state;
+  gboolean network_is_manual;
 };
 
 G_DEFINE_TYPE (CcWwanDevice, cc_wwan_device, G_TYPE_OBJECT)
@@ -99,8 +98,7 @@ cc_wwan_device_state_changed_cb (CcWwanDevice *self)
 
   state = mm_modem_3gpp_get_registration_state (self->modem_3gpp);
 
-  switch (state)
-    {
+  switch (state) {
     case MM_MODEM_3GPP_REGISTRATION_STATE_UNKNOWN:
       self->registration_state = CC_WWAN_REGISTRATION_STATE_UNKNOWN;
       break;
@@ -124,7 +122,7 @@ cc_wwan_device_state_changed_cb (CcWwanDevice *self)
     default:
       self->registration_state = CC_WWAN_REGISTRATION_STATE_REGISTERED;
       break;
-    }
+  }
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_REGISTRATION_STATE]);
 }
@@ -153,20 +151,19 @@ cc_wwan_device_3gpp_changed_cb (CcWwanDevice *self)
   g_clear_object (&self->modem_3gpp);
   self->modem_3gpp = mm_object_get_modem_3gpp (self->mm_object);
 
-  if (self->modem_3gpp)
-    {
-      handler_id = g_signal_connect_object (self->modem_3gpp, "notify::registration-state",
-                                            G_CALLBACK (cc_wwan_device_state_changed_cb),
-                                            self, G_CONNECT_SWAPPED);
-      self->modem_3gpp_id = handler_id;
+  if (self->modem_3gpp) {
+    handler_id = g_signal_connect_object (self->modem_3gpp, "notify::registration-state",
+                                          G_CALLBACK (cc_wwan_device_state_changed_cb),
+                                          self, G_CONNECT_SWAPPED);
+    self->modem_3gpp_id = handler_id;
 
-      handler_id = g_signal_connect_object (self->modem_3gpp, "notify::enabled-facility-locks",
-                                            G_CALLBACK (cc_wwan_device_locks_changed_cb),
-                                            self, G_CONNECT_SWAPPED);
-      self->modem_3gpp_locks_id = handler_id;
-      cc_wwan_device_locks_changed_cb (self);
-      cc_wwan_device_state_changed_cb (self);
-    }
+    handler_id = g_signal_connect_object (self->modem_3gpp, "notify::enabled-facility-locks",
+                                          G_CALLBACK (cc_wwan_device_locks_changed_cb),
+                                          self, G_CONNECT_SWAPPED);
+    self->modem_3gpp_locks_id = handler_id;
+    cc_wwan_device_locks_changed_cb (self);
+    cc_wwan_device_state_changed_cb (self);
+  }
 }
 
 static void
@@ -203,11 +200,10 @@ cc_wwan_device_nm_changed_cb (CcWwanDevice *self,
 
   nm_is_running = nm_client_get_nm_running (client);
 
-  if (!nm_is_running && self->wwan_data != NULL)
-    {
-      g_clear_object (&self->wwan_data);
-      wwan_device_emit_data_changed (self);
-    }
+  if (!nm_is_running && self->wwan_data != NULL) {
+    g_clear_object (&self->wwan_data);
+    wwan_device_emit_data_changed (self);
+  }
 }
 
 static void
@@ -223,13 +219,12 @@ cc_wwan_device_nm_device_added_cb (CcWwanDevice *self,
   self->wwan_data = cc_wwan_data_new (self->mm_object,
                                       NM_CLIENT (self->nm_client));
 
-  if (self->wwan_data)
-    {
-      g_signal_connect_object (self->wwan_data, "notify::enabled",
-                               G_CALLBACK (wwan_device_emit_data_changed),
-                               self, G_CONNECT_SWAPPED);
-      wwan_device_emit_data_changed (self);
-    }
+  if (self->wwan_data) {
+    g_signal_connect_object (self->wwan_data, "notify::enabled",
+                             G_CALLBACK (wwan_device_emit_data_changed),
+                             self, G_CONNECT_SWAPPED);
+    wwan_device_emit_data_changed (self);
+  }
 }
 #endif
 
@@ -242,8 +237,7 @@ cc_wwan_device_get_property (GObject    *object,
   CcWwanDevice *self = (CcWwanDevice *)object;
   MMModemMode allowed, preferred;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_OPERATOR_NAME:
       g_value_set_string (value, cc_wwan_device_get_operator_name (self));
       break;
@@ -275,7 +269,7 @@ cc_wwan_device_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -401,14 +395,13 @@ cc_wwan_device_new (MMObject *mm_object,
   self->modem = mm_object_get_modem (mm_object);
   self->sim = mm_modem_get_sim_sync (self->modem, NULL, NULL);
   g_set_object (&self->nm_client, nm_client);
-  if (self->sim)
-    {
-      self->operator_code = mm_sim_get_operator_identifier (self->sim);
+  if (self->sim) {
+    self->operator_code = mm_sim_get_operator_identifier (self->sim);
 #if defined(HAVE_NETWORK_MANAGER) && defined(BUILD_NETWORK)
-      self->wwan_data = cc_wwan_data_new (mm_object,
-                                          NM_CLIENT (self->nm_client));
+    self->wwan_data = cc_wwan_data_new (mm_object,
+                                        NM_CLIENT (self->nm_client));
 #endif
-    }
+  }
 
   g_signal_connect_object (self->mm_object, "notify::unlock-required",
                            G_CALLBACK (cc_wwan_device_unlock_required_cb),
@@ -419,7 +412,7 @@ cc_wwan_device_new (MMObject *mm_object,
                              self, G_CONNECT_SWAPPED);
 
 #if defined(HAVE_NETWORK_MANAGER) && defined(BUILD_NETWORK)
-  g_signal_connect_object (self->nm_client, "notify::nm-running" ,
+  g_signal_connect_object (self->nm_client, "notify::nm-running",
                            G_CALLBACK (cc_wwan_device_nm_changed_cb), self,
                            G_CONNECT_SWAPPED);
 
@@ -518,23 +511,20 @@ cc_wwan_device_pin_sent_cb (GObject      *object,
 {
   CcWwanDevice *self;
   MMSim *sim = (MMSim *)object;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
 
-  if (!mm_sim_send_pin_finish (sim, result, &error))
-    {
-      self = g_task_get_source_object (G_TASK (task));
+  if (!mm_sim_send_pin_finish (sim, result, &error)) {
+    self = g_task_get_source_object (G_TASK (task));
 
-      g_clear_error (&self->error);
-      self->error = g_error_copy (error);
-      g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
+    g_clear_error (&self->error);
+    self->error = g_error_copy (error);
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
 
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
-  else
-    {
-      g_task_return_boolean (task, TRUE);
-    }
+    g_task_return_error (task, g_steal_pointer (&error));
+  } else {
+    g_task_return_boolean (task, TRUE);
+  }
 }
 
 void
@@ -544,7 +534,7 @@ cc_wwan_device_send_pin (CcWwanDevice        *self,
                          GAsyncReadyCallback  callback,
                          gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   g_return_if_fail (CC_IS_WWAN_DEVICE (self));
   g_return_if_fail (MM_IS_SIM (self->sim));
@@ -576,23 +566,20 @@ cc_wwan_device_puk_sent_cb (GObject      *object,
 {
   CcWwanDevice *self;
   MMSim *sim = (MMSim *)object;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
 
-  if (!mm_sim_send_puk_finish (sim, result, &error))
-    {
-      self = g_task_get_source_object (G_TASK (task));
+  if (!mm_sim_send_puk_finish (sim, result, &error)) {
+    self = g_task_get_source_object (G_TASK (task));
 
-      g_clear_error (&self->error);
-      self->error = g_error_copy (error);
-      g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
+    g_clear_error (&self->error);
+    self->error = g_error_copy (error);
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
 
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
-  else
-    {
-      g_task_return_boolean (task, TRUE);
-    }
+    g_task_return_error (task, g_steal_pointer (&error));
+  } else {
+    g_task_return_boolean (task, TRUE);
+  }
 }
 
 void
@@ -603,7 +590,7 @@ cc_wwan_device_send_puk (CcWwanDevice        *self,
                          GAsyncReadyCallback  callback,
                          gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   g_return_if_fail (CC_IS_WWAN_DEVICE (self));
   g_return_if_fail (MM_IS_SIM (self->sim));
@@ -636,23 +623,20 @@ cc_wwan_device_enable_pin_cb (GObject      *object,
 {
   CcWwanDevice *self;
   MMSim *sim = (MMSim *)object;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
 
-  if (!mm_sim_enable_pin_finish (sim, result, &error))
-    {
-      self = g_task_get_source_object (G_TASK (task));
+  if (!mm_sim_enable_pin_finish (sim, result, &error)) {
+    self = g_task_get_source_object (G_TASK (task));
 
-      g_clear_error (&self->error);
-      self->error = g_error_copy (error);
-      g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
+    g_clear_error (&self->error);
+    self->error = g_error_copy (error);
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
 
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
-  else
-    {
-      g_task_return_boolean (task, TRUE);
-    }
+    g_task_return_error (task, g_steal_pointer (&error));
+  } else {
+    g_task_return_boolean (task, TRUE);
+  }
 }
 
 void
@@ -662,7 +646,7 @@ cc_wwan_device_enable_pin (CcWwanDevice        *self,
                            GAsyncReadyCallback  callback,
                            gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   g_return_if_fail (CC_IS_WWAN_DEVICE (self));
   g_return_if_fail (!cancellable || G_IS_CANCELLABLE (cancellable));
@@ -693,23 +677,20 @@ cc_wwan_device_disable_pin_cb (GObject      *object,
 {
   CcWwanDevice *self;
   MMSim *sim = (MMSim *)object;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
 
-  if (!mm_sim_disable_pin_finish (sim, result, &error))
-    {
-      self = g_task_get_source_object (G_TASK (task));
+  if (!mm_sim_disable_pin_finish (sim, result, &error)) {
+    self = g_task_get_source_object (G_TASK (task));
 
-      g_clear_error (&self->error);
-      self->error = g_error_copy (error);
-      g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
+    g_clear_error (&self->error);
+    self->error = g_error_copy (error);
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
 
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
-  else
-    {
-      g_task_return_boolean (task, TRUE);
-    }
+    g_task_return_error (task, g_steal_pointer (&error));
+  } else {
+    g_task_return_boolean (task, TRUE);
+  }
 }
 
 void
@@ -719,7 +700,7 @@ cc_wwan_device_disable_pin (CcWwanDevice        *self,
                             GAsyncReadyCallback  callback,
                             gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   g_return_if_fail (CC_IS_WWAN_DEVICE (self));
   g_return_if_fail (!cancellable || G_IS_CANCELLABLE (cancellable));
@@ -733,8 +714,8 @@ cc_wwan_device_disable_pin (CcWwanDevice        *self,
 }
 
 gboolean
-cc_wwan_device_disable_pin_finish (CcWwanDevice *self,
-                                   GAsyncResult *result,
+cc_wwan_device_disable_pin_finish (CcWwanDevice  *self,
+                                   GAsyncResult  *result,
                                    GError       **error)
 {
   g_return_val_if_fail (CC_IS_WWAN_DEVICE (self), FALSE);
@@ -750,23 +731,20 @@ cc_wwan_device_change_pin_cb (GObject      *object,
 {
   CcWwanDevice *self;
   MMSim *sim = (MMSim *)object;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
 
-  if (!mm_sim_change_pin_finish (sim, result, &error))
-    {
-      self = g_task_get_source_object (G_TASK (task));
+  if (!mm_sim_change_pin_finish (sim, result, &error)) {
+    self = g_task_get_source_object (G_TASK (task));
 
-      g_clear_error (&self->error);
-      self->error = g_error_copy (error);
-      g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
+    g_clear_error (&self->error);
+    self->error = g_error_copy (error);
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
 
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
-  else
-    {
-      g_task_return_boolean (task, TRUE);
-    }
+    g_task_return_error (task, g_steal_pointer (&error));
+  } else {
+    g_task_return_boolean (task, TRUE);
+  }
 }
 
 void
@@ -777,7 +755,7 @@ cc_wwan_device_change_pin (CcWwanDevice        *self,
                            GAsyncReadyCallback  callback,
                            gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   g_return_if_fail (CC_IS_WWAN_DEVICE (self));
   g_return_if_fail (!cancellable || G_IS_CANCELLABLE (cancellable));
@@ -809,24 +787,21 @@ cc_wwan_device_network_mode_set_cb (GObject      *object,
 {
   CcWwanDevice *self;
   MMModem *modem = (MMModem *)object;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
 
-  if (!mm_modem_set_current_modes_finish (modem, result, &error))
-    {
-      self = g_task_get_source_object (G_TASK (task));
+  if (!mm_modem_set_current_modes_finish (modem, result, &error)) {
+    self = g_task_get_source_object (G_TASK (task));
 
-      g_clear_error (&self->error);
-      self->error = g_error_copy (error);
-      g_warning ("Error: %s", error->message);
-      g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
+    g_clear_error (&self->error);
+    self->error = g_error_copy (error);
+    g_warning ("Error: %s", error->message);
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
 
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
-  else
-    {
-      g_task_return_boolean (task, TRUE);
-    }
+    g_task_return_error (task, g_steal_pointer (&error));
+  } else {
+    g_task_return_boolean (task, TRUE);
+  }
 }
 
 /**
@@ -851,9 +826,9 @@ cc_wwan_device_set_current_mode (CcWwanDevice        *self,
                                  GAsyncReadyCallback  callback,
                                  gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
   GPermission *permission;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_return_if_fail (CC_IS_WWAN_DEVICE (self));
   g_return_if_fail (!cancellable || G_IS_CANCELLABLE (cancellable));
@@ -867,27 +842,22 @@ cc_wwan_device_set_current_mode (CcWwanDevice        *self,
   if (error)
     g_warning ("error: %s", error->message);
 
-  if (error)
-    {
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
-  else if (!g_permission_get_allowed (permission))
-    {
-      error = g_error_new (G_IO_ERROR,
-                           G_IO_ERROR_PERMISSION_DENIED,
-                           "Access Denied");
-      g_clear_error (&self->error);
-      self->error = g_error_copy (error);
-      g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
+  if (error) {
+    g_task_return_error (task, g_steal_pointer (&error));
+  } else if (!g_permission_get_allowed (permission)) {
+    error = g_error_new (G_IO_ERROR,
+                         G_IO_ERROR_PERMISSION_DENIED,
+                         "Access Denied");
+    g_clear_error (&self->error);
+    self->error = g_error_copy (error);
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
 
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
-  else
-    {
-      mm_modem_set_current_modes (self->modem, allowed, preferred,
-                                  cancellable, cc_wwan_device_network_mode_set_cb,
-                                  g_steal_pointer (&task));
-    }
+    g_task_return_error (task, g_steal_pointer (&error));
+  } else {
+    mm_modem_set_current_modes (self->modem, allowed, preferred,
+                                cancellable, cc_wwan_device_network_mode_set_cb,
+                                g_steal_pointer (&task));
+  }
 }
 
 /**
@@ -963,13 +933,12 @@ cc_wwan_device_get_supported_modes (CcWwanDevice *self,
   if (preferred)
     *preferred = 0;
 
-  for (i = 0; i < n_modes; i++)
-    {
-      if (allowed)
-        *allowed = *allowed | modes[i].allowed;
-      if (preferred)
-        *preferred = *preferred | modes[i].preferred;
-    }
+  for (i = 0; i < n_modes; i++) {
+    if (allowed)
+      *allowed = *allowed | modes[i].allowed;
+    if (preferred)
+      *preferred = *preferred | modes[i].preferred;
+  }
 
   return TRUE;
 }
@@ -1001,131 +970,110 @@ cc_wwan_device_get_string_from_mode (CcWwanDevice *self,
   if (allowed & MM_MODEM_MODE_2G &&
       allowed & MM_MODEM_MODE_3G &&
       allowed & MM_MODEM_MODE_4G &&
-      allowed & MM_MODEM_MODE_5G)
-    {
-      if (preferred & MM_MODEM_MODE_5G)
-        g_string_append (str, _("2G, 3G, 4G, 5G (Preferred)"));
-      else if (preferred & MM_MODEM_MODE_4G)
-        g_string_append (str, _("2G, 3G, 4G (Preferred), 5G"));
-      else if (preferred & MM_MODEM_MODE_3G)
-        g_string_append (str, _("2G, 3G (Preferred), 4G, 5G"));
-      else if (preferred & MM_MODEM_MODE_2G)
-        g_string_append (str, _("2G (Preferred), 3G, 4G, 5G"));
-      else
-        g_string_append (str, _("2G, 3G, 4G, 5G"));
-    }
-  else if (allowed & MM_MODEM_MODE_2G &&
-      allowed & MM_MODEM_MODE_3G &&
-      allowed & MM_MODEM_MODE_4G)
-    {
-      if (preferred & MM_MODEM_MODE_4G)
-        g_string_append (str, _("2G, 3G, 4G (Preferred)"));
-      else if (preferred & MM_MODEM_MODE_3G)
-        g_string_append (str, _("2G, 3G (Preferred), 4G"));
-      else if (preferred & MM_MODEM_MODE_2G)
-        g_string_append (str, _("2G (Preferred), 3G, 4G"));
-      else
-        g_string_append (str, _("2G, 3G, 4G"));
-    }
-  else if (allowed & MM_MODEM_MODE_3G &&
-      allowed & MM_MODEM_MODE_4G &&
-      allowed & MM_MODEM_MODE_5G)
-    {
-      if (preferred & MM_MODEM_MODE_5G)
-        g_string_append (str, _("3G, 4G, 5G (Preferred)"));
-      else if (preferred & MM_MODEM_MODE_4G)
-        g_string_append (str, _("3G, 4G (Preferred), 5G"));
-      else if (preferred & MM_MODEM_MODE_2G)
-        g_string_append (str, _("3G (Preferred), 4G, 5G"));
-      else
-        g_string_append (str, _("3G, 4G, 5G"));
-    }
-  else if (allowed & MM_MODEM_MODE_2G &&
-      allowed & MM_MODEM_MODE_4G &&
-      allowed & MM_MODEM_MODE_5G)
-    {
-      if (preferred & MM_MODEM_MODE_5G)
-        g_string_append (str, _("2G, 4G, 5G (Preferred)"));
-      else if (preferred & MM_MODEM_MODE_4G)
-        g_string_append (str, _("2G, 4G (Preferred), 5G"));
-      else if (preferred & MM_MODEM_MODE_2G)
-        g_string_append (str, _("2G (Preferred), 4G, 5G"));
-      else
-        g_string_append (str, _("2G, 4G, 5G"));
-    }
-  else if (allowed & MM_MODEM_MODE_2G &&
-      allowed & MM_MODEM_MODE_3G &&
-      allowed & MM_MODEM_MODE_5G)
-    {
-      if (preferred & MM_MODEM_MODE_5G)
-        g_string_append (str, _("2G, 3G, 5G (Preferred)"));
-      else if (preferred & MM_MODEM_MODE_3G)
-        g_string_append (str, _("2G, 3G (Preferred), 5G"));
-      else if (preferred & MM_MODEM_MODE_2G)
-        g_string_append (str, _("2G (Preferred), 3G, 5G"));
-      else
-        g_string_append (str, _("2G, 3G, 5G"));
-    }
-  else if (allowed & MM_MODEM_MODE_3G &&
-           allowed & MM_MODEM_MODE_4G)
-    {
-      if (preferred & MM_MODEM_MODE_4G)
-        g_string_append (str, _("3G, 4G (Preferred)"));
-      else if (preferred & MM_MODEM_MODE_3G)
-        g_string_append (str, _("3G (Preferred), 4G"));
-      else
-        g_string_append (str, _("3G, 4G"));
-    }
-  else if (allowed & MM_MODEM_MODE_2G &&
-           allowed & MM_MODEM_MODE_4G)
-    {
-      if (preferred & MM_MODEM_MODE_4G)
-        g_string_append (str, _("2G, 4G (Preferred)"));
-      else if (preferred & MM_MODEM_MODE_2G)
-        g_string_append (str, _("2G (Preferred), 4G"));
-      else
-        g_string_append (str, _("2G, 4G"));
-    }
-  else if (allowed & MM_MODEM_MODE_2G &&
-           allowed & MM_MODEM_MODE_3G)
-    {
-      if (preferred & MM_MODEM_MODE_3G)
-        g_string_append (str, _("2G, 3G (Preferred)"));
-      else if (preferred & MM_MODEM_MODE_2G)
-        g_string_append (str, _("2G (Preferred), 3G"));
-      else
-        g_string_append (str, _("2G, 3G"));
-    }
-  else if (allowed & MM_MODEM_MODE_2G &&
-           allowed & MM_MODEM_MODE_5G)
-    {
-      if (preferred & MM_MODEM_MODE_5G)
-        g_string_append (str, _("2G, 5G (Preferred)"));
-      else if (preferred & MM_MODEM_MODE_2G)
-        g_string_append (str, _("2G (Preferred), 5G"));
-      else
-        g_string_append (str, _("2G, 5G"));
-    }
-  else if (allowed & MM_MODEM_MODE_3G &&
-           allowed & MM_MODEM_MODE_5G)
-    {
-      if (preferred & MM_MODEM_MODE_5G)
-        g_string_append (str, _("3G, 5G (Preferred)"));
-      else if (preferred & MM_MODEM_MODE_3G)
-        g_string_append (str, _("3G (Preferred), 5G"));
-      else
-        g_string_append (str, _("3G, 5G"));
-    }
-  else if (allowed & MM_MODEM_MODE_4G &&
-           allowed & MM_MODEM_MODE_5G)
-    {
-      if (preferred & MM_MODEM_MODE_5G)
-        g_string_append (str, _("4G, 5G (Preferred)"));
-      else if (preferred & MM_MODEM_MODE_4G)
-        g_string_append (str, _("4G (Preferred), 5G"));
-      else
-        g_string_append (str, _("4G, 5G"));
-    }
+      allowed & MM_MODEM_MODE_5G) {
+    if (preferred & MM_MODEM_MODE_5G)
+      g_string_append (str, _("2G, 3G, 4G, 5G (Preferred)"));
+    else if (preferred & MM_MODEM_MODE_4G)
+      g_string_append (str, _("2G, 3G, 4G (Preferred), 5G"));
+    else if (preferred & MM_MODEM_MODE_3G)
+      g_string_append (str, _("2G, 3G (Preferred), 4G, 5G"));
+    else if (preferred & MM_MODEM_MODE_2G)
+      g_string_append (str, _("2G (Preferred), 3G, 4G, 5G"));
+    else
+      g_string_append (str, _("2G, 3G, 4G, 5G"));
+  } else if (allowed & MM_MODEM_MODE_2G &&
+             allowed & MM_MODEM_MODE_3G &&
+             allowed & MM_MODEM_MODE_4G) {
+    if (preferred & MM_MODEM_MODE_4G)
+      g_string_append (str, _("2G, 3G, 4G (Preferred)"));
+    else if (preferred & MM_MODEM_MODE_3G)
+      g_string_append (str, _("2G, 3G (Preferred), 4G"));
+    else if (preferred & MM_MODEM_MODE_2G)
+      g_string_append (str, _("2G (Preferred), 3G, 4G"));
+    else
+      g_string_append (str, _("2G, 3G, 4G"));
+  } else if (allowed & MM_MODEM_MODE_3G &&
+             allowed & MM_MODEM_MODE_4G &&
+             allowed & MM_MODEM_MODE_5G) {
+    if (preferred & MM_MODEM_MODE_5G)
+      g_string_append (str, _("3G, 4G, 5G (Preferred)"));
+    else if (preferred & MM_MODEM_MODE_4G)
+      g_string_append (str, _("3G, 4G (Preferred), 5G"));
+    else if (preferred & MM_MODEM_MODE_2G)
+      g_string_append (str, _("3G (Preferred), 4G, 5G"));
+    else
+      g_string_append (str, _("3G, 4G, 5G"));
+  } else if (allowed & MM_MODEM_MODE_2G &&
+             allowed & MM_MODEM_MODE_4G &&
+             allowed & MM_MODEM_MODE_5G) {
+    if (preferred & MM_MODEM_MODE_5G)
+      g_string_append (str, _("2G, 4G, 5G (Preferred)"));
+    else if (preferred & MM_MODEM_MODE_4G)
+      g_string_append (str, _("2G, 4G (Preferred), 5G"));
+    else if (preferred & MM_MODEM_MODE_2G)
+      g_string_append (str, _("2G (Preferred), 4G, 5G"));
+    else
+      g_string_append (str, _("2G, 4G, 5G"));
+  } else if (allowed & MM_MODEM_MODE_2G &&
+             allowed & MM_MODEM_MODE_3G &&
+             allowed & MM_MODEM_MODE_5G) {
+    if (preferred & MM_MODEM_MODE_5G)
+      g_string_append (str, _("2G, 3G, 5G (Preferred)"));
+    else if (preferred & MM_MODEM_MODE_3G)
+      g_string_append (str, _("2G, 3G (Preferred), 5G"));
+    else if (preferred & MM_MODEM_MODE_2G)
+      g_string_append (str, _("2G (Preferred), 3G, 5G"));
+    else
+      g_string_append (str, _("2G, 3G, 5G"));
+  } else if (allowed & MM_MODEM_MODE_3G &&
+             allowed & MM_MODEM_MODE_4G) {
+    if (preferred & MM_MODEM_MODE_4G)
+      g_string_append (str, _("3G, 4G (Preferred)"));
+    else if (preferred & MM_MODEM_MODE_3G)
+      g_string_append (str, _("3G (Preferred), 4G"));
+    else
+      g_string_append (str, _("3G, 4G"));
+  } else if (allowed & MM_MODEM_MODE_2G &&
+             allowed & MM_MODEM_MODE_4G) {
+    if (preferred & MM_MODEM_MODE_4G)
+      g_string_append (str, _("2G, 4G (Preferred)"));
+    else if (preferred & MM_MODEM_MODE_2G)
+      g_string_append (str, _("2G (Preferred), 4G"));
+    else
+      g_string_append (str, _("2G, 4G"));
+  } else if (allowed & MM_MODEM_MODE_2G &&
+             allowed & MM_MODEM_MODE_3G) {
+    if (preferred & MM_MODEM_MODE_3G)
+      g_string_append (str, _("2G, 3G (Preferred)"));
+    else if (preferred & MM_MODEM_MODE_2G)
+      g_string_append (str, _("2G (Preferred), 3G"));
+    else
+      g_string_append (str, _("2G, 3G"));
+  } else if (allowed & MM_MODEM_MODE_2G &&
+             allowed & MM_MODEM_MODE_5G) {
+    if (preferred & MM_MODEM_MODE_5G)
+      g_string_append (str, _("2G, 5G (Preferred)"));
+    else if (preferred & MM_MODEM_MODE_2G)
+      g_string_append (str, _("2G (Preferred), 5G"));
+    else
+      g_string_append (str, _("2G, 5G"));
+  } else if (allowed & MM_MODEM_MODE_3G &&
+             allowed & MM_MODEM_MODE_5G) {
+    if (preferred & MM_MODEM_MODE_5G)
+      g_string_append (str, _("3G, 5G (Preferred)"));
+    else if (preferred & MM_MODEM_MODE_3G)
+      g_string_append (str, _("3G (Preferred), 5G"));
+    else
+      g_string_append (str, _("3G, 5G"));
+  } else if (allowed & MM_MODEM_MODE_4G &&
+             allowed & MM_MODEM_MODE_5G) {
+    if (preferred & MM_MODEM_MODE_5G)
+      g_string_append (str, _("4G, 5G (Preferred)"));
+    else if (preferred & MM_MODEM_MODE_4G)
+      g_string_append (str, _("4G (Preferred), 5G"));
+    else
+      g_string_append (str, _("4G, 5G"));
+  }
 
   if (!str->len)
     g_string_append (str, C_("Network mode", "Unknown"));
@@ -1145,8 +1093,8 @@ cc_wwan_device_scan_complete_cb (GObject      *object,
                                  gpointer      user_data)
 {
   MMModem3gpp *modem_3gpp = (MMModem3gpp *)object;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
   GList *network_list;
 
   network_list = mm_modem_3gpp_scan_finish (modem_3gpp, result, &error);
@@ -1163,7 +1111,7 @@ cc_wwan_device_scan_networks (CcWwanDevice        *self,
                               GAsyncReadyCallback  callback,
                               gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   g_return_if_fail (CC_IS_WWAN_DEVICE (self));
   g_return_if_fail (!cancellable || G_IS_CANCELLABLE (cancellable));
@@ -1193,24 +1141,21 @@ cc_wwan_device_register_network_complete_cb (GObject      *object,
 {
   CcWwanDevice *self;
   MMModem3gpp *modem_3gpp = (MMModem3gpp *)object;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
 
-  if (!mm_modem_3gpp_register_finish (modem_3gpp, result, &error))
-    {
-      self = g_task_get_source_object (G_TASK (task));
+  if (!mm_modem_3gpp_register_finish (modem_3gpp, result, &error)) {
+    self = g_task_get_source_object (G_TASK (task));
 
-      g_clear_error (&self->error);
-      self->error = g_error_copy (error);
-      g_warning ("Error: %s", error->message);
-      g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
+    g_clear_error (&self->error);
+    self->error = g_error_copy (error);
+    g_warning ("Error: %s", error->message);
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ERROR]);
 
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
-  else
-    {
-      g_task_return_boolean (task, TRUE);
-    }
+    g_task_return_error (task, g_steal_pointer (&error));
+  } else {
+    g_task_return_boolean (task, TRUE);
+  }
 }
 
 void
@@ -1220,7 +1165,7 @@ cc_wwan_device_register_network (CcWwanDevice        *self,
                                  GAsyncReadyCallback  callback,
                                  gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   g_return_if_fail (CC_IS_WWAN_DEVICE (self));
   g_return_if_fail (!cancellable || G_IS_CANCELLABLE (cancellable));
@@ -1238,8 +1183,8 @@ cc_wwan_device_register_network (CcWwanDevice        *self,
 }
 
 gboolean
-cc_wwan_device_register_network_finish (CcWwanDevice *self,
-                                        GAsyncResult *result,
+cc_wwan_device_register_network_finish (CcWwanDevice  *self,
+                                        GAsyncResult  *result,
                                         GError       **error)
 {
   g_return_val_if_fail (CC_IS_WWAN_DEVICE (self), FALSE);
@@ -1271,7 +1216,7 @@ cc_wwan_device_get_operator_name (CcWwanDevice *self)
 gchar *
 cc_wwan_device_dup_own_numbers (CcWwanDevice *self)
 {
-  const char *const *own_numbers;
+  const char * const *own_numbers;
 
   g_return_val_if_fail (CC_IS_WWAN_DEVICE (self), NULL);
 
@@ -1319,26 +1264,24 @@ cc_wwan_device_dup_signal_string (CcWwanDevice *self)
 
   /* Adapted from ModemManager mmcli-modem-signal.c */
   signal = mm_modem_signal_peek_cdma (modem_signal);
-  if (signal)
-    {
-      if ((value = mm_signal_get_rssi (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "rssi: %.2g dBm ", value);
-      if ((value = mm_signal_get_ecio (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "ecio: %.2g dBm ", value);
-    }
+  if (signal) {
+    if ((value = mm_signal_get_rssi (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "rssi: %.2g dBm ", value);
+    if ((value = mm_signal_get_ecio (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "ecio: %.2g dBm ", value);
+  }
 
   signal = mm_modem_signal_peek_evdo (modem_signal);
-  if (signal)
-    {
-      if ((value = mm_signal_get_rssi (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "rssi: %.2g dBm ", value);
-      if ((value = mm_signal_get_ecio (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "ecio: %.2g dBm ", value);
-      if ((value = mm_signal_get_sinr (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "sinr: %.2g dB ", value);
-      if ((value = mm_signal_get_io (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "io: %.2g dBm ", value);
-    }
+  if (signal) {
+    if ((value = mm_signal_get_rssi (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "rssi: %.2g dBm ", value);
+    if ((value = mm_signal_get_ecio (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "ecio: %.2g dBm ", value);
+    if ((value = mm_signal_get_sinr (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "sinr: %.2g dB ", value);
+    if ((value = mm_signal_get_io (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "io: %.2g dBm ", value);
+  }
 
   signal = mm_modem_signal_peek_gsm (modem_signal);
   if (signal)
@@ -1346,28 +1289,26 @@ cc_wwan_device_dup_signal_string (CcWwanDevice *self)
       g_string_append_printf (str, "rssi: %.2g dBm ", value);
 
   signal = mm_modem_signal_peek_umts (modem_signal);
-  if (signal)
-    {
-      if ((value = mm_signal_get_rssi (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "rssi: %.2g dBm ", value);
-      if ((value = mm_signal_get_rscp (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "rscp: %.2g dBm ", value);
-      if ((value = mm_signal_get_ecio (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "ecio: %.2g dBm ", value);
-    }
+  if (signal) {
+    if ((value = mm_signal_get_rssi (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "rssi: %.2g dBm ", value);
+    if ((value = mm_signal_get_rscp (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "rscp: %.2g dBm ", value);
+    if ((value = mm_signal_get_ecio (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "ecio: %.2g dBm ", value);
+  }
 
   signal = mm_modem_signal_peek_lte (modem_signal);
-  if (signal)
-    {
-      if ((value = mm_signal_get_rssi (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "rssi: %.2g dBm ", value);
-      if ((value = mm_signal_get_rsrq (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "rsrq: %.2g dB ", value);
-      if ((value = mm_signal_get_rsrp (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "rsrp: %.2g dBm ", value);
-      if ((value = mm_signal_get_snr (signal)) != MM_SIGNAL_UNKNOWN)
-        g_string_append_printf (str, "snr: %.2g dB ", value);
-    }
+  if (signal) {
+    if ((value = mm_signal_get_rssi (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "rssi: %.2g dBm ", value);
+    if ((value = mm_signal_get_rsrq (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "rsrq: %.2g dB ", value);
+    if ((value = mm_signal_get_rsrp (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "rsrp: %.2g dBm ", value);
+    if ((value = mm_signal_get_snr (signal)) != MM_SIGNAL_UNKNOWN)
+      g_string_append_printf (str, "snr: %.2g dB ", value);
+  }
 
   return g_string_free (str, FALSE);
 }
@@ -1453,9 +1394,9 @@ cc_wwan_device_pin_valid (const gchar *password,
 {
   size_t len;
 
-  g_return_val_if_fail (lock == MM_MODEM_LOCK_SIM_PIN  ||
+  g_return_val_if_fail (lock == MM_MODEM_LOCK_SIM_PIN ||
                         lock == MM_MODEM_LOCK_SIM_PIN2 ||
-                        lock == MM_MODEM_LOCK_SIM_PUK  ||
+                        lock == MM_MODEM_LOCK_SIM_PUK ||
                         lock == MM_MODEM_LOCK_SIM_PUK2, FALSE);
   if (!password)
     return FALSE;

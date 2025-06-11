@@ -27,8 +27,7 @@
 #include <cairo-gobject.h>
 #include <gio/gio.h>
 
-struct _BgWallpapersSource
-{
+struct _BgWallpapersSource {
   BgSource parent_instance;
   CcBackgroundXml *xml;
 };
@@ -45,8 +44,8 @@ sort_func (gconstpointer a,
   const char *name_a;
   const char *name_b;
 
-  item_a = (CcBackgroundItem *) a;
-  item_b = (CcBackgroundItem *) b;
+  item_a = (CcBackgroundItem *)a;
+  item_b = (CcBackgroundItem *)b;
 
   name_a = cc_background_item_get_name (item_a);
   name_b = cc_background_item_get_name (item_b);
@@ -78,11 +77,11 @@ load_wallpapers (gchar              *key,
 }
 
 static void
-list_load_cb (GObject *source_object,
-	      GAsyncResult *res,
-	      gpointer user_data)
+list_load_cb (GObject      *source_object,
+              GAsyncResult *res,
+              gpointer      user_data)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   if (!cc_background_xml_load_list_finish (CC_BACKGROUND_XML (source_object), res, &error))
     g_warning ("Failed to load background list: %s", error->message);
 }
@@ -107,9 +106,9 @@ load_default_bg (BgWallpapersSource *self)
     g_autofree gchar *filename = NULL;
 
     filename = g_build_filename (system_data_dirs[i],
-				 "gnome-background-properties",
-				 "adwaita.xml",
-				 NULL);
+                                 "gnome-background-properties",
+                                 "adwaita.xml",
+                                 NULL);
     if (cc_background_xml_load_xml (self->xml, filename))
       break;
   }

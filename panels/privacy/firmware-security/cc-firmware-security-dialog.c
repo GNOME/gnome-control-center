@@ -32,30 +32,29 @@
 #include "cc-firmware-security-dialog.h"
 #include "cc-firmware-security-utils.h"
 
-struct _CcFirmwareSecurityDialog
-{
-  AdwDialog            parent;
+struct _CcFirmwareSecurityDialog {
+  AdwDialog parent;
 
-  GtkWidget           *firmware_security_dialog_icon;
-
+  GtkWidget *firmware_security_dialog_icon;
 
 
-  GtkWidget           *firmware_security_dialog_title_label;
-  GtkWidget           *firmware_security_dialog_body_label;
-  GtkWidget           *firmware_security_dialog_min_row;
-  AdwToastOverlay     *toast_overlay;
 
-  gboolean             is_created;
+  GtkWidget *firmware_security_dialog_title_label;
+  GtkWidget *firmware_security_dialog_body_label;
+  GtkWidget *firmware_security_dialog_min_row;
+  AdwToastOverlay *toast_overlay;
 
-  GHashTable          *hsi1_dict;
-  GHashTable          *hsi2_dict;
-  GHashTable          *hsi3_dict;
-  GHashTable          *hsi4_dict;
-  GHashTable          *runtime_dict;
+  gboolean is_created;
 
-  GString             *event_log_str;
+  GHashTable *hsi1_dict;
+  GHashTable *hsi2_dict;
+  GHashTable *hsi3_dict;
+  GHashTable *hsi4_dict;
+  GHashTable *runtime_dict;
 
-  guint                hsi_number;
+  GString *event_log_str;
+
+  guint hsi_number;
 };
 
 G_DEFINE_TYPE (CcFirmwareSecurityDialog, cc_firmware_security_dialog, ADW_TYPE_DIALOG)
@@ -72,36 +71,33 @@ set_dialog_item_layer1 (CcFirmwareSecurityDialog *self,
   gtk_label_set_text (GTK_LABEL (self->firmware_security_dialog_title_label), title);
   gtk_label_set_text (GTK_LABEL (self->firmware_security_dialog_body_label), body);
 
-  if (self->hsi_number == G_MAXUINT)
-    {
-        gtk_widget_add_css_class (self->firmware_security_dialog_icon, "neutral");
-        return;
-    }
+  if (self->hsi_number == G_MAXUINT) {
+    gtk_widget_add_css_class (self->firmware_security_dialog_icon, "neutral");
+    return;
+  }
 
-  switch (self->hsi_number)
-    {
-      case 0:
-        gtk_widget_add_css_class (self->firmware_security_dialog_icon, "error");
-        break;
-      case 1:
-        gtk_widget_add_css_class (self->firmware_security_dialog_icon, "warning");
-        break;
-      case 2:
-      case 3:
-      case 4:
-      case 5:
-        gtk_widget_add_css_class (self->firmware_security_dialog_icon, "good");
-        break;
-      default:
-        gtk_widget_add_css_class (self->firmware_security_dialog_icon, "neutral");
-    }
+  switch (self->hsi_number) {
+    case 0:
+      gtk_widget_add_css_class (self->firmware_security_dialog_icon, "error");
+      break;
+    case 1:
+      gtk_widget_add_css_class (self->firmware_security_dialog_icon, "warning");
+      break;
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+      gtk_widget_add_css_class (self->firmware_security_dialog_icon, "good");
+      break;
+    default:
+      gtk_widget_add_css_class (self->firmware_security_dialog_icon, "neutral");
+  }
 }
 
 static void
 update_dialog (CcFirmwareSecurityDialog *self)
 {
-  switch (self->hsi_number)
-    {
+  switch (self->hsi_number) {
     case 0:
       set_dialog_item_layer1 (self,
                               "dialog-warning-symbolic",
@@ -145,7 +141,7 @@ update_dialog (CcFirmwareSecurityDialog *self)
                               /* TRANSLATORS: When the security result is unavailable, this description is shown. */
                               _("Device security checks are not available for this device. "
                                 "It is not possible to tell whether it meets hardware security requirements."));
-    }
+  }
 }
 
 static gchar *
@@ -167,13 +163,13 @@ get_os_name (void)
     return g_strdup (_("Unknown"));
 }
 
-static gchar*
+static gchar *
 cpu_get_model ()
 {
   gchar *model;
-  const glibtop_sysinfo * sysinfo;
+  const glibtop_sysinfo *sysinfo;
 
-  glibtop_init();
+  glibtop_init ();
   sysinfo = glibtop_get_sysinfo ();
   model = g_strdup (g_hash_table_lookup (sysinfo->cpuinfo [1].values, "model name"));
   glibtop_close ();
@@ -181,21 +177,20 @@ cpu_get_model ()
   return model;
 }
 
-static gchar*
+static gchar *
 fwupd_get_property (const char *property_name)
 {
-  g_autoptr(GDBusConnection) connection = NULL;
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GVariant) inner = NULL;
-  g_autoptr(GVariant) variant = NULL;
+  g_autoptr (GDBusConnection) connection = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GVariant) inner = NULL;
+  g_autoptr (GVariant) variant = NULL;
   const gchar *ret_property;
 
   connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-  if (!connection)
-    {
-      g_warning ("system bus not available: %s", error->message);
-      return NULL;
-    }
+  if (!connection) {
+    g_warning ("system bus not available: %s", error->message);
+    return NULL;
+  }
   variant = g_dbus_connection_call_sync (connection,
                                          "org.freedesktop.fwupd",
                                          "/",
@@ -209,11 +204,10 @@ fwupd_get_property (const char *property_name)
                                          -1,
                                          NULL,
                                          &error);
-  if (!variant)
-    {
-      g_warning ("Cannot get org.freedesktop.fwupd: %s", error->message);
-      return NULL;
-    }
+  if (!variant) {
+    g_warning ("Cannot get org.freedesktop.fwupd: %s", error->message);
+    return NULL;
+  }
   g_variant_get (variant, "(v)", &inner);
   ret_property = g_variant_get_string (inner, NULL);
 
@@ -244,7 +238,7 @@ on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
 
   result_str = g_string_new (NULL);
 
-  // TRANSLATORS: device security report fields are left untranslated as developers expect bug reports in English
+  /* TRANSLATORS: device security report fields are left untranslated as developers expect bug reports in English */
   g_string_append (result_str, "Device Security Report");
   g_string_append (result_str, "\n======================\n\n");
 
@@ -289,81 +283,72 @@ on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
   g_string_append_printf (result_str, "%s\n", hsi_level);
   g_string_append (result_str, "\n");
 
-  for (int i = 1; i <=5; i++)
-    {
-      switch (i)
-      {
-        case 1:
-          hsi_dict = self->hsi1_dict;
-          break;
-        case 2:
-          hsi_dict = self->hsi2_dict;
-          break;
-        case 3:
-          hsi_dict = self->hsi3_dict;
-          break;
-        case 4:
-          hsi_dict = self->hsi4_dict;
-          break;
-        case 5:
-          hsi_dict = self->runtime_dict;
-      }
-
-      if (i <= 4)
-        {
-          g_string_append_printf (result_str, "HSI-");
-          g_string_append_printf (result_str, "%i ", i);
-          g_string_append (result_str, "Tests");
-          g_string_append (result_str, "\n");
-        }
-      else
-        {
-          g_string_append (result_str, "Runtime Tests");
-          g_string_append (result_str, "\n");
-        }
-
-      hash_keys = g_hash_table_get_keys (hsi_dict);
-      for (GList *item = g_list_first (hash_keys); item != NULL; item = g_list_next (item))
-        {
-          FwupdSecurityAttr *attr = g_hash_table_lookup (hsi_dict, item->data);
-          if (g_strcmp0 (attr->appstream_id, FWUPD_SECURITY_ATTR_ID_SUPPORTED_CPU) == 0)
-            continue;
-          if (attr->title == NULL)
-            continue;
-          g_string_printf (tmp_str, "%s:", attr->title);
-          g_string_append (result_str, "  ");
-          hsi_report_title_print_padding (tmp_str->str, result_str, 0);
-          if (firmware_security_attr_has_flag (attr, FWUPD_SECURITY_ATTR_FLAG_SUCCESS))
-            {
-              /* Passed */
-              g_string_append (result_str, "Pass");
-              g_string_append (result_str, " ");
-            }
-          else
-            {
-              /* Failed */
-              result_str = g_string_overwrite (result_str, result_str->len-2, "! Fail");
-              g_string_append (result_str, " ");
-            }
-          hsi_result = fwupd_security_attr_result_to_string (attr->result);
-          if (hsi_result) {
-            g_string_append_printf (result_str, "(%s)", hsi_result);
-          }
-          g_string_append (result_str, "\n");
-        }
-        g_string_append (result_str, "\n");
+  for (int i = 1; i <= 5; i++) {
+    switch (i) {
+      case 1:
+        hsi_dict = self->hsi1_dict;
+        break;
+      case 2:
+        hsi_dict = self->hsi2_dict;
+        break;
+      case 3:
+        hsi_dict = self->hsi3_dict;
+        break;
+      case 4:
+        hsi_dict = self->hsi4_dict;
+        break;
+      case 5:
+        hsi_dict = self->runtime_dict;
     }
 
-    g_string_append (result_str, "Host security events");
-    g_string_append (result_str, "\n");
-    g_string_append (result_str, self->event_log_str->str);
-    g_string_append (result_str, "\n");
-    g_string_append (result_str, "For information on the contents of this report, see https://fwupd.github.io/hsi.html");
+    if (i <= 4) {
+      g_string_append_printf (result_str, "HSI-");
+      g_string_append_printf (result_str, "%i ", i);
+      g_string_append (result_str, "Tests");
+      g_string_append (result_str, "\n");
+    } else {
+      g_string_append (result_str, "Runtime Tests");
+      g_string_append (result_str, "\n");
+    }
 
-    display = gdk_display_get_default ();
-    clip_board = gdk_display_get_clipboard (display);
-    gdk_clipboard_set_text (clip_board, result_str->str);
-    adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Report copied to clipboard")));
+    hash_keys = g_hash_table_get_keys (hsi_dict);
+    for (GList *item = g_list_first (hash_keys); item != NULL; item = g_list_next (item)) {
+      FwupdSecurityAttr *attr = g_hash_table_lookup (hsi_dict, item->data);
+      if (g_strcmp0 (attr->appstream_id, FWUPD_SECURITY_ATTR_ID_SUPPORTED_CPU) == 0)
+        continue;
+      if (attr->title == NULL)
+        continue;
+      g_string_printf (tmp_str, "%s:", attr->title);
+      g_string_append (result_str, "  ");
+      hsi_report_title_print_padding (tmp_str->str, result_str, 0);
+      if (firmware_security_attr_has_flag (attr, FWUPD_SECURITY_ATTR_FLAG_SUCCESS)) {
+        /* Passed */
+        g_string_append (result_str, "Pass");
+        g_string_append (result_str, " ");
+      } else {
+        /* Failed */
+        result_str = g_string_overwrite (result_str, result_str->len - 2, "! Fail");
+        g_string_append (result_str, " ");
+      }
+      hsi_result = fwupd_security_attr_result_to_string (attr->result);
+      if (hsi_result) {
+        g_string_append_printf (result_str, "(%s)", hsi_result);
+      }
+      g_string_append (result_str, "\n");
+    }
+    g_string_append (result_str, "\n");
+  }
+
+  g_string_append (result_str, "Host security events");
+  g_string_append (result_str, "\n");
+  g_string_append (result_str, self->event_log_str->str);
+  g_string_append (result_str, "\n");
+  g_string_append (result_str, "For information on the contents of this report, see https://fwupd.github.io/hsi.html");
+
+  display = gdk_display_get_default ();
+  clip_board = gdk_display_get_clipboard (display);
+  gdk_clipboard_set_text (clip_board, result_str->str);
+  adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Report copied to clipboard")));
 }
 
 static void

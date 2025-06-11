@@ -39,21 +39,20 @@
 #define PIN_MINIMUM_LENGTH 4
 #define PIN_MAXIMUM_LENGTH 8
 
-struct _CcWwanSimLockDialog
-{
-  GtkDialog     parent_instance;
+struct _CcWwanSimLockDialog {
+  GtkDialog parent_instance;
 
   CcWwanDevice *device;
 
-  GtkButton    *apply_button;
-  GtkStack     *button_stack;
-  GtkGrid      *lock_change_grid;
+  GtkButton *apply_button;
+  GtkStack *button_stack;
+  GtkGrid *lock_change_grid;
   AdwSwitchRow *lock_row;
-  GtkEntry     *new_pin_entry;
-  GtkButton    *next_button;
-  GtkEntry     *pin_confirm_entry;
-  GtkEntry     *pin_entry;
-  GtkStack     *pin_settings_stack;
+  GtkEntry *new_pin_entry;
+  GtkButton *next_button;
+  GtkEntry *pin_confirm_entry;
+  GtkEntry *pin_entry;
+  GtkStack *pin_settings_stack;
 };
 
 G_DEFINE_TYPE (CcWwanSimLockDialog, cc_wwan_sim_lock_dialog, GTK_TYPE_DIALOG)
@@ -103,15 +102,14 @@ cc_wwan_pin_apply_clicked_cb (CcWwanSimLockDialog *self)
   pin = gtk_editable_get_text (GTK_EDITABLE (self->pin_entry));
   new_pin = gtk_editable_get_text (GTK_EDITABLE (self->new_pin_entry));
 
-  if (lock_enabled != row_enabled)
-    {
-      if (row_enabled)
-        cc_wwan_device_enable_pin (self->device, pin, NULL, NULL, NULL);
-      else
-        cc_wwan_device_disable_pin (self->device, pin, NULL, NULL, NULL);
+  if (lock_enabled != row_enabled) {
+    if (row_enabled)
+      cc_wwan_device_enable_pin (self->device, pin, NULL, NULL, NULL);
+    else
+      cc_wwan_device_disable_pin (self->device, pin, NULL, NULL, NULL);
 
-      return;
-    }
+    return;
+  }
 
   cc_wwan_device_change_pin (self->device, pin, new_pin, NULL, NULL, NULL);
 }
@@ -143,7 +141,7 @@ cc_wwan_pin_entry_text_inserted_cb (CcWwanSimLockDialog *self,
   digit_end = strspn (new_text, "1234567890");
 
   /* The maximum length possible for PIN is 8 */
-  if (len <= 8 &&  digit_end == len)
+  if (len <= 8 && digit_end == len)
     return;
 
   g_signal_stop_emission_by_name (editable, "insert-text");
@@ -177,11 +175,10 @@ cc_wwan_pin_entered_cb (CcWwanSimLockDialog *self)
 
   pin = gtk_editable_get_text (GTK_EDITABLE (self->pin_entry));
 
-  if (!pin || !*pin)
-    {
-      gtk_widget_set_sensitive (GTK_WIDGET (self->apply_button), FALSE);
-      return;
-    }
+  if (!pin || !*pin) {
+    gtk_widget_set_sensitive (GTK_WIDGET (self->apply_button), FALSE);
+    return;
+  }
 
   len = strlen (pin);
   enable_apply = len >= PIN_MINIMUM_LENGTH && len <= PIN_MAXIMUM_LENGTH;
@@ -197,15 +194,14 @@ cc_wwan_sim_lock_dialog_set_property (GObject      *object,
 {
   CcWwanSimLockDialog *self = (CcWwanSimLockDialog *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_DEVICE:
       self->device = g_value_dup_object (value);
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void

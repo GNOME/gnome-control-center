@@ -89,8 +89,7 @@ cc_timelike_editor_layout_get_property (GObject    *object,
 {
   CcTimelikeEditorLayout *self = CC_TIMELIKE_EDITOR_LAYOUT (object);
 
-  switch ((CcTimelikeEditorLayoutProperty) property_id)
-    {
+  switch ((CcTimelikeEditorLayoutProperty)property_id) {
     case PROP_ROW_SPACING:
       g_value_set_uint (value, cc_timelike_editor_layout_get_row_spacing (self));
       break;
@@ -100,7 +99,7 @@ cc_timelike_editor_layout_get_property (GObject    *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -111,8 +110,7 @@ cc_timelike_editor_layout_set_property (GObject      *object,
 {
   CcTimelikeEditorLayout *self = CC_TIMELIKE_EDITOR_LAYOUT (object);
 
-  switch ((CcTimelikeEditorLayoutProperty) property_id)
-    {
+  switch ((CcTimelikeEditorLayoutProperty)property_id) {
     case PROP_ROW_SPACING:
       cc_timelike_editor_layout_set_row_spacing (self, g_value_get_uint (value));
       break;
@@ -122,7 +120,7 @@ cc_timelike_editor_layout_set_property (GObject      *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -144,56 +142,43 @@ cc_timelike_editor_layout_measure (GtkLayoutManager *layout_manager,
 
   for (child = gtk_widget_get_first_child (widget), button_pos = 0;
        child != NULL;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      int child_minimum = 0, child_natural = 0;
+       child = gtk_widget_get_next_sibling (child)) {
+    int child_minimum = 0, child_natural = 0;
 
-      if (!gtk_widget_should_layout (child))
-        continue;
+    if (!gtk_widget_should_layout (child))
+      continue;
 
-      gtk_widget_measure (child, orientation, for_size,
-                          &child_minimum, &child_natural,
-                          NULL, NULL);
+    gtk_widget_measure (child, orientation, for_size,
+                        &child_minimum, &child_natural,
+                        NULL, NULL);
 
-      if (GTK_IS_BUTTON (child) && button_pos < 4)
-        {
-          /* Up/Down buttons */
-          max_up_down_button_minimum = MAX (max_up_down_button_minimum, child_minimum);
-          max_up_down_button_natural = MAX (max_up_down_button_natural, child_natural);
-          button_pos++;
-        }
-      else if (GTK_IS_BUTTON (child) && button_pos == 4)
-        {
-          /* AM/PM button; may not be visible, in which case these will default to 0. */
-          am_pm_button_minimum = child_minimum;
-          am_pm_button_natural = child_natural;
-          button_pos++;
-        }
-      else if (CC_IS_TIMELIKE_ENTRY (child))
-        {
-          entry_minimum = child_minimum;
-          entry_natural = child_natural;
-        }
-      else
-        {
-          g_assert_not_reached ();
-        }
-    }
-
-  if (orientation == GTK_ORIENTATION_HORIZONTAL)
-    {
-      *out_minimum = MAX (2 * max_up_down_button_minimum, entry_minimum) + ((am_pm_button_minimum > 0) ? am_pm_button_minimum + self->column_spacing : 0);
-      *out_natural = MAX (2 * max_up_down_button_natural, entry_natural) + ((am_pm_button_natural > 0) ? am_pm_button_natural + self->column_spacing : 0);
-    }
-  else if (orientation == GTK_ORIENTATION_VERTICAL)
-    {
-      *out_minimum = 2 * max_up_down_button_minimum + 2 * self->row_spacing + MAX (entry_minimum, am_pm_button_minimum);
-      *out_natural = 2 * max_up_down_button_natural + 2 * self->row_spacing + MAX (entry_natural, am_pm_button_natural);
-    }
-  else
-    {
+    if (GTK_IS_BUTTON (child) && button_pos < 4) {
+      /* Up/Down buttons */
+      max_up_down_button_minimum = MAX (max_up_down_button_minimum, child_minimum);
+      max_up_down_button_natural = MAX (max_up_down_button_natural, child_natural);
+      button_pos++;
+    } else if (GTK_IS_BUTTON (child) && button_pos == 4) {
+      /* AM/PM button; may not be visible, in which case these will default to 0. */
+      am_pm_button_minimum = child_minimum;
+      am_pm_button_natural = child_natural;
+      button_pos++;
+    } else if (CC_IS_TIMELIKE_ENTRY (child)) {
+      entry_minimum = child_minimum;
+      entry_natural = child_natural;
+    } else {
       g_assert_not_reached ();
     }
+  }
+
+  if (orientation == GTK_ORIENTATION_HORIZONTAL) {
+    *out_minimum = MAX (2 * max_up_down_button_minimum, entry_minimum) + ((am_pm_button_minimum > 0) ? am_pm_button_minimum + self->column_spacing : 0);
+    *out_natural = MAX (2 * max_up_down_button_natural, entry_natural) + ((am_pm_button_natural > 0) ? am_pm_button_natural + self->column_spacing : 0);
+  } else if (orientation == GTK_ORIENTATION_VERTICAL) {
+    *out_minimum = 2 * max_up_down_button_minimum + 2 * self->row_spacing + MAX (entry_minimum, am_pm_button_minimum);
+    *out_natural = 2 * max_up_down_button_natural + 2 * self->row_spacing + MAX (entry_natural, am_pm_button_natural);
+  } else {
+    g_assert_not_reached ();
+  }
 
   *out_minimum_baseline = -1;
   *out_natural_baseline = -1;
@@ -223,42 +208,35 @@ cc_timelike_editor_layout_allocate (GtkLayoutManager *layout_manager,
    * buttons, to make them equal and square. */
   for (child = gtk_widget_get_first_child (widget), button_pos = 0;
        child != NULL;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      GtkOrientation orientation;
-      int child_minimum = 0, child_natural = 0;
+       child = gtk_widget_get_next_sibling (child)) {
+    GtkOrientation orientation;
+    int child_minimum = 0, child_natural = 0;
 
-      if (!gtk_widget_should_layout (child) ||
-          !GTK_IS_BUTTON (child))
-        continue;
+    if (!gtk_widget_should_layout (child) ||
+        !GTK_IS_BUTTON (child))
+      continue;
 
-      if (button_pos < 4)
-        {
-          for (orientation = GTK_ORIENTATION_HORIZONTAL;
-               orientation <= GTK_ORIENTATION_VERTICAL;
-               orientation++)
-            {
-              gtk_widget_measure (child, orientation, -1,
-                                  &child_minimum, &child_natural,
-                                  NULL, NULL);
+    if (button_pos < 4) {
+      for (orientation = GTK_ORIENTATION_HORIZONTAL;
+           orientation <= GTK_ORIENTATION_VERTICAL;
+           orientation++) {
+        gtk_widget_measure (child, orientation, -1,
+                            &child_minimum, &child_natural,
+                            NULL, NULL);
 
-              max_up_down_button_minimum = MAX (max_up_down_button_minimum, child_minimum);
-              max_up_down_button_natural = MAX (max_up_down_button_natural, child_natural);
-            }
-        }
-      else if (button_pos == 4)
-        {
-          gtk_widget_measure (child, GTK_ORIENTATION_HORIZONTAL, -1,
-                              &am_pm_button_width_minimum, &am_pm_button_width_natural,
-                              NULL, NULL);
-        }
-      else
-        {
-          g_assert_not_reached ();
-        }
-
-      button_pos++;
+        max_up_down_button_minimum = MAX (max_up_down_button_minimum, child_minimum);
+        max_up_down_button_natural = MAX (max_up_down_button_natural, child_natural);
+      }
+    } else if (button_pos == 4) {
+      gtk_widget_measure (child, GTK_ORIENTATION_HORIZONTAL, -1,
+                          &am_pm_button_width_minimum, &am_pm_button_width_natural,
+                          NULL, NULL);
+    } else {
+      g_assert_not_reached ();
     }
+
+    button_pos++;
+  }
 
   /* We don’t support these buttons growing; only the entry and AM/PM button can grow. */
   g_assert (max_up_down_button_minimum == max_up_down_button_natural);
@@ -271,51 +249,49 @@ cc_timelike_editor_layout_allocate (GtkLayoutManager *layout_manager,
   /* Allocate the entry first, so we can get the offsets from it for the buttons. */
   for (child = gtk_widget_get_first_child (widget);
        child != NULL;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      if (!gtk_widget_should_layout (child))
-        continue;
+       child = gtk_widget_get_next_sibling (child)) {
+    if (!gtk_widget_should_layout (child))
+      continue;
 
-      if (CC_IS_TIMELIKE_ENTRY (child))
-        {
-          GtkAllocation child_allocation;
-          int child_minimum = 0, child_natural = 0;
-          gboolean success;
+    if (CC_IS_TIMELIKE_ENTRY (child)) {
+      GtkAllocation child_allocation;
+      int child_minimum = 0, child_natural = 0;
+      gboolean success;
 
-          entry = CC_TIMELIKE_ENTRY (child);
+      entry = CC_TIMELIKE_ENTRY (child);
 
-          gtk_widget_measure (child, GTK_ORIENTATION_HORIZONTAL, -1,
-                              &entry_width_minimum, &entry_width_natural,
-                              NULL, NULL);
-          gtk_widget_measure (child, GTK_ORIENTATION_VERTICAL, width,
-                              &child_minimum, &child_natural,
-                              NULL, NULL);
+      gtk_widget_measure (child, GTK_ORIENTATION_HORIZONTAL, -1,
+                          &entry_width_minimum, &entry_width_natural,
+                          NULL, NULL);
+      gtk_widget_measure (child, GTK_ORIENTATION_VERTICAL, width,
+                          &child_minimum, &child_natural,
+                          NULL, NULL);
 
-          child_allocation.width = width - ((am_pm_button_width > 0) ? self->column_spacing + am_pm_button_width : 0);
-          child_allocation.height = CLAMP (height - 2 * self->row_spacing - 2 * up_down_button_size, child_minimum, child_natural);
-          child_allocation.x = 0;
-          child_allocation.y = up_down_button_size + self->row_spacing;
+      child_allocation.width = width - ((am_pm_button_width > 0) ? self->column_spacing + am_pm_button_width : 0);
+      child_allocation.height = CLAMP (height - 2 * self->row_spacing - 2 * up_down_button_size, child_minimum, child_natural);
+      child_allocation.x = 0;
+      child_allocation.y = up_down_button_size + self->row_spacing;
 
-          gtk_widget_size_allocate (child, &child_allocation, -1);
+      gtk_widget_size_allocate (child, &child_allocation, -1);
 
-          cc_timelike_entry_get_hours_and_minutes_midpoints (entry,
-                                                             &hours_midpoint.x,
-                                                             &minutes_midpoint.x);
+      cc_timelike_entry_get_hours_and_minutes_midpoints (entry,
+                                                         &hours_midpoint.x,
+                                                         &minutes_midpoint.x);
 
-          success = gtk_widget_compute_point (child, widget,
-                                              &hours_midpoint, &hours_midpoint_self);
-          g_assert (success);
+      success = gtk_widget_compute_point (child, widget,
+                                          &hours_midpoint, &hours_midpoint_self);
+      g_assert (success);
 
-          success = gtk_widget_compute_point (child, widget,
-                                              &minutes_midpoint, &minutes_midpoint_self);
-          g_assert (success);
+      success = gtk_widget_compute_point (child, widget,
+                                          &minutes_midpoint, &minutes_midpoint_self);
+      g_assert (success);
 
-          entry_extra_width = (child_allocation.width >= entry_width_natural) ? child_allocation.width - entry_width_natural : 0;
-          entry_height = child_allocation.height;
+      entry_extra_width = (child_allocation.width >= entry_width_natural) ? child_allocation.width - entry_width_natural : 0;
+      entry_height = child_allocation.height;
 
-          break;
-        }
+      break;
     }
+  }
 
   g_assert (entry != NULL);
 
@@ -328,48 +304,42 @@ cc_timelike_editor_layout_allocate (GtkLayoutManager *layout_manager,
    */
   for (child = gtk_widget_get_first_child (widget), button_pos = 0;
        child != NULL;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      if (!gtk_widget_should_layout (child) ||
-          !GTK_IS_BUTTON (child))
-        continue;
+       child = gtk_widget_get_next_sibling (child)) {
+    if (!gtk_widget_should_layout (child) ||
+        !GTK_IS_BUTTON (child))
+      continue;
 
-      if (button_pos < 4)
-        {
-          GtkAllocation child_allocation;
-          int child_minimum = 0, child_natural = 0;
-          gboolean is_hours = (button_pos % 2 == 0);
-          gboolean is_up = (button_pos < 2);
+    if (button_pos < 4) {
+      GtkAllocation child_allocation;
+      int child_minimum = 0, child_natural = 0;
+      gboolean is_hours = (button_pos % 2 == 0);
+      gboolean is_up = (button_pos < 2);
 
-          gtk_widget_measure (child, GTK_ORIENTATION_VERTICAL, width,
-                              &child_minimum, &child_natural,
-                              NULL, NULL);
+      gtk_widget_measure (child, GTK_ORIENTATION_VERTICAL, width,
+                          &child_minimum, &child_natural,
+                          NULL, NULL);
 
-          child_allocation.width = up_down_button_size;
-          child_allocation.height = up_down_button_size;
-          child_allocation.x = entry_extra_width / 2 + (is_hours ? hours_midpoint_self.x : minutes_midpoint_self.x) - up_down_button_size / 2;
-          child_allocation.y = is_up ? 0 : up_down_button_size + 2 * self->row_spacing + entry_height;
+      child_allocation.width = up_down_button_size;
+      child_allocation.height = up_down_button_size;
+      child_allocation.x = entry_extra_width / 2 + (is_hours ? hours_midpoint_self.x : minutes_midpoint_self.x) - up_down_button_size / 2;
+      child_allocation.y = is_up ? 0 : up_down_button_size + 2 * self->row_spacing + entry_height;
 
-          gtk_widget_size_allocate (child, &child_allocation, -1);
-        }
-      else if (button_pos == 4)
-        {
-          GtkAllocation child_allocation;
+      gtk_widget_size_allocate (child, &child_allocation, -1);
+    } else if (button_pos == 4) {
+      GtkAllocation child_allocation;
 
-          child_allocation.width = am_pm_button_width;
-          child_allocation.height = entry_height;
-          child_allocation.x = width - am_pm_button_width;
-          child_allocation.y = up_down_button_size + self->row_spacing;
+      child_allocation.width = am_pm_button_width;
+      child_allocation.height = entry_height;
+      child_allocation.x = width - am_pm_button_width;
+      child_allocation.y = up_down_button_size + self->row_spacing;
 
-          gtk_widget_size_allocate (child, &child_allocation, -1);
-        }
-      else
-        {
-          g_assert_not_reached ();
-        }
-
-      button_pos++;
+      gtk_widget_size_allocate (child, &child_allocation, -1);
+    } else {
+      g_assert_not_reached ();
     }
+
+    button_pos++;
+  }
 }
 
 static void

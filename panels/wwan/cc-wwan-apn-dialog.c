@@ -38,31 +38,30 @@
  * @short_description: Dialog to manage Internet Access Points
  */
 
-struct _CcWwanApnDialog
-{
-  GtkDialog          parent_instance;
+struct _CcWwanApnDialog {
+  GtkDialog parent_instance;
 
-  GtkButton         *add_button;
-  GtkButton         *back_button;
-  GtkButton         *save_button;
-  GtkEntry          *apn_entry;
-  GtkEntry          *name_entry;
-  GtkEntry          *password_entry;
-  GtkEntry          *username_entry;
-  GtkGrid           *apn_edit_view;
-  GtkListBox        *apn_list;
-  GtkCheckButton    *apn_radio_button;
+  GtkButton *add_button;
+  GtkButton *back_button;
+  GtkButton *save_button;
+  GtkEntry *apn_entry;
+  GtkEntry *name_entry;
+  GtkEntry *password_entry;
+  GtkEntry *username_entry;
+  GtkGrid *apn_edit_view;
+  GtkListBox *apn_list;
+  GtkCheckButton *apn_radio_button;
   GtkScrolledWindow *apn_list_view;
-  GtkStack          *apn_settings_stack;
-  GtkDropDown       *lte_auth_combo;
-  GtkDropDown       *lte_attach_combo;
+  GtkStack *apn_settings_stack;
+  GtkDropDown *lte_auth_combo;
+  GtkDropDown *lte_attach_combo;
 
-  CcWwanData        *wwan_data;
-  CcWwanDataApn     *apn_to_save;   /* The APN currently being edited */
-  CcWwanDevice      *device;
+  CcWwanData *wwan_data;
+  CcWwanDataApn *apn_to_save;       /* The APN currently being edited */
+  CcWwanDevice *device;
 
-  gboolean           enable_data;
-  gboolean           enable_roaming;
+  gboolean enable_data;
+  gboolean enable_roaming;
 };
 
 G_DEFINE_TYPE (CcWwanApnDialog, cc_wwan_apn_dialog, GTK_TYPE_DIALOG)
@@ -76,14 +75,13 @@ enum {
 
 static GParamSpec *properties[N_PROPS];
 
-#define CC_TYPE_WWAN_APN_ROW (cc_wwan_apn_row_get_type())
+#define CC_TYPE_WWAN_APN_ROW (cc_wwan_apn_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcWwanApnRow, cc_wwan_apn_row, CC, WWAN_APN_ROW, GtkListBoxRow)
 
-struct _CcWwanApnRow
-{
-  GtkListBoxRow   parent_instance;
+struct _CcWwanApnRow {
+  GtkListBoxRow parent_instance;
   GtkCheckButton *radio_button;
-  CcWwanDataApn  *apn;
+  CcWwanDataApn *apn;
 };
 
 G_DEFINE_TYPE (CcWwanApnRow, cc_wwan_apn_row, GTK_TYPE_LIST_BOX_ROW)
@@ -118,17 +116,14 @@ cc_wwan_apn_back_clicked_cb (CcWwanApnDialog *self)
 
   view = gtk_stack_get_visible_child (self->apn_settings_stack);
 
-  if (view == GTK_WIDGET (self->apn_edit_view))
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self->save_button), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->add_button), TRUE);
-      gtk_stack_set_visible_child (self->apn_settings_stack,
-                                   GTK_WIDGET (self->apn_list_view));
-    }
-  else
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
-    }
+  if (view == GTK_WIDGET (self->apn_edit_view)) {
+    gtk_widget_set_visible (GTK_WIDGET (self->save_button), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->add_button), TRUE);
+    gtk_stack_set_visible_child (self->apn_settings_stack,
+                                 GTK_WIDGET (self->apn_list_view));
+  } else {
+    gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
+  }
 }
 
 static void
@@ -167,16 +162,15 @@ cc_wwan_apn_save_clicked_cb (CcWwanApnDialog *self)
   cc_wwan_data_apn_set_username (apn, gtk_editable_get_text (GTK_EDITABLE (self->username_entry)));
   cc_wwan_data_apn_set_password (apn, gtk_editable_get_text (GTK_EDITABLE (self->password_entry)));
 
-  if (gtk_drop_down_get_selected (self->lte_attach_combo) == 1)
-    {
-      cc_wwan_data_apn_set_name (apn, name);
-      cc_wwan_data_apn_set_apn (apn, apn_name);
+  if (gtk_drop_down_get_selected (self->lte_attach_combo) == 1) {
+    cc_wwan_data_apn_set_name (apn, name);
+    cc_wwan_data_apn_set_apn (apn, apn_name);
 
-      cc_wwan_data_apn_set_initial_eps_apn (apn, apn_name);
-      cc_wwan_data_apn_set_initial_eps_username (apn, gtk_editable_get_text (GTK_EDITABLE (self->username_entry)));
-      cc_wwan_data_apn_set_initial_eps_password (apn, gtk_editable_get_text (GTK_EDITABLE (self->password_entry)));
-      cc_wwan_data_apn_set_initial_eps_auth_method (apn, gtk_drop_down_get_selected (self->lte_auth_combo));
-    }
+    cc_wwan_data_apn_set_initial_eps_apn (apn, apn_name);
+    cc_wwan_data_apn_set_initial_eps_username (apn, gtk_editable_get_text (GTK_EDITABLE (self->username_entry)));
+    cc_wwan_data_apn_set_initial_eps_password (apn, gtk_editable_get_text (GTK_EDITABLE (self->password_entry)));
+    cc_wwan_data_apn_set_initial_eps_auth_method (apn, gtk_drop_down_get_selected (self->lte_auth_combo));
+  }
 
   cc_wwan_data_apn_set_should_configure_initial_eps_bearer (apn, gtk_drop_down_get_selected (self->lte_attach_combo));
 
@@ -256,24 +250,21 @@ cc_wwan_apn_edit_clicked_cb (CcWwanApnDialog *self,
   gtk_widget_set_visible (GTK_WIDGET (self->add_button), FALSE);
 
   gtk_editable_set_text (GTK_EDITABLE (self->name_entry), cc_wwan_data_apn_get_name (apn));
-  if (cc_wwan_data_apn_should_configure_initial_eps_bearer (apn))
-    {
-      apn_name = cc_wwan_data_apn_get_initial_eps_apn (apn);
-      username = cc_wwan_data_apn_get_initial_eps_username (apn);
-      password = cc_wwan_data_apn_get_initial_eps_password (apn);
+  if (cc_wwan_data_apn_should_configure_initial_eps_bearer (apn)) {
+    apn_name = cc_wwan_data_apn_get_initial_eps_apn (apn);
+    username = cc_wwan_data_apn_get_initial_eps_username (apn);
+    password = cc_wwan_data_apn_get_initial_eps_password (apn);
 
-      gtk_drop_down_set_selected (self->lte_auth_combo, cc_wwan_data_apn_get_initial_eps_auth_method (apn));
-      gtk_drop_down_set_selected (self->lte_attach_combo, 1);
-    }
-  else
-    {
-      apn_name = cc_wwan_data_apn_get_apn (apn);
-      username = cc_wwan_data_apn_get_username (apn);
-      password = cc_wwan_data_apn_get_password (apn);
+    gtk_drop_down_set_selected (self->lte_auth_combo, cc_wwan_data_apn_get_initial_eps_auth_method (apn));
+    gtk_drop_down_set_selected (self->lte_attach_combo, 1);
+  } else {
+    apn_name = cc_wwan_data_apn_get_apn (apn);
+    username = cc_wwan_data_apn_get_username (apn);
+    password = cc_wwan_data_apn_get_password (apn);
 
-      gtk_drop_down_set_selected (self->lte_auth_combo, 0);
-      gtk_drop_down_set_selected (self->lte_attach_combo, 0);
-    }
+    gtk_drop_down_set_selected (self->lte_auth_combo, 0);
+    gtk_drop_down_set_selected (self->lte_attach_combo, 0);
+  }
 
   gtk_editable_set_text (GTK_EDITABLE (self->apn_entry), apn_name ? apn_name : "");
   gtk_editable_set_text (GTK_EDITABLE (self->username_entry), username ? username : "");
@@ -326,8 +317,8 @@ cc_wwan_apn_dialog_row_new (CcWwanDataApn   *apn,
 
   edit_button = gtk_button_new_from_icon_name ("cog-wheel-symbolic");
   gtk_accessible_update_property (GTK_ACCESSIBLE (edit_button),
-                                GTK_ACCESSIBLE_PROPERTY_LABEL, _("Edit"),
-                                -1);
+                                  GTK_ACCESSIBLE_PROPERTY_LABEL, _("Edit"),
+                                  -1);
   g_signal_connect_object (edit_button, "clicked",
                            G_CALLBACK (cc_wwan_apn_edit_clicked_cb),
                            self, G_CONNECT_SWAPPED);
@@ -346,15 +337,14 @@ cc_wwan_apn_dialog_set_property (GObject      *object,
 {
   CcWwanApnDialog *self = (CcWwanApnDialog *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_DEVICE:
       self->device = g_value_dup_object (value);
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -404,7 +394,7 @@ cc_wwan_apn_dialog_class_init (CcWwanApnDialogClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->set_property = cc_wwan_apn_dialog_set_property;
-  object_class->constructed  = cc_wwan_apn_dialog_constructed;
+  object_class->constructed = cc_wwan_apn_dialog_constructed;
   object_class->dispose = cc_wwan_apn_dialog_dispose;
 
   widget_class->show = cc_wwan_apn_dialog_show;

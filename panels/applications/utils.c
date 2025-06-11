@@ -65,15 +65,15 @@ file_remove_async (GFile               *file,
                    GAsyncReadyCallback  callback,
                    gpointer             data)
 {
-  g_autoptr(GTask) task = g_task_new (file, cancellable, callback, data);
+  g_autoptr (GTask) task = g_task_new (file, cancellable, callback, data);
   g_task_set_return_on_cancel (task, TRUE);
   g_task_run_in_thread (task, file_remove_thread_func);
 }
 
 gboolean
-file_remove_finish (GFile        *file,
-                    GAsyncResult *result,
-                    GError      **error)
+file_remove_finish (GFile         *file,
+                    GAsyncResult  *result,
+                    GError       **error)
 {
   g_return_val_if_fail (g_task_is_valid (result, file), FALSE);
   return g_task_propagate_boolean (G_TASK (result), error);
@@ -87,7 +87,7 @@ ftw_size_cb (const gchar       *path,
              gint               typeflags,
              struct FTW        *ftwbuf)
 {
-  guint64 *size = (guint64*)g_private_get (&size_key);
+  guint64 *size = (guint64 *)g_private_get (&size_key);
   if (typeflags == FTW_F)
     *size += sb->st_size;
   return 0;
@@ -108,7 +108,7 @@ file_size_thread_func (GTask        *task,
   nftw (path, ftw_size_cb, 20, FTW_PHYS | FTW_DEPTH);
 
   total = g_new0 (guint64, 1);
-  *total = *(guint64*)g_private_get (&size_key);
+  *total = *(guint64 *)g_private_get (&size_key);
 
   if (g_task_set_return_on_cancel (task, FALSE))
     g_task_return_pointer (task, total, g_free);
@@ -120,16 +120,16 @@ file_size_async (GFile               *file,
                  GAsyncReadyCallback  callback,
                  gpointer             data)
 {
-  g_autoptr(GTask) task = g_task_new (file, cancellable, callback, data);
+  g_autoptr (GTask) task = g_task_new (file, cancellable, callback, data);
   g_task_set_return_on_cancel (task, TRUE);
   g_task_run_in_thread (task, file_size_thread_func);
 }
 
 gboolean
-file_size_finish (GFile        *file,
-                  GAsyncResult *result,
-                  guint64      *size,
-                  GError      **error)
+file_size_finish (GFile         *file,
+                  GAsyncResult  *result,
+                  guint64       *size,
+                  GError       **error)
 {
   g_autofree guint64 *data = NULL;
 
@@ -149,7 +149,7 @@ get_output_of (const gchar **argv)
   int status;
 
   if (!g_spawn_sync (NULL,
-                     (gchar**) argv,
+                     (gchar **)argv,
                      NULL,
                      G_SPAWN_SEARCH_PATH,
                      NULL, NULL,
@@ -168,8 +168,8 @@ get_flatpak_metadata (const gchar *app_id)
 {
   const gchar *argv[5] = { "flatpak", "info", "-m", "app", NULL };
   g_autofree gchar *data = NULL;
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GKeyFile) keyfile = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GKeyFile) keyfile = NULL;
 
   argv[3] = app_id;
 
@@ -178,11 +178,10 @@ get_flatpak_metadata (const gchar *app_id)
     return NULL;
 
   keyfile = g_key_file_new ();
-  if (!g_key_file_load_from_data (keyfile, data, -1, 0, &error))
-    {
-      g_warning ("%s", error->message);
-      return NULL;
-    }
+  if (!g_key_file_load_from_data (keyfile, data, -1, 0, &error)) {
+    g_warning ("%s", error->message);
+    return NULL;
+  }
 
   return g_steal_pointer (&keyfile);
 }
@@ -227,17 +226,16 @@ guint64
 get_snap_app_size (const gchar *snap_name)
 {
 #ifdef HAVE_SNAP
-  g_autoptr(CcSnapdClient) client = NULL;
-  g_autoptr(JsonObject) snap = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (CcSnapdClient) client = NULL;
+  g_autoptr (JsonObject) snap = NULL;
+  g_autoptr (GError) error = NULL;
 
   client = cc_snapd_client_new ();
   snap = cc_snapd_client_get_snap_sync (client, snap_name, NULL, &error);
-  if (snap == NULL)
-    {
-      g_warning ("Failed to get snap size: %s", error->message);
-      return 0;
-    }
+  if (snap == NULL) {
+    g_warning ("Failed to get snap size: %s", error->message);
+    return 0;
+  }
 
   return json_object_get_int_member (snap, "installed-size");
 #else

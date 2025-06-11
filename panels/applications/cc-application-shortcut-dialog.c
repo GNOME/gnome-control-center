@@ -37,8 +37,7 @@
 #include "cc-keyboard-shortcut-group.h"
 #include "cc-util.h"
 
-struct _CcApplicationShortcutDialog
-{
+struct _CcApplicationShortcutDialog {
   AdwDialog parent_instance;
 
   AdwPreferencesPage *shortcut_list;
@@ -76,8 +75,8 @@ static void
 shortcut_changed_cb (CcApplicationShortcutDialog *self)
 {
   GVariant *shortcuts;
-  g_autoptr(GError) error = NULL;
-  g_autoptr(CcGlobalShortcutsRebind) proxy = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (CcGlobalShortcutsRebind) proxy = NULL;
 
   cc_keyboard_manager_store_global_shortcuts (self->manager, self->app_id);
   shortcuts = cc_keyboard_manager_get_global_shortcuts (self->manager, self->app_id);
@@ -88,23 +87,21 @@ shortcut_changed_cb (CcApplicationShortcutDialog *self)
                                                        "/org/gnome/globalshortcuts",
                                                        NULL,
                                                        &error);
-  if (!proxy)
-    {
-      g_warning ("Can't connect to Global Shortcuts Rebind service: %s",
-                 error->message);
-      return;
-    }
+  if (!proxy) {
+    g_warning ("Can't connect to Global Shortcuts Rebind service: %s",
+               error->message);
+    return;
+  }
 
   cc_global_shortcuts_rebind_call_rebind_shortcuts_sync (proxy,
                                                          self->app_id,
                                                          shortcuts,
                                                          NULL,
                                                          &error);
-  if (error)
-    {
-      g_warning ("Can't connect to Global Shortcuts Rebind service: %s",
-                 error->message);
-    }
+  if (error) {
+    g_warning ("Can't connect to Global Shortcuts Rebind service: %s",
+               error->message);
+  }
 }
 
 static void
@@ -140,7 +137,7 @@ reset_all_activated_cb (CcApplicationShortcutDialog *self)
 
   /* TRANSLATORS: %s is an app name. */
   adw_alert_dialog_format_body (dialog,
-                                _ ("All actions from %s that have been registered for global shortcuts will be removed."),
+                                _("All actions from %s that have been registered for global shortcuts will be removed."),
                                 cc_util_app_id_to_display_name (self->app_id));
 
   adw_alert_dialog_add_responses (dialog,

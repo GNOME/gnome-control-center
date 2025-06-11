@@ -69,8 +69,8 @@ static void cc_duration_row_size_allocate (GtkWidget *widget,
                                            int        width,
                                            int        height,
                                            int        baseline);
-static gboolean cc_duration_row_focus (GtkWidget        *widget,
-                                       GtkDirectionType  direction);
+static gboolean cc_duration_row_focus (GtkWidget       *widget,
+                                       GtkDirectionType direction);
 static void cc_duration_row_activate (AdwActionRow *row);
 static void popover_notify_visible_cb (GObject    *object,
                                        GParamSpec *pspec,
@@ -179,8 +179,7 @@ cc_duration_row_get_property (GObject    *object,
 {
   CcDurationRow *self = CC_DURATION_ROW (object);
 
-  switch ((CcDurationRowProperty) property_id)
-    {
+  switch ((CcDurationRowProperty)property_id) {
     case PROP_DURATION:
       g_value_set_uint (value, cc_duration_row_get_duration (self));
       break;
@@ -193,7 +192,7 @@ cc_duration_row_get_property (GObject    *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -204,8 +203,7 @@ cc_duration_row_set_property (GObject      *object,
 {
   CcDurationRow *self = CC_DURATION_ROW (object);
 
-  switch ((CcDurationRowProperty) property_id)
-    {
+  switch ((CcDurationRowProperty)property_id) {
     case PROP_DURATION:
       cc_duration_row_set_duration (self, g_value_get_uint (value));
       break;
@@ -217,7 +215,7 @@ cc_duration_row_set_property (GObject      *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
+  }
 }
 
 static void

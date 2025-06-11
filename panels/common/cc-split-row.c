@@ -24,38 +24,36 @@
 
 #include "cc-mask-paintable.h"
 
-struct _CcSplitRow
-{
-  CcContentRow       parent;
+struct _CcSplitRow {
+  CcContentRow parent;
 
-  GtkBox            *box;
-  GtkSizeGroup      *size_group;
+  GtkBox *box;
+  GtkSizeGroup *size_group;
 
-  GtkPicture        *default_option_picture;
-  GtkPicture        *alternative_option_picture;
+  GtkPicture *default_option_picture;
+  GtkPicture *alternative_option_picture;
 
-  CcMaskPaintable   *default_option_mask;
-  CcMaskPaintable   *alternative_option_mask;
+  CcMaskPaintable *default_option_mask;
+  CcMaskPaintable *alternative_option_mask;
 
-  GtkCheckButton    *alternative_option_checkbutton;
-  GtkCheckButton    *default_option_checkbutton;
+  GtkCheckButton *alternative_option_checkbutton;
+  GtkCheckButton *default_option_checkbutton;
 
-  gchar             *alternative_resource_path;
-  gchar             *default_resource_path;
+  gchar *alternative_resource_path;
+  gchar *default_resource_path;
 
-  gchar             *alternative_option_title;
-  gchar             *alternative_option_subtitle;
-  gchar             *default_option_title;
-  gchar             *default_option_subtitle;
+  gchar *alternative_option_title;
+  gchar *alternative_option_subtitle;
+  gchar *default_option_title;
+  gchar *default_option_subtitle;
 
-  gboolean           use_default;
-  gboolean           compact;
+  gboolean use_default;
+  gboolean compact;
 };
 
 G_DEFINE_FINAL_TYPE (CcSplitRow, cc_split_row, CC_TYPE_CONTENT_ROW);
 
-enum
-{
+enum {
   PROP_0,
   PROP_USE_DEFAULT,
   PROP_COMPACT,
@@ -124,15 +122,14 @@ cc_split_row_dispose (GObject *object)
 }
 
 static void
-cc_split_row_get_property (GObject      *object,
-                           guint         prop_id,
-                           GValue       *value,
-                           GParamSpec   *pspec)
+cc_split_row_get_property (GObject    *object,
+                           guint       prop_id,
+                           GValue     *value,
+                           GParamSpec *pspec)
 {
   CcSplitRow *self = CC_SPLIT_ROW (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_USE_DEFAULT:
       g_value_set_boolean (value, gtk_check_button_get_active (self->default_option_checkbutton));
       break;
@@ -159,7 +156,7 @@ cc_split_row_get_property (GObject      *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -170,8 +167,7 @@ cc_split_row_set_property (GObject      *object,
 {
   CcSplitRow *self = CC_SPLIT_ROW (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_USE_DEFAULT:
       cc_split_row_set_use_default (self, g_value_get_boolean (value));
       break;
@@ -198,7 +194,7 @@ cc_split_row_set_property (GObject      *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void

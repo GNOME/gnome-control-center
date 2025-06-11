@@ -37,77 +37,77 @@
 static gboolean
 device_type_is_present (GsdDeviceType type)
 {
-        g_autoptr(GList) l = gsd_device_manager_list_devices (gsd_device_manager_get (),
-                                                              type);
-        return l != NULL;
+  g_autoptr (GList) l = gsd_device_manager_list_devices (gsd_device_manager_get (),
+                                                         type);
+  return l != NULL;
 }
 
 gboolean
 touchscreen_is_present (void)
 {
-        return device_type_is_present (GSD_DEVICE_TYPE_TOUCHSCREEN);
+  return device_type_is_present (GSD_DEVICE_TYPE_TOUCHSCREEN);
 }
 
 gboolean
 touchpad_is_present (void)
 {
-        return device_type_is_present (GSD_DEVICE_TYPE_TOUCHPAD);
+  return device_type_is_present (GSD_DEVICE_TYPE_TOUCHPAD);
 }
 
 gboolean
 mouse_is_present (void)
 {
-        return device_type_is_present (GSD_DEVICE_TYPE_MOUSE);
+  return device_type_is_present (GSD_DEVICE_TYPE_MOUSE);
 }
 
 #ifdef GDK_WINDOWING_X11
 char *
 xdevice_get_device_node (int deviceid)
 {
-        GdkDisplay    *display;
-        Atom           prop;
-        Atom           act_type;
-        int            act_format;
-        unsigned long  nitems, bytes_after;
-        unsigned char *data;
-        char          *ret;
+  GdkDisplay *display;
+  Atom prop;
+  Atom act_type;
+  int act_format;
+  unsigned long nitems, bytes_after;
+  unsigned char *data;
+  char *ret;
 
-        display = gdk_display_get_default ();
-        gdk_display_sync (display);
+  display = gdk_display_get_default ();
+  gdk_display_sync (display);
 
-        prop = XInternAtom (GDK_DISPLAY_XDISPLAY (display), "Device Node", False);
-        if (!prop)
-                return NULL;
+  prop = XInternAtom (GDK_DISPLAY_XDISPLAY (display), "Device Node", False);
+  if (!prop)
+    return NULL;
 
-        gdk_x11_display_error_trap_push (display);
+  gdk_x11_display_error_trap_push (display);
 
-        if (!XIGetProperty (GDK_DISPLAY_XDISPLAY (display),
-                            deviceid, prop, 0, 1000, False,
-                            AnyPropertyType, &act_type, &act_format,
-                            &nitems, &bytes_after, &data) == Success) {
-                gdk_x11_display_error_trap_pop_ignored (display);
-                return NULL;
-        }
-        if (gdk_x11_display_error_trap_pop (display))
-                goto out;
+  if (!XIGetProperty (GDK_DISPLAY_XDISPLAY (display),
+                      deviceid, prop, 0, 1000, False,
+                      AnyPropertyType, &act_type, &act_format,
+                      &nitems, &bytes_after, &data) == Success) {
+    gdk_x11_display_error_trap_pop_ignored (display);
+    return NULL;
+  }
+  if (gdk_x11_display_error_trap_pop (display))
+    goto out;
 
-        if (nitems == 0)
-                goto out;
+  if (nitems == 0)
+    goto out;
 
-        if (act_type != XA_STRING)
-                goto out;
+  if (act_type != XA_STRING)
+    goto out;
 
-        /* Unknown string format */
-        if (act_format != 8)
-                goto out;
+  /* Unknown string format */
+  if (act_format != 8)
+    goto out;
 
-        ret = g_strdup ((char *) data);
+  ret = g_strdup ((char *)data);
 
-        XFree (data);
-        return ret;
+  XFree (data);
+  return ret;
 
 out:
-        XFree (data);
-        return NULL;
+  XFree (data);
+  return NULL;
 }
 #endif

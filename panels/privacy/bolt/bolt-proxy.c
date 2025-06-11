@@ -8,7 +8,7 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
@@ -66,7 +66,6 @@ bolt_proxy_class_init (BoltProxyClass *klass)
   gobject_class->constructed = bolt_proxy_constructed;
 
   klass->get_dbus_signals = bolt_proxy_get_dbus_signals;
-
 }
 
 static void
@@ -80,7 +79,7 @@ bolt_proxy_handle_props_changed (GDBusProxy *proxy,
                                  GStrv       invalidated_properties,
                                  gpointer    user_data)
 {
-  g_autoptr(GVariantIter) iter = NULL;
+  g_autoptr (GVariantIter) iter = NULL;
   gboolean handled;
   GParamSpec **pp;
   const char *key;
@@ -89,24 +88,22 @@ bolt_proxy_handle_props_changed (GDBusProxy *proxy,
   pp = g_object_class_list_properties (G_OBJECT_GET_CLASS (proxy), &n);
 
   g_variant_get (changed_properties, "a{sv}", &iter);
-  while (g_variant_iter_next (iter, "{&sv}", &key, NULL))
-    {
-      handled = FALSE;
-      for (guint i = 0; !handled && i < n; i++)
-        {
-          GParamSpec *pspec = pp[i];
-          const char *nick;
-          const char *name;
+  while (g_variant_iter_next (iter, "{&sv}", &key, NULL)) {
+    handled = FALSE;
+    for (guint i = 0; !handled && i < n; i++) {
+      GParamSpec *pspec = pp[i];
+      const char *nick;
+      const char *name;
 
-          nick = g_param_spec_get_nick (pspec);
-          name = g_param_spec_get_name (pspec);
+      nick = g_param_spec_get_nick (pspec);
+      name = g_param_spec_get_name (pspec);
 
-          handled = bolt_streq (nick, key);
+      handled = bolt_streq (nick, key);
 
-          if (handled)
-            g_object_notify (G_OBJECT (user_data), name);
-        }
+      if (handled)
+        g_object_notify (G_OBJECT (user_data), name);
     }
+  }
 
   g_free (pp);
 }
@@ -126,17 +123,14 @@ bolt_proxy_handle_dbus_signal (GDBusProxy  *proxy,
 
   ps = BOLT_PROXY_GET_CLASS (proxy)->get_dbus_signals (&n);
 
-  for (guint i = 0; i < n; i++)
-    {
-      const BoltProxySignal *sig = &ps[i];
+  for (guint i = 0; i < n; i++) {
+    const BoltProxySignal *sig = &ps[i];
 
-      if (g_str_equal (sig->theirs, signal_name))
-        {
-          sig->handle (G_OBJECT (proxy), proxy, params);
-          break;
-        }
+    if (g_str_equal (sig->theirs, signal_name)) {
+      sig->handle (G_OBJECT (proxy), proxy, params);
+      break;
     }
-
+  }
 }
 
 /* public methods */
@@ -146,7 +140,7 @@ bolt_proxy_get_dbus_property (GObject    *proxy,
                               GParamSpec *spec,
                               GValue     *value)
 {
-  g_autoptr(GVariant) val = NULL;
+  g_autoptr (GVariant) val = NULL;
   const GVariantType *vt;
   gboolean handled = FALSE;
   const char *nick;
@@ -160,42 +154,37 @@ bolt_proxy_get_dbus_property (GObject    *proxy,
   vt = g_variant_get_type (val);
 
   if (g_variant_type_equal (vt, G_VARIANT_TYPE_STRING) &&
-      G_IS_PARAM_SPEC_ENUM (spec))
-    {
-      GParamSpecEnum *enum_spec = G_PARAM_SPEC_ENUM (spec);
-      GEnumValue *ev;
-      const char *str;
+      G_IS_PARAM_SPEC_ENUM (spec)) {
+    GParamSpecEnum *enum_spec = G_PARAM_SPEC_ENUM (spec);
+    GEnumValue *ev;
+    const char *str;
 
-      str = g_variant_get_string (val, NULL);
-      ev = g_enum_get_value_by_nick (enum_spec->enum_class, str);
+    str = g_variant_get_string (val, NULL);
+    ev = g_enum_get_value_by_nick (enum_spec->enum_class, str);
 
-      handled = ev != NULL;
+    handled = ev != NULL;
 
-      if (handled)
-        g_value_set_enum (value, ev->value);
-      else
-        g_value_set_enum (value, enum_spec->default_value);
-    }
-  else if (g_variant_type_equal (vt, G_VARIANT_TYPE_STRING) &&
-           G_IS_PARAM_SPEC_FLAGS (spec))
-    {
-      GParamSpecFlags *flags_spec = G_PARAM_SPEC_FLAGS (spec);
-      GFlagsClass *flags_class = flags_spec->flags_class;
-      const char *str;
-      guint v;
+    if (handled)
+      g_value_set_enum (value, ev->value);
+    else
+      g_value_set_enum (value, enum_spec->default_value);
+  } else if (g_variant_type_equal (vt, G_VARIANT_TYPE_STRING) &&
+             G_IS_PARAM_SPEC_FLAGS (spec)) {
+    GParamSpecFlags *flags_spec = G_PARAM_SPEC_FLAGS (spec);
+    GFlagsClass *flags_class = flags_spec->flags_class;
+    const char *str;
+    guint v;
 
-      str = g_variant_get_string (val, NULL);
-      handled = bolt_flags_class_from_string (flags_class, str, &v, NULL);
+    str = g_variant_get_string (val, NULL);
+    handled = bolt_flags_class_from_string (flags_class, str, &v, NULL);
 
-      if (handled)
-        g_value_set_flags (value, v);
-      else
-        g_value_set_flags (value, flags_spec->default_value);
-    }
-  else
-    {
-      g_dbus_gvariant_to_gvalue (val, value);
-    }
+    if (handled)
+      g_value_set_flags (value, v);
+    else
+      g_value_set_flags (value, flags_spec->default_value);
+  } else {
+    g_dbus_gvariant_to_gvalue (val, value);
+  }
 
   return handled;
 }
@@ -214,9 +203,9 @@ bolt_proxy_has_name_owner (BoltProxy *proxy)
 }
 
 static GParamSpec *
-find_property (BoltProxy  *proxy,
-               const char *name,
-               GError    **error)
+find_property (BoltProxy   *proxy,
+               const char  *name,
+               GError     **error)
 {
   GParamSpec *res = NULL;
   GParamSpec **pp;
@@ -224,16 +213,14 @@ find_property (BoltProxy  *proxy,
 
   pp = g_object_class_list_properties (G_OBJECT_GET_CLASS (proxy), &n);
 
-  for (guint i = 0; i < n; i++)
-    {
-      GParamSpec *pspec = pp[i];
+  for (guint i = 0; i < n; i++) {
+    GParamSpec *pspec = pp[i];
 
-      if (bolt_streq (pspec->name, name))
-        {
-          res = pspec;
-          break;
-        }
+    if (bolt_streq (pspec->name, name)) {
+      res = pspec;
+      break;
     }
+  }
 
   if (pp == NULL)
     g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_UNKNOWN_PROPERTY,
@@ -268,7 +255,7 @@ bolt_proxy_get_property_bool (BoltProxy  *proxy,
                               const char *name,
                               gboolean   *value)
 {
-  g_autoptr(GVariant) var = NULL;
+  g_autoptr (GVariant) var = NULL;
 
   var = bolt_proxy_get_cached_property (proxy, name);
 
@@ -285,7 +272,7 @@ bolt_proxy_get_property_enum (BoltProxy  *proxy,
                               const char *name,
                               gint       *value)
 {
-  g_autoptr(GVariant) var = NULL;
+  g_autoptr (GVariant) var = NULL;
   const char *str = NULL;
   const char *bus_name = NULL;
   GParamSpec *pspec;
@@ -324,7 +311,7 @@ bolt_proxy_get_property_flags (BoltProxy  *proxy,
                                const char *name,
                                guint      *value)
 {
-  g_autoptr(GVariant) var = NULL;
+  g_autoptr (GVariant) var = NULL;
   const char *str = NULL;
   const char *bus_name = NULL;
   GFlagsClass *flags_class;
@@ -363,7 +350,7 @@ bolt_proxy_get_property_uint32 (BoltProxy  *proxy,
                                 const char *name,
                                 guint      *value)
 {
-  g_autoptr(GVariant) var = NULL;
+  g_autoptr (GVariant) var = NULL;
 
   var = bolt_proxy_get_cached_property (proxy, name);
 
@@ -380,7 +367,7 @@ bolt_proxy_get_property_int64 (BoltProxy  *proxy,
                                const char *name,
                                gint64     *value)
 {
-  g_autoptr(GVariant) var = NULL;
+  g_autoptr (GVariant) var = NULL;
 
   var = bolt_proxy_get_cached_property (proxy, name);
 
@@ -397,7 +384,7 @@ bolt_proxy_get_property_uint64 (BoltProxy  *proxy,
                                 const char *name,
                                 guint64    *value)
 {
-  g_autoptr(GVariant) var = NULL;
+  g_autoptr (GVariant) var = NULL;
 
   var = bolt_proxy_get_cached_property (proxy, name);
 
@@ -413,7 +400,7 @@ const char *
 bolt_proxy_get_property_string (BoltProxy  *proxy,
                                 const char *name)
 {
-  g_autoptr(GVariant) var = NULL;
+  g_autoptr (GVariant) var = NULL;
   const char *val = NULL;
 
   var = bolt_proxy_get_cached_property (proxy, name);
@@ -428,11 +415,11 @@ bolt_proxy_get_property_string (BoltProxy  *proxy,
 }
 
 gboolean
-bolt_proxy_set_property (BoltProxy    *proxy,
-                         const char   *name,
-                         GVariant     *value,
-                         GCancellable *cancellable,
-                         GError      **error)
+bolt_proxy_set_property (BoltProxy     *proxy,
+                         const char    *name,
+                         GVariant      *value,
+                         GCancellable  *cancellable,
+                         GError       **error)
 {
   GParamSpec *pp;
   const char *iface;
@@ -456,22 +443,21 @@ bolt_proxy_set_property (BoltProxy    *proxy,
                                 cancellable,
                                 error);
 
-  if (res)
-    {
-      g_variant_unref (res);
-      ok = TRUE;
-    }
+  if (res) {
+    g_variant_unref (res);
+    ok = TRUE;
+  }
 
   return ok;
 }
 
 void
-bolt_proxy_set_property_async (BoltProxy          *proxy,
-                               const char         *name,
-                               GVariant           *value,
-                               GCancellable       *cancellable,
-                               GAsyncReadyCallback callback,
-                               gpointer            user_data)
+bolt_proxy_set_property_async (BoltProxy           *proxy,
+                               const char          *name,
+                               GVariant            *value,
+                               GCancellable        *cancellable,
+                               GAsyncReadyCallback  callback,
+                               gpointer             user_data)
 {
   GParamSpec *pp;
   const char *iface;
@@ -497,13 +483,13 @@ bolt_proxy_set_property_async (BoltProxy          *proxy,
 }
 
 gboolean
-bolt_proxy_set_property_finish (GAsyncResult *res,
-                                GError      **error)
+bolt_proxy_set_property_finish (GAsyncResult  *res,
+                                GError       **error)
 {
   BoltProxy *proxy;
   GVariant *val = NULL;
 
-  proxy = (BoltProxy *) g_async_result_get_source_object (res);
+  proxy = (BoltProxy *)g_async_result_get_source_object (res);
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, error);
 
   if (val == NULL)

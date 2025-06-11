@@ -26,13 +26,12 @@
 
 #include "cc-firmware-security-boot-dialog.h"
 
-struct _CcFirmwareSecurityBootDialog
-{
-  AdwDialog         parent;
+struct _CcFirmwareSecurityBootDialog {
+  AdwDialog parent;
 
-  GtkWidget        *secure_boot_icon;
-  GtkWidget        *secure_boot_title;
-  GtkWidget        *secure_boot_description;
+  GtkWidget *secure_boot_icon;
+  GtkWidget *secure_boot_title;
+  GtkWidget *secure_boot_description;
 };
 
 G_DEFINE_TYPE (CcFirmwareSecurityBootDialog, cc_firmware_security_boot_dialog, ADW_TYPE_DIALOG)
@@ -64,15 +63,14 @@ cc_firmware_security_boot_dialog_new (SecureBootState secure_boot_state)
 
   dialog = g_object_new (CC_TYPE_FIRMWARE_SECURITY_BOOT_DIALOG, NULL);
 
-  switch (secure_boot_state)
-    {
+  switch (secure_boot_state) {
     case SECURE_BOOT_STATE_ACTIVE:
       /* TRANSLATORS: secure boot refers to the system firmware security mode */
-      gtk_label_set_text (GTK_LABEL(dialog->secure_boot_title), _("Secure Boot is Active"));
+      gtk_label_set_text (GTK_LABEL (dialog->secure_boot_title), _("Secure Boot is Active"));
       gtk_image_set_from_icon_name (GTK_IMAGE (dialog->secure_boot_icon), "channel-secure-symbolic");
       gtk_widget_add_css_class (dialog->secure_boot_icon, "good");
       status_description = g_strdup_printf ("%s",
-                                             /* TRANSLATORS: this is the first section of the decription */
+                                            /* TRANSLATORS: this is the first section of the decription */
                                             _("Secure boot prevents malicious software from being loaded when the device starts. "
                                               "It is currently turned on and is functioning correctly."));
       break;
@@ -105,8 +103,8 @@ cc_firmware_security_boot_dialog_new (SecureBootState secure_boot_state)
                                             _("Secure boot can often be turned on from your device's UEFI firmware settings (BIOS). "
                                               "For help, contact your hardware manufacturer or IT support provider."));
       break;
-    }
-  gtk_label_set_text (GTK_LABEL(dialog->secure_boot_description), status_description);
+  }
+  gtk_label_set_text (GTK_LABEL (dialog->secure_boot_description), status_description);
 
   return GTK_WIDGET (dialog);
 }

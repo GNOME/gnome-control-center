@@ -28,17 +28,16 @@
 #include "cc-color-profile.h"
 #include "cc-list-row-info-button.h"
 
-struct _CcColorProfile
-{
+struct _CcColorProfile {
   AdwActionRow parent_instance;
 
-  CdDevice    *device;
-  CdProfile   *profile;
-  gboolean     is_default;
-  gchar       *sortable;
-  GtkWidget   *widget_image;
-  GtkWidget   *widget_info;
-  GSettings   *settings;
+  CdDevice *device;
+  CdProfile *profile;
+  gboolean is_default;
+  gchar *sortable;
+  GtkWidget *widget_image;
+  GtkWidget *widget_info;
+  GSettings *settings;
 };
 
 #define GCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD      "recalibrate-printer-threshold"
@@ -49,8 +48,7 @@ struct _CcColorProfile
 
 G_DEFINE_TYPE (CcColorProfile, cc_color_profile, ADW_TYPE_ACTION_ROW)
 
-enum
-{
+enum {
   PROP_0,
   PROP_DEVICE,
   PROP_PROFILE,
@@ -62,7 +60,7 @@ static gchar *
 cc_color_profile_get_profile_date (CdProfile *profile)
 {
   gint64 created;
-  g_autoptr(GDateTime) dt = NULL;
+  g_autoptr (GDateTime) dt = NULL;
 
   /* get profile age */
   created = cd_profile_get_created (profile);
@@ -84,86 +82,70 @@ gcm_prefs_get_profile_title (CdProfile *profile)
   /* add date only if it's a calibration profile or the profile has
    * not been tagged with this data */
   tmp = cd_profile_get_metadata_item (profile, CD_PROFILE_METADATA_DATA_SOURCE);
-  if (tmp == NULL || g_strcmp0 (tmp, CD_PROFILE_METADATA_DATA_SOURCE_CALIB) == 0)
-    {
-      tmp = cc_color_profile_get_profile_date (profile);
-      if (tmp != NULL)
-        g_string_append_printf (str, "%s - ", tmp);
-    }
-  else if (g_strcmp0 (tmp, CD_PROFILE_METADATA_DATA_SOURCE_STANDARD) == 0)
-    {
-      /* TRANSLATORS: standard spaces are well known colorspaces like
-       * sRGB, AdobeRGB and ProPhotoRGB */
-      g_string_append_printf (str, "%s - ", _("Standard Space"));
-    }
-  else if (g_strcmp0 (tmp, CD_PROFILE_METADATA_DATA_SOURCE_TEST) == 0)
-    {
-      /* TRANSLATORS: test profiles do things like changing the screen
-       * a different color, or swap the red and green channels */
-      g_string_append_printf (str, "%s - ", _("Test Profile"));
-    }
-  else if (g_strcmp0 (tmp, CD_PROFILE_METADATA_DATA_SOURCE_EDID) == 0)
-    {
-      /* TRANSLATORS: automatic profiles are generated automatically
-       * by the color management system based on manufacturing data,
-       * for instance the default monitor profile is created from the
-       * primaries specified in the monitor EDID */
-      g_string_append_printf (str, "%s - ", C_("Automatically generated profile", "Automatic"));
-    }
+  if (tmp == NULL || g_strcmp0 (tmp, CD_PROFILE_METADATA_DATA_SOURCE_CALIB) == 0) {
+    tmp = cc_color_profile_get_profile_date (profile);
+    if (tmp != NULL)
+      g_string_append_printf (str, "%s - ", tmp);
+  } else if (g_strcmp0 (tmp, CD_PROFILE_METADATA_DATA_SOURCE_STANDARD) == 0) {
+    /* TRANSLATORS: standard spaces are well known colorspaces like
+     * sRGB, AdobeRGB and ProPhotoRGB */
+    g_string_append_printf (str, "%s - ", _("Standard Space"));
+  } else if (g_strcmp0 (tmp, CD_PROFILE_METADATA_DATA_SOURCE_TEST) == 0) {
+    /* TRANSLATORS: test profiles do things like changing the screen
+     * a different color, or swap the red and green channels */
+    g_string_append_printf (str, "%s - ", _("Test Profile"));
+  } else if (g_strcmp0 (tmp, CD_PROFILE_METADATA_DATA_SOURCE_EDID) == 0) {
+    /* TRANSLATORS: automatic profiles are generated automatically
+     * by the color management system based on manufacturing data,
+     * for instance the default monitor profile is created from the
+     * primaries specified in the monitor EDID */
+    g_string_append_printf (str, "%s - ", C_("Automatically generated profile", "Automatic"));
+  }
 
   /* add quality if it exists */
   tmp = cd_profile_get_metadata_item (profile, CD_PROFILE_METADATA_QUALITY);
-  if (g_strcmp0 (tmp, CD_PROFILE_METADATA_QUALITY_LOW) == 0)
-    {
-      /* TRANSLATORS: the profile quality - low quality profiles take
-       * much less time to generate but may be a poor reflection of the
-       * device capability */
-      g_string_append_printf (str, "%s - ", C_("Profile quality", "Low Quality"));
-    }
-  else if (g_strcmp0 (tmp, CD_PROFILE_METADATA_QUALITY_MEDIUM) == 0)
-    {
-      /* TRANSLATORS: the profile quality */
-      g_string_append_printf (str, "%s - ", C_("Profile quality", "Medium Quality"));
-    }
-  else if (g_strcmp0 (tmp, CD_PROFILE_METADATA_QUALITY_HIGH) == 0)
-    {
-      /* TRANSLATORS: the profile quality - high quality profiles take
-       * a *long* time, and have the best calibration and
-       * characterisation data. */
-      g_string_append_printf (str, "%s - ", C_("Profile quality", "High Quality"));
-    }
+  if (g_strcmp0 (tmp, CD_PROFILE_METADATA_QUALITY_LOW) == 0) {
+    /* TRANSLATORS: the profile quality - low quality profiles take
+     * much less time to generate but may be a poor reflection of the
+     * device capability */
+    g_string_append_printf (str, "%s - ", C_("Profile quality", "Low Quality"));
+  } else if (g_strcmp0 (tmp, CD_PROFILE_METADATA_QUALITY_MEDIUM) == 0) {
+    /* TRANSLATORS: the profile quality */
+    g_string_append_printf (str, "%s - ", C_("Profile quality", "Medium Quality"));
+  } else if (g_strcmp0 (tmp, CD_PROFILE_METADATA_QUALITY_HIGH) == 0) {
+    /* TRANSLATORS: the profile quality - high quality profiles take
+     * a *long* time, and have the best calibration and
+     * characterisation data. */
+    g_string_append_printf (str, "%s - ", C_("Profile quality", "High Quality"));
+  }
 
   /* add profile description */
   tmp = cd_profile_get_title (profile);
-  if (tmp != NULL)
-    {
-      g_string_append (str, tmp);
-      goto out;
-    }
+  if (tmp != NULL) {
+    g_string_append (str, tmp);
+    goto out;
+  }
 
   /* some meta profiles do not have ICC profiles */
   colorspace = cd_profile_get_colorspace (profile);
-  if (colorspace == CD_COLORSPACE_RGB)
-    {
-      /* TRANSLATORS: this default RGB space is used for printers that
-       * do not have additional printer profiles specified in the PPD */
-      g_string_append (str, C_("Colorspace fallback", "Default RGB"));
-      goto out;
-    }
-  if (colorspace == CD_COLORSPACE_CMYK)
-    {
-      /* TRANSLATORS: this default CMYK space is used for printers that
-       * do not have additional printer profiles specified in the PPD */
-      g_string_append (str, C_("Colorspace fallback", "Default CMYK"));
-      goto out;
-    }
-  if (colorspace == CD_COLORSPACE_GRAY)
-    {
-      /* TRANSLATORS: this default gray space is used for printers that
-       * do not have additional printer profiles specified in the PPD */
-      g_string_append (str, C_("Colorspace fallback", "Default Gray"));
-      goto out;
-    }
+  if (colorspace == CD_COLORSPACE_RGB) {
+    /* TRANSLATORS: this default RGB space is used for printers that
+     * do not have additional printer profiles specified in the PPD */
+    g_string_append (str, C_("Colorspace fallback", "Default RGB"));
+    goto out;
+  }
+  if (colorspace == CD_COLORSPACE_CMYK) {
+    /* TRANSLATORS: this default CMYK space is used for printers that
+     * do not have additional printer profiles specified in the PPD */
+    g_string_append (str, C_("Colorspace fallback", "Default CMYK"));
+    goto out;
+  }
+  if (colorspace == CD_COLORSPACE_GRAY) {
+    /* TRANSLATORS: this default gray space is used for printers that
+     * do not have additional printer profiles specified in the PPD */
+    g_string_append (str, C_("Colorspace fallback", "Default Gray"));
+    goto out;
+  }
 
   /* fall back to ID, ick */
   tmp = g_strdup (cd_profile_get_id (profile));
@@ -182,42 +164,36 @@ cc_color_profile_get_warnings (CcColorProfile *self)
 
   /* autogenerated printer defaults */
   if (cd_device_get_kind (self->device) == CD_DEVICE_KIND_PRINTER &&
-      cd_profile_get_filename (self->profile) == NULL)
-    {
-      tooltip = _("Vendor supplied factory calibration data");
-      goto out;
-    }
+      cd_profile_get_filename (self->profile) == NULL) {
+    tooltip = _("Vendor supplied factory calibration data");
+    goto out;
+  }
 
   /* autogenerated profiles are crap */
   if (cd_device_get_kind (self->device) == CD_DEVICE_KIND_DISPLAY &&
       cd_profile_get_kind (self->profile) == CD_PROFILE_KIND_DISPLAY_DEVICE &&
-      !cd_profile_get_has_vcgt (self->profile))
-    {
-      tooltip = _("Full-screen display correction not possible with this profile");
-      goto out;
-    }
+      !cd_profile_get_has_vcgt (self->profile)) {
+    tooltip = _("Full-screen display correction not possible with this profile");
+    goto out;
+  }
 
   /* greater than the calibration threshold for the device type */
   num_days = cd_profile_get_age (self->profile) / seconds_in_one_day;
-  if (cd_device_get_kind (self->device) == CD_DEVICE_KIND_DISPLAY)
-    {
-      g_settings_get (self->settings,
-                      GCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD,
-                      "u",
-                      &threshold_days);
-    }
-  else if (cd_device_get_kind (self->device) == CD_DEVICE_KIND_DISPLAY)
-    {
-      g_settings_get (self->settings,
-                      GCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD,
-                      "u",
-                      &threshold_days);
-    }
-  if (threshold_days > 0 && num_days > threshold_days)
-    {
-      tooltip = _("This profile may no longer be accurate");
-      goto out;
-    }
+  if (cd_device_get_kind (self->device) == CD_DEVICE_KIND_DISPLAY) {
+    g_settings_get (self->settings,
+                    GCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD,
+                    "u",
+                    &threshold_days);
+  } else if (cd_device_get_kind (self->device) == CD_DEVICE_KIND_DISPLAY) {
+    g_settings_get (self->settings,
+                    GCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD,
+                    "u",
+                    &threshold_days);
+  }
+  if (threshold_days > 0 && num_days > threshold_days) {
+    tooltip = _("This profile may no longer be accurate");
+    goto out;
+  }
 out:
   return tooltip;
 }
@@ -230,10 +206,9 @@ cc_color_profile_refresh (CcColorProfile *self)
 
   /* show the image if the profile is default */
 
- if (self->is_default) {
-   gtk_image_set_from_icon_name (GTK_IMAGE (self->widget_image), "object-select-symbolic");
- }
-  else {
+  if (self->is_default) {
+    gtk_image_set_from_icon_name (GTK_IMAGE (self->widget_image), "object-select-symbolic");
+  } else {
     gtk_image_set_from_icon_name (GTK_IMAGE (self->widget_image), NULL);
   }
 
@@ -276,7 +251,8 @@ cc_color_profile_get_is_default (CcColorProfile *self)
 }
 
 void
-cc_color_profile_set_is_default (CcColorProfile *self, gboolean is_default)
+cc_color_profile_set_is_default (CcColorProfile *self,
+                                 gboolean        is_default)
 {
   g_return_if_fail (CC_IS_COLOR_PROFILE (self));
   self->is_default = is_default;
@@ -284,48 +260,50 @@ cc_color_profile_set_is_default (CcColorProfile *self, gboolean is_default)
 }
 
 static void
-cc_color_profile_get_property (GObject *object, guint param_id,
-                               GValue *value, GParamSpec *pspec)
+cc_color_profile_get_property (GObject    *object,
+                               guint       param_id,
+                               GValue     *value,
+                               GParamSpec *pspec)
 {
   CcColorProfile *self = CC_COLOR_PROFILE (object);
-  switch (param_id)
-    {
-      case PROP_DEVICE:
-        g_value_set_object (value, self->device);
-        break;
-      case PROP_PROFILE:
-        g_value_set_object (value, self->profile);
-        break;
-      case PROP_IS_DEFAULT:
-        g_value_set_boolean (value, self->is_default);
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
-        break;
-    }
+  switch (param_id) {
+    case PROP_DEVICE:
+      g_value_set_object (value, self->device);
+      break;
+    case PROP_PROFILE:
+      g_value_set_object (value, self->profile);
+      break;
+    case PROP_IS_DEFAULT:
+      g_value_set_boolean (value, self->is_default);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+      break;
+  }
 }
 
 static void
-cc_color_profile_set_property (GObject *object, guint param_id,
-                               const GValue *value, GParamSpec *pspec)
+cc_color_profile_set_property (GObject      *object,
+                               guint         param_id,
+                               const GValue *value,
+                               GParamSpec   *pspec)
 {
   CcColorProfile *self = CC_COLOR_PROFILE (object);
 
-  switch (param_id)
-    {
-      case PROP_DEVICE:
-        self->device = g_value_dup_object (value);
-        break;
-      case PROP_PROFILE:
-        self->profile = g_value_dup_object (value);
-        break;
-      case PROP_IS_DEFAULT:
-        self->is_default = g_value_get_boolean (value);
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
-        break;
-    }
+  switch (param_id) {
+    case PROP_DEVICE:
+      self->device = g_value_dup_object (value);
+      break;
+    case PROP_PROFILE:
+      self->profile = g_value_dup_object (value);
+      break;
+    case PROP_IS_DEFAULT:
+      self->is_default = g_value_get_boolean (value);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+      break;
+  }
 }
 
 static void
@@ -344,13 +322,13 @@ cc_color_profile_finalize (GObject *object)
 static void
 cc_color_profile_changed_cb (CcColorProfile *self)
 {
-  g_autoptr(CdProfile) profile = NULL;
+  g_autoptr (CdProfile) profile = NULL;
 
   /* check to see if the default has changed */
   profile = cd_device_get_default_profile (self->device);
   if (profile != NULL)
     self->is_default = g_strcmp0 (cd_profile_get_object_path (profile),
-                                           cd_profile_get_object_path (self->profile)) == 0;
+                                  cd_profile_get_object_path (self->profile)) == 0;
   cc_color_profile_refresh (self);
 }
 
@@ -443,9 +421,9 @@ cc_color_profile_init (CcColorProfile *self)
 }
 
 GtkWidget *
-cc_color_profile_new (CdDevice *device,
+cc_color_profile_new (CdDevice  *device,
                       CdProfile *profile,
-                      gboolean is_default)
+                      gboolean   is_default)
 {
   return g_object_new (CC_TYPE_COLOR_PROFILE,
                        "device", device,

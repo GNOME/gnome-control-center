@@ -35,48 +35,45 @@
 #include "panels/common/cc-list-row.h"
 #include "cc-net-proxy-page.h"
 
-struct _CcNetProxyPage
-{
-  AdwNavigationPage    parent_instance;
+struct _CcNetProxyPage {
+  AdwNavigationPage parent_instance;
 
-  AdwComboRow         *proxy_type_row;
+  AdwComboRow *proxy_type_row;
 
-  GtkStack            *main_stack;
+  GtkStack *main_stack;
   AdwPreferencesGroup *automatic_view;
-  GtkBox              *manual_view;
+  GtkBox *manual_view;
 
   /* Automatic view */
-  GtkEntry            *proxy_url_entry;
-  GtkEntry            *proxy_warning_label;
+  GtkEntry *proxy_url_entry;
+  GtkEntry *proxy_warning_label;
 
   /* Manual view */
-  AdwEntryRow         *http_host_entry;
-  GtkAdjustment       *http_port_adjustment;
-  AdwEntryRow         *https_host_entry;
-  GtkAdjustment       *https_port_adjustment;
-  AdwEntryRow         *ftp_host_entry;
-  GtkAdjustment       *ftp_port_adjustment;
-  AdwEntryRow         *socks_host_entry;
-  GtkAdjustment       *socks_port_adjustment;
-  AdwEntryRow         *proxy_ignore_entry;
+  AdwEntryRow *http_host_entry;
+  GtkAdjustment *http_port_adjustment;
+  AdwEntryRow *https_host_entry;
+  GtkAdjustment *https_port_adjustment;
+  AdwEntryRow *ftp_host_entry;
+  GtkAdjustment *ftp_port_adjustment;
+  AdwEntryRow *socks_host_entry;
+  GtkAdjustment *socks_port_adjustment;
+  AdwEntryRow *proxy_ignore_entry;
 
-  GSettings           *settings;
-  char                *state_text;
+  GSettings *settings;
+  char *state_text;
 
-  gboolean             is_loading;
+  gboolean is_loading;
 };
 
 G_DEFINE_TYPE (CcNetProxyPage, cc_net_proxy_page, ADW_TYPE_NAVIGATION_PAGE)
 
-typedef enum
-{
+typedef enum {
   MODE_DISABLED,
   MODE_MANUAL,
   MODE_AUTOMATIC
 } ProxyMode;
 
-typedef enum
-{
+typedef enum {
   ROW_AUTOMATIC,
   ROW_MANUAL
 } RowValue;
@@ -111,22 +108,22 @@ set_ignore_hosts (const GValue       *value,
 {
   const char *sv;
   char **strv;
-  g_autoptr(GPtrArray) str_array = NULL;
+  g_autoptr (GPtrArray) str_array = NULL;
   guint i = 0;
 
   sv = g_value_get_string (value);
   strv = g_strsplit_set (sv, ", ", 0);
 
   /* Remove empty strings */
-  str_array = g_ptr_array_new_take_null_terminated ((gpointer) strv, g_free);
+  str_array = g_ptr_array_new_take_null_terminated ((gpointer)strv, g_free);
 
   while (i < str_array->len)
-    if (*(const char *) g_ptr_array_index (str_array, i) == '\0')
+    if (*(const char *)g_ptr_array_index (str_array, i) == '\0')
       g_ptr_array_remove_index (str_array, i);
     else
       i++;
 
-  return g_variant_new_strv ((const char *const *) str_array->pdata, -1);
+  return g_variant_new_strv ((const char * const *)str_array->pdata, -1);
 }
 
 /*
@@ -276,8 +273,7 @@ cc_net_proxy_page_get_property (GObject    *object,
 {
   CcNetProxyPage *self = (CcNetProxyPage *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_MODIFIED:
       g_value_set_boolean (value, cc_net_proxy_page_has_modified (self));
       break;
@@ -292,7 +288,7 @@ cc_net_proxy_page_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -303,8 +299,7 @@ cc_net_proxy_page_set_property (GObject      *object,
 {
   CcNetProxyPage *self = (CcNetProxyPage *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_MODIFIED:
     case PROP_STATE_TEXT:
       g_warning ("%s is not a writeable property", g_param_spec_get_name (pspec));
@@ -316,7 +311,7 @@ cc_net_proxy_page_set_property (GObject      *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -394,7 +389,7 @@ proxy_bind_settings (CcNetProxyPage *self,
                      gpointer        url_entry,
                      gpointer        port_adjustment)
 {
-  g_autoptr(GSettings) settings = NULL;
+  g_autoptr (GSettings) settings = NULL;
 
   g_assert (type && *type);
 

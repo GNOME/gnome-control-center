@@ -19,15 +19,14 @@
 #include "cc-fade-slider.h"
 #include "gvc-channel-map-private.h"
 
-struct _CcFadeSlider
-{
-  GtkWidget      parent_instance;
+struct _CcFadeSlider {
+  GtkWidget parent_instance;
 
-  GtkWidget     *scale;
+  GtkWidget *scale;
   GtkAdjustment *adjustment;
 
   GvcChannelMap *channel_map;
-  guint          volume_changed_handler_id;
+  guint volume_changed_handler_id;
 };
 
 G_DEFINE_TYPE (CcFadeSlider, cc_fade_slider, GTK_TYPE_WIDGET)
@@ -103,7 +102,7 @@ cc_fade_slider_init (CcFadeSlider *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  // Don't flip the slider with RTL locale
+  /* Don't flip the slider with RTL locale */
   gtk_widget_set_direction (self->scale, GTK_TEXT_DIR_LTR);
 }
 
@@ -113,21 +112,19 @@ cc_fade_slider_set_channel_map (CcFadeSlider  *self,
 {
   g_return_if_fail (CC_IS_FADE_SLIDER (self));
 
-  if (self->channel_map != NULL)
-    {
-      g_signal_handler_disconnect (self->channel_map, self->volume_changed_handler_id);
-      self->volume_changed_handler_id = 0;
-    }
+  if (self->channel_map != NULL) {
+    g_signal_handler_disconnect (self->channel_map, self->volume_changed_handler_id);
+    self->volume_changed_handler_id = 0;
+  }
   g_clear_object (&self->channel_map);
 
-  if (channel_map != NULL)
-    {
-      self->channel_map = g_object_ref (channel_map);
+  if (channel_map != NULL) {
+    self->channel_map = g_object_ref (channel_map);
 
-      self->volume_changed_handler_id = g_signal_connect_object (channel_map,
-                                                                 "volume-changed",
-                                                                 G_CALLBACK (volume_changed_cb),
-                                                                 self, G_CONNECT_SWAPPED);
-      volume_changed_cb (self);
-    }
+    self->volume_changed_handler_id = g_signal_connect_object (channel_map,
+                                                               "volume-changed",
+                                                               G_CALLBACK (volume_changed_cb),
+                                                               self, G_CONNECT_SWAPPED);
+    volume_changed_cb (self);
+  }
 }

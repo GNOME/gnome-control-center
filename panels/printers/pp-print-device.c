@@ -20,30 +20,28 @@
 
 #include "pp-print-device.h"
 
-struct _PpPrintDevice
-{
-  GObject   parent_instance;
+struct _PpPrintDevice {
+  GObject parent_instance;
 
-  gchar    *device_name;
-  gchar    *display_name;
-  gchar    *device_original_name;
-  gchar    *device_make_and_model;
-  gchar    *device_location;
-  gchar    *device_info;
-  gchar    *device_uri;
-  gchar    *device_id;
-  gchar    *device_ppd;
-  gchar    *host_name;
-  gint      host_port;
-  gboolean  is_authenticated_server;
-  gint      acquisition_method;
-  gboolean  is_network_device;
+  gchar *device_name;
+  gchar *display_name;
+  gchar *device_original_name;
+  gchar *device_make_and_model;
+  gchar *device_location;
+  gchar *device_info;
+  gchar *device_uri;
+  gchar *device_id;
+  gchar *device_ppd;
+  gchar *host_name;
+  gint host_port;
+  gboolean is_authenticated_server;
+  gint acquisition_method;
+  gboolean is_network_device;
 };
 
 G_DEFINE_TYPE (PpPrintDevice, pp_print_device, G_TYPE_OBJECT);
 
-enum
-{
+enum {
   PROP_0 = 0,
   PROP_DEVICE_NAME,
   PROP_DISPLAY_NAME,
@@ -88,56 +86,55 @@ pp_print_device_get_property (GObject    *object,
 {
   PpPrintDevice *self = PP_PRINT_DEVICE (object);
 
-  switch (prop_id)
-    {
-      case PROP_DEVICE_NAME:
-        g_value_set_string (value, self->device_name);
-        break;
-      case PROP_DISPLAY_NAME:
-        g_value_set_string (value, self->display_name);
-        break;
-      case PROP_DEVICE_ORIGINAL_NAME:
-        g_value_set_string (value, self->device_original_name);
-        break;
-      case PROP_DEVICE_MAKE_AND_MODEL:
-        g_value_set_string (value, self->device_make_and_model);
-        break;
-      case PROP_DEVICE_LOCATION:
-        g_value_set_string (value, self->device_location);
-        break;
-      case PROP_DEVICE_INFO:
-        g_value_set_string (value, self->device_info);
-        break;
-      case PROP_DEVICE_URI:
-        g_value_set_string (value, self->device_uri);
-        break;
-      case PROP_DEVICE_ID:
-        g_value_set_string (value, self->device_id);
-        break;
-      case PROP_DEVICE_PPD:
-        g_value_set_string (value, self->device_ppd);
-        break;
-      case PROP_HOST_NAME:
-        g_value_set_string (value, self->host_name);
-        break;
-      case PROP_HOST_PORT:
-        g_value_set_int (value, self->host_port);
-        break;
-      case PROP_IS_AUTHENTICATED_SERVER:
-        g_value_set_boolean (value, self->is_authenticated_server);
-        break;
-      case PROP_ACQUISITION_METHOD:
-        g_value_set_int (value, self->acquisition_method);
-        break;
-      case PROP_IS_NETWORK_DEVICE:
-        g_value_set_boolean (value, self->is_network_device);
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
-                                           prop_id,
-                                           param_spec);
+  switch (prop_id) {
+    case PROP_DEVICE_NAME:
+      g_value_set_string (value, self->device_name);
       break;
-    }
+    case PROP_DISPLAY_NAME:
+      g_value_set_string (value, self->display_name);
+      break;
+    case PROP_DEVICE_ORIGINAL_NAME:
+      g_value_set_string (value, self->device_original_name);
+      break;
+    case PROP_DEVICE_MAKE_AND_MODEL:
+      g_value_set_string (value, self->device_make_and_model);
+      break;
+    case PROP_DEVICE_LOCATION:
+      g_value_set_string (value, self->device_location);
+      break;
+    case PROP_DEVICE_INFO:
+      g_value_set_string (value, self->device_info);
+      break;
+    case PROP_DEVICE_URI:
+      g_value_set_string (value, self->device_uri);
+      break;
+    case PROP_DEVICE_ID:
+      g_value_set_string (value, self->device_id);
+      break;
+    case PROP_DEVICE_PPD:
+      g_value_set_string (value, self->device_ppd);
+      break;
+    case PROP_HOST_NAME:
+      g_value_set_string (value, self->host_name);
+      break;
+    case PROP_HOST_PORT:
+      g_value_set_int (value, self->host_port);
+      break;
+    case PROP_IS_AUTHENTICATED_SERVER:
+      g_value_set_boolean (value, self->is_authenticated_server);
+      break;
+    case PROP_ACQUISITION_METHOD:
+      g_value_set_int (value, self->acquisition_method);
+      break;
+    case PROP_IS_NETWORK_DEVICE:
+      g_value_set_boolean (value, self->is_network_device);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
+                                         prop_id,
+                                         param_spec);
+      break;
+  }
 }
 
 static void
@@ -148,66 +145,65 @@ pp_print_device_set_property (GObject      *object,
 {
   PpPrintDevice *self = PP_PRINT_DEVICE (object);
 
-  switch (prop_id)
-    {
-      case PROP_DEVICE_NAME:
-        g_free (self->device_name);
-        self->device_name = g_value_dup_string (value);
-        break;
-      case PROP_DISPLAY_NAME:
-        g_free (self->display_name);
-        self->display_name = g_value_dup_string (value);
-        break;
-      case PROP_DEVICE_ORIGINAL_NAME:
-        g_free (self->device_original_name);
-        self->device_original_name = g_value_dup_string (value);
-        break;
-      case PROP_DEVICE_MAKE_AND_MODEL:
-        g_free (self->device_make_and_model);
-        self->device_make_and_model = g_value_dup_string (value);
-        break;
-      case PROP_DEVICE_LOCATION:
-        g_free (self->device_location);
-        self->device_location = g_value_dup_string (value);
-        break;
-      case PROP_DEVICE_INFO:
-        g_free (self->device_info);
-        self->device_info = g_value_dup_string (value);
-        break;
-      case PROP_DEVICE_URI:
-        g_free (self->device_uri);
-        self->device_uri = g_value_dup_string (value);
-        break;
-      case PROP_DEVICE_ID:
-        g_free (self->device_id);
-        self->device_id = g_value_dup_string (value);
-        break;
-      case PROP_DEVICE_PPD:
-        g_free (self->device_ppd);
-        self->device_ppd = g_value_dup_string (value);
-        break;
-      case PROP_HOST_NAME:
-        g_free (self->host_name);
-        self->host_name = g_value_dup_string (value);
-        break;
-      case PROP_HOST_PORT:
-        self->host_port = g_value_get_int (value);
-        break;
-      case PROP_IS_AUTHENTICATED_SERVER:
-        self->is_authenticated_server = g_value_get_boolean (value);
-        break;
-      case PROP_ACQUISITION_METHOD:
-        self->acquisition_method = g_value_get_int (value);
-        break;
-      case PROP_IS_NETWORK_DEVICE:
-        self->is_network_device = g_value_get_boolean (value);
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
-                                           prop_id,
-                                           param_spec);
-        break;
-    }
+  switch (prop_id) {
+    case PROP_DEVICE_NAME:
+      g_free (self->device_name);
+      self->device_name = g_value_dup_string (value);
+      break;
+    case PROP_DISPLAY_NAME:
+      g_free (self->display_name);
+      self->display_name = g_value_dup_string (value);
+      break;
+    case PROP_DEVICE_ORIGINAL_NAME:
+      g_free (self->device_original_name);
+      self->device_original_name = g_value_dup_string (value);
+      break;
+    case PROP_DEVICE_MAKE_AND_MODEL:
+      g_free (self->device_make_and_model);
+      self->device_make_and_model = g_value_dup_string (value);
+      break;
+    case PROP_DEVICE_LOCATION:
+      g_free (self->device_location);
+      self->device_location = g_value_dup_string (value);
+      break;
+    case PROP_DEVICE_INFO:
+      g_free (self->device_info);
+      self->device_info = g_value_dup_string (value);
+      break;
+    case PROP_DEVICE_URI:
+      g_free (self->device_uri);
+      self->device_uri = g_value_dup_string (value);
+      break;
+    case PROP_DEVICE_ID:
+      g_free (self->device_id);
+      self->device_id = g_value_dup_string (value);
+      break;
+    case PROP_DEVICE_PPD:
+      g_free (self->device_ppd);
+      self->device_ppd = g_value_dup_string (value);
+      break;
+    case PROP_HOST_NAME:
+      g_free (self->host_name);
+      self->host_name = g_value_dup_string (value);
+      break;
+    case PROP_HOST_PORT:
+      self->host_port = g_value_get_int (value);
+      break;
+    case PROP_IS_AUTHENTICATED_SERVER:
+      self->is_authenticated_server = g_value_get_boolean (value);
+      break;
+    case PROP_ACQUISITION_METHOD:
+      self->acquisition_method = g_value_get_int (value);
+      break;
+    case PROP_IS_NETWORK_DEVICE:
+      self->is_network_device = g_value_get_boolean (value);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
+                                         prop_id,
+                                         param_spec);
+      break;
+  }
 }
 
 static void

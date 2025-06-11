@@ -24,15 +24,15 @@
 void
 widget_set_error (GtkWidget *widget)
 {
-	g_return_if_fail (GTK_IS_WIDGET (widget));
+  g_return_if_fail (GTK_IS_WIDGET (widget));
 
-	gtk_widget_add_css_class (widget, "error");
+  gtk_widget_add_css_class (widget, "error");
 }
 
 void
 widget_unset_error (GtkWidget *widget)
 {
-	g_return_if_fail (GTK_IS_WIDGET (widget));
+  g_return_if_fail (GTK_IS_WIDGET (widget));
 
-	gtk_widget_remove_css_class (widget, "error");
+  gtk_widget_remove_css_class (widget, "error");
 }

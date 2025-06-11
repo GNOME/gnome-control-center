@@ -43,13 +43,12 @@
 
 #define BYTES_PER_R8G8B8 3
 
-struct _CcQrCode
-{
-  GObject     parent_instance;
+struct _CcQrCode {
+  GObject parent_instance;
 
-  gchar      *text;
+  gchar *text;
   GdkTexture *texture;
-  gint        size;
+  gint size;
 };
 
 G_DEFINE_TYPE (CcQrCode, cc_qr_code, G_TYPE_OBJECT)
@@ -57,7 +56,7 @@ G_DEFINE_TYPE (CcQrCode, cc_qr_code, G_TYPE_OBJECT)
 static void
 cc_qr_code_finalize (GObject *object)
 {
-  CcQrCode *self = (CcQrCode *) object;
+  CcQrCode *self = (CcQrCode *)object;
 
   g_clear_object (&self->texture);
   g_clear_pointer (&self->text, g_free);
@@ -103,17 +102,16 @@ cc_qr_code_set_text (CcQrCode    *self,
 
 static void
 cc_fill_pixel (GByteArray *array,
-               guint8     value,
-               int        pixel_size)
+               guint8      value,
+               int         pixel_size)
 {
   guint i;
 
-  for (i = 0; i < pixel_size; i++)
-    {
-      g_byte_array_append (array, &value, 1); /* R */
-      g_byte_array_append (array, &value, 1); /* G */
-      g_byte_array_append (array, &value, 1); /* B */
-    }
+  for (i = 0; i < pixel_size; i++) {
+    g_byte_array_append (array, &value, 1);   /* R */
+    g_byte_array_append (array, &value, 1);   /* G */
+    g_byte_array_append (array, &value, 1);   /* B */
+  }
 }
 
 GdkPaintable *
@@ -131,11 +129,10 @@ cc_qr_code_get_paintable (CcQrCode *self,
   g_return_val_if_fail (CC_IS_QR_CODE (self), NULL);
   g_return_val_if_fail (size > 0, NULL);
 
-  if (!self->text || !*self->text)
-    {
-      g_warn_if_reached ();
-      cc_qr_code_set_text (self, "invalid text");
-    }
+  if (!self->text || !*self->text) {
+    g_warn_if_reached ();
+    cc_qr_code_set_text (self, "invalid text");
+  }
 
   if (self->texture && self->size == size)
     return GDK_PAINTABLE (self->texture);
@@ -159,19 +156,16 @@ cc_qr_code_get_paintable (CcQrCode *self,
   total_size = qr_size * pixel_size;
   qr_matrix = g_byte_array_sized_new (total_size * total_size * pixel_size * BYTES_PER_R8G8B8);
 
-  for (column = 0; column < total_size; column++)
-    {
-      for (i = 0; i < pixel_size; i++)
-        {
-          for (row = 0; row < total_size / pixel_size; row++)
-            {
-              if (qrcodegen_getModule (qr_code, column, row))
-                cc_fill_pixel (qr_matrix, 0x00, pixel_size);
-              else
-                cc_fill_pixel (qr_matrix, 0xff, pixel_size);
-            }
-        }
+  for (column = 0; column < total_size; column++) {
+    for (i = 0; i < pixel_size; i++) {
+      for (row = 0; row < total_size / pixel_size; row++) {
+        if (qrcodegen_getModule (qr_code, column, row))
+          cc_fill_pixel (qr_matrix, 0x00, pixel_size);
+        else
+          cc_fill_pixel (qr_matrix, 0xff, pixel_size);
+      }
     }
+  }
 
   bytes = g_byte_array_free_to_bytes (qr_matrix);
 
@@ -199,13 +193,12 @@ escape_string (const gchar *str,
   if (quote)
     g_string_append_c (string, '"');
 
-  while ((next = strpbrk (str, "\\;,:\"")))
-    {
-      g_string_append_len (string, str, next - str);
-      g_string_append_c (string, '\\');
-      g_string_append_c (string, *next);
-      str = next + 1;
-    }
+  while ((next = strpbrk (str, "\\;,:\""))) {
+    g_string_append_len (string, str, next - str);
+    g_string_append_c (string, '\\');
+    g_string_append_c (string, *next);
+    str = next + 1;
+  }
 
   g_string_append (string, str);
   if (quote)
@@ -287,15 +280,12 @@ get_wifi_password (NMConnection *c)
   if (g_str_equal (sec_type, "nopass"))
     return NULL;
 
-  if (g_str_equal (sec_type, "WEP"))
-    {
-      wep_index = nm_setting_wireless_security_get_wep_tx_keyidx (setting);
-      password = nm_setting_wireless_security_get_wep_key (setting, wep_index);
-    }
-  else
-    {
-      password = nm_setting_wireless_security_get_psk (setting);
-    }
+  if (g_str_equal (sec_type, "WEP")) {
+    wep_index = nm_setting_wireless_security_get_wep_tx_keyidx (setting);
+    password = nm_setting_wireless_security_get_wep_key (setting, wep_index);
+  } else {
+    password = nm_setting_wireless_security_get_psk (setting);
+  }
 
   return g_strdup (password);
 }

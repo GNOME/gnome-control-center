@@ -47,8 +47,7 @@ static GtkWidget *cc_sharing_panel_new_media_sharing_row (const char     *uri_or
 
 #define FILE_SHARING_SCHEMA_ID "org.gnome.desktop.file-sharing"
 
-struct _CcSharingPanel
-{
+struct _CcSharingPanel {
   CcPanel parent_instance;
 
   GtkWidget *hostname_entry;
@@ -81,17 +80,15 @@ cc_sharing_panel_dispose (GObject *object)
 {
   CcSharingPanel *self = CC_SHARING_PANEL (object);
 
-  if (self->media_sharing_dialog)
-    {
-      adw_dialog_force_close (self->media_sharing_dialog);
-      self->media_sharing_dialog = NULL;
-    }
+  if (self->media_sharing_dialog) {
+    adw_dialog_force_close (self->media_sharing_dialog);
+    self->media_sharing_dialog = NULL;
+  }
 
-  if (self->personal_file_sharing_dialog)
-    {
-      adw_dialog_force_close (self->personal_file_sharing_dialog);
-      self->personal_file_sharing_dialog = NULL;
-    }
+  if (self->personal_file_sharing_dialog) {
+    adw_dialog_force_close (self->personal_file_sharing_dialog);
+    self->personal_file_sharing_dialog = NULL;
+  }
 
   G_OBJECT_CLASS (cc_sharing_panel_parent_class)->dispose (object);
 }
@@ -114,8 +111,8 @@ on_copy_personal_file_sharing_address_clicked (CcSharingPanel *self)
 static void
 on_public_folder_row_clicked (CcSharingPanel *self)
 {
-  g_autoptr(GFile) file = NULL;
-  g_autoptr(GtkFileLauncher) launcher = NULL;
+  g_autoptr (GFile) file = NULL;
+  g_autoptr (GtkFileLauncher) launcher = NULL;
   const char *public_folder_uri;
   GtkWindow *toplevel;
 
@@ -181,17 +178,17 @@ cc_sharing_panel_networks_to_label_transform_func (GBinding       *binding,
   status = g_value_get_uint (source_value);
 
   switch (status) {
-  case CC_SHARING_STATUS_OFF:
-    g_value_set_string (target_value, C_("service is disabled", "Off"));
-    break;
-  case CC_SHARING_STATUS_ENABLED:
-    g_value_set_string (target_value, C_("service is enabled", "Enabled"));
-    break;
-  case CC_SHARING_STATUS_ACTIVE:
-    g_value_set_string (target_value, C_("service is active", "Active"));
-    break;
-  default:
-    return FALSE;
+    case CC_SHARING_STATUS_OFF:
+      g_value_set_string (target_value, C_("service is disabled", "Off"));
+      break;
+    case CC_SHARING_STATUS_ENABLED:
+      g_value_set_string (target_value, C_("service is enabled", "Enabled"));
+      break;
+    case CC_SHARING_STATUS_ACTIVE:
+      g_value_set_string (target_value, C_("service is active", "Active"));
+      break;
+    default:
+      return FALSE;
   }
 
   return TRUE;
@@ -199,12 +196,12 @@ cc_sharing_panel_networks_to_label_transform_func (GBinding       *binding,
 
 static void
 cc_sharing_panel_bind_networks_to_label (CcSharingPanel *self,
-					 GtkWidget      *networks,
-					 GtkWidget      *list_row)
+                                         GtkWidget      *networks,
+                                         GtkWidget      *list_row)
 {
   g_object_bind_property_full (networks, "status", list_row, "secondary-label",
                                G_BINDING_SYNC_CREATE,
-                               (GBindingTransformFunc) cc_sharing_panel_networks_to_label_transform_func,
+                               (GBindingTransformFunc)cc_sharing_panel_networks_to_label_transform_func,
                                NULL, self, NULL);
 }
 
@@ -216,18 +213,17 @@ on_folder_selected_cb (GObject      *source_object,
   CcSharingPanel *self = CC_SHARING_PANEL (user_data);
   GtkFileDialog *dialog = GTK_FILE_DIALOG (source_object);
   g_autofree gchar *folder = NULL;
-  g_autoptr(GFile) file = NULL;
+  g_autoptr (GFile) file = NULL;
   GtkWidget *child;
   gboolean matching = FALSE;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   gint n_rows = 0;
 
   file = gtk_file_dialog_select_folder_finish (dialog, result, &error);
-  if (!file)
-    {
-      g_warning ("Failed to select folder: %s", error->message);
-      return;
-    }
+  if (!file) {
+    g_warning ("Failed to select folder: %s", error->message);
+    return;
+  }
 
   folder = g_file_get_uri (file);
   if (!folder || g_str_equal (folder, ""))
@@ -237,37 +233,34 @@ on_folder_selected_cb (GObject      *source_object,
 
   for (child = gtk_widget_get_first_child (self->shared_folders_listbox);
        child;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      const char *string;
+       child = gtk_widget_get_next_sibling (child)) {
+    const char *string;
 
-      string = g_object_get_data (G_OBJECT (child), "path");
-      matching = (g_strcmp0 (string, folder) == 0);
+    string = g_object_get_data (G_OBJECT (child), "path");
+    matching = (g_strcmp0 (string, folder) == 0);
 
-      if (matching)
-        {
-          g_debug ("Found a duplicate for %s", folder);
-          break;
-        }
-
-      n_rows++;
+    if (matching) {
+      g_debug ("Found a duplicate for %s", folder);
+      break;
     }
 
-  if (!matching)
-    {
-      GtkWidget *row = cc_sharing_panel_new_media_sharing_row (folder, self);
+    n_rows++;
+  }
 
-      gtk_list_box_insert (GTK_LIST_BOX (self->shared_folders_listbox),
-                           row,
-                           n_rows - 1);
-    }
+  if (!matching) {
+    GtkWidget *row = cc_sharing_panel_new_media_sharing_row (folder, self);
+
+    gtk_list_box_insert (GTK_LIST_BOX (self->shared_folders_listbox),
+                         row,
+                         n_rows - 1);
+  }
 }
 
 static void
 cc_sharing_panel_add_folder (CcSharingPanel *self,
                              GtkListBoxRow  *row)
 {
-  g_autoptr(GtkFileDialog) dialog = NULL;
+  g_autoptr (GtkFileDialog) dialog = NULL;
   GtkWindow *toplevel;
 
   if (!GPOINTER_TO_INT (g_object_get_data (G_OBJECT (row), "is-add")))
@@ -292,8 +285,8 @@ cc_sharing_panel_open_folder (CcSharingPanel *self,
   GtkWidget *row;
   GtkWindow *toplevel;
   const gchar *path;
-  g_autoptr(GFile) file = NULL;
-  g_autoptr(GtkFileLauncher) launcher = NULL;
+  g_autoptr (GFile) file = NULL;
+  g_autoptr (GtkFileLauncher) launcher = NULL;
 
   row = g_object_get_data (G_OBJECT (button), "row");
   path = g_object_get_data (G_OBJECT (row), "path");
@@ -317,26 +310,25 @@ cc_sharing_panel_remove_folder (CcSharingPanel *self,
 static void
 cc_sharing_panel_media_sharing_dialog_close_attempt (CcSharingPanel *self)
 {
-  g_autoptr(GPtrArray) folders = NULL;
+  g_autoptr (GPtrArray) folders = NULL;
   GtkWidget *child;
 
   folders = g_ptr_array_new_with_free_func (g_free);
 
   for (child = gtk_widget_get_first_child (self->shared_folders_listbox);
        child;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      const char *folder;
+       child = gtk_widget_get_next_sibling (child)) {
+    const char *folder;
 
-      folder = g_object_get_data (G_OBJECT (child), "path");
-      if (folder == NULL)
-        continue;
-      g_ptr_array_add (folders, g_strdup (folder));
-    }
+    folder = g_object_get_data (G_OBJECT (child), "path");
+    if (folder == NULL)
+      continue;
+    g_ptr_array_add (folders, g_strdup (folder));
+  }
 
   g_ptr_array_add (folders, NULL);
 
-  cc_media_sharing_set_preferences ((gchar **) folders->pdata);
+  cc_media_sharing_set_preferences ((gchar **)folders->pdata);
 
   adw_dialog_set_can_close (self->media_sharing_dialog, TRUE);
   adw_dialog_close (self->media_sharing_dialog);
@@ -357,23 +349,22 @@ static GIcon *
 special_directory_get_gicon (GUserDirectory directory)
 {
 #define ICON_CASE(x)                      \
-  case G_USER_DIRECTORY_ ## x:            \
-          return g_themed_icon_new_with_default_fallbacks (ICON_NAME_FOLDER_ ## x);
+          case G_USER_DIRECTORY_ ## x:            \
+            return g_themed_icon_new_with_default_fallbacks (ICON_NAME_FOLDER_ ## x);
 
-  switch (directory)
-    {
-      ICON_CASE (DESKTOP);
-      ICON_CASE (DOCUMENTS);
-      ICON_CASE (DOWNLOAD);
-      ICON_CASE (MUSIC);
-      ICON_CASE (PICTURES);
-      ICON_CASE (PUBLIC_SHARE);
-      ICON_CASE (TEMPLATES);
-      ICON_CASE (VIDEOS);
+  switch (directory) {
+  ICON_CASE (DESKTOP);
+  ICON_CASE (DOCUMENTS);
+  ICON_CASE (DOWNLOAD);
+  ICON_CASE (MUSIC);
+  ICON_CASE (PICTURES);
+  ICON_CASE (PUBLIC_SHARE);
+  ICON_CASE (TEMPLATES);
+  ICON_CASE (VIDEOS);
 
     default:
       return g_themed_icon_new_with_default_fallbacks (ICON_NAME_FOLDER);
-    }
+  }
 
 #undef ICON_CASE
 }
@@ -384,11 +375,11 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
 {
   GtkWidget *row, *w;
   GUserDirectory dir = G_USER_N_DIRECTORIES;
-  g_autoptr(GIcon) icon = NULL;
+  g_autoptr (GIcon) icon = NULL;
   guint i;
   g_autofree gchar *basename = NULL;
   g_autofree gchar *path = NULL;
-  g_autoptr(GFile) file = NULL;
+  g_autoptr (GFile) file = NULL;
 
   file = g_file_new_for_commandline_arg (uri_or_path);
   path = g_file_get_path (file);
@@ -396,14 +387,12 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
   row = adw_action_row_new ();
 
   /* Find the icon and create it */
-  for (i = 0; i < G_USER_N_DIRECTORIES; i++)
-    {
-      if (g_strcmp0 (path, g_get_user_special_dir (i)) == 0)
-        {
-          dir = i;
-          break;
-        }
+  for (i = 0; i < G_USER_N_DIRECTORIES; i++) {
+    if (g_strcmp0 (path, g_get_user_special_dir (i)) == 0) {
+      dir = i;
+      break;
     }
+  }
 
   icon = special_directory_get_gicon (dir);
   adw_action_row_add_prefix (ADW_ACTION_ROW (row),
@@ -478,7 +467,7 @@ cc_sharing_panel_check_media_sharing_available (void)
 static void
 cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
 {
-  g_auto(GStrv) folders = NULL;
+  g_auto (GStrv) folders = NULL;
   GStrv list;
   GtkWidget *row, *networks, *w;
 
@@ -489,12 +478,11 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   cc_media_sharing_get_preferences (&folders);
 
   list = folders;
-  while (list && *list)
-    {
-      row = cc_sharing_panel_new_media_sharing_row (*list, self);
-      gtk_list_box_insert (GTK_LIST_BOX (self->shared_folders_listbox), row, -1);
-      list++;
-    }
+  while (list && *list) {
+    row = cc_sharing_panel_new_media_sharing_row (*list, self);
+    gtk_list_box_insert (GTK_LIST_BOX (self->shared_folders_listbox), row, -1);
+    list++;
+  }
 
   row = cc_sharing_panel_new_add_media_sharing_row (self);
   gtk_list_box_append (GTK_LIST_BOX (self->shared_folders_listbox), row);
@@ -517,19 +505,17 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
 }
 
 static void
-cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
+cc_sharing_panel_setup_label_with_hostname (CcSharingPanel     *self,
                                             AdwPreferencesPage *page)
 {
   g_autofree gchar *hostname;
 
   hostname = cc_hostname_get_static_hostname (cc_hostname_get_default ());
 
-  if (page == self->personal_file_sharing_page)
-    {
-      g_autofree gchar *dav_address = g_strdup_printf ("dav://%s", hostname);
-      adw_action_row_set_subtitle (self->personal_file_sharing_address_row, dav_address);
-    }
-  else
+  if (page == self->personal_file_sharing_page) {
+    g_autofree gchar *dav_address = g_strdup_printf ("dav://%s", hostname);
+    adw_action_row_set_subtitle (self->personal_file_sharing_address_row, dav_address);
+  } else
     g_assert_not_reached ();
 }
 
@@ -618,7 +604,7 @@ static gboolean
 cc_sharing_panel_check_schema_available (const gchar *schema_id)
 {
   GSettingsSchemaSource *source;
-  g_autoptr(GSettingsSchema) schema = NULL;
+  g_autoptr (GSettingsSchema) schema = NULL;
 
   source = g_settings_schema_source_get_default ();
   if (!source)
@@ -638,7 +624,7 @@ sharing_proxy_ready (GObject      *source,
 {
   CcSharingPanel *self;
   GDBusProxy *proxy;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   proxy = G_DBUS_PROXY (gsd_sharing_proxy_new_for_bus_finish (res, &error));
   if (!proxy) {

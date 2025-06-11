@@ -8,7 +8,7 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
@@ -23,11 +23,12 @@
 #include "bolt-time.h"
 
 char *
-bolt_epoch_format (guint64 seconds, const char *format)
+bolt_epoch_format (guint64     seconds,
+                   const char *format)
 {
-  g_autoptr(GDateTime) dt = NULL;
+  g_autoptr (GDateTime) dt = NULL;
 
-  dt = g_date_time_new_from_unix_utc ((gint64) seconds);
+  dt = g_date_time_new_from_unix_utc ((gint64)seconds);
 
   if (dt == NULL)
     return NULL;
@@ -40,5 +41,5 @@ bolt_now_in_seconds (void)
 {
   gint64 now = g_get_real_time ();
 
-  return (guint64) now / G_USEC_PER_SEC;
+  return (guint64)now / G_USEC_PER_SEC;
 }

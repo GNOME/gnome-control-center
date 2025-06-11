@@ -24,8 +24,7 @@
 
 #define KEY_SOUNDS_SCHEMA "org.gnome.desktop.sound"
 
-struct _CcAlertChooserPage
-{
+struct _CcAlertChooserPage {
   AdwNavigationPage parent_instance;
 
   GtkCheckButton *none_button;
@@ -34,8 +33,8 @@ struct _CcAlertChooserPage
   GtkCheckButton *swing_button;
   GtkCheckButton *hum_button;
 
-  GSoundContext  *context;
-  GSettings      *sound_settings;
+  GSoundContext *context;
+  GSettings *sound_settings;
 };
 
 G_DEFINE_TYPE (CcAlertChooserPage, cc_alert_chooser_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -62,11 +61,11 @@ get_alert_name (void)
 {
   g_autofree gchar *dir = NULL;
   g_autofree gchar *path = NULL;
-  g_autoptr(GFile) file = NULL;
-  g_autoptr(GFileInfo) info = NULL;
+  g_autoptr (GFile) file = NULL;
+  g_autoptr (GFileInfo) info = NULL;
   const gchar *target;
   g_autofree gchar *basename = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   dir = get_theme_dir ();
   path = g_build_filename (dir, "bell-terminal.ogg", NULL);
@@ -77,12 +76,11 @@ get_alert_name (void)
                             G_FILE_QUERY_INFO_NONE,
                             NULL,
                             &error);
-  if (info == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND))
-        g_warning ("Failed to get sound theme symlink %s: %s", path, error->message);
-      return NULL;
-    }
+  if (info == NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND))
+      g_warning ("Failed to get sound theme symlink %s: %s", path, error->message);
+    return NULL;
+  }
   target = g_file_info_get_attribute_byte_string (info, G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET);
   if (target == NULL)
     return NULL;
@@ -102,8 +100,8 @@ set_sound_symlink (const gchar *alert_name,
   g_autofree gchar *source_filename = NULL;
   g_autofree gchar *source_path = NULL;
   g_autofree gchar *target_path = NULL;
-  g_autoptr(GFile) file = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GFile) file = NULL;
+  g_autoptr (GError) error = NULL;
 
   dir = get_theme_dir ();
   source_filename = g_strdup_printf ("%s.ogg", alert_name);
@@ -111,11 +109,10 @@ set_sound_symlink (const gchar *alert_name,
   target_path = get_sound_path (name);
 
   file = g_file_new_for_path (source_path);
-  if (!g_file_delete (file, NULL, &error))
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND))
-        g_warning ("Failed to remove existing sound symbolic link %s: %s", source_path, error->message);
-    }
+  if (!g_file_delete (file, NULL, &error)) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND))
+      g_warning ("Failed to remove existing sound symbolic link %s: %s", source_path, error->message);
+  }
   if (!g_file_make_symbolic_link (file, target_path, NULL, &error))
     g_warning ("Failed to make sound theme symbolic link %s->%s: %s", source_path, target_path, error->message);
 }
@@ -123,9 +120,9 @@ set_sound_symlink (const gchar *alert_name,
 static void
 update_dir_mtime (const char *dir_path)
 {
-  g_autoptr(GFile) dir = NULL;
-  g_autoptr(GDateTime) now = NULL;
-  g_autoptr(GError) mtime_error = NULL;
+  g_autoptr (GFile) dir = NULL;
+  g_autoptr (GDateTime) now = NULL;
+  g_autoptr (GError) mtime_error = NULL;
 
   now = g_date_time_new_now_utc ();
   dir = g_file_new_for_path (dir_path);
@@ -134,11 +131,10 @@ update_dir_mtime (const char *dir_path)
                                     g_date_time_to_unix (now),
                                     G_FILE_QUERY_INFO_NONE,
                                     NULL,
-                                    &mtime_error))
-    {
-      g_warning ("Failed to update directory modification time for %s: %s",
-                 dir_path, mtime_error->message);
-    }
+                                    &mtime_error)) {
+    g_warning ("Failed to update directory modification time for %s: %s",
+               dir_path, mtime_error->message);
+  }
 }
 
 static void
@@ -148,10 +144,10 @@ set_custom_theme (CcAlertChooserPage *self,
   g_autofree gchar *dir_path = NULL;
   g_autofree gchar *theme_path = NULL;
   g_autofree gchar *sounds_path = NULL;
-  g_autoptr(GKeyFile) theme_file = NULL;
-  g_autoptr(GVariant) default_theme = NULL;
-  g_autoptr(GError) load_error = NULL;
-  g_autoptr(GError) save_error = NULL;
+  g_autoptr (GKeyFile) theme_file = NULL;
+  g_autoptr (GVariant) default_theme = NULL;
+  g_autoptr (GError) load_error = NULL;
+  g_autoptr (GError) save_error = NULL;
 
   dir_path = get_theme_dir ();
   g_mkdir_with_parents (dir_path, USER_DIR_MODE);
@@ -161,20 +157,18 @@ set_custom_theme (CcAlertChooserPage *self,
   default_theme = g_settings_get_default_value (self->sound_settings, "theme-name");
 
   theme_file = g_key_file_new ();
-  if (!g_key_file_load_from_file (theme_file, theme_path, G_KEY_FILE_KEEP_COMMENTS, &load_error))
-    {
-      if (!g_error_matches (load_error, G_FILE_ERROR, G_FILE_ERROR_NOENT))
-        g_printerr ("Failed to load theme file %s: %s", theme_path, load_error->message);
-    }
+  if (!g_key_file_load_from_file (theme_file, theme_path, G_KEY_FILE_KEEP_COMMENTS, &load_error)) {
+    if (!g_error_matches (load_error, G_FILE_ERROR, G_FILE_ERROR_NOENT))
+      g_printerr ("Failed to load theme file %s: %s", theme_path, load_error->message);
+  }
   g_key_file_set_string (theme_file, "Sound Theme", "Name", _("Custom"));
   if (default_theme != NULL)
     g_key_file_set_string (theme_file, "Sound Theme", "Inherits", g_variant_get_string (default_theme, NULL));
   g_key_file_set_string (theme_file, "Sound Theme", "Directories", ".");
 
-  if (!g_key_file_save_to_file (theme_file, theme_path, &save_error))
-    {
-      g_warning ("Failed to save theme file %s: %s", theme_path, save_error->message);
-    }
+  if (!g_key_file_save_to_file (theme_file, theme_path, &save_error)) {
+    g_warning ("Failed to save theme file %s: %s", theme_path, save_error->message);
+  }
 
   set_sound_symlink ("bell-terminal", name);
   set_sound_symlink ("bell-window-system", name);
@@ -199,15 +193,14 @@ play_sound (CcAlertChooserPage *self,
             const gchar        *name)
 {
   g_autofree gchar *path = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   path = get_sound_path (name);
   if (!gsound_context_play_simple (self->context, NULL, &error,
                                    GSOUND_ATTR_MEDIA_FILENAME, path,
-                                   NULL))
-    {
-      g_warning ("Failed to play alert sound %s: %s", path, error->message);
-    }
+                                   NULL)) {
+    g_warning ("Failed to play alert sound %s: %s", path, error->message);
+  }
 }
 
 static void
@@ -283,7 +276,7 @@ void
 cc_alert_chooser_page_init (CcAlertChooserPage *self)
 {
   g_autofree gchar *alert_name = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -299,12 +292,11 @@ cc_alert_chooser_page_init (CcAlertChooserPage *self)
   if (g_strcmp0 (alert_name, "click") != 0 &&
       g_strcmp0 (alert_name, "hum") != 0 &&
       g_strcmp0 (alert_name, "string") != 0 &&
-      g_strcmp0 (alert_name, "swing") != 0)
-    {
-      set_custom_theme (self, "click");
-      g_free (alert_name);
-      alert_name = g_strdup ("click");
-    }
+      g_strcmp0 (alert_name, "swing") != 0) {
+    set_custom_theme (self, "click");
+    g_free (alert_name);
+    alert_name = g_strdup ("click");
+  }
 
   if (!g_settings_get_boolean (self->sound_settings, "event-sounds"))
     set_button_active (self, self->none_button, TRUE);
@@ -330,7 +322,7 @@ const gchar *
 get_selected_alert_display_name (void)
 {
   g_autofree gchar *alert_name = NULL;
-  g_autoptr(GSettings) sound_settings = NULL;
+  g_autoptr (GSettings) sound_settings = NULL;
 
   sound_settings = g_settings_new (KEY_SOUNDS_SCHEMA);
 

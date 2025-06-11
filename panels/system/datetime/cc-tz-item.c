@@ -39,22 +39,21 @@
 #define DEFAULT_TZ "Europe/London"
 #define GETTEXT_PACKAGE_TIMEZONES GETTEXT_PACKAGE "-timezones"
 
-struct _CcTzItem
-{
-  GObject         parent_instance;
+struct _CcTzItem {
+  GObject parent_instance;
 
-  GSettings      *desktop_settings;
-  GTimeZone      *tz;
+  GSettings *desktop_settings;
+  GTimeZone *tz;
   GnomeWallClock *wall_clock;
 
-  TzLocation     *tz_location;
-  TzInfo         *tz_info;
+  TzLocation *tz_location;
+  TzInfo *tz_info;
 
-  char           *name;
-  char           *country;
-  char           *time;
-  char           *offset;    /* eg: UTC+530 */
-  char           *zone;
+  char *name;
+  char *country;
+  char *time;
+  char *offset;              /* eg: UTC+530 */
+  char *zone;
 };
 
 G_DEFINE_TYPE (CcTzItem, cc_tz_item, G_TYPE_OBJECT)
@@ -76,7 +75,7 @@ static void
 generate_city_name (CcTzItem   *self,
                     TzLocation *loc)
 {
-  g_auto(GStrv) split_translated = NULL;
+  g_auto (GStrv) split_translated = NULL;
   gint length;
 
   /* Load the translation for it */
@@ -88,13 +87,13 @@ generate_city_name (CcTzItem   *self,
 
   length = g_strv_length (split_translated);
   self->country = gnome_get_country_from_code (loc->country, NULL);
-  self->name = g_strdup (split_translated[length-1]);
+  self->name = g_strdup (split_translated[length - 1]);
 }
 
 static const char *
 tz_item_get_time (CcTzItem *self)
 {
-  g_autoptr(GDateTime) now = NULL;
+  g_autoptr (GDateTime) now = NULL;
   GDesktopClockFormat format;
 
   g_assert (CC_IS_TZ_ITEM (self));
@@ -134,8 +133,7 @@ cc_tz_item_get_property (GObject    *object,
 {
   CcTzItem *self = (CcTzItem *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_COUNTRY:
       g_value_set_string (value, self->country);
       break;
@@ -158,7 +156,7 @@ cc_tz_item_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void

@@ -24,11 +24,10 @@
 #include "cc-applications-row.h"
 #include "cc-applications-resources.h"
 
-struct _CcApplicationsRow
-{
-  AdwActionRow  parent;
+struct _CcApplicationsRow {
+  AdwActionRow parent;
 
-  GAppInfo     *info;
+  GAppInfo *info;
 };
 
 G_DEFINE_TYPE (CcApplicationsRow, cc_applications_row, ADW_TYPE_ACTION_ROW)
@@ -64,7 +63,7 @@ CcApplicationsRow *
 cc_applications_row_new (GAppInfo *info)
 {
   CcApplicationsRow *self;
-  g_autoptr(GIcon) icon = NULL;
+  g_autoptr (GIcon) icon = NULL;
   GtkWidget *w;
 
   self = g_object_new (CC_TYPE_APPLICATIONS_ROW, NULL);

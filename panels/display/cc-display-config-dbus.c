@@ -37,15 +37,13 @@
 
 #define CURRENT_STATE_FORMAT "(u" MONITORS_FORMAT LOGICAL_MONITORS_FORMAT "a{sv})"
 
-typedef enum _CcDisplayModeFlags
-{
+typedef enum _CcDisplayModeFlags {
   MODE_PREFERRED = 1 << 0,
   MODE_CURRENT = 1 << 1,
   MODE_INTERLACED = 1 << 2,
 } CcDisplayModeFlags;
 
-struct _CcDisplayModeDBus
-{
+struct _CcDisplayModeDBus {
   CcDisplayMode parent_instance;
   CcDisplayMonitorDBus *monitor;
 
@@ -73,10 +71,10 @@ cc_display_mode_dbus_equal (const CcDisplayModeDBus *m1,
     return FALSE;
 
   return m1->width == m2->width &&
-    m1->height == m2->height &&
-    m1->refresh_rate == m2->refresh_rate &&
-    m1->refresh_rate_mode == m2->refresh_rate_mode &&
-    (m1->flags & MODE_INTERLACED) == (m2->flags & MODE_INTERLACED);
+         m1->height == m2->height &&
+         m1->refresh_rate == m2->refresh_rate &&
+         m1->refresh_rate_mode == m2->refresh_rate_mode &&
+         (m1->flags & MODE_INTERLACED) == (m2->flags & MODE_INTERLACED);
 }
 
 static gboolean
@@ -89,7 +87,8 @@ cc_display_mode_dbus_is_clone_mode (CcDisplayMode *pself)
 
 static void
 cc_display_mode_dbus_get_resolution (CcDisplayMode *pself,
-                                     int *w, int *h)
+                                     int           *w,
+                                     int           *h)
 {
   CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
 
@@ -111,18 +110,17 @@ cc_display_mode_dbus_get_preferred_scale (CcDisplayMode *pself)
 
 static gboolean
 cc_display_mode_dbus_is_supported_scale (CcDisplayMode *pself,
-                                         double scale)
+                                         double         scale)
 {
   CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
 
   guint i;
-  for (i = 0; i < self->supported_scales->len; i++)
-    {
-      double v = g_array_index (self->supported_scales, double, i);
+  for (i = 0; i < self->supported_scales->len; i++) {
+    double v = g_array_index (self->supported_scales, double, i);
 
-      if (G_APPROX_VALUE (v, scale, DBL_EPSILON))
-        return TRUE;
-    }
+    if (G_APPROX_VALUE (v, scale, DBL_EPSILON))
+      return TRUE;
+  }
   return FALSE;
 }
 
@@ -208,7 +206,7 @@ cc_display_mode_dbus_new_virtual (int     width,
                                   double  preferred_scale,
                                   GArray *supported_scales)
 {
-  g_autoptr(GVariant) properties_variant = NULL;
+  g_autoptr (GVariant) properties_variant = NULL;
   CcDisplayModeDBus *self;
 
   self = g_object_new (CC_TYPE_DISPLAY_MODE_DBUS, NULL);
@@ -226,8 +224,8 @@ cc_display_mode_dbus_new (CcDisplayMonitorDBus *monitor,
                           GVariant             *variant)
 {
   double d;
-  g_autoptr(GVariantIter) scales_iter = NULL;
-  g_autoptr(GVariant) properties_variant = NULL;
+  g_autoptr (GVariantIter) scales_iter = NULL;
+  g_autoptr (GVariant) properties_variant = NULL;
   gboolean is_current;
   gboolean is_preferred;
   gboolean is_interlaced;
@@ -277,8 +275,7 @@ cc_display_mode_dbus_new (CcDisplayMonitorDBus *monitor,
 G_DECLARE_FINAL_TYPE (CcDisplayLogicalMonitor, cc_display_logical_monitor,
                       CC, DISPLAY_LOGICAL_MONITOR, GObject)
 
-struct _CcDisplayLogicalMonitor
-{
+struct _CcDisplayLogicalMonitor {
   GObject parent_instance;
 
   int x;
@@ -304,10 +301,10 @@ cc_display_logical_monitor_equal (const CcDisplayLogicalMonitor *m1,
     return FALSE;
 
   return m1->x == m2->x &&
-    m1->y == m2->y &&
-    G_APPROX_VALUE (m1->scale, m2->scale, DBL_EPSILON) &&
-    m1->rotation == m2->rotation &&
-    m1->primary == m2->primary;
+         m1->y == m2->y &&
+         G_APPROX_VALUE (m1->scale, m2->scale, DBL_EPSILON) &&
+         m1->rotation == m2->rotation &&
+         m1->primary == m2->primary;
 }
 
 static void
@@ -337,15 +334,13 @@ cc_display_logical_monitor_class_init (CcDisplayLogicalMonitorClass *klass)
 }
 
 
-typedef enum _CcDisplayMonitorUnderscanning
-{
+typedef enum _CcDisplayMonitorUnderscanning {
   UNDERSCANNING_UNSUPPORTED = 0,
   UNDERSCANNING_DISABLED,
   UNDERSCANNING_ENABLED
 } CcDisplayMonitorUnderscanning;
 
-struct _CcDisplayMonitorDBus
-{
+struct _CcDisplayMonitorDBus {
   CcDisplayMonitor parent_instance;
   CcDisplayConfigDBus *config;
 
@@ -381,18 +376,18 @@ G_DEFINE_TYPE (CcDisplayMonitorDBus,
                CC_TYPE_DISPLAY_MONITOR)
 
 static void
-register_logical_monitor (CcDisplayConfigDBus *self,
+register_logical_monitor (CcDisplayConfigDBus     *self,
                           CcDisplayLogicalMonitor *logical_monitor);
 static void
-cc_display_config_dbus_set_primary (CcDisplayConfigDBus *self,
+cc_display_config_dbus_set_primary (CcDisplayConfigDBus  *self,
                                     CcDisplayMonitorDBus *new_primary);
 static void
-cc_display_config_dbus_unset_primary (CcDisplayConfigDBus *self,
+cc_display_config_dbus_unset_primary (CcDisplayConfigDBus  *self,
                                       CcDisplayMonitorDBus *old_primary);
 static void
 cc_display_config_dbus_ensure_non_offset_coords (CcDisplayConfigDBus *self);
 static void
-cc_display_config_dbus_append_right (CcDisplayConfigDBus *self,
+cc_display_config_dbus_append_right (CcDisplayConfigDBus     *self,
                                      CcDisplayLogicalMonitor *monitor);
 static void
 cc_display_config_dbus_make_linear (CcDisplayConfigDBus *self);
@@ -462,7 +457,7 @@ cc_display_monitor_dbus_is_primary (CcDisplayMonitor *pself)
 
 static void
 cc_display_monitor_dbus_set_primary (CcDisplayMonitor *pself,
-                                     gboolean primary)
+                                     gboolean          primary)
 {
   CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
 
@@ -481,62 +476,56 @@ cc_display_monitor_dbus_is_active (CcDisplayMonitor *pself)
 }
 
 static void
-cc_display_monitor_dbus_set_logical_monitor (CcDisplayMonitorDBus *self,
+cc_display_monitor_dbus_set_logical_monitor (CcDisplayMonitorDBus    *self,
                                              CcDisplayLogicalMonitor *logical_monitor)
 {
   gboolean was_primary = FALSE;
 
-  if (self->logical_monitor)
-    {
-      was_primary = self->logical_monitor->primary;
-      if (was_primary)
-        cc_display_config_dbus_unset_primary (self->config, self);
-      g_hash_table_remove (self->logical_monitor->monitors, self);
-      g_object_unref (self->logical_monitor);
-    }
+  if (self->logical_monitor) {
+    was_primary = self->logical_monitor->primary;
+    if (was_primary)
+      cc_display_config_dbus_unset_primary (self->config, self);
+    g_hash_table_remove (self->logical_monitor->monitors, self);
+    g_object_unref (self->logical_monitor);
+  }
 
   self->logical_monitor = logical_monitor;
 
-  if (self->logical_monitor)
-    {
-      g_hash_table_add (self->logical_monitor->monitors, self);
-      g_object_ref (self->logical_monitor);
-      /* unset primary with NULL will select this monitor if it is the only one.*/
-      if (was_primary)
-        cc_display_config_dbus_set_primary (self->config, self);
-      else
-        cc_display_config_dbus_unset_primary (self->config, NULL);
-    }
+  if (self->logical_monitor) {
+    g_hash_table_add (self->logical_monitor->monitors, self);
+    g_object_ref (self->logical_monitor);
+    /* unset primary with NULL will select this monitor if it is the only one.*/
+    if (was_primary)
+      cc_display_config_dbus_set_primary (self->config, self);
+    else
+      cc_display_config_dbus_unset_primary (self->config, NULL);
+  }
 }
 
 static void
 cc_display_monitor_dbus_set_active (CcDisplayMonitor *pself,
-                                    gboolean active)
+                                    gboolean          active)
 {
   CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
 
-  if (!self->current_mode && active)
-    {
-      if (self->preferred_mode)
-        self->current_mode = self->preferred_mode;
-      else if (self->modes)
-        self->current_mode = (CcDisplayMode *) self->modes->data;
-      else
-        g_warning ("Couldn't find a mode to activate monitor at %s", self->connector_name);
-    }
+  if (!self->current_mode && active) {
+    if (self->preferred_mode)
+      self->current_mode = self->preferred_mode;
+    else if (self->modes)
+      self->current_mode = (CcDisplayMode *)self->modes->data;
+    else
+      g_warning ("Couldn't find a mode to activate monitor at %s", self->connector_name);
+  }
 
-  if (!self->logical_monitor && active)
-    {
-      CcDisplayLogicalMonitor *logical_monitor;
-      logical_monitor = g_object_new (CC_TYPE_DISPLAY_LOGICAL_MONITOR, NULL);
-      cc_display_monitor_dbus_set_logical_monitor (self, logical_monitor);
-      cc_display_config_dbus_append_right (self->config, logical_monitor);
-      register_logical_monitor (self->config, logical_monitor);
-    }
-  else if (self->logical_monitor && !active)
-    {
-      cc_display_monitor_dbus_set_logical_monitor (self, NULL);
-    }
+  if (!self->logical_monitor && active) {
+    CcDisplayLogicalMonitor *logical_monitor;
+    logical_monitor = g_object_new (CC_TYPE_DISPLAY_LOGICAL_MONITOR, NULL);
+    cc_display_monitor_dbus_set_logical_monitor (self, logical_monitor);
+    cc_display_config_dbus_append_right (self->config, logical_monitor);
+    register_logical_monitor (self->config, logical_monitor);
+  } else if (self->logical_monitor && !active) {
+    cc_display_monitor_dbus_set_logical_monitor (self, NULL);
+  }
 
   g_signal_emit_by_name (self, "active");
 }
@@ -553,32 +542,32 @@ cc_display_monitor_dbus_get_rotation (CcDisplayMonitor *pself)
 }
 
 static void
-cc_display_monitor_dbus_set_rotation (CcDisplayMonitor *pself,
-                                      CcDisplayRotation rotation)
+cc_display_monitor_dbus_set_rotation (CcDisplayMonitor  *pself,
+                                      CcDisplayRotation  rotation)
 {
   CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
 
   if (!self->logical_monitor)
     return;
 
-  if (self->logical_monitor->rotation != rotation)
-    {
-      self->logical_monitor->rotation = rotation;
+  if (self->logical_monitor->rotation != rotation) {
+    self->logical_monitor->rotation = rotation;
 
-      g_signal_emit_by_name (self, "rotation");
-    }
+    g_signal_emit_by_name (self, "rotation");
+  }
 }
 
 static gboolean
-cc_display_monitor_dbus_supports_rotation (CcDisplayMonitor *pself,
-                                           CcDisplayRotation rotation)
+cc_display_monitor_dbus_supports_rotation (CcDisplayMonitor  *pself,
+                                           CcDisplayRotation  rotation)
 {
   return TRUE;
 }
 
 static void
 cc_display_monitor_dbus_get_physical_size (CcDisplayMonitor *pself,
-                                           int *w, int *h)
+                                           int              *w,
+                                           int              *h)
 {
   CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
 
@@ -590,25 +579,25 @@ cc_display_monitor_dbus_get_physical_size (CcDisplayMonitor *pself,
 
 static void
 cc_display_monitor_dbus_get_geometry (CcDisplayMonitor *pself,
-                                      int *x, int *y, int *w, int *h)
+                                      int              *x,
+                                      int              *y,
+                                      int              *w,
+                                      int              *h)
 {
   CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
   CcDisplayMode *mode = NULL;
 
-  if (self->logical_monitor)
-    {
-      if (x)
-        *x = self->logical_monitor->x;
-      if (y)
-        *y = self->logical_monitor->y;
-    }
-  else
-    {
-      if (x)
-        *x = -1;
-      if (y)
-        *y = -1;
-    }
+  if (self->logical_monitor) {
+    if (x)
+      *x = self->logical_monitor->x;
+    if (y)
+      *y = self->logical_monitor->y;
+  } else {
+    if (x)
+      *x = -1;
+    if (y)
+      *y = -1;
+  }
 
   if (self->current_mode)
     mode = self->current_mode;
@@ -619,14 +608,13 @@ cc_display_monitor_dbus_get_geometry (CcDisplayMonitor *pself,
 
   if (mode)
     cc_display_mode_get_resolution (mode, w, h);
-  else
-    {
-      g_warning ("Monitor at %s has no modes?", self->connector_name);
-      if (w)
-        *w = -1;
-      if (h)
-        *h = -1;
-    }
+  else {
+    g_warning ("Monitor at %s has no modes?", self->connector_name);
+    if (w)
+      *w = -1;
+    if (h)
+      *h = -1;
+  }
 }
 
 static int
@@ -726,7 +714,7 @@ cc_display_monitor_dbus_get_privacy (CcDisplayMonitor *pself)
 
 static void
 cc_display_monitor_dbus_set_underscanning (CcDisplayMonitor *pself,
-                                           gboolean underscanning)
+                                           gboolean          underscanning)
 {
   CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
 
@@ -750,29 +738,26 @@ cc_display_monitor_dbus_get_closest_mode (CcDisplayMonitorDBus         *self,
   CcDisplayModeDBus *best = NULL;
   GList *l;
 
-  for (l = self->modes; l != NULL; l = l->next)
-    {
-      CcDisplayModeDBus *similar = l->data;
+  for (l = self->modes; l != NULL; l = l->next) {
+    CcDisplayModeDBus *similar = l->data;
 
-      if (similar->width != width ||
-          similar->height != height ||
-          similar->refresh_rate_mode != refresh_rate_mode)
-        continue;
+    if (similar->width != width ||
+        similar->height != height ||
+        similar->refresh_rate_mode != refresh_rate_mode)
+      continue;
 
-      if (similar->refresh_rate == refresh_rate &&
-          (similar->flags & MODE_INTERLACED) == (flags & MODE_INTERLACED))
-        {
-          best = similar;
-          break;
-        }
-
-      /* There might be a better heuristic. */
-      if (!best || best->refresh_rate < similar->refresh_rate)
-        {
-          best = similar;
-          continue;
-        }
+    if (similar->refresh_rate == refresh_rate &&
+        (similar->flags & MODE_INTERLACED) == (flags & MODE_INTERLACED)) {
+      best = similar;
+      break;
     }
+
+    /* There might be a better heuristic. */
+    if (!best || best->refresh_rate < similar->refresh_rate) {
+      best = similar;
+      continue;
+    }
+  }
 
   return CC_DISPLAY_MODE (best);
 }
@@ -815,25 +800,23 @@ cc_display_monitor_dbus_set_compatible_clone_mode (CcDisplayMonitor *pself,
 
   cc_display_mode_get_resolution (clone_mode, &clone_width, &clone_height);
 
-  for (l = self->modes; l; l = l->next)
-    {
-      CcDisplayMode *mode = l->data;
-      int width, height;
+  for (l = self->modes; l; l = l->next) {
+    CcDisplayMode *mode = l->data;
+    int width, height;
 
-      cc_display_mode_get_resolution (mode, &width, &height);
-      if (width != clone_width || height != clone_height)
-        continue;
+    cc_display_mode_get_resolution (mode, &width, &height);
+    if (width != clone_width || height != clone_height)
+      continue;
 
-      if (!best_mode)
-        {
-          best_mode = mode;
-          continue;
-        }
-
-      if (cc_display_mode_get_freq_f (mode) >
-          cc_display_mode_get_freq_f (best_mode))
-        best_mode = mode;
+    if (!best_mode) {
+      best_mode = mode;
+      continue;
     }
+
+    if (cc_display_mode_get_freq_f (mode) >
+        cc_display_mode_get_freq_f (best_mode))
+      best_mode = mode;
+  }
 
   g_return_if_fail (best_mode);
 
@@ -864,24 +847,23 @@ cc_display_monitor_dbus_set_refresh_rate_mode (CcDisplayMonitor             *pse
 
 static void
 cc_display_monitor_dbus_set_position (CcDisplayMonitor *pself,
-                                      int x, int y)
+                                      int               x,
+                                      int               y)
 {
   CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
 
-  if (self->logical_monitor)
-    {
-      gboolean notify = FALSE;
+  if (self->logical_monitor) {
+    gboolean notify = FALSE;
 
-      if (self->logical_monitor->x != x || self->logical_monitor->y != y)
-        notify = TRUE;
+    if (self->logical_monitor->x != x || self->logical_monitor->y != y)
+      notify = TRUE;
 
-      self->logical_monitor->x = x;
-      self->logical_monitor->y = y;
+    self->logical_monitor->x = x;
+    self->logical_monitor->y = y;
 
-      if (notify)
-        g_signal_emit_by_name (self, "position-changed");
-    }
-
+    if (notify)
+      g_signal_emit_by_name (self, "position-changed");
+  }
 }
 
 static double
@@ -897,7 +879,7 @@ cc_display_monitor_dbus_get_scale (CcDisplayMonitor *pself)
 
 static void
 cc_display_monitor_dbus_set_scale (CcDisplayMonitor *pself,
-                                   double scale)
+                                   double            scale)
 {
   CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
 
@@ -910,12 +892,11 @@ cc_display_monitor_dbus_set_scale (CcDisplayMonitor *pself,
   if (!self->logical_monitor)
     return;
 
-  if (!G_APPROX_VALUE (self->logical_monitor->scale, scale, DBL_EPSILON))
-    {
-      self->logical_monitor->scale = scale;
+  if (!G_APPROX_VALUE (self->logical_monitor->scale, scale, DBL_EPSILON)) {
+    self->logical_monitor->scale = scale;
 
-      g_signal_emit_by_name (self, "scale");
-    }
+    g_signal_emit_by_name (self, "scale");
+  }
 }
 
 static void
@@ -940,11 +921,10 @@ cc_display_monitor_dbus_finalize (GObject *object)
   g_list_free_full (self->modes, g_object_unref);
   g_list_free (self->supported_color_modes);
 
-  if (self->logical_monitor)
-    {
-      g_hash_table_remove (self->logical_monitor->monitors, self);
-      g_object_unref (self->logical_monitor);
-    }
+  if (self->logical_monitor) {
+    g_hash_table_remove (self->logical_monitor->monitors, self);
+    g_object_unref (self->logical_monitor);
+  }
 
   G_OBJECT_CLASS (cc_display_monitor_dbus_parent_class)->finalize (object);
 }
@@ -995,40 +975,39 @@ cc_display_monitor_dbus_class_init (CcDisplayMonitorDBusClass *klass)
 
 static void
 construct_modes (CcDisplayMonitorDBus *self,
-                 GVariantIter *modes)
+                 GVariantIter         *modes)
 {
   CcDisplayModeDBus *mode;
 
-  while (TRUE)
-    {
-      g_autoptr(GVariant) variant = NULL;
+  while (TRUE) {
+    g_autoptr (GVariant) variant = NULL;
 
-      if (!g_variant_iter_next (modes, "@"MODE_FORMAT, &variant))
-        break;
+    if (!g_variant_iter_next (modes, "@"MODE_FORMAT, &variant))
+      break;
 
-      mode = cc_display_mode_dbus_new (self, variant);
-      self->modes = g_list_prepend (self->modes, mode);
+    mode = cc_display_mode_dbus_new (self, variant);
+    self->modes = g_list_prepend (self->modes, mode);
 
-      if (mode->flags & MODE_PREFERRED)
-        self->preferred_mode = CC_DISPLAY_MODE (mode);
-      if (mode->flags & MODE_CURRENT)
-        self->current_mode = CC_DISPLAY_MODE (mode);
+    if (mode->flags & MODE_PREFERRED)
+      self->preferred_mode = CC_DISPLAY_MODE (mode);
+    if (mode->flags & MODE_CURRENT)
+      self->current_mode = CC_DISPLAY_MODE (mode);
 
-      if (mode->refresh_rate_mode == MODE_REFRESH_RATE_MODE_VARIABLE)
-        self->supports_variable_refresh_rate = TRUE;
-    }
+    if (mode->refresh_rate_mode == MODE_REFRESH_RATE_MODE_VARIABLE)
+      self->supports_variable_refresh_rate = TRUE;
+  }
 
   self->modes = g_list_reverse (self->modes);
 }
 
 static CcDisplayMonitorDBus *
-cc_display_monitor_dbus_new (GVariant *variant,
+cc_display_monitor_dbus_new (GVariant            *variant,
                              CcDisplayConfigDBus *config)
 {
   CcDisplayMonitorDBus *self = g_object_new (CC_TYPE_DISPLAY_MONITOR_DBUS, NULL);
   gchar *s1, *s2, *s3, *s4;
-  g_autoptr(GVariantIter) modes = NULL;
-  g_autoptr(GVariantIter) props = NULL;
+  g_autoptr (GVariantIter) modes = NULL;
+  g_autoptr (GVariantIter) props = NULL;
 
   self->config = config;
 
@@ -1041,102 +1020,78 @@ cc_display_monitor_dbus_new (GVariant *variant,
 
   construct_modes (self, modes);
 
-  while (TRUE)
-    {
-      const char *s;
-      g_autoptr(GVariant) v = NULL;
+  while (TRUE) {
+    const char *s;
+    g_autoptr (GVariant) v = NULL;
 
-      if (!g_variant_iter_next (props, "{&sv}", &s, &v))
-        break;
+    if (!g_variant_iter_next (props, "{&sv}", &s, &v))
+      break;
 
-      if (g_str_equal (s, "width-mm"))
-        {
-          g_variant_get (v, "i", &self->width_mm);
-        }
-      else if (g_str_equal (s, "height-mm"))
-        {
-          g_variant_get (v, "i", &self->height_mm);
-        }
-      else if (g_str_equal (s, "is-underscanning"))
-        {
-          gboolean underscanning = FALSE;
-          g_variant_get (v, "b", &underscanning);
-          if (underscanning)
-            self->underscanning = UNDERSCANNING_ENABLED;
-          else
-            self->underscanning = UNDERSCANNING_DISABLED;
-        }
-      else if (g_str_equal (s, "max-screen-size"))
-        {
-          g_variant_get (v, "ii", &self->max_width, &self->max_height);
-        }
-      else if (g_str_equal (s, "is-builtin"))
-        {
-          g_variant_get (v, "b", &self->builtin);
-        }
-      else if (g_str_equal (s, "display-name"))
-        {
-          g_variant_get (v, "s", &self->display_name);
-        }
-      else if (g_str_equal (s, "privacy-screen-state"))
-        {
-          gboolean enabled;
-          gboolean locked;
-          g_variant_get (v, "(bb)", &enabled, &locked);
+    if (g_str_equal (s, "width-mm")) {
+      g_variant_get (v, "i", &self->width_mm);
+    } else if (g_str_equal (s, "height-mm")) {
+      g_variant_get (v, "i", &self->height_mm);
+    } else if (g_str_equal (s, "is-underscanning")) {
+      gboolean underscanning = FALSE;
+      g_variant_get (v, "b", &underscanning);
+      if (underscanning)
+        self->underscanning = UNDERSCANNING_ENABLED;
+      else
+        self->underscanning = UNDERSCANNING_DISABLED;
+    } else if (g_str_equal (s, "max-screen-size")) {
+      g_variant_get (v, "ii", &self->max_width, &self->max_height);
+    } else if (g_str_equal (s, "is-builtin")) {
+      g_variant_get (v, "b", &self->builtin);
+    } else if (g_str_equal (s, "display-name")) {
+      g_variant_get (v, "s", &self->display_name);
+    } else if (g_str_equal (s, "privacy-screen-state")) {
+      gboolean enabled;
+      gboolean locked;
+      g_variant_get (v, "(bb)", &enabled, &locked);
 
-          if (enabled)
-            self->privacy_screen = CC_DISPLAY_MONITOR_PRIVACY_ENABLED;
-          else
-            self->privacy_screen = CC_DISPLAY_MONITOR_PRIVACY_DISABLED;
+      if (enabled)
+        self->privacy_screen = CC_DISPLAY_MONITOR_PRIVACY_ENABLED;
+      else
+        self->privacy_screen = CC_DISPLAY_MONITOR_PRIVACY_DISABLED;
 
-          if (locked)
-            self->privacy_screen |= CC_DISPLAY_MONITOR_PRIVACY_LOCKED;
-        }
-      else if (g_str_equal (s, "min-refresh-rate"))
-        {
-          g_variant_get (v, "i", &self->min_refresh_rate);
-        }
-      else if (g_str_equal (s, "color-mode"))
-        {
-          uint32_t color_mode;
+      if (locked)
+        self->privacy_screen |= CC_DISPLAY_MONITOR_PRIVACY_LOCKED;
+    } else if (g_str_equal (s, "min-refresh-rate")) {
+      g_variant_get (v, "i", &self->min_refresh_rate);
+    } else if (g_str_equal (s, "color-mode")) {
+      uint32_t color_mode;
 
-          g_variant_get (v, "u", &color_mode);
-          self->color_mode = color_mode;
-        }
-      else if (g_str_equal (s, "supported-color-modes"))
-        {
-          g_autoptr (GVariantIter) iter = NULL;
-          uint32_t color_mode;
+      g_variant_get (v, "u", &color_mode);
+      self->color_mode = color_mode;
+    } else if (g_str_equal (s, "supported-color-modes")) {
+      g_autoptr (GVariantIter) iter = NULL;
+      uint32_t color_mode;
 
-          g_variant_get (v, "au", &iter);
-          while (g_variant_iter_next (iter, "u", &color_mode))
-            {
-              self->supported_color_modes =
-                g_list_append (self->supported_color_modes,
-                               GUINT_TO_POINTER (color_mode));
-            }
-        }
+      g_variant_get (v, "au", &iter);
+      while (g_variant_iter_next (iter, "u", &color_mode)) {
+        self->supported_color_modes =
+          g_list_append (self->supported_color_modes,
+                         GUINT_TO_POINTER (color_mode));
+      }
     }
+  }
 
   return self;
 }
 
 
-typedef enum _CcDisplayLayoutMode
-{
+typedef enum _CcDisplayLayoutMode {
   CC_DISPLAY_LAYOUT_MODE_LOGICAL = 1,
   CC_DISPLAY_LAYOUT_MODE_PHYSICAL = 2
 } CcDisplayLayoutMode;
 
-typedef enum _CcDisplayConfigMethod
-{
+typedef enum _CcDisplayConfigMethod {
   CC_DISPLAY_CONFIG_METHOD_VERIFY = 0,
   CC_DISPLAY_CONFIG_METHOD_TEMPORARY = 1,
   CC_DISPLAY_CONFIG_METHOD_PERSISTENT = 2
 } CcDisplayConfigMethod;
 
-struct _CcDisplayConfigDBus
-{
+struct _CcDisplayConfigDBus {
   CcDisplayConfig parent_instance;
 
   GVariant *state;
@@ -1164,8 +1119,7 @@ G_DEFINE_TYPE (CcDisplayConfigDBus,
                cc_display_config_dbus,
                CC_TYPE_DISPLAY_CONFIG)
 
-enum
-{
+enum {
   PROP_0,
   PROP_STATE,
   PROP_CONNECTION,
@@ -1189,28 +1143,27 @@ build_monitors_variant (GHashTable *monitors)
   g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
   g_hash_table_iter_init (&iter, monitors);
 
-  while (g_hash_table_iter_next (&iter, (void **) &monitor, NULL))
-    {
-      GVariantBuilder props_builder;
-      CcDisplayModeDBus *mode_dbus;
+  while (g_hash_table_iter_next (&iter, (void **)&monitor, NULL)) {
+    GVariantBuilder props_builder;
+    CcDisplayModeDBus *mode_dbus;
 
-      if (!monitor->current_mode)
-        continue;
+    if (!monitor->current_mode)
+      continue;
 
-      g_variant_builder_init (&props_builder, G_VARIANT_TYPE ("a{sv}"));
-      g_variant_builder_add (&props_builder, "{sv}",
-                             "color-mode",
-                             g_variant_new_uint32 (monitor->color_mode));
-      g_variant_builder_add (&props_builder, "{sv}",
-                             "underscanning",
-                             g_variant_new_boolean (monitor->underscanning == UNDERSCANNING_ENABLED));
+    g_variant_builder_init (&props_builder, G_VARIANT_TYPE ("a{sv}"));
+    g_variant_builder_add (&props_builder, "{sv}",
+                           "color-mode",
+                           g_variant_new_uint32 (monitor->color_mode));
+    g_variant_builder_add (&props_builder, "{sv}",
+                           "underscanning",
+                           g_variant_new_boolean (monitor->underscanning == UNDERSCANNING_ENABLED));
 
-      mode_dbus = CC_DISPLAY_MODE_DBUS (monitor->current_mode);
-      g_variant_builder_add (&builder, "(ss@*)",
-                             monitor->connector_name,
-                             mode_dbus->id,
-                             g_variant_builder_end (&props_builder));
-    }
+    mode_dbus = CC_DISPLAY_MODE_DBUS (monitor->current_mode);
+    g_variant_builder_add (&builder, "(ss@*)",
+                           monitor->connector_name,
+                           mode_dbus->id,
+                           g_variant_builder_end (&props_builder));
+  }
 
   return g_variant_builder_end (&builder);
 }
@@ -1225,7 +1178,7 @@ build_logical_monitors_parameter (CcDisplayConfigDBus *self)
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(iiduba(ssa{sv}))"));
   g_hash_table_iter_init (&iter, self->logical_monitors);
 
-  while (g_hash_table_iter_next (&iter, (void **) &logical_monitor, NULL))
+  while (g_hash_table_iter_next (&iter, (void **)&logical_monitor, NULL))
     g_variant_builder_add (&builder, "(iidub@*)",
                            logical_monitor->x,
                            logical_monitor->y,
@@ -1238,8 +1191,8 @@ build_logical_monitors_parameter (CcDisplayConfigDBus *self)
 }
 
 static GVariant *
-build_apply_parameters (CcDisplayConfigDBus *self,
-                        CcDisplayConfigMethod method)
+build_apply_parameters (CcDisplayConfigDBus   *self,
+                        CcDisplayConfigMethod  method)
 {
   GVariantBuilder props_builder;
   g_variant_builder_init (&props_builder, G_VARIANT_TYPE ("a{sv}"));
@@ -1256,11 +1209,11 @@ build_apply_parameters (CcDisplayConfigDBus *self,
 }
 
 static gboolean
-config_apply (CcDisplayConfigDBus *self,
-              CcDisplayConfigMethod method,
-              GError **error)
+config_apply (CcDisplayConfigDBus    *self,
+              CcDisplayConfigMethod   method,
+              GError                **error)
 {
-  g_autoptr(GVariant) retval = NULL;
+  g_autoptr (GVariant) retval = NULL;
 
   cc_display_config_dbus_ensure_non_offset_coords (self);
 
@@ -1278,36 +1231,32 @@ static gboolean
 cc_display_config_dbus_is_applicable (CcDisplayConfig *pself)
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (pself);
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
-  if (!config_apply (self, CC_DISPLAY_CONFIG_METHOD_VERIFY, &error))
-    {
-      g_warning ("Config not applicable: %s", error->message);
-      return FALSE;
-    }
-  else
-    {
-      return TRUE;
-    }
+  if (!config_apply (self, CC_DISPLAY_CONFIG_METHOD_VERIFY, &error)) {
+    g_warning ("Config not applicable: %s", error->message);
+    return FALSE;
+  } else {
+    return TRUE;
+  }
 }
 
 static CcDisplayMonitorDBus *
 monitor_from_spec (CcDisplayConfigDBus *self,
-                   const gchar *connector,
-                   const gchar *vendor,
-                   const gchar *product,
-                   const gchar *serial)
+                   const gchar         *connector,
+                   const gchar         *vendor,
+                   const gchar         *product,
+                   const gchar         *serial)
 {
   GList *l;
-  for (l = self->monitors; l != NULL; l = l->next)
-    {
-      CcDisplayMonitorDBus *m = l->data;
-      if (g_str_equal (m->connector_name, connector) &&
-          g_str_equal (m->vendor_name, vendor) &&
-          g_str_equal (m->product_name, product) &&
-          g_str_equal (m->product_serial, serial))
-        return m;
-    }
+  for (l = self->monitors; l != NULL; l = l->next) {
+    CcDisplayMonitorDBus *m = l->data;
+    if (g_str_equal (m->connector_name, connector) &&
+        g_str_equal (m->vendor_name, vendor) &&
+        g_str_equal (m->product_name, product) &&
+        g_str_equal (m->product_serial, serial))
+      return m;
+  }
   return NULL;
 }
 
@@ -1325,40 +1274,39 @@ cc_display_config_dbus_equal (CcDisplayConfig *pself,
   cc_display_config_dbus_ensure_non_offset_coords (self);
   cc_display_config_dbus_ensure_non_offset_coords (other);
 
-  for (l = self->monitors; l != NULL; l = l->next)
-    {
-      CcDisplayMonitorDBus *m1 = l->data;
-      CcDisplayMonitorDBus *m2 = monitor_from_spec (other,
-                                                    m1->connector_name,
-                                                    m1->vendor_name,
-                                                    m1->product_name,
-                                                    m1->product_serial);
-      if (!m2)
-        return FALSE;
+  for (l = self->monitors; l != NULL; l = l->next) {
+    CcDisplayMonitorDBus *m1 = l->data;
+    CcDisplayMonitorDBus *m2 = monitor_from_spec (other,
+                                                  m1->connector_name,
+                                                  m1->vendor_name,
+                                                  m1->product_name,
+                                                  m1->product_serial);
+    if (!m2)
+      return FALSE;
 
-      if (m1->underscanning != m2->underscanning)
-        return FALSE;
+    if (m1->underscanning != m2->underscanning)
+      return FALSE;
 
-      if (!cc_display_logical_monitor_equal (m1->logical_monitor, m2->logical_monitor))
-        return FALSE;
+    if (!cc_display_logical_monitor_equal (m1->logical_monitor, m2->logical_monitor))
+      return FALSE;
 
-      /* Modes should not be compared if both monitors have no logical monitor. */
-      if (m1->logical_monitor == NULL && m2->logical_monitor == NULL)
-        continue;
+    /* Modes should not be compared if both monitors have no logical monitor. */
+    if (m1->logical_monitor == NULL && m2->logical_monitor == NULL)
+      continue;
 
-      if (!cc_display_mode_dbus_equal (CC_DISPLAY_MODE_DBUS (m1->current_mode),
-                                       CC_DISPLAY_MODE_DBUS (m2->current_mode)))
-        return FALSE;
+    if (!cc_display_mode_dbus_equal (CC_DISPLAY_MODE_DBUS (m1->current_mode),
+                                     CC_DISPLAY_MODE_DBUS (m2->current_mode)))
+      return FALSE;
 
-      if (m1->color_mode != m2->color_mode)
-        return FALSE;
-    }
+    if (m1->color_mode != m2->color_mode)
+      return FALSE;
+  }
 
   return TRUE;
 }
 
 static void
-cc_display_config_dbus_set_primary (CcDisplayConfigDBus *self,
+cc_display_config_dbus_set_primary (CcDisplayConfigDBus  *self,
                                     CcDisplayMonitorDBus *new_primary)
 {
   if (self->primary == new_primary)
@@ -1367,11 +1315,10 @@ cc_display_config_dbus_set_primary (CcDisplayConfigDBus *self,
   if (!new_primary->logical_monitor)
     return;
 
-  if (self->primary && self->primary->logical_monitor)
-    {
-      self->primary->logical_monitor->primary = FALSE;
-      g_signal_emit_by_name (self->primary, "primary");
-    }
+  if (self->primary && self->primary->logical_monitor) {
+    self->primary->logical_monitor->primary = FALSE;
+    g_signal_emit_by_name (self->primary, "primary");
+  }
 
   self->primary = new_primary;
   self->primary->logical_monitor->primary = TRUE;
@@ -1381,7 +1328,7 @@ cc_display_config_dbus_set_primary (CcDisplayConfigDBus *self,
 }
 
 static void
-cc_display_config_dbus_unset_primary (CcDisplayConfigDBus *self,
+cc_display_config_dbus_unset_primary (CcDisplayConfigDBus  *self,
                                       CcDisplayMonitorDBus *old_primary)
 {
   GList *l;
@@ -1389,16 +1336,14 @@ cc_display_config_dbus_unset_primary (CcDisplayConfigDBus *self,
   if (self->primary != old_primary)
     return;
 
-  for (l = self->monitors; l != NULL; l = l->next)
-    {
-      CcDisplayMonitorDBus *monitor = l->data;
-      if (monitor->logical_monitor &&
-          monitor != old_primary)
-        {
-          cc_display_config_dbus_set_primary (self, monitor);
-          break;
-        }
+  for (l = self->monitors; l != NULL; l = l->next) {
+    CcDisplayMonitorDBus *monitor = l->data;
+    if (monitor->logical_monitor &&
+        monitor != old_primary) {
+      cc_display_config_dbus_set_primary (self, monitor);
+      break;
     }
+  }
 
   if (self->primary == old_primary)
     self->primary = NULL;
@@ -1420,52 +1365,46 @@ cc_display_config_dbus_is_cloning (CcDisplayConfig *pself)
 
 static void
 cc_display_config_dbus_set_cloning (CcDisplayConfig *pself,
-                                    gboolean clone)
+                                    gboolean         clone)
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (pself);
   gboolean is_cloning = cc_display_config_is_cloning (pself);
   CcDisplayLogicalMonitor *logical_monitor;
   GList *l;
 
-  if (clone && !is_cloning)
-    {
+  if (clone && !is_cloning) {
+    logical_monitor = g_object_new (CC_TYPE_DISPLAY_LOGICAL_MONITOR, NULL);
+    for (l = self->monitors; l != NULL; l = l->next) {
+      if (!cc_display_monitor_is_usable (l->data))
+        continue;
+      cc_display_monitor_dbus_set_logical_monitor (CC_DISPLAY_MONITOR_DBUS (l->data),
+                                                   logical_monitor);
+    }
+    register_logical_monitor (self, logical_monitor);
+  } else if (!clone && is_cloning) {
+    for (l = self->monitors; l != NULL; l = l->next) {
       logical_monitor = g_object_new (CC_TYPE_DISPLAY_LOGICAL_MONITOR, NULL);
-      for (l = self->monitors; l != NULL; l = l->next)
-        {
-          if (!cc_display_monitor_is_usable (l->data))
-            continue;
-          cc_display_monitor_dbus_set_logical_monitor (CC_DISPLAY_MONITOR_DBUS (l->data),
-                                                       logical_monitor);
-        }
+      cc_display_monitor_dbus_set_logical_monitor (CC_DISPLAY_MONITOR_DBUS (l->data),
+                                                   logical_monitor);
       register_logical_monitor (self, logical_monitor);
     }
-  else if (!clone && is_cloning)
-    {
-      for (l = self->monitors; l != NULL; l = l->next)
-        {
-          logical_monitor = g_object_new (CC_TYPE_DISPLAY_LOGICAL_MONITOR, NULL);
-          cc_display_monitor_dbus_set_logical_monitor (CC_DISPLAY_MONITOR_DBUS (l->data),
-                                                       logical_monitor);
-          register_logical_monitor (self, logical_monitor);
-        }
-      cc_display_config_dbus_make_linear (self);
-    }
+    cc_display_config_dbus_make_linear (self);
+  }
 }
 
 static gboolean
 mode_supports_scale (CcDisplayMode *mode,
                      double         scale)
 {
-  g_autoptr(GArray) scales = NULL;
+  g_autoptr (GArray) scales = NULL;
   int i;
 
   scales = cc_display_mode_get_supported_scales (mode);
-  for (i = 0; i < scales->len; i++)
-    {
-      if (G_APPROX_VALUE (scale, g_array_index (scales, double, i),
-                          DBL_EPSILON))
-        return TRUE;
-    }
+  for (i = 0; i < scales->len; i++) {
+    if (G_APPROX_VALUE (scale, g_array_index (scales, double, i),
+                        DBL_EPSILON))
+      return TRUE;
+  }
 
   return FALSE;
 }
@@ -1474,28 +1413,26 @@ static void
 remove_unsupported_scales (CcDisplayMode *mode,
                            GArray        *supported_scales)
 {
-  g_autoptr(GArray) mode_scales = NULL;
+  g_autoptr (GArray) mode_scales = NULL;
   int i;
 
   mode_scales = cc_display_mode_get_supported_scales (mode);
   i = 0;
-  while (i < supported_scales->len)
-    {
-      double scale;
+  while (i < supported_scales->len) {
+    double scale;
 
-      if (i == supported_scales->len)
-        break;
+    if (i == supported_scales->len)
+      break;
 
-      scale = g_array_index (supported_scales, double, i);
+    scale = g_array_index (supported_scales, double, i);
 
-      if (mode_supports_scale (mode, scale))
-        {
-          i++;
-          continue;
-        }
-
-      g_array_remove_range (supported_scales, i, 1);
+    if (mode_supports_scale (mode, scale)) {
+      i++;
+      continue;
     }
+
+    g_array_remove_range (supported_scales, i, 1);
+  }
 }
 
 static gboolean
@@ -1505,22 +1442,21 @@ monitor_has_compatible_clone_mode (CcDisplayMonitorDBus *monitor,
 {
   GList *l;
 
-  for (l = monitor->modes; l; l = l->next)
-    {
-      CcDisplayModeDBus *other_mode = l->data;
+  for (l = monitor->modes; l; l = l->next) {
+    CcDisplayModeDBus *other_mode = l->data;
 
-      if (other_mode->width != mode->width ||
-          other_mode->height != mode->height)
-        continue;
+    if (other_mode->width != mode->width ||
+        other_mode->height != mode->height)
+      continue;
 
-      if ((other_mode->flags & MODE_INTERLACED) !=
-          (mode->flags & MODE_INTERLACED))
-        continue;
+    if ((other_mode->flags & MODE_INTERLACED) !=
+        (mode->flags & MODE_INTERLACED))
+      continue;
 
-      remove_unsupported_scales (CC_DISPLAY_MODE (other_mode), supported_scales);
+    remove_unsupported_scales (CC_DISPLAY_MODE (other_mode), supported_scales);
 
-      return TRUE;
-    }
+    return TRUE;
+  }
 
   return FALSE;
 }
@@ -1532,13 +1468,12 @@ monitors_has_compatible_clone_mode (CcDisplayConfigDBus *self,
 {
   GList *l;
 
-  for (l = self->monitors; l; l = l->next)
-    {
-      CcDisplayMonitorDBus *monitor = l->data;
+  for (l = self->monitors; l; l = l->next) {
+    CcDisplayMonitorDBus *monitor = l->data;
 
-      if (!monitor_has_compatible_clone_mode (monitor, mode, supported_scales))
-        return FALSE;
-    }
+    if (!monitor_has_compatible_clone_mode (monitor, mode, supported_scales))
+      return FALSE;
+  }
 
   return TRUE;
 }
@@ -1568,41 +1503,38 @@ cc_display_config_dbus_generate_cloning_modes (CcDisplayConfig *pself)
   GList *clone_modes = NULL;
   CcDisplayModeDBus *best_mode = NULL;
 
-  for (l = self->monitors; l; l = l->next)
-    {
-      CcDisplayMonitor *monitor = l->data;
+  for (l = self->monitors; l; l = l->next) {
+    CcDisplayMonitor *monitor = l->data;
 
-      if (cc_display_monitor_is_active (monitor))
-        {
-          base_monitor = CC_DISPLAY_MONITOR_DBUS (monitor);
-          break;
-        }
+    if (cc_display_monitor_is_active (monitor)) {
+      base_monitor = CC_DISPLAY_MONITOR_DBUS (monitor);
+      break;
     }
+  }
 
   if (!base_monitor)
     return NULL;
 
-  for (l = base_monitor->modes; l; l = l->next)
-    {
-      CcDisplayModeDBus *mode = l->data;
-      CcDisplayModeDBus *virtual_mode;
-      g_autoptr (GArray) supported_scales = NULL;
+  for (l = base_monitor->modes; l; l = l->next) {
+    CcDisplayModeDBus *mode = l->data;
+    CcDisplayModeDBus *virtual_mode;
+    g_autoptr (GArray) supported_scales = NULL;
 
-      supported_scales =
-        cc_display_mode_get_supported_scales (CC_DISPLAY_MODE (mode));
+    supported_scales =
+      cc_display_mode_get_supported_scales (CC_DISPLAY_MODE (mode));
 
-      if (!monitors_has_compatible_clone_mode (self, mode, supported_scales))
-        continue;
+    if (!monitors_has_compatible_clone_mode (self, mode, supported_scales))
+      continue;
 
-      virtual_mode = cc_display_mode_dbus_new_virtual (mode->width,
-                                                       mode->height,
-                                                       mode->preferred_scale,
-                                                       supported_scales);
-      clone_modes = g_list_append (clone_modes, virtual_mode);
+    virtual_mode = cc_display_mode_dbus_new_virtual (mode->width,
+                                                     mode->height,
+                                                     mode->preferred_scale,
+                                                     supported_scales);
+    clone_modes = g_list_append (clone_modes, virtual_mode);
 
-      if (!best_mode || is_mode_better (virtual_mode, best_mode))
-        best_mode = virtual_mode;
-    }
+    if (!best_mode || is_mode_better (virtual_mode, best_mode))
+      best_mode = virtual_mode;
+  }
 
   if (best_mode)
     best_mode->flags |= MODE_PREFERRED;
@@ -1611,8 +1543,8 @@ cc_display_config_dbus_generate_cloning_modes (CcDisplayConfig *pself)
 }
 
 static gboolean
-cc_display_config_dbus_apply (CcDisplayConfig *pself,
-                              GError **error)
+cc_display_config_dbus_apply (CcDisplayConfig  *pself,
+                              GError          **error)
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (pself);
 
@@ -1660,16 +1592,15 @@ is_scale_allowed_by_active_monitors (CcDisplayConfigDBus *self,
 {
   GList *l;
 
-  for (l = self->monitors; l != NULL; l = l->next)
-    {
-      CcDisplayMonitorDBus *m = CC_DISPLAY_MONITOR_DBUS (l->data);
+  for (l = self->monitors; l != NULL; l = l->next) {
+    CcDisplayMonitorDBus *m = CC_DISPLAY_MONITOR_DBUS (l->data);
 
-      if (!cc_display_monitor_is_active (CC_DISPLAY_MONITOR (m)))
-        continue;
+    if (!cc_display_monitor_is_active (CC_DISPLAY_MONITOR (m)))
+      continue;
 
-      if (!cc_display_mode_dbus_is_supported_scale (mode, scale))
-        return FALSE;
-    }
+    if (!cc_display_mode_dbus_is_supported_scale (mode, scale))
+      return FALSE;
+  }
 
   return TRUE;
 }
@@ -1680,22 +1611,20 @@ cc_display_mode_dbus_get_supported_scales (CcDisplayMode *pself)
   CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
   CcDisplayConfig *config = CC_DISPLAY_CONFIG (self->monitor->config);
 
-  if (cc_display_config_is_cloning (config))
-    {
-      GArray *scales = g_array_copy (self->supported_scales);
-      int i;
+  if (cc_display_config_is_cloning (config)) {
+    GArray *scales = g_array_copy (self->supported_scales);
+    int i;
 
-      for (i = scales->len - 1; i >= 0; i--)
-        {
-          double scale = g_array_index (scales, double, i);
+    for (i = scales->len - 1; i >= 0; i--) {
+      double scale = g_array_index (scales, double, i);
 
-          if (!is_scale_allowed_by_active_monitors (self->monitor->config,
-                                                    pself, scale))
-            g_array_remove_index (scales, i);
-        }
-
-      return g_steal_pointer (&scales);
+      if (!is_scale_allowed_by_active_monitors (self->monitor->config,
+                                                pself, scale))
+        g_array_remove_index (scales, i);
     }
+
+    return g_steal_pointer (&scales);
+  }
 
   return g_array_ref (self->supported_scales);
 }
@@ -1705,45 +1634,40 @@ filter_out_invalid_scaled_modes (CcDisplayConfigDBus *self)
 {
   GList *l;
 
-  for (l = self->monitors; l; l = l->next)
-    {
-      CcDisplayMonitorDBus *monitor = l->data;
-      GList *ll = monitor->modes;
+  for (l = self->monitors; l; l = l->next) {
+    CcDisplayMonitorDBus *monitor = l->data;
+    GList *ll = monitor->modes;
 
-      while (ll != NULL)
-        {
-          CcDisplayModeDBus *mode = ll->data;
-          GList *current = ll;
-          double current_scale = -1;
-          int i;
+    while (ll != NULL) {
+      CcDisplayModeDBus *mode = ll->data;
+      GList *current = ll;
+      double current_scale = -1;
+      int i;
 
-          ll = ll->next;
+      ll = ll->next;
 
-          if (monitor->current_mode != CC_DISPLAY_MODE (mode) &&
-              monitor->preferred_mode != CC_DISPLAY_MODE (mode) &&
-              !is_scaled_mode_allowed (self, mode, 1.0))
-            {
-              g_clear_object (&mode);
-              monitor->modes = g_list_delete_link (monitor->modes, current);
-              continue;
-            }
+      if (monitor->current_mode != CC_DISPLAY_MODE (mode) &&
+          monitor->preferred_mode != CC_DISPLAY_MODE (mode) &&
+          !is_scaled_mode_allowed (self, mode, 1.0)) {
+        g_clear_object (&mode);
+        monitor->modes = g_list_delete_link (monitor->modes, current);
+        continue;
+      }
 
-          if (monitor->current_mode == CC_DISPLAY_MODE (mode))
-            current_scale = cc_display_monitor_dbus_get_scale (CC_DISPLAY_MONITOR (monitor));
+      if (monitor->current_mode == CC_DISPLAY_MODE (mode))
+        current_scale = cc_display_monitor_dbus_get_scale (CC_DISPLAY_MONITOR (monitor));
 
-          for (i = mode->supported_scales->len - 1; i >= 0; i--)
-            {
-              float scale = g_array_index (mode->supported_scales, double, i);
+      for (i = mode->supported_scales->len - 1; i >= 0; i--) {
+        float scale = g_array_index (mode->supported_scales, double, i);
 
-              if (!G_APPROX_VALUE (scale, current_scale, DBL_EPSILON) &&
-                  !G_APPROX_VALUE (scale, mode->preferred_scale, DBL_EPSILON) &&
-                  !is_scaled_mode_allowed (self, mode, scale))
-                {
-                  g_array_remove_index (mode->supported_scales, i);
-                }
-            }
+        if (!G_APPROX_VALUE (scale, current_scale, DBL_EPSILON) &&
+            !G_APPROX_VALUE (scale, mode->preferred_scale, DBL_EPSILON) &&
+            !is_scaled_mode_allowed (self, mode, scale)) {
+          g_array_remove_index (mode->supported_scales, i);
         }
+      }
     }
+  }
 }
 
 static void
@@ -1797,8 +1721,8 @@ cc_display_config_dbus_init (CcDisplayConfigDBus *self)
 }
 
 static void
-remove_logical_monitor (gpointer data,
-                        GObject *object)
+remove_logical_monitor (gpointer  data,
+                        GObject  *object)
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (data);
 
@@ -1806,7 +1730,7 @@ remove_logical_monitor (gpointer data,
 }
 
 static void
-register_logical_monitor (CcDisplayConfigDBus *self,
+register_logical_monitor (CcDisplayConfigDBus     *self,
                           CcDisplayLogicalMonitor *logical_monitor)
 {
   g_hash_table_add (self->logical_monitors, logical_monitor);
@@ -1821,107 +1745,96 @@ apply_global_scale_requirement (CcDisplayConfigDBus *self,
   GList *l;
   double scale = cc_display_monitor_get_scale (monitor);
 
-  for (l = self->monitors; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *m = l->data;
-      if (m != monitor)
-        cc_display_monitor_set_scale (m, scale);
-    }
+  for (l = self->monitors; l != NULL; l = l->next) {
+    CcDisplayMonitor *m = l->data;
+    if (m != monitor)
+      cc_display_monitor_set_scale (m, scale);
+  }
 }
 
 static void
 construct_monitors (CcDisplayConfigDBus *self,
-                    GVariantIter *monitors,
-                    GVariantIter *logical_monitors)
+                    GVariantIter        *monitors,
+                    GVariantIter        *logical_monitors)
 {
-  while (TRUE)
-    {
-      CcDisplayMonitorDBus *monitor;
-      g_autoptr(GVariant) variant = NULL;
+  while (TRUE) {
+    CcDisplayMonitorDBus *monitor;
+    g_autoptr (GVariant) variant = NULL;
 
-      if (!g_variant_iter_next (monitors, "@"MONITOR_FORMAT, &variant))
-        break;
+    if (!g_variant_iter_next (monitors, "@"MONITOR_FORMAT, &variant))
+      break;
 
-      monitor = cc_display_monitor_dbus_new (variant, self);
-      self->monitors = g_list_prepend (self->monitors, monitor);
+    monitor = cc_display_monitor_dbus_new (variant, self);
+    self->monitors = g_list_prepend (self->monitors, monitor);
 
-      if (self->global_scale_required)
-        g_signal_connect_object (monitor, "scale",
-                                 G_CALLBACK (apply_global_scale_requirement),
-                                 self, G_CONNECT_SWAPPED);
-    }
+    if (self->global_scale_required)
+      g_signal_connect_object (monitor, "scale",
+                               G_CALLBACK (apply_global_scale_requirement),
+                               self, G_CONNECT_SWAPPED);
+  }
 
   self->monitors = g_list_reverse (self->monitors);
 
-  while (TRUE)
-    {
-      g_autoptr(GVariant) variant = NULL;
-      CcDisplayLogicalMonitor *logical_monitor;
-      g_autoptr(GVariantIter) monitor_specs = NULL;
-      const gchar *s1, *s2, *s3, *s4;
-      gboolean primary;
+  while (TRUE) {
+    g_autoptr (GVariant) variant = NULL;
+    CcDisplayLogicalMonitor *logical_monitor;
+    g_autoptr (GVariantIter) monitor_specs = NULL;
+    const gchar *s1, *s2, *s3, *s4;
+    gboolean primary;
 
-      if (!g_variant_iter_next (logical_monitors, "@"LOGICAL_MONITOR_FORMAT, &variant))
-        break;
+    if (!g_variant_iter_next (logical_monitors, "@"LOGICAL_MONITOR_FORMAT, &variant))
+      break;
 
-      logical_monitor = g_object_new (CC_TYPE_DISPLAY_LOGICAL_MONITOR, NULL);
-      g_variant_get (variant, LOGICAL_MONITOR_FORMAT,
-                     &logical_monitor->x,
-                     &logical_monitor->y,
-                     &logical_monitor->scale,
-                     &logical_monitor->rotation,
-                     &primary,
-                     &monitor_specs,
-                     NULL);
+    logical_monitor = g_object_new (CC_TYPE_DISPLAY_LOGICAL_MONITOR, NULL);
+    g_variant_get (variant, LOGICAL_MONITOR_FORMAT,
+                   &logical_monitor->x,
+                   &logical_monitor->y,
+                   &logical_monitor->scale,
+                   &logical_monitor->rotation,
+                   &primary,
+                   &monitor_specs,
+                   NULL);
 
-      while (g_variant_iter_next (monitor_specs, "(&s&s&s&s)", &s1, &s2, &s3, &s4))
-        {
-          CcDisplayMonitorDBus *m = monitor_from_spec (self, s1, s2, s3, s4);
-          if (!m)
-            {
-              g_warning ("Couldn't find monitor given spec: %s, %s, %s, %s",
-                         s1, s2, s3, s4);
-              continue;
-            }
+    while (g_variant_iter_next (monitor_specs, "(&s&s&s&s)", &s1, &s2, &s3, &s4)) {
+      CcDisplayMonitorDBus *m = monitor_from_spec (self, s1, s2, s3, s4);
+      if (!m) {
+        g_warning ("Couldn't find monitor given spec: %s, %s, %s, %s",
+                   s1, s2, s3, s4);
+        continue;
+      }
 
-          cc_display_monitor_dbus_set_logical_monitor (m, logical_monitor);
-        }
-
-      if (g_hash_table_size (logical_monitor->monitors) > 0)
-        {
-          if (primary)
-            {
-              CcDisplayMonitorDBus *m = NULL;
-              GHashTableIter iter;
-              g_hash_table_iter_init (&iter, logical_monitor->monitors);
-              g_hash_table_iter_next (&iter, (void **) &m, NULL);
-
-              cc_display_config_dbus_set_primary (self, m);
-            }
-        }
-      else
-        {
-          g_warning ("Got an empty logical monitor, ignoring");
-        }
-
-      register_logical_monitor (self, logical_monitor);
+      cc_display_monitor_dbus_set_logical_monitor (m, logical_monitor);
     }
+
+    if (g_hash_table_size (logical_monitor->monitors) > 0) {
+      if (primary) {
+        CcDisplayMonitorDBus *m = NULL;
+        GHashTableIter iter;
+        g_hash_table_iter_init (&iter, logical_monitor->monitors);
+        g_hash_table_iter_next (&iter, (void **)&m, NULL);
+
+        cc_display_config_dbus_set_primary (self, m);
+      }
+    } else {
+      g_warning ("Got an empty logical monitor, ignoring");
+    }
+
+    register_logical_monitor (self, logical_monitor);
+  }
 }
 
 static void
 update_panel_orientation_managed (CcDisplayConfigDBus *self)
 {
-  g_autoptr(GVariant) v = NULL;
+  g_autoptr (GVariant) v = NULL;
   gboolean panel_orientation_managed = FALSE;
 
-  if (self->proxy != NULL)
-    {
-      v = g_dbus_proxy_get_cached_property (self->proxy, "PanelOrientationManaged");
-      if (v)
-        {
-          panel_orientation_managed = g_variant_get_boolean (v);
-        }
+  if (self->proxy != NULL) {
+    v = g_dbus_proxy_get_cached_property (self->proxy, "PanelOrientationManaged");
+    if (v) {
+      panel_orientation_managed = g_variant_get_boolean (v);
     }
+  }
 
   if (panel_orientation_managed == self->panel_orientation_managed)
     return;
@@ -1947,10 +1860,10 @@ static void
 cc_display_config_dbus_constructed (GObject *object)
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (object);
-  g_autoptr(GVariantIter) monitors = NULL;
-  g_autoptr(GVariantIter) logical_monitors = NULL;
-  g_autoptr(GVariantIter) props = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GVariantIter) monitors = NULL;
+  g_autoptr (GVariantIter) logical_monitors = NULL;
+  g_autoptr (GVariantIter) props = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_variant_get (self->state,
                  CURRENT_STATE_FORMAT,
@@ -1959,35 +1872,27 @@ cc_display_config_dbus_constructed (GObject *object)
                  &logical_monitors,
                  &props);
 
-  while (TRUE)
-    {
-      const char *s;
-      g_autoptr(GVariant) v = NULL;
+  while (TRUE) {
+    const char *s;
+    g_autoptr (GVariant) v = NULL;
 
-      if (!g_variant_iter_next (props, "{&sv}", &s, &v))
-	break;
+    if (!g_variant_iter_next (props, "{&sv}", &s, &v))
+      break;
 
-      if (g_str_equal (s, "supports-mirroring"))
-        {
-          g_variant_get (v, "b", &self->supports_mirroring);
-        }
-      else if (g_str_equal (s, "supports-changing-layout-mode"))
-        {
-          g_variant_get (v, "b", &self->supports_changing_layout_mode);
-        }
-      else if (g_str_equal (s, "global-scale-required"))
-        {
-          g_variant_get (v, "b", &self->global_scale_required);
-        }
-      else if (g_str_equal (s, "layout-mode"))
-        {
-          guint32 u = 0;
-          g_variant_get (v, "u", &u);
-          if (u >= CC_DISPLAY_LAYOUT_MODE_LOGICAL &&
-              u <= CC_DISPLAY_LAYOUT_MODE_PHYSICAL)
-            self->layout_mode = u;
-        }
+    if (g_str_equal (s, "supports-mirroring")) {
+      g_variant_get (v, "b", &self->supports_mirroring);
+    } else if (g_str_equal (s, "supports-changing-layout-mode")) {
+      g_variant_get (v, "b", &self->supports_changing_layout_mode);
+    } else if (g_str_equal (s, "global-scale-required")) {
+      g_variant_get (v, "b", &self->global_scale_required);
+    } else if (g_str_equal (s, "layout-mode")) {
+      guint32 u = 0;
+      g_variant_get (v, "u", &u);
+      if (u >= CC_DISPLAY_LAYOUT_MODE_LOGICAL &&
+          u <= CC_DISPLAY_LAYOUT_MODE_PHYSICAL)
+        self->layout_mode = u;
     }
+  }
 
   construct_monitors (self, monitors, logical_monitors);
   filter_out_invalid_scaled_modes (self);
@@ -2018,8 +1923,7 @@ cc_display_config_dbus_set_property (GObject      *object,
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_STATE:
       self->state = g_value_dup_variant (value);
       break;
@@ -2028,7 +1932,7 @@ cc_display_config_dbus_set_property (GObject      *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -2039,8 +1943,7 @@ cc_display_config_dbus_get_property (GObject    *object,
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_STATE:
       g_value_set_variant (value, self->state);
       break;
@@ -2049,7 +1952,7 @@ cc_display_config_dbus_get_property (GObject    *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -2057,16 +1960,15 @@ cc_display_config_dbus_dispose (GObject *object)
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (object);
 
-  if (self->logical_monitors)
-    {
-      GHashTableIter iter;
-      gpointer monitor;
+  if (self->logical_monitors) {
+    GHashTableIter iter;
+    gpointer monitor;
 
-      g_hash_table_iter_init (&iter, self->logical_monitors);
+    g_hash_table_iter_init (&iter, self->logical_monitors);
 
-      while (g_hash_table_iter_next (&iter, &monitor, NULL))
-        g_object_weak_unref (G_OBJECT (monitor), remove_logical_monitor, self);
-    }
+    while (g_hash_table_iter_next (&iter, &monitor, NULL))
+      g_object_weak_unref (G_OBJECT (monitor), remove_logical_monitor, self);
+  }
 
   G_OBJECT_CLASS (cc_display_config_dbus_parent_class)->dispose (object);
 }
@@ -2125,15 +2027,16 @@ cc_display_config_dbus_class_init (CcDisplayConfigDBusClass *klass)
   pspec = g_param_spec_object ("connection",
                                "GDBusConnection",
                                "GDBusConnection",
-                                G_TYPE_DBUS_CONNECTION,
-                                G_PARAM_READWRITE |
-                                G_PARAM_STATIC_STRINGS |
-                                G_PARAM_CONSTRUCT_ONLY);
+                               G_TYPE_DBUS_CONNECTION,
+                               G_PARAM_READWRITE |
+                               G_PARAM_STATIC_STRINGS |
+                               G_PARAM_CONSTRUCT_ONLY);
   g_object_class_install_property (gobject_class, PROP_CONNECTION, pspec);
 }
 
 static gint
-sort_x_axis (gconstpointer a, gconstpointer b)
+sort_x_axis (gconstpointer a,
+             gconstpointer b)
 {
   const CcDisplayLogicalMonitor *ma = a;
   const CcDisplayLogicalMonitor *mb = b;
@@ -2141,7 +2044,8 @@ sort_x_axis (gconstpointer a, gconstpointer b)
 }
 
 static gint
-sort_y_axis (gconstpointer a, gconstpointer b)
+sort_y_axis (gconstpointer a,
+             gconstpointer b)
 {
   const CcDisplayLogicalMonitor *ma = a;
   const CcDisplayLogicalMonitor *mb = b;
@@ -2149,7 +2053,8 @@ sort_y_axis (gconstpointer a, gconstpointer b)
 }
 
 static void
-add_x_delta (gpointer d1, gpointer d2)
+add_x_delta (gpointer d1,
+             gpointer d2)
 {
   CcDisplayLogicalMonitor *m = d1;
   int delta = GPOINTER_TO_INT (d2);
@@ -2159,8 +2064,7 @@ add_x_delta (gpointer d1, gpointer d2)
 static gboolean
 logical_monitor_is_rotated (CcDisplayLogicalMonitor *lm)
 {
-  switch (lm->rotation)
-    {
+  switch (lm->rotation) {
     case CC_DISPLAY_ROTATION_90:
     case CC_DISPLAY_ROTATION_270:
     case CC_DISPLAY_ROTATION_90_FLIPPED:
@@ -2168,7 +2072,7 @@ logical_monitor_is_rotated (CcDisplayLogicalMonitor *lm)
       return TRUE;
     default:
       return FALSE;
-    }
+  }
 }
 
 static int
@@ -2180,7 +2084,7 @@ logical_monitor_width (CcDisplayLogicalMonitor *lm)
   int width;
 
   g_hash_table_iter_init (&iter, lm->monitors);
-  g_hash_table_iter_next (&iter, (void **) &monitor, NULL);
+  g_hash_table_iter_next (&iter, (void **)&monitor, NULL);
   mode = CC_DISPLAY_MODE_DBUS (monitor->current_mode);
   if (logical_monitor_is_rotated (lm))
     width = mode ? mode->height : 0;
@@ -2194,7 +2098,8 @@ logical_monitor_width (CcDisplayLogicalMonitor *lm)
 }
 
 static void
-add_y_delta (gpointer d1, gpointer d2)
+add_y_delta (gpointer d1,
+             gpointer d2)
 {
   CcDisplayLogicalMonitor *m = d1;
   int delta = GPOINTER_TO_INT (d2);
@@ -2217,29 +2122,28 @@ cc_display_config_dbus_ensure_non_offset_coords (CcDisplayConfigDBus *self)
 
   m = x_axis->data;
   if (m->x != 0)
-    g_list_foreach (x_axis, add_x_delta, GINT_TO_POINTER (- m->x));
+    g_list_foreach (x_axis, add_x_delta, GINT_TO_POINTER (-m->x));
 
   m = y_axis->data;
   if (m->y != 0)
-    g_list_foreach (y_axis, add_y_delta, GINT_TO_POINTER (- m->y));
+    g_list_foreach (y_axis, add_y_delta, GINT_TO_POINTER (-m->y));
 
   g_list_free (x_axis);
   g_list_free (y_axis);
 }
 
 static void
-cc_display_config_dbus_append_right (CcDisplayConfigDBus *self,
+cc_display_config_dbus_append_right (CcDisplayConfigDBus     *self,
                                      CcDisplayLogicalMonitor *monitor)
 {
   GList *x_axis;
   CcDisplayLogicalMonitor *last;
 
-  if (g_hash_table_size (self->logical_monitors) == 0)
-    {
-      monitor->x = 0;
-      monitor->y = 0;
-      return;
-    }
+  if (g_hash_table_size (self->logical_monitors) == 0) {
+    monitor->x = 0;
+    monitor->y = 0;
+    return;
+  }
 
   x_axis = g_hash_table_get_keys (self->logical_monitors);
   x_axis = g_list_sort (x_axis, sort_x_axis);
@@ -2257,30 +2161,26 @@ cc_display_config_dbus_make_linear (CcDisplayConfigDBus *self)
   GList *logical_monitors, *l;
   int x;
 
-  if (self->primary && self->primary->logical_monitor)
-    {
-      primary = self->primary->logical_monitor;
-      primary->x = primary->y = 0;
-      x = logical_monitor_width (primary);
-    }
-  else
-    {
-      primary = NULL;
-      x = 0;
-    }
+  if (self->primary && self->primary->logical_monitor) {
+    primary = self->primary->logical_monitor;
+    primary->x = primary->y = 0;
+    x = logical_monitor_width (primary);
+  } else {
+    primary = NULL;
+    x = 0;
+  }
 
   logical_monitors = g_hash_table_get_keys (self->logical_monitors);
-  for (l = logical_monitors; l != NULL; l = l->next)
-    {
-      CcDisplayLogicalMonitor *m = l->data;
+  for (l = logical_monitors; l != NULL; l = l->next) {
+    CcDisplayLogicalMonitor *m = l->data;
 
-      if (m == primary)
-        continue;
+    if (m == primary)
+      continue;
 
-      m->x = x;
-      m->y = 0;
-      x += logical_monitor_width (m);
-    }
+    m->x = x;
+    m->y = 0;
+    x += logical_monitor_width (m);
+  }
 
   g_list_free (logical_monitors);
 }

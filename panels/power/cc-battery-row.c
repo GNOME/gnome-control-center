@@ -28,17 +28,17 @@
 struct _CcBatteryRow {
   GtkListBoxRow parent_instance;
 
-  GtkBox       *battery_box;
-  GtkLabel     *details_label;
-  GtkImage     *icon;
-  GtkLevelBar  *levelbar;
-  GtkLabel     *name_label;
-  GtkLabel     *percentage_label;
-  GtkBox       *primary_bottom_box;
-  GtkLabel     *primary_percentage_label;
+  GtkBox *battery_box;
+  GtkLabel *details_label;
+  GtkImage *icon;
+  GtkLevelBar *levelbar;
+  GtkLabel *name_label;
+  GtkLabel *percentage_label;
+  GtkBox *primary_bottom_box;
+  GtkLabel *primary_percentage_label;
 
-  UpDeviceKind  kind;
-  gboolean      primary;
+  UpDeviceKind kind;
+  gboolean primary;
 };
 
 G_DEFINE_TYPE (CcBatteryRow, cc_battery_row, GTK_TYPE_LIST_BOX_ROW)
@@ -69,29 +69,29 @@ cc_battery_row_init (CcBatteryRow *self)
 static gchar *
 get_timestring (guint64 time_secs)
 {
-  gchar* timestring = NULL;
-  gint  hours;
-  gint  minutes;
+  gchar *timestring = NULL;
+  gint hours;
+  gint minutes;
 
   /* Add 0.5 to do rounding */
-  minutes = (int) ( ( time_secs / 60.0 ) + 0.5 );
+  minutes = (int)((time_secs / 60.0) + 0.5);
 
   if (minutes == 0)
     return g_strdup (_("Unknown time"));
 
   if (minutes < 60)
     return timestring = g_strdup_printf (ngettext ("%i minute",
-                                         "%i minutes",
-                                         minutes), minutes);
+                                                   "%i minutes",
+                                                   minutes), minutes);
 
   hours = minutes / 60;
   minutes = minutes % 60;
 
   if (minutes == 0)
     return timestring = g_strdup_printf (ngettext (
-                                         "%i hour",
-                                         "%i hours",
-                                         hours), hours);
+                                           "%i hour",
+                                           "%i hours",
+                                           hours), hours);
 
   /* TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
    * Swap order with "%2$s %2$i %1$s %1$i if needed */
@@ -101,82 +101,76 @@ get_timestring (guint64 time_secs)
 }
 
 static gchar *
-get_details_string (gdouble percentage, UpDeviceState state, guint64 time)
+get_details_string (gdouble       percentage,
+                    UpDeviceState state,
+                    guint64       time)
 {
   g_autofree gchar *details = NULL;
 
-  if (time > 0)
-    {
-      g_autofree gchar *time_string = NULL;
+  if (time > 0) {
+    g_autofree gchar *time_string = NULL;
 
-      time_string = get_timestring (time);
-      switch (state)
-        {
-          case UP_DEVICE_STATE_CHARGING:
-            /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
-            details = g_strdup_printf (_("%s until fully charged"), time_string);
-            break;
-          case UP_DEVICE_STATE_DISCHARGING:
-          case UP_DEVICE_STATE_PENDING_DISCHARGE:
-            if (percentage < 20)
-              {
-                /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
-                details = g_strdup_printf (_("Caution: %s remaining"), time_string);
-              }
-            else
-              {
-                /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
-                details = g_strdup_printf (_("%s remaining"), time_string);
-              }
-            break;
-          case UP_DEVICE_STATE_FULLY_CHARGED:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Fully charged"));
-            break;
-          case UP_DEVICE_STATE_PENDING_CHARGE:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Not charging"));
-            break;
-          case UP_DEVICE_STATE_EMPTY:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Empty"));
-            break;
-          default:
-            details = g_strdup_printf ("error: %s", up_device_state_to_string (state));
-            break;
+    time_string = get_timestring (time);
+    switch (state) {
+      case UP_DEVICE_STATE_CHARGING:
+        /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
+        details = g_strdup_printf (_("%s until fully charged"), time_string);
+        break;
+      case UP_DEVICE_STATE_DISCHARGING:
+      case UP_DEVICE_STATE_PENDING_DISCHARGE:
+        if (percentage < 20) {
+          /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
+          details = g_strdup_printf (_("Caution: %s remaining"), time_string);
+        } else {
+          /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
+          details = g_strdup_printf (_("%s remaining"), time_string);
         }
+        break;
+      case UP_DEVICE_STATE_FULLY_CHARGED:
+        /* TRANSLATORS: primary battery */
+        details = g_strdup (_("Fully charged"));
+        break;
+      case UP_DEVICE_STATE_PENDING_CHARGE:
+        /* TRANSLATORS: primary battery */
+        details = g_strdup (_("Not charging"));
+        break;
+      case UP_DEVICE_STATE_EMPTY:
+        /* TRANSLATORS: primary battery */
+        details = g_strdup (_("Empty"));
+        break;
+      default:
+        details = g_strdup_printf ("error: %s", up_device_state_to_string (state));
+        break;
     }
-  else
-    {
-      switch (state)
-        {
-          case UP_DEVICE_STATE_CHARGING:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Charging"));
-            break;
-          case UP_DEVICE_STATE_DISCHARGING:
-          case UP_DEVICE_STATE_PENDING_DISCHARGE:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Discharging"));
-            break;
-          case UP_DEVICE_STATE_FULLY_CHARGED:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Fully charged"));
-            break;
-          case UP_DEVICE_STATE_PENDING_CHARGE:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Not charging"));
-            break;
-          case UP_DEVICE_STATE_EMPTY:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Empty"));
-            break;
-          default:
-            details = g_strdup_printf ("error: %s",
-                                       up_device_state_to_string (state));
-            break;
-        }
+  } else {
+    switch (state) {
+      case UP_DEVICE_STATE_CHARGING:
+        /* TRANSLATORS: primary battery */
+        details = g_strdup (_("Charging"));
+        break;
+      case UP_DEVICE_STATE_DISCHARGING:
+      case UP_DEVICE_STATE_PENDING_DISCHARGE:
+        /* TRANSLATORS: primary battery */
+        details = g_strdup (_("Discharging"));
+        break;
+      case UP_DEVICE_STATE_FULLY_CHARGED:
+        /* TRANSLATORS: primary battery */
+        details = g_strdup (_("Fully charged"));
+        break;
+      case UP_DEVICE_STATE_PENDING_CHARGE:
+        /* TRANSLATORS: primary battery */
+        details = g_strdup (_("Not charging"));
+        break;
+      case UP_DEVICE_STATE_EMPTY:
+        /* TRANSLATORS: primary battery */
+        details = g_strdup (_("Empty"));
+        break;
+      default:
+        details = g_strdup_printf ("error: %s",
+                                   up_device_state_to_string (state));
+        break;
     }
+  }
 
   return g_steal_pointer (&details);
 }
@@ -184,44 +178,43 @@ get_details_string (gdouble percentage, UpDeviceState state, guint64 time)
 static const char *
 kind_to_description (UpDeviceKind kind)
 {
-  switch (kind)
-    {
-      case UP_DEVICE_KIND_MOUSE:
-        /* TRANSLATORS: secondary battery */
-        return N_("Wireless mouse");
-      case UP_DEVICE_KIND_KEYBOARD:
-        /* TRANSLATORS: secondary battery */
-        return N_("Wireless keyboard");
-      case UP_DEVICE_KIND_UPS:
-        /* TRANSLATORS: secondary battery */
-        return N_("Uninterruptible power supply");
-      case UP_DEVICE_KIND_PDA:
-        /* TRANSLATORS: secondary battery */
-        return N_("Personal digital assistant");
-      case UP_DEVICE_KIND_PHONE:
-        /* TRANSLATORS: secondary battery */
-        return N_("Cellphone");
-      case UP_DEVICE_KIND_MEDIA_PLAYER:
-        /* TRANSLATORS: secondary battery */
-        return N_("Media player");
-      case UP_DEVICE_KIND_TABLET:
-        /* TRANSLATORS: secondary battery */
-        return N_("Tablet");
-      case UP_DEVICE_KIND_COMPUTER:
-        /* TRANSLATORS: secondary battery */
-        return N_("Computer");
-      case UP_DEVICE_KIND_GAMING_INPUT:
-        /* TRANSLATORS: secondary battery */
-        return N_("Gaming input device");
-      default:
-        /* TRANSLATORS: secondary battery, misc */
-        return N_("Battery");
-    }
+  switch (kind) {
+    case UP_DEVICE_KIND_MOUSE:
+      /* TRANSLATORS: secondary battery */
+      return N_("Wireless mouse");
+    case UP_DEVICE_KIND_KEYBOARD:
+      /* TRANSLATORS: secondary battery */
+      return N_("Wireless keyboard");
+    case UP_DEVICE_KIND_UPS:
+      /* TRANSLATORS: secondary battery */
+      return N_("Uninterruptible power supply");
+    case UP_DEVICE_KIND_PDA:
+      /* TRANSLATORS: secondary battery */
+      return N_("Personal digital assistant");
+    case UP_DEVICE_KIND_PHONE:
+      /* TRANSLATORS: secondary battery */
+      return N_("Cellphone");
+    case UP_DEVICE_KIND_MEDIA_PLAYER:
+      /* TRANSLATORS: secondary battery */
+      return N_("Media player");
+    case UP_DEVICE_KIND_TABLET:
+      /* TRANSLATORS: secondary battery */
+      return N_("Tablet");
+    case UP_DEVICE_KIND_COMPUTER:
+      /* TRANSLATORS: secondary battery */
+      return N_("Computer");
+    case UP_DEVICE_KIND_GAMING_INPUT:
+      /* TRANSLATORS: secondary battery */
+      return N_("Gaming input device");
+    default:
+      /* TRANSLATORS: secondary battery, misc */
+      return N_("Battery");
+  }
 
   g_assert_not_reached ();
 }
 
-CcBatteryRow*
+CcBatteryRow *
 cc_battery_row_new (UpDevice *device,
                     gboolean  primary)
 {
@@ -260,31 +253,25 @@ cc_battery_row_new (UpDevice *device,
   is_kind_battery = (kind == UP_DEVICE_KIND_BATTERY || kind == UP_DEVICE_KIND_UPS);
 
   /* Name label */
-  if (is_kind_battery)
-    {
-      if (g_object_get_data (G_OBJECT (device), "is-main-battery") != NULL)
-        name = C_("Battery name", "Main");
-      else
-        name = C_("Battery name", "Extra");
-    }
-  else if (name == NULL || name[0] == '\0')
-    {
-      name = _(kind_to_description (kind));
-    }
+  if (is_kind_battery) {
+    if (g_object_get_data (G_OBJECT (device), "is-main-battery") != NULL)
+      name = C_("Battery name", "Main");
+    else
+      name = C_("Battery name", "Extra");
+  } else if (name == NULL || name[0] == '\0') {
+    name = _(kind_to_description (kind));
+  }
   gtk_label_set_text (self->name_label, name);
 
   /* Icon */
-  if (is_kind_battery && icon_name != NULL && icon_name[0] != '\0')
-    {
-      gtk_image_set_from_icon_name (self->icon, icon_name);
-      gtk_widget_set_visible (GTK_WIDGET (self->icon), TRUE);
-    }
-  else
+  if (is_kind_battery && icon_name != NULL && icon_name[0] != '\0') {
+    gtk_image_set_from_icon_name (self->icon, icon_name);
+    gtk_widget_set_visible (GTK_WIDGET (self->icon), TRUE);
+  } else
     gtk_widget_set_visible (GTK_WIDGET (self->icon), FALSE);
 
   /* Percentage label */
-  if (battery_level == UP_DEVICE_LEVEL_NONE)
-  {
+  if (battery_level == UP_DEVICE_LEVEL_NONE) {
     /* TRANSLATORS: This is the battery charge level percentage (e.g. 50%). This could be localized to account for local Percent sign formatting guidelines. See https://en.wikipedia.org/wiki/Percent_sign#Correct_style */
     s = g_strdup_printf (_("%d %%"), (int)percentage);
     gtk_label_set_text (self->percentage_label, s);

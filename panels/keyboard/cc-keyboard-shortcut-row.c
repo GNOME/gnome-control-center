@@ -23,16 +23,15 @@
 #include "cc-keyboard-shortcut-row.h"
 #include "keyboard-shortcuts.h"
 
-struct _CcKeyboardShortcutRow
-{
-  AdwActionRow              parent_instance;
+struct _CcKeyboardShortcutRow {
+  AdwActionRow parent_instance;
 
-  GtkLabel                 *accelerator_label;
-  GtkButton                *reset_button;
-  GtkRevealer              *reset_revealer;
+  GtkLabel *accelerator_label;
+  GtkButton *reset_button;
+  GtkRevealer *reset_revealer;
 
-  CcKeyboardItem           *item;
-  CcKeyboardManager        *manager;
+  CcKeyboardItem *item;
+  CcKeyboardManager *manager;
 };
 
 G_DEFINE_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, ADW_TYPE_ACTION_ROW)
@@ -79,7 +78,7 @@ transform_binding_to_accel (GBinding     *binding,
                             GValue       *to_value,
                             gpointer      user_data)
 {
-  g_autoptr(CcKeyboardItem) item = NULL;
+  g_autoptr (CcKeyboardItem) item = NULL;
   CcKeyCombo combo;
   gchar *accelerator;
 
@@ -93,9 +92,9 @@ transform_binding_to_accel (GBinding     *binding,
 }
 
 CcKeyboardShortcutRow *
-cc_keyboard_shortcut_row_new (CcKeyboardItem           *item,
-                              CcKeyboardManager        *manager,
-                              GtkSizeGroup             *size_group)
+cc_keyboard_shortcut_row_new (CcKeyboardItem    *item,
+                              CcKeyboardManager *manager,
+                              GtkSizeGroup      *size_group)
 {
   CcKeyboardShortcutRow *self;
 
@@ -122,8 +121,8 @@ cc_keyboard_shortcut_row_new (CcKeyboardItem           *item,
                            self, G_CONNECT_SWAPPED);
   cc_kbd_shortcut_is_default_changed_cb (self);
 
-  gtk_size_group_add_widget(size_group,
-                            GTK_WIDGET (self->accelerator_label));
+  gtk_size_group_add_widget (size_group,
+                             GTK_WIDGET (self->accelerator_label));
 
   return self;
 }

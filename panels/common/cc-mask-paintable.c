@@ -31,20 +31,19 @@
 #include "cc-mask-paintable.h"
 #include "cc-texture-utils.h"
 
-struct _CcMaskPaintable
-{
-  GObject       parent_instance;
+struct _CcMaskPaintable {
+  GObject parent_instance;
 
   GdkPaintable *paintable;
-  GdkRGBA       rgba;
-  GskMaskMode   mask_mode;
+  GdkRGBA rgba;
+  GskMaskMode mask_mode;
 
-  gboolean      follow_accent;
-  gboolean      updating_accent;
+  gboolean follow_accent;
+  gboolean updating_accent;
 
-  gboolean      reloading_resource;
-  char         *resource_path;
-  GtkWidget    *parent_widget;
+  gboolean reloading_resource;
+  char *resource_path;
+  GtkWidget *parent_widget;
 };
 
 static void cc_mask_paintable_iface_init (GdkPaintableInterface *iface);
@@ -52,8 +51,7 @@ static void cc_mask_paintable_iface_init (GdkPaintableInterface *iface);
 G_DEFINE_FINAL_TYPE_WITH_CODE (CcMaskPaintable, cc_mask_paintable, G_TYPE_OBJECT,
                                G_IMPLEMENT_INTERFACE (GDK_TYPE_PAINTABLE, cc_mask_paintable_iface_init))
 
-enum
-{
+enum {
   PROP_0,
   PROP_PAINTABLE,
   PROP_RGBA,
@@ -110,11 +108,10 @@ on_parent_widget_root_cb (CcMaskPaintable *self)
 static void
 clear_parent_widget (CcMaskPaintable *self)
 {
-  if (self->parent_widget)
-    {
-      g_signal_handlers_disconnect_by_func (self->parent_widget, on_parent_widget_root_cb, self);
-      g_signal_handlers_disconnect_by_func (self->parent_widget, reload_scalable_resource, self);
-    }
+  if (self->parent_widget) {
+    g_signal_handlers_disconnect_by_func (self->parent_widget, on_parent_widget_root_cb, self);
+    g_signal_handlers_disconnect_by_func (self->parent_widget, reload_scalable_resource, self);
+  }
 
   g_clear_weak_pointer (&self->parent_widget);
 }
@@ -126,15 +123,14 @@ cc_mask_paintable_dispose (GObject *object)
 
   clear_parent_widget (self);
 
-  if (self->paintable)
-    {
-      g_signal_handlers_disconnect_by_func (self->paintable,
-                                            gdk_paintable_invalidate_size,
-                                            self);
-      g_signal_handlers_disconnect_by_func (self->paintable,
-                                            gdk_paintable_invalidate_contents,
-                                            self);
-    }
+  if (self->paintable) {
+    g_signal_handlers_disconnect_by_func (self->paintable,
+                                          gdk_paintable_invalidate_size,
+                                          self);
+    g_signal_handlers_disconnect_by_func (self->paintable,
+                                          gdk_paintable_invalidate_contents,
+                                          self);
+  }
 
   g_clear_object (&self->paintable);
 
@@ -159,8 +155,7 @@ cc_mask_paintable_get_property (GObject    *object,
 {
   CcMaskPaintable *self = CC_MASK_PAINTABLE (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_PAINTABLE:
       g_value_set_object (value, cc_mask_paintable_get_paintable (self));
       break;
@@ -172,7 +167,7 @@ cc_mask_paintable_get_property (GObject    *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -183,8 +178,7 @@ cc_mask_paintable_set_property (GObject      *object,
 {
   CcMaskPaintable *self = CC_MASK_PAINTABLE (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_PAINTABLE:
       cc_mask_paintable_set_paintable (self, g_value_get_object (value));
       break;
@@ -196,7 +190,7 @@ cc_mask_paintable_set_property (GObject      *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -330,25 +324,23 @@ cc_mask_paintable_set_paintable (CcMaskPaintable *self,
   if (!self->reloading_resource)
     clear_parent_widget (self);
 
-  if (self->paintable)
-    {
-      g_signal_handlers_disconnect_by_func (self->paintable,
-                                            gdk_paintable_invalidate_size,
-                                            self);
-      g_signal_handlers_disconnect_by_func (self->paintable,
-                                            gdk_paintable_invalidate_contents,
-                                            self);
-    }
+  if (self->paintable) {
+    g_signal_handlers_disconnect_by_func (self->paintable,
+                                          gdk_paintable_invalidate_size,
+                                          self);
+    g_signal_handlers_disconnect_by_func (self->paintable,
+                                          gdk_paintable_invalidate_contents,
+                                          self);
+  }
 
   g_set_object (&self->paintable, paintable);
 
-  if (self->paintable)
-    {
-      g_signal_connect_swapped (self->paintable, "invalidate-size",
-                                G_CALLBACK (gdk_paintable_invalidate_size), self);
-      g_signal_connect_swapped (self->paintable, "invalidate-contents",
-                                G_CALLBACK (gdk_paintable_invalidate_contents), self);
-    }
+  if (self->paintable) {
+    g_signal_connect_swapped (self->paintable, "invalidate-size",
+                              G_CALLBACK (gdk_paintable_invalidate_size), self);
+    g_signal_connect_swapped (self->paintable, "invalidate-contents",
+                              G_CALLBACK (gdk_paintable_invalidate_contents), self);
+  }
 
   gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
   gdk_paintable_invalidate_contents (GDK_PAINTABLE (self));
@@ -405,17 +397,14 @@ cc_mask_paintable_set_follow_accent (CcMaskPaintable *self,
 
   style_manager = adw_style_manager_get_default ();
 
-  if (self->follow_accent)
-    {
-      g_signal_connect_object (style_manager, "notify::accent-color",
-                               G_CALLBACK (update_mask_color), self,
-                               G_CONNECT_SWAPPED);
-      update_mask_color (self);
-    }
-  else
-    {
-      g_signal_handlers_disconnect_by_func (style_manager, update_mask_color, self);
-    }
+  if (self->follow_accent) {
+    g_signal_connect_object (style_manager, "notify::accent-color",
+                             G_CALLBACK (update_mask_color), self,
+                             G_CONNECT_SWAPPED);
+    update_mask_color (self);
+  } else {
+    g_signal_handlers_disconnect_by_func (style_manager, update_mask_color, self);
+  }
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_FOLLOW_ACCENT]);
 }
@@ -437,7 +426,7 @@ cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self,
 
   /* FIXME: As long as VP9 alpha decoding is in gstreamer-plugins-bad,
    * we should probably use B&W assets and luminance masking
-   * https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/3173 
+   * https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/3173
    * https://gitlab.freedesktop.org/gstreamer/gstreamer/-/issues/3978 */
   resource_is_webm = g_str_has_suffix (self->resource_path, ".webm");
   if (resource_is_webm)
@@ -447,18 +436,17 @@ cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self,
 
   resource_is_scalable = g_str_has_suffix (self->resource_path, ".svg");
 
-  if (!resource_is_scalable)
-    {
-      g_autoptr (GtkMediaStream) media_stream = NULL;
+  if (!resource_is_scalable) {
+    g_autoptr (GtkMediaStream) media_stream = NULL;
 
-      media_stream = gtk_media_file_new_for_resource (self->resource_path);
-      cc_mask_paintable_set_paintable (self, GDK_PAINTABLE (media_stream));
+    media_stream = gtk_media_file_new_for_resource (self->resource_path);
+    cc_mask_paintable_set_paintable (self, GDK_PAINTABLE (media_stream));
 
-      return;
-    }
+    return;
+  }
 
   self->parent_widget = parent_widget;
-  g_object_add_weak_pointer (G_OBJECT (self->parent_widget), (gpointer *) &self->parent_widget);
+  g_object_add_weak_pointer (G_OBJECT (self->parent_widget), (gpointer *)&self->parent_widget);
 
   /* We will wait until the parent widget is rooted, as otherwise the scale-factor can't
      be retrieved reliably. Doing a resource update with the wrong scale-factor can be

@@ -40,13 +40,12 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 
-typedef struct
-{
-  CcShell      *shell;
+typedef struct {
+  CcShell *shell;
   GCancellable *cancellable;
 
   AdwNavigationView *navigation;
-  gboolean           single_page_mode;
+  gboolean single_page_mode;
 
   GHashTable *subpages;
 } CcPanelPrivate;
@@ -57,15 +56,14 @@ static void cc_panel_buildable_init (GtkBuildableIface *iface);
 G_DEFINE_TYPE_WITH_CODE (CcPanel, cc_panel, ADW_TYPE_NAVIGATION_PAGE,
                          G_ADD_PRIVATE (CcPanel) G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, cc_panel_buildable_init))
 
-enum
-{
+enum {
   PROP_0,
   PROP_SHELL,
   PROP_PARAMETERS,
   N_PROPS
 };
 
-static GParamSpec *properties [N_PROPS];
+static GParamSpec *properties[N_PROPS];
 
 /* GtkBuildable interface */
 static void
@@ -108,22 +106,18 @@ set_subpage (CcPanel     *panel,
   AdwNavigationPage *page;
 
   page = adw_navigation_view_find_page (priv->navigation, tag);
-  if (!page)
-    {
-      if (g_hash_table_contains (priv->subpages, tag))
-        {
-          GType page_type = GPOINTER_TO_TYPE (g_hash_table_lookup (priv->subpages, tag));
+  if (!page) {
+    if (g_hash_table_contains (priv->subpages, tag)) {
+      GType page_type = GPOINTER_TO_TYPE (g_hash_table_lookup (priv->subpages, tag));
 
-          page = ADW_NAVIGATION_PAGE (g_object_new (page_type, NULL));
-          adw_navigation_page_set_can_pop (page, !priv->single_page_mode);
-          adw_navigation_view_add (priv->navigation, page);
-        }
-      else
-        {
-          g_warning ("Invalid subpage: '%s'", tag);
-          return;
-        }
-     }
+      page = ADW_NAVIGATION_PAGE (g_object_new (page_type, NULL));
+      adw_navigation_page_set_can_pop (page, !priv->single_page_mode);
+      adw_navigation_view_add (priv->navigation, page);
+    } else {
+      g_warning ("Invalid subpage: '%s'", tag);
+      return;
+    }
+  }
 
   adw_navigation_view_push_by_tag (priv->navigation, tag);
 }
@@ -144,50 +138,46 @@ cc_panel_set_property (GObject      *object,
 {
   CcPanelPrivate *priv = cc_panel_get_instance_private (CC_PANEL (object));
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_SHELL:
       /* construct only property */
       priv->shell = g_value_get_object (value);
       break;
 
-    case PROP_PARAMETERS:
-      {
-        g_autoptr(GVariant) v = NULL;
-        GVariant *parameters;
-        gsize n_parameters;
+    case PROP_PARAMETERS: {
+      g_autoptr (GVariant) v = NULL;
+      GVariant *parameters;
+      gsize n_parameters;
 
-        parameters = g_value_get_variant (value);
+      parameters = g_value_get_variant (value);
 
-        if (parameters == NULL)
-          return;
+      if (parameters == NULL)
+        return;
 
-        n_parameters = g_variant_n_children (parameters);
-        if (n_parameters == 0)
-          return;
+      n_parameters = g_variant_n_children (parameters);
+      if (n_parameters == 0)
+        return;
 
-        g_variant_get_child (parameters, 0, "v", &v);
+      g_variant_get_child (parameters, 0, "v", &v);
 
-        if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
-          {
-            set_subpage (CC_PANEL (object), g_variant_get_string (v, NULL));
-          }
-        else if (!g_variant_is_of_type (v, G_VARIANT_TYPE_DICTIONARY))
-          g_warning ("Wrong type for the first argument GVariant, expected 'a{sv}' but got '%s'",
-                     (gchar *)g_variant_get_type (v));
-        else if (g_variant_n_children (v) > 0)
-          g_warning ("Ignoring additional flags");
+      if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING)) {
+        set_subpage (CC_PANEL (object), g_variant_get_string (v, NULL));
+      } else if (!g_variant_is_of_type (v, G_VARIANT_TYPE_DICTIONARY))
+        g_warning ("Wrong type for the first argument GVariant, expected 'a{sv}' but got '%s'",
+                   (gchar *)g_variant_get_type (v));
+      else if (g_variant_n_children (v) > 0)
+        g_warning ("Ignoring additional flags");
 
-        if (n_parameters > 1)
-          g_warning ("Ignoring additional parameters");
+      if (n_parameters > 1)
+        g_warning ("Ignoring additional parameters");
 
-        break;
-      }
+      break;
+    }
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -198,8 +188,7 @@ cc_panel_get_property (GObject    *object,
 {
   CcPanelPrivate *priv = cc_panel_get_instance_private (CC_PANEL (object));
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_SHELL:
       g_value_set_object (value, priv->shell);
       break;
@@ -207,7 +196,7 @@ cc_panel_get_property (GObject    *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -248,7 +237,7 @@ cc_panel_class_init (CcPanelClass *klass)
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_install_action (widget_class, "navigation.push", "s",
-                                   (GtkWidgetActionActivateFunc) navigation_push_cb);
+                                   (GtkWidgetActionActivateFunc)navigation_push_cb);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/gtk/cc-panel.ui");
 
@@ -285,7 +274,7 @@ cc_panel_get_shell (CcPanel *panel)
   return priv->shell;
 }
 
-const gchar*
+const gchar *
 cc_panel_get_help_uri (CcPanel *panel)
 {
   CcPanelClass *class = CC_PANEL_GET_CLASS (panel);
@@ -318,8 +307,8 @@ cc_panel_deactivate (CcPanel *panel)
 }
 
 void
-cc_panel_add_subpage (CcPanel     *panel,
-                      const gchar *page_tag,
+cc_panel_add_subpage (CcPanel           *panel,
+                      const gchar       *page_tag,
                       AdwNavigationPage *subpage)
 {
   CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
@@ -343,7 +332,7 @@ cc_panel_add_static_subpage (CcPanel     *panel,
 }
 
 void
-cc_panel_push_subpage (CcPanel *panel,
+cc_panel_push_subpage (CcPanel           *panel,
                        AdwNavigationPage *subpage)
 {
   CcPanelPrivate *priv = cc_panel_get_instance_private (panel);

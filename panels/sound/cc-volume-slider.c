@@ -23,20 +23,19 @@
 #include "cc-sound-resources.h"
 #include "cc-volume-slider.h"
 
-struct _CcVolumeSlider
-{
-  GtkWidget        parent_instance;
+struct _CcVolumeSlider {
+  GtkWidget parent_instance;
 
-  GtkButton       *mute_button;
-  GtkAdjustment   *volume_adjustment;
-  GtkScale        *volume_scale;
+  GtkButton *mute_button;
+  GtkAdjustment *volume_adjustment;
+  GtkScale *volume_scale;
 
-  gboolean         is_amplified;
+  gboolean is_amplified;
   GvcMixerControl *mixer_control;
-  GvcMixerStream  *stream;
-  CcStreamType     type;
-  guint            notify_volume_handler_id;
-  guint            notify_is_muted_handler_id;
+  GvcMixerStream *stream;
+  CcStreamType type;
+  guint notify_volume_handler_id;
+  guint notify_is_muted_handler_id;
 };
 
 G_DEFINE_TYPE (CcVolumeSlider, cc_volume_slider, GTK_TYPE_WIDGET)
@@ -64,8 +63,7 @@ update_volume_icon (CcVolumeSlider *self)
 
   update_mute_button_tooltip (self, volume);
 
-  switch (self->type)
-    {
+  switch (self->type) {
     case CC_STREAM_TYPE_INPUT:
       if (fraction == 0.0)
         icon_name = "microphone-sensitivity-muted-symbolic";
@@ -91,7 +89,7 @@ update_volume_icon (CcVolumeSlider *self)
     default:
       g_assert_not_reached ();
       break;
-    }
+  }
 
   gtk_button_set_icon_name (GTK_BUTTON (self->mute_button), icon_name);
 }
@@ -107,12 +105,12 @@ volume_changed_cb (CcVolumeSlider *self)
   volume = gtk_adjustment_get_value (self->volume_adjustment);
   rounded = round (volume);
 
-  // If the stream is muted, unmute it
+  /* If the stream is muted, unmute it */
   if (gvc_mixer_stream_get_is_muted (self->stream))
     gvc_mixer_stream_change_is_muted (self->stream, FALSE);
 
-  if (gvc_mixer_stream_set_volume (self->stream, (pa_volume_t) rounded))
-      gvc_mixer_stream_push_volume (self->stream);
+  if (gvc_mixer_stream_set_volume (self->stream, (pa_volume_t)rounded))
+    gvc_mixer_stream_push_volume (self->stream);
 }
 
 static void
@@ -136,26 +134,22 @@ update_ranges (CcVolumeSlider *self)
   vol_max_norm = gvc_mixer_control_get_vol_max_norm (self->mixer_control);
 
   gtk_scale_clear_marks (self->volume_scale);
-  if (self->is_amplified)
-    {
-      gtk_adjustment_set_upper (self->volume_adjustment, gvc_mixer_control_get_vol_max_amplified (self->mixer_control));
-      gtk_scale_add_mark (self->volume_scale,
-                          vol_max_norm,
-                          GTK_POS_BOTTOM,
-                          C_("volume", "100%"));
-    }
-  else
-    {
-      gtk_adjustment_set_upper (self->volume_adjustment, vol_max_norm);
-    }
+  if (self->is_amplified) {
+    gtk_adjustment_set_upper (self->volume_adjustment, gvc_mixer_control_get_vol_max_amplified (self->mixer_control));
+    gtk_scale_add_mark (self->volume_scale,
+                        vol_max_norm,
+                        GTK_POS_BOTTOM,
+                        C_("volume", "100%"));
+  } else {
+    gtk_adjustment_set_upper (self->volume_adjustment, vol_max_norm);
+  }
   gtk_adjustment_set_page_increment (self->volume_adjustment, vol_max_norm / 10.0);
   gtk_adjustment_set_step_increment (self->volume_adjustment, vol_max_norm / 100.0);
 
-  if (self->stream)
-    {
-      notify_volume_cb (self);
-      notify_is_muted_cb (self);
-    }
+  if (self->stream) {
+    notify_volume_cb (self);
+    notify_is_muted_cb (self);
+  }
 }
 
 static void
@@ -169,34 +163,28 @@ mute_cb (GtkWidget  *widget,
     return;
 
   if (!gvc_mixer_stream_get_is_muted (self->stream) &&
-      gvc_mixer_stream_get_volume (self->stream) == 0.0)
-    {
-      gdouble default_volume = gvc_mixer_control_get_vol_max_norm (self->mixer_control) * 0.25;
+      gvc_mixer_stream_get_volume (self->stream) == 0.0) {
+    gdouble default_volume = gvc_mixer_control_get_vol_max_norm (self->mixer_control) * 0.25;
 
-      if (gvc_mixer_stream_set_volume (self->stream, (pa_volume_t) default_volume))
-        gvc_mixer_stream_push_volume (self->stream);
-    }
-  else
-    {
-      gvc_mixer_stream_change_is_muted (self->stream, !gvc_mixer_stream_get_is_muted (self->stream));
-    }
+    if (gvc_mixer_stream_set_volume (self->stream, (pa_volume_t)default_volume))
+      gvc_mixer_stream_push_volume (self->stream);
+  } else {
+    gvc_mixer_stream_change_is_muted (self->stream, !gvc_mixer_stream_get_is_muted (self->stream));
+  }
 }
 
 static void
 notify_is_muted_cb (CcVolumeSlider *self)
 {
-  if (gvc_mixer_stream_get_is_muted (self->stream))
-    {
-      g_signal_handlers_block_by_func (self->volume_adjustment, volume_changed_cb, self);
-      gtk_adjustment_set_value (self->volume_adjustment, 0.0);
-      g_signal_handlers_unblock_by_func (self->volume_adjustment, volume_changed_cb, self);
+  if (gvc_mixer_stream_get_is_muted (self->stream)) {
+    g_signal_handlers_block_by_func (self->volume_adjustment, volume_changed_cb, self);
+    gtk_adjustment_set_value (self->volume_adjustment, 0.0);
+    g_signal_handlers_unblock_by_func (self->volume_adjustment, volume_changed_cb, self);
 
-      update_volume_icon (self);
-    }
-  else
-    {
-      notify_volume_cb (self);
-    }
+    update_volume_icon (self);
+  } else {
+    notify_volume_cb (self);
+  }
 }
 
 static void
@@ -264,32 +252,30 @@ cc_volume_slider_set_stream (CcVolumeSlider *self,
 {
   g_return_if_fail (CC_IS_VOLUME_SLIDER (self));
 
-  if (self->stream != NULL)
-    {
-      g_signal_handler_disconnect (self->stream, self->notify_volume_handler_id);
-      self->notify_volume_handler_id = 0;
-      g_signal_handler_disconnect (self->stream, self->notify_is_muted_handler_id);
-      self->notify_is_muted_handler_id = 0;
-    }
+  if (self->stream != NULL) {
+    g_signal_handler_disconnect (self->stream, self->notify_volume_handler_id);
+    self->notify_volume_handler_id = 0;
+    g_signal_handler_disconnect (self->stream, self->notify_is_muted_handler_id);
+    self->notify_is_muted_handler_id = 0;
+  }
   g_clear_object (&self->stream);
 
   self->type = type;
 
-  if (stream != NULL)
-    {
-      self->stream = g_object_ref (stream);
+  if (stream != NULL) {
+    self->stream = g_object_ref (stream);
 
-      self->notify_volume_handler_id = g_signal_connect_object (stream,
-                                                                "notify::volume",
-                                                                G_CALLBACK (notify_volume_cb),
+    self->notify_volume_handler_id = g_signal_connect_object (stream,
+                                                              "notify::volume",
+                                                              G_CALLBACK (notify_volume_cb),
+                                                              self, G_CONNECT_SWAPPED);
+    self->notify_is_muted_handler_id = g_signal_connect_object (stream,
+                                                                "notify::is-muted",
+                                                                G_CALLBACK (notify_is_muted_cb),
                                                                 self, G_CONNECT_SWAPPED);
-      self->notify_is_muted_handler_id = g_signal_connect_object (stream,
-                                                                  "notify::is-muted",
-                                                                  G_CALLBACK (notify_is_muted_cb),
-                                                                  self, G_CONNECT_SWAPPED);
-      notify_volume_cb (self);
-      notify_is_muted_cb (self);
-    }
+    notify_volume_cb (self);
+    notify_is_muted_cb (self);
+  }
 }
 
 GvcMixerStream *

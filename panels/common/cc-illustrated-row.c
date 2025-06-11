@@ -25,19 +25,17 @@
 #include "cc-mask-paintable.h"
 #include "cc-texture-utils.h"
 
-struct _CcIllustratedRow
-{
-  CcContentRow       parent;
+struct _CcIllustratedRow {
+  CcContentRow parent;
 
-  GtkBox            *picture_box;
-  CcMaskPaintable   *picture_mask;
-  gchar             *resource_path;
+  GtkBox *picture_box;
+  CcMaskPaintable *picture_mask;
+  gchar *resource_path;
 };
 
 G_DEFINE_FINAL_TYPE (CcIllustratedRow, cc_illustrated_row, CC_TYPE_CONTENT_ROW);
 
-enum
-{
+enum {
   PROP_0,
   PROP_RESOURCE,
   N_PROPS,
@@ -78,21 +76,20 @@ on_picture_hover_cb (CcIllustratedRow *self)
 }
 
 static void
-cc_illustrated_row_get_property (GObject      *object,
-                                 guint         prop_id,
-                                 GValue       *value,
-                                 GParamSpec   *pspec)
+cc_illustrated_row_get_property (GObject    *object,
+                                 guint       prop_id,
+                                 GValue     *value,
+                                 GParamSpec *pspec)
 {
   CcIllustratedRow *self = CC_ILLUSTRATED_ROW (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_RESOURCE:
       g_value_set_string (value, self->resource_path);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -103,14 +100,13 @@ cc_illustrated_row_set_property (GObject      *object,
 {
   CcIllustratedRow *self = CC_ILLUSTRATED_ROW (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_RESOURCE:
       cc_illustrated_row_set_resource (self, g_value_get_string (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void

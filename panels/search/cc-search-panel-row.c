@@ -19,24 +19,22 @@
 
 #include "cc-search-panel-row.h"
 
-struct _CcSearchPanelRow
-{
-  AdwActionRow   parent_instance;
+struct _CcSearchPanelRow {
+  AdwActionRow parent_instance;
 
-  GAppInfo      *app_info;
+  GAppInfo *app_info;
 
-  GtkImage      *icon;
-  GtkSwitch     *switcher;
+  GtkImage *icon;
+  GtkSwitch *switcher;
 
-  GtkListBox    *drag_widget;
-  gdouble        drag_x;
-  gdouble        drag_y;
+  GtkListBox *drag_widget;
+  gdouble drag_x;
+  gdouble drag_y;
 };
 
 G_DEFINE_TYPE (CcSearchPanelRow, cc_search_panel_row, ADW_TYPE_ACTION_ROW)
 
-enum
-{
+enum {
   SIGNAL_MOVE_ROW,
   SIGNAL_LAST
 };
@@ -50,10 +48,9 @@ update_move_actions_after_row_moved_up (CcSearchPanelRow *self)
   gint previous_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) - 1;
   GtkListBoxRow *previous_row = gtk_list_box_get_row_at_index (list_box, previous_idx);
 
-  if (gtk_list_box_get_row_at_index (list_box, previous_idx - 1) == NULL)
-    {
-      gtk_widget_action_set_enabled (GTK_WIDGET (self), "row.move-up", FALSE);
-    }
+  if (gtk_list_box_get_row_at_index (list_box, previous_idx - 1) == NULL) {
+    gtk_widget_action_set_enabled (GTK_WIDGET (self), "row.move-up", FALSE);
+  }
 
   gtk_widget_action_set_enabled (GTK_WIDGET (previous_row), "row.move-up", TRUE);
   gtk_widget_action_set_enabled (GTK_WIDGET (previous_row), "row.move-down", gtk_widget_get_next_sibling (GTK_WIDGET (self)) != NULL);
@@ -67,12 +64,11 @@ update_move_actions_after_row_moved_down (CcSearchPanelRow *self)
   gint next_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) + 1;
   GtkListBoxRow *next_row = gtk_list_box_get_row_at_index (list_box, next_idx);
 
-  if (gtk_widget_get_next_sibling (GTK_WIDGET (next_row)) == NULL)
-    {
-      gtk_widget_action_set_enabled (GTK_WIDGET (self), "row.move-down", FALSE);
-    }
+  if (gtk_widget_get_next_sibling (GTK_WIDGET (next_row)) == NULL) {
+    gtk_widget_action_set_enabled (GTK_WIDGET (self), "row.move-down", FALSE);
+  }
 
-  gtk_widget_action_set_enabled (GTK_WIDGET (next_row), "row.move-up", next_idx-1 != 0);
+  gtk_widget_action_set_enabled (GTK_WIDGET (next_row), "row.move-up", next_idx - 1 != 0);
   gtk_widget_action_set_enabled (GTK_WIDGET (next_row), "row.move-down", TRUE);
   gtk_widget_action_set_enabled (GTK_WIDGET (self), "row.move-up", TRUE);
 }
@@ -152,7 +148,6 @@ drag_begin_cb (CcSearchPanelRow *self,
   drag_icon = gtk_drag_icon_get_for_drag (drag);
   gtk_drag_icon_set_child (GTK_DRAG_ICON (drag_icon), GTK_WIDGET (self->drag_widget));
   gdk_drag_set_hotspot (drag, self->drag_x, self->drag_y);
-
 }
 
 static gboolean
@@ -181,7 +176,7 @@ drop_cb (CcSearchPanelRow *self,
 static void
 cc_search_panel_row_finalize (GObject *object)
 {
-  CcSearchPanelRow  *self = CC_SEARCH_PANEL_ROW (object);
+  CcSearchPanelRow *self = CC_SEARCH_PANEL_ROW (object);
 
   g_clear_object (&self->app_info);
 
@@ -249,7 +244,7 @@ CcSearchPanelRow *
 cc_search_panel_row_new (GAppInfo *app_info)
 {
   CcSearchPanelRow *self;
-  g_autoptr(GIcon) gicon = NULL;
+  g_autoptr (GIcon) gicon = NULL;
 
   self = g_object_new (CC_TYPE_SEARCH_PANEL_ROW, NULL);
   self->app_info = g_object_ref (app_info);

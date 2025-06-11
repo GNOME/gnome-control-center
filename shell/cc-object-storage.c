@@ -20,9 +20,8 @@
 
 #include "cc-object-storage.h"
 
-struct _CcObjectStorage
-{
-  GObject     parent_instance;
+struct _CcObjectStorage {
+  GObject parent_instance;
 
   GHashTable *id_to_object;
 };
@@ -33,17 +32,16 @@ G_DEFINE_TYPE (CcObjectStorage, cc_object_storage, G_TYPE_OBJECT)
 static CcObjectStorage *_instance = NULL;
 
 /* GTask API to create a new D-Bus proxy */
-typedef struct
-{
-  GBusType         bus_type;
-  GDBusProxyFlags  flags;
-  gchar           *name;
-  gchar           *path;
-  gchar           *interface;
-  gboolean         cached;
+typedef struct {
+  GBusType bus_type;
+  GDBusProxyFlags flags;
+  gchar *name;
+  gchar *path;
+  gchar *interface;
+  gboolean cached;
 } TaskData;
 
-static TaskData*
+static TaskData *
 task_data_new (GBusType         bus_type,
                GDBusProxyFlags  flags,
                const gchar     *name,
@@ -52,7 +50,7 @@ task_data_new (GBusType         bus_type,
 {
   TaskData *data = g_slice_new (TaskData);
   data->bus_type = bus_type;
-  data->flags =flags;
+  data->flags = flags;
   data->name = g_strdup (name);
   data->path = g_strdup (path);
   data->interface = g_strdup (interface);
@@ -76,8 +74,8 @@ create_dbus_proxy_in_thread_cb (GTask        *task,
                                 gpointer      task_data,
                                 GCancellable *cancellable)
 {
-  g_autoptr(GDBusProxy) proxy = NULL;
-  g_autoptr(GError) local_error = NULL;
+  g_autoptr (GDBusProxy) proxy = NULL;
+  g_autoptr (GError) local_error = NULL;
   TaskData *data = task_data;
 
   proxy = g_dbus_proxy_new_for_bus_sync (data->bus_type,
@@ -89,11 +87,10 @@ create_dbus_proxy_in_thread_cb (GTask        *task,
                                          cancellable,
                                          &local_error);
 
-  if (local_error)
-    {
-      g_task_return_error (task, g_steal_pointer (&local_error));
-      return;
-    }
+  if (local_error) {
+    g_task_return_error (task, g_steal_pointer (&local_error));
+    return;
+  }
 
   g_task_return_pointer (task, g_object_ref (g_steal_pointer (&proxy)), g_object_unref);
 }
@@ -227,8 +224,8 @@ cc_object_storage_create_dbus_proxy_sync (GBusType          bus_type,
                                           GCancellable     *cancellable,
                                           GError          **error)
 {
-  g_autoptr(GDBusProxy) proxy = NULL;
-  g_autoptr(GError) local_error = NULL;
+  g_autoptr (GDBusProxy) proxy = NULL;
+  g_autoptr (GError) local_error = NULL;
   g_autofree gchar *key = NULL;
 
   g_assert (CC_IS_OBJECT_STORAGE (_instance));
@@ -256,11 +253,10 @@ cc_object_storage_create_dbus_proxy_sync (GBusType          bus_type,
                                          cancellable,
                                          &local_error);
 
-  if (local_error)
-    {
-      g_propagate_error (error, g_steal_pointer (&local_error));
-      return NULL;
-    }
+  if (local_error) {
+    g_propagate_error (error, g_steal_pointer (&local_error));
+    return NULL;
+  }
 
   /* Store the newly created D-Bus proxy */
   cc_object_storage_add_object (key, proxy);
@@ -298,7 +294,7 @@ cc_object_storage_create_dbus_proxy (GBusType             bus_type,
                                      GAsyncReadyCallback  callback,
                                      gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
   g_autofree gchar *key = NULL;
   TaskData *data = NULL;
 
@@ -312,25 +308,24 @@ cc_object_storage_create_dbus_proxy (GBusType             bus_type,
 
   task = g_task_new (_instance, cancellable, callback, user_data);
   g_task_set_source_tag (task, cc_object_storage_create_dbus_proxy);
-  g_task_set_task_data (task, data, (GDestroyNotify) task_data_free);
+  g_task_set_task_data (task, data, (GDestroyNotify)task_data_free);
 
   /* Check if the D-Bus proxy is already created */
   key = g_strdup_printf ("CcObjectStorage::dbus-proxy(%s,%s,%s)", name, path, interface);
 
   g_debug ("Asynchronously creating D-Bus proxy for %s", key);
 
-  if (g_hash_table_contains (_instance->id_to_object, key))
-    {
-      /* Mark this GTask as already cached, so we can call the right assertions
-       * on the callback
-       * */
-      data->cached = TRUE;
+  if (g_hash_table_contains (_instance->id_to_object, key)) {
+    /* Mark this GTask as already cached, so we can call the right assertions
+     * on the callback
+     * */
+    data->cached = TRUE;
 
-      g_debug ("Found in cache the D-Bus proxy %s", key);
+    g_debug ("Found in cache the D-Bus proxy %s", key);
 
-      g_task_return_pointer (task, cc_object_storage_get_object (key), g_object_unref);
-      return;
-    }
+    g_task_return_pointer (task, cc_object_storage_get_object (key), g_object_unref);
+    return;
+  }
 
   g_task_run_in_thread (task, create_dbus_proxy_in_thread_cb);
 }
@@ -354,8 +349,8 @@ gpointer
 cc_object_storage_create_dbus_proxy_finish (GAsyncResult  *result,
                                             GError       **error)
 {
-  g_autoptr(GDBusProxy) proxy = NULL;
-  g_autoptr(GError) local_error = NULL;
+  g_autoptr (GDBusProxy) proxy = NULL;
+  g_autoptr (GError) local_error = NULL;
   g_autofree gchar *key = NULL;
   TaskData *task_data;
   GTask *task;
@@ -379,11 +374,10 @@ cc_object_storage_create_dbus_proxy_finish (GAsyncResult  *result,
   proxy = g_task_propagate_pointer (task, &local_error);
 
   /* If the proxy is not cached, do the normal caching routine */
-  if (local_error)
-    {
-      g_propagate_error (error, g_steal_pointer (&local_error));
-      return NULL;
-    }
+  if (local_error) {
+    g_propagate_error (error, g_steal_pointer (&local_error));
+    return NULL;
+  }
 
   /* Either we have the object stored right when trying to create it - in which case,
    * task_data->cached == TRUE and cc_object_storage_has_object (key) == TRUE - or we
@@ -418,14 +412,13 @@ cc_object_storage_initialize (void)
 {
   g_assert (_instance == NULL);
 
-  if (g_once_init_enter (&_instance))
-    {
-      CcObjectStorage *instance = g_object_new (CC_TYPE_OBJECT_STORAGE, NULL);
+  if (g_once_init_enter (&_instance)) {
+    CcObjectStorage *instance = g_object_new (CC_TYPE_OBJECT_STORAGE, NULL);
 
-      g_debug ("Initializing object storage");
+    g_debug ("Initializing object storage");
 
-      g_once_init_leave (&_instance, instance);
-    }
+    g_once_init_leave (&_instance, instance);
+  }
 }
 
 /**

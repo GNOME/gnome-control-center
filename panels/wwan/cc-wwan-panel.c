@@ -44,32 +44,31 @@ typedef enum {
   OPERATION_SHOW_DEVICE,
 } CmdlineOperation;
 
-struct _CcWwanPanel
-{
+struct _CcWwanPanel {
   CcPanel parent_instance;
 
-  AdwToastOverlay  *toast_overlay;
-  AdwComboRow      *data_list_row;
-  GtkListBox       *data_sim_select_listbox;
-  GtkStack         *devices_stack;
+  AdwToastOverlay *toast_overlay;
+  AdwComboRow *data_list_row;
+  GtkListBox *data_sim_select_listbox;
+  GtkStack *devices_stack;
   GtkStackSwitcher *devices_switcher;
-  GtkSwitch        *enable_switch;
-  GtkStack         *main_stack;
-  GtkRevealer      *multi_device_revealer;
+  GtkSwitch *enable_switch;
+  GtkStack *main_stack;
+  GtkRevealer *multi_device_revealer;
 
-  GDBusProxy   *rfkill_proxy;
-  MMManager    *mm_manager;
-  NMClient     *nm_client;
+  GDBusProxy *rfkill_proxy;
+  MMManager *mm_manager;
+  NMClient *nm_client;
 
   /* The default device that will be used for data */
   CcWwanDevice *data_device;
-  GListStore   *devices;
-  GListStore   *data_devices;
-  GListStore   *data_devices_name_list;
+  GListStore *devices;
+  GListStore *data_devices;
+  GListStore *data_devices_name_list;
   GCancellable *cancellable;
 
-  CmdlineOperation  arg_operation;
-  char             *arg_device;
+  CmdlineOperation arg_operation;
+  char *arg_device;
 };
 
 enum {
@@ -80,15 +79,14 @@ enum {
 G_DEFINE_TYPE (CcWwanPanel, cc_wwan_panel, CC_TYPE_PANEL)
 
 
-#define CC_TYPE_DATA_DEVICE_ROW (cc_data_device_row_get_type())
+#define CC_TYPE_DATA_DEVICE_ROW (cc_data_device_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcDataDeviceRow, cc_data_device_row, CC, DATA_DEVICE_ROW, GtkListBoxRow)
 
-struct _CcDataDeviceRow
-{
-  GtkListBoxRow  parent_instance;
+struct _CcDataDeviceRow {
+  GtkListBoxRow parent_instance;
 
-  GtkImage      *ok_emblem;
-  CcWwanDevice  *device;
+  GtkImage *ok_emblem;
+  CcWwanDevice *device;
 };
 
 G_DEFINE_TYPE (CcDataDeviceRow, cc_data_device_row, GTK_TYPE_LIST_BOX_ROW)
@@ -124,43 +122,38 @@ static gboolean
 verify_argv (CcWwanPanel  *self,
              const char  **args)
 {
-	switch (self->arg_operation)
-    {
+  switch (self->arg_operation) {
     case OPERATION_SHOW_DEVICE:
-      if (self->arg_device == NULL)
-        {
-          g_warning ("Operation %s requires an object path", args[0]);
-          return FALSE;
-        }
+      if (self->arg_device == NULL) {
+        g_warning ("Operation %s requires an object path", args[0]);
+        return FALSE;
+      }
       G_GNUC_FALLTHROUGH;
     default:
       return TRUE;
-    }
+  }
 }
 
 static void
 handle_argv (CcWwanPanel *self)
 {
   if (self->arg_operation == OPERATION_SHOW_DEVICE &&
-      self->arg_operation)
-    {
-      for (GtkWidget *child = gtk_widget_get_first_child (GTK_WIDGET (self->devices_stack));
-           child;
-           child = gtk_widget_get_next_sibling (child))
-        {
-          CcWwanDevice *device;
+      self->arg_operation) {
+    for (GtkWidget *child = gtk_widget_get_first_child (GTK_WIDGET (self->devices_stack));
+         child;
+         child = gtk_widget_get_next_sibling (child)) {
+      CcWwanDevice *device;
 
-          device = cc_wwan_device_page_get_device (CC_WWAN_DEVICE_PAGE (child));
+      device = cc_wwan_device_page_get_device (CC_WWAN_DEVICE_PAGE (child));
 
-          if (g_strcmp0 (cc_wwan_device_get_path (device), self->arg_device) == 0)
-            {
-              gtk_stack_set_visible_child (GTK_STACK (self->devices_stack), child);
-              g_debug ("Opening device %s", self->arg_device);
-              reset_command_line_args (self);
-              return;
-            }
-        }
+      if (g_strcmp0 (cc_wwan_device_get_path (device), self->arg_device) == 0) {
+        gtk_stack_set_visible_child (GTK_STACK (self->devices_stack), child);
+        g_debug ("Opening device %s", self->arg_device);
+        reset_command_line_args (self);
+        return;
+      }
     }
+  }
 }
 
 static gboolean
@@ -196,15 +189,14 @@ wwan_model_get_item_index (GListModel *model,
 
   n_items = g_list_model_get_n_items (model);
 
-  for (i = 0; i < n_items; i++)
-    {
-      g_autoptr(GObject) object = NULL;
+  for (i = 0; i < n_items; i++) {
+    g_autoptr (GObject) object = NULL;
 
-      object = g_list_model_get_item (model, i);
+    object = g_list_model_get_item (model, i);
 
-      if (object == item)
-        return i;
-    }
+    if (object == item)
+      return i;
+  }
 
   return -1;
 }
@@ -219,16 +211,15 @@ wwan_model_get_item_from_mm_object (GListModel *model,
   n_items = g_list_model_get_n_items (model);
   modem_path = mm_object_get_path (mm_object);
 
-  for (i = 0; i < n_items; i++)
-    {
-      g_autoptr(CcWwanDevice) device = NULL;
+  for (i = 0; i < n_items; i++) {
+    g_autoptr (CcWwanDevice) device = NULL;
 
-      device = g_list_model_get_item (model, i);
-      device_path = cc_wwan_device_get_path (device);
+    device = g_list_model_get_item (model, i);
+    device_path = cc_wwan_device_get_path (device);
 
-      if (g_str_equal (modem_path, device_path))
-        return g_steal_pointer (&device);
-    }
+    if (g_str_equal (modem_path, device_path))
+      return g_steal_pointer (&device);
+  }
 
   return NULL;
 }
@@ -309,7 +300,7 @@ static gboolean
 cc_wwan_panel_get_cached_dbus_property (GDBusProxy  *proxy,
                                         const gchar *property)
 {
-  g_autoptr(GVariant) result = NULL;
+  g_autoptr (GVariant) result = NULL;
 
   g_assert (G_IS_DBUS_PROXY (proxy));
   g_assert (property && *property);
@@ -328,11 +319,10 @@ cc_wwan_panel_update_view (CcWwanPanel *self)
   has_airplane = cc_wwan_panel_get_cached_dbus_property (self->rfkill_proxy, "HasAirplaneMode");
   has_airplane &= cc_wwan_panel_get_cached_dbus_property (self->rfkill_proxy, "ShouldShowAirplaneMode");
 
-  if (has_airplane)
-    {
-      is_airplane = cc_wwan_panel_get_cached_dbus_property (self->rfkill_proxy, "AirplaneMode");
-      is_airplane |= cc_wwan_panel_get_cached_dbus_property (self->rfkill_proxy, "HardwareAirplaneMode");
-    }
+  if (has_airplane) {
+    is_airplane = cc_wwan_panel_get_cached_dbus_property (self->rfkill_proxy, "AirplaneMode");
+    is_airplane |= cc_wwan_panel_get_cached_dbus_property (self->rfkill_proxy, "HardwareAirplaneMode");
+  }
 
   if (self->nm_client)
     enabled = nm_client_wwan_get_enabled (self->nm_client);
@@ -387,7 +377,7 @@ cc_wwan_panel_update_page_title (CcWwanDevicePage *device_page,
   device = cc_wwan_device_page_get_device (device_page);
 
   page = gtk_stack_get_page (GTK_STACK (self->devices_stack), GTK_WIDGET (device_page));
-  index  = wwan_model_get_item_index (G_LIST_MODEL (self->devices), device);
+  index = wwan_model_get_item_index (G_LIST_MODEL (self->devices), device);
 
   if (index == -1)
     g_return_if_reached ();
@@ -404,7 +394,7 @@ static void
 cc_wwan_panel_remove_mm_object (CcWwanPanel *self,
                                 MMObject    *mm_object)
 {
-  g_autoptr(CcWwanDevice) device = NULL;
+  g_autoptr (CcWwanDevice) device = NULL;
   GtkWidget *device_page;
   g_autofree gchar *stack_name = NULL;
   guint n_items;
@@ -443,7 +433,7 @@ static void
 wwan_panel_add_data_device_to_list (CcWwanPanel  *self,
                                     CcWwanDevice *device)
 {
-  g_autoptr(GtkStringObject) str = NULL;
+  g_autoptr (GtkStringObject) str = NULL;
   g_autofree char *operator = NULL;
   int index;
 
@@ -476,27 +466,25 @@ cc_wwan_panel_update_data_connections (CcWwanPanel *self)
   g_list_store_remove_all (self->data_devices_name_list);
   n_items = g_list_model_get_n_items (G_LIST_MODEL (self->devices));
 
-  for (i = 0; i < n_items; i++)
-    {
-      g_autoptr(CcWwanDevice) device = NULL;
+  for (i = 0; i < n_items; i++) {
+    g_autoptr (CcWwanDevice) device = NULL;
 
-      device = g_list_model_get_item (G_LIST_MODEL (self->devices), i);
-      device_data = cc_wwan_device_get_data (device);
+    device = g_list_model_get_item (G_LIST_MODEL (self->devices), i);
+    device_data = cc_wwan_device_get_data (device);
 
-      if (!device_data)
-        continue;
+    if (!device_data)
+      continue;
 
-      if ((!active_data ||
-           cc_wwan_data_get_priority (device_data) > cc_wwan_data_get_priority (active_data)) &&
-          cc_wwan_data_get_enabled (device_data))
-        {
-          active_data = device_data;
-          self->data_device = device;
-        }
-
-      if (cc_wwan_data_get_enabled (device_data))
-        wwan_panel_add_data_device_to_list (self, device);
+    if ((!active_data ||
+         cc_wwan_data_get_priority (device_data) > cc_wwan_data_get_priority (active_data)) &&
+        cc_wwan_data_get_enabled (device_data)) {
+      active_data = device_data;
+      self->data_device = device;
     }
+
+    if (cc_wwan_data_get_enabled (device_data))
+      wwan_panel_add_data_device_to_list (self, device);
+  }
 
   if (active_data)
     cc_wwan_panel_update_data_selection (self);
@@ -509,23 +497,22 @@ cc_wwan_panel_update_devices (CcWwanPanel *self)
 
   devices = g_dbus_object_manager_get_objects (G_DBUS_OBJECT_MANAGER (self->mm_manager));
 
-  for (iter = devices; iter; iter = iter->next)
-    {
-      MMObject *mm_object = iter->data;
-      CcWwanDevice *device;
+  for (iter = devices; iter; iter = iter->next) {
+    MMObject *mm_object = iter->data;
+    CcWwanDevice *device;
 
-      if(!wwan_panel_device_is_supported (iter->data))
-        continue;
+    if(!wwan_panel_device_is_supported (iter->data))
+      continue;
 
-      device = cc_wwan_device_new (mm_object, G_OBJECT (self->nm_client));
-      cc_wwan_panel_add_device (self, device);
-      g_signal_connect_object (device, "notify::has-data",
-                               G_CALLBACK (cc_wwan_panel_update_data_connections),
-                               self, G_CONNECT_SWAPPED);
+    device = cc_wwan_device_new (mm_object, G_OBJECT (self->nm_client));
+    cc_wwan_panel_add_device (self, device);
+    g_signal_connect_object (device, "notify::has-data",
+                             G_CALLBACK (cc_wwan_panel_update_data_connections),
+                             self, G_CONNECT_SWAPPED);
 
-      if (cc_wwan_device_get_data (device))
-        wwan_panel_add_data_device_to_list (self, device);
-    }
+    if (cc_wwan_device_get_data (device))
+      wwan_panel_add_data_device_to_list (self, device);
+  }
 
   cc_wwan_panel_update_data_connections (self);
   handle_argv (self);
@@ -573,11 +560,10 @@ variant_av_to_string_array (GVariant *array)
   count = g_variant_iter_init (&iter, array);
   strv = g_ptr_array_sized_new (count + 1);
 
-  while (g_variant_iter_next (&iter, "v", &v))
-    {
-      g_ptr_array_add (strv, (gpointer)g_variant_get_string (v, NULL));
-      g_variant_unref (v);
-    }
+  while (g_variant_iter_next (&iter, "v", &v)) {
+    g_ptr_array_add (strv, (gpointer)g_variant_get_string (v, NULL));
+    g_variant_unref (v);
+  }
   g_ptr_array_add (strv, NULL); /* NULL-terminate the strv data array */
 
   return strv;
@@ -591,43 +577,39 @@ cc_wwan_panel_set_property (GObject      *object,
 {
   CcWwanPanel *self = CC_WWAN_PANEL (object);
 
-  switch (property_id)
-    {
-    case PROP_PARAMETERS:
-      {
-        GVariant *parameters;
+  switch (property_id) {
+    case PROP_PARAMETERS: {
+      GVariant *parameters;
 
-        reset_command_line_args (self);
+      reset_command_line_args (self);
 
-        parameters = g_value_get_variant (value);
-        if (parameters)
-          {
-            g_autoptr(GPtrArray) array = NULL;
-            const gchar **args;
+      parameters = g_value_get_variant (value);
+      if (parameters) {
+        g_autoptr (GPtrArray) array = NULL;
+        const gchar **args;
 
-            array = variant_av_to_string_array (parameters);
-            args = (const gchar **) array->pdata;
+        array = variant_av_to_string_array (parameters);
+        args = (const gchar **)array->pdata;
 
-            g_debug ("Invoked with operation %s", args[0]);
+        g_debug ("Invoked with operation %s", args[0]);
 
-            if (args[0])
-              self->arg_operation = cmdline_operation_from_string (args[0]);
-            if (args[0] && args[1])
-              self->arg_device = g_strdup (args[1]);
+        if (args[0])
+          self->arg_operation = cmdline_operation_from_string (args[0]);
+        if (args[0] && args[1])
+          self->arg_device = g_strdup (args[1]);
 
-            if (!verify_argv (self, (const char **) args))
-              {
-                reset_command_line_args (self);
-                return;
-              }
-            g_debug ("Calling handle_argv() after setting property");
-            handle_argv (self);
-          }
-        break;
+        if (!verify_argv (self, (const char **)args)) {
+          reset_command_line_args (self);
+          return;
+        }
+        g_debug ("Calling handle_argv() after setting property");
+        handle_argv (self);
       }
+      break;
+    }
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
+  }
 }
 
 static void
@@ -680,7 +662,7 @@ cc_wwan_panel_class_init (CcWwanPanelClass *klass)
 static void
 cc_wwan_panel_init (CcWwanPanel *self)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_resources_register (cc_wwan_get_resource ());
 
@@ -693,44 +675,36 @@ cc_wwan_panel_init (CcWwanPanel *self)
   adw_combo_row_set_model (ADW_COMBO_ROW (self->data_list_row),
                            G_LIST_MODEL (self->data_devices_name_list));
 
-  if (cc_object_storage_has_object (CC_OBJECT_NMCLIENT))
-    {
-      self->nm_client = cc_object_storage_get_object (CC_OBJECT_NMCLIENT);
-      g_signal_connect_object (self->nm_client,
-                               "notify::wwan-enabled",
-                               G_CALLBACK (cc_wwan_panel_update_view),
-                               self, G_CONNECT_SWAPPED);
+  if (cc_object_storage_has_object (CC_OBJECT_NMCLIENT)) {
+    self->nm_client = cc_object_storage_get_object (CC_OBJECT_NMCLIENT);
+    g_signal_connect_object (self->nm_client,
+                             "notify::wwan-enabled",
+                             G_CALLBACK (cc_wwan_panel_update_view),
+                             self, G_CONNECT_SWAPPED);
+  } else {
+    g_warn_if_reached ();
+  }
 
-    }
-  else
-    {
-      g_warn_if_reached ();
-    }
+  if (self->nm_client) {
+    g_object_bind_property (self->nm_client, "wwan-enabled",
+                            self->enable_switch, "active",
+                            G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+  }
 
-  if (self->nm_client)
-    {
-      g_object_bind_property (self->nm_client, "wwan-enabled",
-                              self->enable_switch, "active",
-                              G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
-    }
+  if (cc_object_storage_has_object (CC_OBJECT_MMMANAGER)) {
+    self->mm_manager = cc_object_storage_get_object (CC_OBJECT_MMMANAGER);
 
-  if (cc_object_storage_has_object (CC_OBJECT_MMMANAGER))
-    {
-      self->mm_manager = cc_object_storage_get_object (CC_OBJECT_MMMANAGER);
+    g_signal_connect_object (self->mm_manager, "object-added",
+                             G_CALLBACK (wwan_panel_device_added_cb),
+                             self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->mm_manager, "object-removed",
+                             G_CALLBACK (wwan_panel_device_removed_cb),
+                             self, G_CONNECT_SWAPPED);
 
-      g_signal_connect_object (self->mm_manager, "object-added",
-                               G_CALLBACK (wwan_panel_device_added_cb),
-                               self, G_CONNECT_SWAPPED);
-      g_signal_connect_object (self->mm_manager, "object-removed",
-                               G_CALLBACK (wwan_panel_device_removed_cb),
-                               self, G_CONNECT_SWAPPED);
-
-      cc_wwan_panel_update_devices (self);
-    }
-  else
-    {
-      g_warn_if_reached ();
-    }
+    cc_wwan_panel_update_devices (self);
+  } else {
+    g_warn_if_reached ();
+  }
 
   /* Acquire Airplane Mode proxy */
   self->rfkill_proxy = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
@@ -741,20 +715,17 @@ cc_wwan_panel_init (CcWwanPanel *self)
                                                                  self->cancellable,
                                                                  &error);
 
-  if (error)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_printerr ("Error creating rfkill proxy: %s\n", error->message);
-    }
-  else
-    {
-      g_signal_connect_object (self->rfkill_proxy,
-                               "g-properties-changed",
-                               G_CALLBACK (cc_wwan_panel_update_view),
-                               self, G_CONNECT_SWAPPED);
+  if (error) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_printerr ("Error creating rfkill proxy: %s\n", error->message);
+  } else {
+    g_signal_connect_object (self->rfkill_proxy,
+                             "g-properties-changed",
+                             G_CALLBACK (cc_wwan_panel_update_view),
+                             self, G_CONNECT_SWAPPED);
 
-      cc_wwan_panel_update_view (self);
-    }
+    cc_wwan_panel_update_view (self);
+  }
 }
 
 static void
@@ -771,14 +742,12 @@ wwan_update_panel_visibility (MMManager *mm_manager)
   has_wwan = FALSE;
   devices = g_dbus_object_manager_get_objects (G_DBUS_OBJECT_MANAGER (mm_manager));
 
-  for (GList *item = devices; item != NULL; item = item->next)
-    {
-      if(wwan_panel_device_is_supported (item->data))
-        {
-          has_wwan = TRUE;
-          break;
-        }
+  for (GList *item = devices; item != NULL; item = item->next) {
+    if(wwan_panel_device_is_supported (item->data)) {
+      has_wwan = TRUE;
+      break;
     }
+  }
 
   /* Set the new visibility */
   application = CC_APPLICATION (g_application_get_default ());
@@ -794,9 +763,9 @@ wwan_update_panel_visibility (MMManager *mm_manager)
 void
 cc_wwan_panel_static_init_func (void)
 {
-  g_autoptr(GDBusConnection) system_bus = NULL;
-  g_autoptr(MMManager) mm_manager = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GDBusConnection) system_bus = NULL;
+  g_autoptr (MMManager) mm_manager = NULL;
+  g_autoptr (GError) error = NULL;
 
   /*
    * There could be other modems that are only handled by rfkill,
@@ -812,21 +781,18 @@ cc_wwan_panel_static_init_func (void)
                                       G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE,
                                       NULL, &error);
 
-  if (mm_manager == NULL)
-    {
-      CcApplication *application;
+  if (mm_manager == NULL) {
+    CcApplication *application;
 
-      g_warning ("Error connecting to ModemManager: %s", error->message);
+    g_warning ("Error connecting to ModemManager: %s", error->message);
 
-      application = CC_APPLICATION (g_application_get_default ());
-      cc_shell_model_set_panel_visibility (cc_application_get_model (application),
-                                           "wwan", FALSE);
-      return;
-    }
-  else
-    {
-      cc_object_storage_add_object (CC_OBJECT_MMMANAGER, mm_manager);
-    }
+    application = CC_APPLICATION (g_application_get_default ());
+    cc_shell_model_set_panel_visibility (cc_application_get_model (application),
+                                         "wwan", FALSE);
+    return;
+  } else {
+    cc_object_storage_add_object (CC_OBJECT_MMMANAGER, mm_manager);
+  }
 
   g_debug ("Monitoring ModemManager for WWAN devices");
 

@@ -34,12 +34,11 @@
 #include "screen/cc-screen-page.h"
 #include "usage/cc-usage-page.h"
 
-struct _CcPrivacyPanel
-{
-  CcPanel            parent_instance;
+struct _CcPrivacyPanel {
+  CcPanel parent_instance;
 
-  CcListRow         *bolt_row;
-  CcListRow         *location_row;
+  CcListRow *bolt_row;
+  CcListRow *location_row;
 };
 
 CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
@@ -87,7 +86,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
 #ifdef BUILD_THUNDERBOLT
-  CcBoltPage* bolt_page = cc_bolt_page_new ();
+  CcBoltPage *bolt_page = cc_bolt_page_new ();
 
   cc_panel_add_subpage (CC_PANEL (self), "thunderbolt", ADW_NAVIGATION_PAGE (bolt_page));
 

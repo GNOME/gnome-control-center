@@ -18,13 +18,12 @@
 #include <config.h>
 #include "cc-input-source-xkb.h"
 
-struct _CcInputSourceXkb
-{
-  CcInputSource  parent_instance;
+struct _CcInputSourceXkb {
+  CcInputSource parent_instance;
 
-  GnomeXkbInfo  *xkb_info;
-  gchar         *layout;
-  gchar         *variant;
+  GnomeXkbInfo *xkb_info;
+  gchar *layout;
+  gchar *variant;
 };
 
 G_DEFINE_TYPE (CcInputSourceXkb, cc_input_source_xkb, CC_TYPE_INPUT_SOURCE)
@@ -116,7 +115,7 @@ CcInputSourceXkb *
 cc_input_source_xkb_new_from_id (GnomeXkbInfo *xkb_info,
                                  const gchar  *id)
 {
-  g_auto(GStrv) tokens = NULL;
+  g_auto (GStrv) tokens = NULL;
 
   tokens = g_strsplit (id, "+", 2);
 

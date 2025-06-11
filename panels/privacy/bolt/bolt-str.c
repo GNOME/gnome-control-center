@@ -8,7 +8,7 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
@@ -27,7 +27,8 @@
 typedef void (* zero_fn_t) (void  *s,
                             size_t n);
 void
-bolt_erase_n (void *data, gsize n)
+bolt_erase_n (void  *data,
+              gsize  n)
 {
 #if !HAVE_FN_EXPLICIT_BZERO
   #warning no explicit bzero, using fallback
@@ -72,7 +73,7 @@ bolt_strv_from_ptr_array (GPtrArray **array)
     g_ptr_array_add (a, NULL);
 
   *array = NULL;
-  return (GStrv) g_ptr_array_free (a, FALSE);
+  return (GStrv)g_ptr_array_free (a, FALSE);
 }
 
 char *

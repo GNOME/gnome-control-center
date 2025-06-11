@@ -20,29 +20,28 @@
 #include "cc-wifi-connection-list.h"
 #include "cc-wifi-connection-row.h"
 
-struct _CcWifiConnectionList
-{
-  AdwBin         parent_instance;
+struct _CcWifiConnectionList {
+  AdwBin parent_instance;
 
-  GtkListBox    *listbox;
+  GtkListBox *listbox;
 
-  guint          freeze_count;
-  gboolean       updating;
+  guint freeze_count;
+  gboolean updating;
 
-  gboolean       checkable;
-  gboolean       forgettable;
-  gboolean       hide_unavailable;
-  gboolean       show_aps;
+  gboolean checkable;
+  gboolean forgettable;
+  gboolean hide_unavailable;
+  gboolean show_aps;
 
-  gboolean       activatable;
+  gboolean activatable;
 
-  NMClient      *client;
-  NMDeviceWifi  *device;
+  NMClient *client;
+  NMDeviceWifi *device;
 
-  NMConnection  *last_active;
+  NMConnection *last_active;
 
-  GPtrArray     *connections;
-  GPtrArray     *connections_row;
+  GPtrArray *connections;
+  GPtrArray *connections_row;
 
   /* AP SSID cache stores the APs SSID used for assigning it to a row.
    * This is necessary to efficiently remove it when its SSID changes.
@@ -53,27 +52,26 @@ struct _CcWifiConnectionList
    * In practice this will almost never happen, and if it does, we just
    * show and select the strongest AP.
    */
-  GHashTable    *ap_ssid_cache;
-  GHashTable    *ssid_to_row;
+  GHashTable *ap_ssid_cache;
+  GHashTable *ssid_to_row;
 };
 
-static void on_device_ap_added_cb   (CcWifiConnectionList *self,
-                                     NMAccessPoint        *ap,
-                                     NMDeviceWifi         *device);
+static void on_device_ap_added_cb (CcWifiConnectionList *self,
+                                   NMAccessPoint        *ap,
+                                   NMDeviceWifi         *device);
 static void on_device_ap_removed_cb (CcWifiConnectionList *self,
                                      NMAccessPoint        *ap,
                                      NMDeviceWifi         *device);
-static void on_row_configured_cb    (CcWifiConnectionList *self,
-                                     CcWifiConnectionRow  *row);
-static void on_row_forget_cb        (CcWifiConnectionList *self,
-                                     CcWifiConnectionRow  *row);
+static void on_row_configured_cb (CcWifiConnectionList *self,
+                                  CcWifiConnectionRow  *row);
+static void on_row_forget_cb (CcWifiConnectionList *self,
+                              CcWifiConnectionRow  *row);
 static void on_row_show_qr_code_cb (CcWifiConnectionList *self,
                                     CcWifiConnectionRow  *row);
 
 G_DEFINE_TYPE (CcWifiConnectionList, cc_wifi_connection_list, ADW_TYPE_BIN)
 
-enum
-{
+enum {
   PROP_0,
   PROP_CHECKABLE,
   PROP_HIDE_UNAVAILABLE,
@@ -85,9 +83,9 @@ enum
   PROP_LAST
 };
 
-static GParamSpec *props [PROP_LAST];
+static GParamSpec *props[PROP_LAST];
 
-static GBytes*
+static GBytes *
 new_hashable_ssid (GBytes *ssid)
 {
   GBytes *res;
@@ -96,8 +94,8 @@ new_hashable_ssid (GBytes *ssid)
 
   /* This is what nm_utils_same_ssid does, but returning it so that we can
    * use the result in other ways (i.e. hash table lookups). */
-  data = g_bytes_get_data ((GBytes*) ssid, &size);
-  if (data[size-1] == '\0')
+  data = g_bytes_get_data ((GBytes *)ssid, &size);
+  if (data[size - 1] == '\0')
     size -= 1;
   res = g_bytes_new (data, size);
 
@@ -114,28 +112,26 @@ connection_ignored (NMConnection *connection)
   if (!sw)
     return TRUE;
   if (g_strcmp0 (nm_setting_wireless_get_mode (sw), "adhoc") == 0 ||
-      g_strcmp0 (nm_setting_wireless_get_mode (sw), "ap") == 0)
-    {
-      return TRUE;
-    }
+      g_strcmp0 (nm_setting_wireless_get_mode (sw), "ap") == 0) {
+    return TRUE;
+  }
 
   return FALSE;
 }
 
-static CcWifiConnectionRow*
+static CcWifiConnectionRow *
 cc_wifi_connection_list_row_add (CcWifiConnectionList *self,
                                  NMConnection         *connection,
                                  NMAccessPoint        *ap,
                                  gboolean              known_connection)
 {
   CcWifiConnectionRow *res;
-  g_autoptr(GPtrArray) aps = NULL;
+  g_autoptr (GPtrArray) aps = NULL;
 
-  if (ap)
-    {
-      aps = g_ptr_array_new ();
-      g_ptr_array_add (aps, ap);
-    }
+  if (ap) {
+    aps = g_ptr_array_new ();
+    g_ptr_array_add (aps, ap);
+  }
 
   res = cc_wifi_connection_row_new (self->device,
                                     connection,
@@ -144,7 +140,7 @@ cc_wifi_connection_list_row_add (CcWifiConnectionList *self,
                                     known_connection,
                                     self->forgettable,
                                     self->activatable);
-                                  
+
 
 
   gtk_list_box_append (self->listbox, GTK_WIDGET (res));
@@ -173,24 +169,22 @@ clear_widget (CcWifiConnectionList *self)
 
   /* Remove all AP only rows */
   g_hash_table_iter_init (&iter, self->ssid_to_row);
-  while (g_hash_table_iter_next (&iter, NULL, (gpointer*) &row))
-    {
-      g_hash_table_iter_remove (&iter);
-      g_signal_emit_by_name (self, "remove-row", row);
-      gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
-    }
+  while (g_hash_table_iter_next (&iter, NULL, (gpointer *)&row)) {
+    g_hash_table_iter_remove (&iter);
+    g_signal_emit_by_name (self, "remove-row", row);
+    gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
+  }
 
   /* Remove all connection rows */
-  for (i = 0; i < self->connections_row->len; i++)
-    {
-      if (!g_ptr_array_index (self->connections_row, i))
-        continue;
+  for (i = 0; i < self->connections_row->len; i++) {
+    if (!g_ptr_array_index (self->connections_row, i))
+      continue;
 
-      row = g_ptr_array_index (self->connections_row, i);
-      g_ptr_array_index (self->connections_row, i) = NULL;
-      g_signal_emit_by_name (self, "remove-row", row);
-      gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
-    }
+    row = g_ptr_array_index (self->connections_row, i);
+    g_ptr_array_index (self->connections_row, i) = NULL;
+    g_signal_emit_by_name (self, "remove-row", row);
+    gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
+  }
 
   /* Reset the internal state */
   g_ptr_array_set_size (self->connections, 0);
@@ -204,7 +198,7 @@ update_connections (CcWifiConnectionList *self)
 {
   const GPtrArray *aps;
   const GPtrArray *acs_client;
-  g_autoptr(GPtrArray) acs = NULL;
+  g_autoptr (GPtrArray) acs = NULL;
   NMActiveConnection *ac;
   NMConnection *ac_con = NULL;
   gint i;
@@ -232,28 +226,26 @@ update_connections (CcWifiConnectionList *self)
   if (ac)
     ac_con = NM_CONNECTION (nm_active_connection_get_connection (ac));
 
-  if (ac_con && !g_ptr_array_find (acs, ac_con, NULL))
-    {
-      g_debug ("Adding remote connection for active connection");
-      g_ptr_array_add (acs, g_object_ref (ac_con));
-    }
+  if (ac_con && !g_ptr_array_find (acs, ac_con, NULL)) {
+    g_debug ("Adding remote connection for active connection");
+    g_ptr_array_add (acs, g_object_ref (ac_con));
+  }
 
-  for (i = 0; i < acs->len; i++)
-    {
-      NMConnection *con;
+  for (i = 0; i < acs->len; i++) {
+    NMConnection *con;
 
-      con = g_ptr_array_index (acs, i);
-      if (connection_ignored (con))
-        continue;
+    con = g_ptr_array_index (acs, i);
+    if (connection_ignored (con))
+      continue;
 
-      g_ptr_array_add (self->connections, g_object_ref (con));
-      if (self->hide_unavailable && con != ac_con)
-        g_ptr_array_add (self->connections_row, NULL);
-      else
-        g_ptr_array_add (self->connections_row,
-                         cc_wifi_connection_list_row_add (self, con,
-                         NULL, TRUE));
-    }
+    g_ptr_array_add (self->connections, g_object_ref (con));
+    if (self->hide_unavailable && con != ac_con)
+      g_ptr_array_add (self->connections_row, NULL);
+    else
+      g_ptr_array_add (self->connections_row,
+                       cc_wifi_connection_list_row_add (self, con,
+                                                        NULL, TRUE));
+  }
 
   /* Coldplug all known APs again */
   aps = nm_device_wifi_get_access_points (self->device);
@@ -264,19 +256,22 @@ update_connections (CcWifiConnectionList *self)
 }
 
 static void
-on_row_configured_cb (CcWifiConnectionList *self, CcWifiConnectionRow *row)
+on_row_configured_cb (CcWifiConnectionList *self,
+                      CcWifiConnectionRow  *row)
 {
   g_signal_emit_by_name (self, "configure", row);
 }
 
 static void
-on_row_forget_cb (CcWifiConnectionList *self, CcWifiConnectionRow *row)
+on_row_forget_cb (CcWifiConnectionList *self,
+                  CcWifiConnectionRow  *row)
 {
   g_signal_emit_by_name (self, "forget", row);
 }
 
 static void
-on_row_show_qr_code_cb (CcWifiConnectionList *self, CcWifiConnectionRow *row)
+on_row_show_qr_code_cb (CcWifiConnectionList *self,
+                        CcWifiConnectionRow  *row)
 {
   g_signal_emit_by_name (self, "show_qr_code", row);
 }
@@ -293,26 +288,23 @@ on_access_point_property_changed (CcWifiConnectionList *self,
 
   /* If the SSID changed then the AP needs to be added/removed from rows.
    * Do this by simulating an AP addition/removal.  */
-  if (g_str_equal (pspec->name, NM_ACCESS_POINT_SSID))
-    {
-      g_debug ("Simulating add/remove for SSID change");
-      on_device_ap_removed_cb (self, ap, self->device);
-      on_device_ap_added_cb (self, ap, self->device);
-      return;
-    }
+  if (g_str_equal (pspec->name, NM_ACCESS_POINT_SSID)) {
+    g_debug ("Simulating add/remove for SSID change");
+    on_device_ap_removed_cb (self, ap, self->device);
+    on_device_ap_added_cb (self, ap, self->device);
+    return;
+  }
 
   /* Otherwise, find all rows that contain the AP and update it. Do this by
    * first searching all rows with connections, and then looking it up in the
    * SSID rows if not found. */
-  for (i = 0; i < self->connections_row->len; i++)
-    {
-      row = g_ptr_array_index (self->connections_row, i);
-      if (row && cc_wifi_connection_row_has_access_point (row, ap))
-        {
-          cc_wifi_connection_row_update (row);
-          has_connection = TRUE;
-        }
+  for (i = 0; i < self->connections_row->len; i++) {
+    row = g_ptr_array_index (self->connections_row, i);
+    if (row && cc_wifi_connection_row_has_access_point (row, ap)) {
+      cc_wifi_connection_row_update (row);
+      has_connection = TRUE;
     }
+  }
 
   if (!self->show_aps || has_connection)
     return;
@@ -333,11 +325,11 @@ on_device_ap_added_cb (CcWifiConnectionList *self,
                        NMAccessPoint        *ap,
                        NMDeviceWifi         *device)
 {
-  g_autoptr(GPtrArray) connections = NULL;
+  g_autoptr (GPtrArray) connections = NULL;
   NM80211ApSecurityFlags rsn_flags;
   CcWifiConnectionRow *row;
   GBytes *ap_ssid;
-  g_autoptr(GBytes) ssid = NULL;
+  g_autoptr (GBytes) ssid = NULL;
   guint i, j;
 
   g_signal_connect_object (ap, "notify",
@@ -352,41 +344,37 @@ on_device_ap_added_cb (CcWifiConnectionList *self,
    * So it seems like the dummy AP entry that NM creates internally is not actually
    * compatible with the connection that is being activated.
    */
-  if (ap == nm_device_wifi_get_active_access_point (device))
-    {
-      NMActiveConnection *ac;
-      NMConnection *ac_con;
+  if (ap == nm_device_wifi_get_active_access_point (device)) {
+    NMActiveConnection *ac;
+    NMConnection *ac_con;
 
-      ac = nm_device_get_active_connection (NM_DEVICE (self->device));
+    ac = nm_device_get_active_connection (NM_DEVICE (self->device));
 
-      if (ac)
-        {
-          guint idx;
+    if (ac) {
+      guint idx;
 
-          ac_con = NM_CONNECTION (nm_active_connection_get_connection (ac));
+      ac_con = NM_CONNECTION (nm_active_connection_get_connection (ac));
 
-          if (!g_ptr_array_find (connections, ac_con, NULL) &&
-              g_ptr_array_find (self->connections, ac_con, &idx))
-            {
-              g_debug ("Adding active connection to list of valid connections for AP");
-              g_ptr_array_add (connections, g_object_ref (ac_con));
-            }
-        }
+      if (!g_ptr_array_find (connections, ac_con, NULL) &&
+          g_ptr_array_find (self->connections, ac_con, &idx)) {
+        g_debug ("Adding active connection to list of valid connections for AP");
+        g_ptr_array_add (connections, g_object_ref (ac_con));
+      }
     }
+  }
 
   /* Add the AP to all connection related rows, creating the row if neccessary. */
-  for (i = 0; i < connections->len; i++)
-    {
-      gboolean found = g_ptr_array_find (self->connections, g_ptr_array_index (connections, i), &j);
+  for (i = 0; i < connections->len; i++) {
+    gboolean found = g_ptr_array_find (self->connections, g_ptr_array_index (connections, i), &j);
 
-      g_assert (found);
+    g_assert (found);
 
-      row = g_ptr_array_index (self->connections_row, j);
-      if (!row)
-        row = cc_wifi_connection_list_row_add (self, g_ptr_array_index (connections, i), NULL, TRUE);
-      cc_wifi_connection_row_add_access_point (row, ap);
-      g_ptr_array_index (self->connections_row, j) = row;
-    }
+    row = g_ptr_array_index (self->connections_row, j);
+    if (!row)
+      row = cc_wifi_connection_list_row_add (self, g_ptr_array_index (connections, i), NULL, TRUE);
+    cc_wifi_connection_row_add_access_point (row, ap);
+    g_ptr_array_index (self->connections_row, j) = row;
+  }
 
   if (connections->len > 0)
     return;
@@ -412,16 +400,13 @@ on_device_ap_added_cb (CcWifiConnectionList *self,
   g_hash_table_insert (self->ap_ssid_cache, ap, g_bytes_ref (ssid));
 
   row = g_hash_table_lookup (self->ssid_to_row, ssid);
-  if (!row)
-    {
-      row = cc_wifi_connection_list_row_add (self, NULL, ap, FALSE);
+  if (!row) {
+    row = cc_wifi_connection_list_row_add (self, NULL, ap, FALSE);
 
-      g_hash_table_insert (self->ssid_to_row, g_bytes_ref (ssid), row);
-    }
-  else
-    {
-      cc_wifi_connection_row_add_access_point (row, ap);
-    }
+    g_hash_table_insert (self->ssid_to_row, g_bytes_ref (ssid), row);
+  } else {
+    cc_wifi_connection_row_add_access_point (row, ap);
+  }
 }
 
 static void
@@ -430,7 +415,7 @@ on_device_ap_removed_cb (CcWifiConnectionList *self,
                          NMDeviceWifi         *device)
 {
   CcWifiConnectionRow *row;
-  g_autoptr(GBytes) ssid = NULL;
+  g_autoptr (GBytes) ssid = NULL;
   gboolean found = FALSE;
   gint i;
 
@@ -438,28 +423,25 @@ on_device_ap_removed_cb (CcWifiConnectionList *self,
 
   /* Find any connection related row with the AP and remove the AP from it. Remove the
    * row if it was the last AP and we are hiding unavailable connections. */
-  for (i = 0; i < self->connections_row->len; i++)
-    {
-      row = g_ptr_array_index (self->connections_row, i);
-      if (row && cc_wifi_connection_row_remove_access_point (row, ap))
-        {
-          found = TRUE;
+  for (i = 0; i < self->connections_row->len; i++) {
+    row = g_ptr_array_index (self->connections_row, i);
+    if (row && cc_wifi_connection_row_remove_access_point (row, ap)) {
+      found = TRUE;
 
-          if (self->hide_unavailable)
-            {
-              g_ptr_array_index (self->connections_row, i) = NULL;
-              g_signal_emit_by_name (self, "remove-row", row);
-              gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
-            }
-        }
+      if (self->hide_unavailable) {
+        g_ptr_array_index (self->connections_row, i) = NULL;
+        g_signal_emit_by_name (self, "remove-row", row);
+        gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
+      }
     }
+  }
 
   if (found || !self->show_aps)
     return;
 
   /* If the AP was inserted into a row without a connection, then we will get an
    * SSID for it here. */
-  g_hash_table_steal_extended (self->ap_ssid_cache, ap, NULL, (gpointer*) &ssid);
+  g_hash_table_steal_extended (self->ap_ssid_cache, ap, NULL, (gpointer *)&ssid);
   if (!ssid)
     return;
 
@@ -467,12 +449,11 @@ on_device_ap_removed_cb (CcWifiConnectionList *self,
   row = g_hash_table_lookup (self->ssid_to_row, ssid);
   g_assert (row != NULL);
 
-  if (cc_wifi_connection_row_remove_access_point (row, ap))
-    {
-      g_hash_table_remove (self->ssid_to_row, ssid);
-      g_signal_emit_by_name (self, "remove-row", row);
-      gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
-    }
+  if (cc_wifi_connection_row_remove_access_point (row, ap)) {
+    g_hash_table_remove (self->ssid_to_row, ssid);
+    g_signal_emit_by_name (self, "remove-row", row);
+    gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
+  }
 }
 
 static void
@@ -522,11 +503,10 @@ on_device_state_changed_cb (CcWifiConnectionList *self,
   /* Just update the corresponding row if the AC is still the same. */
   if (self->last_active == connection &&
       g_ptr_array_find (self->connections, connection, &idx) &&
-      g_ptr_array_index (self->connections_row, idx))
-    {
-      cc_wifi_connection_row_update (g_ptr_array_index (self->connections_row, idx));
-      return;
-    }
+      g_ptr_array_index (self->connections_row, idx)) {
+    cc_wifi_connection_row_update (g_ptr_array_index (self->connections_row, idx));
+    return;
+  }
 
   /* Give up and do a full update. */
   update_connections (self);
@@ -545,12 +525,11 @@ on_device_active_ap_changed_cb (CcWifiConnectionList *self,
    * This is necessary because the AP is added before this property
    * is updated. */
   ap = nm_device_wifi_get_active_access_point (self->device);
-  if (ap)
-    {
-      g_debug ("Simulating add/remove for active AP change");
-      on_device_ap_removed_cb (self, ap, self->device);
-      on_device_ap_added_cb (self, ap, self->device);
-    }
+  if (ap) {
+    g_debug ("Simulating add/remove for active AP change");
+    on_device_ap_removed_cb (self, ap, self->device);
+    on_device_ap_added_cb (self, ap, self->device);
+  }
 }
 
 static void
@@ -633,8 +612,7 @@ cc_wifi_connection_list_get_property (GObject    *object,
 {
   CcWifiConnectionList *self = CC_WIFI_CONNECTION_LIST (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_CHECKABLE:
       g_value_set_boolean (value, self->checkable);
       break;
@@ -665,7 +643,7 @@ cc_wifi_connection_list_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -676,8 +654,7 @@ cc_wifi_connection_list_set_property (GObject      *object,
 {
   CcWifiConnectionList *self = CC_WIFI_CONNECTION_LIST (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_CHECKABLE:
       self->checkable = g_value_get_boolean (value);
       break;
@@ -708,7 +685,7 @@ cc_wifi_connection_list_set_property (GObject      *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -752,18 +729,18 @@ cc_wifi_connection_list_class_init (CcWifiConnectionListClass *klass)
                          NM_TYPE_DEVICE_WIFI,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
   props[PROP_FORGETTABLE] =
-      g_param_spec_boolean ("forgettable", "forgettable",
-                           "Passed to the created rows to show/hide the checkbox for deletion",
-                           FALSE,
-                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
-  
-  props[PROP_ACTIVATABLE] =   
+    g_param_spec_boolean ("forgettable", "forgettable",
+                          "Passed to the created rows to show/hide the checkbox for deletion",
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  props[PROP_ACTIVATABLE] =
     g_param_spec_boolean ("activatable", "Activatable",
                           "Determines if the rows are clickable",
                           TRUE,
                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  
+
 
   g_object_class_install_properties (object_class,
                                      PROP_LAST,
@@ -780,10 +757,10 @@ cc_wifi_connection_list_class_init (CcWifiConnectionListClass *klass)
                 0, NULL, NULL, NULL,
                 G_TYPE_NONE, 1, CC_TYPE_WIFI_CONNECTION_ROW);
   g_signal_new ("forget",
-               CC_TYPE_WIFI_CONNECTION_LIST,
-               G_SIGNAL_RUN_LAST,
-               0, NULL, NULL, NULL,
-               G_TYPE_NONE, 1, CC_TYPE_WIFI_CONNECTION_ROW);
+                CC_TYPE_WIFI_CONNECTION_LIST,
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL, NULL,
+                G_TYPE_NONE, 1, CC_TYPE_WIFI_CONNECTION_ROW);
   g_signal_new ("add-row",
                 CC_TYPE_WIFI_CONNECTION_LIST,
                 G_SIGNAL_RUN_LAST,
@@ -812,9 +789,9 @@ cc_wifi_connection_list_init (CcWifiConnectionList *self)
   self->connections = g_ptr_array_new_with_free_func (g_object_unref);
   self->connections_row = g_ptr_array_new ();
   self->ssid_to_row = g_hash_table_new_full (g_bytes_hash, g_bytes_equal,
-                                             (GDestroyNotify) g_bytes_unref, NULL);
+                                             (GDestroyNotify)g_bytes_unref, NULL);
   self->ap_ssid_cache = g_hash_table_new_full (g_direct_hash, g_direct_equal,
-                                               NULL, (GDestroyNotify) g_bytes_unref);
+                                               NULL, (GDestroyNotify)g_bytes_unref);
 }
 
 CcWifiConnectionList *
@@ -857,11 +834,10 @@ cc_wifi_connection_list_thaw (CcWifiConnectionList *self)
 
   self->freeze_count -= 1;
 
-  if (self->freeze_count == 0)
-    {
-      g_debug ("wifi connection list has been thawed");
-      update_connections (self);
-    }
+  if (self->freeze_count == 0) {
+    g_debug ("wifi connection list has been thawed");
+    update_connections (self);
+  }
 }
 
 GtkListBox *

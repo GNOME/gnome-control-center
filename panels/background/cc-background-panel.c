@@ -47,8 +47,7 @@
 #define INTERFACE_COLOR_SCHEME_KEY "color-scheme"
 #define INTERFACE_ACCENT_COLOR_KEY "accent-color"
 
-struct _CcBackgroundPanel
-{
+struct _CcBackgroundPanel {
   CcPanel parent_instance;
 
   GDBusConnection *connection;
@@ -76,7 +75,7 @@ static void on_settings_changed (CcBackgroundPanel *self);
 static void
 load_custom_css (CcBackgroundPanel *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr (GtkCssProvider) provider = NULL;
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/background/preview.css");
@@ -133,8 +132,7 @@ on_accent_color_toggled_cb (CcBackgroundPanel *self,
 static const char *
 get_color_tooltip (GDesktopAccentColor color)
 {
-  switch (color)
-    {
+  switch (color) {
     case G_DESKTOP_ACCENT_COLOR_BLUE:
       return _("Blue");
     case G_DESKTOP_ACCENT_COLOR_TEAL:
@@ -155,14 +153,13 @@ get_color_tooltip (GDesktopAccentColor color)
       return _("Slate");
     default:
       g_assert_not_reached ();
-    }
+  }
 }
 
 static const char *
 get_untranslated_color (GDesktopAccentColor color)
 {
-  switch (color)
-    {
+  switch (color) {
     case G_DESKTOP_ACCENT_COLOR_BLUE:
       return "blue";
     case G_DESKTOP_ACCENT_COLOR_TEAL:
@@ -183,7 +180,7 @@ get_untranslated_color (GDesktopAccentColor color)
       return "slate";
     default:
       g_assert_not_reached ();
-    }
+  }
 }
 
 static void
@@ -192,28 +189,27 @@ setup_accent_color_toggles (CcBackgroundPanel *self)
   GDesktopAccentColor accent_color = g_settings_get_enum (self->interface_settings, INTERFACE_ACCENT_COLOR_KEY);
   GDesktopAccentColor i;
 
-  for (i = G_DESKTOP_ACCENT_COLOR_BLUE; i <= G_DESKTOP_ACCENT_COLOR_SLATE; i++)
-    {
-      GtkWidget *button = GTK_WIDGET (gtk_toggle_button_new ());
-      GtkToggleButton *grouping_button = GTK_TOGGLE_BUTTON (gtk_widget_get_first_child (self->accent_box));
+  for (i = G_DESKTOP_ACCENT_COLOR_BLUE; i <= G_DESKTOP_ACCENT_COLOR_SLATE; i++) {
+    GtkWidget *button = GTK_WIDGET (gtk_toggle_button_new ());
+    GtkToggleButton *grouping_button = GTK_TOGGLE_BUTTON (gtk_widget_get_first_child (self->accent_box));
 
-      gtk_widget_set_tooltip_text (button, get_color_tooltip (i));
-      gtk_widget_add_css_class (button, "accent-button");
-      gtk_widget_add_css_class (button, get_untranslated_color (i));
-      g_object_set_data (G_OBJECT (button), "accent-color", GINT_TO_POINTER (i));
-      g_signal_connect_object (button, "toggled",
-                               G_CALLBACK (on_accent_color_toggled_cb),
-                               self,
-                               G_CONNECT_SWAPPED);
+    gtk_widget_set_tooltip_text (button, get_color_tooltip (i));
+    gtk_widget_add_css_class (button, "accent-button");
+    gtk_widget_add_css_class (button, get_untranslated_color (i));
+    g_object_set_data (G_OBJECT (button), "accent-color", GINT_TO_POINTER (i));
+    g_signal_connect_object (button, "toggled",
+                             G_CALLBACK (on_accent_color_toggled_cb),
+                             self,
+                             G_CONNECT_SWAPPED);
 
-      if (grouping_button != NULL)
-        gtk_toggle_button_set_group (GTK_TOGGLE_BUTTON (button), grouping_button);
+    if (grouping_button != NULL)
+      gtk_toggle_button_set_group (GTK_TOGGLE_BUTTON (button), grouping_button);
 
-      if (i == accent_color)
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+    if (i == accent_color)
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
 
-      gtk_box_append (GTK_BOX (self->accent_box), button);
-    }
+    gtk_box_append (GTK_BOX (self->accent_box), button);
+  }
 }
 
 static void
@@ -224,12 +220,11 @@ reload_accent_color_toggles (CcBackgroundPanel *self)
 
   for (child = gtk_widget_get_first_child (self->accent_box);
        child;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      GDesktopAccentColor child_color = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (child), "accent-color"));
+       child = gtk_widget_get_next_sibling (child)) {
+    GDesktopAccentColor child_color = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (child), "accent-color"));
 
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child), child_color == accent_color);
-    }
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (child), child_color == accent_color);
+  }
 }
 
 static void
@@ -239,19 +234,14 @@ reload_color_scheme (CcBackgroundPanel *self)
 
   scheme = g_settings_get_enum (self->interface_settings, INTERFACE_COLOR_SCHEME_KEY);
 
-  if (scheme == G_DESKTOP_COLOR_SCHEME_DEFAULT)
-    {
-      gtk_toggle_button_set_active (self->default_toggle, TRUE);
-    }
-  else if (scheme == G_DESKTOP_COLOR_SCHEME_PREFER_DARK)
-    {
-      gtk_toggle_button_set_active (self->dark_toggle, TRUE);
-    }
-  else
-    {
-      gtk_toggle_button_set_active (self->default_toggle, FALSE);
-      gtk_toggle_button_set_active (self->dark_toggle, FALSE);
-    }
+  if (scheme == G_DESKTOP_COLOR_SCHEME_DEFAULT) {
+    gtk_toggle_button_set_active (self->default_toggle, TRUE);
+  } else if (scheme == G_DESKTOP_COLOR_SCHEME_PREFER_DARK) {
+    gtk_toggle_button_set_active (self->dark_toggle, TRUE);
+  } else {
+    gtk_toggle_button_set_active (self->default_toggle, FALSE);
+    gtk_toggle_button_set_active (self->dark_toggle, FALSE);
+  }
 }
 
 static void
@@ -291,16 +281,15 @@ got_transition_proxy_cb (GObject      *source_object,
                          GAsyncResult *res,
                          gpointer      data)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   CcBackgroundPanel *self = data;
 
   self->proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
 
-  if (self->proxy == NULL)
-    {
-      g_warning ("Error creating proxy: %s", error->message);
-      return;
-    }
+  if (self->proxy == NULL) {
+    g_warning ("Error creating proxy: %s", error->message);
+    return;
+  }
 }
 
 /* Background */
@@ -369,34 +358,33 @@ reset_settings_if_defaults (CcBackgroundPanel *self,
     NULL
   };
 
-  for (i = 0; keys[i] != NULL; i++)
-    {
-      g_autoptr (GVariant) default_value = NULL;
-      g_autoptr (GVariant) user_value = NULL;
-      gboolean setting_is_default;
+  for (i = 0; keys[i] != NULL; i++) {
+    g_autoptr (GVariant) default_value = NULL;
+    g_autoptr (GVariant) user_value = NULL;
+    gboolean setting_is_default;
 
-      if (!check_dark && g_str_equal (keys[i], WP_URI_DARK_KEY))
-        continue;
+    if (!check_dark && g_str_equal (keys[i], WP_URI_DARK_KEY))
+      continue;
 
-      default_value = g_settings_get_default_value (settings, keys[i]);
-      user_value = g_settings_get_value (settings, keys[i]);
+    default_value = g_settings_get_default_value (settings, keys[i]);
+    user_value = g_settings_get_value (settings, keys[i]);
 
-      setting_is_default = g_variant_equal (default_value, user_value);
+    setting_is_default = g_variant_equal (default_value, user_value);
 
-      /* As a courtesy to distros that are a little lackadaisical about making sure
-       * schema defaults match the settings in the background item with the default
-       * picture, we only look at the URI to determine if we shouldn't clean out dconf.
-       *
-       * In otherwords, we still clean out the picture-uri key from dconf when a user
-       * selects the default background in control-center, even if after selecting it
-       * e.g., primary-color still mismatches with schema defaults.
-       */
-      if (g_str_equal (keys[i], WP_URI_KEY) && !setting_is_default)
-        return;
+    /* As a courtesy to distros that are a little lackadaisical about making sure
+     * schema defaults match the settings in the background item with the default
+     * picture, we only look at the URI to determine if we shouldn't clean out dconf.
+     *
+     * In otherwords, we still clean out the picture-uri key from dconf when a user
+     * selects the default background in control-center, even if after selecting it
+     * e.g., primary-color still mismatches with schema defaults.
+     */
+    if (g_str_equal (keys[i], WP_URI_KEY) && !setting_is_default)
+      return;
 
-      if (setting_is_default)
-        g_settings_reset (settings, keys[i]);
-    }
+    if (setting_is_default)
+      g_settings_reset (settings, keys[i]);
+  }
 
   g_settings_apply (settings);
 }
@@ -420,29 +408,25 @@ set_background (CcBackgroundPanel *self,
 
   g_settings_set_string (settings, WP_URI_KEY, uri);
 
-  if (set_dark)
-    {
-      const char *uri_dark;
+  if (set_dark) {
+    const char *uri_dark;
 
-      uri_dark = cc_background_item_get_uri_dark (item);
+    uri_dark = cc_background_item_get_uri_dark (item);
 
-      if (uri_dark && uri_dark[0])
-        g_settings_set_string (settings, WP_URI_DARK_KEY, uri_dark);
-      else
-        g_settings_set_string (settings, WP_URI_DARK_KEY, uri);
-    }
+    if (uri_dark && uri_dark[0])
+      g_settings_set_string (settings, WP_URI_DARK_KEY, uri_dark);
+    else
+      g_settings_set_string (settings, WP_URI_DARK_KEY, uri);
+  }
 
   /* Also set the placement if we have a URI and the previous value was none */
-  if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT)
-    {
+  if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT) {
+    g_settings_set_enum (settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
+  } else if (uri != NULL) {
+    style = g_settings_get_enum (settings, WP_OPTIONS_KEY);
+    if (style == G_DESKTOP_BACKGROUND_STYLE_NONE)
       g_settings_set_enum (settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
-    }
-  else if (uri != NULL)
-    {
-      style = g_settings_get_enum (settings, WP_OPTIONS_KEY);
-      if (style == G_DESKTOP_BACKGROUND_STYLE_NONE)
-        g_settings_set_enum (settings, WP_OPTIONS_KEY, cc_background_item_get_placement (item));
-    }
+  }
 
   if (flags & CC_BACKGROUND_ITEM_HAS_SHADING)
     g_settings_set_enum (settings, WP_SHADING_KEY, cc_background_item_get_shading (item));
@@ -553,7 +537,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   self->settings = g_settings_new (WP_PATH_ID);
   g_settings_delay (self->settings);
- 
+
   self->lock_settings = g_settings_new (WP_LOCK_PATH_ID);
   g_settings_delay (self->lock_settings);
 

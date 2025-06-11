@@ -27,29 +27,27 @@
 #define APP_PERMISSIONS_TABLE "devices"
 #define APP_PERMISSIONS_ID "camera"
 
-struct _CcCameraPage
-{
+struct _CcCameraPage {
   AdwNavigationPage parent_instance;
 
-  GtkListBox   *camera_apps_list_box;
+  GtkListBox *camera_apps_list_box;
   AdwSwitchRow *camera_row;
 
-  GSettings    *privacy_settings;
+  GSettings *privacy_settings;
   GCancellable *cancellable;
 
-  GDBusProxy   *perm_store;
-  GVariant     *camera_apps_perms;
-  GVariant     *camera_apps_data;
-  GHashTable   *camera_app_switches;
-  GHashTable   *camera_app_rows;
+  GDBusProxy *perm_store;
+  GVariant *camera_apps_perms;
+  GVariant *camera_apps_data;
+  GHashTable *camera_app_switches;
+  GHashTable *camera_app_rows;
 
   GtkSizeGroup *camera_icon_size_group;
 };
 
 G_DEFINE_TYPE (CcCameraPage, cc_camera_page, ADW_TYPE_NAVIGATION_PAGE)
 
-typedef struct
-{
+typedef struct {
   CcCameraPage *self;
   GtkWidget *widget;
   gchar *app_id;
@@ -61,8 +59,8 @@ static void
 camera_app_state_data_free (CameraAppStateData *data,
                             GClosure           *closure)
 {
-    g_free (data->app_id);
-    g_slice_free (CameraAppStateData, data);
+  g_free (data->app_id);
+  g_slice_free (CameraAppStateData, data);
 }
 
 static void
@@ -70,21 +68,20 @@ on_perm_store_set_done (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
 {
-  g_autoptr(GVariant) results = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GVariant) results = NULL;
+  g_autoptr (GError) error = NULL;
   CameraAppStateData *data;
 
   results = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
                                       res,
                                       &error);
-  if (results == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed to store permissions: %s", error->message);
-      return;
-    }
+  if (results == NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to store permissions: %s", error->message);
+    return;
+  }
 
-  data = (CameraAppStateData *) user_data;
+  data = (CameraAppStateData *)user_data;
   data->changing_state = FALSE;
   gtk_switch_set_state (GTK_SWITCH (data->widget), data->pending_state);
 }
@@ -94,7 +91,7 @@ on_camera_app_state_set (GtkSwitch *widget,
                          gboolean   state,
                          gpointer   user_data)
 {
-  CameraAppStateData *data = (CameraAppStateData *) user_data;
+  CameraAppStateData *data = (CameraAppStateData *)user_data;
   GVariantBuilder builder;
   CcCameraPage *self;
   GVariantIter iter;
@@ -115,25 +112,23 @@ on_camera_app_state_set (GtkSwitch *widget,
 
   g_variant_iter_init (&iter, self->camera_apps_perms);
   g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
-  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
-    {
-      gchar *tmp = NULL;
+  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value)) {
+    gchar *tmp = NULL;
 
-      /* It's OK to drop the entry if it's not in expected format */
-      if (g_strv_length (value) != 1)
-        continue;
+    /* It's OK to drop the entry if it's not in expected format */
+    if (g_strv_length (value) != 1)
+      continue;
 
-      if (g_strcmp0 (data->app_id, key) == 0)
-        {
-          tmp = value[0];
-          value[0] = state ? "yes" : "no";
-        }
-
-      g_variant_builder_add (&builder, "{s^as}", key, value);
-
-      if (tmp != NULL)
-        value[0] = tmp;
+    if (g_strcmp0 (data->app_id, key) == 0) {
+      tmp = value[0];
+      value[0] = state ? "yes" : "no";
     }
+
+    g_variant_builder_add (&builder, "{s^as}", key, value);
+
+    if (tmp != NULL)
+      value[0] = tmp;
+  }
 
   params = g_variant_new ("(sbsa{sas}v)",
                           APP_PERMISSIONS_TABLE,
@@ -185,11 +180,10 @@ add_camera_app (CcCameraPage *self,
   GIcon *icon;
 
   w = g_hash_table_lookup (self->camera_app_switches, app_id);
-  if (w != NULL)
-    {
-      gtk_switch_set_active (GTK_SWITCH (w), enabled);
-      return;
-    }
+  if (w != NULL) {
+    gtk_switch_set_active (GTK_SWITCH (w), enabled);
+    return;
+  }
 
   desktop_id = g_strdup_printf ("%s.desktop", app_id);
   app_info = g_desktop_app_info_new (desktop_id);
@@ -242,7 +236,7 @@ add_camera_app (CcCameraPage *self,
                          "state-set",
                          G_CALLBACK (on_camera_app_state_set),
                          data,
-                         (GClosureNotify) camera_app_state_data_free,
+                         (GClosureNotify)camera_app_state_data_free,
                          0);
 }
 
@@ -266,31 +260,27 @@ update_perm_store (CcCameraPage *self,
   /* We iterate over all rows, if the permissions do not contain the app id of
      the row, we remove it. */
   g_hash_table_iter_init (&row_iter, self->camera_app_rows);
-  while (g_hash_table_iter_next (&row_iter, (gpointer *) &key, (gpointer *) &row))
-    {
-      if (!g_variant_lookup_value (permissions, key, NULL))
-        {
-          gtk_list_box_remove (self->camera_apps_list_box, row);
-          g_hash_table_remove (self->camera_app_switches, key);
-          g_hash_table_iter_remove (&row_iter);
-        }
+  while (g_hash_table_iter_next (&row_iter, (gpointer *)&key, (gpointer *)&row)) {
+    if (!g_variant_lookup_value (permissions, key, NULL)) {
+      gtk_list_box_remove (self->camera_apps_list_box, row);
+      g_hash_table_remove (self->camera_app_switches, key);
+      g_hash_table_iter_remove (&row_iter);
     }
+  }
 
   g_variant_iter_init (&iter, permissions);
-  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
-    {
-      gboolean enabled;
+  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value)) {
+    gboolean enabled;
 
-      if (g_strv_length (value) != 1)
-        {
-          g_debug ("Permissions for %s in incorrect format, ignoring..", key);
-          continue;
-        }
-
-      enabled = (g_strcmp0 (value[0], "no") != 0);
-
-      add_camera_app (self, key, enabled);
+    if (g_strv_length (value) != 1) {
+      g_debug ("Permissions for %s in incorrect format, ignoring..", key);
+      continue;
     }
+
+    enabled = (g_strcmp0 (value[0], "no") != 0);
+
+    add_camera_app (self, key, enabled);
+  }
 }
 
 static void
@@ -301,9 +291,9 @@ on_perm_store_signal (GDBusProxy *proxy,
                       gpointer    user_data)
 {
   GVariant *permissions, *permissions_data;
-  g_autoptr(GVariant) boxed_permission_data = NULL;
-  g_autoptr(GVariant) table = NULL;
-  g_autoptr(GVariant) id = NULL;
+  g_autoptr (GVariant) boxed_permission_data = NULL;
+  g_autoptr (GVariant) table = NULL;
+  g_autoptr (GVariant) id = NULL;
 
   if (g_strcmp0 (signal_name, "Changed") != 0)
     return;
@@ -327,18 +317,17 @@ on_perm_store_lookup_done (GObject      *source_object,
 {
   CcCameraPage *self = user_data;
   GVariant *ret, *permissions, *permissions_data;
-  g_autoptr(GVariant) boxed_permission_data = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GVariant) boxed_permission_data = NULL;
+  g_autoptr (GError) error = NULL;
 
   ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
                                   res,
                                   &error);
-  if (ret == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed fetch permissions from flatpak permission store: %s", error->message);
-      return;
-    }
+  if (ret == NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed fetch permissions from flatpak permission store: %s", error->message);
+    return;
+  }
 
   permissions = g_variant_get_child_value (ret, 0);
   boxed_permission_data = g_variant_get_child_value (ret, 1);
@@ -359,16 +348,15 @@ on_perm_store_ready (GObject      *source_object,
 {
   CcCameraPage *self;
   GVariant *params;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   GDBusProxy *proxy;
 
   proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (proxy == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed to connect to flatpak permission store: %s", error->message);
-      return;
-    }
+  if (proxy == NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to connect to flatpak permission store: %s", error->message);
+    return;
+  }
   self = user_data;
   self->perm_store = proxy;
 

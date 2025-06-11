@@ -32,46 +32,45 @@
 
 #include "cc-bolt-page.h"
 
-struct _CcBoltPage
-{
-  AdwNavigationPage   parent;
+struct _CcBoltPage {
+  AdwNavigationPage parent;
 
-  BoltClient         *client;
+  BoltClient *client;
 
   /* headerbar menu */
-  GtkBox             *headerbar_box;
-  GtkLockButton      *lock_button;
+  GtkBox *headerbar_box;
+  GtkLockButton *lock_button;
 
   /* main ui */
-  GtkStack           *container;
+  GtkStack *container;
 
   /* empty state */
-  AdwStatusPage      *notb_page;
+  AdwStatusPage *notb_page;
 
   /* notifications */
-  AdwToastOverlay    *toast_overlay;
+  AdwToastOverlay *toast_overlay;
 
   /* authmode */
-  GtkSwitch          *authmode_switch;
-  AdwActionRow       *direct_access_row;
+  GtkSwitch *authmode_switch;
+  AdwActionRow *direct_access_row;
 
   /* device list */
-  GHashTable         *devices;
+  GHashTable *devices;
 
-  GtkStack           *devices_stack;
-  GtkBox             *devices_box;
-  GtkBox             *pending_box;
+  GtkStack *devices_stack;
+  GtkBox *devices_box;
+  GtkBox *pending_box;
 
-  GtkListBox         *devices_list;
-  GtkListBox         *pending_list;
+  GtkListBox *devices_list;
+  GtkListBox *pending_list;
 
   /* device details dialog */
   CcBoltDeviceDialog *device_dialog;
 
   /* polkit integration */
-  GPermission        *permission;
+  GPermission *permission;
 
-  GCancellable       *cancellable;
+  GCancellable *cancellable;
 };
 
 /* initialization */
@@ -81,15 +80,15 @@ static void           bolt_client_ready (GObject      *source,
 
 /* panel functions */
 static void                cc_bolt_page_set_no_thunderbolt (CcBoltPage *self,
-                                                             const char *custom_msg);
+                                                            const char *custom_msg);
 
 static void                cc_bolt_page_name_owner_changed (CcBoltPage *self);
 
 static CcBoltDeviceEntry * cc_bolt_page_add_device (CcBoltPage *self,
-                                                     BoltDevice *dev);
+                                                    BoltDevice *dev);
 
 static void                cc_bolt_page_del_device_entry (CcBoltPage        *self,
-                                                           CcBoltDeviceEntry *entry);
+                                                          CcBoltDeviceEntry *entry);
 
 static void                cc_bolt_page_authmode_sync (CcBoltPage *self);
 
@@ -138,22 +137,21 @@ static void      on_permission_notify_cb (GPermission *permission,
 G_DEFINE_TYPE (CcBoltPage, cc_bolt_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
-update_visibility (BoltClient  *client,
-                   const char  *path,
-                   gpointer     user_data)
+update_visibility (BoltClient *client,
+                   const char *path,
+                   gpointer    user_data)
 {
-  g_autoptr(GPtrArray) devices = NULL;
+  g_autoptr (GPtrArray) devices = NULL;
   gboolean visible = FALSE;
   CcBoltPage *self;
 
   self = CC_BOLT_PAGE (user_data);
 
-  if (client)
-    {
-      devices = bolt_client_list_devices (client, self->cancellable, NULL);
-      if (devices)
-        visible = devices->len > 0;
-    }
+  if (client) {
+    devices = bolt_client_list_devices (client, self->cancellable, NULL);
+    if (devices)
+      visible = devices->len > 0;
+  }
 
   gtk_widget_set_visible (GTK_WIDGET (self), visible);
 }
@@ -169,11 +167,10 @@ on_visibility_client_ready (GObject      *source,
   self = CC_BOLT_PAGE (user_data);
 
   client = bolt_client_new_finish (res, NULL);
-  if (client == NULL)
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
-      return;
-    }
+  if (client == NULL) {
+    gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
+    return;
+  }
 
   g_signal_connect_object (client,
                            "device-added",
@@ -193,31 +190,30 @@ bolt_client_ready (GObject      *source,
                    GAsyncResult *res,
                    gpointer      user_data)
 {
-  g_autoptr(GError) err = NULL;
-  g_autoptr(CcBoltPage) self = NULL;
+  g_autoptr (GError) err = NULL;
+  g_autoptr (CcBoltPage) self = NULL;
   BoltClient *client;
 
   self = CC_BOLT_PAGE (user_data);
   client = bolt_client_new_finish (res, &err);
 
-  if (client == NULL)
-    {
-      const char *text;
+  if (client == NULL) {
+    const char *text;
 
-      /* operation got cancelled because the panel got destroyed */
-      if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED) ||
-          g_error_matches (err, G_IO_ERROR, G_IO_ERROR_FAILED_HANDLED))
-        return;
-
-      g_warning ("Could not create client: %s", err->message);
-      text = _("The Thunderbolt subsystem (boltd) is not installed or "
-               "not set up properly.");
-
-      adw_status_page_set_description (self->notb_page, text);
-      gtk_stack_set_visible_child_name (self->container, "no-thunderbolt");
-
+    /* operation got cancelled because the panel got destroyed */
+    if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED) ||
+        g_error_matches (err, G_IO_ERROR, G_IO_ERROR_FAILED_HANDLED))
       return;
-    }
+
+    g_warning ("Could not create client: %s", err->message);
+    text = _("The Thunderbolt subsystem (boltd) is not installed or "
+             "not set up properly.");
+
+    adw_status_page_set_description (self->notb_page, text);
+    gtk_stack_set_visible_child_name (self->container, "no-thunderbolt");
+
+    return;
+  }
 
   g_signal_connect_object (client,
                            "notify::g-name-owner",
@@ -274,20 +270,19 @@ bolt_client_ready (GObject      *source,
 }
 
 static gboolean
-devices_table_transfer_entry (GHashTable   *from,
-                              GHashTable   *to,
-                              gconstpointer key)
+devices_table_transfer_entry (GHashTable    *from,
+                              GHashTable    *to,
+                              gconstpointer  key)
 {
   gpointer k, v;
   gboolean found;
 
   found = g_hash_table_lookup_extended (from, key, &k, &v);
 
-  if (found)
-    {
-      g_hash_table_steal (from, key);
-      g_hash_table_insert (to, k, v);
-    }
+  if (found) {
+    g_hash_table_steal (from, key);
+    g_hash_table_insert (to, k, v);
+  }
 
   return found;
 }
@@ -300,48 +295,45 @@ devices_table_clear_entries (GHashTable *table,
   gpointer key, value;
 
   g_hash_table_iter_init (&iter, table);
-  while (g_hash_table_iter_next (&iter, &key, &value))
-    {
-      CcBoltDeviceEntry *entry = value;
+  while (g_hash_table_iter_next (&iter, &key, &value)) {
+    CcBoltDeviceEntry *entry = value;
 
-      cc_bolt_page_del_device_entry (self, entry);
-      g_hash_table_iter_remove (&iter);
-    }
+    cc_bolt_page_del_device_entry (self, entry);
+    g_hash_table_iter_remove (&iter);
+  }
 }
 
 static void
 devices_table_synchronize (CcBoltPage *self)
 {
-  g_autoptr(GHashTable) old = NULL;
-  g_autoptr(GPtrArray) devices = NULL;
-  g_autoptr(GError) err = NULL;
+  g_autoptr (GHashTable) old = NULL;
+  g_autoptr (GPtrArray) devices = NULL;
+  g_autoptr (GError) err = NULL;
   guint i;
 
   devices = bolt_client_list_devices (self->client, self->cancellable, &err);
 
-  if (!devices)
-    {
-      g_warning ("Could not list devices: %s", err->message);
-      devices = g_ptr_array_new_with_free_func (g_object_unref);
-    }
+  if (!devices) {
+    g_warning ("Could not list devices: %s", err->message);
+    devices = g_ptr_array_new_with_free_func (g_object_unref);
+  }
 
   old = self->devices;
   self->devices = g_hash_table_new (g_str_hash, g_str_equal);
 
-  for (i = 0; i < devices->len; i++)
-    {
-      BoltDevice *dev = g_ptr_array_index (devices, i);
-      const char *path;
-      gboolean found;
+  for (i = 0; i < devices->len; i++) {
+    BoltDevice *dev = g_ptr_array_index (devices, i);
+    const char *path;
+    gboolean found;
 
-      path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (dev));
-      found = devices_table_transfer_entry (old, self->devices, path);
+    path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (dev));
+    found = devices_table_transfer_entry (old, self->devices, path);
 
-      if (found)
-        continue;
+    if (found)
+      continue;
 
-      cc_bolt_page_add_device (self, dev);
-    }
+    cc_bolt_page_add_device (self, dev);
+  }
 
   devices_table_clear_entries (old, self);
   gtk_stack_set_visible_child_name (self->container, "devices-listing");
@@ -363,11 +355,11 @@ list_box_sync_visible (GtkListBox *listbox)
 
 static GtkWidget *
 cc_bolt_page_box_for_listbox (CcBoltPage *self,
-                               GtkListBox *lstbox)
+                              GtkListBox *lstbox)
 {
-  if ((gpointer) lstbox == self->devices_list)
+  if ((gpointer)lstbox == self->devices_list)
     return GTK_WIDGET (self->devices_box);
-  else if ((gpointer) lstbox == self->pending_list)
+  else if ((gpointer)lstbox == self->pending_list)
     return GTK_WIDGET (self->pending_box);
 
   g_return_val_if_reached (NULL);
@@ -375,7 +367,7 @@ cc_bolt_page_box_for_listbox (CcBoltPage *self,
 
 static CcBoltDeviceEntry *
 cc_bolt_page_add_device (CcBoltPage *self,
-                          BoltDevice *dev)
+                         BoltDevice *dev)
 {
   CcBoltDeviceEntry *entry;
   BoltDeviceType type;
@@ -393,18 +385,15 @@ cc_bolt_page_add_device (CcBoltPage *self,
   /* add to the list box */
   status = bolt_device_get_status (dev);
 
-  if (bolt_status_is_pending (status))
-    {
-      gtk_list_box_append (self->pending_list, GTK_WIDGET (entry));
-      gtk_widget_set_visible (GTK_WIDGET (self->pending_list), TRUE);
-      gtk_widget_set_visible (GTK_WIDGET (self->pending_box), TRUE);
-    }
-  else
-    {
-      gtk_list_box_append (self->devices_list, GTK_WIDGET (entry));
-      gtk_widget_set_visible (GTK_WIDGET (self->devices_list), TRUE);
-      gtk_widget_set_visible (GTK_WIDGET (self->devices_box), TRUE);
-    }
+  if (bolt_status_is_pending (status)) {
+    gtk_list_box_append (self->pending_list, GTK_WIDGET (entry));
+    gtk_widget_set_visible (GTK_WIDGET (self->pending_list), TRUE);
+    gtk_widget_set_visible (GTK_WIDGET (self->pending_box), TRUE);
+  } else {
+    gtk_list_box_append (self->devices_list, GTK_WIDGET (entry));
+    gtk_widget_set_visible (GTK_WIDGET (self->devices_list), TRUE);
+    gtk_widget_set_visible (GTK_WIDGET (self->devices_box), TRUE);
+  }
 
   g_signal_connect_object (entry,
                            "status-changed",
@@ -413,14 +402,14 @@ cc_bolt_page_add_device (CcBoltPage *self,
                            0);
 
   gtk_stack_set_visible_child_name (self->devices_stack, "have-devices");
-  g_hash_table_insert (self->devices, (gpointer) path, entry);
+  g_hash_table_insert (self->devices, (gpointer)path, entry);
 
   return entry;
 }
 
 static void
 cc_bolt_page_del_device_entry (CcBoltPage        *self,
-                                CcBoltDeviceEntry *entry)
+                               CcBoltDeviceEntry *entry)
 {
   BoltDevice *dev;
   GtkWidget *box;
@@ -428,11 +417,10 @@ cc_bolt_page_del_device_entry (CcBoltPage        *self,
   gboolean show;
 
   dev = cc_bolt_device_entry_get_device (entry);
-  if (cc_bolt_device_dialog_device_equal (self->device_dialog, dev))
-    {
-      gtk_window_close (GTK_WINDOW (self->device_dialog));
-      cc_bolt_device_dialog_set_device (self->device_dialog, NULL, NULL);
-    }
+  if (cc_bolt_device_dialog_device_equal (self->device_dialog, dev)) {
+    gtk_window_close (GTK_WINDOW (self->device_dialog));
+    cc_bolt_device_dialog_set_device (self->device_dialog, NULL, NULL);
+  }
 
   p = gtk_widget_get_parent (GTK_WIDGET (entry));
   gtk_list_box_remove (GTK_LIST_BOX (p), GTK_WIDGET (entry));
@@ -442,10 +430,9 @@ cc_bolt_page_del_device_entry (CcBoltPage        *self,
   gtk_widget_set_visible (box, show);
 
   if (!gtk_widget_is_visible (GTK_WIDGET (self->pending_list)) &&
-      !gtk_widget_is_visible (GTK_WIDGET (self->devices_list)))
-    {
-      gtk_stack_set_visible_child_name (self->devices_stack, "no-devices");
-    }
+      !gtk_widget_is_visible (GTK_WIDGET (self->devices_list))) {
+    gtk_stack_set_visible_child_name (self->devices_stack, "no-devices");
+  }
 }
 
 static void
@@ -498,15 +485,14 @@ cc_panel_list_box_migrate (CcBoltPage        *self,
 /* bolt client signals */
 static void
 cc_bolt_page_set_no_thunderbolt (CcBoltPage *self,
-                                  const char *msg)
+                                 const char *msg)
 {
-  if (!msg)
-    {
-      msg = _("Thunderbolt could not be detected.\n"
-              "Either the system lacks Thunderbolt support, "
-              "it has been disabled in the BIOS or is set to "
-              "an unsupported security level in the BIOS.");
-    }
+  if (!msg) {
+    msg = _("Thunderbolt could not be detected.\n"
+            "Either the system lacks Thunderbolt support, "
+            "it has been disabled in the BIOS or is set to "
+            "an unsupported security level in the BIOS.");
+  }
 
   adw_status_page_set_description (self->notb_page, msg);
   gtk_stack_set_visible_child_name (self->container, "no-thunderbolt");
@@ -523,20 +509,18 @@ cc_bolt_page_name_owner_changed (CcBoltPage *self)
 
   name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->client));
 
-  if (name_owner == NULL)
-    {
-      cc_bolt_page_set_no_thunderbolt (self, NULL);
-      devices_table_clear_entries (self->devices, self);
-      gtk_widget_set_visible (GTK_WIDGET (self->headerbar_box), FALSE);
-      return;
-    }
+  if (name_owner == NULL) {
+    cc_bolt_page_set_no_thunderbolt (self, NULL);
+    devices_table_clear_entries (self->devices, self);
+    gtk_widget_set_visible (GTK_WIDGET (self->headerbar_box), FALSE);
+    return;
+  }
 
   gtk_stack_set_visible_child_name (self->container, "loading");
 
   sl = bolt_client_get_security (client);
 
-  switch (sl)
-    {
+  switch (sl) {
     case BOLT_SECURITY_NONE:
     case BOLT_SECURITY_SECURE:
     case BOLT_SECURITY_USER:
@@ -550,29 +534,25 @@ cc_bolt_page_name_owner_changed (CcBoltPage *self)
       break;
 
     case BOLT_SECURITY_UNKNOWN:
-      text = _("Thunderbolt security level could not be determined.");;
+      text = _("Thunderbolt security level could not be determined.");
       break;
-    }
+  }
 
-  if (notb)
-    {
-      /* security level is unknown or un-handled */
-      cc_bolt_page_set_no_thunderbolt (self, text);
-      return;
-    }
+  if (notb) {
+    /* security level is unknown or un-handled */
+    cc_bolt_page_set_no_thunderbolt (self, text);
+    return;
+  }
 
-  if (self->permission)
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self->headerbar_box), TRUE);
-    }
-  else
-    {
-      polkit_permission_new ("org.freedesktop.bolt.manage",
-                             NULL,
-                             self->cancellable,
-                             on_permission_ready,
-                             g_object_ref (self));
-    }
+  if (self->permission) {
+    gtk_widget_set_visible (GTK_WIDGET (self->headerbar_box), TRUE);
+  } else {
+    polkit_permission_new ("org.freedesktop.bolt.manage",
+                           NULL,
+                           self->cancellable,
+                           on_permission_ready,
+                           g_object_ref (self));
+  }
 
   devices_table_synchronize (self);
 }
@@ -591,7 +571,7 @@ on_bolt_device_added_cb (BoltClient *cli,
                          const char *path,
                          CcBoltPage *self)
 {
-  g_autoptr(GError) err = NULL;
+  g_autoptr (GError) err = NULL;
   GDBusConnection *bus;
   BoltDevice *dev;
   gboolean found;
@@ -604,11 +584,10 @@ on_bolt_device_added_cb (BoltClient *cli,
   bus = g_dbus_proxy_get_connection (G_DBUS_PROXY (self->client));
   dev = bolt_device_new_for_object_path (bus, path, self->cancellable, &err);
 
-  if (!dev)
-    {
-      g_warning ("Could not create proxy for %s", path);
-      return;
-    }
+  if (!dev) {
+    g_warning ("Could not create proxy for %s", path);
+    return;
+  }
 
   cc_bolt_page_add_device (self, dev);
 }
@@ -644,38 +623,35 @@ on_authmode_ready (GObject      *source_object,
                    GAsyncResult *res,
                    gpointer      user_data)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   BoltClient *client = BOLT_CLIENT (source_object);
   CcBoltPage *self;
   gboolean ok;
 
   ok = bolt_client_set_authmode_finish (client, res, &error);
-  if (ok)
-    {
-      BoltAuthMode mode;
-      gboolean enabled;
+  if (ok) {
+    BoltAuthMode mode;
+    gboolean enabled;
 
-      self = CC_BOLT_PAGE (user_data);
-      mode = bolt_client_get_authmode (client);
-      enabled = (mode & BOLT_AUTH_ENABLED) != 0;
-      gtk_switch_set_state (self->authmode_switch, enabled);
-    }
-  else
-    {
-      AdwToast *toast;
+    self = CC_BOLT_PAGE (user_data);
+    mode = bolt_client_get_authmode (client);
+    enabled = (mode & BOLT_AUTH_ENABLED) != 0;
+    gtk_switch_set_state (self->authmode_switch, enabled);
+  } else {
+    AdwToast *toast;
 
-      g_warning ("Could not set authmode: %s", error->message);
+    g_warning ("Could not set authmode: %s", error->message);
 
-      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        return;
+    if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      return;
 
-      self = CC_BOLT_PAGE (user_data);
-      toast = adw_toast_new_format (_("Error switching direct mode: %s"), error->message);
-      adw_toast_overlay_add_toast (self->toast_overlay, toast);
+    self = CC_BOLT_PAGE (user_data);
+    toast = adw_toast_new_format (_("Error switching direct mode: %s"), error->message);
+    adw_toast_overlay_add_toast (self->toast_overlay, toast);
 
-      /* make sure we are reflecting the correct state */
-      cc_bolt_page_authmode_sync (self);
-    }
+    /* make sure we are reflecting the correct state */
+    cc_bolt_page_authmode_sync (self);
+  }
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->authmode_switch), TRUE);
 }
@@ -706,7 +682,7 @@ static void
 on_device_entry_row_activated_cb (CcBoltPage    *self,
                                   GtkListBoxRow *row)
 {
-  g_autoptr(GPtrArray) parents = NULL;
+  g_autoptr (GPtrArray) parents = NULL;
   CcBoltDeviceEntry *entry;
   GtkWindow *toplevel;
   BoltDevice *device;
@@ -724,27 +700,26 @@ on_device_entry_row_activated_cb (CcBoltPage    *self,
   iter = device;
 
   parent = bolt_device_get_parent (iter);
-  while (parent != NULL)
-    {
-      g_autofree char *path = NULL;
-      CcBoltDeviceEntry *child;
-      BoltDevice *dev;
+  while (parent != NULL) {
+    g_autofree char *path = NULL;
+    CcBoltDeviceEntry *child;
+    BoltDevice *dev;
 
-      path = bolt_gen_object_path (BOLT_DBUS_PATH_DEVICES, parent);
+    path = bolt_gen_object_path (BOLT_DBUS_PATH_DEVICES, parent);
 
-      /* NB: the host device is not a peripheral and thus not
-       * in the hash table; therefore when get a NULL back, we
-       * should have reached the end of the chain */
-      child = g_hash_table_lookup (self->devices, path);
-      if (!child)
-	break;
+    /* NB: the host device is not a peripheral and thus not
+     * in the hash table; therefore when get a NULL back, we
+     * should have reached the end of the chain */
+    child = g_hash_table_lookup (self->devices, path);
+    if (!child)
+      break;
 
-      dev = cc_bolt_device_entry_get_device (child);
-      g_ptr_array_add (parents, g_object_ref (dev));
-      iter = dev;
+    dev = cc_bolt_device_entry_get_device (child);
+    g_ptr_array_add (parents, g_object_ref (dev));
+    iter = dev;
 
-      parent = bolt_device_get_parent (iter);
-    }
+    parent = bolt_device_get_parent (iter);
+  }
 
   cc_bolt_device_dialog_set_device (self->device_dialog, device, parents);
 
@@ -775,19 +750,16 @@ on_device_entry_status_changed_cb (CcBoltDeviceEntry *entry,
   is_pending = bolt_status_is_pending (new_status);
 
   p = gtk_widget_get_parent (GTK_WIDGET (entry));
-  parent_pending = (gpointer) p == self->pending_list;
+  parent_pending = (gpointer)p == self->pending_list;
 
   /*  */
-  if (is_pending && !parent_pending)
-    {
-      from = self->devices_list;
-      to = self->pending_list;
-    }
-  else if (!is_pending && parent_pending)
-    {
-      from = self->pending_list;
-      to = self->devices_list;
-    }
+  if (is_pending && !parent_pending) {
+    from = self->devices_list;
+    to = self->pending_list;
+  } else if (!is_pending && parent_pending) {
+    from = self->pending_list;
+    to = self->devices_list;
+  }
 
   if (from && to)
     cc_panel_list_box_migrate (self, from, to, entry);
@@ -800,8 +772,8 @@ on_permission_ready (GObject      *source_object,
                      GAsyncResult *res,
                      gpointer      user_data)
 {
-  g_autoptr(CcBoltPage) self = user_data;
-  g_autoptr(GError) err = NULL;
+  g_autoptr (CcBoltPage) self = user_data;
+  g_autoptr (GError) err = NULL;
   GPermission *permission;
   gboolean is_allowed;
   const char *name;
@@ -809,11 +781,10 @@ on_permission_ready (GObject      *source_object,
   permission = polkit_permission_new_finish (res, &err);
   self->permission = permission;
 
-  if (!self->permission)
-    {
-      g_warning ("Could not get polkit permissions: %s", err->message);
-      return;
-    }
+  if (!self->permission) {
+    g_warning ("Could not get polkit permissions: %s", err->message);
+    return;
+  }
 
   g_signal_connect_object (permission,
                            "notify",
@@ -854,8 +825,8 @@ device_entries_sort_by_recency_cb (GtkListBoxRow *a_row,
   gint64 a_ts, b_ts;
   gint64 score;
 
-  a_ts = (gint64) bolt_device_get_timestamp (a);
-  b_ts = (gint64) bolt_device_get_timestamp (b);
+  a_ts = (gint64)bolt_device_get_timestamp (a);
+  b_ts = (gint64)bolt_device_get_timestamp (b);
 
   score = b_ts - a_ts;
 
@@ -864,26 +835,23 @@ device_entries_sort_by_recency_cb (GtkListBoxRow *a_row,
 
   status = bolt_device_get_status (a);
 
-  if (bolt_status_is_connected (status))
-    {
-      const char *a_path;
-      const char *b_path;
+  if (bolt_status_is_connected (status)) {
+    const char *a_path;
+    const char *b_path;
 
-      a_path = bolt_device_get_syspath (a);
-      b_path = bolt_device_get_syspath (b);
+    a_path = bolt_device_get_syspath (a);
+    b_path = bolt_device_get_syspath (b);
 
-      return g_strcmp0 (a_path, b_path);
-    }
-  else
-    {
-      const char *a_name;
-      const char *b_name;
+    return g_strcmp0 (a_path, b_path);
+  } else {
+    const char *a_name;
+    const char *b_name;
 
-      a_name = bolt_device_get_name (a);
-      b_name = bolt_device_get_name (b);
+    a_name = bolt_device_get_name (a);
+    b_name = bolt_device_get_name (b);
 
-      return g_strcmp0 (a_name, b_name);
-    }
+    return g_strcmp0 (a_name, b_name);
+  }
 
   return 0;
 }

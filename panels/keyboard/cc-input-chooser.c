@@ -40,52 +40,47 @@
 
 #define FILTER_TIMEOUT 150 /* ms */
 
-typedef enum
-{
+typedef enum {
   ROW_TRAVEL_DIRECTION_NONE,
   ROW_TRAVEL_DIRECTION_FORWARD,
   ROW_TRAVEL_DIRECTION_BACKWARD
 } RowTravelDirection;
 
-typedef enum
-{
+typedef enum {
   ROW_LABEL_POSITION_START,
   ROW_LABEL_POSITION_CENTER,
   ROW_LABEL_POSITION_END
 } RowLabelPosition;
 
-struct _CcInputChooser
-{
-  AdwDialog          parent_instance;
+struct _CcInputChooser {
+  AdwDialog parent_instance;
 
-  GtkButton         *add_button;
-  GtkSearchEntry    *filter_entry;
-  GtkListBox        *input_sources_listbox;
-  GtkStack          *input_sources_stack;
-  GtkListBoxRow     *more_row;
-  GtkWidget         *no_results;
-  GtkSearchBar      *search_bar;
+  GtkButton *add_button;
+  GtkSearchEntry *filter_entry;
+  GtkListBox *input_sources_listbox;
+  GtkStack *input_sources_stack;
+  GtkListBoxRow *more_row;
+  GtkWidget *no_results;
+  GtkSearchBar *search_bar;
 
-  GnomeXkbInfo      *xkb_info;
-  GHashTable        *ibus_engines;
-  GHashTable        *locales;
-  GHashTable        *locales_by_language;
-  gboolean           showing_extra;
-  gchar            **filter_words;
+  GnomeXkbInfo *xkb_info;
+  GHashTable *ibus_engines;
+  GHashTable *locales;
+  GHashTable *locales_by_language;
+  gboolean showing_extra;
+  gchar **filter_words;
 };
 
 G_DEFINE_TYPE (CcInputChooser, cc_input_chooser, ADW_TYPE_DIALOG)
 
-enum
-{
+enum {
   SIGNAL_SOURCE_SELECTED,
   SIGNAL_LAST
 };
 
 static guint signals[SIGNAL_LAST] = { 0, };
 
-typedef struct
-{
+typedef struct {
   gchar *id;
   gchar *name;
   gchar *unaccented_name;
@@ -97,7 +92,8 @@ typedef struct
   GHashTable *engine_rows_by_id;
 } LocaleInfo;
 
-static void on_input_sources_listbox_row_activated_cb (CcInputChooser *self, GtkListBoxRow  *row);
+static void on_input_sources_listbox_row_activated_cb (CcInputChooser *self,
+                                                       GtkListBoxRow  *row);
 
 static void
 locale_info_free (gpointer data)
@@ -145,11 +141,10 @@ padded_label_new (const gchar        *text,
 
   widget = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 
-  if (direction == ROW_TRAVEL_DIRECTION_BACKWARD)
-    {
-      arrow = gtk_image_new_from_icon_name ("go-previous-symbolic");
-      gtk_box_append (GTK_BOX (widget), arrow);
-    }
+  if (direction == ROW_TRAVEL_DIRECTION_BACKWARD) {
+    arrow = gtk_image_new_from_icon_name ("go-previous-symbolic");
+    gtk_box_append (GTK_BOX (widget), arrow);
+  }
 
   label = gtk_label_new (text);
   gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_MIDDLE);
@@ -160,11 +155,10 @@ padded_label_new (const gchar        *text,
   if (dim_label)
     gtk_widget_add_css_class (label, "dim-label");
 
-  if (direction == ROW_TRAVEL_DIRECTION_FORWARD)
-    {
-      arrow = gtk_image_new_from_icon_name ("go-next-symbolic");
-      gtk_box_append (GTK_BOX (widget), arrow);
-    }
+  if (direction == ROW_TRAVEL_DIRECTION_FORWARD) {
+    arrow = gtk_image_new_from_icon_name ("go-next-symbolic");
+    gtk_box_append (GTK_BOX (widget), arrow);
+  }
 
   return widget;
 }
@@ -229,74 +223,70 @@ input_source_row_new (CcInputChooser *self,
   GtkWidget *row = NULL;
   GtkWidget *widget;
 
-  if (g_str_equal (type, INPUT_SOURCE_TYPE_XKB))
-    {
-      const gchar *display_name;
-      CcInputSource *source;
-      GtkWidget *box;
-      GtkWidget *preview_button;
+  if (g_str_equal (type, INPUT_SOURCE_TYPE_XKB)) {
+    const gchar *display_name;
+    CcInputSource *source;
+    GtkWidget *box;
+    GtkWidget *preview_button;
 
-      gnome_xkb_info_get_layout_info (self->xkb_info, id, &display_name, NULL, NULL, NULL);
+    gnome_xkb_info_get_layout_info (self->xkb_info, id, &display_name, NULL, NULL, NULL);
 
-      row = gtk_list_box_row_new ();
-      box = gtk_box_new (0, GTK_ORIENTATION_HORIZONTAL);
-      widget = padded_label_new (display_name,
-                                 ROW_LABEL_POSITION_START,
-                                 ROW_TRAVEL_DIRECTION_NONE,
-                                 FALSE);
-      gtk_box_append (GTK_BOX (box), widget);
+    row = gtk_list_box_row_new ();
+    box = gtk_box_new (0, GTK_ORIENTATION_HORIZONTAL);
+    widget = padded_label_new (display_name,
+                               ROW_LABEL_POSITION_START,
+                               ROW_TRAVEL_DIRECTION_NONE,
+                               FALSE);
+    gtk_box_append (GTK_BOX (box), widget);
 
-      preview_button = gtk_button_new_from_icon_name ("view-reveal-symbolic");
-      gtk_widget_set_tooltip_text (preview_button, _("View Keyboard Layout"));
-      gtk_widget_add_css_class (preview_button, "flat");
-      gtk_box_append (GTK_BOX (box), preview_button);
+    preview_button = gtk_button_new_from_icon_name ("view-reveal-symbolic");
+    gtk_widget_set_tooltip_text (preview_button, _("View Keyboard Layout"));
+    gtk_widget_add_css_class (preview_button, "flat");
+    gtk_box_append (GTK_BOX (box), preview_button);
 
-      source = CC_INPUT_SOURCE (cc_input_source_xkb_new_from_id (self->xkb_info, id));
-      g_signal_connect_swapped (preview_button,
-                                "clicked",
-                                (GCallback) cc_input_source_launch_previewer,
-                                source);
+    source = CC_INPUT_SOURCE (cc_input_source_xkb_new_from_id (self->xkb_info, id));
+    g_signal_connect_swapped (preview_button,
+                              "clicked",
+                              (GCallback)cc_input_source_launch_previewer,
+                              source);
 
-      gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
-      g_object_set_data (G_OBJECT (row), "name", (gpointer) display_name);
-      g_object_set_data_full (G_OBJECT (row), "source", source, g_object_unref);
-      g_object_set_data_full (G_OBJECT (row), "unaccented-name",
-                              cc_util_normalize_casefold_and_unaccent (display_name), g_free);
-    }
-  else if (g_str_equal (type, INPUT_SOURCE_TYPE_IBUS))
-    {
+    gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
+    g_object_set_data (G_OBJECT (row), "name", (gpointer)display_name);
+    g_object_set_data_full (G_OBJECT (row), "source", source, g_object_unref);
+    g_object_set_data_full (G_OBJECT (row), "unaccented-name",
+                            cc_util_normalize_casefold_and_unaccent (display_name), g_free);
+  } else if (g_str_equal (type, INPUT_SOURCE_TYPE_IBUS)) {
 #ifdef HAVE_IBUS
-      gchar *display_name;
-      GtkWidget *image;
+    gchar *display_name;
+    GtkWidget *image;
 
-      display_name = engine_get_display_name (g_hash_table_lookup (self->ibus_engines, id));
+    display_name = engine_get_display_name (g_hash_table_lookup (self->ibus_engines, id));
 
-      row = gtk_list_box_row_new ();
-      widget = padded_label_new (display_name,
-                                 ROW_LABEL_POSITION_START,
-                                 ROW_TRAVEL_DIRECTION_NONE,
-                                 FALSE);
-      gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), widget);
+    row = gtk_list_box_row_new ();
+    widget = padded_label_new (display_name,
+                               ROW_LABEL_POSITION_START,
+                               ROW_TRAVEL_DIRECTION_NONE,
+                               FALSE);
+    gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), widget);
 
-      image = gtk_image_new_from_icon_name ("system-run-symbolic");
-      set_row_widget_margins (image);
-      gtk_box_append (GTK_BOX (widget), image);
+    image = gtk_image_new_from_icon_name ("system-run-symbolic");
+    set_row_widget_margins (image);
+    gtk_box_append (GTK_BOX (widget), image);
 
-      g_object_set_data_full (G_OBJECT (row), "name", display_name, g_free);
-      g_object_set_data_full (G_OBJECT (row), "unaccented-name",
-                              cc_util_normalize_casefold_and_unaccent (display_name), g_free);
+    g_object_set_data_full (G_OBJECT (row), "name", display_name, g_free);
+    g_object_set_data_full (G_OBJECT (row), "unaccented-name",
+                            cc_util_normalize_casefold_and_unaccent (display_name), g_free);
 #else
-      widget = NULL;
+    widget = NULL;
 #endif  /* HAVE_IBUS */
-    }
+  }
 
-  if (row)
-    {
-      g_object_set_data (G_OBJECT (row), "type", (gpointer) type);
-      g_object_set_data (G_OBJECT (row), "id", (gpointer) id);
+  if (row) {
+    g_object_set_data (G_OBJECT (row), "type", (gpointer)type);
+    g_object_set_data (G_OBJECT (row), "id", (gpointer)id);
 
-      return GTK_LIST_BOX_ROW (row);
-    }
+    return GTK_LIST_BOX_ROW (row);
+  }
 
   return NULL;
 }
@@ -313,11 +303,11 @@ add_input_source_rows_for_locale (CcInputChooser *self,
     gtk_list_box_append (self->input_sources_listbox, GTK_WIDGET (info->default_input_source_row));
 
   g_hash_table_iter_init (&iter, info->layout_rows_by_id);
-  while (g_hash_table_iter_next (&iter, (gpointer *) &id, (gpointer *) &row))
+  while (g_hash_table_iter_next (&iter, (gpointer *)&id, (gpointer *)&row))
     gtk_list_box_append (self->input_sources_listbox, row);
 
   g_hash_table_iter_init (&iter, info->engine_rows_by_id);
-  while (g_hash_table_iter_next (&iter, (gpointer *) &id, (gpointer *) &row))
+  while (g_hash_table_iter_next (&iter, (gpointer *)&id, (gpointer *)&row))
     gtk_list_box_append (self->input_sources_listbox, row);
 }
 
@@ -352,19 +342,18 @@ show_input_sources_for_locale (CcInputChooser *self,
 {
   gtk_list_box_remove_all (self->input_sources_listbox);
 
-  if (!info->back_row)
-    {
-      GtkEventController *controller;
+  if (!info->back_row) {
+    GtkEventController *controller;
 
-      info->back_row = g_object_ref_sink (back_row_new (info->name));
-      g_object_set_data (G_OBJECT (info->back_row), "back", GINT_TO_POINTER (TRUE));
-      g_object_set_data (G_OBJECT (info->back_row), "locale-info", info);
+    info->back_row = g_object_ref_sink (back_row_new (info->name));
+    g_object_set_data (G_OBJECT (info->back_row), "back", GINT_TO_POINTER (TRUE));
+    g_object_set_data (G_OBJECT (info->back_row), "locale-info", info);
 
-      controller = GTK_EVENT_CONTROLLER (gtk_gesture_click_new ());
-      gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (controller), 0);
-      g_signal_connect_swapped (controller, "released", G_CALLBACK (on_back_row_click_released_cb), self);
-      gtk_widget_add_controller (GTK_WIDGET (info->back_row), controller);
-    }
+    controller = GTK_EVENT_CONTROLLER (gtk_gesture_click_new ());
+    gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (controller), 0);
+    g_signal_connect_swapped (controller, "released", G_CALLBACK (on_back_row_click_released_cb), self);
+    gtk_widget_add_controller (GTK_WIDGET (info->back_row), controller);
+  }
   gtk_list_box_append (self->input_sources_listbox, GTK_WIDGET (info->back_row));
 
   add_input_source_rows_for_locale (self, info);
@@ -384,7 +373,7 @@ is_current_locale (const gchar *locale)
 static void
 show_locale_rows (CcInputChooser *self)
 {
-  g_autoptr(GHashTable) initial = NULL;
+  g_autoptr (GHashTable) initial = NULL;
   LocaleInfo *info;
   GHashTableIter iter;
 
@@ -394,32 +383,29 @@ show_locale_rows (CcInputChooser *self)
     initial = cc_common_language_get_initial_languages ();
 
   g_hash_table_iter_init (&iter, self->locales);
-  while (g_hash_table_iter_next (&iter, NULL, (gpointer *) &info))
-    {
-      if (!info->default_input_source_row &&
-          !g_hash_table_size (info->layout_rows_by_id) &&
-          !g_hash_table_size (info->engine_rows_by_id))
-        continue;
+  while (g_hash_table_iter_next (&iter, NULL, (gpointer *)&info)) {
+    if (!info->default_input_source_row &&
+        !g_hash_table_size (info->layout_rows_by_id) &&
+        !g_hash_table_size (info->engine_rows_by_id))
+      continue;
 
-      if (!info->locale_row)
-        {
-          info->locale_row = g_object_ref_sink (locale_row_new (info->name));
-          gtk_widget_set_visible (GTK_WIDGET (info->locale_row), TRUE);
-          g_object_set_data (G_OBJECT (info->locale_row), "locale-info", info);
+    if (!info->locale_row) {
+      info->locale_row = g_object_ref_sink (locale_row_new (info->name));
+      gtk_widget_set_visible (GTK_WIDGET (info->locale_row), TRUE);
+      g_object_set_data (G_OBJECT (info->locale_row), "locale-info", info);
 
-          if (!self->showing_extra &&
-              !g_hash_table_contains (initial, info->id) &&
-              !is_current_locale (info->id))
-            g_object_set_data (G_OBJECT (info->locale_row), "is-extra", GINT_TO_POINTER (TRUE));
-        }
-      gtk_list_box_append (self->input_sources_listbox, GTK_WIDGET (info->locale_row));
+      if (!self->showing_extra &&
+          !g_hash_table_contains (initial, info->id) &&
+          !is_current_locale (info->id))
+        g_object_set_data (G_OBJECT (info->locale_row), "is-extra", GINT_TO_POINTER (TRUE));
     }
+    gtk_list_box_append (self->input_sources_listbox, GTK_WIDGET (info->locale_row));
+  }
 
   gtk_list_box_append (self->input_sources_listbox, GTK_WIDGET (self->more_row));
   gtk_list_box_invalidate_filter (self->input_sources_listbox);
   gtk_list_box_set_selection_mode (self->input_sources_listbox, GTK_SELECTION_NONE);
   gtk_list_box_set_activate_on_single_click (self->input_sources_listbox, TRUE);
-
 }
 
 static gint
@@ -507,12 +493,11 @@ match_source_in_table (gchar      **words,
   const gchar *source_name;
 
   g_hash_table_iter_init (&iter, table);
-  while (g_hash_table_iter_next (&iter, NULL, &row))
-    {
-      source_name = g_object_get_data (G_OBJECT (row), "unaccented-name");
-      if (source_name && match_all (words, source_name))
-        return TRUE;
-    }
+  while (g_hash_table_iter_next (&iter, NULL, &row)) {
+    source_name = g_object_get_data (G_OBJECT (row), "unaccented-name");
+    if (source_name && match_all (words, source_name))
+      return TRUE;
+  }
   return FALSE;
 }
 
@@ -548,23 +533,19 @@ list_filter (GtkListBoxRow *row,
     return TRUE;
 
   source_name = g_object_get_data (G_OBJECT (row), "unaccented-name");
-  if (source_name)
-    {
-      if (match_all (self->filter_words, source_name))
-        return TRUE;
+  if (source_name) {
+    if (match_all (self->filter_words, source_name))
+      return TRUE;
+  } else {
+    if (info->default_input_source_row &&
+        match_default_source_in_table (self->filter_words, info->default_input_source_row)) {
+      return TRUE;
     }
-  else
-    {
-      if (info->default_input_source_row &&
-          match_default_source_in_table (self->filter_words, info->default_input_source_row))
-        {
-          return TRUE;
-        }
-      if (match_source_in_table (self->filter_words, info->layout_rows_by_id))
-        return TRUE;
-      if (match_source_in_table (self->filter_words, info->engine_rows_by_id))
-        return TRUE;
-    }
+    if (match_source_in_table (self->filter_words, info->layout_rows_by_id))
+      return TRUE;
+    if (match_source_in_table (self->filter_words, info->engine_rows_by_id))
+      return TRUE;
+  }
 
   return FALSE;
 }
@@ -598,7 +579,7 @@ show_more (CcInputChooser *self)
 static void
 on_filter_entry_search_changed_cb (CcInputChooser *self)
 {
-  g_auto(GStrv) previous_words = NULL;
+  g_auto (GStrv) previous_words = NULL;
   g_autofree gchar *filter_contents = NULL;
 
   filter_contents =
@@ -609,14 +590,11 @@ on_filter_entry_search_changed_cb (CcInputChooser *self)
 
   show_more (self);
 
-  if (!self->filter_words[0])
-    {
-      gtk_list_box_set_placeholder (self->input_sources_listbox, NULL);
-    }
-  else if (previous_words == NULL || strvs_differ (self->filter_words, previous_words))
-    {
-      gtk_list_box_set_placeholder (self->input_sources_listbox, self->no_results);
-    }
+  if (!self->filter_words[0]) {
+    gtk_list_box_set_placeholder (self->input_sources_listbox, NULL);
+  } else if (previous_words == NULL || strvs_differ (self->filter_words, previous_words)) {
+    gtk_list_box_set_placeholder (self->input_sources_listbox, self->no_results);
+  }
 }
 
 static void
@@ -626,40 +604,37 @@ on_add_button_clicked_cb (CcInputChooser *self)
 }
 
 static void
-on_input_sources_listbox_row_activated_cb (CcInputChooser *self, GtkListBoxRow  *row)
+on_input_sources_listbox_row_activated_cb (CcInputChooser *self,
+                                           GtkListBoxRow  *row)
 {
   gpointer data;
 
   if (!row)
     return;
 
-  if (row == self->more_row)
-    {
-      show_more (self);
-      return;
-    }
+  if (row == self->more_row) {
+    show_more (self);
+    return;
+  }
 
   data = g_object_get_data (G_OBJECT (row), "back");
-  if (data)
-    {
-      show_locale_rows (self);
-      return;
-    }
+  if (data) {
+    show_locale_rows (self);
+    return;
+  }
 
   data = g_object_get_data (G_OBJECT (row), "name");
-  if (data)
-    {
-      if (gtk_widget_is_sensitive (GTK_WIDGET (self->add_button)))
-        cc_input_chooser_emit_source_selected (self);
-      return;
-    }
+  if (data) {
+    if (gtk_widget_is_sensitive (GTK_WIDGET (self->add_button)))
+      cc_input_chooser_emit_source_selected (self);
+    return;
+  }
 
   data = g_object_get_data (G_OBJECT (row), "locale-info");
-  if (data)
-    {
-      show_input_sources_for_locale (self, (LocaleInfo *) data);
-      return;
-    }
+  if (data) {
+    show_input_sources_for_locale (self, (LocaleInfo *)data);
+    return;
+  }
 }
 
 static void
@@ -668,13 +643,12 @@ on_input_sources_listbox_selected_rows_changed_cb (CcInputChooser *self)
   gboolean sensitive = TRUE;
   GtkListBoxRow *row;
 
-  if (!self->input_sources_listbox)
-    {
-      /* The rows are changing because the GtkListBox is being destroyed.
-       * during CcInputChooser dispose. We must bail.
-       */
-      return;
-    }
+  if (!self->input_sources_listbox) {
+    /* The rows are changing because the GtkListBox is being destroyed.
+     * during CcInputChooser dispose. We must bail.
+     */
+    return;
+  }
 
   row = gtk_list_box_get_selected_row (self->input_sources_listbox);
   if (!row || g_object_get_data (G_OBJECT (row), "back"))
@@ -701,12 +675,11 @@ add_default_row (CcInputChooser *self,
                  const gchar    *id)
 {
   info->default_input_source_row = input_source_row_new (self, type, id);
-  if (info->default_input_source_row)
-    {
-      g_object_ref_sink (GTK_WIDGET (info->default_input_source_row));
-      g_object_set_data (G_OBJECT (info->default_input_source_row), "default", GINT_TO_POINTER (TRUE));
-      g_object_set_data (G_OBJECT (info->default_input_source_row), "locale-info", info);
-    }
+  if (info->default_input_source_row) {
+    g_object_ref_sink (GTK_WIDGET (info->default_input_source_row));
+    g_object_set_data (G_OBJECT (info->default_input_source_row), "default", GINT_TO_POINTER (TRUE));
+    g_object_set_data (G_OBJECT (info->default_input_source_row), "locale-info", info);
+  }
 }
 
 static void
@@ -727,22 +700,19 @@ add_rows_to_table (CcInputChooser *self,
   else
     return;
 
-  while (list)
-    {
-      id = (const gchar *) list->data;
+  while (list) {
+    id = (const gchar *)list->data;
 
-      /* The widget for the default input source lives elsewhere */
-      if (g_strcmp0 (id, default_id))
-        {
-          row = input_source_row_new (self, type, id);
-          if (row)
-            {
-              g_object_set_data (G_OBJECT (row), "locale-info", info);
-              g_hash_table_replace (table, (gpointer) id, g_object_ref_sink (row));
-            }
-        }
-      list = list->next;
+    /* The widget for the default input source lives elsewhere */
+    if (g_strcmp0 (id, default_id)) {
+      row = input_source_row_new (self, type, id);
+      if (row) {
+        g_object_set_data (G_OBJECT (row), "locale-info", info);
+        g_hash_table_replace (table, (gpointer)id, g_object_ref_sink (row));
+      }
     }
+    list = list->next;
+  }
 }
 
 static void
@@ -752,7 +722,7 @@ add_row (CcInputChooser *self,
          const gchar    *id)
 {
   GList tmp = { 0 };
-  tmp.data = (gpointer) id;
+  tmp.data = (gpointer)id;
   add_rows_to_table (self, info, &tmp, type, NULL);
 }
 
@@ -778,11 +748,10 @@ maybe_set_as_default (CcInputChooser *self,
 
   if (g_str_equal (type, INPUT_SOURCE_TYPE_IBUS) &&
       g_str_equal (id, engine_id) &&
-      info->default_input_source_row == NULL)
-    {
-      add_default_row (self, info, type, id);
-      return TRUE;
-    }
+      info->default_input_source_row == NULL) {
+    add_default_row (self, info, type, id);
+    return TRUE;
+  }
 
   return FALSE;
 }
@@ -799,71 +768,56 @@ get_ibus_locale_infos (CcInputChooser *self)
     return;
 
   g_hash_table_iter_init (&iter, self->ibus_engines);
-  while (g_hash_table_iter_next (&iter, (gpointer *) &engine_id, (gpointer *) &engine))
-    {
-      g_autofree gchar *lang_code = NULL;
-      g_autofree gchar *country_code = NULL;
-      const gchar *ibus_locale = ibus_engine_desc_get_language (engine);
+  while (g_hash_table_iter_next (&iter, (gpointer *)&engine_id, (gpointer *)&engine)) {
+    g_autofree gchar *lang_code = NULL;
+    g_autofree gchar *country_code = NULL;
+    const gchar *ibus_locale = ibus_engine_desc_get_language (engine);
 
-      if (gnome_parse_locale (ibus_locale, &lang_code, &country_code, NULL, NULL) &&
-          lang_code != NULL &&
-          country_code != NULL)
-        {
-          g_autofree gchar *locale = g_strdup_printf ("%s_%s.UTF-8", lang_code, country_code);
+    if (gnome_parse_locale (ibus_locale, &lang_code, &country_code, NULL, NULL) &&
+        lang_code != NULL &&
+        country_code != NULL) {
+      g_autofree gchar *locale = g_strdup_printf ("%s_%s.UTF-8", lang_code, country_code);
 
-          info = g_hash_table_lookup (self->locales, locale);
-          if (info)
-            {
-              const gchar *type, *id;
+      info = g_hash_table_lookup (self->locales, locale);
+      if (info) {
+        const gchar *type, *id;
 
-              if (gnome_get_input_source_from_locale (locale, &type, &id) &&
-                  g_str_equal (type, INPUT_SOURCE_TYPE_IBUS) &&
-                  g_str_equal (id, engine_id))
-                {
-                  add_default_row (self, info, type, id);
-                }
-              else
-                {
-                  add_row (self, info, INPUT_SOURCE_TYPE_IBUS, engine_id);
-                }
-            }
-          else
-            {
-              add_row_other (self, INPUT_SOURCE_TYPE_IBUS, engine_id);
-            }
+        if (gnome_get_input_source_from_locale (locale, &type, &id) &&
+            g_str_equal (type, INPUT_SOURCE_TYPE_IBUS) &&
+            g_str_equal (id, engine_id)) {
+          add_default_row (self, info, type, id);
+        } else {
+          add_row (self, info, INPUT_SOURCE_TYPE_IBUS, engine_id);
         }
-      else if (lang_code != NULL)
-        {
-          GHashTableIter iter;
-          GHashTable *locales_for_language;
-          g_autofree gchar *language = NULL;
+      } else {
+        add_row_other (self, INPUT_SOURCE_TYPE_IBUS, engine_id);
+      }
+    } else if (lang_code != NULL) {
+      GHashTableIter iter;
+      GHashTable *locales_for_language;
+      g_autofree gchar *language = NULL;
 
-          /* Most IBus engines only specify the language so we try to
-             add them to all locales for that language. */
+      /* Most IBus engines only specify the language so we try to
+         add them to all locales for that language. */
 
-          language = gnome_get_language_from_code (lang_code, NULL);
-          if (language)
-            locales_for_language = g_hash_table_lookup (self->locales_by_language, language);
-          else
-            locales_for_language = NULL;
-
-          if (locales_for_language)
-            {
-              g_hash_table_iter_init (&iter, locales_for_language);
-              while (g_hash_table_iter_next (&iter, (gpointer *) &info, NULL))
-                if (!maybe_set_as_default (self, info, engine_id))
-                  add_row (self, info, INPUT_SOURCE_TYPE_IBUS, engine_id);
-            }
-          else
-            {
-              add_row_other (self, INPUT_SOURCE_TYPE_IBUS, engine_id);
-            }
-        }
+      language = gnome_get_language_from_code (lang_code, NULL);
+      if (language)
+        locales_for_language = g_hash_table_lookup (self->locales_by_language, language);
       else
-        {
-          add_row_other (self, INPUT_SOURCE_TYPE_IBUS, engine_id);
-        }
+        locales_for_language = NULL;
+
+      if (locales_for_language) {
+        g_hash_table_iter_init (&iter, locales_for_language);
+        while (g_hash_table_iter_next (&iter, (gpointer *)&info, NULL))
+          if (!maybe_set_as_default (self, info, engine_id))
+            add_row (self, info, INPUT_SOURCE_TYPE_IBUS, engine_id);
+      } else {
+        add_row_other (self, INPUT_SOURCE_TYPE_IBUS, engine_id);
+      }
+    } else {
+      add_row_other (self, INPUT_SOURCE_TYPE_IBUS, engine_id);
     }
+  }
 }
 #endif  /* HAVE_IBUS */
 
@@ -878,11 +832,10 @@ add_locale_to_table (GHashTable  *table,
   language = gnome_get_language_from_code (lang_code, NULL);
 
   set = g_hash_table_lookup (table, language);
-  if (!set)
-    {
-      set = g_hash_table_new (NULL, NULL);
-      g_hash_table_replace (table, g_strdup (language), set);
-    }
+  if (!set) {
+    set = g_hash_table_new (NULL, NULL);
+    g_hash_table_replace (table, g_strdup (language), set);
+  }
   g_hash_table_add (set, info);
 }
 
@@ -890,41 +843,38 @@ static void
 add_ids_to_set (GHashTable *set,
                 GList      *list)
 {
-  while (list)
-    {
-      g_hash_table_add (set, list->data);
-      list = list->next;
-    }
+  while (list) {
+    g_hash_table_add (set, list->data);
+    list = list->next;
+  }
 }
 
 static GList *
 layout_lists_intersection (GList *first_list,
                            GList *second_list)
 {
-  g_autoptr(GHashTable) first_set = NULL;
-  g_autoptr(GList) intersection_list = NULL;
+  g_autoptr (GHashTable) first_set = NULL;
+  g_autoptr (GList) intersection_list = NULL;
 
   first_set = g_hash_table_new (g_str_hash, g_str_equal);
 
-  while (first_list != NULL)
-    {
-      char *layout;
+  while (first_list != NULL) {
+    char *layout;
 
-      layout = first_list->data;
-      g_hash_table_insert (first_set, layout, layout);
-      first_list = first_list->next;
-    }
+    layout = first_list->data;
+    g_hash_table_insert (first_set, layout, layout);
+    first_list = first_list->next;
+  }
 
-  while (second_list != NULL)
-    {
-      char *layout;
+  while (second_list != NULL) {
+    char *layout;
 
-      layout = second_list->data;
-      if (g_hash_table_remove (first_set, layout))
-        intersection_list = g_list_prepend (intersection_list, layout);
+    layout = second_list->data;
+    if (g_hash_table_remove (first_set, layout))
+      intersection_list = g_list_prepend (intersection_list, layout);
 
-      second_list = second_list->next;
-    }
+    second_list = second_list->next;
+  }
 
   return g_steal_pointer (&intersection_list);
 }
@@ -932,81 +882,76 @@ layout_lists_intersection (GList *first_list,
 static void
 get_locale_infos (CcInputChooser *self)
 {
-  g_autoptr(GHashTable) layouts_with_locale = NULL;
+  g_autoptr (GHashTable) layouts_with_locale = NULL;
   LocaleInfo *info;
-  g_auto(GStrv) locale_ids = NULL;
+  g_auto (GStrv) locale_ids = NULL;
   gchar **locale;
-  g_autoptr(GList) all_layouts = NULL;
+  g_autoptr (GList) all_layouts = NULL;
   GList *l;
 
   self->locales = g_hash_table_new_full (g_str_hash, g_str_equal,
                                          g_free, locale_info_free);
   self->locales_by_language = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                     g_free, (GDestroyNotify) g_hash_table_unref);
+                                                     g_free, (GDestroyNotify)g_hash_table_unref);
 
   layouts_with_locale = g_hash_table_new (g_str_hash, g_str_equal);
 
   locale_ids = gnome_get_all_locales ();
-  for (locale = locale_ids; *locale; ++locale)
-    {
-      g_autofree gchar *lang_code = NULL;
-      g_autofree gchar *country_code = NULL;
-      g_autofree gchar *simple_locale = NULL;
-      g_autofree gchar *tmp = NULL;
-      const gchar *type = NULL;
-      const gchar *id = NULL;
-      g_autoptr(GList) language_layouts = NULL;
-      g_autoptr(GList) locale_layouts = NULL;
+  for (locale = locale_ids; *locale; ++locale) {
+    g_autofree gchar *lang_code = NULL;
+    g_autofree gchar *country_code = NULL;
+    g_autofree gchar *simple_locale = NULL;
+    g_autofree gchar *tmp = NULL;
+    const gchar *type = NULL;
+    const gchar *id = NULL;
+    g_autoptr (GList) language_layouts = NULL;
+    g_autoptr (GList) locale_layouts = NULL;
 
-      if (!gnome_parse_locale (*locale, &lang_code, &country_code, NULL, NULL))
-        continue;
+    if (!gnome_parse_locale (*locale, &lang_code, &country_code, NULL, NULL))
+      continue;
 
-      if (country_code != NULL)
-	simple_locale = g_strdup_printf ("%s_%s.UTF-8", lang_code, country_code);
-      else
-	simple_locale = g_strdup_printf ("%s.UTF-8", lang_code);
+    if (country_code != NULL)
+      simple_locale = g_strdup_printf ("%s_%s.UTF-8", lang_code, country_code);
+    else
+      simple_locale = g_strdup_printf ("%s.UTF-8", lang_code);
 
-      if (g_hash_table_contains (self->locales, simple_locale))
-          continue;
+    if (g_hash_table_contains (self->locales, simple_locale))
+      continue;
 
-      info = g_new0 (LocaleInfo, 1);
-      info->id = g_strdup (simple_locale);
-      info->name = gnome_get_language_from_locale (simple_locale, NULL);
-      info->unaccented_name = cc_util_normalize_casefold_and_unaccent (info->name);
-      tmp = gnome_get_language_from_locale (simple_locale, "C");
-      info->untranslated_name = cc_util_normalize_casefold_and_unaccent (tmp);
+    info = g_new0 (LocaleInfo, 1);
+    info->id = g_strdup (simple_locale);
+    info->name = gnome_get_language_from_locale (simple_locale, NULL);
+    info->unaccented_name = cc_util_normalize_casefold_and_unaccent (info->name);
+    tmp = gnome_get_language_from_locale (simple_locale, "C");
+    info->untranslated_name = cc_util_normalize_casefold_and_unaccent (tmp);
 
-      g_hash_table_replace (self->locales, g_strdup (simple_locale), info);
-      add_locale_to_table (self->locales_by_language, lang_code, info);
+    g_hash_table_replace (self->locales, g_strdup (simple_locale), info);
+    add_locale_to_table (self->locales_by_language, lang_code, info);
 
-      if (gnome_get_input_source_from_locale (simple_locale, &type, &id) &&
-          g_str_equal (type, INPUT_SOURCE_TYPE_XKB))
-        {
-          add_default_row (self, info, type, id);
-          g_hash_table_add (layouts_with_locale, (gpointer) id);
-        }
-
-      /* We don't own these ids */
-      info->layout_rows_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                       NULL, g_object_unref);
-      info->engine_rows_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                       NULL, g_object_unref);
-
-      language_layouts = gnome_xkb_info_get_layouts_for_language (self->xkb_info, lang_code);
-
-      if (country_code != NULL)
-        {
-          g_autoptr(GList) country_layouts = gnome_xkb_info_get_layouts_for_country (self->xkb_info, country_code);
-          locale_layouts = layout_lists_intersection (language_layouts, country_layouts);
-        }
-      else
-        {
-          locale_layouts = g_steal_pointer (&language_layouts);
-        }
-
-      add_rows_to_table (self, info, locale_layouts, INPUT_SOURCE_TYPE_XKB, id);
-      add_ids_to_set (layouts_with_locale, locale_layouts);
+    if (gnome_get_input_source_from_locale (simple_locale, &type, &id) &&
+        g_str_equal (type, INPUT_SOURCE_TYPE_XKB)) {
+      add_default_row (self, info, type, id);
+      g_hash_table_add (layouts_with_locale, (gpointer)id);
     }
+
+    /* We don't own these ids */
+    info->layout_rows_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                     NULL, g_object_unref);
+    info->engine_rows_by_id = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                     NULL, g_object_unref);
+
+    language_layouts = gnome_xkb_info_get_layouts_for_language (self->xkb_info, lang_code);
+
+    if (country_code != NULL) {
+      g_autoptr (GList) country_layouts = gnome_xkb_info_get_layouts_for_country (self->xkb_info, country_code);
+      locale_layouts = layout_lists_intersection (language_layouts, country_layouts);
+    } else {
+      locale_layouts = g_steal_pointer (&language_layouts);
+    }
+
+    add_rows_to_table (self, info, locale_layouts, INPUT_SOURCE_TYPE_XKB, id);
+    add_ids_to_set (layouts_with_locale, locale_layouts);
+  }
 
   /* Add a "Other" locale to hold the remaining input sources */
   info = g_new0 (LocaleInfo, 1);
@@ -1076,7 +1021,7 @@ cc_input_chooser_load_locale_infos_async (CcInputChooser      *self,
                                           GAsyncReadyCallback  callback,
                                           gpointer             user_data)
 {
-  g_autoptr(GTask) task = g_task_new (self, cancellable, callback, user_data);
+  g_autoptr (GTask) task = g_task_new (self, cancellable, callback, user_data);
 
   g_task_run_in_thread (task, cc_input_chooser_load_locale_infos_thread);
 }
@@ -1127,7 +1072,7 @@ cc_input_chooser_class_init (CcInputChooserClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_filter_entry_search_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_add_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_stop_search_cb);
-  //gtk_widget_class_bind_template_callback (widget_class, on_filter_entry_key_release_event_cb);
+  /*gtk_widget_class_bind_template_callback (widget_class, on_filter_entry_key_release_event_cb); */
 }
 
 void

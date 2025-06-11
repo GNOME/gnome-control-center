@@ -35,20 +35,19 @@
 
 #include "keyboard-shortcuts.h"
 
-struct _CcKeyboardPanel
-{
-  CcPanel             parent_instance;
+struct _CcKeyboardPanel {
+  CcPanel parent_instance;
 
-  GtkCheckButton      *per_window_source;
-  GtkCheckButton      *same_source;
-  GSettings           *keybindings_settings;
+  GtkCheckButton *per_window_source;
+  GtkCheckButton *same_source;
+  GSettings *keybindings_settings;
 
-  GSettings           *input_source_settings;
+  GSettings *input_source_settings;
   AdwPreferencesGroup *input_switch_group;
-  CcListRow           *alt_chars_row;
-  CcListRow           *compose_row;
+  CcListRow *alt_chars_row;
+  CcListRow *compose_row;
 
-  AdwActionRow        *common_shortcuts_row;
+  AdwActionRow *common_shortcuts_row;
 };
 
 CC_PANEL_REGISTER (CcKeyboardPanel, cc_keyboard_panel)
@@ -62,14 +61,14 @@ static const CcXkbModifier LV3_MODIFIER = {
   "lv3:",
   N_("Alternate Characters Key"),
   N_("The alternate characters key can be used to enter additional characters. These are sometimes printed as a third-option on your keyboard."),
-  (CcXkbOption[]){
-    { NC_("keyboard key", "Left Alt"),    "lv3:lalt_switch" },
-    { NC_("keyboard key", "Right Alt"),   "lv3:ralt_switch" },
-    { NC_("keyboard key", "Left Super"),  "lv3:lwin_switch" },
-    { NC_("keyboard key", "Right Super"), "lv3:rwin_switch" },
-    { NC_("keyboard key", "Menu key"),    "lv3:menu_switch" },
-    { NC_("keyboard key", "Right Ctrl"),  "lv3:switch" },
-    { NULL,                               NULL }
+  (CcXkbOption[]) {
+    { NC_ ("keyboard key", "Left Alt"), "lv3:lalt_switch" },
+    { NC_ ("keyboard key", "Right Alt"), "lv3:ralt_switch" },
+    { NC_ ("keyboard key", "Left Super"), "lv3:lwin_switch" },
+    { NC_ ("keyboard key", "Right Super"), "lv3:rwin_switch" },
+    { NC_ ("keyboard key", "Menu key"), "lv3:menu_switch" },
+    { NC_ ("keyboard key", "Right Ctrl"), "lv3:switch" },
+    { NULL, NULL }
   },
   "lv3:ralt_switch",
 };
@@ -80,24 +79,25 @@ static const CcXkbModifier COMPOSE_MODIFIER = {
   N_("The compose key allows a wide variety of characters to be entered. To use it, press compose then a sequence of characters. "
      " For example, compose key followed by <b>o</b> and <b>c</b> will enter <b>©</b>, "
      "<b>a</b> followed by <b>'</b> will enter <b>á</b>."),
-  (CcXkbOption[]){
-    { NC_("keyboard key", "Right Alt"),    "compose:ralt" },
-    { NC_("keyboard key", "Left Super"),   "compose:lwin" },
-    { NC_("keyboard key", "Right Super"),  "compose:rwin" },
-    { NC_("keyboard key", "Menu key"),     "compose:menu" },
-    { NC_("keyboard key", "Left Ctrl"),    "compose:lctrl" },
-    { NC_("keyboard key", "Right Ctrl"),   "compose:rctrl" },
-    { NC_("keyboard key", "Caps Lock"),    "compose:caps" },
-    { NC_("keyboard key", "Scroll Lock"),  "compose:sclk" },
-    { NC_("keyboard key", "Print Screen"), "compose:prsc" },
-    { NC_("keyboard key", "Insert"),       "compose:ins" },
-    { NULL,                                NULL }
+  (CcXkbOption[]) {
+    { NC_ ("keyboard key", "Right Alt"), "compose:ralt" },
+    { NC_ ("keyboard key", "Left Super"), "compose:lwin" },
+    { NC_ ("keyboard key", "Right Super"), "compose:rwin" },
+    { NC_ ("keyboard key", "Menu key"), "compose:menu" },
+    { NC_ ("keyboard key", "Left Ctrl"), "compose:lctrl" },
+    { NC_ ("keyboard key", "Right Ctrl"), "compose:rctrl" },
+    { NC_ ("keyboard key", "Caps Lock"), "compose:caps" },
+    { NC_ ("keyboard key", "Scroll Lock"), "compose:sclk" },
+    { NC_ ("keyboard key", "Print Screen"), "compose:prsc" },
+    { NC_ ("keyboard key", "Insert"), "compose:ins" },
+    { NULL, NULL }
   },
   NULL,
 };
 
 static void
-show_modifier_page (CcKeyboardPanel *self, const CcXkbModifier *modifier)
+show_modifier_page (CcKeyboardPanel     *self,
+                    const CcXkbModifier *modifier)
 {
   AdwNavigationPage *page;
 
@@ -129,18 +129,17 @@ keyboard_shortcuts_activated (CcKeyboardPanel *self)
 
 static void
 cc_keyboard_panel_set_property (GObject      *object,
-                               guint         property_id,
-                               const GValue *value,
-                               GParamSpec   *pspec)
+                                guint         property_id,
+                                const GValue *value,
+                                GParamSpec   *pspec)
 {
-  switch (property_id)
-    {
+  switch (property_id) {
     case PROP_PARAMETERS:
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
+  }
 }
 
 static const char *
@@ -192,9 +191,9 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 }
 
 static gboolean
-translate_switch_input_source (GValue *value,
+translate_switch_input_source (GValue   *value,
                                GVariant *variant,
-                               gpointer user_data)
+                               gpointer  user_data)
 {
   g_autofree const gchar **strv = NULL;
   g_autofree gchar *accel_text = NULL;
@@ -244,7 +243,7 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
                                 G_SETTINGS_BIND_GET,
                                 xcb_modifier_transform_binding_to_label,
                                 NULL,
-                                (gpointer)&LV3_MODIFIER,
+                                (gpointer) & LV3_MODIFIER,
                                 NULL);
   g_settings_bind_with_mapping (self->input_source_settings,
                                 "xkb-options",
@@ -253,6 +252,6 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
                                 G_SETTINGS_BIND_GET,
                                 xcb_modifier_transform_binding_to_label,
                                 NULL,
-                                (gpointer)&COMPOSE_MODIFIER,
+                                (gpointer) & COMPOSE_MODIFIER,
                                 NULL);
 }

@@ -22,104 +22,103 @@
 
 #include "cc-snapd-client.h"
 
-// Unix socket that snapd communicates on.
+/* Unix socket that snapd communicates on. */
 #define SNAPD_SOCKET_PATH "/var/run/snapd.socket"
 
-struct _CcSnapdClient
-{
+struct _CcSnapdClient {
   GObject parent;
 
-  // HTTP connection to snapd.
+  /* HTTP connection to snapd. */
   SoupSession *session;
 };
 
 G_DEFINE_TYPE (CcSnapdClient, cc_snapd_client, G_TYPE_OBJECT)
 
-// Make an HTTP request to send to snapd.
+/* Make an HTTP request to send to snapd. */
 static SoupMessage *
-make_message (const gchar *method, const gchar *path, JsonNode *request_body)
+make_message (const gchar * method, const gchar * path, JsonNode * request_body)
 {
   g_autofree gchar *uri = NULL;
   SoupMessage *msg;
   SoupMessageHeaders *request_headers;
 
-  uri = g_strdup_printf("http://localhost%s", path);
+  uri = g_strdup_printf ("http://localhost%s", path);
   msg = soup_message_new (method, uri);
   request_headers = soup_message_get_request_headers (msg);
-  // Allow authentication via polkit.
+  /* Allow authentication via polkit. */
   soup_message_headers_append (request_headers, "X-Allow-Interaction", "true");
-  if (request_body != NULL)
-    {
-      g_autoptr(JsonGenerator) generator = NULL;
-      g_autofree gchar *body_text = NULL;
-      gsize body_length;
-      g_autoptr(GBytes) body_bytes = NULL;
+  if (request_body != NULL) {
+    g_autoptr (JsonGenerator) generator = NULL;
+    g_autofree gchar *body_text = NULL;
+    gsize body_length;
+    g_autoptr (GBytes) body_bytes = NULL;
 
-      generator = json_generator_new ();
-      json_generator_set_root (generator, request_body);
-      body_text = json_generator_to_data (generator, &body_length);
-      body_bytes = g_bytes_new (body_text, body_length);
-      soup_message_set_request_body_from_bytes (msg, "application/json", body_bytes);
-    }
+    generator = json_generator_new ();
+    json_generator_set_root (generator, request_body);
+    body_text = json_generator_to_data (generator, &body_length);
+    body_bytes = g_bytes_new (body_text, body_length);
+    soup_message_set_request_body_from_bytes (msg, "application/json", body_bytes);
+  }
 
   return msg;
 }
 
-// Process an HTTP response recveived from snapd.
+/* Process an HTTP response recveived from snapd. */
 static JsonObject *
-process_body (SoupMessage *msg, GBytes *body, GError **error)
+process_body (SoupMessage  *msg,
+              GBytes       *body,
+              GError      **error)
 {
   const gchar *content_type;
-  g_autoptr(JsonParser) parser = NULL;
+  g_autoptr (JsonParser) parser = NULL;
   const gchar *body_data;
   size_t body_length;
   JsonNode *root;
   JsonObject *response;
   gint64 status_code;
-  g_autoptr(GError) internal_error = NULL;
+  g_autoptr (GError) internal_error = NULL;
 
   content_type = soup_message_headers_get_one (soup_message_get_response_headers (msg), "Content-Type");
-  if (g_strcmp0 (content_type, "application/json") != 0)
-    {
-      g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED,
-                   "Invalid content type %s returned", content_type);
-      return NULL;
-    }
+  if (g_strcmp0 (content_type, "application/json") != 0) {
+    g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED,
+                 "Invalid content type %s returned", content_type);
+    return NULL;
+  }
 
   parser = json_parser_new ();
   body_data = g_bytes_get_data (body, &body_length);
-  if (!json_parser_load_from_data (parser, body_data, body_length, &internal_error))
-    {
-      g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED,
-                   "Failed to decode JSON content: %s", internal_error->message);
-      return NULL;
-    }
+  if (!json_parser_load_from_data (parser, body_data, body_length, &internal_error)) {
+    g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED,
+                 "Failed to decode JSON content: %s", internal_error->message);
+    return NULL;
+  }
 
   root = json_parser_get_root (parser);
-  if (!JSON_NODE_HOLDS_OBJECT (root))
-    {
-      g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "Returned JSON not an object");
-      return NULL;
-    }
+  if (!JSON_NODE_HOLDS_OBJECT (root)) {
+    g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "Returned JSON not an object");
+    return NULL;
+  }
   response = json_node_get_object (root);
   status_code = json_object_get_int_member (response, "status-code");
-  if (status_code != SOUP_STATUS_OK && status_code != SOUP_STATUS_ACCEPTED)
-    {
-      g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "Invalid status code %" G_GINT64_FORMAT, status_code);
-      return NULL;
-    }
+  if (status_code != SOUP_STATUS_OK && status_code != SOUP_STATUS_ACCEPTED) {
+    g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "Invalid status code %" G_GINT64_FORMAT, status_code);
+    return NULL;
+  }
 
   return json_object_ref (response);
 }
 
-// Send an HTTP request to snapd and process the response.
+/* Send an HTTP request to snapd and process the response. */
 static JsonObject *
-call_sync (CcSnapdClient *self,
-           const gchar *method, const gchar *path, JsonNode *request_body,
-           GCancellable *cancellable, GError **error)
+call_sync (CcSnapdClient  *self,
+           const gchar    *method,
+           const gchar    *path,
+           JsonNode       *request_body,
+           GCancellable   *cancellable,
+           GError        **error)
 {
-  g_autoptr(SoupMessage) msg = NULL;
-  g_autoptr(GBytes) response_body = NULL;
+  g_autoptr (SoupMessage) msg = NULL;
+  g_autoptr (GBytes) response_body = NULL;
 
   msg = make_message (method, path, request_body);
   response_body = soup_session_send_and_read (self->session, msg, cancellable, error);
@@ -129,19 +128,22 @@ call_sync (CcSnapdClient *self,
   return process_body (msg, response_body, error);
 }
 
-// Perform a snap interface action.
+/* Perform a snap interface action. */
 static gchar *
-call_interfaces_sync (CcSnapdClient *self,
-                      const gchar *action,
-                      const gchar *plug_snap, const gchar *plug_name,
-                      const gchar *slot_snap, const gchar *slot_name,
-                      GCancellable *cancellable, GError **error)
+call_interfaces_sync (CcSnapdClient  *self,
+                      const gchar    *action,
+                      const gchar    *plug_snap,
+                      const gchar    *plug_name,
+                      const gchar    *slot_snap,
+                      const gchar    *slot_name,
+                      GCancellable   *cancellable,
+                      GError        **error)
 {
-  g_autoptr(JsonBuilder) builder = NULL;
-  g_autoptr(JsonObject) response = NULL;
+  g_autoptr (JsonBuilder) builder = NULL;
+  g_autoptr (JsonObject) response = NULL;
   const gchar *change_id;
 
-  builder = json_builder_new();
+  builder = json_builder_new ();
   json_builder_begin_object (builder);
   json_builder_set_member_name (builder, "action");
   json_builder_add_string_value (builder, action);
@@ -180,7 +182,7 @@ cc_snapd_client_dispose (GObject *object)
 {
   CcSnapdClient *self = CC_SNAPD_CLIENT (object);
 
-  g_clear_object(&self->session);
+  g_clear_object (&self->session);
 
   G_OBJECT_CLASS (cc_snapd_client_parent_class)->dispose (object);
 }
@@ -196,7 +198,7 @@ cc_snapd_client_class_init (CcSnapdClientClass *klass)
 static void
 cc_snapd_client_init (CcSnapdClient *self)
 {
-  g_autoptr(GSocketAddress) address = g_unix_socket_address_new (SNAPD_SOCKET_PATH);
+  g_autoptr (GSocketAddress) address = g_unix_socket_address_new (SNAPD_SOCKET_PATH);
   self->session = soup_session_new_with_options ("remote-connectable", address, NULL);
 }
 
@@ -207,10 +209,13 @@ cc_snapd_client_new (void)
 }
 
 JsonObject *
-cc_snapd_client_get_snap_sync (CcSnapdClient *self, const gchar *name, GCancellable *cancellable, GError **error)
+cc_snapd_client_get_snap_sync (CcSnapdClient  *self,
+                               const gchar    *name,
+                               GCancellable   *cancellable,
+                               GError        **error)
 {
   g_autofree gchar *path = NULL;
-  g_autoptr(JsonObject) response = NULL;
+  g_autoptr (JsonObject) response = NULL;
   JsonObject *result;
 
   path = g_strdup_printf ("/v2/snaps/%s", name);
@@ -218,20 +223,22 @@ cc_snapd_client_get_snap_sync (CcSnapdClient *self, const gchar *name, GCancella
   if (response == NULL)
     return NULL;
   result = json_object_get_object_member (response, "result");
-  if (result == NULL)
-    {
-      g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "Invalid response to %s", path);
-      return NULL;
-    }
+  if (result == NULL) {
+    g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "Invalid response to %s", path);
+    return NULL;
+  }
 
   return json_object_ref (result);
 }
 
 JsonObject *
-cc_snapd_client_get_change_sync (CcSnapdClient *self, const gchar *change_id, GCancellable *cancellable, GError **error)
+cc_snapd_client_get_change_sync (CcSnapdClient  *self,
+                                 const gchar    *change_id,
+                                 GCancellable   *cancellable,
+                                 GError        **error)
 {
   g_autofree gchar *path = NULL;
-  g_autoptr(JsonObject) response = NULL;
+  g_autoptr (JsonObject) response = NULL;
   JsonObject *result;
 
   path = g_strdup_printf ("/v2/changes/%s", change_id);
@@ -239,32 +246,32 @@ cc_snapd_client_get_change_sync (CcSnapdClient *self, const gchar *change_id, GC
   if (response == NULL)
     return NULL;
   result = json_object_get_object_member (response, "result");
-  if (result == NULL)
-    {
-      g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "Invalid response to %s", path);
-      return NULL;
-    }
+  if (result == NULL) {
+    g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "Invalid response to %s", path);
+    return NULL;
+  }
 
   return json_object_ref (result);
 }
 
 gboolean
-cc_snapd_client_get_all_connections_sync (CcSnapdClient *self,
-                                          JsonArray **plugs, JsonArray **slots,
-                                          GCancellable *cancellable, GError **error)
+cc_snapd_client_get_all_connections_sync (CcSnapdClient  *self,
+                                          JsonArray     **plugs,
+                                          JsonArray     **slots,
+                                          GCancellable   *cancellable,
+                                          GError        **error)
 {
-  g_autoptr(JsonObject) response = NULL;
+  g_autoptr (JsonObject) response = NULL;
   JsonObject *result;
 
   response = call_sync (self, "GET", "/v2/connections?select=all", NULL, cancellable, error);
   if (response == NULL)
     return FALSE;
   result = json_object_get_object_member (response, "result");
-  if (result == NULL)
-    {
-      g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "Invalid response to /v2/connections");
-      return FALSE;
-    }
+  if (result == NULL) {
+    g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED, "Invalid response to /v2/connections");
+    return FALSE;
+  }
 
   *plugs = json_array_ref (json_object_get_array_member (result, "plugs"));
   *slots = json_array_ref (json_object_get_array_member (result, "slots"));
@@ -272,19 +279,25 @@ cc_snapd_client_get_all_connections_sync (CcSnapdClient *self,
 }
 
 gchar *
-cc_snapd_client_connect_interface_sync (CcSnapdClient *self,
-                                        const gchar *plug_snap, const gchar *plug_name,
-                                        const gchar *slot_snap, const gchar *slot_name,
-                                        GCancellable *cancellable, GError **error)
+cc_snapd_client_connect_interface_sync (CcSnapdClient  *self,
+                                        const gchar    *plug_snap,
+                                        const gchar    *plug_name,
+                                        const gchar    *slot_snap,
+                                        const gchar    *slot_name,
+                                        GCancellable   *cancellable,
+                                        GError        **error)
 {
   return call_interfaces_sync (self, "connect", plug_snap, plug_name, slot_snap, slot_name, cancellable, error);
 }
 
 gchar *
-cc_snapd_client_disconnect_interface_sync (CcSnapdClient *self,
-                                           const gchar *plug_snap, const gchar *plug_name,
-                                           const gchar *slot_snap, const gchar *slot_name,
-                                           GCancellable *cancellable, GError **error)
+cc_snapd_client_disconnect_interface_sync (CcSnapdClient  *self,
+                                           const gchar    *plug_snap,
+                                           const gchar    *plug_name,
+                                           const gchar    *slot_snap,
+                                           const gchar    *slot_name,
+                                           GCancellable   *cancellable,
+                                           GError        **error)
 {
   return call_interfaces_sync (self, "disconnect", plug_snap, plug_name, slot_snap, slot_name, cancellable, error);
 }

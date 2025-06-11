@@ -65,15 +65,14 @@
  * respectively the title label and subtitle label.
  */
 
-typedef struct
-{
-  GtkBox    *contents;
+typedef struct {
+  GtkBox *contents;
   GtkWidget *header;
-  GtkBox    *prefixes;
-  GtkLabel  *subtitle;
-  GtkBox    *suffixes;
-  GtkLabel  *title;
-  GtkBox    *title_box;
+  GtkBox *prefixes;
+  GtkLabel *subtitle;
+  GtkBox *suffixes;
+  GtkLabel *title;
+  GtkBox *title_box;
 
   GtkWidget *previous_parent;
 
@@ -83,7 +82,7 @@ typedef struct
   gboolean subtitle_selectable;
 
   GtkWidget *activatable_widget;
-  GBinding  *activatable_binding;
+  GBinding *activatable_binding;
 } CcContentRowPrivate;
 
 static void cc_content_row_buildable_init (GtkBuildableIface *iface);
@@ -91,7 +90,7 @@ static void cc_content_row_buildable_init (GtkBuildableIface *iface);
 G_DEFINE_TYPE_WITH_CODE (CcContentRow, cc_content_row, ADW_TYPE_PREFERENCES_ROW,
                          G_ADD_PRIVATE (CcContentRow)
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
-                         cc_content_row_buildable_init))
+                                                cc_content_row_buildable_init))
 
 static GtkBuildableIface *parent_buildable_iface;
 
@@ -126,7 +125,7 @@ row_activated_cb (CcContentRow  *self,
                   GtkListBoxRow *row)
 {
   /* No need to use GTK_LIST_BOX_ROW() for a pointer comparison. */
-  if ((GtkListBoxRow *) self == row)
+  if ((GtkListBoxRow *)self == row)
     cc_content_row_activate (self);
 }
 
@@ -157,23 +156,23 @@ cc_content_row_get_property (GObject    *object,
   CcContentRow *self = CC_CONTENT_ROW (object);
 
   switch (prop_id) {
-  case PROP_SUBTITLE:
-    g_value_set_string (value, cc_content_row_get_subtitle (self));
-    break;
-  case PROP_ACTIVATABLE_WIDGET:
-    g_value_set_object (value, (GObject *) cc_content_row_get_activatable_widget (self));
-    break;
-  case PROP_SUBTITLE_LINES:
-    g_value_set_int (value, cc_content_row_get_subtitle_lines (self));
-    break;
-  case PROP_TITLE_LINES:
-    g_value_set_int (value, cc_content_row_get_title_lines (self));
-    break;
-  case PROP_SUBTITLE_SELECTABLE:
-    g_value_set_boolean (value, cc_content_row_get_subtitle_selectable (self));
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    case PROP_SUBTITLE:
+      g_value_set_string (value, cc_content_row_get_subtitle (self));
+      break;
+    case PROP_ACTIVATABLE_WIDGET:
+      g_value_set_object (value, (GObject *)cc_content_row_get_activatable_widget (self));
+      break;
+    case PROP_SUBTITLE_LINES:
+      g_value_set_int (value, cc_content_row_get_subtitle_lines (self));
+      break;
+    case PROP_TITLE_LINES:
+      g_value_set_int (value, cc_content_row_get_title_lines (self));
+      break;
+    case PROP_SUBTITLE_SELECTABLE:
+      g_value_set_boolean (value, cc_content_row_get_subtitle_selectable (self));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
   }
 }
 
@@ -186,23 +185,23 @@ cc_content_row_set_property (GObject      *object,
   CcContentRow *self = CC_CONTENT_ROW (object);
 
   switch (prop_id) {
-  case PROP_SUBTITLE:
-    cc_content_row_set_subtitle (self, g_value_get_string (value));
-    break;
-  case PROP_ACTIVATABLE_WIDGET:
-    cc_content_row_set_activatable_widget (self, (GtkWidget*) g_value_get_object (value));
-    break;
-  case PROP_SUBTITLE_LINES:
-    cc_content_row_set_subtitle_lines (self, g_value_get_int (value));
-    break;
-  case PROP_TITLE_LINES:
-    cc_content_row_set_title_lines (self, g_value_get_int (value));
-    break;
-  case PROP_SUBTITLE_SELECTABLE:
-    cc_content_row_set_subtitle_selectable (self, g_value_get_boolean (value));
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    case PROP_SUBTITLE:
+      cc_content_row_set_subtitle (self, g_value_get_string (value));
+      break;
+    case PROP_ACTIVATABLE_WIDGET:
+      cc_content_row_set_activatable_widget (self, (GtkWidget *)g_value_get_object (value));
+      break;
+    case PROP_SUBTITLE_LINES:
+      cc_content_row_set_subtitle_lines (self, g_value_get_int (value));
+      break;
+    case PROP_TITLE_LINES:
+      cc_content_row_set_title_lines (self, g_value_get_int (value));
+      break;
+    case PROP_SUBTITLE_SELECTABLE:
+      cc_content_row_set_subtitle_selectable (self, g_value_get_boolean (value));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
   }
 }
 
@@ -348,7 +347,7 @@ cc_content_row_class_init (CcContentRowClass *klass)
 static void
 cc_content_row_init (CcContentRow *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr (GtkCssProvider) provider = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -475,14 +474,14 @@ cc_content_row_add_content (CcContentRow *self,
 
 /* From adw-widget-utils-private.h */
 #define ADW_CRITICAL_CANNOT_REMOVE_CHILD(parent, child) \
-G_STMT_START { \
-  g_critical ("%s:%d: tried to remove non-child %p of type '%s' from %p of type '%s'", \
-              __FILE__, __LINE__, \
-              (child), \
-              G_OBJECT_TYPE_NAME ((GObject*) (child)), \
-              (parent), \
-              G_OBJECT_TYPE_NAME ((GObject*) (parent))); \
-} G_STMT_END
+        G_STMT_START { \
+          g_critical ("%s:%d: tried to remove non-child %p of type '%s' from %p of type '%s'", \
+                      __FILE__, __LINE__, \
+                      (child), \
+                      G_OBJECT_TYPE_NAME ((GObject *)(child)), \
+                      (parent), \
+                      G_OBJECT_TYPE_NAME ((GObject *)(parent))); \
+        } G_STMT_END
 
 /**
  * cc_content_row_remove:
@@ -510,8 +509,7 @@ cc_content_row_remove (CcContentRow *self,
       parent == GTK_WIDGET (priv->contents)) {
     gtk_box_remove (GTK_BOX (parent), child);
     gtk_widget_set_visible (parent, gtk_widget_get_first_child (parent) != NULL);
-  }
-  else {
+  } else {
     ADW_CRITICAL_CANNOT_REMOVE_CHILD (self, child);
   }
 }

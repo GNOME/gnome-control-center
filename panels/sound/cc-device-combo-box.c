@@ -18,19 +18,20 @@
 #include "cc-device-combo-box.h"
 #include "cc-sound-resources.h"
 
-struct _CcDeviceComboBox
-{
-  GtkComboBox      parent_instance;
+struct _CcDeviceComboBox {
+  GtkComboBox parent_instance;
 
-  GtkListStore    *device_model;
+  GtkListStore *device_model;
 
   GvcMixerControl *mixer_control;
-  gboolean         is_output;
+  gboolean is_output;
 };
 
 G_DEFINE_TYPE (CcDeviceComboBox, cc_device_combo_box, GTK_TYPE_COMBO_BOX)
 
-static gboolean get_iter (CcDeviceComboBox *self, guint id, GtkTreeIter *iter);
+static gboolean get_iter (CcDeviceComboBox *self,
+                          guint             id,
+                          GtkTreeIter      *iter);
 
 void
 cc_device_combo_box_device_added (CcDeviceComboBox *self,
@@ -50,16 +51,13 @@ cc_device_combo_box_device_added (CcDeviceComboBox *self,
     return;
 
   origin = gvc_mixer_ui_device_get_origin (device);
-  if (origin && origin[0] != '\0')
-    {
-      label = g_strdup_printf ("%s - %s",
-                               gvc_mixer_ui_device_get_description (device),
-                               origin);
-    }
-  else
-    {
-      label = g_strdup (gvc_mixer_ui_device_get_description (device));
-    }
+  if (origin && origin[0] != '\0') {
+    label = g_strdup_printf ("%s - %s",
+                             gvc_mixer_ui_device_get_description (device),
+                             origin);
+  } else {
+    label = g_strdup (gvc_mixer_ui_device_get_description (device));
+  }
 
   if (gvc_mixer_ui_device_get_icon_name (device) != NULL)
     icon_name = g_strdup_printf ("%s-symbolic", gvc_mixer_ui_device_get_icon_name (device));
@@ -82,14 +80,13 @@ get_iter (CcDeviceComboBox *self,
   if (!gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->device_model), iter))
     return FALSE;
 
-  do
-    {
-      guint i;
+  do{
+    guint i;
 
-      gtk_tree_model_get (GTK_TREE_MODEL (self->device_model), iter, 2, &i, -1);
-      if (i == id)
-        return TRUE;
-    } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->device_model), iter));
+    gtk_tree_model_get (GTK_TREE_MODEL (self->device_model), iter, 2, &i, -1);
+    if (i == id)
+      return TRUE;
+  } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->device_model), iter));
 
   return FALSE;
 }

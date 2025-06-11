@@ -36,8 +36,7 @@
 #define GLOBAL_SHORTCUTS_PATH "/org/gnome/global-shortcuts/"
 #define SHORTCUT_DELIMITERS "+ "
 
-struct _CcKeyboardItem
-{
+struct _CcKeyboardItem {
   GObject parent_instance;
 
   CcKeyboardItem *reverse_item;
@@ -65,8 +64,7 @@ struct _CcKeyboardItem
   GSettings *settings;
 };
 
-enum
-{
+enum {
   PROP_0,
   PROP_DESCRIPTION,
   PROP_EDITABLE,
@@ -76,52 +74,52 @@ enum
   PROP_KEY_COMBOS
 };
 
-static void     cc_keyboard_item_class_init     (CcKeyboardItemClass *klass);
-static void     cc_keyboard_item_init           (CcKeyboardItem      *keyboard_item);
-static void     cc_keyboard_item_finalize       (GObject               *object);
+static void     cc_keyboard_item_class_init (CcKeyboardItemClass *klass);
+static void     cc_keyboard_item_init (CcKeyboardItem *keyboard_item);
+static void     cc_keyboard_item_finalize (GObject *object);
 
 G_DEFINE_TYPE (CcKeyboardItem, cc_keyboard_item, G_TYPE_OBJECT)
 
 static const CcKeyCombo EMPTY_COMBO = { 0, 0, 0 };
 
 static gboolean
-combo_equal (CcKeyCombo *a, CcKeyCombo *b)
+combo_equal (CcKeyCombo *a,
+             CcKeyCombo *b)
 {
   return (a->keyval == b->keyval
-       && a->keycode == b->keycode
-       && a->mask == b->mask);
+          && a->keycode == b->keycode
+          && a->mask == b->mask);
 }
 
 static gboolean
-combos_contains (GList *combos, CcKeyCombo *needle)
+combos_contains (GList      *combos,
+                 CcKeyCombo *needle)
 {
-  for (GList *l = combos; l != NULL; l = l->next)
-    {
-      if (combo_equal (l->data, needle))
-        return TRUE;
-    }
+  for (GList *l = combos; l != NULL; l = l->next) {
+    if (combo_equal (l->data, needle))
+      return TRUE;
+  }
 
   return FALSE;
 }
 
 static gboolean
-combos_equal (GList *a, GList *b)
+combos_equal (GList *a,
+              GList *b)
 {
-  // Should be efficient enough for any sane number of bindings
+  /* Should be efficient enough for any sane number of bindings */
 
-  for (GList *l = a; l != NULL; l = l->next)
-    {
-      if (!combos_contains (b, l->data))
-        return FALSE;
-    }
+  for (GList *l = a; l != NULL; l = l->next) {
+    if (!combos_contains (b, l->data))
+      return FALSE;
+  }
 
-  for (GList *l = b; l != NULL; l = l->next)
-    {
-      if (!combos_contains (a, l->data))
-        return FALSE;
-    }
+  for (GList *l = b; l != NULL; l = l->next) {
+    if (!combos_contains (a, l->data))
+      return FALSE;
+  }
 
-    return TRUE;
+  return TRUE;
 }
 
 static gboolean
@@ -131,11 +129,10 @@ binding_from_string (const char *str,
   g_return_val_if_fail (combo != NULL, FALSE);
   g_autofree guint *keycodes = NULL;
 
-  if (str == NULL || strcmp (str, "disabled") == 0)
-    {
-      memset (combo, 0, sizeof(CcKeyCombo));
-      return TRUE;
-    }
+  if (str == NULL || strcmp (str, "disabled") == 0) {
+    memset (combo, 0, sizeof (CcKeyCombo));
+    return TRUE;
+  }
 
   gtk_accelerator_parse_with_keycode (str,
                                       gdk_display_get_default (),
@@ -162,7 +159,7 @@ cc_keyboard_item_get_global_shortcut_name (CcKeyboardItem *item)
 
 static void
 _set_description (CcKeyboardItem *item,
-                  const char       *value)
+                  const char     *value)
 {
   g_free (item->description);
   item->description = g_strdup (value);
@@ -193,7 +190,7 @@ _set_type (CcKeyboardItem *item,
 
 static void
 _set_command (CcKeyboardItem *item,
-              const char       *value)
+              const char     *value)
 {
   g_free (item->command);
   item->command = g_strdup (value);
@@ -226,18 +223,18 @@ cc_keyboard_item_set_property (GObject      *object,
   self = CC_KEYBOARD_ITEM (object);
 
   switch (prop_id) {
-  case PROP_DESCRIPTION:
-    _set_description (self, g_value_get_string (value));
-    break;
-  case PROP_COMMAND:
-    _set_command (self, g_value_get_string (value));
-    break;
-  case PROP_TYPE:
-    _set_type (self, g_value_get_int (value));
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    break;
+    case PROP_DESCRIPTION:
+      _set_description (self, g_value_get_string (value));
+      break;
+    case PROP_COMMAND:
+      _set_command (self, g_value_get_string (value));
+      break;
+    case PROP_TYPE:
+      _set_type (self, g_value_get_int (value));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
   }
 }
 
@@ -252,31 +249,31 @@ cc_keyboard_item_get_property (GObject    *object,
   self = CC_KEYBOARD_ITEM (object);
 
   switch (prop_id) {
-  case PROP_DESCRIPTION:
-    g_value_set_string (value, self->description);
-    break;
-  case PROP_EDITABLE:
-    g_value_set_boolean (value, self->editable);
-    break;
-  case PROP_COMMAND:
-    g_value_set_string (value, self->command);
-    break;
-  case PROP_IS_VALUE_DEFAULT:
-    g_value_set_boolean (value, cc_keyboard_item_is_value_default (self));
-    break;
-  case PROP_KEY_COMBOS:
-    g_value_set_pointer (value, self->key_combos);
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    break;
+    case PROP_DESCRIPTION:
+      g_value_set_string (value, self->description);
+      break;
+    case PROP_EDITABLE:
+      g_value_set_boolean (value, self->editable);
+      break;
+    case PROP_COMMAND:
+      g_value_set_string (value, self->command);
+      break;
+    case PROP_IS_VALUE_DEFAULT:
+      g_value_set_boolean (value, cc_keyboard_item_is_value_default (self));
+      break;
+    case PROP_KEY_COMBOS:
+      g_value_set_pointer (value, self->key_combos);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
   }
 }
 
 static void
 cc_keyboard_item_class_init (CcKeyboardItemClass *klass)
 {
-  GObjectClass  *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->get_property = cc_keyboard_item_get_property;
   object_class->set_property = cc_keyboard_item_set_property;
@@ -383,46 +380,42 @@ strv_contains_prefix_or_match (char       **strv,
     const gchar *key;
     const gchar *untranslated;
     const gchar *synonym;
-  } key_aliases[] =
-    {
-      { "ctrl",   "Ctrl",  "ctrl" },
-      { "win",    "Super", "super" },
-      { "option",  NULL,   "alt" },
-      { "command", NULL,   "super" },
-      { "apple",   NULL,   "super" },
-    };
+  } key_aliases[] = {
+    { "ctrl", "Ctrl", "ctrl" },
+    { "win", "Super", "super" },
+    { "option", NULL, "alt" },
+    { "command", NULL, "super" },
+    { "apple", NULL, "super" },
+  };
 
-  for (guint i = 0; strv[i]; i++)
-    {
-      if (g_str_has_prefix (strv[i], prefix))
-        return TRUE;
+  for (guint i = 0; strv[i]; i++) {
+    if (g_str_has_prefix (strv[i], prefix))
+      return TRUE;
+  }
+
+  for (guint i = 0; i < G_N_ELEMENTS (key_aliases); i++) {
+    g_autofree char *alias = NULL;
+    const char *synonym;
+
+    if (!g_str_has_prefix (key_aliases[i].key, prefix))
+      continue;
+
+    if (key_aliases[i].untranslated) {
+      const char *translated_label;
+
+      /* Steal GTK+'s translation */
+      translated_label = g_dpgettext2 ("gtk40", "keyboard label", key_aliases[i].untranslated);
+      alias = g_utf8_strdown (translated_label, -1);
     }
 
-  for (guint i = 0; i < G_N_ELEMENTS (key_aliases); i++)
-    {
-      g_autofree char *alias = NULL;
-      const char *synonym;
+    synonym = key_aliases[i].synonym;
 
-      if (!g_str_has_prefix (key_aliases[i].key, prefix))
-        continue;
-
-      if (key_aliases[i].untranslated)
-        {
-          const char *translated_label;
-
-          /* Steal GTK+'s translation */
-          translated_label = g_dpgettext2 ("gtk40", "keyboard label", key_aliases[i].untranslated);
-          alias = g_utf8_strdown (translated_label, -1);
-        }
-
-      synonym = key_aliases[i].synonym;
-
-      /* If a translation or synonym of the key is in the accelerator, and we typed
-       * the key, also consider that a prefix */
-      if ((alias && g_strv_contains ((const char * const *) strv, alias)) ||
-          (synonym && g_strv_contains ((const char * const *) strv, synonym)))
-        return TRUE;
-    }
+    /* If a translation or synonym of the key is in the accelerator, and we typed
+     * the key, also consider that a prefix */
+    if ((alias && g_strv_contains ((const char * const *)strv, alias)) ||
+        (synonym && g_strv_contains ((const char * const *)strv, synonym)))
+      return TRUE;
+  }
 
   return FALSE;
 }
@@ -432,7 +425,7 @@ static gboolean
 search_match_shortcut (CcKeyboardItem *item,
                        const char     *search)
 {
-  g_auto(GStrv) shortcut_tokens = NULL, search_tokens = NULL;
+  g_auto (GStrv) shortcut_tokens = NULL, search_tokens = NULL;
   g_autofree char *normalized_accel = NULL;
   g_autofree char *accel = NULL;
   GList *key_combos;
@@ -440,30 +433,28 @@ search_match_shortcut (CcKeyboardItem *item,
   gboolean match = TRUE;
 
   key_combos = cc_keyboard_item_get_key_combos (item);
-  for (GList *l = key_combos; l != NULL; l = l->next)
-    {
-      combo = l->data;
+  for (GList *l = key_combos; l != NULL; l = l->next) {
+    combo = l->data;
 
-      if (is_empty_binding (combo))
-        continue;
+    if (is_empty_binding (combo))
+      continue;
 
-      accel = convert_keysym_state_to_string (combo);
-      normalized_accel = cc_util_normalize_casefold_and_unaccent (accel);
+    accel = convert_keysym_state_to_string (combo);
+    normalized_accel = cc_util_normalize_casefold_and_unaccent (accel);
 
-      shortcut_tokens = g_strsplit_set (normalized_accel, SHORTCUT_DELIMITERS, -1);
-      search_tokens = g_strsplit_set (search, SHORTCUT_DELIMITERS, -1);
+    shortcut_tokens = g_strsplit_set (normalized_accel, SHORTCUT_DELIMITERS, -1);
+    search_tokens = g_strsplit_set (search, SHORTCUT_DELIMITERS, -1);
 
-      for (guint i = 0; search_tokens[i]; i++)
-        {
-          match = match && strv_contains_prefix_or_match (shortcut_tokens, search_tokens[i]);
+    for (guint i = 0; search_tokens[i]; i++) {
+      match = match && strv_contains_prefix_or_match (shortcut_tokens, search_tokens[i]);
 
-          if (!match)
-            break;
-        }
-
-      if (match)
-        return TRUE;
+      if (!match)
+        break;
     }
+
+    if (match)
+      return TRUE;
+  }
 
   return FALSE;
 }
@@ -481,15 +472,14 @@ cc_keyboard_item_matches_string (CcKeyboardItem *self,
 
   name = cc_util_normalize_casefold_and_unaccent (self->description);
 
-  for (guint i = 0; search_terms[i]; i++)
-    {
-      gboolean match;
+  for (guint i = 0; search_terms[i]; i++) {
+    gboolean match;
 
-      match = strstr (name, search_terms[i]) || search_match_shortcut (self, search_terms[i]);
+    match = strstr (name, search_terms[i]) || search_match_shortcut (self, search_terms[i]);
 
-      if (!match)
-        return FALSE;
-    }
+    if (!match)
+      return FALSE;
+  }
 
   return TRUE;
 }
@@ -511,20 +501,18 @@ get_above_tab_keysyms (void)
                                 &n_entries))
     goto out;
 
-  for (i = 0; i < n_entries; i++)
-    {
-      gboolean found = FALSE;
+  for (i = 0; i < n_entries; i++) {
+    gboolean found = FALSE;
 
-      for (j = 0; j < keysyms->len; j++)
-        if (g_array_index (keysyms, guint, j) == keyvals[i])
-          {
-            found = TRUE;
-            break;
-          }
+    for (j = 0; j < keysyms->len; j++)
+      if (g_array_index (keysyms, guint, j) == keyvals[i]) {
+        found = TRUE;
+        break;
+      }
 
-      if (!found)
-        g_array_append_val (keysyms, keyvals[i]);
-    }
+    if (!found)
+      g_array_append_val (keysyms, keyvals[i]);
+  }
 
 out:
   return (guint *)g_array_free (keysyms, FALSE);
@@ -544,7 +532,7 @@ out:
  *   can be used unmodified
  */
 static gboolean
-translate_above_tab (char **original_bindings,
+translate_above_tab (char  **original_bindings,
                      char ***new_bindings)
 {
   GPtrArray *replaced_bindings;
@@ -562,27 +550,22 @@ translate_above_tab (char **original_bindings,
 
   replaced_bindings = g_ptr_array_new ();
 
-  for (str = original_bindings; *str; str++)
-    {
-      if (strstr (*str, "Above_Tab") == NULL)
-        {
-          g_ptr_array_add (replaced_bindings, g_strdup (*str));
-        }
-      else
-        {
-          g_auto (GStrv) split_str = g_strsplit (*str, "Above_Tab", -1);
-          int i;
+  for (str = original_bindings; *str; str++) {
+    if (strstr (*str, "Above_Tab") == NULL) {
+      g_ptr_array_add (replaced_bindings, g_strdup (*str));
+    } else {
+      g_auto (GStrv) split_str = g_strsplit (*str, "Above_Tab", -1);
+      int i;
 
-          for (i = 0; above_tab_keysyms[i]; i++)
-            {
-              g_autofree char *sym = NULL;
+      for (i = 0; above_tab_keysyms[i]; i++) {
+        g_autofree char *sym = NULL;
 
-              sym = gtk_accelerator_name (above_tab_keysyms[i], 0);
-              g_ptr_array_add (replaced_bindings, g_strjoinv (sym, split_str));
-            }
-        }
-      g_ptr_array_add (replaced_bindings, NULL);
+        sym = gtk_accelerator_name (above_tab_keysyms[i], 0);
+        g_ptr_array_add (replaced_bindings, g_strjoinv (sym, split_str));
+      }
     }
+    g_ptr_array_add (replaced_bindings, NULL);
+  }
 
   *new_bindings = (char **)g_ptr_array_free (replaced_bindings, FALSE);
   return TRUE;
@@ -593,34 +576,29 @@ variant_get_key_combos (GVariant *variant)
 {
   GList *combos = NULL;
   char **translated_bindings, **str;
-  g_auto(GStrv) bindings = NULL;
+  g_auto (GStrv) bindings = NULL;
 
-  if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING))
-    {
-      bindings = g_malloc0_n (2, sizeof(char *));
-      if (g_strcmp0 (g_variant_get_string (variant, NULL), "") != 0)
-        bindings[0] = g_variant_dup_string (variant, NULL);
-    }
-  else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
-    {
-      bindings = g_variant_dup_strv (variant, NULL);
-    }
+  if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING)) {
+    bindings = g_malloc0_n (2, sizeof (char *));
+    if (g_strcmp0 (g_variant_get_string (variant, NULL), "") != 0)
+      bindings[0] = g_variant_dup_string (variant, NULL);
+  } else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY)) {
+    bindings = g_variant_dup_strv (variant, NULL);
+  }
 
-  if (translate_above_tab (bindings, &translated_bindings))
-    {
-      g_strfreev (bindings);
-      bindings = translated_bindings;
-    }
+  if (translate_above_tab (bindings, &translated_bindings)) {
+    g_strfreev (bindings);
+    bindings = translated_bindings;
+  }
 
-  for (str = bindings; *str; str++)
-    {
-      g_autofree CcKeyCombo *combo = g_new (CcKeyCombo, 1);
+  for (str = bindings; *str; str++) {
+    g_autofree CcKeyCombo *combo = g_new (CcKeyCombo, 1);
 
-      binding_from_string (*str, combo);
+    binding_from_string (*str, combo);
 
-      if (combo->keyval != 0 || combo->keycode != 0 || combo->mask != 0)
-        combos = g_list_prepend (combos, g_steal_pointer (&combo));
-    }
+    if (combo->keyval != 0 || combo->keycode != 0 || combo->mask != 0)
+      combos = g_list_prepend (combos, g_steal_pointer (&combo));
+  }
 
   return g_list_reverse (combos);
 }
@@ -631,7 +609,7 @@ settings_get_key_combos (GSettings  *settings,
                          gboolean    use_default)
 {
   GList *key_combos;
-  g_autoptr(GVariant) variant = NULL;
+  g_autoptr (GVariant) variant = NULL;
 
   if (use_default)
     variant = g_settings_get_default_value (settings, key);
@@ -653,7 +631,7 @@ binding_changed_notify (CcKeyboardItem *item)
 
 static void
 binding_changed (CcKeyboardItem *item,
-		 const char *key)
+                 const char     *key)
 {
   g_list_free_full (item->key_combos, g_free);
   item->key_combos = settings_get_key_combos (item->settings, item->key, FALSE);
@@ -675,36 +653,33 @@ combo_get_accelerator (CcKeyCombo *combo)
 GVariant *
 cc_keyboard_item_store_to_global_shortcuts_variant (CcKeyboardItem *item)
 {
-  g_auto(GVariantBuilder) builder =
+  g_auto (GVariantBuilder) builder =
     G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE ("a{sv}"));
 
   if (item->type != CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT)
     return NULL;
 
-  if (item->key_combos)
-    {
-      g_auto(GVariantBuilder) shortcuts =
-        G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE ("as"));
-      GList *l;
+  if (item->key_combos) {
+    g_auto (GVariantBuilder) shortcuts =
+      G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE ("as"));
+    GList *l;
 
-      for (l = item->key_combos; l; l = l->next)
-        {
-          g_autofree char *accel = NULL;
+    for (l = item->key_combos; l; l = l->next) {
+      g_autofree char *accel = NULL;
 
-          accel = combo_get_accelerator (l->data);
-          g_variant_builder_add (&shortcuts, "s", accel);
-        }
-
-      g_variant_builder_add (&builder, "{sv}",
-                             "shortcuts", g_variant_builder_end (&shortcuts));
+      accel = combo_get_accelerator (l->data);
+      g_variant_builder_add (&shortcuts, "s", accel);
     }
 
-  if (item->description)
-    {
-      g_variant_builder_add (&builder, "{sv}",
-                             "description",
-                             g_variant_new_string (item->description));
-    }
+    g_variant_builder_add (&builder, "{sv}",
+                           "shortcuts", g_variant_builder_end (&shortcuts));
+  }
+
+  if (item->description) {
+    g_variant_builder_add (&builder, "{sv}",
+                           "description",
+                           g_variant_new_string (item->description));
+  }
 
   return g_variant_builder_end (&builder);
 }
@@ -744,7 +719,7 @@ cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem *item,
                                            const char     *path,
                                            gboolean        reset)
 {
-  g_autoptr(GVariant) variant = NULL;
+  g_autoptr (GVariant) variant = NULL;
 
   item->schema = g_strdup (CUSTOM_KEYS_SCHEMA);
   item->gsettings_path = g_strdup (path);
@@ -757,12 +732,11 @@ cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem *item,
   variant = g_settings_get_value (item->settings, item->key);
   item->can_set_multiple = g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY);
 
-  if (reset)
-    {
-      g_settings_reset (item->settings, "name");
-      g_settings_reset (item->settings, "command");
-      g_settings_reset (item->settings, "binding");
-    }
+  if (reset) {
+    g_settings_reset (item->settings, "name");
+    g_settings_reset (item->settings, "command");
+    g_settings_reset (item->settings, "binding");
+  }
 
   g_settings_bind (item->settings, "name",
                    G_OBJECT (item), "description", G_SETTINGS_BIND_DEFAULT);
@@ -780,12 +754,12 @@ cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem *item,
 
 gboolean
 cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
-				      const char *description,
-				      const char *schema,
-				      const char *key)
+                                      const char     *description,
+                                      const char     *schema,
+                                      const char     *key)
 {
   g_autofree char *signal_name = NULL;
-  g_autoptr(GVariant) variant = NULL;
+  g_autoptr (GVariant) variant = NULL;
 
   item->schema = g_strdup (schema);
   item->key = g_strdup (key);
@@ -812,12 +786,11 @@ cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
 
 gboolean
 cc_keyboard_item_equal (CcKeyboardItem *a,
-			CcKeyboardItem *b)
+                        CcKeyboardItem *b)
 {
   if (a->type != b->type)
     return FALSE;
-  switch (a->type)
-    {
+  switch (a->type) {
     case CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT:
       return g_str_equal (a->key, b->key);
     case CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH:
@@ -827,24 +800,21 @@ cc_keyboard_item_equal (CcKeyboardItem *a,
               g_str_equal (a->key, b->key));
     default:
       g_assert_not_reached ();
-    }
-
+  }
 }
 
 void
 cc_keyboard_item_add_reverse_item (CcKeyboardItem *item,
-				   CcKeyboardItem *reverse_item,
-				   gboolean is_reversed)
+                                   CcKeyboardItem *reverse_item,
+                                   gboolean        is_reversed)
 {
   g_return_if_fail (item->key != NULL);
 
   item->reverse_item = reverse_item;
-  if (reverse_item->reverse_item == NULL)
-    {
-      reverse_item->reverse_item = item;
-      reverse_item->is_reversed = !is_reversed;
-    }
-  else
+  if (reverse_item->reverse_item == NULL) {
+    reverse_item->reverse_item = item;
+    reverse_item->is_reversed = !is_reversed;
+  } else
     g_warn_if_fail (reverse_item->is_reversed == !!is_reversed);
 
   item->is_reversed = !!is_reversed;
@@ -858,7 +828,8 @@ cc_keyboard_item_get_reverse_item (CcKeyboardItem *item)
 
 
 void
-cc_keyboard_item_set_hidden (CcKeyboardItem *item, gboolean hidden)
+cc_keyboard_item_set_hidden (CcKeyboardItem *item,
+                             gboolean        hidden)
 {
   item->hidden = !!hidden;
 }
@@ -908,25 +879,21 @@ cc_keyboard_item_reset (CcKeyboardItem *self)
 
   reverse = self->reverse_item;
 
-  if (self->settings)
-    {
-      g_settings_reset (self->settings, self->key);
-    }
-  else
-    {
-      g_list_free_full (self->key_combos, g_free);
-      self->key_combos = NULL;
-      binding_changed_notify (self);
-    }
+  if (self->settings) {
+    g_settings_reset (self->settings, self->key);
+  } else {
+    g_list_free_full (self->key_combos, g_free);
+    self->key_combos = NULL;
+    binding_changed_notify (self);
+  }
 
   g_object_notify (G_OBJECT (self), "is-value-default");
 
   /* Also reset the reverse item */
-  if (reverse)
-    {
-      g_settings_reset (reverse->settings, reverse->key);
-      g_object_notify (G_OBJECT (reverse), "is-value-default");
-    }
+  if (reverse) {
+    g_settings_reset (reverse->settings, reverse->key);
+    g_object_notify (G_OBJECT (reverse), "is-value-default");
+  }
 }
 
 GList *
@@ -947,7 +914,7 @@ CcKeyCombo
 cc_keyboard_item_get_primary_combo (CcKeyboardItem *item)
 {
   g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), EMPTY_COMBO);
-  return (item->key_combos) ? *((CcKeyCombo*)item->key_combos->data) : EMPTY_COMBO;
+  return (item->key_combos) ? *((CcKeyCombo *)item->key_combos->data) : EMPTY_COMBO;
 }
 
 const gchar *
@@ -986,45 +953,38 @@ cc_keyboard_item_can_set_multiple (CcKeyboardItem *item)
 
 static void
 cc_keyboard_item_add_key_combo_inner (CcKeyboardItem *self,
-                                      CcKeyCombo *combo)
+                                      CcKeyCombo     *combo)
 {
-  g_auto(GStrv) strv = NULL;
+  g_auto (GStrv) strv = NULL;
   int i;
 
-  if (!self->can_set_multiple)
-    {
-      /* In-memory keyboard items currently always support multiple,
-       * so we don't bother special-casing when they don't.
-       */
-      g_assert (self->settings);
-      g_settings_set_string (self->settings, self->key, combo_get_accelerator (combo));
-    }
-  else
-    {
-      strv = g_new0 (gchar*, g_list_length (self->key_combos) + 2);
+  if (!self->can_set_multiple) {
+    /* In-memory keyboard items currently always support multiple,
+     * so we don't bother special-casing when they don't.
+     */
+    g_assert (self->settings);
+    g_settings_set_string (self->settings, self->key, combo_get_accelerator (combo));
+  } else {
+    strv = g_new0 (gchar *, g_list_length (self->key_combos) + 2);
 
-      i = 0;
-      for (GList *l = self->key_combos; l != NULL; l = l->next, i++)
-        {
-          /* This combo is already in the list */
-          if (combo_equal (l->data, combo))
-            return;
-          strv[i] = combo_get_accelerator (l->data);
-        }
-      strv[i] = combo_get_accelerator (combo);
-
-      if (self->settings)
-        {
-          g_settings_set_strv (self->settings, self->key, (const gchar **) strv);
-        }
-      else /* In-memory keyboard item */
-        {
-          CcKeyCombo *new_combo;
-          new_combo = g_new0 (CcKeyCombo, 1);
-          *new_combo = *combo;
-          self->key_combos = g_list_append (self->key_combos, new_combo);
-        }
+    i = 0;
+    for (GList *l = self->key_combos; l != NULL; l = l->next, i++) {
+      /* This combo is already in the list */
+      if (combo_equal (l->data, combo))
+        return;
+      strv[i] = combo_get_accelerator (l->data);
     }
+    strv[i] = combo_get_accelerator (combo);
+
+    if (self->settings) {
+      g_settings_set_strv (self->settings, self->key, (const gchar **)strv);
+    } else { /* In-memory keyboard item */
+      CcKeyCombo *new_combo;
+      new_combo = g_new0 (CcKeyCombo, 1);
+      *new_combo = *combo;
+      self->key_combos = g_list_append (self->key_combos, new_combo);
+    }
+  }
 
   if (self->settings)
     binding_changed (self, self->key);
@@ -1034,96 +994,86 @@ cc_keyboard_item_add_key_combo_inner (CcKeyboardItem *self,
 
 void
 cc_keyboard_item_add_key_combo (CcKeyboardItem *self,
-                                CcKeyCombo *combo)
+                                CcKeyCombo     *combo)
 {
   CcKeyCombo reverse_combo;
 
-  if (self->reverse_item)
-    {
-      reverse_combo.keyval = combo->keyval;
-      reverse_combo.keycode = combo->keycode;
-      reverse_combo.mask = combo->mask ^ GDK_SHIFT_MASK;
-      cc_keyboard_item_add_key_combo_inner (self->reverse_item, &reverse_combo);
-    }
+  if (self->reverse_item) {
+    reverse_combo.keyval = combo->keyval;
+    reverse_combo.keycode = combo->keycode;
+    reverse_combo.mask = combo->mask ^ GDK_SHIFT_MASK;
+    cc_keyboard_item_add_key_combo_inner (self->reverse_item, &reverse_combo);
+  }
 
   cc_keyboard_item_add_key_combo_inner (self, combo);
 }
 
 static void
 cc_keyboard_item_remove_key_combo_inner (CcKeyboardItem *self,
-                                         CcKeyCombo *combo)
+                                         CcKeyCombo     *combo)
 {
-  g_auto(GStrv) strv = NULL;
+  g_auto (GStrv) strv = NULL;
   gboolean found;
   int i;
 
-  strv = g_new0 (gchar*, g_list_length (self->key_combos) + 1);
+  strv = g_new0 (gchar *, g_list_length (self->key_combos) + 1);
 
   found = FALSE;
   i = 0;
-  for (GList *l = self->key_combos; l != NULL; l = l->next, i++)
-    {
-      if (combo_equal (l->data, combo))
-        {
-          i--;
-          found = TRUE;
-        }
-      else
-        {
-          strv[i] = combo_get_accelerator (l->data);
-        }
+  for (GList *l = self->key_combos; l != NULL; l = l->next, i++) {
+    if (combo_equal (l->data, combo)) {
+      i--;
+      found = TRUE;
+    } else {
+      strv[i] = combo_get_accelerator (l->data);
     }
+  }
 
-  if (found)
-    {
-      if (self->can_set_multiple)
-        g_settings_set_strv (self->settings, self->key, (const gchar **)strv);
-      else
-        g_settings_set_string (self->settings, self->key, "");
-    }
+  if (found) {
+    if (self->can_set_multiple)
+      g_settings_set_strv (self->settings, self->key, (const gchar **)strv);
+    else
+      g_settings_set_string (self->settings, self->key, "");
+  }
 
   binding_changed (self, self->key);
 }
 
 void
 cc_keyboard_item_remove_key_combo (CcKeyboardItem *self,
-                                   CcKeyCombo *combo)
+                                   CcKeyCombo     *combo)
 {
   CcKeyCombo reverse_combo;
 
-  if (self->reverse_item)
-    {
-      reverse_combo.keyval = combo->keyval;
-      reverse_combo.keycode = combo->keycode;
-      reverse_combo.mask = combo->mask ^ GDK_SHIFT_MASK;
-      cc_keyboard_item_remove_key_combo_inner (self->reverse_item, &reverse_combo);
-    }
+  if (self->reverse_item) {
+    reverse_combo.keyval = combo->keyval;
+    reverse_combo.keycode = combo->keycode;
+    reverse_combo.mask = combo->mask ^ GDK_SHIFT_MASK;
+    cc_keyboard_item_remove_key_combo_inner (self->reverse_item, &reverse_combo);
+  }
 
   cc_keyboard_item_remove_key_combo_inner (self, combo);
 }
 
-void cc_keyboard_item_disable (CcKeyboardItem *self)
+void
+cc_keyboard_item_disable (CcKeyboardItem *self)
 {
-  if (!self->settings)
-    {
-      g_list_free_full (self->key_combos, g_free);
-      self->key_combos = NULL;
-      binding_changed_notify (self);
-      return;
-    }
+  if (!self->settings) {
+    g_list_free_full (self->key_combos, g_free);
+    self->key_combos = NULL;
+    binding_changed_notify (self);
+    return;
+  }
 
-  if (!self->can_set_multiple)
-    {
-      g_settings_set_string (self->settings, self->key, "");
-      if (self->reverse_item)
-        g_settings_set_string (self->reverse_item->settings, self->reverse_item->key, "");
-    }
-  else
-    {
-      g_settings_set_strv (self->settings, self->key, NULL);
-      if (self->reverse_item)
-        g_settings_set_strv (self->reverse_item->settings, self->reverse_item->key, NULL);
-    }
+  if (!self->can_set_multiple) {
+    g_settings_set_string (self->settings, self->key, "");
+    if (self->reverse_item)
+      g_settings_set_string (self->reverse_item->settings, self->reverse_item->key, "");
+  } else {
+    g_settings_set_strv (self->settings, self->key, NULL);
+    if (self->reverse_item)
+      g_settings_set_strv (self->reverse_item->settings, self->reverse_item->key, NULL);
+  }
 
   binding_changed (self, self->key);
 }

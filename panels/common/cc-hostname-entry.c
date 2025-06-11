@@ -26,11 +26,10 @@
 
 #include <polkit/polkit.h>
 
-struct _CcHostnameEntry
-{
-  AdwEntryRow          parent;
+struct _CcHostnameEntry {
+  AdwEntryRow parent;
 
-  guint                set_hostname_timeout_source_id;
+  guint set_hostname_timeout_source_id;
 };
 
 G_DEFINE_TYPE (CcHostnameEntry, cc_hostname_entry, ADW_TYPE_ENTRY_ROW)
@@ -56,7 +55,7 @@ reset_hostname_timeout (CcHostnameEntry *self)
   g_clear_handle_id (&self->set_hostname_timeout_source_id, g_source_remove);
 
   self->set_hostname_timeout_source_id = g_timeout_add_seconds (SET_HOSTNAME_TIMEOUT,
-                                                                (GSourceFunc) set_hostname_timeout,
+                                                                (GSourceFunc)set_hostname_timeout,
                                                                 self);
 }
 
@@ -71,11 +70,10 @@ cc_hostname_entry_dispose (GObject *object)
 {
   CcHostnameEntry *self = CC_HOSTNAME_ENTRY (object);
 
-  if (self->set_hostname_timeout_source_id)
-    {
-      g_clear_handle_id (&self->set_hostname_timeout_source_id, g_source_remove);
-      set_hostname_timeout (self);
-    }
+  if (self->set_hostname_timeout_source_id) {
+    g_clear_handle_id (&self->set_hostname_timeout_source_id, g_source_remove);
+    set_hostname_timeout (self);
+  }
 
   G_OBJECT_CLASS (cc_hostname_entry_parent_class)->dispose (object);
 }
@@ -85,29 +83,27 @@ cc_hostname_entry_constructed (GObject *object)
 {
   CcHostnameEntry *self = CC_HOSTNAME_ENTRY (object);
   GPermission *permission;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   g_autofree gchar *str = NULL;
 
   permission = polkit_permission_new_sync ("org.freedesktop.hostname1.set-static-hostname",
                                            NULL, NULL, NULL);
 
   /* Is hostnamed installed? */
-  if (permission == NULL)
-    {
-      g_debug ("Will not show hostname, hostnamed not installed");
+  if (permission == NULL) {
+    g_debug ("Will not show hostname, hostnamed not installed");
 
-      gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
+    gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
 
-      return;
-    }
+    return;
+  }
 
   if (g_permission_get_allowed (permission))
     gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
-  else
-    {
-      g_debug ("Not allowed to change the hostname");
-      gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
-    }
+  else {
+    g_debug ("Not allowed to change the hostname");
+    gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
+  }
 
   str = cc_hostname_get_display_hostname (cc_hostname_get_default ());
   if (str != NULL)

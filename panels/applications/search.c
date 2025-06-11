@@ -29,8 +29,8 @@ static void
 add_one_provider (GHashTable *search_providers,
                   GFile      *file)
 {
-  g_autoptr(GKeyFile) keyfile = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GKeyFile) keyfile = NULL;
+  g_autoptr (GError) error = NULL;
   g_autofree gchar *app_id = NULL;
   g_autofree gchar *path = NULL;
   gboolean default_disabled;
@@ -39,27 +39,24 @@ add_one_provider (GHashTable *search_providers,
   keyfile = g_key_file_new ();
   g_key_file_load_from_file (keyfile, path, G_KEY_FILE_NONE, &error);
 
-  if (error != NULL)
-    {
-      g_warning ("Error loading %s: %s - search provider will be ignored",
-                 path, error->message);
-      return;
-    }
+  if (error != NULL) {
+    g_warning ("Error loading %s: %s - search provider will be ignored",
+               path, error->message);
+    return;
+  }
 
-  if (!g_key_file_has_group (keyfile, SHELL_PROVIDER_GROUP))
-    {
-      g_debug ("Shell search provider group missing from '%s', ignoring", path);
-      return;
-    }
+  if (!g_key_file_has_group (keyfile, SHELL_PROVIDER_GROUP)) {
+    g_debug ("Shell search provider group missing from '%s', ignoring", path);
+    return;
+  }
 
   app_id = g_key_file_get_string (keyfile, SHELL_PROVIDER_GROUP, "DesktopId", &error);
 
-  if (error != NULL)
-    {
-      g_warning ("Unable to read desktop ID from %s: %s - search provider will be ignored",
-                 path, error->message);
-      return;
-    }
+  if (error != NULL) {
+    g_warning ("Unable to read desktop ID from %s: %s - search provider will be ignored",
+               path, error->message);
+    return;
+  }
 
   if (g_str_has_suffix (app_id, ".desktop"))
     app_id[strlen (app_id) - strlen (".desktop")] = '\0';
@@ -73,9 +70,9 @@ static void
 parse_search_providers_one_dir (GHashTable  *search_providers,
                                 const gchar *system_dir)
 {
-  g_autoptr(GFileEnumerator) enumerator = NULL;
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GFile) providers_location = NULL;
+  g_autoptr (GFileEnumerator) enumerator = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GFile) providers_location = NULL;
   g_autofree gchar *providers_path = NULL;
 
   providers_path = g_build_filename (system_dir, "gnome-shell", "search-providers", NULL);
@@ -86,31 +83,28 @@ parse_search_providers_one_dir (GHashTable  *search_providers,
                                           G_FILE_QUERY_INFO_NONE,
                                           NULL, &error);
 
-  if (error != NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND) &&
-          !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Error opening %s: %s - search provider configuration won't be possible",
-                   providers_path, error->message);
+  if (error != NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND) &&
+        !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Error opening %s: %s - search provider configuration won't be possible",
+                 providers_path, error->message);
+    return;
+  }
+
+  while (TRUE) {
+    GFile *provider = NULL;
+
+    if (!g_file_enumerator_iterate (enumerator, NULL, &provider, NULL, &error)) {
+      g_warning ("Error while reading %s: %s - search provider configuration won't be possible",
+                 providers_path, error->message);
       return;
     }
 
-  while (TRUE)
-    {
-      GFile *provider = NULL;
+    if (provider == NULL)
+      break;
 
-      if (!g_file_enumerator_iterate (enumerator, NULL, &provider, NULL, &error))
-        {
-          g_warning ("Error while reading %s: %s - search provider configuration won't be possible",
-                   providers_path, error->message);
-          return;
-        }
-
-      if (provider == NULL)
-        break;
-
-      add_one_provider (search_providers, provider);
-    }
+    add_one_provider (search_providers, provider);
+  }
 }
 
 /* parse gnome-shell/search-provider files and return a string->boolean hash table */
@@ -130,4 +124,3 @@ parse_search_providers (void)
 
   return search_providers;
 }
-

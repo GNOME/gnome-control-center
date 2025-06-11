@@ -34,17 +34,17 @@ G_DEFINE_TYPE (CcSearchProviderApp, cc_search_provider_app, GTK_TYPE_APPLICATION
 #define INACTIVITY_TIMEOUT 60 * 1000 /* One minute, in milliseconds */
 
 static gboolean
-cc_search_provider_app_dbus_register (GApplication    *application,
-                                      GDBusConnection *connection,
-                                      const gchar     *object_path,
-                                      GError         **error)
+cc_search_provider_app_dbus_register (GApplication     *application,
+                                      GDBusConnection  *connection,
+                                      const gchar      *object_path,
+                                      GError          **error)
 {
   CcSearchProviderApp *self;
 
   if (!G_APPLICATION_CLASS (cc_search_provider_app_parent_class)->dbus_register (application,
-                                                                                   connection,
-                                                                                   object_path,
-                                                                                   error))
+                                                                                 connection,
+                                                                                 object_path,
+                                                                                 error))
     return FALSE;
 
   self = CC_SEARCH_PROVIDER_APP (application);
@@ -142,7 +142,9 @@ cc_search_provider_app_get ()
   return singleton;
 }
 
-int main (int argc, char **argv)
+int
+main (int    argc,
+      char **argv)
 {
   GApplication *app;
 

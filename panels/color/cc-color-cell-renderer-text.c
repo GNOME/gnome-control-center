@@ -31,11 +31,10 @@ enum {
   PROP_LAST
 };
 
-struct _CcColorCellRendererText
-{
-  GtkCellRendererText  parent_instance;
+struct _CcColorCellRendererText {
+  GtkCellRendererText parent_instance;
 
-  gboolean             is_dim_label;
+  gboolean is_dim_label;
 };
 
 G_DEFINE_TYPE (CcColorCellRendererText, cc_color_cell_renderer_text, GTK_TYPE_CELL_RENDERER_TEXT)
@@ -43,37 +42,39 @@ G_DEFINE_TYPE (CcColorCellRendererText, cc_color_cell_renderer_text, GTK_TYPE_CE
 static gpointer parent_class = NULL;
 
 static void
-cc_color_cell_renderer_text_get_property (GObject *object, guint param_id,
-                                          GValue *value, GParamSpec *pspec)
+cc_color_cell_renderer_text_get_property (GObject    *object,
+                                          guint       param_id,
+                                          GValue     *value,
+                                          GParamSpec *pspec)
 {
   CcColorCellRendererText *renderer = CC_COLOR_CELL_RENDERER_TEXT (object);
 
-  switch (param_id)
-    {
-      case PROP_IS_DIM_LABEL:
-        g_value_set_boolean (value, renderer->is_dim_label);
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
-        break;
-    }
+  switch (param_id) {
+    case PROP_IS_DIM_LABEL:
+      g_value_set_boolean (value, renderer->is_dim_label);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+      break;
+  }
 }
 
 static void
-cc_color_cell_renderer_text_set_property (GObject *object, guint param_id,
-                                          const GValue *value, GParamSpec *pspec)
+cc_color_cell_renderer_text_set_property (GObject      *object,
+                                          guint         param_id,
+                                          const GValue *value,
+                                          GParamSpec   *pspec)
 {
   CcColorCellRendererText *renderer = CC_COLOR_CELL_RENDERER_TEXT (object);
 
-  switch (param_id)
-    {
-      case PROP_IS_DIM_LABEL:
-        renderer->is_dim_label = g_value_get_boolean (value);
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
-        break;
-    }
+  switch (param_id) {
+    case PROP_IS_DIM_LABEL:
+      renderer->is_dim_label = g_value_get_boolean (value);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+      break;
+  }
 }
 
 static void

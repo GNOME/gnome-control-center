@@ -32,16 +32,15 @@ diagonal_to_str (double d)
 {
   int i;
 
-  for (i = 0; i < G_N_ELEMENTS (known_diagonals); i++)
-    {
-      double delta;
+  for (i = 0; i < G_N_ELEMENTS (known_diagonals); i++) {
+    double delta;
 
-      delta = fabs(known_diagonals[i] - d);
-      if (delta < 0.1)
-          return g_strdup_printf ("%0.1lf\"", known_diagonals[i]);
-    }
+    delta = fabs (known_diagonals[i] - d);
+    if (delta < 0.1)
+      return g_strdup_printf ("%0.1lf\"", known_diagonals[i]);
+  }
 
-  return g_strdup_printf ("%d\"", (int) (d + 0.5));
+  return g_strdup_printf ("%d\"", (int)(d + 0.5));
 }
 
 static char *
@@ -50,12 +49,11 @@ make_display_size_string (int width_mm,
 {
   char *inches = NULL;
 
-  if (width_mm > 0 && height_mm > 0)
-    {
-      double d = sqrt (width_mm * width_mm + height_mm * height_mm);
+  if (width_mm > 0 && height_mm > 0) {
+    double d = sqrt (width_mm * width_mm + height_mm * height_mm);
 
-      inches = diagonal_to_str (d / 25.4);
-    }
+    inches = diagonal_to_str (d / 25.4);
+  }
 
   return inches;
 }
@@ -97,7 +95,9 @@ cc_display_mode_is_clone_mode (CcDisplayMode *self)
 }
 
 void
-cc_display_mode_get_resolution (CcDisplayMode *self, int *w, int *h)
+cc_display_mode_get_resolution (CcDisplayMode *self,
+                                int           *w,
+                                int           *h)
 {
   return CC_DISPLAY_MODE_GET_CLASS (self)->get_resolution (self, w, h);
 }
@@ -267,7 +267,8 @@ cc_display_monitor_is_primary (CcDisplayMonitor *self)
 }
 
 void
-cc_display_monitor_set_primary (CcDisplayMonitor *self, gboolean primary)
+cc_display_monitor_set_primary (CcDisplayMonitor *self,
+                                gboolean          primary)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_primary (self, primary);
 }
@@ -279,7 +280,8 @@ cc_display_monitor_is_active (CcDisplayMonitor *self)
 }
 
 void
-cc_display_monitor_set_active (CcDisplayMonitor *self, gboolean active)
+cc_display_monitor_set_active (CcDisplayMonitor *self,
+                               gboolean          active)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_active (self, active);
 }
@@ -291,26 +293,33 @@ cc_display_monitor_get_rotation (CcDisplayMonitor *self)
 }
 
 void
-cc_display_monitor_set_rotation (CcDisplayMonitor *self,
-                                 CcDisplayRotation rotation)
+cc_display_monitor_set_rotation (CcDisplayMonitor  *self,
+                                 CcDisplayRotation  rotation)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_rotation (self, rotation);
 }
 
 gboolean
-cc_display_monitor_supports_rotation (CcDisplayMonitor *self, CcDisplayRotation r)
+cc_display_monitor_supports_rotation (CcDisplayMonitor  *self,
+                                      CcDisplayRotation  r)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->supports_rotation (self, r);
 }
 
 void
-cc_display_monitor_get_physical_size (CcDisplayMonitor *self, int *w, int *h)
+cc_display_monitor_get_physical_size (CcDisplayMonitor *self,
+                                      int              *w,
+                                      int              *h)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->get_physical_size (self, w, h);
 }
 
 void
-cc_display_monitor_get_geometry (CcDisplayMonitor *self, int *x, int *y, int *w, int *h)
+cc_display_monitor_get_geometry (CcDisplayMonitor *self,
+                                 int              *x,
+                                 int              *y,
+                                 int              *w,
+                                 int              *h)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->get_geometry (self, x, y, w, h);
 }
@@ -394,7 +403,7 @@ cc_display_monitor_get_underscanning (CcDisplayMonitor *self)
 
 void
 cc_display_monitor_set_underscanning (CcDisplayMonitor *self,
-                                      gboolean underscanning)
+                                      gboolean          underscanning)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_underscanning (self, underscanning);
 }
@@ -406,13 +415,15 @@ cc_display_monitor_get_privacy (CcDisplayMonitor *self)
 }
 
 void
-cc_display_monitor_set_mode (CcDisplayMonitor *self, CcDisplayMode *m)
+cc_display_monitor_set_mode (CcDisplayMonitor *self,
+                             CcDisplayMode    *m)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_mode (self, m);
 }
 
 void
-cc_display_monitor_set_compatible_clone_mode (CcDisplayMonitor *self, CcDisplayMode *m)
+cc_display_monitor_set_compatible_clone_mode (CcDisplayMonitor *self,
+                                              CcDisplayMode    *m)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_mode (self, m);
 }
@@ -425,7 +436,9 @@ cc_display_monitor_set_refresh_rate_mode (CcDisplayMonitor             *self,
 }
 
 void
-cc_display_monitor_set_position (CcDisplayMonitor *self, int x, int y)
+cc_display_monitor_set_position (CcDisplayMonitor *self,
+                                 int               x,
+                                 int               y)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_position (self, x, y);
 }
@@ -437,7 +450,8 @@ cc_display_monitor_get_scale (CcDisplayMonitor *self)
 }
 
 void
-cc_display_monitor_set_scale (CcDisplayMonitor *self, double s)
+cc_display_monitor_set_scale (CcDisplayMonitor *self,
+                              double            s)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_scale (self, s);
 }
@@ -460,7 +474,8 @@ cc_display_monitor_is_usable (CcDisplayMonitor *self)
 }
 
 void
-cc_display_monitor_set_usable (CcDisplayMonitor *self, gboolean is_usable)
+cc_display_monitor_set_usable (CcDisplayMonitor *self,
+                               gboolean          is_usable)
 {
   CcDisplayMonitorPrivate *priv = cc_display_monitor_get_instance_private (self);
 
@@ -502,9 +517,10 @@ cc_display_monitor_dup_ui_number_name (CcDisplayMonitor *self)
 }
 
 static void
-cc_display_monitor_set_ui_info (CcDisplayMonitor *self, gint ui_number, gchar *ui_name)
+cc_display_monitor_set_ui_info (CcDisplayMonitor *self,
+                                gint              ui_number,
+                                gchar            *ui_name)
 {
-
   CcDisplayMonitorPrivate *priv = cc_display_monitor_get_instance_private (self);
 
   priv->ui_number = ui_number;
@@ -539,17 +555,16 @@ cc_display_config_constructed (GObject *object)
   GList *monitors = cc_display_config_get_monitors (self);
   GList *item;
 
-  for (item = monitors; item != NULL; item = item->next)
-    {
-      CcDisplayMonitor *monitor = item->data;
+  for (item = monitors; item != NULL; item = item->next) {
+    CcDisplayMonitor *monitor = item->data;
 
-      if (cc_display_monitor_is_builtin (monitor))
-        priv->ui_sorted_monitors = g_list_prepend (priv->ui_sorted_monitors, monitor);
-      else
-        priv->ui_sorted_monitors = g_list_append (priv->ui_sorted_monitors, monitor);
-    }
+    if (cc_display_monitor_is_builtin (monitor))
+      priv->ui_sorted_monitors = g_list_prepend (priv->ui_sorted_monitors, monitor);
+    else
+      priv->ui_sorted_monitors = g_list_append (priv->ui_sorted_monitors, monitor);
+  }
 
-  cc_display_config_update_ui_numbers_names(self);
+  cc_display_config_update_ui_numbers_names (self);
 }
 
 static void
@@ -609,16 +624,14 @@ cc_display_config_count_useful_monitors (CcDisplayConfig *self)
   g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (self), 0);
 
   outputs = priv->ui_sorted_monitors;
-  for (l = outputs; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      if (!cc_display_monitor_is_useful (output))
-        continue;
-      else
-        count++;
-    }
+  for (l = outputs; l != NULL; l = l->next) {
+    CcDisplayMonitor *output = l->data;
+    if (!cc_display_monitor_is_useful (output))
+      continue;
+    else
+      count++;
+  }
   return count;
-
 }
 
 gboolean
@@ -638,12 +651,11 @@ cc_display_config_set_mode_on_all_outputs (CcDisplayConfig *config,
   g_return_if_fail (cc_display_mode_is_clone_mode (clone_mode));
 
   outputs = cc_display_config_get_monitors (config);
-  for (l = outputs; l; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
-      cc_display_monitor_set_compatible_clone_mode (output, clone_mode);
-      cc_display_monitor_set_position (output, 0, 0);
-    }
+  for (l = outputs; l; l = l->next) {
+    CcDisplayMonitor *output = l->data;
+    cc_display_monitor_set_compatible_clone_mode (output, clone_mode);
+    cc_display_monitor_set_position (output, 0, 0);
+  }
 }
 
 gboolean
@@ -657,18 +669,17 @@ cc_display_config_equal (CcDisplayConfig *self,
 }
 
 gboolean
-cc_display_config_apply (CcDisplayConfig *self,
-                         GError **error)
+cc_display_config_apply (CcDisplayConfig  *self,
+                         GError          **error)
 {
-  if (!CC_IS_DISPLAY_CONFIG (self))
-    {
-      g_warning ("Cannot apply invalid configuration");
-      g_set_error (error,
-                   G_IO_ERROR,
-                   G_IO_ERROR_FAILED,
-                   "Cannot apply invalid configuration");
-      return FALSE;
-    }
+  if (!CC_IS_DISPLAY_CONFIG (self)) {
+    g_warning ("Cannot apply invalid configuration");
+    g_set_error (error,
+                 G_IO_ERROR,
+                 G_IO_ERROR_FAILED,
+                 "Cannot apply invalid configuration");
+    return FALSE;
+  }
 
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->apply (self, error);
 }
@@ -682,7 +693,7 @@ cc_display_config_is_cloning (CcDisplayConfig *self)
 
 void
 cc_display_config_set_cloning (CcDisplayConfig *self,
-                               gboolean clone)
+                               gboolean         clone)
 {
   g_return_if_fail (CC_IS_DISPLAY_CONFIG (self));
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->set_cloning (self, clone);
@@ -733,23 +744,21 @@ cc_display_config_update_ui_numbers_names (CcDisplayConfig *self)
   CcDisplayConfigPrivate *priv = cc_display_config_get_instance_private (self);
   GList *item;
   gint ui_number = 1;
-  for (item = priv->ui_sorted_monitors; item != NULL; item = item->next)
-    {
-      CcDisplayMonitor *monitor = item->data;
-      char *ui_name;
-      gint current_ui_number = 0;
+  for (item = priv->ui_sorted_monitors; item != NULL; item = item->next) {
+    CcDisplayMonitor *monitor = item->data;
+    char *ui_name;
+    gint current_ui_number = 0;
 
-      ui_name = make_output_ui_name (monitor);
+    ui_name = make_output_ui_name (monitor);
 
-      /* Prevents gaps in monitor numbering. Monitors
-       * with number 0 will not be visible in the UI.
-       */
-      if (cc_display_monitor_is_usable (monitor))
-        {
-          current_ui_number = ui_number;
-          ui_number += 1;
-        }
-
-      cc_display_monitor_set_ui_info (monitor, current_ui_number, ui_name);
+    /* Prevents gaps in monitor numbering. Monitors
+     * with number 0 will not be visible in the UI.
+     */
+    if (cc_display_monitor_is_usable (monitor)) {
+      current_ui_number = ui_number;
+      ui_number += 1;
     }
+
+    cc_display_monitor_set_ui_info (monitor, current_ui_number, ui_name);
+  }
 }

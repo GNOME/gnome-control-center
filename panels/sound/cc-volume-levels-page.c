@@ -23,16 +23,15 @@
 #include "cc-stream-row.h"
 #include "cc-volume-levels-page.h"
 
-struct _CcVolumeLevelsPage
-{
+struct _CcVolumeLevelsPage {
   AdwNavigationPage parent_instance;
 
-  GtkListBox      *listbox;
-  GtkStack        *stack;
-  GtkSizeGroup    *label_size_group;
+  GtkListBox *listbox;
+  GtkStack *stack;
+  GtkSizeGroup *label_size_group;
 
   GvcMixerControl *mixer_control;
-  GListStore      *stream_list;
+  GListStore *stream_list;
 };
 
 G_DEFINE_TYPE (CcVolumeLevelsPage, cc_volume_levels_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -72,19 +71,17 @@ filter_stream (gpointer item,
 
   /* Filter out master volume controls */
   if (g_strcmp0 (app_id, "org.gnome.VolumeControl") == 0 ||
-      g_strcmp0 (app_id, "org.PulseAudio.pavucontrol") == 0)
-    {
-      return FALSE;
-    }
+      g_strcmp0 (app_id, "org.PulseAudio.pavucontrol") == 0) {
+    return FALSE;
+  }
 
   /* Filter out streams that aren't volume controls */
   if (GVC_IS_MIXER_SOURCE (stream) ||
       GVC_IS_MIXER_SINK (stream) ||
       gvc_mixer_stream_is_virtual (stream) ||
-      gvc_mixer_stream_is_event_stream (stream))
-    {
-      return FALSE;
-    }
+      gvc_mixer_stream_is_event_stream (stream)) {
+    return FALSE;
+  }
 
   /* We can't present streams without a name in the UI. */
   if (gvc_mixer_stream_get_name (stream) == NULL)
@@ -123,7 +120,7 @@ items_changed_cb (CcVolumeLevelsPage *self,
 
 static void
 stream_added_cb (CcVolumeLevelsPage *self,
-                 guint                 id)
+                 guint               id)
 {
   GvcMixerStream *stream = gvc_mixer_control_lookup_stream_id (self->mixer_control, id);
 
@@ -135,24 +132,22 @@ stream_added_cb (CcVolumeLevelsPage *self,
 
 static void
 stream_removed_cb (CcVolumeLevelsPage *self,
-                   guint                 id)
+                   guint               id)
 {
   guint n_items = g_list_model_get_n_items (G_LIST_MODEL (self->stream_list));
 
-  for (guint i = 0; i < n_items; i++)
-    {
-      g_autoptr(GObject) item;
-      guint stream_id;
+  for (guint i = 0; i < n_items; i++) {
+    g_autoptr (GObject) item;
+    guint stream_id;
 
-      item = g_list_model_get_item (G_LIST_MODEL (self->stream_list), i);
-      stream_id = gvc_mixer_stream_get_id (GVC_MIXER_STREAM (item));
+    item = g_list_model_get_item (G_LIST_MODEL (self->stream_list), i);
+    stream_id = gvc_mixer_stream_get_id (GVC_MIXER_STREAM (item));
 
-      if (id == stream_id)
-        {
-          g_list_store_remove (self->stream_list, i);
-          return;
-        }
+    if (id == stream_id) {
+      g_list_store_remove (self->stream_list, i);
+      return;
     }
+  }
 }
 
 static void
@@ -222,7 +217,7 @@ CcVolumeLevelsPage *
 cc_volume_levels_page_new (GvcMixerControl *mixer_control)
 {
   CcVolumeLevelsPage *self;
-  g_autoptr(GSList) streams = NULL;
+  g_autoptr (GSList) streams = NULL;
 
   self = g_object_new (CC_TYPE_VOLUME_LEVELS_PAGE, NULL);
 

@@ -19,23 +19,21 @@
 #include "cc-input-row.h"
 #include "cc-input-source-ibus.h"
 
-struct _CcInputRow
-{
-  AdwActionRow     parent_instance;
+struct _CcInputRow {
+  AdwActionRow parent_instance;
 
-  CcInputSource   *source;
+  CcInputSource *source;
 
-  GtkListBox      *drag_widget;
+  GtkListBox *drag_widget;
 
-  GtkDragSource   *drag_source;
-  gdouble          drag_x;
-  gdouble          drag_y;
+  GtkDragSource *drag_source;
+  gdouble drag_x;
+  gdouble drag_y;
 };
 
 G_DEFINE_TYPE (CcInputRow, cc_input_row, ADW_TYPE_ACTION_ROW)
 
-enum
-{
+enum {
   SIGNAL_SHOW_SETTINGS,
   SIGNAL_SHOW_LAYOUT,
   SIGNAL_MOVE_ROW,
@@ -46,9 +44,9 @@ enum
 static guint signals[SIGNAL_LAST] = { 0, };
 
 static GdkContentProvider *
-drag_prepare_cb (CcInputRow    *self,
-                 double         x,
-                 double         y)
+drag_prepare_cb (CcInputRow *self,
+                 double      x,
+                 double      y)
 {
   self->drag_x = x;
   self->drag_y = y;
@@ -57,8 +55,8 @@ drag_prepare_cb (CcInputRow    *self,
 }
 
 static void
-drag_begin_cb (CcInputRow    *self,
-               GdkDrag       *drag)
+drag_begin_cb (CcInputRow *self,
+               GdkDrag    *drag)
 {
   GtkAllocation alloc;
   CcInputRow *drag_row;
@@ -79,10 +77,10 @@ drag_begin_cb (CcInputRow    *self,
 }
 
 static gboolean
-drop_cb (CcInputRow    *self,
-         const GValue  *value,
-         gdouble        x,
-         gdouble        y)
+drop_cb (CcInputRow   *self,
+         const GValue *value,
+         gdouble       x,
+         gdouble       y)
 {
   CcInputRow *source;
 
@@ -301,4 +299,3 @@ cc_input_row_set_draggable (CcInputRow *self,
   gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (self->drag_source),
                                               draggable ? GTK_PHASE_BUBBLE : GTK_PHASE_NONE);
 }
-

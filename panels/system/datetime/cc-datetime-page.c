@@ -67,9 +67,8 @@
 #define DATETIME_SCHEMA "org.gnome.desktop.datetime"
 #define AUTO_TIMEZONE_KEY "automatic-timezone"
 
-struct _CcDateTimePage
-{
-  AdwNavigationPage  parent_instance;
+struct _CcDateTimePage {
+  AdwNavigationPage parent_instance;
 
   GList *toplevels;
 
@@ -97,7 +96,7 @@ struct _CcDateTimePage
   AdwSwitchRow *week_numbers_row;
   GtkListBox *date_box;
   GtkSingleSelection *month_model;
-  GtkPopover  *month_popover;
+  GtkPopover *month_popover;
   CcListRow *month_row;
   GtkSwitch *network_time_switch;
   CcPermissionInfobar *permission_infobar;
@@ -118,7 +117,7 @@ struct _CcDateTimePage
   GPermission *tz_permission;
   GSettings *location_settings;
 
-  int        month; /* index starts from 1 */
+  int month;        /* index starts from 1 */
 };
 
 G_DEFINE_TYPE (CcDateTimePage, cc_date_time_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -130,17 +129,15 @@ cc_date_time_page_dispose (GObject *object)
 {
   CcDateTimePage *self = CC_DATE_TIME_PAGE (object);
 
-  if (self->cancellable)
-    {
-      g_cancellable_cancel (self->cancellable);
-      g_clear_object (&self->cancellable);
-    }
+  if (self->cancellable) {
+    g_cancellable_cancel (self->cancellable);
+    g_clear_object (&self->cancellable);
+  }
 
-  if (self->toplevels)
-    {
-      g_list_free_full (self->toplevels, (GDestroyNotify) adw_dialog_force_close);
-      self->toplevels = NULL;
-    }
+  if (self->toplevels) {
+    g_list_free_full (self->toplevels, (GDestroyNotify)adw_dialog_force_close);
+    self->toplevels = NULL;
+  }
 
   g_clear_object (&self->clock_tracker);
   g_clear_object (&self->dtm);
@@ -231,16 +228,13 @@ update_time (CcDateTimePage *self)
   g_signal_handlers_unblock_by_func (self->time_editor, time_changed_cb, self);
 
   /* Update the time on the listbow row */
-  if (use_ampm)
-    {
-      /* Translators: This is the full date and time format used in 12-hour mode. */
-      label = g_date_time_format (self->date, _("%e %B %Y, %l:%M %p"));
-    }
-  else
-    {
-      /* Translators: This is the full date and time format used in 24-hour mode. */
-      label = g_date_time_format (self->date, _("%e %B %Y, %R"));
-    }
+  if (use_ampm) {
+    /* Translators: This is the full date and time format used in 12-hour mode. */
+    label = g_date_time_format (self->date, _("%e %B %Y, %l:%M %p"));
+  } else {
+    /* Translators: This is the full date and time format used in 24-hour mode. */
+    label = g_date_time_format (self->date, _("%e %B %Y, %R"));
+  }
 
   self->month = g_date_time_get_month (self->date);
   g_signal_handlers_block_by_func (self->month_model, on_month_selection_changed_cb, self);
@@ -255,19 +249,16 @@ set_time_cb (GObject      *source,
              gpointer      user_data)
 {
   CcDateTimePage *self = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   if (!timedate1_call_set_time_finish (TIMEDATE1 (source),
                                        res,
-                                       &error))
-    {
-      /* TODO: display any error in a user friendly way */
-      g_warning ("Could not set system time: %s", error->message);
-    }
-  else
-    {
-      update_time (self);
-    }
+                                       &error)) {
+    /* TODO: display any error in a user friendly way */
+    g_warning ("Could not set system time: %s", error->message);
+  } else {
+    update_time (self);
+  }
 }
 
 static void
@@ -275,15 +266,14 @@ set_timezone_cb (GObject      *source,
                  GAsyncResult *res,
                  gpointer      user_data)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   if (!timedate1_call_set_timezone_finish (TIMEDATE1 (source),
                                            res,
-                                           &error))
-    {
-      /* TODO: display any error in a user friendly way */
-      g_warning ("Could not set system timezone: %s", error->message);
-    }
+                                           &error)) {
+    /* TODO: display any error in a user friendly way */
+    g_warning ("Could not set system timezone: %s", error->message);
+  }
 }
 
 static void
@@ -292,19 +282,16 @@ set_using_ntp_cb (GObject      *source,
                   gpointer      user_data)
 {
   CcDateTimePage *self = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   if (!timedate1_call_set_ntp_finish (TIMEDATE1 (source),
                                       res,
-                                      &error))
-    {
-      /* TODO: display any error in a user friendly way */
-      g_warning ("Could not set system to use NTP: %s", error->message);
-    }
-  else
-    {
-      gtk_switch_set_state (self->network_time_switch, self->pending_ntp_state);
-    }
+                                      &error)) {
+    /* TODO: display any error in a user friendly way */
+    g_warning ("Could not set system to use NTP: %s", error->message);
+  } else {
+    gtk_switch_set_state (self->network_time_switch, self->pending_ntp_state);
+  }
 }
 
 static void
@@ -345,22 +332,21 @@ static void
 queue_set_timezone (CcDateTimePage *self)
 {
   /* for now just do it */
-  if (self->current_location)
-    {
-      timedate1_call_set_timezone (self->dtm,
-                                   self->current_location->zone,
-                                   TRUE,
-                                   self->cancellable,
-                                   set_timezone_cb,
-                                   NULL);
-    }
+  if (self->current_location) {
+    timedate1_call_set_timezone (self->dtm,
+                                 self->current_location->zone,
+                                 TRUE,
+                                 self->cancellable,
+                                 set_timezone_cb,
+                                 NULL);
+  }
 }
 
 static void
 change_date (CcDateTimePage *self)
 {
   guint y, d;
-  g_autoptr(GDateTime) old_date = NULL;
+  g_autoptr (GDateTime) old_date = NULL;
 
   y = (guint)adw_spin_row_get_value (self->year_spin_row);
   d = (guint)adw_spin_row_get_value (self->day_spin_row);
@@ -383,7 +369,7 @@ static char *
 translated_city_name (TzLocation *loc)
 {
   g_autofree gchar *zone_translated = NULL;
-  g_auto(GStrv) split_translated = NULL;
+  g_auto (GStrv) split_translated = NULL;
   g_autofree gchar *country = NULL;
   gchar *name;
   gint length;
@@ -400,7 +386,7 @@ translated_city_name (TzLocation *loc)
   country = gnome_get_country_from_code (loc->country, NULL);
   /* Translators: "city, country" */
   name = g_strdup_printf (C_("timezone loc", "%s, %s"),
-                          split_translated[length-1],
+                          split_translated[length - 1],
                           country);
 
   return name;
@@ -430,11 +416,10 @@ get_initial_timezone (CcDateTimePage *self)
   timezone = timedate1_get_timezone (self->dtm);
 
   if (timezone == NULL ||
-      !cc_tz_dialog_set_tz (self->timezone_dialog, timezone))
-    {
-      g_warning ("Timezone '%s' is unhandled, setting %s as default", timezone ? timezone : "(null)", DEFAULT_TZ);
-      cc_tz_dialog_set_tz (self->timezone_dialog, DEFAULT_TZ);
-    }
+      !cc_tz_dialog_set_tz (self->timezone_dialog, timezone)) {
+    g_warning ("Timezone '%s' is unhandled, setting %s as default", timezone ? timezone : "(null)", DEFAULT_TZ);
+    cc_tz_dialog_set_tz (self->timezone_dialog, DEFAULT_TZ);
+  }
 
   self->current_location = cc_tz_dialog_get_selected_location (self->timezone_dialog);
   update_timezone (self);
@@ -495,7 +480,7 @@ on_month_selection_changed_cb (CcDateTimePage *self)
 
 static void
 on_clock_changed (CcDateTimePage *self,
-		          GParamSpec     *pspec)
+                  GParamSpec     *pspec)
 {
   g_date_time_unref (self->date);
   self->date = g_date_time_new_now_local ();
@@ -516,18 +501,17 @@ change_ntp (CcDateTimePage *self,
 static gboolean
 is_ntp_available (CcDateTimePage *self)
 {
-  g_autoptr(GVariant) value = NULL;
+  g_autoptr (GVariant) value = NULL;
   gboolean ntp_available = TRUE;
 
   /* We need to access this directly so that we can default to TRUE if
    * it is not set.
    */
   value = g_dbus_proxy_get_cached_property (G_DBUS_PROXY (self->dtm), "CanNTP");
-  if (value)
-    {
-      if (g_variant_is_of_type (value, G_VARIANT_TYPE_BOOLEAN))
-        ntp_available = g_variant_get_boolean (value);
-    }
+  if (value) {
+    if (g_variant_is_of_type (value, G_VARIANT_TYPE_BOOLEAN))
+      ntp_available = g_variant_get_boolean (value);
+  }
 
   return ntp_available;
 }
@@ -551,9 +535,9 @@ on_permission_changed (CcDateTimePage *self)
 
   /* Hide the subdialogs if we no longer have permissions */
   if (!allowed)
-      gtk_widget_set_visible (GTK_WIDGET (self->datetime_dialog), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->datetime_dialog), FALSE);
   if (!allowed && !tz_allowed)
-      gtk_widget_set_visible (GTK_WIDGET (self->timezone_dialog), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->timezone_dialog), FALSE);
 }
 
 static void
@@ -577,31 +561,31 @@ on_timezone_changed (CcDateTimePage *self)
 static void
 on_timedated_properties_changed (CcDateTimePage  *self,
                                  GVariant        *changed_properties,
-                                 const gchar     **invalidated_properties)
+                                 const gchar    **invalidated_properties)
 {
   guint i;
 
   if (invalidated_properties != NULL)
     for (i = 0; invalidated_properties[i] != NULL; i++) {
-        g_autoptr(GVariant) variant = NULL;
-        g_autoptr(GError) error = NULL;
+      g_autoptr (GVariant) variant = NULL;
+      g_autoptr (GError) error = NULL;
 
-        /* See https://bugs.freedesktop.org/show_bug.cgi?id=37632 for the reason why we're doing this */
-        variant = g_dbus_proxy_call_sync (G_DBUS_PROXY (self->dtm),
-                                          "org.freedesktop.DBus.Properties.Get",
-                                          g_variant_new ("(ss)", "org.freedesktop.timedate1", invalidated_properties[i]),
-                                          G_DBUS_CALL_FLAGS_NONE,
-                                          -1,
-                                          NULL,
-                                          &error);
-        if (variant == NULL)
-                g_warning ("Failed to get property '%s': %s", invalidated_properties[i], error->message);
-        else {
-                GVariant *v;
+      /* See https://bugs.freedesktop.org/show_bug.cgi?id=37632 for the reason why we're doing this */
+      variant = g_dbus_proxy_call_sync (G_DBUS_PROXY (self->dtm),
+                                        "org.freedesktop.DBus.Properties.Get",
+                                        g_variant_new ("(ss)", "org.freedesktop.timedate1", invalidated_properties[i]),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        -1,
+                                        NULL,
+                                        &error);
+      if (variant == NULL)
+        g_warning ("Failed to get property '%s': %s", invalidated_properties[i], error->message);
+      else {
+        GVariant *v;
 
-                g_variant_get (variant, "(v)", &v);
-                g_dbus_proxy_set_cached_property (G_DBUS_PROXY (self->dtm), invalidated_properties[i], v);
-        }
+        g_variant_get (variant, "(v)", &v);
+        g_dbus_proxy_set_cached_property (G_DBUS_PROXY (self->dtm), invalidated_properties[i], v);
+      }
     }
 }
 
@@ -659,7 +643,7 @@ bind_switch_to_row (CcDateTimePage *self,
   g_object_bind_property_full (gtkswitch, "active",
                                listrow, "sensitive",
                                G_BINDING_SYNC_CREATE,
-                               (GBindingTransformFunc) switch_to_row_transform_func,
+                               (GBindingTransformFunc)switch_to_row_transform_func,
                                NULL, self, NULL);
 }
 
@@ -677,21 +661,18 @@ list_box_row_activated (CcDateTimePage *self,
                         GtkListBoxRow  *row)
 
 {
-  if (row == GTK_LIST_BOX_ROW (self->datetime_row))
-    {
-      present_window (self, self->datetime_dialog);
-    }
-  else if (row == GTK_LIST_BOX_ROW (self->timezone_row))
-    {
-      present_window (self, ADW_DIALOG (self->timezone_dialog));
-    }
+  if (row == GTK_LIST_BOX_ROW (self->datetime_row)) {
+    present_window (self, self->datetime_dialog);
+  } else if (row == GTK_LIST_BOX_ROW (self->timezone_row)) {
+    present_window (self, ADW_DIALOG (self->timezone_dialog));
+  }
 }
 
 static void
 time_changed_cb (CcDateTimePage *self,
                  CcTimeEditor   *editor)
 {
-  g_autoptr(GDateTime) old_date = NULL;
+  g_autoptr (GDateTime) old_date = NULL;
 
   g_assert (CC_IS_DATE_TIME_PAGE (self));
   g_assert (CC_IS_TIME_EDITOR (editor));
@@ -713,15 +694,15 @@ setup_datetime_dialog (CcDateTimePage *self)
 {
   GtkAdjustment *adjustment;
   GdkDisplay *display;
-  g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr (GtkCssProvider) provider = NULL;
   guint num_days;
 
   /* Big time buttons */
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_string (GTK_CSS_PROVIDER (provider),
-                                   "gridview.month-grid > child {\n"
-                                   "  background: transparent;\n"
-                                   "}");
+                                     "gridview.month-grid > child {\n"
+                                     "  background: transparent;\n"
+                                     "}");
   display = gdk_display_get_default ();
   gtk_style_context_add_provider_for_display (display,
                                               GTK_STYLE_PROVIDER (provider),
@@ -730,14 +711,14 @@ setup_datetime_dialog (CcDateTimePage *self)
   /* Day */
   num_days = g_date_get_days_in_month (g_date_time_get_month (self->date),
                                        g_date_time_get_year (self->date));
-  adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_day_of_month (self->date), 1,
+  adjustment = (GtkAdjustment *)gtk_adjustment_new (g_date_time_get_day_of_month (self->date), 1,
                                                     num_days + 1, 1, 10, 1);
   adw_spin_row_set_adjustment (self->day_spin_row, adjustment);
   g_signal_connect_object (G_OBJECT (self->day_spin_row), "changed",
                            G_CALLBACK (day_changed), self, G_CONNECT_SWAPPED);
 
   /* Year */
-  adjustment = (GtkAdjustment*) gtk_adjustment_new (g_date_time_get_year (self->date),
+  adjustment = (GtkAdjustment *)gtk_adjustment_new (g_date_time_get_year (self->date),
                                                     1, G_MAXDOUBLE, 1,
                                                     10, 1);
   adw_spin_row_set_adjustment (self->year_spin_row, adjustment);
@@ -765,34 +746,34 @@ sort_date_box (GtkListBoxRow  *a,
   year_row = GTK_LIST_BOX_ROW (self->year_spin_row);
 
   switch (date_endian_get_default (FALSE)) {
-  case DATE_ENDIANESS_YMD:
-    /* year, month, day */
-    if (a == year_row || b == day_row)
-      return -1;
-    if (a == day_row || b == year_row)
-      return 1;
-    break;
-  case DATE_ENDIANESS_DMY:
-    /* day, month, year */
-    if (a == day_row || b == year_row)
-      return -1;
-    if (a == year_row || b == day_row)
-      return 1;
-    break;
-  case DATE_ENDIANESS_MDY:
-    /* month, day, year */
-    if (a == month_row || b == year_row)
-      return -1;
-    if (a == year_row || b == month_row)
-      return 1;
-    break;
-  case DATE_ENDIANESS_YDM:
-    /* year, day, month */
-    if (a == year_row || b == month_row)
-      return -1;
-    if (a == month_row || b == year_row)
-      return 1;
-    break;
+    case DATE_ENDIANESS_YMD:
+      /* year, month, day */
+      if (a == year_row || b == day_row)
+        return -1;
+      if (a == day_row || b == year_row)
+        return 1;
+      break;
+    case DATE_ENDIANESS_DMY:
+      /* day, month, year */
+      if (a == day_row || b == year_row)
+        return -1;
+      if (a == year_row || b == day_row)
+        return 1;
+      break;
+    case DATE_ENDIANESS_MDY:
+      /* month, day, year */
+      if (a == month_row || b == year_row)
+        return -1;
+      if (a == year_row || b == month_row)
+        return 1;
+      break;
+    case DATE_ENDIANESS_YDM:
+      /* year, day, month */
+      if (a == year_row || b == month_row)
+        return -1;
+      if (a == month_row || b == year_row)
+        return 1;
+      break;
   }
 
   return 0;
@@ -847,7 +828,7 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
 static void
 cc_date_time_page_init (CcDateTimePage *self)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -860,8 +841,8 @@ cc_date_time_page_init (CcDateTimePage *self)
                                                 self->cancellable,
                                                 &error);
   if (self->dtm == NULL) {
-        g_warning ("could not get proxy for DateTimeMechanism: %s", error->message);
-        return;
+    g_warning ("could not get proxy for DateTimeMechanism: %s", error->message);
+    return;
   }
 
   gtk_list_box_set_sort_func (self->date_box,
@@ -872,16 +853,13 @@ cc_date_time_page_init (CcDateTimePage *self)
   /* add the lock button */
   self->permission = polkit_permission_new_sync (DATETIME_PERMISSION, NULL, NULL, NULL);
   self->tz_permission = polkit_permission_new_sync (DATETIME_TZ_PERMISSION, NULL, NULL, NULL);
-  if (self->permission != NULL)
-    {
-      g_signal_connect_object (self->permission, "notify",
-                               G_CALLBACK (on_permission_changed), self, G_CONNECT_SWAPPED);
-    }
-  else
-    {
-      g_warning ("Your system does not have the '%s' PolicyKit files installed. Please check your installation",
-                 DATETIME_PERMISSION);
-    }
+  if (self->permission != NULL) {
+    g_signal_connect_object (self->permission, "notify",
+                             G_CALLBACK (on_permission_changed), self, G_CONNECT_SWAPPED);
+  } else {
+    g_warning ("Your system does not have the '%s' PolicyKit files installed. Please check your installation",
+               DATETIME_PERMISSION);
+  }
   cc_permission_infobar_set_permission (self->permission_infobar, self->permission);
 
   self->location_settings = g_settings_new (LOCATION_SETTINGS);
@@ -922,14 +900,14 @@ cc_date_time_page_init (CcDateTimePage *self)
   g_object_bind_property_full (self->auto_timezone_row, "active",
                                self->timezone_row, "sensitive",
                                G_BINDING_SYNC_CREATE,
-                               (GBindingTransformFunc) tz_switch_to_row_transform_func,
+                               (GBindingTransformFunc)tz_switch_to_row_transform_func,
                                NULL, self, NULL);
 
   g_settings_bind (self->datetime_settings, AUTO_TIMEZONE_KEY,
                    self->auto_timezone_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 #else
-  // Let's disable location services
+  /* Let's disable location services */
   g_settings_set_boolean (self->datetime_settings, AUTO_TIMEZONE_KEY, FALSE);
 #endif
 

@@ -25,14 +25,13 @@
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-struct _CcDiagnosticsPage
-{
-  AdwNavigationPage    parent_instance;
+struct _CcDiagnosticsPage {
+  AdwNavigationPage parent_instance;
 
   AdwPreferencesGroup *diagnostics_group;
-  AdwSwitchRow        *abrt_row;
+  AdwSwitchRow *abrt_row;
 
-  GSettings           *privacy_settings;
+  GSettings *privacy_settings;
 };
 
 G_DEFINE_TYPE (CcDiagnosticsPage, cc_diagnostics_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -123,12 +122,12 @@ cc_diagnostics_page_init (CcDiagnosticsPage *self)
 
     /* translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy */
     msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports "
-                           "are sent anonymously and are scrubbed of personal data — %s."),
+                             "are sent anonymously and are scrubbed of personal data — %s."),
                            os_name, link);
   } else {
     /* translators: The '%s' is the distributor's name, such as 'Fedora' */
     msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports "
-                           "are sent anonymously and are scrubbed of personal data."),
+                             "are sent anonymously and are scrubbed of personal data."),
                            os_name);
   }
   adw_preferences_group_set_description (self->diagnostics_group, msg);

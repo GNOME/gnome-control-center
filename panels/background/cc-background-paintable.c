@@ -22,27 +22,25 @@
 #include "cc-background-enum-types.h"
 #include "cc-background-paintable.h"
 
-struct _CcBackgroundPaintable
-{
-  GObject           parent_instance;
+struct _CcBackgroundPaintable {
+  GObject parent_instance;
 
   GnomeDesktopThumbnailFactory *thumbnail_factory;
   CcBackgroundItem *item;
-  int               width;
-  int               height;
-  int               scale_factor;
-  GtkTextDirection  text_direction;
+  int width;
+  int height;
+  int scale_factor;
+  GtkTextDirection text_direction;
 
-  GdkPaintable     *texture;
-  GdkPaintable     *dark_texture;
+  GdkPaintable *texture;
+  GdkPaintable *dark_texture;
 
-  GCancellable     *cancellable;
+  GCancellable *cancellable;
 
-  CcBackgroundPaintFlags  paint_flags;
+  CcBackgroundPaintFlags paint_flags;
 };
 
-enum
-{
+enum {
   PROP_0,
   PROP_THUMBNAIL_FACTORY,
   PROP_ITEM,
@@ -54,7 +52,7 @@ enum
   N_PROPS
 };
 
-static GParamSpec *properties [N_PROPS];
+static GParamSpec *properties[N_PROPS];
 
 static void cc_background_paintable_paintable_init (GdkPaintableInterface *iface);
 
@@ -67,16 +65,15 @@ light_cb (GObject      *object,
           GAsyncResult *result,
           gpointer      user_data)
 {
-  g_autoptr(CcBackgroundPaintable) self = user_data;
-  g_autoptr(GdkPixbuf) pixbuf = NULL;
+  g_autoptr (CcBackgroundPaintable) self = user_data;
+  g_autoptr (GdkPixbuf) pixbuf = NULL;
 
-  if ((pixbuf = cc_background_item_get_thumbnail_finish (CC_BACKGROUND_ITEM (object), result, NULL)))
-    {
-      g_clear_object (&self->texture);
-      self->texture = GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf));
+  if ((pixbuf = cc_background_item_get_thumbnail_finish (CC_BACKGROUND_ITEM (object), result, NULL))) {
+    g_clear_object (&self->texture);
+    self->texture = GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf));
 
-      gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
-    }
+    gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
+  }
 }
 
 static void
@@ -84,16 +81,15 @@ dark_cb (GObject      *object,
          GAsyncResult *result,
          gpointer      user_data)
 {
-  g_autoptr(CcBackgroundPaintable) self = user_data;
-  g_autoptr(GdkPixbuf) pixbuf = NULL;
+  g_autoptr (CcBackgroundPaintable) self = user_data;
+  g_autoptr (GdkPixbuf) pixbuf = NULL;
 
-  if ((pixbuf = cc_background_item_get_thumbnail_finish (CC_BACKGROUND_ITEM (object), result, NULL)))
-    {
-      g_clear_object (&self->dark_texture);
-      self->dark_texture = GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf));
+  if ((pixbuf = cc_background_item_get_thumbnail_finish (CC_BACKGROUND_ITEM (object), result, NULL))) {
+    g_clear_object (&self->dark_texture);
+    self->dark_texture = GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf));
 
-      gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
-    }
+    gdk_paintable_invalidate_size (GDK_PAINTABLE (self));
+  }
 }
 
 static void
@@ -152,8 +148,7 @@ cc_background_paintable_get_property (GObject    *object,
 {
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_THUMBNAIL_FACTORY:
       g_value_set_object (value, self->thumbnail_factory);
       break;
@@ -184,7 +179,7 @@ cc_background_paintable_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -196,8 +191,7 @@ cc_background_paintable_set_property (GObject      *object,
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (object);
   int scale_factor;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_THUMBNAIL_FACTORY:
       g_set_object (&self->thumbnail_factory, g_value_get_object (value));
       break;
@@ -216,13 +210,12 @@ cc_background_paintable_set_property (GObject      *object,
 
     case PROP_SCALE_FACTOR:
       scale_factor = g_value_get_int (value);
-      if (self->scale_factor != scale_factor)
-        {
-          self->scale_factor = scale_factor;
-          /* Update cache, but only if the async call has ran or is still running */
-          if (self->cancellable)
-            update_cache (self);
-        }
+      if (self->scale_factor != scale_factor) {
+        self->scale_factor = scale_factor;
+        /* Update cache, but only if the async call has ran or is still running */
+        if (self->cancellable)
+          update_cache (self);
+      }
       break;
 
     case PROP_TEXT_DIRECTION:
@@ -236,7 +229,7 @@ cc_background_paintable_set_property (GObject      *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -334,17 +327,15 @@ cc_background_paintable_snapshot (GdkPaintable *paintable,
   if (self->dark_texture == NULL && self->texture == NULL)
     return;
 
-  if (!self->dark_texture)
-    {
-      gdk_paintable_snapshot (self->texture, snapshot, width, height);
-      return;
-    }
+  if (!self->dark_texture) {
+    gdk_paintable_snapshot (self->texture, snapshot, width, height);
+    return;
+  }
 
-  if (!self->texture)
-    {
-      gdk_paintable_snapshot (self->dark_texture, snapshot, width, height);
-      return;
-    }
+  if (!self->texture) {
+    gdk_paintable_snapshot (self->dark_texture, snapshot, width, height);
+    return;
+  }
 
   is_rtl = self->text_direction == GTK_TEXT_DIR_RTL;
 
@@ -375,7 +366,6 @@ cc_background_paintable_get_intrinsic_width (GdkPaintable *paintable)
     return gdk_paintable_get_intrinsic_width (valid_texture) / self->scale_factor;
 
   return self->width;
-
 }
 
 static int
@@ -399,7 +389,7 @@ cc_background_paintable_get_intrinsic_aspect_ratio (GdkPaintable *paintable)
   if (valid_texture != NULL)
     return gdk_paintable_get_intrinsic_aspect_ratio (valid_texture);
 
-  return (double) self->width / self->height;
+  return (double)self->width / self->height;
 }
 
 static void

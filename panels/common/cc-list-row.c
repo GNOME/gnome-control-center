@@ -32,14 +32,13 @@
 #include "cc-common-resources.h"
 #include "cc-list-row.h"
 
-struct _CcListRow
-{
-  AdwActionRow  parent_instance;
+struct _CcListRow {
+  AdwActionRow parent_instance;
 
-  GtkLabel     *secondary_label;
+  GtkLabel *secondary_label;
 
-  GtkImage     *arrow;
-  gboolean      show_arrow;
+  GtkImage *arrow;
+  gboolean show_arrow;
 };
 
 G_DEFINE_TYPE (CcListRow, cc_list_row, ADW_TYPE_ACTION_ROW)
@@ -62,8 +61,7 @@ cc_list_row_get_property (GObject    *object,
 {
   CcListRow *self = (CcListRow *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_SECONDARY_LABEL:
       g_value_set_string (value, gtk_label_get_label (self->secondary_label));
       break;
@@ -74,7 +72,7 @@ cc_list_row_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -85,8 +83,7 @@ cc_list_row_set_property (GObject      *object,
 {
   CcListRow *self = (CcListRow *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_SECONDARY_LABEL:
       gtk_label_set_label (self->secondary_label, g_value_get_string (value));
       break;
@@ -97,7 +94,7 @@ cc_list_row_set_property (GObject      *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -113,7 +110,7 @@ cc_list_row_sensitivity_changed_cb (CcListRow *self)
 static void
 cc_list_row_class_init (CcListRowClass *klass)
 {
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->get_property = cc_list_row_get_property;
@@ -148,15 +145,15 @@ cc_list_row_class_init (CcListRowClass *klass)
 static void
 add_secondary_label_to_a11y_description (CcListRow *self)
 {
-  // We're using the widget tree traversal because gtk_accessible_update_relation
-  // does not allow appending to the existing relation.
-  // FIXME: Use the new append to relation API when available.
+  /* We're using the widget tree traversal because gtk_accessible_update_relation */
+  /* does not allow appending to the existing relation. */
+  /* FIXME: Use the new append to relation API when available. */
   GtkWidget *suffix_box;
   GtkWidget *subtitle_label;
 
-  // In current Libadwaita, the subtitle label is in the previous box of the
-  // suffixes box (e. g. our secondary_label's parent)
-  // as the last child.
+  /* In current Libadwaita, the subtitle label is in the previous box of the */
+  /* suffixes box (e. g. our secondary_label's parent) */
+  /* as the last child. */
   suffix_box = gtk_widget_get_parent (GTK_WIDGET (self->secondary_label));
   subtitle_label = gtk_widget_get_last_child (gtk_widget_get_prev_sibling (suffix_box));
   gtk_accessible_update_relation (GTK_ACCESSIBLE (self),

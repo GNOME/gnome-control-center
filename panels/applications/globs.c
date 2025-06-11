@@ -34,29 +34,26 @@ parse_globs (void)
 
   dirs = g_get_system_data_dirs ();
 
-  for (i = 0; dirs[i]; i++)
-    {
-      g_autofree gchar *file = g_build_filename (dirs[i], "mime", "globs", NULL);
-      g_autofree gchar *contents = NULL;
+  for (i = 0; dirs[i]; i++) {
+    g_autofree gchar *file = g_build_filename (dirs[i], "mime", "globs", NULL);
+    g_autofree gchar *contents = NULL;
 
-      if (g_file_get_contents (file, &contents, NULL, NULL))
-        {
-          g_auto(GStrv) strv = NULL;
-          int i;
+    if (g_file_get_contents (file, &contents, NULL, NULL)) {
+      g_auto (GStrv) strv = NULL;
+      int i;
 
-          strv = g_strsplit (contents, "\n", 0);
-          for (i = 0; strv[i]; i++)
-            {
-              g_auto(GStrv) parts = NULL;
+      strv = g_strsplit (contents, "\n", 0);
+      for (i = 0; strv[i]; i++) {
+        g_auto (GStrv) parts = NULL;
 
-              if (strv[i][0] == '#' || strv[i][0] == '\0')
-                continue;
+        if (strv[i][0] == '#' || strv[i][0] == '\0')
+          continue;
 
-              parts = g_strsplit (strv[i], ":", 2);
-              g_hash_table_insert (globs, g_strdup (parts[0]), g_strdup (parts[1]));
-            }
-        }
+        parts = g_strsplit (strv[i], ":", 2);
+        g_hash_table_insert (globs, g_strdup (parts[0]), g_strdup (parts[1]));
+      }
     }
+  }
 
   return globs;
 }

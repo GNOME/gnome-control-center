@@ -58,99 +58,98 @@
 
 #define PORTAL_SNAP_PREFIX "snap."
 
-struct _CcApplicationsPanel
-{
-  CcPanel          parent;
+struct _CcApplicationsPanel {
+  CcPanel parent;
 
-  CcDefaultAppsPage        *default_apps_page;
-  AdwSwitchRow             *autorun_never_row;
+  CcDefaultAppsPage *default_apps_page;
+  AdwSwitchRow *autorun_never_row;
   CcRemovableMediaSettings *removable_media_settings;
 
   AdwNavigationPage *app_settings_page;
-  GtkStack        *main_page_stack;
-  GtkListBox      *app_listbox;
-  GtkEntry        *app_search_entry;
+  GtkStack *main_page_stack;
+  GtkListBox *app_listbox;
+  GtkEntry *app_search_entry;
   GAppInfoMonitor *monitor;
-  gulong           monitor_id;
-  GListModel      *app_model;
-  GListModel      *filter_model;
-  GtkFilter       *filter;
+  gulong monitor_id;
+  GListModel *app_model;
+  GListModel *filter_model;
+  GtkFilter *filter;
 #ifdef HAVE_MALCONTENT
-  GCancellable    *cancellable;
+  GCancellable *cancellable;
 
-  MctAppFilter    *app_filter;
-  MctManager      *manager;
-  guint            app_filter_id;
+  MctAppFilter *app_filter;
+  MctManager *manager;
+  guint app_filter_id;
 #endif
 
-  gchar           *current_app_id;
-  GAppInfo        *current_app_info;
-  gchar           *current_portal_app_id;
+  gchar *current_app_id;
+  GAppInfo *current_app_info;
+  gchar *current_portal_app_id;
 
-  GHashTable      *globs;
-  GHashTable      *search_providers;
+  GHashTable *globs;
+  GHashTable *search_providers;
 
-  GtkImage        *app_icon_image;
-  GtkLabel        *app_name_label;
-  GtkButton       *launch_button;
-  GtkButton       *view_details_button;
-  AdwBanner       *sandbox_banner;
-  GtkWidget       *sandbox_info_button;
+  GtkImage *app_icon_image;
+  GtkLabel *app_name_label;
+  GtkButton *launch_button;
+  GtkButton *view_details_button;
+  AdwBanner *sandbox_banner;
+  GtkWidget *sandbox_info_button;
 
-  GDBusProxy      *perm_store;
-  GSettings       *media_handling_settings;
-  GtkListBoxRow   *perm_store_pending_row;
-  GSettings       *notification_settings;
-  GSettings       *location_settings;
-  GSettings       *privacy_settings;
-  GSettings       *search_settings;
-  GSettings       *global_shortcuts_app_settings;
+  GDBusProxy *perm_store;
+  GSettings *media_handling_settings;
+  GtkListBoxRow *perm_store_pending_row;
+  GSettings *notification_settings;
+  GSettings *location_settings;
+  GSettings *privacy_settings;
+  GSettings *search_settings;
+  GSettings *global_shortcuts_app_settings;
 
-  GtkButton       *install_button;
+  GtkButton *install_button;
 
   AdwPreferencesGroup *permissions_group;
-  AdwSwitchRow    *notifications_row;
-  AdwSwitchRow    *background_row;
-  AdwSwitchRow    *wallpaper_row;
-  AdwSwitchRow    *screenshots_row;
-  AdwSwitchRow    *sounds_row;
-  CcListRow       *no_sounds_row;
-  AdwSwitchRow    *search_row;
-  CcListRow       *no_search_row;
-  AdwSwitchRow    *camera_row;
-  CcListRow       *no_camera_row;
-  AdwSwitchRow    *location_row;
-  CcListRow       *no_location_row;
-  AdwSwitchRow    *shortcuts_row;
-  AdwSwitchRow    *microphone_row;
-  CcListRow       *no_microphone_row;
-  CcListRow       *global_shortcuts_row;
+  AdwSwitchRow *notifications_row;
+  AdwSwitchRow *background_row;
+  AdwSwitchRow *wallpaper_row;
+  AdwSwitchRow *screenshots_row;
+  AdwSwitchRow *sounds_row;
+  CcListRow *no_sounds_row;
+  AdwSwitchRow *search_row;
+  CcListRow *no_search_row;
+  AdwSwitchRow *camera_row;
+  CcListRow *no_camera_row;
+  AdwSwitchRow *location_row;
+  CcListRow *no_location_row;
+  AdwSwitchRow *shortcuts_row;
+  AdwSwitchRow *microphone_row;
+  CcListRow *no_microphone_row;
+  CcListRow *global_shortcuts_row;
   AdwPreferencesGroup *required_permissions_group;
-  CcListRow       *builtin_row;
+  CcListRow *builtin_row;
   AdwPreferencesPage *builtin_page;
-  GtkListBox      *builtin_list;
-  GList           *snap_permission_rows;
+  GtkListBox *builtin_list;
+  GList *snap_permission_rows;
 
-  AdwButtonRow    *handler_reset_button_row;
+  AdwButtonRow *handler_reset_button_row;
   AdwPreferencesPage *handler_page;
-  CcListRow       *handler_row;
+  CcListRow *handler_row;
   AdwPreferencesGroup *handler_file_group;
   AdwPreferencesGroup *handler_link_group;
-  GList           *file_handler_rows;
-  GList           *link_handler_rows;
+  GList *file_handler_rows;
+  GList *link_handler_rows;
 
-  GtkWidget       *general_group;
-  CcListRow       *storage_row;
+  GtkWidget *general_group;
+  CcListRow *storage_row;
   AdwPreferencesPage *storage_page;
-  AdwActionRow    *storage_page_app_row;
-  AdwActionRow    *storage_page_data_row;
-  AdwActionRow    *storage_page_cache_row;
-  AdwActionRow    *storage_page_total_row;
-  AdwButtonRow    *clear_cache_button_row;
+  AdwActionRow *storage_page_app_row;
+  AdwActionRow *storage_page_data_row;
+  AdwActionRow *storage_page_cache_row;
+  AdwActionRow *storage_page_total_row;
+  AdwButtonRow *clear_cache_button_row;
 
-  guint64          app_size;
-  guint64          cache_size;
-  guint64          data_size;
+  guint64 app_size;
+  guint64 cache_size;
+  guint64 data_size;
 };
 
 CC_PANEL_REGISTER (CcApplicationsPanel, cc_applications_panel)
@@ -159,12 +158,13 @@ static void select_app (CcApplicationsPanel *self,
                         const gchar         *app_id,
                         gboolean             emit_activate);
 
-static void update_handler_dialog (CcApplicationsPanel *self, GAppInfo *info);
+static void update_handler_dialog (CcApplicationsPanel *self,
+                                   GAppInfo            *info);
 
-static void update_usage_section (CcApplicationsPanel *self, GAppInfo *info);
+static void update_usage_section (CcApplicationsPanel *self,
+                                  GAppInfo            *info);
 
-enum
-{
+enum {
   PROP_0,
   PROP_PARAMETERS
 };
@@ -182,7 +182,7 @@ static gboolean
 privacy_link_cb (CcApplicationsPanel *self)
 {
   CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   if (!cc_shell_set_active_panel_from_id (shell, "location", NULL, &error))
     g_warning ("Failed to switch to privacy panel: %s", error->message);
@@ -217,8 +217,8 @@ get_portal_permissions (CcApplicationsPanel *self,
                         const gchar         *id,
                         const gchar         *app_id)
 {
-  g_autoptr(GVariant) ret = NULL;
-  g_autoptr(GVariantIter) iter = NULL;
+  g_autoptr (GVariant) ret = NULL;
+  g_autoptr (GVariantIter) iter = NULL;
   const gchar *key = NULL;
   GStrv val;
   GStrv result = NULL;
@@ -232,23 +232,22 @@ get_portal_permissions (CcApplicationsPanel *self,
 
   g_variant_get (ret, "(a{sas}v)", &iter, NULL);
 
-  while (g_variant_iter_loop (iter, "{&s^a&s}", &key, &val))
-    {
-      if (strcmp (key, app_id) == 0 && result == NULL)
-        result = g_strdupv (val);
-    }
+  while (g_variant_iter_loop (iter, "{&s^a&s}", &key, &val)) {
+    if (strcmp (key, app_id) == 0 && result == NULL)
+      result = g_strdupv (val);
+  }
 
   return result;
 }
 
 static void
 set_portal_permissions (CcApplicationsPanel *self,
-                        const gchar *table,
-                        const gchar *id,
-                        const gchar *app_id,
+                        const gchar         *table,
+                        const gchar         *id,
+                        const gchar         *app_id,
                         const gchar * const *permissions)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_dbus_proxy_call_sync (self->perm_store,
                           "SetPermission",
@@ -264,19 +263,18 @@ set_portal_permissions (CcApplicationsPanel *self,
 static gchar *
 get_portal_app_id (GAppInfo *info)
 {
-  if (G_IS_DESKTOP_APP_INFO (info))
-    {
-      g_autofree gchar *snap_name = NULL;
-      gchar *flatpak_id;
+  if (G_IS_DESKTOP_APP_INFO (info)) {
+    g_autofree gchar *snap_name = NULL;
+    gchar *flatpak_id;
 
-      flatpak_id = g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (info), "X-Flatpak");
-      if (flatpak_id != NULL)
-        return flatpak_id;
+    flatpak_id = g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (info), "X-Flatpak");
+    if (flatpak_id != NULL)
+      return flatpak_id;
 
-      snap_name = g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (info), "X-SnapInstanceName");
-      if (snap_name != NULL)
-        return g_strdup_printf ("%s%s", PORTAL_SNAP_PREFIX, snap_name);
-    }
+    snap_name = g_desktop_app_info_get_string (G_DESKTOP_APP_INFO (info), "X-SnapInstanceName");
+    if (snap_name != NULL)
+      return g_strdup_printf ("%s%s", PORTAL_SNAP_PREFIX, snap_name);
+  }
 
   return NULL;
 }
@@ -286,7 +284,7 @@ get_flatpak_app_dir (const gchar *app_id,
                      const gchar *subdir)
 {
   g_autofree gchar *path = NULL;
-  g_autoptr(GFile) appdir = NULL;
+  g_autoptr (GFile) appdir = NULL;
 
   path = g_build_filename (g_get_home_dir (), ".var", "app", app_id, NULL);
   appdir = g_file_new_for_path (path);
@@ -301,50 +299,44 @@ set_search_enabled (CcApplicationsPanel *self,
                     const gchar         *app_id,
                     gboolean             enabled)
 {
-  g_autoptr(GPtrArray) new_apps = NULL;
+  g_autoptr (GPtrArray) new_apps = NULL;
   g_autofree gchar *desktop_id = NULL;
-  g_auto(GStrv) apps = NULL;
+  g_auto (GStrv) apps = NULL;
   gpointer key, value;
   gboolean default_disabled;
   gint i;
 
   desktop_id = g_strconcat (app_id, ".desktop", NULL);
 
-  if (!g_hash_table_lookup_extended (self->search_providers, app_id, &key, &value))
-    {
-      g_warning ("Trying to configure search for a provider-less app - this shouldn't happen");
-      return;
-    }
+  if (!g_hash_table_lookup_extended (self->search_providers, app_id, &key, &value)) {
+    g_warning ("Trying to configure search for a provider-less app - this shouldn't happen");
+    return;
+  }
 
   default_disabled = GPOINTER_TO_INT (value);
 
   new_apps = g_ptr_array_new_with_free_func (g_free);
-  if (default_disabled)
-    {
-      apps = g_settings_get_strv (self->search_settings, "enabled");
-      for (i = 0; apps[i]; i++)
-        {
-          if (strcmp (apps[i], desktop_id) != 0)
-            g_ptr_array_add (new_apps, g_strdup (apps[i]));
-        }
-      if (enabled)
-        g_ptr_array_add (new_apps, g_strdup (desktop_id));
-      g_ptr_array_add (new_apps, NULL);
-      g_settings_set_strv (self->search_settings, "enabled",  (const gchar * const *)new_apps->pdata);
+  if (default_disabled) {
+    apps = g_settings_get_strv (self->search_settings, "enabled");
+    for (i = 0; apps[i]; i++) {
+      if (strcmp (apps[i], desktop_id) != 0)
+        g_ptr_array_add (new_apps, g_strdup (apps[i]));
     }
-  else
-    {
-      apps = g_settings_get_strv (self->search_settings, "disabled");
-      for (i = 0; apps[i]; i++)
-        {
-          if (strcmp (apps[i], desktop_id) != 0)
-            g_ptr_array_add (new_apps, g_strdup (apps[i]));
-        }
-      if (!enabled)
-        g_ptr_array_add (new_apps, g_strdup (desktop_id));
-      g_ptr_array_add (new_apps, NULL);
-      g_settings_set_strv (self->search_settings, "disabled", (const gchar * const *)new_apps->pdata);
+    if (enabled)
+      g_ptr_array_add (new_apps, g_strdup (desktop_id));
+    g_ptr_array_add (new_apps, NULL);
+    g_settings_set_strv (self->search_settings, "enabled", (const gchar * const *)new_apps->pdata);
+  } else {
+    apps = g_settings_get_strv (self->search_settings, "disabled");
+    for (i = 0; apps[i]; i++) {
+      if (strcmp (apps[i], desktop_id) != 0)
+        g_ptr_array_add (new_apps, g_strdup (apps[i]));
     }
+    if (!enabled)
+      g_ptr_array_add (new_apps, g_strdup (desktop_id));
+    g_ptr_array_add (new_apps, NULL);
+    g_settings_set_strv (self->search_settings, "disabled", (const gchar * const *)new_apps->pdata);
+  }
 }
 
 static gboolean
@@ -353,7 +345,7 @@ search_contains_string_for_app (CcApplicationsPanel *self,
                                 const gchar         *setting)
 {
   g_autofree gchar *desktop_id = NULL;
-  g_auto(GStrv) apps = NULL;
+  g_auto (GStrv) apps = NULL;
 
   desktop_id = g_strconcat (app_id, ".desktop", NULL);
   apps = g_settings_get_strv (self->search_settings, setting);
@@ -413,37 +405,31 @@ get_notification_allowed (CcApplicationsPanel *self,
                           gboolean            *set,
                           gboolean            *allowed)
 {
-  if (self->notification_settings)
-    {
-      /* FIXME */
-      *set = TRUE;
-      *allowed = g_settings_get_boolean (self->notification_settings, "enable");
-    }
-  else
-    {
-      g_auto(GStrv) perms = get_portal_permissions (self, "notifications", "notification", app_id);
-      *set = perms != NULL;
-      /* FIXME: needs unreleased xdg-desktop-portals to write permissions on use */
-      *set = TRUE;
-      *allowed = perms == NULL || g_strcmp0 (perms[0], "no") != 0;
-    }
+  if (self->notification_settings) {
+    /* FIXME */
+    *set = TRUE;
+    *allowed = g_settings_get_boolean (self->notification_settings, "enable");
+  } else {
+    g_auto (GStrv) perms = get_portal_permissions (self, "notifications", "notification", app_id);
+    *set = perms != NULL;
+    /* FIXME: needs unreleased xdg-desktop-portals to write permissions on use */
+    *set = TRUE;
+    *allowed = perms == NULL || g_strcmp0 (perms[0], "no") != 0;
+  }
 }
 
 static void
 set_notification_allowed (CcApplicationsPanel *self,
                           gboolean             allowed)
 {
-  if (self->notification_settings)
-    {
-      g_settings_set_boolean (self->notification_settings, "enable", allowed);
-    }
-  else
-    {
-      const gchar *perms[2] = { NULL, NULL };
+  if (self->notification_settings) {
+    g_settings_set_boolean (self->notification_settings, "enable", allowed);
+  } else {
+    const gchar *perms[2] = { NULL, NULL };
 
-      perms[0] = allowed ? "yes" : "no";
-      set_portal_permissions (self, "notifications", "notification", self->current_portal_app_id, perms);
-    }
+    perms[0] = allowed ? "yes" : "no";
+    set_portal_permissions (self, "notifications", "notification", self->current_portal_app_id, perms);
+  }
 }
 
 static void
@@ -488,7 +474,7 @@ get_background_allowed (CcApplicationsPanel *self,
                         gboolean            *set,
                         gboolean            *allowed)
 {
-  g_auto(GStrv) perms = get_portal_permissions (self, "background", "background", app_id);
+  g_auto (GStrv) perms = get_portal_permissions (self, "background", "background", app_id);
   *set = TRUE;
   *allowed = perms == NULL || g_strcmp0 (perms[0], "no") != 0;
 }
@@ -518,7 +504,7 @@ get_wallpaper_allowed (CcApplicationsPanel *self,
                        gboolean            *set,
                        gboolean            *allowed)
 {
-  g_auto(GStrv) perms = get_portal_permissions (self, "wallpaper", "wallpaper", app_id);
+  g_auto (GStrv) perms = get_portal_permissions (self, "wallpaper", "wallpaper", app_id);
 
   *set = perms != NULL;
   *allowed = perms == NULL || g_strcmp0 (perms[0], "no") != 0;
@@ -549,7 +535,7 @@ get_screenshot_allowed (CcApplicationsPanel *self,
                         gboolean            *set,
                         gboolean            *allowed)
 {
-  g_auto(GStrv) perms = get_portal_permissions (self, "screenshot", "screenshot", app_id);
+  g_auto (GStrv) perms = get_portal_permissions (self, "screenshot", "screenshot", app_id);
 
   *set = perms != NULL;
   *allowed = perms == NULL || g_strcmp0 (perms[0], "no") != 0;
@@ -580,7 +566,7 @@ get_shortcuts_allowed (CcApplicationsPanel *self,
                        gboolean            *set,
                        gboolean            *granted)
 {
-  g_auto(GStrv) perms = NULL;
+  g_auto (GStrv) perms = NULL;
 
   perms = get_portal_permissions (self, "gnome", "shortcuts-inhibitor", app_id);
 
@@ -625,7 +611,7 @@ get_device_allowed (CcApplicationsPanel *self,
                     gboolean            *set,
                     gboolean            *allowed)
 {
-  g_auto(GStrv) perms = NULL;
+  g_auto (GStrv) perms = NULL;
 
   perms = get_portal_permissions (self, "devices", device, app_id);
 
@@ -657,7 +643,7 @@ static void
 sound_cb (CcApplicationsPanel *self)
 {
   if (self->current_portal_app_id)
-   set_device_allowed (self, "speakers", adw_switch_row_get_active (self->sounds_row));
+    set_device_allowed (self, "speakers", adw_switch_row_get_active (self->sounds_row));
 }
 
 static void
@@ -675,7 +661,7 @@ get_location_allowed (CcApplicationsPanel *self,
                       gboolean            *set,
                       gboolean            *allowed)
 {
-  g_auto(GStrv) perms = NULL;
+  g_auto (GStrv) perms = NULL;
 
   perms = get_portal_permissions (self, "location", "location", app_id);
 
@@ -742,12 +728,12 @@ add_snap_permissions (CcApplicationsPanel *self,
                       const gchar         *app_id)
 {
   const gchar *snap_name;
-  g_autoptr(CcSnapdClient) client = NULL;
-  g_autoptr(JsonArray) plugs = NULL;
-  g_autoptr(JsonArray) slots = NULL;
+  g_autoptr (CcSnapdClient) client = NULL;
+  g_autoptr (JsonArray) plugs = NULL;
+  g_autoptr (JsonArray) slots = NULL;
   gint added = 0;
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GError) interfaces_error = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GError) interfaces_error = NULL;
 
   if (!g_str_has_prefix (app_id, PORTAL_SNAP_PREFIX))
     return FALSE;
@@ -755,52 +741,51 @@ add_snap_permissions (CcApplicationsPanel *self,
 
   client = cc_snapd_client_new ();
 
-  if (!cc_snapd_client_get_all_connections_sync (client, &plugs, &slots, cc_panel_get_cancellable (CC_PANEL (self)), &error))
-    {
-      g_warning ("Failed to get snap connections: %s", error->message);
-      return FALSE;
-    }
+  if (!cc_snapd_client_get_all_connections_sync (client, &plugs, &slots, cc_panel_get_cancellable (CC_PANEL (self)), &error)) {
+    g_warning ("Failed to get snap connections: %s", error->message);
+    return FALSE;
+  }
 
-  for (guint i = 0; i < json_array_get_length (plugs); i++)
-    {
-      JsonObject *plug = json_array_get_object_element (plugs, i);
-      const gchar *plug_interface;
-      CcSnapRow *row;
-      g_autoptr(JsonArray) available_slots = NULL;
-      const gchar * const hidden_interfaces[] = { "content",
-                                                  "desktop", "desktop-legacy",
-                                                  "mir",
-                                                  "unity7", "unity8",
-                                                  "wayland",
-                                                  "x11",
-                                                  NULL };
+  for (guint i = 0; i < json_array_get_length (plugs); i++) {
+    JsonObject *plug = json_array_get_object_element (plugs, i);
+    const gchar *plug_interface;
+    CcSnapRow *row;
+    g_autoptr (JsonArray) available_slots = NULL;
+    const gchar * const hidden_interfaces[] = {
+      "content",
+      "desktop", "desktop-legacy",
+      "mir",
+      "unity7", "unity8",
+      "wayland",
+      "x11",
+      NULL
+    };
 
-      /* Skip if not relating to this snap */
-      if (g_strcmp0 (json_object_get_string_member (plug, "snap"), snap_name) != 0)
+    /* Skip if not relating to this snap */
+    if (g_strcmp0 (json_object_get_string_member (plug, "snap"), snap_name) != 0)
+      continue;
+
+    /* Ignore interfaces that are too low level to make sense to show or disable */
+    plug_interface = json_object_get_string_member (plug, "interface");
+    if (g_strv_contains (hidden_interfaces, plug_interface))
+      continue;
+
+    available_slots = json_array_new ();
+    for (guint j = 0; j < json_array_get_length (slots); j++) {
+      JsonObject *slot = json_array_get_object_element (slots, j);
+      if (g_strcmp0 (plug_interface, json_object_get_string_member (slot, "interface")) != 0)
         continue;
 
-      /* Ignore interfaces that are too low level to make sense to show or disable */
-      plug_interface = json_object_get_string_member (plug, "interface");
-      if (g_strv_contains (hidden_interfaces, plug_interface))
-        continue;
-
-      available_slots = json_array_new ();
-      for (guint j = 0; j < json_array_get_length (slots); j++)
-        {
-          JsonObject *slot = json_array_get_object_element (slots, j);
-          if (g_strcmp0 (plug_interface, json_object_get_string_member (slot, "interface")) != 0)
-            continue;
-
-          json_array_add_object_element (available_slots, slot);
-        }
-
-      row = cc_snap_row_new (cc_panel_get_cancellable (CC_PANEL (self)), plug, available_slots);
-      adw_preferences_group_add (self->permissions_group, GTK_WIDGET (row));
-      self->snap_permission_rows = g_list_prepend (self->snap_permission_rows, row);
-      added++;
+      json_array_add_object_element (available_slots, slot);
     }
 
-    return added > 0;
+    row = cc_snap_row_new (cc_panel_get_cancellable (CC_PANEL (self)), plug, available_slots);
+    adw_preferences_group_add (self->permissions_group, GTK_WIDGET (row));
+    self->snap_permission_rows = g_list_prepend (self->snap_permission_rows, row);
+    added++;
+  }
+
+  return added > 0;
 }
 #endif
 
@@ -821,12 +806,11 @@ update_sandbox_banner (CcApplicationsPanel *self,
   };
   gsize i;
 
-  for (i = 0; i < G_N_ELEMENTS (system_apps); i++)
-    {
-      is_system = g_str_equal (system_apps[i], app_id);
-      if (is_system)
-        break;
-    }
+  for (i = 0; i < G_N_ELEMENTS (system_apps); i++) {
+    is_system = g_str_equal (system_apps[i], app_id);
+    if (is_system)
+      break;
+  }
 
   show_banner = !is_sandboxed && !is_system;
   gtk_widget_set_visible (GTK_WIDGET (self->sandbox_banner), show_banner);
@@ -853,11 +837,11 @@ add_static_permissions (CcApplicationsPanel *self,
                         GAppInfo            *info,
                         const gchar         *portal_app_id)
 {
-  g_autoptr(GKeyFile) keyfile = NULL;
-  g_auto(GStrv) sockets = NULL;
-  g_auto(GStrv) devices = NULL;
-  g_auto(GStrv) shared = NULL;
-  g_auto(GStrv) filesystems = NULL;
+  g_autoptr (GKeyFile) keyfile = NULL;
+  g_auto (GStrv) sockets = NULL;
+  g_auto (GStrv) devices = NULL;
+  g_auto (GStrv) shared = NULL;
+  g_auto (GStrv) filesystems = NULL;
   g_autofree gchar *str = NULL;
   g_autofree gchar *app_id = NULL;
   gint added = 0;
@@ -877,27 +861,27 @@ add_static_permissions (CcApplicationsPanel *self,
     return FALSE;
 
   sockets = g_key_file_get_string_list (keyfile, "Context", "sockets", NULL, NULL);
-  if (sockets && g_strv_contains ((const gchar * const*)sockets, "system-bus"))
+  if (sockets && g_strv_contains ((const gchar * const *)sockets, "system-bus"))
     added += add_static_permission_row (self, _("System Bus"), _("Full access"));
-  if (sockets && g_strv_contains ((const gchar * const*)sockets, "session-bus"))
+  if (sockets && g_strv_contains ((const gchar * const *)sockets, "session-bus"))
     added += add_static_permission_row (self, _("Session Bus"), _("Full access"));
 
   devices = g_key_file_get_string_list (keyfile, "Context", "devices", NULL, NULL);
-  if (devices && g_strv_contains ((const gchar * const*)devices, "all"))
+  if (devices && g_strv_contains ((const gchar * const *)devices, "all"))
     added += add_static_permission_row (self, _("Devices"), _("Full access to /dev"));
 
   shared = g_key_file_get_string_list (keyfile, "Context", "shared", NULL, NULL);
-  if (shared && g_strv_contains ((const gchar * const*)shared, "network"))
+  if (shared && g_strv_contains ((const gchar * const *)shared, "network"))
     added += add_static_permission_row (self, _("Network"), _("Has network access"));
 
   filesystems = g_key_file_get_string_list (keyfile, "Context", "filesystems", NULL, NULL);
   if (filesystems && (g_strv_contains ((const gchar * const *)filesystems, "home") ||
-               g_strv_contains ((const gchar * const *)filesystems, "home:rw")))
+                      g_strv_contains ((const gchar * const *)filesystems, "home:rw")))
     added += add_static_permission_row (self, _("Home"), _("Full access"));
   else if (filesystems && g_strv_contains ((const gchar * const *)filesystems, "home:ro"))
     added += add_static_permission_row (self, _("Home"), _("Read-only"));
   if (filesystems && (g_strv_contains ((const gchar * const *)filesystems, "host") ||
-               g_strv_contains ((const gchar * const *)filesystems, "host:rw")))
+                      g_strv_contains ((const gchar * const *)filesystems, "host:rw")))
     added += add_static_permission_row (self, _("File System"), _("Full access"));
   else if (filesystems && g_strv_contains ((const gchar * const *)filesystems, "host:ro"))
     added += add_static_permission_row (self, _("File System"), _("Read-only"));
@@ -947,7 +931,7 @@ update_header_section (CcApplicationsPanel *self,
 
 static void
 update_permissions_group (CcApplicationsPanel *self,
-                            GAppInfo            *info)
+                          GAppInfo            *info)
 {
   g_autofree gchar *app_id = get_app_id (info);
   g_autofree gchar *portal_app_id = get_portal_app_id (info);
@@ -960,96 +944,90 @@ update_permissions_group (CcApplicationsPanel *self,
   gtk_widget_set_visible (GTK_WIDGET (self->search_row), set && !disabled);
   gtk_widget_set_visible (GTK_WIDGET (self->no_search_row), set && disabled);
 
-  if (app_id != NULL)
-    {
-      g_autofree gchar *desktop_id = g_strconcat (app_id, ".desktop", NULL);
-      get_shortcuts_allowed (self, desktop_id, &set, &allowed);
-      gtk_widget_set_visible (GTK_WIDGET (self->shortcuts_row), set);
-      adw_switch_row_set_active (self->shortcuts_row, allowed);
-    }
-  else
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self->shortcuts_row), FALSE);
-    }
+  if (app_id != NULL) {
+    g_autofree gchar *desktop_id = g_strconcat (app_id, ".desktop", NULL);
+    get_shortcuts_allowed (self, desktop_id, &set, &allowed);
+    gtk_widget_set_visible (GTK_WIDGET (self->shortcuts_row), set);
+    adw_switch_row_set_active (self->shortcuts_row, allowed);
+  } else {
+    gtk_widget_set_visible (GTK_WIDGET (self->shortcuts_row), FALSE);
+  }
 
 #ifdef HAVE_SNAP
   remove_snap_permissions (self);
 #endif
 
-  if (portal_app_id != NULL)
-    {
-      g_clear_object (&self->notification_settings);
-      get_notification_allowed (self, portal_app_id, &set, &allowed);
-      adw_switch_row_set_active (self->notifications_row, allowed);
-      gtk_widget_set_visible (GTK_WIDGET (self->notifications_row), set);
-      has_any |= set;
+  if (portal_app_id != NULL) {
+    g_clear_object (&self->notification_settings);
+    get_notification_allowed (self, portal_app_id, &set, &allowed);
+    adw_switch_row_set_active (self->notifications_row, allowed);
+    gtk_widget_set_visible (GTK_WIDGET (self->notifications_row), set);
+    has_any |= set;
 
-      get_background_allowed (self, portal_app_id, &set, &allowed);
-      adw_switch_row_set_active (self->background_row, allowed);
-      gtk_widget_set_visible (GTK_WIDGET (self->background_row), set);
-      has_any |= set;
+    get_background_allowed (self, portal_app_id, &set, &allowed);
+    adw_switch_row_set_active (self->background_row, allowed);
+    gtk_widget_set_visible (GTK_WIDGET (self->background_row), set);
+    has_any |= set;
 
-      get_wallpaper_allowed (self, portal_app_id, &set, &allowed);
-      adw_switch_row_set_active (self->wallpaper_row, allowed);
-      gtk_widget_set_visible (GTK_WIDGET (self->wallpaper_row), set);
-      has_any |= set;
+    get_wallpaper_allowed (self, portal_app_id, &set, &allowed);
+    adw_switch_row_set_active (self->wallpaper_row, allowed);
+    gtk_widget_set_visible (GTK_WIDGET (self->wallpaper_row), set);
+    has_any |= set;
 
-      get_screenshot_allowed (self, portal_app_id, &set, &allowed);
-      adw_switch_row_set_active (self->screenshots_row, allowed);
-      gtk_widget_set_visible (GTK_WIDGET (self->screenshots_row), set);
-      has_any |= set;
+    get_screenshot_allowed (self, portal_app_id, &set, &allowed);
+    adw_switch_row_set_active (self->screenshots_row, allowed);
+    gtk_widget_set_visible (GTK_WIDGET (self->screenshots_row), set);
+    has_any |= set;
 
-      disabled = g_settings_get_boolean (self->privacy_settings, "disable-sound-output");
-      get_device_allowed (self, "speakers", portal_app_id, &set, &allowed);
-      adw_switch_row_set_active (self->sounds_row, allowed);
-      gtk_widget_set_visible (GTK_WIDGET (self->sounds_row), set && !disabled);
-      gtk_widget_set_visible (GTK_WIDGET (self->no_sounds_row), set && disabled);
+    disabled = g_settings_get_boolean (self->privacy_settings, "disable-sound-output");
+    get_device_allowed (self, "speakers", portal_app_id, &set, &allowed);
+    adw_switch_row_set_active (self->sounds_row, allowed);
+    gtk_widget_set_visible (GTK_WIDGET (self->sounds_row), set && !disabled);
+    gtk_widget_set_visible (GTK_WIDGET (self->no_sounds_row), set && disabled);
 
-      disabled = g_settings_get_boolean (self->privacy_settings, "disable-camera");
-      get_device_allowed (self, "camera", portal_app_id, &set, &allowed);
-      adw_switch_row_set_active (self->camera_row, allowed);
-      gtk_widget_set_visible (GTK_WIDGET (self->camera_row), set && !disabled);
-      gtk_widget_set_visible (GTK_WIDGET (self->no_camera_row), set && disabled);
-      has_any |= set;
+    disabled = g_settings_get_boolean (self->privacy_settings, "disable-camera");
+    get_device_allowed (self, "camera", portal_app_id, &set, &allowed);
+    adw_switch_row_set_active (self->camera_row, allowed);
+    gtk_widget_set_visible (GTK_WIDGET (self->camera_row), set && !disabled);
+    gtk_widget_set_visible (GTK_WIDGET (self->no_camera_row), set && disabled);
+    has_any |= set;
 
-      disabled = g_settings_get_boolean (self->privacy_settings, "disable-microphone");
-      get_device_allowed (self, "microphone", portal_app_id, &set, &allowed);
-      adw_switch_row_set_active (self->microphone_row, allowed);
-      gtk_widget_set_visible (GTK_WIDGET (self->microphone_row), set && !disabled);
-      gtk_widget_set_visible (GTK_WIDGET (self->no_microphone_row), set && disabled);
-      has_any |= set;
+    disabled = g_settings_get_boolean (self->privacy_settings, "disable-microphone");
+    get_device_allowed (self, "microphone", portal_app_id, &set, &allowed);
+    adw_switch_row_set_active (self->microphone_row, allowed);
+    gtk_widget_set_visible (GTK_WIDGET (self->microphone_row), set && !disabled);
+    gtk_widget_set_visible (GTK_WIDGET (self->no_microphone_row), set && disabled);
+    has_any |= set;
 
-      disabled = !g_settings_get_boolean (self->location_settings, "enabled");
-      get_location_allowed (self, portal_app_id, &set, &allowed);
-      adw_switch_row_set_active (self->location_row, allowed);
-      gtk_widget_set_visible (GTK_WIDGET (self->location_row), set && !disabled);
-      gtk_widget_set_visible (GTK_WIDGET (self->no_location_row), set && disabled);
-      has_any |= set;
+    disabled = !g_settings_get_boolean (self->location_settings, "enabled");
+    get_location_allowed (self, portal_app_id, &set, &allowed);
+    adw_switch_row_set_active (self->location_row, allowed);
+    gtk_widget_set_visible (GTK_WIDGET (self->location_row), set && !disabled);
+    gtk_widget_set_visible (GTK_WIDGET (self->no_location_row), set && disabled);
+    has_any |= set;
 
 #ifdef HAVE_SNAP
-      has_any |= add_snap_permissions (self, info, portal_app_id);
+    has_any |= add_snap_permissions (self, info, portal_app_id);
 #endif
-    }
-  else
-    {
-      g_set_object (&self->notification_settings, get_notification_settings (app_id));
-      get_notification_allowed (self, app_id, &set, &allowed);
-      adw_switch_row_set_active (self->notifications_row, allowed);
-      gtk_widget_set_visible (GTK_WIDGET (self->notifications_row), set);
-      has_any |= set;
+  } else {
+    g_set_object (&self->notification_settings, get_notification_settings (app_id));
+    get_notification_allowed (self, app_id, &set, &allowed);
+    adw_switch_row_set_active (self->notifications_row, allowed);
+    gtk_widget_set_visible (GTK_WIDGET (self->notifications_row), set);
+    has_any |= set;
 
-      gtk_widget_set_visible (GTK_WIDGET (self->background_row), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->wallpaper_row), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->screenshots_row), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->sounds_row), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->no_sounds_row), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->camera_row), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->no_camera_row), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->microphone_row), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->no_microphone_row), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->location_row), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->no_location_row), FALSE);
-    }
+    gtk_widget_set_visible (GTK_WIDGET (self->background_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->wallpaper_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->screenshots_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->sounds_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->no_sounds_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->camera_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->no_camera_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->microphone_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->no_microphone_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->location_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->no_location_row), FALSE);
+  }
 
   gtk_widget_set_visible (GTK_WIDGET (self->permissions_group), has_any);
 }
@@ -1146,21 +1124,19 @@ app_info_recommended_for (GAppInfo    *info,
                           const gchar *type)
 {
   /* this is horribly inefficient. I blame the mime system */
-  g_autolist(GObject) list = NULL;
+  g_autolist (GObject) list = NULL;
   GList *l;
   gboolean ret = FALSE;
 
   list = g_app_info_get_recommended_for_type (type);
-  for (l = list; l; l = l->next)
-    {
-      GAppInfo *ri = l->data;
+  for (l = list; l; l = l->next) {
+    GAppInfo *ri = l->data;
 
-      if (g_app_info_equal (info, ri))
-        {
-          ret = TRUE;
-          break;
-        }
+    if (g_app_info_equal (info, ri)) {
+      ret = TRUE;
+      break;
     }
+  }
 
   return ret;
 }
@@ -1176,14 +1152,13 @@ handler_reset_cb (CcApplicationsPanel *self)
     return;
 
   g_signal_handler_block (self->monitor, self->monitor_id);
-  for (i = 0; types[i]; i++)
-    {
-      gchar *ctype = g_content_type_from_mime_type (types[i]);
-      g_app_info_add_supports_type (self->current_app_info, ctype, NULL);
-    }
+  for (i = 0; types[i]; i++) {
+    gchar *ctype = g_content_type_from_mime_type (types[i]);
+    g_app_info_add_supports_type (self->current_app_info, ctype, NULL);
+  }
   g_signal_handler_unblock (self->monitor, self->monitor_id);
   g_signal_emit_by_name (self->monitor, "changed");
-  update_handler_dialog(self, self->current_app_info);
+  update_handler_dialog (self, self->current_app_info);
 }
 
 static void
@@ -1206,7 +1181,7 @@ update_handler_dialog (CcApplicationsPanel *self,
 {
   g_autofree gchar *header_title = NULL;
   g_autofree gchar *formatted_name = NULL;
-  g_autoptr(GHashTable) hash = NULL;
+  g_autoptr (GHashTable) hash = NULL;
   const gchar **types;
   guint n_associations = 0;
   gint i;
@@ -1224,36 +1199,33 @@ update_handler_dialog (CcApplicationsPanel *self,
   hash = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_free);
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->handler_reset_button_row), FALSE);
-  for (i = 0; types[i]; i++)
-    {
-      g_autofree gchar *ctype = g_content_type_from_mime_type (types[i]);
+  for (i = 0; types[i]; i++) {
+    g_autofree gchar *ctype = g_content_type_from_mime_type (types[i]);
 
-      if (g_hash_table_contains (hash, ctype))
-        continue;
+    if (g_hash_table_contains (hash, ctype))
+      continue;
 
-      if (!app_info_recommended_for (info, ctype))
-        {
-          gtk_widget_set_sensitive (GTK_WIDGET (self->handler_reset_button_row), TRUE);
-          continue;
-        }
-
-      add_handler_row (self, ctype);
-      g_hash_table_add (hash, g_steal_pointer (&ctype));
-
-      n_associations++;
+    if (!app_info_recommended_for (info, ctype)) {
+      gtk_widget_set_sensitive (GTK_WIDGET (self->handler_reset_button_row), TRUE);
+      continue;
     }
 
-  if (n_associations > 0)
-    {
-      g_autofree gchar *types_number = NULL;
+    add_handler_row (self, ctype);
+    g_hash_table_add (hash, g_steal_pointer (&ctype));
 
-      types_number = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE,
-                                                   "%u type",
-                                                   "%u types",
-                                                   n_associations),
-                                      n_associations);
-      cc_list_row_set_secondary_label (self->handler_row, types_number);
-    }
+    n_associations++;
+  }
+
+  if (n_associations > 0) {
+    g_autofree gchar *types_number = NULL;
+
+    types_number = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE,
+                                                 "%u type",
+                                                 "%u types",
+                                                 n_associations),
+                                    n_associations);
+    cc_list_row_set_secondary_label (self->handler_row, types_number);
+  }
 
   formatted_name = g_strdup_printf ("<b>%s</b>", g_app_info_get_display_name (info));
   /* TRANSLATORS: %s is an app name. */
@@ -1266,17 +1238,16 @@ update_handler_dialog (CcApplicationsPanel *self,
 
 static void
 on_items_changed_cb (GListModel *list,
-                  guint       position,
-                  guint       removed,
-                  guint       added,
-                  gpointer    data)
+                     guint       position,
+                     guint       removed,
+                     guint       added,
+                     gpointer    data)
 {
   CcApplicationsPanel *self = data;
 
   if (g_list_model_get_n_items (list) == 0) {
     gtk_stack_set_visible_child_name (self->main_page_stack, "no-search-results-page");
-  }
-  else if (g_list_model_get_n_items (self->app_model) == 0) {
+  } else if (g_list_model_get_n_items (self->app_model) == 0) {
     gtk_stack_set_visible_child_name (self->main_page_stack, "no-apps-found-page");
     gtk_widget_set_visible (GTK_WIDGET (self->app_search_entry), FALSE);
   }
@@ -1326,14 +1297,13 @@ set_cache_size (GObject      *source,
   CcApplicationsPanel *self = data;
   g_autofree gchar *formatted_size = NULL;
   guint64 size;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
-  if (!file_size_finish (G_FILE (source), res, &size, &error))
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed to get flatpak cache size: %s", error->message);
-      return;
-    }
+  if (!file_size_finish (G_FILE (source), res, &size, &error)) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to get flatpak cache size: %s", error->message);
+    return;
+  }
   self->cache_size = size;
 
   formatted_size = g_format_size (self->cache_size);
@@ -1348,7 +1318,7 @@ static void
 update_cache_row (CcApplicationsPanel *self,
                   const gchar         *app_id)
 {
-  g_autoptr(GFile) dir = get_flatpak_app_dir (app_id, "cache");
+  g_autoptr (GFile) dir = get_flatpak_app_dir (app_id, "cache");
 
   adw_action_row_set_subtitle (self->storage_page_cache_row, "…");
 
@@ -1363,14 +1333,13 @@ set_data_size (GObject      *source,
   CcApplicationsPanel *self = data;
   g_autofree gchar *formatted_size = NULL;
   guint64 size;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
-  if (!file_size_finish (G_FILE (source), res, &size, &error))
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed to get flatpak data size: %s", error->message);
-      return;
-    }
+  if (!file_size_finish (G_FILE (source), res, &size, &error)) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to get flatpak data size: %s", error->message);
+    return;
+  }
   self->data_size = size;
 
   formatted_size = g_format_size (self->data_size);
@@ -1381,9 +1350,9 @@ set_data_size (GObject      *source,
 
 static void
 update_data_row (CcApplicationsPanel *self,
-                 const gchar          *app_id)
+                 const gchar         *app_id)
 {
-  g_autoptr(GFile) dir = get_flatpak_app_dir (app_id, "data");
+  g_autoptr (GFile) dir = get_flatpak_app_dir (app_id, "data");
 
   adw_action_row_set_subtitle (self->storage_page_data_row, "…");
 
@@ -1396,14 +1365,13 @@ cache_cleared (GObject      *source,
                gpointer      data)
 {
   CcApplicationsPanel *self = data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
-  if (!file_remove_finish (G_FILE (source), res, &error))
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed to remove cache: %s", error->message);
-      return;
-    }
+  if (!file_remove_finish (G_FILE (source), res, &error)) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to remove cache: %s", error->message);
+    return;
+  }
 
   update_cache_row (self, self->current_app_id);
 }
@@ -1411,7 +1379,7 @@ cache_cleared (GObject      *source,
 static void
 clear_cache_cb (CcApplicationsPanel *self)
 {
-  g_autoptr(GFile) dir = NULL;
+  g_autoptr (GFile) dir = NULL;
 
   if (self->current_app_id == NULL)
     return;
@@ -1454,7 +1422,7 @@ static gboolean
 update_global_shortcuts_section (CcApplicationsPanel *self)
 {
   int global_shortcuts_count;
-  g_autoptr(GVariant) shortcuts = NULL;
+  g_autoptr (GVariant) shortcuts = NULL;
   g_autofree gchar *n_actions = NULL;
 
   shortcuts = g_settings_get_value (self->global_shortcuts_app_settings,
@@ -1514,18 +1482,16 @@ update_panel (CcApplicationsPanel *self,
 {
   GAppInfo *info;
 
-  if (self->perm_store == NULL)
-    {
-      /* Async permission store not initialized, row will be re-activated in the callback */
-      self->perm_store_pending_row = row;
-      return;
-    }
+  if (self->perm_store == NULL) {
+    /* Async permission store not initialized, row will be re-activated in the callback */
+    self->perm_store_pending_row = row;
+    return;
+  }
 
-  if (row == NULL)
-    {
-      g_message ("No app selected, try again");
-      return;
-    }
+  if (row == NULL) {
+    g_message ("No app selected, try again");
+    return;
+  }
 
   info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (row));
 
@@ -1553,12 +1519,12 @@ update_panel (CcApplicationsPanel *self,
 
 
 static gint
-compare_rows (gconstpointer  a,
-              gconstpointer  b,
-              gpointer       data)
+compare_rows (gconstpointer a,
+              gconstpointer b,
+              gpointer      data)
 {
-  GAppInfo *item1 = (GAppInfo *) a;
-  GAppInfo *item2 = (GAppInfo *) b;
+  GAppInfo *item1 = (GAppInfo *)a;
+  GAppInfo *item2 = (GAppInfo *)b;
 
   g_autofree gchar *key1 = NULL;
   g_autofree gchar *key2 = NULL;
@@ -1572,7 +1538,7 @@ compare_rows (gconstpointer  a,
 static void
 populate_applications (CcApplicationsPanel *self)
 {
-  g_autolist(GAppInfo) infos = NULL;
+  g_autolist (GAppInfo) infos = NULL;
   GList *l;
 
   g_list_store_remove_all (G_LIST_STORE (self->app_model));
@@ -1582,28 +1548,27 @@ populate_applications (CcApplicationsPanel *self)
 
   infos = g_app_info_get_all ();
 
-  for (l = infos; l; l = l->next)
-    {
-      GAppInfo *info = l->data;
+  for (l = infos; l; l = l->next) {
+    GAppInfo *info = l->data;
 
-      if (!g_app_info_should_show (info))
-        continue;
+    if (!g_app_info_should_show (info))
+      continue;
 
 #ifdef HAVE_MALCONTENT
-      if (!mct_app_filter_is_appinfo_allowed (self->app_filter, info))
-        continue;
+    if (!mct_app_filter_is_appinfo_allowed (self->app_filter, info))
+      continue;
 #endif
 
-      g_list_store_insert_sorted (G_LIST_STORE (self->app_model), info, compare_rows, NULL);
-    }
+    g_list_store_insert_sorted (G_LIST_STORE (self->app_model), info, compare_rows, NULL);
+  }
 #ifdef HAVE_MALCONTENT
   g_signal_handler_unblock (self->manager, self->app_filter_id);
 #endif
 }
 
 static gboolean
-filter_app_rows (GObject   *item,
-                 gpointer   data)
+filter_app_rows (GObject  *item,
+                 gpointer  data)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (data);
   g_autofree gchar *app_name = NULL;
@@ -1626,7 +1591,7 @@ filter_app_rows (GObject   *item,
 #ifdef HAVE_MALCONTENT
 static void
 app_filter_changed_cb (MctAppFilter        *app_filter,
-                       uid_t               uid,
+                       uid_t                uid,
                        CcApplicationsPanel *self)
 {
   populate_applications (self);
@@ -1653,16 +1618,15 @@ on_perm_store_ready (GObject      *source_object,
 {
   CcApplicationsPanel *self = data;
   GDBusProxy *proxy;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (proxy == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-          g_warning ("Failed to connect to portal permission store: %s",
-                     error->message);
-      return;
-    }
+  if (proxy == NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to connect to portal permission store: %s",
+                 error->message);
+    return;
+  }
 
   self->perm_store = proxy;
 
@@ -1681,25 +1645,23 @@ select_app (CcApplicationsPanel *self,
 
   for (child = gtk_widget_get_first_child (GTK_WIDGET (self->app_listbox));
        child;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      CcApplicationsRow *row = CC_APPLICATIONS_ROW (child);
-      GAppInfo *info = cc_applications_row_get_info (row);
-      if (g_str_has_prefix (g_app_info_get_id (info), app_id))
-        {
-          gtk_list_box_select_row (self->app_listbox, GTK_LIST_BOX_ROW (row));
-          if (emit_activate)
-            g_signal_emit_by_name (row, "activate");
-          break;
-        }
+       child = gtk_widget_get_next_sibling (child)) {
+    CcApplicationsRow *row = CC_APPLICATIONS_ROW (child);
+    GAppInfo *info = cc_applications_row_get_info (row);
+    if (g_str_has_prefix (g_app_info_get_id (info), app_id)) {
+      gtk_list_box_select_row (self->app_listbox, GTK_LIST_BOX_ROW (row));
+      if (emit_activate)
+        g_signal_emit_by_name (row, "activate");
+      break;
     }
+  }
 }
 
 static void
 on_launch_button_clicked_cb (CcApplicationsPanel *self)
 {
-  g_autoptr(GdkAppLaunchContext) context = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GdkAppLaunchContext) context = NULL;
+  g_autoptr (GError) error = NULL;
   GdkDisplay *display;
 
   if (!self->current_app_info)
@@ -1770,11 +1732,10 @@ cc_applications_panel_finalize (GObject *object)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
 #ifdef HAVE_MALCONTENT
-  if (self->app_filter != NULL && self->app_filter_id != 0)
-    {
-      g_signal_handler_disconnect (self->manager, self->app_filter_id);
-      self->app_filter_id = 0;
-    }
+  if (self->app_filter != NULL && self->app_filter_id != 0) {
+    g_signal_handler_disconnect (self->manager, self->app_filter_id);
+    self->app_filter_id = 0;
+  }
   g_clear_pointer (&self->app_filter, mct_app_filter_unref);
 
   g_clear_object (&self->manager);
@@ -1800,33 +1761,30 @@ cc_applications_panel_set_property (GObject      *object,
                                     const GValue *value,
                                     GParamSpec   *pspec)
 {
-  switch (property_id)
-    {
-      case PROP_PARAMETERS:
-        {
-          GVariant *parameters, *v;
-          const gchar *first_arg = NULL;
+  switch (property_id) {
+    case PROP_PARAMETERS: {
+      GVariant *parameters, *v;
+      const gchar *first_arg = NULL;
 
-          parameters = g_value_get_variant (value);
-          if (parameters == NULL)
-            return;
+      parameters = g_value_get_variant (value);
+      if (parameters == NULL)
+        return;
 
-          if (g_variant_n_children (parameters) > 0)
-            {
-              g_variant_get_child (parameters, 0, "v", &v);
-              if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
-                first_arg = g_variant_get_string (v, NULL);
-              else
-                g_warning ("Wrong type for the second argument GVariant, expected 's' but got '%s'",
-                           (gchar *)g_variant_get_type (v));
-              g_variant_unref (v);
+      if (g_variant_n_children (parameters) > 0) {
+        g_variant_get_child (parameters, 0, "v", &v);
+        if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
+          first_arg = g_variant_get_string (v, NULL);
+        else
+          g_warning ("Wrong type for the second argument GVariant, expected 's' but got '%s'",
+                     (gchar *)g_variant_get_type (v));
+        g_variant_unref (v);
 
-              select_app (CC_APPLICATIONS_PANEL (object), first_arg, TRUE);
-            }
+        select_app (CC_APPLICATIONS_PANEL (object), first_arg, TRUE);
+      }
 
-          return;
-        }
+      return;
     }
+  }
 
   G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
 }
@@ -1940,8 +1898,8 @@ static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
 #ifdef HAVE_MALCONTENT
-  g_autoptr(GDBusConnection) system_bus = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GDBusConnection) system_bus = NULL;
+  g_autoptr (GError) error = NULL;
 #endif
 
   g_resources_register (cc_applications_get_resource ());
@@ -1959,7 +1917,7 @@ cc_applications_panel_init (CcApplicationsPanel *self)
                            self,
                            G_CONNECT_SWAPPED);
 
-  self->filter = GTK_FILTER (gtk_custom_filter_new ((GtkCustomFilterFunc) filter_app_rows,
+  self->filter = GTK_FILTER (gtk_custom_filter_new ((GtkCustomFilterFunc)filter_app_rows,
                                                     self, NULL));
 
   self->app_model = G_LIST_MODEL (g_list_store_new (G_TYPE_APP_INFO));
@@ -1986,13 +1944,12 @@ cc_applications_panel_init (CcApplicationsPanel *self)
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
 
 #ifdef HAVE_MALCONTENT
-   /* FIXME: should become asynchronous */
+  /* FIXME: should become asynchronous */
   system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, self->cancellable, &error);
-  if (system_bus == NULL)
-    {
-      g_warning ("Error getting system bus while setting up app permissions: %s", error->message);
-      return;
-    }
+  if (system_bus == NULL) {
+    g_warning ("Error getting system bus while setting up app permissions: %s", error->message);
+    return;
+  }
 
   /* Load the user’s parental controls settings too, so we can filter the list. */
   self->manager = mct_manager_new (system_bus);
@@ -2001,11 +1958,10 @@ cc_applications_panel_init (CcApplicationsPanel *self)
                                                  MCT_MANAGER_GET_VALUE_FLAGS_NONE,
                                                  self->cancellable,
                                                  &error);
-  if (error)
-    {
-      g_warning ("Error retrieving app filter: %s", error->message);
-      return;
-    }
+  if (error) {
+    g_warning ("Error retrieving app filter: %s", error->message);
+    return;
+  }
 
   self->app_filter_id = g_signal_connect (self->manager, "app-filter-changed",
                                           G_CALLBACK (app_filter_changed_cb), self);

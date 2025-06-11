@@ -34,8 +34,7 @@
 #include "control-center-search-provider.h"
 #include "cc-search-provider.h"
 
-struct _CcSearchProvider
-{
+struct _CcSearchProvider {
   GObject parent;
 
   CcShellSearchProvider2 *skeleton;
@@ -57,8 +56,8 @@ get_casefolded_terms (char **terms)
   char **casefolded_terms;
   int i, n;
 
-  n = g_strv_length ((char**) terms);
-  casefolded_terms = g_new (char*, n + 1);
+  n = g_strv_length ((char **)terms);
+  casefolded_terms = g_new (char *, n + 1);
 
   for (i = 0; i < n; i++)
     casefolded_terms[i] = cc_util_normalize_casefold_and_unaccent (terms[i]);
@@ -74,13 +73,12 @@ matches_all_terms (GtkTreeModel  *model,
 {
   int i;
 
-  for (i = 0; terms[i]; i++)
-    {
-      if (!cc_shell_model_iter_matches_search (CC_SHELL_MODEL (model),
-                                               iter,
-                                               terms[i]))
-        return FALSE;
-    }
+  for (i = 0; terms[i]; i++) {
+    if (!cc_shell_model_iter_matches_search (CC_SHELL_MODEL (model),
+                                             iter,
+                                             terms[i]))
+      return FALSE;
+  }
 
   return TRUE;
 }
@@ -97,7 +95,7 @@ get_model (void)
 static gchar **
 get_results (gchar **terms)
 {
-  g_auto(GStrv) casefolded_terms = NULL;
+  g_auto (GStrv) casefolded_terms = NULL;
   GtkTreeModel *model = get_model ();
   GtkTreeIter iter;
   GPtrArray *results;
@@ -109,40 +107,38 @@ get_results (gchar **terms)
   cc_shell_model_set_sort_terms (CC_SHELL_MODEL (model), casefolded_terms);
 
   ok = gtk_tree_model_get_iter_first (model, &iter);
-  while (ok)
-    {
-      if (matches_all_terms (model, &iter, casefolded_terms))
-        {
-          gchar *id;
-          gtk_tree_model_get (model, &iter, COL_ID, &id, -1);
-          g_ptr_array_add (results, id);
-        }
-
-      ok = gtk_tree_model_iter_next (model, &iter);
+  while (ok) {
+    if (matches_all_terms (model, &iter, casefolded_terms)) {
+      gchar *id;
+      gtk_tree_model_get (model, &iter, COL_ID, &id, -1);
+      g_ptr_array_add (results, id);
     }
+
+    ok = gtk_tree_model_iter_next (model, &iter);
+  }
 
   g_ptr_array_add (results, NULL);
 
-  return (char**) g_ptr_array_free (results, FALSE);
+  return (char **)g_ptr_array_free (results, FALSE);
 }
 
 static gboolean
-handle_get_initial_result_set (CcSearchProvider        *self,
-                               GDBusMethodInvocation   *invocation,
-                               char                   **terms)
+handle_get_initial_result_set (CcSearchProvider       *self,
+                               GDBusMethodInvocation  *invocation,
+                               char                  **terms)
 {
-  g_auto(GStrv) results = get_results (terms);
+  g_auto (GStrv) results = get_results (terms);
   cc_shell_search_provider2_complete_get_initial_result_set (self->skeleton,
                                                              invocation,
-                                                             (const char* const*) results);
+                                                             (const char * const *)results);
   return TRUE;
 }
 
 static gboolean
-handle_get_subsearch_result_set (CcSearchProvider        *self,
-                                 GDBusMethodInvocation   *invocation,
-                                 char                   **previous_results,
-                                 char                   **terms)
+handle_get_subsearch_result_set (CcSearchProvider       *self,
+                                 GDBusMethodInvocation  *invocation,
+                                 char                  **previous_results,
+                                 char                  **terms)
 {
   /* We ignore the previous results here since the model re-sorts for
    * the new terms. This means that we're not really doing a subsearch
@@ -151,10 +147,10 @@ handle_get_subsearch_result_set (CcSearchProvider        *self,
    * in the model is always small enough that we don't need to worry
    * about this taking too long.
    */
-  g_auto(GStrv) results = get_results (terms);
+  g_auto (GStrv) results = get_results (terms);
   cc_shell_search_provider2_complete_get_subsearch_result_set (self->skeleton,
                                                                invocation,
-                                                               (const char* const*) results);
+                                                               (const char * const *)results);
   return TRUE;
 }
 
@@ -175,27 +171,26 @@ get_iter_for_result (CcSearchProvider *self,
     goto lookup;
 
   self->iter_table = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                            g_free, (GDestroyNotify) gtk_tree_iter_free);
+                                            g_free, (GDestroyNotify)gtk_tree_iter_free);
 
   model = get_model ();
   ok = gtk_tree_model_get_iter_first (model, &iter);
-  while (ok)
-    {
-      gtk_tree_model_get (model, &iter, COL_ID, &id, -1);
+  while (ok) {
+    gtk_tree_model_get (model, &iter, COL_ID, &id, -1);
 
-      g_hash_table_replace (self->iter_table, id, gtk_tree_iter_copy (&iter));
+    g_hash_table_replace (self->iter_table, id, gtk_tree_iter_copy (&iter));
 
-      ok = gtk_tree_model_iter_next (model, &iter);
-    }
+    ok = gtk_tree_model_iter_next (model, &iter);
+  }
 
- lookup:
+lookup:
   return g_hash_table_lookup (self->iter_table, result);
 }
 
 static gboolean
-handle_get_result_metas (CcSearchProvider        *self,
-                         GDBusMethodInvocation   *invocation,
-                         char                   **results)
+handle_get_result_metas (CcSearchProvider       *self,
+                         GDBusMethodInvocation  *invocation,
+                         char                  **results)
 {
   GtkTreeModel *model = get_model ();
   GtkTreeIter *iter;
@@ -205,34 +200,33 @@ handle_get_result_metas (CcSearchProvider        *self,
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("aa{sv}"));
 
-  for (i = 0; results[i]; i++)
-    {
-      g_autofree gchar *description = NULL;
-      g_autofree gchar *name = NULL;
-      g_autoptr(GIcon) icon = NULL;
+  for (i = 0; results[i]; i++) {
+    g_autofree gchar *description = NULL;
+    g_autofree gchar *name = NULL;
+    g_autoptr (GIcon) icon = NULL;
 
-      iter = get_iter_for_result (self, results[i]);
-      if (!iter)
-        continue;
+    iter = get_iter_for_result (self, results[i]);
+    if (!iter)
+      continue;
 
-      gtk_tree_model_get (model, iter,
-                          COL_ID, &id,
-                          COL_NAME, &name,
-                          COL_GICON, &icon,
-                          COL_DESCRIPTION, &description,
-                          -1);
+    gtk_tree_model_get (model, iter,
+                        COL_ID, &id,
+                        COL_NAME, &name,
+                        COL_GICON, &icon,
+                        COL_DESCRIPTION, &description,
+                        -1);
 
-      g_variant_builder_open (&builder, G_VARIANT_TYPE ("a{sv}"));
-      g_variant_builder_add (&builder, "{sv}",
-                             "id", g_variant_new_string (id));
-      g_variant_builder_add (&builder, "{sv}",
-                             "name", g_variant_new_string (name));
-      g_variant_builder_add (&builder, "{sv}",
-                             "icon", g_icon_serialize (icon));
-      g_variant_builder_add (&builder, "{sv}",
-                             "description", g_variant_new_string (description));
-      g_variant_builder_close (&builder);
-    }
+    g_variant_builder_open (&builder, G_VARIANT_TYPE ("a{sv}"));
+    g_variant_builder_add (&builder, "{sv}",
+                           "id", g_variant_new_string (id));
+    g_variant_builder_add (&builder, "{sv}",
+                           "name", g_variant_new_string (name));
+    g_variant_builder_add (&builder, "{sv}",
+                           "icon", g_icon_serialize (icon));
+    g_variant_builder_add (&builder, "{sv}",
+                           "description", g_variant_new_string (description));
+    g_variant_builder_close (&builder);
+  }
 
   cc_shell_search_provider2_complete_get_result_metas (self->skeleton,
                                                        invocation,
@@ -241,28 +235,27 @@ handle_get_result_metas (CcSearchProvider        *self,
 }
 
 static gboolean
-handle_activate_result (CcSearchProvider        *self,
-                        GDBusMethodInvocation   *invocation,
-                        char                    *identifier,
-                        char                   **results,
-                        guint                    timestamp)
+handle_activate_result (CcSearchProvider       *self,
+                        GDBusMethodInvocation  *invocation,
+                        char                   *identifier,
+                        char                  **results,
+                        guint                   timestamp)
 {
   GtkTreeModel *model = get_model ();
   GtkTreeIter *iter;
   GdkAppLaunchContext *launch_context;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   GAppInfo *app;
 
   iter = get_iter_for_result (self, identifier);
 
-  if (!iter)
-    {
-      g_dbus_method_invocation_return_error (invocation, G_DBUS_ERROR,
-                                             G_DBUS_ERROR_INVALID_ARGS,
-                                             "Identifier '%s' cannot be found",
-                                             identifier);
-      return TRUE;
-    }
+  if (!iter) {
+    g_dbus_method_invocation_return_error (invocation, G_DBUS_ERROR,
+                                           G_DBUS_ERROR_INVALID_ARGS,
+                                           "Identifier '%s' cannot be found",
+                                           identifier);
+    return TRUE;
+  }
 
   gtk_tree_model_get (model, iter, COL_APP, &app, -1);
   launch_context = gdk_display_get_app_launch_context (gdk_display_get_default ());
@@ -277,13 +270,13 @@ handle_activate_result (CcSearchProvider        *self,
 }
 
 static gboolean
-handle_launch_search (CcSearchProvider        *self,
-                      GDBusMethodInvocation   *invocation,
-                      char                   **terms,
-                      guint                    timestamp)
+handle_launch_search (CcSearchProvider       *self,
+                      GDBusMethodInvocation  *invocation,
+                      char                  **terms,
+                      guint                   timestamp)
 {
   GdkAppLaunchContext *launch_context;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   char *joined_terms, *command_line;
   GAppInfo *app;
 
@@ -296,11 +289,10 @@ handle_launch_search (CcSearchProvider        *self,
                                             "gnome-control-center.desktop",
                                             G_APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION,
                                             &error);
-  if (!app)
-    {
-      g_dbus_method_invocation_return_gerror (invocation, error);
-      return TRUE;
-    }
+  if (!app) {
+    g_dbus_method_invocation_return_gerror (invocation, error);
+    return TRUE;
+  }
 
   if (!g_app_info_launch (app, NULL, G_APP_LAUNCH_CONTEXT (launch_context), &error))
     g_dbus_method_invocation_return_gerror (invocation, error);
@@ -350,7 +342,7 @@ cc_search_provider_dbus_unregister (CcSearchProvider *self,
   skeleton = G_DBUS_INTERFACE_SKELETON (self->skeleton);
 
   if (g_dbus_interface_skeleton_has_connection (skeleton, connection))
-      g_dbus_interface_skeleton_unexport_from_connection (skeleton, connection);
+    g_dbus_interface_skeleton_unexport_from_connection (skeleton, connection);
 }
 
 static void
@@ -379,4 +371,3 @@ cc_search_provider_new (void)
 {
   return g_object_new (CC_TYPE_SEARCH_PROVIDER, NULL);
 }
-

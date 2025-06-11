@@ -55,36 +55,35 @@
  * there should be two device pages, one for each SIM.
  */
 
-struct _CcWwanDevicePage
-{
-  GtkBox         parent_instance;
+struct _CcWwanDevicePage {
+  GtkBox parent_instance;
 
-  GtkListBox    *advanced_settings_list;
-  CcListRow     *apn_settings_row;
-  AdwSwitchRow  *data_enable_row;
-  AdwSwitchRow  *data_roaming_row;
-  GtkListBox    *data_settings_list;
-  CcListRow     *details_row;
-  GtkStack      *main_stack;
-  CcListRow     *network_mode_row;
-  CcListRow     *network_name_row;
-  GtkListBox    *network_settings_list;
-  CcListRow     *sim_lock_row;
-  GtkButton     *unlock_button;
+  GtkListBox *advanced_settings_list;
+  CcListRow *apn_settings_row;
+  AdwSwitchRow *data_enable_row;
+  AdwSwitchRow *data_roaming_row;
+  GtkListBox *data_settings_list;
+  CcListRow *details_row;
+  GtkStack *main_stack;
+  CcListRow *network_mode_row;
+  CcListRow *network_name_row;
+  GtkListBox *network_settings_list;
+  CcListRow *sim_lock_row;
+  GtkButton *unlock_button;
 
   AdwToastOverlay *toast_overlay;
 
-  CcWwanDevice  *device;
-  CcWwanData    *wwan_data;
-  GDBusProxy    *wwan_proxy;
+  CcWwanDevice *device;
+  CcWwanData *wwan_data;
+  GDBusProxy *wwan_proxy;
 
-  GtkWindow     *apn_dialog;
-  GtkWindow     *details_dialog;
-  GtkWindow     *network_mode_dialog;
-  GtkWindow     *network_dialog;
-  GtkWindow     *sim_lock_dialog;
+  GtkWindow *apn_dialog;
+  GtkWindow *details_dialog;
+  GtkWindow *network_mode_dialog;
+  GtkWindow *network_dialog;
+  GtkWindow *sim_lock_dialog;
 
-  gint                 sim_index;
+  gint sim_index;
   /* Set if a change is triggered in a signal’s callback,
    * to avoid re-triggering of callback.  This is used
    * instead of blocking handlers where the signal may be
@@ -111,13 +110,12 @@ wwan_device_page_handle_data_row (CcWwanDevicePage *self,
   gboolean active;
 
   /* The user dismissed the dialog for selecting default APN */
-  if (cc_wwan_data_get_default_apn (self->wwan_data) == NULL)
-    {
-      self->is_self_change = TRUE;
-      gtk_widget_activate (GTK_WIDGET (data_row));
+  if (cc_wwan_data_get_default_apn (self->wwan_data) == NULL) {
+    self->is_self_change = TRUE;
+    gtk_widget_activate (GTK_WIDGET (data_row));
 
-      return;
-    }
+    return;
+  }
 
   active = adw_switch_row_get_active (data_row);
 
@@ -153,13 +151,12 @@ wwan_data_show_apn_dialog (CcWwanDevicePage *self)
 
   top_level = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
-  if (!self->apn_dialog)
-    {
-      self->apn_dialog = cc_wwan_apn_dialog_new (top_level, self->device);
-      g_signal_connect_object (self->apn_dialog, "unmap",
-                               G_CALLBACK (wwan_apn_dialog_closed_cb),
-                               self, G_CONNECT_SWAPPED);
-    }
+  if (!self->apn_dialog) {
+    self->apn_dialog = cc_wwan_apn_dialog_new (top_level, self->device);
+    g_signal_connect_object (self->apn_dialog, "unmap",
+                             G_CALLBACK (wwan_apn_dialog_closed_cb),
+                             self, G_CONNECT_SWAPPED);
+  }
 
   gtk_widget_set_visible (GTK_WIDGET (self->apn_dialog), TRUE);
 }
@@ -169,7 +166,7 @@ cc_wwan_device_page_new_prompt (CcWwanDevicePage *self,
                                 MMModemLock       lock)
 {
   GcrPrompt *prompt;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   g_autofree gchar *description = NULL;
   g_autofree gchar *warning = NULL;
   const gchar *message = NULL;
@@ -177,52 +174,43 @@ cc_wwan_device_page_new_prompt (CcWwanDevicePage *self,
 
   prompt = GCR_PROMPT (gcr_system_prompt_open (-1, NULL, &error));
 
-  if (error)
-    {
-      g_warning ("Error opening Prompt: %s", error->message);
-      return NULL;
-    }
+  if (error) {
+    g_warning ("Error opening Prompt: %s", error->message);
+    return NULL;
+  }
 
   gcr_prompt_set_title (prompt, _("Unlock SIM card"));
   gcr_prompt_set_continue_label (prompt, _("Unlock"));
   gcr_prompt_set_cancel_label (prompt, _("Cancel"));
 
-  if (lock == MM_MODEM_LOCK_SIM_PIN)
-    {
-      description = g_strdup_printf (_("Please provide PIN code for SIM %d"), self->sim_index);
-      message = _("Enter PIN to unlock your SIM card");
-    }
-  else if (lock == MM_MODEM_LOCK_SIM_PUK)
-    {
-      description = g_strdup_printf (_("Please provide PUK code for SIM %d"), self->sim_index);
-      message = _("Enter PUK to unlock your SIM card");
-    }
-  else
-    {
-      g_warn_if_reached ();
-      g_object_unref (prompt);
+  if (lock == MM_MODEM_LOCK_SIM_PIN) {
+    description = g_strdup_printf (_("Please provide PIN code for SIM %d"), self->sim_index);
+    message = _("Enter PIN to unlock your SIM card");
+  } else if (lock == MM_MODEM_LOCK_SIM_PUK) {
+    description = g_strdup_printf (_("Please provide PUK code for SIM %d"), self->sim_index);
+    message = _("Enter PUK to unlock your SIM card");
+  } else {
+    g_warn_if_reached ();
+    g_object_unref (prompt);
 
-      return NULL;
-    }
+    return NULL;
+  }
 
   gcr_prompt_set_description (prompt, description);
   gcr_prompt_set_message (prompt, message);
 
   num = cc_wwan_device_get_unlock_retries (self->device, lock);
 
-  if (num != MM_UNLOCK_RETRIES_UNKNOWN)
-    {
-      if (self->is_retry)
-        warning = g_strdup_printf (ngettext ("Wrong password entered. You have %1$u try left",
-                                             "Wrong password entered. You have %1$u tries left", num), num);
-      else
-        warning = g_strdup_printf (ngettext ("You have %u try left",
-                                             "You have %u tries left", num), num);
-    }
-  else if (self->is_retry)
-    {
-      warning = g_strdup (_("Wrong password entered."));
-    }
+  if (num != MM_UNLOCK_RETRIES_UNKNOWN) {
+    if (self->is_retry)
+      warning = g_strdup_printf (ngettext ("Wrong password entered. You have %1$u try left",
+                                           "Wrong password entered. You have %1$u tries left", num), num);
+    else
+      warning = g_strdup_printf (ngettext ("You have %u try left",
+                                           "You have %u tries left", num), num);
+  } else if (self->is_retry) {
+    warning = g_strdup (_("Wrong password entered."));
+  }
 
   gcr_prompt_set_warning (prompt, warning);
 
@@ -248,7 +236,7 @@ cc_wwan_device_page_unlocked_cb (GObject      *object,
 static void
 wwan_device_unlock_clicked_cb (CcWwanDevicePage *self)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   GcrPrompt *prompt;
   const gchar *password, *warning;
   const gchar *pin = "";
@@ -262,44 +250,40 @@ wwan_device_unlock_clicked_cb (CcWwanDevicePage *self)
       lock != MM_MODEM_LOCK_SIM_PUK)
     g_return_if_reached ();
 
-  if (lock == MM_MODEM_LOCK_SIM_PUK)
-    {
-      prompt = cc_wwan_device_page_new_prompt (self, lock);
+  if (lock == MM_MODEM_LOCK_SIM_PUK) {
+    prompt = cc_wwan_device_page_new_prompt (self, lock);
 
-      warning = _("PUK code should be an 8 digit number");
-      while (password && !cc_wwan_device_pin_valid (password, lock))
-        {
-          password = gcr_prompt_password (prompt, NULL, &error);
-          gcr_prompt_set_warning (prompt, warning);
-        }
-
-      puk = g_strdup (password);
-      password = "";
-      gcr_prompt_close (prompt);
-      g_object_unref (prompt);
-
-      if (error)
-        g_warning ("Error: %s", error->message);
-
-      /* Error or User cancelled PUK */
-      if (!puk)
-        return;
-    }
-
-  prompt = cc_wwan_device_page_new_prompt (self, MM_MODEM_LOCK_SIM_PIN);
-  if (lock == MM_MODEM_LOCK_SIM_PUK)
-    {
-      gcr_prompt_set_password_new (prompt, TRUE);
-      gcr_prompt_set_message (prompt, _("Enter New PIN"));
-      gcr_prompt_set_warning (prompt, "");
-    }
-
-  warning = _("PIN code should be a 4-8 digit number");
-  while (password && !cc_wwan_device_pin_valid (password, MM_MODEM_LOCK_SIM_PIN))
-    {
+    warning = _("PUK code should be an 8 digit number");
+    while (password && !cc_wwan_device_pin_valid (password, lock)) {
       password = gcr_prompt_password (prompt, NULL, &error);
       gcr_prompt_set_warning (prompt, warning);
     }
+
+    puk = g_strdup (password);
+    password = "";
+    gcr_prompt_close (prompt);
+    g_object_unref (prompt);
+
+    if (error)
+      g_warning ("Error: %s", error->message);
+
+    /* Error or User cancelled PUK */
+    if (!puk)
+      return;
+  }
+
+  prompt = cc_wwan_device_page_new_prompt (self, MM_MODEM_LOCK_SIM_PIN);
+  if (lock == MM_MODEM_LOCK_SIM_PUK) {
+    gcr_prompt_set_password_new (prompt, TRUE);
+    gcr_prompt_set_message (prompt, _("Enter New PIN"));
+    gcr_prompt_set_warning (prompt, "");
+  }
+
+  warning = _("PIN code should be a 4-8 digit number");
+  while (password && !cc_wwan_device_pin_valid (password, MM_MODEM_LOCK_SIM_PIN)) {
+    password = gcr_prompt_password (prompt, NULL, &error);
+    gcr_prompt_set_warning (prompt, warning);
+  }
 
   pin = g_strdup (password);
   gcr_prompt_close (prompt);
@@ -320,17 +304,14 @@ wwan_device_unlock_clicked_cb (CcWwanDevicePage *self)
                              NULL, /* cancellable */
                              cc_wwan_device_page_unlocked_cb,
                              self);
-  else if (lock == MM_MODEM_LOCK_SIM_PUK)
-    {
-      cc_wwan_device_send_puk (self->device, puk, pin,
-                               NULL, /* Cancellable */
-                               cc_wwan_device_page_unlocked_cb,
-                               self);
-    }
-  else
-    {
-      g_warn_if_reached ();
-    }
+  else if (lock == MM_MODEM_LOCK_SIM_PUK) {
+    cc_wwan_device_send_puk (self->device, puk, pin,
+                             NULL,   /* Cancellable */
+                             cc_wwan_device_page_unlocked_cb,
+                             self);
+  } else {
+    g_warn_if_reached ();
+  }
 }
 
 static void
@@ -338,21 +319,17 @@ wwan_data_settings_changed_cb (CcWwanDevicePage *self,
                                GParamSpec       *pspec,
                                AdwSwitchRow     *data_row)
 {
-  if (self->is_self_change)
-    {
-      self->is_self_change = FALSE;
-      return;
-    }
+  if (self->is_self_change) {
+    self->is_self_change = FALSE;
+    return;
+  }
 
-  if (cc_wwan_data_get_default_apn (self->wwan_data) == NULL)
-    {
-      wwan_data_show_apn_dialog (self);
-      g_object_set_data (G_OBJECT (self->apn_dialog), "row", data_row);
-    }
-  else
-    {
-      wwan_device_page_handle_data_row (self, data_row);
-    }
+  if (cc_wwan_data_get_default_apn (self->wwan_data) == NULL) {
+    wwan_data_show_apn_dialog (self);
+    g_object_set_data (G_OBJECT (self->apn_dialog), "row", data_row);
+  } else {
+    wwan_device_page_handle_data_row (self, data_row);
+  }
 }
 
 static void
@@ -364,24 +341,19 @@ wwan_network_settings_activated_cb (CcWwanDevicePage *self,
 
   top_level = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
-  if (row == self->network_mode_row)
-    {
-      if (!self->network_mode_dialog)
-        self->network_mode_dialog = cc_wwan_mode_dialog_new (top_level, self->device);
+  if (row == self->network_mode_row) {
+    if (!self->network_mode_dialog)
+      self->network_mode_dialog = cc_wwan_mode_dialog_new (top_level, self->device);
 
-      dialog = GTK_WIDGET (self->network_mode_dialog);
-    }
-  else if (row == self->network_name_row)
-    {
-      if (!self->network_dialog)
-        self->network_dialog = cc_wwan_network_dialog_new (top_level, self->device);
+    dialog = GTK_WIDGET (self->network_mode_dialog);
+  } else if (row == self->network_name_row) {
+    if (!self->network_dialog)
+      self->network_dialog = cc_wwan_network_dialog_new (top_level, self->device);
 
-      dialog = GTK_WIDGET (self->network_dialog);
-    }
-  else
-    {
-      return;
-    }
+    dialog = GTK_WIDGET (self->network_dialog);
+  } else {
+    return;
+  }
 
   gtk_window_present (GTK_WINDOW (dialog));
 }
@@ -394,26 +366,19 @@ wwan_advanced_settings_activated_cb (CcWwanDevicePage *self,
 
   top_level = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
-  if (row == self->sim_lock_row)
-    {
-      if (!self->sim_lock_dialog)
-        self->sim_lock_dialog = cc_wwan_sim_lock_dialog_new (top_level, self->device);
-      gtk_widget_set_visible (GTK_WIDGET (self->sim_lock_dialog), TRUE);
-    }
-  else if (row == self->details_row)
-    {
-      if (!self->details_dialog)
-        self->details_dialog = cc_wwan_details_dialog_new (top_level, self->device);
-      gtk_widget_set_visible (GTK_WIDGET (self->details_dialog), TRUE);
-    }
-  else if (row == self->apn_settings_row)
-    {
-      wwan_data_show_apn_dialog (self);
-    }
-  else
-    {
-      g_return_if_reached ();
-    }
+  if (row == self->sim_lock_row) {
+    if (!self->sim_lock_dialog)
+      self->sim_lock_dialog = cc_wwan_sim_lock_dialog_new (top_level, self->device);
+    gtk_widget_set_visible (GTK_WIDGET (self->sim_lock_dialog), TRUE);
+  } else if (row == self->details_row) {
+    if (!self->details_dialog)
+      self->details_dialog = cc_wwan_details_dialog_new (top_level, self->device);
+    gtk_widget_set_visible (GTK_WIDGET (self->details_dialog), TRUE);
+  } else if (row == self->apn_settings_row) {
+    wwan_data_show_apn_dialog (self);
+  } else {
+    g_return_if_reached ();
+  }
 }
 
 static void
@@ -488,15 +453,14 @@ cc_wwan_device_page_set_property (GObject      *object,
 {
   CcWwanDevicePage *self = (CcWwanDevicePage *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_DEVICE:
       self->device = g_value_dup_object (value);
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -552,7 +516,7 @@ cc_wwan_device_page_class_init (CcWwanDevicePageClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->set_property = cc_wwan_device_page_set_property;
-  object_class->constructed  = cc_wwan_device_page_constructed;
+  object_class->constructed = cc_wwan_device_page_constructed;
   object_class->dispose = cc_wwan_device_page_dispose;
 
   g_type_ensure (CC_TYPE_WWAN_DEVICE);

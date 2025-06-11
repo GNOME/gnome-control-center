@@ -23,15 +23,13 @@
 
 #include <cairo-gobject.h>
 
-typedef struct
-{
+typedef struct {
   GListStore *store;
 } BgSourcePrivate;
 
 G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (BgSource, bg_source, G_TYPE_OBJECT)
 
-enum
-{
+enum {
   PROP_0,
   PROP_LISTSTORE
 };
@@ -44,15 +42,14 @@ bg_source_get_property (GObject    *object,
 {
   BgSource *source = BG_SOURCE (object);
 
-  switch (property_id)
-    {
+  switch (property_id) {
     case PROP_LISTSTORE:
       g_value_set_object (value, bg_source_get_liststore (source));
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
+  }
 }
 
 static void
@@ -90,7 +87,7 @@ bg_source_init (BgSource *self)
   priv->store = g_list_store_new (CC_TYPE_BACKGROUND_ITEM);
 }
 
-GListStore*
+GListStore *
 bg_source_get_liststore (BgSource *source)
 {
   BgSourcePrivate *priv;

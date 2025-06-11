@@ -37,7 +37,7 @@ int
 main (gint    argc,
       gchar **argv)
 {
-  g_autoptr(GtkApplication) application = NULL;
+  g_autoptr (GtkApplication) application = NULL;
 
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");

@@ -8,7 +8,7 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
@@ -25,39 +25,37 @@
 
 #include <gio/gio.h>
 
-#if !GLIB_CHECK_VERSION(2, 57, 0)
+#if !GLIB_CHECK_VERSION (2, 57, 0)
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (GEnumClass, g_type_class_unref);
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (GFlagsClass, g_type_class_unref);
 #endif
 
 gboolean
-bolt_enum_class_validate (GEnumClass *enum_class,
-                          gint        value,
-                          GError    **error)
+bolt_enum_class_validate (GEnumClass  *enum_class,
+                          gint         value,
+                          GError     **error)
 {
   const char *name;
   gboolean oob;
 
-  if (enum_class == NULL)
-    {
-      name = g_type_name_from_class ((GTypeClass *) enum_class);
-      g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
-                   "could not determine enum class for '%s'",
-                   name);
+  if (enum_class == NULL) {
+    name = g_type_name_from_class ((GTypeClass *)enum_class);
+    g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
+                 "could not determine enum class for '%s'",
+                 name);
 
-      return FALSE;
-    }
+    return FALSE;
+  }
 
   oob = value < enum_class->minimum || value > enum_class->maximum;
 
-  if (oob)
-    {
-      name = g_type_name_from_class ((GTypeClass *) enum_class);
-      g_set_error (error,  G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
-                   "enum value '%d' is out of bounds for '%s'",
-                   value, name);
-      return FALSE;
-    }
+  if (oob) {
+    name = g_type_name_from_class ((GTypeClass *)enum_class);
+    g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
+                 "enum value '%d' is out of bounds for '%s'",
+                 value, name);
+    return FALSE;
+  }
 
   return TRUE;
 }
@@ -67,7 +65,7 @@ bolt_enum_validate (GType    enum_type,
                     gint     value,
                     GError **error)
 {
-  g_autoptr(GEnumClass) klass = g_type_class_ref (enum_type);
+  g_autoptr (GEnumClass) klass = g_type_class_ref (enum_type);
   return bolt_enum_class_validate (klass, value, error);
 }
 
@@ -76,7 +74,7 @@ bolt_enum_to_string (GType    enum_type,
                      gint     value,
                      GError **error)
 {
-  g_autoptr(GEnumClass) klass = NULL;
+  g_autoptr (GEnumClass) klass = NULL;
   GEnumValue *ev;
 
   klass = g_type_class_ref (enum_type);
@@ -89,149 +87,138 @@ bolt_enum_to_string (GType    enum_type,
 }
 
 gint
-bolt_enum_from_string (GType       enum_type,
-                       const char *string,
-                       GError    **error)
+bolt_enum_from_string (GType        enum_type,
+                       const char  *string,
+                       GError     **error)
 {
-  g_autoptr(GEnumClass) klass = NULL;
+  g_autoptr (GEnumClass) klass = NULL;
   const char *name;
   GEnumValue *ev;
 
   klass = g_type_class_ref (enum_type);
 
-  if (klass == NULL)
-    {
-      g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
-                   "could not determine enum class");
-      return -1;
-    }
+  if (klass == NULL) {
+    g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
+                 "could not determine enum class");
+    return -1;
+  }
 
-  if (string == NULL)
-    {
-      name = g_type_name_from_class ((GTypeClass *) klass);
-      g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
-                   "empty string passed for enum class for '%s'",
-                   name);
-      return -1;
-    }
+  if (string == NULL) {
+    name = g_type_name_from_class ((GTypeClass *)klass);
+    g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
+                 "empty string passed for enum class for '%s'",
+                 name);
+    return -1;
+  }
 
   ev = g_enum_get_value_by_nick (klass, string);
 
-  if (ev == NULL)
-    {
-      name = g_type_name (enum_type);
-      g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
-                   "invalid string '%s' for enum '%s'", string, name);
-      return -1;
-    }
+  if (ev == NULL) {
+    name = g_type_name (enum_type);
+    g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
+                 "invalid string '%s' for enum '%s'", string, name);
+    return -1;
+  }
 
   return ev->value;
 }
 
 char *
-bolt_flags_class_to_string (GFlagsClass *flags_class,
-                            guint        value,
-                            GError     **error)
+bolt_flags_class_to_string (GFlagsClass  *flags_class,
+                            guint         value,
+                            GError      **error)
 {
-  g_autoptr(GString) str = NULL;
+  g_autoptr (GString) str = NULL;
   const char *name;
   GFlagsValue *fv;
 
-  if (flags_class == NULL)
-    {
-      name = g_type_name_from_class ((GTypeClass *) flags_class);
-      g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
-                   "could not determine flags class for '%s'",
-                   name);
+  if (flags_class == NULL) {
+    name = g_type_name_from_class ((GTypeClass *)flags_class);
+    g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
+                 "could not determine flags class for '%s'",
+                 name);
 
-      return FALSE;
-    }
+    return FALSE;
+  }
 
   fv = g_flags_get_first_value (flags_class, value);
-  if (fv == NULL)
-    {
-      if (value == 0)
-        return g_strdup ("");
+  if (fv == NULL) {
+    if (value == 0)
+      return g_strdup ("");
 
-      name = g_type_name_from_class ((GTypeClass *) flags_class);
+    name = g_type_name_from_class ((GTypeClass *)flags_class);
 
-      g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
-                   "invalid value '%u' for flags '%s'", value, name);
-      return NULL;
-    }
+    g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
+                 "invalid value '%u' for flags '%s'", value, name);
+    return NULL;
+  }
 
   value &= ~fv->value;
   str = g_string_new (fv->value_nick);
 
   while (value != 0 &&
-         (fv = g_flags_get_first_value (flags_class, value)) != NULL)
-    {
-      g_string_append (str, " | ");
-      g_string_append (str, fv->value_nick);
+         (fv = g_flags_get_first_value (flags_class, value)) != NULL) {
+    g_string_append (str, " | ");
+    g_string_append (str, fv->value_nick);
 
-      value &= ~fv->value;
-    }
+    value &= ~fv->value;
+  }
 
-  if (value != 0)
-    {
-      name = g_type_name_from_class ((GTypeClass *) flags_class);
+  if (value != 0) {
+    name = g_type_name_from_class ((GTypeClass *)flags_class);
 
-      g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
-                   "unhandled value '%u' for flags '%s'", value, name);
-      return NULL;
-    }
+    g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
+                 "unhandled value '%u' for flags '%s'", value, name);
+    return NULL;
+  }
 
   return g_string_free (g_steal_pointer (&str), FALSE);
 }
 
 gboolean
-bolt_flags_class_from_string (GFlagsClass *flags_class,
-                              const char  *string,
-                              guint       *flags_out,
-                              GError     **error)
+bolt_flags_class_from_string (GFlagsClass  *flags_class,
+                              const char   *string,
+                              guint        *flags_out,
+                              GError      **error)
 {
-  g_auto(GStrv) vals = NULL;
+  g_auto (GStrv) vals = NULL;
   const char *name;
   guint flags = 0;
 
-  if (flags_class == NULL)
-    {
-      g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
-                   "could not determine flags class");
+  if (flags_class == NULL) {
+    g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
+                 "could not determine flags class");
 
-      return FALSE;
-    }
+    return FALSE;
+  }
 
-  if (string == NULL)
-    {
-      name = g_type_name_from_class ((GTypeClass *) flags_class);
-      g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
-                   "empty string passed for flags class for '%s'",
-                   name);
-      return FALSE;
-    }
+  if (string == NULL) {
+    name = g_type_name_from_class ((GTypeClass *)flags_class);
+    g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
+                 "empty string passed for flags class for '%s'",
+                 name);
+    return FALSE;
+  }
 
   vals = g_strsplit (string, "|", -1);
 
-  for (guint i = 0; vals[i]; i++)
-    {
-      GFlagsValue *fv;
-      char *nick;
+  for (guint i = 0; vals[i]; i++) {
+    GFlagsValue *fv;
+    char *nick;
 
-      nick = g_strstrip (vals[i]);
-      fv = g_flags_get_value_by_nick (flags_class, nick);
+    nick = g_strstrip (vals[i]);
+    fv = g_flags_get_value_by_nick (flags_class, nick);
 
-      if (fv == NULL)
-        {
-          name = g_type_name_from_class ((GTypeClass *) flags_class);
-          g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
-                       "invalid flag '%s' for flags '%s'", string, name);
+    if (fv == NULL) {
+      name = g_type_name_from_class ((GTypeClass *)flags_class);
+      g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS,
+                   "invalid flag '%s' for flags '%s'", string, name);
 
-          return FALSE;
-        }
-
-      flags |= fv->value;
+      return FALSE;
     }
+
+    flags |= fv->value;
+  }
 
   if (flags_out != NULL)
     *flags_out = flags;
@@ -244,19 +231,19 @@ bolt_flags_to_string (GType    flags_type,
                       guint    value,
                       GError **error)
 {
-  g_autoptr(GFlagsClass) klass = NULL;
+  g_autoptr (GFlagsClass) klass = NULL;
 
   klass = g_type_class_ref (flags_type);
   return bolt_flags_class_to_string (klass, value, error);
 }
 
 gboolean
-bolt_flags_from_string (GType       flags_type,
-                        const char *string,
-                        guint      *flags_out,
-                        GError    **error)
+bolt_flags_from_string (GType        flags_type,
+                        const char  *string,
+                        guint       *flags_out,
+                        GError     **error)
 {
-  g_autoptr(GFlagsClass) klass = NULL;
+  g_autoptr (GFlagsClass) klass = NULL;
 
   klass = g_type_class_ref (flags_type);
   return bolt_flags_class_from_string (klass, string, flags_out, error);
@@ -336,8 +323,7 @@ bolt_security_allows_pcie (BoltSecurity security)
 {
   gboolean pcie = FALSE;
 
-  switch (security)
-    {
+  switch (security) {
     case BOLT_SECURITY_NONE:
     case BOLT_SECURITY_USER:
     case BOLT_SECURITY_SECURE:
@@ -349,7 +335,7 @@ bolt_security_allows_pcie (BoltSecurity security)
     case BOLT_SECURITY_UNKNOWN:
       pcie = FALSE;
       break;
-    }
+  }
 
   return pcie;
 }

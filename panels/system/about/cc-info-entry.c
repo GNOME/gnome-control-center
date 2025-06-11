@@ -19,8 +19,7 @@
 
 #include "cc-info-entry.h"
 
-struct _CcInfoEntry
-{
+struct _CcInfoEntry {
   GtkBox parent;
 
   GtkLabel *prop;
@@ -46,8 +45,7 @@ cc_info_entry_get_property (GObject    *object,
 {
   CcInfoEntry *self = (CcInfoEntry *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_LABEL:
       g_value_set_string (value, gtk_label_get_label (self->prop));
       break;
@@ -58,7 +56,7 @@ cc_info_entry_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -69,8 +67,7 @@ cc_info_entry_set_property (GObject      *object,
 {
   CcInfoEntry *self = (CcInfoEntry *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_LABEL:
       gtk_label_set_label (self->prop, g_value_get_string (value));
       break;
@@ -81,13 +78,13 @@ cc_info_entry_set_property (GObject      *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
 cc_info_entry_class_init (CcInfoEntryClass *klass)
 {
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->get_property = cc_info_entry_get_property;
@@ -112,7 +109,7 @@ cc_info_entry_class_init (CcInfoEntryClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/about/cc-info-entry.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcInfoEntry, prop);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoEntry, value); 
+  gtk_widget_class_bind_template_child (widget_class, CcInfoEntry, value);
 }
 
 static void
@@ -143,7 +140,7 @@ cc_info_entry_new (const gchar *label,
 {
   if (label == NULL)
     label = "";
-  
+
   if (value == NULL)
     value = "";
 

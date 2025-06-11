@@ -4,7 +4,9 @@
 #include "cc-mouse-resources.h"
 #include "cc-mouse-test.h"
 
-int main (int argc, char **argv)
+int
+main (int    argc,
+      char **argv)
 {
   GtkWidget *widget;
   GtkWidget *window;

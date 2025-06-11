@@ -62,52 +62,51 @@ typedef enum {
 
 #define CC_DISPLAY_CONFIG_LAST_VALID CC_DISPLAY_CONFIG_CLONE
 
-struct _CcDisplayPanel
-{
+struct _CcDisplayPanel {
   CcPanel parent_instance;
 
   CcDisplayConfigManager *manager;
   CcDisplayConfig *current_config;
   CcDisplayMonitor *current_output;
 
-  gint                  rebuilding_counter;
+  gint rebuilding_counter;
 
   CcDisplayArrangement *arrangement;
-  CcDisplaySettings    *settings;
+  CcDisplaySettings *settings;
 
-  guint           focus_id;
+  guint focus_id;
 
   CcNightLightPage *night_light_page;
-  CcListRow        *night_light_row;
+  CcListRow *night_light_row;
 
   UpClient *up_client;
   gboolean lid_is_closed;
 
   GDBusProxy *shell_proxy;
 
-  GtkWidget      *apply_button;
-  GtkWidget      *cancel_button;
+  GtkWidget *apply_button;
+  GtkWidget *cancel_button;
   AdwWindowTitle *apply_titlebar_title_widget;
-  gboolean        showing_apply_titlebar;
+  gboolean showing_apply_titlebar;
 
-  GListStore     *primary_display_list;
-  GList          *monitor_rows;
+  GListStore *primary_display_list;
+  GList *monitor_rows;
 
-  GtkWidget      *display_settings_disabled_group;
+  GtkWidget *display_settings_disabled_group;
 
-  GtkWidget      *arrangement_row;
-  AdwBin         *arrangement_bin;
+  GtkWidget *arrangement_row;
+  AdwBin *arrangement_bin;
   AdwToggleGroup *display_config_type;
-  GtkWidget      *display_multiple_displays;
-  AdwBin         *display_settings_bin;
-  GtkWidget      *display_settings_group;
+  GtkWidget *display_multiple_displays;
+  AdwBin *display_settings_bin;
+  GtkWidget *display_settings_group;
   AdwNavigationPage *display_settings_page;
-  AdwComboRow    *primary_display_row;
+  AdwComboRow *primary_display_row;
   AdwPreferencesGroup *single_display_settings_group;
 
   GtkShortcut *escape_shortcut;
 
-  GSettings           *display_settings;
+  GSettings *display_settings;
 };
 
 enum {
@@ -143,13 +142,12 @@ config_get_current_type (CcDisplayPanel *self)
 
   outputs = cc_display_config_get_ui_sorted_monitors (self->current_config);
   n_active_outputs = 0;
-  for (l = outputs; l; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
+  for (l = outputs; l; l = l->next) {
+    CcDisplayMonitor *output = l->data;
 
-      if (cc_display_monitor_is_useful (output))
-        n_active_outputs += 1;
-    }
+    if (cc_display_monitor_is_useful (output))
+      n_active_outputs += 1;
+  }
 
   if (n_active_outputs == 0)
     return CC_DISPLAY_CONFIG_INVALID_NONE;
@@ -176,19 +174,19 @@ find_preferred_mode (GList *modes)
 {
   GList *l;
 
-  for (l = modes; l; l = l->next)
-    {
-      CcDisplayMode *mode = l->data;
+  for (l = modes; l; l = l->next) {
+    CcDisplayMode *mode = l->data;
 
-      if (cc_display_mode_is_preferred (mode))
-        return mode;
-    }
+    if (cc_display_mode_is_preferred (mode))
+      return mode;
+  }
 
   return NULL;
 }
 
 static void
-config_ensure_of_type (CcDisplayPanel *self, CcDisplayConfigType type)
+config_ensure_of_type (CcDisplayPanel      *self,
+                       CcDisplayConfigType  type)
 {
   CcDisplayConfigType current_type = config_get_current_type (self);
   GList *outputs, *l;
@@ -203,107 +201,100 @@ config_ensure_of_type (CcDisplayPanel *self, CcDisplayConfigType type)
   reset_current_config (self);
 
   outputs = cc_display_config_get_ui_sorted_monitors (self->current_config);
-  for (l = outputs; l; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
+  for (l = outputs; l; l = l->next) {
+    CcDisplayMonitor *output = l->data;
 
-      if (cc_display_monitor_is_primary (output))
-        {
-          current_primary = output;
-          old_primary_scale = cc_display_monitor_get_scale (current_primary);
-          break;
-        }
+    if (cc_display_monitor_is_primary (output)) {
+      current_primary = output;
+      old_primary_scale = cc_display_monitor_get_scale (current_primary);
+      break;
     }
+  }
 
-  switch (type)
-    {
+  switch (type) {
     case CC_DISPLAY_CONFIG_JOIN:
       g_debug ("Creating new join config");
       /* Enable all usable outputs
        * Note that this might result in invalid configurations as we
        * we might not be able to drive all attached monitors. */
       cc_display_config_set_cloning (self->current_config, FALSE);
-      for (l = outputs; l; l = l->next)
-        {
-          CcDisplayMonitor *output = l->data;
-          gdouble scale;
-          CcDisplayMode *mode;
+      for (l = outputs; l; l = l->next) {
+        CcDisplayMonitor *output = l->data;
+        gdouble scale;
+        CcDisplayMode *mode;
 
-          mode = cc_display_monitor_get_preferred_mode (output);
-          /* If the monitor was active, try using the current scale, otherwise
-           * try picking the preferred scale. */
-          if (cc_display_monitor_is_active (output))
-            scale = cc_display_monitor_get_scale (output);
-          else
-            scale = cc_display_mode_get_preferred_scale (mode);
+        mode = cc_display_monitor_get_preferred_mode (output);
+        /* If the monitor was active, try using the current scale, otherwise
+         * try picking the preferred scale. */
+        if (cc_display_monitor_is_active (output))
+          scale = cc_display_monitor_get_scale (output);
+        else
+          scale = cc_display_mode_get_preferred_scale (mode);
 
-          /* If we cannot use the current/preferred scale, try to fall back to
-           * the previously scale of the primary monitor instead.
-           * This is not guaranteed to result in a valid configuration! */
-          if (!cc_display_config_is_scaled_mode_valid (self->current_config,
-                                                       mode,
-                                                       scale))
-            {
-              if (current_primary &&
-                  cc_display_config_is_scaled_mode_valid (self->current_config,
-                                                          mode,
-                                                          old_primary_scale))
-                scale = old_primary_scale;
-            }
-
-          cc_display_monitor_set_active (output, cc_display_monitor_is_usable (output));
-          cc_display_monitor_set_mode (output, mode);
-          cc_display_monitor_set_scale (output, scale);
+        /* If we cannot use the current/preferred scale, try to fall back to
+         * the previously scale of the primary monitor instead.
+         * This is not guaranteed to result in a valid configuration! */
+        if (!cc_display_config_is_scaled_mode_valid (self->current_config,
+                                                     mode,
+                                                     scale)) {
+          if (current_primary &&
+              cc_display_config_is_scaled_mode_valid (self->current_config,
+                                                      mode,
+                                                      old_primary_scale))
+            scale = old_primary_scale;
         }
+
+        cc_display_monitor_set_active (output, cc_display_monitor_is_usable (output));
+        cc_display_monitor_set_mode (output, mode);
+        cc_display_monitor_set_scale (output, scale);
+      }
       cc_display_config_snap_outputs (self->current_config);
       break;
 
-    case CC_DISPLAY_CONFIG_CLONE:
-      {
-        g_debug ("Creating new clone config");
-        gdouble scale;
-        g_autolist(CcDisplayMode) modes = NULL;
-        CcDisplayMode *clone_mode;
+    case CC_DISPLAY_CONFIG_CLONE: {
+      g_debug ("Creating new clone config");
+      gdouble scale;
+      g_autolist (CcDisplayMode) modes = NULL;
+      CcDisplayMode *clone_mode;
 
-        /* Turn on cloning and select the best mode we can find by default */
-        cc_display_config_set_cloning (self->current_config, TRUE);
+      /* Turn on cloning and select the best mode we can find by default */
+      cc_display_config_set_cloning (self->current_config, TRUE);
 
-        modes = cc_display_config_generate_cloning_modes (self->current_config);
-        clone_mode = find_preferred_mode (modes);
-        g_return_if_fail (clone_mode);
+      modes = cc_display_config_generate_cloning_modes (self->current_config);
+      clone_mode = find_preferred_mode (modes);
+      g_return_if_fail (clone_mode);
 
-        /* Take the preferred scale by default, */
-        scale = cc_display_mode_get_preferred_scale (clone_mode);
-        /* but prefer the old primary scale if that is valid. */
-        if (current_primary &&
-            cc_display_config_is_scaled_mode_valid (self->current_config,
-                                                    clone_mode,
-                                                    old_primary_scale))
-          scale = old_primary_scale;
+      /* Take the preferred scale by default, */
+      scale = cc_display_mode_get_preferred_scale (clone_mode);
+      /* but prefer the old primary scale if that is valid. */
+      if (current_primary &&
+          cc_display_config_is_scaled_mode_valid (self->current_config,
+                                                  clone_mode,
+                                                  old_primary_scale))
+        scale = old_primary_scale;
 
-        for (l = outputs; l; l = l->next)
-          {
-            CcDisplayMonitor *output = l->data;
+      for (l = outputs; l; l = l->next) {
+        CcDisplayMonitor *output = l->data;
 
-            cc_display_monitor_set_compatible_clone_mode (output, clone_mode);
-            cc_display_monitor_set_scale (output, scale);
-          }
+        cc_display_monitor_set_compatible_clone_mode (output, clone_mode);
+        cc_display_monitor_set_scale (output, scale);
       }
-      break;
+    }
+    break;
 
     default:
       g_assert_not_reached ();
-    }
+  }
 
   if (!self->rebuilding_counter)
     rebuild_ui (self);
 }
 
 static void
-cc_panel_set_selected_type (CcDisplayPanel *self, CcDisplayConfigType type)
+cc_panel_set_selected_type (CcDisplayPanel      *self,
+                            CcDisplayConfigType  type)
 {
-  switch (type)
-    {
+  switch (type) {
     case CC_DISPLAY_CONFIG_JOIN:
       adw_toggle_group_set_active_name (self->display_config_type, DISPLAY_CONFIG_JOIN_NAME);
       break;
@@ -312,7 +303,7 @@ cc_panel_set_selected_type (CcDisplayPanel *self, CcDisplayConfigType type)
       break;
     default:
       g_assert_not_reached ();
-    }
+  }
 
   config_ensure_of_type (self, type);
 }
@@ -349,24 +340,22 @@ monitor_labeler_show (CcDisplayPanel *self)
   g_variant_builder_init (&builder, G_VARIANT_TYPE_TUPLE);
   g_variant_builder_open (&builder, G_VARIANT_TYPE_ARRAY);
 
-  for (l = outputs; l != NULL; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
+  for (l = outputs; l != NULL; l = l->next) {
+    CcDisplayMonitor *output = l->data;
 
-      number = cc_display_monitor_get_ui_number (output);
-      if (number == 0)
-        continue;
+    number = cc_display_monitor_get_ui_number (output);
+    if (number == 0)
+      continue;
 
-      g_variant_builder_add (&builder, "{sv}",
-                             cc_display_monitor_get_connector_name (output),
-                             g_variant_new_int32 (number));
-    }
+    g_variant_builder_add (&builder, "{sv}",
+                           cc_display_monitor_get_connector_name (output),
+                           g_variant_new_int32 (number));
+  }
 
-  if (number < 2)
-    {
-      g_variant_builder_clear (&builder);
-      return monitor_labeler_hide (self);
-    }
+  if (number < 2) {
+    g_variant_builder_clear (&builder);
+    return monitor_labeler_hide (self);
+  }
 
   g_variant_builder_close (&builder);
 
@@ -380,19 +369,17 @@ monitor_labeler_show (CcDisplayPanel *self)
 static void
 ensure_monitor_labels (CcDisplayPanel *self)
 {
-  g_autoptr(GList) windows = NULL;
+  g_autoptr (GList) windows = NULL;
   GList *w;
 
   windows = gtk_window_list_toplevels ();
 
-  for (w = windows; w; w = w->next)
-    {
-      if (gtk_window_is_active (GTK_WINDOW (w->data)))
-        {
-          monitor_labeler_show (self);
-          break;
-        }
+  for (w = windows; w; w = w->next) {
+    if (gtk_window_is_active (GTK_WINDOW (w->data))) {
+      monitor_labeler_show (self);
+      break;
     }
+  }
 
   if (!w)
     monitor_labeler_hide (self);
@@ -415,7 +402,7 @@ static void
 active_panel_changed (CcPanel *self)
 {
   CcShell *shell;
-  g_autoptr(CcPanel) panel = NULL;
+  g_autoptr (CcPanel) panel = NULL;
 
   shell = cc_panel_get_shell (CC_PANEL (self));
   g_object_get (shell, "active-panel", &panel, NULL);
@@ -431,11 +418,10 @@ cc_display_panel_dispose (GObject *object)
 
   reset_titlebar (CC_DISPLAY_PANEL (object));
 
-  if (self->focus_id)
-    {
-      self->focus_id = 0;
-      monitor_labeler_hide (CC_DISPLAY_PANEL (object));
-    }
+  if (self->focus_id) {
+    self->focus_id = 0;
+    monitor_labeler_hide (CC_DISPLAY_PANEL (object));
+  }
 
   g_clear_pointer (&self->monitor_rows, g_list_free);
   g_clear_object (&self->manager);
@@ -458,12 +444,12 @@ cc_display_panel_get_property (GObject    *object,
   CcDisplayPanel *self = CC_DISPLAY_PANEL (object);
 
   switch (prop_id) {
-  case PROP_SHOWING_APPLY_TITLEBAR:
-    g_value_set_boolean (value, self->showing_apply_titlebar);
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    break;
+    case PROP_SHOWING_APPLY_TITLEBAR:
+      g_value_set_boolean (value, self->showing_apply_titlebar);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
   }
 }
 
@@ -511,7 +497,7 @@ static void
 on_primary_display_selected_item_changed_cb (CcDisplayPanel *self)
 {
   gint idx = adw_combo_row_get_selected (self->primary_display_row);
-  g_autoptr(CcDisplayMonitor) output = NULL;
+  g_autoptr (CcDisplayMonitor) output = NULL;
 
   if (idx < 0 || self->rebuilding_counter > 0)
     return;
@@ -526,7 +512,9 @@ on_primary_display_selected_item_changed_cb (CcDisplayPanel *self)
 }
 
 static void
-on_toplevel_collapsed (CcDisplayPanel *self, GParamSpec *pspec, GtkWidget *toplevel)
+on_toplevel_collapsed (CcDisplayPanel *self,
+                       GParamSpec     *pspec,
+                       GtkWidget      *toplevel)
 {
   gboolean collapsed;
 
@@ -539,11 +527,10 @@ on_toplevel_escape_pressed_cb (GtkWidget      *widget,
                                GVariant       *args,
                                CcDisplayPanel *self)
 {
-  if (self->showing_apply_titlebar)
-    {
-      gtk_widget_activate (self->cancel_button);
-      return GDK_EVENT_STOP;
-    }
+  if (self->showing_apply_titlebar) {
+    gtk_widget_activate (self->cancel_button);
+    return GDK_EVENT_STOP;
+  }
 
   return GDK_EVENT_PROPAGATE;
 }
@@ -637,14 +624,13 @@ set_current_output (CcDisplayPanel   *self,
 
   self->current_output = output;
 
-  if (changed)
-    {
-      cc_display_settings_set_selected_output (self->settings, self->current_output);
-      cc_display_arrangement_set_selected_output (self->arrangement, self->current_output);
+  if (changed) {
+    cc_display_settings_set_selected_output (self->settings, self->current_output);
+    cc_display_arrangement_set_selected_output (self->arrangement, self->current_output);
 
-      adw_navigation_page_set_title (self->display_settings_page,
-                                     output ? cc_display_monitor_get_ui_name (output) : "");
-    }
+    adw_navigation_page_set_title (self->display_settings_page,
+                                   output ? cc_display_monitor_get_ui_name (output) : "");
+  }
 
   self->rebuilding_counter--;
 }
@@ -735,94 +721,86 @@ rebuild_ui (CcDisplayPanel *self)
   GList *outputs, *l;
   CcDisplayConfigType type;
 
-  if (!cc_display_config_manager_get_apply_allowed (self->manager))
-    {
-      gtk_widget_set_visible (self->display_settings_disabled_group, TRUE);
-      gtk_widget_set_visible (self->display_settings_group, FALSE);
-      gtk_widget_set_visible (self->arrangement_row, FALSE);
-      return;
-    }
+  if (!cc_display_config_manager_get_apply_allowed (self->manager)) {
+    gtk_widget_set_visible (self->display_settings_disabled_group, TRUE);
+    gtk_widget_set_visible (self->display_settings_group, FALSE);
+    gtk_widget_set_visible (self->arrangement_row, FALSE);
+    return;
+  }
 
   self->rebuilding_counter++;
 
   g_list_store_remove_all (self->primary_display_list);
 
   /* Remove all monitor rows */
-  while (self->monitor_rows)
-    {
-      adw_preferences_group_remove (ADW_PREFERENCES_GROUP (self->display_settings_group),
-                                    self->monitor_rows->data);
-      self->monitor_rows = g_list_remove_link (self->monitor_rows, self->monitor_rows);
-    }
+  while (self->monitor_rows) {
+    adw_preferences_group_remove (ADW_PREFERENCES_GROUP (self->display_settings_group),
+                                  self->monitor_rows->data);
+    self->monitor_rows = g_list_remove_link (self->monitor_rows, self->monitor_rows);
+  }
 
-  if (!self->current_config)
-    {
-      self->rebuilding_counter--;
-      return;
-    }
+  if (!self->current_config) {
+    self->rebuilding_counter--;
+    return;
+  }
 
   gtk_widget_set_visible (self->display_settings_disabled_group, FALSE);
 
   n_active_outputs = 0;
   n_usable_outputs = 0;
   outputs = cc_display_config_get_ui_sorted_monitors (self->current_config);
-  for (l = outputs; l; l = l->next)
-    {
-      CcDisplayMonitor *output = l->data;
+  for (l = outputs; l; l = l->next) {
+    CcDisplayMonitor *output = l->data;
 
-      if (!cc_display_monitor_is_usable (output))
-        continue;
+    if (!cc_display_monitor_is_usable (output))
+      continue;
 
-      n_usable_outputs += 1;
+    n_usable_outputs += 1;
 
-      if (cc_display_monitor_is_active (output))
-        {
-          n_active_outputs += 1;
+    if (cc_display_monitor_is_active (output)) {
+      n_active_outputs += 1;
 
-          g_list_store_append (self->primary_display_list, output);
-          if (cc_display_monitor_is_primary (output))
-            adw_combo_row_set_selected (self->primary_display_row,
-                                        g_list_model_get_n_items (G_LIST_MODEL (self->primary_display_list)) - 1);
+      g_list_store_append (self->primary_display_list, output);
+      if (cc_display_monitor_is_primary (output))
+        adw_combo_row_set_selected (self->primary_display_row,
+                                    g_list_model_get_n_items (G_LIST_MODEL (self->primary_display_list)) - 1);
 
-          /* Ensure that an output is selected; note that this doesn't ensure
-           * the selected output is any useful (i.e. when switching types).
-           */
-          if (!self->current_output)
-            set_current_output (self, output, FALSE);
-        }
-
-      add_display_row (self, l->data);
+      /* Ensure that an output is selected; note that this doesn't ensure
+       * the selected output is any useful (i.e. when switching types).
+       */
+      if (!self->current_output)
+        set_current_output (self, output, FALSE);
     }
+
+    add_display_row (self, l->data);
+  }
 
   /* Sync the rebuild lists/buttons */
   set_current_output (self, self->current_output, TRUE);
 
   type = config_get_current_type (self);
 
-  if (n_usable_outputs > 1)
-    {
-      if (type > CC_DISPLAY_CONFIG_LAST_VALID)
-        type = CC_DISPLAY_CONFIG_JOIN;
-
-      gtk_widget_set_visible (self->display_settings_group, type == CC_DISPLAY_CONFIG_JOIN);
-      gtk_widget_set_visible (self->display_multiple_displays, TRUE);
-      gtk_widget_set_visible (self->arrangement_row, type == CC_DISPLAY_CONFIG_JOIN);
-
-      if (type == CC_DISPLAY_CONFIG_CLONE)
-        move_display_settings_to_main_page (self);
-      else
-        move_display_settings_to_separate_page (self);
-    }
-  else
-    {
+  if (n_usable_outputs > 1) {
+    if (type > CC_DISPLAY_CONFIG_LAST_VALID)
       type = CC_DISPLAY_CONFIG_JOIN;
 
-      gtk_widget_set_visible (self->display_settings_group, FALSE);
-      gtk_widget_set_visible (self->display_multiple_displays, FALSE);
-      gtk_widget_set_visible (self->arrangement_row, FALSE);
+    gtk_widget_set_visible (self->display_settings_group, type == CC_DISPLAY_CONFIG_JOIN);
+    gtk_widget_set_visible (self->display_multiple_displays, TRUE);
+    gtk_widget_set_visible (self->arrangement_row, type == CC_DISPLAY_CONFIG_JOIN);
 
+    if (type == CC_DISPLAY_CONFIG_CLONE)
       move_display_settings_to_main_page (self);
-    }
+    else
+      move_display_settings_to_separate_page (self);
+  } else {
+    type = CC_DISPLAY_CONFIG_JOIN;
+
+    gtk_widget_set_visible (self->display_settings_group, FALSE);
+    gtk_widget_set_visible (self->display_multiple_displays, FALSE);
+    gtk_widget_set_visible (self->arrangement_row, FALSE);
+
+    move_display_settings_to_main_page (self);
+  }
 
   cc_display_settings_set_multimonitor (self->settings,
                                         n_usable_outputs > 1 &&
@@ -870,21 +848,19 @@ reset_current_config (CcDisplayPanel *self)
 
   g_list_store_remove_all (self->primary_display_list);
 
-  if (self->current_config)
-    {
-      outputs = cc_display_config_get_ui_sorted_monitors (self->current_config);
-      for (l = outputs; l; l = l->next)
-        {
-          CcDisplayMonitor *output = l->data;
+  if (self->current_config) {
+    outputs = cc_display_config_get_ui_sorted_monitors (self->current_config);
+    for (l = outputs; l; l = l->next) {
+      CcDisplayMonitor *output = l->data;
 
-          /* Mark any builtin monitor as unusable if the lid is closed. */
-          if (cc_display_monitor_is_builtin (output) && self->lid_is_closed)
-            cc_display_monitor_set_usable (output, FALSE);
-        }
-
-      /* Recalculate UI numbers after the monitor usability is determined to skip numbering gaps. */
-      cc_display_config_update_ui_numbers_names(self->current_config);
+      /* Mark any builtin monitor as unusable if the lid is closed. */
+      if (cc_display_monitor_is_builtin (output) && self->lid_is_closed)
+        cc_display_monitor_set_usable (output, FALSE);
     }
+
+    /* Recalculate UI numbers after the monitor usability is determined to skip numbering gaps. */
+    cc_display_config_update_ui_numbers_names (self->current_config);
+  }
 
   cc_display_arrangement_set_config (self->arrangement, self->current_config);
   cc_display_settings_set_config (self->settings, self->current_config);
@@ -913,23 +889,21 @@ on_screen_changed (CcDisplayPanel *self)
 }
 
 static void
-show_apply_titlebar (CcDisplayPanel *self, gboolean is_applicable)
+show_apply_titlebar (CcDisplayPanel *self,
+                     gboolean        is_applicable)
 {
   gtk_widget_set_sensitive (self->apply_button, is_applicable);
 
-  if (is_applicable)
-    {
-      adw_window_title_set_title (self->apply_titlebar_title_widget,
-                                  _("Apply Changes?"));
-      adw_window_title_set_subtitle (self->apply_titlebar_title_widget, "");
-    }
-  else
-    {
-      adw_window_title_set_title (self->apply_titlebar_title_widget,
-                                  _("Changes Cannot be Applied"));
-      adw_window_title_set_subtitle (self->apply_titlebar_title_widget,
-                                  _("This could be due to hardware limitations."));
-    }
+  if (is_applicable) {
+    adw_window_title_set_title (self->apply_titlebar_title_widget,
+                                _("Apply Changes?"));
+    adw_window_title_set_subtitle (self->apply_titlebar_title_widget, "");
+  } else {
+    adw_window_title_set_title (self->apply_titlebar_title_widget,
+                                _("Changes Cannot be Applied"));
+    adw_window_title_set_subtitle (self->apply_titlebar_title_widget,
+                                   _("This could be due to hardware limitations."));
+  }
 
   self->showing_apply_titlebar = TRUE;
   g_object_notify (G_OBJECT (self), "showing-apply-titlebar");
@@ -939,13 +913,12 @@ static void
 update_apply_button (CcDisplayPanel *self)
 {
   gboolean config_equal;
-  g_autoptr(CcDisplayConfig) applied_config = NULL;
+  g_autoptr (CcDisplayConfig) applied_config = NULL;
 
-  if (!self->current_config)
-    {
-      reset_titlebar (self);
-      return;
-    }
+  if (!self->current_config) {
+    reset_titlebar (self);
+    return;
+  }
 
   applied_config = cc_display_config_manager_get_current (self->manager);
 
@@ -961,7 +934,7 @@ update_apply_button (CcDisplayPanel *self)
 static void
 apply_current_configuration (CcDisplayPanel *self)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   cc_display_config_apply (self->current_config, &error);
 
@@ -1010,12 +983,11 @@ cc_display_panel_up_client_changed (CcDisplayPanel *self)
 
   lid_is_closed = up_client_get_lid_is_closed (self->up_client);
 
-  if (lid_is_closed != self->lid_is_closed)
-    {
-      self->lid_is_closed = lid_is_closed;
+  if (lid_is_closed != self->lid_is_closed) {
+    self->lid_is_closed = lid_is_closed;
 
-      on_screen_changed (self);
-    }
+    on_screen_changed (self);
+  }
 }
 
 static void
@@ -1024,15 +996,14 @@ shell_proxy_ready (GObject        *source,
                    CcDisplayPanel *self)
 {
   GDBusProxy *proxy;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
-  if (!proxy)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed to contact gnome-shell: %s", error->message);
-      return;
-    }
+  if (!proxy) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to contact gnome-shell: %s", error->message);
+    return;
+  }
 
   self->shell_proxy = proxy;
 
@@ -1045,17 +1016,15 @@ session_bus_ready (GObject        *source,
                    CcDisplayPanel *self)
 {
   GDBusConnection *bus;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   bus = g_bus_get_finish (res, &error);
-  if (!bus)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          g_warning ("Failed to get session bus: %s", error->message);
-        }
-      return;
+  if (!bus) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+      g_warning ("Failed to get session bus: %s", error->message);
     }
+    return;
+  }
 
   self->manager = cc_display_config_manager_dbus_new ();
   g_signal_connect_object (self->manager, "changed",
@@ -1067,8 +1036,8 @@ session_bus_ready (GObject        *source,
 static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
-  g_autoptr(GtkExpression) expression = NULL;
+  g_autoptr (GtkCssProvider) provider = NULL;
+  g_autoptr (GtkExpression) expression = NULL;
 
   g_resources_register (cc_display_get_resource ());
 
@@ -1079,11 +1048,11 @@ cc_display_panel_init (CcDisplayPanel *self)
   adw_bin_set_child (self->arrangement_bin, GTK_WIDGET (self->arrangement));
 
   g_signal_connect_object (self->arrangement, "updated",
-			   G_CALLBACK (update_apply_button), self,
-			   G_CONNECT_SWAPPED);
+                           G_CALLBACK (update_apply_button), self,
+                           G_CONNECT_SWAPPED);
   g_signal_connect_object (self->arrangement, "notify::selected-output",
-			   G_CALLBACK (on_arrangement_selected_ouptut_changed_cb), self,
-			   G_CONNECT_SWAPPED);
+                           G_CALLBACK (on_arrangement_selected_ouptut_changed_cb), self,
+                           G_CONNECT_SWAPPED);
 
   self->settings = cc_display_settings_new (self);
   adw_bin_set_child (self->display_settings_bin, GTK_WIDGET (self->settings));
@@ -1102,13 +1071,11 @@ cc_display_panel_init (CcDisplayPanel *self)
                            G_LIST_MODEL (self->primary_display_list));
 
   self->up_client = up_client_new ();
-  if (up_client_get_lid_is_present (self->up_client))
-    {
-      g_signal_connect_object (self->up_client, "notify::lid-is-closed",
-                               G_CALLBACK (cc_display_panel_up_client_changed), self, G_CONNECT_SWAPPED);
-      cc_display_panel_up_client_changed (self);
-    }
-  else
+  if (up_client_get_lid_is_present (self->up_client)) {
+    g_signal_connect_object (self->up_client, "notify::lid-is-closed",
+                             G_CALLBACK (cc_display_panel_up_client_changed), self, G_CONNECT_SWAPPED);
+    cc_display_panel_up_client_changed (self);
+  } else
     g_clear_object (&self->up_client);
 
   g_signal_connect (self, "map", G_CALLBACK (mapped_cb), NULL);
@@ -1121,12 +1088,12 @@ cc_display_panel_init (CcDisplayPanel *self)
                                        "/org/gnome/Shell",
                                        "org.gnome.Shell",
                                        cc_panel_get_cancellable (CC_PANEL (self)),
-                                       (GAsyncReadyCallback) shell_proxy_ready,
+                                       (GAsyncReadyCallback)shell_proxy_ready,
                                        self);
 
   g_bus_get (G_BUS_TYPE_SESSION,
              cc_panel_get_cancellable (CC_PANEL (self)),
-             (GAsyncReadyCallback) session_bus_ready,
+             (GAsyncReadyCallback)session_bus_ready,
              self);
 
   provider = gtk_css_provider_new ();
@@ -1136,7 +1103,7 @@ cc_display_panel_init (CcDisplayPanel *self)
                                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   gtk_shortcut_set_action (self->escape_shortcut,
-                           gtk_callback_action_new ((GtkShortcutFunc) on_toplevel_escape_pressed_cb,
+                           gtk_callback_action_new ((GtkShortcutFunc)on_toplevel_escape_pressed_cb,
                                                     self,
                                                     NULL));
 

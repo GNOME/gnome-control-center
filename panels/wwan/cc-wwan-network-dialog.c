@@ -37,29 +37,28 @@
  * @short_description: WWAN network operator selection dialog
  */
 
-#define CC_TYPE_WWAN_NETWORK_ROW (cc_wwan_network_row_get_type())
+#define CC_TYPE_WWAN_NETWORK_ROW (cc_wwan_network_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcWwanNetworkRow, cc_wwan_network_row, CC, WWAN_NETWORK_ROW, GtkListBoxRow)
 
-struct _CcWwanNetworkDialog
-{
-  GtkDialog     parent_instance;
+struct _CcWwanNetworkDialog {
+  GtkDialog parent_instance;
 
   AdwToastOverlay *toast_overlay;
   AdwSwitchRow *automatic_row;
-  GtkButton    *button_apply;
-  AdwSpinner   *loading_spinner;
-  GtkBox       *network_search_title;
-  GtkListBox   *operator_list_box;
-  GtkButton    *refresh_button;
+  GtkButton *button_apply;
+  AdwSpinner *loading_spinner;
+  GtkBox *network_search_title;
+  GtkListBox *operator_list_box;
+  GtkButton *refresh_button;
 
   CcWwanDevice *device;
-  GList        *operator_list;
+  GList *operator_list;
 
   CcWwanNetworkRow *selected_row;
 
   GCancellable *search_cancellable;
 
-  gboolean      no_update_network;
+  gboolean no_update_network;
 };
 
 G_DEFINE_TYPE (CcWwanNetworkDialog, cc_wwan_network_dialog, GTK_TYPE_DIALOG)
@@ -73,11 +72,10 @@ enum {
 
 static GParamSpec *properties[N_PROPS];
 
-struct _CcWwanNetworkRow
-{
-  GtkListBoxRow  parent_instance;
-  GtkImage      *ok_emblem;
-  gchar         *operator_code;
+struct _CcWwanNetworkRow {
+  GtkListBoxRow parent_instance;
+  GtkImage *ok_emblem;
+  gchar *operator_code;
 };
 
 G_DEFINE_TYPE (CcWwanNetworkRow, cc_wwan_network_row, GTK_TYPE_LIST_BOX_ROW)
@@ -175,15 +173,14 @@ cc_wwan_network_dialog_update_current_network (CcWwanNetworkDialog *self)
 
   child = gtk_widget_get_first_child (GTK_WIDGET (self->operator_list_box));
 
-  while (child)
-    {
-      GtkWidget *next;
+  while (child) {
+    GtkWidget *next;
 
-      next = gtk_widget_get_next_sibling (child);
-      gtk_list_box_remove (GTK_LIST_BOX (self->operator_list_box), child);
+    next = gtk_widget_get_next_sibling (child);
+    gtk_list_box_remove (GTK_LIST_BOX (self->operator_list_box), child);
 
-      child = next;
-    }
+    child = next;
+  }
 
   row = cc_wwan_network_dialog_row_new (self, operator_name, "");
   self->selected_row = row;
@@ -201,24 +198,22 @@ cc_wwan_network_dialog_update (CcWwanNetworkDialog *self)
 
   child = gtk_widget_get_first_child (GTK_WIDGET (self->operator_list_box));
 
-  while (child)
-    {
-      GtkWidget *next;
+  while (child) {
+    GtkWidget *next;
 
-      next = gtk_widget_get_next_sibling (child);
-      gtk_list_box_remove (GTK_LIST_BOX (self->operator_list_box), child);
+    next = gtk_widget_get_next_sibling (child);
+    gtk_list_box_remove (GTK_LIST_BOX (self->operator_list_box), child);
 
-      child = next;
-    }
+    child = next;
+  }
 
-  for (item = self->operator_list; item; item = item->next)
-    {
-      operator_code = mm_modem_3gpp_network_get_operator_code (item->data);
-      operator_name = mm_modem_3gpp_network_get_operator_long (item->data);
+  for (item = self->operator_list; item; item = item->next) {
+    operator_code = mm_modem_3gpp_network_get_operator_code (item->data);
+    operator_name = mm_modem_3gpp_network_get_operator_long (item->data);
 
-      row = cc_wwan_network_dialog_row_new (self, operator_name, operator_code);
-      gtk_list_box_append (GTK_LIST_BOX (self->operator_list_box), GTK_WIDGET (row));
-    }
+    row = cc_wwan_network_dialog_row_new (self, operator_name, operator_code);
+    gtk_list_box_append (GTK_LIST_BOX (self->operator_list_box), GTK_WIDGET (row));
+  }
 }
 
 static void
@@ -226,8 +221,8 @@ cc_wwan_network_scan_complete_cb (GObject      *object,
                                   GAsyncResult *result,
                                   gpointer      user_data)
 {
-  g_autoptr(CcWwanNetworkDialog) self = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (CcWwanNetworkDialog) self = user_data;
+  g_autoptr (GError) error = NULL;
 
   if (self->operator_list)
     g_list_free_full (self->operator_list, (GDestroyNotify)mm_modem_3gpp_network_free);
@@ -237,25 +232,22 @@ cc_wwan_network_scan_complete_cb (GObject      *object,
   self->operator_list = cc_wwan_device_scan_networks_finish (self->device, result, &error);
   gtk_widget_set_sensitive (GTK_WIDGET (self->operator_list_box), !error);
 
-  if (!error)
-    {
-      cc_wwan_network_dialog_update (self);
-      gtk_widget_set_visible (GTK_WIDGET (self->operator_list_box), TRUE);
-    }
-  else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-    {
-      AdwToast *toast;
+  if (!error) {
+    cc_wwan_network_dialog_update (self);
+    gtk_widget_set_visible (GTK_WIDGET (self->operator_list_box), TRUE);
+  } else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+    AdwToast *toast;
 
-      self->no_update_network = TRUE;
-      gtk_widget_activate (GTK_WIDGET (self->automatic_row));
-      gtk_widget_set_sensitive (GTK_WIDGET (self->operator_list_box), FALSE);
+    self->no_update_network = TRUE;
+    gtk_widget_activate (GTK_WIDGET (self->automatic_row));
+    gtk_widget_set_sensitive (GTK_WIDGET (self->operator_list_box), FALSE);
 
-      toast = adw_toast_new (cc_wwan_error_get_message (error));
-      adw_toast_overlay_add_toast (self->toast_overlay, toast);
+    toast = adw_toast_new (cc_wwan_error_get_message (error));
+    adw_toast_overlay_add_toast (self->toast_overlay, toast);
 
-      gtk_widget_set_visible (GTK_WIDGET (self->operator_list_box), TRUE);
-      g_warning ("Error: scanning networks failed: %s", error->message);
-    }
+    gtk_widget_set_visible (GTK_WIDGET (self->operator_list_box), TRUE);
+    g_warning ("Error: scanning networks failed: %s", error->message);
+  }
 }
 
 static void
@@ -300,26 +292,22 @@ cc_wwan_auto_network_changed_cb (CcWwanNetworkDialog *self,
   is_auto = adw_switch_row_get_active (auto_network_row);
   gtk_widget_set_sensitive (GTK_WIDGET (self->button_apply), is_auto);
 
-  if (self->no_update_network)
-    {
-      self->no_update_network = FALSE;
-      return;
-    }
+  if (self->no_update_network) {
+    self->no_update_network = FALSE;
+    return;
+  }
 
   self->selected_row = NULL;
   gtk_widget_set_visible (GTK_WIDGET (self->network_search_title), !is_auto);
   gtk_widget_set_sensitive (GTK_WIDGET (self->operator_list_box), !is_auto);
   gtk_widget_set_visible (GTK_WIDGET (self->operator_list_box), FALSE);
 
-  if (is_auto)
-    {
-      g_cancellable_cancel (self->search_cancellable);
-      g_cancellable_reset (self->search_cancellable);
-    }
-  else
-    {
-      cc_wwan_network_dialog_refresh_networks (self);
-    }
+  if (is_auto) {
+    g_cancellable_cancel (self->search_cancellable);
+    g_cancellable_reset (self->search_cancellable);
+  } else {
+    cc_wwan_network_dialog_refresh_networks (self);
+  }
 }
 
 static void
@@ -346,15 +334,14 @@ cc_wwan_network_dialog_set_property (GObject      *object,
 {
   CcWwanNetworkDialog *self = (CcWwanNetworkDialog *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_DEVICE:
       self->device = g_value_dup_object (value);
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void

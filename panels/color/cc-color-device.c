@@ -27,41 +27,38 @@
 #include "cc-color-common.h"
 #include "cc-color-device.h"
 
-struct _CcColorDevice
-{
+struct _CcColorDevice {
   AdwActionRow parent_instance;
 
-  CdDevice    *device;
-  gboolean     expanded;
-  gchar       *sortable;
-  GtkWidget   *widget_description;
-  GtkWidget   *widget_button;
-  GtkWidget   *widget_switch;
-  GtkWidget   *widget_nocalib;
+  CdDevice *device;
+  gboolean expanded;
+  gchar *sortable;
+  GtkWidget *widget_description;
+  GtkWidget *widget_button;
+  GtkWidget *widget_switch;
+  GtkWidget *widget_nocalib;
 };
 
 G_DEFINE_TYPE (CcColorDevice, cc_color_device, ADW_TYPE_ACTION_ROW)
 
-enum
-{
+enum {
   SIGNAL_EXPANDED_CHANGED,
   SIGNAL_LAST
 };
 
-enum
-{
+enum {
   PROP_0,
   PROP_DEVICE,
   PROP_LAST
 };
 
-static guint signals [SIGNAL_LAST] = { 0 };
+static guint signals[SIGNAL_LAST] = { 0 };
 
 static void
 cc_color_device_refresh (CcColorDevice *self)
 {
   g_autofree gchar *title = NULL;
-  g_autoptr(GPtrArray) profiles = NULL;
+  g_autoptr (GPtrArray) profiles = NULL;
   g_autofree gchar *name1 = NULL;
   g_autofree gchar *name2 = NULL;
 
@@ -108,36 +105,38 @@ cc_color_device_get_sortable (CcColorDevice *self)
 }
 
 static void
-cc_color_device_get_property (GObject *object, guint param_id,
-                              GValue *value, GParamSpec *pspec)
+cc_color_device_get_property (GObject    *object,
+                              guint       param_id,
+                              GValue     *value,
+                              GParamSpec *pspec)
 {
   CcColorDevice *self = CC_COLOR_DEVICE (object);
-  switch (param_id)
-    {
-      case PROP_DEVICE:
-        g_value_set_object (value, self->device);
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
-        break;
-    }
+  switch (param_id) {
+    case PROP_DEVICE:
+      g_value_set_object (value, self->device);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+      break;
+  }
 }
 
 static void
-cc_color_device_set_property (GObject *object, guint param_id,
-                              const GValue *value, GParamSpec *pspec)
+cc_color_device_set_property (GObject      *object,
+                              guint         param_id,
+                              const GValue *value,
+                              GParamSpec   *pspec)
 {
   CcColorDevice *self = CC_COLOR_DEVICE (object);
 
-  switch (param_id)
-    {
-      case PROP_DEVICE:
-        self->device = g_value_dup_object (value);
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
-        break;
-    }
+  switch (param_id) {
+    case PROP_DEVICE:
+      self->device = g_value_dup_object (value);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+      break;
+  }
 }
 
 static void
@@ -153,7 +152,7 @@ cc_color_device_finalize (GObject *object)
 
 void
 cc_color_device_set_expanded (CcColorDevice *self,
-                              gboolean expanded)
+                              gboolean       expanded)
 {
   /* same as before */
   if (self->expanded == expanded)
@@ -172,7 +171,7 @@ cc_color_device_notify_enable_device_cb (CcColorDevice *self)
 {
   gboolean enable;
   gboolean ret;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   enable = gtk_switch_get_active (GTK_SWITCH (self->widget_switch));
   g_debug ("Set %s to %i", cd_device_get_id (self->device), enable);
@@ -251,10 +250,10 @@ cc_color_device_class_init (CcColorDeviceClass *klass)
 
   signals [SIGNAL_EXPANDED_CHANGED] =
     g_signal_new ("expanded-changed",
-            G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
-            0,
-            NULL, NULL, g_cclosure_marshal_VOID__BOOLEAN,
-            G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
+                  G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL, g_cclosure_marshal_VOID__BOOLEAN,
+                  G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
 }
 
 static void

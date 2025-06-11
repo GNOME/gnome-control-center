@@ -42,36 +42,35 @@
 
 #define DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT "Super_L"
 
-struct _CcKeyboardShortcutDialog
-{
-  AdwDialog             parent_instance;
+struct _CcKeyboardShortcutDialog {
+  AdwDialog parent_instance;
 
-  AdwNavigationView    *navigation_view;
-  AdwNavigationPage    *main_page;
-  AdwSwitchRow         *overview_shortcut_row;
-  AdwButtonRow         *reset_all_button_row;
-  AdwDialog            *reset_all_dialog;
-  GtkSearchEntry       *search_entry;
-  GtkStack             *section_stack;
-  AdwPreferencesPage   *section_list_page;
-  GtkListBox           *section_list_box;
-  AdwPreferencesPage   *search_result_page;
-  AdwStatusPage        *empty_results_page;
+  AdwNavigationView *navigation_view;
+  AdwNavigationPage *main_page;
+  AdwSwitchRow *overview_shortcut_row;
+  AdwButtonRow *reset_all_button_row;
+  AdwDialog *reset_all_dialog;
+  GtkSearchEntry *search_entry;
+  GtkStack *section_stack;
+  AdwPreferencesPage *section_list_page;
+  GtkListBox *section_list_box;
+  AdwPreferencesPage *search_result_page;
+  AdwStatusPage *empty_results_page;
 
-  AdwNavigationPage    *subview_page;
-  GtkStack             *subview_stack;
-  GtkStack             *shortcut_list_stack;
-  AdwStatusPage        *empty_custom_shortcut_page;
-  GtkSizeGroup         *accelerator_size_group;
+  AdwNavigationPage *subview_page;
+  GtkStack *subview_stack;
+  GtkStack *shortcut_list_stack;
+  AdwStatusPage *empty_custom_shortcut_page;
+  GtkSizeGroup *accelerator_size_group;
 
   /* A GListStore of sections containing a GListStore of CcKeyboardItem */
-  GListStore           *sections;
-  GListStore           *visible_section;
-  GtkFlattenListModel  *filtered_shortcuts;
+  GListStore *sections;
+  GListStore *visible_section;
+  GtkFlattenListModel *filtered_shortcuts;
 
-  CcKeyboardManager    *manager;
-  GStrv                 search_terms;
- };
+  CcKeyboardManager *manager;
+  GStrv search_terms;
+};
 
 G_DEFINE_TYPE (CcKeyboardShortcutDialog, cc_keyboard_shortcut_dialog, ADW_TYPE_DIALOG)
 
@@ -81,7 +80,7 @@ keyboard_shortcut_get_section_store (CcKeyboardShortcutDialog *self,
                                      const char               *section_id,
                                      const char               *section_title)
 {
-  g_autoptr(GListStore) section = NULL;
+  g_autoptr (GListStore) section = NULL;
   GtkWidget *group;
   guint n_items;
 
@@ -90,17 +89,16 @@ keyboard_shortcut_get_section_store (CcKeyboardShortcutDialog *self,
 
   n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
 
-  for (guint i = 0; i < n_items; i++)
-    {
-      g_autoptr(GObject) item = NULL;
-      const char *item_section_id;
+  for (guint i = 0; i < n_items; i++) {
+    g_autoptr (GObject) item = NULL;
+    const char *item_section_id;
 
-      item = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
-      item_section_id = g_object_get_data (item, "id");
+    item = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
+    item_section_id = g_object_get_data (item, "id");
 
-      if (g_str_equal (item_section_id, section_id))
-        return G_LIST_STORE (item);
-    }
+    if (g_str_equal (item_section_id, section_id))
+      return G_LIST_STORE (item);
+  }
 
   /* Found no matching section, so create one */
   section = g_list_store_new (CC_TYPE_KEYBOARD_ITEM);
@@ -170,18 +168,16 @@ shortcut_custom_items_changed (CcKeyboardShortcutDialog *self)
 
   section = keyboard_shortcut_get_section_store (self, "custom", "Custom Shortcuts");
 
-  if (self->visible_section == section)
-    {
-      guint n_items;
+  if (self->visible_section == section) {
+    guint n_items;
 
-      n_items = g_list_model_get_n_items (G_LIST_MODEL (section));
+    n_items = g_list_model_get_n_items (G_LIST_MODEL (section));
 
-      if (n_items)
-        page = GTK_WIDGET (self->shortcut_list_stack);
-      else
-        page = GTK_WIDGET (self->empty_custom_shortcut_page);
-    }
-  else
+    if (n_items)
+      page = GTK_WIDGET (self->shortcut_list_stack);
+    else
+      page = GTK_WIDGET (self->empty_custom_shortcut_page);
+  } else
     page = GTK_WIDGET (self->shortcut_list_stack);
 
   gtk_stack_set_visible_child (self->subview_stack, page);
@@ -190,7 +186,7 @@ shortcut_custom_items_changed (CcKeyboardShortcutDialog *self)
 static int
 compare_sections_title (gconstpointer a,
                         gconstpointer b,
-                        gpointer     user_data)
+                        gpointer      user_data)
 {
   GObject *obj_a, *obj_b;
 
@@ -245,8 +241,8 @@ shortcut_search_result_changed_cb (CcKeyboardShortcutDialog *self)
 static void
 shortcuts_loaded_cb (CcKeyboardShortcutDialog *self)
 {
-  g_autoptr(GPtrArray) filtered_items = NULL;
-  g_autoptr(GPtrArray) widgets = NULL;
+  g_autoptr (GPtrArray) filtered_items = NULL;
+  g_autoptr (GPtrArray) widgets = NULL;
   GListStore *filtered_lists;
   GListStore *custom_store;
   guint n_items;
@@ -264,27 +260,26 @@ shortcuts_loaded_cb (CcKeyboardShortcutDialog *self)
 
   g_list_store_sort (self->sections, compare_sections_title, NULL);
 
-  for (guint i = 0; i < n_items; i++)
-    {
-      g_autoptr(GObject) item = NULL;
-      CcKeyboardShortcutGroup *group;
-      GListModel *model;
-      GtkWidget *page;
+  for (guint i = 0; i < n_items; i++) {
+    g_autoptr (GObject) item = NULL;
+    CcKeyboardShortcutGroup *group;
+    GListModel *model;
+    GtkWidget *page;
 
-      item = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
-      group = g_object_get_data (item, "search-group");
-      g_ptr_array_add (widgets, group);
+    item = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
+    group = g_object_get_data (item, "search-group");
+    g_ptr_array_add (widgets, group);
 
-      model = cc_keyboard_shortcut_group_get_model (group);
-      g_ptr_array_add (filtered_items, model);
+    model = cc_keyboard_shortcut_group_get_model (group);
+    g_ptr_array_add (filtered_items, model);
 
-      /* Populate shortcut section page */
-      group = g_object_get_data (item, "group");
-      page = adw_preferences_page_new ();
-      g_object_set_data (item, "page", page);
-      adw_preferences_page_add (ADW_PREFERENCES_PAGE (page), ADW_PREFERENCES_GROUP (group));
-      gtk_stack_add_child (self->shortcut_list_stack, page);
-    }
+    /* Populate shortcut section page */
+    group = g_object_get_data (item, "group");
+    page = adw_preferences_page_new ();
+    g_object_set_data (item, "page", page);
+    adw_preferences_page_add (ADW_PREFERENCES_PAGE (page), ADW_PREFERENCES_GROUP (group));
+    gtk_stack_add_child (self->shortcut_list_stack, page);
+  }
 
   /* Populate search results page */
   for (guint i = 0; i < widgets->len; i++)
@@ -342,28 +337,26 @@ on_reset_all_dialog_response_cb (CcKeyboardShortcutDialog *self)
 
   n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
 
-  for (guint i = 0; i < n_items; i++)
-    {
-      g_autoptr(GListModel) section = NULL;
+  for (guint i = 0; i < n_items; i++) {
+    g_autoptr (GListModel) section = NULL;
 
-      section = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
-      j_items = g_list_model_get_n_items (section);
+    section = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
+    j_items = g_list_model_get_n_items (section);
 
-      for (guint j = 0; j < j_items; j++)
-        {
-          g_autoptr(CcKeyboardItem) item = NULL;
+    for (guint j = 0; j < j_items; j++) {
+      g_autoptr (CcKeyboardItem) item = NULL;
 
-          item = g_list_model_get_item (section, j);
+      item = g_list_model_get_item (section, j);
 
-          /* Don't reset custom shortcuts */
-          if (cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
-            return;
+      /* Don't reset custom shortcuts */
+      if (cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
+        return;
 
-          /* cc_keyboard_manager_reset_shortcut() already resets conflicting shortcuts,
-           * so no other check is needed here. */
-          cc_keyboard_manager_reset_shortcut (self->manager, item);
-        }
+      /* cc_keyboard_manager_reset_shortcut() already resets conflicting shortcuts,
+       * so no other check is needed here. */
+      cc_keyboard_manager_reset_shortcut (self->manager, item);
     }
+  }
 
   adw_switch_row_set_active (self->overview_shortcut_row, TRUE);
 }
@@ -377,20 +370,17 @@ shortcut_dialog_visible_page_changed_cb (CcKeyboardShortcutDialog *self)
   visible_page = adw_navigation_view_get_visible_page (self->navigation_view);
   is_main_view = visible_page == self->main_page;
 
-  if (is_main_view)
-    {
-      gtk_editable_set_text (GTK_EDITABLE (self->search_entry), "");
-      gtk_widget_grab_focus (GTK_WIDGET (self->search_entry));
+  if (is_main_view) {
+    gtk_editable_set_text (GTK_EDITABLE (self->search_entry), "");
+    gtk_widget_grab_focus (GTK_WIDGET (self->search_entry));
 
-      self->visible_section = NULL;
-    }
-  else if (self->visible_section)
-    {
-      const char *title;
+    self->visible_section = NULL;
+  } else if (self->visible_section) {
+    const char *title;
 
-      title = g_object_get_data (G_OBJECT (self->visible_section), "title");
-      adw_navigation_page_set_title (self->subview_page, _(title) ?: "");
-    }
+    title = g_object_get_data (G_OBJECT (self->visible_section), "title");
+    adw_navigation_page_set_title (self->subview_page, _(title) ?: "");
+  }
 }
 
 static void
@@ -417,16 +407,15 @@ shortcut_search_entry_changed_cb (CcKeyboardShortcutDialog *self)
   /* "Reset all..." button row should be sensitive only if the search is not active */
   gtk_widget_set_sensitive (GTK_WIDGET (self->reset_all_button_row), !self->search_terms);
 
-  for (guint i = 0; i < n_items; i++)
-    {
-      g_autoptr(GObject) item = NULL;
-      CcKeyboardShortcutGroup *group;
+  for (guint i = 0; i < n_items; i++) {
+    g_autoptr (GObject) item = NULL;
+    CcKeyboardShortcutGroup *group;
 
-      item = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
-      group = g_object_get_data (item, "search-group");
+    item = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
+    group = g_object_get_data (item, "search-group");
 
-      cc_keyboard_shortcut_group_set_filter (group, self->search_terms);
-    }
+    cc_keyboard_shortcut_group_set_filter (group, self->search_terms);
+  }
 
   shortcut_search_result_changed_cb (self);
 }
@@ -538,7 +527,7 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
 static void
 cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
 {
-  g_autoptr(GSettings) mutter_settings = g_settings_new ("org.gnome.mutter");
+  g_autoptr (GSettings) mutter_settings = g_settings_new ("org.gnome.mutter");
 
   gtk_widget_init_template (GTK_WIDGET (self));
   shortcut_dialog_visible_page_changed_cb (self);
@@ -571,13 +560,13 @@ cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
 
   g_settings_bind_with_mapping (mutter_settings, "overlay-key",
                                 self->overview_shortcut_row, "active",
-				G_SETTINGS_BIND_DEFAULT,
-				get_overview_shortcut_setting,
-				set_overview_shortcut_setting,
-				NULL, NULL);
+                                G_SETTINGS_BIND_DEFAULT,
+                                get_overview_shortcut_setting,
+                                set_overview_shortcut_setting,
+                                NULL, NULL);
 }
 
-CcKeyboardShortcutDialog*
+CcKeyboardShortcutDialog *
 cc_keyboard_shortcut_dialog_new (void)
 {
   return g_object_new (CC_TYPE_KEYBOARD_SHORTCUT_DIALOG, NULL);

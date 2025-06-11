@@ -34,14 +34,14 @@
 
 /* Test panels */
 static CcPanelLoaderVtable test_panels[] = {
-  { "dynamic-panel",           gtp_dynamic_panel_get_type,  NULL                 },
-  { "static-init",             gtp_static_init_get_type,    gtp_static_init_func },
+  { "dynamic-panel", gtp_dynamic_panel_get_type, NULL                 },
+  { "static-init", gtp_static_init_get_type, gtp_static_init_func },
 };
 
 static void
 override_xdg_data_dirs (void)
 {
-  g_autoptr(GString) extended_xdg_data_dirs = NULL;
+  g_autoptr (GString) extended_xdg_data_dirs = NULL;
   const gchar *xdg_data_dirs;
 
   extended_xdg_data_dirs = g_string_new (".");
@@ -57,7 +57,7 @@ gint
 main (gint   argc,
       gchar *argv[])
 {
-  g_autoptr(GtkApplication) application = NULL;
+  g_autoptr (GtkApplication) application = NULL;
 
   /* Manually register GResources */
   g_resources_register (gnome_control_center_get_resource ());

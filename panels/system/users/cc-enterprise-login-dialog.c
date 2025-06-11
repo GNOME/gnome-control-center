@@ -47,36 +47,35 @@
 
 #define DOMAIN_CHECK_TIMEOUT 600
 
-struct _CcEnterpriseLoginDialog
-{
-  AdwDialog           parent_instance;
+struct _CcEnterpriseLoginDialog {
+  AdwDialog parent_instance;
 
-  AdwNavigationView   *navigation;
-  AdwNavigationPage   *offline_page;
-  AdwNavigationPage   *main_page;
-  AdwNavigationPage   *main_preferences_page;
-  AdwNavigationPage   *enroll_page;
-  AdwPreferencesPage  *enroll_preferences_page;
-  AdwToastOverlay     *toast_overlay;
+  AdwNavigationView *navigation;
+  AdwNavigationPage *offline_page;
+  AdwNavigationPage *main_page;
+  AdwNavigationPage *main_preferences_page;
+  AdwNavigationPage *enroll_page;
+  AdwPreferencesPage *enroll_preferences_page;
+  AdwToastOverlay *toast_overlay;
 
-  GtkButton           *add_button;
-  AdwSpinner          *main_page_spinner;
-  AdwEntryRow         *domain_row;
-  CcEntryFeedback     *domain_feedback;
-  gint                 domain_timeout_id;
-  AdwEntryRow         *username_row;
+  GtkButton *add_button;
+  AdwSpinner *main_page_spinner;
+  AdwEntryRow *domain_row;
+  CcEntryFeedback *domain_feedback;
+  gint domain_timeout_id;
+  AdwEntryRow *username_row;
   AdwPasswordEntryRow *password_row;
 
-  GtkButton           *enroll_button;
-  AdwSpinner          *enroll_page_spinner;
-  AdwEntryRow         *admin_name_row;
+  GtkButton *enroll_button;
+  AdwSpinner *enroll_page_spinner;
+  AdwEntryRow *admin_name_row;
   AdwPasswordEntryRow *admin_password_row;
 
-  CcRealmManager      *realm_manager;
-  CcRealmObject       *selected_realm;
-  GNetworkMonitor     *network_monitor;
+  CcRealmManager *realm_manager;
+  CcRealmObject *selected_realm;
+  GNetworkMonitor *network_monitor;
 
-  GCancellable        *cancellable;
+  GCancellable *cancellable;
 };
 
 G_DEFINE_TYPE (CcEnterpriseLoginDialog, cc_enterprise_login_dialog, ADW_TYPE_DIALOG)
@@ -109,16 +108,15 @@ show_operation_progress (CcEnterpriseLoginDialog *self,
   gtk_widget_set_sensitive (GTK_WIDGET (self->enroll_button), !show && enroll_button_is_valid (self));
 
   /* Hide passwords during operations. */
-  if (show)
-    {
-      GtkEditable *delegate;
+  if (show) {
+    GtkEditable *delegate;
 
-      delegate = gtk_editable_get_delegate (GTK_EDITABLE (self->password_row));
-      gtk_text_set_visibility (GTK_TEXT (delegate), FALSE);
+    delegate = gtk_editable_get_delegate (GTK_EDITABLE (self->password_row));
+    gtk_text_set_visibility (GTK_TEXT (delegate), FALSE);
 
-      delegate = gtk_editable_get_delegate (GTK_EDITABLE (self->admin_password_row));
-      gtk_text_set_visibility (GTK_TEXT (delegate), FALSE);
-    }
+    delegate = gtk_editable_get_delegate (GTK_EDITABLE (self->admin_password_row));
+    gtk_text_set_visibility (GTK_TEXT (delegate), FALSE);
+  }
 }
 
 static void
@@ -126,28 +124,25 @@ cache_user_cb (GObject      *source,
                GAsyncResult *result,
                gpointer      user_data)
 {
-  g_autoptr(CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
+  g_autoptr (CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
   g_autoptr (ActUser) user = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   user = act_user_manager_cache_user_finish (ACT_USER_MANAGER (source), result, &error);
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
   /* This is where we're finally done */
-  if (user != NULL)
-    {
-      g_debug ("Successfully cached remote user: %s", act_user_get_user_name (user));
+  if (user != NULL) {
+    g_debug ("Successfully cached remote user: %s", act_user_get_user_name (user));
 
-      adw_dialog_close (ADW_DIALOG (self));
-    }
-  else
-    {
-      g_message ("Couldn't cache user account: %s", error->message);
+    adw_dialog_close (ADW_DIALOG (self));
+  } else {
+    g_message ("Couldn't cache user account: %s", error->message);
 
-      adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Failed to register account")));
-      show_operation_progress (self, FALSE);
-    }
+    adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Failed to register account")));
+    show_operation_progress (self, FALSE);
+  }
 }
 
 static void
@@ -155,75 +150,69 @@ change_login_policy_cb (GObject      *source,
                         GAsyncResult *result,
                         gpointer      user_data)
 {
-  g_autoptr(CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
-  g_autoptr(GError) error = NULL;
+  g_autoptr (CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
+  g_autoptr (GError) error = NULL;
 
   cc_realm_common_call_change_login_policy_finish (CC_REALM_COMMON (source), result, &error);
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  if (error == NULL)
-    {
-      ActUserManager *manager;
-      g_autofree gchar *login = NULL;
+  if (error == NULL) {
+    ActUserManager *manager;
+    g_autofree gchar *login = NULL;
 
-      /*
-       * Now tell the account service about this user. The account service
-       * should also lookup information about this via the realm and make
-       * sure all that is functional.
-       */
-      manager = act_user_manager_get_default ();
-      login = cc_realm_calculate_login (CC_REALM_COMMON (source), gtk_editable_get_text (GTK_EDITABLE (self->username_row)));
+    /*
+     * Now tell the account service about this user. The account service
+     * should also lookup information about this via the realm and make
+     * sure all that is functional.
+     */
+    manager = act_user_manager_get_default ();
+    login = cc_realm_calculate_login (CC_REALM_COMMON (source), gtk_editable_get_text (GTK_EDITABLE (self->username_row)));
 
-      g_debug ("Caching remote user: %s", login);
+    g_debug ("Caching remote user: %s", login);
 
-      act_user_manager_cache_user_async (manager, login, self->cancellable, cache_user_cb, g_object_ref (self));
-    }
-  else
-    {
-      g_message ("Couldn't permit logins on account: %s", error->message);
+    act_user_manager_cache_user_async (manager, login, self->cancellable, cache_user_cb, g_object_ref (self));
+  } else {
+    g_message ("Couldn't permit logins on account: %s", error->message);
 
-      adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Failed to register account")));
-      show_operation_progress (self, FALSE);
-   }
+    adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Failed to register account")));
+    show_operation_progress (self, FALSE);
+  }
 }
 
 static void
 permit_user_login (CcEnterpriseLoginDialog *self)
 {
-  g_autoptr(CcRealmCommon) common = NULL;
+  g_autoptr (CcRealmCommon) common = NULL;
 
   common = cc_realm_object_get_common (self->selected_realm);
-  if (common == NULL)
-    {
-      g_debug ("Failed to register account: failed to get d-bus interface");
+  if (common == NULL) {
+    g_debug ("Failed to register account: failed to get d-bus interface");
 
-      adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Failed to register account")));
-      show_operation_progress (self, FALSE);
-    }
-  else
-    {
-      g_autofree gchar *login = NULL;
-      const gchar *add[2];
-      const gchar *remove[1];
-      GVariant *options;
+    adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Failed to register account")));
+    show_operation_progress (self, FALSE);
+  } else {
+    g_autofree gchar *login = NULL;
+    const gchar *add[2];
+    const gchar *remove[1];
+    GVariant *options;
 
-      login = cc_realm_calculate_login (common, gtk_editable_get_text (GTK_EDITABLE (self->username_row)));
+    login = cc_realm_calculate_login (common, gtk_editable_get_text (GTK_EDITABLE (self->username_row)));
 
-      g_debug ("Permitting login for: %s", login);
+    g_debug ("Permitting login for: %s", login);
 
-      add[0] = login;
-      add[1] = NULL;
-      remove[0] = NULL;
+    add[0] = login;
+    add[1] = NULL;
+    remove[0] = NULL;
 
-      options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
+    options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
 
-      cc_realm_common_call_change_login_policy (common, "",
-                                                add, remove, options,
-                                                self->cancellable,
-                                                change_login_policy_cb,
-                                                g_object_ref (self));
-    }
+    cc_realm_common_call_change_login_policy (common, "",
+                                              add, remove, options,
+                                              self->cancellable,
+                                              change_login_policy_cb,
+                                              g_object_ref (self));
+  }
 }
 
 static void
@@ -231,8 +220,8 @@ realm_join_as_admin_cb (GObject      *source,
                         GAsyncResult *result,
                         gpointer      user_data)
 {
-  g_autoptr(CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
-  g_autoptr(GError) error = NULL;
+  g_autoptr (CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
+  g_autoptr (GError) error = NULL;
   const gchar *message = NULL;
 
   cc_realm_join_finish (CC_REALM_OBJECT (source), result, &error);
@@ -240,20 +229,18 @@ realm_join_as_admin_cb (GObject      *source,
     return;
 
   /* Yay, joined the domain, register the user locally */
-  if (error == NULL)
-    {
-      g_debug ("Joining realm completed successfully");
+  if (error == NULL) {
+    g_debug ("Joining realm completed successfully");
 
-      permit_user_login (self);
-      return;
-    }
+    permit_user_login (self);
+    return;
+  }
   /* Other failure */
-  else
-    {
-      g_message ("Failed to join the domain: %s", error->message);
+  else {
+    g_message ("Failed to join the domain: %s", error->message);
 
-      message = _("Failed to join domain");
-    }
+    message = _("Failed to join domain");
+  }
 
   adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (message));
   show_operation_progress (self, FALSE);
@@ -264,9 +251,9 @@ realm_login_as_admin_cb (GObject      *source,
                          GAsyncResult *result,
                          gpointer      user_data)
 {
-  g_autoptr(CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GBytes) creds = NULL;
+  g_autoptr (CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GBytes) creds = NULL;
   const gchar *message = NULL;
 
   creds = cc_realm_login_finish (result, &error);
@@ -274,52 +261,44 @@ realm_login_as_admin_cb (GObject      *source,
     return;
 
   /* Logged in as admin successfully, use creds to join domain */
-  if (creds != NULL)
-    {
-      if (cc_realm_join_as_admin (self->selected_realm,
-                                  gtk_editable_get_text (GTK_EDITABLE (self->admin_name_row)),
-                                  gtk_editable_get_text (GTK_EDITABLE (self->admin_password_row)),
-                                  creds, self->cancellable,
-                                  realm_join_as_admin_cb, g_object_ref (self)))
-        {
-          return;
-        }
-
-      g_message ("Authenticating as admin is not supported by the realm");
-
-      message = _("No supported way to authenticate with this domain");
+  if (creds != NULL) {
+    if (cc_realm_join_as_admin (self->selected_realm,
+                                gtk_editable_get_text (GTK_EDITABLE (self->admin_name_row)),
+                                gtk_editable_get_text (GTK_EDITABLE (self->admin_password_row)),
+                                creds, self->cancellable,
+                                realm_join_as_admin_cb, g_object_ref (self))) {
+      return;
     }
+
+    g_message ("Authenticating as admin is not supported by the realm");
+
+    message = _("No supported way to authenticate with this domain");
+  }
 
   show_operation_progress (self, FALSE);
 
   /* A problem with the admin's login name or password */
-  if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN))
-    {
-      g_debug ("Bad admin login: %s", error->message);
+  if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN)) {
+    g_debug ("Bad admin login: %s", error->message);
 
-      message = _("That login name didn’t work");
-      gtk_widget_grab_focus (GTK_WIDGET (self->admin_name_row));
-    }
-  else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_PASSWORD))
-    {
-      g_debug ("Bad admin password: %s", error->message);
+    message = _("That login name didn’t work");
+    gtk_widget_grab_focus (GTK_WIDGET (self->admin_name_row));
+  } else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_PASSWORD)) {
+    g_debug ("Bad admin password: %s", error->message);
 
-      message = _("That login password didn’t work");
-      gtk_widget_grab_focus (GTK_WIDGET (self->admin_password_row));
-    }
-  else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_HOSTNAME))
-    {
-      g_debug ("Bad host name: %s", error->message);
+    message = _("That login password didn’t work");
+    gtk_widget_grab_focus (GTK_WIDGET (self->admin_password_row));
+  } else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_HOSTNAME)) {
+    g_debug ("Bad host name: %s", error->message);
 
-      message = _("That hostname didn’t work");
-    }
+    message = _("That hostname didn’t work");
+  }
   /* Other login failure */
-  else
-    {
-      g_message ("Admin login failure: %s", error->message);
+  else {
+    g_message ("Admin login failure: %s", error->message);
 
-      message = _("Failed to log into domain");
-    }
+    message = _("Failed to log into domain");
+  }
 
   adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (message));
 }
@@ -367,22 +346,20 @@ show_enroll_page (CcEnterpriseLoginDialog *self)
                                  domain);
   adw_preferences_page_set_description (self->enroll_preferences_page, description);
 
-  if (strlen (gtk_editable_get_text (GTK_EDITABLE (self->admin_name_row))) == 0)
-    {
-      g_autoptr(CcRealmKerberosMembership) membership = NULL;
-      g_autoptr(CcRealmKerberos) kerberos = NULL;
-      const gchar *name;
+  if (strlen (gtk_editable_get_text (GTK_EDITABLE (self->admin_name_row))) == 0) {
+    g_autoptr (CcRealmKerberosMembership) membership = NULL;
+    g_autoptr (CcRealmKerberos) kerberos = NULL;
+    const gchar *name;
 
-      kerberos = cc_realm_object_get_kerberos (self->selected_realm);
-      membership = cc_realm_object_get_kerberos_membership (self->selected_realm);
-      name = cc_realm_kerberos_membership_get_suggested_administrator (membership);
-      if (name != NULL && !g_str_equal (name, ""))
-        {
-          g_debug ("Suggesting admin user: %s", name);
+    kerberos = cc_realm_object_get_kerberos (self->selected_realm);
+    membership = cc_realm_object_get_kerberos_membership (self->selected_realm);
+    name = cc_realm_kerberos_membership_get_suggested_administrator (membership);
+    if (name != NULL && !g_str_equal (name, "")) {
+      g_debug ("Suggesting admin user: %s", name);
 
-          gtk_editable_set_text (GTK_EDITABLE (self->admin_name_row), name);
-        }
+      gtk_editable_set_text (GTK_EDITABLE (self->admin_name_row), name);
     }
+  }
 
   adw_navigation_view_push (self->navigation, self->enroll_page);
 }
@@ -392,37 +369,34 @@ realm_join_as_user_cb (GObject      *source,
                        GAsyncResult *result,
                        gpointer      user_data)
 {
-  g_autoptr(CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
-  g_autoptr(GError) error = NULL;
+  g_autoptr (CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
+  g_autoptr (GError) error = NULL;
 
   cc_realm_join_finish (CC_REALM_OBJECT (source), result, &error);
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
   /* Yay, joined the domain, register the user locally */
-  if (error == NULL)
-    {
-      g_debug ("Joining realm completed successfully");
+  if (error == NULL) {
+    g_debug ("Joining realm completed successfully");
 
-      permit_user_login (self);
-      return;
-    }
+    permit_user_login (self);
+    return;
+  }
   /* Credential failure while joining domain, prompt for admin creds */
   else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN) ||
            g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_PASSWORD) ||
-           g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_HOSTNAME))
-    {
-      g_debug ("Joining realm failed due to credentials");
+           g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_HOSTNAME)) {
+    g_debug ("Joining realm failed due to credentials");
 
-      show_enroll_page (self);
-    }
+    show_enroll_page (self);
+  }
   /* Other failure */
-  else
-    {
-      g_message ("Failed to join the domain: %s", error->message);
+  else {
+    g_message ("Failed to join the domain: %s", error->message);
 
-      adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Failed to join domain")));
-    }
+    adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Failed to join domain")));
+  }
 
   show_operation_progress (self, FALSE);
 }
@@ -432,9 +406,9 @@ realm_login_cb (GObject      *source,
                 GAsyncResult *result,
                 gpointer      user_data)
 {
-  g_autoptr(CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GBytes) creds = NULL;
+  g_autoptr (CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GBytes) creds = NULL;
   const gchar *message = NULL;
 
   creds = cc_realm_login_finish (result, &error);
@@ -448,62 +422,54 @@ realm_login_cb (GObject      *source,
   if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_CANNOT_AUTH))
     g_clear_error (&error);
 
-  if (error == NULL)
-    {
-      /* Already joined to the domain, just register this user */
-      if (cc_realm_is_configured (self->selected_realm))
-        {
-          g_debug ("Already joined to this realm");
+  if (error == NULL) {
+    /* Already joined to the domain, just register this user */
+    if (cc_realm_is_configured (self->selected_realm)) {
+      g_debug ("Already joined to this realm");
 
-          permit_user_login (self);
-        }
-      /* Join the domain, try using the user's creds */
-      else if (creds != NULL &&
-               cc_realm_join_as_user (self->selected_realm,
-                                      gtk_editable_get_text (GTK_EDITABLE (self->username_row)),
-                                      gtk_editable_get_text (GTK_EDITABLE (self->password_row)),
-                                      creds, self->cancellable,
-                                      realm_join_as_user_cb, g_object_ref (self)))
-        {
-          return;
-        }
-      /* If we can't do user auth, try to authenticate as admin */
-      else
-        {
-          g_debug ("Cannot join with user credentials");
-
-          show_enroll_page (self);
-          show_operation_progress (self, FALSE);
-        }
-
+      permit_user_login (self);
+    }
+    /* Join the domain, try using the user's creds */
+    else if (creds != NULL &&
+             cc_realm_join_as_user (self->selected_realm,
+                                    gtk_editable_get_text (GTK_EDITABLE (self->username_row)),
+                                    gtk_editable_get_text (GTK_EDITABLE (self->password_row)),
+                                    creds, self->cancellable,
+                                    realm_join_as_user_cb, g_object_ref (self))) {
       return;
     }
+    /* If we can't do user auth, try to authenticate as admin */
+    else {
+      g_debug ("Cannot join with user credentials");
+
+      show_enroll_page (self);
+      show_operation_progress (self, FALSE);
+    }
+
+    return;
+  }
 
   show_operation_progress (self, FALSE);
 
   /* A problem with the user's login name or password */
-  if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN))
-    {
-      g_debug ("Problem with the user's login: %s", error->message);
+  if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN)) {
+    g_debug ("Problem with the user's login: %s", error->message);
 
-      message = _("That login name didn’t work");
-      gtk_widget_grab_focus (GTK_WIDGET (self->username_row));
-    }
-  else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_PASSWORD))
-    {
-      g_debug ("Problem with the user's password: %s", error->message);
+    message = _("That login name didn’t work");
+    gtk_widget_grab_focus (GTK_WIDGET (self->username_row));
+  } else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_PASSWORD)) {
+    g_debug ("Problem with the user's password: %s", error->message);
 
-      message = _("That login password didn’t work");
-      gtk_widget_grab_focus (GTK_WIDGET (self->password_row));
-    }
+    message = _("That login password didn’t work");
+    gtk_widget_grab_focus (GTK_WIDGET (self->password_row));
+  }
   /* Other login failure */
-  else
-    {
-      g_message ("Couldn't log in as user: %s", error->message);
+  else {
+    g_message ("Couldn't log in as user: %s", error->message);
 
-      message = _("Failed to log into domain");
-      gtk_widget_grab_focus (GTK_WIDGET (self->domain_row));
-    }
+    message = _("Failed to log into domain");
+    gtk_widget_grab_focus (GTK_WIDGET (self->domain_row));
+  }
 
   adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (message));
 }
@@ -528,12 +494,12 @@ main_page_validate (CcEnterpriseLoginDialog *self)
 }
 
 static void
-realm_manager_discover_cb (GObject       *source,
-                           GAsyncResult  *result,
-                           gpointer       user_data)
+realm_manager_discover_cb (GObject      *source,
+                           GAsyncResult *result,
+                           gpointer      user_data)
 {
-  g_autoptr(CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
-  g_autoptr(GError) error = NULL;
+  g_autoptr (CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
+  g_autoptr (GError) error = NULL;
   GList *realms;
 
   realms = cc_realm_manager_discover_finish (self->realm_manager, result, NULL);
@@ -541,18 +507,15 @@ realm_manager_discover_cb (GObject       *source,
     return;
 
   /* Found a realm, log user into domain */
-  if (realms != NULL)
-    {
-      self->selected_realm = g_object_ref (realms->data);
+  if (realms != NULL) {
+    self->selected_realm = g_object_ref (realms->data);
 
-      cc_entry_feedback_update (self->domain_feedback, "check-outlined-symbolic", _("Valid domain"));
-      gtk_widget_remove_css_class (GTK_WIDGET (self->domain_row), "error");
-    }
-  else
-    {
-      cc_entry_feedback_update (self->domain_feedback, "dialog-error-symbolic", _("Domain not found"));
-      gtk_widget_add_css_class (GTK_WIDGET (self->domain_row), "error");
-    }
+    cc_entry_feedback_update (self->domain_feedback, "check-outlined-symbolic", _("Valid domain"));
+    gtk_widget_remove_css_class (GTK_WIDGET (self->domain_row), "error");
+  } else {
+    cc_entry_feedback_update (self->domain_feedback, "dialog-error-symbolic", _("Domain not found"));
+    gtk_widget_add_css_class (GTK_WIDGET (self->domain_row), "error");
+  }
 
   main_page_validate (self);
 
@@ -592,11 +555,10 @@ on_domain_entry_changed_cb (CcEnterpriseLoginDialog *self)
   clear_enroll_page (self);
 
   domain = gtk_editable_get_text (GTK_EDITABLE (self->domain_row));
-  if (strlen (domain) == 0)
-    {
-      cc_entry_feedback_reset (self->domain_feedback);
-      return;
-    }
+  if (strlen (domain) == 0) {
+    cc_entry_feedback_reset (self->domain_feedback);
+    return;
+  }
 
   cc_entry_feedback_update (self->domain_feedback, CC_ENTRY_LOADING, _("Checking domain…"));
   self->domain_timeout_id = g_timeout_add (DOMAIN_CHECK_TIMEOUT, domain_validate, self);
@@ -605,15 +567,12 @@ on_domain_entry_changed_cb (CcEnterpriseLoginDialog *self)
 static void
 check_network_availability (CcEnterpriseLoginDialog *self)
 {
-  if (!g_network_monitor_get_network_available (self->network_monitor))
-    {
-      adw_navigation_view_pop_to_page (self->navigation, self->offline_page);
-    }
-  else
-    {
-      if (adw_navigation_view_get_visible_page (self->navigation) != self->main_page)
-        adw_navigation_view_push (self->navigation, self->main_page);
-    }
+  if (!g_network_monitor_get_network_available (self->network_monitor)) {
+    adw_navigation_view_pop_to_page (self->navigation, self->offline_page);
+  } else {
+    if (adw_navigation_view_get_visible_page (self->navigation) != self->main_page)
+      adw_navigation_view_push (self->navigation, self->main_page);
+  }
 }
 
 static void
@@ -631,23 +590,20 @@ realm_manager_new_cb (GObject      *source,
                       GAsyncResult *result,
                       gpointer      user_data)
 {
-  g_autoptr(CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
-  g_autoptr(GError) error = NULL;
+  g_autoptr (CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
+  g_autoptr (GError) error = NULL;
 
   self->realm_manager = cc_realm_manager_new_finish (result, &error);
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  if (error != NULL)
-    {
-      g_warning ("Couldn't contact realmd service: %s", error->message);
+  if (error != NULL) {
+    g_warning ("Couldn't contact realmd service: %s", error->message);
 
-      adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Failed to contact realmd service")));
-    }
-  else
-    {
-      show_operation_progress (self, FALSE);
-    }
+    adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Failed to contact realmd service")));
+  } else {
+    show_operation_progress (self, FALSE);
+  }
 }
 
 static void
@@ -684,7 +640,7 @@ cc_enterprise_login_dialog_init (CcEnterpriseLoginDialog *self)
 }
 
 static void
-cc_enterprise_login_dialog_class_init (CcEnterpriseLoginDialogClass * klass)
+cc_enterprise_login_dialog_class_init (CcEnterpriseLoginDialogClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);

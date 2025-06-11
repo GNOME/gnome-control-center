@@ -33,10 +33,10 @@
 #endif
 
 struct _CcSecureShellPage {
-  AdwDialog       parent_instance;
+  AdwDialog parent_instance;
 
-  AdwActionRow    *hostname_row;
-  AdwSwitchRow    *secure_shell_row;
+  AdwActionRow *hostname_row;
+  AdwSwitchRow *secure_shell_row;
   AdwToastOverlay *toast_overlay;
 
   GCancellable *cancellable;
@@ -62,7 +62,7 @@ secure_shell_row_activate (CcSecureShellPage *self)
 static void
 cc_secure_shell_page_dispose (GObject *object)
 {
-  CcSecureShellPage *self = (CcSecureShellPage *) object;
+  CcSecureShellPage *self = (CcSecureShellPage *)object;
 
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
@@ -71,10 +71,10 @@ cc_secure_shell_page_dispose (GObject *object)
 }
 
 static void
-cc_secure_shell_page_class_init (CcSecureShellPageClass * klass)
+cc_secure_shell_page_class_init (CcSecureShellPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->dispose = cc_secure_shell_page_dispose;
 

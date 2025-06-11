@@ -8,7 +8,7 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
@@ -28,8 +28,7 @@
 
 #include <gio/gio.h>
 
-struct _BoltDevice
-{
+struct _BoltDevice {
   BoltProxy parent;
 };
 
@@ -195,7 +194,6 @@ bolt_device_class_init (BoltDeviceClass *klass)
   g_object_class_install_properties (gobject_class,
                                      PROP_LAST,
                                      props);
-
 }
 
 static void
@@ -206,10 +204,10 @@ bolt_device_init (BoltDevice *mgr)
 /* public methods */
 
 BoltDevice *
-bolt_device_new_for_object_path (GDBusConnection *bus,
-                                 const char      *path,
-                                 GCancellable    *cancel,
-                                 GError         **error)
+bolt_device_new_for_object_path (GDBusConnection  *bus,
+                                 const char       *path,
+                                 GCancellable     *cancel,
+                                 GError          **error)
 {
   BoltDevice *dev;
 
@@ -226,12 +224,12 @@ bolt_device_new_for_object_path (GDBusConnection *bus,
 }
 
 gboolean
-bolt_device_authorize (BoltDevice   *dev,
-                       BoltAuthCtrl  flags,
-                       GCancellable *cancel,
-                       GError      **error)
+bolt_device_authorize (BoltDevice    *dev,
+                       BoltAuthCtrl   flags,
+                       GCancellable  *cancel,
+                       GError       **error)
 {
-  g_autoptr(GError) err = NULL;
+  g_autoptr (GError) err = NULL;
   g_autofree char *fstr = NULL;
 
   g_return_val_if_fail (BOLT_IS_DEVICE (dev), FALSE);
@@ -255,11 +253,11 @@ bolt_device_authorize (BoltDevice   *dev,
 }
 
 void
-bolt_device_authorize_async (BoltDevice         *dev,
-                             BoltAuthCtrl        flags,
-                             GCancellable       *cancellable,
-                             GAsyncReadyCallback callback,
-                             gpointer            user_data)
+bolt_device_authorize_async (BoltDevice          *dev,
+                             BoltAuthCtrl         flags,
+                             GCancellable        *cancellable,
+                             GAsyncReadyCallback  callback,
+                             gpointer             user_data)
 {
   GError *err = NULL;
   g_autofree char *fstr = NULL;
@@ -267,11 +265,10 @@ bolt_device_authorize_async (BoltDevice         *dev,
   g_return_if_fail (BOLT_IS_DEVICE (dev));
 
   fstr = bolt_flags_to_string (BOLT_TYPE_AUTH_CTRL, flags, &err);
-  if (fstr == NULL)
-    {
-      g_task_report_error (dev, callback, user_data, NULL, err);
-      return;
-    }
+  if (fstr == NULL) {
+    g_task_report_error (dev, callback, user_data, NULL, err);
+    return;
+  }
 
   g_dbus_proxy_call (G_DBUS_PROXY (dev),
                      "Authorize",
@@ -284,21 +281,20 @@ bolt_device_authorize_async (BoltDevice         *dev,
 }
 
 gboolean
-bolt_device_authorize_finish (BoltDevice   *dev,
-                              GAsyncResult *res,
-                              GError      **error)
+bolt_device_authorize_finish (BoltDevice    *dev,
+                              GAsyncResult  *res,
+                              GError       **error)
 {
-  g_autoptr(GError) err = NULL;
-  g_autoptr(GVariant) val = NULL;
+  g_autoptr (GError) err = NULL;
+  g_autoptr (GVariant) val = NULL;
 
   g_return_val_if_fail (BOLT_IS_DEVICE (dev), FALSE);
 
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (dev), res, &err);
-  if (val == NULL)
-    {
-      bolt_error_propagate_stripped (error, &err);
-      return FALSE;
-    }
+  if (val == NULL) {
+    bolt_error_propagate_stripped (error, &err);
+    return FALSE;
+  }
 
   return TRUE;
 }
@@ -574,8 +570,7 @@ bolt_device_get_timestamp (BoltDevice *dev)
 
   status = bolt_device_get_status (dev);
 
-  switch (status)
-    {
+  switch (status) {
     case BOLT_STATUS_AUTHORIZING:
     case BOLT_STATUS_AUTH_ERROR:
     case BOLT_STATUS_CONNECTING:
@@ -598,7 +593,7 @@ bolt_device_get_timestamp (BoltDevice *dev)
     case BOLT_STATUS_UNKNOWN:
       timestamp = 0;
       break;
-    }
+  }
 
   return timestamp;
 }

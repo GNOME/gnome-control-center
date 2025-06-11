@@ -34,57 +34,54 @@
 #define THUMBNAIL_WIDTH 144
 #define THUMBNAIL_HEIGHT (THUMBNAIL_WIDTH * 3 / 4)
 
-struct _CcBackgroundChooser
-{
-  GtkBox              parent;
+struct _CcBackgroundChooser {
+  GtkBox parent;
 
-  GtkFlowBox         *flowbox;
-  GtkWidget          *recent_box;
-  GtkFlowBox         *recent_flowbox;
+  GtkFlowBox *flowbox;
+  GtkWidget *recent_box;
+  GtkFlowBox *recent_flowbox;
 
-  gboolean            recent_selected;
+  gboolean recent_selected;
 
   BgWallpapersSource *wallpapers_source;
-  BgRecentSource     *recent_source;
+  BgRecentSource *recent_source;
 
-  CcBackgroundItem   *active_item;
+  CcBackgroundItem *active_item;
 
   GnomeDesktopThumbnailFactory *thumbnail_factory;
 
-  AdwToastOverlay    *toast_overlay;
-  AdwToast           *toast;
-  GPtrArray          *removed_backgrounds;
+  AdwToastOverlay *toast_overlay;
+  AdwToast *toast;
+  GPtrArray *removed_backgrounds;
 };
 
 typedef struct {
-  BgRecentSource     *recent_source;
-  CcBackgroundItem   *item;
-  GtkWidget          *parent;
+  BgRecentSource *recent_source;
+  CcBackgroundItem *item;
+  GtkWidget *parent;
 } UndoData;
 
 G_DEFINE_TYPE (CcBackgroundChooser, cc_background_chooser, GTK_TYPE_BOX)
 
-enum
-{
+enum {
   PROP_0,
   PROP_TOAST_OVERLAY,
   N_PROPS
 };
 
-static GParamSpec *properties [N_PROPS];
+static GParamSpec *properties[N_PROPS];
 
-enum
-{
+enum {
   BACKGROUND_CHOSEN,
   N_SIGNALS,
 };
 
-static guint signals [N_SIGNALS];
+static guint signals[N_SIGNALS];
 
 static void
 emit_background_chosen (CcBackgroundChooser *self)
 {
-  g_autoptr(GList) list = NULL;
+  g_autoptr (GList) list = NULL;
   CcBackgroundItem *item;
   GtkFlowBox *flowbox;
 
@@ -130,8 +127,8 @@ on_removed_backgrounds_dismissed (CcBackgroundChooser *self)
 }
 
 static void
-on_delete_background_clicked_cb (GtkButton *button,
-                                 BgRecentSource  *source)
+on_delete_background_clicked_cb (GtkButton      *button,
+                                 BgRecentSource *source)
 {
   GtkWidget *parent;
   CcBackgroundChooser *self;
@@ -164,43 +161,40 @@ on_delete_background_clicked_cb (GtkButton *button,
   if (self->removed_backgrounds->len == g_list_model_get_n_items (G_LIST_MODEL (store)))
     gtk_widget_set_visible (self->recent_box, FALSE);
 
-  if (!self->toast)
-    {
-      self->toast = adw_toast_new (_("Background removed"));
-      adw_toast_set_button_label (self->toast, _("_Undo"));
+  if (!self->toast) {
+    self->toast = adw_toast_new (_("Background removed"));
+    adw_toast_set_button_label (self->toast, _("_Undo"));
 
-      g_signal_connect_swapped (self->toast,
-                                "button-clicked",
-                                G_CALLBACK (on_removed_backgrounds_undo),
-                                self);
-      g_signal_connect_swapped (self->toast,
-                                "dismissed",
-                                G_CALLBACK (on_removed_backgrounds_dismissed),
-                                self);
-    }
-  else
-    {
-      g_autofree gchar *message = NULL;
+    g_signal_connect_swapped (self->toast,
+                              "button-clicked",
+                              G_CALLBACK (on_removed_backgrounds_undo),
+                              self);
+    g_signal_connect_swapped (self->toast,
+                              "dismissed",
+                              G_CALLBACK (on_removed_backgrounds_dismissed),
+                              self);
+  } else {
+    g_autofree gchar *message = NULL;
 
-      /* Translators: %d is the number of backgrounds deleted. */
-      message = g_strdup_printf (ngettext ("%d background removed",
-                                           "%d backgrounds removed",
-                                           self->removed_backgrounds->len),
-                                 self->removed_backgrounds->len);
+    /* Translators: %d is the number of backgrounds deleted. */
+    message = g_strdup_printf (ngettext ("%d background removed",
+                                         "%d backgrounds removed",
+                                         self->removed_backgrounds->len),
+                               self->removed_backgrounds->len);
 
-      adw_toast_set_title (self->toast, message);
+    adw_toast_set_title (self->toast, message);
 
-      g_object_ref (self->toast);
-    }
+    g_object_ref (self->toast);
+  }
 
   adw_toast_overlay_add_toast (self->toast_overlay, self->toast);
 }
 
-static GtkWidget*
+static GtkWidget *
 create_widget_func (gpointer model_item,
                     gpointer user_data)
 {
-  g_autoptr(CcBackgroundPaintable) paintable = NULL;
+  g_autoptr (CcBackgroundPaintable) paintable = NULL;
   CcBackgroundChooser *self;
   CcBackgroundItem *item;
   GtkWidget *overlay;
@@ -237,23 +231,22 @@ create_widget_func (gpointer model_item,
   gtk_widget_set_valign (check, GTK_ALIGN_END);
   gtk_widget_add_css_class (check, "selected-check");
 
-  if (BG_IS_RECENT_SOURCE (source))
-    {
-      button = gtk_button_new_from_icon_name ("cross-small-symbolic");
-      gtk_widget_set_halign (button, GTK_ALIGN_END);
-      gtk_widget_set_valign (button, GTK_ALIGN_START);
+  if (BG_IS_RECENT_SOURCE (source)) {
+    button = gtk_button_new_from_icon_name ("cross-small-symbolic");
+    gtk_widget_set_halign (button, GTK_ALIGN_END);
+    gtk_widget_set_valign (button, GTK_ALIGN_START);
 
-      gtk_widget_add_css_class (button, "osd");
-      gtk_widget_add_css_class (button, "circular");
-      gtk_widget_add_css_class (button, "remove-button");
+    gtk_widget_add_css_class (button, "osd");
+    gtk_widget_add_css_class (button, "circular");
+    gtk_widget_add_css_class (button, "remove-button");
 
-     gtk_widget_set_tooltip_text (GTK_WIDGET (button), _("Remove Background"));
+    gtk_widget_set_tooltip_text (GTK_WIDGET (button), _("Remove Background"));
 
-      g_signal_connect (button,
-                        "clicked",
-                        G_CALLBACK (on_delete_background_clicked_cb),
-                        source);
-    }
+    g_signal_connect (button,
+                      "clicked",
+                      G_CALLBACK (on_delete_background_clicked_cb),
+                      source);
+  }
 
   overlay = gtk_overlay_new ();
   gtk_widget_set_overflow (overlay, GTK_OVERFLOW_HIDDEN);
@@ -276,17 +269,15 @@ create_widget_func (gpointer model_item,
 
   g_object_set_data_full (G_OBJECT (child), "item", g_object_ref (item), g_object_unref);
 
-  if (self->active_item && cc_background_item_compare (item, self->active_item))
-    {
-      gtk_widget_add_css_class (GTK_WIDGET (child), "active-item");
-      gtk_accessible_update_state (GTK_ACCESSIBLE (child),
-                                   GTK_ACCESSIBLE_STATE_CHECKED, TRUE,
-                                   -1);
-    }
-  else
+  if (self->active_item && cc_background_item_compare (item, self->active_item)) {
+    gtk_widget_add_css_class (GTK_WIDGET (child), "active-item");
     gtk_accessible_update_state (GTK_ACCESSIBLE (child),
-                                    GTK_ACCESSIBLE_STATE_CHECKED, FALSE,
-                                    -1);
+                                 GTK_ACCESSIBLE_STATE_CHECKED, TRUE,
+                                 -1);
+  } else
+    gtk_accessible_update_state (GTK_ACCESSIBLE (child),
+                                 GTK_ACCESSIBLE_STATE_CHECKED, FALSE,
+                                 -1);
 
   return child;
 }
@@ -352,25 +343,23 @@ file_dialog_open_cb (GObject      *source_object,
 {
   CcBackgroundChooser *self = CC_BACKGROUND_CHOOSER (user_data);
   GtkFileDialog *file_dialog = GTK_FILE_DIALOG (source_object);
-  g_autoptr(GListModel) files = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GListModel) files = NULL;
+  g_autoptr (GError) error = NULL;
   guint i;
 
   files = gtk_file_dialog_open_multiple_finish (file_dialog, res, &error);
 
-  if (error != NULL)
-    {
-     g_warning ("Failed to pick backgrounds: %s", error->message);
-     return;
-    }
+  if (error != NULL) {
+    g_warning ("Failed to pick backgrounds: %s", error->message);
+    return;
+  }
 
-  for (i = 0; i < g_list_model_get_n_items (files); i++)
-    {
-      g_autoptr(GFile) file = g_list_model_get_item (files, i);
-      g_autofree gchar *filename = g_file_get_path (file);
+  for (i = 0; i < g_list_model_get_n_items (files); i++) {
+    g_autoptr (GFile) file = g_list_model_get_item (files, i);
+    g_autofree gchar *filename = g_file_get_path (file);
 
-      bg_recent_source_add_file (self->recent_source, filename);
-    }
+    bg_recent_source_add_file (self->recent_source, filename);
+  }
 }
 
 /* GObject overrides */
@@ -383,15 +372,14 @@ cc_background_chooser_set_property (GObject      *object,
 {
   CcBackgroundChooser *self = CC_BACKGROUND_CHOOSER (object);
 
-  switch (prop_id)
-    {
-      case PROP_TOAST_OVERLAY:
-        self->toast_overlay = g_value_get_object (value);
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
-    }
+  switch (prop_id) {
+    case PROP_TOAST_OVERLAY:
+      self->toast_overlay = g_value_get_object (value);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
+  }
 }
 
 static void
@@ -457,15 +445,15 @@ cc_background_chooser_init (CcBackgroundChooser *self)
 void
 cc_background_chooser_select_file (CcBackgroundChooser *self)
 {
-  g_autoptr(GFile) pictures_folder = NULL;
+  g_autoptr (GFile) pictures_folder = NULL;
   GtkFileFilter *filter;
-  g_autoptr(GtkFileDialog) file_dialog = NULL;
+  g_autoptr (GtkFileDialog) file_dialog = NULL;
   GtkWindow *toplevel;
   GListStore *filters;
 
   g_return_if_fail (CC_IS_BACKGROUND_CHOOSER (self));
 
-  toplevel = (GtkWindow*) gtk_widget_get_native (GTK_WIDGET (self));
+  toplevel = (GtkWindow *)gtk_widget_get_native (GTK_WIDGET (self));
 
   file_dialog = gtk_file_dialog_new ();
   gtk_file_dialog_set_title (file_dialog, _("Select Picture"));
@@ -488,35 +476,34 @@ cc_background_chooser_select_file (CcBackgroundChooser *self)
                                  self);
 }
 
-static void flow_box_set_active_item (GtkFlowBox *flowbox, CcBackgroundItem *active_item)
+static void
+flow_box_set_active_item (GtkFlowBox       *flowbox,
+                          CcBackgroundItem *active_item)
 {
   GtkFlowBoxChild *child = NULL;
   CcBackgroundItem *item;
   int idx = 0;
 
-  while ((child = gtk_flow_box_get_child_at_index (flowbox, idx++)))
-    {
-      item = g_object_get_data (G_OBJECT (child), "item");
+  while ((child = gtk_flow_box_get_child_at_index (flowbox, idx++))) {
+    item = g_object_get_data (G_OBJECT (child), "item");
 
-      if (cc_background_item_compare (item, active_item))
-        {
-          gtk_widget_add_css_class (GTK_WIDGET (child), "active-item");
-          gtk_accessible_update_state (GTK_ACCESSIBLE (child),
-                                       GTK_ACCESSIBLE_STATE_CHECKED, TRUE,
-                                       -1);
-        }
-      else
-        {
-          gtk_widget_remove_css_class (GTK_WIDGET (child), "active-item");
-          gtk_accessible_update_state (GTK_ACCESSIBLE (child),
-                                       GTK_ACCESSIBLE_STATE_CHECKED, FALSE,
-                                       -1);
-        }
+    if (cc_background_item_compare (item, active_item)) {
+      gtk_widget_add_css_class (GTK_WIDGET (child), "active-item");
+      gtk_accessible_update_state (GTK_ACCESSIBLE (child),
+                                   GTK_ACCESSIBLE_STATE_CHECKED, TRUE,
+                                   -1);
+    } else {
+      gtk_widget_remove_css_class (GTK_WIDGET (child), "active-item");
+      gtk_accessible_update_state (GTK_ACCESSIBLE (child),
+                                   GTK_ACCESSIBLE_STATE_CHECKED, FALSE,
+                                   -1);
     }
+  }
 }
 
 void
-cc_background_chooser_set_active_item (CcBackgroundChooser *self, CcBackgroundItem *active_item)
+cc_background_chooser_set_active_item (CcBackgroundChooser *self,
+                                       CcBackgroundItem    *active_item)
 {
   g_return_if_fail (CC_IS_BACKGROUND_CHOOSER (self));
   g_return_if_fail (CC_IS_BACKGROUND_ITEM (active_item));

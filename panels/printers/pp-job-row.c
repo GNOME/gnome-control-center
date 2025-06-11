@@ -24,13 +24,12 @@
 #include "pp-job-row.h"
 #include "cc-printers-resources.h"
 
-struct _PpJobRow
-{
+struct _PpJobRow {
   AdwActionRow parent;
 
   GtkButton *pause_button;
   GtkButton *priority_button;
-  GtkLabel  *state_label;
+  GtkLabel *state_label;
 
   PpJob *job;
 };
@@ -45,7 +44,8 @@ enum {
 static guint signals[LAST_SIGNAL] = { 0 };
 
 static void
-update_pause_button (PpJobRow *self, gboolean paused)
+update_pause_button (PpJobRow *self,
+                     gboolean  paused)
 {
   gtk_button_set_icon_name (self->pause_button,
                             paused ? "media-playback-start-symbolic" : "media-playback-pause-symbolic");
@@ -59,7 +59,7 @@ pause_cb (PpJobRow *self)
   pp_job_set_hold_until_async (self->job, pp_job_get_state (self->job) == IPP_JOB_HELD ? "no-hold" : "indefinite");
   update_pause_button (self,
                        pp_job_get_state (self->job) == IPP_JOB_HELD);
-                                              }
+}
 
 static void
 stop_cb (PpJobRow *self)
@@ -126,52 +126,48 @@ PpJobRow *
 pp_job_row_new (PpJob *job)
 {
   PpJobRow *self;
-  gboolean  status;
+  gboolean status;
   g_autofree gchar *state_string = NULL;
 
   self = g_object_new (PP_TYPE_JOB_ROW, NULL);
 
   self->job = g_object_ref (job);
 
-  switch (pp_job_get_state (job))
-    {
-      case IPP_JOB_PENDING:
-        /* Translators: Job's state (job is waiting to be printed) */
-        state_string = g_strdup (C_("print job", "Pending"));
-        break;
-      case IPP_JOB_HELD:
-        if (pp_job_get_auth_info_required (job) == NULL)
-          {
-            /* Translators: Job's state (job is held for printing) */
-            state_string = g_strdup (C_("print job", "Paused"));
-          }
-        else
-          {
-            /* Translators: Job's state (job needs authentication to proceed further) */
-            state_string = g_strdup_printf ("<span foreground=\"#ff0000\">%s</span>", C_("print job", "Authentication required"));
-          }
-        break;
-      case IPP_JOB_PROCESSING:
-        /* Translators: Job's state (job is currently printing) */
-        state_string = g_strdup (C_("print job", "Processing"));
-        break;
-      case IPP_JOB_STOPPED:
-        /* Translators: Job's state (job has been stopped) */
-        state_string = g_strdup (C_("print job", "Stopped"));
-        break;
-      case IPP_JOB_CANCELED:
-        /* Translators: Job's state (job has been cancelled) */
-        state_string = g_strdup (C_("print job", "Cancelled"));
-        break;
-      case IPP_JOB_ABORTED:
-        /* Translators: Job's state (job has aborted due to error) */
-        state_string = g_strdup (C_("print job", "Aborted"));
-        break;
-      case IPP_JOB_COMPLETED:
-        /* Translators: Job's state (job has completed successfully) */
-        state_string = g_strdup (C_("print job", "Completed"));
-        break;
-    }
+  switch (pp_job_get_state (job)) {
+    case IPP_JOB_PENDING:
+      /* Translators: Job's state (job is waiting to be printed) */
+      state_string = g_strdup (C_("print job", "Pending"));
+      break;
+    case IPP_JOB_HELD:
+      if (pp_job_get_auth_info_required (job) == NULL) {
+        /* Translators: Job's state (job is held for printing) */
+        state_string = g_strdup (C_("print job", "Paused"));
+      } else {
+        /* Translators: Job's state (job needs authentication to proceed further) */
+        state_string = g_strdup_printf ("<span foreground=\"#ff0000\">%s</span>", C_("print job", "Authentication required"));
+      }
+      break;
+    case IPP_JOB_PROCESSING:
+      /* Translators: Job's state (job is currently printing) */
+      state_string = g_strdup (C_("print job", "Processing"));
+      break;
+    case IPP_JOB_STOPPED:
+      /* Translators: Job's state (job has been stopped) */
+      state_string = g_strdup (C_("print job", "Stopped"));
+      break;
+    case IPP_JOB_CANCELED:
+      /* Translators: Job's state (job has been cancelled) */
+      state_string = g_strdup (C_("print job", "Cancelled"));
+      break;
+    case IPP_JOB_ABORTED:
+      /* Translators: Job's state (job has aborted due to error) */
+      state_string = g_strdup (C_("print job", "Aborted"));
+      break;
+    case IPP_JOB_COMPLETED:
+      /* Translators: Job's state (job has completed successfully) */
+      state_string = g_strdup (C_("print job", "Completed"));
+      break;
+  }
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), pp_job_get_title (job));
   gtk_label_set_markup (self->state_label, state_string);
   gtk_widget_set_sensitive (GTK_WIDGET (self->pause_button), pp_job_get_auth_info_required (job) == NULL);

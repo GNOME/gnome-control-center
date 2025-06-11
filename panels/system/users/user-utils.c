@@ -47,72 +47,72 @@
 gsize
 get_username_max_length (void)
 {
-        return sizeof (((struct utmpx *)NULL)->ut_user);
+  return sizeof (((struct utmpx *)NULL)->ut_user);
 }
 
 gboolean
 is_username_used (const gchar *username)
 {
-        struct passwd *pwent;
+  struct passwd *pwent;
 
-        if (username == NULL || username[0] == '\0') {
-                return FALSE;
-        }
+  if (username == NULL || username[0] == '\0') {
+    return FALSE;
+  }
 
-        pwent = getpwnam (username);
+  pwent = getpwnam (username);
 
-        return pwent != NULL;
+  return pwent != NULL;
 }
 
 gboolean
 is_valid_name (const gchar *name)
 {
-        gboolean is_empty = TRUE;
-        gboolean found_comma = FALSE;
-        const gchar *c;
+  gboolean is_empty = TRUE;
+  gboolean found_comma = FALSE;
+  const gchar *c;
 
-        if (name == NULL)
-                return is_empty;
+  if (name == NULL)
+    return is_empty;
 
-        /* Valid names must contain:
-         *   1) at least one character.
-         *   2) at least one non-"space" character.
-         *   3) comma character not allowed. Issue #888
-         */
-        for (c = name; *c; c++) {
-                gunichar unichar;
+  /* Valid names must contain:
+   *   1) at least one character.
+   *   2) at least one non-"space" character.
+   *   3) comma character not allowed. Issue #888
+   */
+  for (c = name; *c; c++) {
+    gunichar unichar;
 
-                unichar = g_utf8_get_char_validated (c, -1);
+    unichar = g_utf8_get_char_validated (c, -1);
 
-                /* Partial UTF-8 sequence or end of string */
-                if (unichar == (gunichar) -1 || unichar == (gunichar) -2)
-                        break;
+    /* Partial UTF-8 sequence or end of string */
+    if (unichar == (gunichar) - 1 || unichar == (gunichar) - 2)
+      break;
 
-                /* Check for non-space character */
-                if (is_empty && !g_unichar_isspace (unichar)) {
-                        is_empty = FALSE;
-                }
+    /* Check for non-space character */
+    if (is_empty && !g_unichar_isspace (unichar)) {
+      is_empty = FALSE;
+    }
 
-                if (unichar == ',') {
-                        found_comma = TRUE;
-                        break;
-                }
-        }
+    if (unichar == ',') {
+      found_comma = TRUE;
+      break;
+    }
+  }
 
-        return !is_empty && !found_comma;
+  return !is_empty && !found_comma;
 }
 
 typedef struct {
-        gchar *username;
-        gchar *tip;
+  gchar *username;
+  gchar *tip;
 } isValidUsernameData;
 
 static void
 is_valid_username_data_free (isValidUsernameData *data)
 {
-        g_clear_pointer (&data->username, g_free);
-        g_clear_pointer (&data->tip, g_free);
-        g_free (data);
+  g_clear_pointer (&data->username, g_free);
+  g_clear_pointer (&data->tip, g_free);
+  g_free (data);
 }
 
 #ifdef __FreeBSD__
@@ -128,137 +128,135 @@ is_valid_username_data_free (isValidUsernameData *data)
 #endif
 
 static void
-is_valid_username_child_watch_cb (GPid pid,
-                                  gint status,
+is_valid_username_child_watch_cb (GPid     pid,
+                                  gint     status,
                                   gpointer user_data)
 {
-        g_autoptr(GTask) task = G_TASK (user_data);
-        isValidUsernameData *data = g_task_get_task_data (task);
-        GError *error = NULL;
-        gboolean valid = FALSE;
-        g_autofree gchar *tip = NULL;
+  g_autoptr (GTask) task = G_TASK (user_data);
+  isValidUsernameData *data = g_task_get_task_data (task);
+  GError *error = NULL;
+  gboolean valid = FALSE;
+  g_autofree gchar *tip = NULL;
 
-        if (WIFEXITED (status)) {
-                switch (WEXITSTATUS (status)) {
-                        case E_NOTFOUND:
-                                valid = TRUE;
-                                break;
-                        case E_BAD_ARG:
-                                /* Translators: '%c' is an invalid character, such as @, #, etc... */
-                                tip = g_strdup_printf (_("Usernames cannot include “%c”"), data->username[strlen(data->username) - 1]);
-                                valid = FALSE;
-                                break;
-                        case E_SUCCESS:
-                                tip = g_strdup (_("Username is already in use — please choose another"));
-                                valid = FALSE;
-                                break;
-                }
-        }
+  if (WIFEXITED (status)) {
+    switch (WEXITSTATUS (status)) {
+      case E_NOTFOUND:
+        valid = TRUE;
+        break;
+      case E_BAD_ARG:
+        /* Translators: '%c' is an invalid character, such as @, #, etc... */
+        tip = g_strdup_printf (_("Usernames cannot include “%c”"), data->username[strlen (data->username) - 1]);
+        valid = FALSE;
+        break;
+      case E_SUCCESS:
+        tip = g_strdup (_("Username is already in use — please choose another"));
+        valid = FALSE;
+        break;
+    }
+  }
 
-        if (valid || tip != NULL) {
-                data->tip = g_steal_pointer (&tip);
-                g_task_return_boolean (task, valid);
-        }
-        else {
-                g_spawn_check_wait_status (status, &error);
-                g_task_return_error (task, error);
-        }
+  if (valid || tip != NULL) {
+    data->tip = g_steal_pointer (&tip);
+    g_task_return_boolean (task, valid);
+  } else {
+    g_spawn_check_wait_status (status, &error);
+    g_task_return_error (task, error);
+  }
 
-        g_spawn_close_pid (pid);
+  g_spawn_close_pid (pid);
 }
 
 void
-is_valid_username_async (const gchar *username,
-                         GCancellable *cancellable,
-                         GAsyncReadyCallback callback,
-                         gpointer callback_data)
+is_valid_username_async (const gchar         *username,
+                         GCancellable        *cancellable,
+                         GAsyncReadyCallback  callback,
+                         gpointer             callback_data)
 {
-        g_autoptr(GTask) task = NULL;
-        isValidUsernameData *data;
-        gchar *argv[6];
-        GPid pid;
-        GError *error = NULL;
-        gsize max_username_length = get_username_max_length ();
+  g_autoptr (GTask) task = NULL;
+  isValidUsernameData *data;
+  gchar *argv[6];
+  GPid pid;
+  GError *error = NULL;
+  gsize max_username_length = get_username_max_length ();
 
-        task = g_task_new (NULL, cancellable, callback, callback_data);
-        g_task_set_source_tag (task, is_valid_username_async);
+  task = g_task_new (NULL, cancellable, callback, callback_data);
+  g_task_set_source_tag (task, is_valid_username_async);
 
-        data = g_new0 (isValidUsernameData, 1);
-        data->username = g_strdup (username);
-        g_task_set_task_data (task, data, (GDestroyNotify) is_valid_username_data_free);
+  data = g_new0 (isValidUsernameData, 1);
+  data->username = g_strdup (username);
+  g_task_set_task_data (task, data, (GDestroyNotify)is_valid_username_data_free);
 
-        if (username == NULL || username[0] == '\0') {
-                g_task_return_boolean (task, FALSE);
-                return;
-        }
-        else if (strlen (username) > max_username_length) {
-                data->tip = g_strdup_printf (ngettext ("Usernames must have fewer than %ld character",
-                                                       "Usernames must have fewer than %ld characters",
-                                                       max_username_length),
-                                             max_username_length);
-                g_task_return_boolean (task, FALSE);
-                return;
-        }
+  if (username == NULL || username[0] == '\0') {
+    g_task_return_boolean (task, FALSE);
+    return;
+  } else if (strlen (username) > max_username_length) {
+    data->tip = g_strdup_printf (ngettext ("Usernames must have fewer than %ld character",
+                                           "Usernames must have fewer than %ld characters",
+                                           max_username_length),
+                                 max_username_length);
+    g_task_return_boolean (task, FALSE);
+    return;
+  }
 
 #ifdef __FreeBSD__
-        /* Abuse "pw usershow -n <name>" in the same way as the code below. We
-         * don't use "pw usermod -n <name> -N -l <newname>" here because it has
-         * a special case for "root" to reject changes to the root user.
-         */
-        argv[0] = "pw";
-        argv[1] = "usershow";
-        argv[2] = "-n";
-        argv[3] = data->username;
-        argv[4] = NULL;
+  /* Abuse "pw usershow -n <name>" in the same way as the code below. We
+   * don't use "pw usermod -n <name> -N -l <newname>" here because it has
+   * a special case for "root" to reject changes to the root user.
+   */
+  argv[0] = "pw";
+  argv[1] = "usershow";
+  argv[2] = "-n";
+  argv[3] = data->username;
+  argv[4] = NULL;
 #else
-        /* "usermod --login" is meant to be used to change a username, but the
-         * exit codes can be safely abused to check the validity of username.
-         * However, the current "usermod" implementation may change in the
-         * future, so it would be nice to have some official way for this
-         * instead of relying on the current "--login" implementation.
-         */
-        argv[0] = "/usr/sbin/usermod";
-        argv[1] = "--login";
-        argv[2] = data->username;
-        argv[3] = "--";
-        argv[4] = data->username;
-        argv[5] = NULL;
+  /* "usermod --login" is meant to be used to change a username, but the
+   * exit codes can be safely abused to check the validity of username.
+   * However, the current "usermod" implementation may change in the
+   * future, so it would be nice to have some official way for this
+   * instead of relying on the current "--login" implementation.
+   */
+  argv[0] = "/usr/sbin/usermod";
+  argv[1] = "--login";
+  argv[2] = data->username;
+  argv[3] = "--";
+  argv[4] = data->username;
+  argv[5] = NULL;
 #endif
 
-        if (!g_spawn_async (NULL, argv, NULL,
-                            G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD |
-                            G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
-                            NULL, NULL, &pid, &error)) {
-                g_task_return_error (task, error);
-                return;
-        }
+  if (!g_spawn_async (NULL, argv, NULL,
+                      G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD |
+                      G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
+                      NULL, NULL, &pid, &error)) {
+    g_task_return_error (task, error);
+    return;
+  }
 
-        g_child_watch_add (pid, (GChildWatchFunc) is_valid_username_child_watch_cb, task);
-        g_steal_pointer (&task);
+  g_child_watch_add (pid, (GChildWatchFunc)is_valid_username_child_watch_cb, task);
+  g_steal_pointer (&task);
 }
 
 gboolean
-is_valid_username_finish (GAsyncResult *result,
-                          gchar **tip,
-                          gchar **username,
-                          GError **error)
+is_valid_username_finish (GAsyncResult  *result,
+                          gchar        **tip,
+                          gchar        **username,
+                          GError       **error)
 {
-        GTask *task;
-        isValidUsernameData *data;
+  GTask *task;
+  isValidUsernameData *data;
 
-        g_return_val_if_fail (g_task_is_valid (result, NULL), FALSE);
+  g_return_val_if_fail (g_task_is_valid (result, NULL), FALSE);
 
-        task = G_TASK (result);
-        data = g_task_get_task_data (task);
+  task = G_TASK (result);
+  data = g_task_get_task_data (task);
 
-        if (tip != NULL) {
-                *tip = g_steal_pointer (&data->tip);
-        }
+  if (tip != NULL) {
+    *tip = g_steal_pointer (&data->tip);
+  }
 
-        if (username != NULL)
-                *username = g_steal_pointer (&data->username);
+  if (username != NULL)
+    *username = g_steal_pointer (&data->username);
 
-        return g_task_propagate_boolean (task, error);
+  return g_task_propagate_boolean (task, error);
 }
 
 /* This function was taken from AdwAvatar and modified so that it's possible to
@@ -266,53 +264,54 @@ is_valid_username_finish (GAsyncResult *result,
  * See: https://gitlab.gnome.org/GNOME/libadwaita/-/blob/afd0fab86ff9b4332d165b985a435ea6f822d41b/src/adw-avatar.c#L751
  * License: LGPL-2.1-or-later */
 GdkTexture *
-draw_avatar_to_texture (AdwAvatar *avatar, int size)
+draw_avatar_to_texture (AdwAvatar *avatar,
+                        int        size)
 {
-        GdkTexture *result;
-        GskRenderNode *node;
-        GtkSnapshot *snapshot;
-        GdkPaintable *paintable;
-        GtkNative *native;
-        GskRenderer *renderer;
-        int real_size;
-        graphene_matrix_t transform;
-        gboolean transform_ok;
+  GdkTexture *result;
+  GskRenderNode *node;
+  GtkSnapshot *snapshot;
+  GdkPaintable *paintable;
+  GtkNative *native;
+  GskRenderer *renderer;
+  int real_size;
+  graphene_matrix_t transform;
+  gboolean transform_ok;
 
-        real_size = adw_avatar_get_size (avatar);
+  real_size = adw_avatar_get_size (avatar);
 
-        /* This works around the issue that when the custom-image or text of the AdwAvatar changes the
-         * allocation gets invalidated and therefore we can't snapshot the widget till the allocation
-         * is recalculated */
-        gtk_widget_measure (GTK_WIDGET (avatar), GTK_ORIENTATION_HORIZONTAL, real_size, NULL, NULL, NULL, NULL);
-        gtk_widget_allocate (GTK_WIDGET (avatar), real_size, real_size, -1, NULL);
+  /* This works around the issue that when the custom-image or text of the AdwAvatar changes the
+   * allocation gets invalidated and therefore we can't snapshot the widget till the allocation
+   * is recalculated */
+  gtk_widget_measure (GTK_WIDGET (avatar), GTK_ORIENTATION_HORIZONTAL, real_size, NULL, NULL, NULL, NULL);
+  gtk_widget_allocate (GTK_WIDGET (avatar), real_size, real_size, -1, NULL);
 
-        transform_ok = gtk_widget_compute_transform (GTK_WIDGET (avatar),
-                                                     gtk_widget_get_first_child (GTK_WIDGET (avatar)),
-                                                     &transform);
+  transform_ok = gtk_widget_compute_transform (GTK_WIDGET (avatar),
+                                               gtk_widget_get_first_child (GTK_WIDGET (avatar)),
+                                               &transform);
 
-        g_assert (transform_ok);
+  g_assert (transform_ok);
 
-        snapshot = gtk_snapshot_new ();
-        gtk_snapshot_transform_matrix (snapshot, &transform);
-        GTK_WIDGET_GET_CLASS (avatar)->snapshot (GTK_WIDGET (avatar), snapshot);
+  snapshot = gtk_snapshot_new ();
+  gtk_snapshot_transform_matrix (snapshot, &transform);
+  GTK_WIDGET_GET_CLASS (avatar)->snapshot (GTK_WIDGET (avatar), snapshot);
 
-        /* Create first a GdkPaintable at the size the avatar was drawn
-         * then create a GdkSnapshot of it at the size requested */
-        paintable = gtk_snapshot_free_to_paintable (snapshot, &GRAPHENE_SIZE_INIT (real_size, real_size));
-        snapshot = gtk_snapshot_new ();
-        gdk_paintable_snapshot (paintable, snapshot, size, size);
-        g_object_unref (paintable);
+  /* Create first a GdkPaintable at the size the avatar was drawn
+   * then create a GdkSnapshot of it at the size requested */
+  paintable = gtk_snapshot_free_to_paintable (snapshot, &GRAPHENE_SIZE_INIT (real_size, real_size));
+  snapshot = gtk_snapshot_new ();
+  gdk_paintable_snapshot (paintable, snapshot, size, size);
+  g_object_unref (paintable);
 
-        node = gtk_snapshot_free_to_node (snapshot);
+  node = gtk_snapshot_free_to_node (snapshot);
 
-        native = gtk_widget_get_native (GTK_WIDGET (avatar));
-        renderer = gtk_native_get_renderer (native);
+  native = gtk_widget_get_native (GTK_WIDGET (avatar));
+  renderer = gtk_native_get_renderer (native);
 
-        result = gsk_renderer_render_texture (renderer, node, &GRAPHENE_RECT_INIT (-1, 0, size, size));
+  result = gsk_renderer_render_texture (renderer, node, &GRAPHENE_RECT_INIT (-1, 0, size, size));
 
-        gsk_render_node_unref (node);
+  gsk_render_node_unref (node);
 
-        return result;
+  return result;
 }
 
 void
@@ -320,32 +319,32 @@ set_user_icon_data (ActUser     *user,
                     GdkTexture  *texture,
                     const gchar *image_source)
 {
-        g_autofree gchar *path = NULL;
-        g_autoptr(GError) error = NULL;
-        int fd;
+  g_autofree gchar *path = NULL;
+  g_autoptr (GError) error = NULL;
+  int fd;
 
-        fd = g_file_open_tmp ("gnome-control-center-user-icon-XXXXXX", &path, &error);
+  fd = g_file_open_tmp ("gnome-control-center-user-icon-XXXXXX", &path, &error);
 
-        if (fd == -1) {
-                g_warning ("Failed to create temporary user icon: %s", error->message);
-                return;
-        }
+  if (fd == -1) {
+    g_warning ("Failed to create temporary user icon: %s", error->message);
+    return;
+  }
 
-        g_autoptr(GdkPixbuf) pixbuf = gdk_pixbuf_get_from_texture (texture);
-        gdk_pixbuf_save (pixbuf, path, "png", &error, IMAGE_SOURCE_KEY, image_source, NULL);
+  g_autoptr (GdkPixbuf) pixbuf = gdk_pixbuf_get_from_texture (texture);
+  gdk_pixbuf_save (pixbuf, path, "png", &error, IMAGE_SOURCE_KEY, image_source, NULL);
 
-        if (error != NULL) {
-            g_warning ("Failed to create temporary user icon: %s", error->message);
-        }
+  if (error != NULL) {
+    g_warning ("Failed to create temporary user icon: %s", error->message);
+  }
 
-        close (fd);
+  close (fd);
 
-        act_user_set_icon_file (user, path);
+  act_user_set_icon_file (user, path);
 
-        /* if we ever make the dbus call async, the g_remove call needs
-         * to wait for its completion
-         */
-        g_remove (path);
+  /* if we ever make the dbus call async, the g_remove call needs
+   * to wait for its completion
+   */
+  g_remove (path);
 }
 
 const gchar *
@@ -361,59 +360,60 @@ get_real_or_user_name (ActUser *user)
 }
 
 void
-setup_avatar_for_user (AdwAvatar *avatar, ActUser *user)
+setup_avatar_for_user (AdwAvatar *avatar,
+                       ActUser   *user)
 {
-        const gchar *avatar_file;
+  const gchar *avatar_file;
 
-        adw_avatar_set_custom_image (avatar, NULL);
-        adw_avatar_set_text (avatar, get_real_or_user_name (user));
+  adw_avatar_set_custom_image (avatar, NULL);
+  adw_avatar_set_text (avatar, get_real_or_user_name (user));
 
-        avatar_file = act_user_get_icon_file (user);
-        if (avatar_file) {
-                g_autoptr(GdkPixbuf) pixbuf = NULL;
-                const gchar *image_source;
-                gboolean is_generated = TRUE;
+  avatar_file = act_user_get_icon_file (user);
+  if (avatar_file) {
+    g_autoptr (GdkPixbuf) pixbuf = NULL;
+    const gchar *image_source;
+    gboolean is_generated = TRUE;
 
-                pixbuf = gdk_pixbuf_new_from_file_at_size (avatar_file,
-                                                           adw_avatar_get_size (avatar),
-                                                           adw_avatar_get_size (avatar),
-                                                           NULL);
+    pixbuf = gdk_pixbuf_new_from_file_at_size (avatar_file,
+                                               adw_avatar_get_size (avatar),
+                                               adw_avatar_get_size (avatar),
+                                               NULL);
 
-                if (pixbuf) {
-                        image_source = gdk_pixbuf_get_option (pixbuf, IMAGE_SOURCE_KEY);
+    if (pixbuf) {
+      image_source = gdk_pixbuf_get_option (pixbuf, IMAGE_SOURCE_KEY);
 
-                        if (image_source == NULL)
-                                g_debug ("User avatar's source isn't defined");
-                        else
-                                g_debug ("User avatar's source is %s", image_source);
+      if (image_source == NULL)
+        g_debug ("User avatar's source isn't defined");
+      else
+        g_debug ("User avatar's source is %s", image_source);
 
-                        is_generated = g_strcmp0 (image_source, "gnome-generated") == 0;
-                }
+      is_generated = g_strcmp0 (image_source, "gnome-generated") == 0;
+    }
 
-                if (!is_generated) {
-                        g_autoptr(GdkTexture) texture = NULL;
+    if (!is_generated) {
+      g_autoptr (GdkTexture) texture = NULL;
 
-                        texture = gdk_texture_new_for_pixbuf (pixbuf);
-                        adw_avatar_set_custom_image (avatar, GDK_PAINTABLE (texture));
-                }
-        }
+      texture = gdk_texture_new_for_pixbuf (pixbuf);
+      adw_avatar_set_custom_image (avatar, GDK_PAINTABLE (texture));
+    }
+  }
 }
 
 GSettings *
 settings_or_null (const gchar *schema)
 {
-        GSettingsSchemaSource *source = NULL;
-        g_auto(GStrv) non_relocatable = NULL;
-        GSettings *settings = NULL;
+  GSettingsSchemaSource *source = NULL;
+  g_auto (GStrv) non_relocatable = NULL;
+  GSettings *settings = NULL;
 
-        source = g_settings_schema_source_get_default ();
-        if (!source)
-                return NULL;
+  source = g_settings_schema_source_get_default ();
+  if (!source)
+    return NULL;
 
-        g_settings_schema_source_list_schemas (source, TRUE, &non_relocatable, NULL);
+  g_settings_schema_source_list_schemas (source, TRUE, &non_relocatable, NULL);
 
-        if (g_strv_contains ((const gchar * const *)non_relocatable, schema))
-                settings = g_settings_new (schema);
+  if (g_strv_contains ((const gchar * const *)non_relocatable, schema))
+    settings = g_settings_new (schema);
 
-        return settings;
+  return settings;
 }

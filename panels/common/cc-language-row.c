@@ -51,11 +51,10 @@ get_language_label (const gchar *language_code,
 
   if (modifier == NULL)
     return g_steal_pointer (&language);
-  else
-    {
-      g_autofree gchar *t_mod = gnome_get_translated_modifier (modifier, locale_id);
-      return g_strdup_printf ("%s — %s", language, t_mod);
-    }
+  else {
+    g_autofree gchar *t_mod = gnome_get_translated_modifier (modifier, locale_id);
+    return g_strdup_printf ("%s — %s", language, t_mod);
+  }
 }
 
 static void
@@ -112,17 +111,14 @@ cc_language_row_new (const gchar *locale_id)
   self->language_local = get_language_label (language_code, modifier, NULL);
   gtk_label_set_label (self->language_label, self->language);
 
-  if (country_code == NULL)
-    {
-      self->country = NULL;
-      self->country_local = NULL;
-    }
-  else
-    {
-      self->country = gnome_get_country_from_code (country_code, locale_id);
-      self->country_local = gnome_get_country_from_code (country_code, NULL);
-      gtk_label_set_label (self->country_label, self->country);
-    }
+  if (country_code == NULL) {
+    self->country = NULL;
+    self->country_local = NULL;
+  } else {
+    self->country = gnome_get_country_from_code (country_code, locale_id);
+    self->country_local = gnome_get_country_from_code (country_code, NULL);
+    gtk_label_set_label (self->country_label, self->country);
+  }
 
   return self;
 }
@@ -163,14 +159,16 @@ cc_language_row_get_country_local (CcLanguageRow *self)
 }
 
 void
-cc_language_row_set_checked (CcLanguageRow *self, gboolean checked)
+cc_language_row_set_checked (CcLanguageRow *self,
+                             gboolean       checked)
 {
   g_return_if_fail (CC_IS_LANGUAGE_ROW (self));
   gtk_widget_set_visible (GTK_WIDGET (self->check_image), checked);
 }
 
 void
-cc_language_row_set_is_extra (CcLanguageRow *self, gboolean is_extra)
+cc_language_row_set_is_extra (CcLanguageRow *self,
+                              gboolean       is_extra)
 {
   g_return_if_fail (CC_IS_LANGUAGE_ROW (self));
   self->is_extra = is_extra;

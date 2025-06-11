@@ -66,28 +66,27 @@
 #define CC_WWAN_ROUTE_PRIORITY_LOW  (1050)
 #define CC_WWAN_ROUTE_PRIORITY_HIGH (1040)
 
-struct _CcWwanData
-{
-  GObject      parent_instance;
+struct _CcWwanData {
+  GObject parent_instance;
 
-  MMObject    *mm_object;
-  MMModem     *modem;
-  MMSim       *sim;
-  gchar       *sim_id;
+  MMObject *mm_object;
+  MMModem *modem;
+  MMSim *sim;
+  gchar *sim_id;
 
-  gchar       *operator_code; /* MCCMNC */
-  GError      *error;
+  gchar *operator_code;       /* MCCMNC */
+  GError *error;
 
-  NMClient           *nm_client;
-  NMDevice           *nm_device;
+  NMClient *nm_client;
+  NMDevice *nm_device;
   NMAMobileProvidersDatabase *apn_db;
-  NMAMobileProvider  *apn_provider;
-  CcWwanDataApn      *default_apn;
-  CcWwanDataApn      *old_default_apn;
-  GListStore         *apn_list;
+  NMAMobileProvider *apn_provider;
+  CcWwanDataApn *default_apn;
+  CcWwanDataApn *old_default_apn;
+  GListStore *apn_list;
   NMActiveConnection *active_connection;
 
-  gint     priority;
+  gint priority;
   gboolean data_enabled; /* autoconnect enabled */
   gboolean home_only;    /* Data roaming */
   gboolean apn_list_updated;    /* APN list updated from mobile-provider-info */
@@ -239,18 +238,17 @@ wwan_data_find_matching_apn (CcWwanData            *self,
 
   n_items = g_list_model_get_n_items (G_LIST_MODEL (self->apn_list));
 
-  for (i = 0; i < n_items; i++)
-    {
-      apn = g_list_model_get_item (G_LIST_MODEL (self->apn_list), i);
+  for (i = 0; i < n_items; i++) {
+    apn = g_list_model_get_item (G_LIST_MODEL (self->apn_list), i);
 
-      if (apn->access_method == access_method)
-        return apn;
+    if (apn->access_method == access_method)
+      return apn;
 
-      if (wwan_data_apn_are_same (apn, access_method))
-        return apn;
+    if (wwan_data_apn_are_same (apn, access_method))
+      return apn;
 
-      g_object_unref (apn);
-    }
+    g_object_unref (apn);
+  }
 
   return NULL;
 }
@@ -275,7 +273,7 @@ static void
 wwan_data_update_apn_list_db (CcWwanData *self)
 {
   GSList *apn_methods = NULL, *l;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   guint i = 0;
 
   if (!self->sim || !self->operator_code || self->apn_list_updated)
@@ -287,11 +285,10 @@ wwan_data_update_apn_list_db (CcWwanData *self)
   if (!self->apn_db)
     self->apn_db = nma_mobile_providers_database_new_sync (NULL, NULL, NULL, &error);
 
-  if (error)
-    {
-      g_warning ("%s", error->message);
-      return;
-    }
+  if (error) {
+    g_warning ("%s", error->message);
+    return;
+  }
 
   if (!self->apn_provider)
     self->apn_provider = nma_mobile_providers_database_lookup_3gpp_mcc_mnc (self->apn_db,
@@ -302,26 +299,24 @@ wwan_data_update_apn_list_db (CcWwanData *self)
 
   self->apn_list_updated = TRUE;
 
-  for (l = apn_methods; l; l = l->next, i++)
-    {
-      g_autoptr(CcWwanDataApn) apn = NULL;
+  for (l = apn_methods; l; l = l->next, i++) {
+    g_autoptr (CcWwanDataApn) apn = NULL;
 
-      /* We don’t list MMS APNs */
-      if (wwan_data_nma_method_is_mms (l->data))
-        continue;
+    /* We don’t list MMS APNs */
+    if (wwan_data_nma_method_is_mms (l->data))
+      continue;
 
-      apn = wwan_data_find_matching_apn (self, l->data);
+    apn = wwan_data_find_matching_apn (self, l->data);
 
-      /* Prepend the item in order */
-      if (!apn)
-        {
-          apn = cc_wwan_data_apn_new ();
-          apn->access_method = l->data;
-          g_list_store_insert (self->apn_list, i, apn);
-        }
-
+    /* Prepend the item in order */
+    if (!apn) {
+      apn = cc_wwan_data_apn_new ();
       apn->access_method = l->data;
+      g_list_store_insert (self->apn_list, i, apn);
     }
+
+    apn->access_method = l->data;
+  }
 }
 
 static void
@@ -337,46 +332,42 @@ wwan_data_update_apn_list (CcWwanData *self)
   if (!self->apn_list)
     self->apn_list = g_list_store_new (CC_TYPE_WWAN_DATA_APN);
 
-  if (self->nm_device)
-    {
-      nm_connections = nm_device_get_available_connections (self->nm_device);
+  if (self->nm_device) {
+    nm_connections = nm_device_get_available_connections (self->nm_device);
 
-      for (i = 0; i < nm_connections->len; i++)
-        {
-          g_autoptr(CcWwanDataApn) apn = NULL;
+    for (i = 0; i < nm_connections->len; i++) {
+      g_autoptr (CcWwanDataApn) apn = NULL;
 
-          apn = cc_wwan_data_apn_new ();
-          apn->remote_connection = g_object_ref (nm_connections->pdata[i]);
-          g_list_store_append (self->apn_list, apn);
+      apn = cc_wwan_data_apn_new ();
+      apn->remote_connection = g_object_ref (nm_connections->pdata[i]);
+      g_list_store_append (self->apn_list, apn);
 
-          /* Load the default APN */
-          if (!self->default_apn && self->sim_id)
-            {
-              NMSettingConnection *connection_setting;
-              NMSettingIPConfig *ip_setting;
-              NMSettingGsm *setting;
-              NMConnection *connection;
-              const gchar *sim_id;
+      /* Load the default APN */
+      if (!self->default_apn && self->sim_id) {
+        NMSettingConnection *connection_setting;
+        NMSettingIPConfig *ip_setting;
+        NMSettingGsm *setting;
+        NMConnection *connection;
+        const gchar *sim_id;
 
-              connection = NM_CONNECTION (apn->remote_connection);
-              setting = nm_connection_get_setting_gsm (connection);
-              connection_setting = nm_connection_get_setting_connection (connection);
-              sim_id = nm_setting_gsm_get_sim_id (setting);
+        connection = NM_CONNECTION (apn->remote_connection);
+        setting = nm_connection_get_setting_gsm (connection);
+        connection_setting = nm_connection_get_setting_connection (connection);
+        sim_id = nm_setting_gsm_get_sim_id (setting);
 
-              if (sim_id && *sim_id && g_str_equal (sim_id, self->sim_id))
-                {
-                  self->default_apn = apn;
-                  self->home_only = nm_setting_gsm_get_home_only (setting);
-                  self->data_enabled = nm_setting_connection_get_autoconnect (connection_setting);
+        if (sim_id && *sim_id && g_str_equal (sim_id, self->sim_id)) {
+          self->default_apn = apn;
+          self->home_only = nm_setting_gsm_get_home_only (setting);
+          self->data_enabled = nm_setting_connection_get_autoconnect (connection_setting);
 
-                  /* If any of the APN has a high priority, the device have high priority */
-                  ip_setting = nm_connection_get_setting_ip4_config (connection);
-                  if (nm_setting_ip_config_get_route_metric (ip_setting) == CC_WWAN_ROUTE_PRIORITY_HIGH)
-                    self->priority = CC_WWAN_APN_PRIORITY_HIGH;
-                }
-            }
+          /* If any of the APN has a high priority, the device have high priority */
+          ip_setting = nm_connection_get_setting_ip4_config (connection);
+          if (nm_setting_ip_config_get_route_metric (ip_setting) == CC_WWAN_ROUTE_PRIORITY_HIGH)
+            self->priority = CC_WWAN_APN_PRIORITY_HIGH;
         }
+      }
     }
+  }
 }
 
 static void
@@ -392,16 +383,14 @@ wwan_device_3gpp_operator_code_changd_cb (CcWwanData *self)
 
   modem_3gpp = mm_object_peek_modem_3gpp (self->mm_object);
 
-  if (!self->operator_code)
-    {
-      self->operator_code = mm_modem_3gpp_dup_operator_code (modem_3gpp);
+  if (!self->operator_code) {
+    self->operator_code = mm_modem_3gpp_dup_operator_code (modem_3gpp);
 
-      if (self->operator_code)
-        {
-          wwan_data_update_apn_list (self);
-          wwan_data_update_apn_list_db (self);
-        }
+    if (self->operator_code) {
+      wwan_data_update_apn_list (self);
+      wwan_data_update_apn_list_db (self);
     }
+  }
 }
 
 static void
@@ -412,8 +401,7 @@ cc_wwan_data_get_property (GObject    *object,
 {
   CcWwanData *self = (CcWwanData *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_ERROR:
       g_value_set_boolean (value, self->error != NULL);
       break;
@@ -424,7 +412,7 @@ cc_wwan_data_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -494,7 +482,7 @@ cc_wwan_data_new (MMObject *mm_object,
 {
   CcWwanData *self;
   NMDevice *nm_device = NULL;
-  g_autoptr(MMModem) modem = NULL;
+  g_autoptr (MMModem) modem = NULL;
   NMDeviceModemCapabilities capabilities = 0;
 
   g_return_val_if_fail (MM_IS_OBJECT (mm_object), NULL);
@@ -524,19 +512,17 @@ cc_wwan_data_new (MMObject *mm_object,
   self->nm_device = g_object_ref (nm_device);
   self->active_connection = nm_device_get_active_connection (nm_device);
 
-  if (!self->operator_code)
-    {
-      MMModem3gpp *modem_3gpp;
+  if (!self->operator_code) {
+    MMModem3gpp *modem_3gpp;
 
-      modem_3gpp = mm_object_peek_modem_3gpp (mm_object);
-      if (modem_3gpp)
-        {
-          g_signal_connect_object (modem_3gpp, "notify::operator-code",
-                                   G_CALLBACK (wwan_device_3gpp_operator_code_changd_cb),
-                                   self, G_CONNECT_SWAPPED);
-          wwan_device_3gpp_operator_code_changd_cb (self);
-        }
+    modem_3gpp = mm_object_peek_modem_3gpp (mm_object);
+    if (modem_3gpp) {
+      g_signal_connect_object (modem_3gpp, "notify::operator-code",
+                               G_CALLBACK (wwan_device_3gpp_operator_code_changd_cb),
+                               self, G_CONNECT_SWAPPED);
+      wwan_device_3gpp_operator_code_changd_cb (self);
     }
+  }
 
   if (self->active_connection)
     g_object_ref (self->active_connection);
@@ -619,33 +605,27 @@ wwan_data_update_apn (CcWwanData    *self,
 
   setting = NM_SETTING (nm_connection_get_setting_ip4_config (connection));
   if (self->priority == CC_WWAN_APN_PRIORITY_HIGH &&
-      self->default_apn == apn)
-    {
-      dns_priority = CC_WWAN_DNS_PRIORITY_HIGH;
-      route_metric = CC_WWAN_ROUTE_PRIORITY_HIGH;
-    }
-  else
-    {
-      dns_priority = CC_WWAN_DNS_PRIORITY_LOW;
-      route_metric = CC_WWAN_ROUTE_PRIORITY_LOW;
-    }
+      self->default_apn == apn) {
+    dns_priority = CC_WWAN_DNS_PRIORITY_HIGH;
+    route_metric = CC_WWAN_ROUTE_PRIORITY_HIGH;
+  } else {
+    dns_priority = CC_WWAN_DNS_PRIORITY_LOW;
+    route_metric = CC_WWAN_ROUTE_PRIORITY_LOW;
+  }
 
   g_object_set (setting,
                 NM_SETTING_IP_CONFIG_DNS_PRIORITY, dns_priority,
                 NM_SETTING_IP_CONFIG_ROUTE_METRIC, (gint64)route_metric,
                 NULL);
 
-  if (apn->access_method && !apn->remote_connection)
-    {
-      name = nma_mobile_access_method_get_name (apn->access_method);
-      username = nma_mobile_access_method_get_username (apn->access_method);
-      password = nma_mobile_access_method_get_password (apn->access_method);
-      apn_name = nma_mobile_access_method_get_3gpp_apn (apn->access_method);
-    }
-  else
-    {
-      return;
-    }
+  if (apn->access_method && !apn->remote_connection) {
+    name = nma_mobile_access_method_get_name (apn->access_method);
+    username = nma_mobile_access_method_get_username (apn->access_method);
+    password = nma_mobile_access_method_get_password (apn->access_method);
+    apn_name = nma_mobile_access_method_get_3gpp_apn (apn->access_method);
+  } else {
+    return;
+  }
 
   setting = NM_SETTING (nm_connection_get_setting_gsm (connection));
   g_object_set (setting,
@@ -671,15 +651,14 @@ wwan_data_get_apn_index (CcWwanData    *self,
   model = G_LIST_MODEL (self->apn_list);
   n_items = g_list_model_get_n_items (model);
 
-  for (i = 0; i < n_items; i++)
-    {
-      g_autoptr(CcWwanDataApn) cached_apn = NULL;
+  for (i = 0; i < n_items; i++) {
+    g_autoptr (CcWwanDataApn) cached_apn = NULL;
 
-      cached_apn = g_list_model_get_item (model, i);
+    cached_apn = g_list_model_get_item (model, i);
 
-      if (apn == cached_apn)
-        return i;
-    }
+    if (apn == cached_apn)
+      return i;
+  }
 
   return -1;
 }
@@ -691,33 +670,30 @@ cc_wwan_data_connection_updated_cb (GObject      *object,
 {
   CcWwanData *self;
   CcWwanDataApn *apn;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
 
   self = g_task_get_source_object (G_TASK (task));
   apn = g_task_get_task_data (G_TASK (task));
 
   nm_remote_connection_commit_changes_finish (apn->remote_connection,
                                               result, &error);
-  if (!error)
-    {
-      gint apn_index;
-      apn_index = wwan_data_get_apn_index (self, apn);
+  if (!error) {
+    gint apn_index;
+    apn_index = wwan_data_get_apn_index (self, apn);
 
-      if (apn_index >= 0)
-        g_list_model_items_changed (G_LIST_MODEL (self->apn_list),
-                                    apn_index, 1, 1);
-      else
-        g_warning ("APN ‘%s’ not in APN list",
-                   cc_wwan_data_apn_get_name (apn));
+    if (apn_index >= 0)
+      g_list_model_items_changed (G_LIST_MODEL (self->apn_list),
+                                  apn_index, 1, 1);
+    else
+      g_warning ("APN ‘%s’ not in APN list",
+                 cc_wwan_data_apn_get_name (apn));
 
-      apn->modified = FALSE;
-      g_task_return_boolean (task, TRUE);
-    }
-  else
-    {
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
+    apn->modified = FALSE;
+    g_task_return_boolean (task, TRUE);
+  } else {
+    g_task_return_error (task, g_steal_pointer (&error));
+  }
 }
 
 static void
@@ -727,30 +703,26 @@ cc_wwan_data_new_connection_added_cb (GObject      *object,
 {
   CcWwanData *self;
   CcWwanDataApn *apn;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
 
   self = g_task_get_source_object (G_TASK (task));
   apn = g_task_get_task_data (G_TASK (task));
   apn->remote_connection = nm_client_add_connection_finish (self->nm_client,
                                                             result, &error);
-  if (!error)
-    {
-      apn->modified = FALSE;
+  if (!error) {
+    apn->modified = FALSE;
 
-      /* If APN has access method, it’s already on the list */
-      if (!apn->access_method)
-        {
-          g_list_store_append (self->apn_list, apn);
-          g_object_unref (apn);
-        }
+    /* If APN has access method, it’s already on the list */
+    if (!apn->access_method) {
+      g_list_store_append (self->apn_list, apn);
+      g_object_unref (apn);
+    }
 
-      g_task_return_pointer (task, apn, NULL);
-    }
-  else
-    {
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
+    g_task_return_pointer (task, apn, NULL);
+  } else {
+    g_task_return_error (task, g_steal_pointer (&error));
+  }
 }
 
 void
@@ -761,7 +733,7 @@ cc_wwan_data_save_apn (CcWwanData          *self,
                        gpointer             user_data)
 {
   NMConnection *connection = NULL;
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   g_return_if_fail (CC_IS_WWAN_DATA (self));
   g_return_if_fail (CC_IS_WWAN_DATA_APN (apn));
@@ -774,27 +746,23 @@ cc_wwan_data_save_apn (CcWwanData          *self,
 
   /* If the item has a remote connection, it should already be saved.
    * We should save it again only if it got modified */
-  if (apn->remote_connection && !apn->modified)
-    {
-      g_task_return_pointer (task, apn, NULL);
-      return;
-    }
+  if (apn->remote_connection && !apn->modified) {
+    g_task_return_pointer (task, apn, NULL);
+    return;
+  }
 
   wwan_data_update_apn (self, apn, connection);
-  if (wwan_data_apn_is_new (apn))
-    {
-      nm_client_add_connection_async (self->nm_client, apn->nm_connection,
-                                      TRUE, cancellable,
-                                      cc_wwan_data_new_connection_added_cb,
-                                      g_steal_pointer (&task));
-    }
-  else
-    {
-      nm_remote_connection_commit_changes_async (apn->remote_connection, TRUE,
-                                                 cancellable,
-                                                 cc_wwan_data_connection_updated_cb,
-                                                 g_steal_pointer (&task));
-    }
+  if (wwan_data_apn_is_new (apn)) {
+    nm_client_add_connection_async (self->nm_client, apn->nm_connection,
+                                    TRUE, cancellable,
+                                    cc_wwan_data_new_connection_added_cb,
+                                    g_steal_pointer (&task));
+  } else {
+    nm_remote_connection_commit_changes_async (apn->remote_connection, TRUE,
+                                               cancellable,
+                                               cc_wwan_data_connection_updated_cb,
+                                               g_steal_pointer (&task));
+  }
 }
 
 CcWwanDataApn *
@@ -815,21 +783,18 @@ cc_wwan_data_activated_cb (GObject      *object,
 {
   CcWwanData *self;
   NMActiveConnection *connection;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
 
   self = g_task_get_source_object (G_TASK (task));
   connection = nm_client_activate_connection_finish (self->nm_client,
                                                      result, &error);
-  if (connection)
-    {
-      g_set_object (&self->active_connection, connection);
-      g_task_return_boolean (task, TRUE);
-    }
-  else
-    {
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
+  if (connection) {
+    g_set_object (&self->active_connection, connection);
+    g_task_return_boolean (task, TRUE);
+  } else {
+    g_task_return_error (task, g_steal_pointer (&error));
+  }
 
   if (error)
     g_warning ("Error: %s", error->message);
@@ -841,19 +806,16 @@ cc_wwan_data_disconnect_cb (GObject      *object,
                             gpointer      user_data)
 {
   CcWwanData *self;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
 
   self = g_task_get_source_object (G_TASK (task));
-  if (nm_device_disconnect_finish (self->nm_device, result, &error))
-    {
-      g_clear_object (&self->active_connection);
-      g_task_return_boolean (task, TRUE);
-    }
-  else
-    {
-      g_task_return_error (task, g_steal_pointer (&error));
-    }
+  if (nm_device_disconnect_finish (self->nm_device, result, &error)) {
+    g_clear_object (&self->active_connection);
+    g_task_return_boolean (task, TRUE);
+  } else {
+    g_task_return_error (task, g_steal_pointer (&error));
+  }
 
   if (error)
     g_warning ("Error: %s", error->message);
@@ -866,36 +828,32 @@ cc_wwan_data_settings_saved_cb (GObject      *object,
 {
   CcWwanData *self;
   GCancellable *cancellable;
-  g_autoptr(GTask) task = user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = user_data;
+  g_autoptr (GError) error = NULL;
 
   self = g_task_get_source_object (G_TASK (task));
   cancellable = g_task_get_cancellable (G_TASK (task));
 
-  if (!cc_wwan_data_save_apn_finish (self, result, &error))
-    {
-      g_task_return_error (task, g_steal_pointer (&error));
-      return;
-    }
+  if (!cc_wwan_data_save_apn_finish (self, result, &error)) {
+    g_task_return_error (task, g_steal_pointer (&error));
+    return;
+  }
 
   self->default_apn->modified = FALSE;
 
-  if (self->data_enabled)
-    {
-      nm_client_activate_connection_async (self->nm_client,
-                                           NM_CONNECTION (self->default_apn->remote_connection),
-                                           self->nm_device,
-                                           NULL, cancellable,
-                                           cc_wwan_data_activated_cb,
-                                           g_steal_pointer (&task));
-    }
-  else
-    {
-      nm_device_disconnect_async (self->nm_device,
-                                  cancellable,
-                                  cc_wwan_data_disconnect_cb,
-                                  g_steal_pointer (&task));
-    }
+  if (self->data_enabled) {
+    nm_client_activate_connection_async (self->nm_client,
+                                         NM_CONNECTION (self->default_apn->remote_connection),
+                                         self->nm_device,
+                                         NULL, cancellable,
+                                         cc_wwan_data_activated_cb,
+                                         g_steal_pointer (&task));
+  } else {
+    nm_device_disconnect_async (self->nm_device,
+                                cancellable,
+                                cc_wwan_data_disconnect_cb,
+                                g_steal_pointer (&task));
+  }
 }
 
 /**
@@ -920,7 +878,7 @@ cc_wwan_data_save_settings (CcWwanData          *self,
 {
   NMConnection *connection;
   NMSetting *setting;
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   g_return_if_fail (CC_IS_WWAN_DATA (self));
   g_return_if_fail (!cancellable || G_IS_CANCELLABLE (cancellable));
@@ -929,32 +887,31 @@ cc_wwan_data_save_settings (CcWwanData          *self,
   task = g_task_new (self, cancellable, callback, user_data);
 
   /* Reset old settings to default value */
-  if (self->old_default_apn && self->old_default_apn->remote_connection)
-    {
-      connection = NM_CONNECTION (self->old_default_apn->remote_connection);
+  if (self->old_default_apn && self->old_default_apn->remote_connection) {
+    connection = NM_CONNECTION (self->old_default_apn->remote_connection);
 
-      setting = NM_SETTING (nm_connection_get_setting_gsm (connection));
-      g_object_set (G_OBJECT (setting),
-                    NM_SETTING_GSM_HOME_ONLY, TRUE,
-                    NM_SETTING_GSM_SIM_ID, NULL,
-                    NULL);
+    setting = NM_SETTING (nm_connection_get_setting_gsm (connection));
+    g_object_set (G_OBJECT (setting),
+                  NM_SETTING_GSM_HOME_ONLY, TRUE,
+                  NM_SETTING_GSM_SIM_ID, NULL,
+                  NULL);
 
-      setting = NM_SETTING (nm_connection_get_setting_ip4_config (connection));
-      g_object_set (setting,
-                    NM_SETTING_IP_CONFIG_DNS_PRIORITY, CC_WWAN_DNS_PRIORITY_LOW,
-                    NM_SETTING_IP_CONFIG_ROUTE_METRIC, (gint64)CC_WWAN_ROUTE_PRIORITY_LOW,
-                    NULL);
+    setting = NM_SETTING (nm_connection_get_setting_ip4_config (connection));
+    g_object_set (setting,
+                  NM_SETTING_IP_CONFIG_DNS_PRIORITY, CC_WWAN_DNS_PRIORITY_LOW,
+                  NM_SETTING_IP_CONFIG_ROUTE_METRIC, (gint64)CC_WWAN_ROUTE_PRIORITY_LOW,
+                  NULL);
 
-      setting = NM_SETTING (nm_connection_get_setting_connection (connection));
-      g_object_set (G_OBJECT (setting),
-                    NM_SETTING_CONNECTION_AUTOCONNECT, FALSE,
-                    NULL);
+    setting = NM_SETTING (nm_connection_get_setting_connection (connection));
+    g_object_set (G_OBJECT (setting),
+                  NM_SETTING_CONNECTION_AUTOCONNECT, FALSE,
+                  NULL);
 
-      nm_remote_connection_commit_changes (NM_REMOTE_CONNECTION (connection),
-                                           TRUE, cancellable, NULL);
-      self->old_default_apn->modified = FALSE;
-      self->old_default_apn = NULL;
-    }
+    nm_remote_connection_commit_changes (NM_REMOTE_CONNECTION (connection),
+                                         TRUE, cancellable, NULL);
+    self->old_default_apn->modified = FALSE;
+    self->old_default_apn = NULL;
+  }
 
   self->default_apn->modified = TRUE;
   connection = wwan_data_get_nm_connection (self->default_apn);
@@ -997,12 +954,11 @@ cc_wwan_data_delete_apn (CcWwanData     *self,
   g_return_val_if_fail (error != NULL, FALSE);
 
   apn_index = wwan_data_get_apn_index (self, apn);
-  if (apn_index == -1)
-    {
-      g_set_error (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND,
-                   "APN not found for the connection");
-      return FALSE;
-    }
+  if (apn_index == -1) {
+    g_set_error (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND,
+                 "APN not found for the connection");
+    return FALSE;
+  }
 
   connection = g_steal_pointer (&apn->remote_connection);
   wwan_data_apn_reset (apn);
@@ -1010,26 +966,24 @@ cc_wwan_data_delete_apn (CcWwanData     *self,
   if (connection)
     ret = nm_remote_connection_delete (connection, cancellable, error);
 
-  if (!ret)
-    {
-      apn->remote_connection = connection;
-      *error = g_error_new (G_IO_ERROR, G_IO_ERROR_FAILED,
-                            "Deleting APN from NetworkManager failed");
-      return ret;
-    }
+  if (!ret) {
+    apn->remote_connection = connection;
+    *error = g_error_new (G_IO_ERROR, G_IO_ERROR_FAILED,
+                          "Deleting APN from NetworkManager failed");
+    return ret;
+  }
 
   g_object_unref (connection);
 
   /* We remove the item only if it's not in the mobile provider database */
-  if (!apn->access_method)
-    {
-      if (self->default_apn == apn)
-        self->default_apn = NULL;
+  if (!apn->access_method) {
+    if (self->default_apn == apn)
+      self->default_apn = NULL;
 
-      g_list_store_remove (self->apn_list, apn_index);
+    g_list_store_remove (self->apn_list, apn_index);
 
-      return TRUE;
-    }
+    return TRUE;
+  }
 
   *error = g_error_new (G_IO_ERROR, G_IO_ERROR_READ_ONLY,
                         "Deleting APN from NetworkManager failed");
@@ -1207,7 +1161,6 @@ cc_wwan_data_apn_new (void)
 const gchar *
 cc_wwan_data_apn_get_name (CcWwanDataApn *apn)
 {
-
   if (apn->remote_connection)
     return nm_connection_get_id (NM_CONNECTION (apn->remote_connection));
 
@@ -1263,17 +1216,14 @@ cc_wwan_data_apn_get_apn (CcWwanDataApn *apn)
 {
   const gchar *apn_name;
 
-  if (apn->remote_connection)
-    {
-      NMSettingGsm *setting;
+  if (apn->remote_connection) {
+    NMSettingGsm *setting;
 
-      setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
-      apn_name = nm_setting_gsm_get_apn (setting);
-    }
-  else if (apn->access_method)
-    {
-      apn_name = nma_mobile_access_method_get_3gpp_apn (apn->access_method);
-    }
+    setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
+    apn_name = nm_setting_gsm_get_apn (setting);
+  } else if (apn->access_method) {
+    apn_name = nma_mobile_access_method_get_3gpp_apn (apn->access_method);
+  }
 
   return apn_name;
 }
@@ -1326,17 +1276,14 @@ cc_wwan_data_apn_get_username (CcWwanDataApn *apn)
 {
   const gchar *username;
 
-  if (apn->remote_connection)
-    {
-      NMSettingGsm *setting;
+  if (apn->remote_connection) {
+    NMSettingGsm *setting;
 
-      setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
-      username = nm_setting_gsm_get_username (setting);
-    }
-  else if (apn->access_method)
-    {
-      username = nma_mobile_access_method_get_username (apn->access_method);
-    }
+    setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
+    username = nm_setting_gsm_get_username (setting);
+  } else if (apn->access_method) {
+    username = nma_mobile_access_method_get_username (apn->access_method);
+  }
 
   return username;
 }
@@ -1387,36 +1334,31 @@ cc_wwan_data_apn_get_password (CcWwanDataApn *apn)
 {
   const gchar *password;
 
-  if (NM_IS_REMOTE_CONNECTION (apn->remote_connection))
-    {
-      g_autoptr(GVariant) secrets = NULL;
-      g_autoptr(GError) error = NULL;
+  if (NM_IS_REMOTE_CONNECTION (apn->remote_connection)) {
+    g_autoptr (GVariant) secrets = NULL;
+    g_autoptr (GError) error = NULL;
 
-      secrets = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (apn->remote_connection),
-                                                  "gsm", NULL, &error);
+    secrets = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (apn->remote_connection),
+                                                "gsm", NULL, &error);
 
-      if (!error)
-        nm_connection_update_secrets (NM_CONNECTION (apn->remote_connection),
-                                      "gsm", secrets, &error);
+    if (!error)
+      nm_connection_update_secrets (NM_CONNECTION (apn->remote_connection),
+                                    "gsm", secrets, &error);
 
-      if (error)
-        {
-          g_warning ("Error: %s", error->message);
-          return NULL;
-        }
+    if (error) {
+      g_warning ("Error: %s", error->message);
+      return NULL;
     }
+  }
 
-  if (apn->remote_connection)
-    {
-      NMSettingGsm *setting;
+  if (apn->remote_connection) {
+    NMSettingGsm *setting;
 
-      setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
-      password = nm_setting_gsm_get_password (setting);
-    }
-  else if (apn->access_method)
-    {
-      password = nma_mobile_access_method_get_password (apn->access_method);
-    }
+    setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
+    password = nm_setting_gsm_get_password (setting);
+  } else if (apn->access_method) {
+    password = nma_mobile_access_method_get_password (apn->access_method);
+  }
 
   return password;
 }
@@ -1467,8 +1409,7 @@ cc_wwan_data_apn_get_initial_eps_apn (CcWwanDataApn *apn)
 {
   const gchar *apn_name;
 
-  if (apn->remote_connection)
-  {
+  if (apn->remote_connection) {
     NMSettingGsm *setting;
 
     setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
@@ -1531,8 +1472,7 @@ cc_wwan_data_apn_get_initial_eps_username (CcWwanDataApn *apn)
 {
   const gchar *username;
 
-  if (apn->remote_connection)
-  {
+  if (apn->remote_connection) {
     NMSettingGsm *setting;
 
     setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
@@ -1554,7 +1494,7 @@ cc_wwan_data_apn_get_initial_eps_username (CcWwanDataApn *apn)
  */
 void
 cc_wwan_data_apn_set_initial_eps_username (CcWwanDataApn *apn,
-                               const gchar   *username)
+                                           const gchar   *username)
 {
   NMConnection *connection;
   NMSettingGsm *setting;
@@ -1588,32 +1528,29 @@ cc_wwan_data_apn_get_initial_eps_password (CcWwanDataApn *apn)
 {
   const gchar *password;
 
-  if (NM_IS_REMOTE_CONNECTION (apn->remote_connection))
-    {
-      g_autoptr(GVariant) secrets = NULL;
-      g_autoptr(GError) error = NULL;
+  if (NM_IS_REMOTE_CONNECTION (apn->remote_connection)) {
+    g_autoptr (GVariant) secrets = NULL;
+    g_autoptr (GError) error = NULL;
 
-      secrets = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (apn->remote_connection),
-                                                  "gsm", NULL, &error);
+    secrets = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (apn->remote_connection),
+                                                "gsm", NULL, &error);
 
-      if (!error)
-        nm_connection_update_secrets (NM_CONNECTION (apn->remote_connection),
-                                      "gsm", secrets, &error);
+    if (!error)
+      nm_connection_update_secrets (NM_CONNECTION (apn->remote_connection),
+                                    "gsm", secrets, &error);
 
-      if (error)
-        {
-          g_warning ("Error: %s", error->message);
-          return NULL;
-        }
+    if (error) {
+      g_warning ("Error: %s", error->message);
+      return NULL;
     }
+  }
 
-  if (apn->remote_connection)
-    {
-      NMSettingGsm *setting;
+  if (apn->remote_connection) {
+    NMSettingGsm *setting;
 
-      setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
-      password = nm_setting_gsm_get_initial_eps_password (setting);
-    }
+    setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
+    password = nm_setting_gsm_get_initial_eps_password (setting);
+  }
   /*
   else if (apn->access_method)
     {
@@ -1636,7 +1573,7 @@ cc_wwan_data_apn_get_initial_eps_password (CcWwanDataApn *apn)
  */
 void
 cc_wwan_data_apn_set_initial_eps_password (CcWwanDataApn *apn,
-                               const gchar   *password)
+                                           const gchar   *password)
 {
   NMConnection *connection;
   NMSettingGsm *setting;
@@ -1704,7 +1641,7 @@ cc_wwan_data_apn_get_initial_eps_auth_method (CcWwanDataApn *apn)
  */
 void
 cc_wwan_data_apn_set_initial_eps_auth_method (CcWwanDataApn *apn,
-                                              guint authtype)
+                                              guint          authtype)
 {
   NMSettingGsm *setting;
   NMConnection *connection;
@@ -1722,9 +1659,8 @@ cc_wwan_data_apn_set_initial_eps_auth_method (CcWwanDataApn *apn,
   connection = wwan_data_get_nm_connection (apn);
   setting = nm_connection_get_setting_gsm (connection);
 
-  switch(authtype)
-  {
-    case 0: //None
+  switch(authtype) {
+    case 0: /*None */
       noauth_enabled = TRUE;
       refuse_pap_enabled = TRUE;
       refuse_chap_enabled = TRUE;
@@ -1732,7 +1668,7 @@ cc_wwan_data_apn_set_initial_eps_auth_method (CcWwanDataApn *apn,
       refuse_mschap_enabled = TRUE;
       refuse_mschapv2_enabled = TRUE;
       break;
-    case 1: //PAP
+    case 1: /*PAP */
       noauth_enabled = FALSE;
       refuse_pap_enabled = FALSE;
       refuse_chap_enabled = TRUE;
@@ -1740,7 +1676,7 @@ cc_wwan_data_apn_set_initial_eps_auth_method (CcWwanDataApn *apn,
       refuse_mschap_enabled = TRUE;
       refuse_mschapv2_enabled = TRUE;
       break;
-    case 2: //CHAP
+    case 2: /*CHAP */
       noauth_enabled = FALSE;
       refuse_pap_enabled = TRUE;
       refuse_chap_enabled = FALSE;
@@ -1748,7 +1684,7 @@ cc_wwan_data_apn_set_initial_eps_auth_method (CcWwanDataApn *apn,
       refuse_mschap_enabled = TRUE;
       refuse_mschapv2_enabled = TRUE;
       break;
-    case 3: //EAP
+    case 3: /*EAP */
       noauth_enabled = FALSE;
       refuse_pap_enabled = TRUE;
       refuse_chap_enabled = TRUE;
@@ -1756,7 +1692,7 @@ cc_wwan_data_apn_set_initial_eps_auth_method (CcWwanDataApn *apn,
       refuse_mschap_enabled = TRUE;
       refuse_mschapv2_enabled = TRUE;
       break;
-    case 4: //MSCHAP
+    case 4: /*MSCHAP */
       noauth_enabled = FALSE;
       refuse_pap_enabled = TRUE;
       refuse_chap_enabled = TRUE;
@@ -1764,7 +1700,7 @@ cc_wwan_data_apn_set_initial_eps_auth_method (CcWwanDataApn *apn,
       refuse_mschap_enabled = FALSE;
       refuse_mschapv2_enabled = TRUE;
       break;
-    case 5: //MSCHAPV2
+    case 5: /*MSCHAPV2 */
       noauth_enabled = FALSE;
       refuse_pap_enabled = TRUE;
       refuse_chap_enabled = TRUE;
@@ -1774,7 +1710,7 @@ cc_wwan_data_apn_set_initial_eps_auth_method (CcWwanDataApn *apn,
       break;
   }
 
-	g_object_set (setting,
+  g_object_set (setting,
                 NM_SETTING_GSM_INITIAL_EPS_BEARER_NOAUTH, noauth_enabled,
                 NM_SETTING_GSM_INITIAL_EPS_BEARER_REFUSE_PAP, refuse_pap_enabled,
                 NM_SETTING_GSM_INITIAL_EPS_BEARER_REFUSE_CHAP, refuse_chap_enabled,
@@ -1800,8 +1736,7 @@ cc_wwan_data_apn_should_configure_initial_eps_bearer (CcWwanDataApn *apn)
 
   g_return_val_if_fail (CC_IS_WWAN_DATA_APN (apn), FALSE);
 
-  if (apn->remote_connection)
-  {
+  if (apn->remote_connection) {
     NMSettingGsm *setting;
 
     setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
@@ -1838,8 +1773,8 @@ cc_wwan_data_apn_set_should_configure_initial_eps_bearer (CcWwanDataApn *apn,
   g_return_if_fail (CC_IS_WWAN_DATA_APN (apn));
 
   apn->modified = TRUE;
-  connection = wwan_data_get_nm_connection(apn);
-  setting = nm_connection_get_setting_gsm(connection);
+  connection = wwan_data_get_nm_connection (apn);
+  setting = nm_connection_get_setting_gsm (connection);
 
   g_object_set (setting,
                 NM_SETTING_GSM_INITIAL_EPS_BEARER_CONFIGURE, configure,

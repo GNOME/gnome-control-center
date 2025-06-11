@@ -25,8 +25,7 @@
 #include "shell/cc-application.h"
 #include "shell/cc-shell-model.h"
 
-struct _GtpDynamicPanel
-{
+struct _GtpDynamicPanel {
   CcPanel parent;
 };
 

@@ -23,8 +23,7 @@
 
 #include "ce-ip-address-entry.h"
 
-struct _CEIPAddressEntry
-{
+struct _CEIPAddressEntry {
   GtkEntry parent_instance;
 
   int family;

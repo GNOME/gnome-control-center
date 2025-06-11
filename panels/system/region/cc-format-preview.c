@@ -32,7 +32,7 @@
 #include <glib/gi18n.h>
 
 struct _CcFormatPreview {
-  AdwPreferencesGroup     parent_instance;
+  AdwPreferencesGroup parent_instance;
 
   AdwActionRow *date_format_row;
   AdwActionRow *date_time_format_row;
@@ -41,11 +41,10 @@ struct _CcFormatPreview {
   AdwActionRow *paper_format_row;
   AdwActionRow *time_format_row;
 
-  gchar     *region;
+  gchar *region;
 };
 
-enum
-{
+enum {
   PROP_0,
   PROP_REGION
 };
@@ -53,7 +52,9 @@ enum
 G_DEFINE_TYPE (CcFormatPreview, cc_format_preview, ADW_TYPE_PREFERENCES_GROUP)
 
 static void
-display_date (AdwActionRow *row, GDateTime *dt, const gchar *format)
+display_date (AdwActionRow *row,
+              GDateTime    *dt,
+              const gchar  *format)
 {
   g_autofree gchar *s = g_date_time_format (dt, format);
   adw_action_row_set_subtitle (row, g_strstrip (s));
@@ -65,19 +66,19 @@ update_format_examples (CcFormatPreview *self)
   const gchar *region = self->region;
   locale_t locale;
   locale_t old_locale;
-  g_autoptr(GDateTime) dt = NULL;
+  g_autoptr (GDateTime) dt = NULL;
   g_autofree gchar *s = NULL;
 #ifdef LC_MEASUREMENT
   const gchar *fmt;
   gboolean is_imperial = FALSE;
 #endif
-  g_autoptr(GtkPaperSize) paper = NULL;
+  g_autoptr (GtkPaperSize) paper = NULL;
 
   if (region == NULL || region[0] == '\0')
     return;
 
-  locale = newlocale (LC_TIME_MASK, region, (locale_t) 0);
-  if (locale == (locale_t) 0)
+  locale = newlocale (LC_TIME_MASK, region, (locale_t)0);
+  if (locale == (locale_t)0)
     g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
   else
     old_locale = uselocale (locale);
@@ -87,14 +88,13 @@ update_format_examples (CcFormatPreview *self)
   display_date (self->time_format_row, dt, "%X");
   display_date (self->date_time_format_row, dt, "%c");
 
-  if (locale != (locale_t) 0)
-    {
-      uselocale (old_locale);
-      freelocale (locale);
-    }
+  if (locale != (locale_t)0) {
+    uselocale (old_locale);
+    freelocale (locale);
+  }
 
-  locale = newlocale (LC_NUMERIC_MASK, region, (locale_t) 0);
-  if (locale == (locale_t) 0)
+  locale = newlocale (LC_NUMERIC_MASK, region, (locale_t)0);
+  if (locale == (locale_t)0)
     g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
   else
     old_locale = uselocale (locale);
@@ -102,15 +102,14 @@ update_format_examples (CcFormatPreview *self)
   s = g_strdup_printf ("%'.2f", 123456789.00);
   adw_action_row_set_subtitle (self->number_format_row, s);
 
-  if (locale != (locale_t) 0)
-    {
-      uselocale (old_locale);
-      freelocale (locale);
-    }
+  if (locale != (locale_t)0) {
+    uselocale (old_locale);
+    freelocale (locale);
+  }
 
 #if 0
-  locale = newlocale (LC_MONETARY_MASK, region, (locale_t) 0);
-  if (locale == (locale_t) 0)
+  locale = newlocale (LC_MONETARY_MASK, region, (locale_t)0);
+  if (locale == (locale_t)0)
     g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
   else
     old_locale = uselocale (locale);
@@ -119,16 +118,15 @@ update_format_examples (CcFormatPreview *self)
   if (num_info != NULL)
     adw_action_row_set_subtitle (self->currency_format_row, num_info->currency_symbol);
 
-  if (locale != (locale_t) 0)
-    {
-      uselocale (old_locale);
-      freelocale (locale);
-    }
+  if (locale != (locale_t)0) {
+    uselocale (old_locale);
+    freelocale (locale);
+  }
 #endif
 
 #ifdef LC_MEASUREMENT
-  locale = newlocale (LC_MEASUREMENT_MASK, region, (locale_t) 0);
-  if (locale == (locale_t) 0)
+  locale = newlocale (LC_MEASUREMENT_MASK, region, (locale_t)0);
+  if (locale == (locale_t)0)
     g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
   else
     old_locale = uselocale (locale);
@@ -138,22 +136,20 @@ update_format_examples (CcFormatPreview *self)
      locale, so we must use it here. */
   is_imperial = fmt && *fmt == 2;
 
-  if (locale != (locale_t) 0)
-    {
-      uselocale (old_locale);
-      freelocale (locale);
-    }
+  if (locale != (locale_t)0) {
+    uselocale (old_locale);
+    freelocale (locale);
+  }
 
   if (is_imperial)
     adw_action_row_set_subtitle (self->measurement_format_row, C_("measurement format", "Imperial"));
   else
     adw_action_row_set_subtitle (self->measurement_format_row, C_("measurement format", "Metric"));
-
 #endif
 
 #ifdef LC_PAPER
-  locale = newlocale (LC_PAPER_MASK, region, (locale_t) 0);
-  if (locale == (locale_t) 0)
+  locale = newlocale (LC_PAPER_MASK, region, (locale_t)0);
+  if (locale == (locale_t)0)
     g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
   else
     old_locale = uselocale (locale);
@@ -161,11 +157,10 @@ update_format_examples (CcFormatPreview *self)
   paper = gtk_paper_size_new (gtk_paper_size_get_default ());
   adw_action_row_set_subtitle (self->paper_format_row, gtk_paper_size_get_display_name (paper));
 
-  if (locale != (locale_t) 0)
-    {
-      uselocale (old_locale);
-      freelocale (locale);
-    }
+  if (locale != (locale_t)0) {
+    uselocale (old_locale);
+    freelocale (locale);
+  }
 #endif
 }
 
@@ -180,12 +175,12 @@ cc_format_preview_set_property (GObject      *object,
   self = CC_FORMAT_PREVIEW (object);
 
   switch (prop_id) {
-  case PROP_REGION:
-    cc_format_preview_set_region (self, g_value_get_string (value));
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    break;
+    case PROP_REGION:
+      cc_format_preview_set_region (self, g_value_get_string (value));
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
   }
 }
 
@@ -200,12 +195,12 @@ cc_format_preview_get_property (GObject    *object,
   self = CC_FORMAT_PREVIEW (object);
 
   switch (prop_id) {
-  case PROP_REGION:
-    g_value_set_string (value, self->region);
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    break;
+    case PROP_REGION:
+      g_value_set_string (value, self->region);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
   }
 }
 
@@ -252,7 +247,7 @@ cc_format_preview_class_init (CcFormatPreviewClass *klass)
 void
 cc_format_preview_init (CcFormatPreview *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr (GtkCssProvider) provider = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 

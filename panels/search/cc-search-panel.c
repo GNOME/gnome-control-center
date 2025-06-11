@@ -28,18 +28,17 @@
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-struct _CcSearchPanel
-{
-  CcPanel           parent_instance;
+struct _CcSearchPanel {
+  CcPanel parent_instance;
 
-  GtkWidget        *list_box;
-  AdwSwitchRow     *app_search_row;
-  GtkWidget        *search_group;
-  GtkWidget        *settings_row;
+  GtkWidget *list_box;
+  AdwSwitchRow *app_search_row;
+  GtkWidget *search_group;
+  GtkWidget *settings_row;
   CcSearchPanelRow *selected_row;
 
-  GSettings        *search_settings;
-  GHashTable       *sort_order;
+  GSettings *search_settings;
+  GHashTable *sort_order;
 
   CcSearchLocationsPage *locations_page;
 };
@@ -52,7 +51,7 @@ CC_PANEL_REGISTER (CcSearchPanel, cc_search_panel)
 static gint
 list_sort_func (gconstpointer a,
                 gconstpointer b,
-                gpointer user_data)
+                gpointer      user_data)
 {
   CcSearchPanel *self = user_data;
   GAppInfo *app_a, *app_b;
@@ -60,8 +59,8 @@ list_sort_func (gconstpointer a,
   gint idx_a, idx_b;
   gpointer lookup;
 
-  app_a = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW ((gpointer*)a));
-  app_b = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW ((gpointer*)b));
+  app_a = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW ((gpointer *)a));
+  app_b = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW ((gpointer *)b));
 
   id_a = g_app_info_get_id (app_a);
   id_b = g_app_info_get_id (app_b);
@@ -97,7 +96,7 @@ list_sort_func (gconstpointer a,
 static void
 search_panel_invalidate_sort_order (CcSearchPanel *self)
 {
-  g_auto(GStrv) sort_order = NULL;
+  g_auto (GStrv) sort_order = NULL;
   gint idx;
 
   g_hash_table_remove_all (self->sort_order);
@@ -112,7 +111,7 @@ search_panel_invalidate_sort_order (CcSearchPanel *self)
 static gint
 propagate_compare_func (gconstpointer a,
                         gconstpointer b,
-                        gpointer user_data)
+                        gpointer      user_data)
 {
   CcSearchPanel *self = user_data;
   const gchar *key_a = a, *key_b = b;
@@ -127,9 +126,9 @@ propagate_compare_func (gconstpointer a,
 static void
 search_panel_propagate_sort_order (CcSearchPanel *self)
 {
-  g_autoptr(GList) keys = NULL;
+  g_autoptr (GList) keys = NULL;
   GList *l;
-  g_autoptr(GPtrArray) sort_order = NULL;
+  g_autoptr (GPtrArray) sort_order = NULL;
 
   sort_order = g_ptr_array_new ();
   keys = g_hash_table_get_keys (self->sort_order);
@@ -140,12 +139,12 @@ search_panel_propagate_sort_order (CcSearchPanel *self)
 
   g_ptr_array_add (sort_order, NULL);
   g_settings_set_strv (self->search_settings, "sort-order",
-                       (const gchar **) sort_order->pdata);
+                       (const gchar **)sort_order->pdata);
 }
 
 static void
 search_panel_move_selected (CcSearchPanel *self,
-                            gboolean down)
+                            gboolean       down)
 {
   GtkListBoxRow *other_row;
   GAppInfo *app_info, *other_app_info;
@@ -164,7 +163,7 @@ search_panel_move_selected (CcSearchPanel *self,
 
   aux = GTK_WIDGET (self->selected_row);
   other_row = down ? GTK_LIST_BOX_ROW (gtk_widget_get_next_sibling (aux)) :
-                     GTK_LIST_BOX_ROW (gtk_widget_get_prev_sibling (aux));
+              GTK_LIST_BOX_ROW (gtk_widget_get_prev_sibling (aux));
 
   other_app_info = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (other_row));
   other_app_id = g_app_info_get_id (other_app_info);
@@ -180,24 +179,22 @@ search_panel_move_selected (CcSearchPanel *self,
   */
   last_good_app = target_app = app_id;
   found = g_hash_table_lookup_extended (self->sort_order, last_good_app, NULL, &idx_ptr);
-  while (!found)
-    {
-      GAppInfo *tmp;
-      const char *tmp_id;
+  while (!found) {
+    GAppInfo *tmp;
+    const char *tmp_id;
 
-      aux = gtk_widget_get_prev_sibling (aux);
-      if (aux == NULL)
-        {
-          last_good_app = NULL;
-          break;
-        }
-
-      tmp = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (aux));
-      tmp_id = g_app_info_get_id (tmp);
-
-      last_good_app = tmp_id;
-      found = g_hash_table_lookup_extended (self->sort_order, tmp_id, NULL, &idx_ptr);
+    aux = gtk_widget_get_prev_sibling (aux);
+    if (aux == NULL) {
+      last_good_app = NULL;
+      break;
     }
+
+    tmp = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (aux));
+    tmp_id = g_app_info_get_id (tmp);
+
+    last_good_app = tmp_id;
+    found = g_hash_table_lookup_extended (self->sort_order, tmp_id, NULL, &idx_ptr);
+  }
 
   /* For simplicity's sake, set all sort orders to the previously visible state
      first, and only then do the modification requested.
@@ -206,34 +203,30 @@ search_panel_move_selected (CcSearchPanel *self,
      valid one already, but I preferred to keep the logic simple, at the expense
      of a small performance penalty.
   */
-  if (found)
-    {
-      idx = GPOINTER_TO_INT (idx_ptr);
-    }
-  else
-    {
-      /* If not found, there is no configured app that has a sort order, so we start
-         from the first position and walk the entire list.
-         Sort orders are 1 based, so that 0 (NULL) is not a valid value.
-      */
-      idx = 1;
-      aux = gtk_widget_get_first_child (GTK_WIDGET (self->list_box));
-    }
+  if (found) {
+    idx = GPOINTER_TO_INT (idx_ptr);
+  } else {
+    /* If not found, there is no configured app that has a sort order, so we start
+       from the first position and walk the entire list.
+       Sort orders are 1 based, so that 0 (NULL) is not a valid value.
+    */
+    idx = 1;
+    aux = gtk_widget_get_first_child (GTK_WIDGET (self->list_box));
+  }
 
-  while (last_good_app != target_app)
-    {
-      GAppInfo *tmp;
-      const char *tmp_id;
+  while (last_good_app != target_app) {
+    GAppInfo *tmp;
+    const char *tmp_id;
 
-      tmp = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (aux));
-      tmp_id = g_app_info_get_id (tmp);
+    tmp = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (aux));
+    tmp_id = g_app_info_get_id (tmp);
 
-      g_hash_table_replace (self->sort_order, g_strdup (tmp_id), GINT_TO_POINTER (idx));
+    g_hash_table_replace (self->sort_order, g_strdup (tmp_id), GINT_TO_POINTER (idx));
 
-      aux = gtk_widget_get_next_sibling (aux);
-      idx++;
-      last_good_app = tmp_id;
-    }
+    aux = gtk_widget_get_next_sibling (aux);
+    idx++;
+    last_good_app = tmp_id;
+  }
 
   other_idx = GPOINTER_TO_INT (g_hash_table_lookup (self->sort_order, app_id));
   idx = down ? (other_idx + 1) : (other_idx - 1);
@@ -261,15 +254,15 @@ row_moved_cb (CcSearchPanel    *self,
 }
 
 static GVariant *
-switch_settings_mapping_set_generic (const GValue *value,
+switch_settings_mapping_set_generic (const GValue       *value,
                                      const GVariantType *expected_type,
-                                     GtkWidget *row,
-                                     gboolean default_enabled)
+                                     GtkWidget          *row,
+                                     gboolean            default_enabled)
 {
   CcSearchPanel *self = g_object_get_data (G_OBJECT (row), "self");
   GAppInfo *app_info = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (row));
-  g_auto(GStrv) apps = NULL;
-  g_autoptr(GPtrArray) new_apps = NULL;
+  g_auto (GStrv) apps = NULL;
+  g_autoptr (GPtrArray) new_apps = NULL;
   gint idx;
   gboolean remove, found;
 
@@ -279,50 +272,48 @@ switch_settings_mapping_set_generic (const GValue *value,
   apps = g_settings_get_strv (self->search_settings,
                               default_enabled ? "disabled" : "enabled");
 
-  for (idx = 0; apps[idx] != NULL; idx++)
-    {
-      if (g_strcmp0 (apps[idx], g_app_info_get_id (app_info)) == 0)
-        {
-          found = TRUE;
+  for (idx = 0; apps[idx] != NULL; idx++) {
+    if (g_strcmp0 (apps[idx], g_app_info_get_id (app_info)) == 0) {
+      found = TRUE;
 
-          if (remove)
-            continue;
-        }
-
-      g_ptr_array_add (new_apps, g_strdup (apps[idx]));
+      if (remove)
+        continue;
     }
+
+    g_ptr_array_add (new_apps, g_strdup (apps[idx]));
+  }
 
   if (!found && !remove)
     g_ptr_array_add (new_apps, g_strdup (g_app_info_get_id (app_info)));
 
   g_ptr_array_add (new_apps, NULL);
 
-  return g_variant_new_strv ((const gchar **) new_apps->pdata, -1);
+  return g_variant_new_strv ((const gchar **)new_apps->pdata, -1);
 }
 
 static GVariant *
-switch_settings_mapping_set_default_enabled (const GValue *value,
+switch_settings_mapping_set_default_enabled (const GValue       *value,
                                              const GVariantType *expected_type,
-                                             gpointer user_data)
+                                             gpointer            user_data)
 {
   return switch_settings_mapping_set_generic (value, expected_type,
                                               user_data, TRUE);
 }
 
 static GVariant *
-switch_settings_mapping_set_default_disabled (const GValue *value,
+switch_settings_mapping_set_default_disabled (const GValue       *value,
                                               const GVariantType *expected_type,
-                                              gpointer user_data)
+                                              gpointer            user_data)
 {
   return switch_settings_mapping_set_generic (value, expected_type,
                                               user_data, FALSE);
 }
 
 static gboolean
-switch_settings_mapping_get_generic (GValue *value,
-                                     GVariant *variant,
+switch_settings_mapping_get_generic (GValue    *value,
+                                     GVariant  *variant,
                                      GtkWidget *row,
-                                     gboolean default_enabled)
+                                     gboolean   default_enabled)
 {
   GAppInfo *app_info = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (row));
   g_autofree const gchar **apps = NULL;
@@ -332,14 +323,12 @@ switch_settings_mapping_get_generic (GValue *value,
   found = FALSE;
   apps = g_variant_get_strv (variant, NULL);
 
-  for (idx = 0; apps[idx] != NULL; idx++)
-    {
-      if (g_strcmp0 (apps[idx], g_app_info_get_id (app_info)) == 0)
-        {
-          found = TRUE;
-          break;
-        }
+  for (idx = 0; apps[idx] != NULL; idx++) {
+    if (g_strcmp0 (apps[idx], g_app_info_get_id (app_info)) == 0) {
+      found = TRUE;
+      break;
     }
+  }
 
   g_value_set_boolean (value, !!default_enabled != !!found);
 
@@ -347,18 +336,18 @@ switch_settings_mapping_get_generic (GValue *value,
 }
 
 static gboolean
-switch_settings_mapping_get_default_enabled (GValue *value,
+switch_settings_mapping_get_default_enabled (GValue   *value,
                                              GVariant *variant,
-                                             gpointer user_data)
+                                             gpointer  user_data)
 {
   return switch_settings_mapping_get_generic (value, variant,
                                               user_data, TRUE);
 }
 
 static gboolean
-switch_settings_mapping_get_default_disabled (GValue *value,
+switch_settings_mapping_get_default_disabled (GValue   *value,
                                               GVariant *variant,
-                                              gpointer user_data)
+                                              gpointer  user_data)
 {
   return switch_settings_mapping_get_generic (value, variant,
                                               user_data, FALSE);
@@ -371,28 +360,27 @@ search_panel_update_enabled_move_actions (CcSearchPanel *self)
 
   for (child = gtk_widget_get_first_child (GTK_WIDGET (self->list_box));
        child;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      GtkWidget *next_child;
-      gint row_idx;
+       child = gtk_widget_get_next_sibling (child)) {
+    GtkWidget *next_child;
+    gint row_idx;
 
-      if (!CC_IS_SEARCH_PANEL_ROW (child))
-        continue;
+    if (!CC_IS_SEARCH_PANEL_ROW (child))
+      continue;
 
-      next_child = gtk_widget_get_next_sibling (GTK_WIDGET (child));
-      if (!CC_IS_SEARCH_PANEL_ROW (next_child))
-        continue;
+    next_child = gtk_widget_get_next_sibling (GTK_WIDGET (child));
+    if (!CC_IS_SEARCH_PANEL_ROW (next_child))
+      continue;
 
-      row_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (child));
-      gtk_widget_action_set_enabled (GTK_WIDGET (child), "row.move-up", row_idx != 0);
-      gtk_widget_action_set_enabled (GTK_WIDGET (child), "row.move-down", GTK_LIST_BOX_ROW (next_child) != NULL);
-    }
+    row_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (child));
+    gtk_widget_action_set_enabled (GTK_WIDGET (child), "row.move-up", row_idx != 0);
+    gtk_widget_action_set_enabled (GTK_WIDGET (child), "row.move-down", GTK_LIST_BOX_ROW (next_child) != NULL);
+  }
 }
 
 static void
 search_panel_add_one_app_info (CcSearchPanel *self,
-                               GAppInfo *app_info,
-                               gboolean default_enabled)
+                               GAppInfo      *app_info,
+                               gboolean       default_enabled)
 {
   CcSearchPanelRow *row;
 
@@ -406,72 +394,65 @@ search_panel_add_one_app_info (CcSearchPanel *self,
   g_object_set_data (G_OBJECT (row), "self", self);
   gtk_list_box_append (GTK_LIST_BOX (self->list_box), GTK_WIDGET (row));
 
-  if (default_enabled)
-    {
-      g_settings_bind_with_mapping (self->search_settings, "disabled",
-                                    cc_search_panel_row_get_switch (row), "active",
-                                    G_SETTINGS_BIND_DEFAULT,
-                                    switch_settings_mapping_get_default_enabled,
-                                    switch_settings_mapping_set_default_enabled,
-                                    row, NULL);
-    }
-  else
-    {
-      g_settings_bind_with_mapping (self->search_settings, "enabled",
-                                    cc_search_panel_row_get_switch (row), "active",
-                                    G_SETTINGS_BIND_DEFAULT,
-                                    switch_settings_mapping_get_default_disabled,
-                                    switch_settings_mapping_set_default_disabled,
-                                    row, NULL);
-    }
+  if (default_enabled) {
+    g_settings_bind_with_mapping (self->search_settings, "disabled",
+                                  cc_search_panel_row_get_switch (row), "active",
+                                  G_SETTINGS_BIND_DEFAULT,
+                                  switch_settings_mapping_get_default_enabled,
+                                  switch_settings_mapping_set_default_enabled,
+                                  row, NULL);
+  } else {
+    g_settings_bind_with_mapping (self->search_settings, "enabled",
+                                  cc_search_panel_row_get_switch (row), "active",
+                                  G_SETTINGS_BIND_DEFAULT,
+                                  switch_settings_mapping_get_default_disabled,
+                                  switch_settings_mapping_set_default_disabled,
+                                  row, NULL);
+  }
 }
 
 static void
 search_panel_add_one_provider (CcSearchPanel *self,
-                               GFile *provider)
+                               GFile         *provider)
 {
   g_autofree gchar *path = NULL;
   g_autofree gchar *desktop_id = NULL;
-  g_autoptr(GKeyFile) keyfile = NULL;
-  g_autoptr(GAppInfo) app_info = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GKeyFile) keyfile = NULL;
+  g_autoptr (GAppInfo) app_info = NULL;
+  g_autoptr (GError) error = NULL;
   gboolean default_disabled;
 
   path = g_file_get_path (provider);
   keyfile = g_key_file_new ();
   g_key_file_load_from_file (keyfile, path, G_KEY_FILE_NONE, &error);
 
-  if (error != NULL)
-    {
-      g_warning ("Error loading %s: %s - search provider will be ignored",
-                 path, error->message);
-      return;
-    }
+  if (error != NULL) {
+    g_warning ("Error loading %s: %s - search provider will be ignored",
+               path, error->message);
+    return;
+  }
 
-  if (!g_key_file_has_group (keyfile, SHELL_PROVIDER_GROUP))
-    {
-      g_debug ("Shell search provider group missing from '%s', ignoring", path);
-      return;
-    }
+  if (!g_key_file_has_group (keyfile, SHELL_PROVIDER_GROUP)) {
+    g_debug ("Shell search provider group missing from '%s', ignoring", path);
+    return;
+  }
 
   desktop_id = g_key_file_get_string (keyfile, SHELL_PROVIDER_GROUP,
                                       "DesktopId", &error);
 
-  if (error != NULL)
-    {
-      g_warning ("Unable to read desktop ID from %s: %s - search provider will be ignored",
-                 path, error->message);
-      return;
-    }
+  if (error != NULL) {
+    g_warning ("Unable to read desktop ID from %s: %s - search provider will be ignored",
+               path, error->message);
+    return;
+  }
 
   app_info = G_APP_INFO (g_desktop_app_info_new (desktop_id));
 
-  if (app_info == NULL)
-    {
-      g_debug ("Could not find application with desktop ID '%s' referenced in '%s', ignoring",
-               desktop_id, path);
-      return;
-    }
+  if (app_info == NULL) {
+    g_debug ("Could not find application with desktop ID '%s' referenced in '%s', ignoring",
+             desktop_id, path);
+    return;
+  }
 
   default_disabled = g_key_file_get_boolean (keyfile, SHELL_PROVIDER_GROUP,
                                              "DefaultDisabled", NULL);
@@ -479,25 +460,24 @@ search_panel_add_one_provider (CcSearchPanel *self,
 }
 
 static void
-search_providers_discover_ready (GObject *source,
+search_providers_discover_ready (GObject      *source,
                                  GAsyncResult *result,
-                                 gpointer user_data)
+                                 gpointer      user_data)
 {
-  g_autoptr(GList) providers = NULL;
+  g_autoptr (GList) providers = NULL;
   GList *l;
   CcSearchPanel *self = CC_SEARCH_PANEL (source);
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   providers = g_task_propagate_pointer (G_TASK (result), &error);
 
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  for (l = providers; l != NULL; l = l->next)
-    {
-      g_autoptr(GFile) provider = l->data;
-      search_panel_add_one_provider (self, provider);
-    }
+  for (l = providers; l != NULL; l = l->next) {
+    g_autoptr (GFile) provider = l->data;
+    search_panel_add_one_provider (self, provider);
+  }
 
   /* propagate a write to GSettings, to make sure we always have
    * all the providers in the list.
@@ -508,14 +488,14 @@ search_providers_discover_ready (GObject *source,
 }
 
 static GList *
-search_providers_discover_one_directory (const gchar *system_dir,
+search_providers_discover_one_directory (const gchar  *system_dir,
                                          GCancellable *cancellable)
 {
   GList *providers = NULL;
   g_autofree gchar *providers_path = NULL;
-  g_autoptr(GFile) providers_location = NULL;
-  g_autoptr(GFileEnumerator) enumerator = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GFile) providers_location = NULL;
+  g_autoptr (GFileEnumerator) enumerator = NULL;
+  g_autoptr (GError) error = NULL;
 
   providers_path = g_build_filename (system_dir, "gnome-shell", "search-providers", NULL);
   providers_location = g_file_new_for_path (providers_path);
@@ -525,38 +505,35 @@ search_providers_discover_one_directory (const gchar *system_dir,
                                           G_FILE_QUERY_INFO_NONE,
                                           cancellable, &error);
 
-  if (error != NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND) &&
-          !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Error opening %s: %s - search provider configuration won't be possible",
+  if (error != NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND) &&
+        !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Error opening %s: %s - search provider configuration won't be possible",
+                 providers_path, error->message);
+
+    return NULL;
+  }
+
+  while (TRUE) {
+    g_autoptr (GFileInfo) info = NULL;
+    GFile *provider;
+
+    info = g_file_enumerator_next_file (enumerator, cancellable, &error);
+    if (info == NULL) {
+      if (error != NULL && !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Error reading from %s: %s - search providers might be missing from the panel",
                    providers_path, error->message);
-
-      return NULL;
+      return providers;
     }
-
-  while (TRUE)
-    {
-      g_autoptr(GFileInfo) info = NULL;
-      GFile *provider;
-
-      info = g_file_enumerator_next_file (enumerator, cancellable, &error);
-      if (info == NULL)
-        {
-          if (error != NULL && !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-            g_warning ("Error reading from %s: %s - search providers might be missing from the panel",
-                       providers_path, error->message);
-          return providers;
-        }
-      provider = g_file_get_child (providers_location, g_file_info_get_name (info));
-      providers = g_list_prepend (providers, provider);
-    }
+    provider = g_file_get_child (providers_location, g_file_info_get_name (info));
+    providers = g_list_prepend (providers, provider);
+  }
 }
 
 static void
-search_providers_discover_thread (GTask *task,
-                                  gpointer source_object,
-                                  gpointer task_data,
+search_providers_discover_thread (GTask        *task,
+                                  gpointer      source_object,
+                                  gpointer      task_data,
                                   GCancellable *cancellable)
 {
   GList *providers = NULL;
@@ -564,17 +541,15 @@ search_providers_discover_thread (GTask *task,
   int idx;
 
   system_data_dirs = g_get_system_data_dirs ();
-  for (idx = 0; system_data_dirs[idx] != NULL; idx++)
-    {
-      providers = g_list_concat (search_providers_discover_one_directory (system_data_dirs[idx], cancellable),
-                                 providers);
+  for (idx = 0; system_data_dirs[idx] != NULL; idx++) {
+    providers = g_list_concat (search_providers_discover_one_directory (system_data_dirs[idx], cancellable),
+                               providers);
 
-      if (g_task_return_error_if_cancelled (task))
-        {
-          g_list_free_full (providers, g_object_unref);
-          return;
-        }
+    if (g_task_return_error_if_cancelled (task)) {
+      g_list_free_full (providers, g_object_unref);
+      return;
     }
+  }
 
   g_task_return_pointer (task, providers, NULL);
 }
@@ -582,7 +557,7 @@ search_providers_discover_thread (GTask *task,
 static void
 populate_search_providers (CcSearchPanel *self)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   task = g_task_new (self, cc_panel_get_cancellable (CC_PANEL (self)),
                      search_providers_discover_ready, self);
@@ -633,7 +608,7 @@ cc_search_panel_init (CcSearchPanel *self)
                           G_BINDING_SYNC_CREATE);
 
   self->sort_order = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                                  g_free, NULL);
+                                            g_free, NULL);
   g_signal_connect_swapped (self->search_settings, "changed::sort-order",
                             G_CALLBACK (search_panel_invalidate_sort_order), self);
   search_panel_invalidate_sort_order (self);

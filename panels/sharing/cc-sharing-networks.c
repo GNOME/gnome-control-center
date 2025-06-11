@@ -55,11 +55,11 @@ enum {
   PROP_STATUS
 };
 
-static void     cc_sharing_networks_class_init     (CcSharingNetworksClass *klass);
-static void     cc_sharing_networks_init           (CcSharingNetworks      *self);
-static void     cc_sharing_networks_finalize       (GObject                *object);
+static void     cc_sharing_networks_class_init (CcSharingNetworksClass *klass);
+static void     cc_sharing_networks_init (CcSharingNetworks *self);
+static void     cc_sharing_networks_finalize (GObject *object);
 
-static void     cc_sharing_update_networks_box     (CcSharingNetworks *self);
+static void     cc_sharing_update_networks_box (CcSharingNetworks *self);
 
 typedef struct {
   char *uuid;
@@ -99,10 +99,10 @@ cc_sharing_networks_update_status (CcSharingNetworks *self)
 static void
 cc_sharing_update_networks (CcSharingNetworks *self)
 {
-  g_autoptr(GVariant) networks = NULL;
+  g_autoptr (GVariant) networks = NULL;
   char *uuid, *network_name, *carrier_type;
   GVariantIter iter;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_list_free_full (self->networks, cc_sharing_network_free);
   self->networks = NULL;
@@ -110,8 +110,8 @@ cc_sharing_update_networks (CcSharingNetworks *self)
   if (!gsd_sharing_call_list_networks_sync (self->proxy, self->service_name, &networks, NULL, &error)) {
     g_warning ("couldn't list networks: %s", error->message);
     g_dbus_proxy_set_cached_property (G_DBUS_PROXY (self->proxy),
-				      "SharingStatus",
-				      g_variant_new_uint32 (GSD_SHARING_STATUS_OFFLINE));
+                                      "SharingStatus",
+                                      g_variant_new_uint32 (GSD_SHARING_STATUS_OFFLINE));
     return;
   }
 
@@ -133,7 +133,7 @@ cc_sharing_networks_remove_network (CcSharingNetworks *self,
                                     GtkWidget         *button)
 {
   GtkWidget *row;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   gboolean ret;
   const char *uuid;
 
@@ -141,13 +141,13 @@ cc_sharing_networks_remove_network (CcSharingNetworks *self,
   uuid = g_object_get_data (G_OBJECT (row), "uuid");
 
   ret = gsd_sharing_call_disable_service_sync (self->proxy,
-					       self->service_name,
-					       uuid,
-					       NULL,
-					       &error);
+                                               self->service_name,
+                                               uuid,
+                                               NULL,
+                                               &error);
   if (!ret)
     g_warning ("Failed to remove service %s: %s",
-	       self->service_name, error->message);
+               self->service_name, error->message);
 
   cc_sharing_update_networks (self);
   cc_sharing_update_networks_box (self);
@@ -155,30 +155,30 @@ cc_sharing_networks_remove_network (CcSharingNetworks *self,
 
 static gboolean
 cc_sharing_networks_enable_network (CcSharingNetworks *self,
-				    gboolean   state,
-                                    GtkSwitch *widget)
+                                    gboolean           state,
+                                    GtkSwitch         *widget)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   gboolean ret;
 
   if (state) {
     ret = gsd_sharing_call_enable_service_sync (self->proxy,
-						self->service_name,
-						NULL,
-						&error);
+                                                self->service_name,
+                                                NULL,
+                                                &error);
   } else {
     ret = gsd_sharing_call_disable_service_sync (self->proxy,
-						 self->service_name,
-						 gsd_sharing_get_current_network (self->proxy),
-						 NULL,
-						 &error);
+                                                 self->service_name,
+                                                 gsd_sharing_get_current_network (self->proxy),
+                                                 NULL,
+                                                 &error);
   }
 
   if (ret) {
     gtk_switch_set_state (widget, state);
   } else {
     g_warning ("Failed to %s service %s: %s", state ? "enable" : "disable",
-	       self->service_name, error->message);
+               self->service_name, error->message);
     g_signal_handlers_block_by_func (widget,
                                      cc_sharing_networks_enable_network, self);
     gtk_switch_set_active (widget, !state);
@@ -194,9 +194,9 @@ cc_sharing_networks_enable_network (CcSharingNetworks *self,
 
 static GtkWidget *
 cc_sharing_networks_new_row (const char        *uuid,
-			     const char        *network_name,
-			     const char        *carrier_type,
-			     CcSharingNetworks *self)
+                             const char        *network_name,
+                             const char        *carrier_type,
+                             CcSharingNetworks *self)
 {
   GtkWidget *row, *w;
   const char *icon_name;
@@ -220,8 +220,8 @@ cc_sharing_networks_new_row (const char        *uuid,
   gtk_widget_add_css_class (w, "flat");
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_accessible_update_property (GTK_ACCESSIBLE (w),
-                                GTK_ACCESSIBLE_PROPERTY_LABEL, _("Remove"),
-                                -1);
+                                  GTK_ACCESSIBLE_PROPERTY_LABEL, _("Remove"),
+                                  -1);
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
   g_signal_connect_object (G_OBJECT (w), "clicked",
                            G_CALLBACK (cc_sharing_networks_remove_network), self, G_CONNECT_SWAPPED);
@@ -304,7 +304,7 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
 
     /* Network name */
     g_object_set_data_full (G_OBJECT (self->current_row),
-			    "uuid", g_strdup (current_network), g_free);
+                            "uuid", g_strdup (current_network), g_free);
     current_network_name = gsd_sharing_get_current_network_name (self->proxy);
     if (ADW_IS_PREFERENCES_ROW (self->current_row))
       adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->current_row), current_network_name);
@@ -323,7 +323,7 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
     /* State */
     available = gsd_sharing_get_sharing_status (self->proxy) == GSD_SHARING_STATUS_AVAILABLE;
     gtk_widget_set_sensitive (self->current_switch, available);
-    //FIXME add a subtitle explaining why it's disabled
+    /*FIXME add a subtitle explaining why it's disabled */
   } else {
     gtk_widget_set_visible (self->current_row, FALSE);
     current_visible = FALSE;
@@ -339,9 +339,9 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
     }
 
     row = cc_sharing_networks_new_row (net->uuid,
-				       net->network_name,
-				       net->carrier_type,
-				       self);
+                                       net->network_name,
+                                       net->carrier_type,
+                                       self);
     gtk_widget_set_visible (row, TRUE);
     gtk_list_box_insert (GTK_LIST_BOX (self->listbox), row, -1);
   }
@@ -400,57 +400,57 @@ cc_sharing_networks_init (CcSharingNetworks *self)
 
 GtkWidget *
 cc_sharing_networks_new (GDBusProxy *proxy,
-			 const char *service_name)
+                         const char *service_name)
 {
   g_return_val_if_fail (GSD_IS_SHARING (proxy), NULL);
   g_return_val_if_fail (service_name != NULL, NULL);
 
   return GTK_WIDGET (g_object_new (CC_TYPE_SHARING_NETWORKS,
-				   "proxy", proxy,
-				   "service-name", service_name,
-				   NULL));
+                                   "proxy", proxy,
+                                   "service-name", service_name,
+                                   NULL));
 }
 
 static void
 cc_sharing_networks_set_property (GObject      *object,
-				  guint         prop_id,
-				  const GValue *value,
-				  GParamSpec   *pspec)
+                                  guint         prop_id,
+                                  const GValue *value,
+                                  GParamSpec   *pspec)
 {
   CcSharingNetworks *self;
 
   self = CC_SHARING_NETWORKS (object);
 
   switch (prop_id) {
-  case PROP_SERVICE_NAME:
-    self->service_name = g_value_dup_string (value);
-    break;
-  case PROP_PROXY:
-    self->proxy = g_value_dup_object (value);
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    break;
+    case PROP_SERVICE_NAME:
+      self->service_name = g_value_dup_string (value);
+      break;
+    case PROP_PROXY:
+      self->proxy = g_value_dup_object (value);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
   }
 }
 
 static void
-cc_sharing_networks_get_property (GObject      *object,
-				  guint         prop_id,
-				  GValue       *value,
-				  GParamSpec   *pspec)
+cc_sharing_networks_get_property (GObject    *object,
+                                  guint       prop_id,
+                                  GValue     *value,
+                                  GParamSpec *pspec)
 {
   CcSharingNetworks *self;
 
   self = CC_SHARING_NETWORKS (object);
 
   switch (prop_id) {
-  case PROP_STATUS:
-    g_value_set_uint (value, self->status);
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    break;
+    case PROP_STATUS:
+      g_value_set_uint (value, self->status);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+      break;
   }
 }
 
@@ -481,7 +481,7 @@ cc_sharing_networks_finalize (GObject *object)
 static void
 cc_sharing_networks_class_init (CcSharingNetworksClass *klass)
 {
-  GObjectClass  *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->set_property = cc_sharing_networks_set_property;

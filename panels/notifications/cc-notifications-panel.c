@@ -37,19 +37,19 @@
 #define APP_PREFIX "/org/gnome/desktop/notifications/application/"
 
 struct _CcNotificationsPanel {
-  CcPanel            parent_instance;
+  CcPanel parent_instance;
 
-  GtkListBox        *app_listbox;
-  AdwSwitchRow      *lock_screen_row;
-  AdwSwitchRow      *dnd_row;
+  GtkListBox *app_listbox;
+  AdwSwitchRow *lock_screen_row;
+  AdwSwitchRow *dnd_row;
 
-  GSettings         *master_settings;
+  GSettings *master_settings;
 
-  GCancellable      *cancellable;
+  GCancellable *cancellable;
 
-  GHashTable        *known_applications;
+  GHashTable *known_applications;
 
-  GDBusProxy        *perm_store;
+  GDBusProxy *perm_store;
 };
 
 struct _CcNotificationsPanelClass {
@@ -67,8 +67,11 @@ typedef struct {
 } Application;
 
 static void build_app_store (CcNotificationsPanel *self);
-static void select_app      (CcNotificationsPanel *self, GtkListBoxRow *row);
-static int  sort_apps       (gconstpointer one, gconstpointer two, gpointer user_data);
+static void select_app (CcNotificationsPanel *self,
+                        GtkListBoxRow        *row);
+static int  sort_apps (gconstpointer one,
+                       gconstpointer two,
+                       gpointer      user_data);
 
 CC_PANEL_REGISTER (CcNotificationsPanel, cc_notifications_panel);
 
@@ -94,22 +97,21 @@ cc_notifications_panel_finalize (GObject *object)
 }
 
 static void
-on_perm_store_ready (GObject *source_object,
+on_perm_store_ready (GObject      *source_object,
                      GAsyncResult *res,
-                     gpointer user_data)
+                     gpointer      user_data)
 {
   CcNotificationsPanel *self;
   GDBusProxy *proxy;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (proxy == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-          g_warning ("Failed to connect to xdg-app permission store: %s",
-                     error->message);
-      return;
-    }
+  if (proxy == NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to connect to xdg-app permission store: %s",
+                 error->message);
+    return;
+  }
   self = user_data;
   self->perm_store = proxy;
 }
@@ -157,9 +159,9 @@ cc_notifications_panel_get_help_uri (CcPanel *panel)
 static void
 cc_notifications_panel_class_init (CcNotificationsPanelClass *klass)
 {
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  CcPanelClass   *panel_class  = CC_PANEL_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   panel_class->get_help_uri = cc_notifications_panel_get_help_uri;
 
@@ -219,7 +221,7 @@ add_application (CcNotificationsPanel *self,
 {
   CcListRow *row;
   GtkWidget *w;
-  g_autoptr(GIcon) icon = NULL;
+  g_autoptr (GIcon) icon = NULL;
   const gchar *app_name;
   g_autofree gchar *escaped_app_name = NULL;
 
@@ -239,7 +241,7 @@ add_application (CcNotificationsPanel *self,
                                  escaped_app_name);
 
   g_object_set_qdata_full (G_OBJECT (row), application_quark (),
-                           app, (GDestroyNotify) application_free);
+                           app, (GDestroyNotify)application_free);
 
   gtk_list_box_append (self->app_listbox, GTK_WIDGET (row));
 
@@ -263,7 +265,7 @@ add_application (CcNotificationsPanel *self,
 static gboolean
 app_is_system_service (GDesktopAppInfo *app)
 {
-  g_auto(GStrv) split = NULL;
+  g_auto (GStrv) split = NULL;
   const gchar *categories;
 
   categories = g_desktop_app_info_get_categories (app);
@@ -271,9 +273,9 @@ app_is_system_service (GDesktopAppInfo *app)
     return FALSE;
 
   split = g_strsplit (categories, ";", -1);
-  if (g_strv_contains ((const gchar* const*) split, "X-GNOME-Settings-Panel") ||
-      g_strv_contains ((const gchar* const*) split, "Settings") ||
-      g_strv_contains ((const gchar* const*) split, "System")) {
+  if (g_strv_contains ((const gchar * const *)split, "X-GNOME-Settings-Panel") ||
+      g_strv_contains ((const gchar * const *)split, "Settings") ||
+      g_strv_contains ((const gchar * const *)split, "System")) {
     return TRUE;
   }
 
@@ -282,13 +284,13 @@ app_is_system_service (GDesktopAppInfo *app)
 
 static void
 maybe_add_app_id (CcNotificationsPanel *self,
-                  const char *canonical_app_id)
+                  const char           *canonical_app_id)
 {
   Application *app;
   g_autofree gchar *path = NULL;
   g_autofree gchar *full_app_id = NULL;
-  g_autoptr(GSettings) settings = NULL;
-  g_autoptr(GAppInfo) app_info = NULL;
+  g_autoptr (GSettings) settings = NULL;
+  g_autoptr (GAppInfo) app_info = NULL;
 
   if (*canonical_app_id == '\0')
     return;
@@ -335,21 +337,18 @@ app_info_get_id (GAppInfo *app_info)
   int l;
 
   desktop_id = g_app_info_get_id (app_info);
-  if (desktop_id != NULL)
-    {
-      ret = g_strdup (desktop_id);
-    }
-  else
-    {
-      filename = g_desktop_app_info_get_filename (G_DESKTOP_APP_INFO (app_info));
-      ret = g_path_get_basename (filename);
-    }
+  if (desktop_id != NULL) {
+    ret = g_strdup (desktop_id);
+  } else {
+    filename = g_desktop_app_info_get_filename (G_DESKTOP_APP_INFO (app_info));
+    ret = g_path_get_basename (filename);
+  }
 
   if (G_UNLIKELY (g_str_has_suffix (ret, ".desktop") == FALSE))
     return NULL;
 
   l = strlen (ret);
-  *(ret + l - strlen(".desktop")) = '\0';
+  *(ret + l - strlen (".desktop")) = '\0';
   return g_steal_pointer (&ret);
 }
 
@@ -360,7 +359,7 @@ process_app_info (CcNotificationsPanel *self,
   Application *app;
   g_autofree gchar *app_id = NULL;
   g_autofree gchar *path = NULL;
-  g_autoptr(GSettings) settings = NULL;
+  g_autoptr (GSettings) settings = NULL;
   guint i;
 
   app_id = app_info_get_id (app_info);
@@ -398,23 +397,22 @@ load_apps (CcNotificationsPanel *self)
 
   apps = g_app_info_get_all ();
 
-  for (iter = apps; iter; iter = iter->next)
-    {
-      GDesktopAppInfo *app;
+  for (iter = apps; iter; iter = iter->next) {
+    GDesktopAppInfo *app;
 
-      app = iter->data;
-      if (g_desktop_app_info_get_boolean (app, "X-GNOME-UsesNotifications")) {
-        if (app_is_system_service (app)) {
-          g_debug ("Skipped app '%s', as it is a system service", g_app_info_get_id (G_APP_INFO (app)));
-          continue;
-        }
-
-        process_app_info (self, G_APP_INFO (app));
-        g_debug ("Processing app '%s'", g_app_info_get_id (G_APP_INFO (app)));
-      } else {
-        g_debug ("Skipped app '%s', doesn't use notifications", g_app_info_get_id (G_APP_INFO (app)));
+    app = iter->data;
+    if (g_desktop_app_info_get_boolean (app, "X-GNOME-UsesNotifications")) {
+      if (app_is_system_service (app)) {
+        g_debug ("Skipped app '%s', as it is a system service", g_app_info_get_id (G_APP_INFO (app)));
+        continue;
       }
+
+      process_app_info (self, G_APP_INFO (app));
+      g_debug ("Processing app '%s'", g_app_info_get_id (G_APP_INFO (app)));
+    } else {
+      g_debug ("Skipped app '%s', doesn't use notifications", g_app_info_get_id (G_APP_INFO (app)));
     }
+  }
 
   g_list_free_full (apps, g_object_unref);
 }

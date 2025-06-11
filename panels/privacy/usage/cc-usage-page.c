@@ -24,20 +24,19 @@
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-struct _CcUsagePage
-{
+struct _CcUsagePage {
   AdwNavigationPage parent_instance;
 
-  GSettings    *privacy_settings;
+  GSettings *privacy_settings;
 
-  AdwDialog    *clear_file_history_dialog;
-  AdwDialog    *delete_temp_files_dialog;
-  AdwDialog    *empty_trash_dialog;
-  CcNumberRow  *purge_after_row;
+  AdwDialog *clear_file_history_dialog;
+  AdwDialog *delete_temp_files_dialog;
+  AdwDialog *empty_trash_dialog;
+  CcNumberRow *purge_after_row;
   AdwSwitchRow *purge_temp_row;
   AdwSwitchRow *purge_trash_row;
   AdwSwitchRow *recently_used_row;
-  CcNumberRow  *retain_history_row;
+  CcNumberRow *retain_history_row;
 };
 
 G_DEFINE_TYPE (CcUsagePage, cc_usage_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -51,7 +50,7 @@ on_clear_history_response_cb (void)
 static void
 on_empty_trash_response_cb (void)
 {
-  g_autoptr(GDBusConnection) bus = NULL;
+  g_autoptr (GDBusConnection) bus = NULL;
 
   bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
   g_dbus_connection_call (bus,
@@ -65,7 +64,7 @@ on_empty_trash_response_cb (void)
 static void
 on_purge_temp_response_cb (void)
 {
-  g_autoptr(GDBusConnection) bus = NULL;
+  g_autoptr (GDBusConnection) bus = NULL;
 
   bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
   g_dbus_connection_call (bus,

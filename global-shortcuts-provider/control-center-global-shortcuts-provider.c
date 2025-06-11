@@ -28,8 +28,7 @@
 #include <shell/cc-panel-loader.h>
 #include <shell/cc-shell-model.h>
 
-struct _CcGlobalShortcutsProviderApp
-{
+struct _CcGlobalShortcutsProviderApp {
   AdwApplication parent;
 
   CcGlobalShortcutsProvider *global_shortcuts_provider;
@@ -74,12 +73,11 @@ cc_global_shortcuts_provider_app_dbus_unregister (GApplication    *application,
   GApplicationClass *parent_class =
     G_APPLICATION_CLASS (cc_global_shortcuts_provider_app_parent_class);
 
-  if (self->global_shortcuts_provider)
-    {
-      cc_global_shortcuts_provider_dbus_unregister (self->global_shortcuts_provider,
-                                                   connection,
-                                                   object_path);
-    }
+  if (self->global_shortcuts_provider) {
+    cc_global_shortcuts_provider_dbus_unregister (self->global_shortcuts_provider,
+                                                  connection,
+                                                  object_path);
+  }
 
   parent_class->dbus_unregister (application, connection, object_path);
 }
@@ -145,18 +143,18 @@ cc_global_shortcuts_provider_app_get ()
 }
 
 int
-main (int argc, char **argv)
+main (int    argc,
+      char **argv)
 {
   GApplication *app;
   g_autoptr (GError) error = NULL;
 
   if (!gxdp_init_gtk (GXDP_SERVICE_CLIENT_TYPE_GLOBAL_SHORTCUTS,
-                      &error))
-    {
-      g_warning ("Failed to initialize windowing system connection: %s",
-                 error->message);
-      return EXIT_FAILURE;
-    }
+                      &error)) {
+    g_warning ("Failed to initialize windowing system connection: %s",
+               error->message);
+    return EXIT_FAILURE;
+  }
 
   app = G_APPLICATION (cc_global_shortcuts_provider_app_get ());
   return g_application_run (app, argc, argv);

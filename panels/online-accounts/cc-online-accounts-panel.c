@@ -36,19 +36,18 @@
 #define GOA_BACKEND_API_IS_SUBJECT_TO_CHANGE
 #include <goabackend/goabackend.h>
 
-struct _CcOnlineAccountsPanel
-{
+struct _CcOnlineAccountsPanel {
   CcPanel parent_instance;
 
-  GtkFrame      *accounts_frame;
-  GtkListBox    *accounts_listbox;
-  AdwBanner     *offline_banner;
-  GtkListBox    *providers_listbox;
-  GtkWidget     *toast_overlay;
+  GtkFrame *accounts_frame;
+  GtkListBox *accounts_listbox;
+  AdwBanner *offline_banner;
+  GtkListBox *providers_listbox;
+  GtkWidget *toast_overlay;
 
-  GoaClient     *client;
-  GVariant      *parameters;
-  GListStore    *providers;
+  GoaClient *client;
+  GVariant *parameters;
+  GListStore *providers;
 };
 
 CC_PANEL_REGISTER (CcOnlineAccountsPanel, cc_online_accounts_panel);
@@ -60,7 +59,9 @@ enum {
 
 /* Rows methods */
 
-typedef void (*RowForAccountCallback) (CcOnlineAccountsPanel *self, GtkWidget *row, GList *other_rows);
+typedef void (*RowForAccountCallback) (CcOnlineAccountsPanel *self,
+                                       GtkWidget             *row,
+                                       GList                 *other_rows);
 
 static void
 remove_row_for_account_cb (CcOnlineAccountsPanel *self,
@@ -82,44 +83,40 @@ modify_row_for_account (CcOnlineAccountsPanel *self,
 
   for (child = gtk_widget_get_first_child (GTK_WIDGET (self->accounts_listbox));
        child;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      children = g_list_prepend (children, child);
-    }
+       child = gtk_widget_get_next_sibling (child)) {
+    children = g_list_prepend (children, child);
+  }
 
   children = g_list_reverse (children);
 
-  for (l = children; l != NULL; l = l->next)
-    {
-      GoaObject *row_object;
+  for (l = children; l != NULL; l = l->next) {
+    GoaObject *row_object;
 
-      row_object = cc_online_account_row_get_object (CC_ONLINE_ACCOUNT_ROW (l->data));
-      if (row_object == object)
-        {
-          GtkWidget *row = GTK_WIDGET (l->data);
+    row_object = cc_online_account_row_get_object (CC_ONLINE_ACCOUNT_ROW (l->data));
+    if (row_object == object) {
+      GtkWidget *row = GTK_WIDGET (l->data);
 
-          children = g_list_remove_link (children, l);
-          callback (self, row, children);
-          g_list_free (l);
-          break;
-        }
+      children = g_list_remove_link (children, l);
+      callback (self, row, children);
+      g_list_free (l);
+      break;
     }
+  }
 
   g_list_free (children);
 }
 
 static void
-show_account_cb (GoaProvider *provider,
-                 GAsyncResult *result,
+show_account_cb (GoaProvider           *provider,
+                 GAsyncResult          *result,
                  CcOnlineAccountsPanel *self)
 {
   g_autoptr (GError) error = NULL;
 
-  if (!goa_provider_show_account_finish (provider, result, &error))
-    {
-      if (!g_error_matches (error, GOA_ERROR, GOA_ERROR_DIALOG_DISMISSED) && !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Error showing account: %s", error->message);
-    }
+  if (!goa_provider_show_account_finish (provider, result, &error)) {
+    if (!g_error_matches (error, GOA_ERROR, GOA_ERROR_DIALOG_DISMISSED) && !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Error showing account: %s", error->message);
+  }
 }
 
 static void
@@ -135,11 +132,10 @@ show_account (CcOnlineAccountsPanel *self,
   account = goa_object_peek_account (object);
   provider_type = goa_account_get_provider_type (account);
   provider = goa_provider_get_for_provider_type (provider_type);
-  if (provider == NULL)
-    {
-      g_warning ("Error showing account: Unsupported provider");
-      return;
-    }
+  if (provider == NULL) {
+    g_warning ("Error showing account: Unsupported provider");
+    return;
+  }
 
   root = gtk_widget_get_root (GTK_WIDGET (self));
   goa_provider_show_account (provider,
@@ -147,30 +143,28 @@ show_account (CcOnlineAccountsPanel *self,
                              object,
                              GTK_WIDGET (root),
                              cc_panel_get_cancellable (CC_PANEL (self)),
-                             (GAsyncReadyCallback) show_account_cb,
+                             (GAsyncReadyCallback)show_account_cb,
                              self);
 }
 
 static void
-create_account_cb (GoaProvider *provider,
-                   GAsyncResult *result,
+create_account_cb (GoaProvider           *provider,
+                   GAsyncResult          *result,
                    CcOnlineAccountsPanel *self)
 {
   g_autoptr (GoaObject) object = NULL;
   g_autoptr (GError) error = NULL;
 
   object = goa_provider_add_account_finish (provider, result, &error);
-  if (error != NULL)
-    {
-      if (!g_error_matches (error, GOA_ERROR, GOA_ERROR_DIALOG_DISMISSED) &&
-          !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          adw_toast_overlay_add_toast (ADW_TOAST_OVERLAY (self->toast_overlay),
-                                       adw_toast_new (error->message));
-        }
-
-      return;
+  if (error != NULL) {
+    if (!g_error_matches (error, GOA_ERROR, GOA_ERROR_DIALOG_DISMISSED) &&
+        !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+      adw_toast_overlay_add_toast (ADW_TOAST_OVERLAY (self->toast_overlay),
+                                   adw_toast_new (error->message));
     }
+
+    return;
+  }
 
   g_debug ("Created account for \"%s\"",
            goa_account_get_identity (goa_object_peek_account (object)));
@@ -178,7 +172,7 @@ create_account_cb (GoaProvider *provider,
 
 static void
 create_account (CcOnlineAccountsPanel *self,
-                GoaProvider *provider)
+                GoaProvider           *provider)
 {
   GtkRoot *parent;
 
@@ -189,32 +183,30 @@ create_account (CcOnlineAccountsPanel *self,
                             self->client,
                             GTK_WIDGET (parent),
                             cc_panel_get_cancellable (CC_PANEL (self)),
-                            (GAsyncReadyCallback) create_account_cb,
+                            (GAsyncReadyCallback)create_account_cb,
                             self);
 }
 
 static void
-select_account_by_id (CcOnlineAccountsPanel  *self,
-                      const gchar            *account_id)
+select_account_by_id (CcOnlineAccountsPanel *self,
+                      const gchar           *account_id)
 {
   GtkWidget *child;
 
   for (child = gtk_widget_get_first_child (GTK_WIDGET (self->accounts_listbox));
        child;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      GoaAccount *account;
-      GoaObject *row_object;
+       child = gtk_widget_get_next_sibling (child)) {
+    GoaAccount *account;
+    GoaObject *row_object;
 
-      row_object = cc_online_account_row_get_object (CC_ONLINE_ACCOUNT_ROW (child));
-      account = goa_object_peek_account (row_object);
+    row_object = cc_online_account_row_get_object (CC_ONLINE_ACCOUNT_ROW (child));
+    account = goa_object_peek_account (row_object);
 
-      if (g_strcmp0 (goa_account_get_id (account), account_id) == 0)
-        {
-          show_account (self, row_object);
-          break;
-        }
+    if (g_strcmp0 (goa_account_get_id (account), account_id) == 0) {
+      show_account (self, row_object);
+      break;
     }
+  }
 }
 
 static void
@@ -227,49 +219,45 @@ command_add (CcOnlineAccountsPanel *self,
   g_assert (self != NULL);
   g_assert (parameters != NULL);
 
-  switch (g_variant_n_children (parameters))
-    {
-      case 2:
-        g_variant_get_child (parameters, 1, "v", &v);
-        if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
-          provider_name = g_variant_get_string (v, NULL);
-        else
-          g_warning ("Wrong type for the second argument (provider name) GVariant, expected 's' but got '%s'",
-                     (gchar *)g_variant_get_type (v));
+  switch (g_variant_n_children (parameters)) {
+    case 2:
+      g_variant_get_child (parameters, 1, "v", &v);
+      if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
+        provider_name = g_variant_get_string (v, NULL);
+      else
+        g_warning ("Wrong type for the second argument (provider name) GVariant, expected 's' but got '%s'",
+                   (gchar *)g_variant_get_type (v));
+      break;
+
+    default:
+      g_warning ("Unexpected parameters found, ignore request");
+      return;
+  }
+
+  if (provider_name != NULL) {
+    g_autoptr (GoaProvider) provider = NULL;
+    unsigned int n_items = 0;
+
+    n_items = g_list_model_get_n_items (G_LIST_MODEL (self->providers));
+    for (unsigned int i = 0; i < n_items; i++) {
+      const char *provider_type = NULL;
+
+      provider = g_list_model_get_item (G_LIST_MODEL (self->providers), i);
+      provider_type = goa_provider_get_provider_type (provider);
+
+      if (g_strcmp0 (provider_type, provider_name) == 0)
         break;
 
-      default:
-        g_warning ("Unexpected parameters found, ignore request");
-        return;
+      g_clear_object (&provider);
     }
 
-  if (provider_name != NULL)
-    {
-      g_autoptr (GoaProvider) provider = NULL;
-      unsigned int n_items = 0;
-
-      n_items = g_list_model_get_n_items (G_LIST_MODEL (self->providers));
-      for (unsigned int i = 0; i < n_items; i++)
-        {
-          const char *provider_type = NULL;
-
-          provider = g_list_model_get_item (G_LIST_MODEL (self->providers), i);
-          provider_type = goa_provider_get_provider_type (provider);
-
-          if (g_strcmp0 (provider_type, provider_name) == 0)
-            break;
-
-          g_clear_object (&provider);
-        }
-
-      if (provider == NULL)
-        {
-          g_warning ("Unable to get a provider for type '%s'", provider_name);
-          return;
-        }
-
-      create_account (self, provider);
+    if (provider == NULL) {
+      g_warning ("Unable to get a provider for type '%s'", provider_name);
+      return;
     }
+
+    create_account (self, provider);
+  }
 }
 
 static void
@@ -300,11 +288,10 @@ goa_provider_priority (const char *provider_type)
     "kerberos",     /* Enterprise Login (Kerberos) */
   };
 
-  for (size_t i = 0; i < G_N_ELEMENTS (goa_priority); i++)
-    {
-      if (g_str_equal (goa_priority[i], provider_type))
-        return i;
-    }
+  for (size_t i = 0; i < G_N_ELEMENTS (goa_priority); i++) {
+    if (g_str_equal (goa_priority[i], provider_type))
+      return i;
+  }
 
   /* New or unknown providers are sorted last */
   return G_N_ELEMENTS (goa_priority) + 1;
@@ -314,13 +301,13 @@ static GtkWidget *
 provider_create_row (gpointer item,
                      gpointer user_data)
 {
-  return (GtkWidget *) cc_online_account_provider_row_new (GOA_PROVIDER (item));
+  return (GtkWidget *)cc_online_account_provider_row_new (GOA_PROVIDER (item));
 }
 
 static int
 sort_accounts_func (GtkListBoxRow *a,
                     GtkListBoxRow *b,
-                    gpointer user_data)
+                    gpointer       user_data)
 {
   GoaAccount *a_account, *b_account;
   GoaObject *a_object, *b_object;
@@ -350,7 +337,7 @@ sort_providers_func (GoaProvider *a,
 
 static void
 add_account (CcOnlineAccountsPanel *self,
-             GoaObject *object)
+             GoaObject             *object)
 {
   CcOnlineAccountRow *row;
 
@@ -365,7 +352,7 @@ add_provider (CcOnlineAccountsPanel *self,
 {
   g_list_store_insert_sorted (self->providers,
                               provider,
-                              (GCompareDataFunc) sort_providers_func,
+                              (GCompareDataFunc)sort_providers_func,
                               self);
 }
 
@@ -394,7 +381,7 @@ on_accounts_listbox_row_activated (CcOnlineAccountsPanel *self,
 
 static void
 on_provider_row_activated_cb (CcOnlineAccountsPanel *self,
-                              GtkListBoxRow *activated_row)
+                              GtkListBoxRow         *activated_row)
 {
   GoaProvider *provider = cc_online_account_provider_row_get_provider (CC_ONLINE_ACCOUNT_PROVIDER_ROW (activated_row));
 
@@ -402,9 +389,9 @@ on_provider_row_activated_cb (CcOnlineAccountsPanel *self,
 }
 
 static void
-goa_provider_get_all_cb (GObject *object,
+goa_provider_get_all_cb (GObject      *object,
                          GAsyncResult *res,
-                         gpointer user_data)
+                         gpointer      user_data)
 {
   g_autoptr (CcOnlineAccountsPanel) self = CC_ONLINE_ACCOUNTS_PANEL (user_data);
   g_autolist (GoaProvider) providers = NULL;
@@ -417,11 +404,10 @@ goa_provider_get_all_cb (GObject *object,
   if (g_cancellable_is_cancelled (cc_panel_get_cancellable (CC_PANEL (self))))
     return;
 
-  if (!goa_provider_get_all_finish (&providers, res, &error))
-    {
-      g_warning ("Error listing providers: %s", error->message);
-      return;
-    }
+  if (!goa_provider_get_all_finish (&providers, res, &error)) {
+    g_warning ("Error listing providers: %s", error->message);
+    return;
+  }
 
   for (const GList *iter = providers; iter != NULL; iter = iter->next)
     add_provider (self, GOA_PROVIDER (iter->data));
@@ -445,30 +431,28 @@ goa_provider_get_all_cb (GObject *object,
   /* With the client ready, check if we have a pending command */
   gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
 
-  if (self->parameters != NULL)
-    {
-      g_autoptr (GVariant) parameters = NULL;
+  if (self->parameters != NULL) {
+    g_autoptr (GVariant) parameters = NULL;
 
-      parameters = g_steal_pointer (&self->parameters);
-      g_object_set (self, "parameters", parameters, NULL);
-    }
+    parameters = g_steal_pointer (&self->parameters);
+    g_object_set (self, "parameters", parameters, NULL);
+  }
 }
 
 static void
-goa_client_new_cb (GObject *object,
+goa_client_new_cb (GObject      *object,
                    GAsyncResult *res,
-                   gpointer user_data)
+                   gpointer      user_data)
 {
   g_autoptr (CcOnlineAccountsPanel) self = CC_ONLINE_ACCOUNTS_PANEL (user_data);
   g_autoptr (GError) error = NULL;
 
   self->client = goa_client_new_finish (res, &error);
-  if (self->client == NULL)
-    {
-      g_warning ("Error connect to service: %s", error->message);
-      gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
-      return;
-    }
+  if (self->client == NULL) {
+    g_warning ("Error connect to service: %s", error->message);
+    gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
+    return;
+  }
 
   goa_provider_get_all (goa_provider_get_all_cb, g_object_ref (self));
 }
@@ -491,46 +475,38 @@ cc_online_accounts_panel_set_property (GObject      *object,
 {
   CcOnlineAccountsPanel *self = CC_ONLINE_ACCOUNTS_PANEL (object);
 
-  switch (property_id)
-    {
-      case PROP_PARAMETERS:
-        {
-          GVariant *parameters;
-          g_autoptr (GVariant) v = NULL;
-          const gchar *first_arg = NULL;
+  switch (property_id) {
+    case PROP_PARAMETERS: {
+      GVariant *parameters;
+      g_autoptr (GVariant) v = NULL;
+      const gchar *first_arg = NULL;
 
-          parameters = g_value_get_variant (value);
-          if (parameters == NULL)
-            return;
+      parameters = g_value_get_variant (value);
+      if (parameters == NULL)
+        return;
 
-          if (g_variant_n_children (parameters) > 0)
-            {
-                g_variant_get_child (parameters, 0, "v", &v);
-                if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
-                  first_arg = g_variant_get_string (v, NULL);
-                else
-                  g_warning ("Wrong type for the second argument GVariant, expected 's' but got '%s'",
-                             (gchar *)g_variant_get_type (v));
-            }
+      if (g_variant_n_children (parameters) > 0) {
+        g_variant_get_child (parameters, 0, "v", &v);
+        if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING))
+          first_arg = g_variant_get_string (v, NULL);
+        else
+          g_warning ("Wrong type for the second argument GVariant, expected 's' but got '%s'",
+                     (gchar *)g_variant_get_type (v));
+      }
 
-          /* Waiting for the client to load */
-          if (self->client == NULL)
-            {
-              g_clear_pointer (&self->parameters, g_variant_unref);
-              self->parameters = g_value_dup_variant (value);
-            }
-          else if (g_strcmp0 (first_arg, "add") == 0)
-            {
-              command_add (CC_ONLINE_ACCOUNTS_PANEL (object), parameters);
-            }
-          else if (first_arg != NULL)
-            {
-              select_account_by_id (CC_ONLINE_ACCOUNTS_PANEL (object), first_arg);
-            }
+      /* Waiting for the client to load */
+      if (self->client == NULL) {
+        g_clear_pointer (&self->parameters, g_variant_unref);
+        self->parameters = g_value_dup_variant (value);
+      } else if (g_strcmp0 (first_arg, "add") == 0) {
+        command_add (CC_ONLINE_ACCOUNTS_PANEL (object), parameters);
+      } else if (first_arg != NULL) {
+        select_account_by_id (CC_ONLINE_ACCOUNTS_PANEL (object), first_arg);
+      }
 
-          return;
-        }
+      return;
     }
+  }
 
   G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
 }
@@ -594,7 +570,7 @@ cc_online_accounts_panel_init (CcOnlineAccountsPanel *self)
                            self,
                            NULL);
 
-  monitor = g_network_monitor_get_default();
+  monitor = g_network_monitor_get_default ();
   g_object_bind_property (monitor,
                           "network-available",
                           self->offline_banner,

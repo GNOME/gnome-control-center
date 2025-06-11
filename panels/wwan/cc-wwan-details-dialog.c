@@ -36,20 +36,19 @@
  * @short_description: Dialog to Show Device Details
  */
 
-struct _CcWwanDetailsDialog
-{
-  GtkDialog     parent_instance;
+struct _CcWwanDetailsDialog {
+  GtkDialog parent_instance;
 
-  GtkLabel     *device_identifier;
-  GtkLabel     *device_model;
-  GtkLabel     *firmware_version;
-  GtkLabel     *identifier_label;
-  GtkLabel     *manufacturer;
-  GtkLabel     *network_status;
-  GtkLabel     *network_type;
-  GtkLabel     *operator_name;
-  GtkLabel     *own_numbers;
-  GtkLabel     *signal_strength;
+  GtkLabel *device_identifier;
+  GtkLabel *device_model;
+  GtkLabel *firmware_version;
+  GtkLabel *identifier_label;
+  GtkLabel *manufacturer;
+  GtkLabel *network_status;
+  GtkLabel *network_type;
+  GtkLabel *operator_name;
+  GtkLabel *own_numbers;
+  GtkLabel *signal_strength;
 
   CcWwanDevice *device;
 };
@@ -74,8 +73,7 @@ cc_wwan_details_update_network_status (CcWwanDetailsDialog *self)
 
   state = cc_wwan_device_get_network_state (self->device);
 
-  switch (state)
-    {
+  switch (state) {
     case CC_WWAN_REGISTRATION_STATE_IDLE:
       gtk_label_set_label (self->network_status, _("Not Registered"));
       break;
@@ -99,7 +97,7 @@ cc_wwan_details_update_network_status (CcWwanDetailsDialog *self)
     default:
       gtk_label_set_label (self->network_status, _("Unknown"));
       break;
-    }
+  }
 }
 
 static void
@@ -158,15 +156,14 @@ cc_wwan_details_dialog_set_property (GObject      *object,
 {
   CcWwanDetailsDialog *self = CC_WWAN_DETAILS_DIALOG (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_DEVICE:
       self->device = g_value_dup_object (value);
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -208,7 +205,7 @@ cc_wwan_details_dialog_class_init (CcWwanDetailsDialogClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->set_property = cc_wwan_details_dialog_set_property;
-  object_class->constructed  = cc_wwan_details_dialog_constructed;
+  object_class->constructed = cc_wwan_details_dialog_constructed;
   object_class->dispose = cc_wwan_details_dialog_dispose;
 
   properties[PROP_DEVICE] =

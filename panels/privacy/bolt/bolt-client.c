@@ -8,7 +8,7 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
@@ -33,8 +33,7 @@ static void         handle_dbus_device_removed (GObject    *self,
                                                 GDBusProxy *bus_proxy,
                                                 GVariant   *params);
 
-struct _BoltClient
-{
+struct _BoltClient {
   BoltProxy parent;
 };
 
@@ -166,7 +165,9 @@ bolt_client_init (BoltClient *cli)
 /* dbus signals */
 
 static void
-handle_dbus_device_added (GObject *self, GDBusProxy *bus_proxy, GVariant *params)
+handle_dbus_device_added (GObject    *self,
+                          GDBusProxy *bus_proxy,
+                          GVariant   *params)
 {
   BoltClient *cli = BOLT_CLIENT (self);
   const char *opath = NULL;
@@ -176,7 +177,9 @@ handle_dbus_device_added (GObject *self, GDBusProxy *bus_proxy, GVariant *params
 }
 
 static void
-handle_dbus_device_removed (GObject *self, GDBusProxy *bus_proxy, GVariant *params)
+handle_dbus_device_removed (GObject    *self,
+                            GDBusProxy *bus_proxy,
+                            GVariant   *params)
 {
   BoltClient *cli = BOLT_CLIENT (self);
   const char *opath = NULL;
@@ -194,11 +197,10 @@ bolt_client_new (GError **error)
   GDBusConnection *bus;
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, error);
-  if (bus == NULL)
-    {
-      g_prefix_error (error, "Error connecting to D-Bus: ");
-      return FALSE;
-    }
+  if (bus == NULL) {
+    g_prefix_error (error, "Error connecting to D-Bus: ");
+    return FALSE;
+  }
 
   cli = g_initable_new (BOLT_TYPE_CLIENT,
                         NULL, error,
@@ -225,13 +227,12 @@ got_the_client (GObject      *source,
 
   obj = g_async_initable_new_finish (G_ASYNC_INITABLE (source), res, &error);
 
-  if (obj == NULL)
-    {
-      /* error ownership gets transferred to the task */
-      g_task_return_error (task, error);
-      g_object_unref (task);
-      return;
-    }
+  if (obj == NULL) {
+    /* error ownership gets transferred to the task */
+    g_task_return_error (task, error);
+    g_object_unref (task);
+    return;
+  }
 
   g_task_return_pointer (task, obj, g_object_unref);
   g_object_unref (task);
@@ -248,14 +249,13 @@ got_the_bus (GObject      *source,
   GDBusConnection *bus;
 
   bus = g_bus_get_finish (res, &error);
-  if (bus == NULL)
-    {
-      g_prefix_error (&error, "could not connect to D-Bus: ");
-      /* error ownership gets transferred to the task */
-      g_task_return_error (task, error);
-      g_object_unref (task);
-      return;
-    }
+  if (bus == NULL) {
+    g_prefix_error (&error, "could not connect to D-Bus: ");
+    /* error ownership gets transferred to the task */
+    g_task_return_error (task, error);
+    g_object_unref (task);
+    return;
+  }
 
   cancellable = g_task_get_cancellable (task);
   g_async_initable_new_async (BOLT_TYPE_CLIENT,
@@ -272,9 +272,9 @@ got_the_bus (GObject      *source,
 }
 
 void
-bolt_client_new_async (GCancellable       *cancellable,
-                       GAsyncReadyCallback callback,
-                       gpointer            user_data)
+bolt_client_new_async (GCancellable        *cancellable,
+                       GAsyncReadyCallback  callback,
+                       gpointer             user_data)
 {
   GTask *task;
 
@@ -283,8 +283,8 @@ bolt_client_new_async (GCancellable       *cancellable,
 }
 
 BoltClient *
-bolt_client_new_finish (GAsyncResult *res,
-                        GError      **error)
+bolt_client_new_finish (GAsyncResult  *res,
+                        GError       **error)
 {
   g_return_val_if_fail (G_IS_TASK (res), NULL);
 
@@ -292,13 +292,13 @@ bolt_client_new_finish (GAsyncResult *res,
 }
 
 GPtrArray *
-bolt_client_list_devices (BoltClient   *client,
-                          GCancellable *cancel,
-                          GError      **error)
+bolt_client_list_devices (BoltClient    *client,
+                          GCancellable  *cancel,
+                          GError       **error)
 {
-  g_autoptr(GVariant) val = NULL;
-  g_autoptr(GPtrArray) devices = NULL;
-  g_autoptr(GVariantIter) iter = NULL;
+  g_autoptr (GVariant) val = NULL;
+  g_autoptr (GPtrArray) devices = NULL;
+  g_autoptr (GVariantIter) iter = NULL;
   GDBusConnection *bus = NULL;
   const char *d;
 
@@ -319,28 +319,27 @@ bolt_client_list_devices (BoltClient   *client,
   devices = g_ptr_array_new_with_free_func (g_object_unref);
 
   g_variant_get (val, "(ao)", &iter);
-  while (g_variant_iter_loop (iter, "&o", &d, NULL))
-    {
-      BoltDevice *dev;
+  while (g_variant_iter_loop (iter, "&o", &d, NULL)) {
+    BoltDevice *dev;
 
-      dev = bolt_device_new_for_object_path (bus, d, cancel, error);
-      if (dev == NULL)
-        return NULL;
+    dev = bolt_device_new_for_object_path (bus, d, cancel, error);
+    if (dev == NULL)
+      return NULL;
 
-      g_ptr_array_add (devices, dev);
-    }
+    g_ptr_array_add (devices, dev);
+  }
 
   return g_steal_pointer (&devices);
 }
 
 BoltDevice *
-bolt_client_get_device (BoltClient   *client,
-                        const char   *uid,
-                        GCancellable *cancel,
-                        GError      **error)
+bolt_client_get_device (BoltClient    *client,
+                        const char    *uid,
+                        GCancellable  *cancel,
+                        GError       **error)
 {
-  g_autoptr(GVariant) val = NULL;
-  g_autoptr(GError) err = NULL;
+  g_autoptr (GVariant) val = NULL;
+  g_autoptr (GError) err = NULL;
   BoltDevice *dev = NULL;
   GDBusConnection *bus = NULL;
   const char *opath = NULL;
@@ -355,11 +354,10 @@ bolt_client_get_device (BoltClient   *client,
                                 cancel,
                                 &err);
 
-  if (val == NULL)
-    {
-      bolt_error_propagate_stripped (error, &err);
-      return NULL;
-    }
+  if (val == NULL) {
+    bolt_error_propagate_stripped (error, &err);
+    return NULL;
+  }
 
   bus = g_dbus_proxy_get_connection (G_DBUS_PROXY (client));
   g_variant_get (val, "(&o)", &opath);
@@ -372,14 +370,14 @@ bolt_client_get_device (BoltClient   *client,
 }
 
 BoltDevice *
-bolt_client_enroll_device (BoltClient  *client,
-                           const char  *uid,
-                           BoltPolicy   policy,
-                           BoltAuthCtrl flags,
-                           GError     **error)
+bolt_client_enroll_device (BoltClient    *client,
+                           const char    *uid,
+                           BoltPolicy     policy,
+                           BoltAuthCtrl   flags,
+                           GError       **error)
 {
-  g_autoptr(GVariant) val = NULL;
-  g_autoptr(GError) err = NULL;
+  g_autoptr (GVariant) val = NULL;
+  g_autoptr (GError) err = NULL;
   g_autofree char *fstr = NULL;
   BoltDevice *dev = NULL;
   GDBusConnection *bus = NULL;
@@ -406,11 +404,10 @@ bolt_client_enroll_device (BoltClient  *client,
                                 NULL,
                                 &err);
 
-  if (val == NULL)
-    {
-      bolt_error_propagate_stripped (error, &err);
-      return NULL;
-    }
+  if (val == NULL) {
+    bolt_error_propagate_stripped (error, &err);
+    return NULL;
+  }
 
   bus = g_dbus_proxy_get_connection (G_DBUS_PROXY (client));
   g_variant_get (val, "(&o)", &opath);
@@ -423,13 +420,13 @@ bolt_client_enroll_device (BoltClient  *client,
 }
 
 void
-bolt_client_enroll_device_async (BoltClient         *client,
-                                 const char         *uid,
-                                 BoltPolicy          policy,
-                                 BoltAuthCtrl        flags,
-                                 GCancellable       *cancellable,
-                                 GAsyncReadyCallback callback,
-                                 gpointer            user_data)
+bolt_client_enroll_device_async (BoltClient          *client,
+                                 const char          *uid,
+                                 BoltPolicy           policy,
+                                 BoltAuthCtrl         flags,
+                                 GCancellable        *cancellable,
+                                 GAsyncReadyCallback  callback,
+                                 gpointer             user_data)
 {
   g_autofree char *fstr = NULL;
   GError *err = NULL;
@@ -440,18 +437,16 @@ bolt_client_enroll_device_async (BoltClient         *client,
   g_return_if_fail (uid != NULL);
 
   pstr = bolt_enum_to_string (BOLT_TYPE_POLICY, policy, &err);
-  if (pstr == NULL)
-    {
-      g_task_report_error (client, callback, user_data, NULL, err);
-      return;
-    }
+  if (pstr == NULL) {
+    g_task_report_error (client, callback, user_data, NULL, err);
+    return;
+  }
 
   fstr = bolt_flags_to_string (BOLT_TYPE_AUTH_CTRL, flags, &err);
-  if (fstr == NULL)
-    {
-      g_task_report_error (client, callback, user_data, NULL, err);
-      return;
-    }
+  if (fstr == NULL) {
+    g_task_report_error (client, callback, user_data, NULL, err);
+    return;
+  }
 
   params = g_variant_new ("(sss)", uid, pstr, fstr);
   g_dbus_proxy_call (G_DBUS_PROXY (client),
@@ -465,22 +460,21 @@ bolt_client_enroll_device_async (BoltClient         *client,
 }
 
 gboolean
-bolt_client_enroll_device_finish (BoltClient   *client,
-                                  GAsyncResult *res,
-                                  char        **path,
-                                  GError      **error)
+bolt_client_enroll_device_finish (BoltClient    *client,
+                                  GAsyncResult  *res,
+                                  char         **path,
+                                  GError       **error)
 {
-  g_autoptr(GError) err = NULL;
-  g_autoptr(GVariant) val = NULL;
+  g_autoptr (GError) err = NULL;
+  g_autoptr (GVariant) val = NULL;
 
   g_return_val_if_fail (BOLT_IS_CLIENT (client), FALSE);
 
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (client), res, &err);
-  if (val == NULL)
-    {
-      bolt_error_propagate_stripped (error, &err);
-      return FALSE;
-    }
+  if (val == NULL) {
+    bolt_error_propagate_stripped (error, &err);
+    return FALSE;
+  }
 
   if (path != NULL)
     g_variant_get (val, "(o)", path);
@@ -488,13 +482,11 @@ bolt_client_enroll_device_finish (BoltClient   *client,
   return TRUE;
 }
 
-typedef struct OpData
-{
+typedef struct OpData {
   const char *iface;  /* Manager or Device */
   const char *method; /* Enroll or Authorize */
-  char       *path;   /* object path */
-  GVariant   *params; /* parameters */
-
+  char *path;         /* object path */
+  GVariant *params;   /* parameters */
 } OpData;
 
 static OpData *
@@ -549,7 +541,7 @@ op_data_free (OpData *op)
 static void
 op_queue_free (GQueue *queue)
 {
-  g_queue_free_full (queue, (GDestroyNotify) op_data_free);
+  g_queue_free_full (queue, (GDestroyNotify)op_data_free);
 }
 
 static void    allop_one_done (GObject      *source_object,
@@ -557,7 +549,9 @@ static void    allop_one_done (GObject      *source_object,
                                gpointer      user_data);
 
 static gboolean
-allop_continue (BoltClient *client, GTask *task, GQueue *ops)
+allop_continue (BoltClient *client,
+                GTask      *task,
+                GQueue     *ops)
 {
   GDBusConnection *bus;
   GCancellable *cancel;
@@ -594,7 +588,7 @@ allop_one_done (GObject      *source_object,
                 GAsyncResult *res,
                 gpointer      user_data)
 {
-  g_autoptr(GVariant) val = NULL;
+  g_autoptr (GVariant) val = NULL;
   BoltClient *client;
   GDBusConnection *bus;
   gboolean done;
@@ -610,32 +604,30 @@ allop_one_done (GObject      *source_object,
 
   val = g_dbus_connection_call_finish (bus, res, &err);
 
-  if (val == NULL)
-    {
-      g_task_return_error (task, err); /* takes ownership */
-      g_object_unref (task);
-      /* we are done (albeit with an error) */
-      return;
-    }
+  if (val == NULL) {
+    g_task_return_error (task, err);   /* takes ownership */
+    g_object_unref (task);
+    /* we are done (albeit with an error) */
+    return;
+  }
 
   done = allop_continue (client, task, ops);
 
-  if (done)
-    {
-      /* we are done */
-      g_task_return_boolean (task, TRUE);
-      g_object_unref (task);
-    }
+  if (done) {
+    /* we are done */
+    g_task_return_boolean (task, TRUE);
+    g_object_unref (task);
+  }
 }
 
 void
-bolt_client_enroll_all_async (BoltClient         *client,
-                              GPtrArray          *uuids,
-                              BoltPolicy          policy,
-                              BoltAuthCtrl        flags,
-                              GCancellable       *cancellable,
-                              GAsyncReadyCallback callback,
-                              gpointer            user_data)
+bolt_client_enroll_all_async (BoltClient          *client,
+                              GPtrArray           *uuids,
+                              BoltPolicy           policy,
+                              BoltAuthCtrl         flags,
+                              GCancellable        *cancellable,
+                              GAsyncReadyCallback  callback,
+                              gpointer             user_data)
 {
   g_autofree char *fstr = NULL;
   GError *err = NULL;
@@ -649,44 +641,41 @@ bolt_client_enroll_all_async (BoltClient         *client,
   g_return_if_fail (callback != NULL);
 
   pstr = bolt_enum_to_string (BOLT_TYPE_POLICY, policy, &err);
-  if (pstr == NULL)
-    {
-      g_task_report_error (client, callback, user_data, NULL, err);
-      return;
-    }
+  if (pstr == NULL) {
+    g_task_report_error (client, callback, user_data, NULL, err);
+    return;
+  }
 
   fstr = bolt_flags_to_string (BOLT_TYPE_AUTH_CTRL, flags, &err);
-  if (fstr == NULL)
-    {
-      g_task_report_error (client, callback, user_data, NULL, err);
-      return;
-    }
+  if (fstr == NULL) {
+    g_task_report_error (client, callback, user_data, NULL, err);
+    return;
+  }
 
   task = g_task_new (client, cancellable, callback, user_data);
   g_task_set_return_on_cancel (task, TRUE);
 
   ops = g_queue_new ();
-  g_task_set_task_data (task, ops, (GDestroyNotify) op_queue_free);
+  g_task_set_task_data (task, ops, (GDestroyNotify)op_queue_free);
 
-  for (guint i = 0; i < uuids->len; i++)
-    {
-      const char *uid = g_ptr_array_index (uuids, i);
-      OpData *op;
+  for (guint i = 0; i < uuids->len; i++) {
+    const char *uid = g_ptr_array_index (uuids, i);
+    OpData *op;
 
-      op = op_data_new_enroll (uid, pstr, fstr);
+    op = op_data_new_enroll (uid, pstr, fstr);
 
-      g_queue_push_tail (ops, op);
-    }
+    g_queue_push_tail (ops, op);
+  }
 
   allop_continue (client, task, ops);
 }
 
 gboolean
-bolt_client_enroll_all_finish (BoltClient   *client,
-                               GAsyncResult *res,
-                               GError      **error)
+bolt_client_enroll_all_finish (BoltClient    *client,
+                               GAsyncResult  *res,
+                               GError       **error)
 {
-  g_autoptr(GError) err = NULL;
+  g_autoptr (GError) err = NULL;
   gboolean ok;
 
   g_return_val_if_fail (BOLT_IS_CLIENT (client), FALSE);
@@ -702,12 +691,12 @@ bolt_client_enroll_all_finish (BoltClient   *client,
 }
 
 void
-bolt_client_authorize_all_async (BoltClient         *client,
-                                 GPtrArray          *uuids,
-                                 BoltAuthCtrl        flags,
-                                 GCancellable       *cancellable,
-                                 GAsyncReadyCallback callback,
-                                 gpointer            user_data)
+bolt_client_authorize_all_async (BoltClient          *client,
+                                 GPtrArray           *uuids,
+                                 BoltAuthCtrl         flags,
+                                 GCancellable        *cancellable,
+                                 GAsyncReadyCallback  callback,
+                                 gpointer             user_data)
 {
   g_autofree char *fstr = NULL;
   GError *err = NULL;
@@ -720,37 +709,35 @@ bolt_client_authorize_all_async (BoltClient         *client,
   g_return_if_fail (callback != NULL);
 
   fstr = bolt_flags_to_string (BOLT_TYPE_AUTH_CTRL, flags, &err);
-  if (fstr == NULL)
-    {
-      g_task_report_error (client, callback, user_data, NULL, err);
-      return;
-    }
+  if (fstr == NULL) {
+    g_task_report_error (client, callback, user_data, NULL, err);
+    return;
+  }
 
   task = g_task_new (client, cancellable, callback, user_data);
   g_task_set_return_on_cancel (task, TRUE);
 
   ops = g_queue_new ();
-  g_task_set_task_data (task, ops, (GDestroyNotify) op_queue_free);
+  g_task_set_task_data (task, ops, (GDestroyNotify)op_queue_free);
 
-  for (guint i = 0; i < uuids->len; i++)
-    {
-      const char *uid = g_ptr_array_index (uuids, i);
-      OpData *op;
+  for (guint i = 0; i < uuids->len; i++) {
+    const char *uid = g_ptr_array_index (uuids, i);
+    OpData *op;
 
-      op = op_data_new_authorize (uid, fstr);
+    op = op_data_new_authorize (uid, fstr);
 
-      g_queue_push_tail (ops, op);
-    }
+    g_queue_push_tail (ops, op);
+  }
 
   allop_continue (client, task, ops);
 }
 
 gboolean
-bolt_client_authorize_all_finish (BoltClient   *client,
-                                  GAsyncResult *res,
-                                  GError      **error)
+bolt_client_authorize_all_finish (BoltClient    *client,
+                                  GAsyncResult  *res,
+                                  GError       **error)
 {
-  g_autoptr(GError) err = NULL;
+  g_autoptr (GError) err = NULL;
   gboolean ok;
 
   g_return_val_if_fail (BOLT_IS_CLIENT (client), FALSE);
@@ -766,13 +753,13 @@ bolt_client_authorize_all_finish (BoltClient   *client,
 }
 
 void
-bolt_client_connect_all_async (BoltClient         *client,
-                               GPtrArray          *devices,
-                               BoltPolicy          policy,
-                               BoltAuthCtrl        flags,
-                               GCancellable       *cancellable,
-                               GAsyncReadyCallback callback,
-                               gpointer            user_data)
+bolt_client_connect_all_async (BoltClient          *client,
+                               GPtrArray           *devices,
+                               BoltPolicy           policy,
+                               BoltAuthCtrl         flags,
+                               GCancellable        *cancellable,
+                               GAsyncReadyCallback  callback,
+                               gpointer             user_data)
 {
   g_autofree char *fstr = NULL;
   GError *err = NULL;
@@ -786,48 +773,45 @@ bolt_client_connect_all_async (BoltClient         *client,
   g_return_if_fail (callback != NULL);
 
   pstr = bolt_enum_to_string (BOLT_TYPE_POLICY, policy, &err);
-  if (pstr == NULL)
-    {
-      g_task_report_error (client, callback, user_data, NULL, err);
-      return;
-    }
+  if (pstr == NULL) {
+    g_task_report_error (client, callback, user_data, NULL, err);
+    return;
+  }
 
   fstr = bolt_flags_to_string (BOLT_TYPE_AUTH_CTRL, flags, &err);
-  if (fstr == NULL)
-    {
-      g_task_report_error (client, callback, user_data, NULL, err);
-      return;
-    }
+  if (fstr == NULL) {
+    g_task_report_error (client, callback, user_data, NULL, err);
+    return;
+  }
 
   task = g_task_new (client, cancellable, callback, user_data);
   g_task_set_return_on_cancel (task, TRUE);
 
   ops = g_queue_new ();
-  g_task_set_task_data (task, ops, (GDestroyNotify) op_queue_free);
+  g_task_set_task_data (task, ops, (GDestroyNotify)op_queue_free);
 
-  for (guint i = 0; i < devices->len; i++)
-    {
-      BoltDevice *dev = g_ptr_array_index (devices, i);
-      const char *uid = bolt_device_get_uid (dev);
-      OpData *op;
+  for (guint i = 0; i < devices->len; i++) {
+    BoltDevice *dev = g_ptr_array_index (devices, i);
+    const char *uid = bolt_device_get_uid (dev);
+    OpData *op;
 
-      if (bolt_device_is_stored (dev))
-        op = op_data_new_authorize (uid, fstr);
-      else
-        op = op_data_new_enroll (uid, pstr, fstr);
+    if (bolt_device_is_stored (dev))
+      op = op_data_new_authorize (uid, fstr);
+    else
+      op = op_data_new_enroll (uid, pstr, fstr);
 
-      g_queue_push_tail (ops, op);
-    }
+    g_queue_push_tail (ops, op);
+  }
 
   allop_continue (client, task, ops);
 }
 
 gboolean
-bolt_client_connect_all_finish (BoltClient   *client,
-                                GAsyncResult *res,
-                                GError      **error)
+bolt_client_connect_all_finish (BoltClient    *client,
+                                GAsyncResult  *res,
+                                GError       **error)
 {
-  g_autoptr(GError) err = NULL;
+  g_autoptr (GError) err = NULL;
   gboolean ok;
 
   g_return_val_if_fail (BOLT_IS_CLIENT (client), FALSE);
@@ -843,12 +827,12 @@ bolt_client_connect_all_finish (BoltClient   *client,
 }
 
 gboolean
-bolt_client_forget_device (BoltClient *client,
-                           const char *uid,
-                           GError    **error)
+bolt_client_forget_device (BoltClient  *client,
+                           const char  *uid,
+                           GError     **error)
 {
-  g_autoptr(GVariant) val = NULL;
-  g_autoptr(GError) err = NULL;
+  g_autoptr (GVariant) val = NULL;
+  g_autoptr (GError) err = NULL;
 
   g_return_val_if_fail (BOLT_IS_CLIENT (client), FALSE);
 
@@ -860,21 +844,20 @@ bolt_client_forget_device (BoltClient *client,
                                 NULL,
                                 &err);
 
-  if (val == NULL)
-    {
-      bolt_error_propagate_stripped (error, &err);
-      return FALSE;
-    }
+  if (val == NULL) {
+    bolt_error_propagate_stripped (error, &err);
+    return FALSE;
+  }
 
   return TRUE;
 }
 
 void
-bolt_client_forget_device_async (BoltClient         *client,
-                                 const char         *uid,
-                                 GCancellable       *cancellable,
-                                 GAsyncReadyCallback callback,
-                                 gpointer            user_data)
+bolt_client_forget_device_async (BoltClient          *client,
+                                 const char          *uid,
+                                 GCancellable        *cancellable,
+                                 GAsyncReadyCallback  callback,
+                                 gpointer             user_data)
 {
   g_return_if_fail (BOLT_IS_CLIENT (client));
 
@@ -889,21 +872,20 @@ bolt_client_forget_device_async (BoltClient         *client,
 }
 
 gboolean
-bolt_client_forget_device_finish (BoltClient   *client,
-                                  GAsyncResult *res,
-                                  GError      **error)
+bolt_client_forget_device_finish (BoltClient    *client,
+                                  GAsyncResult  *res,
+                                  GError       **error)
 {
-  g_autoptr(GVariant) val = NULL;
-  g_autoptr(GError) err = NULL;
+  g_autoptr (GVariant) val = NULL;
+  g_autoptr (GError) err = NULL;
 
   g_return_val_if_fail (BOLT_IS_CLIENT (client), FALSE);
 
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (client), res, &err);
-  if (val == NULL)
-    {
-      bolt_error_propagate_stripped (error, &err);
-      return FALSE;
-    }
+  if (val == NULL) {
+    bolt_error_propagate_stripped (error, &err);
+    return FALSE;
+  }
 
   return TRUE;
 }
@@ -982,11 +964,11 @@ bolt_client_get_authmode (BoltClient *client)
 }
 
 void
-bolt_client_set_authmode_async (BoltClient         *client,
-                                BoltAuthMode        mode,
-                                GCancellable       *cancellable,
-                                GAsyncReadyCallback callback,
-                                gpointer            user_data)
+bolt_client_set_authmode_async (BoltClient          *client,
+                                BoltAuthMode         mode,
+                                GCancellable        *cancellable,
+                                GAsyncReadyCallback  callback,
+                                gpointer             user_data)
 {
   g_autofree char *str = NULL;
   GError *err = NULL;
@@ -999,11 +981,10 @@ bolt_client_set_authmode_async (BoltClient         *client,
   flags_class = flags_pspec->flags_class;
   str = bolt_flags_class_to_string (flags_class, mode, &err);
 
-  if (str == NULL)
-    {
-      g_task_report_error (client, callback, user_data, NULL, err);
-      return;
-    }
+  if (str == NULL) {
+    g_task_report_error (client, callback, user_data, NULL, err);
+    return;
+  }
 
   bolt_proxy_set_property_async (BOLT_PROXY (client),
                                  g_param_spec_get_nick (pspec),
@@ -1014,9 +995,9 @@ bolt_client_set_authmode_async (BoltClient         *client,
 }
 
 gboolean
-bolt_client_set_authmode_finish (BoltClient   *client,
-                                 GAsyncResult *res,
-                                 GError      **error)
+bolt_client_set_authmode_finish (BoltClient    *client,
+                                 GAsyncResult  *res,
+                                 GError       **error)
 {
   return bolt_proxy_set_property_finish (res, error);
 }
@@ -1027,8 +1008,8 @@ device_sort_by_syspath (gconstpointer ap,
                         gconstpointer bp,
                         gpointer      data)
 {
-  BoltDevice *a = BOLT_DEVICE (*((BoltDevice **) ap));
-  BoltDevice *b = BOLT_DEVICE (*((BoltDevice **) bp));
+  BoltDevice *a = BOLT_DEVICE (*((BoltDevice **)ap));
+  BoltDevice *b = BOLT_DEVICE (*((BoltDevice **)bp));
   gint sort_order = GPOINTER_TO_INT (data);
   const char *pa;
   const char *pb;

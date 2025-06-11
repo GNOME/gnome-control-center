@@ -50,28 +50,27 @@
 #include "cc-hostname.h"
 #include "cc-info-entry.h"
 
-struct _CcSystemDetailsWindow
-{
+struct _CcSystemDetailsWindow {
   AdwDialog parent;
 
-  AdwToastOverlay   *toast_overlay;
+  AdwToastOverlay *toast_overlay;
 
   /* Hardware Information */
-  CcInfoEntry       *hardware_model_row;
-  CcInfoEntry       *firmware_version_row;
-  CcInfoEntry       *memory_row;
-  CcInfoEntry       *processor_row;
-  GtkBox            *graphics_row;
-  CcInfoEntry       *disk_row;
+  CcInfoEntry *hardware_model_row;
+  CcInfoEntry *firmware_version_row;
+  CcInfoEntry *memory_row;
+  CcInfoEntry *processor_row;
+  GtkBox *graphics_row;
+  CcInfoEntry *disk_row;
 
   /* Hardware Information */
-  CcInfoEntry       *os_name_row;
-  CcInfoEntry       *os_build_row;
-  CcInfoEntry       *os_type_row;
-  CcInfoEntry       *gnome_version_row;
-  CcInfoEntry       *windowing_system_row;
-  CcInfoEntry       *virtualization_row;
-  CcInfoEntry       *kernel_row;
+  CcInfoEntry *os_name_row;
+  CcInfoEntry *os_build_row;
+  CcInfoEntry *os_type_row;
+  CcInfoEntry *gnome_version_row;
+  CcInfoEntry *windowing_system_row;
+  CcInfoEntry *virtualization_row;
+  CcInfoEntry *kernel_row;
 };
 
 G_DEFINE_TYPE (CcSystemDetailsWindow, cc_system_details_window, ADW_TYPE_DIALOG)
@@ -79,10 +78,10 @@ G_DEFINE_TYPE (CcSystemDetailsWindow, cc_system_details_window, ADW_TYPE_DIALOG)
 static char *
 get_renderer_from_session (void)
 {
-  g_autoptr(GDBusProxy) session_proxy = NULL;
-  g_autoptr(GVariant) renderer_variant = NULL;
+  g_autoptr (GDBusProxy) session_proxy = NULL;
+  g_autoptr (GVariant) renderer_variant = NULL;
   char *renderer;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   session_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
                                                  G_DBUS_PROXY_FLAGS_NONE,
@@ -91,20 +90,18 @@ get_renderer_from_session (void)
                                                  "/org/gnome/SessionManager",
                                                  "org.gnome.SessionManager",
                                                  NULL, &error);
-  if (error != NULL)
-    {
-      g_warning ("Unable to connect to create a proxy for org.gnome.SessionManager: %s",
-                 error->message);
-      return NULL;
-    }
+  if (error != NULL) {
+    g_warning ("Unable to connect to create a proxy for org.gnome.SessionManager: %s",
+               error->message);
+    return NULL;
+  }
 
   renderer_variant = g_dbus_proxy_get_cached_property (session_proxy, "Renderer");
 
-  if (!renderer_variant)
-    {
-      g_warning ("Unable to retrieve org.gnome.SessionManager.Renderer property");
-      return NULL;
-    }
+  if (!renderer_variant) {
+    g_warning ("Unable to retrieve org.gnome.SessionManager.Renderer property");
+    return NULL;
+  }
 
   renderer = info_cleanup (g_variant_get_string (renderer_variant, NULL));
 
@@ -118,41 +115,35 @@ get_renderer_from_helper (const char **env)
 {
   int status;
   char *argv[] = { LIBEXECDIR "/gnome-control-center-print-renderer", NULL };
-  g_auto(GStrv) envp = NULL;
+  g_auto (GStrv) envp = NULL;
   g_autofree char *renderer = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   /* Environment variables that are needed to run the helper on X11 and Wayland */
   static const char *env_vars[] = { "DISPLAY", "WAYLAND_DISPLAY", "XDG_RUNTIME_DIR" };
   guint i;
 
-  for (i = 0; i < G_N_ELEMENTS (env_vars); i++)
-    {
-      const char *value = g_getenv (env_vars[i]);
-      if (value)
-        envp = g_environ_setenv (envp, env_vars[i], value, TRUE);
-    }
+  for (i = 0; i < G_N_ELEMENTS (env_vars); i++) {
+    const char *value = g_getenv (env_vars[i]);
+    if (value)
+      envp = g_environ_setenv (envp, env_vars[i], value, TRUE);
+  }
 
   g_debug ("About to launch '%s'", argv[0]);
 
-  if (env != NULL)
-    {
-      g_debug ("With environment:");
-      for (i = 0; env != NULL && env[i] != NULL; i = i + 2)
-        {
-          g_debug ("  %s = %s", env[i], env[i+1]);
-          envp = g_environ_setenv (envp, env[i], env[i+1], TRUE);
-        }
+  if (env != NULL) {
+    g_debug ("With environment:");
+    for (i = 0; env != NULL && env[i] != NULL; i = i + 2) {
+      g_debug ("  %s = %s", env[i], env[i + 1]);
+      envp = g_environ_setenv (envp, env[i], env[i + 1], TRUE);
     }
-  else
-    {
-      g_debug ("No additional environment variables");
-    }
+  } else {
+    g_debug ("No additional environment variables");
+  }
 
-  if (!g_spawn_sync (NULL, (char **) argv, envp, 0, NULL, NULL, &renderer, NULL, &status, &error))
-    {
-      g_debug ("Failed to get GPU: %s", error->message);
-      return NULL;
-    }
+  if (!g_spawn_sync (NULL, (char **)argv, envp, 0, NULL, NULL, &renderer, NULL, &status, &error)) {
+    g_debug ("Failed to get GPU: %s", error->message);
+    return NULL;
+  }
 
   if (!g_spawn_check_wait_status (status, NULL))
     return NULL;
@@ -178,10 +169,11 @@ gpu_data_free (GpuData *data)
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (GpuData, gpu_data_free)
 
 static int
-gpu_data_sort (gconstpointer a, gconstpointer b)
+gpu_data_sort (gconstpointer a,
+               gconstpointer b)
 {
-  GpuData *gpu_a = (GpuData *) a;
-  GpuData *gpu_b = (GpuData *) b;
+  GpuData *gpu_a = (GpuData *)a;
+  GpuData *gpu_b = (GpuData *)b;
 
   if (gpu_a->is_default)
     return -1;
@@ -193,9 +185,9 @@ gpu_data_sort (gconstpointer a, gconstpointer b)
 static GSList *
 get_renderer_from_switcheroo (void)
 {
-  g_autoptr(GDBusProxy) switcheroo_proxy = NULL;
-  g_autoptr(GVariant) variant = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GDBusProxy) switcheroo_proxy = NULL;
+  g_autoptr (GVariant) variant = NULL;
+  g_autoptr (GError) error = NULL;
   guint i, num_children;
   GSList *renderers;
 
@@ -206,67 +198,63 @@ get_renderer_from_switcheroo (void)
                                                     "/net/hadess/SwitcherooControl",
                                                     "net.hadess.SwitcherooControl",
                                                     NULL, &error);
-  if (switcheroo_proxy == NULL)
-    {
-      g_debug ("Unable to connect to create a proxy for net.hadess.SwitcherooControl: %s",
-               error->message);
-      return NULL;
-    }
+  if (switcheroo_proxy == NULL) {
+    g_debug ("Unable to connect to create a proxy for net.hadess.SwitcherooControl: %s",
+             error->message);
+    return NULL;
+  }
 
   variant = g_dbus_proxy_get_cached_property (switcheroo_proxy, "GPUs");
 
-  if (!variant)
-    {
-      g_debug ("Unable to retrieve net.hadess.SwitcherooControl.GPUs property, the daemon is likely not running");
-      return NULL;
-    }
+  if (!variant) {
+    g_debug ("Unable to retrieve net.hadess.SwitcherooControl.GPUs property, the daemon is likely not running");
+    return NULL;
+  }
 
   num_children = g_variant_n_children (variant);
   renderers = NULL;
-  for (i = 0; i < num_children; i++)
-    {
-      g_autoptr(GVariant) gpu;
-      g_autoptr(GVariant) name = NULL;
-      g_autoptr(GVariant) env = NULL;
-      g_autoptr(GVariant) default_variant = NULL;
-      const char *name_s;
-      g_autofree const char **env_s = NULL;
-      gsize env_len;
-      g_autofree char *renderer = NULL;
-      GpuData *gpu_data;
+  for (i = 0; i < num_children; i++) {
+    g_autoptr (GVariant) gpu;
+    g_autoptr (GVariant) name = NULL;
+    g_autoptr (GVariant) env = NULL;
+    g_autoptr (GVariant) default_variant = NULL;
+    const char *name_s;
+    g_autofree const char **env_s = NULL;
+    gsize env_len;
+    g_autofree char *renderer = NULL;
+    GpuData *gpu_data;
 
-      gpu = g_variant_get_child_value (variant, i);
-      if (!gpu ||
-          !g_variant_is_of_type (gpu, G_VARIANT_TYPE ("a{s*}")))
-        continue;
+    gpu = g_variant_get_child_value (variant, i);
+    if (!gpu ||
+        !g_variant_is_of_type (gpu, G_VARIANT_TYPE ("a{s*}")))
+      continue;
 
-      name = g_variant_lookup_value (gpu, "Name", NULL);
-      env = g_variant_lookup_value (gpu, "Environment", NULL);
-      if (!name || !env)
-        continue;
-      name_s = g_variant_get_string (name, NULL);
-      g_debug ("Getting renderer from helper for GPU '%s'", name_s);
-      env_s = g_variant_get_strv (env, &env_len);
-      if (env_s != NULL && env_len % 2 != 0)
-        {
-          g_autofree char *debug = NULL;
-          debug = g_strjoinv ("\n", (char **) env_s);
-          g_warning ("Invalid environment returned from switcheroo:\n%s", debug);
-          g_clear_pointer (&env_s, g_free);
-        }
-
-      renderer = get_renderer_from_helper (env_s);
-      default_variant = g_variant_lookup_value (gpu, "Default", NULL);
-
-      /* We could give up if we don't have a renderer, but that
-       * might just mean gnome-session isn't installed. We fall back
-       * to the device name in udev instead, which is better than nothing */
-
-      gpu_data = g_new0 (GpuData, 1);
-      gpu_data->name = g_strdup (renderer ? renderer : name_s);
-      gpu_data->is_default = default_variant ? g_variant_get_boolean (default_variant) : FALSE;
-      renderers = g_slist_prepend (renderers, gpu_data);
+    name = g_variant_lookup_value (gpu, "Name", NULL);
+    env = g_variant_lookup_value (gpu, "Environment", NULL);
+    if (!name || !env)
+      continue;
+    name_s = g_variant_get_string (name, NULL);
+    g_debug ("Getting renderer from helper for GPU '%s'", name_s);
+    env_s = g_variant_get_strv (env, &env_len);
+    if (env_s != NULL && env_len % 2 != 0) {
+      g_autofree char *debug = NULL;
+      debug = g_strjoinv ("\n", (char **)env_s);
+      g_warning ("Invalid environment returned from switcheroo:\n%s", debug);
+      g_clear_pointer (&env_s, g_free);
     }
+
+    renderer = get_renderer_from_helper (env_s);
+    default_variant = g_variant_lookup_value (gpu, "Default", NULL);
+
+    /* We could give up if we don't have a renderer, but that
+     * might just mean gnome-session isn't installed. We fall back
+     * to the device name in udev instead, which is better than nothing */
+
+    gpu_data = g_new0 (GpuData, 1);
+    gpu_data->name = g_strdup (renderer ? renderer : name_s);
+    gpu_data->is_default = default_variant ? g_variant_get_boolean (default_variant) : FALSE;
+    renderers = g_slist_prepend (renderers, gpu_data);
+  }
 
   renderers = g_slist_sort (renderers, gpu_data_sort);
 
@@ -280,48 +268,47 @@ get_graphics_hardware_list (void)
 
   renderers = get_renderer_from_switcheroo ();
 
-  if (!renderers)
-    {
-      GpuData *gpu_data;
-      g_autofree char *renderer;
-      renderer = get_renderer_from_session ();
-      if (!renderer)
-        renderer = get_renderer_from_helper (NULL);
-      if (!renderer)
-        renderer = g_strdup (_("Unknown"));
+  if (!renderers) {
+    GpuData *gpu_data;
+    g_autofree char *renderer;
+    renderer = get_renderer_from_session ();
+    if (!renderer)
+      renderer = get_renderer_from_helper (NULL);
+    if (!renderer)
+      renderer = g_strdup (_("Unknown"));
 
-      gpu_data = g_new0 (GpuData, 1);
-      gpu_data->name = g_strdup (renderer);
-      gpu_data->is_default = TRUE;
-      renderers = g_slist_prepend (renderers, gpu_data);
-    }
+    gpu_data = g_new0 (GpuData, 1);
+    gpu_data->name = g_strdup (renderer);
+    gpu_data->is_default = TRUE;
+    renderers = g_slist_prepend (renderers, gpu_data);
+  }
 
   return renderers;
 }
 
 
 static void
-create_graphics_rows (CcSystemDetailsWindow *self, GSList *devices)
+create_graphics_rows (CcSystemDetailsWindow *self,
+                      GSList                *devices)
 {
   GSList *l;
   guint i = 0;
   GtkWidget *gpu_entry;
 
-  for (l = devices; l != NULL; l = l->next)
-    {
-      GpuData *data = l->data;
-      const char *name = data->name;
-      g_autofree char *label = NULL;
+  for (l = devices; l != NULL; l = l->next) {
+    GpuData *data = l->data;
+    const char *name = data->name;
+    g_autofree char *label = NULL;
 
-      if (data->is_default)
-        label = g_strdup (_("Graphics"));
-      else
-        label = g_strdup_printf (_("Graphics %d"), ++i);
+    if (data->is_default)
+      label = g_strdup (_("Graphics"));
+    else
+      label = g_strdup_printf (_("Graphics %d"), ++i);
 
-      gpu_entry = cc_info_entry_new (label, name);
+    gpu_entry = cc_info_entry_new (label, name);
 
-      gtk_box_append (self->graphics_row, gpu_entry);
-    }
+    gtk_box_append (self->graphics_row, gpu_entry);
+  }
 }
 
 char *
@@ -367,44 +354,41 @@ get_os_type (void)
 char *
 get_primary_disk_info (void)
 {
-  g_autoptr(UDisksClient) client = NULL;
+  g_autoptr (UDisksClient) client = NULL;
   GDBusObjectManager *manager;
-  g_autolist(GDBusObject) objects = NULL;
+  g_autolist (GDBusObject) objects = NULL;
   GList *l;
   guint64 total_size;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   total_size = 0;
 
   client = udisks_client_new_sync (NULL, &error);
-  if (client == NULL)
-    {
-      g_warning ("Unable to get UDisks client: %s. Disk information will not be available.",
-                 error->message);
-      return NULL;
-    }
+  if (client == NULL) {
+    g_warning ("Unable to get UDisks client: %s. Disk information will not be available.",
+               error->message);
+    return NULL;
+  }
 
   manager = udisks_client_get_object_manager (client);
   objects = g_dbus_object_manager_get_objects (manager);
 
-  for (l = objects; l != NULL; l = l->next)
-    {
-      UDisksDrive *drive;
-      drive = udisks_object_peek_drive (UDISKS_OBJECT (l->data));
+  for (l = objects; l != NULL; l = l->next) {
+    UDisksDrive *drive;
+    drive = udisks_object_peek_drive (UDISKS_OBJECT (l->data));
 
-      /* Skip removable devices */
-      if (drive == NULL ||
-          udisks_drive_get_removable (drive) ||
-          udisks_drive_get_ejectable (drive))
-        {
-          continue;
-        }
-
-      total_size += udisks_drive_get_size (drive);
+    /* Skip removable devices */
+    if (drive == NULL ||
+        udisks_drive_get_removable (drive) ||
+        udisks_drive_get_ejectable (drive)) {
+      continue;
     }
 
+    total_size += udisks_drive_get_size (drive);
+  }
+
   if (total_size > 0)
-      return g_format_size (total_size);
+    return g_format_size (total_size);
 
   return NULL;
 }
@@ -458,58 +442,55 @@ get_kernel_version_string ()
 char *
 get_cpu_info ()
 {
-  g_autoptr(GHashTable) counts = NULL;
-  g_autoptr(GString) cpu = NULL;
+  g_autoptr (GHashTable) counts = NULL;
+  g_autoptr (GString) cpu = NULL;
   const glibtop_sysinfo *info;
   GHashTableIter iter;
-  gpointer       key, value;
-  int            i;
-  int            j;
+  gpointer key, value;
+  int i;
+  int j;
 
   counts = g_hash_table_new (g_str_hash, g_str_equal);
   info = glibtop_get_sysinfo ();
 
   /* count duplicates */
-  for (i = 0; i != info->ncpu; ++i)
-    {
-      const char * const keys[] = { "model name", "cpu", "Processor", "Model Name" };
-      char *model;
-      int  *count;
+  for (i = 0; i != info->ncpu; ++i) {
+    const char * const keys[] = { "model name", "cpu", "Processor", "Model Name" };
+    char *model;
+    int *count;
 
-      model = NULL;
+    model = NULL;
 
-      for (j = 0; model == NULL && j != G_N_ELEMENTS (keys); ++j)
-        {
-          model = g_hash_table_lookup (info->cpuinfo[i].values,
-                                       keys[j]);
-        }
-
-      if (model == NULL)
-          continue;
-
-      count = g_hash_table_lookup (counts, model);
-      if (count == NULL)
-        g_hash_table_insert (counts, model, GINT_TO_POINTER (1));
-      else
-        g_hash_table_replace (counts, model, GINT_TO_POINTER (GPOINTER_TO_INT (count) + 1));
+    for (j = 0; model == NULL && j != G_N_ELEMENTS (keys); ++j) {
+      model = g_hash_table_lookup (info->cpuinfo[i].values,
+                                   keys[j]);
     }
+
+    if (model == NULL)
+      continue;
+
+    count = g_hash_table_lookup (counts, model);
+    if (count == NULL)
+      g_hash_table_insert (counts, model, GINT_TO_POINTER (1));
+    else
+      g_hash_table_replace (counts, model, GINT_TO_POINTER (GPOINTER_TO_INT (count) + 1));
+  }
 
   cpu = g_string_new (NULL);
   g_hash_table_iter_init (&iter, counts);
-  while (g_hash_table_iter_next (&iter, &key, &value))
-    {
-      g_autofree char *cleanedup = NULL;
-      int count;
+  while (g_hash_table_iter_next (&iter, &key, &value)) {
+    g_autofree char *cleanedup = NULL;
+    int count;
 
-      count = GPOINTER_TO_INT (value);
-      cleanedup = info_cleanup ((const char *) key);
-      if (cpu->len != 0)
-        g_string_append_printf (cpu, " ");
-      if (count > 1)
-        g_string_append_printf (cpu, "%s \303\227 %d", cleanedup, count);
-      else
-        g_string_append_printf (cpu, "%s", cleanedup);
-    }
+    count = GPOINTER_TO_INT (value);
+    cleanedup = info_cleanup ((const char *)key);
+    if (cpu->len != 0)
+      g_string_append_printf (cpu, " ");
+    if (count > 1)
+      g_string_append_printf (cpu, "%s \303\227 %d", cleanedup, count);
+    else
+      g_string_append_printf (cpu, "%s", cleanedup);
+  }
 
   return g_strdup (cpu->str);
 }
@@ -539,26 +520,23 @@ set_virtualization_label (CcSystemDetailsWindow *self,
   const char *display_name;
   guint i;
 
-  if (virt == NULL || *virt == '\0')
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self->virtualization_row), FALSE);
+  if (virt == NULL || *virt == '\0') {
+    gtk_widget_set_visible (GTK_WIDGET (self->virtualization_row), FALSE);
 
-      return;
-    }
+    return;
+  }
 
   gtk_widget_set_visible (GTK_WIDGET (self->firmware_version_row), FALSE);
 
   gtk_widget_set_visible (GTK_WIDGET (self->virtualization_row), TRUE);
 
   display_name = NULL;
-  for (i = 0; i < G_N_ELEMENTS (virt_tech); i++)
-    {
-      if (g_str_equal (virt_tech[i].id, virt))
-        {
-          display_name = _(virt_tech[i].display);
-          break;
-        }
+  for (i = 0; i < G_N_ELEMENTS (virt_tech); i++) {
+    if (g_str_equal (virt_tech[i].id, virt)) {
+      display_name = _(virt_tech[i].display);
+      break;
     }
+  }
 
   cc_info_entry_set_value (self->virtualization_row, display_name ? display_name : virt);
 }
@@ -566,9 +544,9 @@ set_virtualization_label (CcSystemDetailsWindow *self,
 static void
 system_details_window_setup_virt (CcSystemDetailsWindow *self)
 {
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GDBusProxy) systemd_proxy = NULL;
-  g_autoptr(GVariant) variant = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GDBusProxy) systemd_proxy = NULL;
+  g_autoptr (GVariant) variant = NULL;
   GVariant *inner;
 
   systemd_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
@@ -580,12 +558,11 @@ system_details_window_setup_virt (CcSystemDetailsWindow *self)
                                                  NULL,
                                                  &error);
 
-  if (systemd_proxy == NULL)
-    {
-      g_debug ("systemd not available, bailing: %s", error->message);
-      set_virtualization_label (self, NULL);
-      return;
-    }
+  if (systemd_proxy == NULL) {
+    g_debug ("systemd not available, bailing: %s", error->message);
+    set_virtualization_label (self, NULL);
+    return;
+  }
 
   variant = g_dbus_proxy_call_sync (systemd_proxy,
                                     "org.freedesktop.DBus.Properties.Get",
@@ -594,12 +571,11 @@ system_details_window_setup_virt (CcSystemDetailsWindow *self)
                                     -1,
                                     NULL,
                                     &error);
-  if (variant == NULL)
-    {
-      g_debug ("Failed to get property '%s': %s", "Virtualization", error->message);
-      set_virtualization_label (self, NULL);
-      return;
-    }
+  if (variant == NULL) {
+    g_debug ("Failed to get property '%s': %s", "Virtualization", error->message);
+    set_virtualization_label (self, NULL);
+    return;
+  }
 
   g_variant_get (variant, "(v)", &inner);
   set_virtualization_label (self, g_variant_get_string (inner, NULL));
@@ -635,8 +611,8 @@ get_ram_size_libgtop (void)
 guint64
 get_ram_size_dmi (void)
 {
-  g_autoptr(GUdevClient) client = NULL;
-  g_autoptr(GUdevDevice) dmi = NULL;
+  g_autoptr (GUdevClient) client = NULL;
+  g_autoptr (GUdevDevice) dmi = NULL;
   const gchar * const subsystems[] = {"dmi", NULL };
   guint64 ram_total = 0;
   guint64 num_ram;
@@ -657,7 +633,9 @@ get_ram_size_dmi (void)
 }
 
 static void
-system_details_window_title_print_padding (const gchar *title, GString *dst_string, gsize maxlen)
+system_details_window_title_print_padding (const gchar *title,
+                                           GString     *dst_string,
+                                           gsize        maxlen)
 {
   gsize title_len;
   gsize maxpad = maxlen;
@@ -675,8 +653,8 @@ system_details_window_title_print_padding (const gchar *title, GString *dst_stri
 }
 
 static void
-on_copy_button_clicked_cb (GtkWidget              *widget,
-                           CcSystemDetailsWindow  *self)
+on_copy_button_clicked_cb (GtkWidget             *widget,
+                           CcSystemDetailsWindow *self)
 {
   GdkClipboard *clip_board;
   GdkDisplay *display;
@@ -692,14 +670,14 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
   g_autofree char *firmware_version_text = NULL;
   g_autofree char *windowing_system_text = NULL;
   g_autofree char *kernel_version_text = NULL;
-  g_autoslist(GpuData) graphics_hardware_list = NULL;
+  g_autoslist (GpuData) graphics_hardware_list = NULL;
   GSList *l;
   g_autofree gchar *disk_capacity_string = NULL;
   g_autoptr (GString) result_str;
   locale_t untranslated_locale;
 
   /* Don't use translations for the copied content */
-  untranslated_locale = newlocale (LC_ALL_MASK, "C", (locale_t) 0);
+  untranslated_locale = newlocale (LC_ALL_MASK, "C", (locale_t)0);
   uselocale (untranslated_locale);
 
   result_str = g_string_new (NULL);
@@ -739,20 +717,19 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
   graphics_hardware_list = get_graphics_hardware_list ();
   guint i = 0;
 
-  for (l = graphics_hardware_list; l != NULL; l = l->next)
-    {
-      GpuData *data = l->data;
-      const char *name = data->name;
-      g_autofree char *label = NULL;
+  for (l = graphics_hardware_list; l != NULL; l = l->next) {
+    GpuData *data = l->data;
+    const char *name = data->name;
+    g_autofree char *label = NULL;
 
-      if (data->is_default)
-        label = g_strdup ("**Graphics:**");
-      else
-        label = g_strdup_printf ("**Graphics %d:**", ++i);
-      g_string_append (result_str, "- ");
-      system_details_window_title_print_padding (label, result_str, 0);
-      g_string_append_printf (result_str, "%s\n", name);
-    }
+    if (data->is_default)
+      label = g_strdup ("**Graphics:**");
+    else
+      label = g_strdup_printf ("**Graphics %d:**", ++i);
+    g_string_append (result_str, "- ");
+    system_details_window_title_print_padding (label, result_str, 0);
+    g_string_append_printf (result_str, "%s\n", name);
+  }
 
   g_string_append (result_str, "- ");
   system_details_window_title_print_padding ("**Disk Capacity:**", result_str, 0);
@@ -819,7 +796,7 @@ system_details_window_setup_overview (CcSystemDetailsWindow *self)
   g_autofree char *hardware_model_text = NULL;
   g_autofree char *firmware_version_text = NULL;
   g_autofree char *kernel_version_text = NULL;
-  g_autoslist(GpuData) graphics_hardware_list = NULL;
+  g_autoslist (GpuData) graphics_hardware_list = NULL;
   g_autofree gchar *disk_capacity_string = NULL;
 
   hardware_model_text = get_hardware_model_string ();

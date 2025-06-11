@@ -24,27 +24,26 @@
 #include "cc-multitasking-resources.h"
 #include "cc-illustrated-row.h"
 
-struct _CcMultitaskingPanel
-{
-  CcPanel          parent_instance;
+struct _CcMultitaskingPanel {
+  CcPanel parent_instance;
 
-  GSettings       *interface_settings;
-  GSettings       *mutter_settings;
-  GSettings       *shell_settings;
-  GSettings       *wm_settings;
+  GSettings *interface_settings;
+  GSettings *mutter_settings;
+  GSettings *shell_settings;
+  GSettings *wm_settings;
 
   CcIllustratedRow *active_screen_edges_row;
-  GtkSwitch       *active_screen_edges_switch;
-  GtkCheckButton  *all_workspaces_radio;
-  GtkCheckButton  *current_workspace_radio;
-  GtkCheckButton  *dynamic_workspaces_radio;
-  GtkCheckButton  *fixed_workspaces_radio;
+  GtkSwitch *active_screen_edges_switch;
+  GtkCheckButton *all_workspaces_radio;
+  GtkCheckButton *current_workspace_radio;
+  GtkCheckButton *dynamic_workspaces_radio;
+  GtkCheckButton *fixed_workspaces_radio;
   CcIllustratedRow *hot_corner_row;
-  GtkSwitch       *hot_corner_switch;
-  AdwSpinRow      *number_of_workspaces_spin_row;
+  GtkSwitch *hot_corner_switch;
+  AdwSpinRow *number_of_workspaces_spin_row;
   AdwPreferencesGroup *workspaces_display_group;
-  GtkCheckButton  *workspaces_primary_display_radio;
-  GtkCheckButton  *workspaces_span_displays_radio;
+  GtkCheckButton *workspaces_primary_display_radio;
+  GtkCheckButton *workspaces_span_displays_radio;
 };
 
 CC_PANEL_REGISTER (CcMultitaskingPanel, cc_multitasking_panel)
@@ -167,11 +166,10 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  if (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL)
-    {
-      cc_illustrated_row_set_resource (self->hot_corner_row,
-                                       "/org/gnome/control-center/multitasking/assets/hot-corner-rtl.svg");
-      cc_illustrated_row_set_resource (self->active_screen_edges_row,
-                                       "/org/gnome/control-center/multitasking/assets/active-screen-edges-rtl.svg");
-    }
+  if (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL) {
+    cc_illustrated_row_set_resource (self->hot_corner_row,
+                                     "/org/gnome/control-center/multitasking/assets/hot-corner-rtl.svg");
+    cc_illustrated_row_set_resource (self->active_screen_edges_row,
+                                     "/org/gnome/control-center/multitasking/assets/active-screen-edges-rtl.svg");
+  }
 }

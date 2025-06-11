@@ -36,23 +36,21 @@
 #include "cc-util.h"
 
 
-struct _CcTestWindow
-{
-  GtkWindow    parent;
+struct _CcTestWindow {
+  GtkWindow parent;
 
-  GtkWidget   *main_box;
+  GtkWidget *main_box;
 
-  GtkWidget  *header;
-  CcPanel    *active_panel;
+  GtkWidget *header;
+  CcPanel *active_panel;
 };
 
-static void     cc_shell_iface_init         (CcShellInterface      *iface);
+static void     cc_shell_iface_init (CcShellInterface *iface);
 
 G_DEFINE_TYPE_WITH_CODE (CcTestWindow, cc_test_window, GTK_TYPE_WINDOW,
                          G_IMPLEMENT_INTERFACE (CC_TYPE_SHELL, cc_shell_iface_init))
 
-enum
-{
+enum {
   PROP_0,
   PROP_ACTIVE_PANEL
 };
@@ -69,11 +67,10 @@ set_active_panel (CcTestWindow *shell,
   /* Only allow setting to a non NULL value once. */
   g_assert (shell->active_panel == NULL);
 
-  if (panel)
-    {
-      shell->active_panel = g_object_ref (panel);
-      gtk_box_append (GTK_BOX (shell->main_box), GTK_WIDGET (panel));
-    }
+  if (panel) {
+    shell->active_panel = g_object_ref (panel);
+    gtk_box_append (GTK_BOX (shell->main_box), GTK_WIDGET (panel));
+  }
 }
 
 /* CcShell implementation */
@@ -109,15 +106,14 @@ cc_test_window_get_property (GObject    *object,
 {
   CcTestWindow *self = CC_TEST_WINDOW (object);
 
-  switch (property_id)
-    {
+  switch (property_id) {
     case PROP_ACTIVE_PANEL:
       g_value_set_object (value, self->active_panel);
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
+  }
 }
 
 static void
@@ -128,15 +124,14 @@ cc_test_window_set_property (GObject      *object,
 {
   CcTestWindow *shell = CC_TEST_WINDOW (object);
 
-  switch (property_id)
-    {
+  switch (property_id) {
     case PROP_ACTIVE_PANEL:
       set_active_panel (shell, g_value_get_object (value));
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
+  }
 }
 
 static void

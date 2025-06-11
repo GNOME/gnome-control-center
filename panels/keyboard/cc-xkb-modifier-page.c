@@ -23,33 +23,31 @@
 
 #include "cc-xkb-modifier-page.h"
 
-struct _CcXkbModifierPage
-{
-  AdwNavigationPage   parent_instance;
+struct _CcXkbModifierPage {
+  AdwNavigationPage parent_instance;
 
   AdwPreferencesPage *xkb_modifier_page;
   AdwPreferencesGroup *options_group;
   AdwPreferencesGroup *switch_group;
-  AdwSwitchRow        *switch_row;
+  AdwSwitchRow *switch_row;
 
-  GSettings      *input_source_settings;
+  GSettings *input_source_settings;
   const CcXkbModifier *modifier;
-  GSList         *radio_group;
+  GSList *radio_group;
 };
 
 G_DEFINE_TYPE (CcXkbModifierPage, cc_xkb_modifier_page, ADW_TYPE_NAVIGATION_PAGE)
 
-static const CcXkbOption*
-get_xkb_option_from_name (const CcXkbModifier *modifier, const gchar* name)
+static const CcXkbOption *
+get_xkb_option_from_name (const CcXkbModifier * modifier, const gchar * name)
 {
   const CcXkbOption *options = modifier->options;
   int i;
 
-  for (i = 0; options[i].label && options[i].xkb_option; i++)
-    {
-      if (g_str_equal (name, options[i].xkb_option))
-        return &options[i];
-    }
+  for (i = 0; options[i].label && options[i].xkb_option; i++) {
+    if (g_str_equal (name, options[i].xkb_option))
+      return &options[i];
+  }
 
   return NULL;
 }
@@ -61,12 +59,11 @@ get_radio_button_from_xkb_option_name (CcXkbModifierPage *self,
   gchar *xkb_option;
   GSList *l;
 
-  for (l = self->radio_group; l != NULL; l = l->next)
-    {
-      xkb_option = g_object_get_data (l->data, "xkb-option");
-      if (g_strcmp0 (xkb_option, name) == 0)
-        return l->data;
-    }
+  for (l = self->radio_group; l != NULL; l = l->next) {
+    xkb_option = g_object_get_data (l->data, "xkb-option");
+    if (g_strcmp0 (xkb_option, name) == 0)
+      return l->data;
+  }
 
   return NULL;
 }
@@ -74,49 +71,45 @@ get_radio_button_from_xkb_option_name (CcXkbModifierPage *self,
 static void
 update_active_radio (CcXkbModifierPage *self)
 {
-  g_auto(GStrv) options = NULL;
+  g_auto (GStrv) options = NULL;
   GtkCheckButton *rightalt_radio;
   const CcXkbOption *default_option;
   guint i;
 
   options = g_settings_get_strv (self->input_source_settings, "xkb-options");
 
-  for (i = 0; options != NULL && options[i] != NULL; i++)
-    {
-      GtkCheckButton *radio;
+  for (i = 0; options != NULL && options[i] != NULL; i++) {
+    GtkCheckButton *radio;
 
-      if (!g_str_has_prefix (options[i], self->modifier->prefix))
-        continue;
+    if (!g_str_has_prefix (options[i], self->modifier->prefix))
+      continue;
 
-      radio = get_radio_button_from_xkb_option_name (self, options[i]);
+    radio = get_radio_button_from_xkb_option_name (self, options[i]);
 
-      if (!radio)
-        continue;
+    if (!radio)
+      continue;
 
-      gtk_check_button_set_active (GTK_CHECK_BUTTON (radio), TRUE);
-      adw_switch_row_set_active (self->switch_row, TRUE);
-      return;
-    }
+    gtk_check_button_set_active (GTK_CHECK_BUTTON (radio), TRUE);
+    adw_switch_row_set_active (self->switch_row, TRUE);
+    return;
+  }
 
-  if (self->modifier->default_option != NULL)
-    {
-      default_option = get_xkb_option_from_name(self->modifier, self->modifier->default_option);
-      rightalt_radio = get_radio_button_from_xkb_option_name (self, default_option->xkb_option);
-      gtk_check_button_set_active (GTK_CHECK_BUTTON (rightalt_radio), TRUE);
-      adw_switch_row_set_active (self->switch_row, TRUE);
-    }
-  else
-    {
-      adw_switch_row_set_active (self->switch_row, FALSE);
-    }
+  if (self->modifier->default_option != NULL) {
+    default_option = get_xkb_option_from_name (self->modifier, self->modifier->default_option);
+    rightalt_radio = get_radio_button_from_xkb_option_name (self, default_option->xkb_option);
+    gtk_check_button_set_active (GTK_CHECK_BUTTON (rightalt_radio), TRUE);
+    adw_switch_row_set_active (self->switch_row, TRUE);
+  } else {
+    adw_switch_row_set_active (self->switch_row, FALSE);
+  }
 }
 
 static void
 set_xkb_option (CcXkbModifierPage *self,
                 gchar             *xkb_option)
 {
-  g_autoptr(GPtrArray) array = NULL;
-  g_auto(GStrv) options = NULL;
+  g_autoptr (GPtrArray) array = NULL;
+  g_auto (GStrv) options = NULL;
   gboolean found;
   guint i;
 
@@ -127,19 +120,15 @@ set_xkb_option (CcXkbModifierPage *self,
   options = g_settings_get_strv (self->input_source_settings, "xkb-options");
   found = FALSE;
 
-  for (i = 0; options != NULL && options[i] != NULL; i++)
-    {
-      if (g_str_has_prefix (options[i], self->modifier->prefix))
-        {
-          if (!found && xkb_option != NULL)
-            g_ptr_array_add (array, xkb_option);
-          found = TRUE;
-        }
-      else
-        {
-          g_ptr_array_add (array, options[i]);
-        }
+  for (i = 0; options != NULL && options[i] != NULL; i++) {
+    if (g_str_has_prefix (options[i], self->modifier->prefix)) {
+      if (!found && xkb_option != NULL)
+        g_ptr_array_add (array, xkb_option);
+      found = TRUE;
+    } else {
+      g_ptr_array_add (array, options[i]);
     }
+  }
 
   if (!found && xkb_option != NULL)
     g_ptr_array_add (array, xkb_option);
@@ -148,7 +137,7 @@ set_xkb_option (CcXkbModifierPage *self,
 
   g_settings_set_strv (self->input_source_settings,
                        "xkb-options",
-                       (const gchar * const *) array->pdata);
+                       (const gchar * const *)array->pdata);
 }
 
 static void
@@ -182,22 +171,17 @@ switch_row_changed_cb (CcXkbModifierPage *self)
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->options_group), adw_switch_row_get_active (self->switch_row));
 
-  if (adw_switch_row_get_active (self->switch_row))
-    {
-      for (l = self->radio_group; l != NULL; l = l->next)
-        {
-          if (gtk_check_button_get_active (l->data))
-            {
-              xkb_option = (gchar *)g_object_get_data (l->data, "xkb-option");
-              set_xkb_option (self, xkb_option);
-              break;
-            }
-        }
+  if (adw_switch_row_get_active (self->switch_row)) {
+    for (l = self->radio_group; l != NULL; l = l->next) {
+      if (gtk_check_button_get_active (l->data)) {
+        xkb_option = (gchar *)g_object_get_data (l->data, "xkb-option");
+        set_xkb_option (self, xkb_option);
+        break;
+      }
     }
-  else
-    {
-      set_xkb_option (self, NULL);
-    }
+  } else {
+    set_xkb_option (self, NULL);
+  }
 
   return FALSE;
 }
@@ -239,26 +223,25 @@ add_radio_buttons (CcXkbModifierPage *self)
   CcXkbOption *options = self->modifier->options;
   int i;
 
-  for (i = 0; options[i].label && options[i].xkb_option; i++)
-    {
-      row = g_object_new (ADW_TYPE_ACTION_ROW,
-                          "selectable", FALSE,
-                          NULL);
-      adw_preferences_group_add (self->options_group, row);
+  for (i = 0; options[i].label && options[i].xkb_option; i++) {
+    row = g_object_new (ADW_TYPE_ACTION_ROW,
+                        "selectable", FALSE,
+                        NULL);
+    adw_preferences_group_add (self->options_group, row);
 
-      radio_button = g_object_new (GTK_TYPE_CHECK_BUTTON,
-                                   "valign", GTK_ALIGN_CENTER,
-                                   "group", last_button,
-                                   NULL);
-      g_object_set_data (G_OBJECT (radio_button), "xkb-option", options[i].xkb_option);
-      g_signal_connect_object (radio_button, "toggled", (GCallback)on_active_radio_changed_cb, self, G_CONNECT_SWAPPED);
-      adw_action_row_add_prefix (ADW_ACTION_ROW (row), radio_button);
-      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), options[i].label);
-      adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), radio_button);
+    radio_button = g_object_new (GTK_TYPE_CHECK_BUTTON,
+                                 "valign", GTK_ALIGN_CENTER,
+                                 "group", last_button,
+                                 NULL);
+    g_object_set_data (G_OBJECT (radio_button), "xkb-option", options[i].xkb_option);
+    g_signal_connect_object (radio_button, "toggled", (GCallback)on_active_radio_changed_cb, self, G_CONNECT_SWAPPED);
+    adw_action_row_add_prefix (ADW_ACTION_ROW (row), radio_button);
+    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), options[i].label);
+    adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), radio_button);
 
-      last_button = radio_button;
-      group = g_slist_prepend (group, radio_button);
-    }
+    last_button = radio_button;
+    group = g_slist_prepend (group, radio_button);
+  }
 
   self->radio_group = NULL;
   if (last_button != NULL)
@@ -280,7 +263,7 @@ cc_xkb_modifier_page_init (CcXkbModifierPage *self)
 }
 
 CcXkbModifierPage *
-cc_xkb_modifier_page_new (GSettings *input_settings,
+cc_xkb_modifier_page_new (GSettings           *input_settings,
                           const CcXkbModifier *modifier)
 {
   CcXkbModifierPage *self;
@@ -310,22 +293,18 @@ xcb_modifier_transform_binding_to_label (GValue   *value,
   g_autofree const char **items = g_variant_get_strv (variant, NULL);
   guint i;
 
-  for (i = 0; items != NULL && items[i] != NULL; i++)
-    {
-      entry = get_xkb_option_from_name (modifier, items[i]);
-      if (entry != NULL)
-        break;
-    }
+  for (i = 0; items != NULL && items[i] != NULL; i++) {
+    entry = get_xkb_option_from_name (modifier, items[i]);
+    if (entry != NULL)
+      break;
+  }
 
-  if (entry == NULL && modifier->default_option == NULL)
-    {
-      g_value_set_string (value, _("Disabled"));
-      return TRUE;
-    }
-  else if (entry == NULL)
-    {
-      entry = get_xkb_option_from_name(modifier, modifier->default_option);
-    }
+  if (entry == NULL && modifier->default_option == NULL) {
+    g_value_set_string (value, _("Disabled"));
+    return TRUE;
+  } else if (entry == NULL) {
+    entry = get_xkb_option_from_name (modifier, modifier->default_option);
+  }
 
   g_value_set_string (value,
                       g_dpgettext2 (NULL, "keyboard key", entry->label));

@@ -30,12 +30,11 @@
 
 static void pp_ipp_option_widget_finalize (GObject *object);
 
-static gboolean construct_widget   (PpIPPOptionWidget *self);
-static void     update_widget      (PpIPPOptionWidget *self);
+static gboolean construct_widget (PpIPPOptionWidget *self);
+static void     update_widget (PpIPPOptionWidget *self);
 static void     update_widget_real (PpIPPOptionWidget *self);
 
-struct _PpIPPOptionWidget
-{
+struct _PpIPPOptionWidget {
   GtkBox parent_instance;
 
   GtkWidget *switch_button;
@@ -82,14 +81,12 @@ ipp_choice_translate (const gchar *option,
 {
   gint i;
 
-  for (i = 0; i < G_N_ELEMENTS (ipp_choice_translations); i++)
-    {
-      if (g_strcmp0 (ipp_choice_translations[i].keyword, option) == 0 &&
-          g_strcmp0 (ipp_choice_translations[i].choice, choice) == 0)
-        {
-          return _(ipp_choice_translations[i].translation);
-        }
+  for (i = 0; i < G_N_ELEMENTS (ipp_choice_translations); i++) {
+    if (g_strcmp0 (ipp_choice_translations[i].keyword, option) == 0 &&
+        g_strcmp0 (ipp_choice_translations[i].choice, choice) == 0) {
+      return _(ipp_choice_translations[i].translation);
     }
+  }
 
   return choice;
 }
@@ -136,35 +133,31 @@ pp_ipp_option_widget_new (IPPAttribute *attr_supported,
 {
   PpIPPOptionWidget *self = NULL;
 
-  if (attr_supported && option_name && printer)
-    {
-      self = g_object_new (PP_TYPE_IPP_OPTION_WIDGET, NULL);
+  if (attr_supported && option_name && printer) {
+    self = g_object_new (PP_TYPE_IPP_OPTION_WIDGET, NULL);
 
-      self->printer_name = g_strdup (printer);
-      self->option_name = g_strdup (option_name);
-      self->option_supported = ipp_attribute_copy (attr_supported);
-      self->option_default = ipp_attribute_copy (attr_default);
+    self->printer_name = g_strdup (printer);
+    self->option_name = g_strdup (option_name);
+    self->option_supported = ipp_attribute_copy (attr_supported);
+    self->option_default = ipp_attribute_copy (attr_default);
 
-      if (construct_widget (self))
-        {
-          update_widget_real (self);
-        }
-      else
-        {
-          g_object_ref_sink (self);
-          g_object_unref (self);
-          self = NULL;
-        }
+    if (construct_widget (self)) {
+      update_widget_real (self);
+    } else {
+      g_object_ref_sink (self);
+      g_object_unref (self);
+      self = NULL;
     }
+  }
 
-  return (GtkWidget *) self;
+  return (GtkWidget *)self;
 }
 
 static GtkWidget *
 dropdown_new (void)
 {
   GtkStringList *store = NULL;
-  GtkWidget     *dropdown;
+  GtkWidget *dropdown;
 
   store = gtk_string_list_new (NULL);
 
@@ -191,37 +184,34 @@ dropdown_set (GtkWidget    *dropdown,
 {
   g_autofree gchar *attribute_value = NULL;
 
-  for (guint i = 0; i < option->num_of_values; i++)
-    {
-      if (option->attribute_type == IPP_ATTRIBUTE_TYPE_INTEGER)
-        attribute_value = g_strdup_printf ("%d", option->attribute_values[i].integer_value);
-      else
-        attribute_value = g_strdup (option->attribute_values[i].string_value);
+  for (guint i = 0; i < option->num_of_values; i++) {
+    if (option->attribute_type == IPP_ATTRIBUTE_TYPE_INTEGER)
+      attribute_value = g_strdup_printf ("%d", option->attribute_values[i].integer_value);
+    else
+      attribute_value = g_strdup (option->attribute_values[i].string_value);
 
-      if (g_strcmp0 (attribute_value, value) == 0)
-        {
-          gtk_drop_down_set_selected (GTK_DROP_DOWN (dropdown), i);
-          break;
-        }
+    if (g_strcmp0 (attribute_value, value) == 0) {
+      gtk_drop_down_set_selected (GTK_DROP_DOWN (dropdown), i);
+      break;
     }
+  }
 }
 
 static char *
 dropdown_get (GtkWidget    *dropdown,
               IPPAttribute *option)
 {
-  guint          selected_item;
-  gchar         *value = NULL;
+  guint selected_item;
+  gchar *value = NULL;
 
   selected_item = gtk_drop_down_get_selected (GTK_DROP_DOWN (dropdown));
 
-  if (selected_item != GTK_INVALID_LIST_POSITION)
-    {
-      if (option->attribute_type == IPP_ATTRIBUTE_TYPE_INTEGER)
-        value = g_strdup_printf ("%d", option->attribute_values[selected_item].integer_value);
-      else
-        value = option->attribute_values[selected_item].string_value;
-    }
+  if (selected_item != GTK_INVALID_LIST_POSITION) {
+    if (option->attribute_type == IPP_ATTRIBUTE_TYPE_INTEGER)
+      value = g_strdup_printf ("%d", option->attribute_values[selected_item].integer_value);
+    else
+      value = option->attribute_values[selected_item].string_value;
+  }
 
   return value;
 }
@@ -239,7 +229,7 @@ printer_add_option_async_cb (gboolean success,
 static void
 switch_changed_cb (PpIPPOptionWidget *self)
 {
-  gchar                    **values;
+  gchar **values;
 
   values = g_new0 (gchar *, 2);
 
@@ -266,7 +256,7 @@ switch_changed_cb (PpIPPOptionWidget *self)
 static void
 dropdown_changed_cb (PpIPPOptionWidget *self)
 {
-  gchar                    **values;
+  gchar **values;
 
   values = g_new0 (gchar *, 2);
   values[0] = g_strdup (dropdown_get (self->dropdown, self->option_supported));
@@ -289,7 +279,7 @@ dropdown_changed_cb (PpIPPOptionWidget *self)
 static void
 spin_button_changed_cb (PpIPPOptionWidget *self)
 {
-  gchar                    **values;
+  gchar **values;
 
   values = g_new0 (gchar *, 2);
   values[0] = g_strdup_printf ("%d", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (self->spin_button)));
@@ -312,88 +302,83 @@ spin_button_changed_cb (PpIPPOptionWidget *self)
 static gboolean
 construct_widget (PpIPPOptionWidget *self)
 {
-  gboolean                  trivial_option = FALSE;
-  gboolean                  result = FALSE;
-  gint                      i;
+  gboolean trivial_option = FALSE;
+  gboolean result = FALSE;
+  gint i;
 
-  if (self->option_supported)
-    {
-      switch (self->option_supported->attribute_type)
-        {
-          case IPP_ATTRIBUTE_TYPE_INTEGER:
-            if (self->option_supported->num_of_values <= 1)
-              trivial_option = TRUE;
-            break;
+  if (self->option_supported) {
+    switch (self->option_supported->attribute_type) {
+      case IPP_ATTRIBUTE_TYPE_INTEGER:
+        if (self->option_supported->num_of_values <= 1)
+          trivial_option = TRUE;
+        break;
 
-          case IPP_ATTRIBUTE_TYPE_STRING:
-            if (self->option_supported->num_of_values <= 1)
-              trivial_option = TRUE;
-            break;
+      case IPP_ATTRIBUTE_TYPE_STRING:
+        if (self->option_supported->num_of_values <= 1)
+          trivial_option = TRUE;
+        break;
 
-          case IPP_ATTRIBUTE_TYPE_RANGE:
-            if (self->option_supported->attribute_values[0].lower_range ==
-                self->option_supported->attribute_values[0].upper_range)
-              trivial_option = TRUE;
-            break;
-        }
-
-      if (!trivial_option)
-        {
-          switch (self->option_supported->attribute_type)
-            {
-              case IPP_ATTRIBUTE_TYPE_BOOLEAN:
-                  self->switch_button = gtk_switch_new ();
-
-                  gtk_box_append (GTK_BOX (self), self->switch_button);
-                  g_signal_connect_object (self->switch_button, "notify::active", G_CALLBACK (switch_changed_cb), self, G_CONNECT_SWAPPED);
-                  break;
-
-              case IPP_ATTRIBUTE_TYPE_INTEGER:
-                  self->dropdown = dropdown_new ();
-
-                  for (i = 0; i < self->option_supported->num_of_values; i++)
-                    {
-                      g_autofree gchar *value = NULL;
-
-                      value = g_strdup_printf ("%d", self->option_supported->attribute_values[i].integer_value);
-                      dropdown_append (self->dropdown,
-                                       ipp_choice_translate (self->option_name,
-                                                             value));
-                    }
-
-                  gtk_box_append (GTK_BOX (self), self->dropdown);
-                  g_signal_connect_object (self->dropdown, "notify::selected", G_CALLBACK (dropdown_changed_cb), self, G_CONNECT_SWAPPED);
-                  break;
-
-              case IPP_ATTRIBUTE_TYPE_STRING:
-                  self->dropdown = dropdown_new ();
-
-                  for (i = 0; i < self->option_supported->num_of_values; i++)
-                    dropdown_append (self->dropdown,
-                                     ipp_choice_translate (self->option_name,
-                                                           self->option_supported->attribute_values[i].string_value));
-
-                  gtk_box_append (GTK_BOX (self), self->dropdown);
-                  g_signal_connect_object (self->dropdown, "notify::selected", G_CALLBACK (dropdown_changed_cb), self, G_CONNECT_SWAPPED);
-                  break;
-
-              case IPP_ATTRIBUTE_TYPE_RANGE:
-                  self->spin_button = gtk_spin_button_new_with_range (
-                                        self->option_supported->attribute_values[0].lower_range,
-                                        self->option_supported->attribute_values[0].upper_range,
-                                        1);
-
-                  gtk_box_append (GTK_BOX (self), self->spin_button);
-                  g_signal_connect_object (self->spin_button, "value-changed", G_CALLBACK (spin_button_changed_cb), self, G_CONNECT_SWAPPED);
-                  break;
-
-              default:
-                  break;
-            }
-
-          result = TRUE;
-        }
+      case IPP_ATTRIBUTE_TYPE_RANGE:
+        if (self->option_supported->attribute_values[0].lower_range ==
+            self->option_supported->attribute_values[0].upper_range)
+          trivial_option = TRUE;
+        break;
     }
+
+    if (!trivial_option) {
+      switch (self->option_supported->attribute_type) {
+        case IPP_ATTRIBUTE_TYPE_BOOLEAN:
+          self->switch_button = gtk_switch_new ();
+
+          gtk_box_append (GTK_BOX (self), self->switch_button);
+          g_signal_connect_object (self->switch_button, "notify::active", G_CALLBACK (switch_changed_cb), self, G_CONNECT_SWAPPED);
+          break;
+
+        case IPP_ATTRIBUTE_TYPE_INTEGER:
+          self->dropdown = dropdown_new ();
+
+          for (i = 0; i < self->option_supported->num_of_values; i++) {
+            g_autofree gchar *value = NULL;
+
+            value = g_strdup_printf ("%d", self->option_supported->attribute_values[i].integer_value);
+            dropdown_append (self->dropdown,
+                             ipp_choice_translate (self->option_name,
+                                                   value));
+          }
+
+          gtk_box_append (GTK_BOX (self), self->dropdown);
+          g_signal_connect_object (self->dropdown, "notify::selected", G_CALLBACK (dropdown_changed_cb), self, G_CONNECT_SWAPPED);
+          break;
+
+        case IPP_ATTRIBUTE_TYPE_STRING:
+          self->dropdown = dropdown_new ();
+
+          for (i = 0; i < self->option_supported->num_of_values; i++)
+            dropdown_append (self->dropdown,
+                             ipp_choice_translate (self->option_name,
+                                                   self->option_supported->attribute_values[i].string_value));
+
+          gtk_box_append (GTK_BOX (self), self->dropdown);
+          g_signal_connect_object (self->dropdown, "notify::selected", G_CALLBACK (dropdown_changed_cb), self, G_CONNECT_SWAPPED);
+          break;
+
+        case IPP_ATTRIBUTE_TYPE_RANGE:
+          self->spin_button = gtk_spin_button_new_with_range (
+            self->option_supported->attribute_values[0].lower_range,
+            self->option_supported->attribute_values[0].upper_range,
+            1);
+
+          gtk_box_append (GTK_BOX (self), self->spin_button);
+          g_signal_connect_object (self->spin_button, "value-changed", G_CALLBACK (spin_button_changed_cb), self, G_CONNECT_SWAPPED);
+          break;
+
+        default:
+          break;
+      }
+
+      result = TRUE;
+    }
+  }
 
   return result;
 }
@@ -401,94 +386,80 @@ construct_widget (PpIPPOptionWidget *self)
 static void
 update_widget_real (PpIPPOptionWidget *self)
 {
-  IPPAttribute             *attr = NULL;
+  IPPAttribute *attr = NULL;
 
-  if (self->option_default)
-    {
-      attr = ipp_attribute_copy (self->option_default);
+  if (self->option_default) {
+    attr = ipp_attribute_copy (self->option_default);
 
-      ipp_attribute_free (self->option_default);
-      self->option_default = NULL;
-    }
-  else if (self->ipp_attribute)
-    {
-      g_autofree gchar *attr_name = g_strdup_printf ("%s-default", self->option_name);
-      attr = ipp_attribute_copy (g_hash_table_lookup (self->ipp_attribute, attr_name));
+    ipp_attribute_free (self->option_default);
+    self->option_default = NULL;
+  } else if (self->ipp_attribute) {
+    g_autofree gchar *attr_name = g_strdup_printf ("%s-default", self->option_name);
+    attr = ipp_attribute_copy (g_hash_table_lookup (self->ipp_attribute, attr_name));
 
-      g_hash_table_unref (self->ipp_attribute);
-      self->ipp_attribute = NULL;
-    }
+    g_hash_table_unref (self->ipp_attribute);
+    self->ipp_attribute = NULL;
+  }
 
-  switch (self->option_supported->attribute_type)
-    {
-      case IPP_ATTRIBUTE_TYPE_BOOLEAN:
-        g_signal_handlers_block_by_func (self->switch_button, switch_changed_cb, self);
+  switch (self->option_supported->attribute_type) {
+    case IPP_ATTRIBUTE_TYPE_BOOLEAN:
+      g_signal_handlers_block_by_func (self->switch_button, switch_changed_cb, self);
 
-        if (attr && attr->num_of_values > 0 &&
-            attr->attribute_type == IPP_ATTRIBUTE_TYPE_BOOLEAN)
-          {
-            gtk_switch_set_active (GTK_SWITCH (self->switch_button),
-                                   attr->attribute_values[0].boolean_value);
-          }
+      if (attr && attr->num_of_values > 0 &&
+          attr->attribute_type == IPP_ATTRIBUTE_TYPE_BOOLEAN) {
+        gtk_switch_set_active (GTK_SWITCH (self->switch_button),
+                               attr->attribute_values[0].boolean_value);
+      }
 
-        g_signal_handlers_unblock_by_func (self->switch_button, switch_changed_cb, self);
-        break;
+      g_signal_handlers_unblock_by_func (self->switch_button, switch_changed_cb, self);
+      break;
 
-      case IPP_ATTRIBUTE_TYPE_INTEGER:
-        g_signal_handlers_block_by_func (self->dropdown, dropdown_changed_cb, self);
+    case IPP_ATTRIBUTE_TYPE_INTEGER:
+      g_signal_handlers_block_by_func (self->dropdown, dropdown_changed_cb, self);
 
-        if (attr && attr->num_of_values > 0 &&
-            attr->attribute_type == IPP_ATTRIBUTE_TYPE_INTEGER)
-          {
-            g_autofree gchar *value = g_strdup_printf ("%d", attr->attribute_values[0].integer_value);
-            dropdown_set (self->dropdown, self->option_supported, value);
-          }
-        else
-          {
-            g_autofree gchar *value = g_strdup_printf ("%d", self->option_supported->attribute_values[0].integer_value);
-            dropdown_set (self->dropdown, self->option_supported, value);
-          }
+      if (attr && attr->num_of_values > 0 &&
+          attr->attribute_type == IPP_ATTRIBUTE_TYPE_INTEGER) {
+        g_autofree gchar *value = g_strdup_printf ("%d", attr->attribute_values[0].integer_value);
+        dropdown_set (self->dropdown, self->option_supported, value);
+      } else {
+        g_autofree gchar *value = g_strdup_printf ("%d", self->option_supported->attribute_values[0].integer_value);
+        dropdown_set (self->dropdown, self->option_supported, value);
+      }
 
-        g_signal_handlers_unblock_by_func (self->dropdown, dropdown_changed_cb, self);
-        break;
+      g_signal_handlers_unblock_by_func (self->dropdown, dropdown_changed_cb, self);
+      break;
 
-      case IPP_ATTRIBUTE_TYPE_STRING:
-        g_signal_handlers_block_by_func (self->dropdown, dropdown_changed_cb, self);
+    case IPP_ATTRIBUTE_TYPE_STRING:
+      g_signal_handlers_block_by_func (self->dropdown, dropdown_changed_cb, self);
 
-        if (attr && attr->num_of_values > 0 &&
-            attr->attribute_type == IPP_ATTRIBUTE_TYPE_STRING)
-          {
-            dropdown_set (self->dropdown, self->option_supported, attr->attribute_values[0].string_value);
-          }
-        else
-          {
-            dropdown_set (self->dropdown, self->option_supported, self->option_supported->attribute_values[0].string_value);
-          }
+      if (attr && attr->num_of_values > 0 &&
+          attr->attribute_type == IPP_ATTRIBUTE_TYPE_STRING) {
+        dropdown_set (self->dropdown, self->option_supported, attr->attribute_values[0].string_value);
+      } else {
+        dropdown_set (self->dropdown, self->option_supported, self->option_supported->attribute_values[0].string_value);
+      }
 
-        g_signal_handlers_unblock_by_func (self->dropdown, dropdown_changed_cb, self);
-        break;
+      g_signal_handlers_unblock_by_func (self->dropdown, dropdown_changed_cb, self);
+      break;
 
-      case IPP_ATTRIBUTE_TYPE_RANGE:
-        g_signal_handlers_block_by_func (self->spin_button, spin_button_changed_cb, self);
+    case IPP_ATTRIBUTE_TYPE_RANGE:
+      g_signal_handlers_block_by_func (self->spin_button, spin_button_changed_cb, self);
 
-        if (attr && attr->num_of_values > 0 &&
-            attr->attribute_type == IPP_ATTRIBUTE_TYPE_INTEGER)
-          {
-            gtk_spin_button_set_value (GTK_SPIN_BUTTON (self->spin_button),
-                                       attr->attribute_values[0].integer_value);
-          }
-        else
-          {
-            gtk_spin_button_set_value (GTK_SPIN_BUTTON (self->spin_button),
-                                       self->option_supported->attribute_values[0].lower_range);
-          }
+      if (attr && attr->num_of_values > 0 &&
+          attr->attribute_type == IPP_ATTRIBUTE_TYPE_INTEGER) {
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (self->spin_button),
+                                   attr->attribute_values[0].integer_value);
+      } else {
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (self->spin_button),
+                                   self->option_supported->attribute_values[0].lower_range);
+      }
 
-        g_signal_handlers_unblock_by_func (self->spin_button, spin_button_changed_cb, self);
-        break;
+      g_signal_handlers_unblock_by_func (self->spin_button, spin_button_changed_cb, self);
+      break;
 
-      default:
-        break;
-    }
+    default:
+      break;
+  }
 
   ipp_attribute_free (attr);
 }
@@ -510,7 +481,7 @@ get_ipp_attributes_cb (GHashTable *table,
 static void
 update_widget (PpIPPOptionWidget *self)
 {
-  gchar                    **attributes_names;
+  gchar **attributes_names;
 
   attributes_names = g_new0 (gchar *, 2);
   attributes_names[0] = g_strdup_printf ("%s-default", self->option_name);

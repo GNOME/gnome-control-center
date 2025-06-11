@@ -20,32 +20,30 @@
 #include "cc-wifi-connection-row.h"
 #include "cc-qr-code.h"
 
-struct _CcWifiConnectionRow
-{
-  AdwActionRow     parent_instance;
+struct _CcWifiConnectionRow {
+  AdwActionRow parent_instance;
 
-  gboolean         constructed;
+  gboolean constructed;
 
-  gboolean         checkable;
-  gboolean         forgettable;
-  gboolean         checked;
+  gboolean checkable;
+  gboolean forgettable;
+  gboolean checked;
 
-  NMDeviceWifi    *device;
-  GPtrArray       *aps;
-  NMConnection    *connection;
-  gboolean         known_connection;
+  NMDeviceWifi *device;
+  GPtrArray *aps;
+  NMConnection *connection;
+  gboolean known_connection;
 
-  GtkCheckButton  *checkbutton;
-  AdwSpinner      *connecting_spinner;
-  GtkImage        *encrypted_icon;
-  GtkButton       *options_button;
-  GtkButton       *forget_button;
-  GtkButton       *qr_code_button;
-  GtkImage        *strength_icon;
+  GtkCheckButton *checkbutton;
+  AdwSpinner *connecting_spinner;
+  GtkImage *encrypted_icon;
+  GtkButton *options_button;
+  GtkButton *forget_button;
+  GtkButton *qr_code_button;
+  GtkImage *strength_icon;
 };
 
-enum
-{
+enum {
   PROP_0,
   PROP_CHECKABLE,
   PROP_CHECKED,
@@ -57,8 +55,7 @@ enum
   PROP_LAST
 };
 
-typedef enum
-{
+typedef enum {
   NM_AP_SEC_UNKNOWN,
   NM_AP_SEC_NONE,
   NM_AP_SEC_WEP,
@@ -91,44 +88,35 @@ get_access_point_security (NMAccessPoint *ap)
 
   if (!(flags & NM_802_11_AP_FLAGS_PRIVACY) &&
       wpa_flags == NM_802_11_AP_SEC_NONE &&
-      rsn_flags == NM_802_11_AP_SEC_NONE)
-    {
-      type = NM_AP_SEC_NONE;
-    }
-  else if ((flags & NM_802_11_AP_FLAGS_PRIVACY) &&
-           wpa_flags == NM_802_11_AP_SEC_NONE &&
-           rsn_flags == NM_802_11_AP_SEC_NONE)
-    {
-      type = NM_AP_SEC_WEP;
-    }
-  else if (!(flags & NM_802_11_AP_FLAGS_PRIVACY) &&
-           wpa_flags != NM_802_11_AP_SEC_NONE &&
-           rsn_flags != NM_802_11_AP_SEC_NONE)
-    {
-      type = NM_AP_SEC_WPA;
-    }
-#if NM_CHECK_VERSION(1,20,6)
-  else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_SAE)
-    {
-      type = NM_AP_SEC_SAE;
-    }
+      rsn_flags == NM_802_11_AP_SEC_NONE) {
+    type = NM_AP_SEC_NONE;
+  } else if ((flags & NM_802_11_AP_FLAGS_PRIVACY) &&
+             wpa_flags == NM_802_11_AP_SEC_NONE &&
+             rsn_flags == NM_802_11_AP_SEC_NONE) {
+    type = NM_AP_SEC_WEP;
+  } else if (!(flags & NM_802_11_AP_FLAGS_PRIVACY) &&
+             wpa_flags != NM_802_11_AP_SEC_NONE &&
+             rsn_flags != NM_802_11_AP_SEC_NONE) {
+    type = NM_AP_SEC_WPA;
+  }
+#if NM_CHECK_VERSION (1, 20, 6)
+  else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_SAE) {
+    type = NM_AP_SEC_SAE;
+  }
 #endif
-#if NM_CHECK_VERSION(1,24,0)
-  else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_OWE)
-    {
-      type = NM_AP_SEC_OWE;
-    }
+#if NM_CHECK_VERSION (1, 24, 0)
+  else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_OWE) {
+    type = NM_AP_SEC_OWE;
+  }
 #endif
-#if NM_CHECK_VERSION(1,26,0)
-  else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_OWE_TM)
-    {
-      type = NM_AP_SEC_OWE_TM;
-    }
+#if NM_CHECK_VERSION (1, 26, 0)
+  else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_OWE_TM) {
+    type = NM_AP_SEC_OWE_TM;
+  }
 #endif
-  else
-    {
-      type = NM_AP_SEC_WPA2;
-    }
+  else {
+    type = NM_AP_SEC_WPA2;
+  }
 
   return type;
 }
@@ -183,150 +171,122 @@ update_ui (CcWifiConnectionRow *self)
 
   best_ap = cc_wifi_connection_row_best_access_point (self);
 
-  if (self->connection)
-    {
-      active_connection = nm_device_get_active_connection (NM_DEVICE (self->device));
-      if (active_connection &&
-          NM_CONNECTION (nm_active_connection_get_connection (active_connection)) != self->connection)
-        active_connection = NULL;
+  if (self->connection) {
+    active_connection = nm_device_get_active_connection (NM_DEVICE (self->device));
+    if (active_connection &&
+        NM_CONNECTION (nm_active_connection_get_connection (active_connection)) != self->connection)
+      active_connection = NULL;
+  }
+
+  if (self->connection) {
+    NMSettingWireless *sw;
+    const gchar *name = NULL;
+    g_autofree gchar *ssid_str = NULL;
+    gchar *ssid_pos;
+
+    sw = nm_connection_get_setting_wireless (self->connection);
+
+    ssid = nm_setting_wireless_get_ssid (sw);
+    ssid_str = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
+    name = nm_connection_get_id (NM_CONNECTION (self->connection));
+
+    ssid_pos = strstr (name, ssid_str);
+    if (ssid_pos == name && strlen (name) == strlen (ssid_str)) {
+      title = g_markup_escape_text (name, -1);
+    } else if (ssid_pos) {
+      g_autofree gchar *before = g_strndup (name, ssid_pos - name);
+      g_autofree gchar *after = g_strndup (ssid_pos + strlen (ssid_str), strlen (ssid_pos) - strlen (ssid_str));
+      title = g_markup_printf_escaped ("<i>%s</i>%s<i>%s</i>",
+                                       before, ssid_str, after);
+    } else {
+      /* TRANSLATORS: This happens when the connection name does not contain the SSID. */
+      title = g_markup_printf_escaped (C_("Wi-Fi Connection", "%s (SSID: %s)"),
+                                       name, ssid_str);
     }
 
-  if (self->connection)
-    {
-      NMSettingWireless *sw;
-      const gchar *name = NULL;
-      g_autofree gchar *ssid_str = NULL;
-      gchar *ssid_pos;
+    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title);
+  } else {
+    g_autofree char *title_escaped = NULL;
 
-      sw = nm_connection_get_setting_wireless (self->connection);
+    ssid = nm_access_point_get_ssid (best_ap);
+    title = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
+    title_escaped = g_markup_escape_text (title, -1);
+    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title_escaped);
+  }
 
-      ssid = nm_setting_wireless_get_ssid (sw);
-      ssid_str = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
-      name = nm_connection_get_id (NM_CONNECTION (self->connection));
+  if (active_connection) {
+    state = nm_active_connection_get_state (active_connection);
 
-      ssid_pos = strstr (name, ssid_str);
-      if (ssid_pos == name && strlen (name) == strlen (ssid_str))
-        {
-          title = g_markup_escape_text (name, -1);
-        }
-      else if (ssid_pos)
-        {
-          g_autofree gchar *before = g_strndup (name, ssid_pos - name);
-          g_autofree gchar *after = g_strndup (ssid_pos + strlen (ssid_str), strlen(ssid_pos) - strlen(ssid_str));
-          title = g_markup_printf_escaped ("<i>%s</i>%s<i>%s</i>",
-                                           before, ssid_str, after);
-        }
-      else
-        {
-          /* TRANSLATORS: This happens when the connection name does not contain the SSID. */
-          title = g_markup_printf_escaped (C_("Wi-Fi Connection", "%s (SSID: %s)"),
-                                           name, ssid_str);
-        }
-
-      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title);
-    }
-  else
-    {
-      g_autofree char *title_escaped = NULL;
-
-      ssid = nm_access_point_get_ssid (best_ap);
-      title = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
-      title_escaped = g_markup_escape_text (title, -1);
-      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title_escaped);
-    }
-
-  if (active_connection)
-    {
-      state = nm_active_connection_get_state (active_connection);
-
-      active = state == NM_ACTIVE_CONNECTION_STATE_ACTIVATED;
-      connecting = state == NM_ACTIVE_CONNECTION_STATE_ACTIVATING;
-    }
-  else
-    {
-      active = FALSE;
-      connecting = FALSE;
-    }
+    active = state == NM_ACTIVE_CONNECTION_STATE_ACTIVATED;
+    connecting = state == NM_ACTIVE_CONNECTION_STATE_ACTIVATING;
+  } else {
+    active = FALSE;
+    connecting = FALSE;
+  }
 
   if (self->connection)
     security = get_connection_security (self->connection);
 
-  if (best_ap != NULL)
-    {
-      security = get_access_point_security (best_ap);
-      strength = nm_access_point_get_strength (best_ap);
-    }
+  if (best_ap != NULL) {
+    security = get_access_point_security (best_ap);
+    strength = nm_access_point_get_strength (best_ap);
+  }
 
   gtk_widget_set_visible (GTK_WIDGET (self->connecting_spinner), connecting);
   adw_action_row_set_subtitle (ADW_ACTION_ROW (self), active ? _("Connected") : "");
   gtk_widget_set_visible (GTK_WIDGET (self->options_button), active || connecting || self->known_connection);
   gtk_widget_set_visible (GTK_WIDGET (self->qr_code_button), (active || self->known_connection) && is_qr_code_supported (self->connection));
 
-  if (security != NM_AP_SEC_UNKNOWN && security != NM_AP_SEC_NONE && security != NM_AP_SEC_OWE && security != NM_AP_SEC_OWE_TM)
-    {
-      const gchar *icon_name = "lock-small-symbolic";
+  if (security != NM_AP_SEC_UNKNOWN && security != NM_AP_SEC_NONE && security != NM_AP_SEC_OWE && security != NM_AP_SEC_OWE_TM) {
+    const gchar *icon_name = "lock-small-symbolic";
 
-      gtk_widget_set_child_visible (GTK_WIDGET (self->encrypted_icon), TRUE);
-      if (security == NM_AP_SEC_WEP)
-	{
-          icon_name = "warning-small-symbolic";
-	  gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Insecure network (WEP)"));
-	}
-      else if (security == NM_AP_SEC_WPA)
-	{
-          gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA)"));
-	}
-      else if (security == NM_AP_SEC_WPA2)
-	{
-          gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA2)"));
-	}
-	  else if (security == NM_AP_SEC_SAE)
-	{
-          gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA3)"));
-	}
-      else
-	{
-          gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network"));
-	}
-
-      gtk_image_set_from_icon_name (self->encrypted_icon, icon_name);
-    }
-  else
-    {
-      gtk_widget_set_child_visible (GTK_WIDGET (self->encrypted_icon), FALSE);
+    gtk_widget_set_child_visible (GTK_WIDGET (self->encrypted_icon), TRUE);
+    if (security == NM_AP_SEC_WEP) {
+      icon_name = "warning-small-symbolic";
+      gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Insecure network (WEP)"));
+    } else if (security == NM_AP_SEC_WPA) {
+      gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA)"));
+    } else if (security == NM_AP_SEC_WPA2) {
+      gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA2)"));
+    } else if (security == NM_AP_SEC_SAE) {
+      gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA3)"));
+    } else {
+      gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network"));
     }
 
-  if (best_ap)
-    {
-      g_autofree char *description = NULL;
-      gchar *icon_name;
+    gtk_image_set_from_icon_name (self->encrypted_icon, icon_name);
+  } else {
+    gtk_widget_set_child_visible (GTK_WIDGET (self->encrypted_icon), FALSE);
+  }
 
-      if (strength < 20)
-        icon_name = "network-wireless-signal-none-symbolic";
-      else if (strength < 40)
-        icon_name = "network-wireless-signal-weak-symbolic";
-      else if (strength < 50)
-        icon_name = "network-wireless-signal-ok-symbolic";
-      else if (strength < 80)
-        icon_name = "network-wireless-signal-good-symbolic";
-      else
-        icon_name = "network-wireless-signal-excellent-symbolic";
+  if (best_ap) {
+    g_autofree char *description = NULL;
+    gchar *icon_name;
 
-      g_object_set (self->strength_icon, "icon-name", icon_name, NULL);
-      gtk_widget_set_child_visible (GTK_WIDGET (self->strength_icon), TRUE);
+    if (strength < 20)
+      icon_name = "network-wireless-signal-none-symbolic";
+    else if (strength < 40)
+      icon_name = "network-wireless-signal-weak-symbolic";
+    else if (strength < 50)
+      icon_name = "network-wireless-signal-ok-symbolic";
+    else if (strength < 80)
+      icon_name = "network-wireless-signal-good-symbolic";
+    else
+      icon_name = "network-wireless-signal-excellent-symbolic";
 
-      description = g_strdup_printf(_("Signal strength %d%%"), strength);
-      gtk_widget_set_tooltip_text (GTK_WIDGET (self->strength_icon), description);
-      gtk_accessible_update_property (GTK_ACCESSIBLE (self->strength_icon),
-                                      GTK_ACCESSIBLE_PROPERTY_DESCRIPTION,
-                                      description,
-                                      -1);
-    }
-  else
-    {
-      gtk_widget_set_child_visible (GTK_WIDGET (self->strength_icon), FALSE);
-      gtk_accessible_reset_property (GTK_ACCESSIBLE (self->strength_icon), GTK_ACCESSIBLE_PROPERTY_DESCRIPTION);
-    }
+    g_object_set (self->strength_icon, "icon-name", icon_name, NULL);
+    gtk_widget_set_child_visible (GTK_WIDGET (self->strength_icon), TRUE);
+
+    description = g_strdup_printf (_("Signal strength %d%%"), strength);
+    gtk_widget_set_tooltip_text (GTK_WIDGET (self->strength_icon), description);
+    gtk_accessible_update_property (GTK_ACCESSIBLE (self->strength_icon),
+                                    GTK_ACCESSIBLE_PROPERTY_DESCRIPTION,
+                                    description,
+                                    -1);
+  } else {
+    gtk_widget_set_child_visible (GTK_WIDGET (self->strength_icon), FALSE);
+    gtk_accessible_reset_property (GTK_ACCESSIBLE (self->strength_icon), GTK_ACCESSIBLE_PROPERTY_DESCRIPTION);
+  }
 }
 
 static void
@@ -353,8 +313,7 @@ cc_wifi_connection_row_get_property (GObject    *object,
   GPtrArray *ptr_array;
   gint i;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_CHECKABLE:
       g_value_set_boolean (value, self->checkable);
       break;
@@ -389,7 +348,7 @@ cc_wifi_connection_row_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -402,8 +361,7 @@ cc_wifi_connection_row_set_property (GObject      *object,
   GPtrArray *ptr_array;
   gint i;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_CHECKABLE:
       self->checkable = g_value_get_boolean (value);
       break;
@@ -420,11 +378,10 @@ cc_wifi_connection_row_set_property (GObject      *object,
       ptr_array = g_value_get_boxed (value);
       g_ptr_array_set_size (self->aps, 0);
 
-      if (ptr_array)
-        {
-          for (i = 0; i < ptr_array->len; i++)
-            g_ptr_array_add (self->aps, g_object_ref (g_ptr_array_index (ptr_array, i)));
-        }
+      if (ptr_array) {
+        for (i = 0; i < ptr_array->len; i++)
+          g_ptr_array_add (self->aps, g_object_ref (g_ptr_array_index (ptr_array, i)));
+      }
       if (self->constructed)
         update_ui (self);
       break;
@@ -443,7 +400,7 @@ cc_wifi_connection_row_set_property (GObject      *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -501,18 +458,18 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
 
   props[PROP_APS] = g_param_spec_boxed ("aps", "Access Points",
                                         "The access points for this connection  (may be empty if a connection is given)",
-                                         G_TYPE_PTR_ARRAY,
-                                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+                                        G_TYPE_PTR_ARRAY,
+                                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_CONNECTION] = g_param_spec_object ("connection", "Connection",
                                                 "The NMConnection (may be NULL if there is an AP)",
-                                                 NM_TYPE_CONNECTION,
-                                                 G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+                                                NM_TYPE_CONNECTION,
+                                                G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_KNOWN_CONNECTION] = g_param_spec_boolean ("known-connection", "Known Connection",
-                                                "Whether this row is a known connection or not",
-                                                FALSE,
-                                                G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+                                                       "Whether this row is a known connection or not",
+                                                       FALSE,
+                                                       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_FORGETTABLE] = g_param_spec_boolean ("forgettable", "forgettable",
                                                   "Whether to show a checkbox to select the row",
@@ -530,10 +487,10 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
                 0, NULL, NULL, NULL,
                 G_TYPE_NONE, 0);
   g_signal_new ("forget",
-               CC_TYPE_WIFI_CONNECTION_ROW,
-               G_SIGNAL_RUN_LAST,
-               0, NULL, NULL, NULL,
-               G_TYPE_NONE, 0);
+                CC_TYPE_WIFI_CONNECTION_ROW,
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL, NULL,
+                G_TYPE_NONE, 0);
   g_signal_new ("show-qr-code",
                 CC_TYPE_WIFI_CONNECTION_ROW,
                 G_SIGNAL_RUN_LAST,
@@ -577,13 +534,13 @@ cc_wifi_connection_row_init (CcWifiConnectionRow *self)
 }
 
 CcWifiConnectionRow *
-cc_wifi_connection_row_new (NMDeviceWifi  *device,
-                            NMConnection  *connection,
-                            GPtrArray     *aps,
-                            gboolean       checkable,
-                            gboolean       known_connection,
-                            gboolean       forgettable,
-                            gboolean       activatable)
+cc_wifi_connection_row_new (NMDeviceWifi *device,
+                            NMConnection *connection,
+                            GPtrArray    *aps,
+                            gboolean      checkable,
+                            gboolean      known_connection,
+                            gboolean      forgettable,
+                            gboolean      activatable)
 {
   return g_object_new (CC_TYPE_WIFI_CONNECTION_ROW,
                        "device", device,
@@ -612,7 +569,7 @@ cc_wifi_connection_row_get_checked (CcWifiConnectionRow *self)
   return self->checked;
 }
 
-NMDeviceWifi*
+NMDeviceWifi *
 cc_wifi_connection_row_get_device (CcWifiConnectionRow *self)
 {
   g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (self), NULL);
@@ -620,7 +577,7 @@ cc_wifi_connection_row_get_device (CcWifiConnectionRow *self)
   return self->device;
 }
 
-const GPtrArray*
+const GPtrArray *
 cc_wifi_connection_row_get_access_points (CcWifiConnectionRow *self)
 {
   g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (self), NULL);
@@ -628,7 +585,7 @@ cc_wifi_connection_row_get_access_points (CcWifiConnectionRow *self)
   return self->aps;
 }
 
-NMConnection*
+NMConnection *
 cc_wifi_connection_row_get_connection (CcWifiConnectionRow *self)
 {
   g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (self), NULL);
@@ -654,7 +611,7 @@ cc_wifi_connection_row_set_checked (CcWifiConnectionRow *self,
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_CHECKED]);
 }
 
-NMAccessPoint*
+NMAccessPoint *
 cc_wifi_connection_row_best_access_point (CcWifiConnectionRow *self)
 {
   NMAccessPoint *best_ap = NULL;
@@ -669,25 +626,23 @@ cc_wifi_connection_row_best_access_point (CcWifiConnectionRow *self)
 
   active_ap = nm_device_wifi_get_active_access_point (self->device);
 
-  for (i = 0; i < self->aps->len; i++)
-    {
-      NMAccessPoint *cur;
-      guint8 cur_strength;
+  for (i = 0; i < self->aps->len; i++) {
+    NMAccessPoint *cur;
+    guint8 cur_strength;
 
-      cur = g_ptr_array_index (self->aps, i);
+    cur = g_ptr_array_index (self->aps, i);
 
-      /* Prefer the active AP in all cases */
-      if (cur == active_ap)
-        return cur;
+    /* Prefer the active AP in all cases */
+    if (cur == active_ap)
+      return cur;
 
-      cur_strength = nm_access_point_get_strength (cur);
-      /* Use if we don't have an AP, this is the current AP, or it is better */
-      if (!best_ap || cur_strength > strength)
-        {
-          best_ap = cur;
-          strength = cur_strength;
-        }
+    cur_strength = nm_access_point_get_strength (cur);
+    /* Use if we don't have an AP, this is the current AP, or it is better */
+    if (!best_ap || cur_strength > strength) {
+      best_ap = cur;
+      strength = cur_strength;
     }
+  }
 
   return best_ap;
 }
@@ -712,11 +667,10 @@ cc_wifi_connection_row_remove_access_point (CcWifiConnectionRow *self,
     return FALSE;
 
   /* Object might be invalid; this is alright if it is deleted right away */
-  if (self->aps->len > 0 || self->connection)
-    {
-      g_object_notify_by_pspec (G_OBJECT (self), props[PROP_APS]);
-      update_ui (self);
-    }
+  if (self->aps->len > 0 || self->connection) {
+    g_object_notify_by_pspec (G_OBJECT (self), props[PROP_APS]);
+    update_ui (self);
+  }
 
   return self->aps->len == 0;
 }
@@ -736,6 +690,4 @@ cc_wifi_connection_row_update (CcWifiConnectionRow *self)
   update_ui (self);
 
   gtk_list_box_row_changed (GTK_LIST_BOX_ROW (self));
-
 }
-

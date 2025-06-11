@@ -48,15 +48,14 @@ _g_log_abort (gboolean breakpoint)
 {
   gboolean debugger_present;
 
-  if (g_test_subprocess ())
-    {
-      /* If this is a test case subprocess then it probably caused
-       * this error message on purpose, so just exit() rather than
-       * abort()ing, to avoid triggering any system crash-reporting
-       * daemon.
-       */
-      _exit (1);
-    }
+  if (g_test_subprocess ()) {
+    /* If this is a test case subprocess then it probably caused
+     * this error message on purpose, so just exit() rather than
+     * abort()ing, to avoid triggering any system crash-reporting
+     * daemon.
+     */
+    _exit (1);
+  }
 
 #ifdef G_OS_WIN32
   debugger_present = IsDebuggerPresent ();
@@ -97,7 +96,7 @@ static gboolean
 matches_domain (const char *log_domains,
                 const char *domain)
 {
-  g_auto(GStrv) domain_list = NULL;
+  g_auto (GStrv) domain_list = NULL;
 
   if (!log_domains || !*log_domains ||
       !domain || !*domain)
@@ -105,11 +104,10 @@ matches_domain (const char *log_domains,
 
   domain_list = g_strsplit (log_domains, ",", -1);
 
-  for (guint i = 0; domain_list[i]; i++)
-    {
-      if (g_str_has_prefix (domain, domain_list[i]))
-        return TRUE;
-    }
+  for (guint i = 0; domain_list[i]; i++) {
+    if (g_str_has_prefix (domain, domain_list[i]))
+      return TRUE;
+  }
 
   return FALSE;
 }
@@ -200,34 +198,29 @@ get_log_level_prefix (GLogLevelFlags log_level,
   /* Ignore custom flags set */
   log_level = log_level & ~CC_LOG_DETAILED;
 
-  if (use_color)
-    {
-      switch ((int)log_level)        /* Same colors as used in GLib */
-        {
-        case G_LOG_LEVEL_ERROR:    return "   \033[1;31mERROR\033[0m";
-        case G_LOG_LEVEL_CRITICAL: return "\033[1;35mCRITICAL\033[0m";
-        case G_LOG_LEVEL_WARNING:  return " \033[1;33mWARNING\033[0m";
-        case G_LOG_LEVEL_MESSAGE:  return " \033[1;32mMESSAGE\033[0m";
-        case G_LOG_LEVEL_INFO:     return "    \033[1;32mINFO\033[0m";
-        case G_LOG_LEVEL_DEBUG:    return "   \033[1;32mDEBUG\033[0m";
-        case CC_LOG_LEVEL_TRACE:   return "   \033[1;36mTRACE\033[0m";
-        default:                   return " UNKNOWN";
-        }
+  if (use_color) {
+    switch ((int)log_level) {         /* Same colors as used in GLib */
+      case G_LOG_LEVEL_ERROR:    return "   \033[1;31mERROR\033[0m";
+      case G_LOG_LEVEL_CRITICAL: return "\033[1;35mCRITICAL\033[0m";
+      case G_LOG_LEVEL_WARNING:  return " \033[1;33mWARNING\033[0m";
+      case G_LOG_LEVEL_MESSAGE:  return " \033[1;32mMESSAGE\033[0m";
+      case G_LOG_LEVEL_INFO:     return "    \033[1;32mINFO\033[0m";
+      case G_LOG_LEVEL_DEBUG:    return "   \033[1;32mDEBUG\033[0m";
+      case CC_LOG_LEVEL_TRACE:   return "   \033[1;36mTRACE\033[0m";
+      default:                   return " UNKNOWN";
     }
-  else
-    {
-      switch ((int)log_level)
-        {
-        case G_LOG_LEVEL_ERROR:    return "   ERROR";
-        case G_LOG_LEVEL_CRITICAL: return "CRITICAL";
-        case G_LOG_LEVEL_WARNING:  return " WARNING";
-        case G_LOG_LEVEL_MESSAGE:  return " MESSAGE";
-        case G_LOG_LEVEL_INFO:     return "    INFO";
-        case G_LOG_LEVEL_DEBUG:    return "   DEBUG";
-        case CC_LOG_LEVEL_TRACE:   return "   TRACE";
-        default:                   return " UNKNOWN";
-        }
+  } else {
+    switch ((int)log_level) {
+      case G_LOG_LEVEL_ERROR:    return "   ERROR";
+      case G_LOG_LEVEL_CRITICAL: return "CRITICAL";
+      case G_LOG_LEVEL_WARNING:  return " WARNING";
+      case G_LOG_LEVEL_MESSAGE:  return " MESSAGE";
+      case G_LOG_LEVEL_INFO:     return "    INFO";
+      case G_LOG_LEVEL_DEBUG:    return "   DEBUG";
+      case CC_LOG_LEVEL_TRACE:   return "   TRACE";
+      default:                   return " UNKNOWN";
     }
+  }
 }
 
 static GLogWriterOutput
@@ -238,7 +231,7 @@ cc_log_write (GLogLevelFlags   log_level,
               gsize            n_fields,
               gpointer         user_data)
 {
-  g_autoptr(GString) log_str = NULL;
+  g_autoptr (GString) log_str = NULL;
   FILE *stream = stdout;
   gboolean can_color;
 
@@ -273,31 +266,28 @@ cc_log_write (GLogLevelFlags   log_level,
 
   g_string_append_printf (log_str, "%s: ", get_log_level_prefix (log_level, can_color));
 
-  if (log_level & CC_LOG_DETAILED)
-    {
-      const char *code_func = NULL, *code_line = NULL;
-      for (guint i = 0; i < n_fields; i++)
-        {
-          const GLogField *field = &fields[i];
+  if (log_level & CC_LOG_DETAILED) {
+    const char *code_func = NULL, *code_line = NULL;
+    for (guint i = 0; i < n_fields; i++) {
+      const GLogField *field = &fields[i];
 
-          if (!code_func && g_strcmp0 (field->key, "CODE_FUNC") == 0)
-            code_func = field->value;
-          else if (!code_line && g_strcmp0 (field->key, "CODE_LINE") == 0)
-            code_line = field->value;
+      if (!code_func && g_strcmp0 (field->key, "CODE_FUNC") == 0)
+        code_func = field->value;
+      else if (!code_line && g_strcmp0 (field->key, "CODE_LINE") == 0)
+        code_line = field->value;
 
-          if (code_func && code_line)
-            break;
-        }
-
-      if (code_func)
-        {
-          g_string_append_printf (log_str, "%s():", code_func);
-
-          if (code_line)
-            g_string_append_printf (log_str, "%s:", code_line);
-          g_string_append_c (log_str, ' ');
-        }
+      if (code_func && code_line)
+        break;
     }
+
+    if (code_func) {
+      g_string_append_printf (log_str, "%s():", code_func);
+
+      if (code_line)
+        g_string_append_printf (log_str, "%s:", code_line);
+      g_string_append_c (log_str, ' ');
+    }
+  }
 
   g_string_append (log_str, log_message);
 
@@ -326,15 +316,14 @@ cc_log_handler (GLogLevelFlags   log_level,
   const char *log_domain = NULL;
   const char *log_message = NULL;
 
-  for (guint i = 0; (!log_domain || !log_message) && i < n_fields; i++)
-    {
-      const GLogField *field = &fields[i];
+  for (guint i = 0; (!log_domain || !log_message) && i < n_fields; i++) {
+    const GLogField *field = &fields[i];
 
-      if (g_strcmp0 (field->key, "GLIB_DOMAIN") == 0)
-        log_domain = field->value;
-      else if (g_strcmp0 (field->key, "MESSAGE") == 0)
-        log_message = field->value;
-    }
+    if (g_strcmp0 (field->key, "GLIB_DOMAIN") == 0)
+      log_domain = field->value;
+    else if (g_strcmp0 (field->key, "MESSAGE") == 0)
+      log_message = field->value;
+  }
 
   if (!log_domain)
     log_domain = "**";
@@ -360,33 +349,31 @@ cc_log_init (void)
 {
   static gsize initialized = 0;
 
-  if (g_once_init_enter (&initialized))
-    {
-      domains = g_strdup (g_getenv ("G_MESSAGES_DEBUG"));
+  if (g_once_init_enter (&initialized)) {
+    domains = g_strdup (g_getenv ("G_MESSAGES_DEBUG"));
 
-      if (domains && !*domains)
-        g_clear_pointer (&domains, g_free);
+    if (domains && !*domains)
+      g_clear_pointer (&domains, g_free);
 
-      if (!domains || g_str_equal (domains, "all"))
-        any_domain = TRUE;
+    if (!domains || g_str_equal (domains, "all"))
+      any_domain = TRUE;
 
-      if (domains && strstr (domains, "no-anonymize"))
-        {
-          any_domain = TRUE;
-          no_anonymize = TRUE;
-          g_clear_pointer (&domains, g_free);
-        }
-
-      if (g_strcmp0 (g_getenv ("G_DEBUG"), "fatal-criticals") == 0)
-        fatal_criticals = TRUE;
-      else if (g_strcmp0 (g_getenv ("G_DEBUG"), "fatal-warnings") == 0)
-        fatal_warnings = TRUE;
-
-      stderr_is_journal = g_log_writer_is_journald (fileno (stderr));
-      g_log_set_writer_func (cc_log_handler, NULL, NULL);
-      g_once_init_leave (&initialized, 1);
-      atexit (cc_log_finalize);
+    if (domains && strstr (domains, "no-anonymize")) {
+      any_domain = TRUE;
+      no_anonymize = TRUE;
+      g_clear_pointer (&domains, g_free);
     }
+
+    if (g_strcmp0 (g_getenv ("G_DEBUG"), "fatal-criticals") == 0)
+      fatal_criticals = TRUE;
+    else if (g_strcmp0 (g_getenv ("G_DEBUG"), "fatal-warnings") == 0)
+      fatal_warnings = TRUE;
+
+    stderr_is_journal = g_log_writer_is_journald (fileno (stderr));
+    g_log_set_writer_func (cc_log_handler, NULL, NULL);
+    g_once_init_leave (&initialized, 1);
+    atexit (cc_log_finalize);
+  }
 }
 
 void
@@ -402,16 +389,16 @@ cc_log_get_verbosity (void)
 }
 
 void
-cc_log (const char     *domain,
-        GLogLevelFlags  log_level,
-        const char     *value,
-        const char     *file,
-        const char     *line,
-        const char     *func,
-        const char     *message_format,
+cc_log (const char    *domain,
+        GLogLevelFlags log_level,
+        const char    *value,
+        const char    *file,
+        const char    *line,
+        const char    *func,
+        const char    *message_format,
         ...)
 {
-  g_autoptr(GString) str = NULL;
+  g_autoptr (GString) str = NULL;
   va_list args;
 
   if (!message_format || !*message_format)
@@ -447,36 +434,33 @@ cc_log_anonymize_value (GString    *str,
   if (str->len && str->str[str->len - 1] != ' ')
     g_string_append_c (str, ' ');
 
-  if (no_anonymize)
-    {
-      g_string_append (str, value);
-      return;
-    }
+  if (no_anonymize) {
+    g_string_append (str, value);
+    return;
+  }
 
-  if (!g_utf8_validate (value, -1, NULL))
-    {
-      g_string_append (str, "******");
-      return;
-    }
+  if (!g_utf8_validate (value, -1, NULL)) {
+    g_string_append (str, "******");
+    return;
+  }
 
   c = g_utf8_get_char (value);
   g_string_append_unichar (str, c);
 
   value = g_utf8_next_char (value);
 
-  while (*value)
-    {
-      prev_c = c;
-      c = g_utf8_get_char (value);
+  while (*value) {
+    prev_c = c;
+    c = g_utf8_get_char (value);
 
-      value = g_utf8_next_char (value);
-      next_c = g_utf8_get_char (value);
+    value = g_utf8_next_char (value);
+    next_c = g_utf8_get_char (value);
 
-      if (!g_unichar_isalnum (c))
-        g_string_append_unichar (str, c);
-      else if (!g_unichar_isalnum (prev_c) || !g_unichar_isalnum (next_c))
-        g_string_append_unichar (str, c);
-      else
-        g_string_append_c (str, '#');
-    }
+    if (!g_unichar_isalnum (c))
+      g_string_append_unichar (str, c);
+    else if (!g_unichar_isalnum (prev_c) || !g_unichar_isalnum (next_c))
+      g_string_append_unichar (str, c);
+    else
+      g_string_append_c (str, '#');
+  }
 }

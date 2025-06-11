@@ -8,7 +8,7 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
@@ -33,8 +33,8 @@
  */
 
 static const GDBusErrorEntry bolt_error_entries[] = {
-  {BOLT_ERROR_FAILED,     BOLT_DBUS_NAME ".Error.Failed"},
-  {BOLT_ERROR_UDEV,       BOLT_DBUS_NAME ".Error.UDev"},
+  {BOLT_ERROR_FAILED, BOLT_DBUS_NAME ".Error.Failed"},
+  {BOLT_ERROR_UDEV, BOLT_DBUS_NAME ".Error.UDev"},
 };
 
 
@@ -47,7 +47,7 @@ bolt_error_quark (void)
                                       &quark_volatile,
                                       bolt_error_entries,
                                       G_N_ELEMENTS (bolt_error_entries));
-  return (GQuark) quark_volatile;
+  return (GQuark)quark_volatile;
 }
 
 gboolean

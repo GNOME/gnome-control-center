@@ -53,45 +53,44 @@ typedef enum {
   DIALOG_STATE_IDLE = DIALOG_STATE_DEVICE_CLAIMED | DIALOG_STATE_DEVICE_ENROLLING,
 } DialogState;
 
-struct _CcFingerprintDialog
-{
-  AdwDialog       parent_instance;
+struct _CcFingerprintDialog {
+  AdwDialog parent_instance;
 
-  GtkButton      *back_button;
-  GtkButton      *cancel_button;
-  GtkButton      *delete_prints_button;
-  GtkButton      *done_button;
-  GtkBox         *add_print_popover_box;
-  GtkEntry       *enroll_print_entry;
-  GtkFlowBox     *prints_gallery;
-  AdwHeaderBar   *titlebar;
-  GtkImage       *enroll_result_image;
-  GtkLabel       *enroll_message;
-  GtkLabel       *enroll_result_message;
-  GtkLabel       *infobar_error;
-  GtkListBox     *devices_list;
-  GtkPopover     *add_print_popover;
-  AdwSpinner     *spinner;
-  GtkStack       *stack;
-  GtkWidget      *add_print_icon;
-  GtkWidget      *device_selector;
-  GtkWidget      *enroll_print_bin;
-  GtkWidget      *enroll_result_icon;
-  GtkWidget      *enrollment_view;
-  GtkWidget      *error_infobar;
-  GtkWidget      *no_devices_found;
-  GtkWidget      *prints_manager;
+  GtkButton *back_button;
+  GtkButton *cancel_button;
+  GtkButton *delete_prints_button;
+  GtkButton *done_button;
+  GtkBox *add_print_popover_box;
+  GtkEntry *enroll_print_entry;
+  GtkFlowBox *prints_gallery;
+  AdwHeaderBar *titlebar;
+  GtkImage *enroll_result_image;
+  GtkLabel *enroll_message;
+  GtkLabel *enroll_result_message;
+  GtkLabel *infobar_error;
+  GtkListBox *devices_list;
+  GtkPopover *add_print_popover;
+  AdwSpinner *spinner;
+  GtkStack *stack;
+  GtkWidget *add_print_icon;
+  GtkWidget *device_selector;
+  GtkWidget *enroll_print_bin;
+  GtkWidget *enroll_result_icon;
+  GtkWidget *enrollment_view;
+  GtkWidget *error_infobar;
+  GtkWidget *no_devices_found;
+  GtkWidget *prints_manager;
 
   CcFingerprintManager *manager;
-  DialogState           dialog_state;
-  CcFprintdDevice      *device;
-  gulong                device_signal_id;
-  gulong                device_name_owner_id;
-  GCancellable         *cancellable;
-  GStrv                 enrolled_fingers;
-  guint                 enroll_stages_passed;
-  guint                 enroll_stage_passed_id;
-  gdouble               enroll_progress;
+  DialogState dialog_state;
+  CcFprintdDevice *device;
+  gulong device_signal_id;
+  gulong device_name_owner_id;
+  GCancellable *cancellable;
+  GStrv enrolled_fingers;
+  guint enroll_stages_passed;
+  guint enroll_stage_passed_id;
+  gdouble enroll_progress;
 };
 
 /* TODO - fprintd and API changes required:
@@ -114,7 +113,7 @@ enum {
 
 #define N_VALID_FINGERS G_N_ELEMENTS (FINGER_IDS) - 1
 /* The order of the fingers here will affect the UI order */
-const char * FINGER_IDS[] = {
+const char *FINGER_IDS[] = {
   "right-index-finger",
   "left-index-finger",
   "right-thumb",
@@ -138,7 +137,7 @@ typedef enum {
   N_ENROLL_STATES,
 } EnrollState;
 
-const char * ENROLL_STATE_CLASSES[N_ENROLL_STATES] = {
+const char *ENROLL_STATE_CLASSES[N_ENROLL_STATES] = {
   "normal", /* undefined */
   "retry",
   "success",
@@ -159,7 +158,7 @@ cc_fingerprint_dialog_new (CcFingerprintManager *manager)
 
 static gboolean
 update_dialog_state (CcFingerprintDialog *self,
-                     DialogState         state)
+                     DialogState          state)
 {
   if (self->dialog_state == state)
     return FALSE;
@@ -167,14 +166,11 @@ update_dialog_state (CcFingerprintDialog *self,
   self->dialog_state = state;
 
   if (self->dialog_state == DIALOG_STATE_NONE ||
-      self->dialog_state == (self->dialog_state & DIALOG_STATE_IDLE))
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self->spinner), FALSE);
-    }
-  else
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self->spinner), TRUE);
-    }
+      self->dialog_state == (self->dialog_state & DIALOG_STATE_IDLE)) {
+    gtk_widget_set_visible (GTK_WIDGET (self->spinner), FALSE);
+  } else {
+    gtk_widget_set_visible (GTK_WIDGET (self->spinner), TRUE);
+  }
 
   return TRUE;
 }
@@ -193,10 +189,9 @@ remove_dialog_state (CcFingerprintDialog *self,
   return update_dialog_state (self, (self->dialog_state & ~state));
 }
 
-typedef struct
-{
+typedef struct {
   CcFingerprintDialog *dialog;
-  DialogState          state;
+  DialogState state;
 } DialogStateRemover;
 
 static DialogStateRemover *
@@ -228,9 +223,8 @@ dbus_error_to_human (CcFingerprintDialog *self,
 {
   g_autofree char *dbus_error = g_dbus_error_get_remote_error (error);
 
-  if (dbus_error == NULL)
-    { /* Fallback to generic */ }
-  else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.ClaimDevice"))
+  if (dbus_error == NULL) { /* Fallback to generic */
+  } else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.ClaimDevice"))
     return _("the device needs to be claimed to perform this action");
   else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.AlreadyInUse"))
     return _("the device is already claimed by another process");
@@ -238,12 +232,10 @@ dbus_error_to_human (CcFingerprintDialog *self,
     return _("you do not have permission to perform the action");
   else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoEnrolledPrints"))
     return _("no prints have been enrolled");
-  else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoActionInProgress"))
-    { /* Fallback to generic */ }
-  else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.InvalidFingername"))
-    { /* Fallback to generic */ }
-  else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.Internal"))
-    { /* Fallback to generic */ }
+  else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoActionInProgress")) { /* Fallback to generic */
+  } else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.InvalidFingername")) {                                                                                                            /* Fallback to generic */
+  } else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.Internal")) {                                                                                                                                                                                                                        /* Fallback to generic */
+  }
 
   if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
     return _("Failed to communicate with the device during enrollment");
@@ -261,17 +253,15 @@ disconnect_device_signals (CcFingerprintDialog *self)
   if (!self->device)
     return;
 
-  if (self->device_signal_id)
-    {
-      g_signal_handler_disconnect (self->device, self->device_signal_id);
-      self->device_signal_id = 0;
-    }
+  if (self->device_signal_id) {
+    g_signal_handler_disconnect (self->device, self->device_signal_id);
+    self->device_signal_id = 0;
+  }
 
-  if (self->device_name_owner_id)
-    {
-      g_signal_handler_disconnect (self->device, self->device_name_owner_id);
-      self->device_name_owner_id = 0;
-    }
+  if (self->device_name_owner_id) {
+    g_signal_handler_disconnect (self->device, self->device_name_owner_id);
+    self->device_name_owner_id = 0;
+  }
 }
 
 static void
@@ -282,15 +272,14 @@ cc_fingerprint_dialog_get_property (GObject    *object,
 {
   CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_MANAGER:
       g_value_set_object (value, self->manager);
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -301,15 +290,14 @@ cc_fingerprint_dialog_set_property (GObject      *object,
 {
   CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_MANAGER:
       g_set_object (&self->manager, g_value_get_object (value));
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -323,12 +311,12 @@ notify_error (CcFingerprintDialog *self,
 }
 
 static GtkWidget *
-fingerprint_icon_new (const char *icon_name,
-                      const char *label_text,
-                      GType       icon_widget_type,
-                      gpointer    progress_data,
-                      GtkWidget **out_icon,
-                      GtkWidget **out_label)
+fingerprint_icon_new (const char  *icon_name,
+                      const char  *label_text,
+                      GType        icon_widget_type,
+                      gpointer     progress_data,
+                      GtkWidget  **out_icon,
+                      GtkWidget  **out_label)
 {
   GtkWidget *box;
   GtkWidget *label;
@@ -348,11 +336,10 @@ fingerprint_icon_new (const char *icon_name,
   else
     icon_widget = g_object_new (icon_widget_type, NULL);
 
-  if (g_type_is_a (icon_widget_type, GTK_TYPE_MENU_BUTTON))
-    {
-      gtk_menu_button_set_child (GTK_MENU_BUTTON (icon_widget), image);
-      gtk_widget_set_can_focus (icon_widget, FALSE);
-    }
+  if (g_type_is_a (icon_widget_type, GTK_TYPE_MENU_BUTTON)) {
+    gtk_menu_button_set_child (GTK_MENU_BUTTON (icon_widget), image);
+    gtk_widget_set_can_focus (icon_widget, FALSE);
+  }
 
   gtk_widget_set_halign (icon_widget, GTK_ALIGN_CENTER);
   gtk_widget_set_valign (icon_widget, GTK_ALIGN_CENTER);
@@ -421,7 +408,7 @@ prints_visibility_filter (GtkFlowBoxChild *child,
   if (!self->enrolled_fingers)
     return FALSE;
 
-  return g_strv_contains ((const gchar **) self->enrolled_fingers, finger_id);
+  return g_strv_contains ((const gchar **)self->enrolled_fingers, finger_id);
 }
 
 static GList *
@@ -429,14 +416,14 @@ get_container_children (GtkWidget *container)
 {
   GtkWidget *child;
   GList *list = NULL;
-    
+
   child = gtk_widget_get_first_child (container);
   while (child) {
-      GtkWidget *next = gtk_widget_get_next_sibling (child);
+    GtkWidget *next = gtk_widget_get_next_sibling (child);
 
-      list = g_list_append (list, child);
+    list = g_list_append (list, child);
 
-      child = next;
+    child = next;
   }
 
   return list;
@@ -445,23 +432,22 @@ get_container_children (GtkWidget *container)
 static void
 update_prints_to_add_visibility (CcFingerprintDialog *self)
 {
-  g_autoptr(GList) print_buttons = NULL;
+  g_autoptr (GList) print_buttons = NULL;
   GList *l;
 
   print_buttons = get_container_children (GTK_WIDGET (self->add_print_popover_box));
 
-  for (l = print_buttons; l != NULL; l = l->next)
-    {
-      GtkWidget *button = l->data;
-      gboolean enrolled;
-      const char *finger_id = g_object_get_data (G_OBJECT (button), "finger-id");
+  for (l = print_buttons; l != NULL; l = l->next) {
+    GtkWidget *button = l->data;
+    gboolean enrolled;
+    const char *finger_id = g_object_get_data (G_OBJECT (button), "finger-id");
 
-      enrolled = self->enrolled_fingers &&
-                 g_strv_contains ((const gchar **) self->enrolled_fingers,
-                                  finger_id);
+    enrolled = self->enrolled_fingers &&
+               g_strv_contains ((const gchar **)self->enrolled_fingers,
+                                finger_id);
 
-      gtk_widget_set_visible (button, !enrolled);
-    }
+    gtk_widget_set_visible (button, !enrolled);
+  }
 }
 
 static void
@@ -477,9 +463,9 @@ list_enrolled_cb (GObject      *object,
                   GAsyncResult *res,
                   gpointer      user_data)
 {
-  g_auto(GStrv) enrolled_fingers = NULL;
-  g_autoptr(GError) error = NULL;
-  g_autoptr(DialogStateRemover) state_remover = NULL;
+  g_auto (GStrv) enrolled_fingers = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (DialogStateRemover) state_remover = NULL;
   CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
   CcFingerprintDialog *self = user_data;
   guint n_enrolled_fingers = 0;
@@ -498,26 +484,22 @@ list_enrolled_cb (GObject      *object,
   if (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED)
     gtk_widget_set_sensitive (GTK_WIDGET (self->prints_manager), TRUE);
 
-  if (error)
-    {
-      g_autofree char *dbus_error = g_dbus_error_get_remote_error (error);
+  if (error) {
+    g_autofree char *dbus_error = g_dbus_error_get_remote_error (error);
 
-      if (!dbus_error || !g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoEnrolledPrints"))
-        {
-          g_autofree char *error_message = NULL;
+    if (!dbus_error || !g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoEnrolledPrints")) {
+      g_autofree char *error_message = NULL;
 
-          error_message = g_strdup_printf (_("Failed to list fingerprints: %s"),
-                                           dbus_error_to_human (self, error));
-          g_warning ("Listing of fingerprints on device %s failed: %s",
-                     cc_fprintd_device_get_name (self->device), error->message);
-          notify_error (self, error_message);
-          return;
-        }
+      error_message = g_strdup_printf (_("Failed to list fingerprints: %s"),
+                                       dbus_error_to_human (self, error));
+      g_warning ("Listing of fingerprints on device %s failed: %s",
+                 cc_fprintd_device_get_name (self->device), error->message);
+      notify_error (self, error_message);
+      return;
     }
-  else
-    {
-      n_enrolled_fingers = g_strv_length (enrolled_fingers);
-    }
+  } else {
+    n_enrolled_fingers = g_strv_length (enrolled_fingers);
+  }
 
   self->enrolled_fingers = g_steal_pointer (&enrolled_fingers);
   gtk_flow_box_set_max_children_per_line (self->prints_gallery,
@@ -560,7 +542,7 @@ delete_prints_cb (GObject      *object,
                   GAsyncResult *res,
                   gpointer      user_data)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
   CcFingerprintDialog *self = user_data;
 
@@ -569,16 +551,15 @@ delete_prints_cb (GObject      *object,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  if (error)
-    {
-      g_autofree char *error_message = NULL;
+  if (error) {
+    g_autofree char *error_message = NULL;
 
-      error_message = g_strdup_printf (_("Failed to delete saved fingerprints: %s"),
-                                       dbus_error_to_human (self, error));
-      g_warning ("Deletion of fingerprints on device %s failed: %s",
-                 cc_fprintd_device_get_name (self->device), error->message);
-      notify_error (self, error_message);
-    }
+    error_message = g_strdup_printf (_("Failed to delete saved fingerprints: %s"),
+                                     dbus_error_to_human (self, error));
+    g_warning ("Deletion of fingerprints on device %s failed: %s",
+               cc_fprintd_device_get_name (self->device), error->message);
+    notify_error (self, error_message);
+  }
 
   update_prints_store (self);
   cc_fingerprint_manager_update_state (self->manager, NULL, NULL);
@@ -631,7 +612,7 @@ get_finger_name (const char *finger_id)
 static gboolean
 have_multiple_devices (CcFingerprintDialog *self)
 {
-  g_autoptr(GList) devices_rows = NULL;
+  g_autoptr (GList) devices_rows = NULL;
 
   devices_rows = get_container_children (GTK_WIDGET (self->devices_list));
 
@@ -648,18 +629,17 @@ set_enroll_result_message (CcFingerprintDialog *self,
 
   g_return_if_fail (enroll_state >= 0 && enroll_state < N_ENROLL_STATES);
 
-  switch (enroll_state)
-    {
-      case ENROLL_STATE_WARNING:
-      case ENROLL_STATE_ERROR:
-        icon_name = "fingerprint-detection-warning-symbolic";
-        break;
-      case ENROLL_STATE_COMPLETED:
-        icon_name = "fingerprint-detection-complete-symbolic";
-        break;
-      default:
-        icon_name = "fingerprint-detection-symbolic";
-    }
+  switch (enroll_state) {
+    case ENROLL_STATE_WARNING:
+    case ENROLL_STATE_ERROR:
+      icon_name = "fingerprint-detection-warning-symbolic";
+      break;
+    case ENROLL_STATE_COMPLETED:
+      icon_name = "fingerprint-detection-complete-symbolic";
+      break;
+    default:
+      icon_name = "fingerprint-detection-symbolic";
+  }
 
   for (i = 0; i < N_ENROLL_STATES; ++i)
     gtk_widget_remove_css_class (self->enroll_result_icon, ENROLL_STATE_CLASSES[i]);
@@ -698,96 +678,78 @@ handle_enroll_signal (CcFingerprintDialog *self,
   completed = g_str_equal (result, "enroll-completed");
   g_clear_handle_id (&self->enroll_stage_passed_id, g_source_remove);
 
-  if (g_str_equal (result, "enroll-stage-passed") || completed)
-    {
-      guint enroll_stages;
+  if (g_str_equal (result, "enroll-stage-passed") || completed) {
+    guint enroll_stages;
 
-      enroll_stages = cc_fprintd_device_get_num_enroll_stages (self->device);
+    enroll_stages = cc_fprintd_device_get_num_enroll_stages (self->device);
 
-      self->enroll_stages_passed++;
+    self->enroll_stages_passed++;
 
-      if (enroll_stages > 0)
-        self->enroll_progress =
-          MIN (1.0f, self->enroll_stages_passed / (double) enroll_stages);
-      else
-        g_warning ("The device %s requires an invalid number of enroll stages (%u)",
-                   cc_fprintd_device_get_name (self->device), enroll_stages);
+    if (enroll_stages > 0)
+      self->enroll_progress =
+        MIN (1.0f, self->enroll_stages_passed / (double)enroll_stages);
+    else
+      g_warning ("The device %s requires an invalid number of enroll stages (%u)",
+                 cc_fprintd_device_get_name (self->device), enroll_stages);
 
-      g_debug ("Enroll state passed, %u/%u (%.2f%%)",
-               self->enroll_stages_passed, (guint) enroll_stages,
-               self->enroll_progress);
+    g_debug ("Enroll state passed, %u/%u (%.2f%%)",
+             self->enroll_stages_passed, (guint)enroll_stages,
+             self->enroll_progress);
 
-      if (!completed)
-        {
-          set_enroll_result_message (self, ENROLL_STATE_SUCCESS, NULL);
-
-          self->enroll_stage_passed_id =
-            g_timeout_add (750, stage_passed_timeout_cb, self);
-        }
-      else
-        {
-          if (!G_APPROX_VALUE (self->enroll_progress, 1.0f, FLT_EPSILON))
-            {
-              g_warning ("Device marked enroll as completed, but progress is at %.2f",
-                         self->enroll_progress);
-              self->enroll_progress = 1.0f;
-            }
-        }
-    }
-  else if (!done)
-    {
-      const char *scan_type;
-      const char *message;
-      gboolean is_swipe;
-
-      scan_type = cc_fprintd_device_get_scan_type (self->device);
-      is_swipe = g_str_equal (scan_type, "swipe");
-
-      message = enroll_result_str_to_msg (result, is_swipe);
-      set_enroll_result_message (self, ENROLL_STATE_RETRY, message);
+    if (!completed) {
+      set_enroll_result_message (self, ENROLL_STATE_SUCCESS, NULL);
 
       self->enroll_stage_passed_id =
-        g_timeout_add (850, stage_passed_timeout_cb, self);
+        g_timeout_add (750, stage_passed_timeout_cb, self);
+    } else {
+      if (!G_APPROX_VALUE (self->enroll_progress, 1.0f, FLT_EPSILON)) {
+        g_warning ("Device marked enroll as completed, but progress is at %.2f",
+                   self->enroll_progress);
+        self->enroll_progress = 1.0f;
+      }
     }
+  } else if (!done) {
+    const char *scan_type;
+    const char *message;
+    gboolean is_swipe;
 
-  if (done)
-    {
-      if (completed)
-        {
-          /* TRANSLATORS: This is the message shown when the fingerprint
-           * enrollment has been completed successfully */
-          set_enroll_result_message (self, ENROLL_STATE_COMPLETED,
-                                     C_("Fingerprint enroll state", "Complete"));
-          gtk_widget_set_sensitive (GTK_WIDGET (self->cancel_button), FALSE);
-          gtk_widget_set_sensitive (GTK_WIDGET (self->done_button), TRUE);
-          gtk_widget_grab_focus (GTK_WIDGET (self->done_button));
-        }
-      else
-        {
-          const char *message;
+    scan_type = cc_fprintd_device_get_scan_type (self->device);
+    is_swipe = g_str_equal (scan_type, "swipe");
 
-          if (g_str_equal (result, "enroll-disconnected"))
-            {
-              message = _("Fingerprint device disconnected");
-              remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED |
-                                         DIALOG_STATE_DEVICE_ENROLLING);
-            }
-          else if (g_str_equal (result, "enroll-data-full"))
-            {
-              message = _("Fingerprint device storage is full");
-            }
-          else if (g_str_equal (result, "enroll-duplicate"))
-            {
-              message = _("Fingerprint is duplicate");
-            }
-          else
-            {
-              message = _("Failed to enroll new fingerprint");
-            }
+    message = enroll_result_str_to_msg (result, is_swipe);
+    set_enroll_result_message (self, ENROLL_STATE_RETRY, message);
 
-          set_enroll_result_message (self, ENROLL_STATE_WARNING, message);
-        }
+    self->enroll_stage_passed_id =
+      g_timeout_add (850, stage_passed_timeout_cb, self);
+  }
+
+  if (done) {
+    if (completed) {
+      /* TRANSLATORS: This is the message shown when the fingerprint
+       * enrollment has been completed successfully */
+      set_enroll_result_message (self, ENROLL_STATE_COMPLETED,
+                                 C_("Fingerprint enroll state", "Complete"));
+      gtk_widget_set_sensitive (GTK_WIDGET (self->cancel_button), FALSE);
+      gtk_widget_set_sensitive (GTK_WIDGET (self->done_button), TRUE);
+      gtk_widget_grab_focus (GTK_WIDGET (self->done_button));
+    } else {
+      const char *message;
+
+      if (g_str_equal (result, "enroll-disconnected")) {
+        message = _("Fingerprint device disconnected");
+        remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED |
+                             DIALOG_STATE_DEVICE_ENROLLING);
+      } else if (g_str_equal (result, "enroll-data-full")) {
+        message = _("Fingerprint device storage is full");
+      } else if (g_str_equal (result, "enroll-duplicate")) {
+        message = _("Fingerprint is duplicate");
+      } else {
+        message = _("Failed to enroll new fingerprint");
+      }
+
+      set_enroll_result_message (self, ENROLL_STATE_WARNING, message);
     }
+  }
 }
 
 static void
@@ -795,8 +757,8 @@ enroll_start_cb (GObject      *object,
                  GAsyncResult *res,
                  gpointer      user_data)
 {
-  g_autoptr(GError) error = NULL;
-  g_autoptr(DialogStateRemover) state_remover = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (DialogStateRemover) state_remover = NULL;
   CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
   CcFingerprintDialog *self = user_data;
 
@@ -807,25 +769,24 @@ enroll_start_cb (GObject      *object,
 
   state_remover = auto_state_remover (self, DIALOG_STATE_DEVICE_ENROLL_STARTING);
 
-  if (error)
-    {
-      g_autofree char *error_message = NULL;
+  if (error) {
+    g_autofree char *error_message = NULL;
 
-      remove_dialog_state (self, DIALOG_STATE_DEVICE_ENROLLING);
+    remove_dialog_state (self, DIALOG_STATE_DEVICE_ENROLLING);
 
-      error_message = g_strdup_printf (_("Failed to start enrollment: %s"),
-                                       dbus_error_to_human (self, error));
-      g_warning ("Enrollment on device %s failed: %s",
-                 cc_fprintd_device_get_name (self->device), error->message);
-      notify_error (self, error_message);
+    error_message = g_strdup_printf (_("Failed to start enrollment: %s"),
+                                     dbus_error_to_human (self, error));
+    g_warning ("Enrollment on device %s failed: %s",
+               cc_fprintd_device_get_name (self->device), error->message);
+    notify_error (self, error_message);
 
-      set_enroll_result_message (self, ENROLL_STATE_ERROR,
-                                 C_("Fingerprint enroll state",
-                                    "Failed to enroll new fingerprint"));
-      gtk_widget_set_sensitive (self->enrollment_view, FALSE);
+    set_enroll_result_message (self, ENROLL_STATE_ERROR,
+                               C_("Fingerprint enroll state",
+                                  "Failed to enroll new fingerprint"));
+    gtk_widget_set_sensitive (self->enrollment_view, FALSE);
 
-      return;
-    }
+    return;
+  }
 }
 
 static void
@@ -833,8 +794,8 @@ enroll_stop_cb (GObject      *object,
                 GAsyncResult *res,
                 gpointer      user_data)
 {
-  g_autoptr(GError) error = NULL;
-  g_autoptr(DialogStateRemover) state_remover = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (DialogStateRemover) state_remover = NULL;
   CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
   CcFingerprintDialog *self = user_data;
 
@@ -844,22 +805,21 @@ enroll_stop_cb (GObject      *object,
     return;
 
   state_remover = auto_state_remover (self, DIALOG_STATE_DEVICE_ENROLLING |
-                                            DIALOG_STATE_DEVICE_ENROLL_STOPPING);
+                                      DIALOG_STATE_DEVICE_ENROLL_STOPPING);
   gtk_widget_set_sensitive (self->enrollment_view, TRUE);
   gtk_stack_set_visible_child (self->stack, self->prints_manager);
 
-  if (error)
-    {
-      g_autofree char *error_message = NULL;
+  if (error) {
+    g_autofree char *error_message = NULL;
 
-      error_message = g_strdup_printf (_("Failed to stop enrollment: %s"),
-                                       dbus_error_to_human (self, error));
-      g_warning ("Stopping enrollment on device %s failed: %s",
-                 cc_fprintd_device_get_name (self->device), error->message);
-      notify_error (self, error_message);
+    error_message = g_strdup_printf (_("Failed to stop enrollment: %s"),
+                                     dbus_error_to_human (self, error));
+    g_warning ("Stopping enrollment on device %s failed: %s",
+               cc_fprintd_device_get_name (self->device), error->message);
+    notify_error (self, error_message);
 
-      return;
-    }
+    return;
+  }
 
   cc_fingerprint_manager_update_state (self->manager, NULL, NULL);
 }
@@ -905,14 +865,14 @@ static void
 enroll_finger (CcFingerprintDialog *self,
                const char          *finger_id)
 {
-  g_auto(GStrv) tmp_finger_name = NULL;
+  g_auto (GStrv) tmp_finger_name = NULL;
   g_autofree char *finger_name = NULL;
   g_autofree char *enroll_message = NULL;
 
   g_return_if_fail (finger_id);
 
   if (!add_dialog_state (self, DIALOG_STATE_DEVICE_ENROLLING |
-                               DIALOG_STATE_DEVICE_ENROLL_STARTING))
+                         DIALOG_STATE_DEVICE_ENROLL_STARTING))
     return;
 
   self->enroll_progress = 0;
@@ -941,12 +901,12 @@ populate_enrollment_view (CcFingerprintDialog *self)
                           NULL,
                           GTK_TYPE_IMAGE,
                           &self->enroll_progress,
-                          (GtkWidget **) &self->enroll_result_image,
-                          (GtkWidget **) &self->enroll_result_message);
+                          (GtkWidget **)&self->enroll_result_image,
+                          (GtkWidget **)&self->enroll_result_message);
 
   gtk_box_prepend (GTK_BOX (self->enroll_print_bin), self->enroll_result_icon);
 
-  gtk_widget_add_css_class (self->enroll_result_icon,  "enroll-status");
+  gtk_widget_add_css_class (self->enroll_result_icon, "enroll-status");
 }
 
 static void
@@ -974,19 +934,18 @@ populate_add_print_popover (CcFingerprintDialog *self)
 {
   guint i;
 
-  for (i = 0; i < N_VALID_FINGERS; ++i)
-    {
-      GtkWidget *finger_item;
+  for (i = 0; i < N_VALID_FINGERS; ++i) {
+    GtkWidget *finger_item;
 
-      finger_item = gtk_button_new ();
-      gtk_button_set_label (GTK_BUTTON (finger_item), get_finger_name (FINGER_IDS[i]));
-      gtk_button_set_use_underline (GTK_BUTTON (finger_item), TRUE);
-      g_object_set_data (G_OBJECT (finger_item), "finger-id", (gpointer) FINGER_IDS[i]);
-      gtk_box_append (GTK_BOX (self->add_print_popover_box), finger_item);
+    finger_item = gtk_button_new ();
+    gtk_button_set_label (GTK_BUTTON (finger_item), get_finger_name (FINGER_IDS[i]));
+    gtk_button_set_use_underline (GTK_BUTTON (finger_item), TRUE);
+    g_object_set_data (G_OBJECT (finger_item), "finger-id", (gpointer)FINGER_IDS[i]);
+    gtk_box_append (GTK_BOX (self->add_print_popover_box), finger_item);
 
-      g_signal_connect_object (finger_item, "clicked", G_CALLBACK (on_enroll_cb),
-                               self, G_CONNECT_SWAPPED);
-    }
+    g_signal_connect_object (finger_item, "clicked", G_CALLBACK (on_enroll_cb),
+                             self, G_CONNECT_SWAPPED);
+  }
 }
 
 static void
@@ -998,33 +957,32 @@ populate_prints_gallery (CcFingerprintDialog *self)
 
   g_return_if_fail (!GTK_IS_WIDGET (self->add_print_icon));
 
-  for (i = 0; i < N_VALID_FINGERS; ++i)
-    {
-      GtkWidget *flowbox_child;
-      GtkWidget *popover;
-      GtkWidget *reenroll_button;
+  for (i = 0; i < N_VALID_FINGERS; ++i) {
+    GtkWidget *flowbox_child;
+    GtkWidget *popover;
+    GtkWidget *reenroll_button;
 
-      flowbox_child = fingerprint_menu_button ("fingerprint-detection-symbolic",
-                                               get_finger_name (FINGER_IDS[i]));
+    flowbox_child = fingerprint_menu_button ("fingerprint-detection-symbolic",
+                                             get_finger_name (FINGER_IDS[i]));
 
-      button = g_object_get_data (G_OBJECT (flowbox_child), "button");
+    button = g_object_get_data (G_OBJECT (flowbox_child), "button");
 
-      popover = gtk_popover_new ();
-      reenroll_button = gtk_button_new ();
-      gtk_button_set_use_underline (GTK_BUTTON (reenroll_button), TRUE);
-      gtk_button_set_label (GTK_BUTTON (reenroll_button), _("_Re-enroll this finger…"));
-      g_object_set_data (G_OBJECT (reenroll_button), "finger-id",
-                         (gpointer) FINGER_IDS[i]);
-      g_signal_connect_object (reenroll_button, "clicked", G_CALLBACK (on_enroll_cb), self, G_CONNECT_SWAPPED);
-      gtk_popover_set_child (GTK_POPOVER (popover), reenroll_button);
+    popover = gtk_popover_new ();
+    reenroll_button = gtk_button_new ();
+    gtk_button_set_use_underline (GTK_BUTTON (reenroll_button), TRUE);
+    gtk_button_set_label (GTK_BUTTON (reenroll_button), _("_Re-enroll this finger…"));
+    g_object_set_data (G_OBJECT (reenroll_button), "finger-id",
+                       (gpointer)FINGER_IDS[i]);
+    g_signal_connect_object (reenroll_button, "clicked", G_CALLBACK (on_enroll_cb), self, G_CONNECT_SWAPPED);
+    gtk_popover_set_child (GTK_POPOVER (popover), reenroll_button);
 
-      gtk_menu_button_set_popover (GTK_MENU_BUTTON (button),
-                                   popover);
-      g_object_set_data (G_OBJECT (flowbox_child), "finger-id",
-                         (gpointer) FINGER_IDS[i]);
+    gtk_menu_button_set_popover (GTK_MENU_BUTTON (button),
+                                 popover);
+    g_object_set_data (G_OBJECT (flowbox_child), "finger-id",
+                       (gpointer)FINGER_IDS[i]);
 
-      gtk_flow_box_insert (self->prints_gallery, flowbox_child, i);
-    }
+    gtk_flow_box_insert (self->prints_gallery, flowbox_child, i);
+  }
 
   /* TRANSLATORS: This is the label for the button to enroll a new finger */
   add_print_label = _("Scan new fingerprint");
@@ -1051,7 +1009,7 @@ release_device_cb (GObject      *object,
                    GAsyncResult *res,
                    gpointer      user_data)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
   CcFingerprintDialog *self = user_data;
 
@@ -1060,19 +1018,18 @@ release_device_cb (GObject      *object,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  if (error)
-    {
-      g_autofree char *error_message = NULL;
+  if (error) {
+    g_autofree char *error_message = NULL;
 
-      error_message = g_strdup_printf (_("Failed to release fingerprint device %s: %s"),
-                                       cc_fprintd_device_get_name (fprintd_device),
-                                       dbus_error_to_human (self, error));
-      g_warning ("Releasing device %s failed: %s",
-                 cc_fprintd_device_get_name (self->device), error->message);
+    error_message = g_strdup_printf (_("Failed to release fingerprint device %s: %s"),
+                                     cc_fprintd_device_get_name (fprintd_device),
+                                     dbus_error_to_human (self, error));
+    g_warning ("Releasing device %s failed: %s",
+               cc_fprintd_device_get_name (self->device), error->message);
 
-      notify_error (self, error_message);
-      return;
-    }
+    notify_error (self, error_message);
+    return;
+  }
 
   remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED);
 }
@@ -1098,21 +1055,19 @@ on_device_signal (CcFingerprintDialog *self,
                   GVariant            *parameters,
                   gpointer             user_data)
 {
-  if (g_str_equal (signal_name, "EnrollStatus"))
-    {
-      const char *result;
-      gboolean done;
+  if (g_str_equal (signal_name, "EnrollStatus")) {
+    const char *result;
+    gboolean done;
 
-      if (!g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(sb)")))
-        {
-          g_warning ("Unexpected enroll parameters type %s",
-                     g_variant_get_type_string (parameters));
-          return;
-        }
-
-      g_variant_get (parameters, "(&sb)", &result, &done);
-      handle_enroll_signal (self, result, done);
+    if (!g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(sb)"))) {
+      g_warning ("Unexpected enroll parameters type %s",
+                 g_variant_get_type_string (parameters));
+      return;
     }
+
+    g_variant_get (parameters, "(&sb)", &result, &done);
+    handle_enroll_signal (self, result, done);
+  }
 }
 
 static void claim_device (CcFingerprintDialog *self);
@@ -1126,23 +1081,20 @@ on_device_owner_changed (CcFprintdDevice     *device,
 
   name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (device));
 
-  if (!name_owner)
-    {
-      if (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED)
-        {
-          disconnect_device_signals (self);
+  if (!name_owner) {
+    if (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED) {
+      disconnect_device_signals (self);
 
-          if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
-            {
-              set_enroll_result_message (self, ENROLL_STATE_ERROR,
-                                         C_("Fingerprint enroll state",
-                                            "Problem Reading Device"));
-            }
+      if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING) {
+        set_enroll_result_message (self, ENROLL_STATE_ERROR,
+                                   C_("Fingerprint enroll state",
+                                      "Problem Reading Device"));
+      }
 
-          remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED);
-          claim_device (self);
-        }
+      remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED);
+      claim_device (self);
     }
+  }
 }
 
 static void
@@ -1150,8 +1102,8 @@ claim_device_cb (GObject      *object,
                  GAsyncResult *res,
                  gpointer      user_data)
 {
-  g_autoptr(GError) error = NULL;
-  g_autoptr(DialogStateRemover) state_remover = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (DialogStateRemover) state_remover = NULL;
   CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
   CcFingerprintDialog *self = user_data;
 
@@ -1162,23 +1114,22 @@ claim_device_cb (GObject      *object,
 
   state_remover = auto_state_remover (self, DIALOG_STATE_DEVICE_CLAIMING);
 
-  if (error)
-    {
-      g_autofree char *dbus_error = g_dbus_error_get_remote_error (error);
-      g_autofree char *error_message = NULL;
+  if (error) {
+    g_autofree char *dbus_error = g_dbus_error_get_remote_error (error);
+    g_autofree char *error_message = NULL;
 
-      if (dbus_error && g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.AlreadyInUse") &&
-          (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
-         return;
-
-      error_message = g_strdup_printf (_("Failed to claim fingerprint device %s: %s"),
-                                       cc_fprintd_device_get_name (self->device),
-                                       dbus_error_to_human (self, error));
-      g_warning ("Claiming device %s failed: %s",
-                 cc_fprintd_device_get_name (self->device), error->message);
-      notify_error (self, error_message);
+    if (dbus_error && g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.AlreadyInUse") &&
+        (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
       return;
-    }
+
+    error_message = g_strdup_printf (_("Failed to claim fingerprint device %s: %s"),
+                                     cc_fprintd_device_get_name (self->device),
+                                     dbus_error_to_human (self, error));
+    g_warning ("Claiming device %s failed: %s",
+               cc_fprintd_device_get_name (self->device), error->message);
+    notify_error (self, error_message);
+    return;
+  }
 
   if (!add_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED))
     return;
@@ -1233,32 +1184,27 @@ on_stack_child_changed (CcFingerprintDialog *self)
   adw_header_bar_set_show_end_title_buttons (ADW_HEADER_BAR (self->titlebar), TRUE);
   gtk_flow_box_invalidate_filter (self->prints_gallery);
 
-  if (visible_child == self->prints_manager)
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self->back_button),
-                              have_multiple_devices (self));
-      notify_error (self, NULL);
-      update_prints_store (self);
+  if (visible_child == self->prints_manager) {
+    gtk_widget_set_visible (GTK_WIDGET (self->back_button),
+                            have_multiple_devices (self));
+    notify_error (self, NULL);
+    update_prints_store (self);
 
-      if (!(self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
-        claim_device (self);
-    }
-  else if (visible_child == self->enrollment_view)
-    {
-      adw_header_bar_set_show_start_title_buttons (ADW_HEADER_BAR (self->titlebar), FALSE);
-      adw_header_bar_set_show_end_title_buttons (ADW_HEADER_BAR (self->titlebar), FALSE);
+    if (!(self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
+      claim_device (self);
+  } else if (visible_child == self->enrollment_view) {
+    adw_header_bar_set_show_start_title_buttons (ADW_HEADER_BAR (self->titlebar), FALSE);
+    adw_header_bar_set_show_end_title_buttons (ADW_HEADER_BAR (self->titlebar), FALSE);
 
-      gtk_widget_set_visible (GTK_WIDGET (self->cancel_button), TRUE);
-      gtk_widget_set_sensitive (GTK_WIDGET (self->cancel_button), TRUE);
+    gtk_widget_set_visible (GTK_WIDGET (self->cancel_button), TRUE);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->cancel_button), TRUE);
 
-      gtk_widget_set_visible (GTK_WIDGET (self->done_button), TRUE);
-      gtk_widget_set_sensitive (GTK_WIDGET (self->done_button), FALSE);
-    }
-  else
-    {
-      release_device (self);
-      g_clear_object (&self->device);
-    }
+    gtk_widget_set_visible (GTK_WIDGET (self->done_button), TRUE);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->done_button), FALSE);
+  } else {
+    release_device (self);
+    g_clear_object (&self->device);
+  }
 }
 
 static void
@@ -1296,8 +1242,8 @@ on_devices_list (GObject      *object,
                  gpointer      user_data)
 {
   g_autolist (CcFprintdDevice) fprintd_devices = NULL;
-  g_autoptr(DialogStateRemover) state_remover = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (DialogStateRemover) state_remover = NULL;
+  g_autoptr (GError) error = NULL;
   CcFingerprintManager *fingerprint_manager = CC_FINGERPRINT_MANAGER (object);
   CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (user_data);
 
@@ -1309,48 +1255,41 @@ on_devices_list (GObject      *object,
 
   state_remover = auto_state_remover (self, DIALOG_STATE_DEVICES_LISTING);
 
-  if (fprintd_devices == NULL)
-    {
-      if (error)
-        {
-          g_autofree char *error_message = NULL;
+  if (fprintd_devices == NULL) {
+    if (error) {
+      g_autofree char *error_message = NULL;
 
-          error_message = g_strdup_printf (_("Failed to get fingerprint devices: %s"),
-                                           dbus_error_to_human (self, error));
-          g_warning ("Retrieving fingerprint devices failed: %s", error->message);
-          notify_error (self, error_message);
-        }
-
-      gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->no_devices_found));
+      error_message = g_strdup_printf (_("Failed to get fingerprint devices: %s"),
+                                       dbus_error_to_human (self, error));
+      g_warning ("Retrieving fingerprint devices failed: %s", error->message);
+      notify_error (self, error_message);
     }
-  else if (fprintd_devices->next == NULL)
-    {
-      /* We have just one device... Skip devices selection */
-      self->device = g_object_ref (fprintd_devices->data);
-      gtk_stack_set_visible_child (self->stack, self->prints_manager);
+
+    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->no_devices_found));
+  } else if (fprintd_devices->next == NULL) {
+    /* We have just one device... Skip devices selection */
+    self->device = g_object_ref (fprintd_devices->data);
+    gtk_stack_set_visible_child (self->stack, self->prints_manager);
+  } else {
+    GList *l;
+
+    for (l = fprintd_devices; l; l = l->next) {
+      CcFprintdDevice *device = l->data;
+      CcListRow *device_row;
+
+      device_row = g_object_new (CC_TYPE_LIST_ROW,
+                                 "visible", TRUE,
+                                 "icon-name", "go-next-symbolic",
+                                 "title", cc_fprintd_device_get_name (device),
+                                 NULL);
+
+      gtk_list_box_insert (self->devices_list, GTK_WIDGET (device_row), -1);
+      g_object_set_data_full (G_OBJECT (device_row), "device",
+                              g_object_ref (device), g_object_unref);
     }
-  else
-    {
-      GList *l;
 
-      for (l = fprintd_devices; l; l = l->next)
-        {
-          CcFprintdDevice *device = l->data;
-          CcListRow *device_row;
-
-          device_row = g_object_new (CC_TYPE_LIST_ROW,
-                                     "visible", TRUE,
-                                     "icon-name", "go-next-symbolic",
-                                     "title", cc_fprintd_device_get_name (device),
-                                     NULL);
-
-          gtk_list_box_insert (self->devices_list, GTK_WIDGET (device_row), -1);
-          g_object_set_data_full (G_OBJECT (device_row), "device",
-                                  g_object_ref (device), g_object_unref);
-        }
-
-      gtk_stack_set_visible_child (self->stack, self->device_selector);
-    }
+    gtk_stack_set_visible_child (self->stack, self->device_selector);
+  }
 }
 
 static void
@@ -1371,12 +1310,11 @@ cc_fingerprint_dialog_constructed (GObject *object)
 static void
 back_button_clicked_cb (CcFingerprintDialog *self)
 {
-  if (gtk_stack_get_visible_child (self->stack) == self->prints_manager)
-    {
-      notify_error (self, NULL);
-      gtk_stack_set_visible_child (self->stack, self->device_selector);
-      return;
-    }
+  if (gtk_stack_get_visible_child (self->stack) == self->prints_manager) {
+    notify_error (self, NULL);
+    gtk_stack_set_visible_child (self->stack, self->device_selector);
+    return;
+  }
 
   g_return_if_reached ();
 }
@@ -1397,7 +1335,7 @@ delete_prints_button_clicked_cb (CcFingerprintDialog *self)
                                    "To re-enable Fingerprint Login at least one fingerprint will have to be enrolled."));
 
   adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog),
-                                  "cancel",  _("_Cancel"),
+                                  "cancel", _("_Cancel"),
                                   "delete-all", _("_Delete All"),
                                   NULL);
   adw_alert_dialog_set_response_appearance (ADW_ALERT_DIALOG (dialog),
@@ -1413,18 +1351,15 @@ delete_prints_button_clicked_cb (CcFingerprintDialog *self)
 static void
 cancel_button_clicked_cb (CcFingerprintDialog *self)
 {
-  if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
-    {
-      g_cancellable_cancel (self->cancellable);
-      g_set_object (&self->cancellable, g_cancellable_new ());
+  if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING) {
+    g_cancellable_cancel (self->cancellable);
+    g_set_object (&self->cancellable, g_cancellable_new ());
 
-      g_debug ("Cancelling enroll operation");
-      enroll_stop (self);
-    }
-  else
-    {
-      gtk_stack_set_visible_child (self->stack, self->prints_manager);
-    }
+    g_debug ("Cancelling enroll operation");
+    enroll_stop (self);
+  } else {
+    gtk_stack_set_visible_child (self->stack, self->prints_manager);
+  }
 }
 
 static void
@@ -1445,14 +1380,13 @@ cc_fingerprint_dialog_close_attempt (AdwDialog *dialog)
 
   g_clear_handle_id (&self->enroll_stage_passed_id, g_source_remove);
 
-  if (self->device && (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
-    {
-      disconnect_device_signals (self);
+  if (self->device && (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED)) {
+    disconnect_device_signals (self);
 
-      if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
-        cc_fprintd_device_call_enroll_stop_sync (self->device, NULL, NULL);
-      cc_fprintd_device_call_release (self->device, NULL, NULL, NULL);
-    }
+    if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
+      cc_fprintd_device_call_enroll_stop_sync (self->device, NULL, NULL);
+    cc_fprintd_device_call_release (self->device, NULL, NULL, NULL);
+  }
 
   g_clear_object (&self->manager);
   g_clear_object (&self->device);
@@ -1475,7 +1409,7 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (widget_class,
-    "/org/gnome/control-center/system/users/cc-fingerprint-dialog.ui");
+                                               "/org/gnome/control-center/system/users/cc-fingerprint-dialog.ui");
 
   object_class->constructed = cc_fingerprint_dialog_constructed;
   object_class->get_property = cc_fingerprint_dialog_get_property;
@@ -1519,4 +1453,4 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, done_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_print_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, select_device_row);
-  }
+}

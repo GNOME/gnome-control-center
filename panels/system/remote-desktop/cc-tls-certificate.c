@@ -28,7 +28,7 @@
 #include "cc-tls-certificate.h"
 
 #define DEFAULT_KEY_SIZE   4096
-#define DEFAULT_EXPIRATION (60L*60L*24L*2L*365L)
+#define DEFAULT_EXPIRATION (60L * 60L * 24L * 2L * 365L)
 
 static void
 _gnutls_datum_clear (gnutls_datum_t *datum)
@@ -55,8 +55,7 @@ G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC (gnutls_datum_t, _gnutls_datum_clear)
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (gnutls_x509_crt_t, _gnutls_crt_free)
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (gnutls_x509_privkey_t, _gnutls_privkey_free)
 
-typedef struct
-{
+typedef struct {
   gchar *public_key_path;
   gchar *private_key_path;
   gchar *c;
@@ -84,14 +83,13 @@ make_directory_parent (const gchar  *path,
 
   dir = g_path_get_dirname (path);
 
-  if (g_mkdir_with_parents (dir, 0750) == -1)
-    {
-      g_set_error_literal (error,
-                           G_IO_ERROR,
-                           g_io_error_from_errno (errno),
-                           g_strerror (errno));
-      return FALSE;
-    }
+  if (g_mkdir_with_parents (dir, 0750) == -1) {
+    g_set_error_literal (error,
+                         G_IO_ERROR,
+                         g_io_error_from_errno (errno),
+                         g_strerror (errno));
+    return FALSE;
+  }
 
   return TRUE;
 }
@@ -103,12 +101,12 @@ bonsai_tls_certificate_generate_worker (GTask        *task,
                                         GCancellable *cancellable)
 {
   GenerateData *data = task_data;
-  g_autoptr(GTlsCertificate) certificate = NULL;
-  g_autoptr(GError) error = NULL;
-  g_autoptr(gnutls_x509_crt_t) certptr = NULL;
-  g_autoptr(gnutls_x509_privkey_t) privkeyptr = NULL;
-  g_auto(gnutls_datum_t) pubkey_data = {0};
-  g_auto(gnutls_datum_t) privkey_data = {0};
+  g_autoptr (GTlsCertificate) certificate = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (gnutls_x509_crt_t) certptr = NULL;
+  g_autoptr (gnutls_x509_privkey_t) privkeyptr = NULL;
+  g_auto (gnutls_datum_t) pubkey_data = {0};
+  g_auto (gnutls_datum_t) privkey_data = {0};
   g_autofree char *dn = NULL;
   gnutls_x509_privkey_t privkey;
   gnutls_x509_crt_t cert;
@@ -124,11 +122,10 @@ bonsai_tls_certificate_generate_worker (GTask        *task,
   g_assert (data->cn != NULL);
 
   if (!make_directory_parent (data->public_key_path, &error) ||
-      !make_directory_parent (data->private_key_path, &error))
-    {
-      g_task_return_error (task, g_steal_pointer (&error));
-      return;
-    }
+      !make_directory_parent (data->private_key_path, &error)) {
+    g_task_return_error (task, g_steal_pointer (&error));
+    return;
+  }
 
   /*
    * From the GnuTLS documentation:
@@ -140,11 +137,11 @@ bonsai_tls_certificate_generate_worker (GTask        *task,
   serial = GUINT32_TO_BE (serial);
 
 #define HANDLE_FAILURE(x)            \
-  G_STMT_START {                     \
-    gtlsret = x;                     \
-    if (gtlsret != GNUTLS_E_SUCCESS) \
-      goto failure;                  \
-  } G_STMT_END
+        G_STMT_START {                     \
+          gtlsret = x;                     \
+          if (gtlsret != GNUTLS_E_SUCCESS) \
+          goto failure;                  \
+        } G_STMT_END
 
   HANDLE_FAILURE (gnutls_x509_crt_init (&cert));
   certptr = &cert;
@@ -165,16 +162,15 @@ bonsai_tls_certificate_generate_worker (GTask        *task,
     goto failure;
 
   HANDLE_FAILURE (gnutls_x509_privkey_export2 (privkey, GNUTLS_X509_FMT_PEM, &privkey_data));
-  if (!g_file_set_contents (data->private_key_path, (char*)privkey_data.data, privkey_data.size, &error))
+  if (!g_file_set_contents (data->private_key_path, (char *)privkey_data.data, privkey_data.size, &error))
     goto failure;
 
 #undef HANDLE_FAILURE
 
-  if ((certificate = g_tls_certificate_new_from_files (data->public_key_path, data->private_key_path, &error)))
-    {
-      g_task_return_pointer (task, g_steal_pointer (&certificate), g_object_unref);
-      return;
-    }
+  if ((certificate = g_tls_certificate_new_from_files (data->public_key_path, data->private_key_path, &error))) {
+    g_task_return_pointer (task, g_steal_pointer (&certificate), g_object_unref);
+    return;
+  }
 
 failure:
 
@@ -202,7 +198,7 @@ bonsai_tls_certificate_new_generate_async (const gchar         *public_key_path,
                                            GAsyncReadyCallback  callback,
                                            gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
   GenerateData *data;
 
   g_return_if_fail (public_key_path != NULL);
@@ -241,7 +237,7 @@ bonsai_tls_certificate_new_generate (const gchar   *public_key_path,
                                      GCancellable  *cancellable,
                                      GError       **error)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
   GenerateData *data;
 
   g_return_val_if_fail (public_key_path != NULL, NULL);
@@ -268,8 +264,8 @@ bonsai_tls_certificate_new_generate (const gchar   *public_key_path,
 gchar *
 bonsai_tls_certificate_get_hash (GTlsCertificate *cert)
 {
-  g_autoptr(GByteArray) bytesarray = NULL;
-  g_autoptr(GChecksum) checksum = NULL;
+  g_autoptr (GByteArray) bytesarray = NULL;
+  g_autoptr (GChecksum) checksum = NULL;
 
   g_return_val_if_fail (G_IS_TLS_CERTIFICATE (cert), NULL);
 
@@ -281,8 +277,7 @@ bonsai_tls_certificate_get_hash (GTlsCertificate *cert)
   return g_ascii_strdown (g_checksum_get_string (checksum), -1);
 }
 
-typedef struct
-{
+typedef struct {
   gchar *public_key_path;
   gchar *private_key_path;
   gchar *c;
@@ -308,8 +303,8 @@ bonsai_tls_certificate_new_from_files_or_generate_worker (GTask        *task,
                                                           GCancellable *cancellable)
 {
   NewFromFilesOrGenerate *state = task_data;
-  g_autoptr(GTlsCertificate) certificate = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTlsCertificate) certificate = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_assert (G_IS_TASK (task));
   g_assert (!cancellable || G_IS_CANCELLABLE (cancellable));
@@ -363,7 +358,7 @@ bonsai_tls_certificate_new_from_files_or_generate_async (const gchar         *pu
                                                          GAsyncReadyCallback  callback,
                                                          gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
   NewFromFilesOrGenerate state;
 
   g_assert (public_key_path != NULL);
@@ -487,25 +482,22 @@ bonsai_is_tls_hash (const gchar *hash)
   if (hash == NULL)
     return FALSE;
 
-  for (; *hash; hash++)
-    {
-      if (len == 64)
+  for (; *hash; hash++) {
+    if (len == 64)
+      return FALSE;
+
+    switch (*hash) {
+      case '0': case '1': case '2': case '3': case '4':
+      case '5': case '6': case '7': case '8': case '9':
+      case 'a': case 'b': case 'c': case 'd': case 'e': case 'f':
+      case 'A': case 'B': case 'C': case 'D': case 'E': case 'F':
+        len++;
+        break;
+
+      default:
         return FALSE;
-
-      switch (*hash)
-        {
-        case '0': case '1': case '2': case '3': case '4':
-        case '5': case '6': case '7': case '8': case '9':
-        case 'a': case 'b': case 'c': case 'd': case 'e': case 'f':
-        case 'A': case 'B': case 'C': case 'D': case 'E': case 'F':
-          len++;
-          break;
-
-        default:
-          return FALSE;
-        }
     }
+  }
 
   return len == 64;
 }
-

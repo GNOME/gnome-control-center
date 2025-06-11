@@ -39,40 +39,39 @@
 #include "cc-ua-macros.h"
 #include "cc-ua-mouse-page.h"
 
-struct _CcUaMousePage
-{
-  AdwNavigationPage   parent_instance;
+struct _CcUaMousePage {
+  AdwNavigationPage parent_instance;
 
-  AdwSwitchRow       *mouse_keys_row;
-  AdwSwitchRow       *locate_pointer_row;
-  AdwSwitchRow       *focus_windows_on_hover_row;
-  GtkScale           *double_click_delay_scale;
+  AdwSwitchRow *mouse_keys_row;
+  AdwSwitchRow *locate_pointer_row;
+  AdwSwitchRow *focus_windows_on_hover_row;
+  GtkScale *double_click_delay_scale;
 
-  AdwExpanderRow     *secondary_click_row;
-  GtkScale           *secondary_delay_scale;
+  AdwExpanderRow *secondary_click_row;
+  GtkScale *secondary_delay_scale;
 
-  AdwExpanderRow     *hover_click_row;
-  GtkScale           *hover_delay_scale;
-  GtkScale           *motion_threshold_scale;
+  AdwExpanderRow *hover_click_row;
+  GtkScale *hover_delay_scale;
+  GtkScale *motion_threshold_scale;
 
-  GSettings          *kb_settings;
-  GSettings          *wm_settings;
-  GSettings          *mouse_settings;
-  GSettings          *interface_settings;
-  GSettings          *gds_mouse_settings;
+  GSettings *kb_settings;
+  GSettings *wm_settings;
+  GSettings *mouse_settings;
+  GSettings *interface_settings;
+  GSettings *gds_mouse_settings;
 };
 
 G_DEFINE_TYPE (CcUaMousePage, cc_ua_mouse_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static gboolean
-focus_mode_get_mapping (GValue    *value,
-                        GVariant  *variant,
-                        gpointer   user_data)
+focus_mode_get_mapping (GValue   *value,
+                        GVariant *variant,
+                        gpointer  user_data)
 {
   gboolean enabled;
 
   enabled = g_strcmp0 (g_variant_get_string (variant, NULL), "click") != 0 &&
-  g_strcmp0 (g_variant_get_string (variant, NULL), "mouse") != 0;
+            g_strcmp0 (g_variant_get_string (variant, NULL), "mouse") != 0;
 
   g_value_set_boolean (value, enabled);
 

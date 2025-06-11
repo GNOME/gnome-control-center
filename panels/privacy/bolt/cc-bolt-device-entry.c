@@ -27,23 +27,21 @@
 
 #define RESOURCE_UI "/org/gnome/control-center/privacy/bolt/cc-bolt-device-entry.ui"
 
-struct _CcBoltDeviceEntry
-{
+struct _CcBoltDeviceEntry {
   AdwActionRow parent;
 
-  BoltDevice   *device;
+  BoltDevice *device;
 
   /* main ui */
   GtkLabel *status_warning;
-  gboolean  show_warnings;
+  gboolean show_warnings;
 };
 
 static const char *   device_status_to_brief_for_ui (BoltDevice *dev);
 
 G_DEFINE_TYPE (CcBoltDeviceEntry, cc_bolt_device_entry, ADW_TYPE_ACTION_ROW);
 
-enum
-{
+enum {
   SIGNAL_STATUS_CHANGED,
   SIGNAL_LAST
 };
@@ -112,11 +110,10 @@ device_status_to_brief_for_ui (BoltDevice *dev)
   gboolean nopcie;
 
   status = bolt_device_get_status (dev);
-  aflags = bolt_device_get_authflags(dev);
+  aflags = bolt_device_get_authflags (dev);
   nopcie = bolt_flag_isset (aflags, BOLT_AUTH_NOPCIE);
 
-  switch (status)
-    {
+  switch (status) {
     case BOLT_STATUS_DISCONNECTED:
       return C_("Thunderbolt Device Status", "Disconnected");
 
@@ -143,7 +140,7 @@ device_status_to_brief_for_ui (BoltDevice *dev)
 
     case BOLT_STATUS_UNKNOWN:
       break; /* use function default */
-    }
+  }
 
   return C_("Thunderbolt Device Status", "Unknown");
 }
@@ -190,7 +187,7 @@ cc_bolt_device_entry_init (CcBoltDeviceEntry *entry)
 
 CcBoltDeviceEntry *
 cc_bolt_device_entry_new (BoltDevice *device,
-			  gboolean    show_warnings)
+                          gboolean    show_warnings)
 {
   CcBoltDeviceEntry *entry;
 

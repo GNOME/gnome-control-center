@@ -26,7 +26,7 @@
 #define ACTION_KEY            "action"
 #define KEYBINDING_KEY        "keybinding"
 
-#define WACOM_C(x) g_dpgettext2(NULL, "Wacom action-type", x)
+#define WACOM_C(x) g_dpgettext2 (NULL, "Wacom action-type", x)
 
 enum {
   ACTION_NAME_COLUMN,
@@ -48,21 +48,20 @@ G_DEFINE_TYPE (CcWacomButtonRow, cc_wacom_button_row, GTK_TYPE_LIST_BOX_ROW)
 static GtkWidget *
 create_actions_combo (void)
 {
-  GtkListStore    *model;
-  GtkTreeIter      iter;
-  GtkWidget       *combo;
+  GtkListStore *model;
+  GtkTreeIter iter;
+  GtkWidget *combo;
   GtkCellRenderer *renderer;
-  gint             i;
+  gint i;
 
   model = gtk_list_store_new (ACTION_N_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
 
-  for (i = 0; i < G_N_ELEMENTS (action_table); i++)
-    {
-      gtk_list_store_append (model, &iter);
-      gtk_list_store_set (model, &iter,
-                          ACTION_NAME_COLUMN, WACOM_C(action_table[i].action_name),
-                          ACTION_TYPE_COLUMN, action_table[i].action_type, -1);
-    }
+  for (i = 0; i < G_N_ELEMENTS (action_table); i++) {
+    gtk_list_store_append (model, &iter);
+    gtk_list_store_set (model, &iter,
+                        ACTION_NAME_COLUMN, WACOM_C (action_table[i].action_name),
+                        ACTION_TYPE_COLUMN, action_table[i].action_type, -1);
+  }
 
   combo = gtk_combo_box_new_with_model (GTK_TREE_MODEL (model));
 
@@ -79,51 +78,48 @@ static void
 cc_wacom_button_row_update_shortcut (CcWacomButtonRow        *row,
                                      GDesktopPadButtonAction  action_type)
 {
-  guint                    keyval;
-  GdkModifierType          mask;
-  g_autofree gchar        *shortcut = NULL;
+  guint keyval;
+  GdkModifierType mask;
+  g_autofree gchar *shortcut = NULL;
 
   if (action_type != G_DESKTOP_PAD_BUTTON_ACTION_KEYBINDING)
     return;
 
   shortcut = g_settings_get_string (row->settings, KEYBINDING_KEY);
 
-  if (shortcut != NULL)
-    {
-      gtk_accelerator_parse (shortcut, &keyval, &mask);
+  if (shortcut != NULL) {
+    gtk_accelerator_parse (shortcut, &keyval, &mask);
 
-      g_object_set (row->key_shortcut_button,
-                    "key-value", keyval,
-                    "key-mods", mask,
-                    NULL);
-    }
+    g_object_set (row->key_shortcut_button,
+                  "key-value", keyval,
+                  "key-mods", mask,
+                  NULL);
+  }
 }
 
 static void
 cc_wacom_button_row_update_action (CcWacomButtonRow        *row,
                                    GDesktopPadButtonAction  action_type)
 {
-  GtkTreeIter              iter;
-  gboolean                 iter_valid;
-  GDesktopPadButtonAction  current_action_type, real_action_type;
-  GtkTreeModel            *model;
+  GtkTreeIter iter;
+  gboolean iter_valid;
+  GDesktopPadButtonAction current_action_type, real_action_type;
+  GtkTreeModel *model;
 
   model = gtk_combo_box_get_model (row->action_combo);
   real_action_type = action_type;
 
   for (iter_valid = gtk_tree_model_get_iter_first (model, &iter); iter_valid;
-       iter_valid = gtk_tree_model_iter_next (model, &iter))
-    {
-      gtk_tree_model_get (model, &iter,
-                          ACTION_TYPE_COLUMN, &current_action_type,
-                          -1);
+       iter_valid = gtk_tree_model_iter_next (model, &iter)) {
+    gtk_tree_model_get (model, &iter,
+                        ACTION_TYPE_COLUMN, &current_action_type,
+                        -1);
 
-      if (current_action_type == real_action_type)
-        {
-          gtk_combo_box_set_active_iter (row->action_combo, &iter);
-          break;
-        }
+    if (current_action_type == real_action_type) {
+      gtk_combo_box_set_active_iter (row->action_combo, &iter);
+      break;
     }
+  }
 }
 
 static void
@@ -225,11 +221,11 @@ cc_wacom_button_row_init (CcWacomButtonRow *button_row)
 
 GtkWidget *
 cc_wacom_button_row_new (guint      button,
-			 GSettings *settings)
+                         GSettings *settings)
 {
-  CcWacomButtonRow        *row;
-  GtkWidget               *grid, *combo, *label, *shortcut_button;
-  g_autofree gchar        *name = NULL;
+  CcWacomButtonRow *row;
+  GtkWidget *grid, *combo, *label, *shortcut_button;
+  g_autofree gchar *name = NULL;
 
   row = g_object_new (CC_WACOM_TYPE_BUTTON_ROW, NULL);
 

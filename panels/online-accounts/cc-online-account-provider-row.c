@@ -26,8 +26,7 @@
 #include "cc-online-account-provider-row.h"
 #include "cc-online-accounts-resources.h"
 
-struct _CcOnlineAccountProviderRow
-{
+struct _CcOnlineAccountProviderRow {
   AdwActionRow parent;
 
   GtkImage *icon_image;
@@ -37,8 +36,7 @@ struct _CcOnlineAccountProviderRow
 
 G_DEFINE_TYPE (CcOnlineAccountProviderRow, cc_online_account_provider_row, ADW_TYPE_ACTION_ROW)
 
-typedef struct
-{
+typedef struct {
   const char *provider;
   const char *title;
   const char *description;
@@ -65,22 +63,25 @@ _goa_provider_get_provider_info (GoaProvider *provider)
   };
 
   provider_type = goa_provider_get_provider_type (provider);
-  for (size_t i = 0; i < G_N_ELEMENTS (goa_metadata); i++)
-    {
-      if (g_str_equal (goa_metadata[i].provider, provider_type))
-        return (ProviderInfo){ goa_metadata[i].provider,
-                               _(goa_metadata[i].title),
-                               _(goa_metadata[i].description) };
-    }
+  for (size_t i = 0; i < G_N_ELEMENTS (goa_metadata); i++) {
+    if (g_str_equal (goa_metadata[i].provider, provider_type))
+      return (ProviderInfo) {
+               goa_metadata[i].provider,
+               _(goa_metadata[i].title),
+               _(goa_metadata[i].description)
+      };
+  }
 
-  return (ProviderInfo){ provider_type, C_("Online Account", "Other"), NULL };
+  return (ProviderInfo) {
+           provider_type, C_("Online Account", "Other"), NULL
+  };
 }
 
 static gboolean
 is_gicon_symbolic (GtkWidget *widget,
                    GIcon     *icon)
 {
-  g_autoptr(GtkIconPaintable) icon_paintable = NULL;
+  g_autoptr (GtkIconPaintable) icon_paintable = NULL;
   GtkIconTheme *icon_theme;
 
   icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
@@ -127,39 +128,33 @@ CcOnlineAccountProviderRow *
 cc_online_account_provider_row_new (GoaProvider *provider)
 {
   CcOnlineAccountProviderRow *self;
-  g_autoptr(GIcon) icon = NULL;
+  g_autoptr (GIcon) icon = NULL;
   const char *title = NULL;
   const char *description = NULL;
 
   self = g_object_new (CC_TYPE_ONLINE_ACCOUNT_PROVIDER_ROW, NULL);
 
-  if (provider == NULL)
-    {
-      icon = g_themed_icon_new_with_default_fallbacks ("goa-account");
-      title = C_("Online Account", "Other");
-    }
-  else
-    {
-      ProviderInfo info;
+  if (provider == NULL) {
+    icon = g_themed_icon_new_with_default_fallbacks ("goa-account");
+    title = C_("Online Account", "Other");
+  } else {
+    ProviderInfo info;
 
-      self->provider = g_object_ref (provider);
-      info = _goa_provider_get_provider_info (provider);
-      icon = goa_provider_get_provider_icon (provider, NULL);
-      title = info.title;
-      description = info.description;
-    }
+    self->provider = g_object_ref (provider);
+    info = _goa_provider_get_provider_info (provider);
+    icon = goa_provider_get_provider_icon (provider, NULL);
+    title = info.title;
+    description = info.description;
+  }
 
   gtk_image_set_from_gicon (self->icon_image, icon);
-  if (is_gicon_symbolic (GTK_WIDGET (self), icon))
-    {
-      gtk_image_set_icon_size (self->icon_image, GTK_ICON_SIZE_NORMAL);
-      gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "symbolic-circular");
-    }
-  else
-    {
-      gtk_image_set_icon_size (self->icon_image, GTK_ICON_SIZE_LARGE);
-      gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "lowres-icon");
-    }
+  if (is_gicon_symbolic (GTK_WIDGET (self), icon)) {
+    gtk_image_set_icon_size (self->icon_image, GTK_ICON_SIZE_NORMAL);
+    gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "symbolic-circular");
+  } else {
+    gtk_image_set_icon_size (self->icon_image, GTK_ICON_SIZE_LARGE);
+    gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "lowres-icon");
+  }
 
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title);
   adw_action_row_set_subtitle (ADW_ACTION_ROW (self), description);

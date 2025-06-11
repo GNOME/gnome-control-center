@@ -35,21 +35,19 @@ cc_color_device_get_title (CdDevice *device)
 
   /* is internal panel */
   if (cd_device_get_kind (device) == CD_DEVICE_KIND_DISPLAY &&
-      cd_device_get_embedded (device))
-    {
-      /* TRANSLATORS: This refers to the embedded display on e.g. a smartphone, a laptop, an all-in-one desktop… */
-      g_string_append (string, _("Built-In Screen"));
-      goto out;
-    }
+      cd_device_get_embedded (device)) {
+    /* TRANSLATORS: This refers to the embedded display on e.g. a smartphone, a laptop, an all-in-one desktop… */
+    g_string_append (string, _("Built-In Screen"));
+    goto out;
+  }
 
   /* is internal webcam */
   if (cd_device_get_kind (device) == CD_DEVICE_KIND_WEBCAM &&
-      cd_device_get_embedded (device))
-    {
-      /* TRANSLATORS: This refers to the embedded webcam on e.g. a smartphone, a laptop, an all-in-one desktop… */
-      g_string_append (string, _("Built-In Webcam"));
-      goto out;
-    }
+      cd_device_get_embedded (device)) {
+    /* TRANSLATORS: This refers to the embedded webcam on e.g. a smartphone, a laptop, an all-in-one desktop… */
+    g_string_append (string, _("Built-In Webcam"));
+    goto out;
+  }
 
   /* get the display model, falling back to something sane */
   tmp = cd_device_get_model (device);

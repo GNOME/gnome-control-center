@@ -28,57 +28,56 @@
 static char *
 get_gtk_gles_renderer (void)
 {
-        GdkSurface *surface;
-        GtkNative *native;
-        GtkWidget *win;
-        GdkGLContext *context;
-        g_autofree char *renderer = NULL;
-        g_autofree char *gl_version = NULL;
+  GdkSurface *surface;
+  GtkNative *native;
+  GtkWidget *win;
+  GdkGLContext *context;
+  g_autofree char *renderer = NULL;
+  g_autofree char *gl_version = NULL;
 
-        win = gtk_window_new ();
-        gtk_widget_realize (win);
-        native = gtk_widget_get_native (win);
-        surface = gtk_native_get_surface (native);
-        context = gdk_surface_create_gl_context (surface, NULL);
-        if (!context)
-                return NULL;
-        gdk_gl_context_make_current (context);
-        renderer = g_strdup ((char *) glGetString (GL_RENDERER));
-        gl_version = g_strdup ((char *) glGetString (GL_VERSION));
-        gdk_gl_context_clear_current ();
-        g_object_unref (context);
+  win = gtk_window_new ();
+  gtk_widget_realize (win);
+  native = gtk_widget_get_native (win);
+  surface = gtk_native_get_surface (native);
+  context = gdk_surface_create_gl_context (surface, NULL);
+  if (!context)
+    return NULL;
+  gdk_gl_context_make_current (context);
+  renderer = g_strdup ((char *)glGetString (GL_RENDERER));
+  gl_version = g_strdup ((char *)glGetString (GL_VERSION));
+  gdk_gl_context_clear_current ();
+  g_object_unref (context);
 
-        if (strstr (gl_version, "NVIDIA") != NULL)
-          {
-            const char *glvnd_libname = g_getenv ("__GLX_VENDOR_LIBRARY_NAME");
-            if (g_strcmp0 (glvnd_libname, "nvidia") != 0)
-              {
-                /* This helper is launched with parameters from a
-                 * non-NVIDIA GPU, but is running using a NVIDIA
-                 * library. As such, DRI_PRIME envvar from switcheroo
-                 * does not actually take effect, and the GPU name is
-                 * invalid.
-                 */
-                return NULL;
-              }
-          }
+  if (strstr (gl_version, "NVIDIA") != NULL) {
+    const char *glvnd_libname = g_getenv ("__GLX_VENDOR_LIBRARY_NAME");
+    if (g_strcmp0 (glvnd_libname, "nvidia") != 0) {
+      /* This helper is launched with parameters from a
+       * non-NVIDIA GPU, but is running using a NVIDIA
+       * library. As such, DRI_PRIME envvar from switcheroo
+       * does not actually take effect, and the GPU name is
+       * invalid.
+       */
+      return NULL;
+    }
+  }
 
-        return g_steal_pointer (&renderer);
+  return g_steal_pointer (&renderer);
 }
 
 int
-main (int argc, char **argv)
+main (int    argc,
+      char **argv)
 {
-        g_autofree char *renderer_string = NULL;
+  g_autofree char *renderer_string = NULL;
 
-        g_log_writer_default_set_use_stderr (TRUE);
+  g_log_writer_default_set_use_stderr (TRUE);
 
-        gtk_init ();
+  gtk_init ();
 
-        renderer_string = get_gtk_gles_renderer ();
-        if (renderer_string) {
-                g_print ("%s", renderer_string);
-                return 0;
-        }
-        return 1;
+  renderer_string = get_gtk_gles_renderer ();
+  if (renderer_string) {
+    g_print ("%s", renderer_string);
+    return 0;
+  }
+  return 1;
 }

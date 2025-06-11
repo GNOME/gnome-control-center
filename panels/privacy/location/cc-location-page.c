@@ -27,42 +27,40 @@
 #define APP_PERMISSIONS_TABLE "location"
 #define APP_PERMISSIONS_ID "location"
 
-struct _CcLocationPage
-{
+struct _CcLocationPage {
   AdwNavigationPage parent_instance;
 
-  GtkListBox   *location_apps_list_box;
+  GtkListBox *location_apps_list_box;
   AdwSwitchRow *location_row;
 
-  GSettings    *location_settings;
+  GSettings *location_settings;
   GCancellable *cancellable;
 
-  GDBusProxy   *perm_store;
-  GVariant     *location_apps_perms;
-  GVariant     *location_apps_data;
-  GHashTable   *location_app_switches;
-  GHashTable   *location_app_rows;
+  GDBusProxy *perm_store;
+  GVariant *location_apps_perms;
+  GVariant *location_apps_data;
+  GHashTable *location_app_switches;
+  GHashTable *location_app_rows;
 
   GtkSizeGroup *location_icon_size_group;
 };
 
 G_DEFINE_TYPE (CcLocationPage, cc_location_page, ADW_TYPE_NAVIGATION_PAGE)
 
-typedef struct
-{
+typedef struct {
   CcLocationPage *self;
-  GtkWidget      *widget;
-  gchar          *app_id;
-  gboolean        changing_state;
-  gboolean        pending_state;
+  GtkWidget *widget;
+  gchar *app_id;
+  gboolean changing_state;
+  gboolean pending_state;
 } LocationAppStateData;
 
 static void
 location_app_state_data_free (LocationAppStateData *data,
                               GClosure             *closure)
 {
-    g_free (data->app_id);
-    g_slice_free (LocationAppStateData, data);
+  g_free (data->app_id);
+  g_slice_free (LocationAppStateData, data);
 }
 
 static void
@@ -70,22 +68,21 @@ on_perm_store_set_done (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
 {
-  g_autoptr(GVariant) results = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GVariant) results = NULL;
+  g_autoptr (GError) error = NULL;
   LocationAppStateData *data;
 
   results = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
                                       res,
                                       &error);
-  if (results == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed to store permissions: %s", error->message);
+  if (results == NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to store permissions: %s", error->message);
 
-      return;
-    }
+    return;
+  }
 
-  data = (LocationAppStateData *) user_data;
+  data = (LocationAppStateData *)user_data;
   data->changing_state = FALSE;
   gtk_switch_set_state (GTK_SWITCH (data->widget), data->pending_state);
 }
@@ -95,7 +92,7 @@ on_location_app_state_set (GtkSwitch *widget,
                            gboolean   state,
                            gpointer   user_data)
 {
-  LocationAppStateData *data = (LocationAppStateData *) user_data;
+  LocationAppStateData *data = (LocationAppStateData *)user_data;
   CcLocationPage *self = data->self;
   GVariant *params;
   GVariantIter iter;
@@ -114,17 +111,16 @@ on_location_app_state_set (GtkSwitch *widget,
 
   g_variant_iter_init (&iter, self->location_apps_perms);
   g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
-  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
-    {
-      /* It's OK to drop the entry if it's not in expected format */
-      if (g_strv_length (value) < 2)
-        continue;
+  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value)) {
+    /* It's OK to drop the entry if it's not in expected format */
+    if (g_strv_length (value) < 2)
+      continue;
 
-      if (g_strcmp0 (data->app_id, key) == 0)
-        value[0] = state ? "EXACT" : "NONE";
+    if (g_strcmp0 (data->app_id, key) == 0)
+      value[0] = state ? "EXACT" : "NONE";
 
-      g_variant_builder_add (&builder, "{s^as}", key, value);
-    }
+    g_variant_builder_add (&builder, "{s^as}", key, value);
+  }
 
   params = g_variant_new ("(sbsa{sas}v)",
                           APP_PERMISSIONS_TABLE,
@@ -179,17 +175,16 @@ add_location_app (CcLocationPage *self,
   gchar *desktop_id;
 
   w = g_hash_table_lookup (self->location_app_switches, app_id);
-  if (w != NULL)
-    {
-      gtk_switch_set_active (GTK_SWITCH (w), enabled);
-      return;
-    }
+  if (w != NULL) {
+    gtk_switch_set_active (GTK_SWITCH (w), enabled);
+    return;
+  }
 
   desktop_id = g_strdup_printf ("%s.desktop", app_id);
   app_info = g_desktop_app_info_new (desktop_id);
   g_free (desktop_id);
   if (app_info == NULL)
-      return;
+    return;
 
   row = adw_action_row_new ();
   gtk_list_box_append (self->location_apps_list_box, row);
@@ -246,7 +241,7 @@ add_location_app (CcLocationPage *self,
                          "state-set",
                          G_CALLBACK (on_location_app_state_set),
                          data,
-                         (GClosureNotify) location_app_state_data_free,
+                         (GClosureNotify)location_app_state_data_free,
                          0);
 }
 
@@ -271,33 +266,29 @@ update_perm_store (CcLocationPage *self,
   /* We iterate over all rows, if the permissions do not contain the app id of
      the row, we remove it. */
   g_hash_table_iter_init (&row_iter, self->location_app_rows);
-  while (g_hash_table_iter_next (&row_iter, (gpointer *) &key, (gpointer *) &row))
-    {
-      if (!g_variant_lookup_value (permissions, key, NULL))
-        {
-          gtk_list_box_remove (self->location_apps_list_box, row);
-          g_hash_table_remove (self->location_app_switches, key);
-          g_hash_table_iter_remove (&row_iter);
-        }
+  while (g_hash_table_iter_next (&row_iter, (gpointer *)&key, (gpointer *)&row)) {
+    if (!g_variant_lookup_value (permissions, key, NULL)) {
+      gtk_list_box_remove (self->location_apps_list_box, row);
+      g_hash_table_remove (self->location_app_switches, key);
+      g_hash_table_iter_remove (&row_iter);
     }
+  }
 
   g_variant_iter_init (&iter, permissions);
-  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value))
-    {
-      gboolean enabled;
-      gint64 last_used;
+  while (g_variant_iter_loop (&iter, "{&s^a&s}", &key, &value)) {
+    gboolean enabled;
+    gint64 last_used;
 
-      if (g_strv_length (value) < 2)
-        {
-          g_debug ("Permissions for %s in incorrect format, ignoring..", key);
-          continue;
-        }
-
-      enabled = (g_strcmp0 (value[0], "NONE") != 0);
-      last_used = g_ascii_strtoll (value[1], NULL, 10);
-
-      add_location_app (self, key, enabled, last_used);
+    if (g_strv_length (value) < 2) {
+      g_debug ("Permissions for %s in incorrect format, ignoring..", key);
+      continue;
     }
+
+    enabled = (g_strcmp0 (value[0], "NONE") != 0);
+    last_used = g_ascii_strtoll (value[1], NULL, 10);
+
+    add_location_app (self, key, enabled, last_used);
+  }
 }
 
 static void
@@ -308,9 +299,9 @@ on_perm_store_signal (GDBusProxy *proxy,
                       gpointer    user_data)
 {
   GVariant *permissions, *permissions_data;
-  g_autoptr(GVariant) boxed_permission_data = NULL;
-  g_autoptr(GVariant) table = NULL;
-  g_autoptr(GVariant) id = NULL;
+  g_autoptr (GVariant) boxed_permission_data = NULL;
+  g_autoptr (GVariant) table = NULL;
+  g_autoptr (GVariant) id = NULL;
 
   if (g_strcmp0 (signal_name, "Changed") != 0)
     return;
@@ -328,24 +319,23 @@ on_perm_store_signal (GDBusProxy *proxy,
 }
 
 static void
-on_perm_store_lookup_done(GObject *source_object,
-                          GAsyncResult *res,
-                          gpointer user_data)
+on_perm_store_lookup_done (GObject      *source_object,
+                           GAsyncResult *res,
+                           gpointer      user_data)
 {
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GVariant) boxed_permission_data = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GVariant) boxed_permission_data = NULL;
   GVariant *ret, *permissions, *permissions_data;
 
   ret = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
                                   res,
                                   &error);
-  if (ret == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed fetch permissions from flatpak permission store: %s",
-                   error->message);
-      return;
-    }
+  if (ret == NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed fetch permissions from flatpak permission store: %s",
+                 error->message);
+    return;
+  }
 
   permissions = g_variant_get_child_value (ret, 0);
   boxed_permission_data = g_variant_get_child_value (ret, 1);
@@ -364,20 +354,19 @@ on_perm_store_ready (GObject      *source_object,
                      GAsyncResult *res,
                      gpointer      user_data)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   CcLocationPage *self;
   GDBusProxy *proxy;
   GVariant *params;
 
   proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (proxy == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-          g_warning ("Failed to connect to flatpak permission store: %s",
-                     error->message);
+  if (proxy == NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to connect to flatpak permission store: %s",
+                 error->message);
 
-      return;
-    }
+    return;
+  }
   self = user_data;
   self->perm_store = proxy;
 

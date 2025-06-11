@@ -34,23 +34,21 @@
 
 #include "cc-entry-feedback.h"
 
-struct _CcEntryFeedback
-{
-  GtkBox       parent_instance;
+struct _CcEntryFeedback {
+  GtkBox parent_instance;
 
-  GtkImage    *image;
-  GtkLabel    *label;
+  GtkImage *image;
+  GtkLabel *label;
 
-  gchar       *default_icon_name;
-  gchar       *default_text;
+  gchar *default_icon_name;
+  gchar *default_text;
 
   gboolean spinner_showing;
 };
 
 G_DEFINE_TYPE (CcEntryFeedback, cc_entry_feedback, GTK_TYPE_BOX)
 
-enum
-{
+enum {
   PROP_0,
   PROP_ICON_NAME,
   PROP_TEXT,
@@ -66,8 +64,7 @@ cc_entry_feedback_get_property (GObject    *object,
 {
   CcEntryFeedback *self = CC_ENTRY_FEEDBACK (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_ICON_NAME:
       g_value_set_string (value, gtk_image_get_icon_name (self->image));
       break;
@@ -82,7 +79,7 @@ cc_entry_feedback_get_property (GObject    *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -95,23 +92,19 @@ set_icon (CcEntryFeedback *self,
   if (class != NULL)
     gtk_widget_remove_css_class (GTK_WIDGET (self->image), class);
 
-  if (g_str_equal (icon_name, CC_ENTRY_LOADING))
-    {
-      if (!self->spinner_showing)
-        {
-          AdwSpinnerPaintable *paintable = adw_spinner_paintable_new (GTK_WIDGET (self->image));
+  if (g_str_equal (icon_name, CC_ENTRY_LOADING)) {
+    if (!self->spinner_showing) {
+      AdwSpinnerPaintable *paintable = adw_spinner_paintable_new (GTK_WIDGET (self->image));
 
-          gtk_image_set_from_paintable (self->image, GDK_PAINTABLE (paintable));
-          self->spinner_showing = true;
-        }
+      gtk_image_set_from_paintable (self->image, GDK_PAINTABLE (paintable));
+      self->spinner_showing = true;
     }
-  else
-    {
-      gtk_image_set_from_icon_name (self->image, icon_name);
-      gtk_widget_add_css_class (GTK_WIDGET (self->image), icon_name);
+  } else {
+    gtk_image_set_from_icon_name (self->image, icon_name);
+    gtk_widget_add_css_class (GTK_WIDGET (self->image), icon_name);
 
-      self->spinner_showing = false;
-    }
+    self->spinner_showing = false;
+  }
 }
 
 static void
@@ -122,8 +115,7 @@ cc_entry_feedback_set_property (GObject      *object,
 {
   CcEntryFeedback *self = CC_ENTRY_FEEDBACK (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_ICON_NAME:
       set_icon (self, g_value_get_string (value));
       break;
@@ -144,7 +136,7 @@ cc_entry_feedback_set_property (GObject      *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -154,7 +146,7 @@ cc_entry_feedback_init (CcEntryFeedback *self)
 }
 
 static void
-cc_entry_feedback_class_init (CcEntryFeedbackClass * klass)
+cc_entry_feedback_class_init (CcEntryFeedbackClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);

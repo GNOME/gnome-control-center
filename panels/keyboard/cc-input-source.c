@@ -22,8 +22,7 @@
 #include <gdk/wayland/gdkwayland.h>
 #endif
 
-enum
-{
+enum {
   SIGNAL_LABEL_CHANGED,
   SIGNAL_LAST
 };
@@ -92,17 +91,16 @@ launch_viewer (CcInputSource *source,
                const gchar   *handle)
 {
   const gchar *layout, *layout_variant;
-  g_autoptr(GPtrArray) argv = NULL;
+  g_autoptr (GPtrArray) argv = NULL;
   g_autofree gchar *layout_desc = NULL;
 
   argv = g_ptr_array_new ();
   g_ptr_array_add (argv, KEYBOARD_PREVIEWER_EXEC);
 
-  if (handle)
-    {
-      g_ptr_array_add (argv, "--parent-handle");
-      g_ptr_array_add (argv, (gpointer) handle);
-    }
+  if (handle) {
+    g_ptr_array_add (argv, "--parent-handle");
+    g_ptr_array_add (argv, (gpointer)handle);
+  }
 
   layout = cc_input_source_get_layout (source);
   layout_variant = cc_input_source_get_layout_variant (source);
@@ -116,7 +114,7 @@ launch_viewer (CcInputSource *source,
   g_ptr_array_add (argv, NULL);
 
   g_debug ("Launching keyboard previewer with layout: '%s'\n", layout_desc);
-  g_spawn_async (NULL, (gchar **) argv->pdata, NULL,
+  g_spawn_async (NULL, (gchar **)argv->pdata, NULL,
                  G_SPAWN_DEFAULT, NULL, NULL, NULL, NULL);
 }
 
@@ -143,19 +141,17 @@ cc_input_source_launch_previewer (CcInputSource *source,
 #ifdef GDK_WINDOWING_WAYLAND
   display = gtk_widget_get_display (GTK_WIDGET (requester));
 
-  if (GDK_IS_WAYLAND_DISPLAY (display))
-    {
-      GtkRoot *root = gtk_widget_get_root (GTK_WIDGET (requester));
-      GdkSurface *surface = gtk_native_get_surface (GTK_NATIVE (root));
+  if (GDK_IS_WAYLAND_DISPLAY (display)) {
+    GtkRoot *root = gtk_widget_get_root (GTK_WIDGET (requester));
+    GdkSurface *surface = gtk_native_get_surface (GTK_NATIVE (root));
 
-      gdk_wayland_toplevel_export_handle (GDK_TOPLEVEL (surface),
-                                          toplevel_handle_exported,
-                                          source,
-                                          NULL);
-    }
-  else
+    gdk_wayland_toplevel_export_handle (GDK_TOPLEVEL (surface),
+                                        toplevel_handle_exported,
+                                        source,
+                                        NULL);
+  } else
 #endif
-    {
-      launch_viewer (source, NULL);
-    }
+  {
+    launch_viewer (source, NULL);
+  }
 }

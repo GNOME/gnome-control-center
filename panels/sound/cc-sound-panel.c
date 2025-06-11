@@ -43,37 +43,35 @@
 #include "cc-volume-levels-page.h"
 #include "cc-volume-slider.h"
 
-struct _CcSoundPanel
-{
-  CcPanel            parent_instance;
+struct _CcSoundPanel {
+  CcPanel parent_instance;
 
   AdwPreferencesGroup *output_group;
-  CcLevelBar          *output_level_bar;
-  CcDeviceComboBox    *output_device_combo_box;
-  CcProfileComboRow   *output_profile_combo_row;
-  CcVolumeSlider      *output_volume_slider;
-  CcBalanceSlider     *balance_slider;
-  AdwPreferencesRow   *fade_row;
-  CcFadeSlider        *fade_slider;
-  AdwPreferencesRow   *subwoofer_row;
-  CcSubwooferSlider   *subwoofer_slider;
+  CcLevelBar *output_level_bar;
+  CcDeviceComboBox *output_device_combo_box;
+  CcProfileComboRow *output_profile_combo_row;
+  CcVolumeSlider *output_volume_slider;
+  CcBalanceSlider *balance_slider;
+  AdwPreferencesRow *fade_row;
+  CcFadeSlider *fade_slider;
+  AdwPreferencesRow *subwoofer_row;
+  CcSubwooferSlider *subwoofer_slider;
   AdwPreferencesGroup *output_no_devices_group;
   AdwPreferencesGroup *input_group;
-  CcLevelBar          *input_level_bar;
-  CcDeviceComboBox    *input_device_combo_box;
-  CcProfileComboRow   *input_profile_combo_row;
-  CcVolumeSlider      *input_volume_slider;
+  CcLevelBar *input_level_bar;
+  CcDeviceComboBox *input_device_combo_box;
+  CcProfileComboRow *input_profile_combo_row;
+  CcVolumeSlider *input_volume_slider;
   AdwPreferencesGroup *input_no_devices_group;
-  CcListRow           *alert_sound_row;
+  CcListRow *alert_sound_row;
 
-  GvcMixerControl   *mixer_control;
-  GSettings         *sound_settings;
+  GvcMixerControl *mixer_control;
+  GSettings *sound_settings;
 };
 
 CC_PANEL_REGISTER (CcSoundPanel, cc_sound_panel)
 
-enum
-{
+enum {
   PROP_0,
   PROP_PARAMETERS
 };
@@ -104,12 +102,11 @@ set_output_stream (CcSoundPanel   *self,
   cc_volume_slider_set_stream (self->output_volume_slider, stream, CC_STREAM_TYPE_OUTPUT);
   cc_level_bar_set_stream (self->output_level_bar, stream);
 
-  if (stream != NULL)
-    {
-      map = (GvcChannelMap *) gvc_mixer_stream_get_channel_map (stream);
-      can_fade = gvc_channel_map_can_fade (map);
-      has_lfe = gvc_channel_map_has_lfe (map);
-    }
+  if (stream != NULL) {
+    map = (GvcChannelMap *)gvc_mixer_stream_get_channel_map (stream);
+    can_fade = gvc_channel_map_can_fade (map);
+    has_lfe = gvc_channel_map_has_lfe (map);
+  }
   cc_fade_slider_set_channel_map (self->fade_slider, map);
   cc_balance_slider_set_channel_map (self->balance_slider, map);
   cc_subwoofer_slider_set_channel_map (self->subwoofer_slider, map);
@@ -156,9 +153,9 @@ output_device_update_cb (CcSoundPanel *self,
   gboolean has_multi_profiles;
   GvcMixerStream *stream = NULL;
 
-  g_signal_handlers_block_by_func(self->output_device_combo_box, output_device_changed_cb, self);
+  g_signal_handlers_block_by_func (self->output_device_combo_box, output_device_changed_cb, self);
   cc_device_combo_box_active_device_changed (self->output_device_combo_box, id);
-  g_signal_handlers_unblock_by_func(self->output_device_combo_box, output_device_changed_cb, self);
+  g_signal_handlers_unblock_by_func (self->output_device_combo_box, output_device_changed_cb, self);
 
   device = cc_device_combo_box_get_device (self->output_device_combo_box);
 
@@ -178,15 +175,15 @@ output_device_update_cb (CcSoundPanel *self,
 
 static void
 input_device_update_cb (CcSoundPanel *self,
-                         guint         id)
+                        guint         id)
 {
   GvcMixerUIDevice *device;
   gboolean has_multi_profiles;
   GvcMixerStream *stream = NULL;
 
-  g_signal_handlers_block_by_func(self->input_device_combo_box, input_device_changed_cb, self);
+  g_signal_handlers_block_by_func (self->input_device_combo_box, input_device_changed_cb, self);
   cc_device_combo_box_active_device_changed (self->input_device_combo_box, id);
-  g_signal_handlers_unblock_by_func(self->input_device_combo_box, input_device_changed_cb, self);
+  g_signal_handlers_unblock_by_func (self->input_device_combo_box, input_device_changed_cb, self);
 
   device = cc_device_combo_box_get_device (self->input_device_combo_box);
 

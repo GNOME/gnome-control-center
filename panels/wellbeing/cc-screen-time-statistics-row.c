@@ -76,12 +76,11 @@ struct _CcScreenTimeStatisticsRow {
   GtkStack *data_stack;
 
   /* Model data */
-  struct
-    {
-      GDate start_date;  /* inclusive; invalid when unset */
-      size_t n_days;
-      double *screen_time_per_day;  /* minutes for each day; (nullable) (array length=n_days) (owned) */
-    } model;
+  struct {
+    GDate start_date;    /* inclusive; invalid when unset */
+    size_t n_days;
+    double *screen_time_per_day;    /* minutes for each day; (nullable) (array length=n_days) (owned) */
+  } model;
 
   /* UI state */
   GFile *history_file;  /* (nullable) (owned) */
@@ -122,9 +121,9 @@ static void update_model (CcScreenTimeStatisticsRow *self);
 static char *bar_chart_continuous_axis_label_cb (CcBarChart *chart,
                                                  double      value,
                                                  void       *user_data);
-static double bar_chart_continuous_axis_grid_line_cb (CcBarChart   *chart,
-                                                      unsigned int  idx,
-                                                      void         *user_data);
+static double bar_chart_continuous_axis_grid_line_cb (CcBarChart  *chart,
+                                                      unsigned int idx,
+                                                      void        *user_data);
 static void bar_chart_update_accessible_description (CcScreenTimeStatisticsRow *self);
 static void bar_chart_notify_selected_index_cb (GObject    *object,
                                                 GParamSpec *pspec,
@@ -261,8 +260,7 @@ cc_screen_time_statistics_row_get_property (GObject    *object,
 {
   CcScreenTimeStatisticsRow *self = CC_SCREEN_TIME_STATISTICS_ROW (object);
 
-  switch ((CcScreenTimeStatisticsRowProperty) property_id)
-    {
+  switch ((CcScreenTimeStatisticsRowProperty)property_id) {
     case PROP_HISTORY_FILE:
       g_value_set_object (value, cc_screen_time_statistics_row_get_history_file (self));
       break;
@@ -275,7 +273,7 @@ cc_screen_time_statistics_row_get_property (GObject    *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -286,8 +284,7 @@ cc_screen_time_statistics_row_set_property (GObject      *object,
 {
   CcScreenTimeStatisticsRow *self = CC_SCREEN_TIME_STATISTICS_ROW (object);
 
-  switch ((CcScreenTimeStatisticsRowProperty) property_id)
-    {
+  switch ((CcScreenTimeStatisticsRowProperty)property_id) {
     case PROP_HISTORY_FILE:
       cc_screen_time_statistics_row_set_history_file (self, g_value_get_object (value));
       break;
@@ -299,7 +296,7 @@ cc_screen_time_statistics_row_set_property (GObject      *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
+  }
 }
 
 static void
@@ -368,12 +365,12 @@ get_screen_time_for_day (CcScreenTimeStatisticsRow *self,
 {
   int days_diff = g_date_days_between (&self->model.start_date, day);
   g_assert (is_day_in_model (self, day));
-  return self->model.screen_time_per_day[(unsigned int) days_diff];
+  return self->model.screen_time_per_day[(unsigned int)days_diff];
 }
 
 static char *
 format_hours_and_minutes (unsigned int minutes,
-                          gboolean omit_minutes_if_zero)
+                          gboolean     omit_minutes_if_zero)
 {
   unsigned int hours = minutes / 60;
   minutes %= 60;
@@ -386,30 +383,25 @@ format_hours_and_minutes (unsigned int minutes,
    * Given that the whole panel is about screen *time*, hopefully the meaning of
    * the numbers should be obvious. */
 
-  if (hours == 0 && minutes > 0)
-    {
-      /* Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
-       * Use whatever shortest unit label is used for minutes in your locale. */
-      return g_strdup_printf (_("%um"), minutes);
-    }
-  else if (minutes == 0)
-    {
-      /* Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
-       * Use whatever shortest unit label is used for hours in your locale. */
-      return g_strdup_printf (_("%uh"), hours);
-    }
-  else
-    {
-      /* Translators: This is a duration in hours and minutes, for example
-       * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
-       * is used for hours and minutes in your locale. */
-      return g_strdup_printf (_("%uh %um"), hours, minutes);
-    }
+  if (hours == 0 && minutes > 0) {
+    /* Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
+     * Use whatever shortest unit label is used for minutes in your locale. */
+    return g_strdup_printf (_("%um"), minutes);
+  } else if (minutes == 0) {
+    /* Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
+     * Use whatever shortest unit label is used for hours in your locale. */
+    return g_strdup_printf (_("%uh"), hours);
+  } else {
+    /* Translators: This is a duration in hours and minutes, for example
+     * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
+     * is used for hours and minutes in your locale. */
+    return g_strdup_printf (_("%uh %um"), hours, minutes);
+  }
 }
 
 static void
-label_set_text_hours_and_minutes (GtkLabel     *label,
-                                  unsigned int  minutes)
+label_set_text_hours_and_minutes (GtkLabel    *label,
+                                  unsigned int minutes)
 {
   g_autofree char *text = format_hours_and_minutes (minutes, FALSE);
   gtk_label_set_text (label, text);
@@ -431,7 +423,10 @@ get_week_start (void)
 {
   int week_start;
 #ifdef HAVE__NL_TIME_FIRST_WEEKDAY
-  union { unsigned int word; char *string; } langinfo;
+  union {
+    unsigned int word;
+    char *string;
+  } langinfo;
   int week_1stday = 0;
   int first_weekday = 1;
   guint week_origin;
@@ -462,12 +457,11 @@ get_week_start (void)
   else
     week_start = -1;
 
-  if (week_start < 0 || week_start > 6)
-    {
-      g_warning ("Whoever translated calendar:week_start:0 for GTK+ "
-                 "did so wrongly.\n");
-      return 0;
-    }
+  if (week_start < 0 || week_start > 6) {
+    g_warning ("Whoever translated calendar:week_start:0 for GTK+ "
+               "did so wrongly.\n");
+    return 0;
+  }
 #endif
 
   return week_start;
@@ -478,7 +472,7 @@ get_first_day_of_week (const GDate *date,
                        GDate       *out_new_date)
 {
   unsigned int week_start = get_week_start (); /* 0 = Sunday, 1 = Monday, 2 = Tuesday etc. */
-  GDateWeekday week_start_as_weekday = (week_start == 0) ? G_DATE_SUNDAY : (GDateWeekday) week_start;
+  GDateWeekday week_start_as_weekday = (week_start == 0) ? G_DATE_SUNDAY : (GDateWeekday)week_start;
   GDateWeekday date_weekday = g_date_get_weekday (date);
   int weekday_diff;
 
@@ -509,7 +503,7 @@ static void
 get_today (GDate *today)
 {
   time_t now = time (NULL);
-  g_assert (now != (time_t) -1);  /* can only happen if the argument is non-NULL */
+  g_assert (now != (time_t)-1);   /* can only happen if the argument is non-NULL */
   g_date_set_time_t (today, now);
 }
 
@@ -546,7 +540,7 @@ static unsigned int
 get_week_of_year (const GDate *date)
 {
   unsigned int week_start = get_week_start (); /* 0 = Sunday, 1 = Monday, 2 = Tuesday etc. */
-  GDateWeekday week_start_as_weekday = (week_start == 0) ? G_DATE_SUNDAY : (GDateWeekday) week_start;
+  GDateWeekday week_start_as_weekday = (week_start == 0) ? G_DATE_SUNDAY : (GDateWeekday)week_start;
   unsigned int week_of_year = date_get_week_of_year (date, week_start_as_weekday);
 
   /* Safety checks */
@@ -592,11 +586,10 @@ calculate_average_screen_time_for_day_of_week (CcScreenTimeStatisticsRow *self,
   sum = 0.0;
   n = 0;
 
-  for (size_t i = offset; i < self->model.n_days; i += 7)
-    {
-      sum += self->model.screen_time_per_day[i];
-      n++;
-    }
+  for (size_t i = offset; i < self->model.n_days; i += 7) {
+    sum += self->model.screen_time_per_day[i];
+    n++;
+  }
 
   if (out_average != NULL)
     *out_average = (n != 0) ? sum / n : 0;
@@ -642,8 +635,7 @@ calculate_average_screen_time_per_week (CcScreenTimeStatisticsRow *self)
   return (n_complete_weeks != 0) ? sum / n_complete_weeks : sum;
 }
 
-typedef enum
-{
+typedef enum {
   USER_STATE_INACTIVE = 0,
   USER_STATE_ACTIVE = 1,
 } UserState;
@@ -675,14 +667,14 @@ load_session_active_history_data (CcScreenTimeStatisticsRow  *self,
                                   GError                    **error)
 {
   g_autofree char *history_file_path = NULL;
-  g_autoptr(JsonParser) parser = NULL;
+  g_autoptr (JsonParser) parser = NULL;
   JsonNode *root;
   JsonArray *root_array;
   uint64_t now_secs = g_get_real_time () / G_USEC_PER_SEC;
   uint64_t prev_wall_time_secs = 0;
   UserState prev_new_state = USER_STATE_INACTIVE;
   GDate new_model_start_date;
-  g_autoptr(GArray) new_model_screen_time_per_day = NULL;  /* (element-type double) */
+  g_autoptr (GArray) new_model_screen_time_per_day = NULL;  /* (element-type double) */
 
   g_date_clear (&new_model_start_date, 1);
 
@@ -697,13 +689,12 @@ load_session_active_history_data (CcScreenTimeStatisticsRow  *self,
   /* Load and parse the session active history file, written by gnome-shell.
    * See `timeLimitsManager.js` in gnome-shell for the code which writes this
    * file, and a description of the format. */
-  if (self->history_file == NULL)
-    {
-      g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOENT,
-                   _("Failed to load session history file: %s"),
-                   _("File is empty"));
-      return FALSE;
-    }
+  if (self->history_file == NULL) {
+    g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOENT,
+                 _("Failed to load session history file: %s"),
+                 _("File is empty"));
+    return FALSE;
+  }
 
   history_file_path = g_file_get_path (self->history_file);
   parser = json_parser_new_immutable ();
@@ -717,75 +708,70 @@ load_session_active_history_data (CcScreenTimeStatisticsRow  *self,
   root_array = json_node_get_array (root);
   g_assert (root_array != NULL);
 
-  for (unsigned int i = 0; i < json_array_get_length (root_array); i++)
-    {
-      JsonNode *element = json_array_get_element (root_array, i);
-      JsonObject *element_object;
-      JsonNode *old_state_member, *new_state_member, *wall_time_secs_member;
-      int64_t old_state, new_state, wall_time_secs;
+  for (unsigned int i = 0; i < json_array_get_length (root_array); i++) {
+    JsonNode *element = json_array_get_element (root_array, i);
+    JsonObject *element_object;
+    JsonNode *old_state_member, *new_state_member, *wall_time_secs_member;
+    int64_t old_state, new_state, wall_time_secs;
 
-      if (!JSON_NODE_HOLDS_OBJECT (element))
-        return set_json_error (history_file_path, error);
+    if (!JSON_NODE_HOLDS_OBJECT (element))
+      return set_json_error (history_file_path, error);
 
-      element_object = json_node_get_object (element);
-      g_assert (element_object != NULL);
+    element_object = json_node_get_object (element);
+    g_assert (element_object != NULL);
 
-      old_state_member = json_object_get_member (element_object, "oldState");
-      new_state_member = json_object_get_member (element_object, "newState");
-      wall_time_secs_member = json_object_get_member (element_object, "wallTimeSecs");
+    old_state_member = json_object_get_member (element_object, "oldState");
+    new_state_member = json_object_get_member (element_object, "newState");
+    wall_time_secs_member = json_object_get_member (element_object, "wallTimeSecs");
 
-      if (old_state_member == NULL || !JSON_NODE_HOLDS_VALUE (old_state_member) ||
-          new_state_member == NULL || !JSON_NODE_HOLDS_VALUE (new_state_member) ||
-          wall_time_secs_member == NULL || !JSON_NODE_HOLDS_VALUE (wall_time_secs_member))
-        return set_json_error (history_file_path, error);
+    if (old_state_member == NULL || !JSON_NODE_HOLDS_VALUE (old_state_member) ||
+        new_state_member == NULL || !JSON_NODE_HOLDS_VALUE (new_state_member) ||
+        wall_time_secs_member == NULL || !JSON_NODE_HOLDS_VALUE (wall_time_secs_member))
+      return set_json_error (history_file_path, error);
 
-      old_state = json_node_get_int (old_state_member);
-      new_state = json_node_get_int (new_state_member);
-      wall_time_secs = json_node_get_int (wall_time_secs_member);
+    old_state = json_node_get_int (old_state_member);
+    new_state = json_node_get_int (new_state_member);
+    wall_time_secs = json_node_get_int (wall_time_secs_member);
 
-      if (old_state == new_state ||
-          wall_time_secs <= prev_wall_time_secs ||
-          wall_time_secs < 0 ||
-          wall_time_secs > now_secs ||
-          (old_state != USER_STATE_INACTIVE && old_state != USER_STATE_ACTIVE) ||
-          (new_state != USER_STATE_INACTIVE && new_state != USER_STATE_ACTIVE))
-        return set_json_error (history_file_path, error);
+    if (old_state == new_state ||
+        wall_time_secs <= prev_wall_time_secs ||
+        wall_time_secs < 0 ||
+        wall_time_secs > now_secs ||
+        (old_state != USER_STATE_INACTIVE && old_state != USER_STATE_ACTIVE) ||
+        (new_state != USER_STATE_INACTIVE && new_state != USER_STATE_ACTIVE))
+      return set_json_error (history_file_path, error);
 
-      /* Set up the model if this is the first iteration */
-      if (!g_date_valid (&new_model_start_date))
-        {
-          g_date_set_time_t (&new_model_start_date, wall_time_secs);
-          new_model_screen_time_per_day = g_array_new (FALSE, TRUE, sizeof (double));
-        }
-
-      /* Interpret the data */
-      if (new_state == USER_STATE_INACTIVE && prev_wall_time_secs > 0)
-        {
-          uint64_t duration_secs = wall_time_secs - prev_wall_time_secs;
-          allocate_duration_to_days (&new_model_start_date, new_model_screen_time_per_day,
-                                     prev_wall_time_secs, duration_secs);
-        }
-
-      prev_wall_time_secs = wall_time_secs;
-      prev_new_state = new_state;
+    /* Set up the model if this is the first iteration */
+    if (!g_date_valid (&new_model_start_date)) {
+      g_date_set_time_t (&new_model_start_date, wall_time_secs);
+      new_model_screen_time_per_day = g_array_new (FALSE, TRUE, sizeof (double));
     }
 
-  /* Was the final transition open-ended? */
-  if (prev_wall_time_secs > 0 && prev_new_state == USER_STATE_ACTIVE)
-    {
-      uint64_t duration_secs = now_secs - prev_wall_time_secs;
+    /* Interpret the data */
+    if (new_state == USER_STATE_INACTIVE && prev_wall_time_secs > 0) {
+      uint64_t duration_secs = wall_time_secs - prev_wall_time_secs;
       allocate_duration_to_days (&new_model_start_date, new_model_screen_time_per_day,
                                  prev_wall_time_secs, duration_secs);
     }
 
+    prev_wall_time_secs = wall_time_secs;
+    prev_new_state = new_state;
+  }
+
+  /* Was the final transition open-ended? */
+  if (prev_wall_time_secs > 0 && prev_new_state == USER_STATE_ACTIVE) {
+    uint64_t duration_secs = now_secs - prev_wall_time_secs;
+    allocate_duration_to_days (&new_model_start_date, new_model_screen_time_per_day,
+                               prev_wall_time_secs, duration_secs);
+  }
+
   /* Was the file empty? */
-  if (new_model_screen_time_per_day == NULL || new_model_screen_time_per_day->len == 0)
-    {
-      g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOENT,
-                   _("Failed to load session history file ‘%s’: %s"),
-                   history_file_path, _("File is empty"));
-      return FALSE;
-    }
+  if (new_model_screen_time_per_day == NULL || new_model_screen_time_per_day->len == 0) {
+    g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOENT,
+                 _("Failed to load session history file ‘%s’: %s"),
+                 history_file_path, _("File is empty"));
+    return FALSE;
+  }
 
   /* Success! */
   if (out_new_model_start_date != NULL)
@@ -793,7 +779,7 @@ load_session_active_history_data (CcScreenTimeStatisticsRow  *self,
   if (out_new_model_n_days != NULL)
     *out_new_model_n_days = new_model_screen_time_per_day->len;
   if (out_new_model_screen_time_per_day != NULL)
-    *out_new_model_screen_time_per_day = (double *) g_array_free (g_steal_pointer (&new_model_screen_time_per_day), FALSE);
+    *out_new_model_screen_time_per_day = (double *)g_array_free (g_steal_pointer (&new_model_screen_time_per_day), FALSE);
 
   return TRUE;
 }
@@ -807,38 +793,37 @@ allocate_duration_to_days (const GDate *model_start_date,
                            uint64_t     start_wall_time_secs,
                            uint64_t     duration_secs)
 {
-  g_autoptr(GDateTime) start_date_time = NULL;
+  g_autoptr (GDateTime) start_date_time = NULL;
 
   start_date_time = g_date_time_new_from_unix_local (start_wall_time_secs);
 
-  while (duration_secs > 0)
-    {
-      g_autoptr(GDateTime) start_of_day = NULL, start_of_next_day = NULL;
-      g_autoptr(GDateTime) new_start_date_time = NULL;
-      GTimeSpan span_usecs;
-      uint64_t span_secs;
+  while (duration_secs > 0) {
+    g_autoptr (GDateTime) start_of_day = NULL, start_of_next_day = NULL;
+    g_autoptr (GDateTime) new_start_date_time = NULL;
+    GTimeSpan span_usecs;
+    uint64_t span_secs;
 
-      start_of_day = g_date_time_new_local (g_date_time_get_year (start_date_time),
-                                            g_date_time_get_month (start_date_time),
-                                            g_date_time_get_day_of_month (start_date_time),
-                                            0, 0, 0);
-      g_assert (start_of_day != NULL);
-      start_of_next_day = g_date_time_add_days (start_of_day, 1);
-      g_assert (start_of_next_day != NULL);
+    start_of_day = g_date_time_new_local (g_date_time_get_year (start_date_time),
+                                          g_date_time_get_month (start_date_time),
+                                          g_date_time_get_day_of_month (start_date_time),
+                                          0, 0, 0);
+    g_assert (start_of_day != NULL);
+    start_of_next_day = g_date_time_add_days (start_of_day, 1);
+    g_assert (start_of_next_day != NULL);
 
-      span_usecs = g_date_time_difference (start_of_next_day, start_date_time);
-      span_secs = span_usecs / G_USEC_PER_SEC;
-      if (span_secs > duration_secs)
-        span_secs = duration_secs;
+    span_usecs = g_date_time_difference (start_of_next_day, start_date_time);
+    span_secs = span_usecs / G_USEC_PER_SEC;
+    if (span_secs > duration_secs)
+      span_secs = duration_secs;
 
-      allocate_duration_to_day (model_start_date, model_screen_time_per_day,
-                                start_date_time, span_secs);
+    allocate_duration_to_day (model_start_date, model_screen_time_per_day,
+                              start_date_time, span_secs);
 
-      duration_secs -= span_secs;
-      new_start_date_time = g_date_time_add_seconds (start_date_time, span_secs);
-      g_date_time_unref (start_date_time);
-      start_date_time = g_steal_pointer (&new_start_date_time);
-    }
+    duration_secs -= span_secs;
+    new_start_date_time = g_date_time_add_seconds (start_date_time, span_secs);
+    g_date_time_unref (start_date_time);
+    start_date_time = g_steal_pointer (&new_start_date_time);
+  }
 }
 
 /* Take the time period [start_date_time, start_date_time + duration_secs]
@@ -870,11 +855,10 @@ allocate_duration_to_day (const GDate *model_start_date,
   /* If the new day is outside the range of the model, insert it at the right
    * index. This will automatically create the indices between, and initialise
    * them to zero, which is what we want. */
-  if (diff_days >= model_screen_time_per_day->len)
-    {
-      const double new_val = 0.0;
-      g_array_insert_val (model_screen_time_per_day, diff_days, new_val);
-    }
+  if (diff_days >= model_screen_time_per_day->len) {
+    const double new_val = 0.0;
+    g_array_insert_val (model_screen_time_per_day, diff_days, new_val);
+  }
 
   element = &g_array_index (model_screen_time_per_day, double, diff_days);
   *element += duration_secs / 60.0;
@@ -888,20 +872,19 @@ update_model (CcScreenTimeStatisticsRow *self)
   GDate new_model_start_date;
   size_t new_model_n_days = 0;
   g_autofree double *new_model_screen_time_per_day = NULL;
-  g_autoptr(GError) local_error = NULL;
+  g_autoptr (GError) local_error = NULL;
 
   if (!load_session_active_history_data (self, &new_model_start_date,
                                          &new_model_n_days, &new_model_screen_time_per_day,
-                                         &local_error))
-    {
-      /* Not sure if it helps to display this error in the UI, so just log it
-       * for now. `G_FILE_ERROR_NOENT` is used when the file doesn’t exist, or
-       * exists but is empty, which could happen on new systems before the shell
-       * logs anything. */
-      if (!g_error_matches (local_error, G_FILE_ERROR, G_FILE_ERROR_NOENT))
-        g_warning ("Error loading session history JSON: %s", local_error->message);
-      return;
-    }
+                                         &local_error)) {
+    /* Not sure if it helps to display this error in the UI, so just log it
+     * for now. `G_FILE_ERROR_NOENT` is used when the file doesn’t exist, or
+     * exists but is empty, which could happen on new systems before the shell
+     * logs anything. */
+    if (!g_error_matches (local_error, G_FILE_ERROR, G_FILE_ERROR_NOENT))
+      g_warning ("Error loading session history JSON: %s", local_error->message);
+    return;
+  }
 
   /* Commit the new model. */
   g_free (self->model.screen_time_per_day);
@@ -970,28 +953,22 @@ update_ui_for_model_or_selected_date (CcScreenTimeStatisticsRow *self)
   cc_bar_chart_set_selected_index (self->bar_chart, TRUE,
                                    g_date_days_between (&first_day_of_selected_week, &self->selected_date));
 
-  if (is_today (&self->selected_date))
-    {
-      g_strlcpy (selected_date_text, _("Today"), sizeof (selected_date_text));
-    }
-  else
-    {
-      /* Translators: This a medium-length date, for example ‘15 April’ */
-      retval = g_date_strftime (selected_date_text, sizeof (selected_date_text), _("%-d %B"), &self->selected_date);
-      g_assert (retval != 0);
-    }
+  if (is_today (&self->selected_date)) {
+    g_strlcpy (selected_date_text, _("Today"), sizeof (selected_date_text));
+  } else {
+    /* Translators: This a medium-length date, for example ‘15 April’ */
+    retval = g_date_strftime (selected_date_text, sizeof (selected_date_text), _("%-d %B"), &self->selected_date);
+    g_assert (retval != 0);
+  }
 
   gtk_label_set_label (self->selected_date_label, selected_date_text);
 
-  if (is_day_in_model (self, &self->selected_date))
-    {
-      screen_time_for_selected_date = get_screen_time_for_day (self, &self->selected_date);
-      label_set_text_hours_and_minutes (self->selected_screen_time_label, screen_time_for_selected_date);
-    }
-  else
-    {
-      gtk_label_set_label (self->selected_screen_time_label, _("No Data"));
-    }
+  if (is_day_in_model (self, &self->selected_date)) {
+    screen_time_for_selected_date = get_screen_time_for_day (self, &self->selected_date);
+    label_set_text_hours_and_minutes (self->selected_screen_time_label, screen_time_for_selected_date);
+  } else {
+    gtk_label_set_label (self->selected_screen_time_label, _("No Data"));
+  }
 
   /* We can’t use g_date_strftime() for this, as in some locales weekdays have
    * different grammatical genders, and the ‘Average’ prefix needs to match that. */
@@ -1003,42 +980,37 @@ update_ui_for_model_or_selected_date (CcScreenTimeStatisticsRow *self)
   else
     gtk_label_set_text (self->selected_average_value_label, _("No Data"));
 
-  if (is_this_week (&self->selected_date))
-    {
-      week_date_text = g_strdup_printf (_("This Week"));
-    }
-  else if (g_date_get_month (&first_day_of_selected_week) == g_date_get_month (&last_day_of_selected_week))
-    {
-      char month_name[100] = { 0, };
+  if (is_this_week (&self->selected_date)) {
+    week_date_text = g_strdup_printf (_("This Week"));
+  } else if (g_date_get_month (&first_day_of_selected_week) == g_date_get_month (&last_day_of_selected_week)) {
+    char month_name[100] = { 0, };
 
-      retval = g_date_strftime (month_name, sizeof (month_name), "%B", &first_day_of_selected_week);
-      g_assert (retval != 0);
+    retval = g_date_strftime (month_name, sizeof (month_name), "%B", &first_day_of_selected_week);
+    g_assert (retval != 0);
 
-      /* Translators: This is a range of days within a given month.
-       * For example ‘20–27 April’. The dash is an en-dash. */
-      week_date_text = g_strdup_printf (_("%u–%u %s"),
-                                        g_date_get_day (&first_day_of_selected_week),
-                                        g_date_get_day (&last_day_of_selected_week),
-                                        month_name);
-    }
-  else
-    {
-      char first_month_name[100] = { 0, };
-      char last_month_name[100] = { 0, };
+    /* Translators: This is a range of days within a given month.
+     * For example ‘20–27 April’. The dash is an en-dash. */
+    week_date_text = g_strdup_printf (_("%u–%u %s"),
+                                      g_date_get_day (&first_day_of_selected_week),
+                                      g_date_get_day (&last_day_of_selected_week),
+                                      month_name);
+  } else {
+    char first_month_name[100] = { 0, };
+    char last_month_name[100] = { 0, };
 
-      retval = g_date_strftime (first_month_name, sizeof (first_month_name), "%B", &first_day_of_selected_week);
-      g_assert (retval != 0);
-      retval = g_date_strftime (last_month_name, sizeof (last_month_name), "%B", &last_day_of_selected_week);
-      g_assert (retval != 0);
+    retval = g_date_strftime (first_month_name, sizeof (first_month_name), "%B", &first_day_of_selected_week);
+    g_assert (retval != 0);
+    retval = g_date_strftime (last_month_name, sizeof (last_month_name), "%B", &last_day_of_selected_week);
+    g_assert (retval != 0);
 
-      /* Translators: This is a range of days spanning two months.
-       * For example, ‘27 April–4 May’. The dash is an en-dash. */
-      week_date_text = g_strdup_printf (_("%u %s–%u %s"),
-                                        g_date_get_day (&first_day_of_selected_week),
-                                        first_month_name,
-                                        g_date_get_day (&last_day_of_selected_week),
-                                        last_month_name);
-    }
+    /* Translators: This is a range of days spanning two months.
+     * For example, ‘27 April–4 May’. The dash is an en-dash. */
+    week_date_text = g_strdup_printf (_("%u %s–%u %s"),
+                                      g_date_get_day (&first_day_of_selected_week),
+                                      first_month_name,
+                                      g_date_get_day (&last_day_of_selected_week),
+                                      last_month_name);
+  }
 
   gtk_label_set_label (self->week_date_label, week_date_text);
 
@@ -1068,9 +1040,9 @@ bar_chart_continuous_axis_label_cb (CcBarChart *chart,
 }
 
 static double
-bar_chart_continuous_axis_grid_line_cb (CcBarChart   *chart,
-                                        unsigned int  idx,
-                                        void         *user_data)
+bar_chart_continuous_axis_grid_line_cb (CcBarChart  *chart,
+                                        unsigned int idx,
+                                        void        *user_data)
 {
   /* A grid line every 2h */
   return idx * 2 * 60;
@@ -1081,53 +1053,48 @@ bar_chart_update_accessible_description (CcScreenTimeStatisticsRow *self)
 {
   g_autofree char *description = NULL;
 
-  if (g_date_valid (&self->selected_date) && self->daily_limit_minutes != 0)
-    {
-      char date_str[200];
-      size_t retval;
-      g_autofree char *daily_limit_str = NULL;
-      GDate first_day_of_week;
+  if (g_date_valid (&self->selected_date) && self->daily_limit_minutes != 0) {
+    char date_str[200];
+    size_t retval;
+    g_autofree char *daily_limit_str = NULL;
+    GDate first_day_of_week;
 
-      get_first_day_of_week (&self->selected_date, &first_day_of_week);
-      retval = g_date_strftime (date_str, sizeof (date_str), "%x", &first_day_of_week);
-      g_assert (retval != 0);
+    get_first_day_of_week (&self->selected_date, &first_day_of_week);
+    retval = g_date_strftime (date_str, sizeof (date_str), "%x", &first_day_of_week);
+    g_assert (retval != 0);
 
-      daily_limit_str = cc_util_time_to_string_text (self->daily_limit_minutes * 60 * 1000);
+    daily_limit_str = cc_util_time_to_string_text (self->daily_limit_minutes * 60 * 1000);
 
-      /* Translators: The first placeholder is a formatted date string
-       * (formatted using the `%x` strftime placeholder, which gives the
-       * preferred date representation for the current locale without the time).
-       * The second placeholder is a formatted time duration (for example,
-       * ‘3 hours’ or ‘25 minutes’). */
-      description = g_strdup_printf (_("Bar chart of screen time usage over the "
-                                       "week starting %s. A line is overlayed at "
-                                       "the %s mark to indicate the "
-                                       "configured screen time limit."),
-                                     date_str, daily_limit_str);
-    }
-  else if (g_date_valid (&self->selected_date))
-    {
-      char date_str[200];
-      size_t retval;
-      GDate first_day_of_week;
+    /* Translators: The first placeholder is a formatted date string
+     * (formatted using the `%x` strftime placeholder, which gives the
+     * preferred date representation for the current locale without the time).
+     * The second placeholder is a formatted time duration (for example,
+     * ‘3 hours’ or ‘25 minutes’). */
+    description = g_strdup_printf (_("Bar chart of screen time usage over the "
+                                     "week starting %s. A line is overlayed at "
+                                     "the %s mark to indicate the "
+                                     "configured screen time limit."),
+                                   date_str, daily_limit_str);
+  } else if (g_date_valid (&self->selected_date)) {
+    char date_str[200];
+    size_t retval;
+    GDate first_day_of_week;
 
-      get_first_day_of_week (&self->selected_date, &first_day_of_week);
-      retval = g_date_strftime (date_str, sizeof (date_str), "%x", &first_day_of_week);
-      g_assert (retval != 0);
+    get_first_day_of_week (&self->selected_date, &first_day_of_week);
+    retval = g_date_strftime (date_str, sizeof (date_str), "%x", &first_day_of_week);
+    g_assert (retval != 0);
 
-      /* Translators: The placeholder is a formatted date string (formatted
-       * using the `%x` strftime placeholder, which gives the preferred date
-       * representation for the current locale without the time). */
-      description = g_strdup_printf (_("Bar chart of screen time usage over the "
-                                       "week starting %s."),
-                                     date_str);
-    }
-  else
-    {
-      description = g_strdup_printf (_("Placeholder for a bar chart of screen "
-                                       "time usage. No data is currently "
-                                       "available."));
-    }
+    /* Translators: The placeholder is a formatted date string (formatted
+     * using the `%x` strftime placeholder, which gives the preferred date
+     * representation for the current locale without the time). */
+    description = g_strdup_printf (_("Bar chart of screen time usage over the "
+                                     "week starting %s."),
+                                   date_str);
+  } else {
+    description = g_strdup_printf (_("Placeholder for a bar chart of screen "
+                                     "time usage. No data is currently "
+                                     "available."));
+  }
 
   gtk_accessible_update_property (GTK_ACCESSIBLE (self->bar_chart),
                                   GTK_ACCESSIBLE_PROPERTY_DESCRIPTION, description,
@@ -1144,16 +1111,13 @@ bar_chart_notify_selected_index_cb (GObject    *object,
   GDate *new_selected_date_ptr;
   size_t idx = 0;
 
-  if (cc_bar_chart_get_selected_index (self->bar_chart, &idx))
-    {
-      get_first_day_of_week (&self->selected_date, &new_selected_date);
-      g_date_add_days (&new_selected_date, idx);
-      new_selected_date_ptr = &new_selected_date;
-    }
-  else
-    {
-      new_selected_date_ptr = NULL;
-    }
+  if (cc_bar_chart_get_selected_index (self->bar_chart, &idx)) {
+    get_first_day_of_week (&self->selected_date, &new_selected_date);
+    g_date_add_days (&new_selected_date, idx);
+    new_selected_date_ptr = &new_selected_date;
+  } else {
+    new_selected_date_ptr = NULL;
+  }
 
   cc_screen_time_statistics_row_set_selected_date (self, new_selected_date_ptr);
 }
@@ -1220,17 +1184,14 @@ maybe_enable_update_timeout (CcScreenTimeStatisticsRow *self)
   gboolean should_be_enabled = (self->history_file != NULL && gtk_widget_get_mapped (GTK_WIDGET (self)));
   gboolean is_enabled = (self->update_timeout_source != NULL);
 
-  if (should_be_enabled && !is_enabled)
-    {
-      self->update_timeout_source = g_timeout_source_new_seconds (60 * 60);
-      g_source_set_callback (self->update_timeout_source, G_SOURCE_FUNC (history_file_update_timeout_cb), self, NULL);
-      g_source_attach (self->update_timeout_source, NULL);
-    }
-  else if (is_enabled && !should_be_enabled)
-    {
-      g_source_destroy (self->update_timeout_source);
-      g_clear_pointer (&self->update_timeout_source, g_source_unref);
-    }
+  if (should_be_enabled && !is_enabled) {
+    self->update_timeout_source = g_timeout_source_new_seconds (60 * 60);
+    g_source_set_callback (self->update_timeout_source, G_SOURCE_FUNC (history_file_update_timeout_cb), self, NULL);
+    g_source_attach (self->update_timeout_source, NULL);
+  } else if (is_enabled && !should_be_enabled) {
+    g_source_destroy (self->update_timeout_source);
+    g_clear_pointer (&self->update_timeout_source, g_source_unref);
+  }
 }
 
 /**
@@ -1275,47 +1236,45 @@ void
 cc_screen_time_statistics_row_set_history_file (CcScreenTimeStatisticsRow *self,
                                                 GFile                     *history_file)
 {
-  g_autoptr(GError) local_error = NULL;
+  g_autoptr (GError) local_error = NULL;
 
   g_return_if_fail (CC_IS_SCREEN_TIME_STATISTICS_ROW (self));
   g_return_if_fail (history_file == NULL || G_IS_FILE (history_file));
 
-  if (g_set_object (&self->history_file, history_file))
-    {
-      g_debug ("%s: Loading history file ‘%s’", G_STRFUNC, (history_file != NULL) ? g_file_peek_path (history_file) : "(unset)");
+  if (g_set_object (&self->history_file, history_file)) {
+    g_debug ("%s: Loading history file ‘%s’", G_STRFUNC, (history_file != NULL) ? g_file_peek_path (history_file) : "(unset)");
 
-      update_model (self);
-      update_ui_for_model_or_selected_date (self);
+    update_model (self);
+    update_ui_for_model_or_selected_date (self);
 
-      /* Monitor the file for changes. */
-      if (self->history_file_monitor_changed_id != 0)
-        g_signal_handler_disconnect (self->history_file_monitor, self->history_file_monitor_changed_id);
-      self->history_file_monitor_changed_id = 0;
-      if (self->history_file_monitor != NULL)
-        g_file_monitor_cancel (self->history_file_monitor);
-      g_clear_object (&self->history_file_monitor);
+    /* Monitor the file for changes. */
+    if (self->history_file_monitor_changed_id != 0)
+      g_signal_handler_disconnect (self->history_file_monitor, self->history_file_monitor_changed_id);
+    self->history_file_monitor_changed_id = 0;
+    if (self->history_file_monitor != NULL)
+      g_file_monitor_cancel (self->history_file_monitor);
+    g_clear_object (&self->history_file_monitor);
 
-      if (self->history_file != NULL)
-        {
-          g_autoptr(GFileMonitor) monitor = NULL;
+    if (self->history_file != NULL) {
+      g_autoptr (GFileMonitor) monitor = NULL;
 
-          monitor = g_file_monitor_file (self->history_file, G_FILE_MONITOR_NONE,
-                                         NULL, &local_error);
-          if (local_error != NULL)
-            g_warning ("Error monitoring history file ‘%s’: %s",
-                       g_file_peek_path (self->history_file), local_error->message);
-          else
-            self->history_file_monitor_changed_id = g_signal_connect (monitor, "changed", G_CALLBACK (history_file_monitor_changed_cb), self);
+      monitor = g_file_monitor_file (self->history_file, G_FILE_MONITOR_NONE,
+                                     NULL, &local_error);
+      if (local_error != NULL)
+        g_warning ("Error monitoring history file ‘%s’: %s",
+                   g_file_peek_path (self->history_file), local_error->message);
+      else
+        self->history_file_monitor_changed_id = g_signal_connect (monitor, "changed", G_CALLBACK (history_file_monitor_changed_cb), self);
 
-          g_set_object (&self->history_file_monitor, monitor);
-        }
-
-      /* Periodically reload the data so the graph is updated with the passage
-       * of time. */
-      maybe_enable_update_timeout (self);
-
-      g_object_notify_by_pspec (G_OBJECT (self), props[PROP_HISTORY_FILE]);
+      g_set_object (&self->history_file_monitor, monitor);
     }
+
+    /* Periodically reload the data so the graph is updated with the passage
+     * of time. */
+    maybe_enable_update_timeout (self);
+
+    g_object_notify_by_pspec (G_OBJECT (self), props[PROP_HISTORY_FILE]);
+  }
 }
 
 /**
@@ -1355,12 +1314,12 @@ cc_screen_time_statistics_row_set_selected_date (CcScreenTimeStatisticsRow *self
     return;
 
   /* Log the selected date */
-    {
-      char date_str[200];
-      if (selected_date != NULL)
-        g_date_strftime (date_str, sizeof (date_str), "%x", selected_date);
-      g_debug ("%s: %s", G_STRFUNC, (selected_date != NULL) ? date_str : "(unset)");
-    }
+  {
+    char date_str[200];
+    if (selected_date != NULL)
+      g_date_strftime (date_str, sizeof (date_str), "%x", selected_date);
+    g_debug ("%s: %s", G_STRFUNC, (selected_date != NULL) ? date_str : "(unset)");
+  }
 
   self->selected_date = *selected_date;
 

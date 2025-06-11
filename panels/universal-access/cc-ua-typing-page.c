@@ -41,40 +41,39 @@
 #include "cc-ua-macros.h"
 #include "cc-ua-typing-page.h"
 
-struct _CcUaTypingPage
-{
-  AdwNavigationPage   parent_instance;
+struct _CcUaTypingPage {
+  AdwNavigationPage parent_instance;
 
-  AdwSwitchRow       *screen_kb_row;
-  AdwSwitchRow       *shortcuts_by_kb_row;
+  AdwSwitchRow *screen_kb_row;
+  AdwSwitchRow *shortcuts_by_kb_row;
 
-  AdwSwitchRow       *cursor_blink_row;
-  GtkScale           *blink_time_scale;
-  AdwComboRow        *flash_type_row;
-  AdwEntryRow        *test_blink_row;
+  AdwSwitchRow *cursor_blink_row;
+  GtkScale *blink_time_scale;
+  AdwComboRow *flash_type_row;
+  AdwEntryRow *test_blink_row;
 
-  AdwExpanderRow     *repeat_keys_row;
-  GtkScale           *repeat_speed_scale;
-  GtkScale           *repeat_delay_scale;
+  AdwExpanderRow *repeat_keys_row;
+  GtkScale *repeat_speed_scale;
+  GtkScale *repeat_delay_scale;
 
-  AdwExpanderRow     *sticky_keys_row;
-  AdwSwitchRow       *disable_sticky_keys_row;
-  AdwSwitchRow       *beep_sticky_keys_row;
+  AdwExpanderRow *sticky_keys_row;
+  AdwSwitchRow *disable_sticky_keys_row;
+  AdwSwitchRow *beep_sticky_keys_row;
 
-  AdwExpanderRow     *slow_keys_row;
-  GtkScale           *slow_keys_delay_scale;
-  AdwSwitchRow       *slow_keys_beep_row;
-  AdwSwitchRow       *slow_keys_beep_accept_row;
-  AdwSwitchRow       *slow_keys_beep_reject_row;
+  AdwExpanderRow *slow_keys_row;
+  GtkScale *slow_keys_delay_scale;
+  AdwSwitchRow *slow_keys_beep_row;
+  AdwSwitchRow *slow_keys_beep_accept_row;
+  AdwSwitchRow *slow_keys_beep_reject_row;
 
-  AdwExpanderRow     *bounce_keys_row;
-  GtkScale           *bounce_keys_delay_scale;
-  AdwSwitchRow       *bounce_keys_beep_reject_row;
+  AdwExpanderRow *bounce_keys_row;
+  GtkScale *bounce_keys_delay_scale;
+  AdwSwitchRow *bounce_keys_beep_reject_row;
 
-  GSettings          *application_settings;
-  GSettings          *interface_settings;
-  GSettings          *kb_desktop_settings;
-  GSettings          *kb_settings;
+  GSettings *application_settings;
+  GSettings *interface_settings;
+  GSettings *kb_desktop_settings;
+  GSettings *kb_settings;
 };
 
 G_DEFINE_TYPE (CcUaTypingPage, cc_ua_typing_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -104,7 +103,7 @@ get_inverted_mapping (GValue   *value,
   else
     return FALSE;
 
-  g_value_set_double (value, val * - 1);
+  g_value_set_double (value, val * -1);
 
   return TRUE;
 }

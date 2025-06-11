@@ -39,11 +39,10 @@ on_loader_size_prepared (GdkPixbufLoader *loader,
 
   /* Let the regular icon helper code path handle non-scalable images */
   format = gdk_pixbuf_loader_get_format (loader);
-  if (!gdk_pixbuf_format_is_scalable (format))
-    {
-      loader_data->scale = 1.0;
-      return;
-    }
+  if (!gdk_pixbuf_format_is_scalable (format)) {
+    loader_data->scale = 1.0;
+    return;
+  }
 
   gdk_pixbuf_loader_set_size (loader,
                               width * loader_data->scale,

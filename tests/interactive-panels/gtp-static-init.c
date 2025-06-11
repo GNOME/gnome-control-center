@@ -20,8 +20,7 @@
 
 #include "gtp-static-init.h"
 
-struct _GtpStaticInit
-{
+struct _GtpStaticInit {
   CcPanel parent;
 };
 
@@ -39,7 +38,6 @@ gtp_static_init_class_init (GtpStaticInitClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/tests/panels/gtp-static-init.ui");
-
 }
 
 static void

@@ -30,12 +30,12 @@ cc_util_keynav_propagate_vertical (GtkWidget        *self,
     return FALSE;
 
   switch (direction) {
-  case GTK_DIR_UP:
-    return gtk_widget_child_focus (root, GTK_DIR_TAB_BACKWARD);
-  case GTK_DIR_DOWN:
-    return gtk_widget_child_focus (root, GTK_DIR_TAB_FORWARD);
-  default:
-    return FALSE;
+    case GTK_DIR_UP:
+      return gtk_widget_child_focus (root, GTK_DIR_TAB_BACKWARD);
+    case GTK_DIR_DOWN:
+      return gtk_widget_child_focus (root, GTK_DIR_TAB_FORWARD);
+    default:
+      return FALSE;
   }
 }
 
@@ -49,9 +49,9 @@ cc_util_keynav_propagate_up (GtkWidget        *self,
     return FALSE;
 
   switch (direction) {
-  case GTK_DIR_UP:
-    return gtk_widget_child_focus (root, GTK_DIR_TAB_BACKWARD);
-  default:
-    return FALSE;
+    case GTK_DIR_UP:
+      return gtk_widget_child_focus (root, GTK_DIR_TAB_BACKWARD);
+    default:
+      return FALSE;
   }
 }

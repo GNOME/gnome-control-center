@@ -32,18 +32,17 @@
 #include "cc-panel-loader.h"
 #include "cc-window.h"
 
-struct _CcApplication
-{
-  AdwApplication  parent;
+struct _CcApplication {
+  AdwApplication parent;
 
-  CcShellModel   *model;
+  CcShellModel *model;
 
-  CcWindow       *window;
+  CcWindow *window;
 };
 
-static void cc_application_quit    (GSimpleAction *simple,
-                                    GVariant      *parameter,
-                                    gpointer       user_data);
+static void cc_application_quit (GSimpleAction *simple,
+                                 GVariant      *parameter,
+                                 gpointer       user_data);
 
 static void launch_panel_activated (GSimpleAction *action,
                                     GVariant      *parameter,
@@ -53,18 +52,18 @@ static void launch_single_panel_mode_activated (GSimpleAction *action,
                                                 GVariant      *parameter,
                                                 gpointer       user_data);
 
-static void help_activated         (GSimpleAction *action,
-                                    GVariant      *parameter,
-                                    gpointer       user_data);
+static void help_activated (GSimpleAction *action,
+                            GVariant      *parameter,
+                            gpointer       user_data);
 
-static void about_activated        (GSimpleAction *action,
-                                    GVariant      *parameter,
-                                    gpointer       user_data);
+static void about_activated (GSimpleAction *action,
+                             GVariant      *parameter,
+                             gpointer       user_data);
 
-static gboolean cmd_verbose_cb     (const char    *option_name,
-                                    const char    *value,
-                                    gpointer       data,
-                                    GError       **error);
+static gboolean cmd_verbose_cb (const char *option_name,
+                                const char *value,
+                                gpointer    data,
+                                GError    **error);
 
 G_DEFINE_TYPE (CcApplication, cc_application, ADW_TYPE_APPLICATION)
 
@@ -93,14 +92,13 @@ help_activated (GSimpleAction *action,
   CcApplication *self = CC_APPLICATION (user_data);
   CcPanel *panel = NULL;
   GtkWidget *window = NULL;
-  g_autoptr(GtkUriLauncher) launcher = NULL;
+  g_autoptr (GtkUriLauncher) launcher = NULL;
   const char *uri = NULL;
 
-  if (self->window)
-    {
-      window = cc_shell_get_toplevel (CC_SHELL (self->window));
-      panel = cc_shell_get_active_panel (CC_SHELL (self->window));
-    }
+  if (self->window) {
+    window = cc_shell_get_toplevel (CC_SHELL (self->window));
+    panel = cc_shell_get_active_panel (CC_SHELL (self->window));
+  }
 
   if (panel)
     uri = cc_panel_get_help_uri (panel);
@@ -146,8 +144,8 @@ launch_panel_activated (GSimpleAction *action,
                         gpointer       user_data)
 {
   CcApplication *self = CC_APPLICATION (user_data);
-  g_autoptr(GVariant) parameters = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GVariant) parameters = NULL;
+  g_autoptr (GError) error = NULL;
   gchar *panel_id;
 
   g_variant_get (parameter, "(&s@av)", &panel_id, &parameters);
@@ -192,16 +190,15 @@ get_current_desktops (void)
 static gboolean
 is_supported_desktop (void)
 {
-  g_auto(GStrv) desktops = NULL;
+  g_auto (GStrv) desktops = NULL;
   guint i;
 
   desktops = get_current_desktops ();
-  for (i = 0; desktops[i] != NULL; i++)
-    {
-      /* This matches OnlyShowIn in gnome-control-center.desktop.in.in */
-      if (g_ascii_strcasecmp (desktops[i], "GNOME") == 0)
-        return TRUE;
-    }
+  for (i = 0; desktops[i] != NULL; i++) {
+    /* This matches OnlyShowIn in gnome-control-center.desktop.in.in */
+    if (g_ascii_strcasecmp (desktops[i], "GNOME") == 0)
+      return TRUE;
+  }
 
   return FALSE;
 }
@@ -210,23 +207,20 @@ static gint
 cc_application_handle_local_options (GApplication *application,
                                      GVariantDict *options)
 {
-  if (g_variant_dict_contains (options, "version"))
-    {
-      g_print ("Local options %s %s\n", PACKAGE, VERSION);
-      return 0;
-    }
+  if (g_variant_dict_contains (options, "version")) {
+    g_print ("Local options %s %s\n", PACKAGE, VERSION);
+    return 0;
+  }
 
-  if (!is_supported_desktop ())
-    {
-      g_printerr ("Running gnome-control-center is only supported under GNOME and Unity, exiting\n");
-      return 1;
-    }
+  if (!is_supported_desktop ()) {
+    g_printerr ("Running gnome-control-center is only supported under GNOME and Unity, exiting\n");
+    return 1;
+  }
 
-  if (g_variant_dict_contains (options, "list"))
-    {
-      cc_panel_loader_list_panels ();
-      return 0;
-    }
+  if (g_variant_dict_contains (options, "list")) {
+    cc_panel_loader_list_panels ();
+    return 0;
+  }
 
   return -1;
 }
@@ -252,41 +246,37 @@ cc_application_command_line (GApplication            *application,
 
   g_application_activate (application);
 
-  if (g_variant_dict_lookup (options, "search", "&s", &search_str))
-    {
-      cc_window_set_search_item (self->window, search_str);
+  if (g_variant_dict_lookup (options, "search", "&s", &search_str)) {
+    cc_window_set_search_item (self->window, search_str);
+  } else if (g_variant_dict_lookup (options, G_OPTION_REMAINING, "^a&ay", &start_panels)) {
+    const char *start_id;
+    GError *err = NULL;
+    GVariant *parameters;
+    GVariantBuilder builder;
+    int i;
+
+    g_return_val_if_fail (start_panels[0] != NULL, 1);
+    start_id = start_panels[0];
+
+    if (start_panels[1])
+      g_debug ("Extra argument: %s", start_panels[1]);
+    else
+      g_debug ("No extra argument");
+
+    g_variant_builder_init (&builder, G_VARIANT_TYPE ("av"));
+
+    for (i = 1; start_panels[i] != NULL; i++)
+      g_variant_builder_add (&builder, "v", g_variant_new_string (start_panels[i]));
+    parameters = g_variant_builder_end (&builder);
+    if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), start_id, parameters, &err)) {
+      g_warning ("Could not load setting panel \"%s\": %s", start_id,
+                 (err) ? err->message : "Unknown error");
+      retval = 1;
+
+      if (err)
+        g_clear_error (&err);
     }
-  else if (g_variant_dict_lookup (options, G_OPTION_REMAINING, "^a&ay", &start_panels))
-    {
-      const char *start_id;
-      GError *err = NULL;
-      GVariant *parameters;
-      GVariantBuilder builder;
-      int i;
-
-      g_return_val_if_fail (start_panels[0] != NULL, 1);
-      start_id = start_panels[0];
-
-      if (start_panels[1])
-        g_debug ("Extra argument: %s", start_panels[1]);
-      else
-        g_debug ("No extra argument");
-
-      g_variant_builder_init (&builder, G_VARIANT_TYPE ("av"));
-
-      for (i = 1; start_panels[i] != NULL; i++)
-        g_variant_builder_add (&builder, "v", g_variant_new_string (start_panels[i]));
-      parameters = g_variant_builder_end (&builder);
-      if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), start_id, parameters, &err))
-        {
-          g_warning ("Could not load setting panel \"%s\": %s", start_id,
-                     (err) ? err->message : "Unknown error");
-          retval = 1;
-
-          if (err)
-            g_clear_error (&err);
-        }
-    }
+  }
 
   return retval;
 }
@@ -319,7 +309,7 @@ cc_application_startup (GApplication *application)
 {
   CcApplication *self = CC_APPLICATION (application);
   const gchar *help_accels[] = { "F1", NULL };
-  g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr (GtkCssProvider) provider = NULL;
 
   g_action_map_add_action_entries (G_ACTION_MAP (self),
                                    cc_app_actions,
@@ -358,14 +348,13 @@ cc_application_constructor (GType                  type,
 {
   static GObject *self = NULL;
 
-  if (self == NULL)
-    {
-      self = G_OBJECT_CLASS (cc_application_parent_class)->constructor (type,
-                                                                        n_construct_params,
-                                                                        construct_params);
-      g_object_add_weak_pointer (self, (gpointer) &self);
-      return self;
-    }
+  if (self == NULL) {
+    self = G_OBJECT_CLASS (cc_application_parent_class)->constructor (type,
+                                                                      n_construct_params,
+                                                                      construct_params);
+    g_object_add_weak_pointer (self, (gpointer) & self);
+    return self;
+  }
 
   return g_object_ref (self);
 }

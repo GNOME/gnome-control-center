@@ -50,10 +50,10 @@ cc_remote_desktop_page_dispose (GObject *object)
 }
 
 static void
-cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass * klass)
+cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->dispose = cc_remote_desktop_page_dispose;
 
@@ -68,7 +68,7 @@ cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass * klass)
 static void
 cc_remote_desktop_page_init (CcRemoteDesktopPage *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr (GtkCssProvider) provider = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 

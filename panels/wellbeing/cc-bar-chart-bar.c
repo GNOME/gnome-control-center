@@ -88,13 +88,13 @@ static void cc_bar_chart_bar_set_property (GObject      *object,
                                            GParamSpec   *pspec);
 static void cc_bar_chart_bar_dispose (GObject *object);
 static void cc_bar_chart_bar_finalize (GObject *object);
-static void cc_bar_chart_bar_measure (GtkWidget      *widget,
-                                      GtkOrientation  orientation,
-                                      int             for_size,
-                                      int            *minimum,
-                                      int            *natural,
-                                      int            *minimum_baseline,
-                                      int            *natural_baseline);
+static void cc_bar_chart_bar_measure (GtkWidget     *widget,
+                                      GtkOrientation orientation,
+                                      int            for_size,
+                                      int           *minimum,
+                                      int           *natural,
+                                      int           *minimum_baseline,
+                                      int           *natural_baseline);
 
 static void
 cc_bar_chart_bar_class_init (CcBarChartBarClass *klass)
@@ -176,8 +176,7 @@ cc_bar_chart_bar_get_property (GObject    *object,
 {
   CcBarChartBar *self = CC_BAR_CHART_BAR (object);
 
-  switch ((CcBarChartBarProperty) property_id)
-    {
+  switch ((CcBarChartBarProperty)property_id) {
     case PROP_VALUE:
       g_value_set_double (value, cc_bar_chart_bar_get_value (self));
       break;
@@ -187,7 +186,7 @@ cc_bar_chart_bar_get_property (GObject    *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -198,8 +197,7 @@ cc_bar_chart_bar_set_property (GObject      *object,
 {
   CcBarChartBar *self = CC_BAR_CHART_BAR (object);
 
-  switch ((CcBarChartBarProperty) property_id)
-    {
+  switch ((CcBarChartBarProperty)property_id) {
     case PROP_VALUE:
       cc_bar_chart_bar_set_value (self, g_value_get_double (value));
       break;
@@ -208,7 +206,7 @@ cc_bar_chart_bar_set_property (GObject      *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
+  }
 }
 
 static void
@@ -241,20 +239,15 @@ cc_bar_chart_bar_measure (GtkWidget      *widget,
                           int            *minimum_baseline,
                           int            *natural_baseline)
 {
-  if (orientation == GTK_ORIENTATION_HORIZONTAL)
-    {
-      *minimum = MINIMUM_BAR_WIDTH;
-      *natural = NATURAL_BAR_WIDTH;
-    }
-  else if (orientation == GTK_ORIENTATION_VERTICAL)
-    {
-      *minimum = 0;
-      *natural = 0;
-    }
-  else
-    {
-      g_assert_not_reached ();
-    }
+  if (orientation == GTK_ORIENTATION_HORIZONTAL) {
+    *minimum = MINIMUM_BAR_WIDTH;
+    *natural = NATURAL_BAR_WIDTH;
+  } else if (orientation == GTK_ORIENTATION_VERTICAL) {
+    *minimum = 0;
+    *natural = 0;
+  } else {
+    g_assert_not_reached ();
+  }
 }
 
 /**

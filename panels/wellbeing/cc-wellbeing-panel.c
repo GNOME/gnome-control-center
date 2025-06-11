@@ -36,19 +36,17 @@
 #include "cc-wellbeing-resources.h"
 
 /* All in seconds */
-static const struct
-  {
-    guint duration_secs;
-    guint interval_secs;
-  }
-movement_break_schedule_values[] =
-  {
-    { 1 * 60, 20 * 60 },
-    { 2 * 60, 20 * 60 },
-    { 3 * 60, 30 * 60 },
-    { 5 * 60, 30 * 60 },
-    { 0, 0 },  /* 0-terminator */
-  };
+static const struct {
+  guint duration_secs;
+  guint interval_secs;
+}
+movement_break_schedule_values[] = {
+  { 1 * 60, 20 * 60 },
+  { 2 * 60, 20 * 60 },
+  { 3 * 60, 30 * 60 },
+  { 5 * 60, 30 * 60 },
+  { 0, 0 },    /* 0-terminator */
+};
 
 struct _CcWellbeingPanel {
   CcPanel parent_instance;
@@ -160,7 +158,7 @@ settings_strv_binding_data_new (GSettings  *settings,
                                 const char *key,
                                 const char *expected_member)
 {
-  g_autoptr(SettingsStrvBindingData) data = g_new0 (SettingsStrvBindingData, 1);
+  g_autoptr (SettingsStrvBindingData) data = g_new0 (SettingsStrvBindingData, 1);
 
   data->settings = settings;  /* the binding which owns this struct is guaranteed to keep the GSettings alive */
   data->key = key;
@@ -189,8 +187,8 @@ settings_strv_add_or_remove_str (const GValue       *value,
 {
   gboolean should_add = g_value_get_boolean (value);
   const SettingsStrvBindingData *binding_data = user_data;
-  g_auto(GVariantBuilder) builder = G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE_STRING_ARRAY);
-  g_autoptr(GVariantIter) iter = NULL;
+  g_auto (GVariantBuilder) builder = G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE_STRING_ARRAY);
+  g_autoptr (GVariantIter) iter = NULL;
   const char *member;
   gboolean match_seen = FALSE;
 
@@ -202,14 +200,13 @@ settings_strv_add_or_remove_str (const GValue       *value,
    * and it hasn’t been by the time the loop ends, add it. */
   g_settings_get (binding_data->settings, binding_data->key, "as", &iter);
 
-  while (g_variant_iter_loop (iter, "&s", &member))
-    {
-      gboolean match = g_str_equal (member, binding_data->expected_member);
-      if (should_add || !match)
-        g_variant_builder_add (&builder, "s", member);
-      if (match)
-        match_seen = TRUE;
-    }
+  while (g_variant_iter_loop (iter, "&s", &member)) {
+    gboolean match = g_str_equal (member, binding_data->expected_member);
+    if (should_add || !match)
+      g_variant_builder_add (&builder, "s", member);
+    if (match)
+      match_seen = TRUE;
+  }
 
   if (should_add && !match_seen)
     g_variant_builder_add (&builder, "s", binding_data->expected_member);
@@ -220,8 +217,8 @@ settings_strv_add_or_remove_str (const GValue       *value,
 static void
 cc_wellbeing_panel_init (CcWellbeingPanel *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
-  g_autoptr(GFile) history_file = NULL;
+  g_autoptr (GtkCssProvider) provider = NULL;
+  g_autoptr (GFile) history_file = NULL;
 
   g_resources_register (cc_wellbeing_get_resource ());
 
@@ -237,12 +234,11 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
    * #AdwComboRow because it needs to represent two settings at once. */
   self->movement_break_schedule_list = g_list_store_new (CC_TYPE_BREAK_SCHEDULE);
 
-  for (gsize i = 0; movement_break_schedule_values[i].duration_secs != 0; i++)
-    {
-      g_autoptr(CcBreakSchedule) schedule = cc_break_schedule_new (movement_break_schedule_values[i].duration_secs,
-                                                                   movement_break_schedule_values[i].interval_secs);
-      g_list_store_append (self->movement_break_schedule_list, schedule);
-    }
+  for (gsize i = 0; movement_break_schedule_values[i].duration_secs != 0; i++) {
+    g_autoptr (CcBreakSchedule) schedule = cc_break_schedule_new (movement_break_schedule_values[i].duration_secs,
+                                                                  movement_break_schedule_values[i].interval_secs);
+    g_list_store_append (self->movement_break_schedule_list, schedule);
+  }
 
   adw_combo_row_set_model (self->movement_break_schedule_row, G_LIST_MODEL (self->movement_break_schedule_list));
 
@@ -270,25 +266,25 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
                    G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_NO_SENSITIVITY);
 
   self->screen_time_limits_settings_changed_history_enabled_id =
-      g_signal_connect_swapped (self->screen_time_limits_settings, "changed::history-enabled",
-                                G_CALLBACK (update_screen_time_limits_enabled), self);
+    g_signal_connect_swapped (self->screen_time_limits_settings, "changed::history-enabled",
+                              G_CALLBACK (update_screen_time_limits_enabled), self);
 
   update_screen_time_limits_enabled (self);
 
   /* Sensitivity has to be handled separately for the screen time settings
    * because it’s the combination of multiple inputs. */
   self->screen_time_limits_settings_writable_changed_daily_limit_seconds_id =
-      g_signal_connect_swapped (self->screen_time_limits_settings, "writable-changed::daily-limit-seconds",
-                                G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
+    g_signal_connect_swapped (self->screen_time_limits_settings, "writable-changed::daily-limit-seconds",
+                              G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
   self->screen_time_limits_settings_writable_changed_grayscale_id =
-      g_signal_connect_swapped (self->screen_time_limits_settings, "writable-changed::grayscale",
-                                G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
+    g_signal_connect_swapped (self->screen_time_limits_settings, "writable-changed::grayscale",
+                              G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
   self->screen_time_limits_settings_writable_changed_daily_limit_enabled_id =
-      g_signal_connect_swapped (self->screen_time_limits_settings, "writable-changed::daily-limit-enabled",
-                                G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
+    g_signal_connect_swapped (self->screen_time_limits_settings, "writable-changed::daily-limit-enabled",
+                              G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
   self->screen_time_limits_settings_changed_daily_limit_enabled_id =
-      g_signal_connect_swapped (self->screen_time_limits_settings, "changed::daily-limit-enabled",
-                                G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
+    g_signal_connect_swapped (self->screen_time_limits_settings, "changed::daily-limit-enabled",
+                              G_CALLBACK (update_daily_time_limit_and_grayscale_row_sensitivity), self);
 
   update_daily_time_limit_and_grayscale_row_sensitivity (self);
 
@@ -311,7 +307,7 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
                                 settings_strv_contains_str,
                                 settings_strv_add_or_remove_str,
                                 settings_strv_binding_data_new (self->break_reminders_settings, "selected-breaks", "eyesight"),
-                                (GDestroyNotify) settings_strv_binding_data_free);
+                                (GDestroyNotify)settings_strv_binding_data_free);
   g_settings_bind_with_mapping (self->break_reminders_settings,
                                 "selected-breaks",
                                 self->movement_breaks_row,
@@ -320,25 +316,25 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
                                 settings_strv_contains_str,
                                 settings_strv_add_or_remove_str,
                                 settings_strv_binding_data_new (self->break_reminders_settings, "selected-breaks", "movement"),
-                                (GDestroyNotify) settings_strv_binding_data_free);
+                                (GDestroyNotify)settings_strv_binding_data_free);
 
   /* We can’t use GSettings bindings for the movement break schedule, as the one
    * widget needs to represent two settings. */
   self->movement_break_schedule_notify_selected_item_id =
-      g_signal_connect (self->movement_break_schedule_row, "notify::selected-item",
-                        G_CALLBACK (movement_break_schedule_notify_selected_item_cb), self);
+    g_signal_connect (self->movement_break_schedule_row, "notify::selected-item",
+                      G_CALLBACK (movement_break_schedule_notify_selected_item_cb), self);
   self->movement_break_settings_changed_duration_id =
-      g_signal_connect (self->movement_break_settings, "changed::duration",
-                        G_CALLBACK (break_settings_changed_duration_or_interval_cb), self);
+    g_signal_connect (self->movement_break_settings, "changed::duration",
+                      G_CALLBACK (break_settings_changed_duration_or_interval_cb), self);
   self->movement_break_settings_changed_interval_id =
-      g_signal_connect (self->movement_break_settings, "changed::interval",
-                        G_CALLBACK (break_settings_changed_duration_or_interval_cb), self);
+    g_signal_connect (self->movement_break_settings, "changed::interval",
+                      G_CALLBACK (break_settings_changed_duration_or_interval_cb), self);
   self->movement_break_settings_writable_changed_duration_id =
-      g_signal_connect (self->movement_break_settings, "writable-changed::duration",
-                        G_CALLBACK (break_settings_writable_changed_duration_or_interval_cb), self);
+    g_signal_connect (self->movement_break_settings, "writable-changed::duration",
+                      G_CALLBACK (break_settings_writable_changed_duration_or_interval_cb), self);
   self->movement_break_settings_writable_changed_interval_id =
-      g_signal_connect (self->movement_break_settings, "writable-changed::interval",
-                        G_CALLBACK (break_settings_writable_changed_duration_or_interval_cb), self);
+    g_signal_connect (self->movement_break_settings, "writable-changed::interval",
+                      G_CALLBACK (break_settings_writable_changed_duration_or_interval_cb), self);
 
   break_settings_changed_duration_or_interval_cb (NULL, NULL, self);
   break_settings_writable_changed_duration_or_interval_cb (NULL, NULL, self);
@@ -347,23 +343,23 @@ cc_wellbeing_panel_init (CcWellbeingPanel *self)
    * per object::property yet it needs to set play-sound on two child schemas
    * (one for eyesight breaks and one for movement breaks). */
   self->sounds_notify_active_id =
-      g_signal_connect (self->sounds_row, "notify::active",
-                        G_CALLBACK (sounds_notify_active_cb), self);
+    g_signal_connect (self->sounds_row, "notify::active",
+                      G_CALLBACK (sounds_notify_active_cb), self);
   self->eyesight_break_settings_changed_play_sound_id =
-      g_signal_connect (self->eyesight_break_settings, "changed::play-sound",
-                        G_CALLBACK (break_settings_changed_play_sound_cb), self);
+    g_signal_connect (self->eyesight_break_settings, "changed::play-sound",
+                      G_CALLBACK (break_settings_changed_play_sound_cb), self);
   self->movement_break_settings_changed_play_sound_id =
-      g_signal_connect (self->movement_break_settings, "changed::play-sound",
-                        G_CALLBACK (break_settings_changed_play_sound_cb), self);
+    g_signal_connect (self->movement_break_settings, "changed::play-sound",
+                      G_CALLBACK (break_settings_changed_play_sound_cb), self);
   self->eyesight_break_settings_writable_changed_play_sound_id =
-      g_signal_connect (self->eyesight_break_settings, "writable-changed::play-sound",
-                        G_CALLBACK (break_settings_writable_changed_play_sound_cb), self);
+    g_signal_connect (self->eyesight_break_settings, "writable-changed::play-sound",
+                      G_CALLBACK (break_settings_writable_changed_play_sound_cb), self);
   self->movement_break_settings_writable_changed_play_sound_id =
-      g_signal_connect (self->movement_break_settings, "writable-changed::play-sound",
-                        G_CALLBACK (break_settings_writable_changed_play_sound_cb), self);
+    g_signal_connect (self->movement_break_settings, "writable-changed::play-sound",
+                      G_CALLBACK (break_settings_writable_changed_play_sound_cb), self);
   self->break_settings_changed_selected_breaks_id =
-      g_signal_connect (self->break_reminders_settings, "changed::selected-breaks",
-                        G_CALLBACK (break_settings_changed_selected_breaks_cb), self);
+    g_signal_connect (self->break_reminders_settings, "changed::selected-breaks",
+                      G_CALLBACK (break_settings_changed_selected_breaks_cb), self);
 
   break_settings_changed_play_sound_cb (NULL, NULL, self);
   break_settings_writable_changed_play_sound_cb (NULL, NULL, self);
@@ -440,7 +436,7 @@ movement_break_schedule_notify_selected_item_cb (GObject    *object,
                                                  gpointer    user_data)
 {
   CcWellbeingPanel *self = CC_WELLBEING_PANEL (user_data);
-  CcBreakSchedule *selected_item  = CC_BREAK_SCHEDULE (adw_combo_row_get_selected_item (self->movement_break_schedule_row));
+  CcBreakSchedule *selected_item = CC_BREAK_SCHEDULE (adw_combo_row_get_selected_item (self->movement_break_schedule_row));
 
   g_settings_set_uint (self->movement_break_settings, "duration-seconds", cc_break_schedule_get_duration_secs (selected_item));
   g_settings_set_uint (self->movement_break_settings, "interval-seconds", cc_break_schedule_get_interval_secs (selected_item));
@@ -451,7 +447,7 @@ static gboolean
 break_schedule_equal_cb (gconstpointer a,
                          gconstpointer b)
 {
-  return cc_break_schedule_compare ((CcBreakSchedule *) a, (CcBreakSchedule *) b) == 0;
+  return cc_break_schedule_compare ((CcBreakSchedule *)a, (CcBreakSchedule *)b) == 0;
 }
 
 static gint
@@ -459,7 +455,7 @@ break_schedule_compare_cb (gconstpointer a,
                            gconstpointer b,
                            gpointer      user_data)
 {
-  return cc_break_schedule_compare ((CcBreakSchedule *) a, (CcBreakSchedule *) b);
+  return cc_break_schedule_compare ((CcBreakSchedule *)a, (CcBreakSchedule *)b);
 }
 
 static void
@@ -470,20 +466,19 @@ break_settings_changed_duration_or_interval_cb (GSettings  *settings,
   CcWellbeingPanel *self = CC_WELLBEING_PANEL (user_data);
   guint duration_seconds = g_settings_get_uint (self->movement_break_settings, "duration-seconds");
   guint interval_seconds = g_settings_get_uint (self->movement_break_settings, "interval-seconds");
-  g_autoptr(CcBreakSchedule) settings_schedule = cc_break_schedule_new (duration_seconds, interval_seconds);
+  g_autoptr (CcBreakSchedule) settings_schedule = cc_break_schedule_new (duration_seconds, interval_seconds);
   guint selected_index;
 
-  if (!g_list_store_find_with_equal_func (self->movement_break_schedule_list, settings_schedule, break_schedule_equal_cb, &selected_index))
-    {
-      gboolean again;
+  if (!g_list_store_find_with_equal_func (self->movement_break_schedule_list, settings_schedule, break_schedule_equal_cb, &selected_index)) {
+    gboolean again;
 
-      /* Temporarily add the new schedule to the list, so that the user’s chosen
-       * settings can be represented in the UI. */
-      g_list_store_append (self->movement_break_schedule_list, settings_schedule);
-      g_list_store_sort (self->movement_break_schedule_list, break_schedule_compare_cb, NULL);
-      again = g_list_store_find_with_equal_func (self->movement_break_schedule_list, settings_schedule, break_schedule_equal_cb, &selected_index);
-      g_assert (again);
-    }
+    /* Temporarily add the new schedule to the list, so that the user’s chosen
+     * settings can be represented in the UI. */
+    g_list_store_append (self->movement_break_schedule_list, settings_schedule);
+    g_list_store_sort (self->movement_break_schedule_list, break_schedule_compare_cb, NULL);
+    again = g_list_store_find_with_equal_func (self->movement_break_schedule_list, settings_schedule, break_schedule_equal_cb, &selected_index);
+    g_assert (again);
+  }
 
   adw_combo_row_set_selected (self->movement_break_schedule_row, selected_index);
 }
@@ -491,10 +486,10 @@ break_settings_changed_duration_or_interval_cb (GSettings  *settings,
 static void
 update_movement_break_schedule_row_sensitivity (CcWellbeingPanel *self)
 {
-  g_auto(GStrv) selected_breaks = g_settings_get_strv (self->break_reminders_settings, "selected-breaks");
+  g_auto (GStrv) selected_breaks = g_settings_get_strv (self->break_reminders_settings, "selected-breaks");
   gboolean writable = (g_settings_is_writable (self->movement_break_settings, "duration-seconds") &&
                        g_settings_is_writable (self->movement_break_settings, "interval-seconds"));
-  gboolean enabled = g_strv_contains ((const char * const *) selected_breaks, "movement");
+  gboolean enabled = g_strv_contains ((const char * const *)selected_breaks, "movement");
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->movement_break_schedule_row), writable && enabled);
 }
@@ -545,11 +540,11 @@ break_settings_changed_play_sound_cb (GSettings  *settings,
 static void
 update_sounds_row_sensitivity (CcWellbeingPanel *self)
 {
-  g_auto(GStrv) selected_breaks = g_settings_get_strv (self->break_reminders_settings, "selected-breaks");
+  g_auto (GStrv) selected_breaks = g_settings_get_strv (self->break_reminders_settings, "selected-breaks");
   gboolean writable = (g_settings_is_writable (self->eyesight_break_settings, "play-sound") &&
                        g_settings_is_writable (self->movement_break_settings, "play-sound"));
-  gboolean enabled = (g_strv_contains ((const char * const *) selected_breaks, "eyesight") ||
-                      g_strv_contains ((const char * const *) selected_breaks, "movement"));
+  gboolean enabled = (g_strv_contains ((const char * const *)selected_breaks, "eyesight") ||
+                      g_strv_contains ((const char * const *)selected_breaks, "movement"));
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->sounds_row), writable && enabled);
 }
@@ -638,7 +633,7 @@ cc_wellbeing_panel_class_init (CcWellbeingPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  CcPanelClass *panel_class  = CC_PANEL_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   object_class->dispose = cc_wellbeing_panel_dispose;
 
@@ -666,4 +661,3 @@ cc_wellbeing_panel_class_init (CcWellbeingPanelClass *klass)
   g_type_ensure (CC_TYPE_DURATION_ROW);
   g_type_ensure (CC_TYPE_SCREEN_TIME_STATISTICS_ROW);
 }
-

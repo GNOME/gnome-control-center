@@ -22,12 +22,11 @@
 #include "cc-online-account-row.h"
 #include "cc-online-accounts-resources.h"
 
-struct _CcOnlineAccountRow
-{
+struct _CcOnlineAccountRow {
   AdwActionRow parent;
 
   GtkImage *icon_image;
-  GtkBox   *error_box;
+  GtkBox *error_box;
 
   GoaObject *object;
 };
@@ -38,7 +37,7 @@ static gboolean
 is_gicon_symbolic (GtkWidget *widget,
                    GIcon     *icon)
 {
-  g_autoptr(GtkIconPaintable) icon_paintable = NULL;
+  g_autoptr (GtkIconPaintable) icon_paintable = NULL;
   GtkIconTheme *icon_theme;
 
   icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
@@ -87,8 +86,8 @@ cc_online_account_row_new (GoaObject *object)
 {
   CcOnlineAccountRow *self;
   GoaAccount *account;
-  g_autoptr(GIcon) gicon = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GIcon) gicon = NULL;
+  g_autoptr (GError) error = NULL;
 
   self = g_object_new (CC_TYPE_ONLINE_ACCOUNT_ROW, NULL);
 
@@ -103,28 +102,22 @@ cc_online_account_row_new (GoaObject *object)
                           G_BINDING_SYNC_CREATE);
 
   gicon = g_icon_new_for_string (goa_account_get_provider_icon (account), &error);
-  if (error != NULL)
-    {
-      g_warning ("Error creating GIcon for account: %s (%s, %d)",
-                 error->message,
-                 g_quark_to_string (error->domain),
-                 error->code);
-    }
-  else
-    {
-      gtk_image_set_from_gicon (self->icon_image, gicon);
+  if (error != NULL) {
+    g_warning ("Error creating GIcon for account: %s (%s, %d)",
+               error->message,
+               g_quark_to_string (error->domain),
+               error->code);
+  } else {
+    gtk_image_set_from_gicon (self->icon_image, gicon);
 
-      if (is_gicon_symbolic (GTK_WIDGET (self), gicon))
-        {
-          gtk_image_set_icon_size (self->icon_image, GTK_ICON_SIZE_NORMAL);
-          gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "symbolic-circular");
-        }
-      else
-        {
-          gtk_image_set_icon_size (self->icon_image, GTK_ICON_SIZE_LARGE);
-          gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "lowres-icon");
-        }
+    if (is_gicon_symbolic (GTK_WIDGET (self), gicon)) {
+      gtk_image_set_icon_size (self->icon_image, GTK_ICON_SIZE_NORMAL);
+      gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "symbolic-circular");
+    } else {
+      gtk_image_set_icon_size (self->icon_image, GTK_ICON_SIZE_LARGE);
+      gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "lowres-icon");
     }
+  }
 
   g_object_bind_property (account, "attention-needed",
                           self->error_box, "visible",

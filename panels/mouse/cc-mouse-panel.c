@@ -35,37 +35,36 @@
 #include "gsd-device-manager.h"
 #include "gsd-input-helper.h"
 
-struct _CcMousePanel
-{
-  CcPanel            parent_instance;
+struct _CcMousePanel {
+  CcPanel parent_instance;
 
-  GtkSwitch         *mouse_accel_switch;
+  GtkSwitch *mouse_accel_switch;
   AdwPreferencesGroup *mouse_group;
-  CcSplitRow        *mouse_scroll_direction_row;
-  GtkScale          *mouse_speed_scale;
-  GtkWindow         *mouse_test;
-  AdwToggleGroup    *primary_toggle_group;
-  CcSplitRow        *two_finger_push_row;
-  GtkStack          *title_stack;
-  CcIllustratedRow  *tap_to_click_row;
-  GtkSwitch         *tap_to_click_switch;
-  AdwViewStackPage  *touchpad_stack_page;
-  CcSplitRow        *touchpad_scroll_direction_row;
-  CcSplitRow        *touchpad_scroll_method_row;
-  GtkScale          *touchpad_speed_scale;
-  AdwSwitchRow      *touchpad_toggle_row;
-  AdwSwitchRow      *touchpad_typing_row;
+  CcSplitRow *mouse_scroll_direction_row;
+  GtkScale *mouse_speed_scale;
+  GtkWindow *mouse_test;
+  AdwToggleGroup *primary_toggle_group;
+  CcSplitRow *two_finger_push_row;
+  GtkStack *title_stack;
+  CcIllustratedRow *tap_to_click_row;
+  GtkSwitch *tap_to_click_switch;
+  AdwViewStackPage *touchpad_stack_page;
+  CcSplitRow *touchpad_scroll_direction_row;
+  CcSplitRow *touchpad_scroll_method_row;
+  GtkScale *touchpad_speed_scale;
+  AdwSwitchRow *touchpad_toggle_row;
+  AdwSwitchRow *touchpad_typing_row;
 
-  GSettings         *mouse_settings;
-  GSettings         *touchpad_settings;
+  GSettings *mouse_settings;
+  GSettings *touchpad_settings;
 
-  gboolean           have_mouse;
-  gboolean           have_touchpad;
-  gboolean           have_touchscreen;
-  gboolean           have_synaptics;
+  gboolean have_mouse;
+  gboolean have_touchpad;
+  gboolean have_touchscreen;
+  gboolean have_synaptics;
 
-  GtkGesture        *left_gesture;
-  GtkGesture        *right_gesture;
+  GtkGesture *left_gesture;
+  GtkGesture *right_gesture;
 };
 
 CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
@@ -139,8 +138,8 @@ can_disable_touchpad (CcMousePanel *self)
     return FALSE;
 
   g_debug ("Should we show the row to enable touchpad: have_mouse: %s have_touchscreen: %s\n",
-     self->have_mouse ? "true" : "false",
-     self->have_touchscreen ? "true" : "false");
+           self->have_mouse ? "true" : "false",
+           self->have_touchscreen ? "true" : "false");
 
   /* Let's show the button when a mouse or touchscreen is present */
   if (self->have_mouse || self->have_touchscreen)
@@ -154,9 +153,9 @@ can_disable_touchpad (CcMousePanel *self)
 }
 
 static gboolean
-touchpad_enabled_get_mapping (GValue    *value,
-                              GVariant  *variant,
-                              gpointer   user_data)
+touchpad_enabled_get_mapping (GValue   *value,
+                              GVariant *variant,
+                              gpointer  user_data)
 {
   gboolean enabled;
 
@@ -167,9 +166,9 @@ touchpad_enabled_get_mapping (GValue    *value,
 }
 
 static GVariant *
-touchpad_enabled_set_mapping (const GValue              *value,
-                              const GVariantType        *type,
-                              gpointer                   user_data)
+touchpad_enabled_set_mapping (const GValue       *value,
+                              const GVariantType *type,
+                              gpointer            user_data)
 {
   gboolean enabled;
 
@@ -179,9 +178,9 @@ touchpad_enabled_set_mapping (const GValue              *value,
 }
 
 static gboolean
-click_method_get_mapping (GValue    *value,
-                          GVariant  *variant,
-                          gpointer   user_data)
+click_method_get_mapping (GValue   *value,
+                          GVariant *variant,
+                          gpointer  user_data)
 {
   gboolean is_default;
 
@@ -220,16 +219,16 @@ primary_toggle_right_click_pressed_cb (CcMousePanel *self,
 }
 
 static gboolean
-mouse_accel_get_mapping (GValue    *value,
-                         GVariant  *variant,
-                         gpointer   user_data)
+mouse_accel_get_mapping (GValue   *value,
+                         GVariant *variant,
+                         gpointer  user_data)
 {
-    gboolean enabled;
+  gboolean enabled;
 
-    enabled = g_strcmp0 (g_variant_get_string (variant, NULL), "flat") != 0;
-    g_value_set_boolean (value, enabled);
+  enabled = g_strcmp0 (g_variant_get_string (variant, NULL), "flat") != 0;
+  g_value_set_boolean (value, enabled);
 
-    return TRUE;
+  return TRUE;
 }
 
 static GVariant *
@@ -237,7 +236,7 @@ mouse_accel_set_mapping (const GValue       *value,
                          const GVariantType *type,
                          gpointer            user_data)
 {
-    return g_variant_new_string (g_value_get_boolean (value) ? "default" : "flat");
+  return g_variant_new_string (g_value_get_boolean (value) ? "default" : "flat");
 }
 
 /* Set up the property editors in the dialog. */
@@ -382,7 +381,7 @@ test_button_row_activated_cb (CcMousePanel *self)
 static void
 cc_mouse_panel_init (CcMousePanel *self)
 {
-  GsdDeviceManager  *device_manager;
+  GsdDeviceManager *device_manager;
 
   g_resources_register (cc_mouse_get_resource ());
 

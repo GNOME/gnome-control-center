@@ -30,8 +30,7 @@
 #include <glib/gi18n.h>
 #include "cc-power-profile-info-row.h"
 
-struct _CcPowerProfileInfoRow
-{
+struct _CcPowerProfileInfoRow {
   AdwActionRow parent_instance;
 };
 

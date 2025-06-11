@@ -37,23 +37,22 @@
 #include "cc-tz-dialog.h"
 #include "tz.h"
 
-struct _CcTzDialog
-{
-  AdwDialog           parent_instance;
+struct _CcTzDialog {
+  AdwDialog parent_instance;
 
-  GtkSearchEntry     *location_entry;
+  GtkSearchEntry *location_entry;
 
-  GtkStack           *main_stack;
-  AdwStatusPage      *empty_page;
-  GtkScrolledWindow  *tz_page;
-  GtkListView        *tz_view;
+  GtkStack *main_stack;
+  AdwStatusPage *empty_page;
+  GtkScrolledWindow *tz_page;
+  GtkListView *tz_view;
 
-  TzDB               *tz_db;
-  GListStore         *tz_store;
+  TzDB *tz_db;
+  GListStore *tz_store;
   GtkFilterListModel *tz_filtered_model;
-  GtkNoSelection     *tz_selection_model;
+  GtkNoSelection *tz_selection_model;
 
-  CcTzItem           *selected_item;
+  CcTzItem *selected_item;
 };
 
 G_DEFINE_TYPE (CcTzDialog, cc_tz_dialog, ADW_TYPE_DIALOG)
@@ -69,7 +68,7 @@ static gboolean
 match_tz_item (CcTzItem   *item,
                CcTzDialog *self)
 {
-  g_auto(GStrv) strv = NULL;
+  g_auto (GStrv) strv = NULL;
   g_autofree char *country = NULL;
   g_autofree char *name = NULL;
   g_autofree char *zone = NULL;
@@ -100,18 +99,17 @@ match_tz_item (CcTzItem   *item,
    * ie, for a search "as kol" it will match "Asia/Kolkata"
    * not "Asia/Karachi"
    */
-  for (guint i = 0; strv[i]; i++)
-    {
-      const char *str = strv[i];
+  for (guint i = 0; strv[i]; i++) {
+    const char *str = strv[i];
 
-      if (!str || !*str)
-        continue;
+    if (!str || !*str)
+      continue;
 
-      if (!strcasestr (name, str) &&
-          !strcasestr (zone, str) &&
-          !strcasestr (country, str))
-        return FALSE;
-    }
+    if (!strcasestr (name, str) &&
+        !strcasestr (zone, str) &&
+        !strcasestr (country, str))
+      return FALSE;
+  }
 
   return TRUE;
 }
@@ -129,16 +127,15 @@ load_tz (CcTzDialog *self)
   locations = tz_get_locations (self->tz_db);
   g_assert (locations);
 
-  for (guint i = 0; i < locations->len; i++)
-    {
-      g_autoptr(CcTzItem) item = NULL;
-      TzLocation *location;
+  for (guint i = 0; i < locations->len; i++) {
+    g_autoptr (CcTzItem) item = NULL;
+    TzLocation *location;
 
-      location = locations->pdata[i];
-      item = cc_tz_item_new (location);
+    location = locations->pdata[i];
+    item = cc_tz_item_new (location);
 
-      g_list_store_append (self->tz_store, item);
-    }
+    g_list_store_append (self->tz_store, item);
+  }
 }
 
 static void
@@ -270,7 +267,7 @@ cc_tz_dialog_init (CcTzDialog *self)
   sorter = GTK_SORTER (gtk_string_sorter_new (expression));
   tz_sorted_model = gtk_sort_list_model_new (G_LIST_MODEL (self->tz_store), sorter);
 
-  filter = (GtkFilter *)gtk_custom_filter_new ((GtkCustomFilterFunc) match_tz_item, self, NULL);
+  filter = (GtkFilter *)gtk_custom_filter_new ((GtkCustomFilterFunc)match_tz_item, self, NULL);
   self->tz_filtered_model = gtk_filter_list_model_new (G_LIST_MODEL (tz_sorted_model), filter);
   self->tz_selection_model = gtk_no_selection_new (G_LIST_MODEL (self->tz_filtered_model));
 
@@ -301,21 +298,19 @@ cc_tz_dialog_set_tz (CcTzDialog *self,
   n_items = g_list_model_get_n_items (G_LIST_MODEL (self->tz_store));
   tz = tz_info_get_clean_name (self->tz_db, timezone);
 
-  for (guint i = 0; i < n_items; i++)
-    {
-      g_autoptr(CcTzItem) item = NULL;
-      TzLocation *loc;
+  for (guint i = 0; i < n_items; i++) {
+    g_autoptr (CcTzItem) item = NULL;
+    TzLocation *loc;
 
-      item = g_list_model_get_item (G_LIST_MODEL (self->tz_store), i);
-      loc = cc_tz_item_get_location (item);
+    item = g_list_model_get_item (G_LIST_MODEL (self->tz_store), i);
+    loc = cc_tz_item_get_location (item);
 
-      if (g_strcmp0 (loc->zone, tz ? tz : timezone) == 0)
-        {
-          g_set_object (&self->selected_item, item);
+    if (g_strcmp0 (loc->zone, tz ? tz : timezone) == 0) {
+      g_set_object (&self->selected_item, item);
 
-          return TRUE;
-        }
+      return TRUE;
     }
+  }
 
   return FALSE;
 }

@@ -48,19 +48,19 @@ static void update_sound_row (CcAppNotificationsPage *self);
 static void update_notification_row (CcAppNotificationsPage *self);
 
 struct _CcAppNotificationsPage {
-  AdwNavigationPage    parent;
+  AdwNavigationPage parent;
 
-  GSettings           *settings;
-  GSettings           *master_settings;
-  gchar               *app_id;
-  GDBusProxy          *perm_store;
+  GSettings *settings;
+  GSettings *master_settings;
+  gchar *app_id;
+  GDBusProxy *perm_store;
 
-  AdwSwitchRow        *notifications_row;
-  AdwSwitchRow        *sound_alerts_row;
-  AdwSwitchRow        *notification_banners_row;
-  AdwSwitchRow        *notification_banners_content_row;
-  AdwSwitchRow        *lock_screen_notifications_row;
-  AdwSwitchRow        *lock_screen_content_row;
+  AdwSwitchRow *notifications_row;
+  AdwSwitchRow *sound_alerts_row;
+  AdwSwitchRow *notification_banners_row;
+  AdwSwitchRow *notification_banners_content_row;
+  AdwSwitchRow *lock_screen_notifications_row;
+  AdwSwitchRow *lock_screen_content_row;
 
   gulong notifications_page_change_signal_handler_id;
 };
@@ -68,48 +68,47 @@ struct _CcAppNotificationsPage {
 G_DEFINE_TYPE (CcAppNotificationsPage, cc_app_notifications_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
-on_perm_store_set_done (GObject *source_object,
+on_perm_store_set_done (GObject      *source_object,
                         GAsyncResult *res,
-                        gpointer user_data)
+                        gpointer      user_data)
 {
-  g_autoptr(GVariant) results = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GVariant) results = NULL;
+  g_autoptr (GError) error = NULL;
 
   results = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
                                       res,
                                       &error);
-  if (results == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed to store permissions: %s", error->message);
-      return;
-    }
+  if (results == NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to store permissions: %s", error->message);
+    return;
+  }
 }
 
 static void
-set_portal_permissions_for_app (CcAppNotificationsPage *self, AdwSwitchRow *row)
+set_portal_permissions_for_app (CcAppNotificationsPage *self,
+                                AdwSwitchRow           *row)
 {
   gboolean allow = adw_switch_row_get_active (row);
-  g_autoptr(GVariant) perms = NULL;
-  g_autoptr(GVariant) new_perms = NULL;
-  g_autoptr(GVariant) data = NULL;
+  g_autoptr (GVariant) perms = NULL;
+  g_autoptr (GVariant) new_perms = NULL;
+  g_autoptr (GVariant) data = NULL;
   GVariantBuilder builder;
   gboolean found;
   int i;
   const char *yes_strv[] = { "yes", NULL };
   const char *no_strv[] = { "no", NULL };
-  g_autoptr(GVariant) reply = NULL;
+  g_autoptr (GVariant) reply = NULL;
 
-  if (self->perm_store == NULL)
-    {
-      g_warning ("Could not find PermissionStore, not syncing notification permissions");
-      return;
-    }
+  if (self->perm_store == NULL) {
+    g_warning ("Could not find PermissionStore, not syncing notification permissions");
+    return;
+  }
 
   new_perms = g_variant_new_strv (allow ? yes_strv : no_strv, 1);
   g_variant_ref_sink (new_perms);
 
-  g_variant_builder_init (&builder, G_VARIANT_TYPE("a{sas}"));
+  g_variant_builder_init (&builder, G_VARIANT_TYPE ("a{sas}"));
   found = FALSE;
 
   reply = g_dbus_proxy_call_sync (self->perm_store,
@@ -121,25 +120,21 @@ set_portal_permissions_for_app (CcAppNotificationsPage *self, AdwSwitchRow *row)
                                   -1,
                                   NULL,
                                   NULL);
-  if (reply)
-    {
-      g_variant_get (reply, "(@a{sas}v)", &perms, &data);
+  if (reply) {
+    g_variant_get (reply, "(@a{sas}v)", &perms, &data);
 
-      for (i = 0; i < g_variant_n_children (perms); i++)
-        {
-          const char *key;
-          g_autoptr(GVariant) value = NULL;
+    for (i = 0; i < g_variant_n_children (perms); i++) {
+      const char *key;
+      g_autoptr (GVariant) value = NULL;
 
-          g_variant_get_child (perms, i, "{&s@as}", &key, &value);
-          if (g_strcmp0 (key, self->app_id) == 0)
-            {
-              found = TRUE;
-              g_variant_builder_add (&builder, "{s@as}", key, new_perms);
-            }
-          else
-            g_variant_builder_add (&builder, "{s@as}", key, value);
-        }
+      g_variant_get_child (perms, i, "{&s@as}", &key, &value);
+      if (g_strcmp0 (key, self->app_id) == 0) {
+        found = TRUE;
+        g_variant_builder_add (&builder, "{s@as}", key, new_perms);
+      } else
+        g_variant_builder_add (&builder, "{s@as}", key, value);
     }
+  }
 
   if (!found)
     g_variant_builder_add (&builder, "{s@as}", self->app_id, new_perms);
@@ -243,7 +238,7 @@ update_banner_row (CcAppNotificationsPage *self)
   notifications_enabled = g_settings_get_boolean (self->settings, "enable");
 
   active = g_settings_get_boolean (self->settings, "show-banners") &&
-          show_banners;
+           show_banners;
   sensitive = notifications_enabled &&
               show_banners;
   g_signal_handlers_block_by_func (G_OBJECT (self->notification_banners_row), notification_banners_row_state_set_cb, self);
@@ -367,11 +362,11 @@ cc_app_notifications_page_init (CcAppNotificationsPage *self)
 }
 
 CcAppNotificationsPage *
-cc_app_notifications_page_new (const gchar          *app_id,
-                               const gchar          *title,
-                               GSettings            *settings,
-                               GSettings            *master_settings,
-                               GDBusProxy           *perm_store)
+cc_app_notifications_page_new (const gchar *app_id,
+                               const gchar *title,
+                               GSettings   *settings,
+                               GSettings   *master_settings,
+                               GDBusProxy  *perm_store)
 {
   CcAppNotificationsPage *self;
 
@@ -384,7 +379,7 @@ cc_app_notifications_page_new (const gchar          *app_id,
   self->perm_store = g_object_ref (perm_store);
 
   self->notifications_page_change_signal_handler_id =
-      g_signal_connect_swapped (self->settings, "changed", G_CALLBACK (update_switches), self);
+    g_signal_connect_swapped (self->settings, "changed", G_CALLBACK (update_switches), self);
 
   update_switches (self);
 

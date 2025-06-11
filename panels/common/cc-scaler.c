@@ -24,16 +24,14 @@
 
 #include "cc-scaler.h"
 
-struct _CcScaler
-{
+struct _CcScaler {
   GObject parent_instance;
 
   GdkPaintable *paintable;
   double scale;
 };
 
-struct _CcScalerClass
-{
+struct _CcScalerClass {
   GObjectClass parent_class;
 };
 
@@ -94,12 +92,13 @@ cc_scaler_paintable_get_intrinsic_height (GdkPaintable *paintable)
   return gdk_paintable_get_intrinsic_height (self->paintable) / self->scale;
 }
 
-static double cc_scaler_paintable_get_intrinsic_aspect_ratio (GdkPaintable *paintable)
+static double
+cc_scaler_paintable_get_intrinsic_aspect_ratio (GdkPaintable *paintable)
 {
   CcScaler *self = CC_SCALER (paintable);
 
   return gdk_paintable_get_intrinsic_aspect_ratio (self->paintable);
-};
+}
 
 static void
 cc_scaler_paintable_init (GdkPaintableInterface *iface)
@@ -121,18 +120,17 @@ cc_scaler_dispose (GObject *object)
 {
   CcScaler *self = CC_SCALER (object);
 
-  if (self->paintable)
-    {
-      const guint flags = gdk_paintable_get_flags (self->paintable);
+  if (self->paintable) {
+    const guint flags = gdk_paintable_get_flags (self->paintable);
 
-      if ((flags & GDK_PAINTABLE_STATIC_CONTENTS) == 0)
-        g_signal_handlers_disconnect_by_func (self->paintable, gdk_paintable_invalidate_contents, self);
+    if ((flags & GDK_PAINTABLE_STATIC_CONTENTS) == 0)
+      g_signal_handlers_disconnect_by_func (self->paintable, gdk_paintable_invalidate_contents, self);
 
-      if ((flags & GDK_PAINTABLE_STATIC_SIZE) == 0)
-        g_signal_handlers_disconnect_by_func (self->paintable, gdk_paintable_invalidate_size, self);
+    if ((flags & GDK_PAINTABLE_STATIC_SIZE) == 0)
+      g_signal_handlers_disconnect_by_func (self->paintable, gdk_paintable_invalidate_size, self);
 
-      g_clear_object (&self->paintable);
-    }
+    g_clear_object (&self->paintable);
+  }
 
   G_OBJECT_CLASS (cc_scaler_parent_class)->dispose (object);
 }

@@ -28,17 +28,15 @@
 #define CC_FPRINTD_NAME "net.reactivated.Fprint"
 #define CC_FPRINTD_MANAGER_PATH "/net/reactivated/Fprint/Manager"
 
-struct _CcFingerprintManager
-{
+struct _CcFingerprintManager {
   GObject parent_instance;
 };
 
-typedef struct
-{
-  ActUser           *user;
-  GTask             *current_task;
+typedef struct {
+  ActUser *user;
+  GTask *current_task;
   CcFingerprintState state;
-  GList             *cached_devices;
+  GList *cached_devices;
 } CcFingerprintManagerPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (CcFingerprintManager, cc_fingerprint_manager, G_TYPE_OBJECT)
@@ -66,11 +64,10 @@ cc_fingerprint_manager_dispose (GObject *object)
   CcFingerprintManager *self = CC_FINGERPRINT_MANAGER (object);
   CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
 
-  if (priv->current_task)
-    {
-      g_cancellable_cancel (g_task_get_cancellable (priv->current_task));
-      priv->current_task = NULL;
-    }
+  if (priv->current_task) {
+    g_cancellable_cancel (g_task_get_cancellable (priv->current_task));
+    priv->current_task = NULL;
+  }
 
   g_clear_object (&priv->user);
   cleanup_cached_devices (self);
@@ -87,8 +84,7 @@ cc_fingerprint_manager_get_property (GObject    *object,
   CcFingerprintManager *self = CC_FINGERPRINT_MANAGER (object);
   CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_STATE:
       g_value_set_enum (value, priv->state);
       break;
@@ -99,7 +95,7 @@ cc_fingerprint_manager_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -111,15 +107,14 @@ cc_fingerprint_manager_set_property (GObject      *object,
   CcFingerprintManager *self = CC_FINGERPRINT_MANAGER (object);
   CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_USER:
       g_set_object (&priv->user, g_value_get_object (value));
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -160,9 +155,8 @@ cc_fingerprint_manager_init (CcFingerprintManager *self)
 {
 }
 
-typedef struct
-{
-  guint  waiting_devices;
+typedef struct {
+  guint waiting_devices;
   GList *devices;
 } DeviceListData;
 
@@ -182,11 +176,10 @@ on_device_owner_changed (CcFingerprintManager *self,
 
   name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (device));
 
-  if (!name_owner)
-    {
-      g_debug ("Fprintd daemon disappeared, cleaning cache...");
-      cleanup_cached_devices (self);
-    }
+  if (!name_owner) {
+    g_debug ("Fprintd daemon disappeared, cleaning cache...");
+    cleanup_cached_devices (self);
+  }
 }
 
 static void
@@ -235,97 +228,97 @@ cache_devices (CcFingerprintManager *self,
 }
 
 static void
-on_device_proxy (GObject *object, GAsyncResult *res, gpointer user_data)
+on_device_proxy (GObject      *object,
+                 GAsyncResult *res,
+                 gpointer      user_data)
 {
-  g_autoptr(CcFprintdDevice) fprintd_device = NULL;
-  g_autoptr(GTask) task = G_TASK (user_data);
-  g_autoptr(GError) error = NULL;
+  g_autoptr (CcFprintdDevice) fprintd_device = NULL;
+  g_autoptr (GTask) task = G_TASK (user_data);
+  g_autoptr (GError) error = NULL;
   CcFingerprintManager *self = g_task_get_source_object (task);
   DeviceListData *list_data = g_task_get_task_data (task);
 
   fprintd_device = cc_fprintd_device_proxy_new_for_bus_finish (res, &error);
   list_data->waiting_devices--;
 
-  if (error)
-    {
-      if (list_data->waiting_devices == 0)
-        g_task_return_error (task, g_steal_pointer (&error));
-      else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Impossible to ge the device proxy: %s", error->message);
+  if (error) {
+    if (list_data->waiting_devices == 0)
+      g_task_return_error (task, g_steal_pointer (&error));
+    else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Impossible to ge the device proxy: %s", error->message);
 
-      return;
-    }
+    return;
+  }
 
   g_debug ("Got fingerprint device %s", cc_fprintd_device_get_name (fprintd_device));
 
   list_data->devices = g_list_append (list_data->devices, g_steal_pointer (&fprintd_device));
 
-  if (list_data->waiting_devices == 0)
-    {
-      cache_devices (self, list_data->devices);
-      g_task_return_pointer (task, g_steal_pointer (&list_data->devices), object_list_destroy_notify);
-    }
+  if (list_data->waiting_devices == 0) {
+    cache_devices (self, list_data->devices);
+    g_task_return_pointer (task, g_steal_pointer (&list_data->devices), object_list_destroy_notify);
+  }
 }
 
 static void
-on_devices_list (GObject *object, GAsyncResult *res, gpointer user_data)
+on_devices_list (GObject      *object,
+                 GAsyncResult *res,
+                 gpointer      user_data)
 {
   CcFprintdManager *fprintd_manager = CC_FPRINTD_MANAGER (object);
-  g_autoptr(GTask) task = G_TASK (user_data);
-  g_autoptr(GError) error = NULL;
-  g_auto(GStrv) devices_list = NULL;
+  g_autoptr (GTask) task = G_TASK (user_data);
+  g_autoptr (GError) error = NULL;
+  g_auto (GStrv) devices_list = NULL;
   DeviceListData *list_data;
   guint i;
 
   cc_fprintd_manager_call_get_devices_finish (fprintd_manager, &devices_list, res, &error);
 
-  if (error)
-    {
-      g_task_return_error (task, g_steal_pointer (&error));
-      return;
-    }
+  if (error) {
+    g_task_return_error (task, g_steal_pointer (&error));
+    return;
+  }
 
-  if (!devices_list || !devices_list[0])
-    {
-      g_task_return_pointer (task, NULL, NULL);
-      return;
-    }
+  if (!devices_list || !devices_list[0]) {
+    g_task_return_pointer (task, NULL, NULL);
+    return;
+  }
 
   list_data = g_new0 (DeviceListData, 1);
   g_task_set_task_data (task, list_data, g_free);
 
   g_debug ("Fprintd replied with %u device(s)", g_strv_length (devices_list));
 
-  for (i = 0; devices_list[i] != NULL; ++i)
-    {
-      const char *device_path = devices_list[i];
+  for (i = 0; devices_list[i] != NULL; ++i) {
+    const char *device_path = devices_list[i];
 
-      list_data->waiting_devices++;
+    list_data->waiting_devices++;
 
-      cc_fprintd_device_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
-                                           G_DBUS_PROXY_FLAGS_NONE,
-                                           CC_FPRINTD_NAME,
-                                           device_path,
-                                           g_task_get_cancellable (task),
-                                           on_device_proxy,
-                                           g_object_ref (task));
-    }
+    cc_fprintd_device_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                                         G_DBUS_PROXY_FLAGS_NONE,
+                                         CC_FPRINTD_NAME,
+                                         device_path,
+                                         g_task_get_cancellable (task),
+                                         on_device_proxy,
+                                         g_object_ref (task));
+  }
 }
 
 static void
-on_manager_proxy (GObject *object, GAsyncResult *res, gpointer user_data)
+on_manager_proxy (GObject      *object,
+                  GAsyncResult *res,
+                  gpointer      user_data)
 {
-  g_autoptr(GTask) task = G_TASK (user_data);
-  g_autoptr(CcFprintdManager) fprintd_manager = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTask) task = G_TASK (user_data);
+  g_autoptr (CcFprintdManager) fprintd_manager = NULL;
+  g_autoptr (GError) error = NULL;
 
   fprintd_manager = cc_fprintd_manager_proxy_new_for_bus_finish (res, &error);
 
-  if (error)
-    {
-      g_task_return_error (task, g_steal_pointer (&error));
-      return;
-    }
+  if (error) {
+    g_task_return_error (task, g_steal_pointer (&error));
+    return;
+  }
 
   g_debug ("Fprintd manager connected");
 
@@ -356,19 +349,18 @@ cc_fingerprint_manager_get_devices (CcFingerprintManager *self,
                                     gpointer              user_data)
 {
   CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_source_tag (task, cc_fingerprint_manager_get_devices);
 
-  if (priv->cached_devices)
-    {
-      GList *devices;
+  if (priv->cached_devices) {
+    GList *devices;
 
-      devices = g_list_copy_deep (priv->cached_devices, cached_devices_copy_cb, NULL);
-      g_task_return_pointer (task, devices, object_list_destroy_notify);
-      return;
-    }
+    devices = g_list_copy_deep (priv->cached_devices, cached_devices_copy_cb, NULL);
+    g_task_return_pointer (task, devices, object_list_destroy_notify);
+    return;
+  }
 
   fprintd_manager_connect (self, on_manager_proxy, g_steal_pointer (&task));
 }
@@ -384,9 +376,9 @@ cc_fingerprint_manager_get_devices (CcFingerprintManager *self,
  * Returns: (element-type CcFprintdDevice) (transfer full): List of prints or %NULL on error
  */
 GList *
-cc_fingerprint_manager_get_devices_finish (CcFingerprintManager *self,
-                                           GAsyncResult         *res,
-                                           GError              **error)
+cc_fingerprint_manager_get_devices_finish (CcFingerprintManager  *self,
+                                           GAsyncResult          *res,
+                                           GError               **error)
 {
   g_return_val_if_fail (g_task_is_valid (res, self), NULL);
 
@@ -408,11 +400,10 @@ set_state (CcFingerprintManager *self,
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_STATE]);
 }
 
-typedef struct
-{
-  guint                     waiting_devices;
+typedef struct {
+  guint waiting_devices;
   CcFingerprintStateUpdated callback;
-  gpointer                  user_data;
+  gpointer user_data;
 } UpdateStateData;
 
 static void
@@ -422,7 +413,7 @@ update_state_callback (GObject      *object,
 {
   CcFingerprintManager *self = CC_FINGERPRINT_MANAGER (object);
   CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   CcFingerprintState state;
   UpdateStateData *data;
   GTask *task;
@@ -435,16 +426,15 @@ update_state_callback (GObject      *object,
   state = g_task_propagate_int (task, &error);
   data = g_task_get_task_data (task);
 
-  if (error)
-    {
-      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        return;
+  if (error) {
+    if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      return;
 
-      g_warning ("Impossible to update fingerprint manager state: %s",
-                 error->message);
+    g_warning ("Impossible to update fingerprint manager state: %s",
+               error->message);
 
-      state = CC_FINGERPRINT_STATE_NONE;
-    }
+    state = CC_FINGERPRINT_STATE_NONE;
+  }
 
   set_state (self, state);
 
@@ -458,9 +448,9 @@ on_device_list_enrolled (GObject      *object,
                          gpointer      user_data)
 {
   CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
-  g_autoptr(GTask) task = G_TASK (user_data);
-  g_autoptr(GError) error = NULL;
-  g_auto(GStrv) enrolled_fingers = NULL;
+  g_autoptr (GTask) task = G_TASK (user_data);
+  g_autoptr (GError) error = NULL;
+  g_auto (GStrv) enrolled_fingers = NULL;
   UpdateStateData *data = g_task_get_task_data (task);
   guint num_enrolled_fingers;
 
@@ -473,20 +463,18 @@ on_device_list_enrolled (GObject      *object,
 
   data->waiting_devices--;
 
-  if (error)
-    {
-      g_autofree char *dbus_error = g_dbus_error_get_remote_error (error);
+  if (error) {
+    g_autofree char *dbus_error = g_dbus_error_get_remote_error (error);
 
-      if (!g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoEnrolledPrints"))
-        {
-          if (data->waiting_devices == 0)
-            g_task_return_error (task, g_steal_pointer (&error));
-          else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-            g_warning ("Impossible to list enrolled fingers: %s", error->message);
+    if (!g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoEnrolledPrints")) {
+      if (data->waiting_devices == 0)
+        g_task_return_error (task, g_steal_pointer (&error));
+      else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Impossible to list enrolled fingers: %s", error->message);
 
-          return;
-        }
+      return;
     }
+  }
 
   num_enrolled_fingers = enrolled_fingers ? g_strv_length (enrolled_fingers) : 0;
 
@@ -494,15 +482,12 @@ on_device_list_enrolled (GObject      *object,
            cc_fprintd_device_get_name (fprintd_device),
            num_enrolled_fingers);
 
-  if (num_enrolled_fingers > 0)
-    {
-      data->waiting_devices = 0;
-      g_task_return_int (task, CC_FINGERPRINT_STATE_ENABLED);
-    }
-  else if (data->waiting_devices == 0)
-    {
-      g_task_return_int (task, CC_FINGERPRINT_STATE_DISABLED);
-    }
+  if (num_enrolled_fingers > 0) {
+    data->waiting_devices = 0;
+    g_task_return_int (task, CC_FINGERPRINT_STATE_ENABLED);
+  } else if (data->waiting_devices == 0) {
+    g_task_return_int (task, CC_FINGERPRINT_STATE_DISABLED);
+  }
 }
 
 static void
@@ -512,62 +497,58 @@ on_manager_devices_list (GObject      *object,
 {
   CcFingerprintManager *self = CC_FINGERPRINT_MANAGER (object);
   CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
-  g_autolist(CcFprintdDevice) fprintd_devices = NULL;
-  g_autoptr(GTask) task = G_TASK (user_data);
-  g_autoptr(GError) error = NULL;
+  g_autolist (CcFprintdDevice) fprintd_devices = NULL;
+  g_autoptr (GTask) task = G_TASK (user_data);
+  g_autoptr (GError) error = NULL;
   UpdateStateData *data = g_task_get_task_data (task);
   const char *user_name;
   GList *l;
 
   fprintd_devices = cc_fingerprint_manager_get_devices_finish (self, res, &error);
 
-  if (error)
-    {
-      g_task_return_error (task, g_steal_pointer (&error));
-      return;
-    }
+  if (error) {
+    g_task_return_error (task, g_steal_pointer (&error));
+    return;
+  }
 
-  if (fprintd_devices == NULL)
-    {
-      g_debug ("No fingerprint devices found");
-      g_task_return_int (task, CC_FINGERPRINT_STATE_NONE);
-      return;
-    }
+  if (fprintd_devices == NULL) {
+    g_debug ("No fingerprint devices found");
+    g_task_return_int (task, CC_FINGERPRINT_STATE_NONE);
+    return;
+  }
 
   user_name = act_user_get_user_name (priv->user);
 
-  for (l = fprintd_devices; l; l = l->next)
-    {
-      CcFprintdDevice *device = l->data;
+  for (l = fprintd_devices; l; l = l->next) {
+    CcFprintdDevice *device = l->data;
 
-      g_debug ("Connected to device %s, looking for enrolled fingers",
-               cc_fprintd_device_get_name (device));
+    g_debug ("Connected to device %s, looking for enrolled fingers",
+             cc_fprintd_device_get_name (device));
 
-      data->waiting_devices++;
-      cc_fprintd_device_call_list_enrolled_fingers (device, user_name,
-                                                    g_task_get_cancellable (task),
-                                                    on_device_list_enrolled,
-                                                    g_object_ref (task));
-    }
+    data->waiting_devices++;
+    cc_fprintd_device_call_list_enrolled_fingers (device, user_name,
+                                                  g_task_get_cancellable (task),
+                                                  on_device_list_enrolled,
+                                                  g_object_ref (task));
+  }
 }
 
 void
-cc_fingerprint_manager_update_state (CcFingerprintManager     *self,
-                                     CcFingerprintStateUpdated callback,
-                                     gpointer                  user_data)
+cc_fingerprint_manager_update_state (CcFingerprintManager      *self,
+                                     CcFingerprintStateUpdated  callback,
+                                     gpointer                   user_data)
 {
   CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
-  g_autoptr(GCancellable) cancellable = NULL;
+  g_autoptr (GCancellable) cancellable = NULL;
   UpdateStateData *data;
 
   g_return_if_fail (priv->current_task == NULL);
 
   if (act_user_get_uid (priv->user) != getuid () ||
-      !act_user_is_local_account (priv->user))
-    {
-      set_state (self, CC_FINGERPRINT_STATE_NONE);
-      return;
-    }
+      !act_user_is_local_account (priv->user)) {
+    set_state (self, CC_FINGERPRINT_STATE_NONE);
+    return;
+  }
 
   cancellable = g_cancellable_new ();
   data = g_new0 (UpdateStateData, 1);

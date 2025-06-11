@@ -32,12 +32,11 @@
 #include "cc-common-resources.h"
 #include "cc-list-row-info-button.h"
 
-struct _CcListRowInfoButton
-{
-  GtkWidget      parent_instance;
+struct _CcListRowInfoButton {
+  GtkWidget parent_instance;
 
-  GtkWidget     *button;
-  GtkLabel      *label;
+  GtkWidget *button;
+  GtkLabel *label;
 };
 
 G_DEFINE_TYPE (CcListRowInfoButton, cc_list_row_info_button, GTK_TYPE_WIDGET)
@@ -59,15 +58,14 @@ cc_list_row_info_button_get_property (GObject    *object,
 {
   CcListRowInfoButton *self = (CcListRowInfoButton *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_TEXT:
       g_value_set_string (value, gtk_label_get_label (self->label));
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -78,21 +76,20 @@ cc_list_row_info_button_set_property (GObject      *object,
 {
   CcListRowInfoButton *self = (CcListRowInfoButton *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_TEXT:
       gtk_label_set_label (self->label, g_value_get_string (value));
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
 popover_show_cb (CcListRowInfoButton *self)
 {
-  const char* label = gtk_label_get_label (self->label);
+  const char *label = gtk_label_get_label (self->label);
 
   gtk_accessible_announce (GTK_ACCESSIBLE (self),
                            label,
@@ -112,7 +109,7 @@ cc_list_row_info_button_dispose (GObject *object)
 static void
 cc_list_row_info_button_class_init (CcListRowInfoButtonClass *klass)
 {
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->dispose = cc_list_row_info_button_dispose;

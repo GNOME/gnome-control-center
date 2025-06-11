@@ -27,27 +27,26 @@
 
 #include <gio/gdesktopappinfo.h>
 
-struct _CcScreenPage
-{
-  AdwNavigationPage       parent_instance;
+struct _CcScreenPage {
+  AdwNavigationPage parent_instance;
 
   CcDisplayConfigManager *display_config_manager;
 
-  GSettings     *lock_settings;
-  GSettings     *notification_settings;
-  GSettings     *privacy_settings;
-  GSettings     *session_settings;
+  GSettings *lock_settings;
+  GSettings *notification_settings;
+  GSettings *privacy_settings;
+  GSettings *session_settings;
 
-  GCancellable  *cancellable;
+  GCancellable *cancellable;
 
-  CcNumberRow         *blank_screen_row;
-  CcNumberRow         *lock_after_row;
+  CcNumberRow *blank_screen_row;
+  CcNumberRow *lock_after_row;
   AdwPreferencesGroup *screen_privacy_group;
-  GDBusProxy          *usb_proxy;
-  AdwSwitchRow        *automatic_screen_lock_row;
-  AdwSwitchRow        *privacy_screen_row;
-  AdwSwitchRow        *show_notifications_row;
-  AdwSwitchRow        *usb_protection_row;
+  GDBusProxy *usb_proxy;
+  AdwSwitchRow *automatic_screen_lock_row;
+  AdwSwitchRow *privacy_screen_row;
+  AdwSwitchRow *show_notifications_row;
+  AdwSwitchRow *usb_protection_row;
 };
 
 G_DEFINE_TYPE (CcScreenPage, cc_screen_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -60,14 +59,13 @@ on_usb_protection_properties_changed_cb (GDBusProxy   *usb_proxy,
 {
   gboolean available = FALSE;
 
-  if (self->usb_proxy)
-    {
-      g_autoptr(GVariant) variant = NULL;
+  if (self->usb_proxy) {
+    g_autoptr (GVariant) variant = NULL;
 
-      variant = g_dbus_proxy_get_cached_property (self->usb_proxy, "Available");
-      if (variant != NULL)
-        available = g_variant_get_boolean (variant);
-    }
+    variant = g_dbus_proxy_get_cached_property (self->usb_proxy, "Available");
+    if (variant != NULL)
+      available = g_variant_get_boolean (variant);
+  }
 
   /* Show the USB protection row only if the required daemon is up and running */
   gtk_widget_set_visible (GTK_WIDGET (self->usb_protection_row), available);
@@ -78,23 +76,21 @@ on_usb_protection_param_ready (GObject      *source_object,
                                GAsyncResult *res,
                                gpointer      user_data)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   CcScreenPage *self;
   GDBusProxy *proxy;
 
   self = user_data;
   proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (error)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          g_warning ("Failed to connect to SettingsDaemon.UsbProtection: %s",
-                     error->message);
-        }
-
-      gtk_widget_set_visible (GTK_WIDGET (self->usb_protection_row), FALSE);
-      return;
+  if (error) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+      g_warning ("Failed to connect to SettingsDaemon.UsbProtection: %s",
+                 error->message);
     }
+
+    gtk_widget_set_visible (GTK_WIDGET (self->usb_protection_row), FALSE);
+    return;
+  }
   self->usb_proxy = proxy;
 
   g_signal_connect_object (self->usb_proxy,
@@ -154,19 +150,17 @@ update_display_config (CcScreenPage *self)
   config = cc_display_config_manager_get_current (self->display_config_manager);
   monitors = config ? cc_display_config_get_monitors (config) : NULL;
 
-  for (l = monitors; l; l = l->next)
-    {
-      CcDisplayMonitor *monitor = CC_DISPLAY_MONITOR (l->data);
-      CcDisplayMonitorPrivacy privacy = cc_display_monitor_get_privacy (monitor);
+  for (l = monitors; l; l = l->next) {
+    CcDisplayMonitor *monitor = CC_DISPLAY_MONITOR (l->data);
+    CcDisplayMonitorPrivacy privacy = cc_display_monitor_get_privacy (monitor);
 
-      if (privacy != CC_DISPLAY_MONITOR_PRIVACY_UNSUPPORTED)
-        {
-          any_privacy_screen = TRUE;
+    if (privacy != CC_DISPLAY_MONITOR_PRIVACY_UNSUPPORTED) {
+      any_privacy_screen = TRUE;
 
-          if (!(privacy & CC_DISPLAY_MONITOR_PRIVACY_LOCKED))
-            any_configurable_privacy_screen = TRUE;
-        }
+      if (!(privacy & CC_DISPLAY_MONITOR_PRIVACY_LOCKED))
+        any_configurable_privacy_screen = TRUE;
     }
+  }
 
   gtk_widget_set_visible (GTK_WIDGET (self->screen_privacy_group),
                           any_privacy_screen);

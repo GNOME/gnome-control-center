@@ -63,12 +63,11 @@ struct _CcBarChartGroup {
 
   /* Configured state: */
   gboolean selectable;
-  enum
-    {
-      SELECTION_STATE_NONE,
-      SELECTION_STATE_GROUP,
-      SELECTION_STATE_BAR,
-    }
+  enum {
+    SELECTION_STATE_NONE,
+    SELECTION_STATE_GROUP,
+    SELECTION_STATE_BAR,
+  }
   selection_state;
   unsigned int selected_bar_index;  /* only defined if selection_state == SELECTION_STATE_BAR */
 
@@ -101,15 +100,15 @@ static void cc_bar_chart_group_size_allocate (GtkWidget *widget,
                                               int        width,
                                               int        height,
                                               int        baseline);
-static void cc_bar_chart_group_measure (GtkWidget      *widget,
-                                        GtkOrientation  orientation,
-                                        int             for_size,
-                                        int            *minimum,
-                                        int            *natural,
-                                        int            *minimum_baseline,
-                                        int            *natural_baseline);
-static gboolean cc_bar_chart_group_focus (GtkWidget        *widget,
-                                          GtkDirectionType  direction);
+static void cc_bar_chart_group_measure (GtkWidget     *widget,
+                                        GtkOrientation orientation,
+                                        int            for_size,
+                                        int           *minimum,
+                                        int           *natural,
+                                        int           *minimum_baseline,
+                                        int           *natural_baseline);
+static gboolean cc_bar_chart_group_focus (GtkWidget       *widget,
+                                          GtkDirectionType direction);
 static void gesture_click_pressed_cb (GtkGestureClick *gesture,
                                       guint            n_press,
                                       double           x,
@@ -220,12 +219,12 @@ cc_bar_chart_group_class_init (CcBarChartGroupClass *klass)
 static void
 cc_bar_chart_group_init (CcBarChartGroup *self)
 {
-  g_autoptr(GtkGestureClick) gesture = NULL;
+  g_autoptr (GtkGestureClick) gesture = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->selectable = TRUE;
-  self->bars = g_ptr_array_new_null_terminated (1, (GDestroyNotify) gtk_widget_unparent, TRUE);
+  self->bars = g_ptr_array_new_null_terminated (1, (GDestroyNotify)gtk_widget_unparent, TRUE);
 
   /* Handle clicks */
   gesture = GTK_GESTURE_CLICK (gtk_gesture_click_new ());
@@ -241,8 +240,7 @@ cc_bar_chart_group_get_property (GObject    *object,
 {
   CcBarChartGroup *self = CC_BAR_CHART_GROUP (object);
 
-  switch ((CcBarChartGroupProperty) property_id)
-    {
+  switch ((CcBarChartGroupProperty)property_id) {
     case PROP_SELECTABLE:
       g_value_set_boolean (value, cc_bar_chart_group_get_selectable (self));
       break;
@@ -264,7 +262,7 @@ cc_bar_chart_group_get_property (GObject    *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -275,8 +273,7 @@ cc_bar_chart_group_set_property (GObject      *object,
 {
   CcBarChartGroup *self = CC_BAR_CHART_GROUP (object);
 
-  switch ((CcBarChartGroupProperty) property_id)
-    {
+  switch ((CcBarChartGroupProperty)property_id) {
     case PROP_SELECTABLE:
       cc_bar_chart_group_set_selectable (self, g_value_get_boolean (value));
       break;
@@ -295,7 +292,7 @@ cc_bar_chart_group_set_property (GObject      *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
+  }
 }
 
 static void
@@ -317,29 +314,28 @@ cc_bar_chart_group_size_allocate (GtkWidget *widget,
 {
   CcBarChartGroup *self = CC_BAR_CHART_GROUP (widget);
 
-  for (unsigned int i = 0; i < self->bars->len; i++)
-    {
-      CcBarChartBar *bar = self->bars->pdata[i];
-      int bar_top_y, bar_bottom_y, bar_left_x, bar_right_x;
-      GtkAllocation child_alloc;
+  for (unsigned int i = 0; i < self->bars->len; i++) {
+    CcBarChartBar *bar = self->bars->pdata[i];
+    int bar_top_y, bar_bottom_y, bar_left_x, bar_right_x;
+    GtkAllocation child_alloc;
 
-      /* If drawing RTL, reverse the bar positions. */
-      if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL)
-        bar = self->bars->pdata[self->bars->len - i - 1];
+    /* If drawing RTL, reverse the bar positions. */
+    if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL)
+      bar = self->bars->pdata[self->bars->len - i - 1];
 
-      bar_left_x = width * i / self->bars->len;
-      bar_right_x = width * (i + 1) / self->bars->len;
+    bar_left_x = width * i / self->bars->len;
+    bar_right_x = width * (i + 1) / self->bars->len;
 
-      bar_top_y = height - cc_bar_chart_bar_get_value (bar) * self->scale;
-      bar_bottom_y = height;
+    bar_top_y = height - cc_bar_chart_bar_get_value (bar) * self->scale;
+    bar_bottom_y = height;
 
-      child_alloc.x = bar_left_x;
-      child_alloc.y = bar_top_y;
-      child_alloc.width = bar_right_x - bar_left_x;
-      child_alloc.height = bar_bottom_y - bar_top_y;
+    child_alloc.x = bar_left_x;
+    child_alloc.y = bar_top_y;
+    child_alloc.width = bar_right_x - bar_left_x;
+    child_alloc.height = bar_bottom_y - bar_top_y;
 
-      gtk_widget_size_allocate (GTK_WIDGET (bar), &child_alloc, -1);
-    }
+    gtk_widget_size_allocate (GTK_WIDGET (bar), &child_alloc, -1);
+  }
 }
 
 static void
@@ -353,54 +349,47 @@ cc_bar_chart_group_measure (GtkWidget      *widget,
 {
   CcBarChartGroup *self = CC_BAR_CHART_GROUP (widget);
 
-  if (orientation == GTK_ORIENTATION_HORIZONTAL)
-    {
-      int total_minimum_width = 0, total_natural_width = 0;
+  if (orientation == GTK_ORIENTATION_HORIZONTAL) {
+    int total_minimum_width = 0, total_natural_width = 0;
 
-      for (unsigned int i = 0; i < self->bars->len; i++)
-        {
-          CcBarChartBar *bar = self->bars->pdata[i];
-          int bar_minimum_width = 0, bar_natural_width = 0;
+    for (unsigned int i = 0; i < self->bars->len; i++) {
+      CcBarChartBar *bar = self->bars->pdata[i];
+      int bar_minimum_width = 0, bar_natural_width = 0;
 
-          gtk_widget_measure (GTK_WIDGET (bar), orientation, -1,
-                              &bar_minimum_width, &bar_natural_width,
-                              NULL, NULL);
+      gtk_widget_measure (GTK_WIDGET (bar), orientation, -1,
+                          &bar_minimum_width, &bar_natural_width,
+                          NULL, NULL);
 
-          total_minimum_width += bar_minimum_width;
-          total_natural_width += bar_natural_width;
-        }
-
-      *minimum = total_minimum_width;
-      *natural = total_natural_width;
-      *minimum_baseline = -1;
-      *natural_baseline = -1;
+      total_minimum_width += bar_minimum_width;
+      total_natural_width += bar_natural_width;
     }
-  else if (orientation == GTK_ORIENTATION_VERTICAL)
-    {
-      int maximum_minimum_height = 0, maximum_natural_height = 0;
 
-      for (unsigned int i = 0; i < self->bars->len; i++)
-        {
-          CcBarChartBar *bar = self->bars->pdata[i];
-          int bar_minimum_height = 0, bar_natural_height = 0;
+    *minimum = total_minimum_width;
+    *natural = total_natural_width;
+    *minimum_baseline = -1;
+    *natural_baseline = -1;
+  } else if (orientation == GTK_ORIENTATION_VERTICAL) {
+    int maximum_minimum_height = 0, maximum_natural_height = 0;
 
-          gtk_widget_measure (GTK_WIDGET (bar), orientation, -1,
-                              &bar_minimum_height, &bar_natural_height,
-                              NULL, NULL);
+    for (unsigned int i = 0; i < self->bars->len; i++) {
+      CcBarChartBar *bar = self->bars->pdata[i];
+      int bar_minimum_height = 0, bar_natural_height = 0;
 
-          maximum_minimum_height = MAX (maximum_minimum_height, bar_minimum_height);
-          maximum_natural_height = MAX (maximum_natural_height, bar_natural_height);
-        }
+      gtk_widget_measure (GTK_WIDGET (bar), orientation, -1,
+                          &bar_minimum_height, &bar_natural_height,
+                          NULL, NULL);
 
-      *minimum = maximum_minimum_height;
-      *natural = maximum_natural_height;
-      *minimum_baseline = -1;
-      *natural_baseline = -1;
+      maximum_minimum_height = MAX (maximum_minimum_height, bar_minimum_height);
+      maximum_natural_height = MAX (maximum_natural_height, bar_natural_height);
     }
-  else
-    {
-      g_assert_not_reached ();
-    }
+
+    *minimum = maximum_minimum_height;
+    *natural = maximum_natural_height;
+    *minimum_baseline = -1;
+    *natural_baseline = -1;
+  } else {
+    g_assert_not_reached ();
+  }
 }
 
 static gboolean
@@ -413,60 +402,55 @@ cc_bar_chart_group_focus (GtkWidget        *widget,
 
   /* Reverse the direction if in RTL mode, as the chart presents things on a
    * left–right axis. */
-  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
-    {
-      switch (direction)
-        {
-        case GTK_DIR_TAB_BACKWARD:
-          direction = GTK_DIR_TAB_FORWARD;
-          break;
-        case GTK_DIR_TAB_FORWARD:
-          direction = GTK_DIR_TAB_BACKWARD;
-          break;
-        case GTK_DIR_LEFT:
-          direction = GTK_DIR_RIGHT;
-          break;
-        case GTK_DIR_RIGHT:
-          direction = GTK_DIR_LEFT;
-          break;
-        case GTK_DIR_UP:
-        case GTK_DIR_DOWN:
-        default:
-          /* No change. */
-          break;
-        }
+  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL) {
+    switch (direction) {
+      case GTK_DIR_TAB_BACKWARD:
+        direction = GTK_DIR_TAB_FORWARD;
+        break;
+      case GTK_DIR_TAB_FORWARD:
+        direction = GTK_DIR_TAB_BACKWARD;
+        break;
+      case GTK_DIR_LEFT:
+        direction = GTK_DIR_RIGHT;
+        break;
+      case GTK_DIR_RIGHT:
+        direction = GTK_DIR_LEFT;
+        break;
+      case GTK_DIR_UP:
+      case GTK_DIR_DOWN:
+      default:
+        /* No change. */
+        break;
     }
+  }
 
   focus_child = gtk_widget_get_focus_child (widget);
 
-  if (focus_child != NULL)
-    {
-      /* Can the focus move around inside the currently focused child widget? */
-      if (gtk_widget_child_focus (focus_child, direction))
-        return TRUE;
+  if (focus_child != NULL) {
+    /* Can the focus move around inside the currently focused child widget? */
+    if (gtk_widget_child_focus (focus_child, direction))
+      return TRUE;
 
-      if (CC_IS_BAR_CHART_BAR (focus_child) &&
-          (direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
-        next_focus_bar = get_adjacent_focusable_bar (self, CC_BAR_CHART_BAR (focus_child), -1);
-      else if (CC_IS_BAR_CHART_BAR (focus_child) &&
-               (direction == GTK_DIR_RIGHT || direction == GTK_DIR_TAB_FORWARD))
-        next_focus_bar = get_adjacent_focusable_bar (self, CC_BAR_CHART_BAR (focus_child), 1);
-    }
-  else
-    {
-      /* No current focus bar. If a bar is selected, focus on that. Otherwise,
-       * focus on the first/last focusable bar, depending on which direction
-       * we’re coming in from. */
-      if (self->selection_state == SELECTION_STATE_BAR)
-        next_focus_bar = self->bars->pdata[self->selected_bar_index];
+    if (CC_IS_BAR_CHART_BAR (focus_child) &&
+        (direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
+      next_focus_bar = get_adjacent_focusable_bar (self, CC_BAR_CHART_BAR (focus_child), -1);
+    else if (CC_IS_BAR_CHART_BAR (focus_child) &&
+             (direction == GTK_DIR_RIGHT || direction == GTK_DIR_TAB_FORWARD))
+      next_focus_bar = get_adjacent_focusable_bar (self, CC_BAR_CHART_BAR (focus_child), 1);
+  } else {
+    /* No current focus bar. If a bar is selected, focus on that. Otherwise,
+     * focus on the first/last focusable bar, depending on which direction
+     * we’re coming in from. */
+    if (self->selection_state == SELECTION_STATE_BAR)
+      next_focus_bar = self->bars->pdata[self->selected_bar_index];
 
-      if (next_focus_bar == NULL &&
-          (direction == GTK_DIR_UP || direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
-        next_focus_bar = get_last_focusable_bar (self);
-      else if (next_focus_bar == NULL &&
-               (direction == GTK_DIR_DOWN || direction == GTK_DIR_RIGHT || direction == GTK_DIR_TAB_FORWARD))
-        next_focus_bar = get_first_focusable_bar (self);
-    }
+    if (next_focus_bar == NULL &&
+        (direction == GTK_DIR_UP || direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
+      next_focus_bar = get_last_focusable_bar (self);
+    else if (next_focus_bar == NULL &&
+             (direction == GTK_DIR_DOWN || direction == GTK_DIR_RIGHT || direction == GTK_DIR_TAB_FORWARD))
+      next_focus_bar = get_first_focusable_bar (self);
+  }
 
   if (next_focus_bar == NULL)
     return FALSE;
@@ -495,17 +479,14 @@ gesture_click_pressed_cb (GtkGestureClick *gesture,
     bar = NULL;
 
   /* Select and focus the bar or group. */
-  if (bar != NULL)
-    {
-      if (bar_is_focusable (CC_BAR_CHART_BAR (bar)))
-        gtk_widget_set_focus_child (GTK_WIDGET (self), bar);
-      cc_bar_chart_group_set_selected_index (self, TRUE, bar_idx);
-    }
-  else
-    {
-      /* already grabbed focus above */
-      cc_bar_chart_group_set_is_selected (self, TRUE);
-    }
+  if (bar != NULL) {
+    if (bar_is_focusable (CC_BAR_CHART_BAR (bar)))
+      gtk_widget_set_focus_child (GTK_WIDGET (self), bar);
+    cc_bar_chart_group_set_selected_index (self, TRUE, bar_idx);
+  } else {
+    /* already grabbed focus above */
+    cc_bar_chart_group_set_is_selected (self, TRUE);
+  }
 }
 
 static gboolean
@@ -549,16 +530,15 @@ get_adjacent_focusable_bar (CcBarChartGroup *self,
   i = bar_idx;
 
   while (!((direction == -1 && i == 0) ||
-           (direction == 1 && i >= self->bars->len - 1)))
-    {
-      CcBarChartBar *adjacent_bar;
+           (direction == 1 && i >= self->bars->len - 1))) {
+    CcBarChartBar *adjacent_bar;
 
-      i += direction;
-      adjacent_bar = self->bars->pdata[i];
+    i += direction;
+    adjacent_bar = self->bars->pdata[i];
 
-      if (bar_is_focusable (adjacent_bar))
-        return adjacent_bar;
-    }
+    if (bar_is_focusable (adjacent_bar))
+      return adjacent_bar;
+  }
 
   return NULL;
 }
@@ -568,13 +548,12 @@ get_first_focusable_bar (CcBarChartGroup *self)
 {
   g_assert (self->bars != NULL);
 
-  for (unsigned int i = 0; i < self->bars->len; i++)
-    {
-      CcBarChartBar *bar = self->bars->pdata[i];
+  for (unsigned int i = 0; i < self->bars->len; i++) {
+    CcBarChartBar *bar = self->bars->pdata[i];
 
-      if (bar_is_focusable (bar))
-        return bar;
-    }
+    if (bar_is_focusable (bar))
+      return bar;
+  }
 
   return NULL;
 }
@@ -584,13 +563,12 @@ get_last_focusable_bar (CcBarChartGroup *self)
 {
   g_assert (self->bars != NULL);
 
-  for (unsigned int i = 0; i < self->bars->len; i++)
-    {
-      CcBarChartBar *bar = self->bars->pdata[self->bars->len - 1 - i];
+  for (unsigned int i = 0; i < self->bars->len; i++) {
+    CcBarChartBar *bar = self->bars->pdata[self->bars->len - 1 - i];
 
-      if (bar_is_focusable (bar))
-        return bar;
-    }
+    if (bar_is_focusable (bar))
+      return bar;
+  }
 
   return NULL;
 }
@@ -631,7 +609,7 @@ cc_bar_chart_group_get_bars (CcBarChartGroup *self,
   if (out_n_bars != NULL)
     *out_n_bars = self->bars->len;
 
-  return (self->bars->len != 0) ? (CcBarChartBar * const *) self->bars->pdata : NULL;
+  return (self->bars->len != 0) ? (CcBarChartBar * const *)self->bars->pdata : NULL;
 }
 
 /**
@@ -755,8 +733,7 @@ set_or_unset_selection_state_flags (CcBarChartGroup *self,
 {
   GtkWidget *selected_widget;
 
-  switch (self->selection_state)
-    {
+  switch (self->selection_state) {
     case SELECTION_STATE_BAR:
       selected_widget = GTK_WIDGET (self->bars->pdata[self->selected_bar_index]);
       break;
@@ -767,19 +744,18 @@ set_or_unset_selection_state_flags (CcBarChartGroup *self,
     default:
       selected_widget = NULL;
       break;
-    }
+  }
 
-  if (selected_widget != NULL)
-    {
-      if (set)
-        gtk_widget_set_state_flags (selected_widget, GTK_STATE_FLAG_SELECTED, FALSE);
-      else
-        gtk_widget_unset_state_flags (selected_widget, GTK_STATE_FLAG_SELECTED);
+  if (selected_widget != NULL) {
+    if (set)
+      gtk_widget_set_state_flags (selected_widget, GTK_STATE_FLAG_SELECTED, FALSE);
+    else
+      gtk_widget_unset_state_flags (selected_widget, GTK_STATE_FLAG_SELECTED);
 
-      gtk_accessible_update_state (GTK_ACCESSIBLE (selected_widget),
-                                   GTK_ACCESSIBLE_STATE_SELECTED, set,
-                                   -1);
-    }
+    gtk_accessible_update_state (GTK_ACCESSIBLE (selected_widget),
+                                 GTK_ACCESSIBLE_STATE_SELECTED, set,
+                                 -1);
+  }
 }
 
 /**
@@ -812,12 +788,11 @@ cc_bar_chart_group_set_is_selected (CcBarChartGroup *self,
   g_return_if_fail (CC_IS_BAR_CHART_GROUP (self));
 
   /* If the group is not selectable, pass this through to the first bar. */
-  if (!self->selectable)
-    {
-      if (self->bars->len > 0)
-        cc_bar_chart_group_set_selected_index (self, is_selected, 0);
-      return;
-    }
+  if (!self->selectable) {
+    if (self->bars->len > 0)
+      cc_bar_chart_group_set_selected_index (self, is_selected, 0);
+    return;
+  }
 
   if ((self->selection_state == SELECTION_STATE_GROUP) == is_selected)
     return;

@@ -23,8 +23,7 @@ G_DEFINE_TYPE (CcDisplayConfigManager,
                cc_display_config_manager,
                G_TYPE_OBJECT)
 
-enum
-{
+enum {
   CONFIG_MANAGER_CHANGED,
   N_CONFIG_MANAGER_SIGNALS,
 };

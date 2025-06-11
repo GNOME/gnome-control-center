@@ -21,17 +21,15 @@
 
 #define QR_IMAGE_SIZE 200
 
-struct _CcQrCodeDialog
-{
-  AdwDialog     parent_instance;
+struct _CcQrCodeDialog {
+  AdwDialog parent_instance;
   NMConnection *connection;
   AdwActionRow *network_name_row;
   AdwActionRow *network_password_row;
-  GtkWidget    *qr_image;
+  GtkWidget *qr_image;
 };
 
-enum
-{
+enum {
   PROP_0,
   PROP_CONNECTION,
   PROP_LAST
@@ -49,15 +47,14 @@ cc_qr_code_dialog_get_property (GObject    *object,
 {
   CcQrCodeDialog *self = CC_QR_CODE_DIALOG (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_CONNECTION:
       g_value_set_object (value, self->connection);
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -68,8 +65,7 @@ cc_qr_code_dialog_set_property (GObject      *object,
 {
   CcQrCodeDialog *self = CC_QR_CODE_DIALOG (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_CONNECTION:
       g_assert (self->connection == NULL);
       self->connection = g_value_dup_object (value);
@@ -78,7 +74,7 @@ cc_qr_code_dialog_set_property (GObject      *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -105,25 +101,20 @@ cc_qr_code_dialog_constructed (GObject *object)
                                               NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
                                               NULL,
                                               &error);
-  if (variant)
-    {
-      if (!nm_connection_update_secrets (self->connection,
-                                         NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                         variant,
-                                         &error))
-        {
-          g_warning ("Couldn't update secrets: %s", error->message);
-          return;
-        }
+  if (variant) {
+    if (!nm_connection_update_secrets (self->connection,
+                                       NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
+                                       variant,
+                                       &error)) {
+      g_warning ("Couldn't update secrets: %s", error->message);
+      return;
     }
-  else
-    {
-      if (!g_error_matches (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_SETTING_NOT_FOUND))
-        {
-          g_warning ("Couldn't get secrets: %s", error->message);
-          return;
-        }
+  } else {
+    if (!g_error_matches (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_SETTING_NOT_FOUND)) {
+      g_warning ("Couldn't get secrets: %s", error->message);
+      return;
     }
+  }
 
   setting = nm_connection_get_setting_wireless (self->connection);
   ssid = nm_setting_wireless_get_ssid (setting);
@@ -132,25 +123,20 @@ cc_qr_code_dialog_constructed (GObject *object)
 
   adw_action_row_set_subtitle (self->network_name_row, ssid_text);
 
-  if (password_text)
-    {
-      adw_action_row_set_subtitle (self->network_password_row, password_text);
-    }
-  else
+  if (password_text) {
+    adw_action_row_set_subtitle (self->network_password_row, password_text);
+  } else
     gtk_widget_set_visible (GTK_WIDGET (self->network_password_row), FALSE);
 
   qr_code = cc_qr_code_new ();
   qr_connection_string = get_qr_string_for_connection (self->connection);
-  if (cc_qr_code_set_text (qr_code, qr_connection_string))
-    {
-      gint scale = gtk_widget_get_scale_factor (self->qr_image);
-      GdkPaintable *paintable = cc_qr_code_get_paintable (qr_code, QR_IMAGE_SIZE * scale);
-      gtk_picture_set_paintable (GTK_PICTURE (self->qr_image), paintable);
-    }
-  else
-    {
-      // TODO what should happen in this case?
-    }
+  if (cc_qr_code_set_text (qr_code, qr_connection_string)) {
+    gint scale = gtk_widget_get_scale_factor (self->qr_image);
+    GdkPaintable *paintable = cc_qr_code_get_paintable (qr_code, QR_IMAGE_SIZE * scale);
+    gtk_picture_set_paintable (GTK_PICTURE (self->qr_image), paintable);
+  } else {
+    /* TODO what should happen in this case? */
+  }
 }
 
 static void

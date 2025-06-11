@@ -22,8 +22,7 @@
 
 #include <gio/gio.h>
 
-struct _CcDisplayConfigManagerDBus
-{
+struct _CcDisplayConfigManagerDBus {
   CcDisplayConfigManager parent_instance;
 
   GCancellable *cancellable;
@@ -60,21 +59,19 @@ got_current_state (GObject      *object,
 {
   CcDisplayConfigManagerDBus *self;
   GVariant *variant;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   variant = g_dbus_connection_call_finish (G_DBUS_CONNECTION (object),
                                            result, &error);
-  if (!variant)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          self = CC_DISPLAY_CONFIG_MANAGER_DBUS (data);
-          g_clear_pointer (&self->current_state, g_variant_unref);
-          _cc_display_config_manager_emit_changed (CC_DISPLAY_CONFIG_MANAGER (data));
-          g_warning ("Error calling GetCurrentState: %s", error->message);
-        }
-      return;
+  if (!variant) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+      self = CC_DISPLAY_CONFIG_MANAGER_DBUS (data);
+      g_clear_pointer (&self->current_state, g_variant_unref);
+      _cc_display_config_manager_emit_changed (CC_DISPLAY_CONFIG_MANAGER (data));
+      g_warning ("Error calling GetCurrentState: %s", error->message);
     }
+    return;
+  }
 
   self = CC_DISPLAY_CONFIG_MANAGER_DBUS (data);
   g_clear_pointer (&self->current_state, g_variant_unref);
@@ -120,20 +117,18 @@ bus_gotten (GObject      *object,
 {
   CcDisplayConfigManagerDBus *self;
   GDBusConnection *connection;
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GDBusProxy) proxy = NULL;
-  g_autoptr(GVariant) variant = NULL;
+  g_autoptr (GError) error = NULL;
+  g_autoptr (GDBusProxy) proxy = NULL;
+  g_autoptr (GVariant) variant = NULL;
 
   connection = g_bus_get_finish (result, &error);
-  if (!connection)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          _cc_display_config_manager_emit_changed (CC_DISPLAY_CONFIG_MANAGER (data));
-          g_warning ("Error obtaining DBus connection: %s", error->message);
-        }
-      return;
+  if (!connection) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+      _cc_display_config_manager_emit_changed (CC_DISPLAY_CONFIG_MANAGER (data));
+      g_warning ("Error obtaining DBus connection: %s", error->message);
     }
+    return;
+  }
 
   self = CC_DISPLAY_CONFIG_MANAGER_DBUS (data);
   self->connection = connection;
@@ -157,12 +152,11 @@ bus_gotten (GObject      *object,
                                  "org.gnome.Mutter.DisplayConfig",
                                  NULL,
                                  &error);
-  if (!proxy)
-    {
-      g_warning ("Failed to create D-Bus proxy to \"org.gnome.Mutter.DisplayConfig\": %s",
-                 error->message);
-      return;
-    }
+  if (!proxy) {
+    g_warning ("Failed to create D-Bus proxy to \"org.gnome.Mutter.DisplayConfig\": %s",
+               error->message);
+    return;
+  }
 
   variant = g_dbus_proxy_get_cached_property (proxy, "ApplyMonitorsConfigAllowed");
   if (variant)

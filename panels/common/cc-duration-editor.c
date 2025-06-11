@@ -151,8 +151,7 @@ cc_duration_editor_get_property (GObject    *object,
 {
   CcDurationEditor *self = CC_DURATION_EDITOR (object);
 
-  switch ((CcDurationEditorProperty) property_id)
-    {
+  switch ((CcDurationEditorProperty)property_id) {
     case PROP_DURATION:
       g_value_set_uint (value, cc_duration_editor_get_duration (self));
       break;
@@ -165,7 +164,7 @@ cc_duration_editor_get_property (GObject    *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -176,8 +175,7 @@ cc_duration_editor_set_property (GObject      *object,
 {
   CcDurationEditor *self = CC_DURATION_EDITOR (object);
 
-  switch ((CcDurationEditorProperty) property_id)
-    {
+  switch ((CcDurationEditorProperty)property_id) {
     case PROP_DURATION:
       cc_duration_editor_set_duration (self, g_value_get_uint (value));
       break;
@@ -190,7 +188,7 @@ cc_duration_editor_set_property (GObject      *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -210,11 +208,10 @@ editor_time_changed_cb (CcTimelikeEditor *editor,
 
   /* Clamp to the minimum/maximum. */
   duration = cc_duration_editor_get_duration (self);
-  if (duration < self->minimum || duration > self->maximum)
-    {
-      cc_duration_editor_set_duration (self, CLAMP (duration, self->minimum, self->maximum));
-      return;
-    }
+  if (duration < self->minimum || duration > self->maximum) {
+    cc_duration_editor_set_duration (self, CLAMP (duration, self->minimum, self->maximum));
+    return;
+  }
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_DURATION]);
 }

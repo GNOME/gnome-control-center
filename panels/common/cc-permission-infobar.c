@@ -32,12 +32,11 @@
 
 #include "cc-permission-infobar.h"
 
-struct _CcPermissionInfobar
-{
-  AdwBin         parent_instance;
+struct _CcPermissionInfobar {
+  AdwBin parent_instance;
 
-  AdwBanner     *banner;
-  GPermission   *permission;
+  AdwBanner *banner;
+  GPermission *permission;
 
   GCancellable *cancellable;
 };
@@ -50,11 +49,10 @@ on_permission_changed (CcPermissionInfobar *self)
   gboolean is_authorized = g_permission_get_allowed (self->permission);
 
   adw_banner_set_revealed (self->banner, !is_authorized);
-  if (!is_authorized)
-    {
-      adw_banner_set_title (self->banner, _("Some settings are locked"));
-      adw_banner_set_button_label (self->banner, _("_Unlock…"));
-    }
+  if (!is_authorized) {
+    adw_banner_set_title (self->banner, _("Some settings are locked"));
+    adw_banner_set_button_label (self->banner, _("_Unlock…"));
+  }
 }
 
 static void
@@ -65,10 +63,9 @@ acquire_cb (GObject      *source,
   CcPermissionInfobar *self = CC_PERMISSION_INFOBAR (user_data);
   g_autoptr (GError) error = NULL;
 
-  if (!g_permission_acquire_finish (self->permission, result, &error))
-    {
-      g_warning ("Error acquiring permission: %s", error->message);
-    }
+  if (!g_permission_acquire_finish (self->permission, result, &error)) {
+    g_warning ("Error acquiring permission: %s", error->message);
+  }
 
   g_clear_object (&self->cancellable);
 }
@@ -81,11 +78,10 @@ release_cb (GObject      *source,
   CcPermissionInfobar *self = CC_PERMISSION_INFOBAR (user_data);
   g_autoptr (GError) error = NULL;
 
-  if (!g_permission_release_finish (self->permission, result, &error))
-    {
-      g_warning ("Error releasing permission: %s", error->message);
-      g_error_free (error);
-    }
+  if (!g_permission_release_finish (self->permission, result, &error)) {
+    g_warning ("Error releasing permission: %s", error->message);
+    g_error_free (error);
+  }
 
   g_clear_object (&self->cancellable);
 }
@@ -99,30 +95,25 @@ banner_button_clicked_cb (CcPermissionInfobar *self)
   if (self->cancellable != NULL || self->permission == NULL)
     return;
 
-  if (g_permission_get_allowed (self->permission))
-    {
-      if (g_permission_get_can_release (self->permission))
-        {
-          self->cancellable = g_cancellable_new ();
+  if (g_permission_get_allowed (self->permission)) {
+    if (g_permission_get_can_release (self->permission)) {
+      self->cancellable = g_cancellable_new ();
 
-          g_permission_release_async (self->permission,
-                                      self->cancellable,
-                                      release_cb,
-                                      self);
-        }
+      g_permission_release_async (self->permission,
+                                  self->cancellable,
+                                  release_cb,
+                                  self);
     }
-  else
-    {
-      if (g_permission_get_can_acquire (self->permission))
-        {
-          self->cancellable = g_cancellable_new ();
+  } else {
+    if (g_permission_get_can_acquire (self->permission)) {
+      self->cancellable = g_cancellable_new ();
 
-          g_permission_acquire_async (self->permission,
-                                      self->cancellable,
-                                      acquire_cb,
-                                      self);
-        }
+      g_permission_acquire_async (self->permission,
+                                  self->cancellable,
+                                  acquire_cb,
+                                  self);
     }
+  }
 }
 
 static void
@@ -130,10 +121,9 @@ cc_permission_infobar_dispose (GObject *object)
 {
   CcPermissionInfobar *self = CC_PERMISSION_INFOBAR (object);
 
-  if (self->cancellable != NULL)
-    {
-      g_cancellable_cancel (self->cancellable);
-    }
+  if (self->cancellable != NULL) {
+    g_cancellable_cancel (self->cancellable);
+  }
 
   g_clear_object (&self->cancellable);
 
@@ -169,11 +159,10 @@ cc_permission_infobar_set_permission (CcPermissionInfobar *self,
 {
   g_return_if_fail (CC_IS_PERMISSION_INFOBAR (self));
 
-  if (permission == NULL)
-    {
-      g_warning ("Missing GPermission object");
-      return;
-    }
+  if (permission == NULL) {
+    g_warning ("Missing GPermission object");
+    return;
+  }
 
   self->permission = permission;
 

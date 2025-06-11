@@ -27,24 +27,23 @@
 
 #define CHANGE_POLL_TIME 100
 
-struct _CcSnapRow
-{
+struct _CcSnapRow {
   AdwActionRow parent;
 
-  GtkSwitch     *slot_toggle;
-  GtkComboBox   *slots_combo;
-  GtkListStore  *slots_combo_model;
+  GtkSwitch *slot_toggle;
+  GtkComboBox *slots_combo;
+  GtkListStore *slots_combo_model;
 
-  GCancellable  *cancellable;
+  GCancellable *cancellable;
 
   CcSnapdClient *client;
-  JsonObject    *plug;
-  JsonObject    *connected_slot;
-  JsonArray     *slots;
-  JsonObject    *target_slot;
+  JsonObject *plug;
+  JsonObject *connected_slot;
+  JsonArray *slots;
+  JsonObject *target_slot;
 
-  gchar         *change_id;
-  guint          change_timeout;
+  gchar *change_id;
+  guint change_timeout;
 };
 
 G_DEFINE_TYPE (CcSnapRow, cc_snap_row, ADW_TYPE_ACTION_ROW)
@@ -61,17 +60,15 @@ update_state (CcSnapRow *self)
 
   gtk_switch_set_active (self->slot_toggle, self->connected_slot != NULL);
 
-  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->slots_combo_model), &iter))
-    {
-      do
-        {
-          JsonObject *slot;
+  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->slots_combo_model), &iter)) {
+    do{
+      JsonObject *slot;
 
-          gtk_tree_model_get (GTK_TREE_MODEL (self->slots_combo_model), &iter, 0, &slot, -1);
-          if (slot == self->connected_slot)
-            gtk_combo_box_set_active_iter (self->slots_combo, &iter);
-        } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->slots_combo_model), &iter));
-    }
+      gtk_tree_model_get (GTK_TREE_MODEL (self->slots_combo_model), &iter, 0, &slot, -1);
+      if (slot == self->connected_slot)
+        gtk_combo_box_set_active_iter (self->slots_combo, &iter);
+    } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (self->slots_combo_model), &iter));
+  }
 }
 
 static void
@@ -104,40 +101,36 @@ static gboolean
 poll_change_cb (gpointer user_data)
 {
   CcSnapRow *self = user_data;
-  g_autoptr(JsonObject) change = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (JsonObject) change = NULL;
+  g_autoptr (GError) error = NULL;
 
   change = cc_snapd_client_get_change_sync (self->client, self->change_id, self->cancellable, &error);
-  if (change == NULL)
-    {
-      g_warning ("Failed to monitor change %s: %s", self->change_id, error->message);
-      change_complete (self);
-      return G_SOURCE_REMOVE;
+  if (change == NULL) {
+    g_warning ("Failed to monitor change %s: %s", self->change_id, error->message);
+    change_complete (self);
+    return G_SOURCE_REMOVE;
+  }
+
+  if (json_object_get_boolean_member (change, "ready")) {
+    const gchar *status = json_object_get_string_member (change, "status");
+
+    if (g_strcmp0 (status, "Done") == 0) {
+      g_clear_pointer (&self->connected_slot, json_object_unref);
+      self->connected_slot = self->target_slot ? json_object_ref (self->target_slot) : NULL;
+    } else {
+      g_warning ("Change completed with status %s", status);
     }
 
-  if (json_object_get_boolean_member (change, "ready"))
-    {
-      const gchar *status = json_object_get_string_member (change, "status");
-
-      if (g_strcmp0 (status, "Done") == 0)
-        {
-          g_clear_pointer (&self->connected_slot, json_object_unref);
-          self->connected_slot = self->target_slot ? json_object_ref (self->target_slot) : NULL;
-        }
-      else
-        {
-          g_warning ("Change completed with status %s", status);
-        }
-
-      change_complete (self);
-      return G_SOURCE_REMOVE;
-    }
+    change_complete (self);
+    return G_SOURCE_REMOVE;
+  }
 
   return G_SOURCE_CONTINUE;
 }
 
 static void
-monitor_change (CcSnapRow *self, const gchar *change_id)
+monitor_change (CcSnapRow   *self,
+                const gchar *change_id)
 {
   g_free (self->change_id);
   self->change_id = g_strdup (change_id);
@@ -146,7 +139,7 @@ monitor_change (CcSnapRow *self, const gchar *change_id)
 }
 
 static CcSnapdClient *
-get_client(CcSnapRow *self)
+get_client (CcSnapRow *self)
 {
   if (self->client == NULL)
     self->client = cc_snapd_client_new ();
@@ -154,10 +147,11 @@ get_client(CcSnapRow *self)
 }
 
 static void
-connect_plug (CcSnapRow *self, JsonObject *slot)
+connect_plug (CcSnapRow  *self,
+              JsonObject *slot)
 {
   g_autofree gchar *change_id = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   /* already connected */
   if (self->connected_slot != NULL &&
@@ -176,12 +170,11 @@ connect_plug (CcSnapRow *self, JsonObject *slot)
                                                       json_object_get_string_member (slot, "slot"),
                                                       self->cancellable,
                                                       &error);
-  if (change_id == NULL)
-    {
-      g_warning ("Failed to connect plug: %s", error->message);
-      change_complete (self);
-      return;
-    }
+  if (change_id == NULL) {
+    g_warning ("Failed to connect plug: %s", error->message);
+    change_complete (self);
+    return;
+  }
 
   g_clear_pointer (&self->target_slot, json_object_unref);
   self->target_slot = json_object_ref (slot);
@@ -192,7 +185,7 @@ static void
 disconnect_plug (CcSnapRow *self)
 {
   g_autofree gchar *change_id = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   /* already disconnected */
   if (self->connected_slot == NULL)
@@ -205,12 +198,11 @@ disconnect_plug (CcSnapRow *self)
                                                          json_object_get_string_member (self->plug, "plug"),
                                                          "", "",
                                                          self->cancellable, &error);
-  if (change_id == NULL)
-    {
-      g_warning ("Failed to disconnect plug: %s", error->message);
-      change_complete (self);
-      return;
-    }
+  if (change_id == NULL) {
+    g_warning ("Failed to disconnect plug: %s", error->message);
+    change_complete (self);
+    return;
+  }
 
   g_clear_pointer (&self->target_slot, json_object_unref);
   monitor_change (self, change_id);
@@ -219,15 +211,12 @@ disconnect_plug (CcSnapRow *self)
 static void
 switch_changed_cb (CcSnapRow *self)
 {
-  if (gtk_switch_get_active (self->slot_toggle))
-    {
-      if (json_array_get_length (self->slots) == 1)
-        connect_plug (self, json_array_get_object_element (self->slots, 0));
-    }
-  else
-    {
-      disconnect_plug (self);
-    }
+  if (gtk_switch_get_active (self->slot_toggle)) {
+    if (json_array_get_length (self->slots) == 1)
+      connect_plug (self, json_array_get_object_element (self->slots, 0));
+  } else {
+    disconnect_plug (self);
+  }
 }
 
 static void
@@ -403,7 +392,9 @@ cc_snap_row_init (CcSnapRow *self)
 }
 
 CcSnapRow *
-cc_snap_row_new (GCancellable *cancellable, JsonObject *plug, JsonArray *slots)
+cc_snap_row_new (GCancellable *cancellable,
+                 JsonObject   *plug,
+                 JsonArray    *slots)
 {
   CcSnapRow *self;
   const gchar *label = NULL;
@@ -415,22 +406,20 @@ cc_snap_row_new (GCancellable *cancellable, JsonObject *plug, JsonArray *slots)
   self->plug = json_object_ref (plug);
   self->slots = json_array_ref (slots);
 
-  if (json_object_has_member (plug, "connections"))
-    {
-      JsonArray *connected_slots = json_object_get_array_member (plug, "connections");
-      JsonObject *connected_slot_ref = json_array_get_object_element (connected_slots, 0);
+  if (json_object_has_member (plug, "connections")) {
+    JsonArray *connected_slots = json_object_get_array_member (plug, "connections");
+    JsonObject *connected_slot_ref = json_array_get_object_element (connected_slots, 0);
 
-      for (guint i = 0; i < json_array_get_length (slots); i++)
-        {
-          JsonObject *slot = json_array_get_object_element (slots, i);
+    for (guint i = 0; i < json_array_get_length (slots); i++) {
+      JsonObject *slot = json_array_get_object_element (slots, i);
 
-          if (g_strcmp0 (json_object_get_string_member (slot, "snap"),
-                         json_object_get_string_member (connected_slot_ref, "snap")) == 0 &&
-              g_strcmp0 (json_object_get_string_member (slot, "slot"),
-                         json_object_get_string_member (connected_slot_ref, "slot")) == 0)
-            self->connected_slot = slot;
-        }
+      if (g_strcmp0 (json_object_get_string_member (slot, "snap"),
+                     json_object_get_string_member (connected_slot_ref, "snap")) == 0 &&
+          g_strcmp0 (json_object_get_string_member (slot, "slot"),
+                     json_object_get_string_member (connected_slot_ref, "slot")) == 0)
+        self->connected_slot = slot;
     }
+  }
 
   label = make_interface_label (json_object_get_string_member (plug, "interface"));
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), label);
@@ -438,16 +427,15 @@ cc_snap_row_new (GCancellable *cancellable, JsonObject *plug, JsonArray *slots)
   /* Add option into combo box */
   gtk_list_store_append (self->slots_combo_model, &iter);
   gtk_list_store_set (self->slots_combo_model, &iter, 1, "--", -1);
-  for (guint i = 0; i < json_array_get_length (slots); i++)
-    {
-      JsonObject *slot = json_array_get_object_element (slots, i);
-      g_autofree gchar *label = NULL;
+  for (guint i = 0; i < json_array_get_length (slots); i++) {
+    JsonObject *slot = json_array_get_object_element (slots, i);
+    g_autofree gchar *label = NULL;
 
-      label = g_strdup_printf ("%s:%s", json_object_get_string_member (slot, "snap"),
-                               json_object_get_string_member (slot, "slot"));
-      gtk_list_store_append (self->slots_combo_model, &iter);
-      gtk_list_store_set (self->slots_combo_model, &iter, 0, slot, 1, label, -1);
-    }
+    label = g_strdup_printf ("%s:%s", json_object_get_string_member (slot, "snap"),
+                             json_object_get_string_member (slot, "slot"));
+    gtk_list_store_append (self->slots_combo_model, &iter);
+    gtk_list_store_set (self->slots_combo_model, &iter, 0, slot, 1, label, -1);
+  }
 
   update_state (self);
 

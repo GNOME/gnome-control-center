@@ -30,8 +30,7 @@
 #include <glib/gi18n.h>
 #include "cc-power-profile-row.h"
 
-struct _CcPowerProfileRow
-{
+struct _CcPowerProfileRow {
   AdwActionRow parent_instance;
 
   GtkCheckButton *button;
@@ -122,23 +121,22 @@ cc_power_profile_row_new (CcPowerProfile power_profile)
   self = g_object_new (CC_TYPE_POWER_PROFILE_ROW, NULL);
 
   self->power_profile = power_profile;
-  switch (self->power_profile)
-    {
-      case CC_POWER_PROFILE_PERFORMANCE:
-        text = C_("Power profile", "P_erformance");
-        subtext = _("High performance and power usage");
-        break;
-      case CC_POWER_PROFILE_BALANCED:
-        text = C_("Power profile", "Ba_lanced");
-        subtext = _("Standard performance and power usage");
-        break;
-      case CC_POWER_PROFILE_POWER_SAVER:
-        text = C_("Power profile", "P_ower Saver");
-        subtext = _("Reduced performance and power usage");
-        break;
-      default:
-        g_assert_not_reached ();
-    }
+  switch (self->power_profile) {
+    case CC_POWER_PROFILE_PERFORMANCE:
+      text = C_("Power profile", "P_erformance");
+      subtext = _("High performance and power usage");
+      break;
+    case CC_POWER_PROFILE_BALANCED:
+      text = C_("Power profile", "Ba_lanced");
+      subtext = _("Standard performance and power usage");
+      break;
+    case CC_POWER_PROFILE_POWER_SAVER:
+      text = C_("Power profile", "P_ower Saver");
+      subtext = _("Reduced performance and power usage");
+      break;
+    default:
+      g_assert_not_reached ();
+  }
 
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), text);
   adw_action_row_set_subtitle (ADW_ACTION_ROW (self), subtext);
@@ -164,15 +162,14 @@ cc_power_profile_from_str (const char *profile)
 const char *
 cc_power_profile_to_str (CcPowerProfile profile)
 {
-  switch (profile)
-  {
-  case CC_POWER_PROFILE_POWER_SAVER:
-    return "power-saver";
-  case CC_POWER_PROFILE_BALANCED:
-    return "balanced";
-  case CC_POWER_PROFILE_PERFORMANCE:
-    return "performance";
-  default:
-    g_assert_not_reached ();
+  switch (profile) {
+    case CC_POWER_PROFILE_POWER_SAVER:
+      return "power-saver";
+    case CC_POWER_PROFILE_BALANCED:
+      return "balanced";
+    case CC_POWER_PROFILE_PERFORMANCE:
+      return "performance";
+    default:
+      g_assert_not_reached ();
   }
 }

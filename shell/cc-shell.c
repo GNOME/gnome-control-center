@@ -109,17 +109,14 @@ cc_shell_set_active_panel_from_id (CcShell      *shell,
 
   iface = CC_SHELL_GET_IFACE (shell);
 
-  if (!iface->set_active_panel_from_id)
-    {
-      g_warning ("Object of type \"%s\" does not implement required interface"
-                 " method \"set_active_panel_from_id\",",
-                 G_OBJECT_TYPE_NAME (shell));
-      return FALSE;
-    }
-  else
-    {
-      return iface->set_active_panel_from_id (shell, id, parameters, error);
-    }
+  if (!iface->set_active_panel_from_id) {
+    g_warning ("Object of type \"%s\" does not implement required interface"
+               " method \"set_active_panel_from_id\",",
+               G_OBJECT_TYPE_NAME (shell));
+    return FALSE;
+  } else {
+    return iface->set_active_panel_from_id (shell, id, parameters, error);
+  }
 }
 
 /**
@@ -139,10 +136,9 @@ cc_shell_get_toplevel (CcShell *shell)
 
   iface = CC_SHELL_GET_IFACE (shell);
 
-  if (iface->get_toplevel)
-    {
-        return iface->get_toplevel (shell);
-    }
+  if (iface->get_toplevel) {
+    return iface->get_toplevel (shell);
+  }
 
   g_warning ("Object of type \"%s\" does not implement required interface"
              " method \"get_toplevel\",",

@@ -21,8 +21,7 @@
 #define INTERFACE_SETTINGS           "org.gnome.desktop.interface"
 #define KEY_MOUSE_CURSOR_SIZE        "cursor-size"
 
-struct _CcCursorSizePage
-{
+struct _CcCursorSizePage {
   AdwNavigationPage parent;
 
   GtkFlowBox *cursor_box;
@@ -33,7 +32,8 @@ struct _CcCursorSizePage
 G_DEFINE_TYPE (CcCursorSizePage, cc_cursor_size_page, ADW_TYPE_NAVIGATION_PAGE);
 
 static void
-cursor_size_toggled (CcCursorSizePage *self, GtkWidget *button)
+cursor_size_toggled (CcCursorSizePage *self,
+                     GtkWidget        *button)
 {
   guint cursor_size;
 
@@ -82,29 +82,28 @@ cc_cursor_size_page_init (CcCursorSizePage *self)
   current_cursor_size = g_settings_get_int (self->interface_settings,
                                             KEY_MOUSE_CURSOR_SIZE);
 
-  for (i = 0; i < G_N_ELEMENTS(cursor_sizes); i++)
-    {
-      GtkWidget *image, *button;
-      g_autofree gchar *cursor_image_name = NULL;
+  for (i = 0; i < G_N_ELEMENTS (cursor_sizes); i++) {
+    GtkWidget *image, *button;
+    g_autofree gchar *cursor_image_name = NULL;
 
-      cursor_image_name = g_strdup_printf ("/org/gnome/control-center/universal-access/left_ptr_%dpx.png", cursor_sizes[i]);
-      image = gtk_picture_new_for_resource (cursor_image_name);
-      gtk_picture_set_content_fit (GTK_PICTURE (image), GTK_CONTENT_FIT_SCALE_DOWN);
+    cursor_image_name = g_strdup_printf ("/org/gnome/control-center/universal-access/left_ptr_%dpx.png", cursor_sizes[i]);
+    image = gtk_picture_new_for_resource (cursor_image_name);
+    gtk_picture_set_content_fit (GTK_PICTURE (image), GTK_CONTENT_FIT_SCALE_DOWN);
 
-      button = gtk_toggle_button_new ();
-      gtk_toggle_button_set_group (GTK_TOGGLE_BUTTON (button), GTK_TOGGLE_BUTTON (last_radio_button));
-      last_radio_button = button;
-      g_object_set_data (G_OBJECT (button), "cursor-size", GUINT_TO_POINTER (cursor_sizes[i]));
+    button = gtk_toggle_button_new ();
+    gtk_toggle_button_set_group (GTK_TOGGLE_BUTTON (button), GTK_TOGGLE_BUTTON (last_radio_button));
+    last_radio_button = button;
+    g_object_set_data (G_OBJECT (button), "cursor-size", GUINT_TO_POINTER (cursor_sizes[i]));
 
-      gtk_button_set_child (GTK_BUTTON (button), image);
-      gtk_flow_box_append (self->cursor_box, button);
+    gtk_button_set_child (GTK_BUTTON (button), image);
+    gtk_flow_box_append (self->cursor_box, button);
 
-      g_signal_connect_object (button, "toggled",
-                               G_CALLBACK (cursor_size_toggled), self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (button, "toggled",
+                             G_CALLBACK (cursor_size_toggled), self, G_CONNECT_SWAPPED);
 
-      if (current_cursor_size == cursor_sizes[i])
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
-    }
+    if (current_cursor_size == cursor_sizes[i])
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+  }
 }
 
 CcCursorSizePage *

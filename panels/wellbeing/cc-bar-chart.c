@@ -201,23 +201,23 @@ static void cc_bar_chart_size_allocate (GtkWidget *widget,
                                         int        width,
                                         int        height,
                                         int        baseline);
-static void cc_bar_chart_measure (GtkWidget      *widget,
-                                  GtkOrientation  orientation,
-                                  int             for_size,
-                                  int            *minimum,
-                                  int            *natural,
-                                  int            *minimum_baseline,
-                                  int            *natural_baseline);
+static void cc_bar_chart_measure (GtkWidget     *widget,
+                                  GtkOrientation orientation,
+                                  int            for_size,
+                                  int           *minimum,
+                                  int           *natural,
+                                  int           *minimum_baseline,
+                                  int           *natural_baseline);
 static void cc_bar_chart_snapshot (GtkWidget   *widget,
                                    GtkSnapshot *snapshot);
-static gboolean cc_bar_chart_focus (GtkWidget        *widget,
-                                    GtkDirectionType  direction);
+static gboolean cc_bar_chart_focus (GtkWidget       *widget,
+                                    GtkDirectionType direction);
 
 static void activate_cursor_bar_cb (CcBarChart *self,
                                     gpointer    user_data);
-static void move_cursor_cb (CcBarChart      *self,
-                            GtkMovementStep  step,
-                            int              count);
+static void move_cursor_cb (CcBarChart     *self,
+                            GtkMovementStep step,
+                            int             count);
 
 static gboolean find_index_for_group (CcBarChart      *self,
                                       CcBarChartGroup *group,
@@ -234,12 +234,12 @@ static void ensure_cached_grid_lines_and_labels (CcBarChart *self);
 static inline void calculate_axis_area_widths (CcBarChart *self,
                                                int        *out_left_axis_area_width,
                                                int        *out_right_axis_area_width);
-static inline void calculate_group_x_bounds (CcBarChart   *self,
-                                             unsigned int  idx,
-                                             int          *out_spacing_start_x,
-                                             int          *out_bar_start_x,
-                                             int          *out_bar_finish_x,
-                                             int          *out_spacing_finish_x);
+static inline void calculate_group_x_bounds (CcBarChart  *self,
+                                             unsigned int idx,
+                                             int         *out_spacing_start_x,
+                                             int         *out_bar_start_x,
+                                             int         *out_bar_finish_x,
+                                             int         *out_spacing_finish_x);
 static int value_to_widget_y (CcBarChart *self,
                               double      value);
 static GtkLabel *create_discrete_axis_label (const char *text);
@@ -466,8 +466,7 @@ cc_bar_chart_get_property (GObject    *object,
 {
   CcBarChart *self = CC_BAR_CHART (object);
 
-  switch ((CcBarChartProperty) property_id)
-    {
+  switch ((CcBarChartProperty)property_id) {
     case PROP_SELECTED_INDEX: {
       size_t idx;
       gboolean valid = cc_bar_chart_get_selected_index (self, &idx);
@@ -486,7 +485,7 @@ cc_bar_chart_get_property (GObject    *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -497,8 +496,7 @@ cc_bar_chart_set_property (GObject      *object,
 {
   CcBarChart *self = CC_BAR_CHART (object);
 
-  switch ((CcBarChartProperty) property_id)
-    {
+  switch ((CcBarChartProperty)property_id) {
     case PROP_SELECTED_INDEX:
       cc_bar_chart_set_selected_index (self, TRUE, g_value_get_uint (value));
       break;
@@ -514,7 +512,7 @@ cc_bar_chart_set_property (GObject      *object,
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
+  }
 }
 
 static void
@@ -584,25 +582,24 @@ cc_bar_chart_size_allocate (GtkWidget *widget,
   const double max_value = get_maximum_data_value (self, TRUE);
 
   /* Position the labels for the discrete axis in the correct places. */
-  for (unsigned int i = 0; self->n_data > 0 && self->cached_discrete_axis_labels != NULL && i < self->cached_discrete_axis_labels->len; i++)
-    {
-      GtkAllocation child_alloc;
-      int spacing_start_x, spacing_finish_x;
+  for (unsigned int i = 0; self->n_data > 0 && self->cached_discrete_axis_labels != NULL && i < self->cached_discrete_axis_labels->len; i++) {
+    GtkAllocation child_alloc;
+    int spacing_start_x, spacing_finish_x;
 
-      /* The label is allocated the full possible space, and its xalign and
-       * yalign are used to position the text correctly within that. */
-      calculate_group_x_bounds (self, i,
-                                &spacing_start_x,
-                                NULL, NULL,
-                                &spacing_finish_x);
+    /* The label is allocated the full possible space, and its xalign and
+     * yalign are used to position the text correctly within that. */
+    calculate_group_x_bounds (self, i,
+                              &spacing_start_x,
+                              NULL, NULL,
+                              &spacing_finish_x);
 
-      child_alloc.x = spacing_start_x;
-      child_alloc.y = height - self->cached_discrete_axis_area_height;
-      child_alloc.width = spacing_finish_x - spacing_start_x;
-      child_alloc.height = self->cached_discrete_axis_area_height;
+    child_alloc.x = spacing_start_x;
+    child_alloc.y = height - self->cached_discrete_axis_area_height;
+    child_alloc.width = spacing_finish_x - spacing_start_x;
+    child_alloc.height = self->cached_discrete_axis_area_height;
 
-      gtk_widget_size_allocate (self->cached_discrete_axis_labels->pdata[i], &child_alloc, self->cached_discrete_axis_baseline);
-    }
+    gtk_widget_size_allocate (self->cached_discrete_axis_labels->pdata[i], &child_alloc, self->cached_discrete_axis_baseline);
+  }
 
   /* Calculate our continuous axis grid lines and labels */
   ensure_cached_grid_lines_and_labels (self);
@@ -624,102 +621,94 @@ cc_bar_chart_size_allocate (GtkWidget *widget,
    * step we work out collisions and hide labels based on index modulus to avoid
    * drawing text on top of other text. See below. */
   if (self->cached_continuous_axis_labels != NULL &&
-      self->cached_continuous_axis_grid_line_values != NULL)
-    {
-      for (unsigned int i = 0; i < self->cached_continuous_axis_labels->len; i++)
-        {
-          const double grid_line_value = g_array_index (self->cached_continuous_axis_grid_line_values, double, i);
-          GtkAllocation child_alloc;
-          int label_natural_height, label_natural_baseline;
+      self->cached_continuous_axis_grid_line_values != NULL) {
+    for (unsigned int i = 0; i < self->cached_continuous_axis_labels->len; i++) {
+      const double grid_line_value = g_array_index (self->cached_continuous_axis_grid_line_values, double, i);
+      GtkAllocation child_alloc;
+      int label_natural_height, label_natural_baseline;
 
-          gtk_widget_measure (GTK_WIDGET (self->cached_continuous_axis_labels->pdata[i]),
-                              GTK_ORIENTATION_VERTICAL, self->cached_continuous_axis_area_width,
-                              NULL, &label_natural_height,
-                              NULL, &label_natural_baseline);
+      gtk_widget_measure (GTK_WIDGET (self->cached_continuous_axis_labels->pdata[i]),
+                          GTK_ORIENTATION_VERTICAL, self->cached_continuous_axis_area_width,
+                          NULL, &label_natural_height,
+                          NULL, &label_natural_baseline);
 
-          if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL)
-            child_alloc.x = 0;
-          else
-            child_alloc.x = width - self->cached_continuous_axis_area_width;
-          /* centre the label vertically on the grid line position, and let the valign code
-           * in GtkLabel align the text baseline correctly with that */
-          child_alloc.y = value_to_widget_y (self, grid_line_value) - label_natural_height / 2;
-          child_alloc.width = self->cached_continuous_axis_area_width;
-          child_alloc.height = label_natural_height;
+      if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL)
+        child_alloc.x = 0;
+      else
+        child_alloc.x = width - self->cached_continuous_axis_area_width;
+      /* centre the label vertically on the grid line position, and let the valign code
+       * in GtkLabel align the text baseline correctly with that */
+      child_alloc.y = value_to_widget_y (self, grid_line_value) - label_natural_height / 2;
+      child_alloc.width = self->cached_continuous_axis_area_width;
+      child_alloc.height = label_natural_height;
 
-          gtk_widget_size_allocate (self->cached_continuous_axis_labels->pdata[i], &child_alloc, label_natural_baseline);
-        }
-
-      /* Check for collisions. Compare pairs of continuous axis labels which are
-       * self->cached_continuous_axis_label_collision_modulus positions apart. If
-       * any of those pairs collide, increment the collision modulus and restart the
-       * check. */
-      self->cached_continuous_axis_label_collision_modulus = 1;
-
-      do
-        {
-          collision_detected = FALSE;
-
-          for (unsigned int i = self->cached_continuous_axis_label_collision_modulus;
-               i < self->cached_continuous_axis_labels->len;
-               i++)
-            {
-              graphene_rect_t child_allocs[2];
-              gboolean success;
-
-              success = gtk_widget_compute_bounds (self->cached_continuous_axis_labels->pdata[i - self->cached_continuous_axis_label_collision_modulus],
-                                                   widget,
-                                                   &child_allocs[0]);
-              g_assert (success);
-              success = gtk_widget_compute_bounds (self->cached_continuous_axis_labels->pdata[i],
-                                                   widget,
-                                                   &child_allocs[1]);
-              g_assert (success);
-
-              if (graphene_rect_intersection (&child_allocs[0], &child_allocs[1], NULL))
-                {
-                  collision_detected = TRUE;
-                  g_assert (self->cached_continuous_axis_label_collision_modulus < G_MAXUINT);
-                  self->cached_continuous_axis_label_collision_modulus++;
-                  break;
-                }
-            }
-        }
-      while (collision_detected);
-
-      /* Hide continuous axis labels according to the collision modulus. */
-      for (unsigned int i = 0; i < self->cached_continuous_axis_labels->len; i++)
-        {
-          gtk_widget_set_child_visible (self->cached_continuous_axis_labels->pdata[i],
-                                        (i % self->cached_continuous_axis_label_collision_modulus) == 0);
-        }
+      gtk_widget_size_allocate (self->cached_continuous_axis_labels->pdata[i], &child_alloc, label_natural_baseline);
     }
+
+    /* Check for collisions. Compare pairs of continuous axis labels which are
+     * self->cached_continuous_axis_label_collision_modulus positions apart. If
+     * any of those pairs collide, increment the collision modulus and restart the
+     * check. */
+    self->cached_continuous_axis_label_collision_modulus = 1;
+
+    do{
+      collision_detected = FALSE;
+
+      for (unsigned int i = self->cached_continuous_axis_label_collision_modulus;
+           i < self->cached_continuous_axis_labels->len;
+           i++) {
+        graphene_rect_t child_allocs[2];
+        gboolean success;
+
+        success = gtk_widget_compute_bounds (self->cached_continuous_axis_labels->pdata[i - self->cached_continuous_axis_label_collision_modulus],
+                                             widget,
+                                             &child_allocs[0]);
+        g_assert (success);
+        success = gtk_widget_compute_bounds (self->cached_continuous_axis_labels->pdata[i],
+                                             widget,
+                                             &child_allocs[1]);
+        g_assert (success);
+
+        if (graphene_rect_intersection (&child_allocs[0], &child_allocs[1], NULL)) {
+          collision_detected = TRUE;
+          g_assert (self->cached_continuous_axis_label_collision_modulus < G_MAXUINT);
+          self->cached_continuous_axis_label_collision_modulus++;
+          break;
+        }
+      }
+    }while (collision_detected);
+
+    /* Hide continuous axis labels according to the collision modulus. */
+    for (unsigned int i = 0; i < self->cached_continuous_axis_labels->len; i++) {
+      gtk_widget_set_child_visible (self->cached_continuous_axis_labels->pdata[i],
+                                    (i % self->cached_continuous_axis_label_collision_modulus) == 0);
+    }
+  }
 
   /* Chart bar groups */
-  for (unsigned int i = 0; self->cached_groups != NULL && i < self->cached_groups->len; i++)
-    {
-      CcBarChartGroup *group = CC_BAR_CHART_GROUP (self->cached_groups->pdata[i]);
-      int group_bottom_y, group_left_x, group_right_x;
-      GtkAllocation child_alloc;
+  for (unsigned int i = 0; self->cached_groups != NULL && i < self->cached_groups->len; i++) {
+    CcBarChartGroup *group = CC_BAR_CHART_GROUP (self->cached_groups->pdata[i]);
+    int group_bottom_y, group_left_x, group_right_x;
+    GtkAllocation child_alloc;
 
-      calculate_group_x_bounds (self, i,
-                                NULL,
-                                &group_left_x,
-                                &group_right_x,
-                                NULL);
+    calculate_group_x_bounds (self, i,
+                              NULL,
+                              &group_left_x,
+                              &group_right_x,
+                              NULL);
 
-      /* Position the bottom of the bar just above the axis grid line, to avoid
-       * them overlapping. */
-      group_bottom_y = value_to_widget_y (self, 0.0) - (GRID_LINE_WIDTH + (2 - 1)) / 2;
+    /* Position the bottom of the bar just above the axis grid line, to avoid
+     * them overlapping. */
+    group_bottom_y = value_to_widget_y (self, 0.0) - (GRID_LINE_WIDTH + (2 - 1)) / 2;
 
-      child_alloc.x = group_left_x;
-      child_alloc.y = 0;
-      child_alloc.width = group_right_x - group_left_x;
-      child_alloc.height = group_bottom_y;
+    child_alloc.x = group_left_x;
+    child_alloc.y = 0;
+    child_alloc.width = group_right_x - group_left_x;
+    child_alloc.height = group_bottom_y;
 
-      cc_bar_chart_group_set_scale (group, self->cached_pixels_per_data);
-      gtk_widget_size_allocate (GTK_WIDGET (group), &child_alloc, -1);
-    }
+    cc_bar_chart_group_set_scale (group, self->cached_pixels_per_data);
+    gtk_widget_size_allocate (GTK_WIDGET (group), &child_alloc, -1);
+  }
 }
 
 static void
@@ -734,14 +723,13 @@ cc_bar_chart_measure (GtkWidget      *widget,
   CcBarChart *self = CC_BAR_CHART (widget);
 
   /* Empty state. */
-  if (self->n_data == 0)
-    {
-      *minimum = 0;
-      *natural = 0;
-      *minimum_baseline = -1;
-      *natural_baseline = -1;
-      return;
-    }
+  if (self->n_data == 0) {
+    *minimum = 0;
+    *natural = 0;
+    *minimum_baseline = -1;
+    *natural_baseline = -1;
+    return;
+  }
 
   /* Calculate our continuous axis labels for measuring. Even though some of
    * them won’t be visible (according to
@@ -750,117 +738,107 @@ cc_bar_chart_measure (GtkWidget      *widget,
   if (self->continuous_axis_label_callback != NULL)
     ensure_cached_grid_lines_and_labels (self);
 
-  if (orientation == GTK_ORIENTATION_HORIZONTAL)
-    {
-      int maximum_continuous_label_natural_width = 0;
-      int maximum_discrete_label_minimum_width = 0, maximum_discrete_label_natural_width = 0;
-      int maximum_bar_minimum_width = 0, maximum_bar_natural_width = 0;
+  if (orientation == GTK_ORIENTATION_HORIZONTAL) {
+    int maximum_continuous_label_natural_width = 0;
+    int maximum_discrete_label_minimum_width = 0, maximum_discrete_label_natural_width = 0;
+    int maximum_bar_minimum_width = 0, maximum_bar_natural_width = 0;
 
-      /* Measure the first and last continuous axis labels and work out their
-       * minimum widths. */
-      for (unsigned int i = 0; self->cached_continuous_axis_labels != NULL && i < self->cached_continuous_axis_labels->len; i++)
-        {
-          int label_natural_width = -1;
+    /* Measure the first and last continuous axis labels and work out their
+     * minimum widths. */
+    for (unsigned int i = 0; self->cached_continuous_axis_labels != NULL && i < self->cached_continuous_axis_labels->len; i++) {
+      int label_natural_width = -1;
 
-          gtk_widget_measure (GTK_WIDGET (self->cached_continuous_axis_labels->pdata[i]),
-                              GTK_ORIENTATION_HORIZONTAL, -1,
-                              NULL, &label_natural_width,
-                              NULL, NULL);
+      gtk_widget_measure (GTK_WIDGET (self->cached_continuous_axis_labels->pdata[i]),
+                          GTK_ORIENTATION_HORIZONTAL, -1,
+                          NULL, &label_natural_width,
+                          NULL, NULL);
 
-          maximum_continuous_label_natural_width = MAX (maximum_continuous_label_natural_width, label_natural_width);
-        }
-
-      /* Measure the bar groups to get their minimum and natural widths too. */
-      for (unsigned int i = 0; i < self->cached_groups->len; i++)
-        {
-          int bar_natural_width = -1, bar_minimum_width = -1;
-
-          gtk_widget_measure (GTK_WIDGET (self->cached_groups->pdata[i]),
-                              GTK_ORIENTATION_HORIZONTAL, -1,
-                              &bar_minimum_width, &bar_natural_width,
-                              NULL, NULL);
-
-          maximum_bar_natural_width = MAX (maximum_bar_natural_width, bar_natural_width);
-          maximum_bar_minimum_width = MAX (maximum_bar_minimum_width, bar_minimum_width);
-        }
-
-      /* Also measure the discrete axis labels to see if any of them are wider
-       * than the groups. */
-      for (unsigned int i = 0; self->cached_discrete_axis_labels != NULL && i < self->cached_discrete_axis_labels->len; i++)
-        {
-          int label_natural_width = -1, label_minimum_width = -1;
-
-          gtk_widget_measure (GTK_WIDGET (self->cached_discrete_axis_labels->pdata[i]),
-                              GTK_ORIENTATION_HORIZONTAL, -1,
-                              &label_minimum_width, &label_natural_width,
-                              NULL, NULL);
-
-          maximum_discrete_label_natural_width = MAX (maximum_discrete_label_natural_width, label_natural_width);
-          maximum_discrete_label_minimum_width = MAX (maximum_discrete_label_minimum_width, label_minimum_width);
-        }
-
-      self->cached_minimum_group_width = MAX (maximum_bar_minimum_width, maximum_discrete_label_minimum_width);
-
-      /* Don’t complicate things by allowing the continuous axis labels to get
-       * less than their natural width as an allocation. */
-      self->cached_continuous_axis_area_width = maximum_continuous_label_natural_width;
-
-      *minimum = MAX (maximum_bar_minimum_width, maximum_discrete_label_minimum_width) * self->n_data + maximum_continuous_label_natural_width;
-      *natural = MAX (maximum_bar_natural_width, maximum_discrete_label_natural_width) * self->n_data + maximum_continuous_label_natural_width;
-      *minimum_baseline = -1;
-      *natural_baseline = -1;
+      maximum_continuous_label_natural_width = MAX (maximum_continuous_label_natural_width, label_natural_width);
     }
-  else if (orientation == GTK_ORIENTATION_VERTICAL)
-    {
-      int maximum_discrete_label_natural_height = 0, maximum_discrete_label_natural_baseline = -1;
-      int continuous_label_minimum_height = 0, continuous_label_natural_height = 0;
 
-      /* Measure all the discrete labels. */
-      for (unsigned int i = 0; self->cached_discrete_axis_labels != NULL && i < self->cached_discrete_axis_labels->len; i++)
-        {
-          int label_natural_height = -1, label_natural_baseline = -1;
+    /* Measure the bar groups to get their minimum and natural widths too. */
+    for (unsigned int i = 0; i < self->cached_groups->len; i++) {
+      int bar_natural_width = -1, bar_minimum_width = -1;
 
-          gtk_widget_measure (GTK_WIDGET (self->cached_discrete_axis_labels->pdata[i]),
-                              GTK_ORIENTATION_VERTICAL, -1,
-                              NULL, &label_natural_height,
-                              NULL, &label_natural_baseline);
+      gtk_widget_measure (GTK_WIDGET (self->cached_groups->pdata[i]),
+                          GTK_ORIENTATION_HORIZONTAL, -1,
+                          &bar_minimum_width, &bar_natural_width,
+                          NULL, NULL);
 
-          maximum_discrete_label_natural_height = MAX (maximum_discrete_label_natural_height, label_natural_height);
-          maximum_discrete_label_natural_baseline = MAX (maximum_discrete_label_natural_baseline, label_natural_baseline);
-        }
-
-      /* Measure the last continuous axis label and work out its minimum height,
-       * because it will be vertically centred on the top-most grid line, which
-       * might be near enough the top of the chart to push the top of the text
-       * off the default allocation.
-       *
-       * There’s no need to do the same for the first continuous axis label,
-       * because it will never drop below the discrete axis labels unless the
-       * font sizes are ludicrously different. */
-      if (self->cached_continuous_axis_labels != NULL)
-        {
-          gtk_widget_measure (GTK_WIDGET (self->cached_continuous_axis_labels->pdata[self->cached_continuous_axis_labels->len - 1]),
-                              GTK_ORIENTATION_VERTICAL, -1,
-                              &continuous_label_minimum_height, &continuous_label_natural_height,
-                              NULL, NULL);
-        }
-
-      self->cached_continuous_axis_label_height = continuous_label_natural_height;
-
-      /* Don’t complicate things by allowing the discrete axis labels to get
-       * less than their natural height as an allocation. */
-      self->cached_discrete_axis_area_height = maximum_discrete_label_natural_height;
-      self->cached_discrete_axis_baseline = maximum_discrete_label_natural_baseline;
-
-      *minimum = MINIMUM_CHART_HEIGHT + maximum_discrete_label_natural_height + continuous_label_minimum_height / 2;
-      *natural = NATURAL_CHART_HEIGHT + maximum_discrete_label_natural_height + continuous_label_natural_height / 2;
-      *minimum_baseline = -1;
-      *natural_baseline = -1;
+      maximum_bar_natural_width = MAX (maximum_bar_natural_width, bar_natural_width);
+      maximum_bar_minimum_width = MAX (maximum_bar_minimum_width, bar_minimum_width);
     }
-  else
-    {
-      g_assert_not_reached ();
+
+    /* Also measure the discrete axis labels to see if any of them are wider
+     * than the groups. */
+    for (unsigned int i = 0; self->cached_discrete_axis_labels != NULL && i < self->cached_discrete_axis_labels->len; i++) {
+      int label_natural_width = -1, label_minimum_width = -1;
+
+      gtk_widget_measure (GTK_WIDGET (self->cached_discrete_axis_labels->pdata[i]),
+                          GTK_ORIENTATION_HORIZONTAL, -1,
+                          &label_minimum_width, &label_natural_width,
+                          NULL, NULL);
+
+      maximum_discrete_label_natural_width = MAX (maximum_discrete_label_natural_width, label_natural_width);
+      maximum_discrete_label_minimum_width = MAX (maximum_discrete_label_minimum_width, label_minimum_width);
     }
+
+    self->cached_minimum_group_width = MAX (maximum_bar_minimum_width, maximum_discrete_label_minimum_width);
+
+    /* Don’t complicate things by allowing the continuous axis labels to get
+     * less than their natural width as an allocation. */
+    self->cached_continuous_axis_area_width = maximum_continuous_label_natural_width;
+
+    *minimum = MAX (maximum_bar_minimum_width, maximum_discrete_label_minimum_width) * self->n_data + maximum_continuous_label_natural_width;
+    *natural = MAX (maximum_bar_natural_width, maximum_discrete_label_natural_width) * self->n_data + maximum_continuous_label_natural_width;
+    *minimum_baseline = -1;
+    *natural_baseline = -1;
+  } else if (orientation == GTK_ORIENTATION_VERTICAL) {
+    int maximum_discrete_label_natural_height = 0, maximum_discrete_label_natural_baseline = -1;
+    int continuous_label_minimum_height = 0, continuous_label_natural_height = 0;
+
+    /* Measure all the discrete labels. */
+    for (unsigned int i = 0; self->cached_discrete_axis_labels != NULL && i < self->cached_discrete_axis_labels->len; i++) {
+      int label_natural_height = -1, label_natural_baseline = -1;
+
+      gtk_widget_measure (GTK_WIDGET (self->cached_discrete_axis_labels->pdata[i]),
+                          GTK_ORIENTATION_VERTICAL, -1,
+                          NULL, &label_natural_height,
+                          NULL, &label_natural_baseline);
+
+      maximum_discrete_label_natural_height = MAX (maximum_discrete_label_natural_height, label_natural_height);
+      maximum_discrete_label_natural_baseline = MAX (maximum_discrete_label_natural_baseline, label_natural_baseline);
+    }
+
+    /* Measure the last continuous axis label and work out its minimum height,
+     * because it will be vertically centred on the top-most grid line, which
+     * might be near enough the top of the chart to push the top of the text
+     * off the default allocation.
+     *
+     * There’s no need to do the same for the first continuous axis label,
+     * because it will never drop below the discrete axis labels unless the
+     * font sizes are ludicrously different. */
+    if (self->cached_continuous_axis_labels != NULL) {
+      gtk_widget_measure (GTK_WIDGET (self->cached_continuous_axis_labels->pdata[self->cached_continuous_axis_labels->len - 1]),
+                          GTK_ORIENTATION_VERTICAL, -1,
+                          &continuous_label_minimum_height, &continuous_label_natural_height,
+                          NULL, NULL);
+    }
+
+    self->cached_continuous_axis_label_height = continuous_label_natural_height;
+
+    /* Don’t complicate things by allowing the discrete axis labels to get
+     * less than their natural height as an allocation. */
+    self->cached_discrete_axis_area_height = maximum_discrete_label_natural_height;
+    self->cached_discrete_axis_baseline = maximum_discrete_label_natural_baseline;
+
+    *minimum = MINIMUM_CHART_HEIGHT + maximum_discrete_label_natural_height + continuous_label_minimum_height / 2;
+    *natural = NATURAL_CHART_HEIGHT + maximum_discrete_label_natural_height + continuous_label_natural_height / 2;
+    *minimum_baseline = -1;
+    *natural_baseline = -1;
+  } else {
+    g_assert_not_reached ();
+  }
 }
 
 static void
@@ -882,41 +860,39 @@ cc_bar_chart_snapshot (GtkWidget   *widget,
 
   /* Continuous axis grid lines, should have been cached in size_allocate, but
    * may not have been set yet. */
-  if (self->cached_continuous_axis_grid_line_values != NULL)
-    {
-      g_autoptr(GskPathBuilder) grid_line_builder = gsk_path_builder_new ();
-      g_autoptr(GskPath) grid_line_path = NULL;
-      GskStroke *grid_line_stroke = NULL;
-      const GdkRGBA *grid_line_color;
+  if (self->cached_continuous_axis_grid_line_values != NULL) {
+    g_autoptr (GskPathBuilder) grid_line_builder = gsk_path_builder_new ();
+    g_autoptr (GskPath) grid_line_path = NULL;
+    GskStroke *grid_line_stroke = NULL;
+    const GdkRGBA *grid_line_color;
 
-      grid_line_stroke = gsk_stroke_new (GRID_LINE_WIDTH);
+    grid_line_stroke = gsk_stroke_new (GRID_LINE_WIDTH);
 
-      for (unsigned int i = 0; i < self->cached_continuous_axis_grid_line_values->len; i++)
-        {
-          const double value = g_array_index (self->cached_continuous_axis_grid_line_values, double, i);
-          int y = value_to_widget_y (self, value);
+    for (unsigned int i = 0; i < self->cached_continuous_axis_grid_line_values->len; i++) {
+      const double value = g_array_index (self->cached_continuous_axis_grid_line_values, double, i);
+      int y = value_to_widget_y (self, value);
 
-          gsk_path_builder_move_to (grid_line_builder, left_axis_area_width, y);
-          gsk_path_builder_line_to (grid_line_builder,
-                                    width - right_axis_area_width,
-                                    y);
-        }
-
-      grid_line_path = gsk_path_builder_free_to_path (g_steal_pointer (&grid_line_builder));
-
-      if (adw_style_manager_get_dark (style_manager) && adw_style_manager_get_high_contrast (style_manager))
-        grid_line_color = &GRID_LINE_COLOR_HC_DARK;
-      else if (adw_style_manager_get_dark (style_manager))
-        grid_line_color = &GRID_LINE_COLOR_DARK;
-      else if (adw_style_manager_get_high_contrast (style_manager))
-        grid_line_color = &GRID_LINE_COLOR_HC;
-      else
-        grid_line_color = &GRID_LINE_COLOR;
-
-      gtk_snapshot_append_stroke (snapshot, grid_line_path, grid_line_stroke, grid_line_color);
-
-      gsk_stroke_free (g_steal_pointer (&grid_line_stroke));
+      gsk_path_builder_move_to (grid_line_builder, left_axis_area_width, y);
+      gsk_path_builder_line_to (grid_line_builder,
+                                width - right_axis_area_width,
+                                y);
     }
+
+    grid_line_path = gsk_path_builder_free_to_path (g_steal_pointer (&grid_line_builder));
+
+    if (adw_style_manager_get_dark (style_manager) && adw_style_manager_get_high_contrast (style_manager))
+      grid_line_color = &GRID_LINE_COLOR_HC_DARK;
+    else if (adw_style_manager_get_dark (style_manager))
+      grid_line_color = &GRID_LINE_COLOR_DARK;
+    else if (adw_style_manager_get_high_contrast (style_manager))
+      grid_line_color = &GRID_LINE_COLOR_HC;
+    else
+      grid_line_color = &GRID_LINE_COLOR;
+
+    gtk_snapshot_append_stroke (snapshot, grid_line_path, grid_line_stroke, grid_line_color);
+
+    gsk_stroke_free (g_steal_pointer (&grid_line_stroke));
+  }
 
   /* Continuous axis labels, should have been cached in size_allocate, but may
    * not have been set yet. */
@@ -933,39 +909,38 @@ cc_bar_chart_snapshot (GtkWidget   *widget,
     gtk_widget_snapshot_child (widget, self->cached_groups->pdata[i], snapshot);
 
   /* Overlay line */
-  if (!isnan (self->overlay_line_value))
-    {
-      g_autoptr(GskPathBuilder) overlay_builder = gsk_path_builder_new ();
-      g_autoptr(GskPath) overlay_path = NULL;
-      GskStroke *overlay_stroke = NULL;
-      int overlay_y;
-      const GdkRGBA *overlay_line_color;
+  if (!isnan (self->overlay_line_value)) {
+    g_autoptr (GskPathBuilder) overlay_builder = gsk_path_builder_new ();
+    g_autoptr (GskPath) overlay_path = NULL;
+    GskStroke *overlay_stroke = NULL;
+    int overlay_y;
+    const GdkRGBA *overlay_line_color;
 
-      overlay_stroke = gsk_stroke_new (OVERLAY_LINE_WIDTH);
-      gsk_stroke_set_line_cap (overlay_stroke, GSK_LINE_CAP_SQUARE);
-      gsk_stroke_set_dash (overlay_stroke, OVERLAY_LINE_DASH, G_N_ELEMENTS (OVERLAY_LINE_DASH));
+    overlay_stroke = gsk_stroke_new (OVERLAY_LINE_WIDTH);
+    gsk_stroke_set_line_cap (overlay_stroke, GSK_LINE_CAP_SQUARE);
+    gsk_stroke_set_dash (overlay_stroke, OVERLAY_LINE_DASH, G_N_ELEMENTS (OVERLAY_LINE_DASH));
 
-      overlay_y = value_to_widget_y (self, self->overlay_line_value);
-      gsk_path_builder_move_to (overlay_builder, left_axis_area_width, overlay_y);
-      gsk_path_builder_line_to (overlay_builder,
-                                width - right_axis_area_width,
-                                overlay_y);
+    overlay_y = value_to_widget_y (self, self->overlay_line_value);
+    gsk_path_builder_move_to (overlay_builder, left_axis_area_width, overlay_y);
+    gsk_path_builder_line_to (overlay_builder,
+                              width - right_axis_area_width,
+                              overlay_y);
 
-      overlay_path = gsk_path_builder_free_to_path (g_steal_pointer (&overlay_builder));
+    overlay_path = gsk_path_builder_free_to_path (g_steal_pointer (&overlay_builder));
 
-      if (adw_style_manager_get_dark (style_manager) && adw_style_manager_get_high_contrast (style_manager))
-        overlay_line_color = &OVERLAY_LINE_COLOR_HC_DARK;
-      else if (adw_style_manager_get_dark (style_manager))
-        overlay_line_color = &OVERLAY_LINE_COLOR_DARK;
-      else if (adw_style_manager_get_high_contrast (style_manager))
-        overlay_line_color = &OVERLAY_LINE_COLOR_HC;
-      else
-        overlay_line_color = &OVERLAY_LINE_COLOR;
+    if (adw_style_manager_get_dark (style_manager) && adw_style_manager_get_high_contrast (style_manager))
+      overlay_line_color = &OVERLAY_LINE_COLOR_HC_DARK;
+    else if (adw_style_manager_get_dark (style_manager))
+      overlay_line_color = &OVERLAY_LINE_COLOR_DARK;
+    else if (adw_style_manager_get_high_contrast (style_manager))
+      overlay_line_color = &OVERLAY_LINE_COLOR_HC;
+    else
+      overlay_line_color = &OVERLAY_LINE_COLOR;
 
-      gtk_snapshot_append_stroke (snapshot, overlay_path, overlay_stroke, overlay_line_color);
+    gtk_snapshot_append_stroke (snapshot, overlay_path, overlay_stroke, overlay_line_color);
 
-      gsk_stroke_free (g_steal_pointer (&overlay_stroke));
-    }
+    gsk_stroke_free (g_steal_pointer (&overlay_stroke));
+  }
 }
 
 static gboolean
@@ -978,71 +953,64 @@ cc_bar_chart_focus (GtkWidget        *widget,
 
   /* Reverse the direction if in RTL mode, as the chart presents things on a
    * left–right axis. */
-  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
-    {
-      switch (direction)
-        {
-        case GTK_DIR_TAB_BACKWARD:
-          direction = GTK_DIR_TAB_FORWARD;
-          break;
-        case GTK_DIR_TAB_FORWARD:
-          direction = GTK_DIR_TAB_BACKWARD;
-          break;
-        case GTK_DIR_LEFT:
-          direction = GTK_DIR_RIGHT;
-          break;
-        case GTK_DIR_RIGHT:
-          direction = GTK_DIR_LEFT;
-          break;
-        case GTK_DIR_UP:
-        case GTK_DIR_DOWN:
-        default:
-          /* No change. */
-          break;
-        }
+  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL) {
+    switch (direction) {
+      case GTK_DIR_TAB_BACKWARD:
+        direction = GTK_DIR_TAB_FORWARD;
+        break;
+      case GTK_DIR_TAB_FORWARD:
+        direction = GTK_DIR_TAB_BACKWARD;
+        break;
+      case GTK_DIR_LEFT:
+        direction = GTK_DIR_RIGHT;
+        break;
+      case GTK_DIR_RIGHT:
+        direction = GTK_DIR_LEFT;
+        break;
+      case GTK_DIR_UP:
+      case GTK_DIR_DOWN:
+      default:
+        /* No change. */
+        break;
     }
+  }
 
   focus_child = gtk_widget_get_focus_child (widget);
 
-  if (focus_child != NULL)
-    {
-      /* Can the focus move around inside the currently focused child widget? */
-      if (gtk_widget_child_focus (focus_child, direction))
+  if (focus_child != NULL) {
+    /* Can the focus move around inside the currently focused child widget? */
+    if (gtk_widget_child_focus (focus_child, direction))
+      return TRUE;
+
+    if (CC_IS_BAR_CHART_GROUP (focus_child) &&
+        (direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
+      next_focus_group = get_adjacent_focusable_group (self, CC_BAR_CHART_GROUP (focus_child), -1);
+    else if (CC_IS_BAR_CHART_GROUP (focus_child) &&
+             (direction == GTK_DIR_RIGHT || direction == GTK_DIR_TAB_FORWARD))
+      next_focus_group = get_adjacent_focusable_group (self, CC_BAR_CHART_GROUP (focus_child), 1);
+  } else {
+    /* No current focus group. If a group is selected, focus on that. Otherwise,
+     * focus on the first/last focusable group, depending on which direction
+     * we’re coming in from. */
+    if (self->selected_index_set)
+      next_focus_group = self->cached_groups->pdata[self->selected_index];
+
+    if (next_focus_group == NULL &&
+        (direction == GTK_DIR_UP || direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
+      next_focus_group = get_last_focusable_group (self);
+    else if (next_focus_group == NULL &&
+             (direction == GTK_DIR_DOWN || direction == GTK_DIR_RIGHT || direction == GTK_DIR_TAB_FORWARD))
+      next_focus_group = get_first_focusable_group (self);
+  }
+
+  if (next_focus_group == NULL) {
+    if (direction == GTK_DIR_LEFT || direction == GTK_DIR_RIGHT) {
+      if (gtk_widget_keynav_failed (widget, direction))
         return TRUE;
-
-      if (CC_IS_BAR_CHART_GROUP (focus_child) &&
-          (direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
-        next_focus_group = get_adjacent_focusable_group (self, CC_BAR_CHART_GROUP (focus_child), -1);
-      else if (CC_IS_BAR_CHART_GROUP (focus_child) &&
-               (direction == GTK_DIR_RIGHT || direction == GTK_DIR_TAB_FORWARD))
-        next_focus_group = get_adjacent_focusable_group (self, CC_BAR_CHART_GROUP (focus_child), 1);
-    }
-  else
-    {
-      /* No current focus group. If a group is selected, focus on that. Otherwise,
-       * focus on the first/last focusable group, depending on which direction
-       * we’re coming in from. */
-      if (self->selected_index_set)
-        next_focus_group = self->cached_groups->pdata[self->selected_index];
-
-      if (next_focus_group == NULL &&
-          (direction == GTK_DIR_UP || direction == GTK_DIR_LEFT || direction == GTK_DIR_TAB_BACKWARD))
-        next_focus_group = get_last_focusable_group (self);
-      else if (next_focus_group == NULL &&
-               (direction == GTK_DIR_DOWN || direction == GTK_DIR_RIGHT || direction == GTK_DIR_TAB_FORWARD))
-        next_focus_group = get_first_focusable_group (self);
     }
 
-  if (next_focus_group == NULL)
-    {
-      if (direction == GTK_DIR_LEFT || direction == GTK_DIR_RIGHT)
-        {
-          if (gtk_widget_keynav_failed (widget, direction))
-            return TRUE;
-        }
-
-      return FALSE;
-    }
+    return FALSE;
+  }
 
   return gtk_widget_child_focus (GTK_WIDGET (next_focus_group), direction);
 }
@@ -1063,18 +1031,15 @@ group_notify_selected_index_cb (GObject    *object,
   g_assert (success);
 
   if (cc_bar_chart_group_get_is_selected (group) ||
-      cc_bar_chart_group_get_selected_index (group, NULL))
-    {
-      /* If the group is now selected, update our selection. */
-      cc_bar_chart_set_selected_index (self, TRUE, group_idx);
-    }
-  else if (cc_bar_chart_get_selected_index (self, &selected_idx) &&
-           selected_idx == group_idx)
-    {
-      /* Otherwise, if the group is no longer selected, but was the selected
-       * group in our selection, clear that. */
-      cc_bar_chart_set_selected_index (self, FALSE, 0);
-    }
+      cc_bar_chart_group_get_selected_index (group, NULL)) {
+    /* If the group is now selected, update our selection. */
+    cc_bar_chart_set_selected_index (self, TRUE, group_idx);
+  } else if (cc_bar_chart_get_selected_index (self, &selected_idx) &&
+             selected_idx == group_idx) {
+    /* Otherwise, if the group is no longer selected, but was the selected
+     * group in our selection, clear that. */
+    cc_bar_chart_set_selected_index (self, FALSE, 0);
+  }
 }
 
 static void
@@ -1121,8 +1086,7 @@ move_cursor_cb (CcBarChart      *self,
   else
     visual_count = count;
 
-  switch (step)
-    {
+  switch (step) {
     case GTK_MOVEMENT_BUFFER_ENDS:
       if (count < 0)
         group = get_first_focusable_group (self);
@@ -1140,29 +1104,26 @@ move_cursor_cb (CcBarChart      *self,
     default:
       /* Not currently supported */
       return;
-    }
+  }
 
   /* Did we fail to move anywhere? */
-  if (group == NULL || group == selected_group)
-    {
-      GtkDirectionType direction = (count < 0) ? GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD;
+  if (group == NULL || group == selected_group) {
+    GtkDirectionType direction = (count < 0) ? GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD;
 
-      if (!gtk_widget_keynav_failed (GTK_WIDGET (self), direction))
-        {
-          GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
+    if (!gtk_widget_keynav_failed (GTK_WIDGET (self), direction)) {
+      GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
 
-          if (toplevel != NULL)
-            gtk_widget_child_focus (toplevel, direction);
-        }
-
-      return;
+      if (toplevel != NULL)
+        gtk_widget_child_focus (toplevel, direction);
     }
 
-  if (find_index_for_group (self, group, &idx))
-    {
-      gtk_widget_grab_focus (GTK_WIDGET (group));
-      cc_bar_chart_set_selected_index (self, TRUE, idx);
-    }
+    return;
+  }
+
+  if (find_index_for_group (self, group, &idx)) {
+    gtk_widget_grab_focus (GTK_WIDGET (group));
+    cc_bar_chart_set_selected_index (self, TRUE, idx);
+  }
 }
 
 static gboolean
@@ -1186,26 +1147,21 @@ find_index_for_bar (CcBarChart    *self,
   g_assert (gtk_widget_is_ancestor (GTK_WIDGET (bar), GTK_WIDGET (self)));
   g_assert (self->cached_groups != NULL);
 
-  for (unsigned int i = 0; i < self->cached_groups->len; i++)
-    {
-      CcBarChartGroup *group = self->cached_groups->pdata[i];
-      size_t n_bars = 0;
-      CcBarChartBar * const *bars = cc_bar_chart_group_get_bars (group, &n_bars);
+  for (unsigned int i = 0; i < self->cached_groups->len; i++) {
+    CcBarChartGroup *group = self->cached_groups->pdata[i];
+    size_t n_bars = 0;
+    CcBarChartBar * const *bars = cc_bar_chart_group_get_bars (group, &n_bars);
 
-      for (size_t j = 0; j < n_bars; j++)
-        {
-          if (bars[j] == bar)
-            {
-              if (out_idx != NULL)
-                *out_idx = bar_idx;
-              return TRUE;
-            }
-          else
-            {
-              bar_idx++;
-            }
-        }
+    for (size_t j = 0; j < n_bars; j++) {
+      if (bars[j] == bar) {
+        if (out_idx != NULL)
+          *out_idx = bar_idx;
+        return TRUE;
+      } else {
+        bar_idx++;
+      }
     }
+  }
 
   if (out_idx != NULL)
     *out_idx = 0;
@@ -1243,16 +1199,15 @@ get_adjacent_focusable_group (CcBarChart      *self,
   i = group_idx;
 
   while (!((direction == -1 && i == 0) ||
-           (direction == 1 && i >= self->cached_groups->len - 1)))
-    {
-      CcBarChartGroup *adjacent_group;
+           (direction == 1 && i >= self->cached_groups->len - 1))) {
+    CcBarChartGroup *adjacent_group;
 
-      i += direction;
-      adjacent_group = self->cached_groups->pdata[i];
+    i += direction;
+    adjacent_group = self->cached_groups->pdata[i];
 
-      if (group_is_focusable (adjacent_group))
-        return adjacent_group;
-    }
+    if (group_is_focusable (adjacent_group))
+      return adjacent_group;
+  }
 
   return NULL;
 }
@@ -1262,13 +1217,12 @@ get_first_focusable_group (CcBarChart *self)
 {
   g_assert (self->cached_groups != NULL);
 
-  for (unsigned int i = 0; i < self->cached_groups->len; i++)
-    {
-      CcBarChartGroup *group = self->cached_groups->pdata[i];
+  for (unsigned int i = 0; i < self->cached_groups->len; i++) {
+    CcBarChartGroup *group = self->cached_groups->pdata[i];
 
-      if (group_is_focusable (group))
-        return group;
-    }
+    if (group_is_focusable (group))
+      return group;
+  }
 
   return NULL;
 }
@@ -1278,13 +1232,12 @@ get_last_focusable_group (CcBarChart *self)
 {
   g_assert (self->cached_groups != NULL);
 
-  for (unsigned int i = 0; i < self->cached_groups->len; i++)
-    {
-      CcBarChartGroup *group = self->cached_groups->pdata[self->cached_groups->len - 1 - i];
+  for (unsigned int i = 0; i < self->cached_groups->len; i++) {
+    CcBarChartGroup *group = self->cached_groups->pdata[self->cached_groups->len - 1 - i];
 
-      if (group_is_focusable (group))
-        return group;
-    }
+    if (group_is_focusable (group))
+      return group;
+  }
 
   return NULL;
 }
@@ -1300,21 +1253,18 @@ ensure_cached_grid_lines_and_labels (CcBarChart *self)
    * We always need at least two grid lines to define the top and bottom of the
    * plot. */
   if (self->cached_continuous_axis_grid_line_values == NULL &&
-      self->continuous_axis_grid_line_callback != NULL)
-    {
-      self->cached_continuous_axis_grid_line_values = g_array_new (FALSE, FALSE, sizeof (double));
+      self->continuous_axis_grid_line_callback != NULL) {
+    self->cached_continuous_axis_grid_line_values = g_array_new (FALSE, FALSE, sizeof (double));
 
-      do
-        {
-          latest_grid_line_value = self->continuous_axis_grid_line_callback (self,
-                                                                             self->cached_continuous_axis_grid_line_values->len,
-                                                                             self->continuous_axis_grid_line_user_data);
-          g_assert (latest_grid_line_value >= 0.0);
-          g_array_append_val (self->cached_continuous_axis_grid_line_values, latest_grid_line_value);
-        }
-      while (latest_grid_line_value <= max_value ||
-             self->cached_continuous_axis_grid_line_values->len < 2);
-    }
+    do{
+      latest_grid_line_value = self->continuous_axis_grid_line_callback (self,
+                                                                         self->cached_continuous_axis_grid_line_values->len,
+                                                                         self->continuous_axis_grid_line_user_data);
+      g_assert (latest_grid_line_value >= 0.0);
+      g_array_append_val (self->cached_continuous_axis_grid_line_values, latest_grid_line_value);
+    }while (latest_grid_line_value <= max_value ||
+            self->cached_continuous_axis_grid_line_values->len < 2);
+  }
 
   /* Create one continuous axis label for each grid line. In a subsequent step
    * in cc_bar_chart_size_allocate() we position them all and we work out
@@ -1322,21 +1272,19 @@ ensure_cached_grid_lines_and_labels (CcBarChart *self)
    * top of other text. See cc_bar_chart_size_allocate(). */
   if (self->cached_continuous_axis_labels == NULL &&
       self->continuous_axis_label_callback != NULL &&
-      self->cached_continuous_axis_grid_line_values != NULL)
-    {
-      self->cached_continuous_axis_labels = g_ptr_array_new_with_free_func ((GDestroyNotify) gtk_widget_unparent);
+      self->cached_continuous_axis_grid_line_values != NULL) {
+    self->cached_continuous_axis_labels = g_ptr_array_new_with_free_func ((GDestroyNotify)gtk_widget_unparent);
 
-      for (unsigned int i = 0; i < self->cached_continuous_axis_grid_line_values->len; i++)
-        {
-          const double grid_line_value = g_array_index (self->cached_continuous_axis_grid_line_values, double, i);
-          g_autofree char *label_text = format_continuous_axis_label (self, grid_line_value);
-          GtkLabel *label = create_continuous_axis_label (label_text);
-          gtk_widget_set_parent (GTK_WIDGET (label), GTK_WIDGET (self));
-          /* don’t insert the label into the widget child order using
-           * gtk_widget_insert_after(), as it shouldn’t be focusable */
-          g_ptr_array_add (self->cached_continuous_axis_labels, label);
-        }
+    for (unsigned int i = 0; i < self->cached_continuous_axis_grid_line_values->len; i++) {
+      const double grid_line_value = g_array_index (self->cached_continuous_axis_grid_line_values, double, i);
+      g_autofree char *label_text = format_continuous_axis_label (self, grid_line_value);
+      GtkLabel *label = create_continuous_axis_label (label_text);
+      gtk_widget_set_parent (GTK_WIDGET (label), GTK_WIDGET (self));
+      /* don’t insert the label into the widget child order using
+       * gtk_widget_insert_after(), as it shouldn’t be focusable */
+      g_ptr_array_add (self->cached_continuous_axis_labels, label);
     }
+  }
 }
 
 static inline void
@@ -1348,16 +1296,13 @@ calculate_axis_area_widths (CcBarChart *self,
 
   /* The continuous axis is on the right of the plot area in LTR directions,
    * and on the left in RTL. */
-  if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL)
-    {
-      left_axis_area_width = self->cached_continuous_axis_area_width;
-      right_axis_area_width = 0;
-    }
-  else
-    {
-      left_axis_area_width = 0;
-      right_axis_area_width = self->cached_continuous_axis_area_width;
-    }
+  if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL) {
+    left_axis_area_width = self->cached_continuous_axis_area_width;
+    right_axis_area_width = 0;
+  } else {
+    left_axis_area_width = 0;
+    right_axis_area_width = self->cached_continuous_axis_area_width;
+  }
 
   if (out_left_axis_area_width != NULL)
     *out_left_axis_area_width = left_axis_area_width;
@@ -1370,12 +1315,12 @@ calculate_axis_area_widths (CcBarChart *self,
  * groups and multiplying it, so that rounding errors don’t accumulate across
  * the width of the plot area. */
 static inline void
-calculate_group_x_bounds (CcBarChart   *self,
-                          unsigned int  idx,
-                          int          *out_spacing_start_x,
-                          int          *out_group_start_x,
-                          int          *out_group_finish_x,
-                          int          *out_spacing_finish_x)
+calculate_group_x_bounds (CcBarChart  *self,
+                          unsigned int idx,
+                          int         *out_spacing_start_x,
+                          int         *out_group_start_x,
+                          int         *out_group_finish_x,
+                          int         *out_spacing_finish_x)
 {
   int widget_width, plot_width, extra_plot_width;
   int left_axis_area_width, right_axis_area_width;
@@ -1478,11 +1423,10 @@ get_maximum_data_value (CcBarChart *self,
 
   g_assert (self->data != NULL);
 
-  for (size_t i = 0; i < self->n_data; i++)
-    {
-      if (!isnan (self->data[i]))
-        value = MAX (value, self->data[i]);
-    }
+  for (size_t i = 0; i < self->n_data; i++) {
+    if (!isnan (self->data[i]))
+      value = MAX (value, self->data[i]);
+  }
 
   if (include_overlay_line && !isnan (self->overlay_line_value))
     value = MAX (value, self->overlay_line_value);
@@ -1497,43 +1441,38 @@ update_group_accessible_relations (CcBarChart *self)
                                   GTK_ACCESSIBLE_RELATION_ROW_COUNT, self->n_data,
                                   -1);
 
-  if (self->cached_groups != NULL)
-    {
-      for (unsigned int i = 0; i < self->cached_groups->len; i++)
-        {
-          CcBarChartGroup *group = self->cached_groups->pdata[i];
+  if (self->cached_groups != NULL) {
+    for (unsigned int i = 0; i < self->cached_groups->len; i++) {
+      CcBarChartGroup *group = self->cached_groups->pdata[i];
 
-          gtk_accessible_update_relation (GTK_ACCESSIBLE (group),
-                                          GTK_ACCESSIBLE_RELATION_ROW_INDEX, i,
-                                          -1);
-        }
+      gtk_accessible_update_relation (GTK_ACCESSIBLE (group),
+                                      GTK_ACCESSIBLE_RELATION_ROW_INDEX, i,
+                                      -1);
     }
+  }
 
   if (self->cached_groups != NULL &&
-      self->cached_discrete_axis_labels != NULL)
-    {
-      g_assert (self->cached_groups->len == self->cached_discrete_axis_labels->len);
+      self->cached_discrete_axis_labels != NULL) {
+    g_assert (self->cached_groups->len == self->cached_discrete_axis_labels->len);
 
-      for (unsigned int i = 0; i < self->cached_groups->len; i++)
-        {
-          CcBarChartGroup *group = self->cached_groups->pdata[i];
-          GtkLabel *label = self->cached_discrete_axis_labels->pdata[i];
-          CcBarChartBar * const *bars = NULL;
-          size_t n_bars = 0;
+    for (unsigned int i = 0; i < self->cached_groups->len; i++) {
+      CcBarChartGroup *group = self->cached_groups->pdata[i];
+      GtkLabel *label = self->cached_discrete_axis_labels->pdata[i];
+      CcBarChartBar * const *bars = NULL;
+      size_t n_bars = 0;
 
-          gtk_accessible_update_relation (GTK_ACCESSIBLE (group),
-                                          GTK_ACCESSIBLE_RELATION_LABELLED_BY, label, NULL,
-                                          -1);
+      gtk_accessible_update_relation (GTK_ACCESSIBLE (group),
+                                      GTK_ACCESSIBLE_RELATION_LABELLED_BY, label, NULL,
+                                      -1);
 
-          bars = cc_bar_chart_group_get_bars (group, &n_bars);
-          for (unsigned int j = 0; j < n_bars; j++)
-            {
-              gtk_accessible_update_relation (GTK_ACCESSIBLE (bars[j]),
-                                              GTK_ACCESSIBLE_RELATION_LABELLED_BY, label, NULL,
-                                              -1);
-            }
-        }
+      bars = cc_bar_chart_group_get_bars (group, &n_bars);
+      for (unsigned int j = 0; j < n_bars; j++) {
+        gtk_accessible_update_relation (GTK_ACCESSIBLE (bars[j]),
+                                        GTK_ACCESSIBLE_RELATION_LABELLED_BY, label, NULL,
+                                        -1);
+      }
     }
+  }
 }
 
 /**
@@ -1574,7 +1513,7 @@ cc_bar_chart_get_discrete_axis_labels (CcBarChart *self,
   if (out_n_discrete_axis_labels != NULL)
     *out_n_discrete_axis_labels = self->n_discrete_axis_labels;
 
-  return (const char * const *) self->discrete_axis_labels;
+  return (const char * const *)self->discrete_axis_labels;
 }
 
 /**
@@ -1597,26 +1536,25 @@ cc_bar_chart_set_discrete_axis_labels (CcBarChart         *self,
 
   if ((self->discrete_axis_labels == NULL && labels == NULL) ||
       (self->discrete_axis_labels != NULL && labels != NULL &&
-       g_strv_equal ((const char * const *) self->discrete_axis_labels, labels)))
+       g_strv_equal ((const char * const *)self->discrete_axis_labels, labels)))
     return;
 
   g_strfreev (self->discrete_axis_labels);
-  self->discrete_axis_labels = g_strdupv ((char **) labels);
-  self->n_discrete_axis_labels = (labels != NULL) ? g_strv_length ((char **) labels) : 0;
+  self->discrete_axis_labels = g_strdupv ((char **)labels);
+  self->n_discrete_axis_labels = (labels != NULL) ? g_strv_length ((char **)labels) : 0;
 
   /* Rebuild the cache */
   g_clear_pointer (&self->cached_discrete_axis_labels, g_ptr_array_unref);
   if (self->n_discrete_axis_labels > 0)
-    self->cached_discrete_axis_labels = g_ptr_array_new_with_free_func ((GDestroyNotify) gtk_widget_unparent);
+    self->cached_discrete_axis_labels = g_ptr_array_new_with_free_func ((GDestroyNotify)gtk_widget_unparent);
 
-  for (size_t i = 0; i < self->n_discrete_axis_labels; i++)
-    {
-      GtkLabel *label = create_discrete_axis_label (self->discrete_axis_labels[i]);
-      gtk_widget_set_parent (GTK_WIDGET (label), GTK_WIDGET (self));
-      /* don’t insert the label into the widget child order using
-       * gtk_widget_insert_after(), as it shouldn’t be focusable */
-      g_ptr_array_add (self->cached_discrete_axis_labels, label);
-    }
+  for (size_t i = 0; i < self->n_discrete_axis_labels; i++) {
+    GtkLabel *label = create_discrete_axis_label (self->discrete_axis_labels[i]);
+    gtk_widget_set_parent (GTK_WIDGET (label), GTK_WIDGET (self));
+    /* don’t insert the label into the widget child order using
+     * gtk_widget_insert_after(), as it shouldn’t be focusable */
+    g_ptr_array_add (self->cached_discrete_axis_labels, label);
+  }
 
   update_group_accessible_relations (self);
 
@@ -1782,30 +1720,28 @@ cc_bar_chart_set_data (CcBarChart   *self,
   /* Rebuild the cache. Currently we support exactly at most one bar per group.
    * There will be zero bars in groups where the data is NAN (i.e. not provided). */
   if (self->n_data > 0)
-    self->cached_groups = g_ptr_array_new_with_free_func ((GDestroyNotify) gtk_widget_unparent);
+    self->cached_groups = g_ptr_array_new_with_free_func ((GDestroyNotify)gtk_widget_unparent);
 
-  for (size_t i = 0; i < self->n_data; i++)
-    {
-      CcBarChartGroup *group = cc_bar_chart_group_new ();
-      CcBarChartGroup *previous_group = (i > 0) ? self->cached_groups->pdata[i - 1] : NULL;
-      g_autofree char *accessible_label = format_continuous_axis_label (self, self->data[i]);
+  for (size_t i = 0; i < self->n_data; i++) {
+    CcBarChartGroup *group = cc_bar_chart_group_new ();
+    CcBarChartGroup *previous_group = (i > 0) ? self->cached_groups->pdata[i - 1] : NULL;
+    g_autofree char *accessible_label = format_continuous_axis_label (self, self->data[i]);
 
-      g_signal_connect (group, "notify::selected-index", G_CALLBACK (group_notify_selected_index_cb), self);
-      g_signal_connect (group, "notify::is-selected", G_CALLBACK (group_notify_selected_index_cb), self);
-      cc_bar_chart_group_set_selectable (group, isnan (self->data[i]));
-      cc_bar_chart_group_set_scale (group, self->cached_pixels_per_data);
+    g_signal_connect (group, "notify::selected-index", G_CALLBACK (group_notify_selected_index_cb), self);
+    g_signal_connect (group, "notify::is-selected", G_CALLBACK (group_notify_selected_index_cb), self);
+    cc_bar_chart_group_set_selectable (group, isnan (self->data[i]));
+    cc_bar_chart_group_set_scale (group, self->cached_pixels_per_data);
 
-      if (!isnan (self->data[i]))
-        {
-          CcBarChartBar *bar = cc_bar_chart_bar_new (self->data[i], accessible_label);
-          cc_bar_chart_group_insert_bar (group, -1, bar);
-          g_signal_connect (bar, "activate", G_CALLBACK (bar_activate_cb), self);
-        }
-
-      gtk_widget_set_parent (GTK_WIDGET (group), GTK_WIDGET (self));
-      gtk_widget_insert_after (GTK_WIDGET (group), GTK_WIDGET (self), GTK_WIDGET (previous_group));
-      g_ptr_array_add (self->cached_groups, group);
+    if (!isnan (self->data[i])) {
+      CcBarChartBar *bar = cc_bar_chart_bar_new (self->data[i], accessible_label);
+      cc_bar_chart_group_insert_bar (group, -1, bar);
+      g_signal_connect (bar, "activate", G_CALLBACK (bar_activate_cb), self);
     }
+
+    gtk_widget_set_parent (GTK_WIDGET (group), GTK_WIDGET (self));
+    gtk_widget_insert_after (GTK_WIDGET (group), GTK_WIDGET (self), GTK_WIDGET (previous_group));
+    g_ptr_array_add (self->cached_groups, group);
+  }
 
   update_group_accessible_relations (self);
 
@@ -1911,35 +1847,33 @@ cc_bar_chart_set_selected_index (CcBarChart *self,
     return;
 
   /* Clear the old selection. */
-  if (self->selected_index_set)
-    {
-      g_assert (self->cached_groups != NULL);
-      g_signal_handlers_block_by_func (self->cached_groups->pdata[self->selected_index],
+  if (self->selected_index_set) {
+    g_assert (self->cached_groups != NULL);
+    g_signal_handlers_block_by_func (self->cached_groups->pdata[self->selected_index],
+                                     group_notify_selected_index_cb, self);
+    cc_bar_chart_group_set_is_selected (self->cached_groups->pdata[self->selected_index], FALSE);
+    g_signal_handlers_unblock_by_func (self->cached_groups->pdata[self->selected_index],
                                        group_notify_selected_index_cb, self);
-      cc_bar_chart_group_set_is_selected (self->cached_groups->pdata[self->selected_index], FALSE);
-      g_signal_handlers_unblock_by_func (self->cached_groups->pdata[self->selected_index],
-                                         group_notify_selected_index_cb, self);
-    }
+  }
 
   self->selected_index_set = is_selected;
   self->selected_index = is_selected ? idx : 0;
 
   /* Set the new selection. */
-  if (is_selected)
-    {
-      size_t n_bars = 0;
+  if (is_selected) {
+    size_t n_bars = 0;
 
-      g_assert (self->cached_groups != NULL);
-      g_signal_handlers_block_by_func (self->cached_groups->pdata[idx],
+    g_assert (self->cached_groups != NULL);
+    g_signal_handlers_block_by_func (self->cached_groups->pdata[idx],
+                                     group_notify_selected_index_cb, self);
+    cc_bar_chart_group_get_bars (self->cached_groups->pdata[idx], &n_bars);
+    if (n_bars > 0)
+      cc_bar_chart_group_set_selected_index (self->cached_groups->pdata[idx], TRUE, 0);
+    else
+      cc_bar_chart_group_set_is_selected (self->cached_groups->pdata[idx], TRUE);
+    g_signal_handlers_unblock_by_func (self->cached_groups->pdata[idx],
                                        group_notify_selected_index_cb, self);
-      cc_bar_chart_group_get_bars (self->cached_groups->pdata[idx], &n_bars);
-      if (n_bars > 0)
-        cc_bar_chart_group_set_selected_index (self->cached_groups->pdata[idx], TRUE, 0);
-      else
-        cc_bar_chart_group_set_is_selected (self->cached_groups->pdata[idx], TRUE);
-      g_signal_handlers_unblock_by_func (self->cached_groups->pdata[idx],
-                                         group_notify_selected_index_cb, self);
-    }
+  }
 
   /* Re-render */
   gtk_widget_queue_draw (GTK_WIDGET (self));

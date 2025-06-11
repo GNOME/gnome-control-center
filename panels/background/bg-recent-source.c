@@ -25,18 +25,17 @@
 #include "cc-background-item.h"
 
 #define ATTRIBUTES G_FILE_ATTRIBUTE_STANDARD_NAME "," \
-                   G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
-                   G_FILE_ATTRIBUTE_TIME_MODIFIED
+        G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
+        G_FILE_ATTRIBUTE_TIME_MODIFIED
 
-struct _BgRecentSource
-{
-  BgSource      parent;
+struct _BgRecentSource {
+  BgSource parent;
 
-  GFile        *backgrounds_folder;
+  GFile *backgrounds_folder;
   GFileMonitor *monitor;
 
   GCancellable *cancellable;
-  GHashTable   *items;
+  GHashTable *items;
 };
 
 G_DEFINE_TYPE (BgRecentSource, bg_recent_source, BG_TYPE_SOURCE)
@@ -52,8 +51,8 @@ sort_func (gconstpointer a,
   guint64 modified_b;
   int retval;
 
-  item_a = (CcBackgroundItem *) a;
-  item_b = (CcBackgroundItem *) b;
+  item_a = (CcBackgroundItem *)a;
+  item_b = (CcBackgroundItem *)b;
   modified_a = cc_background_item_get_modified (item_a);
   modified_b = cc_background_item_get_modified (item_b);
 
@@ -67,7 +66,7 @@ add_file_from_info (BgRecentSource *self,
                     GFile          *file,
                     GFileInfo      *info)
 {
-  g_autoptr(CcBackgroundItem) item = NULL;
+  g_autoptr (CcBackgroundItem) item = NULL;
   g_autofree gchar *source_uri = NULL;
   g_autofree gchar *uri = NULL;
   g_autofree gchar *name = NULL;
@@ -115,18 +114,16 @@ remove_item (BgRecentSource   *self,
 
   g_debug ("Removing wallpaper %s", uri);
 
-  for (i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (store)); i++)
-    {
-      g_autoptr(CcBackgroundItem) tmp = NULL;
+  for (i = 0; i < g_list_model_get_n_items (G_LIST_MODEL (store)); i++) {
+    g_autoptr (CcBackgroundItem) tmp = NULL;
 
-      tmp = g_list_model_get_item (G_LIST_MODEL (store), i);
+    tmp = g_list_model_get_item (G_LIST_MODEL (store), i);
 
-      if (tmp == item)
-        {
-          g_list_store_remove (store, i);
-          break;
-        }
+    if (tmp == item) {
+      g_list_store_remove (store, i);
+      break;
     }
+  }
 
   g_hash_table_remove (self->items, cc_background_item_get_uri (item));
 }
@@ -137,18 +134,17 @@ query_info_finished_cb (GObject      *source,
                         gpointer      user_data)
 {
   BgRecentSource *self;
-  g_autoptr(GFileInfo) file_info = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GFileInfo) file_info = NULL;
+  g_autoptr (GError) error = NULL;
   GFile *file = NULL;
 
   file = G_FILE (source);
   file_info = g_file_query_info_finish (file, result, &error);
-  if (error)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Could not get pictures file information: %s", error->message);
-      return;
-    }
+  if (error) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Could not get pictures file information: %s", error->message);
+    return;
+  }
 
   self = BG_RECENT_SOURCE (user_data);
 
@@ -167,8 +163,7 @@ on_file_changed_cb (BgRecentSource    *self,
 {
   g_autofree gchar *uri = NULL;
 
-  switch (event_type)
-    {
+  switch (event_type) {
     case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
       g_file_query_info_async (file,
                                ATTRIBUTES,
@@ -186,7 +181,7 @@ on_file_changed_cb (BgRecentSource    *self,
 
     default:
       return;
-    }
+  }
 }
 
 static int
@@ -209,38 +204,36 @@ file_info_async_ready_cb (GObject      *source,
                           gpointer      user_data)
 {
   BgRecentSource *self;
-  g_autolist(GFileInfo) file_infos = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autolist (GFileInfo) file_infos = NULL;
+  g_autoptr (GError) error = NULL;
   GFile *parent = NULL;
   GList *l;
 
   file_infos = g_file_enumerator_next_files_finish (G_FILE_ENUMERATOR (source),
                                                     result,
                                                     &error);
-  if (error)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Could not get pictures file information: %s", error->message);
-      return;
-    }
+  if (error) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Could not get pictures file information: %s", error->message);
+    return;
+  }
 
   self = BG_RECENT_SOURCE (user_data);
   parent = g_file_enumerator_get_container (G_FILE_ENUMERATOR (source));
 
   file_infos = g_list_sort (file_infos, file_sort_func);
 
-  for (l = file_infos; l; l = l->next)
-    {
-      g_autoptr(GFile) file = NULL;
-      GFileInfo *info;
+  for (l = file_infos; l; l = l->next) {
+    g_autoptr (GFile) file = NULL;
+    GFileInfo *info;
 
-      info = l->data;
-      file = g_file_get_child (parent, g_file_info_get_name (info));
+    info = l->data;
+    file = g_file_get_child (parent, g_file_info_get_name (info));
 
-      g_debug ("Found recent wallpaper %s", g_file_info_get_name (info));
+    g_debug ("Found recent wallpaper %s", g_file_info_get_name (info));
 
-      add_file_from_info (self, file, info);
-    }
+    add_file_from_info (self, file, info);
+  }
 
   g_file_enumerator_close (G_FILE_ENUMERATOR (source), self->cancellable, &error);
 
@@ -254,17 +247,16 @@ enumerate_children_finished_cb (GObject      *source,
                                 gpointer      user_data)
 {
   BgRecentSource *self;
-  g_autoptr(GFileEnumerator) enumerator = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GFileEnumerator) enumerator = NULL;
+  g_autoptr (GError) error = NULL;
 
   enumerator = g_file_enumerate_children_finish (G_FILE (source), result, &error);
 
-  if (error)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Could not fill pictures source: %s", error->message);
-      return;
-    }
+  if (error) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Could not fill pictures source: %s", error->message);
+    return;
+  }
 
   self = BG_RECENT_SOURCE (user_data);
   g_file_enumerator_next_files_async (enumerator,
@@ -279,14 +271,13 @@ static void
 load_backgrounds (BgRecentSource *self)
 {
   g_autofree gchar *backgrounds_path = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   if (!g_file_make_directory_with_parents (self->backgrounds_folder, self->cancellable, &error) &&
-      !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS))
-    {
-      g_critical ("Failed to create local background directory: %s", error->message);
-      return;
-    }
+      !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS)) {
+    g_critical ("Failed to create local background directory: %s", error->message);
+    return;
+  }
 
   backgrounds_path = g_file_get_path (self->backgrounds_folder);
   g_debug ("Enumerating wallpapers under %s", backgrounds_path);
@@ -304,11 +295,10 @@ load_backgrounds (BgRecentSource *self)
                                             self->cancellable,
                                             &error);
 
-  if (!self->monitor)
-    {
-      g_critical ("Failed to monitor background directory: %s", error->message);
-      return;
-    }
+  if (!self->monitor) {
+    g_critical ("Failed to monitor background directory: %s", error->message);
+    return;
+  }
 
   g_signal_connect_object (self->monitor, "changed", G_CALLBACK (on_file_changed_cb), self, G_CONNECT_SWAPPED);
 }
@@ -320,21 +310,20 @@ on_file_copied_cb (GObject      *source,
                    GAsyncResult *result,
                    gpointer      user_data)
 {
-  g_autoptr(BgRecentSource) self = BG_RECENT_SOURCE (user_data);
+  g_autoptr (BgRecentSource) self = BG_RECENT_SOURCE (user_data);
   g_autofree gchar *original_file = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_file_copy_finish (G_FILE (source), result, &error);
 
-  if (error)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_critical ("Failed to copy file: %s", error->message);
-      return;
-    }
+  if (error) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_critical ("Failed to copy file: %s", error->message);
+    return;
+  }
 
-   original_file = g_file_get_path (G_FILE (source));
-   g_debug ("Successfully copied wallpaper: %s", original_file);
+  original_file = g_file_get_path (G_FILE (source));
+  g_debug ("Successfully copied wallpaper: %s", original_file);
 }
 
 static void
@@ -342,18 +331,17 @@ on_file_deleted_cb (GObject      *source,
                     GAsyncResult *result,
                     gpointer      user_data)
 {
-  g_autoptr(BgRecentSource) self = BG_RECENT_SOURCE (user_data);
+  g_autoptr (BgRecentSource) self = BG_RECENT_SOURCE (user_data);
   g_autofree gchar *original_file = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_file_delete_finish (G_FILE (source), result, &error);
 
-  if (error)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_critical ("Failed to delete wallpaper: %s", error->message);
-      return;
-    }
+  if (error) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_critical ("Failed to delete wallpaper: %s", error->message);
+    return;
+  }
 
   original_file = g_file_get_path (G_FILE (source));
   g_debug ("Successfully deleted wallpaper: %s", original_file);
@@ -397,7 +385,7 @@ bg_recent_source_init (BgRecentSource *self)
   load_backgrounds (self);
 }
 
-BgRecentSource*
+BgRecentSource *
 bg_recent_source_new (void)
 {
   return g_object_new (BG_TYPE_RECENT_SOURCE, NULL);
@@ -407,12 +395,12 @@ void
 bg_recent_source_add_file (BgRecentSource *self,
                            const gchar    *path)
 {
-  g_autoptr(GDateTime) now = NULL;
+  g_autoptr (GDateTime) now = NULL;
   g_autofree gchar *destination_name = NULL;
   g_autofree gchar *formatted_now = NULL;
   g_autofree gchar *basename = NULL;
-  g_autoptr(GFile) destination = NULL;
-  g_autoptr(GFile) file = NULL;
+  g_autoptr (GFile) destination = NULL;
+  g_autoptr (GFile) file = NULL;
 
   g_return_if_fail (BG_IS_RECENT_SOURCE (self));
   g_return_if_fail (path && *path);
@@ -442,7 +430,7 @@ void
 bg_recent_source_remove_item (BgRecentSource   *self,
                               CcBackgroundItem *item)
 {
-  g_autoptr(GFile) file = NULL;
+  g_autoptr (GFile) file = NULL;
   const gchar *uri;
 
   g_return_if_fail (BG_IS_RECENT_SOURCE (self));

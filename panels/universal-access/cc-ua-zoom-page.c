@@ -39,33 +39,32 @@
 #include "cc-ua-macros.h"
 #include "cc-ua-zoom-page.h"
 
-struct _CcUaZoomPage
-{
-  AdwNavigationPage   parent_instance;
+struct _CcUaZoomPage {
+  AdwNavigationPage parent_instance;
 
-  AdwSwitchRow       *desktop_zoom_row;
-  AdwSpinRow         *magnify_factor_spin_row;
-  AdwComboRow        *magnify_view_row;
+  AdwSwitchRow *desktop_zoom_row;
+  AdwSpinRow *magnify_factor_spin_row;
+  AdwComboRow *magnify_view_row;
 
-  AdwSwitchRow       *magnify_outside_screen_row;
-  AdwComboRow        *zoom_screen_area_row;
-  AdwComboRow        *zoom_follow_behaviour_row;
+  AdwSwitchRow *magnify_outside_screen_row;
+  AdwComboRow *zoom_screen_area_row;
+  AdwComboRow *zoom_follow_behaviour_row;
 
-  AdwExpanderRow     *crosshair_row;
-  AdwSwitchRow       *crosshair_overlap_mouse_row;
-  GtkScale           *crosshair_thickness_scale;
-  GtkScale           *crosshair_length_scale;
-  GtkColorButton     *crosshair_color_button;
+  AdwExpanderRow *crosshair_row;
+  AdwSwitchRow *crosshair_overlap_mouse_row;
+  GtkScale *crosshair_thickness_scale;
+  GtkScale *crosshair_length_scale;
+  GtkColorButton *crosshair_color_button;
 
-  AdwSwitchRow       *color_inverted_row;
-  GtkScale           *brightness_scale;
-  GtkScale           *contrast_scale;
-  GtkScale           *grayscale_scale;
+  AdwSwitchRow *color_inverted_row;
+  GtkScale *brightness_scale;
+  GtkScale *contrast_scale;
+  GtkScale *grayscale_scale;
 
-  GSettings          *magnifier_settings;
-  GSettings          *application_settings;
+  GSettings *magnifier_settings;
+  GSettings *application_settings;
 
-  gboolean            is_self_update;
+  gboolean is_self_update;
 };
 
 G_DEFINE_TYPE (CcUaZoomPage, cc_ua_zoom_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -82,102 +81,96 @@ ua_zoom_magnifier_settings_changed_cb (CcUaZoomPage *self,
   self->is_self_update = TRUE;
   settings = self->magnifier_settings;
 
-  if (!key || g_str_equal (key, "lens-mode"))
-    {
-      gboolean lens_mode;
+  if (!key || g_str_equal (key, "lens-mode")) {
+    gboolean lens_mode;
 
-      lens_mode = g_settings_get_boolean (settings, "lens-mode");
+    lens_mode = g_settings_get_boolean (settings, "lens-mode");
 
-      if (lens_mode)
-        selected_index = 0;
-      else
-        selected_index = 1;
+    if (lens_mode)
+      selected_index = 0;
+    else
+      selected_index = 1;
 
-      adw_combo_row_set_selected (self->magnify_view_row, selected_index);
-      gtk_widget_set_sensitive (GTK_WIDGET (self->magnify_outside_screen_row), !lens_mode);
-    }
+    adw_combo_row_set_selected (self->magnify_view_row, selected_index);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->magnify_outside_screen_row), !lens_mode);
+  }
 
-  if (!key || g_str_equal (key, "mouse-tracking"))
-    {
-      g_autofree char *tracking = NULL;
+  if (!key || g_str_equal (key, "mouse-tracking")) {
+    g_autofree char *tracking = NULL;
 
-      tracking = g_settings_get_string (settings, "mouse-tracking");
+    tracking = g_settings_get_string (settings, "mouse-tracking");
 
-      if (g_strcmp0 (tracking, "proportional") == 0)
-        selected_index = 0;
-      else if (g_strcmp0 (tracking, "push") == 0)
-        selected_index = 1;
-      else
-        selected_index = 2;
+    if (g_strcmp0 (tracking, "proportional") == 0)
+      selected_index = 0;
+    else if (g_strcmp0 (tracking, "push") == 0)
+      selected_index = 1;
+    else
+      selected_index = 2;
 
-      adw_combo_row_set_selected (self->zoom_follow_behaviour_row, selected_index);
-    }
+    adw_combo_row_set_selected (self->zoom_follow_behaviour_row, selected_index);
+  }
 
-  if (!key || g_str_equal (key, "screen-position"))
-    {
-      g_autofree char *position = NULL;
+  if (!key || g_str_equal (key, "screen-position")) {
+    g_autofree char *position = NULL;
 
-      position = g_settings_get_string (settings, "screen-position");
+    position = g_settings_get_string (settings, "screen-position");
 
-      if (g_strcmp0 (position, "top-half") == 0)
-        selected_index = 1;
-      else if (g_strcmp0 (position, "bottom-half") == 0)
-        selected_index = 2;
-      else if (g_strcmp0 (position, "left-half") == 0)
-        selected_index = 3;
-      else if (g_strcmp0 (position, "right-half") == 0)
-        selected_index = 4;
-      else
-        selected_index = 0;
+    if (g_strcmp0 (position, "top-half") == 0)
+      selected_index = 1;
+    else if (g_strcmp0 (position, "bottom-half") == 0)
+      selected_index = 2;
+    else if (g_strcmp0 (position, "left-half") == 0)
+      selected_index = 3;
+    else if (g_strcmp0 (position, "right-half") == 0)
+      selected_index = 4;
+    else
+      selected_index = 0;
 
-      adw_combo_row_set_selected (self->zoom_screen_area_row, selected_index);
-    }
+    adw_combo_row_set_selected (self->zoom_screen_area_row, selected_index);
+  }
 
-  if (!key || g_str_has_prefix (key, "cross-hairs-"))
-    {
-      g_autofree char *color = NULL;
-      GdkRGBA rgba;
+  if (!key || g_str_has_prefix (key, "cross-hairs-")) {
+    g_autofree char *color = NULL;
+    GdkRGBA rgba;
 
-      color = g_settings_get_string (self->magnifier_settings, "cross-hairs-color");
-      gdk_rgba_parse (&rgba, color);
+    color = g_settings_get_string (self->magnifier_settings, "cross-hairs-color");
+    gdk_rgba_parse (&rgba, color);
 
-      rgba.alpha = g_settings_get_double (self->magnifier_settings, "cross-hairs-opacity");
-      gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (self->crosshair_color_button), &rgba);
-    }
+    rgba.alpha = g_settings_get_double (self->magnifier_settings, "cross-hairs-opacity");
+    gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (self->crosshair_color_button), &rgba);
+  }
 
-  if (!key || g_str_has_prefix (key, "brightness-"))
-    {
-      gdouble red, green, blue, value;
+  if (!key || g_str_has_prefix (key, "brightness-")) {
+    gdouble red, green, blue, value;
 
-      red = g_settings_get_double (settings, "brightness-red");
-      green = g_settings_get_double (settings, "brightness-green");
-      blue = g_settings_get_double (settings, "brightness-blue");
+    red = g_settings_get_double (settings, "brightness-red");
+    green = g_settings_get_double (settings, "brightness-green");
+    blue = g_settings_get_double (settings, "brightness-blue");
 
-      if (red == green && green == blue)
-        value = red;
-      else
-        /* use NTSC conversion weights for reasonable average */
-        value = 0.299 * red + 0.587 * green + 0.114 * blue;
+    if (red == green && green == blue)
+      value = red;
+    else
+      /* use NTSC conversion weights for reasonable average */
+      value = 0.299 * red + 0.587 * green + 0.114 * blue;
 
-      gtk_range_set_value (GTK_RANGE (self->brightness_scale), value);
-    }
+    gtk_range_set_value (GTK_RANGE (self->brightness_scale), value);
+  }
 
-  if (!key || g_str_has_prefix (key, "contrast-"))
-    {
-      gdouble red, green, blue, value;
+  if (!key || g_str_has_prefix (key, "contrast-")) {
+    gdouble red, green, blue, value;
 
-      red = g_settings_get_double (settings, "contrast-red");
-      green = g_settings_get_double (settings, "contrast-green");
-      blue = g_settings_get_double (settings, "contrast-blue");
+    red = g_settings_get_double (settings, "contrast-red");
+    green = g_settings_get_double (settings, "contrast-green");
+    blue = g_settings_get_double (settings, "contrast-blue");
 
-      if (red == green && green == blue)
-        value = red;
-      else
-        /* use NTSC conversion weights for reasonable average */
-        value = 0.299 * red + 0.587 * green + 0.114 * blue;
+    if (red == green && green == blue)
+      value = red;
+    else
+      /* use NTSC conversion weights for reasonable average */
+      value = 0.299 * red + 0.587 * green + 0.114 * blue;
 
-      gtk_range_set_value (GTK_RANGE (self->contrast_scale), value);
-    }
+    gtk_range_set_value (GTK_RANGE (self->contrast_scale), value);
+  }
 
   self->is_self_update = FALSE;
 }
@@ -248,7 +241,7 @@ ua_zoom_behaviour_row_changed_cb (CcUaZoomPage *self)
   g_settings_set_string (self->magnifier_settings, "mouse-tracking", tracking);
 }
 
-#define TO_HEX(x) (int) ((gdouble) x * 255.0)
+#define TO_HEX(x) (int)((gdouble)x * 255.0)
 static void
 ua_zoom_crosshair_color_set_cb (CcUaZoomPage *self)
 {

@@ -22,9 +22,9 @@ test_time (CcTimelikeEntry *timelike_entry,
 
   g_assert_true (CC_IS_TIMELIKE_ENTRY (timelike_entry));
   g_assert_cmpint (hour, >=, 0);
-  g_assert_cmpint (hour, <= , 23);
+  g_assert_cmpint (hour, <=, 23);
   g_assert_cmpint (minute, >=, 0);
-  g_assert_cmpint (minute, <= , 59);
+  g_assert_cmpint (minute, <=, 59);
 
   entry_hour = cc_timelike_entry_get_hour (timelike_entry);
   g_assert_cmpint (entry_hour, ==, hour);
@@ -33,14 +33,13 @@ test_time (CcTimelikeEntry *timelike_entry,
   g_assert_cmpint (entry_minute, ==, minute);
 
   /* Convert 24 hour time to 12 hour */
-  if (!is_24h)
-    {
-      /* 00:00 is 12:00 AM */
-      if (hour == 0)
-        hour = 12;
-      else if (hour > 12)
-        hour = hour - 12;
-    }
+  if (!is_24h) {
+    /* 00:00 is 12:00 AM */
+    if (hour == 0)
+      hour = 12;
+    else if (hour > 12)
+      hour = hour - 12;
+  }
 
   str = g_strdup_printf ("%02d:%02d", hour, minute);
   entry_str = gtk_entry_get_text (GTK_ENTRY (timelike_entry));
@@ -58,23 +57,22 @@ test_time_24h (void)
   g_object_ref_sink (entry);
   g_assert (CC_IS_TIMELIKE_ENTRY (entry));
 
-  for (guint i = 0; i <= 25; i++)
-    {
-      guint hour;
-      gboolean is_am;
+  for (guint i = 0; i <= 25; i++) {
+    guint hour;
+    gboolean is_am;
 
-      cc_timelike_entry_set_time (timelike_entry, i, 0);
-      g_assert_false (cc_timelike_entry_get_am_pm (timelike_entry));
+    cc_timelike_entry_set_time (timelike_entry, i, 0);
+    g_assert_false (cc_timelike_entry_get_am_pm (timelike_entry));
 
-      test_time (timelike_entry, i < 24 ? i : 23, 0, TRUE);
+    test_time (timelike_entry, i < 24 ? i : 23, 0, TRUE);
 
-      hour = cc_timelike_entry_get_hour (timelike_entry);
-      is_am = cc_timelike_entry_get_is_am (timelike_entry);
-      if (hour < 12)
-        g_assert_true (is_am);
-      else
-        g_assert_false (is_am);
-    }
+    hour = cc_timelike_entry_get_hour (timelike_entry);
+    is_am = cc_timelike_entry_get_is_am (timelike_entry);
+    if (hour < 12)
+      g_assert_true (is_am);
+    else
+      g_assert_false (is_am);
+  }
 
   g_object_unref (entry);
 }
@@ -95,23 +93,22 @@ test_time_12h (void)
   cc_timelike_entry_set_am_pm (timelike_entry, TRUE);
   g_assert_true (cc_timelike_entry_get_am_pm (timelike_entry));
 
-  for (guint i = 0; i <= 25; i++)
-    {
-      guint hour;
-      gboolean is_am;
+  for (guint i = 0; i <= 25; i++) {
+    guint hour;
+    gboolean is_am;
 
-      cc_timelike_entry_set_time (timelike_entry, i, 0);
+    cc_timelike_entry_set_time (timelike_entry, i, 0);
 
-      test_time (timelike_entry, i < 24 ? i : 23, 0, FALSE);
+    test_time (timelike_entry, i < 24 ? i : 23, 0, FALSE);
 
-      hour = cc_timelike_entry_get_hour (timelike_entry);
-      is_am = cc_timelike_entry_get_is_am (timelike_entry);
+    hour = cc_timelike_entry_get_hour (timelike_entry);
+    is_am = cc_timelike_entry_get_is_am (timelike_entry);
 
-      if (hour < 12)
-        g_assert_true (is_am);
-      else
-        g_assert_false (is_am);
-    }
+    if (hour < 12)
+      g_assert_true (is_am);
+    else
+      g_assert_false (is_am);
+  }
 
   g_object_unref (entry);
 }
@@ -130,63 +127,59 @@ test_time_hour_24h (void)
   cc_timelike_entry_set_time (timelike_entry, 0, 0);
   gtk_editable_set_position (GTK_EDITABLE (entry), 0);
 
-  for (guint i = 1; i <= 25; i++)
-    {
-      g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_UP);
+  for (guint i = 1; i <= 25; i++) {
+    g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_UP);
 
-      /* Wrap if above limit */
-      hour = i;
-      if (hour >= 24)
-        hour = hour - 24;
+    /* Wrap if above limit */
+    hour = i;
+    if (hour >= 24)
+      hour = hour - 24;
 
-      test_time (timelike_entry, hour, 0, TRUE);
-    }
+    test_time (timelike_entry, hour, 0, TRUE);
+  }
 
   cc_timelike_entry_set_time (timelike_entry, 0, 0);
   hour = 0;
 
-  for (int i = 25; i >= 0; i--)
-    {
-      g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_DOWN);
+  for (int i = 25; i >= 0; i--) {
+    g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_DOWN);
 
-      /* Wrap if below limit */
-      hour--;
-      if (hour < 0)
-        hour = 23;
+    /* Wrap if below limit */
+    hour--;
+    if (hour < 0)
+      hour = 23;
 
-      test_time (timelike_entry, hour, 0, TRUE);
-    }
+    test_time (timelike_entry, hour, 0, TRUE);
+  }
 
   /* Put cursor at the one’s place and repeat the tests */
   gtk_editable_set_position (GTK_EDITABLE (entry), 1);
   cc_timelike_entry_set_time (timelike_entry, 0, 0);
 
-  for (guint i = 1; i <= 25; i++)
-    {
-      g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_UP);
+  for (guint i = 1; i <= 25; i++) {
+    g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_UP);
 
-      /* Wrap if above limit */
-      hour = i;
-      if (hour >= 24)
-        hour = hour - 24;
+    /* Wrap if above limit */
+    hour = i;
+    if (hour >= 24)
+      hour = hour - 24;
 
-      test_time (timelike_entry, hour, 0, TRUE);
-    }
+    test_time (timelike_entry, hour, 0, TRUE);
+  }
 
   cc_timelike_entry_set_time (timelike_entry, 0, 0);
   hour = 0;
 
-  for (int i = 25; i >= 0; i--)
-    {
-      g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_DOWN);
+  for (int i = 25; i >= 0; i--) {
+    g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_DOWN);
 
-      /* Wrap if below limit */
-      hour--;
-      if (hour < 0)
-        hour = 23;
+    /* Wrap if below limit */
+    hour--;
+    if (hour < 0)
+      hour = 23;
 
-      test_time (timelike_entry, hour, 0, TRUE);
-    }
+    test_time (timelike_entry, hour, 0, TRUE);
+  }
 
   g_object_ref_sink (entry);
   g_object_unref (entry);
@@ -207,65 +200,61 @@ test_time_minute_24h (void)
   /* Set cursor at 10’s place of minute */
   gtk_editable_set_position (GTK_EDITABLE (entry), SEPARATOR_INDEX + 1);
 
-  for (guint i = 1; i <= 61; i++)
-    {
-      g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_UP);
+  for (guint i = 1; i <= 61; i++) {
+    g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_UP);
 
-      /* Wrap if above limit */
-      minute = i;
-      if (minute >= 60)
-        minute = minute - 60;
+    /* Wrap if above limit */
+    minute = i;
+    if (minute >= 60)
+      minute = minute - 60;
 
-      test_time (timelike_entry, 0, minute, TRUE);
-    }
+    test_time (timelike_entry, 0, minute, TRUE);
+  }
 
   cc_timelike_entry_set_time (timelike_entry, 0, 0);
   gtk_editable_set_position (GTK_EDITABLE (entry), SEPARATOR_INDEX + 1);
   minute = 0;
 
-  for (int i = 61; i >= 0; i--)
-    {
-      g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_DOWN);
+  for (int i = 61; i >= 0; i--) {
+    g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_DOWN);
 
-      /* Wrap if below limit */
-      minute--;
-      if (minute < 0)
-        minute = 59;
+    /* Wrap if below limit */
+    minute--;
+    if (minute < 0)
+      minute = 59;
 
-      test_time (timelike_entry, 0, minute, TRUE);
-    }
+    test_time (timelike_entry, 0, minute, TRUE);
+  }
 
   /* Put cursor at the minute one’s place and repeat the tests */
   cc_timelike_entry_set_time (timelike_entry, 0, 0);
   gtk_editable_set_position (GTK_EDITABLE (entry), SEPARATOR_INDEX + 2);
 
-  for (guint i = 1; i <= 61; i++)
-    {
-      g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_UP);
+  for (guint i = 1; i <= 61; i++) {
+    g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_UP);
 
-      /* Wrap if above limit */
-      minute = i;
-      if (minute >= 60)
-        minute = minute - 60;
+    /* Wrap if above limit */
+    minute = i;
+    if (minute >= 60)
+      minute = minute - 60;
 
-      test_time (timelike_entry, 0, minute, TRUE);
-    }
+    test_time (timelike_entry, 0, minute, TRUE);
+  }
 
   cc_timelike_entry_set_time (timelike_entry, 0, 0);
   gtk_editable_set_position (GTK_EDITABLE (entry), SEPARATOR_INDEX + 2);
   minute = 0;
 
-  for (int i = 61; i >= 0; i--)
-    {
-      g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_DOWN);
+  for (int i = 61; i >= 0; i--) {
+    g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_DOWN);
 
-      /* Wrap if below limit */
-      minute--;
-      if (minute < 0)
-        minute = 59;
+    /* Wrap if below limit */
+    minute--;
+    if (minute < 0)
+      minute = 59;
 
-      test_time (timelike_entry, 0, minute, TRUE);
-    }
+    test_time (timelike_entry, 0, minute, TRUE);
+  }
 
   g_object_ref_sink (entry);
   g_object_unref (entry);
@@ -286,63 +275,59 @@ test_time_hour_12h (void)
   cc_timelike_entry_set_time (timelike_entry, 0, 0);
   gtk_editable_set_position (GTK_EDITABLE (entry), 0);
 
-  for (guint i = 1; i <= 14; i++)
-    {
-      g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_UP);
+  for (guint i = 1; i <= 14; i++) {
+    g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_UP);
 
-      /* Wrap if above limit */
-      hour = i;
-      if (hour >= 12)
-        hour = hour - 12;
+    /* Wrap if above limit */
+    hour = i;
+    if (hour >= 12)
+      hour = hour - 12;
 
-      test_time (timelike_entry, hour, 0, FALSE);
-    }
+    test_time (timelike_entry, hour, 0, FALSE);
+  }
 
   cc_timelike_entry_set_time (timelike_entry, 0, 0);
   hour = 12;
 
-  for (int i = 23; i >= 0; i--)
-    {
-      g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_DOWN);
+  for (int i = 23; i >= 0; i--) {
+    g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_DOWN);
 
-      /* Wrap if below limit */
-      hour--;
-      if (hour < 0)
-        hour = 11;  /* Hour varies from 0 to 11 (0 is 12) */
+    /* Wrap if below limit */
+    hour--;
+    if (hour < 0)
+      hour = 11;    /* Hour varies from 0 to 11 (0 is 12) */
 
-      test_time (timelike_entry, hour, 0, FALSE);
-    }
+    test_time (timelike_entry, hour, 0, FALSE);
+  }
 
   cc_timelike_entry_set_time (timelike_entry, 0, 0);
   /* Put cursor at the one’s place and repeat the tests */
   gtk_editable_set_position (GTK_EDITABLE (entry), 1);
 
-  for (guint i = 1; i <= 14; i++)
-    {
-      g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_UP);
+  for (guint i = 1; i <= 14; i++) {
+    g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_UP);
 
-      /* Wrap if above limit */
-      hour = i;
-      if (hour >= 12)
-        hour = hour - 12;
+    /* Wrap if above limit */
+    hour = i;
+    if (hour >= 12)
+      hour = hour - 12;
 
-      test_time (timelike_entry, hour, 0, FALSE);
-    }
+    test_time (timelike_entry, hour, 0, FALSE);
+  }
 
   cc_timelike_entry_set_time (timelike_entry, 0, 0);
   hour = 0;
 
-  for (int i = 23; i >= 0; i--)
-    {
-      g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_DOWN);
+  for (int i = 23; i >= 0; i--) {
+    g_signal_emit_by_name (entry, "change-value", GTK_SCROLL_STEP_DOWN);
 
-      /* Wrap if below limit */
-      hour--;
-      if (hour < 0)
-        hour = 11;  /* Hour varies from 0 to 11 (0 is 12) */
+    /* Wrap if below limit */
+    hour--;
+    if (hour < 0)
+      hour = 11;    /* Hour varies from 0 to 11 (0 is 12) */
 
-      test_time (timelike_entry, hour, 0, FALSE);
-    }
+    test_time (timelike_entry, hour, 0, FALSE);
+  }
 
   g_object_ref_sink (entry);
   g_object_unref (entry);

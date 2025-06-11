@@ -33,52 +33,51 @@
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
-struct _CcFirmwareSecurityPage
-{
+struct _CcFirmwareSecurityPage {
   AdwNavigationPage parent_instance;
 
-  GtkButton        *hsi_button;
-  GtkButton        *secure_boot_button;
+  GtkButton *hsi_button;
+  GtkButton *secure_boot_button;
 
   /* Stack */
-  GtkWidget        *panel_stack;
+  GtkWidget *panel_stack;
 
   /* HSI button */
-  GtkWidget        *hsi_grid;
+  GtkWidget *hsi_grid;
 
-  GtkWidget        *hsi_circle_box;
-  GtkWidget        *hsi_circle_number;
-  GtkWidget        *hsi_icon;
+  GtkWidget *hsi_circle_box;
+  GtkWidget *hsi_circle_number;
+  GtkWidget *hsi_icon;
 
-  GtkWidget        *hsi_label;
-  GtkWidget        *hsi_description;
+  GtkWidget *hsi_label;
+  GtkWidget *hsi_description;
 
   /* secure boot button */
-  GtkWidget        *secure_boot_button_grid;
-  GtkWidget        *secure_boot_icon;
-  GtkWidget        *secure_boot_label;
-  GtkWidget        *secure_boot_description;
+  GtkWidget *secure_boot_button_grid;
+  GtkWidget *secure_boot_icon;
+  GtkWidget *secure_boot_label;
+  GtkWidget *secure_boot_description;
 
   /* event listbox */
-  GtkWidget        *firmware_security_log_listbox;
-  GtkWidget        *firmware_security_log_pgroup;
-  GtkWidget        *no_events_box;
+  GtkWidget *firmware_security_log_listbox;
+  GtkWidget *firmware_security_log_pgroup;
+  GtkWidget *no_events_box;
 
-  GCancellable     *cancellable;
-  guint             timeout_id;
+  GCancellable *cancellable;
+  guint timeout_id;
 
-  GDBusProxy       *bus_proxy;
-  GDBusProxy       *properties_bus_proxy;
+  GDBusProxy *bus_proxy;
+  GDBusProxy *properties_bus_proxy;
 
-  GHashTable       *hsi1_dict;
-  GHashTable       *hsi2_dict;
-  GHashTable       *hsi3_dict;
-  GHashTable       *hsi4_dict;
-  GHashTable       *runtime_dict;
-  GString          *event_log_output;
+  GHashTable *hsi1_dict;
+  GHashTable *hsi2_dict;
+  GHashTable *hsi3_dict;
+  GHashTable *hsi4_dict;
+  GHashTable *runtime_dict;
+  GString *event_log_output;
 
-  guint             hsi_number;
-  SecureBootState   secure_boot_state;
+  guint hsi_number;
+  SecureBootState secure_boot_state;
 };
 
 G_DEFINE_TYPE (CcFirmwareSecurityPage, cc_firmware_security_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -103,39 +102,29 @@ set_secure_boot_button_view (CcFirmwareSecurityPage *self)
 
   /* enabled and valid */
   if ((sb_flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS) > 0 &&
-      (pk_flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS) > 0)
-    {
-      self->secure_boot_state = SECURE_BOOT_STATE_ACTIVE;
-    }
-  else if ((sb_flags & FWUPD_SECURITY_ATTR_RESULT_ENABLED) > 0)
-    {
-      self->secure_boot_state = SECURE_BOOT_STATE_PROBLEMS;
-    }
-  else
-    {
-      self->secure_boot_state = SECURE_BOOT_STATE_INACTIVE;
-    }
+      (pk_flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS) > 0) {
+    self->secure_boot_state = SECURE_BOOT_STATE_ACTIVE;
+  } else if ((sb_flags & FWUPD_SECURITY_ATTR_RESULT_ENABLED) > 0) {
+    self->secure_boot_state = SECURE_BOOT_STATE_PROBLEMS;
+  } else {
+    self->secure_boot_state = SECURE_BOOT_STATE_INACTIVE;
+  }
 
   /* update UI */
-  if (self->secure_boot_state == SECURE_BOOT_STATE_ACTIVE)
-   {
-      gtk_label_set_text (GTK_LABEL (self->secure_boot_label), _("Secure Boot is Active"));
-      gtk_label_set_text (GTK_LABEL (self->secure_boot_description), _("Protected against malicious software when the device starts."));
-      gtk_image_set_from_icon_name (GTK_IMAGE (self->secure_boot_icon), "channel-secure-symbolic");
-      gtk_widget_add_css_class (self->secure_boot_icon, "good");
-    }
-  else if (self->secure_boot_state == SECURE_BOOT_STATE_PROBLEMS)
-   {
-      gtk_label_set_text (GTK_LABEL (self->secure_boot_label), _("Secure Boot has Problems"));
-      gtk_label_set_text (GTK_LABEL (self->secure_boot_description), _("Some protection when the device is started."));
-      gtk_widget_add_css_class (self->secure_boot_icon, "error");
-    }
-  else
-    {
-      gtk_label_set_text (GTK_LABEL (self->secure_boot_label), _("Secure Boot is Off"));
-      gtk_label_set_text (GTK_LABEL (self->secure_boot_description), _("No protection when the device is started."));
-      gtk_widget_add_css_class (self->secure_boot_icon, "error");
-    }
+  if (self->secure_boot_state == SECURE_BOOT_STATE_ACTIVE) {
+    gtk_label_set_text (GTK_LABEL (self->secure_boot_label), _("Secure Boot is Active"));
+    gtk_label_set_text (GTK_LABEL (self->secure_boot_description), _("Protected against malicious software when the device starts."));
+    gtk_image_set_from_icon_name (GTK_IMAGE (self->secure_boot_icon), "channel-secure-symbolic");
+    gtk_widget_add_css_class (self->secure_boot_icon, "good");
+  } else if (self->secure_boot_state == SECURE_BOOT_STATE_PROBLEMS) {
+    gtk_label_set_text (GTK_LABEL (self->secure_boot_label), _("Secure Boot has Problems"));
+    gtk_label_set_text (GTK_LABEL (self->secure_boot_description), _("Some protection when the device is started."));
+    gtk_widget_add_css_class (self->secure_boot_icon, "error");
+  } else {
+    gtk_label_set_text (GTK_LABEL (self->secure_boot_label), _("Secure Boot is Off"));
+    gtk_label_set_text (GTK_LABEL (self->secure_boot_description), _("No protection when the device is started."));
+    gtk_widget_add_css_class (self->secure_boot_icon, "error");
+  }
 }
 
 static gchar *
@@ -148,28 +137,23 @@ fu_security_attr_get_description_for_eventlog (FwupdSecurityAttr *attr)
     return g_string_free (str, FALSE);
 
   if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONTACT_OEM &&
-      attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW)
-    {
-      g_string_append_printf (str, "\n\n%s",
-                              /* TRANSLATORS: this is to explain an event that has already happened */
-                              _("This issue could have been caused by a change in UEFI firmware "
-                                "settings, an operating system configuration change, or because of "
-                                "malicious software on this system."));
-    }
-  else if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW)
-    {
-      g_string_append_printf (str, "\n\n%s",
-                              /* TRANSLATORS: this is to explain an event that has already happened */
-                              _("This issue could have been caused by a change in the UEFI firmware "
-                                "settings, or because of malicious software on this system."));
-    }
-  else if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_OS)
-    {
-      g_string_append_printf (str, "\n\n%s",
-                              /* TRANSLATORS: this is to explain an event that has already happened */
-                              _("This issue could have been caused by an operating system configuration "
-                                "change, or because of malicious software on this system."));
-    }
+      attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW) {
+    g_string_append_printf (str, "\n\n%s",
+                            /* TRANSLATORS: this is to explain an event that has already happened */
+                            _("This issue could have been caused by a change in UEFI firmware "
+                              "settings, an operating system configuration change, or because of "
+                              "malicious software on this system."));
+  } else if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW) {
+    g_string_append_printf (str, "\n\n%s",
+                            /* TRANSLATORS: this is to explain an event that has already happened */
+                            _("This issue could have been caused by a change in the UEFI firmware "
+                              "settings, or because of malicious software on this system."));
+  } else if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_OS) {
+    g_string_append_printf (str, "\n\n%s",
+                            /* TRANSLATORS: this is to explain an event that has already happened */
+                            _("This issue could have been caused by an operating system configuration "
+                              "change, or because of malicious software on this system."));
+  }
 
   return g_string_free (str, FALSE);
 }
@@ -180,7 +164,7 @@ parse_event_variant_iter (CcFirmwareSecurityPage *self,
 {
   g_autofree gchar *date_string = NULL;
   g_autoptr (GDateTime) date = NULL;
-  g_autoptr (FwupdSecurityAttr) attr = fu_security_attr_new_from_variant(iter);
+  g_autoptr (FwupdSecurityAttr) attr = fu_security_attr_new_from_variant (iter);
   GtkWidget *row, *icon;
 
   /* unknown to us */
@@ -194,30 +178,24 @@ parse_event_variant_iter (CcFirmwareSecurityPage *self,
 
   /* build new row */
   row = adw_expander_row_new ();
-  if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS)
-    {
-      icon = gtk_image_new_from_icon_name ("check-plain");
-      gtk_widget_add_css_class (icon, "success-icon");
-    }
-  else
-    {
-      icon = gtk_image_new_from_icon_name ("process-stop");
-      gtk_widget_add_css_class (icon, "error-icon");
-    }
+  if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS) {
+    icon = gtk_image_new_from_icon_name ("check-plain");
+    gtk_widget_add_css_class (icon, "success-icon");
+  } else {
+    icon = gtk_image_new_from_icon_name ("process-stop");
+    gtk_widget_add_css_class (icon, "error-icon");
+  }
   adw_expander_row_add_prefix (ADW_EXPANDER_ROW (row), icon);
 
-  if (attr->description != NULL)
-    {
-      GtkWidget *subrow = adw_action_row_new ();
-      g_autofree gchar *str = fu_security_attr_get_description_for_eventlog (attr);
-      adw_action_row_set_subtitle (ADW_ACTION_ROW (subrow), str);
-      adw_expander_row_add_row (ADW_EXPANDER_ROW (row), subrow);
-    }
-  else
-    {
-      adw_expander_row_set_enable_expansion (ADW_EXPANDER_ROW (row), FALSE);
-      gtk_widget_add_css_class (row, "hide-arrow");
-    }
+  if (attr->description != NULL) {
+    GtkWidget *subrow = adw_action_row_new ();
+    g_autofree gchar *str = fu_security_attr_get_description_for_eventlog (attr);
+    adw_action_row_set_subtitle (ADW_ACTION_ROW (subrow), str);
+    adw_expander_row_add_row (ADW_EXPANDER_ROW (row), subrow);
+  } else {
+    adw_expander_row_set_enable_expansion (ADW_EXPANDER_ROW (row), FALSE);
+    gtk_widget_add_css_class (row, "hide-arrow");
+  }
 
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), attr->title);
 
@@ -235,7 +213,7 @@ parse_event_variant_iter (CcFirmwareSecurityPage *self,
     g_string_append (self->event_log_output, _("Pass"));
   else
     /* TRANSLATOR: This is the text event status output when the event status is not "success" */
-    g_string_overwrite (self->event_log_output, self->event_log_output->len-2, _("! Fail"));
+    g_string_overwrite (self->event_log_output, self->event_log_output->len - 2, _("! Fail"));
 
   g_string_append (self->event_log_output, " ");
   g_string_append_printf (self->event_log_output, _("(%1$s → %2$s)"),
@@ -252,7 +230,7 @@ static void
 parse_variant_iter (CcFirmwareSecurityPage *self,
                     GVariantIter           *iter)
 {
-  g_autoptr (FwupdSecurityAttr) attr = fu_security_attr_new_from_variant(iter);
+  g_autoptr (FwupdSecurityAttr) attr = fu_security_attr_new_from_variant (iter);
   const gchar *appstream_id = attr->appstream_id;
 
   /* invalid */
@@ -267,40 +245,38 @@ parse_variant_iter (CcFirmwareSecurityPage *self,
    * so lower the HSI number forcefully if this attribute failed -- the correct thing
    * to do of course is to update fwupd to a newer build */
   if (g_strcmp0 (attr->appstream_id, FWUPD_SECURITY_ATTR_ID_UEFI_SECUREBOOT) == 0 &&
-      (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS) == 0)
-    {
-      self->hsi_number = 0;
-      set_hsi_button_view (self);
-    }
+      (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS) == 0) {
+    self->hsi_number = 0;
+    set_hsi_button_view (self);
+  }
 
   /* insert into correct hash table */
-  switch (attr->hsi_level)
-    {
-      case 1:
-        g_hash_table_insert (self->hsi1_dict,
-                             g_strdup (appstream_id),
-                             g_steal_pointer (&attr));
-        break;
-      case 2:
-        g_hash_table_insert (self->hsi2_dict,
-                             g_strdup (appstream_id),
-                             g_steal_pointer (&attr));
-        break;
-      case 3:
-        g_hash_table_insert (self->hsi3_dict,
-                             g_strdup (appstream_id),
-                             g_steal_pointer (&attr));
-        break;
-      case 4:
-        g_hash_table_insert (self->hsi4_dict,
-                             g_strdup (appstream_id),
-                             g_steal_pointer (&attr));
-        break;
-      default:
-        g_hash_table_insert (self->runtime_dict,
-                             g_strdup (appstream_id),
-                             g_steal_pointer (&attr));
-    }
+  switch (attr->hsi_level) {
+    case 1:
+      g_hash_table_insert (self->hsi1_dict,
+                           g_strdup (appstream_id),
+                           g_steal_pointer (&attr));
+      break;
+    case 2:
+      g_hash_table_insert (self->hsi2_dict,
+                           g_strdup (appstream_id),
+                           g_steal_pointer (&attr));
+      break;
+    case 3:
+      g_hash_table_insert (self->hsi3_dict,
+                           g_strdup (appstream_id),
+                           g_steal_pointer (&attr));
+      break;
+    case 4:
+      g_hash_table_insert (self->hsi4_dict,
+                           g_strdup (appstream_id),
+                           g_steal_pointer (&attr));
+      break;
+    default:
+      g_hash_table_insert (self->runtime_dict,
+                           g_strdup (appstream_id),
+                           g_steal_pointer (&attr));
+  }
 }
 
 static void
@@ -312,26 +288,21 @@ parse_data_from_variant (CcFirmwareSecurityPage *self,
   g_autoptr (GVariantIter) iter = NULL;
 
   type_string = g_variant_get_type_string (value);
-  if (g_strcmp0 (type_string, "(a{sv})") == 0)
-    {
-      g_variant_get (value, "(a{sv})", &iter);
-      if (is_event)
-        parse_event_variant_iter (self, iter);
-      else
-        parse_variant_iter (self, iter);
-    }
-  else if (g_strcmp0 (type_string, "a{sv}") == 0)
-    {
-      g_variant_get (value, "a{sv}", &iter);
-      if (is_event)
-        parse_event_variant_iter (self, iter);
-      else
-        parse_variant_iter (self, iter);
-    }
-  else
-    {
-      g_warning ("type %s not known", type_string);
-    }
+  if (g_strcmp0 (type_string, "(a{sv})") == 0) {
+    g_variant_get (value, "(a{sv})", &iter);
+    if (is_event)
+      parse_event_variant_iter (self, iter);
+    else
+      parse_variant_iter (self, iter);
+  } else if (g_strcmp0 (type_string, "a{sv}") == 0) {
+    g_variant_get (value, "a{sv}", &iter);
+    if (is_event)
+      parse_event_variant_iter (self, iter);
+    else
+      parse_variant_iter (self, iter);
+  } else {
+    g_warning ("type %s not known", type_string);
+  }
 }
 
 static void
@@ -344,15 +315,14 @@ parse_array_from_variant (CcFirmwareSecurityPage *self,
 
   untuple = g_variant_get_child_value (value, 0);
   sz = g_variant_n_children (untuple);
-  for (guint i = 0; i < sz; i++)
-    {
-      g_autoptr (GVariant) data = NULL;
-      data = g_variant_get_child_value (untuple, i);
-      if (is_event)
-        parse_data_from_variant (self, data, TRUE);
-      else
-        parse_data_from_variant (self, data, FALSE);
-    }
+  for (guint i = 0; i < sz; i++) {
+    g_autoptr (GVariant) data = NULL;
+    data = g_variant_get_child_value (untuple, i);
+    if (is_event)
+      parse_data_from_variant (self, data, TRUE);
+    else
+      parse_data_from_variant (self, data, FALSE);
+  }
 }
 
 static void
@@ -365,17 +335,17 @@ on_bus_event_done_cb (GObject      *source,
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
 
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
-  if (val == NULL)
-    {
-      g_warning ("failed to get Security Attribute Event: %s", error->message);
-      return;
-    }
+  if (val == NULL) {
+    g_warning ("failed to get Security Attribute Event: %s", error->message);
+    return;
+  }
 
   parse_array_from_variant (self, val, TRUE);
 }
 
 static void
-show_loading_page (CcFirmwareSecurityPage *self, const gchar *page_name)
+show_loading_page (CcFirmwareSecurityPage *self,
+                   const gchar            *page_name)
 {
   gtk_stack_set_visible_child_name (GTK_STACK (self->panel_stack), page_name);
 }
@@ -408,11 +378,10 @@ on_bus_done (GObject      *source,
   g_autoptr (GVariant) val = NULL;
 
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
-  if (val == NULL)
-    {
-      self->timeout_id = g_timeout_add (1500, on_timeout_unavaliable, self);
-      return;
-    }
+  if (val == NULL) {
+    self->timeout_id = g_timeout_add (1500, on_timeout_unavaliable, self);
+    return;
+  }
 
   parse_array_from_variant (self, val, FALSE);
   set_secure_boot_button_view (self);
@@ -420,21 +389,20 @@ on_bus_done (GObject      *source,
 }
 
 static void
-on_bus_ready_cb (GObject       *source_object,
-                 GAsyncResult  *res,
-                 gpointer       user_data)
+on_bus_ready_cb (GObject      *source_object,
+                 GAsyncResult *res,
+                 gpointer      user_data)
 {
   g_autoptr (GError) error = NULL;
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
 
   self->bus_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (self->bus_proxy == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-          g_warning ("failed to connect fwupd: %s", error->message);
+  if (self->bus_proxy == NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("failed to connect fwupd: %s", error->message);
 
-      return;
-    }
+    return;
+  }
 
   g_dbus_proxy_call (self->bus_proxy,
                      "GetHostSecurityAttrs",
@@ -494,27 +462,26 @@ set_hsi_button_view_contain (CcFirmwareSecurityPage *self,
                              gchar                  *title,
                              const gchar            *description)
 {
-  switch (hsi_number)
-    {
-      case 0:
-        gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "dialog-warning-symbolic");
-        gtk_widget_add_css_class (self->hsi_icon, "error");
-        break;
-      case 1:
-        gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "channel-secure-symbolic");
-        gtk_widget_add_css_class (self->hsi_icon, "warning");
-        break;
-      case 2:
-      case 3:
-      case 4:
-        gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "security-high-symbolic");
-        gtk_widget_add_css_class (self->hsi_icon, "good");
-        break;
-      default:
-        gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "dialog-question-symbolic");
-        gtk_widget_add_css_class (self->hsi_icon, "neutral");
-        break;
-    }
+  switch (hsi_number) {
+    case 0:
+      gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "dialog-warning-symbolic");
+      gtk_widget_add_css_class (self->hsi_icon, "error");
+      break;
+    case 1:
+      gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "channel-secure-symbolic");
+      gtk_widget_add_css_class (self->hsi_icon, "warning");
+      break;
+    case 2:
+    case 3:
+    case 4:
+      gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "security-high-symbolic");
+      gtk_widget_add_css_class (self->hsi_icon, "good");
+      break;
+    default:
+      gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "dialog-question-symbolic");
+      gtk_widget_add_css_class (self->hsi_icon, "neutral");
+      break;
+  }
 
   gtk_label_set_text (GTK_LABEL (self->hsi_label), title);
   gtk_label_set_text (GTK_LABEL (self->hsi_description), description);
@@ -523,42 +490,41 @@ set_hsi_button_view_contain (CcFirmwareSecurityPage *self,
 static void
 set_hsi_button_view (CcFirmwareSecurityPage *self)
 {
-  switch (self->hsi_number)
-    {
-      case 0:
-        set_hsi_button_view_contain (self,
-                                     self->hsi_number,
-                                     /* TRANSLATORS: in reference to firmware protection: 0/4 stars */
-                                     _("Security Checks Failed"),
-                                     _("Hardware does not pass basic security checks."));
-        break;
-      case 1:
-        set_hsi_button_view_contain (self,
-                                     self->hsi_number,
-                                     /* TRANSLATORS: in reference to firmware protection: 1/4 stars */
-                                     _("Basic Security Checks Passed"),
-                                     _("Hardware has a basic level of protection."));
-        break;
-      case 2:
-      case 3:
-      case 4:
-      case 5:
-        set_hsi_button_view_contain (self,
-                                     self->hsi_number,
-                                     /* TRANSLATORS: in reference to firmware protection: 2~4 stars */
-                                     _("Protected"),
-                                     _("Hardware has a strong level of protection."));
-        break;
-      case G_MAXUINT:
-        set_hsi_button_view_contain (self,
-                                     self->hsi_number,
-                                     /* TRANSLATORS: in reference to firmware protection: ??? stars */
-                                     _("Security Checks Unavailable"),
-                                     _("Security levels are not available for this device."));
-        break;
-      default:
-        g_warning ("incorrect HSI number %u", self->hsi_number);
-    }
+  switch (self->hsi_number) {
+    case 0:
+      set_hsi_button_view_contain (self,
+                                   self->hsi_number,
+                                   /* TRANSLATORS: in reference to firmware protection: 0/4 stars */
+                                   _("Security Checks Failed"),
+                                   _("Hardware does not pass basic security checks."));
+      break;
+    case 1:
+      set_hsi_button_view_contain (self,
+                                   self->hsi_number,
+                                   /* TRANSLATORS: in reference to firmware protection: 1/4 stars */
+                                   _("Basic Security Checks Passed"),
+                                   _("Hardware has a basic level of protection."));
+      break;
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+      set_hsi_button_view_contain (self,
+                                   self->hsi_number,
+                                   /* TRANSLATORS: in reference to firmware protection: 2~4 stars */
+                                   _("Protected"),
+                                   _("Hardware has a strong level of protection."));
+      break;
+    case G_MAXUINT:
+      set_hsi_button_view_contain (self,
+                                   self->hsi_number,
+                                   /* TRANSLATORS: in reference to firmware protection: ??? stars */
+                                   _("Security Checks Unavailable"),
+                                   _("Security levels are not available for this device."));
+      break;
+    default:
+      g_warning ("incorrect HSI number %u", self->hsi_number);
+  }
 }
 
 static void
@@ -572,22 +538,18 @@ on_properties_bus_done_cb (GObject      *source,
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
 
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
-  if (val == NULL)
-    {
-      g_warning ("failed to get HSI number");
-      return;
-    }
+  if (val == NULL) {
+    g_warning ("failed to get HSI number");
+    return;
+  }
 
   /* parse value */
   hsi_str = g_variant_get_data (val);
-  if (hsi_str != NULL && g_str_has_prefix (hsi_str, "HSI:INVALID"))
-    {
-      self->hsi_number = G_MAXUINT;
-    }
-  else if (hsi_str != NULL && g_str_has_prefix (hsi_str, "HSI:"))
-    {
-      self->hsi_number = g_ascii_strtoll (hsi_str + 4, NULL, 10);
-    }
+  if (hsi_str != NULL && g_str_has_prefix (hsi_str, "HSI:INVALID")) {
+    self->hsi_number = G_MAXUINT;
+  } else if (hsi_str != NULL && g_str_has_prefix (hsi_str, "HSI:")) {
+    self->hsi_number = g_ascii_strtoll (hsi_str + 4, NULL, 10);
+  }
   set_hsi_button_view (self);
 }
 
@@ -600,13 +562,12 @@ on_properties_bus_ready_cb (GObject      *source_object,
   g_autoptr (GError) error = NULL;
 
   self->properties_bus_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-  if (self->properties_bus_proxy == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("failed to connect fwupd: %s", error->message);
+  if (self->properties_bus_proxy == NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("failed to connect fwupd: %s", error->message);
 
-      return;
-    }
+    return;
+  }
 
   g_dbus_proxy_call (self->properties_bus_proxy,
                      "Get",
@@ -697,11 +658,11 @@ cc_firmware_security_page_init (CcFirmwareSecurityPage *self)
 
   update_page_visibility (self);
 
-  self->hsi1_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
-  self->hsi2_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
-  self->hsi3_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
-  self->hsi4_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
-  self->runtime_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
+  self->hsi1_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify)fu_security_attr_free);
+  self->hsi2_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify)fu_security_attr_free);
+  self->hsi3_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify)fu_security_attr_free);
+  self->hsi4_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify)fu_security_attr_free);
+  self->runtime_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify)fu_security_attr_free);
   self->event_log_output = g_string_new (NULL);
   self->cancellable = g_cancellable_new ();
 

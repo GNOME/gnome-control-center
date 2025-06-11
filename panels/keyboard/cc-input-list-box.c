@@ -41,16 +41,16 @@
 #define KEY_MRU_SOURCES          "mru-sources"
 
 struct _CcInputListBox {
-  AdwBin          parent_instance;
+  AdwBin parent_instance;
 
-  GtkListBoxRow   *add_input_row;
-  GtkListBox      *listbox;
+  GtkListBoxRow *add_input_row;
+  GtkListBox *listbox;
 
-  GCancellable    *cancellable;
+  GCancellable *cancellable;
 
-  gboolean     login_auto_apply;
+  gboolean login_auto_apply;
   GPermission *permission;
-  GDBusProxy  *localed;
+  GDBusProxy *localed;
 
   GSettings *input_settings;
   GnomeXkbInfo *xkb_info;
@@ -61,16 +61,17 @@ struct _CcInputListBox {
 };
 
 G_DEFINE_TYPE (CcInputListBox, cc_input_list_box, ADW_TYPE_BIN)
- 
-typedef struct
-{
+
+typedef struct {
   CcInputListBox *panel;
-  CcInputRow    *source;
-  CcInputRow    *dest;
+  CcInputRow *source;
+  CcInputRow *dest;
 } RowData;
 
 static RowData *
-row_data_new (CcInputListBox *panel, CcInputRow *source, CcInputRow *dest)
+row_data_new (CcInputListBox *panel,
+              CcInputRow     *source,
+              CcInputRow     *dest)
 {
   RowData *data = g_malloc0 (sizeof (RowData));
   data->panel = panel;
@@ -119,19 +120,19 @@ update_ibus_active_sources (CcInputListBox *self)
 }
 
 static void
-fetch_ibus_engines_result (GObject       *object,
-                           GAsyncResult  *result,
+fetch_ibus_engines_result (GObject        *object,
+                           GAsyncResult   *result,
                            CcInputListBox *self)
 {
-  g_autoptr(GList) list = NULL;
+  g_autoptr (GList) list = NULL;
   GList *l;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   list = ibus_bus_list_engines_async_finish (IBUS_BUS (object), result, &error);
   if (!list && error) {
     if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-	g_warning ("Couldn't finish IBus request: %s", error->message);
-      return;
+      g_warning ("Couldn't finish IBus request: %s", error->message);
+    return;
   }
 
   /* Maps engine ids to engine description objects */
@@ -154,10 +155,10 @@ static void
 fetch_ibus_engines (CcInputListBox *self)
 {
   ibus_bus_list_engines_async (self->ibus,
-			       -1,
-			       self->cancellable,
-			       (GAsyncReadyCallback)fetch_ibus_engines_result,
-			       self);
+                               -1,
+                               self->cancellable,
+                               (GAsyncReadyCallback)fetch_ibus_engines_result,
+                               self);
 
   /* We've got everything we needed, don't want to be called again. */
   g_signal_handlers_disconnect_by_func (self->ibus, fetch_ibus_engines, self);
@@ -171,24 +172,24 @@ maybe_start_ibus (void)
    * sure-fire way to activate it.
    */
   g_bus_unwatch_name (g_bus_watch_name (G_BUS_TYPE_SESSION,
-					IBUS_SERVICE_IBUS,
-					G_BUS_NAME_WATCHER_FLAGS_AUTO_START,
-					NULL,
-					NULL,
-					NULL,
-					NULL));
+                                        IBUS_SERVICE_IBUS,
+                                        G_BUS_NAME_WATCHER_FLAGS_AUTO_START,
+                                        NULL,
+                                        NULL,
+                                        NULL,
+                                        NULL));
 }
 
 #endif
 
 static void
 row_settings_cb (CcInputListBox *self,
-                 CcInputRow    *row)
+                 CcInputRow     *row)
 {
   CcInputSourceIBus *source;
-  g_autoptr(GdkAppLaunchContext) ctx = NULL;
+  g_autoptr (GdkAppLaunchContext) ctx = NULL;
   GDesktopAppInfo *app_info;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_return_if_fail (CC_IS_INPUT_SOURCE_IBUS (cc_input_row_get_source (row)));
   source = CC_INPUT_SOURCE_IBUS (cc_input_row_get_source (row));
@@ -201,29 +202,32 @@ row_settings_cb (CcInputListBox *self,
   gdk_app_launch_context_set_timestamp (ctx, GDK_CURRENT_TIME);
 
   g_app_launch_context_setenv (G_APP_LAUNCH_CONTEXT (ctx),
-			       "IBUS_ENGINE_NAME", cc_input_source_ibus_get_engine_name (source));
+                               "IBUS_ENGINE_NAME", cc_input_source_ibus_get_engine_name (source));
 
   if (!g_app_info_launch (G_APP_INFO (app_info), NULL, G_APP_LAUNCH_CONTEXT (ctx), &error))
     g_warning ("Failed to launch input source setup: %s", error->message);
 }
 
-static void move_input (CcInputListBox *self, CcInputRow *source, CcInputRow *dest);
+static void move_input (CcInputListBox *self,
+                        CcInputRow     *source,
+                        CcInputRow     *dest);
 static void update_input_rows (CcInputListBox *self);
 
 static void
 row_moved_cb (CcInputListBox *self,
-              CcInputRow    *dest_row,
-              CcInputRow    *row)
+              CcInputRow     *dest_row,
+              CcInputRow     *row)
 {
   move_input (self, row, dest_row);
   update_input_rows (self);
 }
 
-static void remove_input (CcInputListBox *self, CcInputRow *row);
+static void remove_input (CcInputListBox *self,
+                          CcInputRow     *row);
 
 static void
 row_removed_cb (CcInputListBox *self,
-                CcInputRow    *row)
+                CcInputRow     *row)
 {
   remove_input (self, row);
 }
@@ -255,7 +259,8 @@ update_input_rows (CcInputListBox *self)
 }
 
 static void
-add_input_row (CcInputListBox *self, CcInputSource *source)
+add_input_row (CcInputListBox *self,
+               CcInputSource  *source)
 {
   CcInputRow *row;
 
@@ -270,14 +275,14 @@ add_input_row (CcInputListBox *self, CcInputSource *source)
 
 static void
 add_input_sources (CcInputListBox *self,
-                   GVariant      *sources)
+                   GVariant       *sources)
 {
   GVariantIter iter;
   const gchar *type, *id;
 
   g_variant_iter_init (&iter, sources);
   while (g_variant_iter_next (&iter, "(&s&s)", &type, &id)) {
-    g_autoptr(CcInputSource) source = NULL;
+    g_autoptr (CcInputSource) source = NULL;
 
     if (g_str_equal (type, "xkb")) {
       source = CC_INPUT_SOURCE (cc_input_source_xkb_new_from_id (self->xkb_info, id));
@@ -285,10 +290,10 @@ add_input_sources (CcInputListBox *self,
       source = CC_INPUT_SOURCE (cc_input_source_ibus_new (id));
 #ifdef HAVE_IBUS
       if (self->ibus_engines) {
-	IBusEngineDesc *engine_desc = g_hash_table_lookup (self->ibus_engines, id);
-	if (engine_desc != NULL)
-	  cc_input_source_ibus_set_engine_desc (CC_INPUT_SOURCE_IBUS (source), engine_desc);
-	}
+        IBusEngineDesc *engine_desc = g_hash_table_lookup (self->ibus_engines, id);
+        if (engine_desc != NULL)
+          cc_input_source_ibus_set_engine_desc (CC_INPUT_SOURCE_IBUS (source), engine_desc);
+      }
 #endif
     } else {
       g_warning ("Unhandled input source type '%s'", type);
@@ -302,7 +307,7 @@ add_input_sources (CcInputListBox *self,
 static void
 add_input_sources_from_settings (CcInputListBox *self)
 {
-  g_autoptr(GVariant) sources = NULL;
+  g_autoptr (GVariant) sources = NULL;
   sources = g_settings_get_value (self->input_settings, "sources");
   add_input_sources (self, sources);
 }
@@ -322,7 +327,8 @@ clear_input_sources (CcInputListBox *self)
 }
 
 static CcInputRow *
-get_row_by_source (CcInputListBox *self, CcInputSource *source)
+get_row_by_source (CcInputListBox *self,
+                   CcInputSource  *source)
 {
   GtkListBoxRow *row;
   gint i = 0;
@@ -343,10 +349,10 @@ get_row_by_source (CcInputListBox *self, CcInputSource *source)
 
 static void
 input_sources_changed (CcInputListBox *self,
-                       const gchar   *key)
+                       const gchar    *key)
 {
   CcInputRow *selected;
-  g_autoptr(CcInputSource) source = NULL;
+  g_autoptr (CcInputSource) source = NULL;
 
   selected = CC_INPUT_ROW (gtk_list_box_get_selected_row (self->listbox));
   if (selected)
@@ -385,7 +391,7 @@ set_input_settings (CcInputListBox *self)
       g_variant_builder_add (&builder, "(ss)", "xkb", id);
     } else if (CC_IS_INPUT_SOURCE_IBUS (source)) {
       g_variant_builder_add (&builder, "(ss)", "ibus",
-			     cc_input_source_ibus_get_engine_name (CC_INPUT_SOURCE_IBUS (source)));
+                             cc_input_source_ibus_get_engine_name (CC_INPUT_SOURCE_IBUS (source)));
     }
   }
 
@@ -438,20 +444,22 @@ show_input_chooser (CcInputListBox *self)
 
   chooser = cc_input_chooser_new (self->xkb_info,
 #ifdef HAVE_IBUS
-				  self->ibus_engines
+                                  self->ibus_engines
 #else
-				  NULL
+                                  NULL
 #endif
-				  );
+                                  );
   g_signal_connect_swapped (chooser, "source-selected", G_CALLBACK (on_chooser_response_cb), self);
   adw_dialog_present (ADW_DIALOG (chooser), GTK_WIDGET (self));
 }
 
-// Duplicated from cc-region-panel.c
+/* Duplicated from cc-region-panel.c */
 static gboolean
-permission_acquired (GPermission *permission, GAsyncResult *res, const gchar *action)
+permission_acquired (GPermission  *permission,
+                     GAsyncResult *res,
+                     const gchar  *action)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   if (!g_permission_acquire_finish (permission, res, &error)) {
     if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
@@ -463,7 +471,9 @@ permission_acquired (GPermission *permission, GAsyncResult *res, const gchar *ac
 }
 
 static void
-add_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_data)
+add_input_permission_cb (GObject      *source,
+                         GAsyncResult *res,
+                         gpointer      user_data)
 {
   CcInputListBox *self = user_data;
   if (permission_acquired (G_PERMISSION (source), res, "add input"))
@@ -479,14 +489,15 @@ add_input (CcInputListBox *self)
     show_input_chooser (self);
   } else if (g_permission_get_can_acquire (self->permission)) {
     g_permission_acquire_async (self->permission,
-				self->cancellable,
-				add_input_permission_cb,
-				self);
+                                self->cancellable,
+                                add_input_permission_cb,
+                                self);
   }
 }
 
 static void
-do_remove_input (CcInputListBox *self, CcInputRow *row)
+do_remove_input (CcInputListBox *self,
+                 CcInputRow     *row)
 {
   gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
 
@@ -495,7 +506,9 @@ do_remove_input (CcInputListBox *self, CcInputRow *row)
 }
 
 static void
-remove_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_data)
+remove_input_permission_cb (GObject      *source,
+                            GAsyncResult *res,
+                            gpointer      user_data)
 {
   RowData *data = user_data;
   if (permission_acquired (G_PERMISSION (source), res, "remove input"))
@@ -503,7 +516,8 @@ remove_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_da
 }
 
 static void
-remove_input (CcInputListBox *self, CcInputRow *row)
+remove_input (CcInputListBox *self,
+              CcInputRow     *row)
 {
   if (!self->login_auto_apply) {
     do_remove_input (self, row);
@@ -511,14 +525,16 @@ remove_input (CcInputListBox *self, CcInputRow *row)
     do_remove_input (self, row);
   } else if (g_permission_get_can_acquire (self->permission)) {
     g_permission_acquire_async (self->permission,
-				self->cancellable,
-				remove_input_permission_cb,
-				row_data_new (self, row, NULL));
+                                self->cancellable,
+                                remove_input_permission_cb,
+                                row_data_new (self, row, NULL));
   }
 }
 
 static void
-do_move_input (CcInputListBox *self, CcInputRow *source, CcInputRow *dest)
+do_move_input (CcInputListBox *self,
+               CcInputRow     *source,
+               CcInputRow     *dest)
 {
   gint dest_index;
 
@@ -533,7 +549,9 @@ do_move_input (CcInputListBox *self, CcInputRow *source, CcInputRow *dest)
 }
 
 static void
-move_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_data)
+move_input_permission_cb (GObject      *source,
+                          GAsyncResult *res,
+                          gpointer      user_data)
 {
   RowData *data = user_data;
   if (permission_acquired (G_PERMISSION (source), res, "move input"))
@@ -542,8 +560,8 @@ move_input_permission_cb (GObject *source, GAsyncResult *res, gpointer user_data
 
 static void
 move_input (CcInputListBox *self,
-            CcInputRow    *source,
-            CcInputRow    *dest)
+            CcInputRow     *source,
+            CcInputRow     *dest)
 {
   if (!self->login_auto_apply) {
     do_move_input (self, source, dest);
@@ -551,14 +569,15 @@ move_input (CcInputListBox *self,
     do_move_input (self, source, dest);
   } else if (g_permission_get_can_acquire (self->permission)) {
     g_permission_acquire_async (self->permission,
-				self->cancellable,
-				move_input_permission_cb,
-				row_data_new (self, source, dest));
+                                self->cancellable,
+                                move_input_permission_cb,
+                                row_data_new (self, source, dest));
   }
 }
 
 static void
-input_row_activated_cb (CcInputListBox *self, GtkListBoxRow *row)
+input_row_activated_cb (CcInputListBox *self,
+                        GtkListBoxRow  *row)
 {
   if (row == self->add_input_row) {
     add_input (self);
@@ -611,8 +630,8 @@ add_input_sources_from_localed (CcInputListBox *self)
 static void
 set_localed_input (CcInputListBox *self)
 {
-  g_autoptr(GString) layouts = NULL;
-  g_autoptr(GString) variants = NULL;
+  g_autoptr (GString) layouts = NULL;
+  g_autoptr (GString) variants = NULL;
   GtkListBoxRow *row;
   gint i = 0;
 
@@ -694,7 +713,7 @@ cc_input_list_box_init (CcInputListBox *self)
   self->localed = NULL;
   self->permission = NULL;
 
-  self->cancellable = g_cancellable_new();
+  self->cancellable = g_cancellable_new ();
 
   self->input_settings = g_settings_new (GNOME_DESKTOP_INPUT_SOURCES_DIR);
 
@@ -721,19 +740,22 @@ cc_input_list_box_init (CcInputListBox *self)
 }
 
 void
-cc_input_list_box_set_login_auto_apply (CcInputListBox *self, gboolean login_auto_apply)
+cc_input_list_box_set_login_auto_apply (CcInputListBox *self,
+                                        gboolean        login_auto_apply)
 {
   self->login_auto_apply = login_auto_apply;
 }
 
 void
-cc_input_list_box_set_localed (CcInputListBox *self, GDBusProxy *localed)
+cc_input_list_box_set_localed (CcInputListBox *self,
+                               GDBusProxy     *localed)
 {
   self->localed = localed;
 }
 
 void
-cc_input_list_box_set_permission (CcInputListBox *self, GPermission *permission)
+cc_input_list_box_set_permission (CcInputListBox *self,
+                                  GPermission    *permission)
 {
   self->permission = permission;
 }

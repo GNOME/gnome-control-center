@@ -69,7 +69,7 @@ CcBreakSchedule *
 cc_break_schedule_new (guint duration_secs,
                        guint interval_secs)
 {
-  g_autoptr(CcBreakSchedule) schedule = g_object_new (CC_TYPE_BREAK_SCHEDULE, NULL);
+  g_autoptr (CcBreakSchedule) schedule = g_object_new (CC_TYPE_BREAK_SCHEDULE, NULL);
   schedule->duration_secs = duration_secs;
   schedule->interval_secs = interval_secs;
   return g_steal_pointer (&schedule);
@@ -250,7 +250,7 @@ factory_notify_root_cb (GObject    *object,
   slash = gtk_widget_get_prev_sibling (gtk_widget_get_prev_sibling (icon));
   duration_label = gtk_widget_get_prev_sibling (slash);
   box_popover = gtk_widget_get_ancestor (GTK_WIDGET (box), GTK_TYPE_POPOVER);
-  is_in_combo_popover = (box_popover != NULL && gtk_widget_get_ancestor (box_popover, ADW_TYPE_COMBO_ROW) == (GtkWidget *) combo_row);
+  is_in_combo_popover = (box_popover != NULL && gtk_widget_get_ancestor (box_popover, ADW_TYPE_COMBO_ROW) == (GtkWidget *)combo_row);
 
   /* Selection icon should only be visible when in the popover. */
   gtk_widget_set_visible (icon, is_in_combo_popover);
@@ -372,18 +372,17 @@ header_factory_setup_cb (GtkSignalListItemFactory *factory,
   gtk_widget_set_margin_start (box, 14);
   gtk_widget_set_margin_end (box, 14);
 
-  for (size_t i = 0; i < G_N_ELEMENTS (labels); i++)
-    {
-      GtkWidget *label = gtk_label_new (_(labels[i]));
-      gtk_label_set_xalign (GTK_LABEL (label), 0.0);
-      gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
-      gtk_label_set_max_width_chars (GTK_LABEL (label), 20);
-      gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
-      gtk_box_append (GTK_BOX (box), label);
+  for (size_t i = 0; i < G_N_ELEMENTS (labels); i++) {
+    GtkWidget *label = gtk_label_new (_(labels[i]));
+    gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+    gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
+    gtk_label_set_max_width_chars (GTK_LABEL (label), 20);
+    gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+    gtk_box_append (GTK_BOX (box), label);
 
-      gtk_size_group_add_widget ((i == 0) ? self->duration_size_group : self->interval_size_group,
-                                 label);
-    }
+    gtk_size_group_add_widget ((i == 0) ? self->duration_size_group : self->interval_size_group,
+                               label);
+  }
 
   gtk_list_header_set_child (list_header, box);
 }

@@ -41,8 +41,7 @@
 #include "cc-keyboard-shortcut-group.h"
 #include "cc-util.h"
 
-enum
-{
+enum {
   DONE,
 
   N_SIGNALS
@@ -50,8 +49,7 @@ enum
 
 static guint signals[N_SIGNALS];
 
-enum
-{
+enum {
   PROP_0,
   PROP_APP_ID,
   PROP_PARENT_WINDOW_HANDLE,
@@ -61,8 +59,7 @@ enum
 
 static GParamSpec *props[N_PROPS];
 
-struct _CcGlobalShortcutDialog
-{
+struct _CcGlobalShortcutDialog {
   AdwWindow parent_instance;
 
   AdwPreferencesPage *shortcut_list;
@@ -125,14 +122,13 @@ static void
 emit_done (CcGlobalShortcutDialog *self,
            gboolean                success)
 {
-  g_autoptr(GVariant) response = NULL;
+  g_autoptr (GVariant) response = NULL;
 
-  if (success)
-    {
-      cc_keyboard_manager_store_global_shortcuts (self->manager, self->app_id);
-      response = cc_keyboard_manager_get_global_shortcuts (self->manager,
-                                                           self->app_id);
-    }
+  if (success) {
+    cc_keyboard_manager_store_global_shortcuts (self->manager, self->app_id);
+    response = cc_keyboard_manager_get_global_shortcuts (self->manager,
+                                                         self->app_id);
+  }
 
   g_signal_emit (self, signals[DONE], 0, response);
 }
@@ -174,8 +170,7 @@ cc_global_shortcut_dialog_set_property (GObject      *object,
 {
   CcGlobalShortcutDialog *self = CC_GLOBAL_SHORTCUT_DIALOG (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_APP_ID:
       self->app_id = g_value_dup_string (value);
       break;
@@ -188,7 +183,7 @@ cc_global_shortcut_dialog_set_property (GObject      *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
-    }
+  }
 }
 
 static GVariant *
@@ -197,18 +192,17 @@ lookup_in_settings_variant (GVariant   *settings,
 {
   GVariantIter iter;
   g_autofree char *key = NULL;
-  g_autoptr(GVariant) value = NULL;
+  g_autoptr (GVariant) value = NULL;
 
   g_variant_iter_init (&iter, settings);
 
-  while (g_variant_iter_next (&iter, "(s@a{sv})", &key, &value))
-    {
-      g_autofree char *shortcut = g_steal_pointer (&key);
-      g_autoptr(GVariant) config = g_steal_pointer (&value);
+  while (g_variant_iter_next (&iter, "(s@a{sv})", &key, &value)) {
+    g_autofree char *shortcut = g_steal_pointer (&key);
+    g_autoptr (GVariant) config = g_steal_pointer (&value);
 
-      if (g_strcmp0 (shortcut_id, shortcut) == 0)
-        return g_steal_pointer (&config);
-    }
+    if (g_strcmp0 (shortcut_id, shortcut) == 0)
+      return g_steal_pointer (&config);
+  }
 
   return NULL;
 }
@@ -218,58 +212,54 @@ app_shortcuts_to_settings_variant (GVariant *app_shortcuts,
                                    GVariant *old_settings,
                                    gboolean *has_new_shortcuts)
 {
-  g_auto(GVariantBuilder) builder =
+  g_auto (GVariantBuilder) builder =
     G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE ("a(sa{sv})"));
-  g_autoptr(GVariant) value = NULL;
+  g_autoptr (GVariant) value = NULL;
   g_autofree char *key = NULL;
   GVariantIter iter;
 
   g_variant_iter_init (&iter, app_shortcuts);
 
-  while (g_variant_iter_next (&iter, "(s@a{sv})", &key, &value))
-    {
-      g_autofree char *shortcut_id = g_steal_pointer (&key);
-      g_autoptr(GVariant) prefs = g_steal_pointer (&value);
-      g_autoptr(GVariant) setting = NULL;
+  while (g_variant_iter_next (&iter, "(s@a{sv})", &key, &value)) {
+    g_autofree char *shortcut_id = g_steal_pointer (&key);
+    g_autoptr (GVariant) prefs = g_steal_pointer (&value);
+    g_autoptr (GVariant) setting = NULL;
 
-      setting = lookup_in_settings_variant (old_settings, shortcut_id);
+    setting = lookup_in_settings_variant (old_settings, shortcut_id);
 
-      if (setting)
-        {
-          /* Shortcut was configured previously */
-          g_variant_builder_add (&builder, "(s@a{sv})", shortcut_id, setting);
-        }
-      else
-        {
-          g_auto(GVariantBuilder) new_shortcut =
-            G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE_VARDICT);
-          g_auto(GVariantDict) prefs_dict = G_VARIANT_DICT_INIT (prefs);
-          g_autoptr(GVariant) description = NULL, preferred_trigger = NULL;
-          g_autoptr(GVariant) shortcuts = NULL;
+    if (setting) {
+      /* Shortcut was configured previously */
+      g_variant_builder_add (&builder, "(s@a{sv})", shortcut_id, setting);
+    } else {
+      g_auto (GVariantBuilder) new_shortcut =
+        G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE_VARDICT);
+      g_auto (GVariantDict) prefs_dict = G_VARIANT_DICT_INIT (prefs);
+      g_autoptr (GVariant) description = NULL, preferred_trigger = NULL;
+      g_autoptr (GVariant) shortcuts = NULL;
 
-          /* Extract app preferences for new shortcut */
-          description =
-            g_variant_dict_lookup_value (&prefs_dict, "description",
-                                         G_VARIANT_TYPE_STRING);
-          if (!description)
-            continue;
+      /* Extract app preferences for new shortcut */
+      description =
+        g_variant_dict_lookup_value (&prefs_dict, "description",
+                                     G_VARIANT_TYPE_STRING);
+      if (!description)
+        continue;
 
-          g_variant_builder_add (&new_shortcut, "{sv}", "description",
-                                 g_variant_ref_sink (description));
-          preferred_trigger =
-            g_variant_dict_lookup_value (&prefs_dict, "preferred_trigger",
-                                         G_VARIANT_TYPE_STRING);
-          shortcuts = g_variant_new_array (G_VARIANT_TYPE_STRING,
-                                           preferred_trigger ? &preferred_trigger : NULL,
-                                           preferred_trigger ? 1 : 0);
-          g_variant_builder_add (&new_shortcut, "{sv}", "shortcuts",
-                                 g_variant_ref_sink (shortcuts));
+      g_variant_builder_add (&new_shortcut, "{sv}", "description",
+                             g_variant_ref_sink (description));
+      preferred_trigger =
+        g_variant_dict_lookup_value (&prefs_dict, "preferred_trigger",
+                                     G_VARIANT_TYPE_STRING);
+      shortcuts = g_variant_new_array (G_VARIANT_TYPE_STRING,
+                                       preferred_trigger ? &preferred_trigger : NULL,
+                                       preferred_trigger ? 1 : 0);
+      g_variant_builder_add (&new_shortcut, "{sv}", "shortcuts",
+                             g_variant_ref_sink (shortcuts));
 
-          g_variant_builder_add (&builder, "(s@a{sv})", shortcut_id,
-                                 g_variant_builder_end (&new_shortcut));
-          *has_new_shortcuts = TRUE;
-        }
+      g_variant_builder_add (&builder, "(s@a{sv})", shortcut_id,
+                             g_variant_builder_end (&new_shortcut));
+      *has_new_shortcuts = TRUE;
     }
+  }
 
   return g_variant_builder_end (&builder);
 }
@@ -278,7 +268,7 @@ static void
 cc_global_shortcut_dialog_constructed (GObject *object)
 {
   CcGlobalShortcutDialog *self = CC_GLOBAL_SHORTCUT_DIALOG (object);
-  g_autoptr(GVariant) saved_shortcuts = NULL, shortcuts = NULL;
+  g_autoptr (GVariant) saved_shortcuts = NULL, shortcuts = NULL;
 
   saved_shortcuts = cc_keyboard_manager_get_global_shortcuts (self->manager,
                                                               self->app_id);
@@ -394,31 +384,28 @@ cc_global_shortcut_dialog_new (const char *app_id,
 void
 cc_global_shortcut_dialog_present (CcGlobalShortcutDialog *self)
 {
-  if (!self->has_new_shortcuts)
-    {
-      emit_done (self, TRUE);
-      return;
+  if (!self->has_new_shortcuts) {
+    emit_done (self, TRUE);
+    return;
+  }
+
+  if (!gtk_widget_get_visible (GTK_WIDGET (self))) {
+    self->external_window =
+      gxdp_external_window_new_from_handle (self->parent_window_handle);
+
+    if (self->external_window) {
+      GtkNative *native;
+      GdkSurface *surface;
+
+      gtk_widget_realize (GTK_WIDGET (self));
+
+      native = gtk_widget_get_native (GTK_WIDGET (self));
+      surface = gtk_native_get_surface (native);
+
+      gxdp_external_window_set_parent_of (self->external_window,
+                                          surface);
     }
 
-  if (!gtk_widget_get_visible (GTK_WIDGET (self)))
-    {
-      self->external_window =
-        gxdp_external_window_new_from_handle (self->parent_window_handle);
-
-      if (self->external_window)
-        {
-          GtkNative *native;
-          GdkSurface *surface;
-
-          gtk_widget_realize (GTK_WIDGET (self));
-
-          native = gtk_widget_get_native (GTK_WIDGET (self));
-          surface = gtk_native_get_surface (native);
-
-          gxdp_external_window_set_parent_of (self->external_window,
-                                              surface);
-        }
-
-      gtk_window_present (GTK_WINDOW (self));
-    }
+    gtk_window_present (GTK_WINDOW (self));
+  }
 }

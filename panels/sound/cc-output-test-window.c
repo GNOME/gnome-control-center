@@ -18,9 +18,8 @@
 #include "cc-output-test-wheel.h"
 #include "cc-output-test-window.h"
 
-struct _CcOutputTestWindow
-{
-  AdwDialog          parent_instance;
+struct _CcOutputTestWindow {
+  AdwDialog parent_instance;
 
   CcOutputTestWheel *wheel;
 };

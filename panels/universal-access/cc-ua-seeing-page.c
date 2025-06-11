@@ -43,24 +43,23 @@
 #include "cc-ua-macros.h"
 #include "cc-ua-seeing-page.h"
 
-struct _CcUaSeeingPage
-{
-  AdwNavigationPage   parent_instance;
+struct _CcUaSeeingPage {
+  AdwNavigationPage parent_instance;
 
-  AdwSwitchRow       *high_contrast_row;
-  AdwSwitchRow       *status_shapes_row;
-  GtkSwitch          *animation_effects_switch;
-  AdwSwitchRow       *large_text_row;
-  CcListRow          *cursor_size_row;
-  AdwSwitchRow       *sound_keys_row;
-  AdwSwitchRow       *show_scrollbars_row;
+  AdwSwitchRow *high_contrast_row;
+  AdwSwitchRow *status_shapes_row;
+  GtkSwitch *animation_effects_switch;
+  AdwSwitchRow *large_text_row;
+  CcListRow *cursor_size_row;
+  AdwSwitchRow *sound_keys_row;
+  AdwSwitchRow *show_scrollbars_row;
 
-  AdwSwitchRow       *screen_reader_row;
+  AdwSwitchRow *screen_reader_row;
 
-  GSettings          *kb_settings;
-  GSettings          *interface_settings;
-  GSettings          *application_settings;
-  GSettings          *a11y_interface_settings;
+  GSettings *kb_settings;
+  GSettings *interface_settings;
+  GSettings *application_settings;
+  GSettings *a11y_interface_settings;
 };
 
 G_DEFINE_TYPE (CcUaSeeingPage, cc_ua_seeing_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -103,8 +102,7 @@ ua_seeing_interface_cursor_size_changed_cb (CcUaSeeingPage *self)
 
   cursor_size = g_settings_get_int (self->interface_settings, KEY_MOUSE_CURSOR_SIZE);
 
-  switch (cursor_size)
-    {
+  switch (cursor_size) {
     case 24:
       /* translators: the labels will read:
        * Cursor Size: Default */
@@ -129,7 +127,7 @@ ua_seeing_interface_cursor_size_changed_cb (CcUaSeeingPage *self)
                                             cursor_size),
                                cursor_size);
       break;
-    }
+  }
 
   cc_list_row_set_secondary_label (self->cursor_size_row, label);
 }

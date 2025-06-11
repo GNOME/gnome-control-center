@@ -36,9 +36,8 @@
 #define HOSTNAME_BUS_NAME "org.freedesktop.hostname1"
 #define HOSTNAME_OBJECT_PATH "/org/freedesktop/hostname1"
 
-struct _CcHostname
-{
-  GObject     parent_instance;
+struct _CcHostname {
+  GObject parent_instance;
 
   GDBusProxy *proxy;
 };
@@ -59,7 +58,7 @@ static void
 cc_hostname_constructed (GObject *object)
 {
   CcHostname *self = CC_HOSTNAME (object);
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   self->proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                G_DBUS_PROXY_FLAGS_NONE,
@@ -84,7 +83,7 @@ cc_hostname_init (CcHostname *self)
 static void
 cc_hostname_class_init (CcHostnameClass *klass)
 {
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->constructed = cc_hostname_constructed;
   object_class->dispose = cc_hostname_dispose;
@@ -93,7 +92,7 @@ cc_hostname_class_init (CcHostnameClass *klass)
 CcHostname *
 cc_hostname_get_default (void)
 {
-  g_autoptr(CcHostname) self = NULL;
+  g_autoptr (CcHostname) self = NULL;
 
   if (cc_object_storage_has_object (CC_OBJECT_HOSTNAME)) {
     self = cc_object_storage_get_object (CC_OBJECT_HOSTNAME);
@@ -109,9 +108,9 @@ gchar *
 cc_hostname_get_property (CcHostname  *self,
                           const gchar *property)
 {
-  g_autoptr(GVariant) variant = NULL;
-  g_autoptr(GVariant) inner = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GVariant) variant = NULL;
+  g_autoptr (GVariant) inner = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_return_val_if_fail (CC_IS_HOSTNAME (self), NULL);
   g_return_val_if_fail (property != NULL, NULL);
@@ -129,7 +128,7 @@ cc_hostname_get_property (CcHostname  *self,
                                     G_DBUS_CALL_FLAGS_NONE,
                                     -1,
                                     NULL,
-                                    &error); 
+                                    &error);
   if (variant == NULL) {
     g_warning ("Failed to get property '%s': %s", property, error->message);
 
@@ -150,7 +149,7 @@ cc_hostname_get_display_hostname (CcHostname *self)
   str = cc_hostname_get_property (self, "PrettyHostname");
   /* Empty strings means that we need to fallback */
   if (str != NULL && *str == '\0')
-     return cc_hostname_get_property (self, "Hostname");
+    return cc_hostname_get_property (self, "Hostname");
 
   return g_steal_pointer (&str);
 }
@@ -165,7 +164,7 @@ cc_hostname_get_static_hostname (CcHostname *self)
   str = cc_hostname_get_property (self, "StaticHostname");
   /* Empty strings means that we need to fallback */
   if (str != NULL && *str == '\0')
-     return cc_hostname_get_property (self, "Hostname");
+    return cc_hostname_get_property (self, "Hostname");
 
   return g_steal_pointer (&str);
 }
@@ -175,10 +174,10 @@ cc_hostname_set_hostname (CcHostname  *self,
                           const gchar *hostname)
 {
   g_autofree gchar *static_hostname = NULL;
-  g_autoptr(GVariant) pretty_result = NULL;
-  g_autoptr(GVariant) static_result = NULL;
-  g_autoptr(GError) pretty_error = NULL;
-  g_autoptr(GError) static_error = NULL;
+  g_autoptr (GVariant) pretty_result = NULL;
+  g_autoptr (GVariant) static_result = NULL;
+  g_autoptr (GError) pretty_error = NULL;
+  g_autoptr (GError) static_error = NULL;
 
   g_return_if_fail (CC_IS_HOSTNAME (self));
   g_return_if_fail (hostname != NULL);
@@ -196,7 +195,7 @@ cc_hostname_set_hostname (CcHostname  *self,
   static_hostname = pretty_hostname_to_static (hostname, FALSE);
   g_assert (hostname);
 
-  g_debug ("Setting StaticHostname to '%s'", static_hostname);  
+  g_debug ("Setting StaticHostname to '%s'", static_hostname);
   static_result = g_dbus_proxy_call_sync (self->proxy,
                                           "SetStaticHostname",
                                           g_variant_new ("(sb)", static_hostname, FALSE),

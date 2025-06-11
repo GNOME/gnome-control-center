@@ -20,11 +20,10 @@
 #include "cc-ibus-utils.h"
 #endif
 
-struct _CcInputSourceIBus
-{
-  CcInputSource   parent_instance;
+struct _CcInputSourceIBus {
+  CcInputSource parent_instance;
 
-  gchar          *engine_name;
+  gchar *engine_name;
 #ifdef HAVE_IBUS
   IBusEngineDesc *engine_desc;
 #endif
@@ -41,7 +40,7 @@ cc_input_source_ibus_get_label (CcInputSource *source)
     return g_strdup (engine_get_display_name (self->engine_desc));
   else
 #endif
-    return g_strdup (self->engine_name);
+  return g_strdup (self->engine_name);
 }
 
 static gboolean
@@ -63,7 +62,7 @@ cc_input_source_ibus_get_layout (CcInputSource *source)
     return ibus_engine_desc_get_layout (self->engine_desc);
   else
 #endif
-    return NULL;
+  return NULL;
 }
 
 static const gchar *
@@ -75,7 +74,7 @@ cc_input_source_ibus_get_layout_variant (CcInputSource *source)
     return ibus_engine_desc_get_layout_variant (self->engine_desc);
   else
 #endif
-    return NULL;
+  return NULL;
 }
 
 static void
@@ -143,7 +142,7 @@ cc_input_source_ibus_get_engine_name (CcInputSourceIBus *source)
 GDesktopAppInfo *
 cc_input_source_ibus_get_app_info (CcInputSourceIBus *source)
 {
-  g_auto(GStrv) tokens = NULL;
+  g_auto (GStrv) tokens = NULL;
   g_autofree gchar *desktop_file_name = NULL;
 
   g_return_val_if_fail (CC_IS_INPUT_SOURCE_IBUS (source), NULL);

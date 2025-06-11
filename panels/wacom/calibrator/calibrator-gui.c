@@ -31,27 +31,26 @@
 #include "calibrator-gui.h"
 #include "cc-clock.h"
 
-struct _CcCalibArea
-{
+struct _CcCalibArea {
   GtkWindow parent_instance;
 
   CcCalibrator *calibrator;
-  XYinfo        axis;
-  gboolean      swap;
-  gboolean      success;
-  GsdDevice    *device;
+  XYinfo axis;
+  gboolean swap;
+  gboolean success;
+  GsdDevice *device;
 
-  GtkWidget  *error_revealer;
-  GtkWidget  *title_revealer;
-  GtkWidget  *subtitle_revealer;
-  GtkWidget  *clock;
-  GtkWidget  *target1, *target2, *target3, *target4;
-  GtkWidget  *stack;
-  GtkWidget  *success_page;
+  GtkWidget *error_revealer;
+  GtkWidget *title_revealer;
+  GtkWidget *subtitle_revealer;
+  GtkWidget *clock;
+  GtkWidget *target1, *target2, *target3, *target4;
+  GtkWidget *stack;
+  GtkWidget *success_page;
   GtkCssProvider *style_provider;
 
   FinishCallback callback;
-  gpointer       user_data;
+  gpointer user_data;
 };
 
 G_DEFINE_TYPE (CcCalibArea, cc_calib_area, GTK_TYPE_WINDOW)
@@ -94,17 +93,14 @@ set_calibration_status (CcCalibArea *area)
 {
   area->success = cc_calibrator_finish (area->calibrator, &area->axis, &area->swap);
 
-  if (area->success)
-    {
-      set_success (area);
-      g_timeout_add (END_TIME,
-                     (GSourceFunc) cc_calib_area_finish_idle_cb,
-                     area);
-    }
-  else
-    {
-      g_idle_add ((GSourceFunc) cc_calib_area_finish_idle_cb, area);
-    }
+  if (area->success) {
+    set_success (area);
+    g_timeout_add (END_TIME,
+                   (GSourceFunc)cc_calib_area_finish_idle_cb,
+                   area);
+  } else {
+    g_idle_add ((GSourceFunc)cc_calib_area_finish_idle_cb, area);
+  }
 }
 
 static void
@@ -161,38 +157,36 @@ on_gesture_press (CcCalibArea     *area,
   device = gsd_device_manager_lookup_gdk_device (manager, source);
 
   /* Check matching device if a device was provided */
-  if (area->device && area->device != device)
-    {
-      g_debug ("Ignoring input from device %s",
-	       gdk_device_get_name (source));
-      return;
-    }
+  if (area->device && area->device != device) {
+    g_debug ("Ignoring input from device %s",
+             gdk_device_get_name (source));
+    return;
+  }
 
   /* Reset the clock */
   cc_clock_set_duration (CC_CLOCK (area->clock), MAX_TIME);
 
   /* Handle click */
-  success = cc_calibrator_add_click (area->calibrator, (int) x, (int) y);
+  success = cc_calibrator_add_click (area->calibrator, (int)x, (int)y);
   if (!success)
     show_error_message (area);
   else
     hide_error_message (area);
 
-  state = cc_calibrator_get_state (area->calibrator) ;
-  if (state == CC_CALIBRATOR_STATE_COMPLETE)
-    {
-      set_calibration_status (area);
-      return;
-    }
+  state = cc_calibrator_get_state (area->calibrator);
+  if (state == CC_CALIBRATOR_STATE_COMPLETE) {
+    set_calibration_status (area);
+    return;
+  }
 
   set_active_target (area, state);
 }
 
 static gboolean
-on_key_release (CcCalibArea           *area,
-		guint                  keyval,
-		guint                  keycode,
-		GdkModifierType        state)
+on_key_release (CcCalibArea     *area,
+                guint            keyval,
+                guint            keycode,
+                GdkModifierType  state)
 {
   if (area->success || keyval != GDK_KEY_Escape)
     return GDK_EVENT_PROPAGATE;
@@ -214,9 +208,9 @@ on_title_revealed (CcCalibArea *area)
 }
 
 static void
-on_fullscreen (GtkWindow    *window,
-               GParamSpec   *pspec,
-               CcCalibArea  *area)
+on_fullscreen (GtkWindow   *window,
+               GParamSpec  *pspec,
+               CcCalibArea *area)
 {
   if (!gtk_window_is_fullscreen (window))
     return;
@@ -251,7 +245,7 @@ cc_calib_area_size_allocate (GtkWidget *widget,
 
   cc_calibrator_update_geometry (calib_area->calibrator, width, height);
   if (cc_calibrator_get_state (calib_area->calibrator) == CC_CALIBRATOR_STATE_UPPER_LEFT)
-      set_active_target (calib_area, CC_CALIBRATOR_STATE_UPPER_LEFT);
+    set_active_target (calib_area, CC_CALIBRATOR_STATE_UPPER_LEFT);
 
   GTK_WIDGET_CLASS (cc_calib_area_parent_class)->size_allocate (widget,
                                                                 width,
@@ -363,7 +357,7 @@ cc_calib_area_new (GdkDisplay     *display,
   else
     gtk_window_fullscreen (GTK_WINDOW (calib_area));
 
-  gtk_window_present(GTK_WINDOW (calib_area));
+  gtk_window_present (GTK_WINDOW (calib_area));
 
   return calib_area;
 }
@@ -402,7 +396,7 @@ cc_calib_area_get_axis (CcCalibArea *area,
   g_return_if_fail (area != NULL);
 
   *new_axis = area->axis;
-  *swap_xy  = area->swap;
+  *swap_xy = area->swap;
 }
 
 void

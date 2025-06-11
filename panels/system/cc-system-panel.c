@@ -35,9 +35,8 @@
 #include "secure-shell/cc-secure-shell-page.h"
 #include "users/cc-users-page.h"
 
-struct _CcSystemPanel
-{
-  CcPanel    parent_instance;
+struct _CcSystemPanel {
+  CcPanel parent_instance;
 
   AdwActionRow *about_row;
   AdwActionRow *datetime_row;
@@ -54,10 +53,10 @@ CC_PANEL_REGISTER (CcSystemPanel, cc_system_panel)
 static gboolean
 gnome_software_allows_updates (void)
 {
-  const gchar *schema_id  = "org.gnome.software";
+  const gchar *schema_id = "org.gnome.software";
   GSettingsSchemaSource *source;
-  g_autoptr(GSettingsSchema) schema = NULL;
-  g_autoptr(GSettings) settings = NULL;
+  g_autoptr (GSettingsSchema) schema = NULL;
+  g_autoptr (GSettings) settings = NULL;
 
   source = g_settings_schema_source_get_default ();
 
@@ -97,21 +96,18 @@ show_software_updates_group (CcSystemPanel *self)
 static void
 cc_system_page_open_software_update (CcSystemPanel *self)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   gboolean ret;
   char *argv[3];
 
-  if (gnome_software_exists ())
-    {
-      argv[0] = "gnome-software";
-      argv[1] = "--mode=updates";
-      argv[2] = NULL;
-    }
-  else
-    {
-      argv[0] = "gpk-update-viewer";
-      argv[1] = NULL;
-    }
+  if (gnome_software_exists ()) {
+    argv[0] = "gnome-software";
+    argv[1] = "--mode=updates";
+    argv[2] = NULL;
+  } else {
+    argv[0] = "gpk-update-viewer";
+    argv[1] = NULL;
+  }
 
   ret = g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
   if (!ret)
@@ -121,12 +117,11 @@ cc_system_page_open_software_update (CcSystemPanel *self)
 static void
 on_secure_shell_row_clicked (CcSystemPanel *self)
 {
-  if (self->secure_shell_dialog == NULL)
-    {
-      self->secure_shell_dialog = g_object_new (CC_TYPE_SECURE_SHELL_PAGE, NULL);
-      g_object_add_weak_pointer (G_OBJECT (self->secure_shell_dialog),
-                                 (gpointer *) &self->secure_shell_dialog);
-    }
+  if (self->secure_shell_dialog == NULL) {
+    self->secure_shell_dialog = g_object_new (CC_TYPE_SECURE_SHELL_PAGE, NULL);
+    g_object_add_weak_pointer (G_OBJECT (self->secure_shell_dialog),
+                               (gpointer *)&self->secure_shell_dialog);
+  }
 
   adw_dialog_present (ADW_DIALOG (self->secure_shell_dialog), GTK_WIDGET (self));
 }
@@ -168,7 +163,7 @@ cc_system_panel_init (CcSystemPanel *self)
   service_state = cc_get_service_state (REMOTE_DESKTOP_SERVICE, G_BUS_TYPE_SYSTEM);
   /* Hide the remote-desktop page if the g-r-d service is either "masked", "static", or "not-found". */
   gtk_widget_set_visible (GTK_WIDGET (self->remote_desktop_row), service_state == CC_SERVICE_STATE_ENABLED ||
-                                                                 service_state == CC_SERVICE_STATE_DISABLED);
+                          service_state == CC_SERVICE_STATE_DISABLED);
   gtk_widget_set_visible (GTK_WIDGET (self->software_updates_group), show_software_updates_group (self));
 
   cc_panel_add_static_subpage (CC_PANEL (self), "about", CC_TYPE_ABOUT_PAGE);

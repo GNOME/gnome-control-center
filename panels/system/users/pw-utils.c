@@ -32,116 +32,116 @@
 static pwquality_settings_t *
 get_pwq (void)
 {
-        g_autoptr(GObject) wrapper = NULL;
-        pwquality_settings_t *settings = NULL;
+  g_autoptr (GObject) wrapper = NULL;
+  pwquality_settings_t *settings = NULL;
 
-        if (cc_object_storage_has_object (CC_OBJECT_PWQ_SETTINGS)) {
-                wrapper = cc_object_storage_get_object (CC_OBJECT_PWQ_SETTINGS);
-                settings = g_object_get_data (wrapper, CC_OBJECT_PWQ_SETTINGS);
-        } else {
-                gchar *err = NULL;
-                gint rv = 0;
+  if (cc_object_storage_has_object (CC_OBJECT_PWQ_SETTINGS)) {
+    wrapper = cc_object_storage_get_object (CC_OBJECT_PWQ_SETTINGS);
+    settings = g_object_get_data (wrapper, CC_OBJECT_PWQ_SETTINGS);
+  } else {
+    gchar *err = NULL;
+    gint rv = 0;
 
-                settings = pwquality_default_settings ();
-                pwquality_set_int_value (settings, PWQ_SETTING_MAX_SEQUENCE, 4);
+    settings = pwquality_default_settings ();
+    pwquality_set_int_value (settings, PWQ_SETTING_MAX_SEQUENCE, 4);
 
-                rv = pwquality_read_config (settings, NULL, (gpointer)&err);
-                if (rv < 0) {
-                        g_warning ("failed to read pwquality configuration: %s\n",
-                                   pwquality_strerror (NULL, 0, rv, err));
-                        pwquality_free_settings (settings);
+    rv = pwquality_read_config (settings, NULL, (gpointer) & err);
+    if (rv < 0) {
+      g_warning ("failed to read pwquality configuration: %s\n",
+                 pwquality_strerror (NULL, 0, rv, err));
+      pwquality_free_settings (settings);
 
-                        /* Load just default settings in case of failure. */
-                        settings = pwquality_default_settings ();
-                        pwquality_set_int_value (settings, PWQ_SETTING_MAX_SEQUENCE, 4);
-                }
+      /* Load just default settings in case of failure. */
+      settings = pwquality_default_settings ();
+      pwquality_set_int_value (settings, PWQ_SETTING_MAX_SEQUENCE, 4);
+    }
 
-                wrapper = g_object_new (G_TYPE_OBJECT, NULL);
-                g_object_set_data_full (wrapper, CC_OBJECT_PWQ_SETTINGS, settings,
-                                        (GDestroyNotify) pwquality_free_settings);
-                cc_object_storage_add_object (CC_OBJECT_PWQ_SETTINGS, wrapper);
-        }
+    wrapper = g_object_new (G_TYPE_OBJECT, NULL);
+    g_object_set_data_full (wrapper, CC_OBJECT_PWQ_SETTINGS, settings,
+                            (GDestroyNotify)pwquality_free_settings);
+    cc_object_storage_add_object (CC_OBJECT_PWQ_SETTINGS, wrapper);
+  }
 
-        return settings;
+  return settings;
 }
 
 gint
 pw_min_length (void)
 {
-        gint value = 0;
-        gint rv;
+  gint value = 0;
+  gint rv;
 
-        rv = pwquality_get_int_value (get_pwq (), PWQ_SETTING_MIN_LENGTH, &value);
-        if (rv < 0) {
-                g_warning ("Failed to read pwquality setting: %s\n",
-                           pwquality_strerror (NULL, 0, rv, NULL));
-        }
+  rv = pwquality_get_int_value (get_pwq (), PWQ_SETTING_MIN_LENGTH, &value);
+  if (rv < 0) {
+    g_warning ("Failed to read pwquality setting: %s\n",
+               pwquality_strerror (NULL, 0, rv, NULL));
+  }
 
-        return value;
+  return value;
 }
 
 gchar *
 pw_generate (void)
 {
-        gchar *res;
-        gint rv;
+  gchar *res;
+  gint rv;
 
-        rv = pwquality_generate (get_pwq (), 0, &res);
+  rv = pwquality_generate (get_pwq (), 0, &res);
 
-        if (rv < 0) {
-                g_warning ("Password generation failed: %s\n",
-                           pwquality_strerror (NULL, 0, rv, NULL));
-                return NULL;
-        }
+  if (rv < 0) {
+    g_warning ("Password generation failed: %s\n",
+               pwquality_strerror (NULL, 0, rv, NULL));
+    return NULL;
+  }
 
-        return res;
+  return res;
 }
 
 static const gchar *
 pw_error_hint (gint error)
 {
-        switch (error) {
-        case PWQ_ERROR_SAME_PASSWORD:
-                return C_("Password hint", "The new password needs to be different from the old one");
-        case PWQ_ERROR_CASE_CHANGES_ONLY:
-                return C_("Password hint", "Try changing some letters and numbers");
-        case PWQ_ERROR_TOO_SIMILAR:
-                return C_("Password hint", "Try changing the password a bit more");
-        case PWQ_ERROR_USER_CHECK:
-                return C_("Password hint", "A password without your user name would be stronger");
-        case PWQ_ERROR_GECOS_CHECK:
-                return C_("Password hint", "Try to avoid using your name in the password");
-        case PWQ_ERROR_BAD_WORDS:
-                return C_("Password hint", "Try to avoid some of the words included in the password");
-        case PWQ_ERROR_ROTATED:
-                return C_("Password hint", "Try changing the password a bit more");
-        case PWQ_ERROR_CRACKLIB_CHECK:
-                return C_("Password hint", "Avoid common words");
-        case PWQ_ERROR_PALINDROME:
-                return C_("Password hint", "Try to avoid reordering existing words");
-        case PWQ_ERROR_MIN_DIGITS:
-                return C_("Password hint", "Try to use more numbers");
-        case PWQ_ERROR_MIN_UPPERS:
-                return C_("Password hint", "Try to use more uppercase letters");
-        case PWQ_ERROR_MIN_LOWERS:
-                return C_("Password hint", "Try to use more lowercase letters");
-        case PWQ_ERROR_MIN_OTHERS:
-                return C_("Password hint", "Try to use more special characters, like punctuation");
-        case PWQ_ERROR_MIN_CLASSES:
-                return C_("Password hint", "Try to use a mixture of letters, numbers and punctuation");
-        case PWQ_ERROR_MAX_CONSECUTIVE:
-                return C_("Password hint", "Try to avoid repeating the same character");
-        case PWQ_ERROR_MAX_CLASS_REPEAT:
-                return C_("Password hint", "Try to avoid repeating the same type of character: you need to mix up letters, numbers and punctuation");
-        case PWQ_ERROR_MAX_SEQUENCE:
-                return C_("Password hint", "Try to avoid sequences like 1234 or abcd");
-        case PWQ_ERROR_MIN_LENGTH:
-                return C_("Password hint", "Password needs to be longer");
-        case PWQ_ERROR_EMPTY_PASSWORD:
-                return C_("Password hint", "Mix uppercase and lowercase and try to use a number or two");
-        default:
-                return C_("Password hint", "Valid password. Try adding more letters, numbers and punctuation");
-        }
+  switch (error) {
+    case PWQ_ERROR_SAME_PASSWORD:
+      return C_("Password hint", "The new password needs to be different from the old one");
+    case PWQ_ERROR_CASE_CHANGES_ONLY:
+      return C_("Password hint", "Try changing some letters and numbers");
+    case PWQ_ERROR_TOO_SIMILAR:
+      return C_("Password hint", "Try changing the password a bit more");
+    case PWQ_ERROR_USER_CHECK:
+      return C_("Password hint", "A password without your user name would be stronger");
+    case PWQ_ERROR_GECOS_CHECK:
+      return C_("Password hint", "Try to avoid using your name in the password");
+    case PWQ_ERROR_BAD_WORDS:
+      return C_("Password hint", "Try to avoid some of the words included in the password");
+    case PWQ_ERROR_ROTATED:
+      return C_("Password hint", "Try changing the password a bit more");
+    case PWQ_ERROR_CRACKLIB_CHECK:
+      return C_("Password hint", "Avoid common words");
+    case PWQ_ERROR_PALINDROME:
+      return C_("Password hint", "Try to avoid reordering existing words");
+    case PWQ_ERROR_MIN_DIGITS:
+      return C_("Password hint", "Try to use more numbers");
+    case PWQ_ERROR_MIN_UPPERS:
+      return C_("Password hint", "Try to use more uppercase letters");
+    case PWQ_ERROR_MIN_LOWERS:
+      return C_("Password hint", "Try to use more lowercase letters");
+    case PWQ_ERROR_MIN_OTHERS:
+      return C_("Password hint", "Try to use more special characters, like punctuation");
+    case PWQ_ERROR_MIN_CLASSES:
+      return C_("Password hint", "Try to use a mixture of letters, numbers and punctuation");
+    case PWQ_ERROR_MAX_CONSECUTIVE:
+      return C_("Password hint", "Try to avoid repeating the same character");
+    case PWQ_ERROR_MAX_CLASS_REPEAT:
+      return C_("Password hint", "Try to avoid repeating the same type of character: you need to mix up letters, numbers and punctuation");
+    case PWQ_ERROR_MAX_SEQUENCE:
+      return C_("Password hint", "Try to avoid sequences like 1234 or abcd");
+    case PWQ_ERROR_MIN_LENGTH:
+      return C_("Password hint", "Password needs to be longer");
+    case PWQ_ERROR_EMPTY_PASSWORD:
+      return C_("Password hint", "Mix uppercase and lowercase and try to use a number or two");
+    default:
+      return C_("Password hint", "Valid password. Try adding more letters, numbers and punctuation");
+  }
 }
 
 gdouble
@@ -152,48 +152,47 @@ pw_strength (const gchar  *password,
              gint         *strength_level,
              gboolean     *enforcing)
 {
-        gint rv, level, length = 0;
-        gdouble strength = 0.0;
+  gint rv, level, length = 0;
+  gdouble strength = 0.0;
 
-        rv = pwquality_check (get_pwq (),
-                              password, old_password, username,
-                              NULL);
+  rv = pwquality_check (get_pwq (),
+                        password, old_password, username,
+                        NULL);
 
-        if (password != NULL)
-                length = strlen (password);
+  if (password != NULL)
+    length = strlen (password);
 
-        strength = CLAMP (0.01 * rv, 0.0, 1.0);
-        if (rv < 0) {
-                level = (length > 0) ? 1 : 0;
-        }
-        else if (strength < 0.50) {
-                level = 2;
-        } else if (strength < 0.75) {
-                level = 3;
-        } else if (strength < 0.90) {
-                level = 4;
-        } else {
-                level = 5;
-        }
+  strength = CLAMP (0.01 * rv, 0.0, 1.0);
+  if (rv < 0) {
+    level = (length > 0) ? 1 : 0;
+  } else if (strength < 0.50) {
+    level = 2;
+  } else if (strength < 0.75) {
+    level = 3;
+  } else if (strength < 0.90) {
+    level = 4;
+  } else {
+    level = 5;
+  }
 
-        if (hint) {
-                if (length && length < pw_min_length())
-                        *hint = pw_error_hint (PWQ_ERROR_MIN_LENGTH);
-                else if (level == 5)
-                        *hint = _("Great password!");
-                else
-                        *hint = pw_error_hint (rv);
-        }
+  if (hint) {
+    if (length && length < pw_min_length ())
+      *hint = pw_error_hint (PWQ_ERROR_MIN_LENGTH);
+    else if (level == 5)
+      *hint = _("Great password!");
+    else
+      *hint = pw_error_hint (rv);
+  }
 
-        if (strength_level)
-                *strength_level = level;
+  if (strength_level)
+    *strength_level = level;
 
-        if (enforcing) {
-                gint enforcing_val;
+  if (enforcing) {
+    gint enforcing_val;
 
-                pwquality_get_int_value (get_pwq(), PWQ_SETTING_ENFORCING, &enforcing_val);
-                *enforcing = enforcing_val != 0;
-        }
+    pwquality_get_int_value (get_pwq (), PWQ_SETTING_ENFORCING, &enforcing_val);
+    *enforcing = enforcing_val != 0;
+  }
 
-        return strength;
+  return strength;
 }

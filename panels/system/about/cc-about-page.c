@@ -28,19 +28,18 @@
 #include <config.h>
 #include <glib/gi18n.h>
 
-struct _CcAboutPage
-{
+struct _CcAboutPage {
   AdwNavigationPage parent_instance;
 
-  AdwActionRow    *disk_row;
-  AdwActionRow    *hardware_model_row;
-  AdwActionRow    *memory_row;
-  GtkPicture      *os_logo;
-  AdwActionRow    *os_name_row;
-  AdwActionRow    *processor_row;
+  AdwActionRow *disk_row;
+  AdwActionRow *hardware_model_row;
+  AdwActionRow *memory_row;
+  GtkPicture *os_logo;
+  AdwActionRow *os_name_row;
+  AdwActionRow *processor_row;
 
-  AdwDialog       *system_details_window;
-  guint            create_system_details_id;
+  AdwDialog *system_details_window;
+  guint create_system_details_id;
 };
 
 G_DEFINE_TYPE (CcAboutPage, cc_about_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -80,11 +79,10 @@ about_page_setup_overview (CcAboutPage *self)
 static gboolean
 cc_about_page_create_system_details (CcAboutPage *self)
 {
-  if (!self->system_details_window)
-    {
-      self->system_details_window = ADW_DIALOG (cc_system_details_window_new ());
-      g_object_ref_sink (self->system_details_window);
-    }
+  if (!self->system_details_window) {
+    self->system_details_window = ADW_DIALOG (cc_system_details_window_new ());
+    g_object_ref_sink (self->system_details_window);
+  }
 
   g_clear_handle_id (&self->create_system_details_id, g_source_remove);
 
@@ -114,20 +112,19 @@ setup_os_logo (CcAboutPage *self)
 {
 #ifdef DISTRIBUTOR_LOGO
 #ifdef DARK_MODE_DISTRIBUTOR_LOGO
-  if (use_dark_theme (self))
-    {
-      gtk_picture_set_filename (self->os_logo, DARK_MODE_DISTRIBUTOR_LOGO);
-      return;
-    }
+  if (use_dark_theme (self)) {
+    gtk_picture_set_filename (self->os_logo, DARK_MODE_DISTRIBUTOR_LOGO);
+    return;
+  }
 #endif
   gtk_picture_set_filename (self->os_logo, DISTRIBUTOR_LOGO);
   return;
 #else
   GtkIconTheme *icon_theme;
   g_autofree char *logo_name = g_get_os_info ("LOGO");
-  g_autoptr(GtkIconPaintable) icon_paintable = NULL;
-  g_autoptr(GPtrArray) array = NULL;
-  g_autoptr(GIcon) icon = NULL;
+  g_autoptr (GtkIconPaintable) icon_paintable = NULL;
+  g_autoptr (GPtrArray) array = NULL;
+  g_autoptr (GIcon) icon = NULL;
   gboolean dark;
 
   dark = use_dark_theme (self);
@@ -136,13 +133,13 @@ setup_os_logo (CcAboutPage *self)
 
   array = g_ptr_array_new_with_free_func (g_free);
   if (dark)
-    g_ptr_array_add (array, (gpointer) g_strdup_printf ("%s-text-dark", logo_name));
-  g_ptr_array_add (array, (gpointer) g_strdup_printf ("%s-text", logo_name));
+    g_ptr_array_add (array, (gpointer)g_strdup_printf ("%s-text-dark", logo_name));
+  g_ptr_array_add (array, (gpointer)g_strdup_printf ("%s-text", logo_name));
   if (dark)
-    g_ptr_array_add (array, (gpointer) g_strdup_printf ("%s-dark", logo_name));
-  g_ptr_array_add (array, (gpointer) g_strdup_printf ("%s", logo_name));
+    g_ptr_array_add (array, (gpointer)g_strdup_printf ("%s-dark", logo_name));
+  g_ptr_array_add (array, (gpointer)g_strdup_printf ("%s", logo_name));
 
-  icon = g_themed_icon_new_from_names ((char **) array->pdata, array->len);
+  icon = g_themed_icon_new_from_names ((char **)array->pdata, array->len);
   icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
   icon_paintable = gtk_icon_theme_lookup_by_gicon (icon_theme, icon,
                                                    192,

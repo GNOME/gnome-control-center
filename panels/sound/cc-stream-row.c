@@ -23,18 +23,17 @@
 
 #define SPEECH_DISPATCHER_PREFIX "speech-dispatcher-"
 
-struct _CcStreamRow
-{
-  GtkListBoxRow   parent_instance;
+struct _CcStreamRow {
+  GtkListBoxRow parent_instance;
 
-  GtkBox         *label_box;
-  GtkLabel       *name_label;
-  GtkImage       *icon_image;
+  GtkBox *label_box;
+  GtkLabel *name_label;
+  GtkImage *icon_image;
   CcVolumeSlider *volume_slider;
-  CcLevelBar     *level_bar;
+  CcLevelBar *level_bar;
 
   GvcMixerStream *stream;
-  guint           id;
+  guint id;
 };
 
 G_DEFINE_TYPE (CcStreamRow, cc_stream_row, GTK_TYPE_LIST_BOX_ROW)
@@ -77,24 +76,22 @@ cc_stream_row_init (CcStreamRow *self)
 static GIcon *
 get_app_info_icon_from_stream_name (const gchar *stream_name)
 {
-  g_autolist(GObject) infos = NULL;
+  g_autolist (GObject) infos = NULL;
   GList *l;
 
   infos = g_app_info_get_all ();
-  for (l = infos; l; l = l->next)
-    {
-      GAppInfo *info = l->data;
+  for (l = infos; l; l = l->next) {
+    GAppInfo *info = l->data;
 
-      if (g_str_equal (g_app_info_get_display_name (info), stream_name) ||
-          g_str_equal (g_app_info_get_name (info), stream_name))
-        {
-          GIcon *icon = g_app_info_get_icon (info);
-          if (icon)
-            g_object_ref (icon);
+    if (g_str_equal (g_app_info_get_display_name (info), stream_name) ||
+        g_str_equal (g_app_info_get_name (info), stream_name)) {
+      GIcon *icon = g_app_info_get_icon (info);
+      if (icon)
+        g_object_ref (icon);
 
-          return icon;
-        }
+      return icon;
     }
+  }
 
   return NULL;
 }
@@ -102,7 +99,7 @@ get_app_info_icon_from_stream_name (const gchar *stream_name)
 static GIcon *
 get_icon_for_stream (GvcMixerStream *stream)
 {
-  GIcon* icon;
+  GIcon *icon;
   const gchar *icon_name;
   const gchar *stream_name;
 
@@ -130,7 +127,7 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
                    GvcMixerControl *mixer_control)
 {
   CcStreamRow *self;
-  g_autoptr(GIcon) gicon = NULL;
+  g_autoptr (GIcon) gicon = NULL;
 
   self = g_object_new (CC_TYPE_STREAM_ROW, NULL);
   self->stream = g_object_ref (stream);

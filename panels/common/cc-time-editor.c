@@ -182,4 +182,3 @@ cc_time_editor_get_minute (CcTimeEditor *self)
 
   return cc_timelike_editor_get_minute (self->editor);
 }
-

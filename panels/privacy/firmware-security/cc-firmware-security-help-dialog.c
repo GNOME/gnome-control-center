@@ -26,9 +26,8 @@
 
 #include "cc-firmware-security-help-dialog.h"
 
-struct _CcFirmwareSecurityHelpDialog
-{
-  AdwDialog  parent;
+struct _CcFirmwareSecurityHelpDialog {
+  AdwDialog parent;
 };
 
 G_DEFINE_TYPE (CcFirmwareSecurityHelpDialog, cc_firmware_security_help_dialog, ADW_TYPE_DIALOG)

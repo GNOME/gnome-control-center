@@ -20,13 +20,12 @@
 
 #define PROFILE_KEY "profile-string"
 
-struct _CcProfileComboRow
-{
-  AdwComboRow       parent_instance;
+struct _CcProfileComboRow {
+  AdwComboRow parent_instance;
 
-  GListStore       *profile_list;
+  GListStore *profile_list;
 
-  GvcMixerControl  *mixer_control;
+  GvcMixerControl *mixer_control;
   GvcMixerUIDevice *device;
 };
 
@@ -106,25 +105,24 @@ cc_profile_combo_row_set_device (CcProfileComboRow *self,
 
   self->device = g_object_ref (device);
   profiles = gvc_mixer_ui_device_get_profiles (device);
-  for (link = profiles; link; link = link->next)
-    {
-      GvcMixerCardProfile *profile = link->data;
-      g_autoptr(GtkStringObject) profile_object = NULL;
+  for (link = profiles; link; link = link->next) {
+    GvcMixerCardProfile *profile = link->data;
+    g_autoptr (GtkStringObject) profile_object = NULL;
 
-      profile_object = gtk_string_object_new (profile->human_profile);
-      g_object_set_data_full (G_OBJECT (profile_object), PROFILE_KEY,
-                              g_strdup (profile->profile), g_free);
+    profile_object = gtk_string_object_new (profile->human_profile);
+    g_object_set_data_full (G_OBJECT (profile_object), PROFILE_KEY,
+                            g_strdup (profile->profile), g_free);
 
-      g_signal_handlers_block_by_func(self, profile_changed_cb, self);
+    g_signal_handlers_block_by_func (self, profile_changed_cb, self);
 
-      g_list_store_append (self->profile_list, profile_object);
+    g_list_store_append (self->profile_list, profile_object);
 
-      if (g_strcmp0 (gvc_mixer_ui_device_get_active_profile (device), profile->profile) == 0)
-        adw_combo_row_set_selected (ADW_COMBO_ROW (self),
-                                    g_list_model_get_n_items (G_LIST_MODEL (self->profile_list)));
+    if (g_strcmp0 (gvc_mixer_ui_device_get_active_profile (device), profile->profile) == 0)
+      adw_combo_row_set_selected (ADW_COMBO_ROW (self),
+                                  g_list_model_get_n_items (G_LIST_MODEL (self->profile_list)));
 
-      g_signal_handlers_unblock_by_func(self, profile_changed_cb, self);
-    }
+    g_signal_handlers_unblock_by_func (self, profile_changed_cb, self);
+  }
 }
 
 gint

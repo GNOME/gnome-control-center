@@ -21,14 +21,13 @@
 #include "cc-sound-resources.h"
 #include "cc-speaker-test-button.h"
 
-struct _CcSpeakerTestButton
-{
-  GtkButton             parent_instance;
+struct _CcSpeakerTestButton {
+  GtkButton parent_instance;
 
-  GCancellable         *cancellable;
-  GSoundContext        *context;
+  GCancellable *cancellable;
+  GSoundContext *context;
   pa_channel_position_t position;
-  gint                  event_index;
+  gint event_index;
 };
 
 G_DEFINE_TYPE (CcSpeakerTestButton, cc_speaker_test_button, GTK_TYPE_BUTTON)
@@ -41,33 +40,32 @@ play_sound (CcSpeakerTestButton *self);
 static const gchar *
 get_icon_name (CcSpeakerTestButton *self)
 {
-  switch (self->position)
-    {
-  case PA_CHANNEL_POSITION_FRONT_LEFT:
-    return "audio-speaker-left";
-  case PA_CHANNEL_POSITION_FRONT_RIGHT:
-    return "audio-speaker-right";
-  case PA_CHANNEL_POSITION_FRONT_CENTER:
-  case PA_CHANNEL_POSITION_MONO:
-    return "audio-speaker-center";
-  case PA_CHANNEL_POSITION_REAR_LEFT:
-    return "audio-speaker-left-back";
-  case PA_CHANNEL_POSITION_REAR_RIGHT:
-    return "audio-speaker-right-back";
-  case PA_CHANNEL_POSITION_REAR_CENTER:
-    return "audio-speaker-center-back";
-  case PA_CHANNEL_POSITION_LFE:
-    return "audio-subwoofer";
-  case PA_CHANNEL_POSITION_SIDE_LEFT:
-    return "audio-speaker-left-side";
-  case PA_CHANNEL_POSITION_SIDE_RIGHT:
-    return "audio-speaker-right-side";
-  case PA_CHANNEL_POSITION_FRONT_LEFT_OF_CENTER:
-    return "audio-speaker-front-left-of-center";
-  case PA_CHANNEL_POSITION_FRONT_RIGHT_OF_CENTER:
-    return "audio-speaker-front-right-of-center";
-  default:
-    return "audio-speakers";
+  switch (self->position) {
+    case PA_CHANNEL_POSITION_FRONT_LEFT:
+      return "audio-speaker-left";
+    case PA_CHANNEL_POSITION_FRONT_RIGHT:
+      return "audio-speaker-right";
+    case PA_CHANNEL_POSITION_FRONT_CENTER:
+    case PA_CHANNEL_POSITION_MONO:
+      return "audio-speaker-center";
+    case PA_CHANNEL_POSITION_REAR_LEFT:
+      return "audio-speaker-left-back";
+    case PA_CHANNEL_POSITION_REAR_RIGHT:
+      return "audio-speaker-right-back";
+    case PA_CHANNEL_POSITION_REAR_CENTER:
+      return "audio-speaker-center-back";
+    case PA_CHANNEL_POSITION_LFE:
+      return "audio-subwoofer";
+    case PA_CHANNEL_POSITION_SIDE_LEFT:
+      return "audio-speaker-left-side";
+    case PA_CHANNEL_POSITION_SIDE_RIGHT:
+      return "audio-speaker-right-side";
+    case PA_CHANNEL_POSITION_FRONT_LEFT_OF_CENTER:
+      return "audio-speaker-front-left-of-center";
+    case PA_CHANNEL_POSITION_FRONT_RIGHT_OF_CENTER:
+      return "audio-speaker-front-right-of-center";
+    default:
+      return "audio-speakers";
   }
 }
 
@@ -80,34 +78,33 @@ update_icon (CcSpeakerTestButton *self)
 static GStrv
 get_sound_events (CcSpeakerTestButton *self)
 {
-  switch (self->position)
-    {
-  case PA_CHANNEL_POSITION_FRONT_LEFT:
-    return g_strsplit ("audio-channel-front-left;audio-test-signal;bell", ";", -1);
-  case PA_CHANNEL_POSITION_FRONT_RIGHT:
-    return g_strsplit ("audio-channel-front-right;audio-test-signal;bell", ";", -1);
-  case PA_CHANNEL_POSITION_FRONT_CENTER:
-    return g_strsplit ("audio-channel-front-center;audio-test-signal;bell", ";", -1);
-  case PA_CHANNEL_POSITION_REAR_LEFT:
-    return g_strsplit ("audio-channel-rear-left;audio-test-signal;bell", ";", -1);
-  case PA_CHANNEL_POSITION_REAR_RIGHT:
-    return g_strsplit ("audio-channel-rear-right;audio-test-signal;bell", ";", -1);
-  case PA_CHANNEL_POSITION_REAR_CENTER:
-    return g_strsplit ("audio-channel-rear-center;audio-test-signal;bell", ";", -1);
-  case PA_CHANNEL_POSITION_LFE:
-    return g_strsplit ("audio-channel-lfe;audio-test-signal;bell", ";", -1);
-  case PA_CHANNEL_POSITION_SIDE_LEFT:
-    return g_strsplit ("audio-channel-side-left;audio-test-signal;bell", ";", -1);
-  case PA_CHANNEL_POSITION_SIDE_RIGHT:
-    return g_strsplit ("audio-channel-side-right;audio-test-signal;bell", ";", -1);
-  case PA_CHANNEL_POSITION_FRONT_LEFT_OF_CENTER:
-    return g_strsplit ("audio-channel-front-left-of-center;audio-test-signal;bell", ";", -1);
-  case PA_CHANNEL_POSITION_FRONT_RIGHT_OF_CENTER:
-    return g_strsplit ("audio-channel-front-right-of-center;audio-test-signal;bell", ";", -1);
-  case PA_CHANNEL_POSITION_MONO:
-    return g_strsplit ("audio-channel-mono;audio-test-signal;bell", ";", -1);
-  default:
-    return g_strsplit ("audio-test-signal;bell", ";", -1);
+  switch (self->position) {
+    case PA_CHANNEL_POSITION_FRONT_LEFT:
+      return g_strsplit ("audio-channel-front-left;audio-test-signal;bell", ";", -1);
+    case PA_CHANNEL_POSITION_FRONT_RIGHT:
+      return g_strsplit ("audio-channel-front-right;audio-test-signal;bell", ";", -1);
+    case PA_CHANNEL_POSITION_FRONT_CENTER:
+      return g_strsplit ("audio-channel-front-center;audio-test-signal;bell", ";", -1);
+    case PA_CHANNEL_POSITION_REAR_LEFT:
+      return g_strsplit ("audio-channel-rear-left;audio-test-signal;bell", ";", -1);
+    case PA_CHANNEL_POSITION_REAR_RIGHT:
+      return g_strsplit ("audio-channel-rear-right;audio-test-signal;bell", ";", -1);
+    case PA_CHANNEL_POSITION_REAR_CENTER:
+      return g_strsplit ("audio-channel-rear-center;audio-test-signal;bell", ";", -1);
+    case PA_CHANNEL_POSITION_LFE:
+      return g_strsplit ("audio-channel-lfe;audio-test-signal;bell", ";", -1);
+    case PA_CHANNEL_POSITION_SIDE_LEFT:
+      return g_strsplit ("audio-channel-side-left;audio-test-signal;bell", ";", -1);
+    case PA_CHANNEL_POSITION_SIDE_RIGHT:
+      return g_strsplit ("audio-channel-side-right;audio-test-signal;bell", ";", -1);
+    case PA_CHANNEL_POSITION_FRONT_LEFT_OF_CENTER:
+      return g_strsplit ("audio-channel-front-left-of-center;audio-test-signal;bell", ";", -1);
+    case PA_CHANNEL_POSITION_FRONT_RIGHT_OF_CENTER:
+      return g_strsplit ("audio-channel-front-right-of-center;audio-test-signal;bell", ";", -1);
+    case PA_CHANNEL_POSITION_MONO:
+      return g_strsplit ("audio-channel-mono;audio-test-signal;bell", ";", -1);
+    default:
+      return g_strsplit ("audio-test-signal;bell", ";", -1);
   }
 }
 
@@ -117,18 +114,17 @@ finish_cb (GObject      *object,
            gpointer      userdata)
 {
   CcSpeakerTestButton *self = userdata;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
-  if (!gsound_context_play_full_finish (GSOUND_CONTEXT (object), result, &error))
-    {
-      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        return;
+  if (!gsound_context_play_full_finish (GSOUND_CONTEXT (object), result, &error)) {
+    if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      return;
 
-      if (play_sound (self))
-        return;
+    if (play_sound (self))
+      return;
 
-      g_warning ("Failed to play sound: %s", error->message);
-    }
+    g_warning ("Failed to play sound: %s", error->message);
+  }
 
   gtk_widget_remove_css_class (GTK_WIDGET (self), "playing");
 }
@@ -136,7 +132,7 @@ finish_cb (GObject      *object,
 static gboolean
 play_sound (CcSpeakerTestButton *self)
 {
-  g_auto(GStrv) events = NULL;
+  g_auto (GStrv) events = NULL;
 
   /* Stop existing sound */
   g_cancellable_cancel (self->cancellable);

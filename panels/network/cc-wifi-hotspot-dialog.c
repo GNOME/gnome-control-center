@@ -37,23 +37,22 @@
  * @short_description: WWAN network type selection dialog
  */
 
-struct _CcWifiHotspotDialog
-{
-  GtkDialog        parent_instance;
+struct _CcWifiHotspotDialog {
+  GtkDialog parent_instance;
 
-  GtkLabel        *connection_label;
-  GtkEntry        *name_entry;
-  GtkLabel        *name_error_label;
-  GtkEntry        *password_entry;
-  GtkLabel        *password_error_label;
-  GtkButton       *ok_button;
+  GtkLabel *connection_label;
+  GtkEntry *name_entry;
+  GtkLabel *name_error_label;
+  GtkEntry *password_entry;
+  GtkLabel *password_error_label;
+  GtkButton *ok_button;
 
-  GCancellable    *cancellable;
+  GCancellable *cancellable;
 
-  NMDeviceWifi    *device;
-  NMConnection    *connection;
-  gchar           *host_name;
-  gboolean         wpa_supported; /* WPA/WPA2 supported */
+  NMDeviceWifi *device;
+  NMConnection *connection;
+  gchar *host_name;
+  gboolean wpa_supported;         /* WPA/WPA2 supported */
 };
 
 G_DEFINE_TYPE (CcWifiHotspotDialog, cc_wifi_hotspot_dialog, GTK_TYPE_DIALOG)
@@ -65,14 +64,13 @@ get_random_wpa_key (void)
   gint i;
 
   key = g_malloc (10 * sizeof (key));
-  for (i = 0; i < 8; i++)
-    {
-      gint c = 0;
-      /* too many non alphanumeric characters are hard to remember for humans */
-      while (!g_ascii_isalnum (c))
-        c = g_random_int_range (33, 126);
+  for (i = 0; i < 8; i++) {
+    gint c = 0;
+    /* too many non alphanumeric characters are hard to remember for humans */
+    while (!g_ascii_isalnum (c))
+      c = g_random_int_range (33, 126);
 
-    key[i] = (gchar) c;
+    key[i] = (gchar)c;
   }
   key[i] = '\0';
 
@@ -89,12 +87,11 @@ get_random_wep_key (void)
   key = g_malloc (12 * sizeof (key));
 
   /* generate a 10-digit hex WEP key */
-  for (i = 0; i < 10; i++)
-    {
-      gint digit;
-      digit = g_random_int_range (0, 16);
-      key[i] = hexdigits[digit];
-    }
+  for (i = 0; i < 10; i++) {
+    gint digit;
+    digit = g_random_int_range (0, 16);
+    key[i] = hexdigits[digit];
+  }
 
   key[i] = '\0';
 
@@ -137,34 +134,32 @@ wifi_hotspot_dialog_update_main_label (CcWifiHotspotDialog *self)
 }
 
 static void
-get_secrets_cb (GObject            *source_object,
-                GAsyncResult       *res,
-                gpointer            data)
+get_secrets_cb (GObject      *source_object,
+                GAsyncResult *res,
+                gpointer      data)
 {
   CcWifiHotspotDialog *self;
-  g_autoptr(GVariant) secrets = NULL;
+  g_autoptr (GVariant) secrets = NULL;
   NMSettingWirelessSecurity *security_setting;
   const gchar *key;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   secrets = nm_remote_connection_get_secrets_finish (NM_REMOTE_CONNECTION (source_object), res, &error);
-  if (!secrets)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Could not get secrets: %s", error->message);
-      return;
-    }
+  if (!secrets) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Could not get secrets: %s", error->message);
+    return;
+  }
 
   self = CC_WIFI_HOTSPOT_DIALOG (data);
 
   nm_connection_update_secrets (self->connection,
                                 NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
                                 secrets, &error);
-  if (error)
-    {
-      g_warning ("Error updating secrets: %s", error->message);
-      return;
-    }
+  if (error) {
+    g_warning ("Error updating secrets: %s", error->message);
+    return;
+  }
 
   security_setting = nm_connection_get_setting_wireless_security (self->connection);
   if (self->wpa_supported)
@@ -245,46 +240,35 @@ hotspot_entry_changed_cb (CcWifiHotspotDialog *self)
   ssid = gtk_editable_get_text (GTK_EDITABLE (self->name_entry));
   password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
 
-  if (!ssid || !*ssid)
-    {
-      ssid_error_label = _("Network name cannot be empty");
-      widget_set_error (GTK_WIDGET (self->name_entry));
-    }
-  else if (strlen (ssid) > 32)
-    {
-      /* SSID length needs to be in the 1-32 byte range */
-      ssid_error_label = _("Network name is too long");
-      widget_set_error (GTK_WIDGET (self->name_entry));
-    }
-  else
-    {
-      valid_ssid = TRUE;
-      ssid_error_label = "";
-      widget_unset_error (GTK_WIDGET (self->name_entry));
-    }
+  if (!ssid || !*ssid) {
+    ssid_error_label = _("Network name cannot be empty");
+    widget_set_error (GTK_WIDGET (self->name_entry));
+  } else if (strlen (ssid) > 32) {
+    /* SSID length needs to be in the 1-32 byte range */
+    ssid_error_label = _("Network name is too long");
+    widget_set_error (GTK_WIDGET (self->name_entry));
+  } else {
+    valid_ssid = TRUE;
+    ssid_error_label = "";
+    widget_unset_error (GTK_WIDGET (self->name_entry));
+  }
 
   valid_password = hotspot_password_is_valid (self, password);
 
-  if (valid_password)
-    {
-      password_error_label = "";
-      widget_unset_error (GTK_WIDGET (self->password_entry));
+  if (valid_password) {
+    password_error_label = "";
+    widget_unset_error (GTK_WIDGET (self->password_entry));
+  } else {
+    if (strlen (password) < 8) {
+      password_error_label = _("Must have a minimum of 8 characters");
+    } else {
+      guint max_chars = self->wpa_supported ? 63 : 16;
+      password_error_label = g_strdup_printf (ngettext ("Must have a maximum of %d character",
+                                                        "Must have a maximum of %d characters", max_chars), max_chars);
     }
-  else
-    {
-      if (strlen (password) < 8)
-        {
-          password_error_label = _("Must have a minimum of 8 characters");
-        }
-      else
-        {
-          guint max_chars = self->wpa_supported ? 63 : 16;
-          password_error_label = g_strdup_printf (ngettext ("Must have a maximum of %d character",
-                                                            "Must have a maximum of %d characters", max_chars), max_chars);
-        }
 
-      widget_set_error (GTK_WIDGET(self->password_entry));
-    }
+    widget_set_error (GTK_WIDGET (self->password_entry));
+  }
 
   gtk_label_set_label (self->name_error_label, ssid_error_label);
   gtk_label_set_label (self->password_error_label, password_error_label);
@@ -311,7 +295,7 @@ static void
 hotspot_update_wireless_settings (CcWifiHotspotDialog *self)
 {
   NMSettingWireless *setting;
-  g_autoptr(GBytes) ssid = NULL;
+  g_autoptr (GBytes) ssid = NULL;
   const gchar *ssid_text;
   NMDeviceWifiCapabilities capabilities;
 
@@ -363,39 +347,33 @@ hotspot_update_wireless_security_settings (CcWifiHotspotDialog *self)
                   "wep-key-type", NM_WEP_KEY_TYPE_KEY,
                   NULL);
 
-  if (!value || !*value)
-    {
-      g_autofree gchar *key = NULL;
+  if (!value || !*value) {
+    g_autofree gchar *key = NULL;
 
-      if (self->wpa_supported)
-        key = get_random_wpa_key ();
-      else
-        key = get_random_wep_key ();
+    if (self->wpa_supported)
+      key = get_random_wpa_key ();
+    else
+      key = get_random_wep_key ();
 
-      g_object_set (setting, key_type, key, NULL);
-    }
-  else
+    g_object_set (setting, key_type, key, NULL);
+  } else
     g_object_set (setting, key_type, value, NULL);
 
-  if (self->wpa_supported)
-    {
-      NMDeviceWifiCapabilities caps;
+  if (self->wpa_supported) {
+    NMDeviceWifiCapabilities caps;
 
-      caps = nm_device_wifi_get_capabilities (self->device);
+    caps = nm_device_wifi_get_capabilities (self->device);
 
-      if (caps & NM_WIFI_DEVICE_CAP_RSN)
-        {
-          nm_setting_wireless_security_add_proto (setting, "rsn");
-          nm_setting_wireless_security_add_pairwise (setting, "ccmp");
-          nm_setting_wireless_security_add_group (setting, "ccmp");
-        }
-      else if (caps & NM_WIFI_DEVICE_CAP_WPA)
-        {
-          nm_setting_wireless_security_add_proto (setting, "wpa");
-          nm_setting_wireless_security_add_pairwise (setting, "tkip");
-          nm_setting_wireless_security_add_group (setting, "tkip");
-        }
+    if (caps & NM_WIFI_DEVICE_CAP_RSN) {
+      nm_setting_wireless_security_add_proto (setting, "rsn");
+      nm_setting_wireless_security_add_pairwise (setting, "ccmp");
+      nm_setting_wireless_security_add_group (setting, "ccmp");
+    } else if (caps & NM_WIFI_DEVICE_CAP_WPA) {
+      nm_setting_wireless_security_add_proto (setting, "wpa");
+      nm_setting_wireless_security_add_pairwise (setting, "tkip");
+      nm_setting_wireless_security_add_group (setting, "tkip");
     }
+  }
 }
 
 static void
@@ -403,7 +381,7 @@ cc_wifi_hotspot_dialog_finalize (GObject *object)
 {
   CcWifiHotspotDialog *self = (CcWifiHotspotDialog *)object;
 
-  g_cancellable_cancel(self->cancellable);
+  g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
   g_clear_pointer (&self->host_name, g_free);
   g_clear_object (&self->device);
@@ -441,23 +419,21 @@ cc_wifi_hotspot_dialog_response (GtkDialog *dialog,
   if (!self->connection)
     self->connection = NM_CONNECTION (nm_simple_connection_new ());
 
-  if (nm_connection_get_setting_connection (self->connection) == NULL)
-    {
-      setting = nm_setting_connection_new ();
-      g_object_set (setting,
-                    "type", "802-11-wireless",
-                    "id", "Hotspot",
-                    "autoconnect", FALSE,
-                    NULL);
-      nm_connection_add_setting (self->connection, setting);
-    }
+  if (nm_connection_get_setting_connection (self->connection) == NULL) {
+    setting = nm_setting_connection_new ();
+    g_object_set (setting,
+                  "type", "802-11-wireless",
+                  "id", "Hotspot",
+                  "autoconnect", FALSE,
+                  NULL);
+    nm_connection_add_setting (self->connection, setting);
+  }
 
-  if (nm_connection_get_setting_ip4_config (self->connection) == NULL)
-    {
-      setting = nm_setting_ip4_config_new ();
-      g_object_set (setting, "method", "shared", NULL);
-      nm_connection_add_setting (self->connection, setting);
-    }
+  if (nm_connection_get_setting_ip4_config (self->connection) == NULL) {
+    setting = nm_setting_ip4_config_new ();
+    g_object_set (setting, "method", "shared", NULL);
+    nm_connection_add_setting (self->connection, setting);
+  }
 
   hotspot_update_wireless_settings (self);
   hotspot_update_wireless_security_settings (self);
@@ -468,7 +444,7 @@ cc_wifi_hotspot_dialog_class_init (CcWifiHotspotDialogClass *klass)
 {
   GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->finalize = cc_wifi_hotspot_dialog_finalize;
 
@@ -527,17 +503,16 @@ cc_wifi_hotspot_dialog_set_device (CcWifiHotspotDialog *self,
 
   g_set_object (&self->device, device);
 
-  if (device)
-    {
-      NMDeviceWifiCapabilities caps;
+  if (device) {
+    NMDeviceWifiCapabilities caps;
 
-      caps = nm_device_wifi_get_capabilities (device);
-      self->wpa_supported = FALSE;
+    caps = nm_device_wifi_get_capabilities (device);
+    self->wpa_supported = FALSE;
 
-      if (caps & NM_WIFI_DEVICE_CAP_AP)
-        if (caps & (NM_WIFI_DEVICE_CAP_RSN | NM_WIFI_DEVICE_CAP_WPA))
-          self->wpa_supported = TRUE;
-    }
+    if (caps & NM_WIFI_DEVICE_CAP_AP)
+      if (caps & (NM_WIFI_DEVICE_CAP_RSN | NM_WIFI_DEVICE_CAP_WPA))
+        self->wpa_supported = TRUE;
+  }
 
   wifi_hotspot_dialog_update_main_label (self);
 }

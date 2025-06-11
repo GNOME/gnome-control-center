@@ -34,26 +34,25 @@
 #include "cc-keyboard-shortcut-row.h"
 #include "cc-keyboard-shortcut-group.h"
 
-struct _CcKeyboardShortcutGroup
-{
-  AdwPreferencesGroup       parent_instance;
+struct _CcKeyboardShortcutGroup {
+  AdwPreferencesGroup parent_instance;
 
-  GtkListBox               *shortcut_list_box;
+  GtkListBox *shortcut_list_box;
 
-  GtkSizeGroup             *accelerator_size_group;
+  GtkSizeGroup *accelerator_size_group;
 
-  GListModel               *shortcut_items;
-  GtkFilterListModel       *filtered_shortcuts;
-  GtkCustomFilter          *custom_filter;
+  GListModel *shortcut_items;
+  GtkFilterListModel *filtered_shortcuts;
+  GtkCustomFilter *custom_filter;
 
-  CcKeyboardManager        *keyboard_manager;
-  char                    **search_terms;
-  char                     *section_id;
-  char                     *section_title;
+  CcKeyboardManager *keyboard_manager;
+  char **search_terms;
+  char *section_id;
+  char *section_title;
   /* The text representing the count of shortcuts changed */
-  char                     *modified_text;
+  char *modified_text;
 
-  gboolean                 is_empty;
+  gboolean is_empty;
 };
 
 G_DEFINE_TYPE (CcKeyboardShortcutGroup, cc_keyboard_shortcut_group, ADW_TYPE_PREFERENCES_GROUP)
@@ -78,19 +77,16 @@ shortcut_group_row_activated_cb (CcKeyboardShortcutGroup *self,
 
   shortcut_editor = cc_keyboard_shortcut_editor_new (self->keyboard_manager);
 
-  if (CC_IS_KEYBOARD_SHORTCUT_ROW (row))
-    {
-      CcKeyboardItem *item;
+  if (CC_IS_KEYBOARD_SHORTCUT_ROW (row)) {
+    CcKeyboardItem *item;
 
-      item = cc_keyboard_shortcut_row_get_item (CC_KEYBOARD_SHORTCUT_ROW (row));
-      cc_keyboard_shortcut_editor_set_mode (shortcut_editor, CC_SHORTCUT_EDITOR_EDIT);
-      cc_keyboard_shortcut_editor_set_item (shortcut_editor, item);
-    }
-  else  /* Add shortcut row */
-    {
-      cc_keyboard_shortcut_editor_set_mode (shortcut_editor, CC_SHORTCUT_EDITOR_CREATE);
-      cc_keyboard_shortcut_editor_set_item (shortcut_editor, NULL);
-    }
+    item = cc_keyboard_shortcut_row_get_item (CC_KEYBOARD_SHORTCUT_ROW (row));
+    cc_keyboard_shortcut_editor_set_mode (shortcut_editor, CC_SHORTCUT_EDITOR_EDIT);
+    cc_keyboard_shortcut_editor_set_item (shortcut_editor, item);
+  } else { /* Add shortcut row */
+    cc_keyboard_shortcut_editor_set_mode (shortcut_editor, CC_SHORTCUT_EDITOR_CREATE);
+    cc_keyboard_shortcut_editor_set_item (shortcut_editor, NULL);
+  }
 
   adw_dialog_present (ADW_DIALOG (shortcut_editor), GTK_WIDGET (self));
 }
@@ -117,15 +113,14 @@ shortcut_group_update_modified_text (CcKeyboardShortcutGroup *self)
 
   n_items = g_list_model_get_n_items (self->shortcut_items);
 
-  for (guint i = 0; i < n_items; i++)
-    {
-      g_autoptr(CcKeyboardItem) item = NULL;
+  for (guint i = 0; i < n_items; i++) {
+    g_autoptr (CcKeyboardItem) item = NULL;
 
-      item = g_list_model_get_item (self->shortcut_items, i);
+    item = g_list_model_get_item (self->shortcut_items, i);
 
-      if (!cc_keyboard_item_is_value_default (item))
-        n_modified++;
-    }
+    if (!cc_keyboard_item_is_value_default (item))
+      n_modified++;
+  }
 
   if (n_modified == 0)
     self->modified_text = g_strdup ("");
@@ -145,25 +140,23 @@ shortcut_group_row_new (gpointer item,
   GtkWidget *row;
 
   /* Row to add custom shortcut */
-  if (GTK_IS_STRING_OBJECT (item))
-    {
-      GtkWidget *icon;
+  if (GTK_IS_STRING_OBJECT (item)) {
+    GtkWidget *icon;
 
-      row = adw_preferences_row_new ();
-      gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
-      gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (row), FALSE);
-      gtk_accessible_update_property (GTK_ACCESSIBLE (row),
-                                      GTK_ACCESSIBLE_PROPERTY_LABEL,
-                                      _("Add a Shortcut"),
-                                      -1);
-      icon = gtk_image_new_from_icon_name ("list-add-symbolic");
-      gtk_widget_set_margin_top (icon, 15);
-      gtk_widget_set_margin_bottom (icon, 15);
-      gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), icon);
+    row = adw_preferences_row_new ();
+    gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
+    gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (row), FALSE);
+    gtk_accessible_update_property (GTK_ACCESSIBLE (row),
+                                    GTK_ACCESSIBLE_PROPERTY_LABEL,
+                                    _("Add a Shortcut"),
+                                    -1);
+    icon = gtk_image_new_from_icon_name ("list-add-symbolic");
+    gtk_widget_set_margin_top (icon, 15);
+    gtk_widget_set_margin_bottom (icon, 15);
+    gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), icon);
 
-      return row;
-
-    }
+    return row;
+  }
 
   row = GTK_WIDGET (cc_keyboard_shortcut_row_new (item,
                                                   self->keyboard_manager,
@@ -179,7 +172,7 @@ shortcut_group_row_new (gpointer item,
 
 static gboolean
 shortcut_group_filter_cb (gpointer item,
-                          gpointer  user_data)
+                          gpointer user_data)
 {
   CcKeyboardShortcutGroup *self = user_data;
 
@@ -234,25 +227,24 @@ shortcut_group_set_list_model (CcKeyboardShortcutGroup *self,
    * to add more items.  We do this way instead of appending a
    * row to avoid some imperfections in the GUI.
    */
-  if (g_strcmp0 (self->section_id, "custom") == 0)
-    {
-      g_autoptr(GListStore) add_shortcut = NULL;
-      g_autoptr(GtkStringObject) str = NULL;
-      GtkFlattenListModel *flat_model;
-      GListStore *shortcut_store;
+  if (g_strcmp0 (self->section_id, "custom") == 0) {
+    g_autoptr (GListStore) add_shortcut = NULL;
+    g_autoptr (GtkStringObject) str = NULL;
+    GtkFlattenListModel *flat_model;
+    GListStore *shortcut_store;
 
-      shortcut_store = g_list_store_new (G_TYPE_LIST_MODEL);
-      add_shortcut = g_list_store_new (GTK_TYPE_STRING_OBJECT);
+    shortcut_store = g_list_store_new (G_TYPE_LIST_MODEL);
+    add_shortcut = g_list_store_new (GTK_TYPE_STRING_OBJECT);
 
-      str = gtk_string_object_new ("add-shortcut");
-      g_list_store_append (add_shortcut, str);
+    str = gtk_string_object_new ("add-shortcut");
+    g_list_store_append (add_shortcut, str);
 
-      g_list_store_append (shortcut_store, sort_model);
-      g_list_store_append (shortcut_store, add_shortcut);
+    g_list_store_append (shortcut_store, sort_model);
+    g_list_store_append (shortcut_store, add_shortcut);
 
-      flat_model = gtk_flatten_list_model_new (G_LIST_MODEL (shortcut_store));
-      model = G_LIST_MODEL (flat_model);
-    }
+    flat_model = gtk_flatten_list_model_new (G_LIST_MODEL (shortcut_store));
+    model = G_LIST_MODEL (flat_model);
+  }
 
   if (!model)
     model = G_LIST_MODEL (sort_model);
@@ -295,8 +287,7 @@ cc_keyboard_shortcut_group_get_property (GObject    *object,
 {
   CcKeyboardShortcutGroup *self = (CcKeyboardShortcutGroup *)object;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_EMPTY:
       g_value_set_boolean (value, self->is_empty);
       break;
@@ -308,7 +299,7 @@ cc_keyboard_shortcut_group_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void

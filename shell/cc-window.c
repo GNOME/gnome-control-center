@@ -46,25 +46,24 @@
 
 #define DEFAULT_WINDOW_ICON_NAME "gnome-control-center"
 
-struct _CcWindow
-{
+struct _CcWindow {
   AdwApplicationWindow parent;
 
   AdwBreakpoint *break_point;
 
-  AdwDialog         *development_warning_dialog;
+  AdwDialog *development_warning_dialog;
   AdwNavigationSplitView *split_view;
-  CcPanelList       *panel_list;
-  GtkSearchBar      *search_bar;
-  GtkSearchEntry    *search_entry;
+  CcPanelList *panel_list;
+  GtkSearchBar *search_bar;
+  GtkSearchEntry *search_entry;
 
-  GtkWidget  *old_panel;
-  GtkWidget  *current_panel;
-  char       *current_panel_id;
-  GQueue     *previous_panels;
-  gboolean    single_panel_mode;
+  GtkWidget *old_panel;
+  GtkWidget *current_panel;
+  char *current_panel_id;
+  GQueue *previous_panels;
+  gboolean single_panel_mode;
 
-  GtkWidget  *custom_titlebar;
+  GtkWidget *custom_titlebar;
 
   CcShellModel *store;
 
@@ -74,13 +73,12 @@ struct _CcWindow
   CcPanelListView previous_list_view;
 };
 
-static void     cc_shell_iface_init         (CcShellInterface      *iface);
+static void     cc_shell_iface_init (CcShellInterface *iface);
 
 G_DEFINE_TYPE_WITH_CODE (CcWindow, cc_window, ADW_TYPE_APPLICATION_WINDOW,
                          G_IMPLEMENT_INTERFACE (CC_TYPE_SHELL, cc_shell_iface_init))
 
-enum
-{
+enum {
   PROP_0,
   PROP_ACTIVE_PANEL,
   PROP_MODEL,
@@ -96,11 +94,11 @@ load_window_state (CcWindow *self)
   gboolean maximized = FALSE;
 
   g_settings_get (self->settings,
-                 "window-state",
-                 "(iib)",
-                 &current_width,
-                 &current_height,
-                 &maximized);
+                  "window-state",
+                  "(iib)",
+                  &current_width,
+                  &current_height,
+                  &maximized);
 
   if (current_width != -1 && current_height != -1)
     gtk_window_set_default_size (GTK_WINDOW (self), current_width, current_height);
@@ -122,7 +120,7 @@ activate_panel (CcWindow          *self,
                 GIcon             *gicon,
                 CcPanelVisibility  visibility)
 {
-  g_autoptr(GTimer) timer = NULL;
+  g_autoptr (GTimer) timer = NULL;
   gdouble elapsed_time;
 
   CC_ENTRY;
@@ -180,20 +178,19 @@ find_iter_for_panel_id (CcWindow    *self,
 
   valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->store), &iter);
 
-  while (valid)
-    {
-      g_autofree gchar *id = NULL;
+  while (valid) {
+    g_autofree gchar *id = NULL;
 
-      gtk_tree_model_get (GTK_TREE_MODEL (self->store),
-                          &iter,
-                          COL_ID, &id,
-                          -1);
+    gtk_tree_model_get (GTK_TREE_MODEL (self->store),
+                        &iter,
+                        COL_ID, &id,
+                        -1);
 
-      if (g_strcmp0 (id, panel_id) == 0)
-        break;
+    if (g_strcmp0 (id, panel_id) == 0)
+      break;
 
-      valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (self->store), &iter);
-    }
+    valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (self->store), &iter);
+  }
 
   g_assert (out_iter != NULL);
   *out_iter = iter;
@@ -235,41 +232,40 @@ setup_model (CcWindow *self)
   /* Create a row for each panel */
   valid = gtk_tree_model_get_iter_first (model, &iter);
 
-  while (valid)
-    {
-      CcPanelCategory category;
-      g_autoptr(GIcon) icon = NULL;
-      g_autofree gchar *name = NULL;
-      g_autofree gchar *description = NULL;
-      g_autofree gchar *id = NULL;
-      g_auto(GStrv) keywords = NULL;
-      CcPanelVisibility visibility;
-      const gchar *icon_name = NULL;
+  while (valid) {
+    CcPanelCategory category;
+    g_autoptr (GIcon) icon = NULL;
+    g_autofree gchar *name = NULL;
+    g_autofree gchar *description = NULL;
+    g_autofree gchar *id = NULL;
+    g_auto (GStrv) keywords = NULL;
+    CcPanelVisibility visibility;
+    const gchar *icon_name = NULL;
 
-      gtk_tree_model_get (model, &iter,
-                          COL_CATEGORY, &category,
-                          COL_DESCRIPTION, &description,
-                          COL_GICON, &icon,
-                          COL_ID, &id,
-                          COL_NAME, &name,
-                          COL_KEYWORDS, &keywords,
-                          COL_VISIBILITY, &visibility,
-                          -1);
+    gtk_tree_model_get (model, &iter,
+                        COL_CATEGORY, &category,
+                        COL_DESCRIPTION, &description,
+                        COL_GICON, &icon,
+                        COL_ID, &id,
+                        COL_NAME, &name,
+                        COL_KEYWORDS, &keywords,
+                        COL_VISIBILITY, &visibility,
+                        -1);
 
-      if (G_IS_THEMED_ICON (icon))
-        icon_name = g_themed_icon_get_names (G_THEMED_ICON (icon))[0];
+    if (G_IS_THEMED_ICON (icon))
+      icon_name = g_themed_icon_get_names (G_THEMED_ICON (icon))[0];
 
-      cc_panel_list_add_panel (self->panel_list,
-                               category,
-                               id,
-                               name,
-                               description,
-                               keywords,
-                               icon_name,
-                               visibility);
+    cc_panel_list_add_panel (self->panel_list,
+                             category,
+                             id,
+                             name,
+                             description,
+                             keywords,
+                             icon_name,
+                             visibility);
 
-      valid = gtk_tree_model_iter_next (model, &iter);
-    }
+    valid = gtk_tree_model_iter_next (model, &iter);
+  }
 
   /* React to visibility changes */
   g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), self, G_CONNECT_SWAPPED);
@@ -283,11 +279,11 @@ set_active_panel_from_id (CcWindow     *self,
                           gboolean      force_moving_to_the_panel,
                           GError      **error)
 {
-  g_autoptr(GIcon) gicon = NULL;
+  g_autoptr (GIcon) gicon = NULL;
   g_autofree gchar *name = NULL;
   CcPanelVisibility visibility;
   CcPanelCategory category;
-  g_autoptr(GVariant) system_param_overwrite = NULL;
+  g_autoptr (GVariant) system_param_overwrite = NULL;
   GtkTreeIter iter;
   CcPanelListView view;
   gboolean activated;
@@ -298,21 +294,19 @@ set_active_panel_from_id (CcWindow     *self,
   view = cc_panel_list_get_view (self->panel_list);
 
   /* When loading the same panel again, just set its parameters */
-  if (g_strcmp0 (self->current_panel_id, start_id) == 0)
-    {
-      g_object_set (G_OBJECT (self->current_panel), "parameters", parameters, NULL);
-      if (force_moving_to_the_panel || self->previous_list_view == view)
-        adw_navigation_split_view_set_show_content (self->split_view, TRUE);
-      self->previous_list_view = view;
-      CC_RETURN (TRUE);
-    }
+  if (g_strcmp0 (self->current_panel_id, start_id) == 0) {
+    g_object_set (G_OBJECT (self->current_panel), "parameters", parameters, NULL);
+    if (force_moving_to_the_panel || self->previous_list_view == view)
+      adw_navigation_split_view_set_show_content (self->split_view, TRUE);
+    self->previous_list_view = view;
+    CC_RETURN (TRUE);
+  }
 
   found = find_iter_for_panel_id (self, start_id, &iter);
-  if (!found)
-    {
-      g_warning ("Could not find settings panel \"%s\"", start_id);
-      CC_RETURN (TRUE);
-    }
+  if (!found) {
+    g_warning ("Could not find settings panel \"%s\"", start_id);
+    CC_RETURN (TRUE);
+  }
 
   self->old_panel = self->current_panel;
   if (self->old_panel)
@@ -328,18 +322,17 @@ set_active_panel_from_id (CcWindow     *self,
 
   /* Handle "System" subpages by overwriting the start_id and parameters arguments.
    * This is needed because they have their own desktop files. */
-  if (category == CC_CATEGORY_SYSTEM)
-    {
-      g_autofree gchar *param_str = NULL;
+  if (category == CC_CATEGORY_SYSTEM) {
+    g_autofree gchar *param_str = NULL;
 
-      param_str = g_strdup_printf ("[<'%s'>]", start_id);
-      system_param_overwrite = g_variant_new_parsed (param_str);
-      g_variant_ref_sink (system_param_overwrite);
+    param_str = g_strdup_printf ("[<'%s'>]", start_id);
+    system_param_overwrite = g_variant_new_parsed (param_str);
+    g_variant_ref_sink (system_param_overwrite);
 
-      g_warning ("The direct access to `%s` is now deprecated. Please, use `system %s` instead.", start_id, start_id);
+    g_warning ("The direct access to `%s` is now deprecated. Please, use `system %s` instead.", start_id, start_id);
 
-      start_id = "system";
-    }
+    start_id = "system";
+  }
 
   /* Activate the panel */
   activated = activate_panel (self,
@@ -351,11 +344,10 @@ set_active_panel_from_id (CcWindow     *self,
 
   /* Failed to activate the panel for some reason, let's keep the old
    * panel around instead */
-  if (!activated)
-    {
-      g_debug ("Failed to activate panel");
-      CC_RETURN (TRUE);
-    }
+  if (!activated) {
+    g_debug ("Failed to activate panel");
+    CC_RETURN (TRUE);
+  }
 
   if (self->single_panel_mode)
     cc_panel_enable_single_page_mode (CC_PANEL (self->current_panel));
@@ -385,17 +377,16 @@ set_active_panel (CcWindow *self,
   g_return_if_fail (CC_IS_SHELL (self));
   g_return_if_fail (panel == NULL || CC_IS_PANEL (panel));
 
-  if (panel != self->active_panel)
-    {
-      /* remove the old panel */
-      g_clear_object (&self->active_panel);
+  if (panel != self->active_panel) {
+    /* remove the old panel */
+    g_clear_object (&self->active_panel);
 
-      /* set the new panel */
-      if (panel)
-        self->active_panel = g_object_ref (panel);
+    /* set the new panel */
+    if (panel)
+      self->active_panel = g_object_ref (panel);
 
-      g_object_notify (G_OBJECT (self), "active-panel");
-    }
+    g_object_notify (G_OBJECT (self), "active-panel");
+  }
 }
 
 static void
@@ -446,12 +437,11 @@ show_panel_cb (CcWindow    *self,
   if (!panel_id)
     return;
 
-  if (!parent_id)
-    {
-      set_active_panel_from_id (self, panel_id, NULL, TRUE, FALSE, NULL);
+  if (!parent_id) {
+    set_active_panel_from_id (self, panel_id, NULL, TRUE, FALSE, NULL);
 
-      return;
-    }
+    return;
+  }
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("av"));
   g_variant_builder_add (&builder, "v", g_variant_new_string (panel_id));
@@ -546,7 +536,7 @@ cc_shell_iface_init (CcShellInterface *iface)
 static void
 cc_window_map (GtkWidget *widget)
 {
-  CcWindow *self = (CcWindow *) widget;
+  CcWindow *self = (CcWindow *)widget;
 
   GTK_WIDGET_CLASS (cc_window_parent_class)->map (widget);
 
@@ -585,8 +575,7 @@ cc_window_get_property (GObject    *object,
 {
   CcWindow *self = CC_WINDOW (object);
 
-  switch (property_id)
-    {
+  switch (property_id) {
     case PROP_ACTIVE_PANEL:
       g_value_set_object (value, self->active_panel);
       break;
@@ -601,7 +590,7 @@ cc_window_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
+  }
 }
 
 static void
@@ -612,8 +601,7 @@ cc_window_set_property (GObject      *object,
 {
   CcWindow *self = CC_WINDOW (object);
 
-  switch (property_id)
-    {
+  switch (property_id) {
     case PROP_ACTIVE_PANEL:
       set_active_panel (self, g_value_get_object (value));
       break;
@@ -625,7 +613,7 @@ cc_window_set_property (GObject      *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
+  }
 }
 
 static void
@@ -638,12 +626,10 @@ maybe_load_last_panel (CcWindow *self)
     return;
 
   /* select the last used panel, if any, or the first visible panel */
-  if (id != NULL && cc_shell_model_has_panel (self->store, id))
-    {
-      cc_panel_list_center_activated_row (self->panel_list, TRUE);
-      cc_panel_list_set_active_panel (self->panel_list, id);
-    }
-  else
+  if (id != NULL && cc_shell_model_has_panel (self->store, id)) {
+    cc_panel_list_center_activated_row (self->panel_list, TRUE);
+    cc_panel_list_set_active_panel (self->panel_list, id);
+  } else
     cc_panel_list_activate (self->panel_list);
 }
 
@@ -661,7 +647,7 @@ cc_window_constructed (GObject *object)
    * or the first visible panel. We do that in an idle handler so we
    * have a chance to skip it when another panel has been explicitly
    * activated from commandline parameter or from DBus method */
-  g_idle_add_once ((GSourceOnceFunc) maybe_load_last_panel, self);
+  g_idle_add_once ((GSourceOnceFunc)maybe_load_last_panel, self);
 
   G_OBJECT_CLASS (cc_window_parent_class)->constructed (object);
 }
@@ -683,11 +669,10 @@ cc_window_finalize (GObject *object)
 {
   CcWindow *self = CC_WINDOW (object);
 
-  if (self->previous_panels)
-    {
-      g_queue_free_full (self->previous_panels, g_free);
-      self->previous_panels = NULL;
-    }
+  if (self->previous_panels) {
+    g_queue_free_full (self->previous_panels, g_free);
+    self->previous_panels = NULL;
+  }
 
   g_clear_object (&self->settings);
 
@@ -704,15 +689,14 @@ search_entry_key_pressed_cb (CcWindow              *self,
   GtkWidget *toplevel;
 
   /* When pressing Arrow Down on the entry we move focus to match results list */
-  if (keyval == GDK_KEY_Down || keyval == GDK_KEY_KP_Down)
-    {
-      toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
+  if (keyval == GDK_KEY_Down || keyval == GDK_KEY_KP_Down) {
+    toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
 
-      if (!toplevel)
-        return FALSE;
+    if (!toplevel)
+      return FALSE;
 
-      return gtk_widget_child_focus (toplevel, GTK_DIR_TAB_FORWARD);
-    }
+    return gtk_widget_child_focus (toplevel, GTK_DIR_TAB_FORWARD);
+  }
 
   return FALSE;
 }

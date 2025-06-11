@@ -29,8 +29,7 @@
 
 #include "shell/cc-object-storage.h"
 
-typedef struct
-{
+typedef struct {
   const char *content_type;
   /* Patterns used to filter supported mime types
      when changing preferred applications. NULL
@@ -38,9 +37,8 @@ typedef struct
   const char *extra_type_filter;
 } DefaultAppData;
 
-struct _CcDefaultAppsPage
-{
-  AdwPreferencesGroup  parent;
+struct _CcDefaultAppsPage {
+  AdwPreferencesGroup parent;
 
   GtkWidget *web_row;
   GtkWidget *mail_row;
@@ -124,17 +122,16 @@ cc_default_apps_page_init (CcDefaultAppsPage *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
 #ifdef BUILD_WWAN
-  if (cc_object_storage_has_object (CC_OBJECT_MMMANAGER))
-    {
-      self->mm_manager = cc_object_storage_get_object (CC_OBJECT_MMMANAGER);
+  if (cc_object_storage_has_object (CC_OBJECT_MMMANAGER)) {
+    self->mm_manager = cc_object_storage_get_object (CC_OBJECT_MMMANAGER);
 
-      g_signal_connect_swapped (self->mm_manager, "object-added",
-                                G_CALLBACK (update_modem_apps_visibility), self);
-      g_signal_connect_swapped (self->mm_manager, "object-removed",
-                                G_CALLBACK (update_modem_apps_visibility), self);
+    g_signal_connect_swapped (self->mm_manager, "object-added",
+                              G_CALLBACK (update_modem_apps_visibility), self);
+    g_signal_connect_swapped (self->mm_manager, "object-removed",
+                              G_CALLBACK (update_modem_apps_visibility), self);
 
-      update_modem_apps_visibility (self);
-    }
+    update_modem_apps_visibility (self);
+  }
 #endif
 }
 

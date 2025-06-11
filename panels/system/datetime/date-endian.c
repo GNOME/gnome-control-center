@@ -31,158 +31,158 @@
 #define DEFAULT_ENDIANESS DATE_ENDIANESS_DMY
 
 typedef enum {
-	ITEM_NONE = 0,
-	ITEM_DAY,
-	ITEM_MONTH,
-	ITEM_YEAR
+  ITEM_NONE = 0,
+  ITEM_DAY,
+  ITEM_MONTH,
+  ITEM_YEAR
 } Item;
 
 static gboolean
 has_item (Item *items,
-	  Item  item)
+          Item  item)
 {
-	guint i;
+  guint i;
 
-	for (i = 0; i < 3; i++) {
-		if (items[i] == ITEM_NONE)
-			return FALSE;
-		if (items[i] == item)
-			return TRUE;
-	}
-	return FALSE;
+  for (i = 0; i < 3; i++) {
+    if (items[i] == ITEM_NONE)
+      return FALSE;
+    if (items[i] == item)
+      return TRUE;
+  }
+  return FALSE;
 }
 
 DateEndianess
 date_endian_get_default (gboolean verbose)
 {
-	const char *fmt;
-	const char *p;
-	Item items[3];
-	guint i;
+  const char *fmt;
+  const char *p;
+  Item items[3];
+  guint i;
 
-	fmt = nl_langinfo (D_FMT);
-	g_return_val_if_fail (fmt != NULL, DEFAULT_ENDIANESS);
+  fmt = nl_langinfo (D_FMT);
+  g_return_val_if_fail (fmt != NULL, DEFAULT_ENDIANESS);
 
-	if (verbose)
-		g_print ("%s", fmt);
+  if (verbose)
+    g_print ("%s", fmt);
 
-	if (g_str_equal (fmt, "%F"))
-		return DATE_ENDIANESS_YMD;
+  if (g_str_equal (fmt, "%F"))
+    return DATE_ENDIANESS_YMD;
 
-	i = 0;
-	memset (&items, 0, sizeof(items));
+  i = 0;
+  memset (&items, 0, sizeof (items));
 
-	/* Assume ASCII only */
-	for (p = fmt; *p != '\0'; p++) {
-		char c;
+  /* Assume ASCII only */
+  for (p = fmt; *p != '\0'; p++) {
+    char c;
 
-		/* Look for '%' */
-		if (*p != '%')
-			continue;
+    /* Look for '%' */
+    if (*p != '%')
+      continue;
 
-		/* Only assert when we're sure we don't have another '%' */
-		if (i >= 4) {
-			g_warning ("Could not parse format '%s', too many formats", fmt);
-			return DEFAULT_ENDIANESS;
-		}
+    /* Only assert when we're sure we don't have another '%' */
+    if (i >= 4) {
+      g_warning ("Could not parse format '%s', too many formats", fmt);
+      return DEFAULT_ENDIANESS;
+    }
 
-		c = *(p + 1);
-		/* Ignore alternative formats */
-		if (c == 'O' || c == '-' || c == 'E')
-			c = *(p + 2);
-		if (c == '\0') {
-			g_warning ("Count not parse format '%s', unterminated '%%'", fmt);
-			return DEFAULT_ENDIANESS;
-		}
-		switch (c) {
-		case 'A':
-		case 'd':
-		case 'e':
-			if (has_item (items, ITEM_DAY) == FALSE) {
-				items[i] = ITEM_DAY;
-				i++;
-			}
-			break;
-		case 'm':
-		case 'b':
-		case 'B':
-			if (has_item (items, ITEM_MONTH) == FALSE) {
-				items[i] = ITEM_MONTH;
-				i++;
-			}
-			break;
-		case 'y':
-		case 'Y':
-			if (has_item (items, ITEM_YEAR) == FALSE) {
-				items[i] = ITEM_YEAR;
-				i++;
-			}
-			break;
-		case 'a':
-			/* Ignore */
-			;
-		}
-	}
+    c = *(p + 1);
+    /* Ignore alternative formats */
+    if (c == 'O' || c == '-' || c == 'E')
+      c = *(p + 2);
+    if (c == '\0') {
+      g_warning ("Count not parse format '%s', unterminated '%%'", fmt);
+      return DEFAULT_ENDIANESS;
+    }
+    switch (c) {
+      case 'A':
+      case 'd':
+      case 'e':
+        if (has_item (items, ITEM_DAY) == FALSE) {
+          items[i] = ITEM_DAY;
+          i++;
+        }
+        break;
+      case 'm':
+      case 'b':
+      case 'B':
+        if (has_item (items, ITEM_MONTH) == FALSE) {
+          items[i] = ITEM_MONTH;
+          i++;
+        }
+        break;
+      case 'y':
+      case 'Y':
+        if (has_item (items, ITEM_YEAR) == FALSE) {
+          items[i] = ITEM_YEAR;
+          i++;
+        }
+        break;
+      case 'a':
+        /* Ignore */
+        ;
+    }
+  }
 
-	if (items[0] == ITEM_DAY &&
-	    items[1] == ITEM_MONTH &&
-	    items[2] == ITEM_YEAR)
-		return DATE_ENDIANESS_DMY;
-	if (items[0] == ITEM_YEAR &&
-	    items[1] == ITEM_MONTH &&
-	    items[2] == ITEM_DAY)
-		return DATE_ENDIANESS_YMD;
-	if (items[0] == ITEM_MONTH &&
-	    items[1] == ITEM_DAY &&
-	    items[2] == ITEM_YEAR)
-		return DATE_ENDIANESS_MDY;
-	if (items[0] == ITEM_YEAR &&
-	    items[1] == ITEM_DAY &&
-	    items[2] == ITEM_MONTH)
-		return DATE_ENDIANESS_YDM;
+  if (items[0] == ITEM_DAY &&
+      items[1] == ITEM_MONTH &&
+      items[2] == ITEM_YEAR)
+    return DATE_ENDIANESS_DMY;
+  if (items[0] == ITEM_YEAR &&
+      items[1] == ITEM_MONTH &&
+      items[2] == ITEM_DAY)
+    return DATE_ENDIANESS_YMD;
+  if (items[0] == ITEM_MONTH &&
+      items[1] == ITEM_DAY &&
+      items[2] == ITEM_YEAR)
+    return DATE_ENDIANESS_MDY;
+  if (items[0] == ITEM_YEAR &&
+      items[1] == ITEM_DAY &&
+      items[2] == ITEM_MONTH)
+    return DATE_ENDIANESS_YDM;
 
-	g_warning ("Could not parse format '%s'", fmt);
+  g_warning ("Could not parse format '%s'", fmt);
 
-	return DEFAULT_ENDIANESS;
+  return DEFAULT_ENDIANESS;
 }
 
 DateEndianess
 date_endian_get_for_lang (const char *lang,
-			  gboolean    verbose)
+                          gboolean    verbose)
 {
-	locale_t locale;
-	locale_t old_locale;
-	DateEndianess endian;
+  locale_t locale;
+  locale_t old_locale;
+  DateEndianess endian;
 
-	locale = newlocale (LC_TIME_MASK, lang, (locale_t) 0);
-	if (locale == (locale_t) 0)
-		g_warning ("Failed to create locale %s: %s", lang, g_strerror (errno));
-	else
-		old_locale = uselocale (locale);
+  locale = newlocale (LC_TIME_MASK, lang, (locale_t)0);
+  if (locale == (locale_t)0)
+    g_warning ("Failed to create locale %s: %s", lang, g_strerror (errno));
+  else
+    old_locale = uselocale (locale);
 
-	endian = date_endian_get_default (verbose);
+  endian = date_endian_get_default (verbose);
 
-	if (locale != (locale_t) 0) {
-		uselocale (old_locale);
-		freelocale (locale);
-	}
+  if (locale != (locale_t)0) {
+    uselocale (old_locale);
+    freelocale (locale);
+  }
 
-	return endian;
+  return endian;
 }
 
 const char *
 date_endian_to_string (DateEndianess endianess)
 {
-	switch (endianess) {
-	case DATE_ENDIANESS_DMY:
-		return "Little (DD-MM-YYYY)";
-	case DATE_ENDIANESS_YMD:
-		return "Big (YYYY-MM-DD)";
-	case DATE_ENDIANESS_MDY:
-		return "Middle (MM-DD-YYYY)";
-        case DATE_ENDIANESS_YDM:
-		return "YDM (YYYY-DD-MM)";
-	default:
-		g_assert_not_reached ();
-	}
+  switch (endianess) {
+    case DATE_ENDIANESS_DMY:
+      return "Little (DD-MM-YYYY)";
+    case DATE_ENDIANESS_YMD:
+      return "Big (YYYY-MM-DD)";
+    case DATE_ENDIANESS_MDY:
+      return "Middle (MM-DD-YYYY)";
+    case DATE_ENDIANESS_YDM:
+      return "YDM (YYYY-DD-MM)";
+    default:
+      g_assert_not_reached ();
+  }
 }

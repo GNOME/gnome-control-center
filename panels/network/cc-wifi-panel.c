@@ -33,8 +33,7 @@
 
 #define QR_IMAGE_SIZE 180
 
-typedef enum
-{
+typedef enum {
   OPERATION_NULL,
   OPERATION_SHOW_DEVICE,
   OPERATION_CREATE_WIFI,
@@ -42,48 +41,46 @@ typedef enum
   OPERATION_CONNECT_8021X
 } CmdlineOperation;
 
-struct _CcWifiPanel
-{
-  CcPanel             parent;
+struct _CcWifiPanel {
+  CcPanel parent;
 
   /* RFKill (Airplane Mode) */
-  GDBusProxy         *rfkill_proxy;
-  AdwSwitchRow       *rfkill_row;
-  GtkWidget          *rfkill_widget;
+  GDBusProxy *rfkill_proxy;
+  AdwSwitchRow *rfkill_row;
+  GtkWidget *rfkill_widget;
 
   /* Main widgets */
-  GtkStack           *center_stack;
-  GtkStack           *device_stack;
-  GtkBox             *hotspot_box;
-  GtkButton          *hotspot_off_button;
-  GtkLabel           *list_label;
-  GtkStack           *main_stack;
-  GtkWidget          *spinner;
-  GtkStack           *stack;
-  AdwDialog          *stop_hotspot_dialog;
-  GtkPicture         *wifi_qr_image;
-  CcQrCode           *qr_code;
+  GtkStack *center_stack;
+  GtkStack *device_stack;
+  GtkBox *hotspot_box;
+  GtkButton *hotspot_off_button;
+  GtkLabel *list_label;
+  GtkStack *main_stack;
+  GtkWidget *spinner;
+  GtkStack *stack;
+  AdwDialog *stop_hotspot_dialog;
+  GtkPicture *wifi_qr_image;
+  CcQrCode *qr_code;
 
-  NMClient           *client;
+  NMClient *client;
 
-  GPtrArray          *devices;
+  GPtrArray *devices;
 
-  GBinding           *spinner_binding;
+  GBinding *spinner_binding;
 
   /* Command-line arguments */
-  CmdlineOperation    arg_operation;
-  gchar              *arg_device;
-  gchar              *arg_access_point;
+  CmdlineOperation arg_operation;
+  gchar *arg_device;
+  gchar *arg_access_point;
 };
 
-static void          rfkill_switch_notify_activate_cb            (CcWifiPanel        *self);
+static void          rfkill_switch_notify_activate_cb (CcWifiPanel *self);
 
-static void          update_devices_names                        (CcWifiPanel        *self);
+static void          update_devices_names (CcWifiPanel *self);
 
 G_DEFINE_TYPE (CcWifiPanel, cc_wifi_panel, CC_TYPE_PANEL)
 
-enum
-{
+enum {
   PROP_0,
   PROP_PARAMETERS,
   N_PROPS
@@ -104,15 +101,14 @@ update_panel_visibility (NMClient *client)
   devices = nm_client_get_devices (client);
   visible = FALSE;
 
-  for (i = 0; devices && i < devices->len; i++)
-    {
-      NMDevice *device = g_ptr_array_index (devices, i);
+  for (i = 0; devices && i < devices->len; i++) {
+    NMDevice *device = g_ptr_array_index (devices, i);
 
-      visible |= NM_IS_DEVICE_WIFI (device);
+    visible |= NM_IS_DEVICE_WIFI (device);
 
-      if (visible)
-        break;
-    }
+    if (visible)
+      break;
+  }
 
   /* Set the new visibility */
   application = CC_APPLICATION (g_application_get_default ());
@@ -126,16 +122,15 @@ update_panel_visibility (NMClient *client)
 void
 cc_wifi_panel_static_init_func (void)
 {
-  g_autoptr(NMClient) client = NULL;
+  g_autoptr (NMClient) client = NULL;
 
   g_debug ("Monitoring NetworkManager for Wi-Fi devices");
 
   /* Create and store a NMClient instance if it doesn't exist yet */
-  if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT))
-    {
-      g_autoptr(NMClient) new_client = nm_client_new (NULL, NULL);
-      cc_object_storage_add_object (CC_OBJECT_NMCLIENT, new_client);
-    }
+  if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT)) {
+    g_autoptr (NMClient) new_client = nm_client_new (NULL, NULL);
+    cc_object_storage_add_object (CC_OBJECT_NMCLIENT, new_client);
+  }
 
   client = cc_object_storage_get_object (CC_OBJECT_NMCLIENT);
 
@@ -183,43 +178,39 @@ wifi_panel_update_qr_image_cb (CcWifiPanel *self)
 
   g_assert (CC_IS_WIFI_PANEL (self));
 
-  child  = NET_DEVICE_WIFI (gtk_stack_get_visible_child (self->stack));
+  child = NET_DEVICE_WIFI (gtk_stack_get_visible_child (self->stack));
   device = net_device_wifi_get_device (child);
   hotspot = wifi_device_get_hotspot (self, device);
 
-  if (hotspot)
-    {
-      g_autofree gchar *str = NULL;
-      g_autoptr (GVariant) secrets = NULL;
-      g_autoptr (GError) error = NULL;
+  if (hotspot) {
+    g_autofree gchar *str = NULL;
+    g_autoptr (GVariant) secrets = NULL;
+    g_autoptr (GError) error = NULL;
 
-      if (!self->qr_code)
-        self->qr_code = cc_qr_code_new ();
+    if (!self->qr_code)
+      self->qr_code = cc_qr_code_new ();
 
-      secrets = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (hotspot),
-                                                  NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                                  NULL, &error);
-      if (!error) {
-        nm_connection_update_secrets (hotspot,
-                                      NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                      secrets, &error);
+    secrets = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (hotspot),
+                                                NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
+                                                NULL, &error);
+    if (!error) {
+      nm_connection_update_secrets (hotspot,
+                                    NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
+                                    secrets, &error);
 
-        str = get_qr_string_for_connection (hotspot);
-        if (cc_qr_code_set_text (self->qr_code, str))
-          {
-            GdkPaintable *paintable;
-            gint scale;
+      str = get_qr_string_for_connection (hotspot);
+      if (cc_qr_code_set_text (self->qr_code, str)) {
+        GdkPaintable *paintable;
+        gint scale;
 
-            scale = gtk_widget_get_scale_factor (GTK_WIDGET (self->wifi_qr_image));
-            paintable = cc_qr_code_get_paintable (self->qr_code, QR_IMAGE_SIZE * scale);
-            gtk_picture_set_paintable (self->wifi_qr_image, paintable);
-          }
-        }
-      else
-        {
-          g_warning ("Error: %s", error->message);
-        }
+        scale = gtk_widget_get_scale_factor (GTK_WIDGET (self->wifi_qr_image));
+        paintable = cc_qr_code_get_paintable (self->qr_code, QR_IMAGE_SIZE * scale);
+        gtk_picture_set_paintable (self->wifi_qr_image, paintable);
+      }
+    } else {
+      g_warning ("Error: %s", error->message);
     }
+  }
 
   gtk_widget_set_visible (GTK_WIDGET (self->hotspot_box), hotspot != NULL);
   gtk_widget_set_opacity (GTK_WIDGET (self->list_label), hotspot == NULL);
@@ -270,20 +261,18 @@ remove_wifi_device (CcWifiPanel *self,
   id = nm_device_get_udi (device);
 
   /* Remove from the devices list */
-  for (i = 0; i < self->devices->len; i++)
-    {
-      NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
+  for (i = 0; i < self->devices->len; i++) {
+    NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
 
-      if (net_device_wifi_get_device (net_device) == device)
-        {
-          g_ptr_array_remove (self->devices, net_device);
-          break;
-        }
+    if (net_device_wifi_get_device (net_device) == device) {
+      g_ptr_array_remove (self->devices, net_device);
+      break;
     }
+  }
 
   /* Disconnect the signal to prevent assertion crash */
-  g_signal_handlers_disconnect_by_func (device, 
-                                        G_CALLBACK (wifi_panel_update_qr_image_cb), 
+  g_signal_handlers_disconnect_by_func (device,
+                                        G_CALLBACK (wifi_panel_update_qr_image_cb),
                                         self);
 
   /* Destroy all stack pages related to this device */
@@ -297,14 +286,13 @@ remove_wifi_device (CcWifiPanel *self,
   /* Update the title widget */
   update_devices_names (self);
 
-  if (is_visible_device)
-    {
-      /* The binding for the visible wifi device would have been
-         removed as part of device (binding source) removal above. So,
-         we clear the reference to the binding, so we don't try
-         unbinding an invalid binding later. */
-      self->spinner_binding = NULL;
-    }
+  if (is_visible_device) {
+    /* The binding for the visible wifi device would have been
+       removed as part of device (binding source) removal above. So,
+       we clear the reference to the binding, so we don't try
+       unbinding an invalid binding later. */
+    self->spinner_binding = NULL;
+  }
 }
 
 static void
@@ -341,18 +329,16 @@ load_wifi_devices (CcWifiPanel *self)
   devices = nm_client_get_devices (self->client);
 
   /* Cold-plug existing devices */
-  if (devices)
-    {
-      for (i = 0; i < devices->len; i++)
-        {
-          NMDevice *device;
+  if (devices) {
+    for (i = 0; i < devices->len; i++) {
+      NMDevice *device;
 
-          device = g_ptr_array_index (devices, i);
-          if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
-            continue;
-          add_wifi_device (self, device);
-        }
+      device = g_ptr_array_index (devices, i);
+      if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
+        continue;
+      add_wifi_device (self, device);
     }
+  }
 
   check_main_stack_page (self);
 }
@@ -361,7 +347,7 @@ static inline gboolean
 get_cached_rfkill_property (CcWifiPanel *self,
                             const gchar *property)
 {
-  g_autoptr(GVariant) result = NULL;
+  g_autoptr (GVariant) result = NULL;
 
   result = g_dbus_proxy_get_cached_property (self->rfkill_proxy, property);
   return result ? g_variant_get_boolean (result) : FALSE;
@@ -384,16 +370,15 @@ sync_airplane_mode_switch (CcWifiPanel *self)
 
   enabled |= hw_enabled;
 
-  if (enabled != adw_switch_row_get_active (self->rfkill_row))
-    {
-      g_signal_handlers_block_by_func (self->rfkill_row,
+  if (enabled != adw_switch_row_get_active (self->rfkill_row)) {
+    g_signal_handlers_block_by_func (self->rfkill_row,
+                                     rfkill_switch_notify_activate_cb,
+                                     self);
+    g_object_set (self->rfkill_row, "active", enabled, NULL);
+    check_main_stack_page (self);
+    g_signal_handlers_unblock_by_func (self->rfkill_row,
                                        rfkill_switch_notify_activate_cb,
                                        self);
-      g_object_set (self->rfkill_row, "active", enabled, NULL);
-      check_main_stack_page (self);
-      g_signal_handlers_unblock_by_func (self->rfkill_row,
-                                         rfkill_switch_notify_activate_cb,
-                                         self);
   }
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->rfkill_row), !hw_enabled);
@@ -406,48 +391,43 @@ update_devices_names (CcWifiPanel *self)
 {
   guint number_of_devices = self->devices->len;
 
-  if (number_of_devices == 1)
-    {
-      GtkWidget *title_widget;
+  if (number_of_devices == 1) {
+    GtkWidget *title_widget;
+    NetDeviceWifi *net_device;
+
+    net_device = g_ptr_array_index (self->devices, 0);
+    title_widget = net_device_wifi_get_title_widget (net_device);
+
+    gtk_stack_add_named (self->center_stack, title_widget, "single");
+    gtk_stack_set_visible_child_name (self->center_stack, "single");
+
+    net_device_wifi_set_title (net_device, _("Wi-Fi"));
+  } else {
+    GtkWidget *single_page_widget;
+    guint i;
+
+    for (i = 0; i < number_of_devices; i++) {
       NetDeviceWifi *net_device;
+      NMDevice *device;
 
-      net_device = g_ptr_array_index (self->devices, 0);
-      title_widget = net_device_wifi_get_title_widget (net_device);
+      net_device = g_ptr_array_index (self->devices, i);
+      device = net_device_wifi_get_device (net_device);
 
-      gtk_stack_add_named (self->center_stack, title_widget, "single");
-      gtk_stack_set_visible_child_name (self->center_stack, "single");
-
-      net_device_wifi_set_title (net_device, _("Wi-Fi"));
+      net_device_wifi_set_title (net_device, nm_device_get_description (device));
     }
-  else
-    {
-      GtkWidget *single_page_widget;
-      guint i;
 
-      for (i = 0; i < number_of_devices; i++)
-        {
-          NetDeviceWifi *net_device;
-          NMDevice *device;
+    /* Remove the widget at the "single" page */
+    single_page_widget = gtk_stack_get_child_by_name (self->center_stack, "single");
 
-          net_device = g_ptr_array_index (self->devices, i);
-          device = net_device_wifi_get_device (net_device);
-
-          net_device_wifi_set_title (net_device, nm_device_get_description (device));
-        }
-
-      /* Remove the widget at the "single" page */
-      single_page_widget = gtk_stack_get_child_by_name (self->center_stack, "single");
-
-      if (single_page_widget)
-        {
-          g_object_ref (single_page_widget);
-          gtk_stack_remove (self->center_stack, single_page_widget);
-          g_object_unref (single_page_widget);
-        }
-
-      /* Show the stack-switcher page */
-      gtk_stack_set_visible_child_name (self->center_stack, "many");
+    if (single_page_widget) {
+      g_object_ref (single_page_widget);
+      gtk_stack_remove (self->center_stack, single_page_widget);
+      g_object_unref (single_page_widget);
     }
+
+    /* Show the stack-switcher page */
+    gtk_stack_set_visible_child_name (self->center_stack, "many");
+  }
 }
 
 /* Command-line arguments */
@@ -461,7 +441,8 @@ reset_command_line_args (CcWifiPanel *self)
 }
 
 static gboolean
-handle_argv_for_device (CcWifiPanel *self, NetDeviceWifi *net_device)
+handle_argv_for_device (CcWifiPanel   *self,
+                        NetDeviceWifi *net_device)
 {
   GtkWidget *toplevel;
   NMDevice *device;
@@ -471,32 +452,24 @@ handle_argv_for_device (CcWifiPanel *self, NetDeviceWifi *net_device)
   device = net_device_wifi_get_device (net_device);
   ret = FALSE;
 
-  if (self->arg_operation == OPERATION_CREATE_WIFI)
-    {
-      cc_network_panel_create_wifi_network (toplevel, self->client);
+  if (self->arg_operation == OPERATION_CREATE_WIFI) {
+    cc_network_panel_create_wifi_network (toplevel, self->client);
+    ret = TRUE;
+  } else if (self->arg_operation == OPERATION_CONNECT_HIDDEN) {
+    cc_network_panel_connect_to_hidden_network (toplevel, self->client);
+    ret = TRUE;
+  } else if (g_str_equal (nm_object_get_path (NM_OBJECT (device)), self->arg_device)) {
+    if (self->arg_operation == OPERATION_CONNECT_8021X) {
+      cc_network_panel_connect_to_8021x_network (toplevel,
+                                                 self->client,
+                                                 device,
+                                                 self->arg_access_point);
+      ret = TRUE;
+    } else if (self->arg_operation == OPERATION_SHOW_DEVICE) {
+      gtk_stack_set_visible_child_name (self->stack, nm_device_get_udi (device));
       ret = TRUE;
     }
-  else if (self->arg_operation == OPERATION_CONNECT_HIDDEN)
-    {
-      cc_network_panel_connect_to_hidden_network (toplevel, self->client);
-      ret = TRUE;
-    }
-  else if (g_str_equal (nm_object_get_path (NM_OBJECT (device)), self->arg_device))
-    {
-      if (self->arg_operation == OPERATION_CONNECT_8021X)
-        {
-          cc_network_panel_connect_to_8021x_network (toplevel,
-                                                     self->client,
-                                                     device,
-                                                     self->arg_access_point);
-          ret = TRUE;
-        }
-      else if (self->arg_operation == OPERATION_SHOW_DEVICE)
-        {
-          gtk_stack_set_visible_child_name (self->stack, nm_device_get_udi (device));
-          ret = TRUE;
-        }
-    }
+  }
 
   if (ret)
     reset_command_line_args (self);
@@ -512,11 +485,10 @@ handle_argv (CcWifiPanel *self)
   if (self->arg_operation == OPERATION_NULL)
     return;
 
-  for (i = 0; i < self->devices->len; i++)
-    {
-      if (handle_argv_for_device (self, g_ptr_array_index (self->devices, i)))
-        break;
-    }
+  for (i = 0; i < self->devices->len; i++) {
+    if (handle_argv_for_device (self, g_ptr_array_index (self->devices, i)))
+      break;
+  }
 }
 
 static GPtrArray *
@@ -530,11 +502,10 @@ variant_av_to_string_array (GVariant *array)
   count = g_variant_iter_init (&iter, array);
   strv = g_ptr_array_sized_new (count + 1);
 
-  while (g_variant_iter_next (&iter, "v", &v))
-    {
-      g_ptr_array_add (strv, (gpointer) g_variant_get_string (v, NULL));
-      g_variant_unref (v);
-    }
+  while (g_variant_iter_next (&iter, "v", &v)) {
+    g_ptr_array_add (strv, (gpointer)g_variant_get_string (v, NULL));
+    g_variant_unref (v);
+  }
 
   g_ptr_array_add (strv, NULL); /* NULL-terminate the strv data array */
   return strv;
@@ -544,25 +515,25 @@ static gboolean
 verify_argv (CcWifiPanel  *self,
              const char  **args)
 {
-  switch (self->arg_operation)
-    {
+  switch (self->arg_operation) {
     case OPERATION_CONNECT_8021X:
     case OPERATION_SHOW_DEVICE:
-      if (!self->arg_device)
-        {
-          g_warning ("Operation %s requires an object path", args[0]);
-          return FALSE;
-        }
+      if (!self->arg_device) {
+        g_warning ("Operation %s requires an object path", args[0]);
+        return FALSE;
+      }
       G_GNUC_FALLTHROUGH;
     default:
       return TRUE;
-    }
+  }
 }
 
 /* Callbacks */
 
 static void
-device_state_changed_cb (CcWifiPanel *self, GParamSpec *pspec, NMDevice *device)
+device_state_changed_cb (CcWifiPanel *self,
+                         GParamSpec  *pspec,
+                         NMDevice    *device)
 {
   const gchar *id;
 
@@ -571,33 +542,30 @@ device_state_changed_cb (CcWifiPanel *self, GParamSpec *pspec, NMDevice *device)
   if (!NM_IS_DEVICE_WIFI (device) || !id)
     return;
 
-  if (nm_device_get_managed (device))
-    {
-      if (gtk_stack_get_child_by_name (self->stack, id))
-        return;
-      add_wifi_device (self, device);
-      check_main_stack_page (self);
-    }
-  else
-    {
-      if (!gtk_stack_get_child_by_name (self->stack, id))
-        return;
-      remove_wifi_device (self, device);
-      check_main_stack_page (self);
-    }
+  if (nm_device_get_managed (device)) {
+    if (gtk_stack_get_child_by_name (self->stack, id))
+      return;
+    add_wifi_device (self, device);
+    check_main_stack_page (self);
+  } else {
+    if (!gtk_stack_get_child_by_name (self->stack, id))
+      return;
+    remove_wifi_device (self, device);
+    check_main_stack_page (self);
+  }
 }
 
 static void
-device_added_cb (CcWifiPanel *self, NMDevice *device)
+device_added_cb (CcWifiPanel *self,
+                 NMDevice    *device)
 {
   if (!NM_IS_DEVICE_WIFI (device))
     return;
 
-  if (nm_device_get_managed (device))
-    {
-      add_wifi_device (self, device);
-      check_main_stack_page (self);
-    }
+  if (nm_device_get_managed (device)) {
+    add_wifi_device (self, device);
+    check_main_stack_page (self);
+  }
 
   g_signal_connect_object (device,
                            "notify::state",
@@ -607,7 +575,8 @@ device_added_cb (CcWifiPanel *self, NMDevice *device)
 }
 
 static void
-device_removed_cb (CcWifiPanel *self, NMDevice *device)
+device_removed_cb (CcWifiPanel *self,
+                   NMDevice    *device)
 {
   const gchar *id;
 
@@ -648,17 +617,16 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
 {
   CcWifiPanel *self;
   GDBusProxy *proxy;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
 
-  if (error)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_printerr ("Error creating rfkill proxy: %s\n", error->message);
+  if (error) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_printerr ("Error creating rfkill proxy: %s\n", error->message);
 
-      return;
-    }
+    return;
+  }
 
   self = CC_WIFI_PANEL (user_data);
 
@@ -705,24 +673,22 @@ on_stack_visible_child_changed_cb (CcWifiPanel *self)
 
   visible_device_id = gtk_stack_get_visible_child_name (self->stack);
   gtk_stack_set_visible_child_name (self->device_stack, visible_device_id);
-  for (i = 0; i < self->devices->len; i++)
-    {
-      NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
+  for (i = 0; i < self->devices->len; i++) {
+    NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
 
-      if (g_strcmp0 (nm_device_get_udi (net_device_wifi_get_device (net_device)), visible_device_id) == 0)
-        {
-          self->spinner_binding = g_object_bind_property (net_device,
-                                                          "scanning",
-                                                          self->spinner,
-                                                          "visible",
-                                                          G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
-          break;
-        }
+    if (g_strcmp0 (nm_device_get_udi (net_device_wifi_get_device (net_device)), visible_device_id) == 0) {
+      self->spinner_binding = g_object_bind_property (net_device,
+                                                      "scanning",
+                                                      self->spinner,
+                                                      "visible",
+                                                      G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
+      break;
     }
+  }
 }
 
 static void
-on_stop_hotspot_dialog_response_cb (CcWifiPanel        *self)
+on_stop_hotspot_dialog_response_cb (CcWifiPanel *self)
 {
   NetDeviceWifi *child;
 
@@ -771,53 +737,49 @@ cc_wifi_panel_set_property (GObject      *object,
   CcWifiPanel *self = CC_WIFI_PANEL (object);
   GVariant *parameters;
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_PARAMETERS:
       reset_command_line_args (self);
 
       parameters = g_value_get_variant (value);
 
-      if (parameters)
-        {
-          g_autoptr(GPtrArray) array = NULL;
-          const gchar **args;
+      if (parameters) {
+        g_autoptr (GPtrArray) array = NULL;
+        const gchar **args;
 
-          array = variant_av_to_string_array (parameters);
-          args = (const gchar **) array->pdata;
+        array = variant_av_to_string_array (parameters);
+        args = (const gchar **)array->pdata;
 
-          if (args[0])
-            {
-              if (g_str_equal (args[0], "create-wifi"))
-                self->arg_operation = OPERATION_CREATE_WIFI;
-              else if (g_str_equal (args[0], "connect-hidden-wifi"))
-                self->arg_operation = OPERATION_CONNECT_HIDDEN;
-              else if (g_str_equal (args[0], "connect-8021x-wifi"))
-                self->arg_operation = OPERATION_CONNECT_8021X;
-              else if (g_str_equal (args[0], "show-device"))
-                self->arg_operation = OPERATION_SHOW_DEVICE;
-              else
-                self->arg_operation = OPERATION_NULL;
-            }
-
-          if (args[0] && args[1])
-            self->arg_device = g_strdup (args[1]);
-          if (args[0] && args[1] && args[2])
-            self->arg_access_point = g_strdup (args[2]);
-
-          if (!verify_argv (self, (const char **) args))
-            {
-              reset_command_line_args (self);
-              return;
-            }
-
-          handle_argv (self);
+        if (args[0]) {
+          if (g_str_equal (args[0], "create-wifi"))
+            self->arg_operation = OPERATION_CREATE_WIFI;
+          else if (g_str_equal (args[0], "connect-hidden-wifi"))
+            self->arg_operation = OPERATION_CONNECT_HIDDEN;
+          else if (g_str_equal (args[0], "connect-8021x-wifi"))
+            self->arg_operation = OPERATION_CONNECT_8021X;
+          else if (g_str_equal (args[0], "show-device"))
+            self->arg_operation = OPERATION_SHOW_DEVICE;
+          else
+            self->arg_operation = OPERATION_NULL;
         }
+
+        if (args[0] && args[1])
+          self->arg_device = g_strdup (args[1]);
+        if (args[0] && args[1] && args[2])
+          self->arg_access_point = g_strdup (args[2]);
+
+        if (!verify_argv (self, (const char **)args)) {
+          reset_command_line_args (self);
+          return;
+        }
+
+        handle_argv (self);
+      }
       break;
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -858,7 +820,7 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
 static void
 cc_wifi_panel_init (CcWifiPanel *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr (GtkCssProvider) provider = NULL;
   GtkLabel *hotspot_off_label;
 
   g_resources_register (cc_network_get_resource ());
@@ -868,11 +830,10 @@ cc_wifi_panel_init (CcWifiPanel *self)
   self->devices = g_ptr_array_new ();
 
   /* Create and store a NMClient instance if it doesn't exist yet */
-  if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT))
-    {
-      g_autoptr(NMClient) client = nm_client_new (NULL, NULL);
-      cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
-    }
+  if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT)) {
+    g_autoptr (NMClient) client = nm_client_new (NULL, NULL);
+    cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
+  }
 
   /* Load NetworkManager */
   self->client = cc_object_storage_get_object (CC_OBJECT_NMCLIENT);

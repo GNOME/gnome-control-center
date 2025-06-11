@@ -24,8 +24,7 @@
 
 #include "ce-netmask-entry.h"
 
-struct _CENetmaskEntry
-{
+struct _CENetmaskEntry {
   GtkEntry parent_instance;
 };
 
@@ -36,31 +35,29 @@ G_DEFINE_TYPE_WITH_CODE (CENetmaskEntry, ce_netmask_entry, GTK_TYPE_ENTRY,
                                                 ce_netmask_entry_editable_init))
 
 static gboolean
-parse_netmask (const char *str, guint32 *prefix)
+parse_netmask (const char *str,
+               guint32    *prefix)
 {
   struct in_addr tmp_addr;
   glong tmp_prefix;
 
   /* Is it a prefix? */
   errno = 0;
-  if (!strchr (str, '.'))
-    {
-      tmp_prefix = strtol (str, NULL, 10);
-      if (!errno && tmp_prefix >= 0 && tmp_prefix <= 32)
-        {
-          if (prefix != NULL)
-            *prefix = tmp_prefix;
-          return TRUE;
-        }
-    }
-
-  /* Is it a netmask? */
-  if (inet_pton (AF_INET, str, &tmp_addr) > 0)
-    {
+  if (!strchr (str, '.')) {
+    tmp_prefix = strtol (str, NULL, 10);
+    if (!errno && tmp_prefix >= 0 && tmp_prefix <= 32) {
       if (prefix != NULL)
-        *prefix = nm_utils_ip4_netmask_to_prefix (tmp_addr.s_addr);
+        *prefix = tmp_prefix;
       return TRUE;
     }
+  }
+
+  /* Is it a netmask? */
+  if (inet_pton (AF_INET, str, &tmp_addr) > 0) {
+    if (prefix != NULL)
+      *prefix = nm_utils_ip4_netmask_to_prefix (tmp_addr.s_addr);
+    return TRUE;
+  }
 
   return FALSE;
 }

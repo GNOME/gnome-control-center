@@ -38,24 +38,22 @@
 #define GLOBAL_SHORTCUTS_APP_SCHEMA "org.gnome.settings-daemon.global-shortcuts.application"
 #define GLOBAL_SHORTCUTS_PATH "/org/gnome/settings-daemon/global-shortcuts/"
 
-struct _CcKeyboardManager
-{
-  GObject             parent;
+struct _CcKeyboardManager {
+  GObject parent;
 
-  GtkListStore       *sections_store;
+  GtkListStore *sections_store;
 
-  GHashTable         *kb_system_sections;
-  GHashTable         *kb_apps_sections;
-  GHashTable         *kb_user_sections;
+  GHashTable *kb_system_sections;
+  GHashTable *kb_apps_sections;
+  GHashTable *kb_user_sections;
 
-  GSettings          *binding_settings;
-  GSettings          *global_shortcuts_settings;
+  GSettings *binding_settings;
+  GSettings *global_shortcuts_settings;
 };
 
 G_DEFINE_TYPE (CcKeyboardManager, cc_keyboard_manager, G_TYPE_OBJECT)
 
-enum
-{
+enum {
   SHORTCUT_ADDED,
   SHORTCUT_CHANGED,
   SHORTCUT_REMOVED,
@@ -71,21 +69,19 @@ static guint signals[LAST_SIGNAL] = { 0, };
 static void
 free_key_array (GPtrArray *keys)
 {
-  if (keys != NULL)
-    {
-      gint i;
+  if (keys != NULL) {
+    gint i;
 
-      for (i = 0; i < keys->len; i++)
-        {
-          CcKeyboardItem *item;
+    for (i = 0; i < keys->len; i++) {
+      CcKeyboardItem *item;
 
-          item = g_ptr_array_index (keys, i);
+      item = g_ptr_array_index (keys, i);
 
-          g_object_unref (item);
-        }
-
-      g_ptr_array_free (keys, TRUE);
+      g_object_unref (item);
     }
+
+    g_ptr_array_free (keys, TRUE);
+  }
 }
 
 static gboolean
@@ -98,21 +94,20 @@ find_conflict (CcUniquenessData *data,
   if (data->orig_item && cc_keyboard_item_equal (data->orig_item, item))
     return FALSE;
 
-  for (l = cc_keyboard_item_get_key_combos (item); l; l = l->next)
-    {
-      CcKeyCombo *combo = l->data;
+  for (l = cc_keyboard_item_get_key_combos (item); l; l = l->next) {
+    CcKeyCombo *combo = l->data;
 
-      if (data->new_mask != combo->mask)
-        continue;
+    if (data->new_mask != combo->mask)
+      continue;
 
-      if (data->new_keyval != 0)
-        is_conflict = data->new_keyval == combo->keyval;
-      else
-        is_conflict = combo->keyval == 0 && data->new_keycode == combo->keycode;
+    if (data->new_keyval != 0)
+      is_conflict = data->new_keyval == combo->keyval;
+    else
+      is_conflict = combo->keyval == 0 && data->new_keycode == combo->keycode;
 
-      if (is_conflict)
-        break;
-    }
+    if (is_conflict)
+      break;
+  }
 
   if (is_conflict)
     data->conflict_item = item;
@@ -153,28 +148,26 @@ check_for_uniqueness (gpointer          key,
 {
   guint i;
 
-  for (i = 0; i < keys_array->len; i++)
-    {
-      CcKeyboardItem *item;
+  for (i = 0; i < keys_array->len; i++) {
+    CcKeyboardItem *item;
 
-      item = keys_array->pdata[i];
+    item = keys_array->pdata[i];
 
-      if (compare_keys_for_uniqueness (item, data))
-        return TRUE;
-    }
+    if (compare_keys_for_uniqueness (item, data))
+      return TRUE;
+  }
 
   return FALSE;
 }
 
 
-static GHashTable*
+static GHashTable *
 get_hash_for_group (CcKeyboardManager *self,
                     BindingGroupType   group)
 {
   GHashTable *hash;
 
-  switch (group)
-    {
+  switch (group) {
     case BINDING_GROUP_SYSTEM:
       hash = self->kb_system_sections;
       break;
@@ -186,7 +179,7 @@ get_hash_for_group (CcKeyboardManager *self,
       break;
     default:
       hash = NULL;
-    }
+  }
 
   return hash;
 }
@@ -201,27 +194,21 @@ have_key_for_group (CcKeyboardManager *self,
   gint i;
 
   g_hash_table_iter_init (&iter, get_hash_for_group (self, group));
-  while (g_hash_table_iter_next (&iter, NULL, (gpointer*) &keys))
-    {
-      for (i = 0; i < keys->len; i++)
-        {
-          CcKeyboardItem *item = g_ptr_array_index (keys, i);
-          CcKeyboardItemType type;
-          type = cc_keyboard_item_get_item_type (item);
+  while (g_hash_table_iter_next (&iter, NULL, (gpointer *)&keys)) {
+    for (i = 0; i < keys->len; i++) {
+      CcKeyboardItem *item = g_ptr_array_index (keys, i);
+      CcKeyboardItemType type;
+      type = cc_keyboard_item_get_item_type (item);
 
-          if (type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS)
-            {
-              if (g_strcmp0 (name, cc_keyboard_item_get_key (item)) == 0)
-                {
-                  return TRUE;
-                }
-            }
-          else if (g_strcmp0 (name, cc_keyboard_item_get_gsettings_path (item)) == 0)
-            {
-              return TRUE;
-            }
+      if (type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS) {
+        if (g_strcmp0 (name, cc_keyboard_item_get_key (item)) == 0) {
+          return TRUE;
         }
+      } else if (g_strcmp0 (name, cc_keyboard_item_get_gsettings_path (item)) == 0) {
+        return TRUE;
+      }
     }
+  }
 
   return FALSE;
 }
@@ -236,46 +223,42 @@ add_shortcuts (CcKeyboardManager *self)
   sections_model = GTK_TREE_MODEL (self->sections_store);
   can_continue = gtk_tree_model_get_iter_first (sections_model, &sections_iter);
 
-  while (can_continue)
-    {
-      BindingGroupType group;
-      GPtrArray *keys;
-      g_autofree gchar *id = NULL;
-      g_autofree gchar *title = NULL;
-      gint i;
+  while (can_continue) {
+    BindingGroupType group;
+    GPtrArray *keys;
+    g_autofree gchar *id = NULL;
+    g_autofree gchar *title = NULL;
+    gint i;
 
-      gtk_tree_model_get (sections_model,
-                          &sections_iter,
-                          SECTION_DESCRIPTION_COLUMN, &title,
-                          SECTION_GROUP_COLUMN, &group,
-                          SECTION_ID_COLUMN, &id,
-                          -1);
+    gtk_tree_model_get (sections_model,
+                        &sections_iter,
+                        SECTION_DESCRIPTION_COLUMN, &title,
+                        SECTION_GROUP_COLUMN, &group,
+                        SECTION_ID_COLUMN, &id,
+                        -1);
 
-      /* Ignore separators */
-      if (group == BINDING_GROUP_SEPARATOR)
-        {
-          can_continue = gtk_tree_model_iter_next (sections_model, &sections_iter);
-          continue;
-        }
-
-      keys = g_hash_table_lookup (get_hash_for_group (self, group), id);
-
-      for (i = 0; i < keys->len; i++)
-        {
-          CcKeyboardItem *item = g_ptr_array_index (keys, i);
-
-          if (!cc_keyboard_item_is_hidden (item))
-            {
-              g_signal_emit (self, signals[SHORTCUT_ADDED],
-                             0,
-                             item,
-                             id,
-                             title);
-            }
-        }
-
+    /* Ignore separators */
+    if (group == BINDING_GROUP_SEPARATOR) {
       can_continue = gtk_tree_model_iter_next (sections_model, &sections_iter);
+      continue;
     }
+
+    keys = g_hash_table_lookup (get_hash_for_group (self, group), id);
+
+    for (i = 0; i < keys->len; i++) {
+      CcKeyboardItem *item = g_ptr_array_index (keys, i);
+
+      if (!cc_keyboard_item_is_hidden (item)) {
+        g_signal_emit (self, signals[SHORTCUT_ADDED],
+                       0,
+                       item,
+                       id,
+                       title);
+      }
+    }
+
+    can_continue = gtk_tree_model_iter_next (sections_model, &sections_iter);
+  }
 
   g_signal_emit (self, signals[SHORTCUTS_LOADED], 0);
 }
@@ -302,93 +285,84 @@ append_section (CcKeyboardManager  *self,
   /* Add all CcKeyboardItems for this section */
   is_new = FALSE;
   keys_array = g_hash_table_lookup (hash, id);
-  if (keys_array == NULL)
-    {
-      keys_array = g_ptr_array_new ();
-      is_new = TRUE;
-    }
+  if (keys_array == NULL) {
+    keys_array = g_ptr_array_new ();
+    is_new = TRUE;
+  }
 
   reverse_items = g_hash_table_new (g_str_hash, g_str_equal);
 
-  for (i = 0; keys_list != NULL && keys_list[i].name != NULL; i++)
-    {
-      CcKeyboardItem *item;
-      gboolean ret;
+  for (i = 0; keys_list != NULL && keys_list[i].name != NULL; i++) {
+    CcKeyboardItem *item;
+    gboolean ret;
 
-      if (have_key_for_group (self, group, keys_list[i].name))
-        continue;
+    if (have_key_for_group (self, group, keys_list[i].name))
+      continue;
 
-      item = cc_keyboard_item_new (keys_list[i].type);
+    item = cc_keyboard_item_new (keys_list[i].type);
 
-      switch (keys_list[i].type)
-        {
-        case CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT:
-          ret = cc_keyboard_item_load_from_global_shortcuts (item,
-                                                             keys_list[i].name,
-                                                             keys_list[i].properties);
-          break;
+    switch (keys_list[i].type) {
+      case CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT:
+        ret = cc_keyboard_item_load_from_global_shortcuts (item,
+                                                           keys_list[i].name,
+                                                           keys_list[i].properties);
+        break;
 
-        case CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH:
-          ret = cc_keyboard_item_load_from_gsettings_path (item, keys_list[i].name, FALSE);
-          break;
+      case CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH:
+        ret = cc_keyboard_item_load_from_gsettings_path (item, keys_list[i].name, FALSE);
+        break;
 
-        case CC_KEYBOARD_ITEM_TYPE_GSETTINGS:
-          ret = cc_keyboard_item_load_from_gsettings (item,
-                                                      keys_list[i].description,
-                                                      keys_list[i].schema,
-                                                      keys_list[i].name);
-          if (ret && keys_list[i].reverse_entry != NULL)
-            {
-              CcKeyboardItem *reverse_item;
-              reverse_item = g_hash_table_lookup (reverse_items,
-                                                  keys_list[i].reverse_entry);
-              if (reverse_item != NULL)
-                {
-                  cc_keyboard_item_add_reverse_item (item,
-                                                     reverse_item,
-                                                     keys_list[i].is_reversed);
-                }
-              else
-                {
-                  g_hash_table_insert (reverse_items,
-                                       keys_list[i].name,
-                                       item);
-                }
-            }
-          break;
-
-        default:
-          g_assert_not_reached ();
+      case CC_KEYBOARD_ITEM_TYPE_GSETTINGS:
+        ret = cc_keyboard_item_load_from_gsettings (item,
+                                                    keys_list[i].description,
+                                                    keys_list[i].schema,
+                                                    keys_list[i].name);
+        if (ret && keys_list[i].reverse_entry != NULL) {
+          CcKeyboardItem *reverse_item;
+          reverse_item = g_hash_table_lookup (reverse_items,
+                                              keys_list[i].reverse_entry);
+          if (reverse_item != NULL) {
+            cc_keyboard_item_add_reverse_item (item,
+                                               reverse_item,
+                                               keys_list[i].is_reversed);
+          } else {
+            g_hash_table_insert (reverse_items,
+                                 keys_list[i].name,
+                                 item);
+          }
         }
+        break;
 
-      if (ret == FALSE)
-        {
-          /* We don't actually want to popup a dialog - just skip this one */
-          g_object_unref (item);
-          continue;
-        }
-
-      cc_keyboard_item_set_hidden (item, keys_list[i].hidden);
-
-      g_ptr_array_add (keys_array, item);
+      default:
+        g_assert_not_reached ();
     }
+
+    if (ret == FALSE) {
+      /* We don't actually want to popup a dialog - just skip this one */
+      g_object_unref (item);
+      continue;
+    }
+
+    cc_keyboard_item_set_hidden (item, keys_list[i].hidden);
+
+    g_ptr_array_add (keys_array, item);
+  }
 
   g_hash_table_destroy (reverse_items);
 
   /* Add the keys to the hash table */
-  if (is_new)
-    {
-      g_hash_table_insert (hash, g_strdup (id), keys_array);
+  if (is_new) {
+    g_hash_table_insert (hash, g_strdup (id), keys_array);
 
-      /* Append the section to the left tree view */
-      gtk_list_store_append (GTK_LIST_STORE (self->sections_store), &iter);
-      gtk_list_store_set (GTK_LIST_STORE (self->sections_store),
-                          &iter,
-                          SECTION_DESCRIPTION_COLUMN, title,
-                          SECTION_ID_COLUMN, id,
-                          SECTION_GROUP_COLUMN, group,
-                          -1);
-    }
+    /* Append the section to the left tree view */
+    gtk_list_store_append (GTK_LIST_STORE (self->sections_store), &iter);
+    gtk_list_store_set (GTK_LIST_STORE (self->sections_store),
+                        &iter,
+                        SECTION_DESCRIPTION_COLUMN, title,
+                        SECTION_ID_COLUMN, id,
+                        SECTION_GROUP_COLUMN, group,
+                        -1);
+  }
 }
 
 static void
@@ -409,21 +383,20 @@ append_sections_from_file (CcKeyboardManager  *self,
   if (keylist == NULL)
     return;
 
-#define const_strv(s) ((const gchar* const*) s)
+#define const_strv(s) ((const gchar * const *)s)
 
   /* If there's no keys to add, or the settings apply to a window manager
    * that's not the one we're running */
   if (keylist->entries->len == 0 ||
       (keylist->wm_name != NULL && !g_strv_contains (const_strv (wm_keybindings), keylist->wm_name)) ||
-      keylist->name == NULL)
-    {
-      g_free (keylist->name);
-      g_free (keylist->package);
-      g_free (keylist->wm_name);
-      g_array_free (keylist->entries, TRUE);
-      g_free (keylist);
-      return;
-    }
+      keylist->name == NULL) {
+    g_free (keylist->name);
+    g_free (keylist->package);
+    g_free (keylist->wm_name);
+    g_array_free (keylist->entries, TRUE);
+    g_free (keylist);
+    return;
+  }
 
 #undef const_strv
 
@@ -431,18 +404,17 @@ append_sections_from_file (CcKeyboardManager  *self,
   key.name = NULL;
   g_array_append_val (keylist->entries, key);
 
-  keys = (KeyListEntry *) g_array_free (keylist->entries, FALSE);
-  if (keylist->package)
-    {
-      g_autofree gchar *localedir = NULL;
+  keys = (KeyListEntry *)g_array_free (keylist->entries, FALSE);
+  if (keylist->package) {
+    g_autofree gchar *localedir = NULL;
 
-      localedir = g_build_filename (datadir, "locale", NULL);
-      bindtextdomain (keylist->package, localedir);
+    localedir = g_build_filename (datadir, "locale", NULL);
+    bindtextdomain (keylist->package, localedir);
 
-      title = dgettext (keylist->package, keylist->name);
-    } else {
-      title = _(keylist->name);
-    }
+    title = dgettext (keylist->package, keylist->name);
+  } else {
+    title = _(keylist->name);
+  }
 
   if (keylist->group && strcmp (keylist->group, "system") == 0)
     group = BINDING_GROUP_SYSTEM;
@@ -457,14 +429,13 @@ append_sections_from_file (CcKeyboardManager  *self,
   g_free (keylist->schema);
   g_free (keylist->group);
 
-  for (i = 0; keys[i].name != NULL; i++)
-    {
-      KeyListEntry *entry = &keys[i];
-      g_free (entry->schema);
-      g_free (entry->description);
-      g_free (entry->name);
-      g_free (entry->reverse_entry);
-    }
+  for (i = 0; keys[i].name != NULL; i++) {
+    KeyListEntry *entry = &keys[i];
+    g_free (entry->schema);
+    g_free (entry->description);
+    g_free (entry->name);
+    g_free (entry->reverse_entry);
+  }
 
   g_free (keylist);
   g_free (keys);
@@ -473,7 +444,7 @@ append_sections_from_file (CcKeyboardManager  *self,
 static void
 append_sections_from_gsettings (CcKeyboardManager *self)
 {
-  g_auto(GStrv) custom_paths = NULL;
+  g_auto (GStrv) custom_paths = NULL;
   GArray *entries;
   KeyListEntry key = { 0 };
   int i;
@@ -482,38 +453,31 @@ append_sections_from_gsettings (CcKeyboardManager *self)
   entries = g_array_new (FALSE, TRUE, sizeof (KeyListEntry));
 
   custom_paths = g_settings_get_strv (self->binding_settings, "custom-keybindings");
-  for (i = 0; custom_paths[i]; i++)
-    {
-      key.name = g_strdup (custom_paths[i]);
-      if (!have_key_for_group (self, BINDING_GROUP_USER, key.name))
-        {
-          key.type = CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH;
-          g_array_append_val (entries, key);
-        }
-      else
-        g_free (key.name);
-    }
-
-  if (entries->len > 0)
-    {
-      KeyListEntry *keys;
-      int i;
-
-      /* Empty KeyListEntry to end the array */
-      key.name = NULL;
+  for (i = 0; custom_paths[i]; i++) {
+    key.name = g_strdup (custom_paths[i]);
+    if (!have_key_for_group (self, BINDING_GROUP_USER, key.name)) {
+      key.type = CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH;
       g_array_append_val (entries, key);
+    } else
+      g_free (key.name);
+  }
 
-      keys = (KeyListEntry *) entries->data;
-      append_section (self, _("Custom Shortcuts"), CUSTOM_SHORTCUTS_ID, BINDING_GROUP_USER, keys);
-      for (i = 0; i < entries->len; ++i)
-        {
-          g_free (keys[i].name);
-        }
+  if (entries->len > 0) {
+    KeyListEntry *keys;
+    int i;
+
+    /* Empty KeyListEntry to end the array */
+    key.name = NULL;
+    g_array_append_val (entries, key);
+
+    keys = (KeyListEntry *)entries->data;
+    append_section (self, _("Custom Shortcuts"), CUSTOM_SHORTCUTS_ID, BINDING_GROUP_USER, keys);
+    for (i = 0; i < entries->len; ++i) {
+      g_free (keys[i].name);
     }
-  else
-    {
-      append_section (self, _("Custom Shortcuts"), CUSTOM_SHORTCUTS_ID, BINDING_GROUP_USER, NULL);
-    }
+  } else {
+    append_section (self, _("Custom Shortcuts"), CUSTOM_SHORTCUTS_ID, BINDING_GROUP_USER, NULL);
+  }
 
   g_array_free (entries, TRUE);
 }
@@ -523,8 +487,8 @@ append_section_for_app_global_shortcuts (CcKeyboardManager *self,
                                          const char        *app_id,
                                          GVariant          *shortcuts)
 {
-  g_autoptr(GArray) entries = NULL;
-  g_autoptr(GVariant) value = NULL;
+  g_autoptr (GArray) entries = NULL;
+  g_autoptr (GVariant) value = NULL;
   g_autofree char *section_name = NULL;
   g_autofree char *shortcut = NULL;
   KeyListEntry key = { 0, };
@@ -534,21 +498,20 @@ append_section_for_app_global_shortcuts (CcKeyboardManager *self,
   entries = g_array_new (FALSE, TRUE, sizeof (KeyListEntry));
   g_variant_iter_init (&iter, shortcuts);
 
-  while (g_variant_iter_next (&iter, "(s@a{sv})", &shortcut, &value))
-    {
-      g_autofree char *shortcut_id = g_steal_pointer (&shortcut);
-      g_autoptr(GVariant) config = g_steal_pointer (&value);
+  while (g_variant_iter_next (&iter, "(s@a{sv})", &shortcut, &value)) {
+    g_autofree char *shortcut_id = g_steal_pointer (&shortcut);
+    g_autoptr (GVariant) config = g_steal_pointer (&value);
 
-      key.name = g_strdup (shortcut_id);
-      key.type = CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT;
-      key.properties = g_steal_pointer (&config);
-      g_array_append_val (entries, key);
-    }
+    key.name = g_strdup (shortcut_id);
+    key.type = CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT;
+    key.properties = g_steal_pointer (&config);
+    g_array_append_val (entries, key);
+  }
 
   /* Empty KeyListEntry to end the array */
   key.name = NULL;
   g_array_append_val (entries, key);
-  keys = (KeyListEntry *) entries->data;
+  keys = (KeyListEntry *)entries->data;
 
   section_name = cc_util_app_id_to_display_name (app_id);
   append_section (self, section_name, app_id, BINDING_GROUP_USER, keys);
@@ -565,37 +528,32 @@ append_sections_from_global_shortcuts_settings (CcKeyboardManager *self,
 
   children = g_settings_get_strv (self->global_shortcuts_settings, "applications");
 
-  for (i = 0; children[i]; i++)
-    {
-      g_autoptr (GVariant) shortcuts = NULL;
+  for (i = 0; children[i]; i++) {
+    g_autoptr (GVariant) shortcuts = NULL;
 
-      if (overlay_app_id && g_strcmp0 (overlay_app_id, children[i]) == 0)
-        {
-          shortcuts = g_variant_ref (overlay_app_shortcuts);
-          overlay_added = TRUE;
-        }
-      else
-        {
-          g_autoptr(GSettings) app_settings = NULL;
-          g_autofree char *app_path = NULL;
+    if (overlay_app_id && g_strcmp0 (overlay_app_id, children[i]) == 0) {
+      shortcuts = g_variant_ref (overlay_app_shortcuts);
+      overlay_added = TRUE;
+    } else {
+      g_autoptr (GSettings) app_settings = NULL;
+      g_autofree char *app_path = NULL;
 
-          app_path = g_strdup_printf (GLOBAL_SHORTCUTS_PATH "%s/", children[i]);
-          app_settings = g_settings_new_with_path (GLOBAL_SHORTCUTS_APP_SCHEMA,
-                                                   app_path);
-          shortcuts = g_settings_get_value (app_settings, "shortcuts");
-        }
-
-      append_section_for_app_global_shortcuts (self,
-                                               children[i],
-                                               shortcuts);
+      app_path = g_strdup_printf (GLOBAL_SHORTCUTS_PATH "%s/", children[i]);
+      app_settings = g_settings_new_with_path (GLOBAL_SHORTCUTS_APP_SCHEMA,
+                                               app_path);
+      shortcuts = g_settings_get_value (app_settings, "shortcuts");
     }
 
-  if (!overlay_added && overlay_app_id && overlay_app_shortcuts)
-    {
-      append_section_for_app_global_shortcuts (self,
-                                               overlay_app_id,
-                                               overlay_app_shortcuts);
-    }
+    append_section_for_app_global_shortcuts (self,
+                                             children[i],
+                                             shortcuts);
+  }
+
+  if (!overlay_added && overlay_app_id && overlay_app_shortcuts) {
+    append_section_for_app_global_shortcuts (self,
+                                             overlay_app_id,
+                                             overlay_app_shortcuts);
+  }
 }
 
 #ifdef GDK_WINDOWING_X11
@@ -640,20 +598,18 @@ get_window_manager_property (GdkDisplay *display,
   if (result != Success ||
       actual_type != utf8_string ||
       actual_format != 8 ||
-      n_items == 0)
-    {
-      XFree (prop);
-      return NULL;
-    }
+      n_items == 0) {
+    XFree (prop);
+    return NULL;
+  }
 
-  value = g_strndup ((const char *) prop, n_items);
+  value = g_strndup ((const char *)prop, n_items);
   XFree (prop);
 
-  if (!g_utf8_validate (value, -1, NULL))
-    {
-      g_free (value);
-      return NULL;
-    }
+  if (!g_utf8_validate (value, -1, NULL)) {
+    g_free (value);
+    return NULL;
+  }
 
   return value;
 }
@@ -693,13 +649,12 @@ get_wm_window (GdkDisplay *display)
 
   if (result != Success ||
       actual_type != XA_WINDOW ||
-      n_items == 0)
-    {
-      XFree (prop);
-      return None;
-    }
+      n_items == 0) {
+    XFree (prop);
+    return None;
+  }
 
-  wm_window = *(Window *) prop;
+  wm_window = *(Window *)prop;
   XFree (prop);
 
   return wm_window;
@@ -729,28 +684,25 @@ get_current_keybindings (void)
                                              keybindings_atom,
                                              wm_window);
 
-  if (keybindings != NULL)
-    {
-      GStrv p;
+  if (keybindings != NULL) {
+    GStrv p;
 
-      results = g_strsplit (keybindings, ",", -1);
+    results = g_strsplit (keybindings, ",", -1);
 
-      for (p = results; p && *p; p++)
-        g_strstrip (*p);
+    for (p = results; p && *p; p++)
+      g_strstrip (*p);
 
-      g_free (keybindings);
-    }
-  else
-    {
-      Atom wm_atom;
-      char *wm_name;
+    g_free (keybindings);
+  } else {
+    Atom wm_atom;
+    char *wm_name;
 
-      wm_atom = XInternAtom (xdisplay, "_NET_WM_NAME", False);
-      wm_name = get_window_manager_property (display, wm_atom, wm_window);
+    wm_atom = XInternAtom (xdisplay, "_NET_WM_NAME", False);
+    wm_name = get_window_manager_property (display, wm_atom, wm_window);
 
-      results = g_new0 (char *, 2);
-      results[0] = wm_name ? wm_name : g_strdup ("Unknown");
-    }
+    results = g_new0 (char *, 2);
+    results[0] = wm_name ? wm_name : g_strdup ("Unknown");
+  }
 
   return results;
 #else
@@ -764,8 +716,8 @@ reload_sections (CcKeyboardManager *self)
   GHashTable *loaded_files;
   GDir *dir;
   gchar *default_wm_keybindings[] = { "Mutter", "GNOME Shell", NULL };
-  g_auto(GStrv) wm_keybindings = NULL;
-  const gchar * const * data_dirs;
+  g_auto (GStrv) wm_keybindings = NULL;
+  const gchar * const *data_dirs;
   guint i;
 
   /* Clear previous models and hash tables */
@@ -775,19 +727,19 @@ reload_sections (CcKeyboardManager *self)
   self->kb_system_sections = g_hash_table_new_full (g_str_hash,
                                                     g_str_equal,
                                                     g_free,
-                                                    (GDestroyNotify) free_key_array);
+                                                    (GDestroyNotify)free_key_array);
 
   g_clear_pointer (&self->kb_apps_sections, g_hash_table_destroy);
   self->kb_apps_sections = g_hash_table_new_full (g_str_hash,
                                                   g_str_equal,
                                                   g_free,
-                                                  (GDestroyNotify) free_key_array);
+                                                  (GDestroyNotify)free_key_array);
 
   g_clear_pointer (&self->kb_user_sections, g_hash_table_destroy);
   self->kb_user_sections = g_hash_table_new_full (g_str_hash,
                                                   g_str_equal,
                                                   g_free,
-                                                  (GDestroyNotify) free_key_array);
+                                                  (GDestroyNotify)free_key_array);
 
   /* Load WM keybindings */
   wm_keybindings = get_current_keybindings ();
@@ -798,37 +750,34 @@ reload_sections (CcKeyboardManager *self)
   loaded_files = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
   data_dirs = g_get_system_data_dirs ();
-  for (i = 0; data_dirs[i] != NULL; i++)
-    {
-      g_autofree gchar *dir_path = NULL;
-      const gchar *name;
+  for (i = 0; data_dirs[i] != NULL; i++) {
+    g_autofree gchar *dir_path = NULL;
+    const gchar *name;
 
-      dir_path = g_build_filename (data_dirs[i], "gnome-control-center", "keybindings", NULL);
+    dir_path = g_build_filename (data_dirs[i], "gnome-control-center", "keybindings", NULL);
 
-      dir = g_dir_open (dir_path, 0, NULL);
-      if (!dir)
+    dir = g_dir_open (dir_path, 0, NULL);
+    if (!dir)
+      continue;
+
+    for (name = g_dir_read_name (dir) ; name ; name = g_dir_read_name (dir)) {
+      g_autofree gchar *path = NULL;
+
+      if (g_str_has_suffix (name, ".xml") == FALSE)
         continue;
 
-      for (name = g_dir_read_name (dir) ; name ; name = g_dir_read_name (dir))
-        {
-          g_autofree gchar *path = NULL;
+      if (g_hash_table_lookup (loaded_files, name) != NULL) {
+        g_debug ("Not loading %s, it was already loaded from another directory", name);
+        continue;
+      }
 
-          if (g_str_has_suffix (name, ".xml") == FALSE)
-            continue;
-
-          if (g_hash_table_lookup (loaded_files, name) != NULL)
-            {
-              g_debug ("Not loading %s, it was already loaded from another directory", name);
-              continue;
-            }
-
-          g_hash_table_insert (loaded_files, g_strdup (name), GINT_TO_POINTER (1));
-          path = g_build_filename (dir_path, name, NULL);
-          append_sections_from_file (self, path, data_dirs[i], wm_keybindings);
-        }
-
-      g_dir_close (dir);
+      g_hash_table_insert (loaded_files, g_strdup (name), GINT_TO_POINTER (1));
+      path = g_build_filename (dir_path, name, NULL);
+      append_sections_from_file (self, path, data_dirs[i], wm_keybindings);
     }
+
+    g_dir_close (dir);
+  }
 
   g_hash_table_destroy (loaded_files);
 
@@ -1010,7 +959,7 @@ cc_keyboard_manager_load_shortcuts (CcKeyboardManager *self)
  *
  * Returns: (transfer full): a #CcKeyboardItem
  */
-CcKeyboardItem*
+CcKeyboardItem *
 cc_keyboard_manager_create_custom_shortcut (CcKeyboardManager *self)
 {
   CcKeyboardItem *item;
@@ -1048,11 +997,10 @@ cc_keyboard_manager_add_custom_shortcut (CcKeyboardManager *self,
   hash = get_hash_for_group (self, BINDING_GROUP_USER);
   keys_array = g_hash_table_lookup (hash, CUSTOM_SHORTCUTS_ID);
 
-  if (keys_array == NULL)
-    {
-      keys_array = g_ptr_array_new ();
-      g_hash_table_insert (hash, g_strdup (CUSTOM_SHORTCUTS_ID), keys_array);
-    }
+  if (keys_array == NULL) {
+    keys_array = g_ptr_array_new ();
+    g_hash_table_insert (hash, g_strdup (CUSTOM_SHORTCUTS_ID), keys_array);
+  }
 
   g_ptr_array_add (keys_array, item);
 
@@ -1082,8 +1030,8 @@ cc_keyboard_manager_add_custom_shortcut (CcKeyboardManager *self,
  * Removed the custom shortcut.
  */
 void
-cc_keyboard_manager_remove_custom_shortcut  (CcKeyboardManager *self,
-                                             CcKeyboardItem    *item)
+cc_keyboard_manager_remove_custom_shortcut (CcKeyboardManager *self,
+                                            CcKeyboardItem    *item)
 {
   GPtrArray *keys_array;
   GVariantBuilder builder;
@@ -1129,11 +1077,11 @@ cc_keyboard_manager_store_global_shortcuts (CcKeyboardManager *self,
 {
   GPtrArray *keys_array;
   GHashTable *hash;
-  g_autoptr(GSettings) app_settings = NULL;
+  g_autoptr (GSettings) app_settings = NULL;
   g_autofree char *app_settings_path = NULL;
-  g_auto(GVariantBuilder) builder =
+  g_auto (GVariantBuilder) builder =
     G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE ("a(sa{sv})"));
-  g_auto(GStrv) applications = NULL;
+  g_auto (GStrv) applications = NULL;
   int i;
 
   g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
@@ -1144,19 +1092,18 @@ cc_keyboard_manager_store_global_shortcuts (CcKeyboardManager *self,
   if (keys_array == NULL)
     return;
 
-  for (i = 0; i < keys_array->len; i++)
-    {
-      const char *name;
-      g_autoptr(GVariant) key_variant = NULL;
-      CcKeyboardItem *item;
+  for (i = 0; i < keys_array->len; i++) {
+    const char *name;
+    g_autoptr (GVariant) key_variant = NULL;
+    CcKeyboardItem *item;
 
-      item = g_ptr_array_index (keys_array, i);
+    item = g_ptr_array_index (keys_array, i);
 
-      name = cc_keyboard_item_get_global_shortcut_name (item);
-      key_variant = cc_keyboard_item_store_to_global_shortcuts_variant (item);
-      g_variant_builder_add (&builder, "(s@a{sv})",
-                             name, g_variant_ref_sink (key_variant));
-    }
+    name = cc_keyboard_item_get_global_shortcut_name (item);
+    key_variant = cc_keyboard_item_store_to_global_shortcuts_variant (item);
+    g_variant_builder_add (&builder, "(s@a{sv})",
+                           name, g_variant_ref_sink (key_variant));
+  }
 
   app_settings_path = g_strdup_printf (GLOBAL_SHORTCUTS_PATH "%s/", app_id);
   app_settings = g_settings_new_with_path (GLOBAL_SHORTCUTS_APP_SCHEMA, app_settings_path);
@@ -1164,25 +1111,24 @@ cc_keyboard_manager_store_global_shortcuts (CcKeyboardManager *self,
 
   applications = g_settings_get_strv (self->global_shortcuts_settings, "applications");
 
-  if (!g_strv_contains ((const char * const*) applications, app_id))
-    {
-      g_auto(GVariantBuilder) apps_builder =
-        G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE ("as"));
+  if (!g_strv_contains ((const char * const *)applications, app_id)) {
+    g_auto (GVariantBuilder) apps_builder =
+      G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE ("as"));
 
-      for (i = 0; applications[i]; i++)
-        g_variant_builder_add (&apps_builder, "s", applications[i]);
+    for (i = 0; applications[i]; i++)
+      g_variant_builder_add (&apps_builder, "s", applications[i]);
 
-      g_variant_builder_add (&apps_builder, "s", app_id);
-      g_settings_set_value (self->global_shortcuts_settings, "applications",
-                            g_variant_builder_end (&apps_builder));
-    }
+    g_variant_builder_add (&apps_builder, "s", app_id);
+    g_settings_set_value (self->global_shortcuts_settings, "applications",
+                          g_variant_builder_end (&apps_builder));
+  }
 }
 
 GVariant *
 cc_keyboard_manager_get_global_shortcuts (CcKeyboardManager *self,
                                           const char        *app_id)
 {
-  g_autoptr(GSettings) app_settings = NULL;
+  g_autoptr (GSettings) app_settings = NULL;
   g_autofree char *path = NULL;
 
   path = g_strdup_printf (GLOBAL_SHORTCUTS_PATH "%s/", app_id);
@@ -1201,7 +1147,7 @@ cc_keyboard_manager_get_global_shortcuts (CcKeyboardManager *self,
  *
  * Returns: (transfer none)(nullable): the collisioned shortcut
  */
-CcKeyboardItem*
+CcKeyboardItem *
 cc_keyboard_manager_get_collision (CcKeyboardManager *self,
                                    CcKeyboardItem    *item,
                                    CcKeyCombo        *combo)
@@ -1221,17 +1167,16 @@ cc_keyboard_manager_get_collision (CcKeyboardManager *self,
     return NULL;
 
   /* Any number of shortcuts can be disabled */
-  for (i = BINDING_GROUP_SYSTEM; i <= BINDING_GROUP_USER && !data.conflict_item; i++)
-    {
-      GHashTable *table;
+  for (i = BINDING_GROUP_SYSTEM; i <= BINDING_GROUP_USER && !data.conflict_item; i++) {
+    GHashTable *table;
 
-      table = get_hash_for_group (self, i);
+    table = get_hash_for_group (self, i);
 
-      if (!table)
-        continue;
+    if (!table)
+      continue;
 
-      g_hash_table_find (table, (GHRFunc) check_for_uniqueness, &data);
-    }
+    g_hash_table_find (table, (GHRFunc)check_for_uniqueness, &data);
+  }
 
   return data.conflict_item;
 }
@@ -1261,23 +1206,22 @@ cc_keyboard_manager_reset_shortcut (CcKeyboardManager *self,
    * no other binding will get altered as long as the global shortcut default
    * is "disabled", because resetting to "disabled" never causes conflicts.
    */
-  for (l = cc_keyboard_item_get_default_combos (item); l; l = l->next)
-    {
-      CcKeyCombo *combo = l->data;
-      CcKeyboardItem *collision;
+  for (l = cc_keyboard_item_get_default_combos (item); l; l = l->next) {
+    CcKeyCombo *combo = l->data;
+    CcKeyboardItem *collision;
 
-      collision = cc_keyboard_manager_get_collision (self, NULL, combo);
-      if (collision)
-        cc_keyboard_item_remove_key_combo (collision, combo);
-    }
+    collision = cc_keyboard_manager_get_collision (self, NULL, combo);
+    if (collision)
+      cc_keyboard_item_remove_key_combo (collision, combo);
+  }
 
   /* Resets the current item */
   cc_keyboard_item_reset (item);
 }
 
 void
-cc_keyboard_manager_reset_global_shortcuts (CcKeyboardManager  *self,
-                                            const char         *app_id)
+cc_keyboard_manager_reset_global_shortcuts (CcKeyboardManager *self,
+                                            const char        *app_id)
 {
   g_autoptr (GSettings) settings = NULL;
   g_autofree char *path = NULL;

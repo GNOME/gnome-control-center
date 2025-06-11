@@ -41,32 +41,31 @@
 #include "pp-printer.h"
 
 struct _PpOptionsDialog {
-  AdwWindow    parent_instance;
+  AdwWindow parent_instance;
 
   GtkTreeSelection *categories_selection;
-  GtkTreeView      *categories_treeview;
-  GtkNotebook      *notebook;
-  GtkStack         *stack;
-  AdwWindowTitle   *title_widget;
+  GtkTreeView *categories_treeview;
+  GtkNotebook *notebook;
+  GtkStack *stack;
+  AdwWindowTitle *title_widget;
 
-  gchar       *printer_name;
+  gchar *printer_name;
 
-  gchar       *ppd_filename;
-  gboolean     ppd_filename_set;
+  gchar *ppd_filename;
+  gboolean ppd_filename_set;
 
   cups_dest_t *destination;
-  gboolean     destination_set;
+  gboolean destination_set;
 
-  GHashTable  *ipp_attributes;
-  gboolean     ipp_attributes_set;
+  GHashTable *ipp_attributes;
+  gboolean ipp_attributes_set;
 
   gboolean sensitive;
 };
 
 G_DEFINE_TYPE (PpOptionsDialog, pp_options_dialog, ADW_TYPE_WINDOW)
 
-enum
-{
+enum {
   CATEGORY_IDS_COLUMN = 0,
   CATEGORY_NAMES_COLUMN
 };
@@ -87,7 +86,7 @@ static const struct {
   { "MediaType", NULL, N_("Paper Type") },
   { "InputSlot", NULL, N_("Paper Source") },
   { "OutputBin", NULL, N_("Output Tray") },
-  { "Resolution", "printing option", NC_("printing option", "Resolution") },
+  { "Resolution", "printing option", NC_ ("printing option", "Resolution") },
   { "PreFilter", NULL, N_("GhostScript pre-filtering") },
   { "StpiShrinkOutput", NULL, N_("Shrink Page") },
 };
@@ -186,7 +185,7 @@ static const char *allowed_image_quality_groups[] = {
 };
 
 /* keep sorted when changing */
-static const char * allowed_finishing_options[] = {
+static const char *allowed_finishing_options[] = {
   "BindColor",
   "BindEdge",
   "BindType",
@@ -256,7 +255,7 @@ static const char *disallowed_ppd_options[] = {
 
 static int
 strptr_cmp (const void *a,
-	    const void *b)
+            const void *b)
 {
   char **aa = (char **)a;
   char **bb = (char **)b;
@@ -265,8 +264,8 @@ strptr_cmp (const void *a,
 
 static gboolean
 string_in_table (gchar       *str,
-		 const gchar *table[],
-		 gint         table_len)
+                 const gchar *table[],
+                 gint         table_len)
 {
   return bsearch (&str, table, table_len, sizeof (char *), (void *)strptr_cmp) != NULL;
 }
@@ -278,16 +277,14 @@ ppd_option_name_translate (ppd_option_t *option)
 {
   gint i;
 
-  for (i = 0; i < G_N_ELEMENTS (ppd_option_translations); i++)
-    {
-      if (g_strcmp0 (ppd_option_translations[i].keyword, option->keyword) == 0)
-        {
-          if (ppd_option_translations[i].translation_context)
-            return g_dpgettext2(NULL, ppd_option_translations[i].translation_context, ppd_option_translations[i].translation);
-          else
-            return _(ppd_option_translations[i].translation);
-        }
+  for (i = 0; i < G_N_ELEMENTS (ppd_option_translations); i++) {
+    if (g_strcmp0 (ppd_option_translations[i].keyword, option->keyword) == 0) {
+      if (ppd_option_translations[i].translation_context)
+        return g_dpgettext2 (NULL, ppd_option_translations[i].translation_context, ppd_option_translations[i].translation);
+      else
+        return _(ppd_option_translations[i].translation);
     }
+  }
 
   return option->text;
 }
@@ -296,22 +293,21 @@ static gint
 grid_get_height (GtkWidget *grid)
 {
   GtkWidget *child;
-  gint   height = 0;
-  gint   row = 0;
-  gint   max = 0;
+  gint height = 0;
+  gint row = 0;
+  gint max = 0;
 
   for (child = gtk_widget_get_first_child (grid);
        child;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      gtk_grid_query_child (GTK_GRID (grid),
-                            child,
-                            NULL, &row,
-                            NULL, &height);
+       child = gtk_widget_get_next_sibling (child)) {
+    gtk_grid_query_child (GTK_GRID (grid),
+                          child,
+                          NULL, &row,
+                          NULL, &height);
 
-      if (height + row > max)
-        max = height + row;
-    }
+    if (height + row > max)
+      max = height + row;
+  }
 
   return max;
 }
@@ -331,31 +327,30 @@ ipp_option_add (IPPAttribute *attr_supported,
                 GtkWidget    *grid,
                 gboolean      sensitive)
 {
-  GtkWidget       *widget;
-  GtkWidget       *label;
-  gint             position;
+  GtkWidget *widget;
+  GtkWidget *label;
+  gint position;
 
-  widget = (GtkWidget *) pp_ipp_option_widget_new (attr_supported,
-                                                   attr_default,
-                                                   option_name,
-                                                   printer_name);
-  if (widget)
-    {
-      gtk_widget_set_visible (widget, TRUE);
-      gtk_widget_set_sensitive (widget, sensitive);
-      position = grid_get_height (grid);
+  widget = (GtkWidget *)pp_ipp_option_widget_new (attr_supported,
+                                                  attr_default,
+                                                  option_name,
+                                                  printer_name);
+  if (widget) {
+    gtk_widget_set_visible (widget, TRUE);
+    gtk_widget_set_sensitive (widget, sensitive);
+    position = grid_get_height (grid);
 
-      label = gtk_label_new (option_display_name);
-      gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
-      gtk_widget_add_css_class (label, "dim-label");
-      gtk_widget_set_halign (label, GTK_ALIGN_END);
-      gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
-      gtk_widget_set_margin_start (label, 10);
-      gtk_grid_attach (GTK_GRID (grid), label, 0, position, 1, 1);
+    label = gtk_label_new (option_display_name);
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
+    gtk_widget_add_css_class (label, "dim-label");
+    gtk_widget_set_halign (label, GTK_ALIGN_END);
+    gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+    gtk_widget_set_margin_start (label, 10);
+    gtk_grid_attach (GTK_GRID (grid), label, 0, position, 1, 1);
 
-      gtk_widget_set_margin_start (widget, 20);
-      gtk_grid_attach (GTK_GRID (grid), widget, 1, position, 1, 1);
-    }
+    gtk_widget_set_margin_start (widget, 20);
+    gtk_grid_attach (GTK_GRID (grid), widget, 1, position, 1, 1);
+  }
 
   return widget;
 }
@@ -366,28 +361,27 @@ ppd_option_add (ppd_option_t  option,
                 GtkWidget    *grid,
                 gboolean      sensitive)
 {
-  GtkWidget       *widget;
-  GtkWidget       *label;
-  gint             position;
+  GtkWidget *widget;
+  GtkWidget *label;
+  gint position;
 
-  widget = (GtkWidget *) pp_ppd_option_widget_new (&option, printer_name);
-  if (widget)
-    {
-      gtk_widget_set_visible (widget, TRUE);
-      gtk_widget_set_sensitive (widget, sensitive);
-      position = grid_get_height (grid);
+  widget = (GtkWidget *)pp_ppd_option_widget_new (&option, printer_name);
+  if (widget) {
+    gtk_widget_set_visible (widget, TRUE);
+    gtk_widget_set_sensitive (widget, sensitive);
+    position = grid_get_height (grid);
 
-      label = gtk_label_new (ppd_option_name_translate (&option));
-      gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
-      gtk_widget_add_css_class (label, "dim-label");
-      gtk_widget_set_halign (label, GTK_ALIGN_END);
-      gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
-      gtk_widget_set_margin_start (label, 10);
-      gtk_grid_attach (GTK_GRID (grid), label, 0, position, 1, 1);
+    label = gtk_label_new (ppd_option_name_translate (&option));
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
+    gtk_widget_add_css_class (label, "dim-label");
+    gtk_widget_set_halign (label, GTK_ALIGN_END);
+    gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+    gtk_widget_set_margin_start (label, 10);
+    gtk_grid_attach (GTK_GRID (grid), label, 0, position, 1, 1);
 
-      gtk_widget_set_margin_start (widget, 20);
-      gtk_grid_attach (GTK_GRID (grid), widget, 1, position, 1, 1);
-    }
+    gtk_widget_set_margin_start (widget, 20);
+    gtk_grid_attach (GTK_GRID (grid), widget, 1, position, 1, 1);
+  }
 
   return widget;
 }
@@ -413,219 +407,202 @@ tab_add (PpOptionsDialog *self,
          GtkWidget       *grid)
 {
   GtkListStore *store;
-  GtkTreeIter   iter;
-  GtkWidget    *scrolled_window;
-  gboolean      unref_store = FALSE;
-  gint          id;
+  GtkTreeIter iter;
+  GtkWidget *scrolled_window;
+  gboolean unref_store = FALSE;
+  gint id;
 
-  if (!grid_is_empty (grid))
-    {
-      scrolled_window = gtk_scrolled_window_new ();
-      gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-                                      GTK_POLICY_NEVER,
-                                      GTK_POLICY_AUTOMATIC);
-      gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scrolled_window), grid);
+  if (!grid_is_empty (grid)) {
+    scrolled_window = gtk_scrolled_window_new ();
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+                                    GTK_POLICY_NEVER,
+                                    GTK_POLICY_AUTOMATIC);
+    gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scrolled_window), grid);
 
-      id = gtk_notebook_append_page (self->notebook,
-                                     scrolled_window,
-                                     NULL);
+    id = gtk_notebook_append_page (self->notebook,
+                                   scrolled_window,
+                                   NULL);
 
-      if (id >= 0)
-        {
-          store = GTK_LIST_STORE (gtk_tree_view_get_model (self->categories_treeview));
-          if (!store)
-            {
-              store = gtk_list_store_new (2, G_TYPE_INT, G_TYPE_STRING);
-              unref_store = TRUE;
-            }
+    if (id >= 0) {
+      store = GTK_LIST_STORE (gtk_tree_view_get_model (self->categories_treeview));
+      if (!store) {
+        store = gtk_list_store_new (2, G_TYPE_INT, G_TYPE_STRING);
+        unref_store = TRUE;
+      }
 
-          gtk_list_store_append (store, &iter);
-          gtk_list_store_set (store, &iter,
-                              CATEGORY_IDS_COLUMN, id,
-                              CATEGORY_NAMES_COLUMN, tab_name,
-                              -1);
+      gtk_list_store_append (store, &iter);
+      gtk_list_store_set (store, &iter,
+                          CATEGORY_IDS_COLUMN, id,
+                          CATEGORY_NAMES_COLUMN, tab_name,
+                          -1);
 
-          if (unref_store)
-            {
-              gtk_tree_view_set_model (self->categories_treeview, GTK_TREE_MODEL (store));
-              g_object_unref (store);
-            }
-        }
+      if (unref_store) {
+        gtk_tree_view_set_model (self->categories_treeview, GTK_TREE_MODEL (store));
+        g_object_unref (store);
+      }
     }
-  else
-    {
-      g_object_ref_sink (grid);
-      g_object_unref (grid);
-    }
+  } else {
+    g_object_ref_sink (grid);
+    g_object_unref (grid);
+  }
 }
 
 static void
 category_selection_changed_cb (PpOptionsDialog *self)
 {
   GtkTreeModel *model;
-  GtkTreeIter   iter;
-  gint          id = -1;
+  GtkTreeIter iter;
+  gint id = -1;
 
-  if (gtk_tree_selection_get_selected (self->categories_selection, &model, &iter))
-    {
-      gtk_tree_model_get (model, &iter,
-			  CATEGORY_IDS_COLUMN, &id,
-			  -1);
-    }
+  if (gtk_tree_selection_get_selected (self->categories_selection, &model, &iter)) {
+    gtk_tree_model_get (model, &iter,
+                        CATEGORY_IDS_COLUMN, &id,
+                        -1);
+  }
 
-  if (id >= 0)
-    {
-      gtk_notebook_set_current_page (self->notebook, id);
-    }
+  if (id >= 0) {
+    gtk_notebook_set_current_page (self->notebook, id);
+  }
 }
 
 static void
 populate_options_real (PpOptionsDialog *self)
 {
   GtkTreeModel *model;
-  GtkTreeIter   iter;
-  ppd_file_t   *ppd_file;
-  GtkWidget    *grid;
-  GtkWidget    *general_tab_grid = tab_grid_new ();
-  GtkWidget    *page_setup_tab_grid = tab_grid_new ();
-  GtkWidget    *installable_options_tab_grid = tab_grid_new ();
-  GtkWidget    *job_tab_grid = tab_grid_new ();
-  GtkWidget    *image_quality_tab_grid = tab_grid_new ();
-  GtkWidget    *color_tab_grid = tab_grid_new ();
-  GtkWidget    *finishing_tab_grid = tab_grid_new ();
-  GtkWidget    *advanced_tab_grid = tab_grid_new ();
-  gint          i, j;
+  GtkTreeIter iter;
+  ppd_file_t *ppd_file;
+  GtkWidget *grid;
+  GtkWidget *general_tab_grid = tab_grid_new ();
+  GtkWidget *page_setup_tab_grid = tab_grid_new ();
+  GtkWidget *installable_options_tab_grid = tab_grid_new ();
+  GtkWidget *job_tab_grid = tab_grid_new ();
+  GtkWidget *image_quality_tab_grid = tab_grid_new ();
+  GtkWidget *color_tab_grid = tab_grid_new ();
+  GtkWidget *finishing_tab_grid = tab_grid_new ();
+  GtkWidget *advanced_tab_grid = tab_grid_new ();
+  gint i, j;
 
   gtk_stack_set_visible_child_name (self->stack, "pp-options-page");
 
-  if (self->ipp_attributes)
-    {
-      /* Add number-up option to Page Setup tab */
-      ipp_option_add (g_hash_table_lookup (self->ipp_attributes,
-                                           "number-up-supported"),
-                      g_hash_table_lookup (self->ipp_attributes,
-                                           "number-up-default"),
-                      "number-up",
-                      /* Translators: This option sets number of pages printed on one sheet */
-                      _("Pages per side"),
-                      self->printer_name,
-                      page_setup_tab_grid,
-                      self->sensitive);
+  if (self->ipp_attributes) {
+    /* Add number-up option to Page Setup tab */
+    ipp_option_add (g_hash_table_lookup (self->ipp_attributes,
+                                         "number-up-supported"),
+                    g_hash_table_lookup (self->ipp_attributes,
+                                         "number-up-default"),
+                    "number-up",
+                    /* Translators: This option sets number of pages printed on one sheet */
+                    _("Pages per side"),
+                    self->printer_name,
+                    page_setup_tab_grid,
+                    self->sensitive);
 
-      /* Add sides option to Page Setup tab */
-      ipp_option_add (g_hash_table_lookup (self->ipp_attributes,
-                                           "sides-supported"),
-                      g_hash_table_lookup (self->ipp_attributes,
-                                           "sides-default"),
-                      "sides",
-                      /* Translators: This option sets whether to print on both sides of paper */
-                      _("Two-sided"),
-                      self->printer_name,
-                      page_setup_tab_grid,
-                      self->sensitive);
+    /* Add sides option to Page Setup tab */
+    ipp_option_add (g_hash_table_lookup (self->ipp_attributes,
+                                         "sides-supported"),
+                    g_hash_table_lookup (self->ipp_attributes,
+                                         "sides-default"),
+                    "sides",
+                    /* Translators: This option sets whether to print on both sides of paper */
+                    _("Two-sided"),
+                    self->printer_name,
+                    page_setup_tab_grid,
+                    self->sensitive);
 
-      /* Add orientation-requested option to Page Setup tab */
-      ipp_option_add (g_hash_table_lookup (self->ipp_attributes,
-                                           "orientation-requested-supported"),
-                      g_hash_table_lookup (self->ipp_attributes,
-                                           "orientation-requested-default"),
-                      "orientation-requested",
-                      /* Translators: This option sets orientation of print (portrait, landscape...) */
-                      _("Orientation"),
-                      self->printer_name,
-                      page_setup_tab_grid,
-                      self->sensitive);
-    }
+    /* Add orientation-requested option to Page Setup tab */
+    ipp_option_add (g_hash_table_lookup (self->ipp_attributes,
+                                         "orientation-requested-supported"),
+                    g_hash_table_lookup (self->ipp_attributes,
+                                         "orientation-requested-default"),
+                    "orientation-requested",
+                    /* Translators: This option sets orientation of print (portrait, landscape...) */
+                    _("Orientation"),
+                    self->printer_name,
+                    page_setup_tab_grid,
+                    self->sensitive);
+  }
 
-  if (self->destination && self->ppd_filename)
-    {
-      ppd_file = ppdOpenFile (self->ppd_filename);
-      ppdLocalize (ppd_file);
+  if (self->destination && self->ppd_filename) {
+    ppd_file = ppdOpenFile (self->ppd_filename);
+    ppdLocalize (ppd_file);
 
-      if (ppd_file)
-        {
-          ppdMarkDefaults (ppd_file);
-          cupsMarkOptions (ppd_file,
-                           self->destination->num_options,
-                           self->destination->options);
+    if (ppd_file) {
+      ppdMarkDefaults (ppd_file);
+      cupsMarkOptions (ppd_file,
+                       self->destination->num_options,
+                       self->destination->options);
 
-          for (i = 0; i < ppd_file->num_groups; i++)
-            {
-              for (j = 0; j < ppd_file->groups[i].num_options; j++)
-                {
-                  grid = NULL;
+      for (i = 0; i < ppd_file->num_groups; i++) {
+        for (j = 0; j < ppd_file->groups[i].num_options; j++) {
+          grid = NULL;
 
-                  if (STRING_IN_TABLE (ppd_file->groups[i].name,
-                                       allowed_color_groups))
-                    grid = color_tab_grid;
-                  else if (STRING_IN_TABLE (ppd_file->groups[i].name,
-                                            allowed_image_quality_groups))
-                    grid = image_quality_tab_grid;
-                  else if (STRING_IN_TABLE (ppd_file->groups[i].name,
-                                            allowed_job_groups))
-                    grid = job_tab_grid;
-                  else if (STRING_IN_TABLE (ppd_file->groups[i].name,
-                                            allowed_finishing_groups))
-                    grid = finishing_tab_grid;
-                  else if (STRING_IN_TABLE (ppd_file->groups[i].name,
-                                            allowed_installable_options_groups))
-                    grid = installable_options_tab_grid;
-                  else if (STRING_IN_TABLE (ppd_file->groups[i].name,
-                                            allowed_page_setup_groups))
-                    grid = page_setup_tab_grid;
+          if (STRING_IN_TABLE (ppd_file->groups[i].name,
+                               allowed_color_groups))
+            grid = color_tab_grid;
+          else if (STRING_IN_TABLE (ppd_file->groups[i].name,
+                                    allowed_image_quality_groups))
+            grid = image_quality_tab_grid;
+          else if (STRING_IN_TABLE (ppd_file->groups[i].name,
+                                    allowed_job_groups))
+            grid = job_tab_grid;
+          else if (STRING_IN_TABLE (ppd_file->groups[i].name,
+                                    allowed_finishing_groups))
+            grid = finishing_tab_grid;
+          else if (STRING_IN_TABLE (ppd_file->groups[i].name,
+                                    allowed_installable_options_groups))
+            grid = installable_options_tab_grid;
+          else if (STRING_IN_TABLE (ppd_file->groups[i].name,
+                                    allowed_page_setup_groups))
+            grid = page_setup_tab_grid;
 
-                  if (!STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
-                                        disallowed_ppd_options))
-                    {
-                      if (!grid && STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
-                                                    allowed_color_options))
-                        grid = color_tab_grid;
-                      else if (!grid && STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
-                                                         allowed_image_quality_options))
-                        grid = image_quality_tab_grid;
-                      else if (!grid && STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
-                                                         allowed_finishing_options))
-                        grid = finishing_tab_grid;
-                      else if (!grid && STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
-                                                         allowed_page_setup_options))
-                        grid = page_setup_tab_grid;
+          if (!STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
+                                disallowed_ppd_options)) {
+            if (!grid && STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
+                                          allowed_color_options))
+              grid = color_tab_grid;
+            else if (!grid && STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
+                                               allowed_image_quality_options))
+              grid = image_quality_tab_grid;
+            else if (!grid && STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
+                                               allowed_finishing_options))
+              grid = finishing_tab_grid;
+            else if (!grid && STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
+                                               allowed_page_setup_options))
+              grid = page_setup_tab_grid;
 
-                      if (!grid)
-                        grid = advanced_tab_grid;
+            if (!grid)
+              grid = advanced_tab_grid;
 
-                      ppd_option_add (ppd_file->groups[i].options[j],
-                                      self->printer_name,
-                                      grid,
-                                      self->sensitive);
-                    }
-                }
-            }
-
-          ppdClose (ppd_file);
+            ppd_option_add (ppd_file->groups[i].options[j],
+                            self->printer_name,
+                            grid,
+                            self->sensitive);
+          }
         }
+      }
+
+      ppdClose (ppd_file);
     }
+  }
 
   self->ppd_filename_set = FALSE;
-  if (self->ppd_filename)
-    {
-      g_unlink (self->ppd_filename);
-      g_free (self->ppd_filename);
-      self->ppd_filename = NULL;
-    }
+  if (self->ppd_filename) {
+    g_unlink (self->ppd_filename);
+    g_free (self->ppd_filename);
+    self->ppd_filename = NULL;
+  }
 
   self->destination_set = FALSE;
-  if (self->destination)
-    {
-      cupsFreeDests (1, self->destination);
-      self->destination = NULL;
-    }
+  if (self->destination) {
+    cupsFreeDests (1, self->destination);
+    self->destination = NULL;
+  }
 
   self->ipp_attributes_set = FALSE;
-  if (self->ipp_attributes)
-    {
-      g_hash_table_unref (self->ipp_attributes);
-      self->ipp_attributes = NULL;
-    }
+  if (self->ipp_attributes) {
+    g_hash_table_unref (self->ipp_attributes);
+    self->ipp_attributes = NULL;
+  }
 
   /* Translators: "General" tab contains general printer options */
   tab_add (self, C_("Printer Option Group", "General"), general_tab_grid);
@@ -661,29 +638,27 @@ static void
 printer_get_ppd_cb (const gchar *ppd_filename,
                     gpointer     user_data)
 {
-  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = (PpOptionsDialog *)user_data;
 
-  if (self->ppd_filename)
-    {
-      g_unlink (self->ppd_filename);
-      g_free (self->ppd_filename);
-    }
+  if (self->ppd_filename) {
+    g_unlink (self->ppd_filename);
+    g_free (self->ppd_filename);
+  }
 
   self->ppd_filename = g_strdup (ppd_filename);
   self->ppd_filename_set = TRUE;
 
   if (self->destination_set &&
-      self->ipp_attributes_set)
-    {
-      populate_options_real (self);
-    }
+      self->ipp_attributes_set) {
+    populate_options_real (self);
+  }
 }
 
 static void
 get_named_dest_cb (cups_dest_t *dest,
                    gpointer     user_data)
 {
-  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = (PpOptionsDialog *)user_data;
 
   if (self->destination)
     cupsFreeDests (1, self->destination);
@@ -692,17 +667,16 @@ get_named_dest_cb (cups_dest_t *dest,
   self->destination_set = TRUE;
 
   if (self->ppd_filename_set &&
-      self->ipp_attributes_set)
-    {
-      populate_options_real (self);
-    }
+      self->ipp_attributes_set) {
+    populate_options_real (self);
+  }
 }
 
 static void
 get_ipp_attributes_cb (GHashTable *table,
                        gpointer    user_data)
 {
-  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = (PpOptionsDialog *)user_data;
 
   if (self->ipp_attributes)
     g_hash_table_unref (self->ipp_attributes);
@@ -711,31 +685,31 @@ get_ipp_attributes_cb (GHashTable *table,
   self->ipp_attributes_set = TRUE;
 
   if (self->ppd_filename_set &&
-      self->destination_set)
-    {
-      populate_options_real (self);
-    }
+      self->destination_set) {
+    populate_options_real (self);
+  }
 }
 
 static void
 populate_options (PpOptionsDialog *self)
 {
-  GtkTreeViewColumn  *column;
-  GtkCellRenderer    *renderer;
+  GtkTreeViewColumn *column;
+  GtkCellRenderer *renderer;
   /*
    * Options which we need to obtain through an IPP request
    * to be able to fill the options dialog.
    * *-supported - possible values of the option
    * *-default - actual value of the option
    */
-  const gchar        *attributes[] =
-    { "number-up-supported",
-      "number-up-default",
-      "sides-supported",
-      "sides-default",
-      "orientation-requested-supported",
-      "orientation-requested-default",
-      NULL};
+  const gchar *attributes[] = {
+    "number-up-supported",
+    "number-up-default",
+    "sides-supported",
+    "sides-default",
+    "orientation-requested-supported",
+    "orientation-requested-default",
+    NULL
+  };
 
   renderer = gtk_cell_renderer_text_new ();
 
@@ -755,7 +729,7 @@ populate_options (PpOptionsDialog *self)
                         self);
 
   get_ipp_attributes_async (self->printer_name,
-                            (gchar **) attributes,
+                            (gchar **)attributes,
                             get_ipp_attributes_cb,
                             self);
 }
@@ -765,26 +739,27 @@ pp_maintenance_command_execute_cb (GObject      *source_object,
                                    GAsyncResult *res,
                                    gpointer      user_data)
 {
-  pp_maintenance_command_execute_finish (PP_MAINTENANCE_COMMAND(source_object), res, NULL);
+  pp_maintenance_command_execute_finish (PP_MAINTENANCE_COMMAND (source_object), res, NULL);
 }
 
 static gchar *
 get_testprint_filename (const gchar *datadir)
 {
-  const gchar *testprint[] = { "/data/testprint",
-                               "/data/testprint.ps",
-                               NULL };
-  gchar       *filename = NULL;
-  gint         i;
+  const gchar *testprint[] = {
+    "/data/testprint",
+    "/data/testprint.ps",
+    NULL
+  };
+  gchar *filename = NULL;
+  gint i;
 
-  for (i = 0; testprint[i] != NULL; i++)
-    {
-      filename = g_strconcat (datadir, testprint[i], NULL);
-      if (g_access (filename, R_OK) == 0)
-        break;
+  for (i = 0; testprint[i] != NULL; i++) {
+    filename = g_strconcat (datadir, testprint[i], NULL);
+    if (g_access (filename, R_OK) == 0)
+      break;
 
-      g_clear_pointer (&filename, g_free);
-    }
+    g_clear_pointer (&filename, g_free);
+  }
 
   return filename;
 }
@@ -803,56 +778,51 @@ test_page_cb (PpOptionsDialog *self)
 {
   gint i;
 
-  if (self->printer_name)
-    {
-      const gchar      *const dirs[] = { "/usr/share/cups",
-                                         "/usr/local/share/cups",
-                                         NULL };
-      const gchar      *datadir = NULL;
-      g_autofree gchar *filename = NULL;
+  if (self->printer_name) {
+    const gchar * const dirs[] = {
+      "/usr/share/cups",
+      "/usr/local/share/cups",
+      NULL
+    };
+    const gchar *datadir = NULL;
+    g_autofree gchar *filename = NULL;
 
-      datadir = getenv ("CUPS_DATADIR");
-      if (datadir != NULL)
-        {
-          filename = get_testprint_filename (datadir);
-        }
-      else
-        {
-          for (i = 0; dirs[i] != NULL && filename == NULL; i++)
-            filename = get_testprint_filename (dirs[i]);
-        }
-
-      if (filename != NULL)
-        {
-          g_autoptr(PpPrinter) printer = NULL;
-
-          printer = pp_printer_new (self->printer_name);
-          pp_printer_print_file_async (printer,
-                                       filename,
-          /* Translators: Name of job which makes printer to print test page */
-                                       _("Test Page"),
-                                       NULL,
-                                       print_test_page_cb,
-                                       NULL);
-        }
-      else
-        {
-          g_autoptr(PpMaintenanceCommand) command = NULL;
-
-          command = pp_maintenance_command_new (self->printer_name,
-                                                "PrintSelfTestPage",
-                                                NULL,
-          /* Translators: Name of job which makes printer to print test page */
-                                                _("Test page"));
-
-          pp_maintenance_command_execute_async (command, NULL, pp_maintenance_command_execute_cb, NULL);
-        }
+    datadir = getenv ("CUPS_DATADIR");
+    if (datadir != NULL) {
+      filename = get_testprint_filename (datadir);
+    } else {
+      for (i = 0; dirs[i] != NULL && filename == NULL; i++)
+        filename = get_testprint_filename (dirs[i]);
     }
+
+    if (filename != NULL) {
+      g_autoptr (PpPrinter) printer = NULL;
+
+      printer = pp_printer_new (self->printer_name);
+      pp_printer_print_file_async (printer,
+                                   filename,
+                                   /* Translators: Name of job which makes printer to print test page */
+                                   _("Test Page"),
+                                   NULL,
+                                   print_test_page_cb,
+                                   NULL);
+    } else {
+      g_autoptr (PpMaintenanceCommand) command = NULL;
+
+      command = pp_maintenance_command_new (self->printer_name,
+                                            "PrintSelfTestPage",
+                                            NULL,
+                                            /* Translators: Name of job which makes printer to print test page */
+                                            _("Test page"));
+
+      pp_maintenance_command_execute_async (command, NULL, pp_maintenance_command_execute_cb, NULL);
+    }
+  }
 }
 
 PpOptionsDialog *
-pp_options_dialog_new (gchar   *printer_name,
-                       gboolean sensitive)
+pp_options_dialog_new (gchar    *printer_name,
+                       gboolean  sensitive)
 {
   PpOptionsDialog *self;
 
@@ -877,24 +847,21 @@ pp_options_dialog_dispose (GObject *object)
   g_free (self->printer_name);
   self->printer_name = NULL;
 
-  if (self->ppd_filename)
-    {
-      g_unlink (self->ppd_filename);
-      g_free (self->ppd_filename);
-      self->ppd_filename = NULL;
-    }
+  if (self->ppd_filename) {
+    g_unlink (self->ppd_filename);
+    g_free (self->ppd_filename);
+    self->ppd_filename = NULL;
+  }
 
-  if (self->destination)
-    {
-      cupsFreeDests (1, self->destination);
-      self->destination = NULL;
-    }
+  if (self->destination) {
+    cupsFreeDests (1, self->destination);
+    self->destination = NULL;
+  }
 
-  if (self->ipp_attributes)
-    {
-      g_hash_table_unref (self->ipp_attributes);
-      self->ipp_attributes = NULL;
-    }
+  if (self->ipp_attributes) {
+    g_hash_table_unref (self->ipp_attributes);
+    self->ipp_attributes = NULL;
+  }
 
   G_OBJECT_CLASS (pp_options_dialog_parent_class)->dispose (object);
 }

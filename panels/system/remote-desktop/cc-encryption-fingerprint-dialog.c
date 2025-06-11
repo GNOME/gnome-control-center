@@ -54,7 +54,7 @@ cc_encryption_fingerprint_dialog_set_fingerprint (CcEncryptionFingerprintDialog 
                                                   const gchar                   *fingerprint,
                                                   const gchar                   *separator)
 {
-  g_auto(GStrv) fingerprintv = NULL;
+  g_auto (GStrv) fingerprintv = NULL;
   g_autofree char *left_string = NULL;
   g_autofree char *right_string = NULL;
 
@@ -71,15 +71,15 @@ cc_encryption_fingerprint_dialog_set_fingerprint (CcEncryptionFingerprintDialog 
     fingerprintv[16], fingerprintv[17], fingerprintv[18], fingerprintv[19],
     fingerprintv[24], fingerprintv[25], fingerprintv[26], fingerprintv[27]);
 
- right_string = g_strdup_printf (
-   "%s:%s:%s:%s\n"
-   "%s:%s:%s:%s\n"
-   "%s:%s:%s:%s\n"
-   "%s:%s:%s:%s\n",
-   fingerprintv[4], fingerprintv[5], fingerprintv[6], fingerprintv[7],
-   fingerprintv[12], fingerprintv[13], fingerprintv[14], fingerprintv[15],
-   fingerprintv[20], fingerprintv[21], fingerprintv[22], fingerprintv[23],
-   fingerprintv[28], fingerprintv[29], fingerprintv[30], fingerprintv[31]);
+  right_string = g_strdup_printf (
+    "%s:%s:%s:%s\n"
+    "%s:%s:%s:%s\n"
+    "%s:%s:%s:%s\n"
+    "%s:%s:%s:%s\n",
+    fingerprintv[4], fingerprintv[5], fingerprintv[6], fingerprintv[7],
+    fingerprintv[12], fingerprintv[13], fingerprintv[14], fingerprintv[15],
+    fingerprintv[20], fingerprintv[21], fingerprintv[22], fingerprintv[23],
+    fingerprintv[28], fingerprintv[29], fingerprintv[30], fingerprintv[31]);
 
   gtk_label_set_label (GTK_LABEL (self->fingerprint_left_label), left_string);
   gtk_label_set_label (GTK_LABEL (self->fingerprint_right_label), right_string);
@@ -90,18 +90,17 @@ cc_encryption_fingerprint_dialog_set_certificate (CcEncryptionFingerprintDialog 
                                                   GTlsCertificate               *certificate)
 {
   g_autofree char *fingerprint = NULL;
-  g_autoptr(GByteArray) der = NULL;
-  g_autoptr(GcrCertificate) gcr_cert = NULL;
+  g_autoptr (GByteArray) der = NULL;
+  g_autoptr (GcrCertificate) gcr_cert = NULL;
   g_return_if_fail (self);
   g_return_if_fail (certificate);
 
   g_object_get (certificate, "certificate", &der, NULL);
   gcr_cert = gcr_simple_certificate_new (der->data, der->len);
-  if (!gcr_cert)
-    {
-      g_warning ("Failed to load GCR TLS certificate representation");
-      return;
-    }
+  if (!gcr_cert) {
+    g_warning ("Failed to load GCR TLS certificate representation");
+    return;
+  }
 
   fingerprint = gcr_certificate_get_fingerprint_hex (gcr_cert, G_CHECKSUM_SHA256);
   cc_encryption_fingerprint_dialog_set_fingerprint (self, fingerprint, " ");

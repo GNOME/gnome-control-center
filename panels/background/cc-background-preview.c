@@ -26,31 +26,29 @@
 #define THUMBNAIL_WIDTH 256 /* No use asking for more, gnome_bg caps at 256 */
 #define THUMBNAIL_HEIGHT (THUMBNAIL_WIDTH * 3 / 4)
 
-struct _CcBackgroundPreview
-{
-  GtkWidget         parent;
+struct _CcBackgroundPreview {
+  GtkWidget parent;
 
-  GtkWidget        *picture;
-  GtkWidget        *light_dark_window;
-  GtkWidget        *dark_window;
+  GtkWidget *picture;
+  GtkWidget *light_dark_window;
+  GtkWidget *dark_window;
 
   GnomeDesktopThumbnailFactory *thumbnail_factory;
 
-  gboolean          is_dark;
+  gboolean is_dark;
   CcBackgroundItem *item;
 };
 
 G_DEFINE_TYPE (CcBackgroundPreview, cc_background_preview, GTK_TYPE_WIDGET)
 
-enum
-{
+enum {
   PROP_0,
   PROP_IS_DARK,
   PROP_ITEM,
   N_PROPS
 };
 
-static GParamSpec *properties [N_PROPS];
+static GParamSpec *properties[N_PROPS];
 
 /* GObject overrides */
 
@@ -81,16 +79,13 @@ set_is_dark (CcBackgroundPreview *self,
 {
   self->is_dark = is_dark;
 
-  if (self->is_dark)
-    {
-      gtk_widget_add_css_class (self->light_dark_window, "dark");
-      gtk_widget_remove_css_class (self->light_dark_window, "light");
-    }
-  else
-    {
-      gtk_widget_add_css_class (self->light_dark_window, "light");
-      gtk_widget_remove_css_class (self->light_dark_window, "dark");
-    }
+  if (self->is_dark) {
+    gtk_widget_add_css_class (self->light_dark_window, "dark");
+    gtk_widget_remove_css_class (self->light_dark_window, "light");
+  } else {
+    gtk_widget_add_css_class (self->light_dark_window, "light");
+    gtk_widget_remove_css_class (self->light_dark_window, "dark");
+  }
 }
 
 static void
@@ -101,8 +96,7 @@ cc_background_preview_get_property (GObject    *object,
 {
   CcBackgroundPreview *self = CC_BACKGROUND_PREVIEW (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_IS_DARK:
       g_value_set_boolean (value, self->is_dark);
       break;
@@ -113,7 +107,7 @@ cc_background_preview_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -124,8 +118,7 @@ cc_background_preview_set_property (GObject      *object,
 {
   CcBackgroundPreview *self = CC_BACKGROUND_PREVIEW (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_IS_DARK:
       set_is_dark (self, g_value_get_boolean (value));
       break;
@@ -136,7 +129,7 @@ cc_background_preview_set_property (GObject      *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static GtkSizeRequestMode
@@ -156,29 +149,25 @@ cc_background_preview_measure (GtkWidget      *widget,
 {
   GtkWidget *child;
 
-  if (orientation == GTK_ORIENTATION_HORIZONTAL)
-    {
-      *natural = THUMBNAIL_WIDTH;
-      *minimum = 0;
-    }
-  else
-    {
-      *natural = MAX (0, for_size * 3 / 4); /* 4:3 aspect ratio */
-      *minimum = *natural;
-    }
+  if (orientation == GTK_ORIENTATION_HORIZONTAL) {
+    *natural = THUMBNAIL_WIDTH;
+    *minimum = 0;
+  } else {
+    *natural = MAX (0, for_size * 3 / 4);   /* 4:3 aspect ratio */
+    *minimum = *natural;
+  }
 
   for (child = gtk_widget_get_first_child (widget);
        child;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      int child_min, child_nat;
+       child = gtk_widget_get_next_sibling (child)) {
+    int child_min, child_nat;
 
-      gtk_widget_measure (child, orientation, for_size,
-                          &child_min, &child_nat, NULL, NULL);
+    gtk_widget_measure (child, orientation, for_size,
+                        &child_min, &child_nat, NULL, NULL);
 
-      *minimum = MAX (*minimum, child_min);
-      *natural = MAX (*natural, child_nat);
-    }
+    *minimum = MAX (*minimum, child_min);
+    *natural = MAX (*natural, child_nat);
+  }
 }
 
 static void
@@ -261,7 +250,7 @@ cc_background_preview_init (CcBackgroundPreview *self)
   self->thumbnail_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 }
 
-CcBackgroundItem*
+CcBackgroundItem *
 cc_background_preview_get_item (CcBackgroundPreview *self)
 {
   g_return_val_if_fail (CC_IS_BACKGROUND_PREVIEW (self), NULL);
@@ -273,7 +262,7 @@ void
 cc_background_preview_set_item (CcBackgroundPreview *self,
                                 CcBackgroundItem    *item)
 {
-  g_autoptr(CcBackgroundPaintable) paintable = NULL;
+  g_autoptr (CcBackgroundPaintable) paintable = NULL;
   CcBackgroundPaintFlags paint_flags;
 
   g_return_if_fail (CC_IS_BACKGROUND_PREVIEW (self));

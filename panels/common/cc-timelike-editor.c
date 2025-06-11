@@ -51,14 +51,13 @@
 #define SECONDS_PER_DAY     (60 * 60 * 24)
 
 
-struct _CcTimelikeEditor
-{
-  GtkWidget  parent_instance;
+struct _CcTimelikeEditor {
+  GtkWidget parent_instance;
 
   GtkButton *am_pm_button;
-  GtkStack  *am_pm_stack;
-  GtkLabel  *am_label;
-  GtkLabel  *pm_label;
+  GtkStack *am_pm_stack;
+  GtkLabel *am_label;
+  GtkLabel *pm_label;
   GtkButton *hour_up_button;
   GtkButton *hour_down_button;
   GtkButton *minute_up_button;
@@ -69,7 +68,7 @@ struct _CcTimelikeEditor
   GSettings *clock_settings;
   GSettings *filechooser_settings;
 
-  guint      timer_id;
+  guint timer_id;
 
   CcTimelikeEditorMode mode;
 };
@@ -106,13 +105,12 @@ update_am_pm_widgets (CcTimelikeEditor *self)
 
   gtk_widget_set_visible (GTK_WIDGET (self->am_pm_button), is_am_pm && is_time);
 
-  if (is_am_pm && is_time)
-    {
-      if (cc_timelike_entry_get_is_am (self->timelike_entry))
-        gtk_stack_set_visible_child (self->am_pm_stack, GTK_WIDGET (self->am_label));
-      else
-        gtk_stack_set_visible_child (self->am_pm_stack, GTK_WIDGET (self->pm_label));
-    }
+  if (is_am_pm && is_time) {
+    if (cc_timelike_entry_get_is_am (self->timelike_entry))
+      gtk_stack_set_visible_child (self->am_pm_stack, GTK_WIDGET (self->am_label));
+    else
+      gtk_stack_set_visible_child (self->am_pm_stack, GTK_WIDGET (self->pm_label));
+  }
 }
 
 static void
@@ -139,37 +137,29 @@ editor_change_time_clicked_cb (CcTimelikeEditor *self,
   if (button == NULL)
     return;
 
-  if (button == self->hour_up_button)
-    {
-      gtk_editable_set_position (GTK_EDITABLE (self->timelike_entry), 0);
-      g_signal_emit_by_name (self->timelike_entry, "change-value", GTK_SCROLL_STEP_UP);
-    }
-  else if (button == self->hour_down_button)
-    {
-      gtk_editable_set_position (GTK_EDITABLE (self->timelike_entry), 0);
-      g_signal_emit_by_name (self->timelike_entry, "change-value", GTK_SCROLL_STEP_DOWN);
-    }
-  else if (button == self->minute_up_button)
-    {
-      gtk_editable_set_position (GTK_EDITABLE (self->timelike_entry), 3);
-      g_signal_emit_by_name (self->timelike_entry, "change-value", GTK_SCROLL_STEP_UP);
-    }
-  else if (button == self->minute_down_button)
-    {
-      gtk_editable_set_position (GTK_EDITABLE (self->timelike_entry), 3);
-      g_signal_emit_by_name (self->timelike_entry, "change-value", GTK_SCROLL_STEP_DOWN);
-    }
+  if (button == self->hour_up_button) {
+    gtk_editable_set_position (GTK_EDITABLE (self->timelike_entry), 0);
+    g_signal_emit_by_name (self->timelike_entry, "change-value", GTK_SCROLL_STEP_UP);
+  } else if (button == self->hour_down_button) {
+    gtk_editable_set_position (GTK_EDITABLE (self->timelike_entry), 0);
+    g_signal_emit_by_name (self->timelike_entry, "change-value", GTK_SCROLL_STEP_DOWN);
+  } else if (button == self->minute_up_button) {
+    gtk_editable_set_position (GTK_EDITABLE (self->timelike_entry), 3);
+    g_signal_emit_by_name (self->timelike_entry, "change-value", GTK_SCROLL_STEP_UP);
+  } else if (button == self->minute_down_button) {
+    gtk_editable_set_position (GTK_EDITABLE (self->timelike_entry), 3);
+    g_signal_emit_by_name (self->timelike_entry, "change-value", GTK_SCROLL_STEP_DOWN);
+  }
 }
 
 static gboolean
 editor_change_time_repeat (CcTimelikeEditor *self)
 {
-  if (self->clicked_button == NULL)
-    {
-      self->timer_id = 0;
+  if (self->clicked_button == NULL) {
+    self->timer_id = 0;
 
-      return G_SOURCE_REMOVE;
-    }
+    return G_SOURCE_REMOVE;
+  }
 
   editor_change_time_clicked_cb (self, self->clicked_button);
 
@@ -281,8 +271,7 @@ cc_timelike_editor_get_property (GObject    *object,
 {
   CcTimelikeEditor *self = CC_TIMELIKE_EDITOR (object);
 
-  switch ((CcTimelikeEditorProperty) property_id)
-    {
+  switch ((CcTimelikeEditorProperty)property_id) {
     case PROP_MODE:
       g_value_set_enum (value, cc_timelike_editor_get_mode (self));
       break;
@@ -292,7 +281,7 @@ cc_timelike_editor_get_property (GObject    *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -303,8 +292,7 @@ cc_timelike_editor_set_property (GObject      *object,
 {
   CcTimelikeEditor *self = CC_TIMELIKE_EDITOR (object);
 
-  switch ((CcTimelikeEditorProperty) property_id)
-    {
+  switch ((CcTimelikeEditorProperty)property_id) {
     case PROP_MODE:
       cc_timelike_editor_set_mode (self, g_value_get_enum (value));
       break;
@@ -314,7 +302,7 @@ cc_timelike_editor_set_property (GObject      *object,
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -340,7 +328,7 @@ cc_timelike_editor_finalize (GObject *object)
 static void
 cc_timelike_editor_class_init (CcTimelikeEditorClass *klass)
 {
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->constructed = cc_timelike_editor_constructed;

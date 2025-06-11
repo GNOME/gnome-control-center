@@ -43,18 +43,17 @@
 #include "cc-ua-macros.h"
 #include "cc-ua-hearing-page.h"
 
-struct _CcUaHearingPage
-{
-  AdwNavigationPage   parent_instance;
+struct _CcUaHearingPage {
+  AdwNavigationPage parent_instance;
 
-  AdwSwitchRow       *overamplification_row;
-  GtkLabel           *sound_settings_label;
+  AdwSwitchRow *overamplification_row;
+  GtkLabel *sound_settings_label;
 
-  AdwSwitchRow       *visual_alerts_row;
-  AdwComboRow        *flash_type_row;
+  AdwSwitchRow *visual_alerts_row;
+  AdwComboRow *flash_type_row;
 
-  GSettings          *sound_settings;
-  GSettings          *wm_settings;
+  GSettings *sound_settings;
+  GSettings *wm_settings;
 };
 
 G_DEFINE_TYPE (CcUaHearingPage, cc_ua_hearing_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -71,7 +70,7 @@ ua_hearing_flash_type_changed_cb (CcUaHearingPage *self)
 static gboolean
 ua_hearing_sound_settings_clicked_cb (CcUaHearingPage *self)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
   CcShell *shell;
   CcPanel *panel;
 

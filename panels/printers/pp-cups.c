@@ -31,8 +31,7 @@
 #define ippGetStatusCode(ipp) ipp->request.status.status_code
 #endif
 
-struct _PpCups
-{
+struct _PpCups {
   GObject parent_instance;
 };
 
@@ -71,14 +70,11 @@ _pp_cups_get_dests_thread (GTask        *task,
   dests = g_new0 (PpCupsDests, 1);
   dests->num_of_dests = cupsGetDests (&dests->dests);
 
-  if (g_task_set_return_on_cancel (task, FALSE))
-    {
-      g_task_return_pointer (task, dests, (GDestroyNotify) pp_cups_dests_free);
-    }
-  else
-    {
-      pp_cups_dests_free (dests);
-    }
+  if (g_task_set_return_on_cancel (task, FALSE)) {
+    g_task_return_pointer (task, dests, (GDestroyNotify)pp_cups_dests_free);
+  } else {
+    pp_cups_dests_free (dests);
+  }
 }
 
 void
@@ -87,11 +83,11 @@ pp_cups_get_dests_async (PpCups              *self,
                          GAsyncReadyCallback  callback,
                          gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_return_on_cancel (task, TRUE);
-  g_task_run_in_thread (task, (GTaskThreadFunc) _pp_cups_get_dests_thread);
+  g_task_run_in_thread (task, (GTaskThreadFunc)_pp_cups_get_dests_thread);
 }
 
 PpCupsDests *
@@ -120,10 +116,9 @@ connection_test_thread (GTask        *task,
 #endif
   httpClose (http);
 
-  if (g_task_set_return_on_cancel (task, FALSE))
-    {
-      g_task_return_boolean (task, http != NULL);
-    }
+  if (g_task_set_return_on_cancel (task, FALSE)) {
+    g_task_return_boolean (task, http != NULL);
+  }
 }
 
 void
@@ -132,7 +127,7 @@ pp_cups_connection_test_async (PpCups              *self,
                                GAsyncReadyCallback  callback,
                                gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_return_on_cancel (task, TRUE);
@@ -140,9 +135,9 @@ pp_cups_connection_test_async (PpCups              *self,
 }
 
 gboolean
-pp_cups_connection_test_finish (PpCups         *self,
-                                GAsyncResult   *result,
-                                GError        **error)
+pp_cups_connection_test_finish (PpCups        *self,
+                                GAsyncResult  *result,
+                                GError       **error)
 {
   g_return_val_if_fail (g_task_is_valid (result, self), FALSE);
 
@@ -158,19 +153,18 @@ cancel_subscription_thread (GTask        *task,
 {
   ipp_t *request;
   ipp_t *response = NULL;
-  gint   id = GPOINTER_TO_INT (task_data);
+  gint id = GPOINTER_TO_INT (task_data);
 
-  if (id >= 0)
-    {
-      request = ippNewRequest (IPP_CANCEL_SUBSCRIPTION);
-      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
-                    "printer-uri", NULL, "/");
-      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
-                    "requesting-user-name", NULL, cupsUser ());
-      ippAddInteger (request, IPP_TAG_OPERATION, IPP_TAG_INTEGER,
-                     "notify-subscription-id", id);
-      response = cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/");
-    }
+  if (id >= 0) {
+    request = ippNewRequest (IPP_CANCEL_SUBSCRIPTION);
+    ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                  "printer-uri", NULL, "/");
+    ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                  "requesting-user-name", NULL, cupsUser ());
+    ippAddInteger (request, IPP_TAG_OPERATION, IPP_TAG_INTEGER,
+                   "notify-subscription-id", id);
+    response = cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/");
+  }
 
   g_task_return_boolean (task, response != NULL && ippGetStatusCode (response) <= IPP_OK);
 
@@ -183,7 +177,7 @@ pp_cups_cancel_subscription_async (PpCups              *self,
                                    GAsyncReadyCallback  callback,
                                    gpointer             user_data)
 {
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   task = g_task_new (self, NULL, callback, user_data);
   g_task_set_task_data (task, GINT_TO_POINTER (subscription_id), NULL);
@@ -219,61 +213,57 @@ renew_subscription_thread (GTask        *task,
                            GCancellable *cancellable)
 {
   ipp_attribute_t *attr = NULL;
-  CRSData         *subscription_data = task_data;
-  ipp_t           *request;
-  ipp_t           *response = NULL;
-  gint             result = -1;
+  CRSData *subscription_data = task_data;
+  ipp_t *request;
+  ipp_t *response = NULL;
+  gint result = -1;
 
   if (g_cancellable_is_cancelled (cancellable))
     return;
 
-  if (subscription_data->id > 0)
-    {
-      request = ippNewRequest (IPP_RENEW_SUBSCRIPTION);
-      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
-                   "printer-uri", NULL, "/");
-      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
-                   "requesting-user-name", NULL, cupsUser ());
-      ippAddInteger (request, IPP_TAG_OPERATION, IPP_TAG_INTEGER,
-                    "notify-subscription-id", subscription_data->id);
-      ippAddInteger (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_INTEGER,
-                    "notify-lease-duration", subscription_data->lease_duration);
-      response = cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/");
-      if (response != NULL && ippGetStatusCode (response) <= IPP_OK_CONFLICT)
-        {
-          if ((attr = ippFindAttribute (response, "notify-lease-duration", IPP_TAG_INTEGER)) == NULL)
-            g_debug ("No notify-lease-duration in response!\n");
-          else if (ippGetInteger (attr, 0) == subscription_data->lease_duration)
-            result = subscription_data->id;
-        }
+  if (subscription_data->id > 0) {
+    request = ippNewRequest (IPP_RENEW_SUBSCRIPTION);
+    ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                  "printer-uri", NULL, "/");
+    ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                  "requesting-user-name", NULL, cupsUser ());
+    ippAddInteger (request, IPP_TAG_OPERATION, IPP_TAG_INTEGER,
+                   "notify-subscription-id", subscription_data->id);
+    ippAddInteger (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_INTEGER,
+                   "notify-lease-duration", subscription_data->lease_duration);
+    response = cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/");
+    if (response != NULL && ippGetStatusCode (response) <= IPP_OK_CONFLICT) {
+      if ((attr = ippFindAttribute (response, "notify-lease-duration", IPP_TAG_INTEGER)) == NULL)
+        g_debug ("No notify-lease-duration in response!\n");
+      else if (ippGetInteger (attr, 0) == subscription_data->lease_duration)
+        result = subscription_data->id;
     }
+  }
 
-  if (result < 0)
-    {
-      request = ippNewRequest (IPP_CREATE_PRINTER_SUBSCRIPTION);
-      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
-                   "printer-uri", NULL, "/");
-      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
-                   "requesting-user-name", NULL, cupsUser ());
-      ippAddStrings (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_KEYWORD,
-                    "notify-events", g_strv_length (subscription_data->events), NULL,
-                     (const char * const *) subscription_data->events);
-      ippAddString (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_KEYWORD,
-                   "notify-pull-method", NULL, "ippget");
-      ippAddString (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_URI,
-                   "notify-recipient-uri", NULL, "dbus://");
-      ippAddInteger (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_INTEGER,
-                    "notify-lease-duration", subscription_data->lease_duration);
-      response = cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/");
+  if (result < 0) {
+    request = ippNewRequest (IPP_CREATE_PRINTER_SUBSCRIPTION);
+    ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                  "printer-uri", NULL, "/");
+    ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                  "requesting-user-name", NULL, cupsUser ());
+    ippAddStrings (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_KEYWORD,
+                   "notify-events", g_strv_length (subscription_data->events), NULL,
+                   (const char * const *)subscription_data->events);
+    ippAddString (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_KEYWORD,
+                  "notify-pull-method", NULL, "ippget");
+    ippAddString (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_URI,
+                  "notify-recipient-uri", NULL, "dbus://");
+    ippAddInteger (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_INTEGER,
+                   "notify-lease-duration", subscription_data->lease_duration);
+    response = cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/");
 
-      if (response != NULL && ippGetStatusCode (response) <= IPP_OK_CONFLICT)
-        {
-          if ((attr = ippFindAttribute (response, "notify-subscription-id", IPP_TAG_INTEGER)) == NULL)
-            g_debug ("No notify-subscription-id in response!\n");
-          else
-            result = ippGetInteger (attr, 0);
-        }
+    if (response != NULL && ippGetStatusCode (response) <= IPP_OK_CONFLICT) {
+      if ((attr = ippFindAttribute (response, "notify-subscription-id", IPP_TAG_INTEGER)) == NULL)
+        g_debug ("No notify-subscription-id in response!\n");
+      else
+        result = ippGetInteger (attr, 0);
     }
+  }
 
   ippDelete (response);
 
@@ -281,16 +271,16 @@ renew_subscription_thread (GTask        *task,
 }
 
 void
-pp_cups_renew_subscription_async  (PpCups               *self,
-                                   gint                  subscription_id,
-                                   gchar               **events,
-                                   gint                  lease_duration,
-                                   GCancellable         *cancellable,
-                                   GAsyncReadyCallback   callback,
-                                   gpointer              user_data)
+pp_cups_renew_subscription_async (PpCups               *self,
+                                  gint                  subscription_id,
+                                  gchar               **events,
+                                  gint                  lease_duration,
+                                  GCancellable         *cancellable,
+                                  GAsyncReadyCallback   callback,
+                                  gpointer              user_data)
 {
   CRSData *subscription_data;
-  g_autoptr(GTask) task = NULL;
+  g_autoptr (GTask) task = NULL;
 
   subscription_data = g_slice_new (CRSData);
   subscription_data->id = subscription_id;
@@ -298,7 +288,7 @@ pp_cups_renew_subscription_async  (PpCups               *self,
   subscription_data->lease_duration = lease_duration;
 
   task = g_task_new (self, cancellable, callback, user_data);
-  g_task_set_task_data (task, subscription_data, (GDestroyNotify) crs_data_free);
+  g_task_set_task_data (task, subscription_data, (GDestroyNotify)crs_data_free);
   g_task_run_in_thread (task, renew_subscription_thread);
 }
 

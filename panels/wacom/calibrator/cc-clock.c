@@ -29,16 +29,14 @@
 
 typedef struct _CcClock CcClock;
 
-struct _CcClock
-{
+struct _CcClock {
   GtkWidget parent_instance;
   guint duration;
   gint64 start_time;
   gboolean running;
 };
 
-enum
-{
+enum {
   PROP_DURATION = 1,
   N_PROPS
 };
@@ -76,7 +74,7 @@ cc_clock_get_angle (CcClock *clock)
   if (time_diff > clock->duration * 1000)
     return 360;
 
-  return ((gdouble) time_diff / (clock->duration * 1000)) * 360;
+  return ((gdouble)time_diff / (clock->duration * 1000)) * 360;
 }
 
 static void
@@ -135,11 +133,10 @@ on_frame_clock_update (CcClock *clock)
 
   time_diff = cc_clock_get_time_diff (clock);
 
-  if (time_diff > clock->duration * 1000)
-    {
-      g_signal_emit (clock, signals[FINISHED], 0);
-      cc_clock_stop (clock);
-    }
+  if (time_diff > clock->duration * 1000) {
+    g_signal_emit (clock, signals[FINISHED], 0);
+    cc_clock_stop (clock);
+  }
 
   gtk_widget_queue_draw (GTK_WIDGET (clock));
 }
@@ -166,15 +163,14 @@ cc_clock_set_property (GObject      *object,
 {
   CcClock *clock = CC_CLOCK (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_DURATION:
       clock->duration = g_value_get_uint (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
-    }
+  }
 }
 
 static void
@@ -185,15 +181,14 @@ cc_clock_get_property (GObject    *object,
 {
   CcClock *clock = CC_CLOCK (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_DURATION:
       g_value_set_uint (value, clock->duration);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
-    }
+  }
 }
 
 static void

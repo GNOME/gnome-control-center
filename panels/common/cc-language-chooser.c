@@ -37,22 +37,22 @@
 #include <libgnome-desktop/gnome-languages.h>
 
 struct _CcLanguageChooser {
-        AdwDialog parent_instance;
+  AdwDialog parent_instance;
 
-        GtkSearchEntry *language_filter_entry;
-        GtkListBox     *language_listbox;
-        GtkListBoxRow  *more_row;
-        GtkSearchBar   *search_bar;
-        GtkButton      *select_button;
+  GtkSearchEntry *language_filter_entry;
+  GtkListBox *language_listbox;
+  GtkListBoxRow *more_row;
+  GtkSearchBar *search_bar;
+  GtkButton *select_button;
 
-        gboolean showing_extra;
-        gchar *language;
-        gchar **filter_words;
+  gboolean showing_extra;
+  gchar *language;
+  gchar **filter_words;
 };
 
 enum {
-        LANGUAGE_SELECTED,
-        LAST_SIGNAL
+  LANGUAGE_SELECTED,
+  LAST_SIGNAL
 };
 
 static guint signals[LAST_SIGNAL] = { 0, };
@@ -62,278 +62,280 @@ G_DEFINE_TYPE (CcLanguageChooser, cc_language_chooser, ADW_TYPE_DIALOG)
 static void
 add_all_languages (CcLanguageChooser *self)
 {
-        g_auto(GStrv) locale_ids = NULL;
-        g_autoptr(GHashTable) initial = NULL;
+  g_auto (GStrv) locale_ids = NULL;
+  g_autoptr (GHashTable) initial = NULL;
 
-        locale_ids = gnome_get_all_locales ();
-        initial = cc_common_language_get_initial_languages ();
-        for (int i = 0; locale_ids[i] != NULL; i++) {
-                CcLanguageRow *row;
-                gboolean is_initial;
+  locale_ids = gnome_get_all_locales ();
+  initial = cc_common_language_get_initial_languages ();
+  for (int i = 0; locale_ids[i] != NULL; i++) {
+    CcLanguageRow *row;
+    gboolean is_initial;
 
-                if (!cc_common_language_has_font (locale_ids[i]))
-                        continue;
+    if (!cc_common_language_has_font (locale_ids[i]))
+      continue;
 
-                row = cc_language_row_new (locale_ids[i]);
-                is_initial = (g_hash_table_lookup (initial, locale_ids[i]) != NULL);
-                cc_language_row_set_is_extra (row, !is_initial);
-                gtk_list_box_prepend (self->language_listbox, GTK_WIDGET (row));
-        }
+    row = cc_language_row_new (locale_ids[i]);
+    is_initial = (g_hash_table_lookup (initial, locale_ids[i]) != NULL);
+    cc_language_row_set_is_extra (row, !is_initial);
+    gtk_list_box_prepend (self->language_listbox, GTK_WIDGET (row));
+  }
 }
 
 static gboolean
 match_all (gchar       **words,
            const gchar  *str)
 {
-        gchar **w;
+  gchar **w;
 
-        if (str == NULL)
-                return FALSE;
+  if (str == NULL)
+    return FALSE;
 
-        for (w = words; *w; ++w)
-                if (!strstr (str, *w))
-                        return FALSE;
+  for (w = words; *w; ++w)
+    if (!strstr (str, *w))
+      return FALSE;
 
-        return TRUE;
+  return TRUE;
 }
 
 static gboolean
 language_visible (GtkListBoxRow *row,
-                  gpointer   user_data)
+                  gpointer       user_data)
 {
-        CcLanguageChooser *self = user_data;
-        g_autofree gchar *language = NULL;
-        g_autofree gchar *country = NULL;
-        g_autofree gchar *language_local = NULL;
-        g_autofree gchar *country_local = NULL;
-        gboolean visible;
+  CcLanguageChooser *self = user_data;
+  g_autofree gchar *language = NULL;
+  g_autofree gchar *country = NULL;
+  g_autofree gchar *language_local = NULL;
+  g_autofree gchar *country_local = NULL;
+  gboolean visible;
 
-        if (row == self->more_row)
-                return !self->showing_extra;
+  if (row == self->more_row)
+    return !self->showing_extra;
 
-        if (!CC_IS_LANGUAGE_ROW (row))
-                return TRUE;
+  if (!CC_IS_LANGUAGE_ROW (row))
+    return TRUE;
 
-        if (!self->showing_extra && cc_language_row_get_is_extra (CC_LANGUAGE_ROW (row)))
-                return FALSE;
+  if (!self->showing_extra && cc_language_row_get_is_extra (CC_LANGUAGE_ROW (row)))
+    return FALSE;
 
-        if (!self->filter_words)
-                return TRUE;
+  if (!self->filter_words)
+    return TRUE;
 
-        language =
-                cc_util_normalize_casefold_and_unaccent (cc_language_row_get_language (CC_LANGUAGE_ROW (row)));
-        visible = match_all (self->filter_words, language);
-        if (visible)
-                return TRUE;
+  language =
+    cc_util_normalize_casefold_and_unaccent (cc_language_row_get_language (CC_LANGUAGE_ROW (row)));
+  visible = match_all (self->filter_words, language);
+  if (visible)
+    return TRUE;
 
-        country =
-                cc_util_normalize_casefold_and_unaccent (cc_language_row_get_country (CC_LANGUAGE_ROW (row)));
-        visible = match_all (self->filter_words, country);
-        if (visible)
-                return TRUE;
+  country =
+    cc_util_normalize_casefold_and_unaccent (cc_language_row_get_country (CC_LANGUAGE_ROW (row)));
+  visible = match_all (self->filter_words, country);
+  if (visible)
+    return TRUE;
 
-        language_local =
-                cc_util_normalize_casefold_and_unaccent (cc_language_row_get_language_local (CC_LANGUAGE_ROW (row)));
-        visible = match_all (self->filter_words, language_local);
-        if (visible)
-                return TRUE;
+  language_local =
+    cc_util_normalize_casefold_and_unaccent (cc_language_row_get_language_local (CC_LANGUAGE_ROW (row)));
+  visible = match_all (self->filter_words, language_local);
+  if (visible)
+    return TRUE;
 
-        country_local =
-                cc_util_normalize_casefold_and_unaccent (cc_language_row_get_country_local (CC_LANGUAGE_ROW (row)));
-        return match_all (self->filter_words, country_local);
+  country_local =
+    cc_util_normalize_casefold_and_unaccent (cc_language_row_get_country_local (CC_LANGUAGE_ROW (row)));
+  return match_all (self->filter_words, country_local);
 }
 
 static gint
 sort_languages (GtkListBoxRow *a,
                 GtkListBoxRow *b,
-                gpointer   data)
+                gpointer       data)
 {
-        int d;
+  int d;
 
-        if (!CC_IS_LANGUAGE_ROW (a))
-                return 1;
-        if (!CC_IS_LANGUAGE_ROW (b))
-                return -1;
+  if (!CC_IS_LANGUAGE_ROW (a))
+    return 1;
+  if (!CC_IS_LANGUAGE_ROW (b))
+    return -1;
 
-        d = g_strcmp0 (cc_language_row_get_language (CC_LANGUAGE_ROW (a)), cc_language_row_get_language (CC_LANGUAGE_ROW (b)));
-        if (d != 0)
-                return d;
+  d = g_strcmp0 (cc_language_row_get_language (CC_LANGUAGE_ROW (a)), cc_language_row_get_language (CC_LANGUAGE_ROW (b)));
+  if (d != 0)
+    return d;
 
-        return g_strcmp0 (cc_language_row_get_country (CC_LANGUAGE_ROW (a)), cc_language_row_get_country (CC_LANGUAGE_ROW (b)));
+  return g_strcmp0 (cc_language_row_get_country (CC_LANGUAGE_ROW (a)), cc_language_row_get_country (CC_LANGUAGE_ROW (b)));
 }
 
 static void
 language_filter_entry_search_changed_cb (CcLanguageChooser *self)
 {
-        g_autofree gchar *filter_contents = NULL;
+  g_autofree gchar *filter_contents = NULL;
 
-        g_clear_pointer (&self->filter_words, g_strfreev);
+  g_clear_pointer (&self->filter_words, g_strfreev);
 
-        filter_contents =
-                cc_util_normalize_casefold_and_unaccent (gtk_editable_get_text (GTK_EDITABLE (self->language_filter_entry)));
-        if (!filter_contents) {
-                gtk_list_box_invalidate_filter (self->language_listbox);
-                return;
-        }
-        self->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
-        gtk_list_box_invalidate_filter (self->language_listbox);
+  filter_contents =
+    cc_util_normalize_casefold_and_unaccent (gtk_editable_get_text (GTK_EDITABLE (self->language_filter_entry)));
+  if (!filter_contents) {
+    gtk_list_box_invalidate_filter (self->language_listbox);
+    return;
+  }
+  self->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
+  gtk_list_box_invalidate_filter (self->language_listbox);
 }
 
 static void
-show_more (CcLanguageChooser *self, gboolean visible)
+show_more (CcLanguageChooser *self,
+           gboolean           visible)
 {
-        gtk_search_bar_set_search_mode (self->search_bar, visible);
-        gtk_widget_grab_focus (visible ? GTK_WIDGET (self->language_filter_entry) : GTK_WIDGET (self->language_listbox));
+  gtk_search_bar_set_search_mode (self->search_bar, visible);
+  gtk_widget_grab_focus (visible ? GTK_WIDGET (self->language_filter_entry) : GTK_WIDGET (self->language_listbox));
 
-        self->showing_extra = visible;
+  self->showing_extra = visible;
 
-        gtk_list_box_invalidate_filter (self->language_listbox);
+  gtk_list_box_invalidate_filter (self->language_listbox);
 }
 
 static void
 set_locale_id (CcLanguageChooser *self,
                const gchar       *locale_id)
 {
-        GtkWidget *child;
+  GtkWidget *child;
 
-        gtk_widget_set_sensitive (GTK_WIDGET (self->select_button), FALSE);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->select_button), FALSE);
 
-        for (child = gtk_widget_get_first_child (GTK_WIDGET (self->language_listbox));
-             child;
-             child = gtk_widget_get_next_sibling (child)) {
-                CcLanguageRow *row;
+  for (child = gtk_widget_get_first_child (GTK_WIDGET (self->language_listbox));
+       child;
+       child = gtk_widget_get_next_sibling (child)) {
+    CcLanguageRow *row;
 
-                if (!CC_IS_LANGUAGE_ROW (child))
-                        continue;
+    if (!CC_IS_LANGUAGE_ROW (child))
+      continue;
 
-                row = CC_LANGUAGE_ROW (child);
-                if (g_strcmp0 (locale_id, cc_language_row_get_locale_id (row)) == 0) {
-                        cc_language_row_set_checked (row, TRUE);
-                        gtk_widget_set_sensitive (GTK_WIDGET (self->select_button), TRUE);
+    row = CC_LANGUAGE_ROW (child);
+    if (g_strcmp0 (locale_id, cc_language_row_get_locale_id (row)) == 0) {
+      cc_language_row_set_checked (row, TRUE);
+      gtk_widget_set_sensitive (GTK_WIDGET (self->select_button), TRUE);
 
-                        /* make sure the selected language is shown */
-                        if (!self->showing_extra && cc_language_row_get_is_extra (row)) {
-                                cc_language_row_set_is_extra (row, FALSE);
-                                gtk_list_box_invalidate_filter (self->language_listbox);
-                        }
-                } else {
-                        cc_language_row_set_checked (row, FALSE);
-                }
-        }
+      /* make sure the selected language is shown */
+      if (!self->showing_extra && cc_language_row_get_is_extra (row)) {
+        cc_language_row_set_is_extra (row, FALSE);
+        gtk_list_box_invalidate_filter (self->language_listbox);
+      }
+    } else {
+      cc_language_row_set_checked (row, FALSE);
+    }
+  }
 
-        g_free (self->language);
-        self->language = g_strdup (locale_id);
+  g_free (self->language);
+  self->language = g_strdup (locale_id);
 }
 
 static void
-language_listbox_row_activated_cb (CcLanguageChooser *self, GtkListBoxRow *row)
+language_listbox_row_activated_cb (CcLanguageChooser *self,
+                                   GtkListBoxRow     *row)
 {
-        const gchar *new_locale_id;
+  const gchar *new_locale_id;
 
-        if (row == self->more_row) {
-                show_more (self, TRUE);
-                return;
-        }
+  if (row == self->more_row) {
+    show_more (self, TRUE);
+    return;
+  }
 
-        if (!CC_IS_LANGUAGE_ROW (row))
-                return;
+  if (!CC_IS_LANGUAGE_ROW (row))
+    return;
 
-        new_locale_id = cc_language_row_get_locale_id (CC_LANGUAGE_ROW (row));
-        if (g_strcmp0 (new_locale_id, self->language) == 0) {
-                g_signal_emit (self, signals[LANGUAGE_SELECTED], 0);
-        } else {
-                set_locale_id (self, new_locale_id);
-        }
+  new_locale_id = cc_language_row_get_locale_id (CC_LANGUAGE_ROW (row));
+  if (g_strcmp0 (new_locale_id, self->language) == 0) {
+    g_signal_emit (self, signals[LANGUAGE_SELECTED], 0);
+  } else {
+    set_locale_id (self, new_locale_id);
+  }
 }
 
 static void
 select_button_clicked_cb (CcLanguageChooser *self)
 {
-        g_signal_emit (self, signals[LANGUAGE_SELECTED], 0);
+  g_signal_emit (self, signals[LANGUAGE_SELECTED], 0);
 }
 
 void
 cc_language_chooser_init (CcLanguageChooser *self)
 {
-        g_resources_register (cc_common_get_resource ());
+  g_resources_register (cc_common_get_resource ());
 
-        gtk_widget_init_template (GTK_WIDGET (self));
+  gtk_widget_init_template (GTK_WIDGET (self));
 
-        gtk_list_box_set_sort_func (self->language_listbox,
-                                    sort_languages, self, NULL);
-        gtk_list_box_set_filter_func (self->language_listbox,
-                                      language_visible, self, NULL);
-        add_all_languages (self);
+  gtk_list_box_set_sort_func (self->language_listbox,
+                              sort_languages, self, NULL);
+  gtk_list_box_set_filter_func (self->language_listbox,
+                                language_visible, self, NULL);
+  add_all_languages (self);
 
-        gtk_list_box_invalidate_filter (self->language_listbox);
+  gtk_list_box_invalidate_filter (self->language_listbox);
 }
 
 static void
 cc_language_chooser_dispose (GObject *object)
 {
-        CcLanguageChooser *self = CC_LANGUAGE_CHOOSER (object);
+  CcLanguageChooser *self = CC_LANGUAGE_CHOOSER (object);
 
-        g_clear_pointer (&self->filter_words, g_strfreev);
-        g_clear_pointer (&self->language, g_free);
+  g_clear_pointer (&self->filter_words, g_strfreev);
+  g_clear_pointer (&self->language, g_free);
 
-        G_OBJECT_CLASS (cc_language_chooser_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_language_chooser_parent_class)->dispose (object);
 }
 
 void
 cc_language_chooser_class_init (CcLanguageChooserClass *klass)
 {
-        GObjectClass *object_class = G_OBJECT_CLASS (klass);
-        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-        object_class->dispose = cc_language_chooser_dispose;
+  object_class->dispose = cc_language_chooser_dispose;
 
-        signals[LANGUAGE_SELECTED] =
-                g_signal_new ("language-selected",
-                              G_TYPE_FROM_CLASS (klass),
-                              G_SIGNAL_RUN_LAST,
-                              0,
-                              NULL, NULL, NULL,
-                              G_TYPE_NONE,
-                              0);
+  signals[LANGUAGE_SELECTED] =
+    g_signal_new ("language-selected",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE,
+                  0);
 
-        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-language-chooser.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-language-chooser.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_filter_entry);
-        gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_listbox);
-        gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, more_row);
-        gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, search_bar);
-        gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, select_button);
+  gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_filter_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, more_row);
+  gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, search_bar);
+  gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, select_button);
 
-        gtk_widget_class_bind_template_callback (widget_class, language_filter_entry_search_changed_cb);
-        gtk_widget_class_bind_template_callback (widget_class, language_listbox_row_activated_cb);
-        gtk_widget_class_bind_template_callback (widget_class, select_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, language_filter_entry_search_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, language_listbox_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, select_button_clicked_cb);
 }
 
 CcLanguageChooser *
 cc_language_chooser_new (void)
 {
-        return g_object_new (CC_TYPE_LANGUAGE_CHOOSER, NULL);
+  return g_object_new (CC_TYPE_LANGUAGE_CHOOSER, NULL);
 }
 
 void
 cc_language_chooser_clear_filter (CcLanguageChooser *self)
 {
-        g_return_if_fail (CC_IS_LANGUAGE_CHOOSER (self));
-        gtk_editable_set_text (GTK_EDITABLE (self->language_filter_entry), "");
-        show_more (self, FALSE);
+  g_return_if_fail (CC_IS_LANGUAGE_CHOOSER (self));
+  gtk_editable_set_text (GTK_EDITABLE (self->language_filter_entry), "");
+  show_more (self, FALSE);
 }
 
 const gchar *
 cc_language_chooser_get_language (CcLanguageChooser *self)
 {
-        g_return_val_if_fail (CC_IS_LANGUAGE_CHOOSER (self), NULL);
-        return self->language;
+  g_return_val_if_fail (CC_IS_LANGUAGE_CHOOSER (self), NULL);
+  return self->language;
 }
 
 void
 cc_language_chooser_set_language (CcLanguageChooser *self,
                                   const gchar       *language)
 {
-        g_return_if_fail (CC_IS_LANGUAGE_CHOOSER (self));
-        set_locale_id (self, language);
+  g_return_if_fail (CC_IS_LANGUAGE_CHOOSER (self));
+  set_locale_id (self, language);
 }

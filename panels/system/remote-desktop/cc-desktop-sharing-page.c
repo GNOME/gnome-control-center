@@ -66,8 +66,8 @@ struct _CcDesktopSharingPage {
   AdwSwitchRow *remote_control_row;
   AdwActionRow *hostname_row;
   AdwActionRow *port_row;
-  GtkWidget    *username_entry;
-  GtkWidget    *password_entry;
+  GtkWidget *username_entry;
+  GtkWidget *password_entry;
   AdwButtonRow *generate_password_button_row;
   AdwButtonRow *verify_encryption_button_row;
 
@@ -109,10 +109,10 @@ get_hostname (void)
 
 static gboolean
 check_schema_available (CcDesktopSharingPage *self,
-                        const gchar *schema_id)
+                        const gchar          *schema_id)
 {
   GSettingsSchemaSource *source;
-  g_autoptr(GSettingsSchema) schema = NULL;
+  g_autoptr (GSettingsSchema) schema = NULL;
 
   source = g_settings_schema_source_get_default ();
   if (!source)
@@ -128,16 +128,15 @@ check_schema_available (CcDesktopSharingPage *self,
 static gboolean
 store_credentials_timeout (gpointer user_data)
 {
-  CcDesktopSharingPage *self = (CcDesktopSharingPage*) user_data;
+  CcDesktopSharingPage *self = (CcDesktopSharingPage *)user_data;
   const char *username, *password;
 
   username = gtk_editable_get_text (GTK_EDITABLE (self->username_entry));
   password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
 
-  if (username && password)
-    {
-      cc_grd_store_rdp_credentials (username, password, self->cancellable);
-    }
+  if (username && password) {
+    cc_grd_store_rdp_credentials (username, password, self->cancellable);
+  }
 
   self->store_credentials_id = 0;
 
@@ -156,7 +155,7 @@ is_desktop_sharing_enabled (CcDesktopSharingPage *self)
 static void
 disable_gnome_desktop_sharing_service (CcDesktopSharingPage *self)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_settings_set_boolean (self->rdp_settings, "enable", FALSE);
 
@@ -169,16 +168,15 @@ disable_gnome_desktop_sharing_service (CcDesktopSharingPage *self)
 static void
 enable_gnome_desktop_sharing_service (CcDesktopSharingPage *self)
 {
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GError) error = NULL;
 
   if (is_desktop_sharing_enabled (self))
     return;
 
-  if (!cc_enable_service (REMOTE_DESKTOP_SERVICE, G_BUS_TYPE_SESSION, &error))
-    {
-      g_warning ("Failed to enable remote desktop service: %s", error->message);
-      disable_gnome_desktop_sharing_service (self);
-    }
+  if (!cc_enable_service (REMOTE_DESKTOP_SERVICE, G_BUS_TYPE_SESSION, &error)) {
+    g_warning ("Failed to enable remote desktop service: %s", error->message);
+    disable_gnome_desktop_sharing_service (self);
+  }
 }
 
 static void
@@ -200,20 +198,20 @@ calc_default_tls_paths (char **out_dir_path,
 {
   g_autofree char *dir_path = NULL;
 
-  dir_path = g_build_filename (g_get_user_data_dir(), "gnome-remote-desktop", "certificates", NULL);
+  dir_path = g_build_filename (g_get_user_data_dir (), "gnome-remote-desktop", "certificates", NULL);
 
   if (out_cert_path)
-    *out_cert_path = g_build_filename(dir_path, "rdp-tls.crt", NULL);
+    *out_cert_path = g_build_filename (dir_path, "rdp-tls.crt", NULL);
   if (out_key_path)
-    *out_key_path = g_build_filename(dir_path, "rdp-tls.key", NULL);
+    *out_key_path = g_build_filename (dir_path, "rdp-tls.key", NULL);
 
   if (out_dir_path)
     *out_dir_path = g_steal_pointer (&dir_path);
 }
 
 static void
-set_tls_certificate (CcDesktopSharingPage  *self,
-                     GTlsCertificate *tls_certificate)
+set_tls_certificate (CcDesktopSharingPage *self,
+                     GTlsCertificate      *tls_certificate)
 {
   g_set_object (&self->certificate, tls_certificate);
   gtk_widget_set_sensitive (GTK_WIDGET (self->verify_encryption_button_row), TRUE);
@@ -225,20 +223,19 @@ on_certificate_generated (GObject      *source_object,
                           gpointer      user_data)
 {
   CcDesktopSharingPage *self;
-  g_autoptr(GTlsCertificate) tls_certificate = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GTlsCertificate) tls_certificate = NULL;
+  g_autoptr (GError) error = NULL;
   g_autofree char *cert_path = NULL;
   g_autofree char *key_path = NULL;
 
   tls_certificate = bonsai_tls_certificate_new_generate_finish (res, &error);
-  if (!tls_certificate)
-    {
-      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        return;
-
-      g_warning ("Failed to generate TLS certificate: %s", error->message);
+  if (!tls_certificate) {
+    if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
       return;
-    }
+
+    g_warning ("Failed to generate TLS certificate: %s", error->message);
+    return;
+  }
 
   self = (CcDesktopSharingPage *)user_data;
 
@@ -258,69 +255,63 @@ enable_gnome_desktop_sharing (CcDesktopSharingPage *self)
   g_autofree char *dir_path = NULL;
   g_autofree char *cert_path = NULL;
   g_autofree char *key_path = NULL;
-  g_autoptr(GFile) dir = NULL;
-  g_autoptr(GFile) cert_file = NULL;
-  g_autoptr(GFile) key_file = NULL;
-  g_autoptr(GError) error = NULL;
+  g_autoptr (GFile) dir = NULL;
+  g_autoptr (GFile) cert_file = NULL;
+  g_autoptr (GFile) key_file = NULL;
+  g_autoptr (GError) error = NULL;
 
   g_settings_set_boolean (self->rdp_settings, "enable", TRUE);
 
   cert_path = g_settings_get_string (self->rdp_settings, "tls-cert");
   key_path = g_settings_get_string (self->rdp_settings, "tls-key");
   if (strlen (cert_path) > 0 &&
-      strlen (key_path) > 0)
-    {
-      g_autoptr(GTlsCertificate) tls_certificate = NULL;
+      strlen (key_path) > 0) {
+    g_autoptr (GTlsCertificate) tls_certificate = NULL;
 
-      tls_certificate = g_tls_certificate_new_from_file (cert_path, &error);
-      if (tls_certificate)
-        {
-          set_tls_certificate (self, tls_certificate);
+    tls_certificate = g_tls_certificate_new_from_file (cert_path, &error);
+    if (tls_certificate) {
+      set_tls_certificate (self, tls_certificate);
 
-          enable_gnome_desktop_sharing_service (self);
-          return;
-        }
-
-      g_warning ("Configured TLS certificate invalid: %s", error->message);
+      enable_gnome_desktop_sharing_service (self);
       return;
     }
+
+    g_warning ("Configured TLS certificate invalid: %s", error->message);
+    return;
+  }
 
   calc_default_tls_paths (&dir_path, &cert_path, &key_path);
 
   dir = g_file_new_for_path (dir_path);
-  if (!g_file_query_exists (dir, NULL))
-    {
-      if (!g_file_make_directory_with_parents (dir, NULL, &error))
-        {
-          g_warning ("Failed to create remote desktop certificate directory: %s",
-                     error->message);
-          return;
-        }
+  if (!g_file_query_exists (dir, NULL)) {
+    if (!g_file_make_directory_with_parents (dir, NULL, &error)) {
+      g_warning ("Failed to create remote desktop certificate directory: %s",
+                 error->message);
+      return;
     }
+  }
 
   cert_file = g_file_new_for_path (cert_path);
   key_file = g_file_new_for_path (key_path);
 
   if (g_file_query_exists (cert_file, NULL) &&
-      g_file_query_exists (key_file, NULL))
-    {
-      g_autoptr(GTlsCertificate) tls_certificate = NULL;
+      g_file_query_exists (key_file, NULL)) {
+    g_autoptr (GTlsCertificate) tls_certificate = NULL;
 
-      tls_certificate = g_tls_certificate_new_from_file (cert_path, &error);
-      if (tls_certificate)
-        {
-          g_settings_set_string (self->rdp_settings, "tls-cert", cert_path);
-          g_settings_set_string (self->rdp_settings, "tls-key", key_path);
+    tls_certificate = g_tls_certificate_new_from_file (cert_path, &error);
+    if (tls_certificate) {
+      g_settings_set_string (self->rdp_settings, "tls-cert", cert_path);
+      g_settings_set_string (self->rdp_settings, "tls-key", key_path);
 
-          set_tls_certificate (self, tls_certificate);
+      set_tls_certificate (self, tls_certificate);
 
-          enable_gnome_desktop_sharing_service (self);
-          return;
-        }
-
-      g_warning ("Existing TLS certificate invalid: %s", error->message);
+      enable_gnome_desktop_sharing_service (self);
       return;
     }
+
+    g_warning ("Existing TLS certificate invalid: %s", error->message);
+    return;
+  }
 
   bonsai_tls_certificate_new_generate_async (cert_path,
                                              key_path,
@@ -342,7 +333,7 @@ on_desktop_sharing_active_changed (CcDesktopSharingPage *self)
 
 static void
 add_toast (CcDesktopSharingPage *self,
-           const char          *message)
+           const char           *message)
 {
   adw_toast_overlay_add_toast (ADW_TOAST_OVERLAY (self->toast_overlay),
                                adw_toast_new (message));
@@ -350,7 +341,7 @@ add_toast (CcDesktopSharingPage *self,
 
 static void
 on_address_copy_clicked (CcDesktopSharingPage *self,
-                         GtkButton           *button)
+                         GtkButton            *button)
 {
   gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
                           adw_action_row_get_subtitle (self->hostname_row));
@@ -368,7 +359,7 @@ on_port_copy_clicked (CcDesktopSharingPage *self,
 
 static void
 on_username_copy_clicked (CcDesktopSharingPage *self,
-                          GtkButton           *button)
+                          GtkButton            *button)
 {
   GtkEditable *editable = GTK_EDITABLE (self->username_entry);
 
@@ -379,7 +370,7 @@ on_username_copy_clicked (CcDesktopSharingPage *self,
 
 static void
 on_password_copy_clicked (CcDesktopSharingPage *self,
-                          GtkButton           *button)
+                          GtkButton            *button)
 {
   GtkEditable *editable = GTK_EDITABLE (self->password_entry);
 
@@ -415,22 +406,20 @@ setup_desktop_sharing_page (CcDesktopSharingPage *self)
                             "notify::text",
                             G_CALLBACK (on_credentials_changed),
                             self);
-  if (username == NULL)
-    {
-      struct passwd *pw = getpwuid (getuid ());
-      if (pw != NULL)
-        username = g_strdup (pw->pw_name);
-      else
-        g_warning ("Failed to get username: %s", g_strerror (errno));
-    }
+  if (username == NULL) {
+    struct passwd *pw = getpwuid (getuid ());
+    if (pw != NULL)
+      username = g_strdup (pw->pw_name);
+    else
+      g_warning ("Failed to get username: %s", g_strerror (errno));
+  }
   gtk_editable_set_text (GTK_EDITABLE (self->username_entry), username);
 
-  if (password == NULL)
-    {
-      g_autofree gchar *pw = cc_generate_password ();
-      if (pw != NULL)
-        gtk_editable_set_text (GTK_EDITABLE (self->password_entry), pw);
-    }
+  if (password == NULL) {
+    g_autofree gchar *pw = cc_generate_password ();
+    if (pw != NULL)
+      gtk_editable_set_text (GTK_EDITABLE (self->password_entry), pw);
+  }
 
   g_signal_connect_object (self->desktop_sharing_row, "notify::active",
                            G_CALLBACK (on_desktop_sharing_active_changed), self,
@@ -452,8 +441,8 @@ setup_desktop_sharing_page (CcDesktopSharingPage *self)
                           self->remote_control_row, "sensitive",
                           G_BINDING_SYNC_CREATE);
   g_object_bind_property (self->password_entry, "sensitive",
-		          self->generate_password_button_row, "sensitive",
-			  G_BINDING_SYNC_CREATE);
+                          self->generate_password_button_row, "sensitive",
+                          G_BINDING_SYNC_CREATE);
 }
 
 static void
@@ -475,19 +464,18 @@ static void
 check_desktop_sharing_available (CcDesktopSharingPage *self)
 {
   if (!check_schema_available (self, GNOME_REMOTE_DESKTOP_SCHEMA_ID) ||
-      !check_schema_available (self, GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID))
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
-      return;
-    }
+      !check_schema_available (self, GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID)) {
+    gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
+    return;
+  }
 
   self->desktop_sharing_name_watch = g_bus_watch_name (G_BUS_TYPE_SESSION,
-                                                      "org.gnome.Mutter.RemoteDesktop",
-                                                      G_BUS_NAME_WATCHER_FLAGS_NONE,
-                                                      desktop_sharing_name_appeared,
-                                                      NULL,
-                                                      self,
-                                                      NULL);
+                                                       "org.gnome.Mutter.RemoteDesktop",
+                                                       G_BUS_NAME_WATCHER_FLAGS_NONE,
+                                                       desktop_sharing_name_appeared,
+                                                       NULL,
+                                                       self,
+                                                       NULL);
 }
 
 static void
@@ -508,10 +496,10 @@ cc_desktop_sharing_page_dispose (GObject *object)
 }
 
 static void
-cc_desktop_sharing_page_class_init (CcDesktopSharingPageClass * klass)
+cc_desktop_sharing_page_class_init (CcDesktopSharingPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->dispose = cc_desktop_sharing_page_dispose;
 
@@ -576,12 +564,11 @@ on_connected_to_remote_desktop_rdp_server (GObject      *source_object,
   g_clear_object (&self->rdp_server);
   self->rdp_server = gsd_remote_desktop_rdp_server_proxy_new_finish (result, &error);
 
-  if (error)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed to create remote desktop proxy: %s", error->message);
-      return;
-    }
+  if (error) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to create remote desktop proxy: %s", error->message);
+    return;
+  }
 
   g_object_bind_property_full (self->rdp_server, "port",
                                self->port_row, "subtitle",
@@ -626,7 +613,7 @@ connect_to_remote_desktop_rdp_server (CcDesktopSharingPage *self)
 static void
 cc_desktop_sharing_page_init (CcDesktopSharingPage *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
+  g_autoptr (GtkCssProvider) provider = NULL;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 

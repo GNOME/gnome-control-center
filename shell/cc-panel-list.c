@@ -27,50 +27,47 @@
 #include "cc-ui-util.h"
 #include "cc-util.h"
 
-typedef struct
-{
-  GtkWidget          *row;
-  GtkWidget          *description_label;
-  CcPanelCategory     category;
-  gchar              *id;
-  gchar              *name;
-  gchar              *description;
-  gchar             **keywords;
-  CcPanelVisibility   visibility;
+typedef struct {
+  GtkWidget *row;
+  GtkWidget *description_label;
+  CcPanelCategory category;
+  gchar *id;
+  gchar *name;
+  gchar *description;
+  gchar **keywords;
+  CcPanelVisibility visibility;
 } RowData;
 
-struct _CcPanelList
-{
-  AdwBin              parent;
+struct _CcPanelList {
+  AdwBin parent;
 
-  GtkWidget          *main_listbox;
-  GtkWidget          *search_listbox;
-  GtkStack           *stack;
+  GtkWidget *main_listbox;
+  GtkWidget *search_listbox;
+  GtkStack *stack;
 
   /* When clicking on Details or Devices row, show it
    * automatically select the first panel of the list.
    */
-  gboolean            autoselect_panel : 1;
+  gboolean autoselect_panel : 1;
 
-  gchar              *current_panel_id;
-  gchar              *search_query;
-  gchar             **search_words;
+  gchar *current_panel_id;
+  gchar *search_query;
+  gchar **search_words;
 
-  CcPanelListView     previous_view;
-  CcPanelListView     view;
-  GHashTable         *id_to_data;
-  GHashTable         *id_to_search_data;
+  CcPanelListView previous_view;
+  CcPanelListView view;
+  GHashTable *id_to_data;
+  GHashTable *id_to_search_data;
 
   /* When true, the next row being activated will be vertically centered on
    * the visible part of panel list. Currently we do that for panels activated
    * from Search or from the set_active_panel_from_id() CcShell iface */
-  gboolean            center_activated_row;
+  gboolean center_activated_row;
 };
 
 G_DEFINE_TYPE (CcPanelList, cc_panel_list, ADW_TYPE_BIN)
 
-enum
-{
+enum {
   PROP_0,
   PROP_SEARCH_MODE,
   PROP_SEARCH_QUERY,
@@ -78,24 +75,22 @@ enum
   N_PROPS
 };
 
-enum
-{
+enum {
   SHOW_PANEL,
   LAST_SIGNAL
 };
 
-static GParamSpec *properties [N_PROPS] = { NULL, };
-static gint signals [LAST_SIGNAL] = { 0, };
+static GParamSpec *properties[N_PROPS] = { NULL, };
+static gint signals[LAST_SIGNAL] = { 0, };
 
 /*
  * Auxiliary methods
  */
-static GtkWidget*
+static GtkWidget *
 get_widget_from_view (CcPanelList     *self,
                       CcPanelListView  view)
 {
-  switch (view)
-    {
+  switch (view) {
     case CC_PANEL_LIST_MAIN:
       return self->main_listbox;
 
@@ -104,7 +99,7 @@ get_widget_from_view (CcPanelList     *self,
 
     default:
       return NULL;
-    }
+  }
 }
 
 static void
@@ -163,7 +158,7 @@ switch_to_view (CcPanelList     *self,
 
   gtk_stack_set_transition_type (self->stack,
                                  should_crossfade ? GTK_STACK_TRANSITION_TYPE_CROSSFADE :
-                                                    GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT);
+                                 GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT);
 
   visible_child = get_widget_from_view (self, view);
 
@@ -173,10 +168,9 @@ switch_to_view (CcPanelList     *self,
    * newly selected row
    */
   if (self->autoselect_panel &&
-      view != CC_PANEL_LIST_SEARCH)
-    {
-      cc_panel_list_activate (self);
-    }
+      view != CC_PANEL_LIST_SEARCH) {
+    cc_panel_list_activate (self);
+  }
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_VIEW]);
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SEARCH_MODE]);
@@ -192,28 +186,24 @@ update_search (CcPanelList *self)
    * search query available.
    */
   if (self->search_query &&
-      g_utf8_strlen (self->search_query, -1) > 0)
-    {
-      if (self->view == CC_PANEL_LIST_MAIN)
-        switch_to_view (self, CC_PANEL_LIST_SEARCH);
-    }
-  else if (self->view == CC_PANEL_LIST_SEARCH)
-    {
-      /* Don't autoselect first panel when going back from search view */
-      self->autoselect_panel = FALSE;
+      g_utf8_strlen (self->search_query, -1) > 0) {
+    if (self->view == CC_PANEL_LIST_MAIN)
+      switch_to_view (self, CC_PANEL_LIST_SEARCH);
+  } else if (self->view == CC_PANEL_LIST_SEARCH) {
+    /* Don't autoselect first panel when going back from search view */
+    self->autoselect_panel = FALSE;
 
-      switch_to_view (self, self->previous_view);
-    }
+    switch_to_view (self, self->previous_view);
+  }
 
   gtk_list_box_invalidate_filter (GTK_LIST_BOX (self->search_listbox));
   gtk_list_box_unselect_all (GTK_LIST_BOX (self->search_listbox));
 }
 
-static const gchar*
+static const gchar *
 get_panel_id_from_row (CcPanelList   *self,
                        GtkListBoxRow *row)
 {
-
   RowData *row_data = g_object_get_data (G_OBJECT (row), "data");
 
   g_assert (row_data != NULL);
@@ -233,14 +223,14 @@ row_data_free (RowData *data)
   g_free (data);
 }
 
-static RowData*
-row_data_new (CcPanelCategory     category,
-              const gchar        *id,
-              const gchar        *name,
-              const gchar        *description,
-              const GStrv         keywords,
-              const gchar        *icon,
-              CcPanelVisibility   visibility)
+static RowData *
+row_data_new (CcPanelCategory    category,
+              const gchar       *id,
+              const gchar       *name,
+              const gchar       *description,
+              const GStrv        keywords,
+              const gchar       *icon,
+              CcPanelVisibility  visibility)
 {
   GtkWidget *label, *grid, *image;
   RowData *data;
@@ -303,7 +293,7 @@ row_data_new (CcPanelCategory     category,
 
   gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (data->row), grid);
 
-  g_object_set_data_full (G_OBJECT (data->row), "data", data, (GDestroyNotify) row_data_free);
+  g_object_set_data_full (G_OBJECT (data->row), "data", data, (GDestroyNotify)row_data_free);
 
   data->visibility = visibility;
 
@@ -349,15 +339,15 @@ filter_func (GtkListBoxRow *row,
     if (search_word[0] == '\0')
       continue;
 
-    // Compare keywords
+    /* Compare keywords */
     for (i = 0; !match && data->keywords[i] != NULL; i++)
       match = (strstr (data->keywords[i], search_word) == data->keywords[i]);
 
-    // Compare panel title and description
+    /* Compare panel title and description */
     match = match || (g_strstr_len (panel_text, -1, search_word) != NULL ||
                       g_strstr_len (panel_description, -1, search_word) != NULL);
 
-    // All search words must match
+    /* All search words must match */
     retval = retval && match;
   }
 
@@ -410,11 +400,10 @@ get_panel_id_index (const gchar *panel_id)
 {
   guint i;
 
-  for (i = 0; i < G_N_ELEMENTS (panel_order); i++)
-    {
-      if (g_str_equal (panel_order[i], panel_id))
-        return i;
-    }
+  for (i = 0; i < G_N_ELEMENTS (panel_order); i++) {
+    if (g_str_equal (panel_order[i], panel_id))
+      return i;
+  }
 
   return 0;
 }
@@ -461,11 +450,10 @@ search_sort_function (GtkListBoxRow *a,
   g_strstrip (a_name);
   g_strstrip (b_name);
 
-  if (self->search_query)
-    {
-      search = cc_util_normalize_casefold_and_unaccent (self->search_query);
-      g_strstrip (search);
-    }
+  if (self->search_query) {
+    search = cc_util_normalize_casefold_and_unaccent (self->search_query);
+    g_strstrip (search);
+  }
 
   /* Default result for empty search */
   if (!search || g_utf8_strlen (search, -1) == 0)
@@ -494,19 +482,16 @@ header_func (GtkListBoxRow *row,
     return;
 
   pid = get_panel_id_index (get_panel_id_from_row (user_data, row));
-  if (pid > 0 && g_str_equal (panel_order[pid-1], "separator"))
-    {
-      GtkWidget *separator;
+  if (pid > 0 && g_str_equal (panel_order[pid - 1], "separator")) {
+    GtkWidget *separator;
 
-      separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_set_hexpand (separator, TRUE);
+    separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+    gtk_widget_set_hexpand (separator, TRUE);
 
-      gtk_list_box_row_set_header (row, separator);
-    }
-  else
-    {
-      gtk_list_box_row_set_header (row, NULL);
-    }
+    gtk_list_box_row_set_header (row, separator);
+  } else {
+    gtk_list_box_row_set_header (row, NULL);
+  }
 }
 
 /*
@@ -556,39 +541,37 @@ search_row_activated_cb (GtkWidget     *listbox,
   /* Select the correct row */
   for (child = gtk_widget_get_first_child (self->main_listbox);
        child != NULL;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      RowData *real_row_data;
+       child = gtk_widget_get_next_sibling (child)) {
+    RowData *real_row_data;
 
-      real_row_data = g_object_get_data (G_OBJECT (child), "data");
+    real_row_data = g_object_get_data (G_OBJECT (child), "data");
 
-      /*
-       * The main listbox has the Details & Devices rows, and neither
-       * of them contains "data", so we have to ensure we have valid
-       * data before going on.
-       */
-      if (!real_row_data)
-        continue;
+    /*
+     * The main listbox has the Details & Devices rows, and neither
+     * of them contains "data", so we have to ensure we have valid
+     * data before going on.
+     */
+    if (!real_row_data)
+      continue;
 
-      if (g_strcmp0 (real_row_data->id, data->id) == 0)
-        {
-          GtkListBoxRow *real_row;
+    if (g_strcmp0 (real_row_data->id, data->id) == 0) {
+      GtkListBoxRow *real_row;
 
-          real_row = GTK_LIST_BOX_ROW (real_row_data->row);
+      real_row = GTK_LIST_BOX_ROW (real_row_data->row);
 
-          gtk_list_box_select_row (GTK_LIST_BOX (self->main_listbox), real_row);
-          gtk_widget_grab_focus (GTK_WIDGET (real_row));
+      gtk_list_box_select_row (GTK_LIST_BOX (self->main_listbox), real_row);
+      gtk_widget_grab_focus (GTK_WIDGET (real_row));
 
-          /* Don't autoselect first panel because we are already
-           * activating a panel from search result */
-          self->autoselect_panel = FALSE;
+      /* Don't autoselect first panel because we are already
+       * activating a panel from search result */
+      self->autoselect_panel = FALSE;
 
-          /* center Search activated row on panel list */
-          self->center_activated_row = TRUE;
-          g_signal_emit_by_name (real_row, "activate");
-          break;
-        }
+      /* center Search activated row on panel list */
+      self->center_activated_row = TRUE;
+      g_signal_emit_by_name (real_row, "activate");
+      break;
     }
+  }
 
   CC_EXIT;
 }
@@ -615,8 +598,7 @@ cc_panel_list_get_property (GObject    *object,
 {
   CcPanelList *self = CC_PANEL_LIST (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_SEARCH_MODE:
       g_value_set_boolean (value, self->view == CC_PANEL_LIST_SEARCH);
       break;
@@ -631,7 +613,7 @@ cc_panel_list_get_property (GObject    *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -642,8 +624,7 @@ cc_panel_list_set_property (GObject      *object,
 {
   CcPanelList *self = CC_PANEL_LIST (object);
 
-  switch (prop_id)
-    {
+  switch (prop_id) {
     case PROP_SEARCH_MODE:
       update_search (self);
       break;
@@ -658,7 +639,7 @@ cc_panel_list_set_property (GObject      *object,
 
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
+  }
 }
 
 static void
@@ -764,7 +745,7 @@ cc_panel_list_init (CcPanelList *self)
                                 NULL);
 }
 
-GtkWidget*
+GtkWidget *
 cc_panel_list_new (void)
 {
   return g_object_new (CC_TYPE_PANEL_LIST, NULL);
@@ -799,21 +780,20 @@ cc_panel_list_activate (CcPanelList *self)
   do
     row = gtk_list_box_get_row_at_index (GTK_LIST_BOX (listbox), i++);
   while (row && !(gtk_widget_get_visible (GTK_WIDGET (row)) &&
-         gtk_widget_get_child_visible (GTK_WIDGET (row))));
+                  gtk_widget_get_child_visible (GTK_WIDGET (row))));
 
   /* If the row is valid, activate it */
-  if (row)
-    {
-      gtk_list_box_select_row (GTK_LIST_BOX (listbox), row);
-      gtk_widget_grab_focus (GTK_WIDGET (row));
+  if (row) {
+    gtk_list_box_select_row (GTK_LIST_BOX (listbox), row);
+    gtk_widget_grab_focus (GTK_WIDGET (row));
 
-      g_signal_emit_by_name (row, "activate");
-    }
+    g_signal_emit_by_name (row, "activate");
+  }
 
   CC_RETURN (row != NULL);
 }
 
-const gchar*
+const gchar *
 cc_panel_list_get_search_query (CcPanelList *self)
 {
   g_return_val_if_fail (CC_IS_PANEL_LIST (self), NULL);
@@ -827,26 +807,25 @@ cc_panel_list_set_search_query (CcPanelList *self,
 {
   g_return_if_fail (CC_IS_PANEL_LIST (self));
 
-  if (g_strcmp0 (self->search_query, search) != 0)
-    {
-      g_autofree gchar *search_query_normalized;
+  if (g_strcmp0 (self->search_query, search) != 0) {
+    g_autofree gchar *search_query_normalized;
 
-      g_clear_pointer (&self->search_query, g_free);
-      g_clear_pointer (&self->search_words, g_strfreev);
+    g_clear_pointer (&self->search_query, g_free);
+    g_clear_pointer (&self->search_words, g_strfreev);
 
-      self->search_query = g_strdup (search);
+    self->search_query = g_strdup (search);
 
-      /* Split on spaces */
-      search_query_normalized = cc_util_normalize_casefold_and_unaccent (search);
-      self->search_words = g_strsplit (g_strstrip (search_query_normalized), " ", 0);
+    /* Split on spaces */
+    search_query_normalized = cc_util_normalize_casefold_and_unaccent (search);
+    self->search_words = g_strsplit (g_strstrip (search_query_normalized), " ", 0);
 
-      update_search (self);
+    update_search (self);
 
-      g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SEARCH_QUERY]);
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SEARCH_QUERY]);
 
-      gtk_list_box_invalidate_filter (GTK_LIST_BOX (self->search_listbox));
-      gtk_list_box_invalidate_sort (GTK_LIST_BOX (self->search_listbox));
-    }
+    gtk_list_box_invalidate_filter (GTK_LIST_BOX (self->search_listbox));
+    gtk_list_box_invalidate_sort (GTK_LIST_BOX (self->search_listbox));
+  }
 }
 
 CcPanelListView
@@ -863,7 +842,7 @@ cc_panel_list_get_view (CcPanelList *self)
  *
  * Returns: (allow-none): id string of current active panel on @self, or %NULL when there's none yet.
  */
-const gchar*
+const gchar *
 cc_panel_list_get_current_panel (CcPanelList *self)
 {
   g_return_val_if_fail (CC_IS_PANEL_LIST (self), NULL);
@@ -872,14 +851,14 @@ cc_panel_list_get_current_panel (CcPanelList *self)
 }
 
 void
-cc_panel_list_add_panel (CcPanelList        *self,
-                         CcPanelCategory     category,
-                         const gchar        *id,
-                         const gchar        *title,
-                         const gchar        *description,
-                         const GStrv         keywords,
-                         const gchar        *icon,
-                         CcPanelVisibility   visibility)
+cc_panel_list_add_panel (CcPanelList       *self,
+                         CcPanelCategory    category,
+                         const gchar       *id,
+                         const gchar       *title,
+                         const gchar       *description,
+                         const GStrv        keywords,
+                         const gchar       *icon,
+                         CcPanelVisibility  visibility)
 {
   RowData *data, *search_data;
 
@@ -904,7 +883,7 @@ cc_panel_list_add_panel (CcPanelList        *self,
 /* Scrolls sibebar so that @row is at middle of the visible part of list */
 static void
 cc_panel_list_scroll_to_center_row (CcPanelList *self,
-                                    GtkWidget *row)
+                                    GtkWidget   *row)
 {
   double target_value;
   graphene_point_t p;
@@ -965,35 +944,32 @@ cc_panel_list_set_active_panel (CcPanelList *self,
 
   g_assert (data != NULL);
 
-  if (self->center_activated_row)
-    {
-      scroll_to_center = TRUE;
-      self->center_activated_row = FALSE;
-    }
+  if (self->center_activated_row) {
+    scroll_to_center = TRUE;
+    self->center_activated_row = FALSE;
+  }
 
   /* Stop if row is supposed to be always hidden */
-  if (data->visibility == CC_PANEL_HIDDEN)
-    {
-      g_debug ("Panel '%s' is always hidden, stopping.", id);
-      cc_panel_list_activate (self);
-      return;
-    }
+  if (data->visibility == CC_PANEL_HIDDEN) {
+    g_debug ("Panel '%s' is always hidden, stopping.", id);
+    cc_panel_list_activate (self);
+    return;
+  }
 
   /* If the currently selected panel is not always visible, for example when
    * the panel is only visible on search and we're temporarily seeing it, make
    * sure to hide it after the user moves out.
    */
-  if (self->current_panel_id != NULL && g_strcmp0 (self->current_panel_id, id) != 0)
-    {
-      RowData *current_row_data;
+  if (self->current_panel_id != NULL && g_strcmp0 (self->current_panel_id, id) != 0) {
+    RowData *current_row_data;
 
-      current_row_data = g_hash_table_lookup (self->id_to_data, self->current_panel_id);
+    current_row_data = g_hash_table_lookup (self->id_to_data, self->current_panel_id);
 
-      /* We cannot be showing a non-existent panel */
-      g_assert (current_row_data != NULL);
+    /* We cannot be showing a non-existent panel */
+    g_assert (current_row_data != NULL);
 
-      gtk_widget_set_visible (current_row_data->row, current_row_data->visibility == CC_PANEL_VISIBLE);
-    }
+    gtk_widget_set_visible (current_row_data->row, current_row_data->visibility == CC_PANEL_VISIBLE);
+  }
 
   listbox = gtk_widget_get_parent (data->row);
 
@@ -1016,16 +992,15 @@ cc_panel_list_set_active_panel (CcPanelList *self,
 
   /* This centering is currently set for panels activated from Search
    * or from set_active_panel_from_id() CcShell iface */
-  if (scroll_to_center)
-    {
-      /* Scroll the sidebar to the selected panel row, as that row may be
-       * out of view when panel is launched from a search or from cli */
-      sdata = g_new (ScrollData, 1);
-      sdata->panel_list = g_object_ref (self);
-      sdata->row = g_object_ref (data->row);
+  if (scroll_to_center) {
+    /* Scroll the sidebar to the selected panel row, as that row may be
+     * out of view when panel is launched from a search or from cli */
+    sdata = g_new (ScrollData, 1);
+    sdata->panel_list = g_object_ref (self);
+    sdata->row = g_object_ref (data->row);
 
-      g_idle_add (G_SOURCE_FUNC (scroll_to_idle_cb), sdata);
-    }
+    g_idle_add (G_SOURCE_FUNC (scroll_to_idle_cb), sdata);
+  }
 }
 
 /**
@@ -1057,13 +1032,12 @@ cc_panel_list_set_panel_visibility (CcPanelList       *self,
   /* If this is the currently selected row, and the panel can't be displayed
    * (i.e. visibility != VISIBLE), then select the next possible row */
   if (gtk_list_box_row_is_selected (GTK_LIST_BOX_ROW (data->row)) &&
-      visibility != CC_PANEL_VISIBLE)
-    {
-      activate_row_below (self, data);
-    }
+      visibility != CC_PANEL_VISIBLE) {
+    activate_row_below (self, data);
+  }
 
   gtk_widget_set_visible (data->row, visibility == CC_PANEL_VISIBLE);
-  gtk_widget_set_visible (search_data->row, visibility =! CC_PANEL_HIDDEN);
+  gtk_widget_set_visible (search_data->row, visibility = !CC_PANEL_HIDDEN);
 }
 
 void
@@ -1075,13 +1049,12 @@ cc_panel_list_set_selection_mode (CcPanelList      *self,
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->main_listbox), selection_mode);
 
   /* When selection mode changed, selection will be lost.  So reselect */
-  if (selection_mode == GTK_SELECTION_SINGLE && self->current_panel_id)
-    {
-      GtkWidget *listbox;
-      RowData *data;
+  if (selection_mode == GTK_SELECTION_SINGLE && self->current_panel_id) {
+    GtkWidget *listbox;
+    RowData *data;
 
-      data = g_hash_table_lookup (self->id_to_data, self->current_panel_id);
-      listbox = gtk_widget_get_parent (data->row);
-      gtk_list_box_select_row (GTK_LIST_BOX (listbox), GTK_LIST_BOX_ROW (data->row));
-    }
+    data = g_hash_table_lookup (self->id_to_data, self->current_panel_id);
+    listbox = gtk_widget_get_parent (data->row);
+    gtk_list_box_select_row (GTK_LIST_BOX (listbox), GTK_LIST_BOX_ROW (data->row));
+  }
 }

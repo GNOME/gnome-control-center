@@ -36,8 +36,10 @@
 
 /* Forward declarations for private functions */
 
-static float convert_pos (gchar *pos, int digits);
-static int compare_country_names (const void *a, const void *b);
+static float convert_pos (gchar *pos,
+                          int    digits);
+static int compare_country_names (const void *a,
+                                  const void *b);
 static void sort_locations_by_country (GPtrArray *locations);
 static gchar * tz_data_file_get (void);
 static void load_backward_tz (TzDB *tz_db);
@@ -48,138 +50,139 @@ static void load_backward_tz (TzDB *tz_db);
 TzDB *
 tz_load_db (void)
 {
-	g_autofree gchar *tz_data_file = NULL;
-	TzDB *tz_db;
-	FILE *tzfile;
-	char buf[4096];
+  g_autofree gchar *tz_data_file = NULL;
+  TzDB *tz_db;
+  FILE *tzfile;
+  char buf[4096];
 
-	tz_data_file = tz_data_file_get ();
-	if (!tz_data_file) {
-		g_warning ("Could not get the TimeZone data file name");
-		return NULL;
-	}
-	tzfile = fopen (tz_data_file, "r");
-	if (!tzfile) {
-		g_warning ("Could not open *%s*\n", tz_data_file);
-		return NULL;
-	}
+  tz_data_file = tz_data_file_get ();
+  if (!tz_data_file) {
+    g_warning ("Could not get the TimeZone data file name");
+    return NULL;
+  }
+  tzfile = fopen (tz_data_file, "r");
+  if (!tzfile) {
+    g_warning ("Could not open *%s*\n", tz_data_file);
+    return NULL;
+  }
 
-	tz_db = g_new0 (TzDB, 1);
-	tz_db->locations = g_ptr_array_new ();
+  tz_db = g_new0 (TzDB, 1);
+  tz_db->locations = g_ptr_array_new ();
 
-	while (fgets (buf, sizeof(buf), tzfile))
-	{
-		g_auto(GStrv) tmpstrarr = NULL;
-		g_autofree gchar *latstr = NULL;
-		g_autofree gchar *lngstr = NULL;
-		gchar *p;
-		TzLocation *loc;
+  while (fgets (buf, sizeof (buf), tzfile)) {
+    g_auto (GStrv) tmpstrarr = NULL;
+    g_autofree gchar *latstr = NULL;
+    g_autofree gchar *lngstr = NULL;
+    gchar *p;
+    TzLocation *loc;
 
-		if (*buf == '#') continue;
+    if (*buf == '#') continue;
 
-		g_strchomp(buf);
-		tmpstrarr = g_strsplit(buf,"\t", 6);
+    g_strchomp (buf);
+    tmpstrarr = g_strsplit (buf, "\t", 6);
 
-		latstr = g_strdup (tmpstrarr[1]);
-		p = latstr + 1;
-		while (*p != '-' && *p != '+') p++;
-		lngstr = g_strdup (p);
-		*p = '\0';
+    latstr = g_strdup (tmpstrarr[1]);
+    p = latstr + 1;
+    while (*p != '-' && *p != '+') p++;
+    lngstr = g_strdup (p);
+    *p = '\0';
 
-		loc = g_new0 (TzLocation, 1);
-		loc->country = g_strdup (tmpstrarr[0]);
-		loc->zone = g_strdup (tmpstrarr[2]);
-		loc->latitude  = convert_pos (latstr, 2);
-		loc->longitude = convert_pos (lngstr, 3);
+    loc = g_new0 (TzLocation, 1);
+    loc->country = g_strdup (tmpstrarr[0]);
+    loc->zone = g_strdup (tmpstrarr[2]);
+    loc->latitude = convert_pos (latstr, 2);
+    loc->longitude = convert_pos (lngstr, 3);
 
 #ifdef __sun
-		if (tmpstrarr[3] && *tmpstrarr[3] == '-' && tmpstrarr[4])
-			loc->comment = g_strdup (tmpstrarr[4]);
+    if (tmpstrarr[3] && *tmpstrarr[3] == '-' && tmpstrarr[4])
+      loc->comment = g_strdup (tmpstrarr[4]);
 
-		if (tmpstrarr[3] && *tmpstrarr[3] != '-' && !islower(loc->zone)) {
-			TzLocation *locgrp;
+    if (tmpstrarr[3] && *tmpstrarr[3] != '-' && !islower (loc->zone)) {
+      TzLocation *locgrp;
 
-			/* duplicate entry */
-			locgrp = g_new0 (TzLocation, 1);
-			locgrp->country = g_strdup (tmpstrarr[0]);
-			locgrp->zone = g_strdup (tmpstrarr[3]);
-			locgrp->latitude  = convert_pos (latstr, 2);
-			locgrp->longitude = convert_pos (lngstr, 3);
-			locgrp->comment = (tmpstrarr[4]) ? g_strdup (tmpstrarr[4]) : NULL;
+      /* duplicate entry */
+      locgrp = g_new0 (TzLocation, 1);
+      locgrp->country = g_strdup (tmpstrarr[0]);
+      locgrp->zone = g_strdup (tmpstrarr[3]);
+      locgrp->latitude = convert_pos (latstr, 2);
+      locgrp->longitude = convert_pos (lngstr, 3);
+      locgrp->comment = (tmpstrarr[4]) ? g_strdup (tmpstrarr[4]) : NULL;
 
-			g_ptr_array_add (tz_db->locations, (gpointer) locgrp);
-		}
+      g_ptr_array_add (tz_db->locations, (gpointer)locgrp);
+    }
 #else
-		loc->comment = (tmpstrarr[3]) ? g_strdup(tmpstrarr[3]) : NULL;
+    loc->comment = (tmpstrarr[3]) ? g_strdup (tmpstrarr[3]) : NULL;
 #endif
 
-		g_ptr_array_add (tz_db->locations, (gpointer) loc);
-	}
+    g_ptr_array_add (tz_db->locations, (gpointer)loc);
+  }
 
-	fclose (tzfile);
+  fclose (tzfile);
 
-	/* now sort by country */
-	sort_locations_by_country (tz_db->locations);
+  /* now sort by country */
+  sort_locations_by_country (tz_db->locations);
 
-	/* Load up the hashtable of backward links */
-	load_backward_tz (tz_db);
+  /* Load up the hashtable of backward links */
+  load_backward_tz (tz_db);
 
-	return tz_db;
+  return tz_db;
 }
 
 static void
 tz_location_free (TzLocation *loc,
                   void       *user_data)
 {
-	g_free (loc->country);
-	g_free (loc->zone);
-	g_free (loc->comment);
+  g_free (loc->country);
+  g_free (loc->zone);
+  g_free (loc->comment);
 
-	g_free (loc);
+  g_free (loc);
 }
 
 void
 tz_db_free (TzDB *db)
 {
-	g_ptr_array_foreach (db->locations, (GFunc) tz_location_free, NULL);
-	g_ptr_array_free (db->locations, TRUE);
-	g_hash_table_destroy (db->backward);
-	g_free (db);
+  g_ptr_array_foreach (db->locations, (GFunc)tz_location_free, NULL);
+  g_ptr_array_free (db->locations, TRUE);
+  g_hash_table_destroy (db->backward);
+  g_free (db);
 }
 
 GPtrArray *
 tz_get_locations (TzDB *db)
 {
-	return db->locations;
+  return db->locations;
 }
 
 
 gchar *
 tz_location_get_country (TzLocation *loc)
 {
-	return loc->country;
+  return loc->country;
 }
 
 
 gchar *
 tz_location_get_zone (TzLocation *loc)
 {
-	return loc->zone;
+  return loc->zone;
 }
 
 
 gchar *
 tz_location_get_comment (TzLocation *loc)
 {
-	return loc->comment;
+  return loc->comment;
 }
 
 
 void
-tz_location_get_position (TzLocation *loc, double *longitude, double *latitude)
+tz_location_get_position (TzLocation *loc,
+                          double     *longitude,
+                          double     *latitude)
 {
-	*longitude = loc->longitude;
-	*latitude = loc->latitude;
+  *longitude = loc->longitude;
+  *latitude = loc->latitude;
 }
 
 /* For timezone map display purposes, we try to highlight regions of the
@@ -199,170 +202,170 @@ tz_location_get_position (TzLocation *loc, double *longitude, double *latitude)
  * dubious.
  */
 struct {
-	const char *zone;
-	gint offset;
+  const char *zone;
+  gint offset;
 } base_offset_overrides[] = {
-	{ "Europe/Dublin",  0 },
+  { "Europe/Dublin", 0 },
 };
 
 glong
 tz_location_get_base_utc_offset (TzLocation *loc)
 {
-	g_autoptr(TzInfo) tz_info = NULL;
-	glong offset;
-	guint i;
+  g_autoptr (TzInfo) tz_info = NULL;
+  glong offset;
+  guint i;
 
-	tz_info = tz_info_from_location (loc);
-	offset = tz_info->utc_offset + (tz_info->daylight ? -3600 : 0);
+  tz_info = tz_info_from_location (loc);
+  offset = tz_info->utc_offset + (tz_info->daylight ? -3600 : 0);
 
-	for (i = 0; i < G_N_ELEMENTS (base_offset_overrides); i++) {
-		if (g_str_equal (loc->zone, base_offset_overrides[i].zone)) {
-			offset = base_offset_overrides[i].offset;
-			break;
-		}
-	}
+  for (i = 0; i < G_N_ELEMENTS (base_offset_overrides); i++) {
+    if (g_str_equal (loc->zone, base_offset_overrides[i].zone)) {
+      offset = base_offset_overrides[i].offset;
+      break;
+    }
+  }
 
-	return offset;
+  return offset;
 }
 
 TzInfo *
 tz_info_from_location (TzLocation *loc)
 {
-	TzInfo *tzinfo;
-	time_t curtime;
-	struct tm *curzone;
-	g_autofree gchar *tz_env_value = NULL;
+  TzInfo *tzinfo;
+  time_t curtime;
+  struct tm *curzone;
+  g_autofree gchar *tz_env_value = NULL;
 
-	g_return_val_if_fail (loc != NULL, NULL);
-	g_return_val_if_fail (loc->zone != NULL, NULL);
+  g_return_val_if_fail (loc != NULL, NULL);
+  g_return_val_if_fail (loc->zone != NULL, NULL);
 
-	tz_env_value = g_strdup (getenv ("TZ"));
-	setenv ("TZ", loc->zone, 1);
+  tz_env_value = g_strdup (getenv ("TZ"));
+  setenv ("TZ", loc->zone, 1);
 
 #if 0
-	tzset ();
+  tzset ();
 #endif
-	tzinfo = g_new0 (TzInfo, 1);
+  tzinfo = g_new0 (TzInfo, 1);
 
-	curtime = time (NULL);
-	curzone = localtime (&curtime);
+  curtime = time (NULL);
+  curzone = localtime (&curtime);
 
 #ifndef __sun
-	tzinfo->tzname = g_strdup (curzone->tm_zone);
-	tzinfo->utc_offset = curzone->tm_gmtoff;
+  tzinfo->tzname = g_strdup (curzone->tm_zone);
+  tzinfo->utc_offset = curzone->tm_gmtoff;
 #else
-	tzinfo->tzname = NULL;
-	tzinfo->utc_offset = 0;
+  tzinfo->tzname = NULL;
+  tzinfo->utc_offset = 0;
 #endif
 
-	tzinfo->daylight = curzone->tm_isdst;
+  tzinfo->daylight = curzone->tm_isdst;
 
-	if (tz_env_value)
-		setenv ("TZ", tz_env_value, 1);
-	else
-		unsetenv ("TZ");
+  if (tz_env_value)
+    setenv ("TZ", tz_env_value, 1);
+  else
+    unsetenv ("TZ");
 
-	return tzinfo;
+  return tzinfo;
 }
 
 
 void
 tz_info_free (TzInfo *tzinfo)
 {
-	g_return_if_fail (tzinfo != NULL);
+  g_return_if_fail (tzinfo != NULL);
 
-	if (tzinfo->tzname) g_free (tzinfo->tzname);
-	g_free (tzinfo);
+  if (tzinfo->tzname) g_free (tzinfo->tzname);
+  g_free (tzinfo);
 }
 
 struct {
-	const char *orig;
-	const char *dest;
+  const char *orig;
+  const char *dest;
 } aliases[] = {
-	{ "Asia/Istanbul",  "Europe/Istanbul" },	/* Istanbul is in both Europe and Asia */
-	{ "Europe/Nicosia", "Asia/Nicosia" },		/* Ditto */
-	{ "EET",            "Europe/Istanbul" },	/* Same tz as the 2 above */
-	{ "HST",            "Pacific/Honolulu" },
-	{ "WET",            "Europe/Brussels" },	/* Other name for the mainland Europe tz */
-	{ "CET",            "Europe/Brussels" },	/* ditto */
-	{ "MET",            "Europe/Brussels" },
-	{ "Etc/Zulu",       "Etc/GMT" },
-	{ "Etc/UTC",        "Etc/GMT" },
-	{ "GMT",            "Etc/GMT" },
-	{ "Greenwich",      "Etc/GMT" },
-	{ "Etc/UCT",        "Etc/GMT" },
-	{ "Etc/GMT0",       "Etc/GMT" },
-	{ "Etc/GMT+0",      "Etc/GMT" },
-	{ "Etc/GMT-0",      "Etc/GMT" },
-	{ "Etc/Universal",  "Etc/GMT" },
-	{ "PST8PDT",        "America/Los_Angeles" },	/* Other name for the Atlantic tz */
-	{ "EST",            "America/New_York" },	/* Other name for the Eastern tz */
-	{ "EST5EDT",        "America/New_York" },	/* ditto */
-	{ "CST6CDT",        "America/Chicago" },	/* Other name for the Central tz */
-	{ "MST",            "America/Denver" },		/* Other name for the mountain tz */
-	{ "MST7MDT",        "America/Denver" },		/* ditto */
+  { "Asia/Istanbul", "Europe/Istanbul" },               /* Istanbul is in both Europe and Asia */
+  { "Europe/Nicosia", "Asia/Nicosia" },                 /* Ditto */
+  { "EET", "Europe/Istanbul" },                         /* Same tz as the 2 above */
+  { "HST", "Pacific/Honolulu" },
+  { "WET", "Europe/Brussels" },                         /* Other name for the mainland Europe tz */
+  { "CET", "Europe/Brussels" },                         /* ditto */
+  { "MET", "Europe/Brussels" },
+  { "Etc/Zulu", "Etc/GMT" },
+  { "Etc/UTC", "Etc/GMT" },
+  { "GMT", "Etc/GMT" },
+  { "Greenwich", "Etc/GMT" },
+  { "Etc/UCT", "Etc/GMT" },
+  { "Etc/GMT0", "Etc/GMT" },
+  { "Etc/GMT+0", "Etc/GMT" },
+  { "Etc/GMT-0", "Etc/GMT" },
+  { "Etc/Universal", "Etc/GMT" },
+  { "PST8PDT", "America/Los_Angeles" },                 /* Other name for the Atlantic tz */
+  { "EST", "America/New_York" },                        /* Other name for the Eastern tz */
+  { "EST5EDT", "America/New_York" },                    /* ditto */
+  { "CST6CDT", "America/Chicago" },                     /* Other name for the Central tz */
+  { "MST", "America/Denver" },                          /* Other name for the mountain tz */
+  { "MST7MDT", "America/Denver" },                      /* ditto */
 };
 
 static gboolean
 compare_timezones (const char *a,
-		   const char *b)
+                   const char *b)
 {
-	if (g_str_equal (a, b))
-		return TRUE;
-	if (strchr (b, '/') == NULL) {
-		g_autofree gchar *prefixed = NULL;
+  if (g_str_equal (a, b))
+    return TRUE;
+  if (strchr (b, '/') == NULL) {
+    g_autofree gchar *prefixed = NULL;
 
-		prefixed = g_strdup_printf ("/%s", b);
-		if (g_str_has_suffix (a, prefixed))
-			return TRUE;
-	}
+    prefixed = g_strdup_printf ("/%s", b);
+    if (g_str_has_suffix (a, prefixed))
+      return TRUE;
+  }
 
-	return FALSE;
+  return FALSE;
 }
 
 char *
-tz_info_get_clean_name (TzDB *tz_db,
-			const char *tz)
+tz_info_get_clean_name (TzDB       *tz_db,
+                        const char *tz)
 {
-	char *ret;
-	const char *timezone;
-	guint i;
-	gboolean replaced;
+  char *ret;
+  const char *timezone;
+  guint i;
+  gboolean replaced;
 
-	/* Remove useless prefixes */
-	if (g_str_has_prefix (tz, "right/"))
-		tz = tz + strlen ("right/");
-	else if (g_str_has_prefix (tz, "posix/"))
-		tz = tz + strlen ("posix/");
+  /* Remove useless prefixes */
+  if (g_str_has_prefix (tz, "right/"))
+    tz = tz + strlen ("right/");
+  else if (g_str_has_prefix (tz, "posix/"))
+    tz = tz + strlen ("posix/");
 
-	/* Here start the crazies */
-	replaced = FALSE;
+  /* Here start the crazies */
+  replaced = FALSE;
 
-	for (i = 0; i < G_N_ELEMENTS (aliases); i++) {
-		if (compare_timezones (tz, aliases[i].orig)) {
-			replaced = TRUE;
-			timezone = aliases[i].dest;
-			break;
-		}
-	}
+  for (i = 0; i < G_N_ELEMENTS (aliases); i++) {
+    if (compare_timezones (tz, aliases[i].orig)) {
+      replaced = TRUE;
+      timezone = aliases[i].dest;
+      break;
+    }
+  }
 
-	/* Try again! */
-	if (!replaced) {
-		/* Ignore crazy solar times from the '80s */
-		if (g_str_has_prefix (tz, "Asia/Riyadh") ||
-		    g_str_has_prefix (tz, "Mideast/Riyadh")) {
-			timezone = "Asia/Riyadh";
-			replaced = TRUE;
-		}
-	}
+  /* Try again! */
+  if (!replaced) {
+    /* Ignore crazy solar times from the '80s */
+    if (g_str_has_prefix (tz, "Asia/Riyadh") ||
+        g_str_has_prefix (tz, "Mideast/Riyadh")) {
+      timezone = "Asia/Riyadh";
+      replaced = TRUE;
+    }
+  }
 
-	if (!replaced)
-		timezone = tz;
+  if (!replaced)
+    timezone = tz;
 
-	ret = g_hash_table_lookup (tz_db->backward, timezone);
-	if (ret == NULL)
-		return g_strdup (timezone);
-	return g_strdup (ret);
+  ret = g_hash_table_lookup (tz_db->backward, timezone);
+  if (ret == NULL)
+    return g_strdup (timezone);
+  return g_strdup (ret);
 }
 
 /* ----------------- *
@@ -372,32 +375,33 @@ tz_info_get_clean_name (TzDB *tz_db,
 static gchar *
 tz_data_file_get (void)
 {
-	gchar *file;
+  gchar *file;
 
-	file = g_strdup (TZ_DATA_FILE);
+  file = g_strdup (TZ_DATA_FILE);
 
-	return file;
+  return file;
 }
 
 static float
-convert_pos (gchar *pos, int digits)
+convert_pos (gchar *pos,
+             int    digits)
 {
-	gchar whole[10];
-	gchar *fraction;
-	gint i;
-	float t1, t2;
+  gchar whole[10];
+  gchar *fraction;
+  gint i;
+  float t1, t2;
 
-	if (!pos || strlen(pos) < 4 || digits > 9) return 0.0;
+  if (!pos || strlen (pos) < 4 || digits > 9) return 0.0;
 
-	for (i = 0; i < digits + 1; i++) whole[i] = pos[i];
-	whole[i] = '\0';
-	fraction = pos + digits + 1;
+  for (i = 0; i < digits + 1; i++) whole[i] = pos[i];
+  whole[i] = '\0';
+  fraction = pos + digits + 1;
 
-	t1 = g_strtod (whole, NULL);
-	t2 = g_strtod (fraction, NULL);
+  t1 = g_strtod (whole, NULL);
+  t2 = g_strtod (fraction, NULL);
 
-	if (t1 >= 0.0) return t1 + t2/pow (10.0, strlen(fraction));
-	else return t1 - t2/pow (10.0, strlen(fraction));
+  if (t1 >= 0.0) return t1 + t2 / pow (10.0, strlen (fraction));
+  else return t1 - t2 / pow (10.0, strlen (fraction));
 }
 
 
@@ -407,41 +411,41 @@ convert_pos (gchar *pos, int digits)
 static void
 free_tzdata (TzLocation *tz)
 {
+  if (tz->country)
+    g_free (tz->country);
+  if (tz->zone)
+    g_free (tz->zone);
+  if (tz->comment)
+    g_free (tz->comment);
 
-	if (tz->country)
-	  g_free(tz->country);
-	if (tz->zone)
-	  g_free(tz->zone);
-	if (tz->comment)
-	  g_free(tz->comment);
-
-	g_free(tz);
+  g_free (tz);
 }
 #endif
 
 
 static int
-compare_country_names (const void *a, const void *b)
+compare_country_names (const void *a,
+                       const void *b)
 {
-	const TzLocation *tza = * (TzLocation **) a;
-	const TzLocation *tzb = * (TzLocation **) b;
+  const TzLocation *tza = *(TzLocation **)a;
+  const TzLocation *tzb = *(TzLocation **)b;
 
-	return strcmp (tza->zone, tzb->zone);
+  return strcmp (tza->zone, tzb->zone);
 }
 
 
 static void
 sort_locations_by_country (GPtrArray *locations)
 {
-	qsort (locations->pdata, locations->len, sizeof (gpointer),
-	       compare_country_names);
+  qsort (locations->pdata, locations->len, sizeof (gpointer),
+         compare_country_names);
 }
 
 static void
 load_backward_tz (TzDB *tz_db)
 {
-  g_auto(GStrv) lines = NULL;
-  g_autoptr(GBytes) bytes = NULL;
+  g_auto (GStrv) lines = NULL;
+  g_autoptr (GBytes) bytes = NULL;
   const char *contents;
   guint i;
 
@@ -449,45 +453,41 @@ load_backward_tz (TzDB *tz_db)
 
   bytes = g_resources_lookup_data ("/org/gnome/control-center/system/datetime/backward",
                                    G_RESOURCE_LOOKUP_FLAGS_NONE, NULL);
-  contents = (const char *) g_bytes_get_data (bytes, NULL);
+  contents = (const char *)g_bytes_get_data (bytes, NULL);
 
   lines = g_strsplit (contents, "\n", -1);
 
-  for (i = 0; lines[i] != NULL; i++)
-    {
-      g_auto(GStrv) items = NULL;
-      guint j;
-      char *real, *alias;
+  for (i = 0; lines[i] != NULL; i++) {
+    g_auto (GStrv) items = NULL;
+    guint j;
+    char *real, *alias;
 
-      if (g_ascii_strncasecmp (lines[i], "Link\t", 5) != 0)
+    if (g_ascii_strncasecmp (lines[i], "Link\t", 5) != 0)
+      continue;
+
+    items = g_strsplit (lines[i], "\t", -1);
+    real = NULL;
+    alias = NULL;
+    /* Skip the "Link<tab>" part */
+    for (j = 1; items[j] != NULL; j++) {
+      if (items[j][0] == '\0')
         continue;
-
-      items = g_strsplit (lines[i], "\t", -1);
-      real = NULL;
-      alias = NULL;
-      /* Skip the "Link<tab>" part */
-      for (j = 1; items[j] != NULL; j++)
-        {
-          if (items[j][0] == '\0')
-            continue;
-          if (real == NULL)
-            {
-              real = items[j];
-              continue;
-            }
-          alias = items[j];
-          break;
-        }
-
-      if (real == NULL || alias == NULL)
-        g_warning ("Could not parse line: %s", lines[i]);
-
-      /* We don't need more than one name for it */
-      if (g_str_equal (real, "Etc/UTC") ||
-          g_str_equal (real, "Etc/UCT"))
-        real = "Etc/GMT";
-
-      g_hash_table_insert (tz_db->backward, g_strdup (alias), g_strdup (real));
+      if (real == NULL) {
+        real = items[j];
+        continue;
+      }
+      alias = items[j];
+      break;
     }
-}
 
+    if (real == NULL || alias == NULL)
+      g_warning ("Could not parse line: %s", lines[i]);
+
+    /* We don't need more than one name for it */
+    if (g_str_equal (real, "Etc/UTC") ||
+        g_str_equal (real, "Etc/UCT"))
+      real = "Etc/GMT";
+
+    g_hash_table_insert (tz_db->backward, g_strdup (alias), g_strdup (real));
+  }
+}
