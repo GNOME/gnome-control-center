@@ -4,6 +4,7 @@
 
     <child>
       <object class="AdwPreferencesGroup">
+        <property name="visible" bind-source="use_as_row" bind-property="visible" bind-flags="sync-create"/>
         <child>
           <object class="AdwComboRow" id="use_as_row">
             <property name="title" translatable="yes">Use As</property>
