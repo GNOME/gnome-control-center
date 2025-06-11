@@ -73,60 +73,78 @@
                         <property name="title" translatable="yes">Displays</property>
                         <property name="icon-name">video-display-symbolic</property>
                         <property name="child">
-                          <object class="GtkBox">
+                          <object class="GtkBox" id="display_settings_box">
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="AdwPreferencesPage">
-                                <child>
-                                  <object class="AdwPreferencesGroup" id="display_multiple_displays">
-                                    <!-- Config Type -->
-                                    <child>
-                                      <object class="AdwActionRow" id="config_type_switcher_row">
-                                        <property name="title" translatable="yes">Multiple Displays</property>
-                                        <child type="suffix">
-                                          <object class="AdwToggleGroup" id="display_config_type">
-                                            <property name="valign">center</property>
-                                            <property name="homogeneous">True</property>
-                                            <signal name="notify::active" handler="on_config_type_toggled_cb" object="CcDisplayPanel" swapped="yes"/>
+                              <object class="AdwBin" id="display_selection_widget">
+                                <property name="child">
+                                  <object class="AdwClamp">
+                                    <property name="child">
+                                      <object class="AdwBin">
+                                        <property name="margin-top">12</property>
+                                        <property name="margin-start">12</property>
+                                        <property name="margin-end">12</property>
+                                        <style>
+                                          <class name="card"/>
+                                        </style>
+                                        <child>
+                                          <object class="GtkBox">
+                                            <property name="orientation">vertical</property>
+                                            <property name="margin-top">12</property>
+                                            <property name="margin-bottom">12</property>
+                                            <property name="margin-start">12</property>
+                                            <property name="margin-end">12</property>
                                             <child>
-                                              <object class="AdwToggle">
-                                                <property name="name">join</property>
-                                                <property name="label" translatable="yes" comments="'Join' as in 'Join displays'">_Join</property>
-                                                <property name="use-underline">True</property>
+                                              <object class="GtkFlowBox" id="display_selection_flowbox">
+                                                <property name="halign">center</property>
+                                                <property name="margin-top">20</property>
+                                                <property name="margin-bottom">32</property>
+                                                <property name="column-spacing">12</property>
+                                                <property name="row-spacing">12</property>
+                                                <property name="max-children-per-line">3</property>
+                                                <signal name="child-activated" handler="on_display_selection_child_activated_cb"/>
                                               </object>
                                             </child>
                                             <child>
-                                              <object class="AdwToggle">
-                                                <property name="name">clone</property>
-                                                <property name="label" translatable="yes">_Mirror</property>
-                                                <property name="use-underline">True</property>
+                                              <object class="AdwWrapBox">
+                                                <child>
+                                                  <object class="AdwToggleGroup" id="display_config_type">
+                                                    <property name="valign">center</property>
+                                                    <property name="homogeneous">True</property>
+                                                    <signal name="notify::active" handler="on_config_type_toggled_cb" object="CcDisplayPanel" swapped="yes"/>
+                                                    <child>
+                                                      <object class="AdwToggle">
+                                                        <property name="name">join</property>
+                                                        <property name="label" translatable="yes" comments="'Join' as in 'Join displays'">_Join</property>
+                                                        <property name="use-underline">True</property>
+                                                      </object>
+                                                    </child>
+                                                    <child>
+                                                      <object class="AdwToggle">
+                                                        <property name="name">clone</property>
+                                                        <property name="label" translatable="yes">_Mirror</property>
+                                                        <property name="use-underline">True</property>
+                                                      </object>
+                                                    </child>
+                                                  </object>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkButton" id="arrangement_button">
+                                                    <property name="hexpand">True</property>
+                                                    <property name="halign">end</property>
+                                                    <property name="valign">center</property>
+                                                    <property name="label" translatable="yes">Arrange...</property>
+                                                    <signal name="clicked" handler="adw_dialog_present" object="display_arrangement_dialog" swapped="yes"/>
+                                                  </object>
+                                                </child>
                                               </object>
                                             </child>
                                           </object>
                                         </child>
                                       </object>
-                                    </child>
-                                    <!-- Display Arrangement -->
-                                    <child>
-                                      <object class="CcListRow" id="arrangement_row">
-                                        <property name="show-arrow">True</property>
-                                        <property name="title" translatable="yes">Arrange Displays</property>
-                                        <signal name="activated" handler="adw_dialog_present" object="display_arrangement_dialog" swapped="yes"/>
-                                      </object>
-                                    </child>
+                                    </property>
                                   </object>
-                                </child>
-
-                                <child>
-                                  <object class="AdwPreferencesGroup" id="display_settings_group"/>
-                                </child>
-
-                                <!-- Single Display Settings -->
-                                <child>
-                                  <object class="AdwPreferencesGroup" id="single_display_settings_group">
-                                    <property name="visible">False</property>
-                                  </object>
-                                </child>
+                                </property>
                               </object>
                             </child>
                             <child>
