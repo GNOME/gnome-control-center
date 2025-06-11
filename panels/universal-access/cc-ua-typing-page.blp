@@ -53,6 +53,13 @@ template $CcUaTypingPage: Adw.NavigationPage {
             ]
 
             adjustment: Adjustment {
+              /* In the UI We are showing the speed of the blinking, but
+               * in the settings, we are storing the duration. So we want
+               * to show the inverse of the value. But since GtkAdjustment
+               * doesn't allow upper < lower, and GtkRange:inverted is not
+               * what we need, use negative values for lower, upper bounds
+               * and invert sign of them when read/write.
+               */
               lower: -2500;
               upper: -100;
               step-increment: 200;

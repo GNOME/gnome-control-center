@@ -88,6 +88,9 @@ template $CcDateTimePage: Adw.NavigationPage {
 
       Adw.PreferencesPage {
         Adw.PreferencesGroup {
+          /* This should stay AdwActionRow and not become AdwSwitchRow,
+           * we use the delayed state change of GtkSwitch
+           */
           Adw.ActionRow auto_datetime_row {
             title: _("Automatic _Date &amp; Time");
             subtitle: _("Requires internet access");

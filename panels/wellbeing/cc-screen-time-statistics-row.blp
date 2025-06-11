@@ -48,7 +48,7 @@ template $CcScreenTimeStatisticsRow: Adw.PreferencesRow {
 
             Label selected_date_label {
               halign: start;
-              label: "Today";
+              label: "Today"; /* placeholder */
 
               layout {
                 column: 0;
@@ -62,7 +62,7 @@ template $CcScreenTimeStatisticsRow: Adw.PreferencesRow {
 
             Label selected_screen_time_label {
               halign: start;
-              label: "3h 15m";
+              label: "3h 15m"; /* placeholder */
 
               layout {
                 column: 0;
@@ -82,7 +82,7 @@ template $CcScreenTimeStatisticsRow: Adw.PreferencesRow {
 
             Label selected_average_label {
               halign: start;
-              label: "Average Sunday";
+              label: "Average Sunday"; /* placeholder */
 
               layout {
                 column: 0;
@@ -96,7 +96,7 @@ template $CcScreenTimeStatisticsRow: Adw.PreferencesRow {
 
             Label selected_average_value_label {
               halign: start;
-              label: "6h 5m";
+              label: "6h 5m"; /* placeholder */
 
               layout {
                 column: 0;
@@ -116,7 +116,13 @@ template $CcScreenTimeStatisticsRow: Adw.PreferencesRow {
 
             Label week_date_label {
               halign: start;
-              label: "This Week";
+              label: "This Week"; /* placeholder */
+
+              /* When the widget is really narrow, week ranges which span a month end
+               * (e.g. “30 December–5 January”) can overflow.
+               * Avoid that by ellipsizing, which will probably only truncate the last
+               * part of the second month, so still be intelligible by users
+               */
               ellipsize: end;
 
               layout {
@@ -131,7 +137,7 @@ template $CcScreenTimeStatisticsRow: Adw.PreferencesRow {
 
             Label week_screen_time_label {
               halign: start;
-              label: "34h 55m";
+              label: "34h 55m"; /* placeholder */
 
               layout {
                 column: 1;
@@ -165,7 +171,7 @@ template $CcScreenTimeStatisticsRow: Adw.PreferencesRow {
 
             Label week_average_value_label {
               halign: start;
-              label: "36h 18m";
+              label: "36h 18m"; /* placeholder */
 
               layout {
                 column: 1;

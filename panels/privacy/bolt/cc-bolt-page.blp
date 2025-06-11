@@ -47,6 +47,9 @@ template $CcBoltPage: Adw.NavigationPage {
             Adw.PreferencesGroup {
               title: _("Direct Access");
 
+              /* This should stay AdwActionRow and not become AdwSwitchRow,
+               * we use the delayed state change of GtkSwitch
+               */
               Adw.ActionRow direct_access_row {
                 title: _("Allow direct access to devices such as docks and external GPUs");
                 activatable-widget: authmode_switch;

@@ -61,6 +61,7 @@ template $CcWellbeingPanel: $CcPanel {
           focusable: false;
 
           Adw.StatusPage {
+            /* Ensure the box is tall enough to make the AdwStatusPage not scroll */
             height-request: 300;
             vexpand: true;
             title: _("Screen Time Recording Disabled");
