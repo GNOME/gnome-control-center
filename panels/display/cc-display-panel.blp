@@ -59,45 +59,51 @@ template $CcDisplayPanel: $CcPanel {
             title: _("Displays");
             icon-name: "video-display-symbolic";
 
-            child: Adw.PreferencesPage {
-              Adw.PreferencesGroup display_multiple_displays {
-                Adw.ActionRow config_type_switcher_row {
-                  title: _("Multiple Displays");
+            child: Box {
+              orientation: vertical;
 
-                  [suffix]
-                  Adw.ToggleGroup display_config_type {
-                    valign: center;
-                    homogeneous: true;
-                    notify::active => $on_config_type_toggled_cb(template);
+              Adw.PreferencesPage {
+                Adw.PreferencesGroup display_multiple_displays {
+                  Adw.ActionRow config_type_switcher_row {
+                    title: _("Multiple Displays");
 
-                    Adw.Toggle {
-                      name: "join";
+                    [suffix]
+                    Adw.ToggleGroup display_config_type {
+                      valign: center;
+                      homogeneous: true;
+                      notify::active => $on_config_type_toggled_cb(template);
 
-                      /* Translators: 'Join' as in 'Join displays' */
-                      label: _("_Join");
-                      use-underline: true;
+                      Adw.Toggle {
+                        name: "join";
+
+                        /* Translators: 'Join' as in 'Join displays' */
+                        label: _("_Join");
+                        use-underline: true;
+                      }
+
+                      Adw.Toggle {
+                        name: "clone";
+                        label: _("_Mirror");
+                        use-underline: true;
+                      }
                     }
+                  }
 
-                    Adw.Toggle {
-                      name: "clone";
-                      label: _("_Mirror");
-                      use-underline: true;
-                    }
+                  $CcListRow arrangement_row {
+                    show-arrow: "True";
+                    title: _("Arrange Displays");
+                    activated => $adw_dialog_present(display_arrangement_dialog);
                   }
                 }
 
-                $CcListRow arrangement_row {
-                  show-arrow: "True";
-                  title: _("Arrange Displays");
-                  activated => $adw_dialog_present(display_arrangement_dialog);
+                Adw.PreferencesGroup display_settings_group {}
+
+                Adw.PreferencesGroup single_display_settings_group {
+                  visible: false;
                 }
               }
 
-              Adw.PreferencesGroup display_settings_group {}
-
-              Adw.PreferencesGroup single_display_settings_group {
-                visible: false;
-              }
+              Adw.Bin display_settings_bin {}
             };
           }
 
@@ -108,54 +114,6 @@ template $CcDisplayPanel: $CcPanel {
             child: Adw.ToolbarView {
               content: $CcNightLightPage night_light_page {};
             };
-          }
-        }
-      };
-    };
-  }
-
-  [subpage]
-  Adw.NavigationPage display_settings_page {
-    tag: "display-settings";
-
-    child: Adw.ToolbarView {
-      [top]
-      Adw.HeaderBar {}
-
-      [bottom]
-      Box {
-        visible: bind template.showing-apply-titlebar;
-        halign: center;
-        homogeneous: true;
-
-        styles [
-          "toolbar",
-        ]
-
-        Button {
-          use-underline: true;
-          label: bind cancel_button.label;
-          can-shrink: true;
-          clicked => $cancel_current_configuration(template);
-        }
-
-        Button {
-          use-underline: true;
-          label: bind apply_button.label;
-          can-shrink: true;
-          clicked => $apply_current_configuration(template);
-          sensitive: bind apply_button.sensitive;
-
-          styles [
-            "suggested-action",
-          ]
-        }
-      }
-
-      content: Adw.ToastOverlay display_settings_page_toast_overlay {
-        Adw.PreferencesPage {
-          Adw.PreferencesGroup {
-            Adw.Bin display_settings_bin {}
           }
         }
       };
