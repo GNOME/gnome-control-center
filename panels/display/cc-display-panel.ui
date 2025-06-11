@@ -73,56 +73,64 @@
                         <property name="title" translatable="yes">Displays</property>
                         <property name="icon-name">video-display-symbolic</property>
                         <property name="child">
-                          <object class="AdwPreferencesPage">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
                             <child>
-                              <object class="AdwPreferencesGroup" id="display_multiple_displays">
-                                <!-- Config Type -->
+                              <object class="AdwPreferencesPage">
                                 <child>
-                                  <object class="AdwActionRow" id="config_type_switcher_row">
-                                    <property name="title" translatable="yes">Multiple Displays</property>
-                                    <child type="suffix">
-                                      <object class="AdwToggleGroup" id="display_config_type">
-                                        <property name="valign">center</property>
-                                        <property name="homogeneous">True</property>
-                                        <signal name="notify::active" handler="on_config_type_toggled_cb" object="CcDisplayPanel" swapped="yes"/>
-                                        <child>
-                                          <object class="AdwToggle">
-                                            <property name="name">join</property>
-                                            <property name="label" translatable="yes" comments="'Join' as in 'Join displays'">_Join</property>
-                                            <property name="use-underline">True</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="AdwToggle">
-                                            <property name="name">clone</property>
-                                            <property name="label" translatable="yes">_Mirror</property>
-                                            <property name="use-underline">True</property>
+                                  <object class="AdwPreferencesGroup" id="display_multiple_displays">
+                                    <!-- Config Type -->
+                                    <child>
+                                      <object class="AdwActionRow" id="config_type_switcher_row">
+                                        <property name="title" translatable="yes">Multiple Displays</property>
+                                        <child type="suffix">
+                                          <object class="AdwToggleGroup" id="display_config_type">
+                                            <property name="valign">center</property>
+                                            <property name="homogeneous">True</property>
+                                            <signal name="notify::active" handler="on_config_type_toggled_cb" object="CcDisplayPanel" swapped="yes"/>
+                                            <child>
+                                              <object class="AdwToggle">
+                                                <property name="name">join</property>
+                                                <property name="label" translatable="yes" comments="'Join' as in 'Join displays'">_Join</property>
+                                                <property name="use-underline">True</property>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="AdwToggle">
+                                                <property name="name">clone</property>
+                                                <property name="label" translatable="yes">_Mirror</property>
+                                                <property name="use-underline">True</property>
+                                              </object>
+                                            </child>
                                           </object>
                                         </child>
                                       </object>
                                     </child>
+                                    <!-- Display Arrangement -->
+                                    <child>
+                                      <object class="CcListRow" id="arrangement_row">
+                                        <property name="show-arrow">True</property>
+                                        <property name="title" translatable="yes">Arrange Displays</property>
+                                        <signal name="activated" handler="adw_dialog_present" object="display_arrangement_dialog" swapped="yes"/>
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
-                                <!-- Display Arrangement -->
+
                                 <child>
-                                  <object class="CcListRow" id="arrangement_row">
-                                    <property name="show-arrow">True</property>
-                                    <property name="title" translatable="yes">Arrange Displays</property>
-                                    <signal name="activated" handler="adw_dialog_present" object="display_arrangement_dialog" swapped="yes"/>
+                                  <object class="AdwPreferencesGroup" id="display_settings_group"/>
+                                </child>
+
+                                <!-- Single Display Settings -->
+                                <child>
+                                  <object class="AdwPreferencesGroup" id="single_display_settings_group">
+                                    <property name="visible">False</property>
                                   </object>
                                 </child>
                               </object>
                             </child>
-
                             <child>
-                              <object class="AdwPreferencesGroup" id="display_settings_group"/>
-                            </child>
-
-                            <!-- Single Display Settings -->
-                            <child>
-                              <object class="AdwPreferencesGroup" id="single_display_settings_group">
-                                <property name="visible">False</property>
-                              </object>
+                              <object class="AdwBin" id="display_settings_bin"/>
                             </child>
                           </object>
                         </property>
@@ -146,73 +154,6 @@
                 </child>
               </object>
             </property>
-          </object>
-        </property>
-      </object>
-    </child>
-
-    <!-- Display Settings page -->
-    <child type="subpage">
-      <object class="AdwNavigationPage" id="display_settings_page">
-        <property name="tag">display-settings</property>
-        <property name="child">
-          <object class="AdwToolbarView">
-            <child type="top">
-              <object class="AdwHeaderBar"/>
-            </child>
-
-            <child type="bottom">
-              <object class="GtkBox">
-                <property name="visible" bind-source="CcDisplayPanel" bind-property="showing-apply-titlebar" bind-flags="sync-create"/>
-                <property name="halign">center</property>
-                <property name="homogeneous">True</property>
-
-                <style>
-                  <class name="toolbar"/>
-                </style>
-
-                <child>
-                  <object class="GtkButton">
-                    <property name="use-underline">True</property>
-                    <property name="label" bind-source="cancel_button" bind-property="label" bind-flags="sync-create"/>
-                    <property name="can-shrink">True</property>
-                    <signal name="clicked" handler="cancel_current_configuration" object="CcDisplayPanel" swapped="yes" />
-                  </object>
-                </child>
-
-                <child>
-                  <object class="GtkButton">
-                    <property name="use-underline">True</property>
-                    <property name="label" bind-source="apply_button" bind-property="label" bind-flags="sync-create"/>
-                    <property name="can-shrink">True</property>
-                    <signal name="clicked" handler="apply_current_configuration" object="CcDisplayPanel" swapped="yes" />
-                    <property name="sensitive" bind-source="apply_button" bind-property="sensitive" bind-flags="sync-create"/>
-                    <style>
-                      <class name="suggested-action" />
-                    </style>
-                  </object>
-                </child>
-
-              </object>
-            </child>
-
-            <!-- Display Settings -->
-            <property name="content">
-              <object class="AdwToastOverlay" id="display_settings_page_toast_overlay">
-                <child>
-                  <object class="AdwPreferencesPage">
-                    <child>
-                      <object class="AdwPreferencesGroup">
-                        <child>
-                          <object class="AdwBin" id="display_settings_bin" />
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </property>
-
           </object>
         </property>
       </object>
