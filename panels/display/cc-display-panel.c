@@ -87,17 +87,18 @@ struct _CcDisplayPanel
   GtkWidget      *cancel_button;
   gboolean        showing_apply_titlebar;
 
-  GList          *monitor_rows;
+  GListStore      *monitors_model;
+  GtkToggleButton *monitor_toggle_button;
 
   AdwNavigationPage *disabled_page;
 
-  GtkWidget      *arrangement_row;
+  GtkWidget      *arrangement_button;
   AdwPreferencesGroup *arrangement_group;
   AdwDialog      *display_arrangement_dialog;
   gboolean        display_arrangement_updated;
   AdwToggleGroup *display_config_type;
-  AdwBin         *display_settings_bin;
-  GtkWidget      *display_settings_group;
+  GtkFlowBox     *display_selection_flowbox;
+  GtkBox         *display_settings_box;
   AdwToastOverlay *toast_overlay;
 
   GtkShortcut *escape_shortcut;
@@ -441,7 +442,6 @@ cc_display_panel_dispose (GObject *object)
       monitor_labeler_hide (CC_DISPLAY_PANEL (object));
     }
 
-  g_clear_pointer (&self->monitor_rows, g_list_free);
   g_clear_object (&self->manager);
   g_clear_object (&self->current_config);
   g_clear_object (&self->up_client);
@@ -494,6 +494,17 @@ on_config_type_toggled_cb (CcDisplayPanel *self)
 
   type = cc_panel_get_selected_type (self);
   config_ensure_of_type (self, type);
+}
+
+static void
+on_display_selection_child_activated_cb (GtkFlowBox      *box,
+                                         GtkFlowBoxChild *row,
+                                         CcDisplayPanel  *self)
+{
+  CcDisplayMonitor *monitor;
+
+  monitor = g_object_get_data (G_OBJECT (row), "monitor");
+  set_current_output (self, monitor, FALSE);
 }
 
 static void
@@ -567,13 +578,14 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/display/cc-display-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_group);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_button);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, cancel_button);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, disabled_page);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_arrangement_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_config_type);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_bin);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_group);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_box);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_selection_flowbox);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_box);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, escape_shortcut);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_page);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, toast_overlay);
@@ -584,6 +596,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_display_arrangement_dialog_close_attempt_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_screen_changed);
   gtk_widget_class_bind_template_callback (widget_class, on_toplevel_escape_pressed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_display_selection_child_activated_cb);
 }
 
 static void
@@ -612,46 +625,40 @@ set_current_output (CcDisplayPanel   *self,
   self->rebuilding_counter--;
 }
 
-static void
-on_monitor_row_activated_cb (CcDisplayPanel *self,
-                             GtkListBoxRow  *row)
-{
-  CcDisplayMonitor *monitor;
-
-  monitor = g_object_get_data (G_OBJECT (row), "monitor");
-  set_current_output (self, monitor, FALSE);
-}
-
-static void
-add_display_row (CcDisplayPanel   *self,
-                 CcDisplayMonitor *monitor)
+static GtkWidget *
+create_display_item (CcDisplayMonitor *monitor,
+                     CcDisplayPanel    *self)
 {
   g_autofree gchar *number_string = NULL;
+  GtkWidget *flowbox_child;
+  GtkWidget *display_label;
   GtkWidget *number_label;
-  GtkWidget *icon;
-  GtkWidget *row;
+  GtkWidget *overlay;
 
-  row = adw_action_row_new ();
-  g_object_set_data (G_OBJECT (row), "monitor", monitor);
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
-                                 cc_display_monitor_get_ui_name (monitor));
-
+  overlay = gtk_overlay_new ();
   number_string = g_strdup_printf ("%d", cc_display_monitor_get_ui_number (monitor));
   number_label = gtk_label_new (number_string);
-  gtk_widget_set_valign (number_label, GTK_ALIGN_CENTER);
-  gtk_widget_set_halign (number_label, GTK_ALIGN_CENTER);
+  gtk_widget_set_valign (number_label, GTK_ALIGN_START);
+  gtk_widget_set_halign (number_label, GTK_ALIGN_START);
   gtk_widget_add_css_class (number_label, "monitor-label");
-  adw_action_row_add_prefix (ADW_ACTION_ROW (row), number_label);
+  gtk_overlay_set_child (GTK_OVERLAY (overlay), number_label);
 
-  icon = gtk_image_new_from_icon_name ("go-next-symbolic");
-  adw_action_row_add_suffix (ADW_ACTION_ROW (row), icon);
-  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), icon);
+  display_label = gtk_label_new (cc_display_monitor_get_ui_name (monitor));
+  gtk_label_set_justify (GTK_LABEL (display_label), GTK_JUSTIFY_CENTER);
+  gtk_label_set_wrap (GTK_LABEL (display_label), TRUE);
+  gtk_label_set_max_width_chars (GTK_LABEL (display_label), 10);
+  gtk_label_set_lines (GTK_LABEL (display_label), 3);
+  gtk_widget_add_css_class (display_label, "heading");
+  gtk_overlay_add_overlay (GTK_OVERLAY (overlay), display_label);
 
-  adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->display_settings_group), row);
+  flowbox_child = gtk_flow_box_child_new ();
+  gtk_widget_set_size_request (flowbox_child, 128, 128);
+  gtk_widget_add_css_class (flowbox_child, "frame");
+  gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (flowbox_child), overlay);
 
-  g_signal_connect_swapped (row, "activated", G_CALLBACK (on_monitor_row_activated_cb), self);
+  g_object_set_data (G_OBJECT (flowbox_child), "monitor", monitor);
 
-  self->monitor_rows = g_list_prepend (self->monitor_rows, row);
+  return flowbox_child;
 }
 
 static void
@@ -670,12 +677,7 @@ rebuild_ui (CcDisplayPanel *self)
   self->rebuilding_counter++;
 
   /* Remove all monitor rows */
-  while (self->monitor_rows)
-    {
-      adw_preferences_group_remove (ADW_PREFERENCES_GROUP (self->display_settings_group),
-                                    self->monitor_rows->data);
-      self->monitor_rows = g_list_remove_link (self->monitor_rows, self->monitor_rows);
-    }
+  g_list_store_remove_all (self->monitors_model);
 
   if (!self->current_config)
     {
@@ -695,6 +697,7 @@ rebuild_ui (CcDisplayPanel *self)
 
       n_usable_outputs += 1;
 
+      g_list_store_append (self->monitors_model, l->data);
       if (cc_display_monitor_is_active (output))
         {
           n_active_outputs += 1;
@@ -705,12 +708,21 @@ rebuild_ui (CcDisplayPanel *self)
           if (!self->current_output)
             set_current_output (self, output, FALSE);
         }
-
-      add_display_row (self, l->data);
     }
 
   /* Sync the rebuild lists/buttons */
   set_current_output (self, self->current_output, TRUE);
+
+  // FIXME
+  guint position;
+  g_list_store_find (self->monitors_model, self->current_output, &position);
+  GtkFlowBoxChild *child = gtk_flow_box_get_child_at_index (self->display_selection_flowbox, position);
+  if (child)
+    {
+      g_signal_handlers_block_by_func (self->display_selection_flowbox, on_monitor_settings_updated_cb, self);
+      gtk_flow_box_select_child (self->display_selection_flowbox, child);
+      g_signal_handlers_unblock_by_func (self->display_selection_flowbox, on_monitor_settings_updated_cb, self);
+    }
 
   type = config_get_current_type (self);
 
@@ -719,15 +731,15 @@ rebuild_ui (CcDisplayPanel *self)
       if (type > CC_DISPLAY_CONFIG_LAST_VALID)
         type = CC_DISPLAY_CONFIG_JOIN;
 
-      gtk_widget_set_visible (self->display_settings_group, type == CC_DISPLAY_CONFIG_JOIN);
-      gtk_widget_set_visible (self->arrangement_row, type == CC_DISPLAY_CONFIG_JOIN);
+      gtk_widget_set_visible (GTK_WIDGET (self->display_config_type), TRUE);
+      gtk_widget_set_visible (self->arrangement_button, type == CC_DISPLAY_CONFIG_JOIN);
     }
   else
     {
       type = CC_DISPLAY_CONFIG_JOIN;
 
-      gtk_widget_set_visible (self->display_settings_group, FALSE);
-      gtk_widget_set_visible (self->arrangement_row, FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->display_config_type), FALSE);
+      gtk_widget_set_visible (self->arrangement_button, FALSE);
     }
 
   cc_display_settings_set_multimonitor (self->settings,
@@ -974,6 +986,12 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  self->monitors_model = g_list_store_new (CC_TYPE_DISPLAY_MONITOR);
+  gtk_flow_box_bind_model (self->display_selection_flowbox,
+                           G_LIST_MODEL (self->monitors_model),
+                           (GtkFlowBoxCreateWidgetFunc)create_display_item,
+                           self, NULL);
+
   self->arrangement = cc_display_arrangement_new (NULL);
   gtk_widget_set_size_request (GTK_WIDGET (self->arrangement), -1, 175);
   adw_preferences_group_add (self->arrangement_group, GTK_WIDGET (self->arrangement));
@@ -981,7 +999,7 @@ cc_display_panel_init (CcDisplayPanel *self)
   g_signal_connect_swapped (self->arrangement, "updated", G_CALLBACK (on_display_arrangement_updated_cb), self);
 
   self->settings = cc_display_settings_new (self);
-  adw_bin_set_child (self->display_settings_bin, GTK_WIDGET (self->settings));
+  gtk_box_append (self->display_settings_box, GTK_WIDGET (self->settings));
   g_signal_connect_object (self->settings, "updated",
                            G_CALLBACK (on_monitor_settings_updated_cb), self,
                            G_CONNECT_SWAPPED);

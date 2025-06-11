@@ -59,48 +59,69 @@ template $CcDisplayPanel: $CcPanel {
             title: _("Displays");
             icon-name: "video-display-symbolic";
 
-            child: Box {
+            child: Box display_settings_box {
               orientation: vertical;
 
-              Adw.PreferencesPage {
-                Adw.PreferencesGroup display_multiple_displays {
-                  Adw.ActionRow config_type_switcher_row {
-                    title: _("Multiple Displays");
+              Adw.Bin display_selection_widget {
+                child: Adw.Clamp {
+                  child: Adw.Bin {
+                    margin-top: 12;
+                    margin-start: 12;
+                    margin-end: 12;
 
-                    [suffix]
-                    Adw.ToggleGroup display_config_type {
-                      valign: center;
-                      homogeneous: true;
-                      notify::active => $on_config_type_toggled_cb(template);
+                    styles [
+                      "card",
+                    ]
 
-                      Adw.Toggle {
-                        name: "join";
+                    Box {
+                      orientation: vertical;
+                      margin-top: 12;
+                      margin-bottom: 12;
+                      margin-start: 12;
+                      margin-end: 12;
 
-                        /* Translators: 'Join' as in 'Join displays' */
-                        label: _("_Join");
-                        use-underline: true;
+                      FlowBox display_selection_flowbox {
+                        halign: center;
+                        margin-top: 20;
+                        margin-bottom: 32;
+                        column-spacing: 12;
+                        row-spacing: 12;
+                        max-children-per-line: 3;
+                        child-activated => $on_display_selection_child_activated_cb();
                       }
 
-                      Adw.Toggle {
-                        name: "clone";
-                        label: _("_Mirror");
-                        use-underline: true;
+                      Adw.WrapBox {
+                        Adw.ToggleGroup display_config_type {
+                          valign: center;
+                          homogeneous: true;
+                          notify::active => $on_config_type_toggled_cb(template);
+
+                          Adw.Toggle {
+                            name: "join";
+
+                            /* Translators: 'Join' as in 'Join displays' */
+                            label: _("_Join");
+                            use-underline: true;
+                          }
+
+                          Adw.Toggle {
+                            name: "clone";
+                            label: _("_Mirror");
+                            use-underline: true;
+                          }
+                        }
+
+                        Button arrangement_button {
+                          hexpand: true;
+                          halign: end;
+                          valign: center;
+                          label: _("Arrange...");
+                          clicked => $adw_dialog_present(display_arrangement_dialog);
+                        }
                       }
                     }
-                  }
-
-                  $CcListRow arrangement_row {
-                    show-arrow: "True";
-                    title: _("Arrange Displays");
-                    activated => $adw_dialog_present(display_arrangement_dialog);
-                  }
-                }
-
-                Adw.PreferencesGroup display_settings_group {}
-
-                Adw.PreferencesGroup single_display_settings_group {
-                  visible: false;
-                }
+                  };
+                };
               }
 
               Adw.Bin display_settings_bin {}
