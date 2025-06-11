@@ -95,15 +95,15 @@ template $CcDisplayPanel: $CcPanel {
                     }
                   }
                 }
+
+                $CcListRow arrangement_row {
+                  show-arrow: "True";
+                  title: _("Arrange Displays");
+                  activated => $adw_dialog_present(display_arrangement_dialog);
+                }
               }
 
               Adw.PreferencesGroup display_settings_group {
-                Adw.PreferencesRow arrangement_row {
-                  activatable: false;
-
-                  Adw.Bin arrangement_bin {}
-                }
-
                 Adw.ComboRow primary_display_row {
                   subtitle: _("Contains top bar and Activities");
                   title: _("_Primary Display");
@@ -178,4 +178,26 @@ template $CcDisplayPanel: $CcPanel {
       };
     };
   }
+}
+
+Adw.Dialog display_arrangement_dialog {
+  title: _("Arrange Displays");
+  content-width: 400;
+  can-close: false;
+  close-attempt => $on_display_arrangement_dialog_close_attempt_cb(template);
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      description: _("Drag displays so they match the physical layout");
+
+      Adw.PreferencesGroup arrangement_group {
+        styles [
+          "view",
+        ]
+      }
+    };
+  };
 }

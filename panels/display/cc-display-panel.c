@@ -93,7 +93,9 @@ struct _CcDisplayPanel
   GtkWidget      *display_settings_disabled_group;
 
   GtkWidget      *arrangement_row;
-  AdwBin         *arrangement_bin;
+  AdwPreferencesGroup *arrangement_group;
+  AdwDialog      *display_arrangement_dialog;
+  gboolean        display_arrangement_updated;
   AdwToggleGroup *display_config_type;
   GtkWidget      *display_multiple_displays;
   AdwBin         *display_settings_bin;
@@ -133,6 +135,15 @@ set_current_output (CcDisplayPanel   *self,
 static void
 on_screen_changed (CcDisplayPanel *self);
 
+static void
+on_display_arrangement_dialog_close_attempt_cb (CcDisplayPanel *self)
+{
+  if (self->display_arrangement_updated)
+      apply_current_configuration (self);
+
+  self->display_arrangement_updated = FALSE;
+  adw_dialog_force_close (self->display_arrangement_dialog);
+}
 
 static CcDisplayConfigType
 config_get_current_type (CcDisplayPanel *self)
@@ -467,12 +478,6 @@ cc_display_panel_get_property (GObject    *object,
 }
 
 static void
-on_arrangement_selected_ouptut_changed_cb (CcDisplayPanel *self)
-{
-  set_current_output (self, cc_display_arrangement_get_selected_output (self->arrangement), FALSE);
-}
-
-static void
 on_monitor_settings_updated_cb (CcDisplayPanel    *self,
                                 CcDisplayMonitor  *monitor,
                                 CcDisplaySettings *settings)
@@ -586,9 +591,10 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/display/cc-display-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_disabled_group);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_bin);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, cancel_button);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_arrangement_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_multiple_displays);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_config_type);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_bin);
@@ -604,6 +610,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, apply_current_configuration);
   gtk_widget_class_bind_template_callback (widget_class, cancel_current_configuration);
   gtk_widget_class_bind_template_callback (widget_class, on_config_type_toggled_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_display_arrangement_dialog_close_attempt_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_primary_display_selected_item_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_screen_changed);
   gtk_widget_class_bind_template_callback (widget_class, on_toplevel_escape_pressed_cb);
@@ -974,6 +981,12 @@ cancel_current_configuration (CcDisplayPanel *panel)
 }
 
 static void
+on_display_arrangement_updated_cb (CcDisplayPanel *self)
+{
+  self->display_arrangement_updated = TRUE;
+}
+
+static void
 mapped_cb (CcDisplayPanel *self)
 {
   CcShell *shell;
@@ -1059,14 +1072,9 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   self->arrangement = cc_display_arrangement_new (NULL);
   gtk_widget_set_size_request (GTK_WIDGET (self->arrangement), -1, 175);
-  adw_bin_set_child (self->arrangement_bin, GTK_WIDGET (self->arrangement));
+  adw_preferences_group_add (self->arrangement_group, GTK_WIDGET (self->arrangement));
 
-  g_signal_connect_object (self->arrangement, "updated",
-			   G_CALLBACK (update_apply_button), self,
-			   G_CONNECT_SWAPPED);
-  g_signal_connect_object (self->arrangement, "notify::selected-output",
-			   G_CALLBACK (on_arrangement_selected_ouptut_changed_cb), self,
-			   G_CONNECT_SWAPPED);
+  g_signal_connect_swapped (self->arrangement, "updated", G_CALLBACK (on_display_arrangement_updated_cb), self);
 
   self->settings = cc_display_settings_new (self);
   adw_bin_set_child (self->display_settings_bin, GTK_WIDGET (self->settings));
