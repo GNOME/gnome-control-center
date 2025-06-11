@@ -3,6 +3,8 @@ using Adw 1;
 
 template $CcDisplaySettings: Adw.PreferencesPage {
   Adw.PreferencesGroup {
+    visible: bind use_as_row.visible;
+
     Adw.ComboRow use_as_row {
       title: _("Use As");
 
