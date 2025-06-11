@@ -60,16 +60,6 @@ template $CcDisplayPanel: $CcPanel {
             icon-name: "video-display-symbolic";
 
             child: Adw.PreferencesPage {
-              Adw.PreferencesGroup display_settings_disabled_group {
-                visible: false;
-
-                Adw.StatusPage {
-                  vexpand: true;
-                  icon-name: "computer-symbolic";
-                  title: _("Display Settings Disabled");
-                }
-              }
-
               Adw.PreferencesGroup display_multiple_displays {
                 Adw.ActionRow config_type_switcher_row {
                   title: _("Multiple Displays");
@@ -170,6 +160,24 @@ template $CcDisplayPanel: $CcPanel {
         }
       };
     };
+  }
+
+  [subpage]
+  Adw.NavigationPage disabled_page {
+    title: _("Displays");
+
+    Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {
+        show-back-button: false;
+      }
+
+      content: Adw.StatusPage {
+        vexpand: true;
+        icon-name: "computer-symbolic";
+        title: _("Display Settings Disabled");
+      };
+    }
   }
 }
 
