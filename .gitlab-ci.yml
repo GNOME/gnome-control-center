@@ -181,7 +181,7 @@ conditional builds:
 # Runs static checks.
 # Runs the unit tests.
 ##
-style-check-diff:
+check-code-style:
   extends:
   - '.fdo.suffixed-image@fedora'
   - '.fedora.container.common'
@@ -190,8 +190,13 @@ style-check-diff:
   stage: test
   when: always
   allow_failure: true
+  interruptible: true
   script:
-    - .gitlab-ci/run-style-check-diff.sh
+    - bash .gitlab-ci/check-code-style.sh
+  artifacts:
+    when: on_failure
+  rules:
+    - if: $CI_COMMIT_BRANCH !~ /gnome-\d\d+/
 
 check-potfiles:
   extends:
