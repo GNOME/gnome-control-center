@@ -208,8 +208,8 @@
   </template>
 
   <object class="AdwDialog" id="display_arrangement_dialog">
+    <property name="content-width">420</property>
     <property name="title" translatable="yes">Arrange Displays</property>
-    <property name="content-width">400</property>
     <property name="can-close">False</property>
     <signal name="close-attempt" handler="on_display_arrangement_dialog_close_attempt_cb" object="CcDisplayPanel" swapped="yes"/>
     <property name="child">
@@ -219,6 +219,7 @@
         </child>
         <property name="content">
           <object class="AdwPreferencesPage">
+            <property name="description-centered">True</property>
             <property name="description" translatable="yes">Drag displays so they match the physical layout</property>
             <child>
               <object class="AdwPreferencesGroup" id="arrangement_group">
