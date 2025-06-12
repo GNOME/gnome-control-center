@@ -19,41 +19,22 @@ i18n.merge_file(
   install_dir: join_paths(control_center_datadir, 'polkit-1', 'actions')
 )
 
-blueprints = custom_target(
+ui_sources = files(
+  'cc-system-panel.blp',
+)
+
+ui_compiled = []
+foreach ui_source : ui_sources
+  ui_compiled += fs.name(fs.replace_suffix(ui_source, '.ui'))
+endforeach
+
+blueprints = []
+
+blueprints += custom_target(
   'blueprints',
-  input: files(
-    'about/cc-about-page.blp',
-    'about/cc-info-entry.blp',
-    'about/cc-system-details-window.blp',
-    'cc-system-panel.blp',
-    'datetime/cc-datetime-page.blp',
-    'datetime/cc-month-row.blp',
-    'datetime/cc-tz-dialog.blp',
-    'datetime/cc-tz-row.blp',
-    'region/cc-format-chooser.blp',
-    'region/cc-format-preview.blp',
-    'region/cc-region-page.blp',
-    'remote-desktop/cc-desktop-sharing-page.blp',
-    'remote-desktop/cc-encryption-fingerprint-dialog.blp',
-    'remote-desktop/cc-remote-desktop-page.blp',
-    'remote-desktop/cc-remote-login-page.blp',
-    'secure-shell/cc-secure-shell-page.blp',
-    'users/cc-avatar-chooser.blp',
-    'users/cc-enterprise-login-dialog.blp',
-    'users/cc-entry-feedback.blp',
-    'users/cc-fingerprint-dialog.blp',
-    'users/cc-user-page.blp',
-    'users/cc-users-page.blp',
-    'users/data/join-dialog.blp',
-  ),
-  output: '.',
-  command: [
-    blueprint_compiler,
-    'batch-compile',
-    '@OUTPUT@',
-    '@CURRENT_SOURCE_DIR@',
-    '@INPUT@',
-  ],
+  input: ui_sources,
+  output: ui_compiled,
+  command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
 )
 
 sources = files(
@@ -94,14 +75,6 @@ sources = files(
   'users/pw-utils.c',
   'users/run-passwd.c',
   'users/user-utils.c',
-)
-
-sources += gnome.compile_resources(
-  'cc-' + cappletname + '-resources',
-  cappletname + '.gresource.xml',
-  c_name : 'cc_' + cappletname,
-  export : true,
-  dependencies : blueprints,
 )
 
 gdesktop_enums_header = files(
@@ -172,6 +145,14 @@ subdir('region')
 subdir('remote-desktop')
 subdir('secure-shell')
 subdir('users')
+
+sources += gnome.compile_resources(
+  'cc-' + cappletname + '-resources',
+  cappletname + '.gresource.xml',
+  c_name : 'cc_' + cappletname,
+  export : true,
+  dependencies : blueprints,
+)
 
 panels_libs += static_library(
   cappletname,

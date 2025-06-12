@@ -8,6 +8,27 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
+ui_sources = files(
+  'cc-avatar-chooser.blp',
+  'cc-enterprise-login-dialog.blp',
+  'cc-entry-feedback.blp',
+  'cc-fingerprint-dialog.blp',
+  'cc-user-page.blp',
+  'cc-users-page.blp',
+)
+
+ui_compiled = []
+foreach ui_source : ui_sources
+  ui_compiled += fs.name(fs.replace_suffix(ui_source, '.ui'))
+endforeach
+
+blueprints += custom_target(
+  'blueprints',
+  input: ui_sources,
+  output: ui_compiled,
+  command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
+)
+
 image_data = files(
   'data/faces/bicycle.jpg',
   'data/faces/book.jpg',
