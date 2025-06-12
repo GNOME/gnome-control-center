@@ -2,6 +2,22 @@ polkit_conf = configuration_data()
 polkit_conf.set('libexecdir', control_center_libexecdir)
 polkit = 'org.gnome.controlcenter.remote-login-helper.policy'
 
+ui_sources = files(
+  'cc-secure-shell-page.blp',
+)
+
+ui_compiled = []
+foreach ui_source : ui_sources
+  ui_compiled += fs.name(fs.replace_suffix(ui_source, '.ui'))
+endforeach
+
+blueprints += custom_target(
+  'blueprints',
+  input: ui_sources,
+  output: ui_compiled,
+  command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
+)
+
 polkit_in = configure_file(
   input: polkit + '.in.in',
   output: polkit + '.in',
