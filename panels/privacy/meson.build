@@ -10,31 +10,31 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
-blueprints = custom_target(
+blueprints = []
+
+subdir('bolt')
+subdir('camera')
+subdir('diagnostics')
+subdir('firmware-security')
+subdir('icons')
+subdir('location')
+subdir('screen')
+subdir('usage')
+
+ui_sources = files(
+  'cc-privacy-panel.blp',
+)
+
+ui_compiled = []
+foreach ui_source : ui_sources
+  ui_compiled += fs.name(fs.replace_suffix(ui_source, '.ui'))
+endforeach
+
+blueprints += custom_target(
   'blueprints',
-  input: files(
-    'bolt/cc-bolt-device-dialog.blp',
-    'bolt/cc-bolt-device-entry.blp',
-    'bolt/cc-bolt-page.blp',
-    'camera/cc-camera-page.blp',
-    'cc-privacy-panel.blp',
-    'diagnostics/cc-diagnostics-page.blp',
-    'firmware-security/cc-firmware-security-boot-dialog.blp',
-    'firmware-security/cc-firmware-security-dialog.blp',
-    'firmware-security/cc-firmware-security-help-dialog.blp',
-    'firmware-security/cc-firmware-security-page.blp',
-    'location/cc-location-page.blp',
-    'screen/cc-screen-page.blp',
-    'usage/cc-usage-page.blp',
-  ),
-  output: '.',
-  command: [
-    blueprint_compiler,
-    'batch-compile',
-    '@OUTPUT@',
-    '@CURRENT_SOURCE_DIR@',
-    '@INPUT@',
-  ],
+  input: ui_sources,
+  output: ui_compiled,
+  command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
 )
 
 sources = files(
@@ -105,5 +105,3 @@ panels_libs += static_library(
   dependencies: deps,
   c_args: cflags
 )
-
-subdir('icons')
