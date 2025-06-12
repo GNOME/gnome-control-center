@@ -993,7 +993,7 @@ cc_display_panel_init (CcDisplayPanel *self)
                            self, NULL);
 
   self->arrangement = cc_display_arrangement_new (NULL);
-  gtk_widget_set_size_request (GTK_WIDGET (self->arrangement), -1, 175);
+  gtk_widget_set_size_request (GTK_WIDGET (self->arrangement), -1, 420);
   adw_preferences_group_add (self->arrangement_group, GTK_WIDGET (self->arrangement));
 
   g_signal_connect_swapped (self->arrangement, "updated", G_CALLBACK (on_display_arrangement_updated_cb), self);
