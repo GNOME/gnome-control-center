@@ -29,6 +29,9 @@ template $CcDisplayPanel: $CcPanel {
         visible: bind template.showing-apply-titlebar;
         halign: center;
         homogeneous: true;
+        margin-top: 20;
+        margin-bottom: 20;
+        spacing: 20;
 
         styles [
           "toolbar",
@@ -39,6 +42,10 @@ template $CcDisplayPanel: $CcPanel {
           label: _("_Cancel");
           can-shrink: true;
           clicked => $cancel_current_configuration(template);
+
+          styles [
+            "pill",
+          ]
         }
 
         Button apply_button {
@@ -48,6 +55,7 @@ template $CcDisplayPanel: $CcPanel {
           clicked => $apply_current_configuration(template);
 
           styles [
+            "pill",
             "suggested-action",
           ]
         }
