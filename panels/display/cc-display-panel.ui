@@ -35,6 +35,9 @@
                 <property name="visible" bind-source="CcDisplayPanel" bind-property="showing-apply-titlebar" bind-flags="sync-create"/>
                 <property name="halign">center</property>
                 <property name="homogeneous">True</property>
+                <property name="margin-top">20</property>
+                <property name="margin-bottom">20</property>
+                <property name="spacing">20</property>
 
                 <style>
                   <class name="toolbar"/>
@@ -46,6 +49,9 @@
                     <property name="label" translatable="yes">_Cancel</property>
                     <property name="can-shrink">True</property>
                     <signal name="clicked" handler="cancel_current_configuration" object="CcDisplayPanel" swapped="yes" />
+                    <style>
+                      <class name="pill"/>
+                    </style>
                   </object>
                 </child>
 
@@ -56,6 +62,7 @@
                     <property name="can-shrink">True</property>
                     <signal name="clicked" handler="apply_current_configuration" object="CcDisplayPanel" swapped="yes" />
                     <style>
+                      <class name="pill"/>
                       <class name="suggested-action" />
                     </style>
                   </object>
