@@ -1037,7 +1037,7 @@ cc_display_panel_init (CcDisplayPanel *self)
              self);
 
   provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/display/display-arrangement.css");
+  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/display/cc-display-panel.css");
   gtk_style_context_add_provider_for_display (gdk_display_get_default (),
                                               GTK_STYLE_PROVIDER (provider),
                                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
