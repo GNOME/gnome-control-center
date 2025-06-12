@@ -48,6 +48,8 @@
 #define SECTION_PADDING 32
 #define HEADING_PADDING 12
 
+#define DISPLAY_SELECTION_ITEM_HEIGHT 100
+
 #define DISPLAY_SCHEMA   "org.gnome.settings-daemon.plugins.color"
 
 #define DISPLAY_CONFIG_JOIN_NAME "join"
@@ -652,7 +654,8 @@ create_display_item (CcDisplayMonitor *monitor,
   gtk_overlay_add_overlay (GTK_OVERLAY (overlay), display_label);
 
   flowbox_child = gtk_flow_box_child_new ();
-  gtk_widget_set_size_request (flowbox_child, 128, 128);
+  /* Use a 3:2 aspect ratio for the flow box child size */
+  gtk_widget_set_size_request (flowbox_child, DISPLAY_SELECTION_ITEM_HEIGHT * (3/2.0), DISPLAY_SELECTION_ITEM_HEIGHT);
   gtk_widget_add_css_class (flowbox_child, "frame");
   gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (flowbox_child), overlay);
 
