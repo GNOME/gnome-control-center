@@ -21,7 +21,6 @@ foreach ui_source : ui_sources
 endforeach
 
 blueprints += custom_target(
-  'blueprints',
   input: ui_sources,
   output: ui_compiled,
   command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
@@ -51,7 +50,6 @@ gdbus_iface_xml = gdbus + '1-interface.xml'
 #    > timedated1-interface.xml
 '''
 gdbus_iface = custom_target(
-  gdbus_iface_xml,
   output: gdbus_iface_xml,
   capture: true,
   command: [

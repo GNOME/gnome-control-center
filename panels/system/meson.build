@@ -31,7 +31,6 @@ endforeach
 blueprints = []
 
 blueprints += custom_target(
-  'blueprints',
   input: ui_sources,
   output: ui_compiled,
   command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
