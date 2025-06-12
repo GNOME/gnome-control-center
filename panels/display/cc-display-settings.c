@@ -130,7 +130,7 @@ string_for_rotation (CcDisplayRotation rotation,
             return C_("Display rotation", "Portrait Left");
           case CC_DISPLAY_ROTATION_180:
           case CC_DISPLAY_ROTATION_FLIPPED:
-            return C_("Display rotation", "Landscape (flipped)");
+            return C_("Display rotation", "Landscape (Flipped)");
           default:
             return "";
           }
@@ -150,7 +150,7 @@ string_for_rotation (CcDisplayRotation rotation,
             return C_("Display rotation", "Landscape Left");
           case CC_DISPLAY_ROTATION_180:
           case CC_DISPLAY_ROTATION_FLIPPED:
-            return C_("Display rotation", "Portrait (flipped)");
+            return C_("Display rotation", "Portrait (Flipped)");
           default:
             return "";
           }
