@@ -658,6 +658,7 @@ create_display_item (CcDisplayMonitor *monitor,
   gtk_widget_set_size_request (flowbox_child, DISPLAY_SELECTION_ITEM_HEIGHT * (3/2.0), DISPLAY_SELECTION_ITEM_HEIGHT);
   gtk_widget_add_css_class (flowbox_child, "frame");
   gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (flowbox_child), overlay);
+  gtk_widget_add_css_class (flowbox_child, "display-selection-child");
 
   g_object_set_data (G_OBJECT (flowbox_child), "monitor", monitor);
 
