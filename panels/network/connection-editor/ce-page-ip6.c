@@ -102,9 +102,12 @@ sync_dns_entry_warning (CEPageIP6 *self)
                 gtk_entry_set_icon_tooltip_text (self->dns_entry, GTK_ENTRY_ICON_SECONDARY, _("Automatic DNS is enabled. Did you intend to disable Automatic DNS?"));
                 gtk_widget_add_css_class (GTK_WIDGET (self->dns_entry), "warning");
         } else {
+            if (gtk_widget_has_css_class (GTK_WIDGET (self->dns_entry), "warning"))
+              {
                 gtk_entry_set_icon_from_icon_name (self->dns_entry, GTK_ENTRY_ICON_SECONDARY, NULL);
                 gtk_entry_set_icon_tooltip_text (self->dns_entry, GTK_ENTRY_ICON_SECONDARY, NULL);
                 gtk_widget_remove_css_class (GTK_WIDGET (self->dns_entry), "warning");
+              }
         }
 }
 

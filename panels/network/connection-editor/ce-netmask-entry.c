@@ -23,6 +23,7 @@
 #include <NetworkManager.h>
 
 #include "ce-netmask-entry.h"
+#include "ui-helpers.h"
 #include <glib/gi18n.h>
 
 struct _CENetmaskEntry
@@ -89,9 +90,9 @@ ce_netmask_entry_changed (GtkEditable *editable)
   CENetmaskEntry *self = CE_NETMASK_ENTRY (editable);
 
   if (ce_netmask_entry_is_valid (self))
-    gtk_widget_remove_css_class (GTK_WIDGET (self), "error");
+    widget_unset_error (GTK_WIDGET (self));
   else
-    gtk_widget_add_css_class (GTK_WIDGET (self), "error");
+    widget_set_error (GTK_WIDGET (self));
 }
 
 static void
