@@ -692,8 +692,8 @@ on_click_gesture_released_cb (CcDisplayArrangement *self,
   self->drag_active = FALSE;
 
   output = cc_display_arrangement_find_monitor_at (self, x, y);
-  gtk_widget_set_cursor_from_name (GTK_WIDGET (self),
-                                   output != NULL ? "fleur" : NULL);
+  //gtk_widget_set_cursor_from_name (GTK_WIDGET (self),
+    //                               output != NULL ? "fleur" : NULL);
 
   /* And queue a redraw to recenter everything */
   gtk_widget_queue_draw (GTK_WIDGET (self));
@@ -723,8 +723,8 @@ on_motion_controller_motion_cb (CcDisplayArrangement *self,
       CcDisplayMonitor *output;
       output = cc_display_arrangement_find_monitor_at (self, x, y);
 
-      gtk_widget_set_cursor_from_name (GTK_WIDGET (self),
-                                       output != NULL ? "fleur" : NULL);
+      //gtk_widget_set_cursor_from_name (GTK_WIDGET (self),
+        //                               output != NULL ? "fleur" : NULL);
       if (self->prelit_output != output)
         gtk_widget_queue_draw (GTK_WIDGET (self));
 
@@ -861,8 +861,8 @@ cc_display_arrangement_init (CcDisplayArrangement *self)
   gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (click_gesture));
 
   motion_controller = gtk_event_controller_motion_new ();
-  g_signal_connect_swapped (motion_controller, "motion", G_CALLBACK (on_motion_controller_motion_cb), self);
-  gtk_widget_add_controller (GTK_WIDGET (self), motion_controller);
+  //g_signal_connect_swapped (motion_controller, "motion", G_CALLBACK (on_motion_controller_motion_cb), self);
+  //gtk_widget_add_controller (GTK_WIDGET (self), motion_controller);
 
   gtk_drawing_area_set_draw_func (GTK_DRAWING_AREA (self),
                                   cc_display_arrangement_draw,
