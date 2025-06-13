@@ -154,6 +154,10 @@ template $CcBackgroundPanel: $CcPanel {
               styles [
                 "card",
               ]
+              accessibility {
+                label: _("Background");
+              }
+              accessible-role: group;
 
               $CcBackgroundChooser background_chooser {
                 hexpand: true;
