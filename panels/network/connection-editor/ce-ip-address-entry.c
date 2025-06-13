@@ -22,6 +22,7 @@
 #include <NetworkManager.h>
 
 #include "ce-ip-address-entry.h"
+#include "ui-helpers.h"
 #include <glib/gi18n.h>
 
 struct _CEIPAddressEntry
@@ -60,9 +61,9 @@ ce_ip_address_entry_changed (GtkEditable *editable)
   CEIPAddressEntry *self = CE_IP_ADDRESS_ENTRY (editable);
 
   if (ce_ip_address_entry_is_valid (self))
-    gtk_widget_remove_css_class (GTK_WIDGET (self), "error");
+    widget_unset_error (GTK_WIDGET (self));
   else
-    gtk_widget_add_css_class (GTK_WIDGET (self), "error");
+    widget_set_error (GTK_WIDGET (self));
 }
 
 static void
