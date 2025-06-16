@@ -23,13 +23,3 @@ libwacom_calibrator_test = static_library(
   dependencies: calibrator_deps,
   c_args: test_cflags
 )
-
-sources = common_sources + wacom_gresource + files('main.c')
-
-executable(
-  'test-calibrator',
-  sources,
-  include_directories: top_inc,
-  dependencies: calibrator_deps,
-  c_args: cflags
-)
