@@ -23,10 +23,12 @@
 #include <NetworkManager.h>
 
 #include "ce-netmask-entry.h"
+#include <glib/gi18n.h>
 
 struct _CENetmaskEntry
 {
   GtkEntry parent_instance;
+  gulong notify_id;
 };
 
 static void ce_netmask_entry_editable_init (GtkEditableInterface *iface);
@@ -66,6 +68,22 @@ parse_netmask (const char *str, guint32 *prefix)
 }
 
 static void
+ce_netmask_focus (CENetmaskEntry *self, GParamSpec *pspec, gpointer data)
+{
+  /* We must check the validity only after the user has entered or exited the widget.
+     We can't do this in `ce_netmask_entry_is_valid()` because it is called
+     after each keystroke, and the user would receive constantly notifications
+     of "Netmask value not valid" until the value is correct.
+  */
+  if (!ce_netmask_entry_is_valid (self))
+    {
+      gtk_accessible_announce (GTK_ACCESSIBLE (self),
+                               _("Netmask value not valid"),
+                               GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_HIGH);
+    }
+}
+
+static void
 ce_netmask_entry_changed (GtkEditable *editable)
 {
   CENetmaskEntry *self = CE_NETMASK_ENTRY (editable);
@@ -79,6 +97,7 @@ ce_netmask_entry_changed (GtkEditable *editable)
 static void
 ce_netmask_entry_init (CENetmaskEntry *self)
 {
+  g_signal_connect (self, "notify::has-focus", (GCallback) ce_netmask_focus, NULL);
 }
 
 static void
@@ -88,8 +107,23 @@ ce_netmask_entry_editable_init (GtkEditableInterface *iface)
 }
 
 static void
+ce_netmask_entry_dispose (GObject *object)
+{
+  CENetmaskEntry *self = CE_NETMASK_ENTRY (object);
+  if (self->notify_id)
+    {
+      g_signal_handler_disconnect (self, self->notify_id);
+      self->notify_id = 0;
+    }
+
+  G_OBJECT_CLASS (ce_netmask_entry_parent_class)->dispose (object);
+}
+
+static void
 ce_netmask_entry_class_init (CENetmaskEntryClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  object_class->dispose = ce_netmask_entry_dispose;
 }
 
 CENetmaskEntry *
