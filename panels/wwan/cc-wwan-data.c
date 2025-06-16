@@ -1724,6 +1724,7 @@ cc_wwan_data_apn_set_initial_eps_auth_method (CcWwanDataApn *apn,
 
   switch(authtype)
   {
+    default:
     case 0: //None
       noauth_enabled = TRUE;
       refuse_pap_enabled = TRUE;
