@@ -84,7 +84,6 @@ release_cb (GObject      *source,
   if (!g_permission_release_finish (self->permission, result, &error))
     {
       g_warning ("Error releasing permission: %s", error->message);
-      g_error_free (error);
     }
 
   g_clear_object (&self->cancellable);
