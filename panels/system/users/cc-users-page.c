@@ -206,19 +206,17 @@ users_loaded (CcUsersPage *self)
 {
     g_autoptr(GSList) user_list = NULL;
     GSList *l;
-    guint n_users;
 
     user_list = act_user_manager_list_users (self->user_manager);
     for (l = user_list; l; l = l->next) {
         ActUser *user = ACT_USER (l->data);
 
+        /* Show all accounts in the UI except for "system" accounts, such
+         * as "root" or "nobody". */
         if (act_user_is_system_account (user)) {
             continue;
         }
 
-        /* Increase the user count for all accounts except for "system" accounts, such
-         * as "root" or "nobody". */
-        n_users++;
         if (act_user_get_uid (user) == getuid ()) {
             cc_user_page_set_user (self->current_user_page, user, self->permission);
 
