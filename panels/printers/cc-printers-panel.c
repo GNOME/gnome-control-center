@@ -386,17 +386,17 @@ on_cups_notification (GDBusConnection *connection,
                       gpointer         user_data)
 {
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-  gboolean                printer_is_accepting_jobs;
+  gboolean                printer_is_accepting_jobs = FALSE;
   gchar                  *printer_name = NULL;
   gchar                  *text = NULL;
   gchar                  *printer_uri = NULL;
   gchar                  *printer_state_reasons = NULL;
   gchar                  *job_state_reasons = NULL;
   gchar                  *job_name = NULL;
-  guint                   job_id;
-  gint                    printer_state;
-  gint                    job_state;
-  gint                    job_impressions_completed;
+  guint                   job_id = 0;
+  gint                    printer_state = -1;
+  gint                    job_state = -1;
+  gint                    job_impressions_completed = 0;
   static gchar *requested_attrs[] = {
     "job-printer-uri",
     "job-originating-user-name",
