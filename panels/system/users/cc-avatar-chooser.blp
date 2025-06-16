@@ -12,6 +12,10 @@ template $CcAvatarChooser: Popover {
       homogeneous: true;
       max-children-per-line: 5;
       column-spacing: 10;
+      accessible-role: group;
+      accessibility {
+        label: _("Stock avatars");
+      }
     }
 
     Box {
