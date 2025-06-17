@@ -160,3 +160,16 @@ template $CcFormatChooser: Adw.Dialog {
     };
   };
 }
+
+FilterListModel region_filter_model {
+  filter: StringFilter {
+    expression: expr item as <StringObject>.string;
+    search: bind region_filter_entry.text;
+  };
+
+  model: SortListModel region_sort_model {
+    sorter: StringSorter {
+      expression: expr item as <StringObject>.string;
+    };
+  };
+}

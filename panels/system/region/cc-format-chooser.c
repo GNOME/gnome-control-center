@@ -41,6 +41,8 @@ struct _CcFormatChooser {
   AdwDialog parent_instance;
 
   AdwOverlaySplitView *split_view;
+  GtkSortListModel *region_sort_model;
+  GtkFilterListModel *region_filter_model;
   GtkSearchEntry *region_filter_entry;
   GtkStack *region_list_stack;
   AdwPreferencesGroup *common_region_group;
@@ -111,27 +113,6 @@ set_locale_id (CcFormatChooser *self,
         gtk_label_set_label (self->preview_title_label, locale_name);
 }
 
-static gint
-sort_regions (GtkListBoxRow* a,
-              GtkListBoxRow* b,
-              gpointer       user_data)
-{
-        CcLocaleRow *row1 = CC_LOCALE_ROW (a);
-        CcLocaleRow *row2 = CC_LOCALE_ROW (b);
-        const gchar *la;
-        const gchar *lb;
-
-        if (!cc_locale_row_get_locale_id (row1))
-                return 1;
-        if (!cc_locale_row_get_locale_id (row2))
-                return -1;
-
-        la = cc_locale_row_get_country (row1);
-        lb = cc_locale_row_get_country (row2);
-
-        return g_strcmp0 (la, lb);
-}
-
 static void
 on_stop_search (CcFormatChooser *self)
 {
@@ -187,18 +168,23 @@ preview_button_clicked_cb (CcFormatChooser *self,
   adw_overlay_split_view_set_show_sidebar (self->split_view, TRUE);
 }
 
-static CcLocaleRow *
-region_widget_new (CcFormatChooser *self,
-                   const gchar     *locale_id)
+static GtkWidget*
+create_row_func (gpointer data,
+                 gpointer user_data)
 {
+        GtkStringObject *string_object = data;
+        CcFormatChooser *self = user_data;
+        const gchar *locale_id;
         gchar *locale_name;
         gchar *locale_untranslated_name;
         GtkWidget *button;
         CcLocaleRow *row;
 
+        locale_id = gtk_string_object_get_string (string_object);
+
         locale_name = gnome_get_country_from_locale (locale_id, locale_id);
         if (!locale_name)
-          return NULL;
+          return GTK_WIDGET (adw_action_row_new ());
 
         locale_untranslated_name = gnome_get_country_from_locale (locale_id, "C");
 
@@ -218,109 +204,7 @@ region_widget_new (CcFormatChooser *self,
 
         g_object_set_data_full (G_OBJECT (row), "locale-untranslated-name", locale_untranslated_name, g_free);
 
-        return row;
-}
-
-static void
-add_regions (CcFormatChooser *self,
-             gchar          **locale_ids,
-             GHashTable      *initial)
-{
-        g_autoptr(GList) initial_locales = NULL;
-        CcLocaleRow *row;
-        GList *l;
-
-        self->adding = TRUE;
-        initial_locales = g_hash_table_get_keys (initial);
-
-        /* Populate Common Locales */
-        for (l = initial_locales; l != NULL; l = l->next) {
-                if (!cc_common_language_has_font (l->data))
-                        continue;
-
-                row = region_widget_new (self, l->data);
-                if (!row)
-                        continue;
-
-                gtk_list_box_append (self->common_region_listbox, GTK_WIDGET (row));
-          }
-
-        /* Populate All locales */
-        while (*locale_ids) {
-                gchar *locale_id;
-
-                locale_id = *locale_ids;
-                locale_ids ++;
-
-                if (!cc_common_language_has_font (locale_id))
-                        continue;
-
-                row = region_widget_new (self, locale_id);
-                if (!row)
-                  continue;
-
-                gtk_list_box_append (self->region_listbox, GTK_WIDGET (row));
-        }
-
-        self->adding = FALSE;
-}
-
-static void
-add_all_regions (CcFormatChooser *self)
-{
-        g_auto(GStrv) locale_ids = NULL;
-        g_autoptr(GHashTable) initial = NULL;
-
-        locale_ids = gnome_get_all_locales ();
-        initial = cc_common_language_get_initial_languages ();
-        add_regions (self, locale_ids, initial);
-}
-
-static gboolean
-match_all (gchar       **words,
-           const gchar  *str)
-{
-        gchar **w;
-
-        for (w = words; *w; ++w)
-                if (!strstr (str, *w))
-                        return FALSE;
-
-        return TRUE;
-}
-
-static gboolean
-region_visible (GtkListBoxRow *row,
-                gpointer   user_data)
-{
-        CcFormatChooser *self = user_data;
-        g_autofree gchar *locale_name = NULL;
-        g_autofree gchar *locale_current_name = NULL;
-        g_autofree gchar *locale_untranslated_name = NULL;
-        gboolean match = TRUE;
-
-        if (!self->filter_words)
-          goto end;
-
-        locale_name =
-                cc_util_normalize_casefold_and_unaccent (cc_locale_row_get_country (CC_LOCALE_ROW (row)));
-        if (match_all (self->filter_words, locale_name))
-          goto end;
-
-        locale_current_name =
-                cc_util_normalize_casefold_and_unaccent (cc_locale_row_get_country_local (CC_LOCALE_ROW (row)));
-        if (match_all (self->filter_words, locale_current_name))
-          goto end;
-
-        locale_untranslated_name =
-                cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (row), "locale-untranslated-name"));
-
-        match = match_all (self->filter_words, locale_untranslated_name);
-
- end:
-        if (match)
-          self->no_results = FALSE;
-        return match;
+        return GTK_WIDGET (row);
 }
 
 static void
@@ -353,9 +237,9 @@ filter_changed (CcFormatChooser *self)
         self->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
         gtk_list_box_invalidate_filter (self->region_listbox);
 
-        if (self->no_results)
-          gtk_stack_set_visible_child_name (self->region_list_stack, "empty_results_page");
-        else
+        /* if (self->no_results) */
+        /*   gtk_stack_set_visible_child_name (self->region_list_stack, "empty_results_page"); */
+        /* else */
           gtk_stack_set_visible_child_name (self->region_list_stack, "region_list_page");
 }
 
@@ -423,6 +307,8 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list_stack);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, format_preview);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, preview_title_label);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_filter_model);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_sort_model);
 
         gtk_widget_class_bind_template_callback (widget_class, format_chooser_close_sidebar_button_pressed_cb);
         gtk_widget_class_bind_template_callback (widget_class, select_button_clicked_cb);
@@ -435,14 +321,15 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
 void
 cc_format_chooser_init (CcFormatChooser *self)
 {
+        GtkStringList *string_list;
+
         gtk_widget_init_template (GTK_WIDGET (self));
 
-        gtk_list_box_set_sort_func (self->common_region_listbox, sort_regions, self, NULL);
-        gtk_list_box_set_sort_func (self->region_listbox, sort_regions, self, NULL);
-        gtk_list_box_set_filter_func (self->region_listbox, region_visible, self, NULL);
+        string_list = g_object_new (GTK_TYPE_STRING_LIST, "strings", gnome_get_all_locales (), NULL);
 
-        add_all_regions (self);
-        gtk_list_box_invalidate_filter (self->region_listbox);
+        gtk_sort_list_model_set_model (self->region_sort_model, G_LIST_MODEL (string_list));
+
+        gtk_list_box_bind_model (self->region_listbox, G_LIST_MODEL (self->region_filter_model), create_row_func, self, NULL);
 
         /* Store group title so we can hide it during search */
         g_set_str (&self->region_group_title, adw_preferences_group_get_title (self->region_group));
