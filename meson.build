@@ -29,7 +29,7 @@ config_h = configuration_data()
 
 py = import('python')
 python = py.find_installation('python3')
-blueprint_compiler = find_program('blueprint-compiler')
+blueprint_compiler = find_program('blueprint-compiler', version: '>= 0.17')
 
 config_h.set_quoted('TEST_NM_PYTHON', python.full_path())
 
