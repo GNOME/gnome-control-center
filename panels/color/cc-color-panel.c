@@ -606,39 +606,11 @@ gcm_prefs_title_entry_changed_cb (CcColorPanel *self)
 static void
 gcm_prefs_calibrate_cb (CcColorPanel *self)
 {
-  GtkNative *native;
-  GdkSurface *surface;
-  gboolean ret;
-  g_autoptr(GError) error = NULL;
-  guint xid = 0;
-  g_autoptr(GPtrArray) argv = NULL;
-
-  /* use the new-style calibration helper */
+  /* use the new-style calibration helper which only works for displays */
   if (cd_device_get_kind (self->current_device) == CD_DEVICE_KIND_DISPLAY)
     {
       gcm_prefs_calibrate_display (self);
-      return;
     }
-
-  /* get xid */
-  native = gtk_widget_get_native (GTK_WIDGET (self));
-  surface = gtk_native_get_surface (native);
-
-  if (GDK_IS_X11_SURFACE (surface))
-    xid = gdk_x11_surface_get_xid (GDK_X11_SURFACE (surface));
-
-  /* run with modal set */
-  argv = g_ptr_array_new_with_free_func (g_free);
-  g_ptr_array_add (argv, g_strdup ("gcm-calibrate"));
-  g_ptr_array_add (argv, g_strdup ("--device"));
-  g_ptr_array_add (argv, g_strdup (cd_device_get_id (self->current_device)));
-  g_ptr_array_add (argv, g_strdup ("--parent-window"));
-  g_ptr_array_add (argv, g_strdup_printf ("%i", xid));
-  g_ptr_array_add (argv, NULL);
-  ret = g_spawn_async (NULL, (gchar**) argv->pdata, NULL, G_SPAWN_SEARCH_PATH,
-                       NULL, NULL, NULL, &error);
-  if (!ret)
-    g_warning ("failed to run calibrate: %s", error->message);
 }
 
 static gboolean
@@ -1113,7 +1085,6 @@ gcm_prefs_set_calibrate_button_sensitivity (CcColorPanel *self)
   gboolean ret = FALSE;
   const gchar *tooltip;
   CdDeviceKind kind;
-  CdSensor *sensor_tmp;
 
   /* TRANSLATORS: this is when the button is sensitive */
   tooltip = _("Create a color profile for the selected device");
@@ -1139,40 +1110,7 @@ gcm_prefs_set_calibrate_button_sensitivity (CcColorPanel *self)
       ret = TRUE;
 
     }
-  else if (kind == CD_DEVICE_KIND_SCANNER ||
-           kind == CD_DEVICE_KIND_CAMERA ||
-           kind == CD_DEVICE_KIND_WEBCAM)
-    {
-
-      /* TODO: find out if we can scan using gnome-scan */
-      ret = TRUE;
-
-    }
-  else if (kind == CD_DEVICE_KIND_PRINTER)
-    {
-
-    /* find whether we have hardware installed */
-    if (self->sensors == NULL || self->sensors->len == 0)
-      {
-        /* TRANSLATORS: this is when the button is insensitive */
-        tooltip = _("The measuring instrument is not detected. Please check it is turned on and correctly connected.");
-        goto out;
-      }
-
-    /* find whether we have hardware installed */
-    sensor_tmp = g_ptr_array_index (self->sensors, 0);
-    ret = cd_sensor_has_cap (sensor_tmp, CD_SENSOR_CAP_PRINTER);
-    if (!ret)
-      {
-        /* TRANSLATORS: this is when the button is insensitive */
-        tooltip = _("The measuring instrument does not support printer profiling.");
-        goto out;
-      }
-
-    /* success */
-    ret = TRUE;
-
-    }
+  /* no other types of calibration are currently supported */
   else
     {
       /* TRANSLATORS: this is when the button is insensitive */
