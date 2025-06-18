@@ -187,6 +187,11 @@ cc_list_row_set_show_arrow (CcListRow *self,
     return;
 
   self->show_arrow = show_arrow;
+  if (show_arrow)
+    g_object_set (G_OBJECT (self),
+                  "accessible-role",
+                  GTK_ACCESSIBLE_ROLE_BUTTON,
+                  NULL);
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SHOW_ARROW]);
 }
 
