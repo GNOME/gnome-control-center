@@ -26,6 +26,7 @@ cflags += [
 ui_sources = files(
   'cc-alert-chooser-page.blp',
   'cc-balance-slider.blp',
+  'cc-device-combo-row.blp',
   'cc-fade-slider.blp',
   'cc-output-test-window.blp',
   'cc-profile-combo-row.blp',

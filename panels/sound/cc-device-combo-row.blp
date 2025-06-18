@@ -1,0 +1,15 @@
+using Gtk 4.0;
+using Adw 1;
+using Gio 2.0;
+
+template $CcDeviceComboRow: Adw.ComboRow {
+  model: Gio.ListStore device_list {
+    item-type: typeof<$GvcMixerUIDevice>;
+  };
+
+  factory: SignalListItemFactory {
+    setup => $factory_setup_cb(template);
+    bind => $factory_bind_cb(template);
+    unbind => $factory_unbind_cb(template);
+  };
+}
