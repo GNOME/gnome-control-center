@@ -295,6 +295,10 @@ row_data_new (CcPanelCategory     category,
                                   label,
                                   NULL,
                                   -1);
+  g_object_set (G_OBJECT (data->row),
+                "accessible-role",
+                GTK_ACCESSIBLE_ROLE_BUTTON,
+                NULL);
 
   gtk_widget_add_css_class (label, "dim-label");
   gtk_grid_attach (GTK_GRID (grid), label, 1, 1, 1, 1);
