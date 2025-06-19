@@ -102,6 +102,12 @@ handle_bind_shortcuts (CcGlobalShortcutsProvider *self,
 {
   g_autoptr(CcGlobalShortcutDialog) shortcut_dialog = NULL;
 
+  if (!g_application_id_is_valid (app_id))
+    {
+      g_warning ("Discarded shortcut bind request from application with an invalid app_id >%s<.", app_id);
+      return G_DBUS_METHOD_INVOCATION_UNHANDLED;
+    }
+
   shortcut_dialog =
     cc_global_shortcut_dialog_new (app_id,
                                    parent_window,
