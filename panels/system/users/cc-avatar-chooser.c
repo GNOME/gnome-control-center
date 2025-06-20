@@ -237,6 +237,7 @@ create_face_widget (gpointer item,
                 adw_avatar_set_custom_image (ADW_AVATAR (avatar), GDK_PAINTABLE (source_image));
         }
 
+        g_object_set (child, "accessible-role", GTK_ACCESSIBLE_ROLE_BUTTON, NULL);
         gtk_accessible_update_property (GTK_ACCESSIBLE (child),
                                         GTK_ACCESSIBLE_PROPERTY_LABEL, g_object_get_data (item, "a11y_label"),
                                         -1);
