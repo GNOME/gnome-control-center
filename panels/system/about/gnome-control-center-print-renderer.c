@@ -51,13 +51,19 @@ get_gtk_gles_renderer (void)
         if (strstr (gl_version, "NVIDIA") != NULL)
           {
             const char *glvnd_libname = g_getenv ("__GLX_VENDOR_LIBRARY_NAME");
-            if (g_strcmp0 (glvnd_libname, "nvidia") != 0)
+            const char *dri_prime = g_getenv ("DRI_PRIME");
+            if (g_strcmp0 (glvnd_libname, "nvidia") != 0 && dri_prime != NULL)
               {
                 /* This helper is launched with parameters from a
                  * non-NVIDIA GPU, but is running using a NVIDIA
                  * library. As such, DRI_PRIME envvar from switcheroo
                  * does not actually take effect, and the GPU name is
                  * invalid.
+                 *
+                 * If there is no DRI_PRIME envvar neither, assuming
+                 * we failed to use switcheroo to get GPU names, and
+                 * this is called with basic envvars listed in
+                 * cc-system-details-window.c:get_renderer_from_helper()
                  */
                 return NULL;
               }
