@@ -633,11 +633,25 @@ create_display_item (CcDisplayMonitor *monitor,
 {
   g_autofree gchar *number_string = NULL;
   GtkWidget *flowbox_child;
+  GtkWidget *box;
   GtkWidget *display_label;
   GtkWidget *number_label;
   GtkWidget *overlay;
+  GtkWidget *icon_image;
+
+  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  gtk_box_set_spacing (GTK_BOX (box), 12);
+  gtk_widget_set_valign (box, GTK_ALIGN_CENTER);
+  gtk_widget_set_margin_start (box, 20);
+  gtk_widget_set_margin_end (box, 20);
 
   overlay = gtk_overlay_new ();
+  gtk_widget_set_halign (overlay, GTK_ALIGN_CENTER);
+  gtk_widget_set_valign (overlay, GTK_ALIGN_CENTER);
+  gtk_widget_set_size_request (overlay, DISPLAY_SELECTION_ITEM_HEIGHT, DISPLAY_SELECTION_ITEM_HEIGHT);
+  gtk_widget_add_css_class (overlay, "card");
+  gtk_box_append (GTK_BOX (box), overlay);
+
   number_string = g_strdup_printf ("%d", cc_display_monitor_get_ui_number (monitor));
   number_label = gtk_label_new (number_string);
   gtk_widget_set_valign (number_label, GTK_ALIGN_START);
@@ -645,21 +659,24 @@ create_display_item (CcDisplayMonitor *monitor,
   gtk_widget_add_css_class (number_label, "monitor-label");
   gtk_overlay_set_child (GTK_OVERLAY (overlay), number_label);
 
+  icon_image = gtk_image_new_from_icon_name ("video-display-symbolic");
+  gtk_image_set_icon_size (GTK_IMAGE (icon_image), GTK_ICON_SIZE_LARGE);
+  gtk_widget_set_margin_start (icon_image, 12);
+  gtk_widget_set_margin_end (icon_image, 12);
+  gtk_widget_set_margin_top (icon_image, 12);
+  gtk_widget_set_margin_bottom (icon_image, 12);
+  gtk_overlay_add_overlay (GTK_OVERLAY (overlay), icon_image);
+
   display_label = gtk_label_new (cc_display_monitor_get_ui_name (monitor));
   gtk_label_set_justify (GTK_LABEL (display_label), GTK_JUSTIFY_CENTER);
   gtk_label_set_wrap (GTK_LABEL (display_label), TRUE);
   gtk_label_set_max_width_chars (GTK_LABEL (display_label), 10);
   gtk_label_set_lines (GTK_LABEL (display_label), 3);
   gtk_widget_add_css_class (display_label, "heading");
-  gtk_overlay_add_overlay (GTK_OVERLAY (overlay), display_label);
+  gtk_box_append (GTK_BOX (box), display_label);
 
   flowbox_child = gtk_flow_box_child_new ();
-  /* Use a 3:2 aspect ratio for the flow box child size */
-  gtk_widget_set_size_request (flowbox_child, DISPLAY_SELECTION_ITEM_HEIGHT * (3/2.0), DISPLAY_SELECTION_ITEM_HEIGHT);
-  gtk_widget_add_css_class (flowbox_child, "frame");
-  gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (flowbox_child), overlay);
-  gtk_widget_add_css_class (flowbox_child, "display-selection-child");
-
+  gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (flowbox_child), box);
   g_object_set_data (G_OBJECT (flowbox_child), "monitor", monitor);
 
   return flowbox_child;
