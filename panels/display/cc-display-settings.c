@@ -325,17 +325,10 @@ make_resolution_string (CcDisplayMode *mode)
     return g_strdup_printf ("%d × %d%s", width, height, interlaced);
 }
 
-static double
-round_scale_for_ui (double scale)
-{
-  /* Keep in sync with mutter */
-  return round (scale*4)/4;
-}
-
 static gchar *
 make_scale_string (gdouble scale)
 {
-  return g_strdup_printf ("%d %%", (int) (round_scale_for_ui (scale)*100));
+  return g_strdup_printf ("%d %%", (int) (scale * 100));
 }
 
 static gint
