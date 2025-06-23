@@ -817,7 +817,7 @@ update_sandbox_banner (CcApplicationsPanel *self,
     "org.gnome.DiskUtility",
     "org.gnome.Tour",
     "org.gnome.baobab",
-    "yelp",
+    "org.gnome.Yelp",
   };
   gsize i;
 
