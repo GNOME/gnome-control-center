@@ -44,9 +44,15 @@ sources += gnome.compile_resources(
   dependencies: blueprints,
 )
 
+sources += gnome.gdbus_codegen(
+  'cc-dbus-color-manager',
+  'org.gnome.Mutter.ColorManager.xml',
+  interface_prefix: 'org.gnome.Mutter',
+  namespace: 'CcDBus'
+)
+
 deps = common_deps + [
   colord_dep,
-  gnome_rr_dep,
   m_dep,
   dependency('colord-gtk4', version: '>= 0.1.24'),
 ]

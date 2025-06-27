@@ -28,10 +28,8 @@
 #include <math.h>
 #include <colord-session/cd-session.h>
 
-#define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <gnome-rr/gnome-rr.h>
-
 #include "cc-color-calibrate.h"
+#include "cc-dbus-color-manager.h"
 
 #define CALIBRATE_WINDOW_OPACITY 0.9
 
@@ -47,8 +45,8 @@ struct _CcColorCalibrate
   GDBusProxy      *proxy_helper;
   GDBusProxy      *proxy_inhibit;
   GMainLoop       *loop;
-  GnomeRROutput   *output;
-  GnomeRRScreen   *x11_screen;
+  CcDBusColorManager *color_manager;
+  CcDBusColorManagerCalibration *calibration_session;
   GtkBuilder      *builder;
   GtkWindow       *window;
   GtkWidget       *sample_widget;
@@ -147,61 +145,83 @@ cc_color_calibrate_get_profile (CcColorCalibrate *calibrate)
   return calibrate->profile;
 }
 
-static guint
-_gnome_rr_output_get_gamma_size (GnomeRROutput *output)
-{
-  GnomeRRCrtc *crtc;
-  gint len = 0;
-
-  crtc = gnome_rr_output_get_crtc (output);
-  if (crtc == NULL)
-    return 0;
-  gnome_rr_crtc_get_gamma (crtc,
-                           &len,
-                           NULL, NULL, NULL);
-  return (guint) len;
-}
-
 static gboolean
 cc_color_calibrate_calib_setup_screen (CcColorCalibrate *calibrate,
                                        const gchar *name,
                                        GError **error)
 {
-  gboolean ret = TRUE;
+  g_autofree char *session_path = NULL;
 
-  /* get screen */
-  calibrate->x11_screen = gnome_rr_screen_new (gdk_display_get_default (), error);
-  if (calibrate->x11_screen == NULL)
-    {
-      ret = FALSE;
-      goto out;
-    }
+  calibrate->color_manager =
+    cc_dbus_color_manager_proxy_new_for_bus_sync (
+      G_BUS_TYPE_SESSION,
+      G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+      "org.gnome.Mutter.ColorManager",
+      "/org/gnome/Mutter/ColorManager",
+      NULL, error);
+  if (!calibrate->color_manager)
+    return FALSE;
 
-  /* get the output */
-  calibrate->output = gnome_rr_screen_get_output_by_name (calibrate->x11_screen,
-                                                     name);
-  if (calibrate->output == NULL)
-    {
-      ret = FALSE;
-      g_set_error_literal (error,
-                           CD_SESSION_ERROR,
-                           CD_SESSION_ERROR_INTERNAL,
-                           "failed to get output");
-      goto out;
-    }
+  if (!cc_dbus_color_manager_call_calibrate_monitor_sync (calibrate->color_manager,
+                                                          "name",
+                                                          &session_path,
+                                                          NULL, error))
+    return FALSE;
 
-  /* create a lookup table */
-  calibrate->gamma_size = _gnome_rr_output_get_gamma_size (calibrate->output);
+  calibrate->calibration_session =
+    cc_dbus_color_manager_calibration_proxy_new_for_bus_sync (
+      G_BUS_TYPE_SESSION,
+      G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+      "org.gnome.Mutter.ColorManager",
+      session_path,
+      NULL, error);
+  if (!calibrate->calibration_session)
+    return FALSE;
+
+  calibrate->gamma_size =
+    cc_dbus_color_manager_calibration_get_gamma_lut_size (calibrate->calibration_session);
   if (calibrate->gamma_size == 0)
     {
-      ret = FALSE;
       g_set_error_literal (error,
                            CD_SESSION_ERROR,
                            CD_SESSION_ERROR_INTERNAL,
                            "gamma size is zero");
+      return FALSE;
     }
-out:
-  return ret;
+
+  return TRUE;
+}
+
+static gboolean
+set_crtc_gamma_lut (CcColorCalibrate  *calibrate,
+                    uint16_t          *red,
+                    uint16_t          *green,
+                    uint16_t          *blue,
+                    size_t             size,
+                    GError           **error)
+{
+  g_autoptr(GBytes) red_bytes = NULL;
+  g_autoptr(GBytes) green_bytes = NULL;
+  g_autoptr(GBytes) blue_bytes = NULL;
+  GVariant *red_variant, *green_variant, *blue_variant;
+
+  red_bytes = g_bytes_new (red, size * sizeof (unsigned short));
+  green_bytes = g_bytes_new (green, size * sizeof (unsigned short));
+  blue_bytes = g_bytes_new (blue, size * sizeof (unsigned short));
+
+  red_variant = g_variant_new_from_bytes (G_VARIANT_TYPE ("aq"),
+                                          red_bytes, TRUE);
+  green_variant = g_variant_new_from_bytes (G_VARIANT_TYPE ("aq"),
+                                            green_bytes, TRUE);
+  blue_variant = g_variant_new_from_bytes (G_VARIANT_TYPE ("aq"),
+                                           blue_bytes, TRUE);
+
+  return cc_dbus_color_manager_calibration_call_set_crtc_gamma_lut_sync (
+    calibrate->calibration_session,
+    red_variant,
+    green_variant,
+    blue_variant,
+    NULL, error);
 }
 
 /**
@@ -225,7 +245,6 @@ cc_color_calibrate_calib_set_output_gamma (CcColorCalibrate *calibrate,
   CdColorRGB *p2;
   CdColorRGB result;
   gdouble mix;
-  GnomeRRCrtc *crtc;
   g_autofree guint16 *blue = NULL;
   g_autofree guint16 *green = NULL;
   g_autofree guint16 *red = NULL;
@@ -262,20 +281,10 @@ cc_color_calibrate_calib_set_output_gamma (CcColorCalibrate *calibrate,
       blue[i] = result.B * 0xffff;
     }
 
-  /* send to LUT */
-  crtc = gnome_rr_output_get_crtc (calibrate->output);
-  if (crtc == NULL)
-    {
-      g_set_error (error,
-                   CD_SESSION_ERROR,
-                   CD_SESSION_ERROR_INTERNAL,
-                   "failed to get ctrc for %s",
-                   gnome_rr_output_get_name (calibrate->output));
-      return FALSE;
-    }
-  gnome_rr_crtc_set_gamma (crtc, calibrate->gamma_size,
-                           red, green, blue);
-  return TRUE;
+  return set_crtc_gamma_lut (calibrate,
+                             red, green, blue,
+                             calibrate->gamma_size,
+                             error);
 }
 
 static void
@@ -943,7 +952,13 @@ cc_color_calibrate_finalize (GObject *object)
   g_clear_object (&calibrate->proxy_helper);
   g_clear_object (&calibrate->proxy_inhibit);
   g_clear_object (&calibrate->sensor);
-  g_clear_object (&calibrate->x11_screen);
+  if (calibrate->calibration_session)
+    {
+      cc_dbus_color_manager_calibration_call_stop_sync (calibrate->calibration_session,
+                                                        NULL, NULL);
+    }
+  g_clear_object (&calibrate->calibration_session);
+  g_clear_object (&calibrate->color_manager);
   g_free (calibrate->title);
   g_main_loop_unref (calibrate->loop);
 

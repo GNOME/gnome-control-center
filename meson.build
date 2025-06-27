@@ -203,7 +203,6 @@ gio_dep = dependency('gio-2.0')
 glib_dep = dependency('glib-2.0', version: '>= 2.76.6')
 gnome_desktop_dep = dependency('gnome-desktop-4')
 gnome_bg_dep = dependency('gnome-bg-4')
-gnome_rr_dep = dependency('gnome-rr-4')
 gnome_settings_dep = dependency('gnome-settings-daemon', version: '>= 48.rc', fallback: 'gsd')
 goa_dep = dependency('goa-1.0', version: goa_req_version, fallback: 'goa')
 gsettings_desktop_dep = dependency('gsettings-desktop-schemas', version: '>= 48.alpha')  # actually requires commit 9d55553, just after alpha
