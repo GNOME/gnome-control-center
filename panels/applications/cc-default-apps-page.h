@@ -26,6 +26,4 @@ G_BEGIN_DECLS
 #define CC_TYPE_DEFAULT_APPS_PAGE (cc_default_apps_page_get_type ())
 G_DECLARE_FINAL_TYPE (CcDefaultAppsPage, cc_default_apps_page, CC, DEFAULT_APPS_PAGE, AdwNavigationPage)
 
-CcDefaultAppsPage *cc_default_apps_page_new (void);
-
 G_END_DECLS

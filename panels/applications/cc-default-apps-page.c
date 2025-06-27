@@ -157,10 +157,3 @@ cc_default_apps_page_init (CcDefaultAppsPage *self)
     }
 #endif
 }
-
-CcDefaultAppsPage *
-cc_default_apps_page_new (void)
-{
-  return g_object_new (CC_TYPE_DEFAULT_APPS_PAGE,
-                       NULL);
-}
