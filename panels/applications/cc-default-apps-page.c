@@ -26,6 +26,7 @@
 
 #include "cc-default-apps-page.h"
 #include "cc-default-apps-row.h"
+#include "cc-removable-media-settings.h"
 
 #include "shell/cc-object-storage.h"
 
@@ -40,7 +41,7 @@ typedef struct
 
 struct _CcDefaultAppsPage
 {
-  AdwPreferencesGroup  parent;
+  AdwNavigationPage  parent;
 
   GtkWidget *web_row;
   GtkWidget *mail_row;
@@ -50,6 +51,11 @@ struct _CcDefaultAppsPage
   GtkWidget *photos_row;
   GtkWidget *calls_row;
   GtkWidget *sms_row;
+  AdwSwitchRow *autorun_never_row;
+
+  CcRemovableMediaSettings *removable_media_settings;
+
+  GSettings *media_handling_settings;
 
 #ifdef BUILD_WWAN
   MMManager *mm_manager;
@@ -57,7 +63,7 @@ struct _CcDefaultAppsPage
 };
 
 
-G_DEFINE_TYPE (CcDefaultAppsPage, cc_default_apps_page, ADW_TYPE_PREFERENCES_GROUP)
+G_DEFINE_TYPE (CcDefaultAppsPage, cc_default_apps_page, ADW_TYPE_NAVIGATION_PAGE)
 
 #ifdef BUILD_WWAN
 static void
@@ -85,9 +91,11 @@ on_row_selected_item_changed (CcDefaultAppsRow *row)
 static void
 cc_default_apps_page_dispose (GObject *object)
 {
-#ifdef BUILD_WWAN
   CcDefaultAppsPage *self = CC_DEFAULT_APPS_PAGE (object);
 
+  g_clear_object (&self->media_handling_settings);
+
+#ifdef BUILD_WWAN
   g_clear_object (&self->mm_manager);
 #endif
 
@@ -103,6 +111,8 @@ cc_default_apps_page_class_init (CcDefaultAppsPageClass *klass)
 
   object_class->dispose = cc_default_apps_page_dispose;
 
+  g_type_ensure (CC_TYPE_REMOVABLE_MEDIA_SETTINGS);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-default-apps-page.ui");
   gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, web_row);
   gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, mail_row);
@@ -112,6 +122,8 @@ cc_default_apps_page_class_init (CcDefaultAppsPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, photos_row);
   gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, calls_row);
   gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, sms_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, removable_media_settings);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, autorun_never_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_row_selected_item_changed);
 }
@@ -122,6 +134,14 @@ cc_default_apps_page_init (CcDefaultAppsPage *self)
   g_type_ensure (CC_TYPE_DEFAULT_APPS_ROW);
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  self->media_handling_settings = g_settings_new ("org.gnome.desktop.media-handling");
+
+  g_settings_bind (self->media_handling_settings,
+                   "autorun-never",
+                   self->autorun_never_row,
+                   "active",
+                   G_SETTINGS_BIND_INVERT_BOOLEAN);
 
 #ifdef BUILD_WWAN
   if (cc_object_storage_has_object (CC_OBJECT_MMMANAGER))

@@ -38,7 +38,6 @@
 #include "cc-applications-resources.h"
 #include "cc-applications-row.h"
 #include "cc-default-apps-page.h"
-#include "cc-removable-media-settings.h"
 #ifdef HAVE_SNAP
 #include "cc-snapd-client.h"
 #include "cc-snap-row.h"
@@ -60,10 +59,6 @@
 struct _CcApplicationsPanel
 {
   CcPanel          parent;
-
-  CcDefaultAppsPage        *default_apps_page;
-  AdwSwitchRow             *autorun_never_row;
-  CcRemovableMediaSettings *removable_media_settings;
 
   AdwNavigationPage *app_settings_page;
   GtkStack        *main_page_stack;
@@ -97,7 +92,6 @@ struct _CcApplicationsPanel
   GtkWidget       *sandbox_info_button;
 
   GDBusProxy      *perm_store;
-  GSettings       *media_handling_settings;
   GtkListBoxRow   *perm_store_pending_row;
   GSettings       *notification_settings;
   GSettings       *location_settings;
@@ -1850,7 +1844,6 @@ cc_applications_panel_finalize (GObject *object)
 
   g_clear_object (&self->manager);
 #endif
-  g_clear_object (&self->media_handling_settings);
   g_clear_object (&self->notification_settings);
   g_clear_object (&self->location_settings);
   g_clear_object (&self->privacy_settings);
@@ -1917,7 +1910,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   g_type_ensure (CC_TYPE_DEFAULT_APPS_PAGE);
   g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_LIST_ROW_INFO_BUTTON);
-  g_type_ensure (CC_TYPE_REMOVABLE_MEDIA_SETTINGS);
 
   object_class->dispose = cc_applications_panel_dispose;
   object_class->finalize = cc_applications_panel_finalize;
@@ -1935,7 +1927,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_search_entry);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_settings_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, required_permissions_group);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, autorun_never_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_list);
@@ -1944,7 +1935,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, camera_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, clear_cache_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_page_data_row);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, default_apps_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_file_group);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_link_group);
@@ -1964,7 +1954,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, notifications_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, background_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, wallpaper_row);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, removable_media_settings);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sandbox_banner);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sandbox_info_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, screenshots_row);
@@ -2048,13 +2037,6 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   self->location_settings = g_settings_new ("org.gnome.system.location");
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
   self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
-  self->media_handling_settings = g_settings_new ("org.gnome.desktop.media-handling");
-
-  g_settings_bind (self->media_handling_settings,
-                   "autorun-never",
-                   self->autorun_never_row,
-                   "active",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
 
 #ifdef HAVE_MALCONTENT
    /* FIXME: should become asynchronous */
