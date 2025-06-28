@@ -1,0 +1,53 @@
+using Gtk 4.0;
+using Adw 1;
+
+Adw.ShortcutsDialog shortcuts_dialog {
+  Adw.ShortcutsSection {
+    title: C_("shortcuts dialog", "General");
+
+    Adw.ShortcutsItem {
+      accelerator: "<Control>Q";
+      title: C_("shortcuts dialog", "Quit");
+    }
+
+    Adw.ShortcutsItem {
+      accelerator: "<Control>F";
+      title: C_("shortcuts dialog", "Search");
+    }
+
+    Adw.ShortcutsItem {
+      action-name: "app.help";
+      title: C_("shortcuts dialog", "Show help");
+    }
+
+    Adw.ShortcutsItem {
+      action-name: "app.shortcuts";
+      title: C_("shortcuts dialog", "Keyboard shortcuts");
+    }
+  }
+
+  Adw.ShortcutsSection {
+    title: C_("shortcuts dialog", "Panels");
+
+    Adw.ShortcutsItem {
+      accelerator: "<Alt>Left";
+      direction: ltr;
+      title: C_("shortcuts dialog", "Go back to previous panel");
+    }
+
+    Adw.ShortcutsItem {
+      accelerator: "<Alt>Right";
+      direction: rtl;
+      title: C_("shortcuts dialog", "Go back to previous panel");
+    }
+  }
+
+  Adw.ShortcutsSection {
+    title: C_("shortcuts dialog", "Search");
+
+    Adw.ShortcutsItem {
+      accelerator: "Escape";
+      title: C_("shortcuts dialog", "Cancel search");
+    }
+  }
+}

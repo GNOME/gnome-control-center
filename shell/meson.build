@@ -39,7 +39,7 @@ ui_sources = files(
   'cc-panel-list.blp',
   'cc-panel.blp',
   'cc-window.blp',
-  'help-overlay.blp',
+  'shortcuts-dialog.blp',
 )
 
 ui_compiled = []
