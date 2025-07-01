@@ -361,6 +361,7 @@ static void
 cc_keyboard_shortcut_group_init (CcKeyboardShortcutGroup *self)
 {
   self->shortcut_list_box = GTK_LIST_BOX (gtk_list_box_new ());
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->shortcut_list_box), GTK_SELECTION_NONE);
   gtk_widget_add_css_class (GTK_WIDGET (self->shortcut_list_box), "boxed-list");
   g_signal_connect_object (self->shortcut_list_box, "row-activated",
                            G_CALLBACK (shortcut_group_row_activated_cb),
