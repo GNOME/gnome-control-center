@@ -63,6 +63,7 @@ ui_sources = files(
   'cc-keyboard-panel.blp',
   'cc-keyboard-shortcut-dialog.blp',
   'cc-keyboard-shortcut-editor.blp',
+  'cc-keyboard-shortcut-group.blp',
   'cc-keyboard-shortcut-row.blp',
   'cc-xkb-modifier-page.blp',
 )

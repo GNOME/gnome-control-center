@@ -321,9 +321,18 @@ static void
 cc_keyboard_shortcut_group_class_init (CcKeyboardShortcutGroupClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->get_property = cc_keyboard_shortcut_group_get_property;
   object_class->finalize = cc_keyboard_shortcut_group_finalize;
+
+  gtk_widget_class_set_template_from_resource (widget_class,
+                                               "/org/gnome/control-center/"
+                                               "keyboard/cc-keyboard-shortcut-group.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutGroup, shortcut_list_box);
+
+  gtk_widget_class_bind_template_callback (widget_class, shortcut_group_row_activated_cb);
 
   /**
    * CcKeyboardShortcutGroup:empty:
@@ -360,15 +369,7 @@ cc_keyboard_shortcut_group_class_init (CcKeyboardShortcutGroupClass *klass)
 static void
 cc_keyboard_shortcut_group_init (CcKeyboardShortcutGroup *self)
 {
-  self->shortcut_list_box = GTK_LIST_BOX (gtk_list_box_new ());
-  gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->shortcut_list_box), GTK_SELECTION_NONE);
-  gtk_widget_add_css_class (GTK_WIDGET (self->shortcut_list_box), "boxed-list");
-  g_signal_connect_object (self->shortcut_list_box, "row-activated",
-                           G_CALLBACK (shortcut_group_row_activated_cb),
-                           self, G_CONNECT_SWAPPED);
-
-  adw_preferences_group_add (ADW_PREFERENCES_GROUP (self),
-                             GTK_WIDGET (self->shortcut_list_box));
+  gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 GtkWidget *
