@@ -6,6 +6,7 @@ template $CcKeyboardShortcutGroup: Adw.PreferencesGroup {
   ListBox shortcut_list_box {
     selection-mode: none;
     row-activated => $shortcut_group_row_activated_cb(template);
+    keynav-failed => $cc_util_keynav_propagate_vertical();
 
     styles [
       "boxed-list",
