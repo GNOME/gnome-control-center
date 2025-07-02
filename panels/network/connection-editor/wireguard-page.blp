@@ -103,7 +103,6 @@ template $CEPageWireguard: Box {
         SpinButton spin_listen_port {
           width-request: 5;
           tooltip-text: _("A port to listen on. If set to 'automatic', the port will be chosen randomly when the interface comes up.");
-          text: _("0");
 
           adjustment: Adjustment {
             upper: 65535;
@@ -137,7 +136,6 @@ template $CEPageWireguard: Box {
         SpinButton spin_fwmark {
           width-request: 10;
           tooltip-text: _("A 32-bit fwmark for outgoing packets. Leave it to 'off' to disable fwmark.");
-          text: _("0");
 
           adjustment: Adjustment {
             upper: 4294967295;
