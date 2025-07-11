@@ -119,7 +119,7 @@ about_activated (GSimpleAction *action,
   AdwDialog *about_dialog;
   const char *developer_name;
 
-  about_dialog = adw_about_dialog_new_from_appdata ("/org/gnome/Settings/appdata", NULL);
+  about_dialog = adw_about_dialog_new_from_appdata ("/org/gnome/Settings/metainfo", NULL);
   adw_about_dialog_set_version (ADW_ABOUT_DIALOG (about_dialog), VERSION);
   developer_name = adw_about_dialog_get_developer_name (ADW_ABOUT_DIALOG (about_dialog));
   /* Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s). */
