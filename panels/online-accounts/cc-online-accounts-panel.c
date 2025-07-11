@@ -165,8 +165,12 @@ create_account_cb (GoaProvider *provider,
       if (!g_error_matches (error, GOA_ERROR, GOA_ERROR_DIALOG_DISMISSED) &&
           !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
+          AdwToast *toast = NULL;
+
+          toast = adw_toast_new (error->message);
+          adw_toast_set_use_markup (toast, FALSE);
           adw_toast_overlay_add_toast (ADW_TOAST_OVERLAY (self->toast_overlay),
-                                       adw_toast_new (error->message));
+                                       toast);
         }
 
       return;
