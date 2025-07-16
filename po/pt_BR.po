@@ -35,7 +35,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-03-31 11:43+0000\n"
+"POT-Creation-Date: 2025-07-14 09:30+0000\n"
 "PO-Revision-Date: 2024-11-06 09:55-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
@@ -862,7 +862,7 @@ msgstr ""
 msgid "Remove Background"
 msgstr "Remover a imagem de fundo"
 
-#: panels/background/cc-background-chooser.c:339
+#: panels/background/cc-background-chooser.c:340
 msgid "Select a picture"
 msgstr "Selecionar uma imagem"
 
@@ -1124,7 +1124,7 @@ msgstr "Calibração da tela"
 #: panels/privacy/usage/cc-usage-page.ui:147
 #: panels/system/region/cc-format-chooser.ui:24
 #: panels/system/users/cc-add-user-dialog.ui:24
-#: panels/system/users/cc-avatar-chooser.c:92
+#: panels/system/users/cc-avatar-chooser.c:98
 #: panels/system/users/cc-enterprise-login-dialog.ui:44
 #: panels/system/users/cc-fingerprint-dialog.ui:32
 #: panels/system/users/cc-password-dialog.ui:15
@@ -1282,14 +1282,14 @@ msgstr "O tipo de dispositivo não é compatível atualmente."
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
 #. Translators: This will be presented as the text of a link to the documentation
-#: panels/color/cc-color-panel.c:2070
+#: panels/color/cc-color-panel.c:2075
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 #: panels/wacom/cc-wacom-device.c:168
 msgid "learn more"
 msgstr "saiba mais"
 
 #. Translators: %s is a link to the documentation with the label "learn more"
-#: panels/color/cc-color-panel.c:2072
+#: panels/color/cc-color-panel.c:2077
 #, c-format
 msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr ""
@@ -1707,15 +1707,15 @@ msgid_plural "%d days"
 msgstr[0] "%d dia"
 msgstr[1] "%d dias"
 
-#: panels/common/cc-permission-infobar.c:199
+#: panels/common/cc-permission-infobar.c:198
 msgid "Error — some settings cannot be unlocked"
 msgstr "Erro — algumas configurações não podem ser desbloqueadas"
 
-#: panels/common/cc-permission-infobar.c:202
+#: panels/common/cc-permission-infobar.c:201
 msgid "Unlock to Change Settings"
 msgstr "Desbloquear para alterar as configurações"
 
-#: panels/common/cc-permission-infobar.c:205
+#: panels/common/cc-permission-infobar.c:204
 #: panels/common/cc-permission-infobar.ui:7
 msgid "_Unlock…"
 msgstr "_Desbloquear…"
@@ -2220,6 +2220,11 @@ msgstr "Pasta pessoal"
 #: panels/search/gnome-search-panel.desktop.in:4 shell/cc-window.ui:26
 msgid "Search"
 msgstr "Pesquisa"
+
+#: panels/keyboard/01-launchers.xml.in:16
+msgctxt "keybinding"
+msgid "Search"
+msgstr "Pesquisar"
 
 #: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:18
 #: panels/system/cc-system-panel.ui:6
@@ -7596,7 +7601,7 @@ msgstr "_Porta"
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:88
 #: panels/system/remote-desktop/cc-remote-login-page.ui:88
 msgid "Login Details"
-msgstr "Detalhes do início da seção"
+msgstr "Detalhes do início da sessão"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
 #: panels/system/remote-desktop/cc-remote-login-page.ui:91
@@ -7687,7 +7692,7 @@ msgstr "_Secure Shell"
 
 #: panels/system/secure-shell/cc-secure-shell-page.ui:41
 msgid "SSH Login _Command"
-msgstr "_Comando de início de seção SSH"
+msgstr "_Comando de início de sessão SSH"
 
 #: panels/system/secure-shell/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -7756,7 +7761,7 @@ msgstr ""
 
 #: panels/system/users/cc-add-user-dialog.ui:107
 msgid "User sets password on _first login"
-msgstr "Os usuário definem a senha no _primeiro início de seção"
+msgstr "Os usuário definem a senha no _primeiro início de sessão"
 
 #: panels/system/users/cc-add-user-dialog.ui:120
 msgid "Set password n_ow"
@@ -7777,15 +7782,15 @@ msgstr ""
 msgid "_Confirm Password"
 msgstr "_Confirmar senha"
 
-#: panels/system/users/cc-avatar-chooser.c:94
+#: panels/system/users/cc-avatar-chooser.c:100
 msgid "Select"
 msgstr "Selecionar"
 
-#: panels/system/users/cc-avatar-chooser.c:162
+#: panels/system/users/cc-avatar-chooser.c:168
 msgid "Browse for more pictures"
 msgstr "Procurar por mais imagens"
 
-#: panels/system/users/cc-avatar-chooser.ui:24
+#: panels/system/users/cc-avatar-chooser.ui:25
 msgid "Select a File…"
 msgstr "Selecionar um arquivo…"
 
@@ -7807,12 +7812,12 @@ msgstr "Nenhuma forma suportada para autenticar neste domínio"
 #: panels/system/users/cc-enterprise-login-dialog.c:300
 #: panels/system/users/cc-enterprise-login-dialog.c:489
 msgid "That login name didn’t work"
-msgstr "Esse nome início de seção não funcionou"
+msgstr "Esse nome início de sessão não funcionou"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:307
 #: panels/system/users/cc-enterprise-login-dialog.c:496
 msgid "That login password didn’t work"
-msgstr "Essa senha de início de seção não funcionou"
+msgstr "Essa senha de início de sessão não funcionou"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:314
 msgid "That hostname didn’t work"
@@ -7831,7 +7836,7 @@ msgid ""
 "<b>%s</b>. To enroll, have your domain administrator enter their name and "
 "password."
 msgstr ""
-"Para adicionar uma conta de seção corporativa, este dispositivo precisa "
+"Para adicionar uma conta de sessão corporativa, este dispositivo precisa "
 "estar registrado em <b>%s</b>. Para se inscrever, peça ao administrador do "
 "domínio que insira o nome e a senha."
 
@@ -7863,14 +7868,14 @@ msgstr "Desconectado"
 #: panels/system/users/cc-enterprise-login-dialog.ui:24
 msgid "A network connection is needed to add enterprise login accounts."
 msgstr ""
-"É necessária uma conexão de rede para adicionar contas de seção corporativa."
+"É necessária uma conexão de rede para adicionar contas de sessão corporativa."
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:69
 msgid ""
 "Enterprise login allows an existing centrally managed account to be used on "
 "this device."
 msgstr ""
-"A seção corporativa permite que uma conta existente gerenciada centralmente "
+"A sessão corporativa permite que uma conta existente gerenciada centralmente "
 "seja usada neste dispositivo."
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:74
@@ -10117,10 +10122,6 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "Sons do sistema"
-
-#~ msgctxt "keybinding"
-#~ msgid "Search"
-#~ msgstr "Pesquisar"
 
 #~ msgid "All Connected and Network Printers"
 #~ msgstr "Todas as impressoras conectadas e em rede"
