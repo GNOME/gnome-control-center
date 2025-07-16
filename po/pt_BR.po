@@ -37,7 +37,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-04-03 06:00+0000\n"
+"POT-Creation-Date: 2025-07-14 09:29+0000\n"
 "PO-Revision-Date: 2025-03-13 14:31-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <https://br.gnome.org/traducao>\n"
@@ -81,7 +81,7 @@ msgstr "Adicionar atalhos de teclado"
 #: panels/privacy/usage/cc-usage-page.ui:147
 #: panels/system/region/cc-format-chooser.ui:32
 #: panels/system/users/cc-add-user-dialog.ui:24
-#: panels/system/users/cc-avatar-chooser.c:89
+#: panels/system/users/cc-avatar-chooser.c:95
 #: panels/system/users/cc-enterprise-login-dialog.ui:44
 #: panels/system/users/cc-fingerprint-dialog.c:1400
 #: panels/system/users/cc-fingerprint-dialog.ui:17
@@ -137,7 +137,7 @@ msgstr "_Remover"
 msgid "_Remove All Shortcuts"
 msgstr "_Remover todos os atalhos"
 
-#: panels/applications/cc-application-shortcut-dialog.c:263
+#: panels/applications/cc-application-shortcut-dialog.c:265
 #, c-format
 msgid "%s has registered the following global shortcuts"
 msgstr "%s registrou os seguintes atalhos globais"
@@ -976,7 +976,7 @@ msgstr[1] "%d planos de fundo removidos"
 msgid "Remove Background"
 msgstr "Remover a imagem de fundo"
 
-#: panels/background/cc-background-chooser.c:470
+#: panels/background/cc-background-chooser.c:471
 msgid "Select Picture"
 msgstr "Selecionar imagem"
 
@@ -1039,23 +1039,23 @@ msgstr "Plano de fundo atual"
 msgid "Style"
 msgstr "Estilo"
 
-#: panels/background/cc-background-panel.ui:69
+#: panels/background/cc-background-panel.ui:70
 msgid "_Default"
 msgstr "_Padrão"
 
-#: panels/background/cc-background-panel.ui:101
+#: panels/background/cc-background-panel.ui:102
 msgid "Da_rk"
 msgstr "Escu_ro"
 
-#: panels/background/cc-background-panel.ui:122
+#: panels/background/cc-background-panel.ui:123
 msgid "Accent Color"
 msgstr "Cor de realce"
 
-#: panels/background/cc-background-panel.ui:142
+#: panels/background/cc-background-panel.ui:144
 msgid "Background"
 msgstr "Plano de fundo"
 
-#: panels/background/cc-background-panel.ui:148
+#: panels/background/cc-background-panel.ui:150
 msgid "_Add Picture…"
 msgstr "_Adicionar imagem…"
 
@@ -1362,14 +1362,14 @@ msgstr "O tipo de dispositivo não é compatível atualmente."
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
 #. Translators: This will be presented as the text of a link to the documentation
-#: panels/color/cc-color-panel.c:2003
+#: panels/color/cc-color-panel.c:2006
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 #: panels/wacom/cc-wacom-device.c:168
 msgid "learn more"
 msgstr "saiba mais"
 
 #. Translators: %s is a link to the documentation with the label "learn more"
-#: panels/color/cc-color-panel.c:2005
+#: panels/color/cc-color-panel.c:2008
 #, c-format
 msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr ""
@@ -1815,7 +1815,7 @@ msgstr "Reduzir minuto"
 
 #: panels/common/cc-util.c:130
 #: panels/network/connection-editor/ce-page-details.c:188
-#: panels/wellbeing/cc-screen-time-statistics-row.c:973
+#: panels/wellbeing/cc-screen-time-statistics-row.c:975
 msgid "Today"
 msgstr "Hoje"
 
@@ -2300,6 +2300,11 @@ msgstr "Pasta pessoal"
 #: panels/search/gnome-search-panel.desktop.in:4 shell/cc-window.ui:26
 msgid "Search"
 msgstr "Pesquisa"
+
+#: panels/keyboard/01-launchers.xml.in:16
+msgctxt "keybinding"
+msgid "Search"
+msgstr "Pesquisar"
 
 #: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.ui:18
 #: panels/system/cc-system-panel.ui:6
@@ -7678,7 +7683,7 @@ msgstr "_Porta"
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:88
 #: panels/system/remote-desktop/cc-remote-login-page.ui:88
 msgid "Login Details"
-msgstr "Detalhes do início da seção"
+msgstr "Detalhes do início da sessão"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.ui:91
 #: panels/system/remote-desktop/cc-remote-login-page.ui:91
@@ -7764,7 +7769,7 @@ msgstr "_Secure Shell"
 
 #: panels/system/secure-shell/cc-secure-shell-page.ui:41
 msgid "SSH Login _Command"
-msgstr "_Comando de início de seção SSH"
+msgstr "_Comando de início de sessão SSH"
 
 #: panels/system/secure-shell/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -7833,7 +7838,7 @@ msgstr ""
 
 #: panels/system/users/cc-add-user-dialog.ui:107
 msgid "User sets password on _first login"
-msgstr "Os usuário definem a senha no _primeiro início de seção"
+msgstr "Os usuário definem a senha no _primeiro início de sessão"
 
 #: panels/system/users/cc-add-user-dialog.ui:120
 msgid "Set password n_ow"
@@ -7854,15 +7859,15 @@ msgstr ""
 msgid "_Confirm Password"
 msgstr "_Confirmar senha"
 
-#: panels/system/users/cc-avatar-chooser.c:91
+#: panels/system/users/cc-avatar-chooser.c:97
 msgid "Select"
 msgstr "Selecionar"
 
-#: panels/system/users/cc-avatar-chooser.c:159
+#: panels/system/users/cc-avatar-chooser.c:165
 msgid "Browse for more pictures"
 msgstr "Procurar por mais imagens"
 
-#: panels/system/users/cc-avatar-chooser.ui:24
+#: panels/system/users/cc-avatar-chooser.ui:25
 msgid "Select a File…"
 msgstr "Selecionar um arquivo…"
 
@@ -7884,12 +7889,12 @@ msgstr "Nenhuma forma suportada para autenticar neste domínio"
 #: panels/system/users/cc-enterprise-login-dialog.c:300
 #: panels/system/users/cc-enterprise-login-dialog.c:489
 msgid "That login name didn’t work"
-msgstr "Esse nome início de seção não funcionou"
+msgstr "Esse nome início de sessão não funcionou"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:307
 #: panels/system/users/cc-enterprise-login-dialog.c:496
 msgid "That login password didn’t work"
-msgstr "Essa senha de início de seção não funcionou"
+msgstr "Essa senha de início de sessão não funcionou"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:314
 msgid "That hostname didn’t work"
@@ -7908,7 +7913,7 @@ msgid ""
 "<b>%s</b>. To enroll, have your domain administrator enter their name and "
 "password."
 msgstr ""
-"Para adicionar uma conta de seção corporativa, este dispositivo precisa "
+"Para adicionar uma conta de sessão corporativa, este dispositivo precisa "
 "estar registrado em <b>%s</b>. Para se inscrever, peça ao administrador do "
 "domínio que insira o nome e a senha."
 
@@ -7940,14 +7945,14 @@ msgstr "Desconectado"
 #: panels/system/users/cc-enterprise-login-dialog.ui:24
 msgid "A network connection is needed to add enterprise login accounts."
 msgstr ""
-"É necessária uma conexão de rede para adicionar contas de seção corporativa."
+"É necessária uma conexão de rede para adicionar contas de sessão corporativa."
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:69
 msgid ""
 "Enterprise login allows an existing centrally managed account to be used on "
 "this device."
 msgstr ""
-"A seção corporativa permite que uma conta existente gerenciada centralmente "
+"A sessão corporativa permite que uma conta existente gerenciada centralmente "
 "seja usada neste dispositivo."
 
 #: panels/system/users/cc-enterprise-login-dialog.ui:74
@@ -9423,53 +9428,53 @@ msgstr "Duração"
 msgid "Interval"
 msgstr "Intervalo"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:228
+#: panels/wellbeing/cc-screen-time-statistics-row.c:230
 msgctxt "abbreviated weekday name for Sunday"
 msgid "S"
 msgstr "D"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:229
+#: panels/wellbeing/cc-screen-time-statistics-row.c:231
 msgctxt "abbreviated weekday name for Monday"
 msgid "M"
 msgstr "S"
 
 # Neste caso melhor traduzir como "até", já que indica um período de tempo, ex.: Das 03h até as 5h --Enrico
-#: panels/wellbeing/cc-screen-time-statistics-row.c:230
+#: panels/wellbeing/cc-screen-time-statistics-row.c:232
 msgctxt "abbreviated weekday name for Tuesday"
 msgid "T"
 msgstr "T"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:231
+#: panels/wellbeing/cc-screen-time-statistics-row.c:233
 msgctxt "abbreviated weekday name for Wednesday"
 msgid "W"
 msgstr "Q"
 
 # Neste caso melhor traduzir como "até", já que indica um período de tempo, ex.: Das 03h até as 5h --Enrico
-#: panels/wellbeing/cc-screen-time-statistics-row.c:232
+#: panels/wellbeing/cc-screen-time-statistics-row.c:234
 msgctxt "abbreviated weekday name for Thursday"
 msgid "T"
 msgstr "Q"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:233
+#: panels/wellbeing/cc-screen-time-statistics-row.c:235
 msgctxt "abbreviated weekday name for Friday"
 msgid "F"
 msgstr "S"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:234
+#: panels/wellbeing/cc-screen-time-statistics-row.c:236
 msgctxt "abbreviated weekday name for Saturday"
 msgid "S"
 msgstr "S"
 
 #. Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
 #. * Use whatever shortest unit label is used for minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:391
+#: panels/wellbeing/cc-screen-time-statistics-row.c:393
 #, c-format
 msgid "%um"
 msgstr "%um"
 
 #. Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
 #. * Use whatever shortest unit label is used for hours in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:397
+#: panels/wellbeing/cc-screen-time-statistics-row.c:399
 #, c-format
 msgid "%uh"
 msgstr "%uh"
@@ -9477,85 +9482,85 @@ msgstr "%uh"
 #. Translators: This is a duration in hours and minutes, for example
 #. * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
 #. * is used for hours and minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:404
+#: panels/wellbeing/cc-screen-time-statistics-row.c:406
 #, c-format
 msgid "%uh %um"
 msgstr "%uh %um"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:663
-#: panels/wellbeing/cc-screen-time-statistics-row.c:783
+#: panels/wellbeing/cc-screen-time-statistics-row.c:665
+#: panels/wellbeing/cc-screen-time-statistics-row.c:785
 #, c-format
 msgid "Failed to load session history file ‘%s’: %s"
 msgstr "Falha ao carregar histórico de sessão do arquivo “%s”: %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:664
+#: panels/wellbeing/cc-screen-time-statistics-row.c:666
 msgid "Invalid file structure"
 msgstr "Estrutura de arquivo inválida"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:701
+#: panels/wellbeing/cc-screen-time-statistics-row.c:703
 #, c-format
 msgid "Failed to load session history file: %s"
 msgstr "Falha ao carregar histórico de sessão a partir de arquivo: %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:702
-#: panels/wellbeing/cc-screen-time-statistics-row.c:784
+#: panels/wellbeing/cc-screen-time-statistics-row.c:704
+#: panels/wellbeing/cc-screen-time-statistics-row.c:786
 msgid "File is empty"
 msgstr "O arquivo está vazio"
 
 #. G_DATE_BAD_WEEKDAY
-#: panels/wellbeing/cc-screen-time-statistics-row.c:920
+#: panels/wellbeing/cc-screen-time-statistics-row.c:922
 msgid "Average Monday"
 msgstr "Média de segunda-feira"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:921
+#: panels/wellbeing/cc-screen-time-statistics-row.c:923
 msgid "Average Tuesday"
 msgstr "Média de terça-feira"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:922
+#: panels/wellbeing/cc-screen-time-statistics-row.c:924
 msgid "Average Wednesday"
 msgstr "Média de quarta-feira"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:923
+#: panels/wellbeing/cc-screen-time-statistics-row.c:925
 msgid "Average Thursday"
 msgstr "Média de quinta-feira"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:924
+#: panels/wellbeing/cc-screen-time-statistics-row.c:926
 msgid "Average Friday"
 msgstr "Média de sexta-feira"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:925
+#: panels/wellbeing/cc-screen-time-statistics-row.c:927
 msgid "Average Saturday"
 msgstr "Média de sábado"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:926
+#: panels/wellbeing/cc-screen-time-statistics-row.c:928
 msgid "Average Sunday"
 msgstr "Média de domingo"
 
 #. Translators: This a medium-length date, for example ‘15 April’
-#: panels/wellbeing/cc-screen-time-statistics-row.c:978
+#: panels/wellbeing/cc-screen-time-statistics-row.c:980
 msgid "%-d %B"
 msgstr "%-d de %B"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:991
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1002
+#: panels/wellbeing/cc-screen-time-statistics-row.c:993
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1004
 msgid "No Data"
 msgstr "Nenhum dado"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1006
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1008
 #, c-format
 msgid "This Week"
 msgstr "Esta semana"
 
 #. Translators: This is a range of days within a given month.
 #. * For example ‘20–27 April’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1017
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1019
 #, c-format
 msgid "%u–%u %s"
 msgstr "%u–%u de %s"
 
 #. Translators: This is a range of days spanning two months.
 #. * For example, ‘27 April–4 May’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1034
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1036
 #, c-format
 msgid "%u %s–%u %s"
 msgstr "%u de %s–%u de %s"
@@ -9565,7 +9570,7 @@ msgstr "%u de %s–%u de %s"
 #. * preferred date representation for the current locale without the time).
 #. * The second placeholder is a formatted time duration (for example,
 #. * ‘3 hours’ or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1097
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1102
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
@@ -9578,14 +9583,14 @@ msgstr ""
 #. Translators: The placeholder is a formatted date string (formatted
 #. * using the `%x` strftime placeholder, which gives the preferred date
 #. * representation for the current locale without the time).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1116
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1121
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr ""
 "Gráfico de barras do uso do tempo de tela ao longo da semana, começando em "
 "%s."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1122
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1127
 #, c-format
 msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
@@ -9631,67 +9636,67 @@ msgstr ""
 msgid "_Disable Screen Time"
 msgstr "_Desabilitar tempo de tela"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:76
+#: panels/wellbeing/cc-wellbeing-panel.ui:78
 msgid "Screen Time Recording Disabled"
 msgstr "Gravação do tempo de tela desabilitada"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:78
+#: panels/wellbeing/cc-wellbeing-panel.ui:80
 msgid "Enable recording to view screen usage history"
 msgstr "Habilita gravação para ver histórico de uso da tela"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:82
+#: panels/wellbeing/cc-wellbeing-panel.ui:84
 msgid "E_nable"
 msgstr "_Habilitar"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:102
+#: panels/wellbeing/cc-wellbeing-panel.ui:104
 msgid "Screen Limits"
 msgstr "Limites de tela"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:105
+#: panels/wellbeing/cc-wellbeing-panel.ui:107
 msgid "_Screen Time Limit"
 msgstr "_Limite de tempo de tela"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:112
+#: panels/wellbeing/cc-wellbeing-panel.ui:114
 msgid "Daily _Limit"
 msgstr "Limite _diário"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:118
+#: panels/wellbeing/cc-wellbeing-panel.ui:120
 msgid "_Grayscale"
 msgstr "_Tons de cinza"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:119
+#: panels/wellbeing/cc-wellbeing-panel.ui:121
 msgid "Black and white screen for screen limits"
 msgstr "Tela preto e branco para limites de tela"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:128
+#: panels/wellbeing/cc-wellbeing-panel.ui:130
 msgid "Break Reminders"
 msgstr "Lembretes de pausa"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:131
+#: panels/wellbeing/cc-wellbeing-panel.ui:133
 msgid "_Eyesight Reminders"
 msgstr "Lembretes de _visão"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:132
+#: panels/wellbeing/cc-wellbeing-panel.ui:134
 msgid "Reminders to look away from the screen"
 msgstr "Lembretes para desviar o olhar da tela"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:138
+#: panels/wellbeing/cc-wellbeing-panel.ui:140
 msgid "_Movement Reminders"
 msgstr "Lembretes de _movimento"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:139
+#: panels/wellbeing/cc-wellbeing-panel.ui:141
 msgid "Reminders to move around"
 msgstr "Lembretes para se movimentar"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:145
+#: panels/wellbeing/cc-wellbeing-panel.ui:147
 msgid "Movement _Break Schedule"
 msgstr "_Agendamento de pausas para movimento"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:151
+#: panels/wellbeing/cc-wellbeing-panel.ui:153
 msgid "S_ounds"
 msgstr "S_ons"
 
-#: panels/wellbeing/cc-wellbeing-panel.ui:152
+#: panels/wellbeing/cc-wellbeing-panel.ui:154
 msgid "Play a sound when a break ends"
 msgstr "Reproduz um som quando uma pausa termina"
 
@@ -10481,10 +10486,6 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "Sons do sistema"
-
-#~ msgctxt "keybinding"
-#~ msgid "Search"
-#~ msgstr "Pesquisar"
 
 #~ msgid "Daily Screen Usage Limi_t"
 #~ msgstr "Limi_te de uso diário da tela"
