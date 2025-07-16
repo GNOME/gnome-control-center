@@ -25,6 +25,25 @@ template $CcAboutPage: Adw.NavigationPage {
       }
 
       Adw.PreferencesGroup {
+        Adw.ActionRow {
+          title: _("Support GNOME");
+          subtitle: _("GNOME needs your help. Please donate today.");
+
+          [suffix]
+          Button {
+            label: _("D_onate");
+            use-underline: true;
+            valign: center;
+            styles [
+              "suggested-action",
+            ]
+
+            clicked => $on_donate_button_clicked_cb(template);
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
         $CcHostnameEntry hostname_row {
           title: _("_Device Name");
           use-underline: true;
