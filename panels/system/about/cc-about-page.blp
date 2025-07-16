@@ -25,6 +25,27 @@ template $CcAboutPage: Adw.NavigationPage {
       }
 
       Adw.PreferencesGroup {
+        Adw.ActionRow {
+          /* These strings are not final yet, so we don't want to waste translator's time.
+           * TODO by gnome-49.beta */
+          title: "Support GNOME";
+          subtitle: "GNOME needs your help. Please donate today.";
+
+          [suffix]
+          Gtk.Button {
+            /* Needs translation when final too. */
+            label: "Donate";
+            valign: center;
+            styles [
+              "suggested-action",
+            ]
+
+            clicked => $on_donate_button_clicked_cb(template);
+          }
+        }
+      }
+
+      Adw.PreferencesGroup {
         $CcHostnameEntry hostname_row {
           title: _("_Device Name");
           use-underline: true;
