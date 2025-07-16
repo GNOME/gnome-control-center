@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-06-22 10:22+0000\n"
-"PO-Revision-Date: 2025-06-22 17:24+0200\n"
+"POT-Creation-Date: 2025-07-14 09:31+0000\n"
+"PO-Revision-Date: 2025-07-16 09:56+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -45,7 +45,7 @@ msgstr "Dodaj tipkovne bližnjice"
 #: panels/network/cc-wifi-panel.blp:180
 #: panels/network/connection-editor/ce-page-details.c:89
 #: panels/network/connection-editor/connection-editor.blp:17
-#: panels/printers/pp-jobs-dialog.blp:111
+#: panels/printers/pp-jobs-dialog.blp:112
 #: panels/printers/pp-new-printer-dialog.ui:65
 #: panels/printers/pp-ppd-selection-dialog.blp:19
 #: panels/privacy/usage/cc-usage-page.blp:114
@@ -291,7 +291,7 @@ msgid "Reproduce sounds"
 msgstr "Omogoči predvajanje zvokov"
 
 #: panels/applications/cc-applications-panel.blp:267
-#: panels/sound/cc-sound-panel.blp:266
+#: panels/sound/cc-sound-panel.blp:206
 msgid "Sounds"
 msgstr "Zvoki"
 
@@ -1111,7 +1111,7 @@ msgstr "Za uporabo vmesnika Bluetooth je treba izklopiti letalski način."
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:3
 #: panels/network/cc-network-panel.blp:37
 #: panels/network/net-device-bluetooth.c:138
-#: panels/printers/pp-new-printer-dialog.c:1369
+#: panels/printers/pp-new-printer-dialog.c:1368
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -1282,57 +1282,57 @@ msgstr "Pokaži barvne profile za %s"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: panels/color/cc-color-panel.c:138
+#: panels/color/cc-color-panel.c:140
 msgid "Default: "
 msgstr "Privzeto: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: panels/color/cc-color-panel.c:146
+#: panels/color/cc-color-panel.c:148
 msgid "Colorspace: "
 msgstr "Barvni prostor: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: panels/color/cc-color-panel.c:153
+#: panels/color/cc-color-panel.c:155
 msgid "Test profile: "
 msgstr "Preizkusni profil: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: panels/color/cc-color-panel.c:292
+#: panels/color/cc-color-panel.c:294
 msgid "Select ICC Profile File"
 msgstr "Izbor datoteke profila ICC"
 
-#: panels/color/cc-color-panel.c:295
+#: panels/color/cc-color-panel.c:297
 msgid "Import"
 msgstr "Uvozi"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:307
+#: panels/color/cc-color-panel.c:309
 msgid "Supported ICC profiles"
 msgstr "Podprti profili ICC"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:315
+#: panels/color/cc-color-panel.c:317
 msgid "All files"
 msgstr "Vse datoteke"
 
-#: panels/color/cc-color-panel.c:581
+#: panels/color/cc-color-panel.c:583
 msgid "Screen"
 msgstr "Zaslon"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: panels/color/cc-color-panel.c:861
+#: panels/color/cc-color-panel.c:835
 msgid "Save Profile"
 msgstr "Shrani profil"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1119
+#: panels/color/cc-color-panel.c:1095
 msgid "Create a color profile for the selected device"
 msgstr "Ustvari barvni profil za izbrane naprave"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1134 panels/color/cc-color-panel.c:1158
+#: panels/color/cc-color-panel.c:1110
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -1341,26 +1341,21 @@ msgstr ""
 "na ustrezen način."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1168
-msgid "The measuring instrument does not support printer profiling."
-msgstr "Merilna naprava ne podpira profiliranja tiskalnika."
-
-#. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1179
+#: panels/color/cc-color-panel.c:1122
 msgid "The device type is not currently supported."
 msgstr "Vrsta naprave trenutno ni podprta."
 
 #. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
 #. Translators: This will be presented as the text of a link to the documentation
-#: panels/color/cc-color-panel.c:2007
+#: panels/color/cc-color-panel.c:1950
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 #: panels/wacom/cc-wacom-device.c:168
 msgid "learn more"
 msgstr "Več podrobnosti"
 
 #. Translators: %s is a link to the documentation with the label "learn more"
-#: panels/color/cc-color-panel.c:2009
+#: panels/color/cc-color-panel.c:1952
 #, c-format
 msgid "Each device needs an up to date color profile to be color managed — %s."
 msgstr ""
@@ -2128,38 +2123,33 @@ msgstr "_Časi"
 msgid "From"
 msgstr "Od"
 
-#: panels/display/cc-night-light-page.blp:123
-#: panels/display/cc-night-light-page.blp:211
+#: panels/display/cc-night-light-page.blp:122
+#: panels/display/cc-night-light-page.blp:208
 msgid "Hour"
 msgstr "Ure"
 
-#: panels/display/cc-night-light-page.blp:128
-#: panels/display/cc-night-light-page.blp:216
-msgid ":"
-msgstr ":"
-
-#: panels/display/cc-night-light-page.blp:146
-#: panels/display/cc-night-light-page.blp:234
+#: panels/display/cc-night-light-page.blp:144
+#: panels/display/cc-night-light-page.blp:230
 msgid "Minute"
 msgstr "Minute"
 
 #. Translators: This is the short form for the time period in the morning
-#: panels/display/cc-night-light-page.blp:156
-#: panels/display/cc-night-light-page.blp:243
+#: panels/display/cc-night-light-page.blp:154
+#: panels/display/cc-night-light-page.blp:239
 msgid "AM"
 msgstr "AM"
 
 #. Translators: This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-page.blp:169
-#: panels/display/cc-night-light-page.blp:255
+#: panels/display/cc-night-light-page.blp:167
+#: panels/display/cc-night-light-page.blp:251
 msgid "PM"
 msgstr "PM"
 
-#: panels/display/cc-night-light-page.blp:184
+#: panels/display/cc-night-light-page.blp:182
 msgid "To"
 msgstr "Za"
 
-#: panels/display/cc-night-light-page.blp:283
+#: panels/display/cc-night-light-page.blp:279
 msgid "_Color Temperature"
 msgstr "_Temperatura barve"
 
@@ -3040,7 +3030,7 @@ msgstr "_Nastavitve"
 #: panels/network/connection-editor/ip6-page.blp:36
 #: panels/network/connection-editor/ip6-page.blp:187
 #: panels/network/connection-editor/ip6-page.blp:242
-#: panels/wacom/cc-wacom-page.c:680
+#: panels/wacom/cc-wacom-page.c:677
 msgid "Automatic"
 msgstr "Samodejno"
 
@@ -3150,7 +3140,7 @@ msgstr "Ime omrežja"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-qr-code-dialog.blp:64
 #: panels/network/cc-wifi-hotspot-dialog.blp:79
-#: panels/printers/pp-jobs-dialog.blp:170
+#: panels/printers/pp-jobs-dialog.blp:171
 #: panels/printers/pp-new-printer-dialog.ui:300
 #: panels/system/users/cc-add-user-dialog.ui:103
 #: panels/wwan/cc-wwan-apn-dialog.blp:152
@@ -3677,7 +3667,7 @@ msgid "WireGuard"
 msgstr "WireGuard"
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
-#: panels/network/connection-editor/ce-page-wireguard.c:375
+#: panels/network/connection-editor/ce-page-wireguard.c:370
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:167
 #: panels/sound/cc-alert-chooser-page.c:350
 #: panels/system/about/cc-about-page.c:73
@@ -3688,7 +3678,7 @@ msgstr "WireGuard"
 msgid "Unknown"
 msgstr "Neznano"
 
-#: panels/network/connection-editor/ce-page-wireguard.c:414
+#: panels/network/connection-editor/ce-page-wireguard.c:409
 msgid "Unsaved peer"
 msgstr "Neshranjen soležnik"
 
@@ -3765,7 +3755,7 @@ msgid "_Cloned Address"
 msgstr "_Kloniran naslov"
 
 #: panels/network/connection-editor/ethernet-page.blp:107
-#: panels/network/connection-editor/wireguard-page.blp:190
+#: panels/network/connection-editor/wireguard-page.blp:188
 msgid "bytes"
 msgstr "bajtov"
 
@@ -3984,39 +3974,34 @@ msgstr ""
 "Vrata za prisluh. Z izbiro nastavitve na samodejno določevanje, se vrata "
 "izberejo naključno ob vzpostavitvi vmesnika."
 
-#: panels/network/connection-editor/wireguard-page.blp:106
-#: panels/network/connection-editor/wireguard-page.blp:140
-msgid "0"
-msgstr "0"
-
-#: panels/network/connection-editor/wireguard-page.blp:127
+#: panels/network/connection-editor/wireguard-page.blp:126
 msgid "_fwmark"
 msgstr "_fwmark"
 
-#: panels/network/connection-editor/wireguard-page.blp:139
+#: panels/network/connection-editor/wireguard-page.blp:138
 msgid ""
 "A 32-bit fwmark for outgoing packets. Leave it to 'off' to disable fwmark."
 msgstr ""
 "32-bitni fwmark za odhodne pakete. Če želite možnost onemogočiti, pustite "
 "vrednost 'izklopljeno."
 
-#: panels/network/connection-editor/wireguard-page.blp:160
+#: panels/network/connection-editor/wireguard-page.blp:158
 msgid "_MTU"
 msgstr "_MTU"
 
-#: panels/network/connection-editor/wireguard-page.blp:200
+#: panels/network/connection-editor/wireguard-page.blp:198
 msgid "_Add peer routes"
 msgstr "_Dodaj soležne poti"
 
-#: panels/network/connection-editor/wireguard-page.blp:226
+#: panels/network/connection-editor/wireguard-page.blp:224
 msgid "_Peers"
 msgstr "Soležniki"
 
-#: panels/network/connection-editor/wireguard-page.blp:240
+#: panels/network/connection-editor/wireguard-page.blp:238
 msgid "Add WireGuard peer"
 msgstr "Dodaj WireGuard soležnika"
 
-#: panels/network/connection-editor/wireguard-page.blp:261
+#: panels/network/connection-editor/wireguard-page.blp:259
 msgid "No peers set up"
 msgstr "Ni nastavljenih soležnikov"
 
@@ -5309,51 +5294,55 @@ msgctxt "print job"
 msgid "Completed"
 msgstr "Zaključeno"
 
+#: panels/printers/pp-jobs-dialog.blp:5
+msgid "Printer Jobs"
+msgstr "Posli tiskalnika"
+
 #. Translators: this action removes (purges) all the listed jobs from the list.
-#: panels/printers/pp-jobs-dialog.blp:14
+#: panels/printers/pp-jobs-dialog.blp:15
 msgid "_Clear All"
 msgstr "Počisti _vse"
 
-#: panels/printers/pp-jobs-dialog.blp:25
+#: panels/printers/pp-jobs-dialog.blp:26
 msgid "Active Jobs"
 msgstr "Dejavni posli"
 
 #. Translators: this label describes the dialog empty state, with no jobs listed.
-#: panels/printers/pp-jobs-dialog.blp:35
+#: panels/printers/pp-jobs-dialog.blp:36
 msgid "No Active Printer Jobs"
 msgstr "Ni dejavnih poslov tiskalnika"
 
 #. Translators: This button pop up authentication dialog for print jobs which need credentials.
-#: panels/printers/pp-jobs-dialog.blp:76
+#: panels/printers/pp-jobs-dialog.blp:77
 msgid "_Authenticate"
 msgstr "_Overi"
 
-#: panels/printers/pp-jobs-dialog.blp:104
+#: panels/printers/pp-jobs-dialog.blp:105
 msgid "Clear All Active Jobs?"
 msgstr "Ali želite počistiti vsa dejavna opravila?"
 
-#: panels/printers/pp-jobs-dialog.blp:105
+#: panels/printers/pp-jobs-dialog.blp:106
 msgid "Clearing jobs cannot be undone"
 msgstr "Čiščenja opravil ni mogoče razveljaviti"
 
-#: panels/printers/pp-jobs-dialog.blp:112
+#: panels/printers/pp-jobs-dialog.blp:113
 msgid "Clear _All"
 msgstr "Počisti _vse"
 
 #. Translators: This is a windows domain used with SMB protocol.
-#: panels/printers/pp-jobs-dialog.blp:142
+#: panels/printers/pp-jobs-dialog.blp:143
 msgid "Domain"
 msgstr "Domena"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/pp-jobs-dialog.blp:156
+#: panels/printers/pp-jobs-dialog.blp:157
 #: panels/printers/pp-new-printer-dialog.ui:280
 #: panels/wwan/cc-wwan-apn-dialog.blp:129
 msgid "Username"
 msgstr "Uporabniško ime"
 
 #. Translators: This button authenticates all print jobs and send them for printing.
-#: panels/printers/pp-jobs-dialog.blp:218
+#: panels/printers/pp-jobs-dialog.blp:219
 msgid "A_uthenticate"
 msgstr "_Overi"
 
@@ -5379,58 +5368,58 @@ msgid "Automatic configuration"
 msgstr "Samodejna prilagoditev"
 
 #. Translators: This is the title presented at top of the dialog.
-#: panels/printers/pp-new-printer-dialog.c:254
-#: panels/printers/pp-new-printer-dialog.c:311
+#: panels/printers/pp-new-printer-dialog.c:253
+#: panels/printers/pp-new-printer-dialog.c:310
 #: panels/printers/pp-new-printer-dialog.ui:28
 #: panels/printers/pp-new-printer-dialog.ui:54
 msgid "Add Printer"
 msgstr "Dodaj tiskalnik"
 
-#: panels/printers/pp-new-printer-dialog.c:269
+#: panels/printers/pp-new-printer-dialog.c:268
 msgid "Unlock Print Server"
 msgstr "Odkleni strežnik tiskanja"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:273
+#: panels/printers/pp-new-printer-dialog.c:272
 #, c-format
 msgid "Unlock %s."
 msgstr "Odkleni %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:277
+#: panels/printers/pp-new-printer-dialog.c:276
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr "Vnesite uporabniško ime in geslo za ogled tiskalnikov na %s."
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1352
+#: panels/printers/pp-new-printer-dialog.c:1351
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1357
+#: panels/printers/pp-new-printer-dialog.c:1356
 msgid "Serial Port"
 msgstr "Zaporedna vrata"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1364
+#: panels/printers/pp-new-printer-dialog.c:1363
 msgid "Parallel Port"
 msgstr "Vzporedna vrata"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1406
+#: panels/printers/pp-new-printer-dialog.c:1405
 #, c-format
 msgid "Location: %s"
 msgstr "Mesto: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1411
+#: panels/printers/pp-new-printer-dialog.c:1410
 #, c-format
 msgid "Address: %s"
 msgstr "Naslov: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1438
+#: panels/printers/pp-new-printer-dialog.c:1437
 msgid "Server requires authentication"
 msgstr "Strežnik zahteva overitev"
 
@@ -6984,7 +6973,7 @@ msgstr "Preizkus zvočnikov"
 msgid "Sound"
 msgstr "Zvok"
 
-#: panels/sound/cc-sound-panel.blp:15 panels/sound/cc-sound-panel.blp:171
+#: panels/sound/cc-sound-panel.blp:15 panels/sound/cc-sound-panel.blp:142
 msgid "Output"
 msgstr "Izhod"
 
@@ -6992,71 +6981,71 @@ msgstr "Izhod"
 msgid "_Test…"
 msgstr "_Preizkus …"
 
-#: panels/sound/cc-sound-panel.blp:46
+#: panels/sound/cc-sound-panel.blp:34
 msgid "_Output Device"
 msgstr "_Odvodna naprava"
 
-#: panels/sound/cc-sound-panel.blp:69
+#: panels/sound/cc-sound-panel.blp:40
 msgid "_Configuration"
 msgstr "_Nastavitve"
 
-#: panels/sound/cc-sound-panel.blp:77
+#: panels/sound/cc-sound-panel.blp:48
 msgid "Master volume"
 msgstr "Sistemska glasnost"
 
-#: panels/sound/cc-sound-panel.blp:90
+#: panels/sound/cc-sound-panel.blp:61
 msgid "O_utput Volume"
 msgstr "Izhodna glasnost"
 
-#: panels/sound/cc-sound-panel.blp:113
+#: panels/sound/cc-sound-panel.blp:84
 msgid "_Balance"
 msgstr "_Uravnoteženost"
 
-#: panels/sound/cc-sound-panel.blp:136
+#: panels/sound/cc-sound-panel.blp:107
 msgid "Fad_e"
 msgstr "_Utišanje"
 
-#: panels/sound/cc-sound-panel.blp:159
+#: panels/sound/cc-sound-panel.blp:130
 msgid "_Subwoofer"
 msgstr "_Nizkotonski zvočnik"
 
-#: panels/sound/cc-sound-panel.blp:174
+#: panels/sound/cc-sound-panel.blp:145
 msgid "Output Device"
 msgstr "Odvodna naprava"
 
-#: panels/sound/cc-sound-panel.blp:175
+#: panels/sound/cc-sound-panel.blp:146
 msgid "No Output Devices"
 msgstr "Ni navedenih izhodnih naprav"
 
-#: panels/sound/cc-sound-panel.blp:181 panels/sound/cc-sound-panel.blp:256
+#: panels/sound/cc-sound-panel.blp:152 panels/sound/cc-sound-panel.blp:196
 msgid "Input"
 msgstr "Vhod"
 
-#: panels/sound/cc-sound-panel.blp:202
+#: panels/sound/cc-sound-panel.blp:161
 msgid "_Input Device"
 msgstr "Vhodna _naprava"
 
-#: panels/sound/cc-sound-panel.blp:227
+#: panels/sound/cc-sound-panel.blp:167
 msgid "Con_figuration"
 msgstr "_Nastavitve"
 
-#: panels/sound/cc-sound-panel.blp:244
+#: panels/sound/cc-sound-panel.blp:184
 msgid "I_nput Volume"
 msgstr "_Vhodna glasnost"
 
-#: panels/sound/cc-sound-panel.blp:259
+#: panels/sound/cc-sound-panel.blp:199
 msgid "Input Device"
 msgstr "Vhodna naprava"
 
-#: panels/sound/cc-sound-panel.blp:260
+#: panels/sound/cc-sound-panel.blp:200
 msgid "No Input Devices"
 msgstr "Ni določene vhodne naprave"
 
-#: panels/sound/cc-sound-panel.blp:269
+#: panels/sound/cc-sound-panel.blp:209
 msgid "Vo_lume Levels"
 msgstr "Ravni _glasnosti"
 
-#: panels/sound/cc-sound-panel.blp:275
+#: panels/sound/cc-sound-panel.blp:215
 msgid "_Alert Sound"
 msgstr "_Opozorilni zvok"
 
@@ -9268,7 +9257,7 @@ msgid "_Calibrate"
 msgstr "_Umeri …"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:667
+#: panels/wacom/cc-wacom-page.c:664
 msgid "All Displays"
 msgstr "Vsi zasloni"
 
@@ -9290,12 +9279,12 @@ msgstr "Dodeli tipkovno bližnjico"
 msgid "Press Esc to cancel"
 msgstr "Pritisnite ubežnico (Esc) za preklic"
 
-#: panels/wacom/cc-wacom-stylus-action-dialog.c:253
+#: panels/wacom/cc-wacom-stylus-action-dialog.c:257
 #, c-format
 msgid "Choose an action when button %d on the stylus is pressed"
 msgstr "Izbor dejanja, ko je pritisnjen gumb %d pisala"
 
-#: panels/wacom/cc-wacom-stylus-action-dialog.c:256
+#: panels/wacom/cc-wacom-stylus-action-dialog.c:260
 #, c-format
 msgid "Button %d Mapping"
 msgstr "Preslikava gumba %d"
