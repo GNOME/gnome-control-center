@@ -154,6 +154,12 @@ setup_os_logo (CcAboutPage *self)
 }
 
 static void
+on_donate_button_clicked_cb (CcAboutPage *self)
+{
+  g_app_info_launch_default_for_uri ("https://donate.gnome.org/", NULL, NULL);
+}
+
+static void
 cc_about_page_dispose (GObject *object)
 {
   CcAboutPage *self = CC_ABOUT_PAGE (object);
@@ -187,6 +193,7 @@ cc_about_page_class_init (CcAboutPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcAboutPage, processor_row);
 
   gtk_widget_class_bind_template_callback (widget_class, cc_about_page_open_system_details);
+  gtk_widget_class_bind_template_callback (widget_class, on_donate_button_clicked_cb);
 }
 
 static void
