@@ -59,11 +59,17 @@ sources += gnome.compile_resources(
   dependencies: blueprints,
 )
 
+deps = common_deps + [json_glib_dep]
+
+if enable_malcontent
+  deps += malcontent_dep
+endif
+
 panels_libs += static_library(
   cappletname,
   sources: sources,
   include_directories: [ top_inc, common_inc ],
-  dependencies: common_deps + [json_glib_dep],
+  dependencies: deps,
   c_args: cflags,
 )
 

@@ -480,9 +480,7 @@ spawn_malcontent_control (CcUserPage *self)
 {
     g_autoptr(GError) error = NULL;
     const gchar *argv[] = { "malcontent-control",
-#ifdef HAVE_MALCONTENT_0_10
                         "--user", act_user_get_user_name (self->user),
-#endif  /* HAVE_MALCONTENT_0_10 */
                         NULL
     };
 

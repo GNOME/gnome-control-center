@@ -57,7 +57,7 @@ stages:
     # Should probably also switch away from 'rawhide',
     # to stable fedora branch as well.
     BRANCH_NAME: 'main'
-    CONTAINER_TAG: '2025-11-12.0'
+    CONTAINER_TAG: '2025-11-15.0'
     FEDORA_VERSION: rawhide
     # Derive FDO variables from this automatically.
     # DO NOT edit, instead change the variables above
@@ -84,6 +84,7 @@ build.container.fedora@x86_64:
     # - most packages are needed for testing
     # - glibc-langpack-en is needed for sorting in run-style-check-diff.sh
     # - libsass-devel, sassc are often needed for building libadwaita, gtk, etc.
+    # - libsoup3-devel required for malcontent is not included in its build depends yet
     FDO_DISTRIBUTION_PACKAGES: >-
       dnf5-plugins
       gawk
@@ -96,12 +97,14 @@ build.container.fedora@x86_64:
       xorg-x11-server-Xvfb
       mesa-dri-drivers
       libsass-devel sassc
+      libsoup3-devel
     FDO_DISTRIBUTION_EXEC: |-
       dnf builddep -y gnome-control-center && \
       dnf builddep -y gsettings-desktop-schemas && \
       dnf builddep -y gnome-settings-daemon && \
       dnf builddep -y libadwaita && \
       dnf builddep -y gnome-online-accounts && \
+      dnf builddep -y malcontent && \
       git clone --depth 1 https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
         cd gsettings-desktop-schemas && \
         meson setup $MESON_BUILD_DIR --prefix=/usr && \
