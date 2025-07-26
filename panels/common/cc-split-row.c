@@ -245,6 +245,50 @@ cc_split_row_set_property (GObject      *object,
     }
 }
 
+static gboolean
+cc_split_row_child_focus (GtkWidget        *widget,
+                          GtkDirectionType  direction)
+{
+  CcSplitRow *self = CC_SPLIT_ROW (widget);
+  GtkWidget *child_focus;
+  gboolean is_tab, is_rtl, is_start, is_end;
+
+  is_tab = direction == GTK_DIR_TAB_FORWARD || direction == GTK_DIR_TAB_BACKWARD;
+
+  child_focus = gtk_widget_get_focus_child (widget);
+
+  if (child_focus && is_tab)
+    return FALSE;
+
+  is_rtl = gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL;
+  is_start = (direction == GTK_DIR_LEFT && !is_rtl) || (direction == GTK_DIR_RIGHT && is_rtl);
+  is_end = (direction == GTK_DIR_RIGHT && !is_rtl) || (direction == GTK_DIR_LEFT && is_rtl);
+
+  if (is_start)
+    {
+      cc_split_row_set_use_default (self, TRUE);
+      return gtk_widget_grab_focus (self->default_option_box);
+    }
+  else if (is_end)
+    {
+      cc_split_row_set_use_default (self, FALSE);
+      return gtk_widget_grab_focus (self->alternative_option_box);
+    }
+
+  return GTK_WIDGET_CLASS (cc_split_row_parent_class)->focus (widget, direction);
+}
+
+static gboolean
+cc_split_row_grab_focus (GtkWidget *widget)
+{
+  CcSplitRow *self = CC_SPLIT_ROW (widget);
+
+  if (cc_split_row_get_use_default (self))
+    return gtk_widget_grab_focus (self->default_option_box);
+  else
+    return gtk_widget_grab_focus (self->alternative_option_box);
+}
+
 static void
 cc_split_row_class_init (CcSplitRowClass *klass)
 {
@@ -254,6 +298,9 @@ cc_split_row_class_init (CcSplitRowClass *klass)
   object_class->dispose = cc_split_row_dispose;
   object_class->get_property = cc_split_row_get_property;
   object_class->set_property = cc_split_row_set_property;
+
+  widget_class->focus = cc_split_row_child_focus;
+  widget_class->grab_focus = cc_split_row_grab_focus;
 
   props[PROP_USE_DEFAULT] =
     g_param_spec_boolean ("use-default",
@@ -485,3 +532,4 @@ cc_split_row_set_alternative_option_subtitle (CcSplitRow  *self,
   if (g_set_str (&self->alternative_option_subtitle, subtitle))
     g_object_notify_by_pspec (G_OBJECT (self), props[PROP_ALTERNATIVE_OPTION_SUBTITLE]);
 }
+

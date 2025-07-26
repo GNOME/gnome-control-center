@@ -2,11 +2,15 @@ using Gtk 4.0;
 using Adw 1;
 
 template $CcSplitRow: $CcContentRow {
+  styles [
+    "split-row",
+  ]
+
   [content]
   Box box {
     hexpand: true;
     homogeneous: true;
-    spacing: 24;
+    spacing: 3;
 
     Box default_option_box {
       accessible-role: radio;
@@ -14,6 +18,16 @@ template $CcSplitRow: $CcContentRow {
       can-focus: true;
       focusable: true;
       receives-default: true;
+
+      accessibility {
+        labelled-by: default_option_title;
+        described-by: default_option_subtitle;
+      }
+
+      styles [
+        "activatable",
+        "card",
+      ]
 
       EventControllerMotion {
         enter => $on_option_focus_enter_cb(default_option_mask);
@@ -69,7 +83,7 @@ template $CcSplitRow: $CcContentRow {
             "title",
           ]
 
-          Label {
+          Label default_option_title {
             use-underline: true;
             xalign: 0.0;
             wrap: true;
@@ -81,7 +95,7 @@ template $CcSplitRow: $CcContentRow {
             ]
           }
 
-          Label {
+          Label default_option_subtitle {
             xalign: 0.0;
             wrap: true;
             wrap-mode: word_char;
@@ -101,6 +115,16 @@ template $CcSplitRow: $CcContentRow {
       can-focus: true;
       focusable: true;
       receives-default: true;
+
+      accessibility {
+        labelled-by: alternative_option_title;
+        described-by: alternative_option_subtitle;
+      }
+
+      styles [
+        "activatable",
+        "card",
+      ]
 
       EventControllerMotion {
         enter => $on_option_focus_enter_cb(alternative_option_mask);
@@ -155,7 +179,7 @@ template $CcSplitRow: $CcContentRow {
             "title",
           ]
 
-          Label {
+          Label alternative_option_title {
             use-underline: true;
             xalign: 0.0;
             wrap: true;
@@ -167,7 +191,7 @@ template $CcSplitRow: $CcContentRow {
             ]
           }
 
-          Label {
+          Label alternative_option_subtitle {
             xalign: 0.0;
             wrap: true;
             wrap-mode: word_char;
