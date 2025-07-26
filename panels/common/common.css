@@ -34,3 +34,26 @@ row.split-row radio {
 row.split-row radio:checked {
   background-image: -gtk-icontheme("bullet-symbolic");
 }
+
+row.split-row box.card {
+  border-radius: 9px;
+  transition-property: box-shadow, background, outline, outline-offset;
+  transition-duration: 250ms;
+}
+
+row.split-row box.card:not(:hover) {
+  box-shadow: unset;
+  background: unset;
+}
+
+row.split-row.content box.contents {
+  margin-left: 3px;
+  margin-right: 3px;
+  margin-bottom: 3px;
+}
+
+row.split-row box.header {
+  min-height: 0;
+  margin-top: 9px;
+  margin-bottom: 3px;
+}
