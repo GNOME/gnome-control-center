@@ -10,7 +10,7 @@ template $CcSplitRow: $CcContentRow {
   Box box {
     hexpand: true;
     homogeneous: true;
-    spacing: 24;
+    spacing: 3;
 
     Box default_option_box {
       accessible-role: radio;
@@ -18,6 +18,16 @@ template $CcSplitRow: $CcContentRow {
       can-focus: true;
       focusable: true;
       receives-default: true;
+
+      accessibility {
+        labelled-by: default_option_title;
+        described-by: default_option_subtitle;
+      }
+
+      styles [
+        "activatable",
+        "card",
+      ]
 
       EventControllerMotion {
         enter => $on_option_focus_enter_cb(default_option_mask);
@@ -29,6 +39,11 @@ template $CcSplitRow: $CcContentRow {
       }
 
       Adw.Bin {
+        margin-top: 9;
+        margin-bottom: 9;
+        margin-start: 9;
+        margin-end: 9;
+
         styles [
           "background",
           "frame",
@@ -37,8 +52,8 @@ template $CcSplitRow: $CcContentRow {
         Picture default_option_picture {
           hexpand: true;
           halign: center;
-          margin-top: 18;
-          margin-bottom: 18;
+          margin-top: 6;
+          margin-bottom: 6;
           margin-start: 6;
           margin-end: 6;
           height-request: 128;
@@ -50,10 +65,8 @@ template $CcSplitRow: $CcContentRow {
       }
 
       Box {
-        margin-top: 3;
-        margin-bottom: 3;
-        margin-start: 9;
-        spacing: 4;
+        margin-start: 15;
+        margin-bottom: 9;
 
         Adw.Bin default_checkbutton_image {
           css-name: "radio";
@@ -71,7 +84,7 @@ template $CcSplitRow: $CcContentRow {
             "title",
           ]
 
-          Label {
+          Label default_option_title {
             use-underline: true;
             xalign: 0.0;
             wrap: true;
@@ -83,7 +96,7 @@ template $CcSplitRow: $CcContentRow {
             ]
           }
 
-          Label {
+          Label default_option_subtitle {
             xalign: 0.0;
             wrap: true;
             wrap-mode: word_char;
@@ -104,6 +117,16 @@ template $CcSplitRow: $CcContentRow {
       focusable: true;
       receives-default: true;
 
+      accessibility {
+        labelled-by: alternative_option_title;
+        described-by: alternative_option_subtitle;
+      }
+
+      styles [
+        "activatable",
+        "card",
+      ]
+
       EventControllerMotion {
         enter => $on_option_focus_enter_cb(alternative_option_mask);
         leave => $on_option_focus_leave_cb(alternative_option_mask);
@@ -114,6 +137,11 @@ template $CcSplitRow: $CcContentRow {
       }
 
       Adw.Bin {
+        margin-top: 9;
+        margin-bottom: 9;
+        margin-start: 9;
+        margin-end: 9;
+
         styles [
           "background",
           "frame",
@@ -122,8 +150,8 @@ template $CcSplitRow: $CcContentRow {
         Picture alternative_option_picture {
           hexpand: true;
           halign: center;
-          margin-top: 18;
-          margin-bottom: 18;
+          margin-top: 6;
+          margin-bottom: 6;
           margin-start: 6;
           margin-end: 6;
           height-request: 128;
@@ -135,10 +163,8 @@ template $CcSplitRow: $CcContentRow {
       }
 
       Box {
-        margin-top: 3;
-        margin-bottom: 3;
-        margin-start: 9;
-        spacing: 4;
+        margin-start: 15;
+        margin-bottom: 9;
 
         Adw.Bin alternative_checkbutton_image {
           css-name: "radio";
@@ -155,7 +181,7 @@ template $CcSplitRow: $CcContentRow {
             "title",
           ]
 
-          Label {
+          Label alternative_option_title {
             use-underline: true;
             xalign: 0.0;
             wrap: true;
@@ -167,7 +193,7 @@ template $CcSplitRow: $CcContentRow {
             ]
           }
 
-          Label {
+          Label alternative_option_subtitle {
             xalign: 0.0;
             wrap: true;
             wrap-mode: word_char;
@@ -181,13 +207,4 @@ template $CcSplitRow: $CcContentRow {
       }
     }
   }
-}
-
-SizeGroup size_group {
-  mode: both;
-
-  widgets [
-    default_option_box,
-    alternative_option_box,
-  ]
 }

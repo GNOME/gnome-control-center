@@ -29,7 +29,6 @@ struct _CcSplitRow
   CcContentRow       parent;
 
   GtkBox            *box;
-  GtkSizeGroup      *size_group;
 
   GtkPicture        *default_option_picture;
   GtkPicture        *alternative_option_picture;
@@ -454,8 +453,6 @@ cc_split_row_set_compact (CcSplitRow *self,
   gtk_orientable_set_orientation (GTK_ORIENTABLE (self->box),
                                   compact ? GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL);
   gtk_box_set_spacing (self->box, compact ? 6 : 18);
-  gtk_size_group_set_mode (self->size_group,
-                           compact ? GTK_SIZE_GROUP_NONE : GTK_SIZE_GROUP_BOTH);
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_COMPACT]);
 }
@@ -537,3 +534,4 @@ cc_split_row_set_alternative_option_subtitle (CcSplitRow  *self,
   if (g_set_str (&self->alternative_option_subtitle, subtitle))
     g_object_notify_by_pspec (G_OBJECT (self), props[PROP_ALTERNATIVE_OPTION_SUBTITLE]);
 }
+
