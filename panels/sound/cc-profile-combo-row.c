@@ -121,8 +121,7 @@ cc_profile_combo_row_set_device (CcProfileComboRow *self,
 
       if (g_strcmp0 (gvc_mixer_ui_device_get_active_profile (device), profile->profile) == 0)
         adw_combo_row_set_selected (ADW_COMBO_ROW (self),
-                                    g_list_model_get_n_items (G_LIST_MODEL (self->profile_list)));
-
+                                    g_list_model_get_n_items (G_LIST_MODEL (self->profile_list)) - 1);
       g_signal_handlers_unblock_by_func(self, profile_changed_cb, self);
     }
 }
