@@ -27,6 +27,14 @@ template $CcUaSeeingPage: Adw.NavigationPage {
             subtitle: _("The screen reader reads displayed text as you move the focus");
             use-underline: true;
           }
+
+          Adw.ButtonRow {
+            title: _("Co_nfigure");
+            use-underline: true;
+            sensitive: bind screen_reader_row.active;
+            activated => $configure_screen_reader_activated_cb(template);
+            end-icon-name: "external-link-symbolic";
+          }
         }
       }
 
