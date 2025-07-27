@@ -16,6 +16,17 @@ template $CcUaSeeingPage: Adw.NavigationPage {
           subtitle: _("The screen reader reads displayed text as you move the focus");
           use-underline: true;
         }
+
+        Adw.ActionRow screen_reader_launch {
+          activatable: true;
+          title: _("Configure Screen Reader");
+          sensitive: bind screen_reader_row.active;
+          activated => $screen_reader_launch_activated_cb(template);
+
+          Image {
+            icon-name: "external-link-symbolic";
+          }
+        }
       }
 
       Adw.PreferencesGroup {

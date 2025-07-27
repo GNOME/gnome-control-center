@@ -57,6 +57,8 @@ struct _CcUaSeeingPage
 
   AdwSwitchRow       *screen_reader_row;
 
+  GDBusProxy         *proxy;
+
   GSettings          *kb_settings;
   GSettings          *interface_settings;
   GSettings          *application_settings;
@@ -64,6 +66,25 @@ struct _CcUaSeeingPage
 };
 
 G_DEFINE_TYPE (CcUaSeeingPage, cc_ua_seeing_page, ADW_TYPE_NAVIGATION_PAGE)
+
+static void
+on_orca_proxy_ready (GObject      *source_object,
+                     GAsyncResult *res,
+                     gpointer      data)
+{
+  g_autoptr(GError) error = NULL;
+  CcUaSeeingPage *self = data;
+
+  g_assert (CC_IS_UA_SEEING_PAGE (self));
+
+  self->proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+
+  if (self->proxy == NULL)
+    {
+      g_warning ("Error creating proxy: %s", error->message);
+      return;
+    }
+}
 
 static gboolean
 get_large_text_mapping (GValue   *value,
@@ -149,6 +170,25 @@ ua_cursor_row_activated_cb (CcUaSeeingPage *self)
 }
 
 static void
+screen_reader_launch_activated_cb (CcUaSeeingPage *self)
+{
+  g_autoptr (GError) error = NULL;
+
+  g_assert (CC_IS_UA_SEEING_PAGE (self));
+
+  g_dbus_proxy_call_sync (self->proxy,
+                          "ShowPreferences",
+                          NULL,
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1,
+                          NULL,
+                          &error);
+
+  if (error)
+    g_warning ("Couldn't launch screen reader settings: %s", error->message);
+}
+
+static void
 cc_ua_seeing_page_dispose (GObject *object)
 {
   CcUaSeeingPage *self = (CcUaSeeingPage *)object;
@@ -184,6 +224,7 @@ cc_ua_seeing_page_class_init (CcUaSeeingPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, screen_reader_row);
 
   gtk_widget_class_bind_template_callback (widget_class, ua_cursor_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, screen_reader_launch_activated_cb);
 }
 
 static void
@@ -238,6 +279,16 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
   g_signal_connect_object (self->interface_settings, "changed::" KEY_MOUSE_CURSOR_SIZE,
                            G_CALLBACK (ua_seeing_interface_cursor_size_changed_cb),
                            self, G_CONNECT_SWAPPED | G_CONNECT_AFTER);
+
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.gnome.Orca.Service",
+                            "/org/gnome/Orca/Service",
+                            "org.gnome.Orca.Service",
+                            NULL,
+                            on_orca_proxy_ready,
+                            self);
 
   ua_seeing_interface_cursor_size_changed_cb (self);
 }
