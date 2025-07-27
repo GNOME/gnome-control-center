@@ -29,7 +29,6 @@ struct _CcSplitRow
   CcContentRow       parent;
 
   GtkBox            *box;
-  GtkSizeGroup      *size_group;
 
   GtkPicture        *default_option_picture;
   GtkPicture        *alternative_option_picture;
@@ -37,8 +36,11 @@ struct _CcSplitRow
   CcMaskPaintable   *default_option_mask;
   CcMaskPaintable   *alternative_option_mask;
 
-  GtkCheckButton    *alternative_option_checkbutton;
-  GtkCheckButton    *default_option_checkbutton;
+  GtkWidget         *alternative_option_box;
+  GtkWidget         *default_option_box;
+
+  GtkWidget         *default_checkbutton_image;
+  GtkWidget         *alternative_checkbutton_image;
 
   gchar             *alternative_resource_path;
   gchar             *default_resource_path;
@@ -69,6 +71,30 @@ enum
 };
 
 static GParamSpec *props[N_PROPS] = { NULL, };
+
+static void
+set_use_default (CcSplitRow *self,
+                 gboolean    use_default)
+{
+  if (use_default)
+    {
+      gtk_widget_set_state_flags (self->default_checkbutton_image, GTK_STATE_FLAG_CHECKED, FALSE);
+      gtk_widget_unset_state_flags (self->alternative_checkbutton_image, GTK_STATE_FLAG_CHECKED);
+    }
+  else
+    {
+      gtk_widget_set_state_flags (self->alternative_checkbutton_image, GTK_STATE_FLAG_CHECKED, FALSE);
+      gtk_widget_unset_state_flags (self->default_checkbutton_image, GTK_STATE_FLAG_CHECKED);
+    }
+
+  gtk_accessible_update_state (GTK_ACCESSIBLE (self->default_option_box),
+                               GTK_ACCESSIBLE_STATE_CHECKED, use_default,
+                               -1);
+
+  gtk_accessible_update_state (GTK_ACCESSIBLE (self->alternative_option_box),
+                               GTK_ACCESSIBLE_STATE_CHECKED, !use_default,
+                               -1);
+}
 
 static void
 on_option_focus_leave_cb (CcMaskPaintable *mask)
@@ -103,31 +129,27 @@ on_option_focus_enter_cb (CcMaskPaintable *mask)
 }
 
 static void
-on_option_released_cb (GtkWidget       *check_button,
+on_option_released_cb (GtkWidget       *option_box,
                        gint             n_press,
                        gdouble          x,
                        gdouble          y,
                        GtkGestureClick *gesture)
 {
   GtkWidget *widget = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (gesture));
+  CcSplitRow *self = CC_SPLIT_ROW (gtk_widget_get_ancestor (widget, CC_TYPE_SPLIT_ROW));
 
-  g_assert (GTK_IS_CHECK_BUTTON (check_button));
+  g_assert (CC_IS_SPLIT_ROW (self));
+  g_assert (GTK_IS_BOX (option_box));
   g_assert (GTK_IS_GESTURE_CLICK (gesture));
   g_assert (GTK_IS_BOX (widget));
 
   gtk_gesture_set_state (GTK_GESTURE (gesture), GTK_EVENT_SEQUENCE_CLAIMED);
   if (gtk_widget_contains (widget, x, y))
     {
-      if (!gtk_widget_grab_focus (check_button))
+      if (!gtk_widget_grab_focus (widget))
         g_assert_not_reached ();
-      gtk_widget_activate (check_button);
+      cc_split_row_set_use_default (self, self->default_option_box == option_box);
     }
-}
-
-static void
-on_checkbutton_toggled_cb (CcSplitRow *self)
-{
-  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_USE_DEFAULT]);
 }
 
 static void
@@ -156,7 +178,7 @@ cc_split_row_get_property (GObject      *object,
   switch (prop_id)
     {
     case PROP_USE_DEFAULT:
-      g_value_set_boolean (value, gtk_check_button_get_active (self->default_option_checkbutton));
+      g_value_set_boolean (value, cc_split_row_get_use_default (self));
       break;
     case PROP_COMPACT:
       g_value_set_boolean (value, cc_split_row_get_compact (self));
@@ -289,15 +311,15 @@ cc_split_row_class_init (CcSplitRowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/common/cc-split-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, box);
-  gtk_widget_class_bind_template_child (widget_class, CcSplitRow, size_group);
-  gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_option_checkbutton);
+  gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_option_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_checkbutton_image);
+  gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_checkbutton_image);
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_option_picture);
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_option_mask);
-  gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_checkbutton);
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_picture);
   gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_mask);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_checkbutton_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_option_focus_enter_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_option_focus_leave_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_option_released_cb);
@@ -360,7 +382,7 @@ cc_split_row_set_use_default (CcSplitRow *self,
 {
   g_return_if_fail (CC_IS_SPLIT_ROW (self));
 
-  gtk_check_button_set_active (use_default ? self->default_option_checkbutton : self->alternative_option_checkbutton, TRUE);
+  set_use_default (self, use_default);
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_USE_DEFAULT]);
 }
@@ -368,7 +390,7 @@ cc_split_row_set_use_default (CcSplitRow *self,
 gboolean
 cc_split_row_get_use_default (CcSplitRow *self)
 {
-  return gtk_check_button_get_active (self->default_option_checkbutton);
+  return gtk_widget_get_state_flags (self->default_checkbutton_image) & GTK_STATE_FLAG_CHECKED;
 }
 
 void
@@ -382,8 +404,6 @@ cc_split_row_set_compact (CcSplitRow *self,
   gtk_orientable_set_orientation (GTK_ORIENTABLE (self->box),
                                   compact ? GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL);
   gtk_box_set_spacing (self->box, compact ? 6 : 18);
-  gtk_size_group_set_mode (self->size_group,
-                           compact ? GTK_SIZE_GROUP_NONE : GTK_SIZE_GROUP_BOTH);
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_COMPACT]);
 }

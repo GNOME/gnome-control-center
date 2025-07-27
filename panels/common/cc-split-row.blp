@@ -8,8 +8,12 @@ template $CcSplitRow: $CcContentRow {
     homogeneous: true;
     spacing: 24;
 
-    Box {
+    Box default_option_box {
+      accessible-role: radio;
       orientation: vertical;
+      can-focus: true;
+      focusable: true;
+      receives-default: true;
 
       EventControllerMotion {
         enter => $on_option_focus_enter_cb(default_option_mask);
@@ -17,10 +21,15 @@ template $CcSplitRow: $CcContentRow {
       }
 
       GestureClick {
-        released => $on_option_released_cb(default_option_checkbutton);
+        released => $on_option_released_cb(default_option_box);
       }
 
       Adw.Bin {
+        margin-top: 9;
+        margin-bottom: 9;
+        margin-start: 9;
+        margin-end: 9;
+
         styles [
           "background",
           "frame",
@@ -29,8 +38,7 @@ template $CcSplitRow: $CcContentRow {
         Picture default_option_picture {
           hexpand: true;
           halign: center;
-          margin-top: 18;
-          margin-bottom: 18;
+          margin-bottom: 6;
           margin-start: 6;
           margin-end: 6;
           height-request: 128;
@@ -41,12 +49,18 @@ template $CcSplitRow: $CcContentRow {
         }
       }
 
-      CheckButton default_option_checkbutton {
-        margin-start: 6;
-        group: alternative_option_checkbutton;
-        toggled => $on_checkbutton_toggled_cb(template);
+      Box {
+        margin-start: 15;
+        margin-bottom: 9;
 
-        child: Box {
+        Adw.Bin default_checkbutton_image {
+          css-name: "radio";
+          can-target: false;
+          valign: center;
+          halign: center;
+        }
+
+        Box {
           valign: center;
           margin-start: 6;
           orientation: vertical;
@@ -77,12 +91,16 @@ template $CcSplitRow: $CcContentRow {
               "subtitle",
             ]
           }
-        };
+        }
       }
     }
 
-    Box {
+    Box alternative_option_box {
+      accessible-role: radio;
       orientation: vertical;
+      can-focus: true;
+      focusable: true;
+      receives-default: true;
 
       EventControllerMotion {
         enter => $on_option_focus_enter_cb(alternative_option_mask);
@@ -90,10 +108,15 @@ template $CcSplitRow: $CcContentRow {
       }
 
       GestureClick {
-        released => $on_option_released_cb(alternative_option_checkbutton);
+        released => $on_option_released_cb(alternative_option_box);
       }
 
       Adw.Bin {
+        margin-top: 9;
+        margin-bottom: 9;
+        margin-start: 9;
+        margin-end: 9;
+
         styles [
           "background",
           "frame",
@@ -102,8 +125,7 @@ template $CcSplitRow: $CcContentRow {
         Picture alternative_option_picture {
           hexpand: true;
           halign: center;
-          margin-top: 18;
-          margin-bottom: 18;
+          margin-bottom: 6;
           margin-start: 6;
           margin-end: 6;
           height-request: 128;
@@ -114,11 +136,17 @@ template $CcSplitRow: $CcContentRow {
         }
       }
 
-      CheckButton alternative_option_checkbutton {
-        margin-start: 6;
-        toggled => $on_checkbutton_toggled_cb(template);
+      Box {
+        margin-start: 15;
+        margin-bottom: 9;
 
-        child: Box {
+        Adw.Bin alternative_checkbutton_image {
+          css-name: "radio";
+          can-target: false;
+          valign: center;
+        }
+
+        Box {
           valign: center;
           margin-start: 6;
           orientation: vertical;
@@ -149,17 +177,8 @@ template $CcSplitRow: $CcContentRow {
               "subtitle",
             ]
           }
-        };
+        }
       }
     }
   }
-}
-
-SizeGroup size_group {
-  mode: both;
-
-  widgets [
-    default_option_checkbutton,
-    alternative_option_checkbutton,
-  ]
 }
