@@ -167,21 +167,41 @@ lookup_device_id (CcDeviceComboRow *self,
   return gvc_mixer_control_lookup_input_id (self->mixer_control, id);
 }
 
-void
-cc_device_combo_row_device_added (CcDeviceComboRow *self,
-                                  guint             id)
+static void
+selection_changed_cb (CcDeviceComboRow *self)
+{
+  GvcMixerUIDevice *device;
+
+  device = cc_device_combo_row_get_device (self);
+
+  if (device == NULL)
+    return;
+
+  if (self->is_output)
+    gvc_mixer_control_change_output (self->mixer_control, device);
+  else
+    gvc_mixer_control_change_input (self->mixer_control, device);
+}
+
+static void
+device_added_cb (CcDeviceComboRow *self,
+                 guint             id)
 {
   GvcMixerUIDevice *device = lookup_device_id (self, id);
 
   if (device == NULL)
     return;
 
+  g_signal_handlers_block_by_func (self, selection_changed_cb, self);
+
   g_list_store_append (self->device_list, device);
+
+  g_signal_handlers_unblock_by_func (self, selection_changed_cb, self);
 }
 
-void
-cc_device_combo_row_device_removed (CcDeviceComboRow *self,
-                                    guint             id)
+static void
+device_removed_cb (CcDeviceComboRow *self,
+                   guint             id)
 {
   GvcMixerUIDevice *device = lookup_device_id (self, id);
   guint position;
@@ -190,17 +210,21 @@ cc_device_combo_row_device_removed (CcDeviceComboRow *self,
     g_list_store_remove (self->device_list, position);
 }
 
-void
-cc_device_combo_row_active_device_changed (CcDeviceComboRow *self,
-                                           guint             id)
+static void
+device_update_cb (CcDeviceComboRow *self,
+                  guint             id)
 {
   GvcMixerUIDevice *device = lookup_device_id (self, id);
   guint position;
+
+  g_signal_handlers_block_by_func (self, selection_changed_cb, self);
 
   if (g_list_store_find (self->device_list, device, &position))
     adw_combo_row_set_selected (ADW_COMBO_ROW (self), position);
   else
     adw_combo_row_set_selected (ADW_COMBO_ROW (self), GTK_INVALID_LIST_POSITION);
+
+  g_signal_handlers_unblock_by_func (self, selection_changed_cb, self);
 }
 
 static void
@@ -228,6 +252,7 @@ cc_device_combo_row_class_init (CcDeviceComboRowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, factory_setup_cb);
   gtk_widget_class_bind_template_callback (widget_class, factory_bind_cb);
   gtk_widget_class_bind_template_callback (widget_class, factory_unbind_cb);
+  gtk_widget_class_bind_template_callback (widget_class, selection_changed_cb);
 }
 
 void
@@ -244,11 +269,30 @@ cc_device_combo_row_set_mixer_control (CcDeviceComboRow *self,
                                        gboolean          is_output)
 {
   g_return_if_fail (CC_IS_DEVICE_COMBO_ROW (self));
+  const char *added_signal_name = is_output ? "output-added" : "input-added";
+  const char *removed_signal_name = is_output ? "output-removed" : "input-removed";
+  const char *update_signal_name = is_output ? "active-output-update" : "active-input-update";
 
   g_clear_object (&self->mixer_control);
 
   self->mixer_control = g_object_ref (mixer_control);
   self->is_output = is_output;
+
+  g_signal_connect_object (self->mixer_control,
+                           added_signal_name,
+                           G_CALLBACK (device_added_cb),
+                           self,
+                           G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->mixer_control,
+                           removed_signal_name,
+                           G_CALLBACK (device_removed_cb),
+                           self,
+                           G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->mixer_control,
+                           update_signal_name,
+                           G_CALLBACK (device_update_cb),
+                           self,
+                           G_CONNECT_SWAPPED);
 }
 
 GvcMixerUIDevice *

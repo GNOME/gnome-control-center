@@ -33,7 +33,6 @@ template $CcSoundPanel: $CcPanel {
           $CcDeviceComboRow output_device_combo_row {
             title: _("_Output Device");
             use-underline: true;
-            notify::selected => $output_device_changed_cb(template);
           }
 
           $CcProfileComboRow output_profile_combo_row {
@@ -160,7 +159,6 @@ template $CcSoundPanel: $CcPanel {
           $CcDeviceComboRow input_device_combo_row {
             title: _("_Input Device");
             use-underline: true;
-            notify::selected => $input_device_changed_cb(template);
           }
 
           $CcProfileComboRow input_profile_combo_row {

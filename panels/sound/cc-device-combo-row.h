@@ -31,13 +31,4 @@ void                   cc_device_combo_row_set_mixer_control (CcDeviceComboRow *
 
 GvcMixerUIDevice      *cc_device_combo_row_get_device        (CcDeviceComboRow *self);
 
-void cc_device_combo_row_device_added (CcDeviceComboRow *self,
-                                       guint             id);
-
-void cc_device_combo_row_device_removed (CcDeviceComboRow *self,
-                                         guint             id);
-
-void cc_device_combo_row_active_device_changed (CcDeviceComboRow *self,
-                                                guint             id);
-
 G_END_DECLS

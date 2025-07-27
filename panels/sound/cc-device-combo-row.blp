@@ -12,4 +12,6 @@ template $CcDeviceComboRow: Adw.ComboRow {
     bind => $factory_bind_cb(template);
     unbind => $factory_unbind_cb(template);
   };
+
+  notify::selected => $selection_changed_cb(template);
 }
