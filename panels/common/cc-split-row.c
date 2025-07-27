@@ -103,6 +103,28 @@ on_option_focus_enter_cb (CcMaskPaintable *mask)
 }
 
 static void
+on_option_released_cb (GtkWidget       *check_button,
+                       gint             n_press,
+                       gdouble          x,
+                       gdouble          y,
+                       GtkGestureClick *gesture)
+{
+  GtkWidget *widget = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (gesture));
+
+  g_assert (GTK_IS_CHECK_BUTTON (check_button));
+  g_assert (GTK_IS_GESTURE_CLICK (gesture));
+  g_assert (GTK_IS_BOX (widget));
+
+  gtk_gesture_set_state (GTK_GESTURE (gesture), GTK_EVENT_SEQUENCE_CLAIMED);
+  if (gtk_widget_contains (widget, x, y))
+    {
+      if (!gtk_widget_grab_focus (check_button))
+        g_assert_not_reached ();
+      gtk_widget_activate (check_button);
+    }
+}
+
+static void
 on_checkbutton_toggled_cb (CcSplitRow *self)
 {
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_USE_DEFAULT]);
@@ -278,6 +300,7 @@ cc_split_row_class_init (CcSplitRowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_checkbutton_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_option_focus_enter_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_option_focus_leave_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_option_released_cb);
 }
 
 static void
