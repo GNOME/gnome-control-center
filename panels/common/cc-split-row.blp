@@ -17,7 +17,7 @@ template $CcSplitRow: $CcContentRow {
       }
 
       GestureClick {
-        released => $gtk_widget_activate(default_option_checkbutton);
+        released => $on_option_released_cb(default_option_checkbutton);
       }
 
       Adw.Bin {
@@ -90,7 +90,7 @@ template $CcSplitRow: $CcContentRow {
       }
 
       GestureClick {
-        released => $gtk_widget_activate(alternative_option_checkbutton);
+        released => $on_option_released_cb(alternative_option_checkbutton);
       }
 
       Adw.Bin {
