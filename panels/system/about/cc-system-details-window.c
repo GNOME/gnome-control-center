@@ -344,13 +344,13 @@ get_os_name (void)
 }
 
 static char *
-get_os_build_id (void)
+get_os_image_version (void)
 {
-  char *build_id = NULL;
+  char *image_version = NULL;
 
-  build_id = g_get_os_info ("BUILD_ID");
+  image_version = g_get_os_info ("IMAGE_VERSION");
 
-  return build_id;
+  return image_version;
 }
 
 static char *
@@ -775,7 +775,7 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
 
   g_string_append (result_str, "- ");
   system_details_window_title_print_padding ("**OS Build:**", result_str, 0);
-  os_build_text = get_os_build_id ();
+  os_build_text = get_os_image_version ();
   g_string_append_printf (result_str, "%s\n", os_build_text);
 
   g_string_append (result_str, "- ");
@@ -850,7 +850,7 @@ system_details_window_setup_overview (CcSystemDetailsWindow *self)
   os_name_text = get_os_name ();
   cc_info_entry_set_value (self->os_name_row, os_name_text);
 
-  os_build_text = get_os_build_id ();
+  os_build_text = get_os_image_version ();
   cc_info_entry_set_value (self->os_build_row, os_build_text);
   gtk_widget_set_visible (GTK_WIDGET (self->os_build_row), os_build_text != NULL);
 
