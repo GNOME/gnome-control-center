@@ -86,6 +86,7 @@ cc_avatar_chooser_crop (CcAvatarChooser *self,
                         GdkPixbuf       *pixbuf)
 {
         GtkWidget *dialog;
+        GtkWidget *select_button;
 
         dialog = gtk_dialog_new_with_buttons ("",
                                               GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
@@ -96,6 +97,11 @@ cc_avatar_chooser_crop (CcAvatarChooser *self,
                                               GTK_RESPONSE_ACCEPT,
                                               NULL);
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+
+        select_button = gtk_dialog_get_widget_for_response (GTK_DIALOG (dialog),
+                                                            GTK_RESPONSE_ACCEPT);
+
+        gtk_widget_add_css_class (select_button, "suggested-action");
 
         gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
 
