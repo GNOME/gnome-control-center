@@ -37,13 +37,6 @@
 #include "cc-display-resources.h"
 #include "cc-display-settings.h"
 
-/* The minimum supported size for the panel
- * Note that WIDTH is assumed to be the larger size and we accept portrait
- * mode too effectively (in principle we should probably restrict the rotation
- * setting in that case). */
-#define MINIMUM_WIDTH  720
-#define MINIMUM_HEIGHT 360
-
 #define PANEL_PADDING   32
 #define SECTION_PADDING 32
 #define HEADING_PADDING 12
@@ -856,7 +849,6 @@ reset_current_config (CcDisplayPanel *self)
   if (!current)
     return;
 
-  cc_display_config_set_minimum_size (current, MINIMUM_WIDTH, MINIMUM_HEIGHT);
   self->current_config = current;
 
   g_signal_connect_object (current, "panel-orientation-managed",

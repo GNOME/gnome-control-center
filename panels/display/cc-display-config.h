@@ -121,9 +121,6 @@ void              cc_display_config_set_mode_on_all_outputs (CcDisplayConfig *co
                                                              CcDisplayMode   *mode);
 
 gboolean          cc_display_config_is_layout_logical       (CcDisplayConfig    *self);
-void              cc_display_config_set_minimum_size        (CcDisplayConfig    *self,
-                                                             int                 width,
-                                                             int                 height);
 gboolean          cc_display_config_is_scaled_mode_valid    (CcDisplayConfig    *self,
                                                              CcDisplayMode      *mode,
                                                              double              scale);

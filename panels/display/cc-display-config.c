@@ -2348,24 +2348,6 @@ cc_display_config_is_layout_logical (CcDisplayConfig *self)
   return self->layout_mode == CC_DISPLAY_LAYOUT_MODE_LOGICAL;
 }
 
-void
-cc_display_config_set_minimum_size (CcDisplayConfig *self,
-                                    int              width,
-                                    int              height)
-{
-  g_return_if_fail (CC_IS_DISPLAY_CONFIG (self));
-
-  g_assert (width >= 0 && height >= 0);
-  g_assert (((self->min_width == 0 && self->min_height == 0) ||
-             (self->min_width >= width && self->min_height >= height)) &&
-            "Minimum size can't be set again to higher values");
-
-  self->min_width = width;
-  self->min_height = height;
-
-  filter_out_invalid_scaled_modes (self);
-}
-
 gboolean
 cc_display_config_is_scaled_mode_valid (CcDisplayConfig *self,
                                         CcDisplayMode   *mode,
