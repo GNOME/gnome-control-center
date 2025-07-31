@@ -51,6 +51,15 @@ template $CcPrivacyPanel: $CcPanel {
             action-target: "'diagnostics'";
             visible: bind diagnostics_page.visible;
           }
+
+          $CcListRow {
+            title: _("Network Activity");
+            subtitle: _("Services which rely on network communications");
+            icon-name: "network-transmit-receive-symbolic";
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'network-activity'";
+          }
         }
 
         Adw.PreferencesGroup {
@@ -97,6 +106,9 @@ template $CcPrivacyPanel: $CcPanel {
 
   [subpage]
   $CcUsagePage {}
+
+  [subpage]
+  $CcNetworkActivityPage {}
 
   [subpage]
   $CcDiagnosticsPage diagnostics_page {}

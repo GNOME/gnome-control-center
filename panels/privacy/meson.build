@@ -18,6 +18,7 @@ subdir('diagnostics')
 subdir('firmware-security')
 subdir('icons')
 subdir('location')
+subdir('network-activity')
 subdir('screen')
 subdir('usage')
 
@@ -45,6 +46,7 @@ sources = files(
   'firmware-security/cc-firmware-security-page.c',
   'firmware-security/cc-firmware-security-utils.c',
   'location/cc-location-page.c',
+  'network-activity/cc-network-activity-page.c',
   'cc-privacy-panel.c',
   'screen/cc-screen-page.c',
   'usage/cc-usage-page.c',

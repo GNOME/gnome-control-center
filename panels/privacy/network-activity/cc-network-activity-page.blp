@@ -1,0 +1,33 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcNetworkActivityPage: Adw.NavigationPage {
+  title: _("Network Activity");
+  tag: "network-activity";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      description: _("Optional services which rely on anonymous network communications.\nMore details can be found in the <a href='https://www.gnome.org/privacy-policy/'>GNOME Privacy Policy</a>");
+      description-centered: true;
+
+      Adw.PreferencesGroup {
+        Adw.SwitchRow network_login_dectection_row {
+          title: _("_Network Login Detection");
+          subtitle: _("Detects when a network requires login to access the internet");
+          use-underline: true;
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Adw.SwitchRow donation_prompts_row {
+          title: _("_Donation Prompts");
+          subtitle: _("Low frequency donation requests");
+          use-underline: true;
+        }
+      }
+    };
+  };
+}
