@@ -92,6 +92,7 @@ cflags += [
 
 deps = common_deps + [
   dependency('libgtop-2.0'),
+  network_manager_deps,
 ]
 
 deps = deps + [
