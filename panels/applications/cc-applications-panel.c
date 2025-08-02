@@ -1625,11 +1625,41 @@ filter_app_rows (GObject   *item,
 
 #ifdef HAVE_MALCONTENT
 static void
-app_filter_changed_cb (MctAppFilter        *app_filter,
-                       uid_t               uid,
+get_app_filter_cb (GObject             *source,
+                   GAsyncResult        *res,
+                   CcApplicationsPanel *self)
+{
+  g_autoptr(GError) error = NULL;
+
+  g_clear_pointer (&self->app_filter, mct_app_filter_unref);
+  self->app_filter = mct_manager_get_app_filter_finish (self->manager,
+                                                        res,
+                                                        &error);
+
+  if (error)
+    {
+      g_debug ("Error retrieving app filter: %s", error->message);
+      on_items_changed_cb (self->filter_model, 0, 0, 0, self);
+      return;
+    }
+
+  populate_applications (self);
+}
+
+static void
+app_filter_changed_cb (MctManager          *policy_manager,
+                       uid_t                uid,
                        CcApplicationsPanel *self)
 {
-  populate_applications (self);
+  if (uid != getuid ())
+    return;
+
+  mct_manager_get_app_filter_async (self->manager,
+                                    getuid (),
+                                    MCT_MANAGER_GET_VALUE_FLAGS_NONE,
+                                    self->cancellable,
+                                    (GAsyncReadyCallback) get_app_filter_cb,
+                                    self);
 }
 #endif
 
