@@ -11,10 +11,22 @@ template $CcUaSeeingPage: Adw.NavigationPage {
 
     content: Adw.PreferencesPage {
       Adw.PreferencesGroup {
-        Adw.SwitchRow screen_reader_row {
-          title: _("Screen _Reader");
-          subtitle: _("The screen reader reads displayed text as you move the focus");
-          use-underline: true;
+        ListBox {
+          selection-mode: none;
+
+          accessibility {
+            label: _("Screen Reader");
+          }
+
+          styles [
+            "boxed-list-separate",
+          ]
+
+          Adw.SwitchRow screen_reader_row {
+            title: _("Screen _Reader");
+            subtitle: _("The screen reader reads displayed text as you move the focus");
+            use-underline: true;
+          }
         }
       }
 
