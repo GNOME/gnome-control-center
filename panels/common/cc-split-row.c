@@ -79,6 +79,10 @@ enum
 
 static GParamSpec *props[N_PROPS] = { NULL, };
 
+/*
+ * Private Methods
+ */
+
 static void
 set_use_default (CcSplitRow *self,
                  gboolean    use_default)
@@ -158,6 +162,10 @@ on_option_released_cb (GtkWidget       *option_box,
       cc_split_row_set_use_default (self, option_box == self->default_option_box);
     }
 }
+
+/*
+ * GObject Overrides
+ */
 
 static void
 cc_split_row_dispose (GObject *object)
@@ -252,6 +260,10 @@ cc_split_row_set_property (GObject      *object,
     }
 }
 
+/*
+ * GtkWidget Overrides
+ */
+
 static gboolean
 cc_split_row_child_focus (GtkWidget        *widget,
                           GtkDirectionType  direction)
@@ -295,6 +307,10 @@ cc_split_row_grab_focus (GtkWidget *widget)
   else
     return gtk_widget_grab_focus (self->alternative_option_box);
 }
+
+/*
+ * Initialization
+ */
 
 static void
 cc_split_row_class_init (CcSplitRowClass *klass)
@@ -414,6 +430,10 @@ cc_split_row_init (CcSplitRow *self)
   gtk_widget_init_template (GTK_WIDGET (self));
   gtk_widget_add_css_class (GTK_WIDGET (self), "illustrated");
 }
+
+/*
+ * Public Methods
+ */
 
 /**
  * cc_split_row_get_default_illustration_resource:
