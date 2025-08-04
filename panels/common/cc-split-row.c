@@ -24,6 +24,13 @@
 
 #include "cc-mask-paintable.h"
 
+/**
+ * CcSplitRow:
+ *
+ * A [class@Gtk.ListBoxRow] containing two mutually-exclusive
+ * options with an illustration.
+ */
+
 struct _CcSplitRow
 {
   CcContentRow       parent;
@@ -302,54 +309,83 @@ cc_split_row_class_init (CcSplitRowClass *klass)
   widget_class->focus = cc_split_row_child_focus;
   widget_class->grab_focus = cc_split_row_grab_focus;
 
+  /**
+   * CcSplitRow:use-default:
+   *
+   * Whether the default option is checked.
+   */
   props[PROP_USE_DEFAULT] =
-    g_param_spec_boolean ("use-default",
-                          "Use Default",
-                          "Use Default",
+    g_param_spec_boolean ("use-default", NULL, NULL,
                           TRUE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
+  /**
+   * CcSplitRow:compact:
+   *
+   * Whether @self is using a compact layout.
+   */
   props[PROP_COMPACT] =
-    g_param_spec_boolean ("compact",
-                          "Compact",
-                          "Compact",
+    g_param_spec_boolean ("compact", NULL, NULL,
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
+  /**
+   * CcSplitRow:alternative-illustration-resource:
+   *
+   * The resource path for the illustration of the alternative option.
+   */
   props[PROP_ALTERNATIVE_ILLUSTRATION_RESOURCE] =
-    g_param_spec_string ("alternative-illustration-resource",
-                         "Alternative illustration resource",
-                         "Alternative illustration resource",
+    g_param_spec_string ("alternative-illustration-resource", NULL, NULL,
                          "",
                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  /**
+   * CcSplitRow:alternative-option-title:
+   *
+   * The title for the alternative option of @self.
+   */
   props[PROP_ALTERNATIVE_OPTION_TITLE] =
-    g_param_spec_string ("alternative-option-title",
-                         "Alternative option title",
-                         "Alternative option title",
+    g_param_spec_string ("alternative-option-title", NULL, NULL,
                          "",
                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  /**
+   * CcSplitRow:alternative-option-subtitle:
+   *
+   * The subtitle for the alternative option of @self.
+   */
   props[PROP_ALTERNATIVE_OPTION_SUBTITLE] =
-    g_param_spec_string ("alternative-option-subtitle",
-                         "Alternative option subtitle",
-                         "Alternative option subtitle",
+    g_param_spec_string ("alternative-option-subtitle", NULL, NULL,
                          "",
                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  /**
+   * CcSplitRow:default-illustration-resource:
+   *
+   * The resource path for the illustration of the default option.
+   */
   props[PROP_DEFAULT_ILLUSTRATION_RESOURCE] =
-    g_param_spec_string ("default-illustration-resource",
-                         "Default illustration resource",
-                         "Default illustration resource",
+    g_param_spec_string ("default-illustration-resource", NULL, NULL,
                          "",
                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  /**
+   * CcSplitRow:default-option-title:
+   *
+   * The title for the default option of @self.
+   */
   props[PROP_DEFAULT_OPTION_TITLE] =
-    g_param_spec_string ("default-option-title",
-                         "Default option title",
-                         "Default option title",
+    g_param_spec_string ("default-option-title", NULL, NULL,
                          "",
                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
+
+  /**
+   * CcSplitRow:default-option-subtitle:
+   *
+   * The subtitle for the default option of @self.
+   */
   props[PROP_DEFAULT_OPTION_SUBTITLE] =
-    g_param_spec_string ("default-option-subtitle",
-                         "Default option subtitle",
-                         "Default option subtitle",
+    g_param_spec_string ("default-option-subtitle", NULL, NULL,
                          "",
                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
@@ -379,12 +415,27 @@ cc_split_row_init (CcSplitRow *self)
   gtk_widget_add_css_class (GTK_WIDGET (self), "illustrated");
 }
 
+/**
+ * cc_split_row_get_default_illustration_resource:
+ * @self: a #CcSplitRow
+ *
+ * Get the resource path for the illustration of the default option.
+ *
+ * Returns: the resource path for the illustration of the default option
+ */
 const gchar *
 cc_split_row_get_default_illustration_resource (CcSplitRow *self)
 {
   return self->default_resource_path;
 }
 
+/**
+ * cc_split_row_set_default_illustration_resource:
+ * @self: a #CcSplitRow
+ * @resource_path: the resource path for the illustration of the default option
+ *
+ * Set the resource path for the illustration of the default option.
+ */
 void
 cc_split_row_set_default_illustration_resource (CcSplitRow  *self,
                                                 const gchar *resource_path)
@@ -401,12 +452,27 @@ cc_split_row_set_default_illustration_resource (CcSplitRow  *self,
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_DEFAULT_ILLUSTRATION_RESOURCE]);
 }
 
+/**
+ * cc_split_row_get_alternative_illustration_resource:
+ * @self: a #CcSplitRow
+ *
+ * Get the resource path for the illustration of the alternative option.
+ *
+ * Returns: the resource path for the illustration of the alternative option
+ */
 const gchar *
 cc_split_row_get_alternative_illustration_resource (CcSplitRow *self)
 {
   return self->alternative_resource_path;
 }
 
+/**
+ * cc_split_row_set_alternative_illustration_resource:
+ * @self: a #CcSplitRow
+ * @resource_path: the resource path for the illustration of the alternative option
+ *
+ * Set the resource path for the illustration of the alternative option.
+ */
 void
 cc_split_row_set_alternative_illustration_resource (CcSplitRow  *self,
                                                     const gchar *resource_path)
@@ -423,6 +489,16 @@ cc_split_row_set_alternative_illustration_resource (CcSplitRow  *self,
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_ALTERNATIVE_ILLUSTRATION_RESOURCE]);
 }
 
+/**
+ * cc_split_row_get_use_default:
+ * @self: a #CcSplitRow
+ *
+ * Get whether the default option is checked.
+ *
+ * Returns:
+ *   %TRUE if the default option is checked,
+ *   %FALSE if the alternative option is checked
+ */
 gboolean
 cc_split_row_get_use_default (CcSplitRow *self)
 {
@@ -431,6 +507,15 @@ cc_split_row_get_use_default (CcSplitRow *self)
   return !!(state_flags & GTK_STATE_FLAG_CHECKED);
 }
 
+/**
+ * cc_split_row_set_use_default:
+ * @self: a #CcSplitRow
+ * @use_default:
+ *   %TRUE if the default option should be checked,
+ *   %FALSE if the alternative option should be checked.
+ *
+ * Set whether the default option should be checked.
+ */
 void
 cc_split_row_set_use_default (CcSplitRow *self,
                               gboolean    use_default)
@@ -442,12 +527,27 @@ cc_split_row_set_use_default (CcSplitRow *self,
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_USE_DEFAULT]);
 }
 
+/**
+ * cc_split_row_get_compact:
+ * @self: a #CcSplitRow
+ *
+ * Get whether @self is using a compact layout.
+ *
+ * Returns: %TRUE if @self is using a compact layout
+ */
 gboolean
 cc_split_row_get_compact (CcSplitRow *self)
 {
   return self->compact;
 }
 
+/**
+ * cc_split_row_set_compact:
+ * @self: a #CcSplitRow
+ * @compact: %TRUE if @self should use a compact layout
+ *
+ * Set whether @self should use a compact layout.
+ */
 void
 cc_split_row_set_compact (CcSplitRow *self,
                           gboolean    compact)
@@ -463,6 +563,14 @@ cc_split_row_set_compact (CcSplitRow *self,
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_COMPACT]);
 }
 
+/**
+ * cc_split_row_get_default_option_title:
+ * @self: a #CcSplitRow
+ *
+ * Get the title for the default option of @self.
+ *
+ * Returns: the title for the default option
+ */
 const gchar *
 cc_split_row_get_default_option_title (CcSplitRow *self)
 {
@@ -471,6 +579,13 @@ cc_split_row_get_default_option_title (CcSplitRow *self)
   return self->default_option_title;
 }
 
+/**
+ * cc_split_row_set_default_option_title:
+ * @self: a #CcSplitRow
+ * @title: the new title for the default option
+ *
+ * Set the title for the default option of @self.
+ */
 void
 cc_split_row_set_default_option_title (CcSplitRow  *self,
                                        const gchar *title)
@@ -481,6 +596,14 @@ cc_split_row_set_default_option_title (CcSplitRow  *self,
     g_object_notify_by_pspec (G_OBJECT (self), props[PROP_DEFAULT_OPTION_TITLE]);
 }
 
+/**
+ * cc_split_row_get_default_option_subtitle:
+ * @self: a #CcSplitRow
+ *
+ * Get the subtitle for the default option of @self.
+ *
+ * Returns: the subtitle for the default option
+ */
 const gchar *
 cc_split_row_get_default_option_subtitle (CcSplitRow *self)
 {
@@ -489,6 +612,13 @@ cc_split_row_get_default_option_subtitle (CcSplitRow *self)
   return self->default_option_subtitle;
 }
 
+/**
+ * cc_split_row_set_default_option_subtitle:
+ * @self: a #CcSplitRow
+ * @subtitle: the new subtitle for the default option
+ *
+ * Set the subtitle for the default option of @self.
+ */
 void
 cc_split_row_set_default_option_subtitle (CcSplitRow  *self,
                                           const gchar *subtitle)
@@ -499,6 +629,14 @@ cc_split_row_set_default_option_subtitle (CcSplitRow  *self,
     g_object_notify_by_pspec (G_OBJECT (self), props[PROP_DEFAULT_OPTION_SUBTITLE]);
 }
 
+/**
+ * cc_split_row_get_alternative_option_title:
+ * @self: a #CcSplitRow
+ *
+ * Get the title for the alternative option of @self.
+ *
+ * Returns: the title for the alternative option
+ */
 const gchar *
 cc_split_row_get_alternative_option_title (CcSplitRow *self)
 {
@@ -507,6 +645,13 @@ cc_split_row_get_alternative_option_title (CcSplitRow *self)
   return self->alternative_option_title;
 }
 
+/**
+ * cc_split_row_set_alternative_option_title:
+ * @self: a #CcSplitRow
+ * @title: the new title for the alternative option
+ *
+ * Set the title for the alternative option of @self.
+ */
 void
 cc_split_row_set_alternative_option_title (CcSplitRow  *self,
                                            const gchar *title)
@@ -517,6 +662,14 @@ cc_split_row_set_alternative_option_title (CcSplitRow  *self,
     g_object_notify_by_pspec (G_OBJECT (self), props[PROP_ALTERNATIVE_OPTION_TITLE]);
 }
 
+/**
+ * cc_split_row_get_alternative_option_subtitle:
+ * @self: a #CcSplitRow
+ *
+ * Get the subtitle for the alternative option of @self.
+ *
+ * Returns: the subtitle for the alternative option
+ */
 const gchar *
 cc_split_row_get_alternative_option_subtitle (CcSplitRow *self)
 {
@@ -525,6 +678,13 @@ cc_split_row_get_alternative_option_subtitle (CcSplitRow *self)
   return self->alternative_option_subtitle;
 }
 
+/**
+ * cc_split_row_set_alternative_option_subtitle:
+ * @self: a #CcSplitRow
+ * @subtitle: the new subtitle for the alternative option
+ *
+ * Set the subtitle for the alternative option of @self.
+ */
 void
 cc_split_row_set_alternative_option_subtitle (CcSplitRow  *self,
                                               const gchar *subtitle)
