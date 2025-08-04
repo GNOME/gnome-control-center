@@ -423,6 +423,12 @@ cc_split_row_set_alternative_illustration_resource (CcSplitRow  *self,
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_ALTERNATIVE_ILLUSTRATION_RESOURCE]);
 }
 
+gboolean
+cc_split_row_get_use_default (CcSplitRow *self)
+{
+  return gtk_widget_get_state_flags (self->default_checkbutton_image) & GTK_STATE_FLAG_CHECKED;
+}
+
 void
 cc_split_row_set_use_default (CcSplitRow *self,
                               gboolean    use_default)
@@ -435,9 +441,9 @@ cc_split_row_set_use_default (CcSplitRow *self,
 }
 
 gboolean
-cc_split_row_get_use_default (CcSplitRow *self)
+cc_split_row_get_compact (CcSplitRow *self)
 {
-  return gtk_widget_get_state_flags (self->default_checkbutton_image) & GTK_STATE_FLAG_CHECKED;
+  return self->compact;
 }
 
 void
@@ -453,12 +459,6 @@ cc_split_row_set_compact (CcSplitRow *self,
   gtk_box_set_spacing (self->box, compact ? 6 : 18);
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_COMPACT]);
-}
-
-gboolean
-cc_split_row_get_compact (CcSplitRow *self)
-{
-  return self->compact;
 }
 
 const gchar *
