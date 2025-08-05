@@ -5,7 +5,7 @@ template $CcKeyboardShortcutDialog: Adw.Dialog {
   content-width: 600;
   content-height: 540;
   title: _("Keyboard Shortcuts");
-  map => $gtk_widget_grab_focus(search_entry);
+  focus-widget: search_entry;
 
   child: Adw.NavigationView navigation_view {
     notify::visible-page => $shortcut_dialog_visible_page_changed_cb(template);
