@@ -144,8 +144,8 @@ is_valid_username_child_watch_cb (GPid pid,
                                 valid = TRUE;
                                 break;
                         case E_BAD_ARG:
-                                /* Translators: '%c' is an invalid character, such as @, #, etc... */
-                                tip = g_strdup_printf (_("Usernames cannot include “%c”"), data->username[strlen(data->username) - 1]);
+                                /* Translators: '%s' is an invalid character, such as @, #, etc... */
+                                tip = g_strdup_printf (_("Usernames cannot include “%s”"), g_utf8_offset_to_pointer (data->username, g_utf8_strlen (data->username, -1) - 1));
                                 valid = FALSE;
                                 break;
                         case E_SUCCESS:
