@@ -292,7 +292,7 @@ cc_timelike_editor_layout_allocate (GtkLayoutManager *layout_manager,
                               NULL, NULL);
 
           child_allocation.width = width - ((am_pm_button_width > 0) ? self->column_spacing + am_pm_button_width : 0);
-          child_allocation.height = CLAMP (height - 2 * self->row_spacing - 2 * up_down_button_size, child_minimum, child_natural);
+          child_allocation.height = CLAMP (height - 2 * (int) self->row_spacing - 2 * up_down_button_size, child_minimum, child_natural);
           child_allocation.x = 0;
           child_allocation.y = up_down_button_size + self->row_spacing;
 
