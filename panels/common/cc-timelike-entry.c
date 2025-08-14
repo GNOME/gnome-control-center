@@ -160,10 +160,10 @@ editable_insert_text_cb (GtkText         *text,
 
   if (new_text_length == 5)
     {
-      const gchar *text = gtk_editable_get_text (GTK_EDITABLE (self));
+      const gchar *text_str = gtk_editable_get_text (GTK_EDITABLE (self));
       guint16 text_length;
 
-      text_length = g_utf8_strlen (text, -1);
+      text_length = g_utf8_strlen (text_str, -1);
 
       /* Return if the text matches XX:XX template (where X is a number) */
       if (text_length == 0 &&
