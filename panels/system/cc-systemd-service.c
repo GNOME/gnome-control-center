@@ -177,7 +177,7 @@ cc_disable_service (const char  *service,
                                                 NULL,
                                                 error);
 
-  if (!stop_result)
+  if (!disable_result)
     {
       g_prefix_error_literal (error, "Failed to disable service: ");
       return FALSE;
