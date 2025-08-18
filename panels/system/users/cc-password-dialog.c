@@ -143,6 +143,13 @@ password_changed_cb (PasswdHandler    *handler,
         else {
                 primary_text = _("Password could not be changed");
                 secondary_text = error->message;
+
+                if (error->code == PASSWD_ERROR_CHANGE_FAILED) {
+                        gtk_editable_set_text (GTK_EDITABLE (self->password_entry), "");
+                        gtk_widget_grab_focus (GTK_WIDGET (self->password_entry));
+
+                        gtk_editable_set_text (GTK_EDITABLE (self->verify_entry), "");
+                }
         }
 
         dialog = adw_alert_dialog_new (primary_text, secondary_text);

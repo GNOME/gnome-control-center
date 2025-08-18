@@ -31,6 +31,7 @@ typedef void (*PasswdCallback) (PasswdHandler *passwd_handler, GError *error, co
 /* Error codes */
 typedef enum {
         PASSWD_ERROR_REJECTED,          /* New password is not secure enough */
+        PASSWD_ERROR_CHANGE_FAILED,     /* Password can't be changed */
         PASSWD_ERROR_AUTH_FAILED,       /* Wrong old password, or PAM failure */
         PASSWD_ERROR_REAUTH_FAILED,     /* Password has changed since first authentication */
         PASSWD_ERROR_BACKEND,           /* Backend error */

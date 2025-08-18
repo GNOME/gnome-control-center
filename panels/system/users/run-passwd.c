@@ -440,6 +440,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
                                                 "match",
                                                 "1 numeric or special",
                                                 "failure",
+                                                "change failed",
                                                 "DIFFERENT",
                                                 "BAD PASSWORD",
                                                 NULL)) {
@@ -497,6 +498,9 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
                                         else if (strstr (str->str, "DIFFERENT")) {
                                                 error = g_error_new (PASSWD_ERROR, PASSWD_ERROR_REJECTED,
                                                                      _("The new password does not contain enough different characters"));
+                                        } else if (strstr (str->str, "change failed") != NULL) {
+                                            error = g_error_new (PASSWD_ERROR, PASSWD_ERROR_CHANGE_FAILED,
+                                                                 _("Password does not meet your organization's security policies. Try a different password or contact your system administrator."));
                                         }
                                         else {
                                                 error = g_error_new (PASSWD_ERROR, PASSWD_ERROR_UNKNOWN,
