@@ -83,7 +83,8 @@ struct _CcPowerPanel
 
   GDBusProxy    *iio_proxy;
   guint          iio_proxy_watch_id;
-  gboolean       has_brightness;
+  GDBusProxy    *shell_brightness_proxy;
+  gboolean       has_brightness_control;
 
   GDBusProxy    *power_profiles_proxy;
   guint          power_profiles_prop_id;
@@ -421,7 +422,8 @@ als_enabled_state_changed (CcPowerPanel *self)
   g_debug ("ALS enabled: %s", enabled ? "on" : "off");
   g_signal_handlers_block_by_func (self->als_row, als_row_changed_cb, self);
   adw_switch_row_set_active (self->als_row, enabled);
-  gtk_widget_set_visible (GTK_WIDGET (self->als_row), visible && self->has_brightness);
+  gtk_widget_set_visible (GTK_WIDGET (self->als_row),
+                          visible && self->has_brightness_control);
   g_signal_handlers_unblock_by_func (self->als_row, als_row_changed_cb, self);
 }
 
@@ -611,33 +613,19 @@ can_suspend_or_hibernate (CcPowerPanel *self,
 }
 
 static void
-got_brightness_cb (GObject      *source_object,
-                   GAsyncResult *res,
-                   gpointer      user_data)
+shell_brightness_changed_cb (CcPowerPanel *self)
 {
-  g_autoptr(GVariant) result = NULL;
-  g_autoptr(GError) error = NULL;
-  gint32 brightness = -1.0;
-  CcPowerPanel *self;
+  g_autoptr(GVariant) v =
+    g_dbus_proxy_get_cached_property (self->shell_brightness_proxy,
+                                      "HasBrightnessControl");
 
-  result = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object), res, &error);
-  if (!result)
-    {
-      g_debug ("Failed to get Brightness property: %s", error->message);
-      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        return;
-    }
+  if (v != NULL)
+    self->has_brightness_control = g_variant_get_boolean (v);
   else
-    {
-      g_autoptr(GVariant) v = NULL;
-      g_variant_get (result, "(v)", &v);
-      brightness = v ? g_variant_get_int32 (v) : -1.0;
-    }
+    self->has_brightness_control = FALSE;
 
-  self = user_data;
-  self->has_brightness = brightness >= 0.0;
-
-  gtk_widget_set_visible (GTK_WIDGET (self->dim_screen_row), self->has_brightness);
+  gtk_widget_set_visible (GTK_WIDGET (self->dim_screen_row),
+                          self->has_brightness_control);
   als_enabled_state_changed (self);
 }
 
@@ -722,7 +710,6 @@ setup_suspend_delay_rows (CcPowerPanel *self)
 static void
 setup_power_saving (CcPowerPanel *self)
 {
-  g_autoptr(GDBusConnection) connection = NULL;
   g_autoptr(GError) error = NULL;
 
   /* ambient light sensor */
@@ -736,32 +723,28 @@ setup_power_saving (CcPowerPanel *self)
   g_signal_connect_object (self->gsd_settings, "changed",
                            G_CALLBACK (als_enabled_setting_changed), self, G_CONNECT_SWAPPED);
 
-  connection = g_bus_get_sync (G_BUS_TYPE_SESSION,
-                               cc_panel_get_cancellable (CC_PANEL (self)),
-                               &error);
-  if (connection)
+  self->shell_brightness_proxy =
+    cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
+                                              G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS |
+                                              G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+                                              "org.gnome.Shell.Brightness",
+                                              "/org/gnome/Shell/Brightness",
+                                              "org.gnome.Shell.Brightness",
+                                              NULL,
+                                              &error);
+  if (!self->shell_brightness_proxy)
     {
-      g_dbus_connection_call (connection,
-                              "org.gnome.SettingsDaemon.Power",
-                              "/org/gnome/SettingsDaemon/Power",
-                              "org.freedesktop.DBus.Properties",
-                              "Get",
-                              g_variant_new ("(ss)",
-                                             "org.gnome.SettingsDaemon.Power.Screen",
-                                             "Brightness"),
-                              NULL,
-                              G_DBUS_CALL_FLAGS_NONE,
-                              -1,
-                              cc_panel_get_cancellable (CC_PANEL (self)),
-                              got_brightness_cb,
-                              self);
+      g_warning ("Could not create Shell Brightness proxy: %s", error->message);
     }
   else
     {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("session bus not available: %s", error->message);
+      g_signal_connect_object (self->shell_brightness_proxy,
+                               "g-properties-changed",
+                               G_CALLBACK (shell_brightness_changed_cb),
+                               self,
+                               G_CONNECT_SWAPPED);
+      shell_brightness_changed_cb (self);
     }
-
 
   g_settings_bind (self->gsd_settings, "idle-dim",
                    self->dim_screen_row, "active",
@@ -1277,6 +1260,7 @@ cc_power_panel_dispose (GObject *object)
   if (self->iio_proxy_watch_id != 0)
     g_bus_unwatch_name (self->iio_proxy_watch_id);
   self->iio_proxy_watch_id = 0;
+  g_clear_object (&self->shell_brightness_proxy);
 
   G_OBJECT_CLASS (cc_power_panel_parent_class)->dispose (object);
 }
