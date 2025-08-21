@@ -4,13 +4,20 @@ include:
    ref: 765bb77a5e1274b0daeb14344e7caa6cd3876232
  - component: gitlab.gnome.org/GNOME/citemplates/release-service@master
    inputs:
-     dist-job-name: release-build
-     tarball-artifact-path: $TARBALL_ARTIFACT_PATH
+     dist-job-name: build-gnomeos
+ - project: GNOME/citemplates
+   file: templates/default-rules.yml
+ - component: "gitlab.gnome.org/GNOME/citemplates/gnomeos-basic-ci@master"
+   inputs:
+     before-script: "build-aux/ci/ci-helper.sh 'INFO' && build-aux/ci/ci-helper.sh 'GIT_INFO'"
+     meson-options: "-Dprofile=development --fatal-meson-warnings --werror -Dwarning_level=2"
+     meson-test-options: "--verbose"
+     lsan-options: "suppressions=${CI_PROJECT_DIR}/build-aux/ci/lsan.supp"
+     tsan: enabled
 
 variables:
   FDO_UPSTREAM_REPO: gnome/gnome-control-center
   MESON_BUILD_DIR: _build
-  TARBALL_ARTIFACT_PATH: "$MESON_BUILD_DIR/meson-dist/$CI_PROJECT_NAME-$CI_COMMIT_TAG.tar.xz"
 
 stages:
   - prepare
@@ -230,19 +237,6 @@ test:
       - $CI_PIPELINE_SOURCE == "schedule"
       - $CI_COMMIT_TITLE =~ /^Update.*translation$/
 
-release-build:
-  stage: build
-  extends:
-    - '.fdo.suffixed-image@fedora'
-    - '.fedora.container.common'
-  script:
-    - meson subprojects download gvc libgxdp
-    - meson setup $MESON_BUILD_DIR --wrap-mode=nodownload
-    - meson dist -C $MESON_BUILD_DIR --no-tests --include-subprojects
-  artifacts:
-    paths:
-      - $TARBALL_ARTIFACT_PATH
-
 # Runs the coverage test.
 coverage:
   extends:
@@ -356,49 +350,3 @@ flatpak:
     - tags
     - gnome-3-.*
     - main@GNOME/gnome-control-center
-
-# Runs the sanitizers [address, thread, undefined, and memory].
-.sanitizer: &sanitizer
-  extends:
-    - '.fdo.suffixed-image@fedora'
-    - '.fedora.container.common'
-  dependencies:
-    - build.container.fedora@x86_64
-  stage: manual
-  when: manual
-  script:
-    - *environment_information
-    - *build_procedure
-    - *run_tests
-
-  artifacts:
-    <<: *build_logs
-
-  except:
-    variables:
-      - $CI_PIPELINE_SOURCE == "schedule"
-      - $CI_COMMIT_TITLE =~ /^Update.*translation$/
-
-asan:
- <<: *sanitizer
- # ASAN requires debugging capabilities
- tags: [ asan ]
- variables:
-   BUILD_OPTS: "-Db_sanitize=address"
-   LSAN_OPTIONS: "suppressions=${CI_PROJECT_DIR}/build-aux/ci/lsan.supp"
-
-tsan:
-  <<: *sanitizer
-  variables:
-    BUILD_OPTS: "-Db_sanitize=thread"
-
-ubsan:
-  <<: *sanitizer
-  variables:
-    BUILD_OPTS: "-Db_sanitize=undefined"
-
-msan:
-  <<: *sanitizer
-  variables:
-    BUILD_OPTS: "-Db_sanitize=memory"
-    CC: "clang"
