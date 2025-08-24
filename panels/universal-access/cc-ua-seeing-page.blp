@@ -28,7 +28,7 @@ template $CcUaSeeingPage: Adw.NavigationPage {
             use-underline: true;
           }
 
-          Adw.ButtonRow {
+          Adw.ButtonRow configure_screen_reader_row {
             title: _("Co_nfigure");
             use-underline: true;
             sensitive: bind screen_reader_row.active;
