@@ -573,6 +573,8 @@ cc_wwan_device_page_constructed (GObject *object)
   cc_wwan_device_page_update (self);
   cc_wwan_locks_changed_cb (self);
   cc_wwan_update_sim_slots_row (self);
+
+  g_signal_connect_swapped (self->sim_slot_row, "notify::selected", (GCallback)wwan_device_set_primary_sim_slot_cb, self);
 }
 
 static void
@@ -632,7 +634,6 @@ cc_wwan_device_page_class_init (CcWwanDevicePageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWwanDevicePage, unlock_button);
 
   gtk_widget_class_bind_template_callback (widget_class, wwan_device_unlock_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, wwan_device_set_primary_sim_slot_cb);
   gtk_widget_class_bind_template_callback (widget_class, wwan_data_settings_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, wwan_network_settings_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, wwan_advanced_settings_activated_cb);

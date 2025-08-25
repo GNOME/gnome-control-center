@@ -126,7 +126,6 @@ template $CcWwanDevicePage: Box {
             Adw.ComboRow sim_slot_row {
               use-underline: true;
               title: _("Primary S_IM Slot");
-              notify::selected => $wwan_device_set_primary_sim_slot_cb(template);
 
               model: StringList sim_slot_string_list {};
             }
