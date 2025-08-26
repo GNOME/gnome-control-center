@@ -60,10 +60,12 @@ struct _CcDesktopSharingPage {
 
   GsdRemoteDesktopRdpServer *rdp_server;
 
+  AdwBanner    *keyring_infobar;
   AdwSwitchRow *desktop_sharing_row;
   AdwSwitchRow *remote_control_row;
   AdwActionRow *hostname_row;
   AdwActionRow *port_row;
+  GtkWidget    *login_details_group;
   GtkWidget    *username_entry;
   GtkWidget    *password_entry;
   AdwButtonRow *generate_password_button_row;
@@ -387,16 +389,10 @@ on_password_copy_clicked (CcDesktopSharingPage *self,
 }
 
 static void
-setup_desktop_sharing_page (CcDesktopSharingPage *self)
+load_credentials (CcDesktopSharingPage *self)
 {
   g_autofree gchar *username = NULL;
   g_autofree gchar *password = NULL;
-  g_autofree char *hostname = NULL;
-
-  self->rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
-
-  hostname = get_hostname ();
-  adw_action_row_set_subtitle (self->hostname_row, hostname);
 
   username = cc_grd_lookup_rdp_username (self->cancellable);
   password = cc_grd_lookup_rdp_password (self->cancellable);
@@ -405,14 +401,7 @@ setup_desktop_sharing_page (CcDesktopSharingPage *self)
   if (password != NULL)
     gtk_editable_set_text (GTK_EDITABLE (self->password_entry), password);
 
-  g_signal_connect_swapped (self->username_entry,
-                            "notify::text",
-                            G_CALLBACK (on_credentials_changed),
-                            self);
-  g_signal_connect_swapped (self->password_entry,
-                            "notify::text",
-                            G_CALLBACK (on_credentials_changed),
-                            self);
+  /* No credentials available. Let's create them. */
   if (username == NULL)
     {
       struct passwd *pw = getpwuid (getuid ());
@@ -429,7 +418,125 @@ setup_desktop_sharing_page (CcDesktopSharingPage *self)
       if (pw != NULL)
         gtk_editable_set_text (GTK_EDITABLE (self->password_entry), pw);
     }
+}
 
+static void
+unlock_gnome_keyring_cb (GObject      *source_object,
+                         GAsyncResult *res,
+                         gpointer      user_data)
+{
+  CcDesktopSharingPage *self = CC_DESKTOP_SHARING_PAGE (user_data);
+  g_autoptr(GList) unlocked = NULL;
+
+  secret_service_unlock_finish (NULL, res, &unlocked, NULL);
+  /* If the keyring is locked,  */
+  if (unlocked == NULL)
+      return;
+
+  adw_banner_set_revealed (self->keyring_infobar, FALSE);
+  gtk_widget_set_sensitive (self->login_details_group, TRUE);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->generate_password_button_row), TRUE);
+
+  load_credentials (self);
+}
+
+static void
+unlock_gnome_keyring (CcDesktopSharingPage *self)
+{
+  g_autoptr(SecretService) service = NULL;
+  g_autoptr(GList) collections_to_unlock = NULL;
+  g_autoptr(SecretCollection) collection = NULL;
+  g_autoptr(GError) error = NULL;
+
+  service = secret_service_get_sync (SECRET_SERVICE_LOAD_COLLECTIONS, NULL, &error);
+  if (!service)
+    {
+      g_debug ("Can't connect to secret service: %s", error->message);
+      return;
+    }
+
+  collection = secret_collection_for_alias_sync (service,
+                                                 SECRET_COLLECTION_DEFAULT,
+                                                 SECRET_COLLECTION_LOAD_ITEMS,
+                                                 NULL, &error);
+  if (!collection)
+    {
+      g_debug ("Can't load secret collection: %s", error->message);
+      return;
+    }
+
+  collections_to_unlock = g_list_append (collections_to_unlock, collection);
+  secret_service_unlock (NULL,
+                         collections_to_unlock,
+                         self->cancellable,
+                         (GAsyncReadyCallback) unlock_gnome_keyring_cb,
+                         self);
+}
+
+static void
+setup_login_details_group (GObject      *source_object,
+                           GAsyncResult *result,
+                           gpointer      user_data)
+{
+  CcDesktopSharingPage *self = CC_DESKTOP_SHARING_PAGE (user_data);
+  g_autoptr(SecretCollection) collection = NULL;
+  gboolean locked = TRUE;
+  g_autoptr(SecretService) service = NULL;
+  g_autoptr(GError) error = NULL;
+
+  service = secret_service_get_finish (result, &error);
+  if (!service)
+    {
+      g_debug ("Can't connect to secret service: %s", error->message);
+      return;
+    }
+
+  collection = secret_collection_for_alias_sync (service,
+                                                 SECRET_COLLECTION_DEFAULT,
+                                                 SECRET_COLLECTION_LOAD_ITEMS,
+                                                 NULL, &error);
+  if (!collection)
+    {
+      g_debug ("Can't load secret collection: %s", error->message);
+      return;
+    }
+
+  locked = secret_collection_get_locked (collection);
+  g_debug ("Secret collection locked: %s", locked ? "yes" : "no");
+
+  adw_banner_set_revealed (self->keyring_infobar, locked);
+  gtk_widget_set_sensitive (self->login_details_group, !locked);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->generate_password_button_row), !locked);
+
+  if (!locked)
+      load_credentials (self);
+}
+
+static void
+setup_desktop_sharing_page (CcDesktopSharingPage *self)
+{
+  g_autofree char *hostname = NULL;
+
+  self->rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
+
+  hostname = get_hostname ();
+  adw_action_row_set_subtitle (self->hostname_row, hostname);
+
+  /* Initialize credentials only when keyring is accessible.
+   * See https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/3547 */
+  secret_service_get (SECRET_SERVICE_LOAD_COLLECTIONS,
+                      self->cancellable,
+                      (GAsyncReadyCallback)setup_login_details_group,
+                      self);
+
+  g_signal_connect_swapped (self->username_entry,
+                            "notify::text",
+                            G_CALLBACK (on_credentials_changed),
+                            self);
+  g_signal_connect_swapped (self->password_entry,
+                            "notify::text",
+                            G_CALLBACK (on_credentials_changed),
+                            self);
   g_signal_connect_object (self->desktop_sharing_row, "notify::active",
                            G_CALLBACK (on_desktop_sharing_active_changed), self,
                            G_CONNECT_SWAPPED);
@@ -517,10 +624,12 @@ cc_desktop_sharing_page_class_init (CcDesktopSharingPageClass * klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, toast_overlay);
 
+  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, keyring_infobar);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, desktop_sharing_row);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, remote_control_row);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, hostname_row);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, port_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, login_details_group);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, username_entry);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, password_entry);
   gtk_widget_class_bind_template_child (widget_class, CcDesktopSharingPage, generate_password_button_row);
@@ -532,6 +641,7 @@ cc_desktop_sharing_page_class_init (CcDesktopSharingPageClass * klass)
   gtk_widget_class_bind_template_callback (widget_class, on_password_copy_clicked);
   gtk_widget_class_bind_template_callback (widget_class, on_generate_password_button_row_activated);
   gtk_widget_class_bind_template_callback (widget_class, on_verify_encryption_button_row_activated);
+  gtk_widget_class_bind_template_callback (widget_class, unlock_gnome_keyring);
 }
 
 static gboolean
