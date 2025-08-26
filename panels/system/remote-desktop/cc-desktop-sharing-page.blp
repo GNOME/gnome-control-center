@@ -3,133 +3,144 @@ using Adw 1;
 
 template $CcDesktopSharingPage: Adw.Bin {
   Adw.ToastOverlay toast_overlay {
-    child: Adw.PreferencesPage {
-      Adw.PreferencesGroup {
-        Label {
-          label: _("Share your existing desktop with other devices. The remote connection uses the existing screen resolution.");
-          hexpand: true;
-          wrap: true;
-          justify: center;
+    child: Box {
+      orientation: vertical;
 
-          styles [
-            "dim-label",
-          ]
-        }
+      Adw.Banner keyring_infobar {
+        title: _("Some settings are locked");
+        button-label: _("Unlock…");
+        button-style: suggested;
+        button-clicked => $unlock_gnome_keyring(template);
       }
 
-      Adw.PreferencesGroup {
-        Adw.SwitchRow desktop_sharing_row {
-          title: _("_Desktop Sharing");
-          use-underline: true;
-        }
-
-        Adw.SwitchRow remote_control_row {
-          title: _("Remote _Control");
-          use-underline: true;
-          subtitle: _("Allows desktop shares to control the screen");
-        }
-      }
-
-      Adw.PreferencesGroup {
-        title: _("How to Connect");
-        description: _("Use a remote desktop app to connect using the RDP protocol. Additional information about the device’s network location may also be required.");
-
-        Adw.ActionRow hostname_row {
-          title: _("_Hostname");
-          use-underline: true;
-
-          styles [
-            "property",
-          ]
-
-          [suffix]
-          Button {
-            tooltip-text: _("Copy");
-            valign: center;
-            icon-name: "edit-copy-symbolic";
-            clicked => $on_address_copy_clicked(template);
+      Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          Label {
+            label: _("Share your existing desktop with other devices. The remote connection uses the existing screen resolution.");
+            hexpand: true;
+            wrap: true;
+            justify: center;
 
             styles [
-              "flat",
+              "dim-label",
             ]
           }
         }
 
-        Adw.ActionRow port_row {
-          title: _("_Port");
-          use-underline: true;
-
-          styles [
-            "property",
-          ]
-
-          [suffix]
-          Button {
-            tooltip-text: _("Copy");
-            valign: center;
-            icon-name: "edit-copy-symbolic";
-            clicked => $on_port_copy_clicked(template);
-
-            styles [
-              "flat",
-            ]
+        Adw.PreferencesGroup {
+          Adw.SwitchRow desktop_sharing_row {
+            title: _("_Desktop Sharing");
+            use-underline: true;
           }
-        }
-      }
 
-      Adw.PreferencesGroup {
-        title: _("Login Details");
-
-        Adw.EntryRow username_entry {
-          title: _("_Username");
-          use-underline: true;
-
-          [suffix]
-          Button {
-            tooltip-text: _("Copy");
-            valign: center;
-            icon-name: "edit-copy-symbolic";
-            clicked => $on_username_copy_clicked(template);
-
-            styles [
-              "flat",
-            ]
+          Adw.SwitchRow remote_control_row {
+            title: _("Remote _Control");
+            use-underline: true;
+            subtitle: _("Allows desktop shares to control the screen");
           }
         }
 
-        Adw.PasswordEntryRow password_entry {
-          title: _("P_assword");
-          use-underline: true;
+        Adw.PreferencesGroup {
+          title: _("How to Connect");
+          description: _("Use a remote desktop app to connect using the RDP protocol. Additional information about the device’s network location may also be required.");
 
-          [suffix]
-          Button {
-            tooltip-text: _("Copy");
-            valign: center;
-            icon-name: "edit-copy-symbolic";
-            clicked => $on_password_copy_clicked(template);
+          Adw.ActionRow hostname_row {
+            title: _("_Hostname");
+            use-underline: true;
 
             styles [
-              "flat",
+              "property",
             ]
+
+            [suffix]
+            Button {
+              tooltip-text: _("Copy");
+              valign: center;
+              icon-name: "edit-copy-symbolic";
+              clicked => $on_address_copy_clicked(template);
+
+              styles [
+                "flat",
+              ]
+            }
+          }
+
+          Adw.ActionRow port_row {
+            title: _("_Port");
+            use-underline: true;
+
+            styles [
+              "property",
+            ]
+
+            [suffix]
+            Button {
+              tooltip-text: _("Copy");
+              valign: center;
+              icon-name: "edit-copy-symbolic";
+              clicked => $on_port_copy_clicked(template);
+
+              styles [
+                "flat",
+              ]
+            }
           }
         }
-      }
 
-      Adw.PreferencesGroup {
-        separate-rows: true;
+        Adw.PreferencesGroup login_details_group {
+          title: _("Login Details");
 
-        Adw.ButtonRow generate_password_button_row {
-          sensitive: false;
-          title: _("_Generate New Password");
-          use-underline: true;
-          activated => $on_generate_password_button_row_activated(template);
+          Adw.EntryRow username_entry {
+            title: _("_Username");
+            use-underline: true;
+
+            [suffix]
+            Button {
+              tooltip-text: _("Copy");
+              valign: center;
+              icon-name: "edit-copy-symbolic";
+              clicked => $on_username_copy_clicked(template);
+
+              styles [
+                "flat",
+              ]
+            }
+          }
+
+          Adw.PasswordEntryRow password_entry {
+            title: _("P_assword");
+            use-underline: true;
+
+            [suffix]
+            Button {
+              tooltip-text: _("Copy");
+              valign: center;
+              icon-name: "edit-copy-symbolic";
+              clicked => $on_password_copy_clicked(template);
+
+              styles [
+                "flat",
+              ]
+            }
+          }
         }
 
-        Adw.ButtonRow verify_encryption_button_row {
-          sensitive: false;
-          title: _("_Verify Encryption");
-          use-underline: true;
-          activated => $on_verify_encryption_button_row_activated(template);
+        Adw.PreferencesGroup {
+          separate-rows: true;
+
+          Adw.ButtonRow generate_password_button_row {
+            sensitive: false;
+            title: _("_Generate New Password");
+            use-underline: true;
+            activated => $on_generate_password_button_row_activated(template);
+          }
+
+          Adw.ButtonRow verify_encryption_button_row {
+            sensitive: false;
+            title: _("_Verify Encryption");
+            use-underline: true;
+            activated => $on_verify_encryption_button_row_activated(template);
+          }
         }
       }
     };
