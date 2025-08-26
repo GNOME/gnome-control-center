@@ -51,6 +51,7 @@ template $CcKeyboardShortcutDialog: Adw.Dialog {
             Adw.PreferencesGroup {
               ListBox section_list_box {
                 selection-mode: none;
+                tab-behavior: item;
                 row-activated => $shortcut_section_row_activated_cb(template);
 
                 styles [
