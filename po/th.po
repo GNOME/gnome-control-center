@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2025-08-19 18:49+0000\n"
-"PO-Revision-Date: 2025-08-28 01:01+0700\n"
+"POT-Creation-Date: 2025-08-27 18:04+0000\n"
+"PO-Revision-Date: 2025-08-29 19:02+0700\n"
 "Last-Translator: Atirut Wattanamongkol <atirut.wattanamongkol@gmail.com>\n"
 "Language-Team: Thai\n"
 "Language: th\n"
@@ -26,10 +26,8 @@ msgstr ""
 "X-Generator: Poedit 3.7\n"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.ui:6
-#, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgid "Add Keyboard Shortcuts"
-msgstr "ปุ่มลัด"
+msgstr "เพิ่มปุ่มลัดแป้นพิมพ์"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.ui:15
 #: panels/applications/cc-application-shortcut-dialog.c:152
@@ -80,18 +78,16 @@ msgstr "เ_พิ่ม"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.ui:36
 msgid "Added keyboard shortcuts will be available globally, and can be changed in the application’s panel in Settings"
-msgstr ""
+msgstr "ปุ่มลัดแป้นพิมพ์ที่เริ่มจะใช้งานได้ทั่วทั้งระบบ และสามารถเปลี่ยนได้ในแผงของแอปพลิเคชันในการตั้งค่า"
 
 #: panels/applications/cc-application-shortcut-dialog.c:143
-#, fuzzy
-#| msgid "Reset All Shortcuts?"
 msgid "Remove All Shortcuts?"
-msgstr "ล้างค่าปุ่มลัดทั้งหมดหรือไม่?"
+msgstr "ลบปุ่มลัดทั้งหมดออกหรือไม่?"
 
 #: panels/applications/cc-application-shortcut-dialog.c:148
 #, c-format
 msgid "All actions from %s that have been registered for global shortcuts will be removed."
-msgstr ""
+msgstr "การกระทำทั้งหมดจาก %s ที่ลงทะเบียนไว้สำหรับปุ่มลัดกลางจะถูกลบออก"
 
 #: panels/applications/cc-application-shortcut-dialog.c:153
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:19
@@ -100,21 +96,17 @@ msgid "_Remove"
 msgstr "_ลบออก"
 
 #: panels/applications/cc-application-shortcut-dialog.c:183
-#, fuzzy
-#| msgid "Remove Shortcut"
 msgid "_Remove All Shortcuts"
-msgstr "ลบปุ่มลัด"
+msgstr "_ลบปุ่มลัดทั้งหมดออก"
 
 #: panels/applications/cc-application-shortcut-dialog.c:265
 #, c-format
 msgid "%s has registered the following global shortcuts"
-msgstr ""
+msgstr "%s ได้ลงทะเบียนปุ่มลัดกลางต่อไปนี้"
 
 #: panels/applications/cc-application-shortcut-dialog.ui:5
-#, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgid "Global Shortcuts"
-msgstr "ปุ่มลัด"
+msgstr "ปุ่มลัดกลาง"
 
 #: panels/applications/cc-applications-panel.c:880
 msgid "System Bus"
@@ -129,7 +121,7 @@ msgstr "การเข้าถึงแบบเต็มที่"
 
 #: panels/applications/cc-applications-panel.c:882
 msgid "Session Bus"
-msgstr "บัสของวาระ"
+msgstr "บัสของเซสชัน"
 
 #: panels/applications/cc-applications-panel.c:886
 #: panels/privacy/bolt/cc-bolt-page.ui:164
@@ -265,16 +257,12 @@ msgstr "ไม่สามารถเรียกรายชื่อแอป
 
 #. Translators: Parental Controls here refers to the features provided by 'malcontent'
 #: panels/applications/cc-applications-panel.ui:122
-#, fuzzy
-#| msgid ""
-#| "An error has occurred and apps cannot be listed.\n"
-#| "Error details: Malcontent is not installed."
 msgid ""
 "An error has occurred and apps cannot be listed.\n"
 "Error details: Parental Controls are not installed."
 msgstr ""
 "เกิดข้อผิดพลาดและไม่สามารถแสดงรายการแอปได้\n"
-"รายละเอียดข้อผิดพลาด: ไม่ได้ติดตั้ง Malcontent"
+"รายละเอียดข้อผิดพลาด: ไม่ได้ติดตั้งการควบคุมโดยผู้ปกครอง"
 
 #: panels/applications/cc-applications-panel.ui:139
 #: panels/applications/cc-default-apps-page.ui:4
@@ -448,14 +436,12 @@ msgid "System permissions that the app requires"
 msgstr "สิทธิ์ระบบที่แอปต้องการ"
 
 #: panels/applications/cc-applications-panel.ui:412
-#, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgid "Global S_hortcuts"
-msgstr "ปุ่มลัด"
+msgstr "_ปุ่มลัดกลาง"
 
 #: panels/applications/cc-applications-panel.ui:413
 msgid "Global actions that have been registered for use"
-msgstr ""
+msgstr "การกระทำกลางที่ลงทะเบียนสำหรับใช้งานแล้ว"
 
 #: panels/applications/cc-applications-panel.ui:423
 #: panels/mouse/cc-mouse-panel.ui:67 panels/mouse/cc-mouse-panel.ui:203
@@ -745,165 +731,155 @@ msgstr "เข้าถึงข้อมูลฮาร์ดแวร์"
 
 #: panels/applications/cc-snap-row.c:283
 msgid "Provide entropy to hardware random number generator"
-msgstr ""
+msgstr "จัดเตรียมเอนโทรปีให้กับตัวสร้างหมายเลขสุ่มแบบฮาร์ดแวร์"
 
 #: panels/applications/cc-snap-row.c:285
 msgid "Use hardware-generated random numbers"
-msgstr ""
+msgstr "ใช้หมายเลขสุ่มที่สร้างขึ้นด้วยฮาร์ดแวร์"
 
 #: panels/applications/cc-snap-row.c:287
 msgid "Access files in your home folder"
-msgstr ""
+msgstr "เข้าถึงไฟล์ในโฟลเดอร์บ้านของคุณ"
 
 #: panels/applications/cc-snap-row.c:289
 msgid "Access libvirt service"
-msgstr ""
+msgstr "เข้าถึงบริการ libvirt"
 
 #: panels/applications/cc-snap-row.c:291
-#, fuzzy
 msgid "Change system language and region settings"
-msgstr "ตั้งเวลาระบบและตั้งค่าเกี่ยวกับวันที่"
+msgstr "เปลี่ยนภาษาระบบและการตั้งค่าภูมิภาค"
 
 #: panels/applications/cc-snap-row.c:293
 msgid "Change location settings and providers"
-msgstr ""
+msgstr "เปลี่ยนการตั้งค่าและผู้ให้บริการตำแหน่งที่ตั้ง"
 
 #: panels/applications/cc-snap-row.c:295
-#, fuzzy
 msgid "Access your location"
-msgstr "ตัวเลือกของการเข้าถึง"
+msgstr "เข้าถึงตำแหน่งที่ตั้งของคุณ"
 
 #: panels/applications/cc-snap-row.c:297
 msgid "Read system and application logs"
-msgstr ""
+msgstr "อ่านปูมเกี่ยวกับระบบและแอปพลิเคชัน"
 
 #: panels/applications/cc-snap-row.c:299
 msgid "Access LXD service"
-msgstr ""
+msgstr "เข้าถึงบริการ LXD"
 
 #: panels/applications/cc-snap-row.c:301
 msgid "Use and configure modems"
-msgstr ""
+msgstr "ใช้และกำหนดค่าโมเด็ม"
 
 #: panels/applications/cc-snap-row.c:303
 msgid "Read system mount information and disk quotas"
-msgstr ""
+msgstr "อ่านข้อมูลการเมานท์และโควตาดิสก์ของระบบ"
 
 #: panels/applications/cc-snap-row.c:305
 msgid "Control music and video players"
-msgstr ""
+msgstr "ควบคุมโปรแกรมเล่นเพลงและวิดีโอ"
 
 #: panels/applications/cc-snap-row.c:307
-#, fuzzy
 msgid "Change low-level network settings"
-msgstr "ตั้งค่าเครื่องพิมพ์"
+msgstr "เปลี่ยนการตั้งค่าเครือข่ายระดับต่ำ"
 
 #: panels/applications/cc-snap-row.c:309
 msgid "Access the NetworkManager service to read and change network settings"
-msgstr ""
+msgstr "เข้าถึงบริการ NetworkManager เพื่ออ่านและเปลี่ยนการตั้งค่าเครือข่าย"
 
 #: panels/applications/cc-snap-row.c:311
-#, fuzzy
 msgid "Read access to network settings"
-msgstr "ตั้งค่าเครือข่าย"
+msgstr "อ่านสิทธิ์เข้าถึงการตั้งค่าเครือข่าย"
 
 #: panels/applications/cc-snap-row.c:313
-#, fuzzy
 msgid "Change network settings"
-msgstr "ตั้งค่าเครื่องพิมพ์"
+msgstr "เปลี่ยนการตั้งค่าเครือข่าย"
 
 #: panels/applications/cc-snap-row.c:315
-#, fuzzy
 msgid "Read network settings"
-msgstr "ตั้งค่าเครือข่าย"
+msgstr "อ่านการตั้งค่าเครือข่าย"
 
 #: panels/applications/cc-snap-row.c:317
 msgid "Access the ofono service to read and change network settings for mobile telephony"
-msgstr ""
+msgstr "เข้าถึงบริการ ofono เพื่ออ่านและเปลี่ยนการตั้งค่าเครือข่ายสำหรับระบบโทรศัพท์มือถือ"
 
 #: panels/applications/cc-snap-row.c:319
 msgid "Control Open vSwitch hardware"
-msgstr ""
+msgstr "ควบคุมฮาร์ดแวร์ Open vSwitch"
 
 #: panels/applications/cc-snap-row.c:321
 msgid "Read from CD/DVD"
-msgstr ""
+msgstr "อ่านจากซีดี/ดีวีดี"
 
 #: panels/applications/cc-snap-row.c:323
 msgid "Read, add, change, or remove saved passwords"
-msgstr ""
+msgstr "อ่าน เพิ่ม เปลี่ยน หรือลบรหัสผ่านที่บันทึกไว้"
 
 #: panels/applications/cc-snap-row.c:325
 msgid "Access pppd and ppp devices for configuring Point-to-Point Protocol connections"
-msgstr ""
+msgstr "เข้าถึงอุปกรณ์ pppd และ ppp สำหรับการกำหนดค่าการเชื่อมต่อโปรโตคอลแบบจุดต่อจุด"
 
 #: panels/applications/cc-snap-row.c:327
 msgid "Pause or end any process on the system"
-msgstr ""
+msgstr "หยุดชั่วคราวหรือจบโปรเซสใด ๆ บนระบบ"
 
 #: panels/applications/cc-snap-row.c:331
 msgid "Access USB hardware directly"
-msgstr ""
+msgstr "เข้าถึงฮาร์ดแวร์ USB โดยตรง"
 
 #: panels/applications/cc-snap-row.c:333
 msgid "Read/write files on removable storage devices"
-msgstr ""
+msgstr "อ่าน/เขียนไฟล์บนอุปกรณ์เก็บข้อมูลแบบถอดเสียบ"
 
 #: panels/applications/cc-snap-row.c:335
 msgid "Prevent screen sleep/lock"
-msgstr ""
+msgstr "ป้องกันไม่ให้พัก/ล็อกหน้าจอ"
 
 #: panels/applications/cc-snap-row.c:337
 msgid "Access serial port hardware"
-msgstr ""
+msgstr "เข้าถึงฮาร์ดแวร์พอร์ตอนุกรม"
 
 #: panels/applications/cc-snap-row.c:339
 msgid "Restart or power off the device"
-msgstr ""
+msgstr "รีสตาร์ทหรือปิดอุปกรณ์"
 
 #: panels/applications/cc-snap-row.c:341
 msgid "Install, remove and configure software"
-msgstr ""
+msgstr "ติดตั้ง ถอดถอน และกำหนดค่าซอฟต์แวร์"
 
 #: panels/applications/cc-snap-row.c:343
 msgid "Access Storage Framework service"
-msgstr ""
+msgstr "เข้าถึงบริการ Storage Framework"
 
 #: panels/applications/cc-snap-row.c:345
-#, fuzzy
 msgid "Read process and system information"
-msgstr "ข้อมูลเกี่ยวกับระบบ"
+msgstr "อ่านข้อมูลเกี่ยวกับโปรเซสและระบบ"
 
 #: panels/applications/cc-snap-row.c:347
 msgid "Monitor and control any running program"
-msgstr ""
+msgstr "เฝ้าสังเกตและควบคุมโปรแกรมใด ๆ ที่ทำงานอยู่"
 
 #: panels/applications/cc-snap-row.c:349
-#, fuzzy
 msgid "Change the date and time"
-msgstr "ตั้งวันที่และเวลา รวมถึงเขตเวลา"
+msgstr "เปลี่ยนวันที่และเวลา"
 
 #: panels/applications/cc-snap-row.c:351
-#, fuzzy
 msgid "Change time server settings"
-msgstr "ตั้งค่าเครื่องพิมพ์"
+msgstr "เปลี่ยนการตั้งค่าเซิร์ฟเวอร์เวลา"
 
 #: panels/applications/cc-snap-row.c:353
-#, fuzzy
 msgid "Change the time zone"
-msgstr "เปลี่ยนพื้นหลังของพื้นโต๊ะ"
+msgstr "เปลี่ยนเขตเวลา"
 
 #: panels/applications/cc-snap-row.c:355
 msgid "Access the UDisks2 service for configuring disks and removable media"
-msgstr ""
+msgstr "เข้าถึงบริการ UDisks2 สำหรับการกำหนดค่าดิสก์และสื่อถอดเสียล"
 
 #: panels/applications/cc-snap-row.c:357
 msgid "Access energy usage data"
-msgstr ""
+msgstr "เข้าถึงข้อมูลการใช้พลังงาน"
 
 #: panels/applications/cc-snap-row.c:359
 msgid "Read/write access to U2F devices exposed"
-msgstr ""
+msgstr "สิทธิ์เข้าถึงแบบอ่าน/เขียนสำหรับอุปกรณ์ U2F ที่ถูกเปิดเผย"
 
 #: panels/applications/gnome-applications-panel.desktop.in:3
 msgid "Control various app permissions and settings"
@@ -2671,7 +2647,7 @@ msgstr "กดด้วย_สองนิ้ว"
 
 #: panels/mouse/cc-mouse-panel.ui:246
 msgid "Push anywhere with 2 fingers"
-msgstr ""
+msgstr "กดบริเวณใดก็ได้ด้วย 2 นิ้ว"
 
 #: panels/mouse/cc-mouse-panel.ui:248
 msgid "_Corner Push"
@@ -2679,7 +2655,7 @@ msgstr "กดที่_มุม"
 
 #: panels/mouse/cc-mouse-panel.ui:249
 msgid "Push with a single finger in the corner"
-msgstr ""
+msgstr "กดด้วยนิ้วเดียวในบริเวณมุม"
 
 #: panels/mouse/cc-mouse-panel.ui:262
 msgid "T_ap to Click"
@@ -3167,30 +3143,27 @@ msgstr "ชื่อ"
 
 #: panels/network/connection-editor/ce-page.c:234
 #: panels/network/connection-editor/ce-page.c:238
-#, fuzzy
 msgid "Preserve"
-msgstr "ล้างค่า"
+msgstr "บันทึก"
 
 #: panels/network/connection-editor/ce-page.c:235
 #: panels/network/connection-editor/ce-page.c:239
-#, fuzzy
 msgid "Permanent"
-msgstr "เยอรมัน"
+msgstr "ถาวร"
 
 #: panels/network/connection-editor/ce-page.c:236
 #: panels/network/connection-editor/ce-page.c:240
 msgid "Random"
-msgstr ""
+msgstr "สุ่ม"
 
 #: panels/network/connection-editor/ce-page.c:237
 #: panels/network/connection-editor/ce-page.c:241
-#, fuzzy
 msgid "Stable"
-msgstr "แท็บเล็ต"
+msgstr "คงที่"
 
 #: panels/network/connection-editor/ce-page.c:243
 msgid "Stable per SSID"
-msgstr ""
+msgstr "คงที่สำหรับแต่ละ SSID"
 
 #: panels/network/connection-editor/ce-page.c:251
 msgid "The MAC address entered here will be used as hardware address for the network device this connection is activated on. This feature is known as MAC cloning or spoofing. Example: 00:11:22:33:44:55"
@@ -3205,7 +3178,7 @@ msgstr "โปรไฟล์ %d"
 #: panels/network/connection-editor/ce-page-details.c:83
 #, c-format
 msgid "Saved details for “%s” will be permanently lost. This includes passwords and any network changes."
-msgstr ""
+msgstr "รายละเอียดที่บันทึกไว้สำหรับ “%s” จะหายไปอย่างถาวร ซึ่งรวมถึงรหัสผ่านและการเปลี่ยนแปลงที่ทำกับเครือข่ายทั้งหมดด้วย"
 
 #: panels/network/connection-editor/ce-page-details.c:85
 msgid "Forget Connection?"
@@ -3671,7 +3644,7 @@ msgstr "ไฟล์ค่ากำหนด VPN ไม่ถูกต้อง"
 #. Translators: VPN add dialog Wireguard description
 #: panels/network/connection-editor/net-connection-editor.c:873
 msgid "Free and open-source VPN solution designed for ease of use, high speed performance and low attack surface."
-msgstr ""
+msgstr "โซลูชัน VPN ฟรีและโอเพนซอร์สที่ออกแบบมาให้ใช้งานง่าย มีประสิทธิภาพด้วยความเร็วสูง และมีพื้นผิวการโจมตีต่ำ"
 
 #: panels/network/connection-editor/net-connection-editor.c:888
 msgid "Import from file…"
@@ -3719,21 +3692,18 @@ msgid "_BSSID"
 msgstr "_BSSID"
 
 #: panels/network/connection-editor/wireguard-page.ui:23
-#, fuzzy
 msgid "_Connection Name"
-msgstr "เชื่อมต่อไม่สำเร็จ"
+msgstr "ชื่อ_ช่องเชื่อมต่อ"
 
 #: panels/network/connection-editor/wireguard-page.ui:46
-#, fuzzy
 msgid "_Interface Name"
-msgstr "_อินเทอร์เฟซ"
+msgstr "ชื่อ_อินเทอร์เฟซ"
 
 #: panels/network/connection-editor/wireguard-page.ui:57
 msgid "The name of the wireguard interface to create."
 msgstr ""
 
 #: panels/network/connection-editor/wireguard-page.ui:69
-#, fuzzy
 msgid "_Private Key"
 msgstr "กุญแจ_ส่วนตัว"
 
@@ -3742,13 +3712,12 @@ msgid "The 256 bit private key in base64 encoding"
 msgstr ""
 
 #: panels/network/connection-editor/wireguard-page.ui:85
-#, fuzzy
 msgid "Show/hide private key"
-msgstr "เลือกกุญแจส่วนตัวของคุณ"
+msgstr "แสดง/ซ่อนกุญแจส่วนตัว"
 
 #: panels/network/connection-editor/wireguard-page.ui:97
 msgid "_Listen Port"
-msgstr ""
+msgstr "พอร์ต_รับการเชื่อมต่อ"
 
 #: panels/network/connection-editor/wireguard-page.ui:109
 msgid "A port to listen on. If set to 'automatic', the port will be chosen randomly when the interface comes up."
@@ -3761,7 +3730,7 @@ msgstr ""
 
 #: panels/network/connection-editor/wireguard-page.ui:131
 msgid "_fwmark"
-msgstr ""
+msgstr "_fwmark"
 
 #: panels/network/connection-editor/wireguard-page.ui:143
 msgid "A 32-bit fwmark for outgoing packets. Leave it to 'off' to disable fwmark."
@@ -3769,16 +3738,15 @@ msgstr ""
 
 #: panels/network/connection-editor/wireguard-page.ui:164
 msgid "_MTU"
-msgstr ""
+msgstr "_MTU"
 
 #: panels/network/connection-editor/wireguard-page.ui:204
-#, fuzzy
 msgid "_Add peer routes"
-msgstr "เ_พิ่มโปรไฟล์"
+msgstr "เ_พิ่มเส้นทางเพียร์"
 
 #: panels/network/connection-editor/wireguard-page.ui:229
 msgid "_Peers"
-msgstr ""
+msgstr "เ_พียร์"
 
 #: panels/network/connection-editor/wireguard-page.ui:242
 msgid "Add WireGuard peer"
@@ -3796,7 +3764,7 @@ msgstr "ตัวเลือก…"
 
 #: panels/network/connection-editor/wireguard-peer.ui:94
 msgid "_Endpoint"
-msgstr ""
+msgstr "ตำ_แหน่งข้อมูล"
 
 #: panels/network/connection-editor/wireguard-peer.ui:105
 msgid "An endpoint IP or hostname, followed by a colon, and then a port number."
@@ -3804,25 +3772,23 @@ msgstr ""
 
 #: panels/network/connection-editor/wireguard-peer.ui:117
 msgid "_Public key"
-msgstr ""
+msgstr "กุญแจส_าธารณะ"
 
 #: panels/network/connection-editor/wireguard-peer.ui:128
 msgid "A base64 public key calculated by 'wg pubkey' from a private key."
 msgstr ""
 
 #: panels/network/connection-editor/wireguard-peer.ui:143
-#, fuzzy
 msgid "_Pre-shared key"
-msgstr "ใช้กุญแจร่วมกัน"
+msgstr "กุญแจแ_บ่งใช้ล่วงหน้า"
 
 #: panels/network/connection-editor/wireguard-peer.ui:154
 msgid "A base64 preshared key generated by 'wg genpsk'. Optional, and may be omitted. Adds an additional layer of symmetric-key cryptography to be mixed into the already existing public-key cryptography, for post-quantum resistance."
 msgstr ""
 
 #: panels/network/connection-editor/wireguard-peer.ui:171
-#, fuzzy
 msgid "Allowed _IP addresses"
-msgstr "ที่อยู่ที่_ถอดแบบมา"
+msgstr "ที่อยู่_ไอพีที่อนุญาต"
 
 #: panels/network/connection-editor/wireguard-peer.ui:182
 msgid "Comma-separated list of IP (v4 or v6) addresses with CIDR masks from which incoming traffic for this peer is allowed and to which outgoing traffic for this peer is directed."
@@ -3830,16 +3796,15 @@ msgstr ""
 
 #: panels/network/connection-editor/wireguard-peer.ui:194
 msgid "_Persistent keepalive"
-msgstr ""
+msgstr "รั_กษาการเชื่อมต่อให้ต่อเนื่อง"
 
 #: panels/network/connection-editor/wireguard-peer.ui:208
 msgid "How often to send an authenticated empty packet to the peer for the purpose of keeping a stateful firewall or NAT mapping valid. This is optional and not recommended outside of specific setups."
 msgstr ""
 
 #: panels/network/connection-editor/wireguard-peer.ui:217
-#, fuzzy
 msgid "seconds"
-msgstr "30 วินาที"
+msgstr "วินาที"
 
 #: panels/network/connection-editor/wireguard-peer.ui:233
 msgid "Apply"
@@ -4663,19 +4628,19 @@ msgstr "การชาร์จแบตเตอรี่"
 
 #: panels/power/cc-power-panel.ui:84
 msgid "_Maximize Charge"
-msgstr ""
+msgstr "เ_ร่งประสิทธิภาพการชาร์จให้สูงสุด"
 
 #: panels/power/cc-power-panel.ui:85
 msgid "Uses all battery capacity. Degrades batteries more quickly."
-msgstr ""
+msgstr "ใช้ความจุแบตเตอรี่ทั้งหมด แต่อาจทำให้แบตเตอรี่เสื่อมสภาพเร็วขึ้น"
 
 #: panels/power/cc-power-panel.ui:99
 msgid "Preserve Battery _Health"
-msgstr ""
+msgstr "รักษา_สุขภาพแบตเตอรี่"
 
 #: panels/power/cc-power-panel.ui:100
 msgid "Increases battery longevity by maintaining lower charge levels"
-msgstr ""
+msgstr "ยืดอายุการใช้งานแบตเตอรี่โดยรักษาระดับการชาร์จที่ต่ำลง"
 
 #: panels/power/cc-power-panel.ui:115
 msgid "Connected Devices"
@@ -6091,7 +6056,7 @@ msgstr "ไม่พบ"
 #. TRANSLATORS: the function is supported by hardware.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:95
 msgid "Supported"
-msgstr "ร้องรับ"
+msgstr "รองรับ"
 
 #. TRANSLATORS: the function isn't supported by hardware.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:100
@@ -7416,7 +7381,7 @@ msgstr "เข้าสู่ระบบโดเมนไม่สำเร็
 #: panels/system/users/cc-enterprise-login-dialog.c:365
 #, c-format
 msgid "To add an enterprise login account, this device needs to be enrolled with <b>%s</b>. To enroll, have your domain administrator enter their name and password."
-msgstr ""
+msgstr "ถ้าต้องการเพิ่มบัญชีเข้าสู่ระบบองค์กร ก็จำเป็นต้องลงทะเบียนอุปกรณ์นี้กับ <b>%s</b> เมื่อต้องการลงทะเบียน โปรดให้ผู้ดูแลโดเมนของคุณป้อนชื่อและรหัสผ่านของตนเอง"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:548
 msgid "Valid domain"
@@ -8626,9 +8591,8 @@ msgstr "ทำให้ง่ายต่อการเห็น, ได้ย�
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:14
-#, fuzzy
 msgid "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;"
-msgstr "แป้นพิมพ์;เมาส์;a11y;สิ่งอำนวยความสะดวก;ความต่างระดับสี;ซูม;อ่านหน้าจอ;ข้อความ;แบบอักษร;ขนาด;AccessX;ค้างปุ่มกด;พิมพ์แบบช้า;ป้องกันการกดแป้นรัว;บังคับเมาส์ด้วยแป้น;"
+msgstr "แป้นพิมพ์;เมาส์;a11y;สิ่งอำนวยความสะดวก;ความต่างระดับสี;เคอร์เซอร์;เสียง;ซูม;อ่านหน้าจอ;ใหญ่;สูง;ข้อความ;แบบอักษร;ขนาด;AccessX;ค้างปุ่มกด;พิมพ์แบบช้า;ป้องกันการกดแป้นรัว;บังคับเมาส์ด้วยแป้น;เมาส์;ดับเบิลคลิก;ดับเบิล;คลิก;หน่วงเวลา;ความเร็ว;ตัวช่วย;ซ้ำปุ่มกด;กะพริบ;ตัวชี้;หา;หาตำแหน่ง;ภาพ;การได้ยิน;การพิมพ์;ภาพเคลื่อนไหว;"
 
 #: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:19
 msgid "Map Buttons"
@@ -9531,50 +9495,44 @@ msgid "M_odem Details"
 msgstr "รายละเอียดโ_มเด็ม"
 
 #: panels/wwan/cc-wwan-errors-private.h:40
-#, fuzzy
 msgid "Phone failure"
-msgstr "การตรวจสอบ PIN ล้มเหลว"
+msgstr "โทรศัพท์ขัดข้อง"
 
 #: panels/wwan/cc-wwan-errors-private.h:41
-#, fuzzy
 msgid "No connection to phone"
-msgstr "ไม่ได้เชื่อมต่อ"
+msgstr "ไม่มีการเชื่อมต่อกับโทรศัพท์"
 
 #: panels/wwan/cc-wwan-errors-private.h:43
 msgid "Operation not allowed"
-msgstr ""
+msgstr "ไม่อนุญาตให้ดำเนินการนี้"
 
 #: panels/wwan/cc-wwan-errors-private.h:44
 msgid "Operation not supported"
-msgstr ""
+msgstr "ไม่รองรับการดำเนินการนี้"
 
 #: panels/wwan/cc-wwan-errors-private.h:48
-#, fuzzy
 msgid "SIM not inserted"
-msgstr "ไม่ได้ใส่ SIM card"
+msgstr "ไม่ได้ใส่ซิม"
 
 #: panels/wwan/cc-wwan-errors-private.h:49
-#, fuzzy
 msgid "SIM PIN required"
-msgstr "ต้องการรหัส PIN ของ SIM"
+msgstr "ต้องการรหัส PIN ของซิม"
 
 #: panels/wwan/cc-wwan-errors-private.h:50
-#, fuzzy
 msgid "SIM PUK required"
-msgstr "ต้องการรหัส PIN ของ SIM"
+msgstr "ต้องการรหัส PUK ของซิม"
 
 #: panels/wwan/cc-wwan-errors-private.h:51
 msgid "SIM failure"
-msgstr ""
+msgstr "ซิมขัดข้อง"
 
 #: panels/wwan/cc-wwan-errors-private.h:52
 msgid "SIM busy"
-msgstr ""
+msgstr "ซิมไม่ว่าง"
 
 #: panels/wwan/cc-wwan-errors-private.h:54
-#, fuzzy
 msgid "Incorrect password"
-msgstr "รหัสผ่าน_ปัจจุบัน"
+msgstr "รหัสผ่านไม่ถูกต้อง"
 
 #: panels/wwan/cc-wwan-errors-private.h:55
 #, fuzzy
@@ -9656,32 +9614,28 @@ msgid "SIM %d"
 msgstr "ซิม %d"
 
 #: panels/wwan/cc-wwan-panel.ui:13
-#, fuzzy
 msgid "Enable Mobile Network"
-msgstr "เครือข่ายของบ้านฉัน"
+msgstr "เปิดใช้งานเครือข่ายมือถือ"
 
 #: panels/wwan/cc-wwan-panel.ui:49
 msgid "No WWAN Adapter Found"
-msgstr ""
+msgstr "ไม่พบอะแดปเตอร์ WWAN"
 
 #: panels/wwan/cc-wwan-panel.ui:50
 msgid "Make sure you have a Wireless Wan/Cellular device"
-msgstr ""
+msgstr "โปรดดูให้แน่ใจว่าคุณมีอุปกรณ์ Wan/เซลลูลาร์แบบไร้สาย"
 
 #: panels/wwan/cc-wwan-panel.ui:65
-#, fuzzy
 msgid "Wireless Wan is disabled when airplane mode is on"
-msgstr "บลูทูทจะถูกปิดใช้งานเมื่อเปิดใช้โหมดเครื่องบิน"
+msgstr "Wan ไร้สายจะถูกปิดใช้งานเมื่อเปิดใช้โหมดเครื่องบิน"
 
 #: panels/wwan/cc-wwan-panel.ui:106
-#, fuzzy
 msgid "Data Connection"
-msgstr "การเชื่อมต่อ"
+msgstr "การเชื่อมต่อข้อมูล"
 
 #: panels/wwan/cc-wwan-panel.ui:107
-#, fuzzy
 msgid "SIM card used for internet"
-msgstr "ไม่ได้ใส่ SIM card"
+msgstr "ซิมการ์ดที่ใช้สำหรับอินเทอร์เน็ต"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:9
 msgid "SIM Lock"
@@ -9718,7 +9672,7 @@ msgstr "กำหนดค่าระบบโทรศัพท์และก
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wwan/gnome-wwan-panel.desktop.in:15
 msgid "cellular;wwan;telephony;sim;mobile;"
-msgstr ""
+msgstr "เซลลูลาร์;wwan;โทรศัพท์;ระบบโทรศัพท์;ซิม;มือถือ;"
 
 #: shell/appdata/org.gnome.Settings.appdata.xml.in.in:8
 msgid "Utility to configure the GNOME desktop"
@@ -9852,27 +9806,27 @@ msgstr "ปรับแต่ง;ตั้งค่า;การตั้งค�
 
 #: shell/org.gnome.Settings.gschema.xml:5
 msgid "The identifier for the last Settings panel to be opened"
-msgstr ""
+msgstr "ตัวระบุสำหรับแผง “การตั้งค่า” อันล่าสุดที่จะเปิด"
 
 #: shell/org.gnome.Settings.gschema.xml:6
 msgid "The identifier for the last Settings panel to be opened. Unrecognised values will be ignored and the first panel in the list selected."
-msgstr ""
+msgstr "ตัวระบุสำหรับแผง “การตั้งค่า” อันล่าสุดที่จะเปิด ค่าที่ไม่รู้จักจะถูกละเว้นและแผงแรกในรายชื่อจะถูกเลือก"
 
 #: shell/org.gnome.Settings.gschema.xml:13
 msgid "Show warning when running a development build of Settings"
-msgstr ""
+msgstr "แสดงคำเตือนเมื่อเรียกทำงาน “การตั้งค่า” รุ่นพัฒนา"
 
 #: shell/org.gnome.Settings.gschema.xml:14
 msgid "Whether Settings should show a warning when running a development build."
-msgstr ""
+msgstr "กำหนดว่าจะให้ “การตั้งค่า” แสดงคำเตือนหรือไม่ เมื่อเรียกทำงานรุ่นพัฒนา"
 
 #: shell/org.gnome.Settings.gschema.xml:20
 msgid "Initial state of the window"
-msgstr ""
+msgstr "สถานะเริ่มแรกของหน้าต่าง"
 
 #: shell/org.gnome.Settings.gschema.xml:21
 msgid "A tuple containing the initial width, height and maximized state of the app window."
-msgstr ""
+msgstr "ทูเพิลที่มีความกว้าง ความสูง และสถานะขยายแผ่เริ่มแรกของหน้าต่างแอป"
 
 #. translators:
 #. * The number of sound outputs on a particular device
