@@ -1,3 +1,34 @@
+=============
+Version 49.rc
+=============
+
+- Fix yelp app name (requires yelp 49.beta)
+- Fix a couple of compiler warnings in the time editor widget
+- Various translation updates
+
+About
+- Use IMAGE_VERSION from /etc/os-release for "OS Build" row
+- Fix NVIDIA GPU name display if get_renderer_from_switcheroo failed
+
+Accessibility
+- Add button to launch Orca preferences
+
+Color
+- Use explicit color calibration API (requires mutter 49.rc)
+
+Keyboard
+- Fix issue with focus on search entry in the Shortcuts settings
+
+Power
+- Replace SettingsDaemon.Power.Screen with Shell.Brightness (requires gnome-shell 49.beta)
+
+System
+- Fix handling of failure to disable systemd services
+- Add missing include guard
+
+User Accounts
+- Handle UTF-8 characters in invalid username error message
+
 ===============
 Version 49.beta
 ===============
