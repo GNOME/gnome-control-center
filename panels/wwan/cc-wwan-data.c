@@ -1214,7 +1214,7 @@ cc_wwan_data_apn_get_name (CcWwanDataApn *apn)
   if (apn->access_method)
     return nma_mobile_access_method_get_name (apn->access_method);
 
-  return NULL;
+  return "";
 }
 
 /**
