@@ -550,10 +550,8 @@ on_permission_changed (CcDateTimePage *self)
   gtk_widget_set_sensitive (GTK_WIDGET (self->timezone_row), (allowed || tz_allowed) && (!auto_timezone || !location_allowed));
 
   /* Hide the subdialogs if we no longer have permissions */
-  if (!allowed)
-      gtk_widget_set_visible (GTK_WIDGET (self->datetime_dialog), FALSE);
-  if (!allowed && !tz_allowed)
-      gtk_widget_set_visible (GTK_WIDGET (self->timezone_dialog), FALSE);
+  gtk_widget_set_visible (GTK_WIDGET (self->datetime_dialog), allowed);
+  gtk_widget_set_visible (GTK_WIDGET (self->timezone_dialog), !allowed && !tz_allowed);
 }
 
 static void
