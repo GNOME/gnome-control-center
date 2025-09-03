@@ -2,12 +2,14 @@
 <interface>
 
   <object class="CcTzDialog" id="timezone_dialog">
+    <property name="visible" bind-source="timezone_row" bind-property="sensitive" bind-flags="sync-create|default"/>
     <signal name="tz-selected" handler="panel_tz_selection_changed_cb" swapped="yes"/>
   </object>
 
   <object class="AdwDialog" id="datetime_dialog">
     <property name="title" translatable="yes">Date &amp; Time</property>
     <property name="content-width">430</property>
+    <property name="visible" bind-source="datetime_row" bind-property="sensitive" bind-flags="sync-create|default"/>
     <property name="child">
       <object class="AdwToolbarView">
         <child type="top">
