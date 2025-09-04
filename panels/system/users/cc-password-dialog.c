@@ -31,6 +31,7 @@
 #include <gtk/gtk.h>
 #include <act/act.h>
 
+#include "cc-entry-feedback.h"
 #include "cc-password-dialog.h"
 #include "pw-utils.h"
 #include "run-passwd.h"
@@ -47,6 +48,7 @@ struct _CcPasswordDialog
         GtkButton         *generate_password_button;
         GtkButton          *ok_button;
         AdwPasswordEntryRow *old_password_entry;
+        CcEntryFeedback     *verify_old_password_hint;
         AdwPreferencesGroup *password_group;
         AdwPreferencesGroup *password_on_next_login_group;
         AdwPasswordEntryRow *password_entry;
@@ -343,6 +345,9 @@ auth_cb (PasswdHandler    *handler,
         else {
                 self->old_password_ok = TRUE;
                 gtk_widget_remove_css_class (GTK_WIDGET (self->old_password_entry), "error");
+                cc_entry_feedback_update (self->verify_old_password_hint,
+                                          "check-outlined-symbolic",
+                                          _("Passwords match"));
         }
 
         update_sensitivity (self);
@@ -383,6 +388,9 @@ old_password_entry_changed (CcPasswordDialog *self)
 
         gtk_widget_add_css_class (GTK_WIDGET (self->old_password_entry), "error");
         gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button), FALSE);
+        cc_entry_feedback_update (self->verify_old_password_hint,
+                                  "dialog-error-symbolic",
+                                  _("Passwords do not match"));
 
         self->old_password_ok = FALSE;
         gtk_widget_set_sensitive (GTK_WIDGET (self->password_entry), self->old_password_ok);
@@ -447,6 +455,7 @@ cc_password_dialog_class_init (CcPasswordDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_hint_label);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, strength_indicator);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, verify_entry);
+        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, verify_old_password_hint);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, verify_label);
 
         gtk_widget_class_bind_template_callback (widget_class, action_now_radio_toggled_cb);
