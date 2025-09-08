@@ -7,5 +7,11 @@ template $CcProfileComboRow: Adw.ComboRow {
     item-type: typeof<StringObject>;
   };
 
+  factory: SignalListItemFactory {
+    setup => $factory_setup_cb(template);
+    bind => $factory_bind_cb(template);
+    unbind => $factory_unbind_cb(template);
+  };
+
   notify::selected => $profile_changed_cb(template);
 }

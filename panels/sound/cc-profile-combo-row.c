@@ -33,6 +33,105 @@ struct _CcProfileComboRow
 G_DEFINE_TYPE (CcProfileComboRow, cc_profile_combo_row, ADW_TYPE_COMBO_ROW)
 
 static void
+selected_item_changed (CcProfileComboRow *self,
+                       GParamSpec        *pspec,
+                       GtkListItem       *list_item)
+{
+  GtkWidget *box;
+  GtkWidget *selected_icon;
+
+  box = gtk_list_item_get_child (list_item);
+  selected_icon = gtk_widget_get_last_child (box);
+
+  if (adw_combo_row_get_selected_item (ADW_COMBO_ROW (self)) == gtk_list_item_get_item (list_item))
+    gtk_widget_set_opacity (selected_icon, 1.0);
+  else
+    gtk_widget_set_opacity (selected_icon, 0.0);
+}
+
+static void
+item_root_changed (GtkWidget         *box,
+                   GParamSpec        *pspec,
+                   CcProfileComboRow *self)
+{
+  GtkWidget *selected_icon;
+  GtkWidget *box_popover;
+  gboolean is_in_combo_popover;
+
+  selected_icon = gtk_widget_get_last_child (box);
+  box_popover = gtk_widget_get_ancestor (box, GTK_TYPE_POPOVER);
+  is_in_combo_popover = (box_popover != NULL &&
+                         gtk_widget_get_ancestor (box_popover, ADW_TYPE_COMBO_ROW) == (GtkWidget *) self);
+
+  /* Selection icon should only be visible when in the popover */
+  gtk_widget_set_visible (selected_icon, is_in_combo_popover);
+}
+
+static void
+factory_setup_cb (CcProfileComboRow *self,
+                  GtkListItem       *list_item)
+{
+  GtkWidget *box;
+  GtkWidget *label;
+  GtkWidget *selected_icon;
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+
+  label = gtk_label_new (NULL);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
+  gtk_label_set_width_chars (GTK_LABEL (label), 1);
+  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+  gtk_box_append (GTK_BOX (box), label);
+
+  selected_icon = g_object_new (GTK_TYPE_IMAGE,
+                                "accessible-role", GTK_ACCESSIBLE_ROLE_PRESENTATION,
+                                "icon-name", "object-select-symbolic",
+                                NULL);
+  gtk_box_append (GTK_BOX (box), selected_icon);
+
+  gtk_list_item_set_child (list_item, box);
+}
+
+static void
+factory_bind_cb (CcProfileComboRow *self,
+                 GtkListItem       *list_item)
+{
+  GtkStringObject *selected_profile;
+  const gchar *profile;
+  GtkWidget *box;
+  GtkWidget *label;
+
+  selected_profile = GTK_STRING_OBJECT (gtk_list_item_get_item (list_item));
+  profile = gtk_string_object_get_string (selected_profile);
+
+  box = gtk_list_item_get_child (list_item);
+  label = gtk_widget_get_first_child (box);
+
+  gtk_label_set_label (GTK_LABEL (label), profile);
+
+  g_signal_connect (self, "notify::selected-item",
+                    G_CALLBACK (selected_item_changed), list_item);
+  selected_item_changed (self, NULL, list_item);
+
+  g_signal_connect (box, "notify::root",
+                    G_CALLBACK (item_root_changed), self);
+  item_root_changed (box, NULL, self);
+}
+
+static void
+factory_unbind_cb (CcProfileComboRow *self,
+                   GtkListItem       *list_item)
+{
+  GtkWidget *box;
+
+  box = gtk_list_item_get_child (list_item);
+
+  g_signal_handlers_disconnect_by_func (self, selected_item_changed, list_item);
+  g_signal_handlers_disconnect_by_func (box, item_root_changed, self);
+}
+
+static void
 profile_changed_cb (CcProfileComboRow *self)
 {
   GtkStringObject *selected_profile;
@@ -73,6 +172,9 @@ cc_profile_combo_row_class_init (CcProfileComboRowClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcProfileComboRow, profile_list);
 
+  gtk_widget_class_bind_template_callback (widget_class, factory_setup_cb);
+  gtk_widget_class_bind_template_callback (widget_class, factory_bind_cb);
+  gtk_widget_class_bind_template_callback (widget_class, factory_unbind_cb);
   gtk_widget_class_bind_template_callback (widget_class, profile_changed_cb);
 }
 
