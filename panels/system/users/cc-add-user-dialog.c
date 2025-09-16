@@ -65,6 +65,7 @@ struct _CcAddUserDialog {
         gboolean            has_custom_username;
         ActUserPasswordMode password_mode;
         gint                password_timeout_id;
+        gchar              *password_hint_text;
 };
 
 G_DEFINE_TYPE (CcAddUserDialog, cc_add_user_dialog, ADW_TYPE_DIALOG);
@@ -212,8 +213,15 @@ update_password_strength (CcAddUserDialog *self)
         accept = valid || !enforcing;
 
         gtk_level_bar_set_value (self->strength_indicator, strength_level);
-        if (enforcing)
-                cc_entry_feedback_update (self->password_hint, valid ? "check-outlined-symbolic" : "dialog-error-symbolic", hint);
+
+        /* Don't re-announce the password hint if it didn't change.
+         * In this case we announce the verify-password hint i(if it exists) instead. */
+        if (enforcing && g_strcmp0 (hint, self->password_hint_text) != 0) {
+                cc_entry_feedback_update (self->password_hint,
+                                          valid ? "check-outlined-symbolic" : "dialog-error-symbolic",
+                                          hint);
+                self->password_hint_text = g_strdup (hint);
+        }
 
         verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_password_row));
         if (strlen (verify) == 0) {
@@ -456,6 +464,7 @@ cc_add_user_dialog_finalize (GObject *obj)
 
         g_clear_object (&self->cancellable);
         g_clear_object (&self->permission);
+        g_clear_pointer (&self->password_hint_text, g_free);
 
         G_OBJECT_CLASS (cc_add_user_dialog_parent_class)->finalize (obj);
 }
