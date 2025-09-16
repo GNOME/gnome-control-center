@@ -52,10 +52,10 @@ struct _CcPasswordDialog
         AdwPreferencesGroup *password_group;
         AdwPreferencesGroup *password_on_next_login_group;
         AdwPasswordEntryRow *password_entry;
-        GtkLabel           *password_hint_label;
+        CcEntryFeedback     *password_hint_label;
+        gchar               *password_hint_text;
         GtkLevelBar        *strength_indicator;
         AdwPasswordEntryRow *verify_entry;
-        GtkLabel            *verify_label;
 
         gint                password_entry_timeout_id;
 
@@ -89,7 +89,13 @@ update_password_strength (CcPasswordDialog *self)
                      &hint, &strength_level, &enforcing);
 
         gtk_level_bar_set_value (self->strength_indicator, strength_level);
-        gtk_label_set_label (self->password_hint_label, hint);
+
+        if (g_strcmp0 (hint, self->password_hint_text) != 0) {
+            cc_entry_feedback_update (self->password_hint_label,
+                                      strength_level > 1 ? "check-outlined-symbolic" : "dialog-error-symbolic",
+                                      hint);
+            self->password_hint_text = g_strdup (hint);
+        }
 
         if (strength_level > 1) {
                 gtk_widget_remove_css_class (GTK_WIDGET (self->password_entry), "error");
@@ -264,13 +270,12 @@ update_password_match (CcPasswordDialog *self)
 
         if (strlen (verify) > 0) {
                 if (strcmp (password, verify) != 0) {
-                        gtk_widget_set_visible (GTK_WIDGET (self->verify_label), TRUE);
                         gtk_widget_add_css_class (GTK_WIDGET (self->verify_entry), "error");
+                        cc_entry_feedback_update (self->password_hint_label, "dialog-error-symbolic", _("Passwords do not match"));
                 }
                 else {
-                        gtk_widget_set_visible (GTK_WIDGET (self->verify_label), FALSE);
                         gtk_widget_remove_css_class (GTK_WIDGET (self->verify_entry), "error");
-
+                        cc_entry_feedback_update (self->password_hint_label, "check-outlined-symbolic", _("Passwords match"));
                 }
         }
 }
@@ -304,6 +309,7 @@ password_entry_changed (CcPasswordDialog *self)
 {
         gtk_widget_add_css_class (GTK_WIDGET (self->password_entry), "error");
         gtk_widget_add_css_class (GTK_WIDGET (self->verify_entry), "error");
+        gtk_widget_set_visible (GTK_WIDGET (self->password_hint_label), TRUE);
         recheck_password_match (self);
 }
 
@@ -435,6 +441,8 @@ cc_password_dialog_dispose (GObject *object)
                 self->passwd_handler = NULL;
         }
 
+        g_clear_pointer (&self->password_hint_text, g_free);
+
         g_clear_handle_id (&self->old_password_entry_timeout_id, g_source_remove);
         g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
 
@@ -463,7 +471,6 @@ cc_password_dialog_class_init (CcPasswordDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, strength_indicator);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, verify_entry);
         gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, verify_old_password_hint);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, verify_label);
 
         gtk_widget_class_bind_template_callback (widget_class, action_now_radio_toggled_cb);
         gtk_widget_class_bind_template_callback (widget_class, generate_password);
