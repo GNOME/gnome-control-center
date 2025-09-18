@@ -321,6 +321,9 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   /* Text Size */
+  gtk_range_set_value (GTK_RANGE (self->text_size_scale),
+                       g_settings_get_double (self->interface_settings,
+                                              KEY_TEXT_SCALING_FACTOR));
   g_signal_connect (GTK_RANGE (self->text_size_scale), "change-value",
                     G_CALLBACK (ua_text_size_change_value), self);
 
