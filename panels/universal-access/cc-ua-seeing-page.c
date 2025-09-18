@@ -88,11 +88,11 @@ ua_text_size_change_value (GtkRange      *text_size_range,
                            gpointer       user_data)
 {
   CcUaSeeingPage *self = CC_UA_SEEING_PAGE (user_data);
-  gdouble rounded_value = round (value / 0.05) * 0.05;
+  gdouble rounded_value = round (value / 0.25) * 0.25;
   PangoAttrList *new_attrs = pango_attr_list_new ();
   PangoAttribute *attr = pango_attr_size_new_absolute ((int)(15 * PANGO_SCALE * rounded_value));
 
-  /* Always round to 0.05 multiples */
+  /* Always round to 0.25 multiples */
   gtk_range_set_value (text_size_range, rounded_value);
 
   pango_attr_list_insert (new_attrs, attr);
