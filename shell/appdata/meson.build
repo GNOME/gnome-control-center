@@ -1,5 +1,6 @@
 metainfo_conf = configuration_data()
 metainfo_conf.set('appid', application_id)
+metainfo_conf.set('release-version', meson.project_version())
 
 metainfo_file = i18n.merge_file(
   input: configure_file(
