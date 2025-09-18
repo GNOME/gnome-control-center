@@ -1,5 +1,15 @@
+# Use current date for development snapshots
+today = 'unknown'
+date = find_program('date', required: false)
+if date.found() and get_option('profile') == 'development'
+  r = run_command(date, '-I', check: true)
+  today = r.stdout().strip()
+endif
+
 metainfo_conf = configuration_data()
 metainfo_conf.set('appid', application_id)
+metainfo_conf.set('release-version', meson.project_version())
+metainfo_conf.set('build-date', today)
 
 metainfo_file = i18n.merge_file(
   input: configure_file(
