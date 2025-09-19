@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-09-10 20:27+0000\n"
-"PO-Revision-Date: 2025-09-11 23:37+0200\n"
+"POT-Creation-Date: 2025-09-19 14:21+0000\n"
+"PO-Revision-Date: 2025-09-19 21:53+0200\n"
 "Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
 "Language-Team: Esperanto <gnome-eo-list@gnome.org>\n"
 "Language: eo\n"
@@ -76,7 +76,7 @@ msgstr "_Nuligi"
 #: panels/printers/pp-new-printer-dialog.ui:96
 #: panels/system/users/cc-add-user-dialog.c:362
 #: panels/system/users/cc-add-user-dialog.ui:32
-#: panels/system/users/cc-add-user-dialog.ui:153
+#: panels/system/users/cc-add-user-dialog.ui:152
 #: panels/system/users/cc-enterprise-login-dialog.blp:47
 msgid "_Add"
 msgstr "_Aldoni"
@@ -2562,7 +2562,7 @@ msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut"
 msgstr "Premu Esc por nuligi aŭ Retropaŝon por malebligi la klavkombinon"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:125
-#: panels/keyboard/cc-keyboard-shortcut-row.blp:23
+#: panels/keyboard/cc-keyboard-shortcut-row.blp:22
 msgid "Reset Shortcut"
 msgstr "Reagordi klavkombinon"
 
@@ -2638,9 +2638,9 @@ msgid_plural "%d modified"
 msgstr[0] "%d modifita"
 msgstr[1] "%d modifitaj"
 
-#: panels/keyboard/cc-keyboard-shortcut-group.c:157
-msgid "Add a Shortcut"
-msgstr "Aldoni klavkombinon"
+#: panels/keyboard/cc-keyboard-shortcut-group.c:152
+msgid "_Add Shortcut"
+msgstr "_Aldoni klavkombinon"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:3
 msgid ""
@@ -3089,7 +3089,7 @@ msgstr "Retnomo"
 #: panels/network/cc-wifi-hotspot-dialog.blp:79
 #: panels/printers/pp-jobs-dialog.blp:171
 #: panels/printers/pp-new-printer-dialog.ui:300
-#: panels/system/users/cc-add-user-dialog.ui:103
+#: panels/system/users/cc-add-user-dialog.ui:102
 #: panels/wwan/cc-wwan-apn-dialog.blp:152
 msgid "Password"
 msgstr "Pasvorto"
@@ -3238,20 +3238,18 @@ msgid ""
 "Scan with another device to connect to the hotspot.\n"
 "Turn off the hotspot to use Wi-Fi with this device."
 msgstr ""
+"Skani per alia aparato por konektiĝi al la retkaptejo.\n"
+"Malŝaltu la retkaptejon por uzi vifion per ĉi tiu aparato."
 
 #: panels/network/cc-wifi-panel.blp:119
-#, fuzzy
-#| msgid "Turn Off Hotspot…"
 msgid "T_urn Off Hotspot…"
-msgstr "Malŝalti retkaptejon…"
+msgstr "M_alŝalti retkaptejon…"
 
 #: panels/network/cc-wifi-panel.blp:137
 msgid "Visible Networks"
 msgstr "Videblaj retoj"
 
 #: panels/network/cc-wifi-panel.blp:162
-#, fuzzy
-#| msgid "Unavailable"
 msgid "Wi-Fi Unavailable"
 msgstr "Vifio nedisponebla"
 
@@ -3292,6 +3290,14 @@ msgstr "802.1x _sekureco"
 #: panels/system/users/cc-user-page.blp:77
 msgid "_Name"
 msgstr "_Nomo"
+
+#: panels/network/connection-editor/ce-ip-address-entry.c:52
+msgid "IP address value not valid"
+msgstr "IP-adreso ne estas valida"
+
+#: panels/network/connection-editor/ce-netmask-entry.c:81
+msgid "Netmask value not valid"
+msgstr "Retmasko ne estas valida"
 
 #: panels/network/connection-editor/ce-page-8021x-security.c:106
 #: panels/network/connection-editor/ce-page-security.c:416
@@ -3856,7 +3862,7 @@ msgstr ""
 
 #: panels/network/connection-editor/vpn-helpers.c:148
 #: panels/system/users/cc-add-user-dialog.c:87
-#: panels/system/users/cc-password-dialog.c:150 shell/cc-window.blp:77
+#: panels/system/users/cc-password-dialog.c:157 shell/cc-window.blp:77
 msgid "_OK"
 msgstr "B_one"
 
@@ -4075,15 +4081,12 @@ msgid "Add new connection"
 msgstr "Aldoni novan konekton"
 
 #: panels/network/net-device-wifi.c:881
-#, fuzzy
-#| msgid "Network Mode"
 msgid "Network deleted"
 msgstr "Reto forigita"
 
 #. Translators: %d is the number of network connections deleted.
 #: panels/network/net-device-wifi.c:896
-#, fuzzy, c-format
-#| msgid "No network service"
+#, c-format
 msgid "%d network deleted"
 msgid_plural "%d networks deleted"
 msgstr[0] "%d reto forigita"
@@ -4098,20 +4101,14 @@ msgid "Wireless device does not support Hotspot mode"
 msgstr "Sendrata aparato ne subtenas retkapteja reĝimo"
 
 #: panels/network/net-device-wifi.c:1159
-#, fuzzy
-#| msgid "Not searching for networks"
 msgid "Searching for networks…"
 msgstr "Serĉante retojn…"
 
 #: panels/network/net-device-wifi.c:1176
-#, fuzzy
-#| msgid "Known Wi-Fi Networks"
 msgid "No saved networks"
 msgstr "Neniuj konservitaj retoj"
 
 #: panels/network/network-ethernet.blp:8
-#, fuzzy
-#| msgid "Add new connection"
 msgid "Add Ethernet Connection"
 msgstr "Aldoni dratan konekton"
 
@@ -4125,10 +4122,8 @@ msgid "Provider"
 msgstr "Provizanto"
 
 #: panels/network/network-mobile.ui:289
-#, fuzzy
-#| msgid "_Mobile Data"
 msgid "Mobile Broadband"
-msgstr "Poŝtelefona larĝkapacita"
+msgstr "Poŝtelefona larĝkapacita reto"
 
 #: panels/network/network-mobile.ui:299
 msgid "Not connected"
@@ -4139,10 +4134,8 @@ msgid "Active"
 msgstr "Aktiva"
 
 #: panels/network/network-vpn.blp:15
-#, fuzzy
-#| msgid "Options"
 msgid "VPN Options"
-msgstr "VPR-agordoj"
+msgstr "VPN-agordoj"
 
 #: panels/network/network-wifi.blp:25
 msgctxt "Wi-Fi Hotspot"
@@ -4150,12 +4143,9 @@ msgid "Network Name"
 msgstr "Retnomo"
 
 #: panels/network/network-wifi.blp:33
-#, fuzzy
-#| msgctxt "Wi-Fi Hotspot"
-#| msgid "Security type"
 msgctxt "Wi-Fi Hotspot"
 msgid "Security Type"
-msgstr "Tipo de sekureco"
+msgstr "Sekurectipo"
 
 #: panels/network/network-wifi.blp:41
 msgctxt "Wi-Fi Hotspot"
@@ -4175,8 +4165,6 @@ msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "Ŝ_alti retkaptejon…"
 
 #: panels/network/network-wifi.blp:82
-#, fuzzy
-#| msgid "Known Wi-Fi Networks"
 msgid "Saved Wi-Fi Networks"
 msgstr "Konservitaj vifiaj retoj"
 
@@ -5375,10 +5363,8 @@ msgid "Authentication Required"
 msgstr "Aŭtentigo necesas"
 
 #: panels/printers/pp-new-printer-dialog.ui:271
-#, fuzzy
-#| msgid "Enter username and password to view printers on Print Server."
 msgid "Enter username and password to view printers on Print Server"
-msgstr "Enigu uzantonomon kaj pasvorton por vidi presilojn je presila servilo."
+msgstr "Enigu uzantnomon kaj pasvorton por vidi presilojn ĉe presila servilo"
 
 #: panels/printers/pp-options-dialog.blp:5
 #: panels/printers/pp-options-dialog.blp:29
@@ -5933,7 +5919,7 @@ msgstr "Kontroli aliron al via loko"
 
 #: panels/privacy/cc-privacy-panel.blp:37
 msgid "_File History &amp; Trash"
-msgstr "_Dosierhistorio kaj rubujo"
+msgstr "_Dosierhistorio &amp; rubujo"
 
 #: panels/privacy/cc-privacy-panel.blp:38
 msgid "Remove saved data and files"
@@ -6706,10 +6692,8 @@ msgid "_File Sharing"
 msgstr "_Dosier-kunhavigado"
 
 #: panels/sharing/cc-sharing-panel.blp:31
-#, fuzzy
-#| msgid "Share music, photos and videos over the network."
 msgid "Stream music, photos and videos to devices on the current network"
-msgstr "Kunhavigi muzikon, fotojn kaj videojn sur la reto."
+msgstr "Fluigi muzikon, fotojn kaj videojn al aparatoj en la nuna reto"
 
 #: panels/sharing/cc-sharing-panel.blp:32
 #: panels/sharing/cc-sharing-panel.blp:134
@@ -6755,7 +6739,7 @@ msgstr ""
 "Aparatoj en ĉi tiu reto eble ankoraŭ povos vidi kian enhavon oni kunhavigas."
 
 #: panels/sharing/cc-sharing-panel.blp:113
-#: panels/system/users/cc-add-user-dialog.ui:176
+#: panels/system/users/cc-add-user-dialog.ui:175
 #: panels/system/users/cc-enterprise-login-dialog.blp:87
 msgid "_Password"
 msgstr "_Pasvorto"
@@ -6765,12 +6749,12 @@ msgid "Media Sharing"
 msgstr "Aŭdovid-kunhavigado"
 
 #: panels/sharing/cc-sharing-panel.blp:140
-#, fuzzy
-#| msgid "Share music, photos and videos over the network."
 msgid ""
 "Media sharing allows streaming pictures, music and video to DLNA enabled "
 "devices on the current network."
-msgstr "Kunhavigi muzikon, fotojn kaj videojn sur la reto."
+msgstr ""
+"Aŭdvida kunhavigo ebligas fluigi bildojn, muzikon kaj videojn al DLNA-"
+"aktivigitaj aparatoj en la nuna reto."
 
 #: panels/sharing/cc-sharing-panel.blp:146
 msgid "Folders"
@@ -7151,53 +7135,43 @@ msgstr "aparato;sistemo;informoj;aparatnomo;gastignomo;memoro;procezoro;versio;i
 
 #: panels/system/cc-system-panel.blp:16
 msgid "_Region &amp; Language"
-msgstr "_Regiono & lingvo"
+msgstr "_Regiono &amp; lingvo"
 
 #: panels/system/cc-system-panel.blp:17
 msgid "System language and localization"
-msgstr ""
+msgstr "Sistemlingvo kaj lokaĵigo"
 
 #: panels/system/cc-system-panel.blp:25
-#, fuzzy
-#| msgid "Date &amp; _Time"
 msgid "_Date &amp; Time"
-msgstr "Dato &amp; _horo"
+msgstr "_Dato &amp; horo"
 
 #: panels/system/cc-system-panel.blp:26
-#, fuzzy
-#| msgid "Mouse & Touchpad Settings"
 msgid "Time zone and clock settings"
-msgstr "Agordoj de muso kaj tuŝplato"
+msgstr "Agordoj de horzono kaj horloĝo"
 
 #: panels/system/cc-system-panel.blp:34
 msgid "_Users"
 msgstr "_Uzantoj"
 
 #: panels/system/cc-system-panel.blp:35
-#, fuzzy
-#| msgid "Add or remove users and change your password"
 msgid "Add and remove accounts, change password"
-msgstr "Aldoni aŭ forigi uzantojn kaj ŝanĝi vian pasvorton"
+msgstr "Aldoni kaj forigi kontojn, ŝanĝi pasvorton"
 
 #: panels/system/cc-system-panel.blp:44
-#, fuzzy
-#| msgid "Remote Desktop"
 msgid "R_emote Desktop"
-msgstr "Fora labortablo"
+msgstr "De_fora labortablo"
 
 #: panels/system/cc-system-panel.blp:45
 msgid "Allow this device to be used remotely"
-msgstr ""
+msgstr "Permesi deforan uzon de ĉi tiu aparato"
 
 #: panels/system/cc-system-panel.blp:53
 msgid "Se_cure Shell"
-msgstr ""
+msgstr "Sekura Ŝ_elo"
 
 #: panels/system/cc-system-panel.blp:54
-#, fuzzy
-#| msgid "Has network access"
 msgid "SSH network access"
-msgstr "Havas retaliron"
+msgstr "SSH-retaliro"
 
 #: panels/system/cc-system-panel.blp:61
 msgid "_About"
@@ -7205,13 +7179,11 @@ msgstr "_Pri"
 
 #: panels/system/cc-system-panel.blp:62
 msgid "Hardware details and software versions"
-msgstr ""
+msgstr "Aparataj detaloj kaj programaraj versioj"
 
 #: panels/system/cc-system-panel.blp:75
-#, fuzzy
-#| msgid "Software Updates"
 msgid "S_oftware Updates"
-msgstr "Programaraj ĝisdatigoj"
+msgstr "Ĝisdatigoj de pr_ogramaro"
 
 #: panels/system/datetime/cc-datetime-page.blp:9
 #: panels/system/datetime/cc-datetime-page.blp:77
@@ -7229,7 +7201,7 @@ msgstr "_Monato"
 
 #: panels/system/datetime/cc-datetime-page.blp:64
 msgid "_Day"
-msgstr ""
+msgstr "_Tago"
 
 #: panels/system/datetime/cc-datetime-page.blp:95
 msgid "Automatic _Date &amp; Time"
@@ -7269,7 +7241,7 @@ msgstr "ATM / _PTM"
 
 #: panels/system/datetime/cc-datetime-page.blp:154
 msgid "Clock &amp; Calendar"
-msgstr ""
+msgstr "Horloĝo &amp; kalendaro"
 
 #: panels/system/datetime/cc-datetime-page.blp:155
 msgid "Control how the time and date is shown in the top bar"
@@ -7281,21 +7253,19 @@ msgstr "_Semajna tago"
 
 #: panels/system/datetime/cc-datetime-page.blp:163
 msgid "D_ate"
-msgstr ""
+msgstr "D_ato"
 
 #: panels/system/datetime/cc-datetime-page.blp:168
 msgid "_Seconds"
 msgstr "_Sekundoj"
 
 #: panels/system/datetime/cc-datetime-page.blp:173
-#, fuzzy
-#| msgid "Week Numbers"
 msgid "Week _Numbers"
-msgstr "Semajnaj numeroj"
+msgstr "Semajnaj _numeroj"
 
 #: panels/system/datetime/cc-datetime-page.blp:174
 msgid "Shown in the dropdown calendar"
-msgstr ""
+msgstr "Montrata en la falmenua kalendaro"
 
 #: panels/system/datetime/cc-datetime-page.blp:207
 msgid "January"
@@ -7569,7 +7539,7 @@ msgstr "Ensalutaj detaloj"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.blp:84
 #: panels/system/remote-desktop/cc-remote-login-page.blp:84
-#: panels/system/users/cc-add-user-dialog.ui:87
+#: panels/system/users/cc-add-user-dialog.ui:64
 #: panels/system/users/cc-enterprise-login-dialog.blp:81
 msgid "_Username"
 msgstr "_Uzantonomo"
@@ -7652,28 +7622,24 @@ msgid "Authentication is required to enable or disable remote sessions"
 msgstr "Aŭtentigo necesas por ebligi aŭ malebligi deforajn seancojn"
 
 #: panels/system/secure-shell/cc-secure-shell-page.blp:5
-#, fuzzy
-#| msgid "Secure network"
 msgid "Secure Shell"
-msgstr "Sekura reto"
+msgstr "Sekura Ŝelo"
 
 #: panels/system/secure-shell/cc-secure-shell-page.blp:19
 msgid "Access this device using Secure Shell (SSH)"
-msgstr ""
+msgstr "Atingi ĉi tiun aparaton per Sekura Ŝelo (SSH)"
 
 #: panels/system/secure-shell/cc-secure-shell-page.blp:29
 msgid "_Secure Shell"
-msgstr ""
+msgstr "_Sekura Ŝelo"
 
 #: panels/system/secure-shell/cc-secure-shell-page.blp:35
 msgid "SSH Login _Command"
-msgstr ""
+msgstr "SSH-saluta _komando"
 
 #: panels/system/secure-shell/cc-secure-shell-page.c:53
-#, fuzzy
-#| msgid "Copy a screenshot to clipboard"
 msgid "Command copied to clipboard"
-msgstr "Kopii ekrankopion al tondujo"
+msgstr "Komando kopiita al la tondujo"
 
 #: panels/system/secure-shell/org.gnome.controlcenter.remote-login-helper.policy.in.in:11
 msgid "Enable or disable remote login"
@@ -7688,16 +7654,12 @@ msgid "Failed to add account"
 msgstr "Malsukcesis aldoni konton"
 
 #: panels/system/users/cc-add-user-dialog.c:282
-#, fuzzy
-#| msgid "Password"
 msgid "Passwords match"
-msgstr "Pasvorto"
+msgstr "Pasvortoj kongruas"
 
 #: panels/system/users/cc-add-user-dialog.c:282
-#, fuzzy
-#| msgid "The passwords do not match."
 msgid "Passwords do not match"
-msgstr "La pasvortoj ne kongruas."
+msgstr "La pasvortoj ne kongruas"
 
 #: panels/system/users/cc-add-user-dialog.c:362
 #: panels/wwan/cc-wwan-sim-lock-dialog.blp:21
@@ -7709,81 +7671,61 @@ msgid "Add User"
 msgstr "Aldoni uzanton"
 
 #: panels/system/users/cc-add-user-dialog.ui:53
-#, fuzzy
-#| msgctxt "Password mode"
-#| msgid "Account disabled"
-msgid "Account Type"
-msgstr "Konto estas malŝaltita"
+msgid "User Details"
+msgstr "Uzant-detaloj"
 
-#: panels/system/users/cc-add-user-dialog.ui:57
-#, fuzzy
-#| msgid "Administrator"
+#: panels/system/users/cc-add-user-dialog.ui:56
+msgid "Fu_ll Name"
+msgstr "Plena _nomo"
+
+#: panels/system/users/cc-add-user-dialog.ui:72
+msgid ""
+"Usernames can only include lower case letters, numbers, hyphens and "
+"underscores."
+msgstr ""
+"Uzantonomoj povas enhavi nur minusklajn literojn, ciferojn, streketojn kaj "
+"substreketojn."
+
+#: panels/system/users/cc-add-user-dialog.ui:83
 msgid "Ad_ministrator"
-msgstr "Administranto"
+msgstr "Ad_ministranto"
 
-#: panels/system/users/cc-add-user-dialog.ui:62
+#: panels/system/users/cc-add-user-dialog.ui:88
 #: panels/system/users/cc-user-page.blp:139
 msgid ""
 "Administrators have extra abilities, including adding and removing users, "
 "changing login settings, and removing software. Parental controls cannot be "
 "applied to administrators."
 msgstr ""
+"Administrantoj havas kromajn kapablojn, inkluzive aldoni kaj forigi "
+"uzantojn, ŝanĝi salut-agordojn kaj forigi programaron. Gepatraj kontroloj ne "
+"aplikeblas al administrantoj."
 
-#: panels/system/users/cc-add-user-dialog.ui:76
-#, fuzzy
-#| msgid "%s Details"
-msgid "User Details"
-msgstr "%s detaloj"
-
-#: panels/system/users/cc-add-user-dialog.ui:79
-#, fuzzy
-#| msgid "_Name"
-msgid "Fu_ll Name"
-msgstr "_Nomo"
-
-#: panels/system/users/cc-add-user-dialog.ui:95
-msgid ""
-"Usernames can only include lower case letters, numbers, hyphens and "
-"underscores."
-msgstr ""
-
-#: panels/system/users/cc-add-user-dialog.ui:107
-#, fuzzy
-#| msgid "User sets password on first login"
+#: panels/system/users/cc-add-user-dialog.ui:106
 msgid "User sets password on _first login"
-msgstr "Uzanto metas pasvorton ĉe la unua ensaluto"
+msgstr "Uzanto metas pasvorton ĉe la _unua saluto"
 
-#: panels/system/users/cc-add-user-dialog.ui:120
-#, fuzzy
-#| msgid "Set password now"
+#: panels/system/users/cc-add-user-dialog.ui:119
 msgid "Set password n_ow"
-msgstr "Agordi pasvorton nun"
+msgstr "Ag_ordi pasvorton nun"
 
-#: panels/system/users/cc-add-user-dialog.ui:143
-#, fuzzy
-#| msgid "New Password"
+#: panels/system/users/cc-add-user-dialog.ui:142
 msgid "Set Password"
-msgstr "Nova pasvorto"
+msgstr "Agordi pasvorton"
 
-#: panels/system/users/cc-add-user-dialog.ui:219
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to use a mixture of letters, numbers and punctuation."
+#: panels/system/users/cc-add-user-dialog.ui:218
 msgid ""
 "For a good password, mix upper case, lower case, numbers and punctuation."
-msgstr "Klopodu uzi kunmeton de literoj, ciferoj kaj interpunkcio."
+msgstr ""
+"Por bona pasvorto, miksu majusklojn, minusklojn, ciferojn kaj interpunkciojn."
 
-#: panels/system/users/cc-add-user-dialog.ui:229
-#, fuzzy
-#| msgid "Confirm Password"
+#: panels/system/users/cc-add-user-dialog.ui:228
 msgid "_Confirm Password"
-msgstr "Konfirmi pasvorton"
+msgstr "_Konfirmi pasvorton"
 
 #: panels/system/users/cc-avatar-chooser.blp:17
-#, fuzzy
-#| msgid "Edit avatar"
 msgid "Stock avatars"
-msgstr "Redakti avataron"
+msgstr "Pretaj avataroj"
 
 #: panels/system/users/cc-avatar-chooser.blp:26
 msgid "Select a File…"
@@ -7799,10 +7741,8 @@ msgstr "Foliumi por pliaj bildoj"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:13
 #: panels/system/users/cc-enterprise-login-dialog.blp:28
-#, fuzzy
-#| msgid "Enterprise Login"
 msgid "Add Enterprise Login"
-msgstr "Entreprena saluto"
+msgstr "Aldoni entreprenan saluton"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:21
 msgid "Offline"
@@ -7810,37 +7750,27 @@ msgstr "Malkonektite"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:22
 msgid "A network connection is needed to add enterprise login accounts."
-msgstr ""
+msgstr "Reta konekto necesas por aldoni entreprenajn salutkontojn."
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:63
-#, fuzzy
-#| msgid ""
-#| "Enterprise login allows an existing centrally managed user account to be "
-#| "used on this device. You can also use this account to access company "
-#| "resources on the internet."
 msgid ""
 "Enterprise login allows an existing centrally managed account to be used on "
 "this device."
 msgstr ""
-"Entreprena salutado permesas uzadon de ekzistanta, centre mastrumata "
-"uzantokonto sur ĉi tiu aparato. Vi povas ankaŭ uzi tiun konto por aliri "
-"firmaajn risurcojn sur la interreto."
+"Entreprena salutado ebligas uzi ekzistantan, centre mastrumatan konton en ĉi "
+"tiu aparato."
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:67
 msgid "_Domain"
 msgstr "_Domajno"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:74
-#, fuzzy
-#| msgid "Should match the web address of your login provider."
 msgid "Should match the web domain of the account provider"
-msgstr "Devus akordi al la retadredo de via salut-provizanto."
+msgstr "Devus kongrui kun la ret-domajno de la kont-provizanto"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:97
-#, fuzzy
-#| msgid "Input Device"
 msgid "Enroll Device"
-msgstr "Eniga aparato"
+msgstr "Aliĝigi aparaton"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:108
 msgid "_Enroll"
@@ -7851,10 +7781,8 @@ msgid "Administrator _Name"
 msgstr "Administranto-_nomo"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:132
-#, fuzzy
-#| msgid "Administrator Password"
 msgid "Administrator _Password"
-msgstr "Administranto-pasvorto"
+msgstr "_Pasvorto de administranto"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:148
 #: panels/system/users/cc-enterprise-login-dialog.c:186
@@ -7873,35 +7801,17 @@ msgstr "Ne valida maniero por aŭtentigi per tiu ĉi domajno"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:300
 #: panels/system/users/cc-enterprise-login-dialog.c:489
-#, fuzzy
-#| msgid ""
-#| "That login name didn’t work.\n"
-#| "Please try again."
 msgid "That login name didn’t work"
-msgstr ""
-"Tiu salutnomo ne funkciis.\n"
-"Bonvolu provi denove."
+msgstr "Tiu salutnomo ne funkciis"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:307
 #: panels/system/users/cc-enterprise-login-dialog.c:496
-#, fuzzy
-#| msgid ""
-#| "That login password didn’t work.\n"
-#| "Please try again."
 msgid "That login password didn’t work"
-msgstr ""
-"Tiu salut-pasvorto ne funkciis.\n"
-"Bonvolu provi denove."
+msgstr "Tiu saluta pasvorto ne funkciis"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:314
-#, fuzzy
-#| msgid ""
-#| "That login name didn’t work.\n"
-#| "Please try again."
 msgid "That hostname didn’t work"
-msgstr ""
-"Tiu salutnomo ne funkciis.\n"
-"Bonvolu provi denove."
+msgstr "Tiu gastignomo ne funkciis"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:321
 #: panels/system/users/cc-enterprise-login-dialog.c:504
@@ -7922,26 +7832,20 @@ msgstr ""
 "pasvorton."
 
 #: panels/system/users/cc-enterprise-login-dialog.c:548
-#, fuzzy
-#| msgid "Failed to join domain"
 msgid "Valid domain"
-msgstr "Malsukcesis aliĝi al domajno"
+msgstr "Valida domajno"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:553
-#, fuzzy
-#| msgid "Modem not found"
 msgid "Domain not found"
-msgstr "Modemo ne trovita"
+msgstr "Domajno ne trovita"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:601
 msgid "Checking domain…"
-msgstr ""
+msgstr "Kontrolante domajnon…"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:645
-#, fuzzy
-#| msgid "Failed to authorize device: "
 msgid "Failed to contact realmd service"
-msgstr "Malsukcesis aŭtentigi aparaton: "
+msgstr "Malsukcesis kontakti la servon realmd"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:90
 msgid "No fingerprint device"
@@ -7953,10 +7857,8 @@ msgid "No Fingerprint device"
 msgstr "Neniu fingroprema aparato"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:114
-#, fuzzy
-#| msgid "Ensure the device is properly connected."
 msgid "Ensure the device is properly connected"
-msgstr "Certigu ke la aparato estas konektita."
+msgstr "Certigu, ke la aparato estas ĝuste konektita"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:122
 msgid "Fingerprint Device"
@@ -7971,15 +7873,11 @@ msgid "Fingerprint Login"
 msgstr "Fingroprema salutado"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:168
-#, fuzzy
-#| msgid ""
-#| "Fingerprint login allows you to unlock and log into your computer with "
-#| "your finger"
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
 msgstr ""
-"Fingroprema salutado permesas al vi malŝlosi kaj saluti je via komputilo per "
+"Fingroprema salutado ebligas al vi malŝlosi kaj saluti en vian aparaton per "
 "via fingro"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:194
@@ -8000,7 +7898,7 @@ msgstr "la aparato jam estas postulita per alia procezo"
 
 #: panels/system/users/cc-fingerprint-dialog.c:238
 msgid "you do not have permission to perform the action"
-msgstr ""
+msgstr "vi ne havas permeson por fari la agon"
 
 #: panels/system/users/cc-fingerprint-dialog.c:240
 msgid "no prints have been enrolled"
@@ -8016,7 +7914,7 @@ msgstr "Malsukcesis komuniki kun la fingrospura legilo"
 
 #: panels/system/users/cc-fingerprint-dialog.c:255
 msgid "Failed to communicate with the fingerprint daemon"
-msgstr ""
+msgstr "Malsukcesis komuniki kun la fingrospura demono"
 
 #: panels/system/users/cc-fingerprint-dialog.c:509
 #, c-format
@@ -8083,7 +7981,7 @@ msgstr "Fingrospura aparato malkonektita"
 
 #: panels/system/users/cc-fingerprint-dialog.c:777
 msgid "Fingerprint device storage is full"
-msgstr ""
+msgstr "Konservejo de fingrospura aparato estas plena"
 
 #: panels/system/users/cc-fingerprint-dialog.c:781
 msgid "Fingerprint is duplicate"
@@ -8113,6 +8011,8 @@ msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr ""
+"Ripete levu kaj metu vian fingron sur la legilon por registri vian "
+"fingrospuron"
 
 #: panels/system/users/cc-fingerprint-dialog.c:1015
 msgid "_Re-enroll this finger…"
@@ -8144,22 +8044,21 @@ msgid "Failed to get fingerprint devices: %s"
 msgstr "Malsukcesis akiri fingrospurajn aparatojn: %s"
 
 #: panels/system/users/cc-fingerprint-dialog.c:1395
-#, fuzzy
-#| msgid "_Delete Fingerprints"
 msgid "Delete All Fingerprints?"
-msgstr "_Forigi fingropremojn"
+msgstr "Ĉu forigi ĉiujn fingrospurojn?"
 
 #: panels/system/users/cc-fingerprint-dialog.c:1396
 msgid ""
 "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
 "enable Fingerprint Login at least one fingerprint will have to be enrolled."
 msgstr ""
+"Forigo de ĉiuj registritaj fingrospuroj malebligos fingrospuran salutadon. "
+"Por reebligi fingrospuran salutadon, almenaŭ unu fingrospuro devas esti "
+"registrita."
 
 #: panels/system/users/cc-fingerprint-dialog.c:1401
-#, fuzzy
-#| msgid "_Delete"
 msgid "_Delete All"
-msgstr "_Forigi"
+msgstr "_Forigi ĉiujn"
 
 #: panels/system/users/cc-password-dialog.c:129
 msgid "Please choose another password."
@@ -8194,10 +8093,8 @@ msgid "Confirm Password"
 msgstr "Konfirmi pasvorton"
 
 #: panels/system/users/cc-password-dialog.ui:94
-#, fuzzy
-#| msgid "The passwords do not match."
 msgid "The passwords do not match"
-msgstr "La pasvortoj ne kongruas."
+msgstr "La pasvortoj ne kongruas"
 
 #: panels/system/users/cc-password-dialog.ui:130
 msgid "Allow user to change their password on next login"
@@ -8237,22 +8134,16 @@ msgstr "Ne eblis koneti al la %s domajno: %s"
 #: panels/system/users/cc-user-page.blp:111
 #: panels/system/users/cc-user-page.blp:131
 #: panels/system/users/cc-user-page.blp:161
-#, fuzzy
-#| msgid "Unlock to Change Settings"
 msgid "Unlock to Change This Setting"
-msgstr "Malŝlosi por ŝanĝi agordojn"
+msgstr "Malŝlosu por ŝanĝi ĉi tiun agordon"
 
 #: panels/system/users/cc-user-page.blp:38
-#, fuzzy
-#| msgid "Change Wallpaper"
 msgid "Change Avatar"
-msgstr "Ŝanĝi ekranfonon"
+msgstr "Ŝanĝi avataron"
 
 #: panels/system/users/cc-user-page.blp:57
-#, fuzzy
-#| msgid "Remove Account"
 msgid "Remove Avatar"
-msgstr "Forigi konton"
+msgstr "Forigi avataron"
 
 #: panels/system/users/cc-user-page.blp:87
 msgid "Pa_ssword"
@@ -8272,6 +8163,9 @@ msgid ""
 "requiring authentication. Authentication is still required at other times, "
 "such as when unlocking the screen."
 msgstr ""
+"Aŭtomata salutado malfermas la uzantkonton kiam la aparato ekfunkcias, sen "
+"postuli aŭtentigon. Aŭtentigo tamen bezonatas en aliaj momentoj, ekzemple ĉe "
+"malŝloso de la ekrano."
 
 #: panels/system/users/cc-user-page.blp:132
 msgid "_Administrator"
@@ -8282,10 +8176,8 @@ msgid "_Parental Controls"
 msgstr "Ge_patraj kontroliloj"
 
 #: panels/system/users/cc-user-page.blp:150
-#, fuzzy
-#| msgid "Open the Parental Controls app."
 msgid "Open the Parental Controls app"
-msgstr "Malfermi la gepatrajn kontrolilojn."
+msgstr "Malfermi la apon Gepatraj kontroliloj"
 
 #: panels/system/users/cc-user-page.blp:176
 msgid "_Remove User…"
@@ -8296,12 +8188,11 @@ msgid ""
 "The user will not be able to use this device once their account has been "
 "removed"
 msgstr ""
+"La uzanto ne povos uzi ĉi tiun aparaton post kiam lia konto estos forigita"
 
 #: panels/system/users/cc-user-page.blp:204
-#, fuzzy
-#| msgid "Delete Files and Settings"
 msgid "_Delete Files and Settings"
-msgstr "Forigi dosierojn kaj agordojn"
+msgstr "_Forigi dosierojn kaj agordojn"
 
 #: panels/system/users/cc-user-page.c:203
 msgctxt "Password mode"
@@ -8338,10 +8229,8 @@ msgid "_Add User"
 msgstr "_Aldoni uzanton"
 
 #: panels/system/users/cc-users-page.blp:34
-#, fuzzy
-#| msgid "Enterprise Login"
 msgid "Add _Enterprise Login"
-msgstr "Entreprena saluto"
+msgstr "Aldoni _entreprenan saluton"
 
 #: panels/system/users/gnome-users-panel.desktop.in:3
 msgid "Add or remove users and change your password"
@@ -8350,7 +8239,7 @@ msgstr "Aldoni aŭ forigi uzantojn kaj ŝanĝi vian pasvorton"
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/users/gnome-users-panel.desktop.in:14
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;Kid;Child;"
-msgstr ""
+msgstr "saluto;nomo;fingrospuro;avataro;emblemo;vizaĝo;pasvorto;gepatra;limigoj;uzado;ido;infano;"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
@@ -8361,217 +8250,162 @@ msgid "Authentication is required to change user data"
 msgstr "Aŭtentigo necesas por ŝanĝi uzanto-datumojn"
 
 #: panels/system/users/pw-utils.c:105
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "The new password needs to be different from the old one."
 msgctxt "Password hint"
 msgid "The new password needs to be different from the old one"
-msgstr "La nova pasvorta devas esti malsama al la malnova."
+msgstr "La nova pasvorto devas esti malsama ol la malnova"
 
 #: panels/system/users/pw-utils.c:107
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try changing some letters and numbers."
 msgctxt "Password hint"
 msgid "Try changing some letters and numbers"
-msgstr "Provu ŝanĝi kelkajn leterojn kaj nombrojn."
+msgstr "Provu ŝanĝi kelkajn literojn kaj ciferojn"
 
 #: panels/system/users/pw-utils.c:109 panels/system/users/pw-utils.c:117
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try changing the password a bit more."
 msgctxt "Password hint"
 msgid "Try changing the password a bit more"
-msgstr "Provu ŝanĝi la pasvorton iom pli."
+msgstr "Provu ŝanĝi la pasvorton iom pli"
 
 #: panels/system/users/pw-utils.c:111
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "A password without your user name would be stronger."
 msgctxt "Password hint"
 msgid "A password without your user name would be stronger"
-msgstr "Pasvorto sen via uzantonomo estus pli forta."
+msgstr "Pasvorto sen via uzantnomo estus pli forta"
 
 #: panels/system/users/pw-utils.c:113
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to avoid using your name in the password."
 msgctxt "Password hint"
 msgid "Try to avoid using your name in the password"
-msgstr "Klopodu eviti vian uzantonomon en la pasvorto."
+msgstr "Klopodu eviti vian nomon en la pasvorto"
 
 #: panels/system/users/pw-utils.c:115
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to avoid some of the words included in the password."
 msgctxt "Password hint"
 msgid "Try to avoid some of the words included in the password"
-msgstr "Klopodu eviti kelkajn vortojn, jam inkluditaj en la pasvorto."
+msgstr "Klopodu eviti iujn el la vortoj inkluditaj en la pasvorto"
 
 #: panels/system/users/pw-utils.c:119
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to avoid common words."
 msgctxt "Password hint"
 msgid "Avoid common words"
-msgstr "Klopodu eviti komunajn vortojn."
+msgstr "Evitu oftajn vortojn"
 
 #: panels/system/users/pw-utils.c:121
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to avoid reordering existing words."
 msgctxt "Password hint"
 msgid "Try to avoid reordering existing words"
-msgstr "Klopodu eviti reordon de jamaj vortoj."
+msgstr "Klopodu eviti reordon de ekzistantaj vortoj"
 
 #: panels/system/users/pw-utils.c:123
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to use more numbers."
 msgctxt "Password hint"
 msgid "Try to use more numbers"
-msgstr "Klopodu uzi pli da ciferoj."
+msgstr "Klopodu uzi pli da ciferoj"
 
 #: panels/system/users/pw-utils.c:125
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to use more uppercase letters."
 msgctxt "Password hint"
 msgid "Try to use more uppercase letters"
-msgstr "Klopodu uzi pli da majusklaj literoj."
+msgstr "Klopodu uzi pli da majusklaj literoj"
 
 #: panels/system/users/pw-utils.c:127
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to use more lowercase letters."
 msgctxt "Password hint"
 msgid "Try to use more lowercase letters"
-msgstr "Klopodu uzi pli da minusklaj literoj."
+msgstr "Klopodu uzi pli da minusklaj literoj"
 
 #: panels/system/users/pw-utils.c:129
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to use more special characters, like punctuation."
 msgctxt "Password hint"
 msgid "Try to use more special characters, like punctuation"
-msgstr "Klopodu uzi pli da specialaj signoj, kiel interpunkcio."
+msgstr "Klopodu uzi pli da specialaj signoj, ekzemple interpunkcio"
 
 #: panels/system/users/pw-utils.c:131
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to use a mixture of letters, numbers and punctuation."
 msgctxt "Password hint"
 msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr "Klopodu uzi kunmeton de literoj, ciferoj kaj interpunkcio."
+msgstr "Klopodu uzi miksaĵon de literoj, ciferoj kaj interpunkcio"
 
 #: panels/system/users/pw-utils.c:133
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to avoid repeating the same character."
 msgctxt "Password hint"
 msgid "Try to avoid repeating the same character"
-msgstr "Klopodu eviti ripeto de la sama signo."
+msgstr "Klopodu eviti ripeton de la sama signo"
 
 #: panels/system/users/pw-utils.c:135
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid ""
-#| "Try to avoid repeating the same type of character: you need to mix up "
-#| "letters, numbers and punctuation."
 msgctxt "Password hint"
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation"
 msgstr ""
-"Klopodu eviti ripeto de la sama signo: vi kunmetu literojn, ciferojn kaj "
-"interpunkcion."
+"Klopodu eviti ripeton de la sama tipo de signo: vi bezonas miksi literojn, "
+"ciferojn kaj interpunkcion"
 
 #: panels/system/users/pw-utils.c:137
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to avoid sequences like 1234 or abcd."
 msgctxt "Password hint"
 msgid "Try to avoid sequences like 1234 or abcd"
-msgstr "Klopodu eviti sekvencojn kiel 1234 aŭ abcd."
+msgstr "Klopodu eviti sekvencojn kiel 1234 aŭ abcd"
 
 #: panels/system/users/pw-utils.c:139
-#, fuzzy
-#| msgid "Password could not be changed"
 msgctxt "Password hint"
 msgid "Password needs to be longer"
-msgstr "Ne eblis ŝanĝi pasvorton"
+msgstr "Pasvorto devas esti pli longa"
 
 #: panels/system/users/pw-utils.c:141
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Mix uppercase and lowercase and try to use a number or two."
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and try to use a number or two"
-msgstr "Kunmetu majusklojn kaj minusklojn, kaj uzu almenaŭ unu ciferon."
+msgstr "Miksu majusklojn kaj minusklojn, kaj uzu unu aŭ du ciferojn"
 
 #: panels/system/users/pw-utils.c:143
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid ""
-#| "Password needs to be longer. Try to add more letters, numbers and "
-#| "punctuation."
 msgctxt "Password hint"
 msgid "Valid password. Try adding more letters, numbers and punctuation"
-msgstr ""
-"Pasvorto devas esti pli longa. Klopodu aldoni pli da literoj, ciferoj kaj "
-"interpunkcioj."
+msgstr "Valida pasvorto. Provu aldoni pli da literoj, ciferoj kaj interpunkcio"
 
 #: panels/system/users/pw-utils.c:183
-#, fuzzy
-#| msgid "Incorrect password"
 msgid "Great password!"
-msgstr "Malĝusta pasvorto"
+msgstr "Bonega pasvorto!"
 
 #: panels/system/users/run-passwd.c:390
 msgid "Authentication failed"
 msgstr "Aŭtentigo malsukcesis"
 
-#: panels/system/users/run-passwd.c:469
+#: panels/system/users/run-passwd.c:470
 #, c-format
 msgid "The new password is too short"
 msgstr "La pasvorto estas tro mallonga"
 
-#: panels/system/users/run-passwd.c:475
+#: panels/system/users/run-passwd.c:476
 #, c-format
 msgid "The new password is too simple"
 msgstr "La pasvorto estas tro simpla"
 
-#: panels/system/users/run-passwd.c:481
+#: panels/system/users/run-passwd.c:482
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "La malnova kaj nova pasvortoj tro similaj"
 
-#: panels/system/users/run-passwd.c:484
+#: panels/system/users/run-passwd.c:485
 #, c-format
 msgid "The new password has already been used recently."
 msgstr "La nova pasvorto jam estis uzata."
 
-#: panels/system/users/run-passwd.c:487
+#: panels/system/users/run-passwd.c:488
 #, c-format
 msgid "The new password must contain numeric or special characters"
 msgstr "La nova pasvorto devas enhavi ciferajn aŭ specialan signojn"
 
-#: panels/system/users/run-passwd.c:491
+#: panels/system/users/run-passwd.c:492
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "La malnova kaj nova pasvortoj estas identaj"
 
-#: panels/system/users/run-passwd.c:495
+#: panels/system/users/run-passwd.c:496
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "Via pasvorto estas ŝanĝita ekde kiam vi unuafoje aŭtentiĝis!"
 
-#: panels/system/users/run-passwd.c:499
+#: panels/system/users/run-passwd.c:500
 #, c-format
 msgid "The new password does not contain enough different characters"
 msgstr "La nova pasvorto ne enhavas sufiĉe da diversaj signoj"
 
-#: panels/system/users/run-passwd.c:503 panels/wwan/cc-wwan-errors-private.h:72
+#: panels/system/users/run-passwd.c:503
+#, c-format
+msgid ""
+"Password does not meet your organization's security policies. Try a "
+"different password or contact your system administrator."
+msgstr ""
+"La pasvorto ne plenumas la sekurecajn politikojn de via organizo. Provu "
+"alian pasvorton aŭ kontaktu vian sistem-administranton."
+
+#: panels/system/users/run-passwd.c:507 panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Nekonata eraro"
@@ -8580,7 +8414,7 @@ msgstr "Nekonata eraro"
 #: panels/system/users/user-utils.c:148
 #, c-format
 msgid "Usernames cannot include “%s”"
-msgstr ""
+msgstr "Uzantnomoj ne povas enhavi “%s”"
 
 #: panels/system/users/user-utils.c:152
 msgid "Username is already in use — please choose another"
@@ -8598,14 +8432,10 @@ msgid "Cursor Size"
 msgstr "Grando de musmontrilo"
 
 #: panels/universal-access/cc-cursor-size-page.blp:12
-#, fuzzy
-#| msgid ""
-#| "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgid ""
 "Cursor size can be combined with Zoom to make it easier to see the cursor"
 msgstr ""
-"Grando de musmontrilo povas esti kombinita kun zomo por plifaciligi vidadon "
-"de musmontrilon."
+"Kursora grando povas esti kombinita kun Zomo por plifaciligi vidi la kursoron"
 
 #: panels/universal-access/cc-ua-hearing-page.blp:5
 msgid "Hearing"
@@ -8617,17 +8447,15 @@ msgstr "_Treplifortigo"
 
 #: panels/universal-access/cc-ua-hearing-page.blp:16
 msgid "Allow volume to exceed 100%, with reduced sound quality"
-msgstr ""
+msgstr "Permesi laŭtecon superi 100 %, kun reduktita sonkvalito"
 
 #: panels/universal-access/cc-ua-hearing-page.blp:34
 msgid "Visual Alerts"
 msgstr "Vidaj avertoj"
 
 #: panels/universal-access/cc-ua-hearing-page.blp:35
-#, fuzzy
-#| msgid "Use a visual indication when an alert sound occurs."
 msgid "Use a visual indication when an alert sound occurs"
-msgstr "Uzi vidan indikon kiam averta sono okazas."
+msgstr "Uzi vidan indikon kiam okazas averta sono"
 
 #: panels/universal-access/cc-ua-hearing-page.blp:38
 msgid "_Visual Alerts"
@@ -8635,21 +8463,19 @@ msgstr "_Videblaj avertoj"
 
 #: panels/universal-access/cc-ua-hearing-page.blp:44
 msgid "_Flash Area"
-msgstr ""
+msgstr "_Fulmigi areon"
 
 #: panels/universal-access/cc-ua-hearing-page.blp:50
 msgid "Entire Screen"
-msgstr "Tutta ekrano"
+msgstr "Tuta ekrano"
 
 #: panels/universal-access/cc-ua-hearing-page.blp:51
 msgid "Entire Window"
 msgstr "Tuta fenestro"
 
 #: panels/universal-access/cc-ua-hearing-page.blp:60
-#, fuzzy
-#| msgid "_Test flash"
 msgid "_Test Flash"
-msgstr "_Provi fulmadon"
+msgstr "_Testi fulmadon"
 
 #. Translators: This will be presented as the text of a link to the Sound panel
 #: panels/universal-access/cc-ua-hearing-page.c:156
@@ -8659,10 +8485,9 @@ msgstr "Sono"
 
 #. Translators: %s is a link to the Sound panel with the label "Sound"
 #: panels/universal-access/cc-ua-hearing-page.c:158
-#, fuzzy, c-format
-#| msgid "Change system time and date settings"
+#, c-format
 msgid "System volume can be adjusted in %s settings"
-msgstr "Ŝanĝi sistemajn agordoj pri horo kaj dato"
+msgstr "Sisteman laŭtecon eblas ĝustigi en la agordoj de %s"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:5
 msgid "Pointing & Clicking"
@@ -8674,7 +8499,7 @@ msgstr "_Musklavoj"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:16
 msgid "Use numeric keypad to move your mouse pointer"
-msgstr ""
+msgstr "Uzi nombrajn klavojn por movi la musmontrilon"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:21
 msgid "_Locate Pointer"
@@ -8682,15 +8507,15 @@ msgstr "_Lokigi indikilon"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:22
 msgid "Reveal pointer location by pressing Left Ctrl"
-msgstr ""
+msgstr "Malkaŝi lokon de montrilo premante Maldekstran Stir (Ktrl)"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:27
 msgid "_Activate Windows on Hover"
-msgstr ""
+msgstr "_Aktivigi fenestrojn ĉe ŝvebado"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:28
 msgid "Place the pointer over a window to activate it"
-msgstr ""
+msgstr "Meti la montrilon super fenestro por aktivigi ĝin"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:33
 msgid "_Double-Click Delay"
@@ -8727,18 +8552,14 @@ msgid "_Simulated Secondary Click"
 msgstr "_Simulita duaranĝa alklako"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:62
-#, fuzzy
-#| msgid "Trigger a secondary click by holding down the primary button"
 msgid "Secondary click by holding down the primary mouse button"
-msgstr "Fari duaranĝan alklakon per premteni la ĉefa butono"
+msgstr "Duaranga alklako per premteni la ĉefan musbutonon"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:67
 #: panels/universal-access/cc-ua-typing-page.blp:155
 #: panels/universal-access/cc-ua-typing-page.blp:196
-#, fuzzy
-#| msgid "A_cceptance delay:"
 msgid "Acceptance Delay"
-msgstr "Antaŭak_cepta prokrasto:"
+msgstr "Akcepto-prokrasto"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:90
 msgid "_Hover Click"
@@ -8766,14 +8587,12 @@ msgid "Large"
 msgstr "Grande"
 
 #: panels/universal-access/cc-ua-panel.blp:16
-#, fuzzy
-#| msgid "Accessibility"
 msgid "_Always Show Accessibility Menu"
-msgstr "Alirebleco"
+msgstr "Ĉiam montri _alireblecan menuon"
 
 #: panels/universal-access/cc-ua-panel.blp:17
 msgid "Display the accessibility menu in the top bar"
-msgstr ""
+msgstr "Montri la alireblecan menuon en la supra breto"
 
 #: panels/universal-access/cc-ua-panel.blp:24
 msgid "_Seeing"
@@ -8788,10 +8607,8 @@ msgid "_Typing"
 msgstr "_Tajpado"
 
 #: panels/universal-access/cc-ua-panel.blp:48
-#, fuzzy
-#| msgid "Pointing & Clicking"
 msgid "_Pointing and Clicking"
-msgstr "Indiki & klaki"
+msgstr "_Indiki kaj alklaki"
 
 #: panels/universal-access/cc-ua-panel.blp:56
 msgid "_Zoom"
@@ -8810,16 +8627,12 @@ msgid "Screen _Reader"
 msgstr "Ek_ranlegilo"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:27
-#, fuzzy
-#| msgid "The screen reader reads displayed text as you move the focus."
 msgid "The screen reader reads displayed text as you move the focus"
-msgstr "La ekranlegilo legas vidigan tekston, kiun vi fokusas."
+msgstr "La ekranlegilo laŭtlegas montratan tekston dum vi movas la fokuson"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:32
-#, fuzzy
-#| msgid "Configuration"
 msgid "Co_nfigure"
-msgstr "Agordoj"
+msgstr "A_gordi"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:43
 msgid "_High Contrast"
@@ -8827,23 +8640,23 @@ msgstr "_Alta kontrasto"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:44
 msgid "Increase color contrast of foreground and background interface elements"
-msgstr ""
+msgstr "Plialtigi kolor-kontraston de malfonaj kaj fonaj interfaco-elementoj"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:49
 msgid "_On/Off Shapes"
-msgstr ""
+msgstr "_Ŝalt-/Malŝalt-formoj"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:50
 msgid "Use shapes to indicate state in addition to or instead of color"
-msgstr ""
+msgstr "Uzi formojn por indiki staton krome aŭ anstataŭ koloro"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:55
 msgid "_Animation Effects"
-msgstr ""
+msgstr "_Animaciaj efektoj"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:56
 msgid "Toggle animation effects throughout the user interface"
-msgstr ""
+msgstr "Baskuli animaciajn efektojn tra la uzantinterfaco"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:62
 msgid ""
@@ -8851,6 +8664,9 @@ msgid ""
 "motion in the user interface at all. This may introduce unwanted effects "
 "that may have a negative impact on some visual sensitivities."
 msgstr ""
+"Malŝalto de animaciaj efektoj rezultigos pli subitajn transirojn kaj neniun "
+"moviĝon en la uzantinterfaco entute. Tio eble kaŭzos nedeziratajn efikojn "
+"kiuj povus negative influi iujn vidajn sentemojn."
 
 #: panels/universal-access/cc-ua-seeing-page.blp:73
 msgid "_Large Text"
@@ -8858,35 +8674,31 @@ msgstr "_Granda teksto"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:74
 msgid "Increase the size of all text in the user interface"
-msgstr ""
+msgstr "Pligrandigi la grandecon de ĉiu teksto en la uzantinterfaco"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:79
 msgid "_Cursor Size"
 msgstr "_Kursorogrando"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:80
-#, fuzzy
-#| msgid "Increase text size"
 msgid "Increase the size of the cursor"
-msgstr "Pligrandigi la tekston"
+msgstr "Pligrandigi la grandecon de la kursoro"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:86
 msgid "_Sound Keys"
 msgstr "_Son-klavoj"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:87
-#, fuzzy
-#| msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgid "Beep when Num Lock or Caps Lock are turned on or off"
-msgstr "Pepi kiam majuskla kaj nombra baskuloj estas ŝaltita aŭ malŝaltita."
+msgstr "Pepi kiam Nombra aŭ Majuskla baskulo estas ŝaltita aŭ malŝaltita"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:92
 msgid "Always Show Scroll_bars"
-msgstr ""
+msgstr "Ĉiam montri rulum-_bretojn"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:93
 msgid "Make scrollbars always visible"
-msgstr ""
+msgstr "Igi rulum-bretojn ĉiam videblaj"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
@@ -8923,76 +8735,56 @@ msgstr[0] "%d bildero"
 msgstr[1] "%d bilderoj"
 
 #: panels/universal-access/cc-ua-typing-page.blp:16
-#, fuzzy
-#| msgid "Screen _Keyboard"
 msgid "Screen _Keyboard"
 msgstr "Ekran_klavaro"
 
 #: panels/universal-access/cc-ua-typing-page.blp:17
-#, fuzzy
-#| msgid "Move the selected keyboard layout up in the list"
 msgid "Use the on-screen keyboard to type in input fields"
-msgstr "Movi la elektitan klavararanĝon supren en la listo"
+msgstr "Uzi la ekranklavaron por tajpi en enirkampoj"
 
 #: panels/universal-access/cc-ua-typing-page.blp:22
 msgid "_Enable by Keyboard"
 msgstr "Ŝalti p_er klavaro"
 
 #: panels/universal-access/cc-ua-typing-page.blp:23
-#, fuzzy
-#| msgid "Turn accessibility features on and off using the keyboard"
 msgid "Turn accessibility features on or off using the keyboard"
-msgstr "Ŝalti kaj malŝalti funkciojn por universala aliro per la klavaro"
+msgstr "Ŝalti aŭ malŝalti alireblecajn funkciojn per la klavaro"
 
 #: panels/universal-access/cc-ua-typing-page.blp:29
-#, fuzzy
-#| msgid "Text Editor"
 msgid "Text Cursor"
-msgstr "Tekstredaktilo"
+msgstr "Teksta kursoro"
 
 #: panels/universal-access/cc-ua-typing-page.blp:32
-#, fuzzy
-#| msgid "Cursor Blinking"
 msgid "_Cursor Blinking"
-msgstr "Pulsanta tajpmontrilo"
+msgstr "_Palpebrumo de kursoro"
 
 #: panels/universal-access/cc-ua-typing-page.blp:33
-#, fuzzy
-#| msgid "Cursor blinks in text fields."
 msgid "Change if the cursor blinks in text fields"
-msgstr "Tajpmontrilo pulsas en tekstkampo."
+msgstr "Ŝanĝi ĉu la kursoro palpebrumas en tekstkampoj"
 
 #: panels/universal-access/cc-ua-typing-page.blp:38
-#, fuzzy
-#| msgid "Link speed"
 msgid "_Blink Speed"
-msgstr "Ligita rapido"
+msgstr "_Palpebrumrapido"
 
 #: panels/universal-access/cc-ua-typing-page.blp:46
-#, fuzzy
-#| msgid "Link speed"
 msgid "Blink Speed"
-msgstr "Ligita rapido"
+msgstr "Palpebrumrapido"
 
 #: panels/universal-access/cc-ua-typing-page.blp:72
 msgid "_Test Entry"
-msgstr ""
+msgstr "_Testa enigo"
 
 #: panels/universal-access/cc-ua-typing-page.blp:78
 msgid "Typing Assist"
 msgstr "Tajpada asisto"
 
 #: panels/universal-access/cc-ua-typing-page.blp:81
-#, fuzzy
-#| msgid "Repeat Keys"
 msgid "_Repeat Keys"
-msgstr "Ripeti klavojn"
+msgstr "_Ripeti klavojn"
 
 #: panels/universal-access/cc-ua-typing-page.blp:82
-#, fuzzy
-#| msgid "Key presses repeat when key is held down."
 msgid "Key presses repeat when the key is held down"
-msgstr "Klavpremoj ripetas kiam klavo estas tenata malsupre."
+msgstr "Klavpremoj ripetas kiam klavo estas tenata malsupre"
 
 #: panels/universal-access/cc-ua-typing-page.blp:87
 msgid "Speed"
@@ -9036,10 +8828,8 @@ msgid "Beep when a key is rejected"
 msgstr "Pepi se klavo estas malakceptita"
 
 #: panels/universal-access/cc-ua-typing-page.blp:190
-#, fuzzy
-#| msgid "_Bounce Keys"
 msgid "B_ounce Keys"
-msgstr "_Saltaj klavoj"
+msgstr "_Resaltaj klavoj"
 
 #: panels/universal-access/cc-ua-typing-page.blp:191
 msgid "Ignore fast duplicate keypresses"
@@ -9062,16 +8852,12 @@ msgid "Magnifier"
 msgstr "Pligrandigilo"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:25
-#, fuzzy
-#| msgid "Magnification Factor"
 msgid "_Magnification Factor"
-msgstr "Pligrandigofaktoro"
+msgstr "_Pligrandigofaktoro"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:39
-#, fuzzy
-#| msgid "_Magnifier View"
 msgid "M_agnifier View"
-msgstr "_Vido de pligrandigo"
+msgstr "Vido de pligrandig_ilo"
 
 #. Translators: This is a behavior option of the Magnifier View
 #: panels/universal-access/cc-ua-zoom-page.blp:46
@@ -9085,13 +8871,11 @@ msgstr "Ekranareo"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:54
 msgid "_Extend Outside Screen Edges"
-msgstr ""
+msgstr "_Etendi ekster ekranrandoj"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:61
-#, fuzzy
-#| msgid "Screen Area"
 msgid "_Screen Area"
-msgstr "Ekranareo"
+msgstr "_Ekranareo"
 
 #. Translators: This is an option of the Magnifier Screen Area
 #: panels/universal-access/cc-ua-zoom-page.blp:67
@@ -9120,7 +8904,7 @@ msgstr "Dekstra duono"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:82
 msgid "_Follow Behavior"
-msgstr ""
+msgstr "_Sekva konduto"
 
 #. Translators: This is an option of the zoom Magnifier behavior
 #: panels/universal-access/cc-ua-zoom-page.blp:89
@@ -9135,21 +8919,19 @@ msgstr "Puŝas enhavon ĉirkaŭen"
 #. Translators: This is an option of the zoom Magnifier behavior
 #: panels/universal-access/cc-ua-zoom-page.blp:93
 msgid "Remains Centered"
-msgstr ""
+msgstr "Restas centre"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:100
 msgid "Crosshairs"
 msgstr "Celiloj"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:103
-#, fuzzy
-#| msgid "Crosshairs"
 msgid "_Crosshair Lines"
-msgstr "Celiloj"
+msgstr "_Celilaj linioj"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:104
 msgid "Mark the cursor location in the magnifier region using lines"
-msgstr ""
+msgstr "Marki la lokon de la kursoro en la pligrandigila regiono per linioj"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:109
 msgid "_Overlap Mouse Cursor"
@@ -9171,7 +8953,7 @@ msgstr "Dika"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:138
 msgid "Len_gth"
-msgstr ""
+msgstr "Lon_go"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:161
 msgid "Colo_r"
@@ -9183,11 +8965,11 @@ msgstr "Koloraj filtriloj"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:177
 msgid "_Inverted"
-msgstr ""
+msgstr "_Inversigita"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:178
 msgid "Invert colors in the magnifier region"
-msgstr ""
+msgstr "Inversigi kolorojn en la pligrandigila regiono"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:183
 msgid "_Brightness"
@@ -9213,7 +8995,7 @@ msgstr "Ko_ntrasto"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:233
 msgid "Co_lor"
-msgstr ""
+msgstr "Ko_loro"
 
 #. Translators: This is a mark in the Grayscale scale
 #: panels/universal-access/cc-ua-zoom-page.blp:242
@@ -9222,40 +9004,29 @@ msgstr "Plene"
 
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:3
 msgid "Make it easier to see, hear, type, point and click"
-msgstr "Fari ĝin pli facila por vidi, aŭdi, tajpi, fingromontri kaj alklaki"
+msgstr "Faciligi vidi, aŭdi, tajpi, fingromontri kaj alklaki"
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:14
-#, fuzzy
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Universal "
-#| "Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;"
 msgid "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;"
-msgstr ""
-"klavaro;muso;alirebleco;universala "
-"aliro;kontrasto;sono;zomo;ekrano;legilo;granda;alta;granda;teksto;tiparo;grandeco;AccessX;glosiĝema;klavoj;malrapida;salto;muso;duobla;klako;prokrasto;rapido;asisto;ripeti;montrilo;trovi;loki;vida;aŭdi;aŭdion;tajpado;animacioj;"
+msgstr "klavaro;muso;a11y;alirebleco;universala;aliro;kontrasto;kursoro;sono;zomi;ekrano;legilo;granda;alta;granda;teksto;tiparo;grandeco;AccessX;gluiĝemaj;klavoj;malrapida;salteti;muso;duobla;klako;prokrasto;rapido;helpo;ripeti;ekbrili;montrilo;trovi;loki;vida;aŭdado;aŭdio;tajpado;animacioj;"
 
 #: panels/wacom/button-mapping.blp:6
 msgid "Map Buttons"
-msgstr "Mapobutonoj"
+msgstr "Mapi butonojn"
 
 #: panels/wacom/button-mapping.blp:25
 msgid "Map buttons to functions"
 msgstr "Mapi butonojn al funkcioj"
 
 #: panels/wacom/button-mapping.blp:47
-#, fuzzy
-#| msgid ""
-#| "To edit a shortcut, choose the “Send Keystroke” action, press the "
-#| "keyboard shortcut button and hold down the new keys or press Backspace to "
-#| "clear."
 msgid ""
 "To edit a shortcut, choose the “Send Keystroke” action, press the keyboard "
 "shortcut button and hold down the new keys or press Backspace to clear"
 msgstr ""
 "Por redakti klavkombinon, elektu la “Sendi klavofrapon” agon, premu la "
-"klavkombina butono, kaj premu la novajn klavojn, aŭ premu la retropaŝan "
-"klavon por vakigi."
+"klavkombinan butonon kaj tenu la novajn klavojn, aŭ premu la retropaŝan "
+"klavon por vakigi"
 
 #: panels/wacom/button-mapping.blp:59
 msgid "_Close"
@@ -9303,14 +9074,15 @@ msgstr "Montri ekranhelpon"
 #, c-format
 msgid "This device is unknown and may present wrong capabilities — %s."
 msgstr ""
+"Ĉi tiu aparato estas nekonata kaj eble prezentas malĝustajn kapablojn — %s."
 
 #: panels/wacom/cc-wacom-device.c:460
 msgid "Tablet mounted on laptop panel"
-msgstr ""
+msgstr "Tabuleto muntita sur la panelo de portebla komputilo"
 
 #: panels/wacom/cc-wacom-device.c:462
 msgid "Tablet mounted on external display"
-msgstr ""
+msgstr "Tabuleto muntita sur ekstera ekrano"
 
 #: panels/wacom/cc-wacom-device.c:464
 msgid "External tablet device"
@@ -9352,8 +9124,7 @@ msgstr "Konservi _proporcion"
 
 #: panels/wacom/cc-wacom-page.blp:62
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
-msgstr ""
-"Uzi nur parton de la surfaco de la tabuleto por konservi la ekranproporcion"
+msgstr "Uzi nur parton de la tabuleta surfaco por reteni ekranproporciojn"
 
 #: panels/wacom/cc-wacom-page.blp:67
 msgid "_Calibrate"
@@ -9470,9 +9241,7 @@ msgstr "Grafikaj tabuletoj"
 #: panels/wacom/gnome-wacom-panel.desktop.in:3
 msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
 msgstr ""
-"Agordi butonmapojn kaj ĝustigi grifelan sentemon por grafikaj "
-"tabuletojAgordi butonaj mapoj kaj ĝustigi grifelan sentemon por grafikaj "
-"tabuletoj"
+"Agordi butonmapojn kaj ĝustigi skribil-sentivecon por grafikaj tabuletoj"
 
 #. Translators: Search terms to find the Graphics Tablets panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wacom/gnome-wacom-panel.desktop.in:14
@@ -9770,8 +9539,7 @@ msgstr "Velfarto"
 
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
 msgid "Review and limit the amount of time you spend at the computer screen"
-msgstr ""
-"Kontroli kaj limigi la tempon, kiun vi pasigas antaŭ la komputila ekrano"
+msgstr "Revizii kaj limigi la tempon kiun vi pasigas antaŭ la komputila ekrano"
 
 #. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:17
@@ -10542,6 +10310,12 @@ msgstr[1] "%u enigoj"
 #: subprojects/gvc/gvc-mixer-control.c:2872
 msgid "System Sounds"
 msgstr "Sistemsonoj"
+
+#~ msgid "Add a Shortcut"
+#~ msgstr "Aldoni klavkombinon"
+
+#~ msgid "Account Type"
+#~ msgstr "Kontospeco"
 
 #~ msgid "No Apps"
 #~ msgstr "Neniuj aplikaĵoj"
