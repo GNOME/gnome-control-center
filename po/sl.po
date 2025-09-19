@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2025-08-25 11:56+0000\n"
-"PO-Revision-Date: 2025-08-25 17:33+0200\n"
+"POT-Creation-Date: 2025-09-19 19:59+0000\n"
+"PO-Revision-Date: 2025-09-19 23:38+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -38,7 +38,7 @@ msgid "_Cancel"
 msgstr "_Prekliči"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:25 panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.blp:24 panels/keyboard/cc-keyboard-shortcut-editor.blp:32 panels/network/connection-editor/net-connection-editor.c:653 panels/printers/pp-new-printer-dialog.ui:96
-#: panels/system/users/cc-add-user-dialog.c:362 panels/system/users/cc-add-user-dialog.ui:32 panels/system/users/cc-add-user-dialog.ui:153 panels/system/users/cc-enterprise-login-dialog.blp:47
+#: panels/system/users/cc-add-user-dialog.c:362 panels/system/users/cc-add-user-dialog.ui:32 panels/system/users/cc-add-user-dialog.ui:152 panels/system/users/cc-enterprise-login-dialog.blp:47
 msgid "_Add"
 msgstr "_Dodaj"
 
@@ -2357,7 +2357,7 @@ msgstr "_Nastavi"
 msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut"
 msgstr "Pritisnite tipko Esc za preklic oziroma povratno tipko za ponastavitev tipkovne bližnjice."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:125 panels/keyboard/cc-keyboard-shortcut-row.blp:23
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:125 panels/keyboard/cc-keyboard-shortcut-row.blp:22
 msgid "Reset Shortcut"
 msgstr "Ponastavi tipkovno bližnjico"
 
@@ -2427,9 +2427,9 @@ msgstr[1] "%d spremenjena"
 msgstr[2] "%d spremenjeni"
 msgstr[3] "%d spremenjene"
 
-#: panels/keyboard/cc-keyboard-shortcut-group.c:157
-msgid "Add a Shortcut"
-msgstr "Dodaj tipkovno bližnjico"
+#: panels/keyboard/cc-keyboard-shortcut-group.c:152
+msgid "_Add Shortcut"
+msgstr "_Dodaj tipkovno bližnjico"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:3
 msgid "Change keyboard shortcuts and set your typing preferences, keyboard layouts and input sources"
@@ -2820,7 +2820,7 @@ msgid "Network Name"
 msgstr "Ime omrežja"
 
 #. Translators: This is a password needed for printing.
-#: panels/network/cc-qr-code-dialog.blp:64 panels/network/cc-wifi-hotspot-dialog.blp:79 panels/printers/pp-jobs-dialog.blp:171 panels/printers/pp-new-printer-dialog.ui:300 panels/system/users/cc-add-user-dialog.ui:103 panels/wwan/cc-wwan-apn-dialog.blp:152
+#: panels/network/cc-qr-code-dialog.blp:64 panels/network/cc-wifi-hotspot-dialog.blp:79 panels/printers/pp-jobs-dialog.blp:171 panels/printers/pp-new-printer-dialog.ui:300 panels/system/users/cc-add-user-dialog.ui:102 panels/wwan/cc-wwan-apn-dialog.blp:152
 msgid "Password"
 msgstr "Geslo"
 
@@ -3004,6 +3004,14 @@ msgstr "Varnost 802.1x"
 #: panels/network/connection-editor/bluetooth-page.blp:15 panels/network/connection-editor/ethernet-page.blp:27 panels/network/connection-editor/vpn-page.blp:21 panels/printers/pp-details-dialog.blp:20 panels/system/users/cc-user-page.blp:77
 msgid "_Name"
 msgstr "_Ime"
+
+#: panels/network/connection-editor/ce-ip-address-entry.c:52
+msgid "IP address value not valid"
+msgstr "Vrednost naslova IP ni veljavna"
+
+#: panels/network/connection-editor/ce-netmask-entry.c:81
+msgid "Netmask value not valid"
+msgstr "Vrednost omrežne maske ni veljavna"
 
 #: panels/network/connection-editor/ce-page-8021x-security.c:106 panels/network/connection-editor/ce-page-security.c:416 panels/network/connection-editor/details-page.blp:85 panels/sharing/cc-sharing-panel.blp:94
 msgid "Security"
@@ -3474,7 +3482,7 @@ msgstr ""
 "\n"
 "Napaka: %s."
 
-#: panels/network/connection-editor/vpn-helpers.c:148 panels/system/users/cc-add-user-dialog.c:87 panels/system/users/cc-password-dialog.c:150 shell/cc-window.blp:77
+#: panels/network/connection-editor/vpn-helpers.c:148 panels/system/users/cc-add-user-dialog.c:87 panels/system/users/cc-password-dialog.c:157 shell/cc-window.blp:77
 msgid "_OK"
 msgstr "_V redu"
 
@@ -4461,64 +4469,64 @@ msgid "Disabling automatic suspend will result in higher power consumption. It i
 msgstr "Onemogočanje samodejne prekinitve bo povzročilo večjo porabo energije. Priporočljivo je, da ohranite samodejno prekinitev omogočeno."
 
 #. TRANSLATORS: This is the same title as the title from the .ui file, but without mnemonic
-#: panels/power/cc-power-panel.c:207
+#: panels/power/cc-power-panel.c:208
 msgid "Power Saving"
 msgstr "Varčevanje z energijo"
 
-#: panels/power/cc-power-panel.c:303
+#: panels/power/cc-power-panel.c:304
 msgid "Battery Levels"
 msgstr "Polnost baterije"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:308
+#: panels/power/cc-power-panel.c:309
 msgid "UPS"
 msgstr "UPS"
 
-#: panels/power/cc-power-panel.c:311
+#: panels/power/cc-power-panel.c:312
 msgid "Battery Level"
 msgstr "Polnost baterije"
 
-#: panels/power/cc-power-panel.c:549
+#: panels/power/cc-power-panel.c:551
 msgid "Suspend"
 msgstr "Zaustavi"
 
-#: panels/power/cc-power-panel.c:550
+#: panels/power/cc-power-panel.c:552
 msgid "Power Off"
 msgstr "Izklop"
 
-#: panels/power/cc-power-panel.c:551
+#: panels/power/cc-power-panel.c:553
 msgid "Hibernate"
 msgstr "Preidi v mirovanje"
 
-#: panels/power/cc-power-panel.c:552
+#: panels/power/cc-power-panel.c:554
 msgid "Nothing"
 msgstr "Ničesar"
 
-#: panels/power/cc-power-panel.c:876
+#: panels/power/cc-power-panel.c:859
 msgid "Performance mode temporarily disabled due to high operating temperature"
 msgstr "Zmogljivostni način delovanja je začasno onemogočen zaradi visoke delovne temperature"
 
-#: panels/power/cc-power-panel.c:878
+#: panels/power/cc-power-panel.c:861
 msgid "Lap detected: performance mode temporarily unavailable. Move the device to a stable surface to restore."
 msgstr "Sprememba delovanja: zmogljivostni način začasno ni na voljo. Za ponovno vzpostavitev je treba napravo premakniti na stabilno površino."
 
-#: panels/power/cc-power-panel.c:880
+#: panels/power/cc-power-panel.c:863
 msgid "Performance mode temporarily disabled"
 msgstr "Zmogljivostni način je začasno onemogočen"
 
-#: panels/power/cc-power-panel.c:922
+#: panels/power/cc-power-panel.c:905
 msgid "Power saver enabled due to low battery. Previous mode will be restored when battery is charged."
 msgstr "Varčevalni način delovanja je omogočen zaradi nizkega stanja baterije. Predhodno uporabljeni način bo obnovljen, ko bo baterija dovolj napolnjena."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:930
+#: panels/power/cc-power-panel.c:913
 #, c-format
 msgid "Power Saver mode activated by “%s”"
 msgstr "Varčevalni način delovanja je sprožil program »%s«."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:934
+#: panels/power/cc-power-panel.c:917
 #, c-format
 msgid "Performance mode activated by “%s”"
 msgstr "Zmogljivostni način delovanja je sprožil program »%s«."
@@ -6135,7 +6143,7 @@ msgstr ""
 "Geslo je obvezno na napravah, ki želijo dostopati do vsebine v skupni rabi.\n"
 "Naprave v tem omrežju bodo morda še vedno lahko videle, katera vsebina je v skupni rabi."
 
-#: panels/sharing/cc-sharing-panel.blp:113 panels/system/users/cc-add-user-dialog.ui:176 panels/system/users/cc-enterprise-login-dialog.blp:87
+#: panels/sharing/cc-sharing-panel.blp:113 panels/system/users/cc-add-user-dialog.ui:175 panels/system/users/cc-enterprise-login-dialog.blp:87
 msgid "_Password"
 msgstr "_Geslo"
 
@@ -6894,7 +6902,7 @@ msgstr "_Vrata"
 msgid "Login Details"
 msgstr "Podrobnosti prijave"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:84 panels/system/remote-desktop/cc-remote-login-page.blp:84 panels/system/users/cc-add-user-dialog.ui:87 panels/system/users/cc-enterprise-login-dialog.blp:81
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:84 panels/system/remote-desktop/cc-remote-login-page.blp:84 panels/system/users/cc-add-user-dialog.ui:64 panels/system/users/cc-enterprise-login-dialog.blp:81
 msgid "_Username"
 msgstr "_Uporabniško ime"
 
@@ -7011,46 +7019,42 @@ msgid "Add User"
 msgstr "Dodaj uporabnika"
 
 #: panels/system/users/cc-add-user-dialog.ui:53
-msgid "Account Type"
-msgstr "Vrsta računa"
-
-#: panels/system/users/cc-add-user-dialog.ui:57
-msgid "Ad_ministrator"
-msgstr "_Skrbnik"
-
-#: panels/system/users/cc-add-user-dialog.ui:62 panels/system/users/cc-user-page.blp:139
-msgid "Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental controls cannot be applied to administrators."
-msgstr "Skrbniki lahko dodajo in odstranijo druge uporabnike, spreminjajo nastavitve in prilagajajo programske pakete. Starševski nadzor skrbnikom ni na voljo."
-
-#: panels/system/users/cc-add-user-dialog.ui:76
 msgid "User Details"
 msgstr "Podrobnosti uporabnika"
 
-#: panels/system/users/cc-add-user-dialog.ui:79
+#: panels/system/users/cc-add-user-dialog.ui:56
 msgid "Fu_ll Name"
 msgstr "Po_lno ime"
 
-#: panels/system/users/cc-add-user-dialog.ui:95
+#: panels/system/users/cc-add-user-dialog.ui:72
 msgid "Usernames can only include lower case letters, numbers, hyphens and underscores."
 msgstr "Uporabniška imena lahko vključujejo le male črke, številke, vezaje in podčrtaje."
 
-#: panels/system/users/cc-add-user-dialog.ui:107
+#: panels/system/users/cc-add-user-dialog.ui:83
+msgid "Ad_ministrator"
+msgstr "_Skrbnik"
+
+#: panels/system/users/cc-add-user-dialog.ui:88 panels/system/users/cc-user-page.blp:139
+msgid "Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental controls cannot be applied to administrators."
+msgstr "Skrbniki lahko dodajo in odstranijo druge uporabnike, spreminjajo nastavitve in prilagajajo programske pakete. Starševski nadzor skrbnikom ni na voljo."
+
+#: panels/system/users/cc-add-user-dialog.ui:106
 msgid "User sets password on _first login"
 msgstr "Uporabnik si nastavi geslo ob _prvi prijavi"
 
-#: panels/system/users/cc-add-user-dialog.ui:120
+#: panels/system/users/cc-add-user-dialog.ui:119
 msgid "Set password n_ow"
 msgstr "Nastavi geslo _takoj"
 
-#: panels/system/users/cc-add-user-dialog.ui:143
+#: panels/system/users/cc-add-user-dialog.ui:142
 msgid "Set Password"
 msgstr "Nastavi geslo"
 
-#: panels/system/users/cc-add-user-dialog.ui:219
+#: panels/system/users/cc-add-user-dialog.ui:218
 msgid "For a good password, mix upper case, lower case, numbers and punctuation."
 msgstr "Za dobro geslo mešajte velike črke, male črke, številke in ločila."
 
-#: panels/system/users/cc-add-user-dialog.ui:229
+#: panels/system/users/cc-add-user-dialog.ui:228
 msgid "_Confirm Password"
 msgstr "P_otrdi geslo"
 
@@ -7635,47 +7639,52 @@ msgstr "Odlično geslo!"
 msgid "Authentication failed"
 msgstr "Overitev je spodletela"
 
-#: panels/system/users/run-passwd.c:469
+#: panels/system/users/run-passwd.c:470
 #, c-format
 msgid "The new password is too short"
 msgstr "Novo geslo je prekratko"
 
-#: panels/system/users/run-passwd.c:475
+#: panels/system/users/run-passwd.c:476
 #, c-format
 msgid "The new password is too simple"
 msgstr "Novo geslo je preveč enostavno"
 
-#: panels/system/users/run-passwd.c:481
+#: panels/system/users/run-passwd.c:482
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "Novo geslo je preveč podobno staremu"
 
-#: panels/system/users/run-passwd.c:484
+#: panels/system/users/run-passwd.c:485
 #, c-format
 msgid "The new password has already been used recently."
 msgstr "Novo geslo je bilo nedavno že uporabljeno."
 
-#: panels/system/users/run-passwd.c:487
+#: panels/system/users/run-passwd.c:488
 #, c-format
 msgid "The new password must contain numeric or special characters"
 msgstr "Novo geslo mora vsebovati številke ali posebne znake"
 
-#: panels/system/users/run-passwd.c:491
+#: panels/system/users/run-passwd.c:492
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "Novo geslo je enako staremu"
 
-#: panels/system/users/run-passwd.c:495
+#: panels/system/users/run-passwd.c:496
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "Vaše geslo je bilo spremenjeno od začetne overitve!"
 
-#: panels/system/users/run-passwd.c:499
+#: panels/system/users/run-passwd.c:500
 #, c-format
 msgid "The new password does not contain enough different characters"
 msgstr "Novo geslo ne vsebuje dovolj različnih znakov"
 
-#: panels/system/users/run-passwd.c:503 panels/wwan/cc-wwan-errors-private.h:72
+#: panels/system/users/run-passwd.c:503
+#, c-format
+msgid "Password does not meet your organization's security policies. Try a different password or contact your system administrator."
+msgstr "Geslo ne ustreza varnostnim pravilom organizacije. Poskusite uporabiti drugo geslo ali se obrnite na skrbnika sistema."
+
+#: panels/system/users/run-passwd.c:507 panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Neznana napaka"
