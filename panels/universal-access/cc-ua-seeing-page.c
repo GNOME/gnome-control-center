@@ -51,6 +51,7 @@ struct _CcUaSeeingPage
   AdwSwitchRow       *high_contrast_row;
   AdwSwitchRow       *status_shapes_row;
   GtkSwitch          *animation_effects_switch;
+  CcListRow          *text_size_row;
   GtkScale           *text_size_scale;
   CcListRow          *cursor_size_row;
   AdwSwitchRow       *sound_keys_row;
@@ -73,13 +74,26 @@ struct _CcUaSeeingPage
 G_DEFINE_TYPE (CcUaSeeingPage, cc_ua_seeing_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
+update_text_size_row_label (CcUaSeeingPage *self)
+{
+  const gchar *label = NULL;
+  gdouble text_scaling_factor;
+
+  text_scaling_factor = g_settings_get_double (self->interface_settings,
+                                               KEY_TEXT_SCALING_FACTOR);
+  label = text_scaling_factor > DPI_FACTOR_NORMAL ? _("Large") : _("Default");
+  cc_list_row_set_secondary_label (self->text_size_row, label);
+}
+
+static void
 apply_text_size_changes (CcUaSeeingPage *self)
 {
   g_settings_set_double (self->interface_settings, KEY_TEXT_SCALING_FACTOR,
                          gtk_range_get_value (GTK_RANGE (self->text_size_scale)));
   adw_dialog_close (self->text_size_dialog);
-}
 
+  update_text_size_row_label (self);
+}
 
 static gboolean
 ua_text_size_change_value (GtkRange      *text_size_range,
@@ -279,6 +293,7 @@ cc_ua_seeing_page_class_init (CcUaSeeingPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, high_contrast_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, status_shapes_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, animation_effects_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, text_size_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, text_size_scale);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, cursor_size_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, sound_keys_row);
@@ -326,6 +341,7 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
                                               KEY_TEXT_SCALING_FACTOR));
   g_signal_connect (GTK_RANGE (self->text_size_scale), "change-value",
                     G_CALLBACK (ua_text_size_change_value), self);
+  update_text_size_row_label (self);
 
   /* Sound Keys */
   g_settings_bind (self->kb_settings, KEY_TOGGLEKEYS_ENABLED,
