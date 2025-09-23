@@ -125,7 +125,7 @@ cc_default_apps_row_constructed (GObject *object)
   for (l = recommended_apps; l != NULL; l = l->next) {
     GAppInfo *app = l->data;
 
-    if (!G_IS_APP_INFO (app) || (default_app != NULL && g_app_info_equal (app, default_app)))
+    if (!G_IS_APP_INFO (app) || (default_app != NULL && g_app_info_equal (app, default_app)) || !g_app_info_should_show (app))
       continue;
 
     g_list_store_append (self->model, app);
