@@ -34,7 +34,6 @@
 #include "cc-applications-row.h"
 #include "cc-list-row-info-button.h"
 #include "cc-list-row.h"
-#include "cc-default-apps-page.h"
 #include "cc-removable-media-settings.h"
 #include "cc-applications-resources.h"
 #include "cc-applications-row.h"
