@@ -33,6 +33,7 @@
 #include "cc-keyboard-item.h"
 #include "cc-keyboard-shortcut-row.h"
 #include "cc-keyboard-shortcut-group.h"
+#include "cc-ui-util.h"
 
 struct _CcKeyboardShortcutGroup
 {
@@ -333,6 +334,7 @@ cc_keyboard_shortcut_group_class_init (CcKeyboardShortcutGroupClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutGroup, shortcut_list_box);
 
   gtk_widget_class_bind_template_callback (widget_class, shortcut_group_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, cc_util_keynav_propagate_vertical);
 
   /**
    * CcKeyboardShortcutGroup:empty:
