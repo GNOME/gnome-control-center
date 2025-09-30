@@ -64,6 +64,7 @@ template $CcMousePanel: $CcPanel {
                 Adw.ToggleGroup primary_toggle_group {
                   valign: center;
                   homogeneous: true;
+                  can-shrink: false;
                   notify::active => $on_primary_button_changed_cb(template);
 
                   Adw.Toggle {
