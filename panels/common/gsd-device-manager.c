@@ -426,12 +426,12 @@ create_device (GUdevDevice *udev_device, GUdevDevice *parent)
 	guint width, height;
 
 	name = g_udev_device_get_sysfs_attr (parent, "name");
-	vendor = g_udev_device_get_property (udev_device, "ID_VENDOR_ID");
-	product = g_udev_device_get_property (udev_device, "ID_MODEL_ID");
+	vendor = g_udev_device_get_sysfs_attr (udev_device, "device/id/vendor");
+	product = g_udev_device_get_sysfs_attr (udev_device, "device/id/product");
 
 	if (!vendor || !product) {
-		vendor = g_udev_device_get_sysfs_attr (udev_device, "device/id/vendor");
-		product = g_udev_device_get_sysfs_attr (udev_device, "device/id/product");
+		vendor = g_udev_device_get_property (udev_device, "ID_VENDOR_ID");
+		product = g_udev_device_get_property (udev_device, "ID_MODEL_ID");
 	}
 
 	width = g_udev_device_get_property_as_int (udev_device, "ID_INPUT_WIDTH_MM");
