@@ -816,7 +816,6 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, auto_datetime_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, auto_timezone_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, auto_timezone_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, date_box);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, datetime_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePage, datetime_dialog);
