@@ -56,6 +56,7 @@ enum
   PROP_TEXT,
   PROP_DEFAULT_ICON_NAME,
   PROP_DEFAULT_TEXT,
+  PROP_ENTRY,
 };
 
 static void
@@ -115,6 +116,47 @@ set_icon (CcEntryFeedback *self,
 }
 
 static void
+a11y_announce (CcEntryFeedback *self)
+{
+  gtk_accessible_announce (gtk_accessible_get_accessible_parent (GTK_ACCESSIBLE (self)),
+                           gtk_label_get_text (self->label),
+                           GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_MEDIUM);
+}
+
+static void
+on_entry_has_focused_css_class_cb (GtkWidget       *widget,
+                                   GParamSpec      *pspec,
+                                   CcEntryFeedback *self)
+{
+  g_autofree gchar **classes = gtk_widget_get_css_classes (widget);
+  gint i;
+
+  for (i = 0; classes[i] != NULL; i++) {
+    if (g_strcmp0 (classes[i], "focused") == 0) {
+      a11y_announce (self);
+      break;
+    }
+  }
+}
+
+static void
+set_entry (CcEntryFeedback *self,
+           GtkWidget       *entry_widget)
+{
+  if (entry_widget == NULL)
+      return;
+
+  /* entry_widgets are AdwEntryRows, which don't expose the "has-focus"
+   * of its internal GtkEntry. So we rely on CSS classes to identify whether
+   * the row is focused. */
+  g_signal_connect_object (entry_widget,
+                           "notify::css-classes",
+                            G_CALLBACK (on_entry_has_focused_css_class_cb),
+                            self,
+                            G_CONNECT_DEFAULT);
+}
+
+static void
 cc_entry_feedback_set_property (GObject      *object,
                                 guint         prop_id,
                                 const GValue *value,
@@ -141,6 +183,9 @@ cc_entry_feedback_set_property (GObject      *object,
       self->default_text = g_strdup (g_value_get_string (value));
       if (g_str_equal (gtk_label_get_label (self->label), ""))
         gtk_label_set_label (self->label, self->default_text);
+      break;
+    case PROP_ENTRY:
+      set_entry (self, g_value_get_object (value));
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -195,6 +240,13 @@ cc_entry_feedback_class_init (CcEntryFeedbackClass * klass)
                                                         "The text to be displayed by default.",
                                                         NULL,
                                                         G_PARAM_READWRITE));
+  g_object_class_install_property (object_class,
+                                   PROP_ENTRY,
+                                   g_param_spec_object ("entry",
+                                                       "Entry Widget",
+                                                       "The entry widget correspondend to this object",
+                                                       GTK_TYPE_WIDGET,
+                                                       G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS));
 }
 
 void
@@ -218,7 +270,5 @@ cc_entry_feedback_update (CcEntryFeedback *self,
     return;
 
   gtk_label_set_label (self->label, text);
-  gtk_accessible_announce (gtk_accessible_get_accessible_parent (GTK_ACCESSIBLE (self)),
-                           text,
-                           GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_MEDIUM);
+  a11y_announce (self);
 }
