@@ -213,8 +213,11 @@ cc_entry_feedback_update (CcEntryFeedback *self,
   g_return_if_fail (CC_IS_ENTRY_FEEDBACK (self));
 
   set_icon (self, icon_name);
-  gtk_label_set_label (self->label, text);
 
+  if (g_strcmp0 (text, gtk_label_get_text (self->label)) == 0)
+    return;
+
+  gtk_label_set_label (self->label, text);
   gtk_accessible_announce (gtk_accessible_get_accessible_parent (GTK_ACCESSIBLE (self)),
                            text,
                            GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_MEDIUM);
