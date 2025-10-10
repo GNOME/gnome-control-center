@@ -1807,6 +1807,8 @@ cc_applications_panel_dispose (GObject *object)
 
   g_clear_pointer (&self->sandbox_info_button, gtk_widget_unparent);
 
+  on_remove_toast_dismissed (self);
+
   remove_all_handler_rows (self);
 #ifdef HAVE_SNAP
   remove_snap_permissions (self);
