@@ -40,7 +40,8 @@
 #include "cc-util.h"
 #include "keyboard-shortcuts.h"
 
-#define DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT "Super_L"
+#define OLD_ACTIVITIES_OVERVIEW_SHORTCUT "Super_L"
+#define DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT "Super"
 
 struct _CcKeyboardShortcutDialog
 {
@@ -467,7 +468,9 @@ get_overview_shortcut_setting (GValue   *value,
                                GVariant *variant,
                                gpointer  user_data)
 {
-  gboolean enabled = g_strcmp0 (g_variant_get_string (variant, NULL), DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT) == 0;
+  const char *overlay_key = g_variant_get_string (variant, NULL);
+  gboolean enabled = g_strcmp0 (overlay_key, DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT) == 0 ||
+                     g_strcmp0 (overlay_key, OLD_ACTIVITIES_OVERVIEW_SHORTCUT) == 0;
   g_value_set_boolean (value, enabled);
 
   return TRUE;
