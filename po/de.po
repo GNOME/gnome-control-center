@@ -29,7 +29,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
 "POT-Creation-Date: 2025-10-08 10:14+0000\n"
-"PO-Revision-Date: 2025-10-17 00:31+0200\n"
+"PO-Revision-Date: 2025-10-19 00:15+0200\n"
 "Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -411,10 +411,9 @@ msgstr "Darf Einstellungen ändern"
 
 #. TRANSLATORS: %s is an app name.
 #: panels/applications/cc-applications-panel.c:911
-#, fuzzy, c-format
-#| msgid "<b>%s</b> requires access to the following system resources. To stop this access, the app must be removed."
+#, c-format
 msgid "%s requires access to the following system resources. To stop this access, the app must be removed."
-msgstr "<b>%s</b> benötigt Zugriff auf die folgenden Systemressourcen. Um diesen Zugriff zu widerrufen, muss die Anwendung entfernt werden."
+msgstr "%s benötigt Zugriff auf die folgenden Systemressourcen. Um diesen Zugriff zu widerrufen, muss die Anwendung entfernt werden."
 
 #: panels/applications/cc-applications-panel.c:915
 #, c-format
@@ -440,23 +439,21 @@ msgstr[1] "%u Typen"
 
 #. TRANSLATORS: %s is an app name.
 #: panels/applications/cc-applications-panel.c:1260
-#, fuzzy, c-format
-#| msgid "<b>%s</b> is used to open the following types of files and links"
+#, c-format
 msgid "%s is used to open the following types of files and links"
-msgstr "<b>%s</b> wird verwendet, um die folgenden Datei- und Verknüpfungs-Typen zu öffnen"
+msgstr "%s wird verwendet, um die folgenden Datei- und Verknüpfungs-Typen zu öffnen"
 
 #. TRANSLATORS: %s is an app name.
 #: panels/applications/cc-applications-panel.c:1303
-#, fuzzy, c-format
-#| msgid "How much disk space <b>%s</b> is occupying with app data and caches"
+#, c-format
 msgid "How much disk space %s is occupying with app data and caches"
-msgstr "Wie viel Speicherplatz <b>%s</b> für Zwischenspeicher und Daten belegt"
+msgstr "Wie viel Speicherplatz %s für Zwischenspeicher und Daten belegt"
 
 #: panels/applications/cc-applications-panel.c:1468
 #, c-format
 msgid "%u action"
 msgid_plural "%u actions"
-msgstr[0] "%u Aktion"
+msgstr[0] "%u action"
 msgstr[1] "%u Aktionen"
 
 #: panels/applications/cc-default-apps-page.blp:8
@@ -853,7 +850,7 @@ msgstr "_Rückgängig"
 msgid "%d background removed"
 msgid_plural "%d backgrounds removed"
 msgstr[0] "%d Hintergrund wurde entfernt"
-msgstr[1] "%d Hintergründe wurde entfernt"
+msgstr[1] "%d Hintergründe wurden entfernt"
 
 #: panels/background/cc-background-chooser.c:250
 msgid "Remove Background"
@@ -2316,13 +2313,11 @@ msgstr "Nach Tastenkürzeln suchen"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.blp:64
 msgid "Activities _Overview Shortcut"
-msgstr ""
+msgstr "Tastenkürzel für die _Aktivitätenübersicht"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.blp:66
-#, fuzzy
-#| msgid "Touch the top-left corner to open the Activities Overview"
 msgid "Use the Super key to open the overview"
-msgstr "Berühren Sie die obere linke Ecke, um die Aktivitäten-Übersicht zu öffnen"
+msgstr "Verwenden Sie die Super-Taste, um die Übersicht zu öffnen"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.blp:72
 msgid "_Reset All…"
@@ -3492,10 +3487,8 @@ msgid "Select file to import"
 msgstr "Wählen Sie die Datei zum Importieren"
 
 #: panels/network/connection-editor/vpn-page.blp:34
-#, fuzzy
-#| msgid "(Error: unable to load VPN connection editor)"
 msgid "<i>(Error: unable to load VPN connection editor)</i>"
-msgstr "(Fehler: VPN-Verbindungseditor kann nicht geladen werden)"
+msgstr "<i>(Fehler: Der VPN-Verbindungseditor kann nicht geladen werden)</i>"
 
 #: panels/network/connection-editor/wifi-page.blp:21
 msgid "_SSID"
@@ -4362,23 +4355,23 @@ msgstr "All_gemein"
 #. Translators: 'battery charging' means the settings to handle the way battery charges, not that the battery is currently charging.
 #: panels/power/cc-power-panel.blp:72
 msgid "Battery Charging"
-msgstr "Akkuladung"
+msgstr "Akku lädt"
 
 #: panels/power/cc-power-panel.blp:76
 msgid "_Maximize Charge"
-msgstr ""
+msgstr "Ladung _maximieren"
 
 #: panels/power/cc-power-panel.blp:77
 msgid "Uses all battery capacity. Degrades batteries more quickly."
-msgstr ""
+msgstr "Nutzt die gesamte Akkukapazität. Nutzt den Akku schneller ab."
 
 #: panels/power/cc-power-panel.blp:88
 msgid "Preserve Battery _Health"
-msgstr ""
+msgstr "Akku_lebensdauer verbessern"
 
 #: panels/power/cc-power-panel.blp:89
 msgid "Increases battery longevity by maintaining lower charge levels"
-msgstr ""
+msgstr "Erhöht die Langlebigkeit des Akkus, indem die Lademenge begrenzt wird"
 
 #: panels/power/cc-power-panel.blp:102
 msgid "Connected Devices"
@@ -4447,10 +4440,8 @@ msgstr "Automatisch in Bereitschaft gehen"
 # Ich würde das »Wenn« weglassen.  - jb
 # Es geht darum, unter welchen Bedingungen in Suspend-Modus gegangen werden soll, insofern passt das "Wenn" gut - ts
 #: panels/power/cc-power-panel.blp:225
-#, fuzzy
-#| msgid "On Battery Power"
 msgid "On Ba_ttery Power"
-msgstr "Wenn im Akkubetrieb"
+msgstr "Wenn im _Akkubetrieb"
 
 #: panels/power/cc-power-panel.blp:232
 msgid "De_lay"
@@ -4466,7 +4457,7 @@ msgstr "_Verzögerung"
 
 #: panels/power/cc-power-panel.blp:259
 msgid "Disabling automatic suspend will result in higher power consumption. It is recommended to keep automatic suspend enabled."
-msgstr ""
+msgstr "Deaktivierte automatische Bereitschaft resultiert in höherem Energieverbrauch. Es wird empfohlen automatische Bereitschaft einzuschalten."
 
 #. TRANSLATORS: This is the same title as the title from the .ui file, but without mnemonic
 #: panels/power/cc-power-panel.c:208
@@ -8471,7 +8462,7 @@ msgstr "Klick mit der rechten Maustaste"
 #. Translators: this is the "go forward" action of a button
 #: panels/wacom/cc-wacom-stylus-page.c:429
 msgid "Forward"
-msgstr "Weiter"
+msgstr "Vor"
 
 #: panels/wacom/cc-wacom-stylus-page.c:435
 msgid "Switch Monitor"
@@ -8528,10 +8519,8 @@ msgid "Interval"
 msgstr "Intervall"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.blp:23
-#, fuzzy
-#| msgid "Security Checks Unavailable"
 msgid "Screen Time Unavailable"
-msgstr "Sicherheitüberprüfungen nicht verfügbar"
+msgstr "Bildschirmzeit ist nicht verfügbar"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.blp:25
 msgid "Screen time information will appear here after a period of usage"
@@ -8543,7 +8532,7 @@ msgstr ""
 
 #: panels/wellbeing/cc-screen-time-statistics-row.blp:204
 msgid "Previous Week"
-msgstr "Letzte Woche"
+msgstr "Vorherige Woche"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.blp:214
 msgid "Next Week"
@@ -8562,12 +8551,12 @@ msgstr "M"
 #: panels/wellbeing/cc-screen-time-statistics-row.c:232
 msgctxt "abbreviated weekday name for Tuesday"
 msgid "T"
-msgstr "T"
+msgstr "D"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:233
 msgctxt "abbreviated weekday name for Wednesday"
 msgid "W"
-msgstr "W"
+msgstr "M"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:234
 msgctxt "abbreviated weekday name for Thursday"
@@ -8587,17 +8576,16 @@ msgstr "S"
 #. Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
 #. * Use whatever shortest unit label is used for minutes in your locale.
 #: panels/wellbeing/cc-screen-time-statistics-row.c:393
-#, fuzzy, c-format
-#| msgid "Hum"
+#, c-format
 msgid "%um"
-msgstr "Summen"
+msgstr "%u min"
 
 #. Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
 #. * Use whatever shortest unit label is used for hours in your locale.
 #: panels/wellbeing/cc-screen-time-statistics-row.c:399
 #, c-format
 msgid "%uh"
-msgstr ""
+msgstr "%u h"
 
 #. Translators: This is a duration in hours and minutes, for example
 #. * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
@@ -8605,7 +8593,7 @@ msgstr ""
 #: panels/wellbeing/cc-screen-time-statistics-row.c:406
 #, c-format
 msgid "%uh %um"
-msgstr ""
+msgstr "%u h %u min"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:665 panels/wellbeing/cc-screen-time-statistics-row.c:785
 #, c-format
@@ -8613,10 +8601,8 @@ msgid "Failed to load session history file ‘%s’: %s"
 msgstr "Laden der Datei »%s« mit der Sitzungschronik ist fehlgeschlagen: %s"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:666
-#, fuzzy
-#| msgid "Infrastructure"
 msgid "Invalid file structure"
-msgstr "Infrastruktur"
+msgstr "Ungültige Dateistruktur"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:703
 #, c-format
@@ -8708,10 +8694,8 @@ msgid "Placeholder for a bar chart of screen time usage. No data is currently av
 msgstr "Platzhalter für ein Balkendiagramm der Bildschirmzeit. Derzeit sind keine Daten verfügbar."
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:11
-#, fuzzy
-#| msgid "Screen Area"
 msgid "Screen Time"
-msgstr "Bildschirmbereich"
+msgstr "Bildschirmzeit"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:35
 msgid "Disabling screen time recording stops screen time data from being saved. This data is never shared outside this device."
@@ -8755,7 +8739,7 @@ msgstr "Schwarz-weiß-Bildschirm zur Bildschirmeinschränkung"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:111
 msgid "Break Reminders"
-msgstr "Pausenerinnerung"
+msgstr "Pausenerinnerungen"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:114
 msgid "_Eyesight Reminders"
@@ -8783,13 +8767,11 @@ msgstr "Klän_ge"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:132
 msgid "Play a sound when a break ends"
-msgstr ""
+msgstr "Einen Klang abspielen sobald die Pause endet"
 
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:5
-#, fuzzy
-#| msgid "Seeing"
 msgid "Wellbeing"
-msgstr "Sehen"
+msgstr "Gesundheit"
 
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
 msgid "Review and limit the amount of time you spend at the computer screen"
@@ -8798,7 +8780,7 @@ msgstr "Prüfen und beschränken Sie die Zeit, die Sie vor dem Bildschirm verbri
 #. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:17
 msgid "Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;Screen Limits;Usage Limit;"
-msgstr ""
+msgstr "Gesundheit;Wohlbefinden;Bildschirmzeit;Pause;Pausen;Einschränkung;"
 
 #: panels/wwan/cc-wwan-apn-dialog.blp:8
 msgid "Access Points"
@@ -8813,10 +8795,8 @@ msgid "APN"
 msgstr "APN"
 
 #: panels/wwan/cc-wwan-apn-dialog.blp:177
-#, fuzzy
-#| msgid "Paper Type"
 msgid "APN Type"
-msgstr "Papierart"
+msgstr "APN-Typ"
 
 #: panels/wwan/cc-wwan-apn-dialog.blp:193
 msgid "Internet"
@@ -8824,13 +8804,11 @@ msgstr "Internet"
 
 #: panels/wwan/cc-wwan-apn-dialog.blp:194
 msgid "Attach"
-msgstr ""
+msgstr "Einbinden"
 
 #: panels/wwan/cc-wwan-apn-dialog.blp:208
-#, fuzzy
-#| msgid "Account Type"
 msgid "Auth Type"
-msgstr "Kontentyp"
+msgstr "Legitimierungstyp"
 
 #: panels/wwan/cc-wwan-apn-dialog.c:329
 msgid "Edit"
