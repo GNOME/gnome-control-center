@@ -134,7 +134,11 @@ cc_qr_code_dialog_constructed (GObject *object)
 
   if (password_text)
     {
-      adw_action_row_set_subtitle (self->network_password_row, password_text);
+      /* Use markup to not insert a hyphen in case the password wraps */
+      g_autofree gchar *password_markup =
+        g_markup_printf_escaped ("<span insert_hyphens='false'>%s</span>", password_text);
+
+      adw_action_row_set_subtitle (self->network_password_row, password_markup);
     }
   else
     gtk_widget_set_visible (GTK_WIDGET (self->network_password_row), FALSE);
