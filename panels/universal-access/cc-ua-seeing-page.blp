@@ -52,19 +52,13 @@ template $CcUaSeeingPage: Adw.NavigationPage {
         }
 
         Adw.ActionRow {
-          title: _("_Animation Effects");
-          subtitle: _("Toggle animation effects throughout the user interface");
+          title: _("_Reduced Motion");
+          subtitle: _("Toggle reduced motion animations throughout the user interface");
           use-underline: true;
-          activatable-widget: animation_effects_switch;
+          activatable-widget: reduced_motion_switch;
 
           [suffix]
-          $CcListRowInfoButton {
-            text: _("Turning off animation effects will result in more sudden transitions and no motion in the user interface at all. This may introduce unwanted effects that may have a negative impact on some visual sensitivities.");
-            valign: center;
-          }
-
-          [suffix]
-          Switch animation_effects_switch {
+          Switch reduced_motion_switch {
             valign: center;
           }
         }
