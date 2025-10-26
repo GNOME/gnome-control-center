@@ -188,9 +188,23 @@ device_added_cb (CcDeviceComboRow *self,
                  guint             id)
 {
   GvcMixerUIDevice *device = lookup_device_id (self, id);
+  GvcMixerStream *stream;
+  guint stream_id;
 
   if (device == NULL)
     return;
+
+  stream_id = gvc_mixer_ui_device_get_stream_id (device);
+  stream = gvc_mixer_control_lookup_stream_id (self->mixer_control, stream_id);
+  if (stream)
+    {
+      const char *name;
+
+      name = gvc_mixer_stream_get_name (stream);
+      /* Don't add role loopbacks as switching to them is not useful */
+      if (g_str_has_prefix (name, "input.loopback.sink.role."))
+	return;
+  }
 
   g_signal_handlers_block_by_func (self, selection_changed_cb, self);
 
