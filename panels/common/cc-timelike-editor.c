@@ -102,7 +102,7 @@ update_am_pm_widgets (CcTimelikeEditor *self)
   is_am_pm = value == G_DESKTOP_CLOCK_FORMAT_12H;
   is_time = (self->mode == CC_TIMELIKE_EDITOR_MODE_TIME);
 
-  cc_timelike_entry_set_am_pm (self->timelike_entry, is_am_pm);
+  cc_timelike_entry_set_am_pm (self->timelike_entry, is_am_pm && is_time);
 
   gtk_widget_set_visible (GTK_WIDGET (self->am_pm_button), is_am_pm && is_time);
 
