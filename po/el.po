@@ -8006,53 +8006,37 @@ msgstr "Περιηγηθείτε για περισσότερες φωτογρα�
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:13
 #: panels/system/users/cc-enterprise-login-dialog.blp:28
-#, fuzzy
-#| msgid "Enterprise Login"
 msgid "Add Enterprise Login"
-msgstr "Εταιρική σύνδεση"
+msgstr "Προσθήκη Εταιρικής Σύνδεσης"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:21
 msgid "Offline"
 msgstr "Αποσυνδεδεμένος"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:22
-#, fuzzy
-#| msgid "No internet connection — connect to set up new online accounts"
 msgid "A network connection is needed to add enterprise login accounts."
 msgstr ""
-"Χωρίς σύνδεση στο διαδίκτυο — συνδεθείτε για να ρυθμίσετε νέους "
-"διαδικτυακούς λογαριασμούς"
+"Απαιτείται σύνδεση δικτύου για την προσθήκη λογαριασμών εταιρικής σύνδεσης."
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:63
-#, fuzzy
-#| msgid ""
-#| "Enterprise login allows an existing centrally managed user account to be "
-#| "used on this device. You can also use this account to access company "
-#| "resources on the internet."
 msgid ""
 "Enterprise login allows an existing centrally managed account to be used on "
 "this device."
 msgstr ""
 "Η εταιρική σύνδεση επιτρέπει σε έναν υπάρχοντα κεντρικά διαχειριζόμενο "
-"λογαριασμό χρήστη να χρησιμοποιηθεί σε αυτή τη συσκευή. Μπορείτε επίσης να "
-"χρησιμοποιήσετε τον λογαριασμό γι να έχετε πρόσβαση σε πόρους της εταιρείας "
-"στο διαδίκτυο."
+"λογαριασμό να χρησιμοποιηθεί σε αυτή τη συσκευή."
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:67
 msgid "_Domain"
 msgstr "_Τομέας"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:74
-#, fuzzy
-#| msgid "Should match the web address of your login provider."
 msgid "Should match the web domain of the account provider"
-msgstr "Πρέπει να ταιριάζει η διεύθυνση ιστού του παρόχου της εισόδου σας."
+msgstr "Πρέπει να ταιριάζει με τον τομέα ιστού του παρόχου λογαριασμού"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:97
-#, fuzzy
-#| msgid "Input Device"
 msgid "Enroll Device"
-msgstr "Συσκευή εισόδου"
+msgstr "Εγγραφή συσκευής"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:108
 msgid "_Enroll"
@@ -8063,10 +8047,8 @@ msgid "Administrator _Name"
 msgstr "Ό_νομα διαχειριστή"
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:132
-#, fuzzy
-#| msgid "Administrator Password"
 msgid "Administrator _Password"
-msgstr "Συνθηματικό διαχειριστή"
+msgstr "_Συνθηματικό διαχειριστή"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:148
 #: panels/system/users/cc-enterprise-login-dialog.c:186
@@ -8085,35 +8067,25 @@ msgstr "Κανένας υποστηριζόμενος τρόπος πιστοπ�
 
 #: panels/system/users/cc-enterprise-login-dialog.c:300
 #: panels/system/users/cc-enterprise-login-dialog.c:489
-#, fuzzy
 #| msgid ""
 #| "That login name didn’t work.\n"
 #| "Please try again."
 msgid "That login name didn’t work"
 msgstr ""
-"Αυτό το όνομα εισόδου δεν δούλεψε.\n"
-"Παρακαλούμε, προσπαθήστε ξανά."
+"Αυτό το όνομα εισόδου δεν δούλεψε"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:307
 #: panels/system/users/cc-enterprise-login-dialog.c:496
-#, fuzzy
 #| msgid ""
 #| "That login password didn’t work.\n"
 #| "Please try again."
 msgid "That login password didn’t work"
 msgstr ""
-"Αυτό το συνθηματικό εισόδου δεν δούλεψε.\n"
-"Παρακαλούμε, προσπαθήστε ξανά."
+"Αυτό το συνθηματικό εισόδου δεν δούλεψε"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:314
-#, fuzzy
-#| msgid ""
-#| "That login name didn’t work.\n"
-#| "Please try again."
-msgid "That hostname didn’t work"
-msgstr ""
-"Αυτό το όνομα εισόδου δεν δούλεψε.\n"
-"Παρακαλούμε, προσπαθήστε ξανά."
+msgid "That hostname didn't work"
+msgstr "Αυτό το όνομα διακομιστή δεν δούλεψε"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:321
 #: panels/system/users/cc-enterprise-login-dialog.c:504
@@ -8122,43 +8094,31 @@ msgstr "Αποτυχία σύνδεσης στο τομέα"
 
 #. Translators: The "%s" is a domain address (e.g. "demo1.freeipa.org").
 #: panels/system/users/cc-enterprise-login-dialog.c:365
-#, fuzzy, c-format
-#| msgid ""
-#| "In order to use enterprise logins, this computer needs to be\n"
-#| "enrolled in the domain. Please have your network administrator\n"
-#| "type their domain password here."
+#, c-format
 msgid ""
 "To add an enterprise login account, this device needs to be enrolled with "
 "<b>%s</b>. To enroll, have your domain administrator enter their name and "
 "password."
 msgstr ""
-"Για να χρησιμοποιήσετε τις εταιρικές συνδέσεις, αυτός ο υπολογιστής πρέπει "
-"να είναι\n"
-"εγγεγραμμένος στον τομέα. Παρακαλούμε, ενημερώστε τον διαχειριστή του "
-"δικτύου σας\n"
-"να πληκτρολογήσει εδώ το συνθηματικό του τομέα."
+"Για την προσθήκη ενός λογαριασμού εταιρικής σύνδεσης, αυτή η συσκευή πρέπει "
+"να εγγραφεί στο <b>%s</b>. Για εγγραφή, ζητήστε από τον διαχειριστή του "
+"τομέα να εισάγει το όνομα και το συνθηματικό του."
 
 #: panels/system/users/cc-enterprise-login-dialog.c:548
-#, fuzzy
-#| msgid "Failed to join domain"
 msgid "Valid domain"
-msgstr "Αποτυχία ένταξης στον τομέα"
+msgstr "Έγκυρος τομέας"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:553
-#, fuzzy
-#| msgid "Modem not found"
 msgid "Domain not found"
-msgstr "Δεν βρέθηκε μόντεμ"
+msgstr "Ο τομέας δεν βρέθηκε"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:601
 msgid "Checking domain…"
-msgstr "Έλεγχος τομέα..."
+msgstr "Έλεγχος τομέα…"
 
 #: panels/system/users/cc-enterprise-login-dialog.c:645
-#, fuzzy
-#| msgid "Failed to contact the accounts service"
 msgid "Failed to contact realmd service"
-msgstr "Αποτυχία επικοινωνίας με την υπηρεσία λογαριασμών"
+msgstr "Αποτυχία επικοινωνίας με την υπηρεσία realmd"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:90
 msgid "No fingerprint device"
@@ -8170,10 +8130,8 @@ msgid "No Fingerprint device"
 msgstr "Καμία συσκευή δακτυλικού αποτυπώματος"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:114
-#, fuzzy
-#| msgid "Ensure the device is properly connected."
 msgid "Ensure the device is properly connected"
-msgstr "Βεβαιωθείτε ότι η συσκευή είναι σωστά συνδεδεμένη."
+msgstr "Βεβαιωθείτε ότι η συσκευή είναι σωστά συνδεδεμένη"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:122
 msgid "Fingerprint Device"
@@ -8188,16 +8146,12 @@ msgid "Fingerprint Login"
 msgstr "Είσοδος με δακτυλικό αποτύπωμα"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:168
-#, fuzzy
-#| msgid ""
-#| "Fingerprint login allows you to unlock and log into your computer with "
-#| "your finger"
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
 msgstr ""
-"Η είσοδος με χρήση δακτυλικών αποτυπωμάτων σάς επιτρέπει να ξεκλειδώνετε και "
-"να συνδέεστε στον υπολογιστή σας με το δάχτυλό σας"
+"Η είσοδος με δακτυλικό αποτύπωμα σάς επιτρέπει να ξεκλειδώνετε και να "
+"συνδέεστε στη συσκευή σας με το δάχτυλό σας"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:194
 msgid "_Delete Fingerprints"
@@ -8364,10 +8318,9 @@ msgid "Failed to get fingerprint devices: %s"
 msgstr "Αποτυχία λήψης συσκευών αναγνώρισης δακτυλικού αποτυπώματος: %s"
 
 #: panels/system/users/cc-fingerprint-dialog.c:1395
-#, fuzzy
 #| msgid "_Delete Fingerprints"
 msgid "Delete All Fingerprints?"
-msgstr "_Διαγραφή αποτυπωμάτων"
+msgstr "Διαγραφή όλων των αποτυπωμάτων"
 
 #: panels/system/users/cc-fingerprint-dialog.c:1396
 msgid ""
@@ -8376,10 +8329,9 @@ msgid ""
 msgstr ""
 
 #: panels/system/users/cc-fingerprint-dialog.c:1401
-#, fuzzy
 #| msgid "_Delete"
 msgid "_Delete All"
-msgstr "_Διαγραφή"
+msgstr "_Διαγραφή όλων"
 
 #: panels/system/users/cc-password-dialog.c:129
 msgid "Please choose another password."
@@ -8456,10 +8408,9 @@ msgstr "Αδυναμία σύνδεσης στον τομέα %s: %s"
 #: panels/system/users/cc-user-page.blp:111
 #: panels/system/users/cc-user-page.blp:131
 #: panels/system/users/cc-user-page.blp:161
-#, fuzzy
 #| msgid "Unlock to Change Settings"
 msgid "Unlock to Change This Setting"
-msgstr "Ξεκλειδώστε για να αλλάξετε ρυθμίσεις"
+msgstr "Ξεκλειδώστε για να αλλάξετε αυτή τη ρύθμιση"
 
 #: panels/system/users/cc-user-page.blp:38
 msgid "Change Avatar"
@@ -8504,28 +8455,21 @@ msgid "Open the Parental Controls app"
 msgstr "Άνοιγμα της εφαρμογής Γονικού ελέγχου"
 
 #: panels/system/users/cc-user-page.blp:176
-#, fuzzy
 #| msgid "_Remove User"
 msgid "_Remove User…"
-msgstr "_Αφαίρεση χρήστη"
+msgstr "_Αφαίρεση χρήστη…"
 
 #: panels/system/users/cc-user-page.blp:191
-#, fuzzy
-#| msgid ""
-#| "The user will not be able to use this device once their account has been "
-#| "removed."
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed"
 msgstr ""
-"Ο χρήστης δεν θα μπορεί να χρησιμοποιήσει αυτήν τη συσκευή αφού έχει "
-"αφαιρεθεί ο λογαριασμός του."
+"Ο χρήστης δεν θα μπορεί να χρησιμοποιήσει αυτή τη συσκευή αφού αφαιρεθεί ο "
+"λογαριασμός του"
 
 #: panels/system/users/cc-user-page.blp:204
-#, fuzzy
-#| msgid "Delete Files and Settings"
 msgid "_Delete Files and Settings"
-msgstr "Διαγραφή Αρχείων και Ρυθμίσεων"
+msgstr "_Διαγραφή Αρχείων και Ρυθμίσεων"
 
 #: panels/system/users/cc-user-page.c:203
 msgctxt "Password mode"
@@ -8558,16 +8502,12 @@ msgid "Other Users"
 msgstr "Άλλοι χρήστες"
 
 #: panels/system/users/cc-users-page.blp:26
-#, fuzzy
-#| msgid "Add User"
 msgid "_Add User"
-msgstr "Προσθήκη χρήστη"
+msgstr "_Προσθήκη χρήστη"
 
 #: panels/system/users/cc-users-page.blp:34
-#, fuzzy
-#| msgid "Enterprise Login"
 msgid "Add _Enterprise Login"
-msgstr "Εταιρική σύνδεση"
+msgstr "Προσθήκη _εταιρικής σύνδεσης"
 
 #: panels/system/users/gnome-users-panel.desktop.in:3
 msgid "Add or remove users and change your password"
@@ -8575,198 +8515,119 @@ msgstr "Προσθέστε ή διαγράψτε χρήστες και αλλά�
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/users/gnome-users-panel.desktop.in:14
-#, fuzzy
-#| msgid ""
-#| "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
-#| "Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;Kid;Child;"
-msgstr ""
-"Σύνδεση;Όνομα;Αποτύπωμα;Αβαταρ;Λογότυπο;Πρόσωπο;Συνθηματικό;Γονικός "
-"Έλεγχος;Χρόνος Οθόνης;Περιορισμοί Εφαρμογών;Περιορισμοί Ιστού;Χρήση;Όριο "
-"Χρήσης;Παιδί;Παιδί;"
+msgstr "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;Kid;Child;Σύνδεση;Όνομα;Αποτύπωμα;Αβατάρ;Λογότυπο;Πρόσωπο;Συνθηματικό;Γονικός;Περιορισμοί;Χρήση;Παιδί;"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
-msgstr "Διαχείριση λογαριασμών των χρηστών"
+msgstr "Διαχείριση λογαριασμών χρηστών"
 
 #: panels/system/users/org.gnome.controlcenter.user-accounts.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr "Απαιτείται πιστοποίηση για την αλλαγή δεδομένων του χρήστη"
+msgstr "Απαιτείται πιστοποίηση για την αλλαγή δεδομένων χρήστη"
 
 #: panels/system/users/pw-utils.c:105
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "The new password needs to be different from the old one."
 msgctxt "Password hint"
 msgid "The new password needs to be different from the old one"
-msgstr "Το νέο συνθηματικό πρέπει να είναι διαφορετικό από το παλιό."
+msgstr "Το νέο συνθηματικό πρέπει να είναι διαφορετικό από το παλιό"
 
 #: panels/system/users/pw-utils.c:107
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try changing some letters and numbers."
 msgctxt "Password hint"
 msgid "Try changing some letters and numbers"
-msgstr "Προσπαθήστε να αλλάξετε μερικά γράμματα και αριθμούς."
+msgstr "Προσπαθήστε να αλλάξετε μερικά γράμματα και αριθμούς"
 
 #: panels/system/users/pw-utils.c:109 panels/system/users/pw-utils.c:117
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try changing the password a bit more."
 msgctxt "Password hint"
 msgid "Try changing the password a bit more"
-msgstr "Δοκιμάστε να αλλάξετε το συνθηματικό λίγο περισσότερο."
+msgstr "Προσπαθήστε να αλλάξετε το συνθηματικό λίγο περισσότερο"
 
 #: panels/system/users/pw-utils.c:111
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "A password without your user name would be stronger."
 msgctxt "Password hint"
 msgid "A password without your user name would be stronger"
-msgstr "Ένα συνθηματικό χωρίς το όνομα χρήστη πιθανόν να είναι πιο ισχυρό."
+msgstr "Ένα συνθηματικό χωρίς το όνομα χρήστη θα ήταν πιο ισχυρό"
 
 #: panels/system/users/pw-utils.c:113
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to avoid using your name in the password."
 msgctxt "Password hint"
 msgid "Try to avoid using your name in the password"
-msgstr "Προσπαθήστε να αποφύγετε τη χρήση του ονόματός σας στο συνθηματικό."
+msgstr "Προσπαθήστε να αποφύγετε τη χρήση του ονόματός σας στο συνθηματικό"
 
 #: panels/system/users/pw-utils.c:115
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to avoid some of the words included in the password."
 msgctxt "Password hint"
 msgid "Try to avoid some of the words included in the password"
-msgstr ""
-"Προσπαθήστε να αποφύγετε μερικές από τις λέξεις που συμπεριλαμβάνονται στο "
-"συνθηματικό."
+msgstr "Προσπαθήστε να αποφύγετε μερικές από τις λέξεις που περιλαμβάνονται στο συνθηματικό"
 
 #: panels/system/users/pw-utils.c:119
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to avoid common words."
 msgctxt "Password hint"
 msgid "Avoid common words"
-msgstr "Προσπαθήστε να αποφύγετε συνηθισμένες λέξεις."
+msgstr "Αποφύγετε συνηθισμένες λέξεις"
 
 #: panels/system/users/pw-utils.c:121
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to avoid reordering existing words."
 msgctxt "Password hint"
 msgid "Try to avoid reordering existing words"
-msgstr "Προσπαθήστε να αποφύγετε αναδιάταξη υπαρχουσών λέξεων."
+msgstr "Προσπαθήστε να αποφύγετε την αναδιάταξη υπαρχουσών λέξεων"
 
 #: panels/system/users/pw-utils.c:123
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to use more numbers."
 msgctxt "Password hint"
 msgid "Try to use more numbers"
-msgstr "Προσπαθήστε να χρησιμοποιήσετε περισσότερους αριθμούς."
+msgstr "Προσπαθήστε να χρησιμοποιήσετε περισσότερους αριθμούς"
 
 #: panels/system/users/pw-utils.c:125
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to use more uppercase letters."
 msgctxt "Password hint"
 msgid "Try to use more uppercase letters"
-msgstr "Προσπαθήστε να χρησιμοποιήσετε περισσότερα κεφαλαία γράμματα."
+msgstr "Προσπαθήστε να χρησιμοποιήσετε περισσότερα κεφαλαία γράμματα"
 
 #: panels/system/users/pw-utils.c:127
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to use more lowercase letters."
 msgctxt "Password hint"
 msgid "Try to use more lowercase letters"
-msgstr "Προσπαθήστε να χρησιμοποιήσετε περισσότερα πεζά γράμματα."
+msgstr "Προσπαθήστε να χρησιμοποιήσετε περισσότερα πεζά γράμματα"
 
 #: panels/system/users/pw-utils.c:129
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to use more special characters, like punctuation."
 msgctxt "Password hint"
 msgid "Try to use more special characters, like punctuation"
-msgstr ""
-"Προσπαθήστε να χρησιμοποιήσετε περισσότερους ειδικούς χαρακτήρες, όπως "
-"σημεία στίξης."
+msgstr "Προσπαθήστε να χρησιμοποιήσετε περισσότερους ειδικούς χαρακτήρες, όπως σημεία στίξης"
 
 #: panels/system/users/pw-utils.c:131
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to use a mixture of letters, numbers and punctuation."
 msgctxt "Password hint"
 msgid "Try to use a mixture of letters, numbers and punctuation"
-msgstr ""
-"Προσπαθήστε να χρησιμοποιήσετε έναν συνδυασμό γραμμάτων, αριθμών και σημείων "
-"στίξης."
+msgstr "Προσπαθήστε να χρησιμοποιήσετε έναν συνδυασμό γραμμάτων, αριθμών και σημείων στίξης"
 
 #: panels/system/users/pw-utils.c:133
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to avoid repeating the same character."
 msgctxt "Password hint"
 msgid "Try to avoid repeating the same character"
-msgstr "Προσπαθήστε να αποφύγετε την επανάληψη του ίδιου χαρακτήρα."
+msgstr "Προσπαθήστε να αποφύγετε την επανάληψη του ίδιου χαρακτήρα"
 
 #: panels/system/users/pw-utils.c:135
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid ""
-#| "Try to avoid repeating the same type of character: you need to mix up "
-#| "letters, numbers and punctuation."
 msgctxt "Password hint"
 msgid ""
 "Try to avoid repeating the same type of character: you need to mix up "
 "letters, numbers and punctuation"
 msgstr ""
-"Προσπαθήστε να αποφύγετε την επανάληψη του ίδιου τύπου χαρακτήρα: χρειάζεστε "
-"την ανάμειξη γραμμάτων, αριθμών και σημείων στίξης."
+"Προσπαθήστε να αποφύγετε την επανάληψη του ίδιου τύπου χαρακτήρα: πρέπει να "
+"αναμίξετε γράμματα, αριθμούς και σημεία στίξης"
 
 #: panels/system/users/pw-utils.c:137
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Try to avoid sequences like 1234 or abcd."
 msgctxt "Password hint"
 msgid "Try to avoid sequences like 1234 or abcd"
-msgstr "Προσπαθήστε να αποφύγετε ακολουθίες όπως 1234 ή abcd."
+msgstr "Προσπαθήστε να αποφύγετε ακολουθίες όπως 1234 ή abcd"
 
 #: panels/system/users/pw-utils.c:139
-#, fuzzy
-#| msgid "Password could not be changed"
 msgctxt "Password hint"
 msgid "Password needs to be longer"
-msgstr "Το συνθηματικό σας δεν μπορούσε να αλλαχθεί"
+msgstr "Το συνθηματικό πρέπει να είναι μεγαλύτερο"
 
 #: panels/system/users/pw-utils.c:141
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid "Mix uppercase and lowercase and try to use a number or two."
 msgctxt "Password hint"
 msgid "Mix uppercase and lowercase and try to use a number or two"
-msgstr ""
-"Αναμείξτε κεφαλαία και πεζά γράμματα και χρησιμοποιήστε έναν ή περισσότερους "
-"αριθμούς."
+msgstr "Αναμείξτε κεφαλαία και πεζά γράμματα και προσπαθήστε να χρησιμοποιήσετε έναν ή δύο αριθμούς"
 
 #: panels/system/users/pw-utils.c:143
-#, fuzzy
-#| msgctxt "Password hint"
-#| msgid ""
-#| "Password needs to be longer. Try to add more letters, numbers and "
-#| "punctuation."
 msgctxt "Password hint"
 msgid "Valid password. Try adding more letters, numbers and punctuation"
-msgstr ""
-"Τα συνθηματικά πρέπει να είναι μεγαλύτερα. Προσπαθήστε να προσθέσετε "
-"περισσότερα γράμματα, αριθμούς και σημεία στίξης."
+msgstr "Έγκυρο συνθηματικό. Προσπαθήστε να προσθέσετε περισσότερα γράμματα, αριθμούς και σημεία στίξης"
 
 #: panels/system/users/pw-utils.c:183
-#, fuzzy
-#| msgid "Incorrect password"
 msgid "Great password!"
-msgstr "Εσφαλμένο συνθηματικό"
+msgstr "Εξαιρετικό συνθηματικό!"
 
 #: panels/system/users/run-passwd.c:390
 msgid "Authentication failed"
@@ -8820,35 +8681,32 @@ msgstr "Άγνωστο σφάλμα"
 
 #. Translators: '%s' is an invalid character, such as @, #, etc...
 #: panels/system/users/user-utils.c:148
-#, fuzzy, c-format
+#, c-format
 #| msgid "The username cannot start with a “-”."
 msgid "Usernames cannot include “%s”"
-msgstr "Το όνομα χρήστη δεν μπορεί να αρχίζει με «-»."
+msgstr "Τα ονόματα χρήστη δεν μπορούν να περιλαμβάνουν «%s»"
 
 #: panels/system/users/user-utils.c:152
 msgid "Username is already in use — please choose another"
-msgstr ""
+msgstr "Το όνομα χρήστη χρησιμοποιείται ήδη — παρακαλούμε επιλέξτε άλλο"
 
 #: panels/system/users/user-utils.c:195
-#, fuzzy, c-format
-#| msgid "Must have a maximum of %d character"
-#| msgid_plural "Must have a maximum of %d characters"
+#, c-format
 msgid "Usernames must have fewer than %ld character"
 msgid_plural "Usernames must have fewer than %ld characters"
-msgstr[0] "Πρέπει να έχει τουλάχιστον %d χαρακτήρα"
-msgstr[1] "Πρέπει να έχει τουλάχιστον %d χαρακτήρες"
+msgstr[0] "Τα ονόματα χρήστη πρέπει να έχουν λιγότερους από %ld χαρακτήρα"
+msgstr[1] "Τα ονόματα χρήστη πρέπει να έχουν λιγότερους από %ld χαρακτήρες"
 
 #: panels/universal-access/cc-cursor-size-page.blp:5
 msgid "Cursor Size"
-msgstr "Μέγεθος δρομέα"
+msgstr "Μέγεθος Δρομέα"
 
 #: panels/universal-access/cc-cursor-size-page.blp:12
-#, fuzzy
-#| msgid "The size of the cursor can be increased to make it easier to see"
 msgid ""
 "Cursor size can be combined with Zoom to make it easier to see the cursor"
 msgstr ""
-"Το μέγεθος του δρομέα μπορεί να αυξηθεί για να διευκολυνθεί ο εντοπισμός του"
+"Το μέγεθος του δρομέα μπορεί να συνδυαστεί με το Ζουμ για να διευκολυνθεί η "
+"όραση του δρομέα"
 
 #: panels/universal-access/cc-ua-hearing-page.blp:5
 msgid "Hearing"
@@ -8859,12 +8717,9 @@ msgid "_Overamplification"
 msgstr "_Υπερενίσχυση"
 
 #: panels/universal-access/cc-ua-hearing-page.blp:16
-#, fuzzy
 #| msgid "Allow volume to exceed 100%. This will result in quality loss"
 msgid "Allow volume to exceed 100%, with reduced sound quality"
-msgstr ""
-"Να επιτρέπεται η ένταση να ξεπεράσει το 100%. Αυτό θα οδηγήσει σε απώλεια "
-"ποιότητας"
+msgstr "Να επιτρέπεται η ένταση να ξεπερνά το 100%, με μειωμένη ποιότητα ήχου"
 
 #: panels/universal-access/cc-ua-hearing-page.blp:34
 msgid "Visual Alerts"
@@ -8902,12 +8757,10 @@ msgstr "Ήχος"
 
 #. Translators: %s is a link to the Sound panel with the label "Sound"
 #: panels/universal-access/cc-ua-hearing-page.c:158
-#, fuzzy, c-format
+#, c-format
 #| msgid "System volume can be adjusted in <a href='#'>Sound</a> settings."
 msgid "System volume can be adjusted in %s settings"
-msgstr ""
-"Η ένταση του συστήματος μπορεί να προσαρμοστεί στις ρυθμίσεις <a "
-"href='#'>Ήχου</a>."
+msgstr "Η ένταση του συστήματος μπορεί να προσαρμοστεί στις ρυθμίσεις %s."
 
 #: panels/universal-access/cc-ua-mouse-page.blp:5
 msgid "Pointing & Clicking"
@@ -8933,13 +8786,11 @@ msgstr "Αποκαλύψτε τη θέση του δείκτη πατώντας 
 
 #: panels/universal-access/cc-ua-mouse-page.blp:27
 msgid "_Activate Windows on Hover"
-msgstr ""
+msgstr "_Ενεργοποίηση Παραθύρων με Αιώρηση"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:28
-#, fuzzy
-#| msgid "Pauses the computer after a period of inactivity."
 msgid "Place the pointer over a window to activate it"
-msgstr "Αναστέλλει τον υπολογιστή μετά από μια περίοδο αδράνειας."
+msgstr "Τοποθετήστε τον δείκτη πάνω από ένα παράθυρο για να το ενεργοποιήσετε"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:33
 msgid "_Double-Click Delay"
@@ -9045,10 +8896,9 @@ msgid "Seeing"
 msgstr "Όραση"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:18
-#, fuzzy
 #| msgid "_Screen Reader"
 msgid "Screen Reader"
-msgstr "Αναγνώστης ο_θόνης"
+msgstr "Αναγνώστης οθόνης"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:26
 msgid "Screen _Reader"
@@ -9061,11 +8911,10 @@ msgstr ""
 "εστίαση"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:32
-#, fuzzy
 #| msgctxt "printer state"
 #| msgid "Configuring"
 msgid "Co_nfigure"
-msgstr "Γίνεται ρύθμιση"
+msgstr "_Ρύθμιση"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:43
 msgid "_High Contrast"
@@ -9085,14 +8934,12 @@ msgid "Use shapes to indicate state in addition to or instead of color"
 msgstr "Χρήση σχημάτων για ένδειξη κατάστασης επιπλέον ή αντί χρώματος"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:55
-#, fuzzy
-#| msgid "Sound Effects"
 msgid "_Animation Effects"
-msgstr "Ηχητικά εφέ"
+msgstr "_Εφέ κινούμενης εικόνας"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:56
 msgid "Toggle animation effects throughout the user interface"
-msgstr ""
+msgstr "Εναλλαγή εφέ κινούμενης εικόνας σε όλη τη διεπαφή χρήστη"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:62
 msgid ""
@@ -9114,10 +8961,8 @@ msgid "_Cursor Size"
 msgstr "_Μέγεθος δρομέα"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:80
-#, fuzzy
-#| msgid "Increase the size of all text in the user interface"
 msgid "Increase the size of the cursor"
-msgstr "Αύξηση του μεγέθους όλου του κειμένου στη διεπαφή χρήστη"
+msgstr "Αύξηση του μεγέθους του δρομέα"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:86
 msgid "_Sound Keys"
@@ -9128,10 +8973,8 @@ msgid "Beep when Num Lock or Caps Lock are turned on or off"
 msgstr "Ήχος κατά την ενεργοποίηση/απενεργοποίηση του Num Lock ή Caps Lock"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:92
-#, fuzzy
-#| msgid "_Overlay Scrollbars"
 msgid "Always Show Scroll_bars"
-msgstr "_Επικάλυψη γραμμών κύλισης"
+msgstr "Να εμφανίζονται πάντα οι μπάρες _κύλισης"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:93
 msgid "Make scrollbars always visible"
@@ -9268,8 +9111,6 @@ msgid "Beep when a key is rejected"
 msgstr "Ήχος όταν ένα πλήκτρο έχει απορριφτεί"
 
 #: panels/universal-access/cc-ua-typing-page.blp:190
-#, fuzzy
-#| msgid "_Bounce Keys"
 msgid "B_ounce Keys"
 msgstr "Πλήκτρα α_ναπήδησης"
 
@@ -9294,14 +9135,10 @@ msgid "Magnifier"
 msgstr "Μεγεθυντής"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:25
-#, fuzzy
-#| msgid "Magnification Factor"
 msgid "_Magnification Factor"
-msgstr "Συντελεστής Μεγέθυνσης"
+msgstr "_Συντελεστής Μεγέθυνσης"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:39
-#, fuzzy
-#| msgid "_Magnifier View"
 msgid "M_agnifier View"
 msgstr "Προβολή _μεγεθυντικού φακού"
 
@@ -9351,51 +9188,43 @@ msgid "Right Half"
 msgstr "Δεξιό μισό"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:82
-#, fuzzy
-#| msgid "Follow Behavior"
 msgid "_Follow Behavior"
-msgstr "Συμπεριφορά Ακολούθησης"
+msgstr "_Συμπεριφορά Ακολούθησης"
 
 #. Translators: This is an option of the zoom Magnifier behavior
 #: panels/universal-access/cc-ua-zoom-page.blp:89
 msgid "Moves with Contents"
-msgstr "Κινείται με το περιεχόμενο"
+msgstr "Κινείται με το Περιεχόμενο"
 
 #. Translators: This is an option of the zoom Magnifier behavior
 #: panels/universal-access/cc-ua-zoom-page.blp:91
 msgid "Pushes Contents Around"
-msgstr "Μετακινεί το περιεχόμενο"
+msgstr "Μετακινεί το Περιεχόμενο"
 
 #. Translators: This is an option of the zoom Magnifier behavior
 #: panels/universal-access/cc-ua-zoom-page.blp:93
 msgid "Remains Centered"
-msgstr "Παραμένει στο κέντρο"
+msgstr "Παραμένει Κεντραρισμένο"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:100
 msgid "Crosshairs"
-msgstr "Στόχος"
+msgstr "Στόχοι"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:103
-#, fuzzy
-#| msgid "_Crosshairs:"
 msgid "_Crosshair Lines"
-msgstr "_Στόχοι:"
+msgstr "Γραμμές _Στόχου"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:104
-#, fuzzy
-#| msgid "Invert colors in the magnifier region"
 msgid "Mark the cursor location in the magnifier region using lines"
-msgstr "Αντιστροφή χρωμάτων στην περιοχή του μεγεθυντικού φακού"
+msgstr "Σήμανση της θέσης του δρομέα στην περιοχή μεγεθυντικού φακού με χρήση γραμμών"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:109
 msgid "_Overlap Mouse Cursor"
-msgstr "Επι_κάλυψη δρομέα ποντικιού"
+msgstr "Επι_κάλυψη Δρομέα Ποντικιού"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:114
-#, fuzzy
-#| msgid "Thickness"
 msgid "_Thickness"
-msgstr "Πάχος"
+msgstr "_Πάχος"
 
 #. Translators: This is a mark in the Thickness scale
 #: panels/universal-access/cc-ua-zoom-page.blp:121
@@ -9428,10 +9257,9 @@ msgid "Invert colors in the magnifier region"
 msgstr "Αντιστροφή χρωμάτων στην περιοχή του μεγεθυντικού φακού"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:183
-#, fuzzy
 #| msgid "Brightness"
 msgid "_Brightness"
-msgstr "Φωτεινότητα"
+msgstr "_Φωτεινότητα"
 
 #. Translators: This is a mark in the Brightness scale
 #. Translators: This is a mark in the Contrast scale
@@ -9468,52 +9296,37 @@ msgstr ""
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:14
-#, fuzzy
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Universal "
-#| "Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;"
 msgid "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;"
-msgstr ""
-"Πληκτρολόγιο;Ποντίκι;a11y;Προσιτότητα;Αντίθεση;Ήχος;Εστίαση;Οθόνη;Αναγνώστης;μεγάλο;ψηλό;μεγάλο;κείμενο;γραμματοσειρά;μέγεθος;AccessX;Κολλημένο;Πλήκτρα;Αργά;Αναπήδηση;Ποντίκι;Διπλό;κλικ;Καθυστέρηση;Ταχύτητα;Βοήθεια;Επανάληψη;Αναβοσμήσιμο;οπτικός;ακρόαση;ήχος;πληκτρολόγηση;κινούμενες "
-"εικόνες;Keyboard;Mouse;a11y;Accessibility;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;audio;typing;animations;"
+msgstr "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;Πληκτρολόγιο;Ποντίκι;a11y;Προσιτότητα;Καθολική;Πρόσβαση;Αντίθεση;Δρομέας;Ήχος;Εστίαση;Οθόνη;Αναγνώστης;μεγάλο;ψηλό;μεγάλο;κείμενο;γραμματοσειρά;μέγεθος;AccessX;Κολλημένα;Πλήκτρα;Αργά;Αναπήδηση;Ποντίκι;Διπλό;κλικ;Καθυστέρηση;Ταχύτητα;Βοήθεια;Επανάληψη;Αναβοσβήσιμο;Δείκτης;εύρεση;εντοπισμός;οπτικός;ακοή;ήχος;πληκτρολόγηση;κινούμενες εικόνες;"
 
 #: panels/wacom/button-mapping.blp:6
 msgid "Map Buttons"
-msgstr "Χαρτογράφηση κουμπιών"
+msgstr "Χαρτογράφηση Κουμπιών"
 
 #: panels/wacom/button-mapping.blp:25
 msgid "Map buttons to functions"
 msgstr "Χαρτογράφηση κουμπιών σε συναρτήσεις"
 
 #: panels/wacom/button-mapping.blp:47
-#, fuzzy
-#| msgid ""
-#| "To edit a shortcut, choose the “Send Keystroke” action, press the "
-#| "keyboard shortcut button and hold down the new keys or press Backspace to "
-#| "clear."
 msgid ""
 "To edit a shortcut, choose the “Send Keystroke” action, press the keyboard "
 "shortcut button and hold down the new keys or press Backspace to clear"
 msgstr ""
 "Για να επεξεργαστείτε μια συντόμευση, επιλέξτε την ενέργεια «Αποστολή "
 "πατήματος πλήκτρου», πατήστε στο κουμπί συντόμευσης πληκτρολογίου και "
-"κρατήστε πατημένα τα νέα πλήκτρα ή πατήστε οπισθοδιαγραφή για εκκαθάριση."
+"κρατήστε πατημένα τα νέα πλήκτρα ή πατήστε οπισθοδιαγραφή για εκκαθάριση"
 
 #: panels/wacom/button-mapping.blp:59
 msgid "_Close"
 msgstr "_Κλείσιμο"
 
 #: panels/wacom/calibrator/calibrator.blp:48
-#, fuzzy
-#| msgid ""
-#| "Please tap the target markers as they appear on screen to calibrate the "
-#| "tablet."
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet"
 msgstr ""
-"Παρακαλούμε πατήστε τους δείκτες όπως αυτοί εμφανίζονται στην οθόνη για να "
-"βαθμονομήσετε το tablet σας."
+"Παρακαλούμε πατήστε τους δείκτες στόχου όπως εμφανίζονται στην οθόνη για να "
+"βαθμονομήσετε το tablet"
 
 #: panels/wacom/calibrator/calibrator.blp:58
 msgid "Mis-click detected, restarting…"
@@ -9548,7 +9361,7 @@ msgstr "Εμφάνιση βοήθειας στην οθόνη"
 #: panels/wacom/cc-wacom-device.c:170
 #, c-format
 msgid "This device is unknown and may present wrong capabilities — %s."
-msgstr ""
+msgstr "Αυτή η συσκευή είναι άγνωστη και ενδέχεται να παρουσιάσει λανθασμένες δυνατότητες — %s."
 
 #: panels/wacom/cc-wacom-device.c:460
 msgid "Tablet mounted on laptop panel"
@@ -9572,38 +9385,30 @@ msgid "Map _Buttons"
 msgstr "Χαρτογράφηση _κουμπιών"
 
 #: panels/wacom/cc-wacom-page.blp:17
-#, fuzzy
 #| msgid "Tablet Mode"
 msgid "_Tablet Mode"
-msgstr "Λειτουργία Tablet"
+msgstr "Λειτουργία _Tablet"
 
 #: panels/wacom/cc-wacom-page.blp:18
 msgid "Use absolute positioning for the pen"
 msgstr "Χρήση απόλυτης θέσης για το στυλό"
 
 #: panels/wacom/cc-wacom-page.blp:23
-#, fuzzy
-#| msgid "Custom Locations"
 msgid "Button Location"
-msgstr "Προσαρμοσμένες τοποθεσίες"
+msgstr "Τοποθεσία κουμπιού"
 
 #: panels/wacom/cc-wacom-page.blp:24
 msgid "The location of the physical buttons on the tablet"
-msgstr ""
+msgstr "Η τοποθεσία των φυσικών κουμπιών στο tablet"
 
 #: panels/wacom/cc-wacom-page.blp:55
-#, fuzzy
-#| msgctxt "display setting"
-#| msgid "Map to Monitor"
 msgctxt "display setting"
 msgid "Map to _Monitor"
-msgstr "Χαρτογράφηση στην οθόνη"
+msgstr "Χαρτογράφηση στην _οθόνη"
 
 #: panels/wacom/cc-wacom-page.blp:61
-#, fuzzy
-#| msgid "Keep Aspect Ratio"
 msgid "_Keep Aspect Ratio"
-msgstr "Διατήρηση αναλογίας διαστάσεων"
+msgstr "_Διατήρηση αναλογίας διαστάσεων"
 
 #: panels/wacom/cc-wacom-page.blp:62
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
@@ -9625,23 +9430,17 @@ msgid "No tablet detected"
 msgstr "Δεν εντοπίσθηκε tablet"
 
 #: panels/wacom/cc-wacom-panel.blp:50
-#, fuzzy
 #| msgid "Please plug in or turn on your Wacom tablet."
 msgid "Please plug in or turn on your Wacom tablet"
-msgstr "Παρακαλούμε συνδέστε ή ενεργοποιήστε το Wacom tablet."
+msgstr "Παρακαλούμε συνδέστε ή ενεργοποιήστε το Wacom tablet"
 
 #: panels/wacom/cc-wacom-stylus-action-dialog.blp:100
 #: panels/wacom/cc-wacom-stylus-action-dialog.blp:132
 #: panels/wacom/cc-wacom-stylus-page.c:432
-#, fuzzy
-#| msgctxt "Wacom action-type"
-#| msgid "Send Keystroke"
 msgid "Assign Keystroke"
-msgstr "Αποστολή πατήματος πλήκτρου"
+msgstr "Ανάθεση πατήματος πλήκτρου"
 
 #: panels/wacom/cc-wacom-stylus-action-dialog.blp:157
-#, fuzzy
-#| msgid "Press Esc to cancel."
 msgid "Press Esc to cancel"
 msgstr "Πατήστε Esc για ακύρωση"
 
@@ -9651,16 +9450,13 @@ msgid "Choose an action when button %d on the stylus is pressed"
 msgstr "Επιλογή ενέργειας όταν πατιέται το κουμπί %d στη γραφίδα"
 
 #: panels/wacom/cc-wacom-stylus-action-dialog.c:260
-#, fuzzy, c-format
-#| msgid "Button %d"
+#, c-format
 msgid "Button %d Mapping"
-msgstr "Κουμπί %d"
+msgstr "Χαρτογράφηση κουμπιού %d"
 
 #: panels/wacom/cc-wacom-stylus-page.blp:17
-#, fuzzy
-#| msgid "Tip Pressure Feel"
 msgid "Tip _Pressure Feel"
-msgstr "Αίσθηση πίεσης μύτης"
+msgstr "Αίσθηση πίεσης _μύτης"
 
 #. Translators: This is a mark in the 'Tip Pressure Feel' scale
 #. Translators: This is a mark in the 'Erase Pressure Feel' scale
@@ -9689,70 +9485,49 @@ msgid "Button _3"
 msgstr "Κουμπί _3"
 
 #: panels/wacom/cc-wacom-stylus-page.blp:59
-#, fuzzy
-#| msgid "Eraser Pressure Feel"
 msgid "_Eraser Pressure Feel"
-msgstr "Αίσθηση πίεσης σβήστρας"
+msgstr "Αίσθηση πίεσης _σβήστρας"
 
 #: panels/wacom/cc-wacom-stylus-page.c:415
-#, fuzzy
-#| msgid "Left Mouse Button Click"
 msgid "Left Mousebutton Click"
-msgstr "Αριστερό κλικ κουμπιού του ποντικιού"
+msgstr "Κλικ αριστερού πλήκτρου ποντικιού"
 
 #: panels/wacom/cc-wacom-stylus-page.c:418
-#, fuzzy
-#| msgid "Middle Mouse Button Click"
 msgid "Middle Mousebutton Click"
-msgstr "Μεσαίο κλικ κουμπιού του ποντικιού"
+msgstr "Κλικ μεσαίου πλήκτρου ποντικιού"
 
 #: panels/wacom/cc-wacom-stylus-page.c:421
-#, fuzzy
-#| msgid "Right Mouse Button Click"
 msgid "Right Mousebutton Click"
-msgstr "Δεξί κλικ κουμπιού του ποντικιού"
+msgstr "Κλικ δεξιού πλήκτρου ποντικιού"
 
 #. Translators: this is the "go forward" action of a button
 #: panels/wacom/cc-wacom-stylus-page.c:429
-#, fuzzy
-#| msgid "_Forward"
 msgid "Forward"
-msgstr "_Μπροστά"
+msgstr "Μπροστά"
 
 #: panels/wacom/cc-wacom-stylus-page.c:435
-#, fuzzy
-#| msgctxt "Wacom action-type"
-#| msgid "Switch Monitor"
 msgid "Switch Monitor"
 msgstr "Αλλαγή οθόνης"
 
 #: panels/wacom/cc-wacom-tool.c:365
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
-msgstr "Γραφίδα airbrush με πίεση, κλίση και ενσωματωμένο ρυθμιστή"
+msgstr "Γραφίδα αερογράφο με πίεση, κλίση και ενσωματωμένο ρυθμιστή"
 
 #: panels/wacom/cc-wacom-tool.c:367
-#, fuzzy
-#| msgid "Airbrush stylus with pressure, tilt, and rotation"
 msgid "Art pen with pressure, tilt, and rotation"
-msgstr "Γραφίδα airbrush με πίεση, κλίση και περιστροφή"
+msgstr "Γραφίδα τέχνης με πίεση, κλίση και περιστροφή"
 
 #: panels/wacom/cc-wacom-tool.c:369
-#, fuzzy
-#| msgid "Standard stylus with pressure and tilt"
 msgid "Stylus with pressure and tilt"
-msgstr "Γραφίδα στάνταρ με πίεση και κλίση"
+msgstr "Γραφίδα με πίεση και κλίση"
 
 #: panels/wacom/cc-wacom-tool.c:371
-#, fuzzy
-#| msgid "Stylus tip pressure"
 msgid "Stylus with pressure"
-msgstr "Πίεση άκρης γραφίδας"
+msgstr "Γραφίδα με πίεση"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in:2
-#, fuzzy
-#| msgid "Graphics %d"
 msgid "Graphics Tablets"
-msgstr "Γραφικά %d"
+msgstr "Γραφικά Tablets"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in:3
 msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
@@ -9774,177 +9549,156 @@ msgstr "Νέα συντόμευση…"
 #. * “1 minute / 20 minutes” to indicate a 1 minute break every 20 minutes.
 #: panels/wellbeing/cc-break-schedule-row.c:289
 msgid " / "
-msgstr ""
+msgstr " / "
 
 #: panels/wellbeing/cc-break-schedule-row.c:369
-#, fuzzy
 #| msgctxt "Battery power"
 #| msgid "Caution"
 msgid "Duration"
-msgstr "Προσοχή"
+msgstr "Διάρκεια"
 
 #: panels/wellbeing/cc-break-schedule-row.c:369
-#, fuzzy
-#| msgid "Integration"
 msgid "Interval"
-msgstr "Ενσωμάτωση"
+msgstr "Διάστημα"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.blp:23
-#, fuzzy
-#| msgid "Wi-Fi Unavailable"
 msgid "Screen Time Unavailable"
-msgstr "Το Wi-Fi δεν είναι διαθέσιμο"
+msgstr "Ο χρόνος οθόνης δεν είναι διαθέσιμος"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.blp:25
 msgid "Screen time information will appear here after a period of usage"
-msgstr ""
+msgstr "Οι πληροφορίες χρόνου οθόνης θα εμφανιστούν εδώ μετά από περίοδο χρήσης"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.blp:160
 msgid "Average Week"
-msgstr ""
+msgstr "Μέση εβδομάδα"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.blp:204
-#, fuzzy
-#| msgid "Previous"
 msgid "Previous Week"
-msgstr "Προηγούμενο"
+msgstr "Προηγούμενη εβδομάδα"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.blp:214
-#, fuzzy
-#| msgid "Last Week"
 msgid "Next Week"
-msgstr "Την τελευταία εβδομάδα"
+msgstr "Επόμενη εβδομάδα"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:230
 msgctxt "abbreviated weekday name for Sunday"
 msgid "S"
-msgstr ""
+msgstr "Κ"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:231
-#, fuzzy
 #| msgid "AM"
 msgctxt "abbreviated weekday name for Monday"
 msgid "M"
-msgstr "ΠM"
+msgstr "Δ"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:232
-#, fuzzy
 #| msgid "To"
 msgctxt "abbreviated weekday name for Tuesday"
 msgid "T"
-msgstr "Έως"
+msgstr "Τρ"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:233
 msgctxt "abbreviated weekday name for Wednesday"
 msgid "W"
-msgstr ""
+msgstr "Τε"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:234
-#, fuzzy
 #| msgid "To"
 msgctxt "abbreviated weekday name for Thursday"
 msgid "T"
-msgstr "Έως"
+msgstr "Πε"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:235
 msgctxt "abbreviated weekday name for Friday"
 msgid "F"
-msgstr ""
+msgstr "Πα"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:236
 msgctxt "abbreviated weekday name for Saturday"
 msgid "S"
-msgstr ""
+msgstr "Σ"
 
-#. Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
+#. Translators: This is a duration in minutes, for example '15m' for 15 minutes.
 #. * Use whatever shortest unit label is used for minutes in your locale.
 #: panels/wellbeing/cc-screen-time-statistics-row.c:393
-#, fuzzy, c-format
-#| msgid "Hum"
+#, c-format
 msgid "%um"
-msgstr "Βουητό"
+msgstr "%uλ"
 
-#. Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
+#. Translators: This is a duration in hours, for example '2h' for 2 hours.
 #. * Use whatever shortest unit label is used for hours in your locale.
 #: panels/wellbeing/cc-screen-time-statistics-row.c:399
 #, c-format
 msgid "%uh"
-msgstr ""
+msgstr "%uω"
 
 #. Translators: This is a duration in hours and minutes, for example
-#. * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
+#. * '3h 15m' for 3 hours and 15 minutes. Use whatever shortest unit label
 #. * is used for hours and minutes in your locale.
 #: panels/wellbeing/cc-screen-time-statistics-row.c:406
 #, c-format
 msgid "%uh %um"
-msgstr ""
+msgstr "%uω %uλ"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:665
 #: panels/wellbeing/cc-screen-time-statistics-row.c:785
-#, fuzzy, c-format
-#| msgid "Failed to upload file: %s"
-msgid "Failed to load session history file ‘%s’: %s"
-msgstr "Αποτυχία αποστολής αρχείου: %s"
+#, c-format
+msgid "Failed to load session history file '%s': %s"
+msgstr "Αποτυχία φόρτωσης αρχείου ιστορικού συνεδρίας '%s': %s"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:666
-#, fuzzy
-#| msgid "Infrastructure"
 msgid "Invalid file structure"
-msgstr "Υποδομή"
+msgstr "Μη έγκυρη δομή αρχείου"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:703
-#, fuzzy, c-format
-#| msgid "Failed to upload file: %s"
+#, c-format
 msgid "Failed to load session history file: %s"
-msgstr "Αποτυχία αποστολής αρχείου: %s"
+msgstr "Αποτυχία φόρτωσης αρχείου ιστορικού συνεδρίας: %s"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:704
 #: panels/wellbeing/cc-screen-time-statistics-row.c:786
-#, fuzzy
-#| msgid "File History"
 msgid "File is empty"
-msgstr "Ιστορικό αρχείου"
+msgstr "Το αρχείο είναι κενό"
 
 #. G_DATE_BAD_WEEKDAY
 #: panels/wellbeing/cc-screen-time-statistics-row.c:922
 msgid "Average Monday"
-msgstr ""
+msgstr "Μέση Δευτέρα"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:923
 msgid "Average Tuesday"
-msgstr ""
+msgstr "Μέση Τρίτη"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:924
 msgid "Average Wednesday"
-msgstr ""
+msgstr "Μέση Τετάρτη"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:925
 msgid "Average Thursday"
-msgstr ""
+msgstr "Μέση Πέμπτη"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:926
 msgid "Average Friday"
-msgstr ""
+msgstr "Μέση Παρασκευή"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:927
 msgid "Average Saturday"
-msgstr ""
+msgstr "Μέσο Σάββατο"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:928
 msgid "Average Sunday"
-msgstr ""
+msgstr "Μέση Κυριακή"
 
-#. Translators: This a medium-length date, for example ‘15 April’
+#. Translators: This a medium-length date, for example '15 April'
 #: panels/wellbeing/cc-screen-time-statistics-row.c:980
 msgid "%-d %B"
-msgstr ""
+msgstr "%-d %B"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:993
 #: panels/wellbeing/cc-screen-time-statistics-row.c:1004
-#, fuzzy
-#| msgid "Data"
 msgid "No Data"
-msgstr "Δεδομένα"
+msgstr "Χωρίς δεδομένα"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:1008
 #, c-format
@@ -9956,26 +9710,28 @@ msgstr "Αυτήν την εβδομάδα"
 #: panels/wellbeing/cc-screen-time-statistics-row.c:1019
 #, c-format
 msgid "%u–%u %s"
-msgstr ""
+msgstr "%u–%u %s"
 
 #. Translators: This is a range of days spanning two months.
 #. * For example, ‘27 April–4 May’. The dash is an en-dash.
 #: panels/wellbeing/cc-screen-time-statistics-row.c:1036
 #, c-format
 msgid "%u %s–%u %s"
-msgstr ""
+msgstr "%u %s–%u %s"
 
 #. Translators: The first placeholder is a formatted date string
 #. * (formatted using the `%x` strftime placeholder, which gives the
 #. * preferred date representation for the current locale without the time).
 #. * The second placeholder is a formatted time duration (for example,
-#. * ‘3 hours’ or ‘25 minutes’).
+#. * '3 hours' or '25 minutes').
 #: panels/wellbeing/cc-screen-time-statistics-row.c:1102
 #, c-format
 msgid ""
 "Bar chart of screen time usage over the week starting %s. A line is "
 "overlayed at the %s mark to indicate the configured screen time limit."
 msgstr ""
+"Ραβδόγραμμα χρήσης χρόνου οθόνης για την εβδομάδα που ξεκινά %s. Μια γραμμή "
+"εμφανίζεται στο σημείο %s για να υποδείξει το ρυθμισμένο όριο χρόνου οθόνης."
 
 #. Translators: The placeholder is a formatted date string (formatted
 #. * using the `%x` strftime placeholder, which gives the preferred date
@@ -9983,7 +9739,7 @@ msgstr ""
 #: panels/wellbeing/cc-screen-time-statistics-row.c:1121
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
-msgstr ""
+msgstr "Ραβδόγραμμα χρήσης χρόνου οθόνης για την εβδομάδα που ξεκινά %s."
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:1127
 #, c-format
@@ -9991,120 +9747,106 @@ msgid ""
 "Placeholder for a bar chart of screen time usage. No data is currently "
 "available."
 msgstr ""
+"Καθυστερητής για ραβδόγραμμα χρήσης χρόνου οθόνης. Δεν υπάρχουν διαθέσιμα "
+"δεδομένα προς το παρόν."
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:11
-#, fuzzy
-#| msgid "Screen Area"
 msgid "Screen Time"
-msgstr "Περιοχή Οθόνης"
+msgstr "Χρόνος Οθόνης"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:35
 msgid ""
 "Disabling screen time recording stops screen time data from being saved. "
 "This data is never shared outside this device."
 msgstr ""
+"Η απενεργοποίηση της καταγραφής χρόνου οθόνης σταματά την αποθήκευση "
+"δεδομένων χρόνου οθόνης. Αυτά τα δεδομένα δεν κοινοποιούνται ποτέ έξω από "
+"αυτή τη συσκευή."
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:43
-#, fuzzy
-#| msgid "Disable image"
 msgid "_Disable Screen Time"
-msgstr "Απενεργοποίηση εικόνας"
+msgstr "_Απενεργοποίηση Χρόνου Οθόνης"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:67
 msgid "Screen Time Recording Disabled"
-msgstr ""
+msgstr "Η Καταγραφή Χρόνου Οθόνης είναι Απενεργοποιημένη"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:69
 msgid "Enable recording to view screen usage history"
-msgstr ""
+msgstr "Ενεργοποιήστε την καταγραφή για να δείτε το ιστορικό χρήσης οθόνης"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:73
-#, fuzzy
-#| msgid "Enable"
 msgid "E_nable"
-msgstr "Ενεργοποίηση"
+msgstr "Ε_νεργοποίηση"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:90
-#, fuzzy
-#| msgid "Screen Lock"
 msgid "Screen Limits"
-msgstr "Κλείδωμα οθόνης"
+msgstr "Όρια Οθόνης"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:93
-#, fuzzy
-#| msgid "_Screen Lock"
 msgid "_Screen Time Limit"
-msgstr "Κλείδωμα _οθόνης"
+msgstr "_Όριο Χρόνου Οθόνης"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:99
 msgid "Daily _Limit"
-msgstr ""
+msgstr "_Ημερήσιο Όριο"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:104
-#, fuzzy
-#| msgctxt "display setting"
-#| msgid "Scale"
 msgid "_Grayscale"
-msgstr "Κλιμάκωση"
+msgstr "_Ασπρόμαυρο"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:105
 msgid "Black and white screen for screen limits"
-msgstr ""
+msgstr "Ασπρόμαυρη οθόνη για τα όρια οθόνης"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:111
 msgid "Break Reminders"
-msgstr ""
+msgstr "Υπενθυμίσεις Διαλείμματος"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:114
 msgid "_Eyesight Reminders"
-msgstr ""
+msgstr "_Υπενθυμίσεις Όρασης"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:115
 msgid "Reminders to look away from the screen"
-msgstr ""
+msgstr "Υπενθυμίσεις για να απομακρύνετε το βλέμμα από την οθόνη"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:120
 msgid "_Movement Reminders"
-msgstr ""
+msgstr "_Υπενθυμίσεις Κίνησης"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:121
-#, fuzzy
-#| msgid "Remove Background"
 msgid "Reminders to move around"
-msgstr "Αφαίρεση παρασκηνίου"
+msgstr "Υπενθυμίσεις για να κινηθείτε"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:126
-#, fuzzy
-#| msgid "Manual Schedule"
 msgid "Movement _Break Schedule"
-msgstr "Χειροκίνητο πρόγραμμα"
+msgstr "Πρόγραμμα Διαλείμματος _Κίνησης"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:131
-#, fuzzy
-#| msgid "Sounds"
 msgid "S_ounds"
-msgstr "Ήχοι"
+msgstr "Ή_χοι"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:132
 msgid "Play a sound when a break ends"
-msgstr ""
+msgstr "Αναπαραγωγή ήχου όταν τελειώνει ένα διάλειμμα"
 
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:5
-#, fuzzy
-#| msgid "Seeing"
 msgid "Wellbeing"
-msgstr "Όραση"
+msgstr "Ευεξία"
 
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:6
 msgid "Review and limit the amount of time you spend at the computer screen"
 msgstr ""
+"Ελέγξτε και περιορίστε τον χρόνο που περνάτε μπροστά από την οθόνη του "
+"υπολογιστή"
 
 #. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:17
 msgid ""
 "Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily "
 "Usage;Screen Limits;Usage Limit;"
-msgstr ""
+msgstr "Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily Usage;Screen Limits;Usage Limit;Ευεξία;Χρόνος Οθόνης;Διαλείμματα;Υπενθυμίσεις Διαλείμματος;Υγειονομικά Διαλείμματα;Ημερήσια Χρήση;Όρια Οθόνης;Όριο Χρήσης;"
 
 #: panels/wwan/cc-wwan-apn-dialog.blp:8
 msgid "Access Points"
@@ -10119,26 +9861,20 @@ msgid "APN"
 msgstr "APN"
 
 #: panels/wwan/cc-wwan-apn-dialog.blp:177
-#, fuzzy
-#| msgid "VPN Type"
 msgid "APN Type"
-msgstr "Τύπος VPN"
+msgstr "Τύπος APN"
 
 #: panels/wwan/cc-wwan-apn-dialog.blp:193
-#, fuzzy
-#| msgid "Integration"
 msgid "Internet"
-msgstr "Ενσωμάτωση"
+msgstr "Διαδίκτυο"
 
 #: panels/wwan/cc-wwan-apn-dialog.blp:194
 msgid "Attach"
-msgstr ""
+msgstr "Σύνδεση"
 
 #: panels/wwan/cc-wwan-apn-dialog.blp:208
-#, fuzzy
-#| msgid "Account _Type"
 msgid "Auth Type"
-msgstr "_Τύπος λογαριασμού"
+msgstr "Τύπος Πιστοποίησης"
 
 #: panels/wwan/cc-wwan-apn-dialog.c:329
 msgid "Edit"
