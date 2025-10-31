@@ -214,9 +214,7 @@ update_password_strength (CcAddUserDialog *self)
 
         gtk_level_bar_set_value (self->strength_indicator, strength_level);
 
-        /* Don't re-announce the password hint if it didn't change.
-         * In this case we announce the verify-password hint i(if it exists) instead. */
-        if (enforcing && g_strcmp0 (hint, self->password_hint_text) != 0) {
+        if (enforcing) {
                 cc_entry_feedback_update (self->password_hint,
                                           valid ? "check-outlined-symbolic" : "dialog-error-symbolic",
                                           hint);
