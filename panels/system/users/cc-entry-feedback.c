@@ -41,9 +41,6 @@ struct _CcEntryFeedback
   GtkImage    *image;
   GtkLabel    *label;
 
-  gchar       *default_icon_name;
-  gchar       *default_text;
-
   gboolean spinner_showing;
 };
 
@@ -74,12 +71,6 @@ cc_entry_feedback_get_property (GObject    *object,
       break;
     case PROP_TEXT:
       g_value_set_string (value, gtk_label_get_label (self->label));
-      break;
-    case PROP_DEFAULT_ICON_NAME:
-      g_value_set_string (value, self->default_icon_name);
-      break;
-    case PROP_DEFAULT_TEXT:
-      g_value_set_string (value, self->default_text);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -172,18 +163,6 @@ cc_entry_feedback_set_property (GObject      *object,
     case PROP_TEXT:
       gtk_label_set_label (self->label, g_value_get_string (value));
       break;
-    case PROP_DEFAULT_ICON_NAME:
-      g_free (self->default_icon_name);
-      self->default_icon_name = g_strdup (g_value_get_string (value));
-      if (gtk_image_get_icon_name (self->image) == NULL)
-        set_icon (self, self->default_icon_name);
-      break;
-    case PROP_DEFAULT_TEXT:
-      g_free (self->default_text);
-      self->default_text = g_strdup (g_value_get_string (value));
-      if (g_str_equal (gtk_label_get_label (self->label), ""))
-        gtk_label_set_label (self->label, self->default_text);
-      break;
     case PROP_ENTRY:
       set_entry (self, g_value_get_object (value));
       break;
@@ -227,20 +206,6 @@ cc_entry_feedback_class_init (CcEntryFeedbackClass * klass)
                                                         NULL,
                                                         G_PARAM_READWRITE));
   g_object_class_install_property (object_class,
-                                   PROP_DEFAULT_ICON_NAME,
-                                   g_param_spec_string ("default-icon-name",
-                                                        "Default icon name",
-                                                        "The icon theme name for the icon to be shown by default.",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
-                                   PROP_DEFAULT_TEXT,
-                                   g_param_spec_string ("default-text",
-                                                        "Default text",
-                                                        "The text to be displayed by default.",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
                                    PROP_ENTRY,
                                    g_param_spec_object ("entry",
                                                        "Entry Widget",
@@ -254,7 +219,10 @@ cc_entry_feedback_reset (CcEntryFeedback *self)
 {
   g_return_if_fail (CC_IS_ENTRY_FEEDBACK (self));
 
-  cc_entry_feedback_update (self, self->default_icon_name, self->default_text);
+  gtk_widget_set_visible (GTK_WIDGET (self->image), FALSE);
+
+  gtk_label_set_label (self->label, "");
+  gtk_image_set_from_icon_name (self->image, "");
 }
 
 void
@@ -264,7 +232,9 @@ cc_entry_feedback_update (CcEntryFeedback *self,
 {
   g_return_if_fail (CC_IS_ENTRY_FEEDBACK (self));
 
-  set_icon (self, icon_name);
+  gtk_widget_set_visible (GTK_WIDGET (self->image), TRUE);
+  if (icon_name)
+    set_icon (self, icon_name);
 
   if (g_strcmp0 (text, gtk_label_get_text (self->label)) == 0)
     return;
