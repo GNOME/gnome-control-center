@@ -68,11 +68,14 @@ template $CcEnterpriseLoginDialog: Adw.Dialog {
                 use-underline: true;
                 changed => $main_page_validate(template);
                 changed => $on_domain_entry_changed_cb(template);
+
+                [suffix]
+                $CcListRowInfoButton {
+                  text: _("Should match the web domain of the account provider");
+                }
               }
 
               $CcEntryFeedback domain_feedback {
-                default-text: _("Should match the web domain of the account provider");
-                default-icon-name: "info-outline-symbolic";
               }
             }
 

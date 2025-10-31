@@ -34,6 +34,7 @@
 #include "cc-entry-feedback.h"
 #include "cc-realm-manager.h"
 #include "cc-list-row.h"
+#include "cc-list-row-info-button.h"
 #include "user-utils.h"
 
 #include <adwaita.h>
@@ -693,6 +694,7 @@ cc_enterprise_login_dialog_class_init (CcEnterpriseLoginDialogClass * klass)
 
   g_type_ensure (CC_TYPE_ENTRY_FEEDBACK);
   g_type_ensure (CC_TYPE_LIST_ROW);
+  g_type_ensure (CC_TYPE_LIST_ROW_INFO_BUTTON);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-enterprise-login-dialog.ui");
 
