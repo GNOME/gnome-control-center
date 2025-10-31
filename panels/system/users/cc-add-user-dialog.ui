@@ -65,13 +65,17 @@
                             <property name="use-underline">True</property>
                             <signal name="changed" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
                             <signal name="entry-activated" handler="dialog_validate" object="CcAddUserDialog" swapped="yes"/>
+                            <child type="suffix">
+                              <object class="CcListRowInfoButton">
+                                <property name="valign">center</property>
+                                 <property name="text" translatable="yes">Usernames can only include lower case letters, numbers, hyphens and underscores</property>
+                              </object>
+                            </child>
                           </object>
                         </child>
                         <child>
                           <object class="CcEntryFeedback" id="name_feedback">
                             <property name="entry">username_row</property>
-                            <property name="default-text" translatable="yes">Usernames can only include lower case letters, numbers, hyphens and underscores.</property>
-                            <property name="default-icon-name">info-outline-symbolic</property>
                           </object>
                         </child>
                       </object>
