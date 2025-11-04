@@ -35,6 +35,16 @@ template $CcMultitaskingPanel: $CcPanel {
         }
       }
 
+      Adw.PreferencesGroup system_group {
+        title: _("System");
+        visible: false;
+
+        Adw.SwitchRow save_restore_row {
+          title: _("Reopen Windows After Login");
+          subtitle: _("Restore windows that were open when you last used the computer");
+        }
+      }
+
       Adw.PreferencesGroup {
         title: _("Workspaces");
 
