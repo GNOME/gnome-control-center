@@ -33,6 +33,12 @@ template $CcMultitaskingPanel: $CcPanel {
             valign: center;
           }
         }
+
+        Adw.SwitchRow save_restore_row {
+          title: _("Remember Open Apps");
+          subtitle: _("Restore apps that were open when you last used your computer");
+          visible: false;
+        }
       }
 
       Adw.PreferencesGroup {

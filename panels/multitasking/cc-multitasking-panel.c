@@ -30,6 +30,7 @@ struct _CcMultitaskingPanel
 
   GSettings       *interface_settings;
   GSettings       *mutter_settings;
+  GSettings       *session_settings;
   GSettings       *shell_settings;
   GSettings       *wm_settings;
 
@@ -42,6 +43,7 @@ struct _CcMultitaskingPanel
   CcIllustratedRow *hot_corner_row;
   GtkSwitch       *hot_corner_switch;
   AdwSpinRow      *number_of_workspaces_spin_row;
+  AdwSwitchRow    *save_restore_row;
   AdwPreferencesGroup *workspaces_display_group;
   GtkCheckButton  *workspaces_primary_display_radio;
   GtkCheckButton  *workspaces_span_displays_radio;
@@ -61,6 +63,53 @@ fixed_workspaces_changed_cb (CcMultitaskingPanel *self)
                             multi_workspaces || !fixed_workspaces);
 }
 
+static void
+query_supports_restore_cb (GObject      *source_object,
+                           GAsyncResult *result,
+                           gpointer      data)
+{
+  CcMultitaskingPanel *self = CC_MULTITASKING_PANEL (data);
+  g_autoptr(GVariant) value = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) supported = NULL;
+
+  value = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
+                                         result, &error);
+  if (value == NULL)
+    {
+      g_warning ("Failed to determine if save/restore is supported: %s",
+                 error->message);
+      return;
+    }
+
+  g_variant_get (value, "(v)", &supported);
+
+  gtk_widget_set_visible (GTK_WIDGET (self->save_restore_row),
+                          g_variant_get_boolean (supported));
+}
+
+static void
+check_session_supports_save_restore (CcMultitaskingPanel *self)
+{
+  g_autoptr(GDBusConnection) bus = NULL;
+
+  bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
+  g_dbus_connection_call (bus,
+                          "org.gnome.SessionManager",
+                          "/org/gnome/SessionManager",
+                          "org.freedesktop.DBus.Properties",
+                          "Get",
+                          g_variant_new ("(ss)",
+                                         "org.gnome.SessionManager",
+                                         "RestoreSupported"),
+                          G_VARIANT_TYPE ("(v)"),
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1,
+                          cc_panel_get_cancellable (CC_PANEL (self)),
+                          query_supports_restore_cb,
+                          self);
+}
+
 /* GObject overrides */
 
 static void
@@ -70,6 +119,7 @@ cc_multitasking_panel_finalize (GObject *object)
 
   g_clear_object (&self->interface_settings);
   g_clear_object (&self->mutter_settings);
+  g_clear_object (&self->session_settings);
   g_clear_object (&self->shell_settings);
   g_clear_object (&self->wm_settings);
 
@@ -97,6 +147,7 @@ cc_multitasking_panel_class_init (CcMultitaskingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, hot_corner_row);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, hot_corner_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, number_of_workspaces_spin_row);
+  gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, save_restore_row);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, workspaces_display_group);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, workspaces_primary_display_radio);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, workspaces_span_displays_radio);
@@ -166,6 +217,14 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
                    self->current_workspace_radio,
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
+
+  self->session_settings = g_settings_new ("org.gnome.desktop.session");
+  g_settings_bind (self->session_settings,
+                   "restore",
+                   self->save_restore_row,
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  check_session_supports_save_restore (self);
 
   if (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL)
     {
