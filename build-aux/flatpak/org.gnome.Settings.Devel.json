@@ -757,17 +757,10 @@
             "name" : "mutter",
             "buildsystem" : "meson",
             "config-opts" : [
-                "-Dgles2=false",
-                "-Dglx=false",
-                "-Dx11=true",
                 "-Dxwayland=false",
-                "-Dwayland=false",
-                "-Dlogind=false",
                 "-Dbash_completion=false",
-                "-Dnative_backend=false",
                 "-Dremote_desktop=false",
                 "-Degl_device=false",
-                "-Dudev=false",
                 "-Dstartup_notification=false",
                 "-Dintrospection=true",
                 "-Ddocs=false",
@@ -806,6 +799,30 @@
                                     "url" : "https://github.com/vcrhonek/hwdata.git"
                                 }
                             ]
+                        }
+                    ]
+                },
+                {
+                    "name" : "libinput",
+                    "buildsystem" : "meson",
+                    "config-opts" : [
+                        "-Dmtdev=false"
+                    ],
+                    "sources" : [
+                        {
+                            "type" : "git",
+                            "branch" : "main",
+                            "url" : "https://gitlab.freedesktop.org/libinput/libinput.git"
+                        }
+                    ]
+                },
+                {
+                    "name" : "libxcvt",
+                    "buildsystem" : "meson",
+                    "sources" : [
+                        {
+                            "type" : "git",
+                            "url" : "https://gitlab.freedesktop.org/xorg/lib/libxcvt.git"
                         }
                     ]
                 }
