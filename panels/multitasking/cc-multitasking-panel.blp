@@ -8,7 +8,8 @@ template $CcMultitaskingPanel: $CcPanel {
 
     content: Adw.PreferencesPage {
       Adw.PreferencesGroup {
-        title: _("General");
+        title: _("Screen Edges");
+        separate-rows: true;
 
         $CcIllustratedRow hot_corner_row {
           activatable-widget: hot_corner_switch;
@@ -24,7 +25,7 @@ template $CcMultitaskingPanel: $CcPanel {
 
         $CcIllustratedRow active_screen_edges_row {
           activatable-widget: active_screen_edges_switch;
-          title: _("_Active Screen Edges");
+          title: _("_Window Resize");
           subtitle: _("Drag windows against the top, left, and right screen edges to resize them");
           use-underline: true;
           resource: "/org/gnome/control-center/multitasking/assets/active-screen-edges.svg";
