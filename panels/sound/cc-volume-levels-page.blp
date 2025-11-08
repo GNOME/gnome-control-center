@@ -22,14 +22,14 @@ template $CcVolumeLevelsPage: Adw.NavigationPage {
         name: "streams-page";
 
         child: Adw.PreferencesPage {
-          Adw.PreferencesGroup {
-            ListBox listbox {
-              selection-mode: none;
+          Adw.PreferencesGroup output_group {
+            visible: false;
+            title: _("Outputs");
+          }
 
-              styles [
-                "boxed-list",
-              ]
-            }
+          Adw.PreferencesGroup input_group {
+            visible: false;
+            title: _("Inputs");
           }
         };
       }
