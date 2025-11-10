@@ -35,6 +35,7 @@
 #include "cc-fingerprint-manager.h"
 #include "cc-language-chooser.h"
 #include "cc-list-row.h"
+#include "cc-list-row-info-button.h"
 #include "cc-password-dialog.h"
 #include "cc-permission-infobar.h"
 #include "user-utils.h"
@@ -630,6 +631,8 @@ cc_user_page_class_init (CcUserPageClass * klass)
                                                            FALSE,
                                                            G_PARAM_READABLE));
     g_type_ensure (CC_TYPE_LIST_ROW);
+    g_type_ensure (CC_TYPE_LIST_ROW_INFO_BUTTON);
+    g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);
 
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-user-page.ui");
 
