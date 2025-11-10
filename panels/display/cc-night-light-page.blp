@@ -149,30 +149,38 @@ template $CcNightLightPage: Adw.Bin {
                     hhomogeneous: false;
                     vhomogeneous: false;
 
-                    Button button_from_am {
-                      /* Translators: This is the short form for the time period in the morning */
-                      label: _("AM");
-                      can-focus: true;
-                      receives-default: true;
-                      valign: center;
-                      clicked => $dialog_am_pm_from_button_clicked_cb(template);
+                    StackPage {
+                      name: "am";
 
-                      styles [
-                        "unpadded-button",
-                      ]
+                      child: Button button_from_am {
+                        /* Translators: This is the short form for the time period in the morning */
+                        label: _("AM");
+                        can-focus: true;
+                        receives-default: true;
+                        valign: center;
+                        clicked => $dialog_am_pm_from_button_clicked_cb(template);
+
+                        styles [
+                          "unpadded-button",
+                        ]
+                      };
                     }
 
-                    Button button_from_pm {
-                      /* Translators: This is the short form for the time period in the afternoon */
-                      label: _("PM");
-                      can-focus: true;
-                      receives-default: true;
-                      valign: center;
-                      clicked => $dialog_am_pm_from_button_clicked_cb(template);
+                    StackPage {
+                      name: "pm";
 
-                      styles [
-                        "unpadded-button",
-                      ]
+                      child: Button button_from_pm {
+                        /* Translators: This is the short form for the time period in the afternoon */
+                        label: _("PM");
+                        can-focus: true;
+                        receives-default: true;
+                        valign: center;
+                        clicked => $dialog_am_pm_from_button_clicked_cb(template);
+
+                        styles [
+                          "unpadded-button",
+                        ]
+                      };
                     }
                   }
                 }
@@ -235,28 +243,36 @@ template $CcNightLightPage: Adw.Bin {
                     hhomogeneous: false;
                     vhomogeneous: false;
 
-                    Button button_to_am {
-                      label: _("AM");
-                      can-focus: true;
-                      receives-default: true;
-                      valign: center;
-                      clicked => $dialog_am_pm_to_button_clicked_cb(template);
+                    StackPage {
+                      name: "am";
 
-                      styles [
-                        "unpadded-button",
-                      ]
+                      child: Button button_to_am {
+                        label: _("AM");
+                        can-focus: true;
+                        receives-default: true;
+                        valign: center;
+                        clicked => $dialog_am_pm_to_button_clicked_cb(template);
+
+                        styles [
+                          "unpadded-button",
+                        ]
+                      };
                     }
 
-                    Button button_to_pm {
-                      label: _("PM");
-                      can-focus: true;
-                      receives-default: true;
-                      valign: center;
-                      clicked => $dialog_am_pm_to_button_clicked_cb(template);
+                    StackPage {
+                      name: "pm";
 
-                      styles [
-                        "unpadded-button",
-                      ]
+                      child: Button button_to_pm {
+                        label: _("PM");
+                        can-focus: true;
+                        receives-default: true;
+                        valign: center;
+                        clicked => $dialog_am_pm_to_button_clicked_cb(template);
+
+                        styles [
+                          "unpadded-button",
+                        ]
+                      };
                     }
                   }
                 }
