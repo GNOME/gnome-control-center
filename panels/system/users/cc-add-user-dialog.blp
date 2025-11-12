@@ -1,0 +1,228 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcAddUserDialog: Adw.Dialog {
+  content-width: 500;
+
+  child: Adw.NavigationView navigation {
+    Adw.NavigationPage {
+      title: _("Add User");
+
+      Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          show-end-title-buttons: false;
+          show-start-title-buttons: false;
+
+          [start]
+          Button cancel_button {
+            label: _("_Cancel");
+            use-underline: true;
+            valign: center;
+            clicked => $adw_dialog_force_close(template);
+          }
+
+          [end]
+          Button add_button {
+            label: _("_Add");
+            receives-default: true;
+            use-underline: true;
+            valign: center;
+            clicked => $add_button_clicked_cb(template) swapped;
+
+            styles [
+              "suggested-action",
+            ]
+          }
+
+          [end]
+          Adw.Spinner {
+            visible: bind spinner.None;
+          }
+        }
+
+        content: Adw.PreferencesPage page {
+          Adw.PreferencesGroup {
+            title: _("User Details");
+
+            Adw.EntryRow name_row {
+              title: _("Fu_ll Name");
+              use-underline: true;
+              changed => $dialog_validate(template) swapped;
+              entry-activated => $dialog_validate(template) swapped;
+            }
+
+            Adw.EntryRow username_row {
+              title: _("_Username");
+              use-underline: true;
+              changed => $dialog_validate(template) swapped;
+              entry-activated => $dialog_validate(template) swapped;
+            }
+
+            $CcEntryFeedback name_feedback {
+              entry: "username_row";
+              default-text: _("Usernames can only include lower case letters, numbers, hyphens and underscores.");
+              default-icon-name: "info-outline-symbolic";
+            }
+          }
+
+          Adw.PreferencesGroup {
+            Adw.ActionRow {
+              activatable-widget: account_type_switch;
+              title: _("Ad_ministrator");
+              use-underline: true;
+
+              [suffix]
+              $CcListRowInfoButton {
+                valign: "center";
+                text: _("Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental controls cannot be applied to administrators.");
+              }
+
+              [suffix]
+              Switch account_type_switch {
+                valign: center;
+              }
+            }
+          }
+
+          Adw.PreferencesGroup {
+            title: _("Password");
+
+            Adw.ActionRow {
+              activatable-widget: password_login_radio;
+              title: _("User sets password on _first login");
+              use-underline: true;
+
+              [prefix]
+              CheckButton password_login_radio {
+                valign: center;
+                active: true;
+              }
+            }
+
+            Adw.ActionRow {
+              activatable-widget: password_radio;
+              title: _("Set password n_ow");
+              use-underline: true;
+
+              [prefix]
+              CheckButton password_radio {
+                valign: center;
+                use-underline: true;
+                group: password_login_radio;
+                toggled => $password_radio_changed_cb(template) swapped;
+              }
+            }
+          }
+        };
+      }
+    }
+
+    Adw.NavigationPage password_page {
+      tag: "password-page";
+      title: _("Set Password");
+
+      Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          show-end-title-buttons: false;
+          show-start-title-buttons: false;
+
+          [end]
+          Button password_page_add_button {
+            sensitive: false;
+            label: _("_Add");
+            receives-default: true;
+            use-underline: true;
+            valign: center;
+            clicked => $create_user(template) swapped;
+
+            styles [
+              "suggested-action",
+            ]
+          }
+
+          [end]
+          Adw.Spinner spinner {
+            visible: false;
+          }
+        }
+
+        content: Adw.PreferencesPage {
+          Adw.PreferencesGroup {
+            Adw.PasswordEntryRow password_row {
+              title: _("_Password");
+              use-underline: true;
+              notify::text => $password_entry_changed_cb(template) swapped;
+              entry-activated => $password_page_validate(template) swapped;
+
+              EventControllerKey {
+                key-pressed => $password_entry_key_press_event_cb(template) swapped;
+              }
+
+              EventControllerFocus {
+                leave => $password_focus_out_event_cb(template) swapped;
+              }
+
+              [suffix]
+              Button {
+                visible: false;
+                icon-name: "system-run-symbolic";
+                valign: center;
+                clicked => $generate_password(template) swapped;
+
+                styles [
+                  "flat",
+                ]
+              }
+            }
+
+            LevelBar strength_indicator {
+              mode: continuous;
+              max-value: 5;
+              margin-top: 12;
+
+              offsets [
+                offset ("strength-weak", 1),
+                offset ("strength-low", 2),
+                offset ("strength-medium", 3),
+                offset ("strength-good", 4),
+                offset ("strength-high", 5),
+              ]
+            }
+
+            $CcEntryFeedback password_hint {
+              entry: "password_row";
+              default-text: _("For a good password, mix upper case, lower case, numbers and punctuation.");
+              default-icon-name: "info-outline-symbolic";
+            }
+          }
+
+          Adw.PreferencesGroup {
+            Adw.PasswordEntryRow verify_password_row {
+              title: _("_Confirm Password");
+              use-underline: true;
+              notify::text => $verify_entry_changed_cb(template) swapped;
+              entry-activated => $password_page_validate(template) swapped;
+
+              EventControllerFocus {
+                leave => $password_focus_out_event_cb(template) swapped;
+              }
+            }
+
+            $CcEntryFeedback verify_password_hint {}
+          }
+        };
+      }
+    }
+  };
+}
+
+SizeGroup {
+  widgets [
+    cancel_button,
+    add_button,
+    password_page_add_button,
+  ]
+}
+
