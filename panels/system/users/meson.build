@@ -9,10 +9,12 @@ i18n.merge_file(
 )
 
 ui_sources = files(
+  'cc-add-user-dialog.blp',
   'cc-avatar-chooser.blp',
   'cc-enterprise-login-dialog.blp',
   'cc-entry-feedback.blp',
   'cc-fingerprint-dialog.blp',
+  'cc-password-dialog.blp',
   'cc-user-page.blp',
   'cc-users-page.blp',
 )
