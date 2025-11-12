@@ -28,7 +28,7 @@ template $CcAddUserDialog: Adw.Dialog {
             receives-default: true;
             use-underline: true;
             valign: center;
-            clicked => $add_button_clicked_cb(template) swapped;
+            clicked => $add_button_clicked_cb(template);
 
             styles [
               "suggested-action",
@@ -37,7 +37,7 @@ template $CcAddUserDialog: Adw.Dialog {
 
           [end]
           Adw.Spinner {
-            visible: bind spinner.None;
+            visible: bind spinner.visible;
           }
         }
 
@@ -48,19 +48,19 @@ template $CcAddUserDialog: Adw.Dialog {
             Adw.EntryRow name_row {
               title: _("Fu_ll Name");
               use-underline: true;
-              changed => $dialog_validate(template) swapped;
-              entry-activated => $dialog_validate(template) swapped;
+              changed => $dialog_validate(template);
+              entry-activated => $dialog_validate(template);
             }
 
             Adw.EntryRow username_row {
               title: _("_Username");
               use-underline: true;
-              changed => $dialog_validate(template) swapped;
-              entry-activated => $dialog_validate(template) swapped;
+              changed => $dialog_validate(template);
+              entry-activated => $dialog_validate(template);
             }
 
             $CcEntryFeedback name_feedback {
-              entry: "username_row";
+              entry: username_row;
               default-text: _("Usernames can only include lower case letters, numbers, hyphens and underscores.");
               default-icon-name: "info-outline-symbolic";
             }
@@ -74,7 +74,7 @@ template $CcAddUserDialog: Adw.Dialog {
 
               [suffix]
               $CcListRowInfoButton {
-                valign: "center";
+                valign: center;
                 text: _("Administrators have extra abilities, including adding and removing users, changing login settings, and removing software. Parental controls cannot be applied to administrators.");
               }
 
@@ -110,7 +110,7 @@ template $CcAddUserDialog: Adw.Dialog {
                 valign: center;
                 use-underline: true;
                 group: password_login_radio;
-                toggled => $password_radio_changed_cb(template) swapped;
+                toggled => $password_radio_changed_cb(template);
               }
             }
           }
@@ -135,7 +135,7 @@ template $CcAddUserDialog: Adw.Dialog {
             receives-default: true;
             use-underline: true;
             valign: center;
-            clicked => $create_user(template) swapped;
+            clicked => $create_user(template);
 
             styles [
               "suggested-action",
@@ -153,15 +153,15 @@ template $CcAddUserDialog: Adw.Dialog {
             Adw.PasswordEntryRow password_row {
               title: _("_Password");
               use-underline: true;
-              notify::text => $password_entry_changed_cb(template) swapped;
-              entry-activated => $password_page_validate(template) swapped;
+              notify::text => $password_entry_changed_cb(template);
+              entry-activated => $password_page_validate(template);
 
               EventControllerKey {
-                key-pressed => $password_entry_key_press_event_cb(template) swapped;
+                key-pressed => $password_entry_key_press_event_cb(template);
               }
 
               EventControllerFocus {
-                leave => $password_focus_out_event_cb(template) swapped;
+                leave => $password_focus_out_event_cb(template);
               }
 
               [suffix]
@@ -169,7 +169,7 @@ template $CcAddUserDialog: Adw.Dialog {
                 visible: false;
                 icon-name: "system-run-symbolic";
                 valign: center;
-                clicked => $generate_password(template) swapped;
+                clicked => $generate_password(template);
 
                 styles [
                   "flat",
@@ -192,7 +192,7 @@ template $CcAddUserDialog: Adw.Dialog {
             }
 
             $CcEntryFeedback password_hint {
-              entry: "password_row";
+              entry: password_row;
               default-text: _("For a good password, mix upper case, lower case, numbers and punctuation.");
               default-icon-name: "info-outline-symbolic";
             }
@@ -202,11 +202,11 @@ template $CcAddUserDialog: Adw.Dialog {
             Adw.PasswordEntryRow verify_password_row {
               title: _("_Confirm Password");
               use-underline: true;
-              notify::text => $verify_entry_changed_cb(template) swapped;
-              entry-activated => $password_page_validate(template) swapped;
+              notify::text => $verify_entry_changed_cb(template);
+              entry-activated => $password_page_validate(template);
 
               EventControllerFocus {
-                leave => $password_focus_out_event_cb(template) swapped;
+                leave => $password_focus_out_event_cb(template);
               }
             }
 
