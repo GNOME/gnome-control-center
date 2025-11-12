@@ -1,7 +1,7 @@
 include:
  - project: Infrastructure/freedesktop-ci-templates
    file: templates/fedora.yml
-   ref: 765bb77a5e1274b0daeb14344e7caa6cd3876232
+   ref: aec7a6ce7bb38902c70641526f6611e27141784a
  - component: gitlab.gnome.org/GNOME/citemplates/release-service@master
    inputs:
      dist-job-name: release-build
@@ -57,7 +57,7 @@ stages:
     # Should probably also switch away from 'rawhide',
     # to stable fedora branch as well.
     BRANCH_NAME: 'main'
-    CONTAINER_TAG: '2025-07-28.0'
+    CONTAINER_TAG: '2025-11-12.0'
     FEDORA_VERSION: rawhide
     # Derive FDO variables from this automatically.
     # DO NOT edit, instead change the variables above
