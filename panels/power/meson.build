@@ -11,6 +11,7 @@ i18n.merge_file(
 )
 
 ui_sources = files(
+  'cc-battery-row.blp',
   'cc-power-panel.blp',
   'cc-power-profile-info-row.blp',
   'cc-power-profile-row.blp',

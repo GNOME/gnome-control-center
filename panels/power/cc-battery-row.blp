@@ -1,0 +1,73 @@
+using Gtk 4.0;
+
+template $CcBatteryRow: ListBoxRow {
+  selectable: false;
+  activatable: false;
+
+  Box {
+    orientation: vertical;
+    valign: center;
+    margin-start: 12;
+    margin-end: 12;
+    margin-top: 16;
+    margin-bottom: 14;
+    spacing: 10;
+
+    Box {
+      orientation: horizontal;
+      spacing: 12;
+
+      Box battery_box {
+        orientation: horizontal;
+        spacing: 12;
+
+        Label name_label {
+          ellipsize: end;
+          xalign: 0;
+        }
+
+        Image icon {
+          halign: end;
+          valign: center;
+
+          styles [
+            "dim-label",
+          ]
+        }
+      }
+
+      Label percentage_label {
+        halign: end;
+
+        styles [
+          "dim-label",
+        ]
+      }
+
+      LevelBar levelbar {
+        hexpand: true;
+        halign: fill;
+        valign: center;
+
+        offsets [
+          offset ("warning-battery-offset", 0.03),
+          offset ("low-battery-offset", 0.1),
+          offset ("high-battery-offset", 1.0),
+        ]
+      }
+    }
+
+    Box primary_bottom_box {
+      orientation: horizontal;
+
+      Label details_label {
+        hexpand: true;
+        ellipsize: end;
+        xalign: 0;
+      }
+
+      Label primary_percentage_label {}
+    }
+  }
+}
+
