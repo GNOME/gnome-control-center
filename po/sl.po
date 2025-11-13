@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2025-11-07 21:26+0000\n"
-"PO-Revision-Date: 2025-11-08 15:31+0100\n"
+"POT-Creation-Date: 2025-11-12 20:08+0000\n"
+"PO-Revision-Date: 2025-11-13 09:30+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -172,7 +172,7 @@ msgstr "Prejme sistemska iskanja in pošlji zadetke"
 #. translators:
 #. * The device has been disabled
 #: panels/applications/cc-applications-panel.blp:227 panels/applications/cc-applications-panel.blp:269 panels/applications/cc-applications-panel.blp:290 panels/applications/cc-applications-panel.blp:304 panels/applications/cc-applications-panel.blp:318 panels/keyboard/cc-keyboard-shortcut-editor.blp:120
-#: panels/keyboard/cc-xkb-modifier-page.c:322 panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336 panels/system/users/cc-user-page.c:367 panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:475 subprojects/gvc/gvc-mixer-control.c:1872
+#: panels/keyboard/cc-xkb-modifier-page.c:322 panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336 panels/system/users/cc-user-page.c:368 panels/system/users/cc-user-page.c:755 panels/wwan/cc-wwan-device-page.c:475 subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Onemogočeno"
 
@@ -1580,7 +1580,7 @@ msgstr "Ni najdenih jezikov"
 msgid "More…"
 msgstr "Več …"
 
-#: panels/common/cc-list-row-info-button.blp:5 panels/wellbeing/cc-wellbeing-panel.blp:15
+#: panels/common/cc-list-row-info-button.blp:5 panels/wellbeing/cc-wellbeing-panel.blp:19
 msgid "More Information"
 msgstr "Več podrobnosti"
 
@@ -5777,7 +5777,7 @@ msgstr "Ni veljavno"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/firmware-security/cc-firmware-security-utils.c:45 panels/system/users/cc-user-page.c:365 panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:473
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:45 panels/system/users/cc-user-page.c:366 panels/system/users/cc-user-page.c:755 panels/wwan/cc-wwan-device-page.c:473
 msgid "Enabled"
 msgstr "Omogočeno"
 
@@ -6347,6 +6347,14 @@ msgstr "Ravni glasnosti"
 #: panels/sound/cc-volume-levels-page.blp:17
 msgid "No Sound Playing"
 msgstr "Zvok se ne predvaja"
+
+#: panels/sound/cc-volume-levels-page.blp:27
+msgid "Outputs"
+msgstr "Izhodi"
+
+#: panels/sound/cc-volume-levels-page.blp:32
+msgid "Inputs"
+msgstr "Vhodi"
 
 #: panels/sound/cc-volume-slider.blp:7 panels/sound/cc-volume-slider.c:52
 msgid "Mute"
@@ -7489,23 +7497,23 @@ msgstr "Po odstranitvi računa uporabniki do te naprave ne bo imeli več dostopa
 msgid "_Delete Files and Settings"
 msgstr "_Izbriši datoteke in nastavitve"
 
-#: panels/system/users/cc-user-page.c:203
+#: panels/system/users/cc-user-page.c:204
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Račun je onemogočen"
 
-#: panels/system/users/cc-user-page.c:210
+#: panels/system/users/cc-user-page.c:211
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Nastavljeno bo ob naslednji prijavi"
 
-#: panels/system/users/cc-user-page.c:213
+#: panels/system/users/cc-user-page.c:214
 msgctxt "Password mode"
 msgid "None"
 msgstr "Brez"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:421
+#: panels/system/users/cc-user-page.c:422
 #, c-format
 msgid "Remove %s?"
 msgstr "Ali želite odstraniti %s?"
@@ -8516,23 +8524,23 @@ msgstr "Trajanje"
 msgid "Interval"
 msgstr "Interval"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.blp:23
+#: panels/wellbeing/cc-screen-time-statistics-row.blp:27
 msgid "Screen Time Unavailable"
 msgstr "Čas pred zaslonom ni na voljo"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.blp:25
+#: panels/wellbeing/cc-screen-time-statistics-row.blp:29
 msgid "Screen time information will appear here after a period of usage"
 msgstr "Informacije o času pred zaslonom se bodo tukaj prikazale po določenem obdobju uporabe"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.blp:160
+#: panels/wellbeing/cc-screen-time-statistics-row.blp:164
 msgid "Average Week"
 msgstr "Povprečni teden"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.blp:204
+#: panels/wellbeing/cc-screen-time-statistics-row.blp:208
 msgid "Previous Week"
 msgstr "Prejšnji teden"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.blp:214
+#: panels/wellbeing/cc-screen-time-statistics-row.blp:218
 msgid "Next Week"
 msgstr "Prihodnji teden"
 
@@ -8691,79 +8699,79 @@ msgstr "Stolpčni grafikon uporabe časa pred zaslonom v tednu od %s."
 msgid "Placeholder for a bar chart of screen time usage. No data is currently available."
 msgstr "Označba mesta za stolpčni grafikon uporabe časa pred zaslonom. Trenutno podatki niso na voljo."
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:11
+#: panels/wellbeing/cc-wellbeing-panel.blp:15
 msgid "Screen Time"
 msgstr "Čas pred zaslonom"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:35
+#: panels/wellbeing/cc-wellbeing-panel.blp:39
 msgid "Disabling screen time recording stops screen time data from being saved. This data is never shared outside this device."
 msgstr "Če onemogočite snemanje časa pred zaslonom, preprečite shranjevanje podatkov o času pred zaslonom. Ti podatki se nikoli ne delijo zunaj te naprave."
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:43
+#: panels/wellbeing/cc-wellbeing-panel.blp:47
 msgid "_Disable Screen Time"
 msgstr "_Onemogoči čas pred zaslonom"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:67
+#: panels/wellbeing/cc-wellbeing-panel.blp:71
 msgid "Screen Time Recording Disabled"
 msgstr "Čas pred zaslonom je onemogočen"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:69
+#: panels/wellbeing/cc-wellbeing-panel.blp:73
 msgid "Enable recording to view screen usage history"
 msgstr "Omogoči snemanje za ogled zgodovine uporabe zaslona"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:73
+#: panels/wellbeing/cc-wellbeing-panel.blp:77
 msgid "E_nable"
 msgstr "O_mogoči"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:90
+#: panels/wellbeing/cc-wellbeing-panel.blp:94
 msgid "Screen Limits"
 msgstr "Omejitve zaslona"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:93
+#: panels/wellbeing/cc-wellbeing-panel.blp:97
 msgid "_Screen Time Limit"
 msgstr "_Omejitev časa pred zaslonom"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:99
+#: panels/wellbeing/cc-wellbeing-panel.blp:103
 msgid "Daily _Limit"
 msgstr "Dnevna o_mejitev"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:104
+#: panels/wellbeing/cc-wellbeing-panel.blp:108
 msgid "_Grayscale"
 msgstr "_Sivinsko"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:105
+#: panels/wellbeing/cc-wellbeing-panel.blp:109
 msgid "Black and white screen for screen limits"
 msgstr "Črno-beli zaslon za omejitve časa pred zaslonom"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:111
+#: panels/wellbeing/cc-wellbeing-panel.blp:115
 msgid "Break Reminders"
 msgstr "Opomniki za prekinitve"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:114
+#: panels/wellbeing/cc-wellbeing-panel.blp:118
 msgid "_Eyesight Reminders"
 msgstr "Opomniki za _vid"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:115
+#: panels/wellbeing/cc-wellbeing-panel.blp:119
 msgid "Reminders to look away from the screen"
 msgstr "Opomniki, da odvrnete pogled od zaslona"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:120
+#: panels/wellbeing/cc-wellbeing-panel.blp:124
 msgid "_Movement Reminders"
 msgstr "Opomniki za _gibanje"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:121
+#: panels/wellbeing/cc-wellbeing-panel.blp:125
 msgid "Reminders to move around"
 msgstr "Opomniki za gibanje po prostoru"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:126
+#: panels/wellbeing/cc-wellbeing-panel.blp:130
 msgid "Movement _Break Schedule"
 msgstr "Razpored premorov z _gibanjem"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:131
+#: panels/wellbeing/cc-wellbeing-panel.blp:135
 msgid "S_ounds"
 msgstr "Zvo_ki"
 
-#: panels/wellbeing/cc-wellbeing-panel.blp:132
+#: panels/wellbeing/cc-wellbeing-panel.blp:136
 msgid "Play a sound when a break ends"
 msgstr "Predvajaj zvok, ko se odmor konča"
 
