@@ -181,18 +181,6 @@ gnome_software_is_installed (void)
 
 /* Callbacks */
 
-static gboolean
-privacy_link_cb (CcApplicationsPanel *self)
-{
-  CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
-  g_autoptr(GError) error = NULL;
-
-  if (!cc_shell_set_active_panel_from_id (shell, "location", NULL, &error))
-    g_warning ("Failed to switch to privacy panel: %s", error->message);
-
-  return TRUE;
-}
-
 static void
 open_software_cb (CcApplicationsPanel *self)
 {
@@ -1970,7 +1958,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, wallpaper_cb);
   gtk_widget_class_bind_template_callback (widget_class, screenshot_cb);
   gtk_widget_class_bind_template_callback (widget_class, shortcuts_cb);
-  gtk_widget_class_bind_template_callback (widget_class, privacy_link_cb);
   gtk_widget_class_bind_template_callback (widget_class, sound_cb);
   gtk_widget_class_bind_template_callback (widget_class, clear_cache_cb);
   gtk_widget_class_bind_template_callback (widget_class, open_software_cb);
