@@ -51,6 +51,7 @@ struct _CcRemovableMediaSettings
   AdwDialog           *other_type_dialog;
   AdwActionRow        *other_action_row;
   GtkBox              *other_action_box;
+  AdwPreferencesRow   *other_type_action_row;
   GtkComboBox         *other_type_combo_box;
   GtkListStore        *other_type_list_store;
   GtkAppChooserButton *software_chooser;
@@ -502,6 +503,7 @@ cc_removable_media_settings_class_init (CcRemovableMediaSettingsClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_action_row);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_action_box);
+  gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_action_row);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_list_store);
   gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, software_chooser);
@@ -515,10 +517,19 @@ cc_removable_media_settings_class_init (CcRemovableMediaSettingsClass *klass)
 static void
 cc_removable_media_settings_init (CcRemovableMediaSettings *self)
 {
+  const char *type_title;
+  g_autofree gchar *type_title_markup = NULL;
+
   gtk_widget_init_template (GTK_WIDGET (self));
   self->settings = g_settings_new (MEDIA_HANDLING_SCHEMA);
 
   info_panel_setup_media (self);
+
+  /* Fix for #3478 using approach in code rather than exposing
+   * translators to ugly escaped tags in the property string */
+  type_title = adw_preferences_row_get_title (self->other_type_action_row);
+  type_title_markup = g_markup_printf_escaped ("<span allow_breaks='false'>%s</span>", type_title);
+  adw_preferences_row_set_title (self->other_type_action_row, type_title_markup);
 }
 
 CcRemovableMediaSettings *
