@@ -932,6 +932,63 @@
             ]
         },
         {
+            "name" : "malcontent",
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "branch" : "main",
+                    "url" : "https://gitlab.freedesktop.org/pwithnall/malcontent.git"
+                }
+            ],
+            "config-opts" : [
+                "-Dui=disabled"
+            ],
+            "modules" : [
+                {
+                    "name" : "systemd",
+                    "buildsystem" : "meson",
+                    "sources" : [
+                        {
+                            "type" : "git",
+                            "branch" : "main",
+                            "url" : "https://github.com/systemd/systemd.git"
+                        }
+                    ],
+                    "config-opts" : [
+                        "-Drepart=disabled",
+                        "-Dsysupdate=disabled",
+                        "-Dbashcompletiondir=no",
+                        "-Ddbuspolicydir=/app/share/dbus-1/system.d",
+                        "-Ddbussessionservicedir=/app/share/dbus-1/session.d",
+                        "-Ddbussystemservicedir=/app/share/dbus-1/system.d",
+                        "-Ddbus-interfaces-dir=/app/share/dbus-1/interfaces",
+                        "-Dxdg-autostart=false",
+                        "-Dinstall-sysconfdir=false",
+                        "-Dsshconfdir=no",
+                        "-Dsshdconfdir=no",
+                        "-Dsshdprivsepdir=no"
+                    ]
+                },
+                {
+                    "name" : "pam",
+                    "buildsystem" : "meson",
+                    "sources" : [
+                        {
+                            "type" : "git",
+                            "url" : "https://github.com/linux-pam/linux-pam.git"
+                        }
+                    ],
+                    "config-opts" : [
+                        "-Deconf=disabled",
+                        "-Dvendordir=/app/share/pam",
+                        "-Dsecuredir=/app/share/pam/security",
+                        "-Dsconfigdir=/app/share/pam"
+                    ]
+                }
+            ]
+        },
+        {
             "name" : "gnome-control-center",
             "buildsystem" : "meson",
             "sources" : [
@@ -943,7 +1000,8 @@
             "config-opts" : [
                 "-Dsnap=false",
                 "-Dtests=false",
-                "-Dprofile=development"
+                "-Dprofile=development",
+                "-Dmalcontent=true"
             ]
         }
     ]
