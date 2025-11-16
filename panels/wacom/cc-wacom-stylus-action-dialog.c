@@ -21,9 +21,6 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include <adwaita.h>
-#ifdef HAVE_X11
-#include <gdk/x11/gdkx.h>
-#endif
 
 #include <gdesktop-enums.h>
 
@@ -211,12 +208,6 @@ cc_wacom_stylus_action_dialog_init (CcWacomStylusActionDialog *self)
 	adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->keybinding_row), text);
 	text = cc_wacom_panel_get_stylus_button_action_label (G_DESKTOP_STYLUS_BUTTON_ACTION_SWITCH_MONITOR);
 	adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->switch_monitor_row), text);
-#ifdef HAVE_X11
-	if (GDK_IS_X11_DISPLAY (gdk_display_get_default ())) {
-		gtk_widget_set_visible (GTK_WIDGET(self->keybinding_row), FALSE);
-		gtk_widget_set_visible (GTK_WIDGET(self->switch_monitor_row), FALSE);
-	}
-#endif /* HAVE_X11 */
 }
 
 GtkWidget*

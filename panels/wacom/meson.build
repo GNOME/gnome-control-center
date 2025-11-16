@@ -2,9 +2,6 @@ deps = common_deps + wacom_deps + [
   gnome_settings_dep,
   liblanguage_dep,
 ]
-if have_x11_support
-  deps += [x11_dep, xi_dep]
-endif
 
 cflags += ['-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)]
 

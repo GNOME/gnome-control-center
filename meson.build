@@ -267,13 +267,6 @@ config_h.set10('HAVE_CUPS_HTTPCONNECT2',
                cc.has_function('httpConnect2', dependencies: cups_dep),
                description: 'Define if httpConnect2() is available in CUPS')
 
-# X11
-have_x11_support = get_option('x11')
-if have_x11_support
-  x11_dep = dependency('x11', version: '>= 1.8')
-  xi_dep = dependency('xi', version: '>= 1.2')
-endif
-config_h.set('HAVE_X11', have_x11_support, description: 'Defined if X11 support is enabled')
 
 # IBus support
 enable_ibus = get_option('ibus')
@@ -418,7 +411,6 @@ summary({
     'GNOME Bluetooth': host_is_linux_not_s390,
     'NetworkManager': host_is_linux,
     'Wacom': host_is_linux_not_s390,
-    'X11 xupport': have_x11_support,
   },
   section: 'Dependencies',
   bool_yn: true,

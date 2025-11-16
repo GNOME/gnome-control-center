@@ -23,15 +23,7 @@
 
 #include <gdk/gdk.h>
 
-#ifdef HAVE_X11
-#include <gdk/x11/gdkx.h>
-#endif /* HAVE_X11 */
-
 #include <sys/types.h>
-#ifdef HAVE_X11
-#include <X11/Xatom.h>
-#include <X11/extensions/XInput2.h>
-#endif /* HAVE_X11 */
 
 #include "gsd-input-helper.h"
 #include "gsd-device-manager.h"
@@ -67,55 +59,3 @@ pointingstick_is_present (void)
 {
         return device_type_is_present (GSD_DEVICE_TYPE_POINTINGSTICK);
 }
-
-#ifdef HAVE_X11
-char *
-xdevice_get_device_node (int deviceid)
-{
-        GdkDisplay    *display;
-        Atom           prop;
-        Atom           act_type;
-        int            act_format;
-        unsigned long  nitems, bytes_after;
-        unsigned char *data;
-        char          *ret;
-
-        display = gdk_display_get_default ();
-        gdk_display_sync (display);
-
-        prop = XInternAtom (GDK_DISPLAY_XDISPLAY (display), "Device Node", False);
-        if (!prop)
-                return NULL;
-
-        gdk_x11_display_error_trap_push (display);
-
-        if (!XIGetProperty (GDK_DISPLAY_XDISPLAY (display),
-                            deviceid, prop, 0, 1000, False,
-                            AnyPropertyType, &act_type, &act_format,
-                            &nitems, &bytes_after, &data) == Success) {
-                gdk_x11_display_error_trap_pop_ignored (display);
-                return NULL;
-        }
-        if (gdk_x11_display_error_trap_pop (display))
-                goto out;
-
-        if (nitems == 0)
-                goto out;
-
-        if (act_type != XA_STRING)
-                goto out;
-
-        /* Unknown string format */
-        if (act_format != 8)
-                goto out;
-
-        ret = g_strdup ((char *) data);
-
-        XFree (data);
-        return ret;
-
-out:
-        XFree (data);
-        return NULL;
-}
-#endif /* HAVE_X11 */

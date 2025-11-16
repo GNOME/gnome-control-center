@@ -763,7 +763,6 @@ add_snap_permissions (CcApplicationsPanel *self,
                                                   "mir",
                                                   "unity7", "unity8",
                                                   "wayland",
-                                                  "x11",
                                                   NULL };
 
       /* Skip if not relating to this snap */

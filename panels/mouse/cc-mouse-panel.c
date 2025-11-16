@@ -28,7 +28,6 @@
 #include "cc-split-row.h"
 #include "cc-list-row-info-button.h"
 
-#include "cc-mouse-caps-helper.h"
 #include "cc-mouse-panel.h"
 #include "cc-mouse-resources.h"
 #include "cc-mouse-test.h"
@@ -70,7 +69,6 @@ struct _CcMousePanel
   gboolean           have_touchpad;
   gboolean           have_touchscreen;
   gboolean           have_pointingstick;
-  gboolean           have_synaptics;
 
   GtkGesture        *left_gesture;
   GtkGesture        *right_gesture;
@@ -85,15 +83,13 @@ setup_title_stack (CcMousePanel *self)
   gboolean have_pointingstick;
   gboolean have_touchpad;
 
-  have_touchpad = self->have_touchpad && !self->have_synaptics;
+  have_touchpad = self->have_touchpad;
   have_pointingstick = self->have_pointingstick;
 
   if (have_touchpad) {
-    gboolean have_two_finger_scrolling;
-    gboolean have_edge_scrolling;
-    gboolean have_tap_to_click;
-
-    cc_touchpad_check_capabilities (&have_two_finger_scrolling, &have_edge_scrolling, &have_tap_to_click);
+    /* show all touchpad knobs */
+    gboolean have_two_finger_scrolling = TRUE;
+    gboolean have_tap_to_click = TRUE;
 
     gtk_widget_set_visible (GTK_WIDGET (self->touchpad_scroll_method_row), have_two_finger_scrolling);
     gtk_widget_set_visible (GTK_WIDGET (self->tap_to_click_row), have_tap_to_click);
@@ -450,9 +446,6 @@ cc_mouse_panel_init (CcMousePanel *self)
   self->have_touchpad = touchpad_is_present ();
   self->have_touchscreen = touchscreen_is_present ();
   self->have_pointingstick = pointingstick_is_present ();
-  self->have_synaptics = cc_synaptics_check ();
-  if (self->have_synaptics)
-    g_warning ("Detected synaptics X driver, please migrate to libinput");
 
   setup_dialog (self);
 }

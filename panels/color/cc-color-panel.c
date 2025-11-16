@@ -23,9 +23,6 @@
 #include <glib/gi18n.h>
 #include <colord.h>
 #include <gtk/gtk.h>
-#ifdef HAVE_X11
-#include <gdk/x11/gdkx.h>
-#endif /* HAVE_X11 */
 
 #include "cc-color-calibrate.h"
 #include "cc-color-cell-renderer-text.h"
@@ -958,18 +955,6 @@ gcm_prefs_profile_view (CcColorPanel *self, CdProfile *profile)
   guint xid = 0;
   gboolean ret;
   g_autoptr(GError) error = NULL;
-
-#ifdef HAVE_X11
-  GtkNative *native;
-  GdkSurface *surface;
-
-  /* get xid */
-  native = gtk_widget_get_native (GTK_WIDGET (self));
-  surface = gtk_native_get_surface (native);
-
-  if (GDK_IS_X11_SURFACE (surface))
-    xid = gdk_x11_surface_get_xid (GDK_X11_SURFACE (surface));
-#endif /* HAVE_X11 */
 
   /* open up gcm-viewer as a info pane */
   argv = g_ptr_array_new_with_free_func (g_free);
