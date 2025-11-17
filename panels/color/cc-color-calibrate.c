@@ -169,7 +169,7 @@ cc_color_calibrate_calib_setup_screen (CcColorCalibrate *calibrate,
       g_autofree char *session_path = NULL;
 
       if (!cc_dbus_color_manager_call_calibrate_monitor_sync (calibrate->color_manager,
-                                                              "name",
+                                                              name,
                                                               &session_path,
                                                               NULL, error))
         return FALSE;
