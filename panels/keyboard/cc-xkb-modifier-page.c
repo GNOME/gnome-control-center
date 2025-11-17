@@ -309,9 +309,9 @@ cc_xkb_modifier_page_new (GSettings *input_settings,
 
   self->modifier = modifier;
 
-  adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), gettext (modifier->title));
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->switch_row), gettext (modifier->switch_label));
-  adw_preferences_page_set_description (self->xkb_modifier_page, gettext (modifier->description));
+  adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), _(modifier->title));
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->switch_row), _(modifier->switch_label));
+  adw_preferences_page_set_description (self->xkb_modifier_page, _(modifier->description));
   add_radio_buttons (self);
   update_active_radio (self);
 
