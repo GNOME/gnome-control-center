@@ -62,6 +62,26 @@ get_xkb_option_from_name (const CcXkbModifier *modifier, const gchar* name)
   return NULL;
 }
 
+static gboolean
+get_is_customized (CcXkbModifierPage *self)
+{
+  gboolean switch_active = adw_switch_row_get_active (self->switch_row);
+
+  if (self->modifier->switch_inverted)
+    return !switch_active;
+
+  return switch_active;
+}
+
+static void
+set_is_customized (CcXkbModifierPage *self,
+                   gboolean           is_customized)
+{
+  gboolean switch_active = self->modifier->switch_inverted ? !is_customized : is_customized;
+
+  adw_switch_row_set_active (self->switch_row, switch_active);
+}
+
 static GtkCheckButton *
 get_radio_button_from_xkb_option_name (CcXkbModifierPage *self,
                                        const gchar       *name)
@@ -83,8 +103,6 @@ static void
 update_active_radio (CcXkbModifierPage *self)
 {
   g_auto(GStrv) options = NULL;
-  GtkCheckButton *rightalt_radio;
-  const CcXkbOption *default_option;
   guint i;
 
   options = g_settings_get_strv (self->input_source_settings, "xkb-options");
@@ -102,21 +120,11 @@ update_active_radio (CcXkbModifierPage *self)
         continue;
 
       gtk_check_button_set_active (GTK_CHECK_BUTTON (radio), TRUE);
-      adw_switch_row_set_active (self->switch_row, TRUE);
+      set_is_customized (self, TRUE);
       return;
     }
 
-  if (self->modifier->default_option != NULL)
-    {
-      default_option = get_xkb_option_from_name(self->modifier, self->modifier->default_option);
-      rightalt_radio = get_radio_button_from_xkb_option_name (self, default_option->xkb_option);
-      gtk_check_button_set_active (GTK_CHECK_BUTTON (rightalt_radio), TRUE);
-      adw_switch_row_set_active (self->switch_row, TRUE);
-    }
-  else
-    {
-      adw_switch_row_set_active (self->switch_row, FALSE);
-    }
+  set_is_customized (self, FALSE);
 }
 
 static void
@@ -168,7 +176,7 @@ on_active_radio_changed_cb (CcXkbModifierPage *self,
   if (!gtk_check_button_get_active (GTK_CHECK_BUTTON (radio)))
     return;
 
-  if (!adw_switch_row_get_active (self->switch_row))
+  if (!get_is_customized (self))
     return;
 
   xkb_option = (gchar *)g_object_get_data (G_OBJECT (radio), "xkb-option");
@@ -188,9 +196,9 @@ switch_row_changed_cb (CcXkbModifierPage *self)
   gchar *xkb_option;
   GSList *l;
 
-  gtk_widget_set_sensitive (GTK_WIDGET (self->options_group), adw_switch_row_get_active (self->switch_row));
+  gtk_widget_set_sensitive (GTK_WIDGET (self->options_group), get_is_customized (self));
 
-  if (adw_switch_row_get_active (self->switch_row))
+  if (get_is_customized (self))
     {
       for (l = self->radio_group; l != NULL; l = l->next)
         {
@@ -300,13 +308,14 @@ cc_xkb_modifier_page_new (GSettings *input_settings,
   self->input_source_settings = g_object_ref (input_settings);
 
   self->modifier = modifier;
+
   adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), gettext (modifier->title));
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->switch_row), gettext (modifier->title));
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->switch_row), gettext (modifier->switch_label));
   adw_preferences_page_set_description (self->xkb_modifier_page, gettext (modifier->description));
-  gtk_widget_set_visible (GTK_WIDGET (self->switch_group), modifier->default_option == NULL);
   add_radio_buttons (self);
   update_active_radio (self);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->options_group), adw_switch_row_get_active (self->switch_row));
+
+  gtk_widget_set_sensitive (GTK_WIDGET (self->options_group), get_is_customized (self));
 
   return self;
 }
@@ -328,14 +337,10 @@ xcb_modifier_transform_binding_to_label (GValue   *value,
         break;
     }
 
-  if (entry == NULL && modifier->default_option == NULL)
+  if (entry == NULL)
     {
-      g_value_set_string (value, _("Disabled"));
+      g_value_set_string (value, _(modifier->unset_label));
       return TRUE;
-    }
-  else if (entry == NULL)
-    {
-      entry = get_xkb_option_from_name(modifier, modifier->default_option);
     }
 
   g_value_set_string (value, get_translated_xkb_option_label (entry));

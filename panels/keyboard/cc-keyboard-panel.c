@@ -62,6 +62,9 @@ static const CcXkbModifier LV3_MODIFIER = {
   "lv3:",
   N_("Alternate Characters Key"),
   N_("The alternate characters key can be used to enter additional characters. These are sometimes printed as a third-option on your keyboard."),
+  N_("Layout Default"),
+  N_("Default"),
+  TRUE,
   (CcXkbOption[]){
     { NC_("keyboard key", "None"),        "lv3:ralt_alt" },
     { NC_("keyboard key", "Left Alt"),    "lv3:lalt_switch" },
@@ -72,7 +75,6 @@ static const CcXkbModifier LV3_MODIFIER = {
     { NC_("keyboard key", "Right Ctrl"),  "lv3:switch" },
     { NULL,                               NULL }
   },
-  "lv3:ralt_switch",
 };
 
 static const CcXkbModifier COMPOSE_MODIFIER = {
@@ -81,6 +83,9 @@ static const CcXkbModifier COMPOSE_MODIFIER = {
   N_("The compose key allows a wide variety of characters to be entered. To use it, press compose then a sequence of characters. "
      " For example, compose key followed by <b>o</b> and <b>c</b> will enter <b>©</b>, "
      "<b>a</b> followed by <b>'</b> will enter <b>á</b>."),
+  N_("Compose Key"),
+  N_("Disabled"),
+  FALSE,
   (CcXkbOption[]){
     { NC_("keyboard key", "Right Alt"),    "compose:ralt" },
     { NC_("keyboard key", "Left Super"),   "compose:lwin" },
@@ -94,7 +99,6 @@ static const CcXkbModifier COMPOSE_MODIFIER = {
     { NC_("keyboard key", "Insert"),       "compose:ins" },
     { NULL,                                NULL }
   },
-  NULL,
 };
 
 static void

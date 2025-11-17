@@ -36,8 +36,11 @@ typedef struct
   gchar *prefix;
   gchar *title;
   gchar *description;
+  gchar *switch_label;
+  gchar *unset_label;
+  gboolean switch_inverted;
+
   CcXkbOption *options;
-  gchar *default_option;
 } CcXkbModifier;
 
 #define CC_TYPE_XKB_MODIFIER_PAGE (cc_xkb_modifier_page_get_type())
