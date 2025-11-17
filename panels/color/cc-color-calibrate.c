@@ -779,8 +779,6 @@ gboolean
 cc_color_calibrate_setup (CcColorCalibrate *calibrate,
                           GError **error)
 {
-  gboolean ret = TRUE;
-
   g_return_val_if_fail (CC_IS_COLOR_CALIBRATE (calibrate), FALSE);
   g_return_val_if_fail (calibrate->device_kind != CD_SENSOR_CAP_UNKNOWN, FALSE);
 
@@ -796,10 +794,7 @@ cc_color_calibrate_setup (CcColorCalibrate *calibrate,
                                                                 NULL,
                                                                 error);
       if (calibrate->proxy_inhibit == NULL)
-        {
-          ret = FALSE;
-          goto out;
-        }
+        return FALSE;
     }
 
   if (!calibrate->proxy_helper)
@@ -814,10 +809,8 @@ cc_color_calibrate_setup (CcColorCalibrate *calibrate,
                                                               NULL,
                                                               error);
       if (calibrate->proxy_helper == NULL)
-        {
-          ret = FALSE;
-          goto out;
-        }
+        return FALSE;
+
       g_signal_connect_object (calibrate->proxy_helper,
                               "g-properties-changed",
                               G_CALLBACK (cc_color_calibrate_property_changed_cb),
@@ -827,8 +820,8 @@ cc_color_calibrate_setup (CcColorCalibrate *calibrate,
                               G_CALLBACK (cc_color_calibrate_signal_cb),
                               calibrate, G_CONNECT_SWAPPED);
     }
-out:
-  return ret;
+
+  return TRUE;
 }
 
 static GdkMonitor *
