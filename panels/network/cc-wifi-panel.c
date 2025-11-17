@@ -86,6 +86,7 @@ enum
 {
   PROP_0,
   PROP_PARAMETERS,
+  PROP_N_DEVICES,
   N_PROPS
 };
 
@@ -759,7 +760,16 @@ cc_wifi_panel_get_property (GObject    *object,
                             GValue     *value,
                             GParamSpec *pspec)
 {
-  G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+  CcWifiPanel *self = CC_WIFI_PANEL (object);
+
+  switch (prop_id)
+    {
+    case PROP_N_DEVICES:
+      g_value_set_uint (value, self->devices->len);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
 }
 
 static void
@@ -826,6 +836,7 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+  GParamSpec *pspec;
 
   panel_class->get_help_uri = cc_wifi_panel_get_help_uri;
 
@@ -853,6 +864,15 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_stop_hotspot_dialog_response_cb);
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
+
+  pspec = g_param_spec_uint ("n-devices",
+                             NULL,
+                             "Number of managed devices",
+                             0,
+                             G_MAXUINT,
+                             0,
+                             G_PARAM_READABLE);
+  g_object_class_install_property (object_class, PROP_N_DEVICES, pspec);
 }
 
 static void
