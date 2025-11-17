@@ -379,12 +379,16 @@ static void
 device_off_switch_changed_cb (NetDeviceWifi *self)
 {
         gboolean active;
+        guint n_devices;
 
         if (self->updating_device)
                 return;
 
+        g_object_get (G_OBJECT (self->panel), "n-devices", &n_devices, NULL);
         active = adw_switch_row_get_active (self->device_enable_row);
-        if (active) {
+        if (n_devices <= 1 || active) {
+                /* Always toggle the global enabled setting if this panel only manages one device.
+                 * Always toggle the global enabled setting when activating. */
                 nm_client_dbus_set_property (self->client,
                                              NM_DBUS_PATH,
                                              NM_DBUS_INTERFACE,
@@ -393,10 +397,13 @@ device_off_switch_changed_cb (NetDeviceWifi *self)
                                              -1,
                                              NULL, NULL, NULL);
 
-        } else {
+        } else if (!active) {
+                /* Only disconnect this particular device when de-activating */
                 nm_device_disconnect_async (self->device, self->cancellable, NULL, NULL);
-                disable_scan_timeout (self);
         }
+
+        if (!active)
+                disable_scan_timeout (self);
 
         gtk_widget_set_sensitive (GTK_WIDGET (self->connect_hidden_row), active);
 }
