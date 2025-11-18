@@ -28,9 +28,7 @@
 #include "gsd-common-enums.h"
 #include "gsd-input-helper.h"
 
-#ifdef GDK_WINDOWING_WAYLAND
 #include <gdk/wayland/gdkwayland.h>
-#endif
 
 typedef struct
 {
@@ -308,10 +306,9 @@ gsd_device_manager_real_lookup_device (GsdDeviceManager *manager,
 	GHashTableIter iter;
 	GsdDevice *device;
 
-#ifdef GDK_WINDOWING_WAYLAND
 	if (GDK_IS_WAYLAND_DISPLAY (display))
 		node_path = g_strdup (gdk_wayland_device_get_node_path (gdk_device));
-#endif
+
 	if (!node_path)
 		return NULL;
 

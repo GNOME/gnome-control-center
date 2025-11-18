@@ -134,13 +134,27 @@ libgvc = subproject(
 libgvc_dep = libgvc.get_variable('libgvc_dep')
 
 libadwaita_version = '>= 1.8.alpha'
+gtk_version = '>= 4.15.2'
 goa_req_version = '>= 3.51.0'
 pulse_req_version = '>= 2.0'
 malcontent_version = '>= 0.14.0'
 
 gtk_dep = dependency(
   'gtk4',
-  version: '>= 4.15.2',
+  version: gtk_version,
+  fallback: 'gtk',
+  default_options: [
+    'introspection=disabled',
+    'build-demos=false',
+    'build-testsuite=false',
+    'build-tests=false',
+    'build-examples=false',
+  ]
+)
+
+gtk_wayland_dep = dependency(
+  'gtk4-wayland',
+  version: gtk_version,
   fallback: 'gtk',
   default_options: [
     'introspection=disabled',

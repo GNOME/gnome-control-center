@@ -39,9 +39,7 @@
 #include <gtk/gtk.h>
 #include <locale.h>
 
-#ifdef GDK_WINDOWING_WAYLAND
 #include <gdk/wayland/gdkwayland.h>
-#endif
 
 #include <pwd.h>
 #include <pwquality.h>

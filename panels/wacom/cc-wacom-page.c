@@ -28,9 +28,7 @@
 #include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 #include <gdesktop-enums.h>
-#ifdef GDK_WINDOWING_WAYLAND
 #include <gdk/wayland/gdkwayland.h>
-#endif
 
 #include "cc-list-row.h"
 #include "cc-mask-paintable.h"
