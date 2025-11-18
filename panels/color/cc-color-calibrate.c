@@ -150,6 +150,15 @@ cc_color_calibrate_calib_setup_screen (CcColorCalibrate *calibrate,
                                        const gchar *name,
                                        GError **error)
 {
+  g_autofree char *session_path = NULL;
+
+  if (calibrate->calibration_session)
+    {
+      cc_dbus_color_manager_calibration_call_stop_sync (calibrate->calibration_session,
+                                                        NULL, NULL);
+    }
+  g_clear_object (&calibrate->calibration_session);
+
   if (!calibrate->color_manager)
     {
       calibrate->color_manager =
@@ -164,41 +173,33 @@ cc_color_calibrate_calib_setup_screen (CcColorCalibrate *calibrate,
         return FALSE;
     }
 
+  if (!cc_dbus_color_manager_call_calibrate_monitor_sync (calibrate->color_manager,
+                                                          name,
+                                                          &session_path,
+                                                          NULL, error))
+    return FALSE;
+
+  calibrate->calibration_session =
+    cc_dbus_color_manager_calibration_proxy_new_for_bus_sync (
+      G_BUS_TYPE_SESSION,
+      G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+      "org.gnome.Mutter.ColorManager",
+      session_path,
+      NULL, error);
+
   if (!calibrate->calibration_session)
+    return FALSE;
+
+  calibrate->gamma_size =
+    cc_dbus_color_manager_calibration_get_gamma_lut_size (calibrate->calibration_session);
+
+  if (calibrate->gamma_size == 0)
     {
-      g_autofree char *session_path = NULL;
-
-      if (!cc_dbus_color_manager_call_calibrate_monitor_sync (calibrate->color_manager,
-                                                              name,
-                                                              &session_path,
-                                                              NULL, error))
-        return FALSE;
-
-      calibrate->calibration_session =
-        cc_dbus_color_manager_calibration_proxy_new_for_bus_sync (
-          G_BUS_TYPE_SESSION,
-          G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-          "org.gnome.Mutter.ColorManager",
-          session_path,
-          NULL, error);
-
-      if (!calibrate->calibration_session)
-        return FALSE;
-    }
-
-  if (!calibrate->gamma_size)
-    {
-      calibrate->gamma_size =
-        cc_dbus_color_manager_calibration_get_gamma_lut_size (calibrate->calibration_session);
-
-      if (calibrate->gamma_size == 0)
-        {
-          g_set_error_literal (error,
-                               CD_SESSION_ERROR,
-                               CD_SESSION_ERROR_INTERNAL,
-                               "gamma size is zero");
-          return FALSE;
-        }
+      g_set_error_literal (error,
+                            CD_SESSION_ERROR,
+                            CD_SESSION_ERROR_INTERNAL,
+                            "gamma size is zero");
+      return FALSE;
     }
 
   return TRUE;
@@ -801,24 +802,24 @@ cc_color_calibrate_setup (CcColorCalibrate *calibrate,
     {
       /* start the calibration session daemon */
       calibrate->proxy_helper = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                                              G_DBUS_PROXY_FLAGS_NONE,
-                                                              NULL,
-                                                              CD_SESSION_DBUS_SERVICE,
-                                                              CD_SESSION_DBUS_PATH,
-                                                              CD_SESSION_DBUS_INTERFACE_DISPLAY,
-                                                              NULL,
-                                                              error);
+                                                               G_DBUS_PROXY_FLAGS_NONE,
+                                                               NULL,
+                                                               CD_SESSION_DBUS_SERVICE,
+                                                               CD_SESSION_DBUS_PATH,
+                                                               CD_SESSION_DBUS_INTERFACE_DISPLAY,
+                                                               NULL,
+                                                               error);
       if (calibrate->proxy_helper == NULL)
         return FALSE;
 
       g_signal_connect_object (calibrate->proxy_helper,
-                              "g-properties-changed",
-                              G_CALLBACK (cc_color_calibrate_property_changed_cb),
-                              calibrate, G_CONNECT_SWAPPED);
+                               "g-properties-changed",
+                               G_CALLBACK (cc_color_calibrate_property_changed_cb),
+                               calibrate, G_CONNECT_SWAPPED);
       g_signal_connect_object (calibrate->proxy_helper,
-                              "g-signal",
-                              G_CALLBACK (cc_color_calibrate_signal_cb),
-                              calibrate, G_CONNECT_SWAPPED);
+                               "g-signal",
+                               G_CALLBACK (cc_color_calibrate_signal_cb),
+                               calibrate, G_CONNECT_SWAPPED);
     }
 
   return TRUE;
