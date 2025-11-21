@@ -234,33 +234,36 @@ cc_xkb_modifier_page_class_init (CcXkbModifierPageClass *klass)
 static void
 add_radio_buttons (CcXkbModifierPage *self)
 {
-  g_autoptr (GSList) group = NULL;
-  GtkWidget *row, *radio_button, *last_button = NULL;
+  g_autoptr(GSList) group = NULL;
+  GtkWidget *last_button = NULL;
   CcXkbOption *options = self->modifier->options;
   int i;
 
   for (i = 0; options[i].label && options[i].xkb_option; i++)
     {
-      row = adw_action_row_new ();
+      AdwActionRow *row;
+      GtkWidget *radio_button;
+
+      row = ADW_ACTION_ROW (adw_action_row_new ());
       adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), options[i].label);
 
       radio_button = gtk_check_button_new ();
       gtk_widget_set_valign (radio_button, GTK_ALIGN_CENTER);
       gtk_check_button_set_group (GTK_CHECK_BUTTON (radio_button), GTK_CHECK_BUTTON (last_button));
       g_object_set_data (G_OBJECT (radio_button), "xkb-option", options[i].xkb_option);
-      g_signal_connect_object (radio_button, "toggled", (GCallback)on_active_radio_changed_cb, self, G_CONNECT_SWAPPED);
+      g_signal_connect_object (radio_button, "toggled", G_CALLBACK (on_active_radio_changed_cb),
+                               self, G_CONNECT_SWAPPED);
 
-      adw_action_row_add_prefix (ADW_ACTION_ROW (row), radio_button);
-      adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), radio_button);
+      adw_action_row_add_prefix (row, radio_button);
+      adw_action_row_set_activatable_widget (row, radio_button);
 
-      adw_preferences_group_add (self->options_group, row);
+      adw_preferences_group_add (self->options_group, GTK_WIDGET (row));
 
       last_button = radio_button;
       group = g_slist_prepend (group, radio_button);
     }
 
-  self->radio_group = NULL;
-  if (last_button != NULL)
+  if (group != NULL)
     self->radio_group = g_steal_pointer (&group);
 }
 
