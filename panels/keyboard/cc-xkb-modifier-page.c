@@ -349,8 +349,6 @@ cc_xkb_modifier_page_init (CcXkbModifierPage *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->modifier = NULL;
-
   self->input_source_settings = g_settings_new ("org.gnome.desktop.input-sources");
   g_signal_connect_object (self->input_source_settings,
                            "changed::xkb-options",
