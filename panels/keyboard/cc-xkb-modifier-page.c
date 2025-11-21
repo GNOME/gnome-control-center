@@ -39,6 +39,8 @@ struct _CcXkbModifierPage
 
 G_DEFINE_TYPE (CcXkbModifierPage, cc_xkb_modifier_page, ADW_TYPE_NAVIGATION_PAGE)
 
+#define RADIO_STORAGE_KEY "cc-xkb-option"
+
 static const gchar*
 get_translated_xkb_option_label (const CcXkbOption *option)
 {
@@ -86,13 +88,13 @@ static GtkCheckButton *
 get_radio_button_from_xkb_option_name (CcXkbModifierPage *self,
                                        const gchar       *name)
 {
-  gchar *xkb_option;
+  CcXkbOption *option;
   GSList *l;
 
   for (l = self->radio_group; l != NULL; l = l->next)
     {
-      xkb_option = g_object_get_data (l->data, "xkb-option");
-      if (g_strcmp0 (xkb_option, name) == 0)
+      option = g_object_get_data (l->data, RADIO_STORAGE_KEY);
+      if (g_strcmp0 (option->xkb_option, name) == 0)
         return l->data;
     }
 
@@ -171,7 +173,7 @@ static void
 on_active_radio_changed_cb (CcXkbModifierPage *self,
                             GtkCheckButton    *radio)
 {
-  gchar *xkb_option;
+  CcXkbOption *option;
 
   if (!gtk_check_button_get_active (GTK_CHECK_BUTTON (radio)))
     return;
@@ -179,8 +181,8 @@ on_active_radio_changed_cb (CcXkbModifierPage *self,
   if (!get_is_customized (self))
     return;
 
-  xkb_option = (gchar *)g_object_get_data (G_OBJECT (radio), "xkb-option");
-  set_xkb_option (self, xkb_option);
+  option = g_object_get_data (G_OBJECT (radio), RADIO_STORAGE_KEY);
+  set_xkb_option (self, option->xkb_option);
 }
 
 static void
@@ -193,7 +195,7 @@ on_xkb_options_changed_cb (CcXkbModifierPage *self)
 static gboolean
 switch_row_changed_cb (CcXkbModifierPage *self)
 {
-  gchar *xkb_option;
+  CcXkbOption *option;
   GSList *l;
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->options_group), get_is_customized (self));
@@ -204,8 +206,8 @@ switch_row_changed_cb (CcXkbModifierPage *self)
         {
           if (gtk_check_button_get_active (l->data))
             {
-              xkb_option = (gchar *)g_object_get_data (l->data, "xkb-option");
-              set_xkb_option (self, xkb_option);
+              option = g_object_get_data (l->data, RADIO_STORAGE_KEY);
+              set_xkb_option (self, option->xkb_option);
               break;
             }
         }
@@ -267,7 +269,7 @@ add_radio_buttons (CcXkbModifierPage *self)
       radio_button = gtk_check_button_new ();
       gtk_widget_set_valign (radio_button, GTK_ALIGN_CENTER);
       gtk_check_button_set_group (GTK_CHECK_BUTTON (radio_button), GTK_CHECK_BUTTON (last_button));
-      g_object_set_data (G_OBJECT (radio_button), "xkb-option", options[i].xkb_option);
+      g_object_set_data (G_OBJECT (radio_button), RADIO_STORAGE_KEY, &options[i]);
       g_signal_connect_object (radio_button, "toggled", G_CALLBACK (on_active_radio_changed_cb),
                                self, G_CONNECT_SWAPPED);
 
