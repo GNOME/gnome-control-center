@@ -242,7 +242,6 @@ add_radio_buttons (CcXkbModifierPage *self)
   for (i = 0; options[i].label && options[i].xkb_option; i++)
     {
       row = g_object_new (ADW_TYPE_ACTION_ROW,
-                          "selectable", FALSE,
                           NULL);
       adw_preferences_group_add (self->options_group, row);
 
