@@ -66,14 +66,14 @@ static const CcXkbModifier LV3_MODIFIER = {
   N_("Default"),
   TRUE,
   (CcXkbOption[]){
-    { NC_("keyboard key", "None"),        "lv3:ralt_alt" },
-    { NC_("keyboard key", "Left Alt"),    "lv3:lalt_switch" },
-    { NC_("keyboard key", "Right Alt"),   "lv3:ralt_switch" },
-    { NC_("keyboard key", "Left Super"),  "lv3:lwin_switch" },
-    { NC_("keyboard key", "Right Super"), "lv3:rwin_switch" },
-    { NC_("keyboard key", "Menu key"),    "lv3:menu_switch" },
-    { NC_("keyboard key", "Right Ctrl"),  "lv3:switch" },
-    { NULL,                               NULL }
+    { NC_("keyboard key", "None"),        "lv3:ralt_alt",    0 },
+    { NC_("keyboard key", "Left Alt"),    "lv3:lalt_switch", KEY_LEFTALT },
+    { NC_("keyboard key", "Right Alt"),   "lv3:ralt_switch", KEY_RIGHTALT },
+    { NC_("keyboard key", "Left Super"),  "lv3:lwin_switch", KEY_LEFTMETA },
+    { NC_("keyboard key", "Right Super"), "lv3:rwin_switch", KEY_RIGHTMETA },
+    { NC_("keyboard key", "Menu key"),    "lv3:menu_switch", KEY_MENU },
+    { NC_("keyboard key", "Right Ctrl"),  "lv3:switch",      KEY_RIGHTCTRL },
+    { NULL,                               NULL,              0 }
   },
 };
 
@@ -87,17 +87,17 @@ static const CcXkbModifier COMPOSE_MODIFIER = {
   N_("Disabled"),
   FALSE,
   (CcXkbOption[]){
-    { NC_("keyboard key", "Right Alt"),    "compose:ralt" },
-    { NC_("keyboard key", "Left Super"),   "compose:lwin" },
-    { NC_("keyboard key", "Right Super"),  "compose:rwin" },
-    { NC_("keyboard key", "Menu key"),     "compose:menu" },
-    { NC_("keyboard key", "Left Ctrl"),    "compose:lctrl" },
-    { NC_("keyboard key", "Right Ctrl"),   "compose:rctrl" },
-    { NC_("keyboard key", "Caps Lock"),    "compose:caps" },
-    { NC_("keyboard key", "Scroll Lock"),  "compose:sclk" },
-    { NC_("keyboard key", "Print Screen"), "compose:prsc" },
-    { NC_("keyboard key", "Insert"),       "compose:ins" },
-    { NULL,                                NULL }
+    { NC_("keyboard key", "Right Alt"),    "compose:ralt",  KEY_RIGHTALT },
+    { NC_("keyboard key", "Left Super"),   "compose:lwin",  KEY_LEFTMETA },
+    { NC_("keyboard key", "Right Super"),  "compose:rwin",  KEY_RIGHTMETA },
+    { NC_("keyboard key", "Menu key"),     "compose:menu",  KEY_MENU },
+    { NC_("keyboard key", "Left Ctrl"),    "compose:lctrl", KEY_LEFTCTRL },
+    { NC_("keyboard key", "Right Ctrl"),   "compose:rctrl", KEY_RIGHTCTRL },
+    { NC_("keyboard key", "Caps Lock"),    "compose:caps",  KEY_CAPSLOCK },
+    { NC_("keyboard key", "Scroll Lock"),  "compose:sclk",  KEY_SCROLLLOCK },
+    { NC_("keyboard key", "Print Screen"), "compose:prsc",  KEY_SYSRQ },
+    { NC_("keyboard key", "Insert"),       "compose:ins",   KEY_INSERT },
+    { NULL,                                NULL,            0 }
   },
 };
 

@@ -220,6 +220,64 @@ switch_row_changed_cb (CcXkbModifierPage *self)
   return FALSE;
 }
 
+static const char *
+get_layout_default_str (CcXkbModifierPage *self)
+{
+  GdkDisplay *display;
+  GdkSeat *seat;
+  GdkDevice *keyboard;
+  GSList *l;
+  int custom_event_code = 0;
+  g_autoptr(GdkKeymapKey) keys = NULL;
+  int n_keys;
+
+  if (!g_str_equal (self->modifier->prefix, "lv3:"))
+    return NULL;
+
+  display = gdk_display_get_default ();
+  if (!display)
+    return NULL;
+
+  seat = gdk_display_get_default_seat (display);
+  if (!seat)
+    return NULL;
+
+  keyboard = gdk_seat_get_keyboard (seat);
+  if (!keyboard)
+    return NULL;
+
+  for (l = self->radio_group; l != NULL; l = l->next)
+    {
+      if (gtk_check_button_get_active (l->data))
+        {
+          CcXkbOption *active_option = g_object_get_data (l->data, RADIO_STORAGE_KEY);
+          custom_event_code = active_option->event_code;
+          break;
+        }
+    }
+
+  /* Find all currently active Level 3 shifts to see if anything other than Right Alt
+     or the custom key is used, and if so, return NULL.
+     It's not worth translating any other (very rare) Level 3 default option.
+     Note that the GDK/X keycodes are offset by 8 compared to the kernel codes. */
+  gdk_display_map_keyval (display, GDK_KEY_ISO_Level3_Shift, &keys, &n_keys);
+
+  for (int i = 0; i < n_keys; i++)
+    {
+      /* Ignore keys from other layouts and the virtual Level 3 key */
+      if (keys[i].group != gdk_device_get_active_layout_index (keyboard) || keys[i].keycode == 92)
+        continue;
+
+      if (custom_event_code && keys[i].keycode == custom_event_code + 8)
+        continue;
+
+      if (keys[i].keycode != KEY_RIGHTALT + 8)
+        return NULL;
+    }
+
+  return g_dpgettext2 (NULL, "keyboard key", "Right Alt");
+}
+
 static void
 cc_xkb_modifier_page_finalize (GObject *object)
 {
@@ -305,17 +363,22 @@ cc_xkb_modifier_page_new (GSettings *input_settings,
                           const CcXkbModifier *modifier)
 {
   CcXkbModifierPage *self;
+  const char *default_str;
 
   self = g_object_new (CC_TYPE_XKB_MODIFIER_PAGE, NULL);
   self->input_source_settings = g_object_ref (input_settings);
 
   self->modifier = modifier;
 
-  adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), _(modifier->title));
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->switch_row), _(modifier->switch_label));
-  adw_preferences_page_set_description (self->xkb_modifier_page, _(modifier->description));
   add_radio_buttons (self);
   update_active_radio (self);
+
+  default_str = get_layout_default_str (self);
+
+  adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), _(modifier->title));
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->switch_row), _(modifier->switch_label));
+  adw_action_row_set_subtitle (ADW_ACTION_ROW (self->switch_row), default_str ? default_str : "");
+  adw_preferences_page_set_description (self->xkb_modifier_page, _(modifier->description));
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->options_group), get_is_customized (self));
 
