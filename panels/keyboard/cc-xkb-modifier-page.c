@@ -39,6 +39,14 @@ struct _CcXkbModifierPage
 
 G_DEFINE_TYPE (CcXkbModifierPage, cc_xkb_modifier_page, ADW_TYPE_NAVIGATION_PAGE)
 
+static const gchar*
+get_translated_xkb_option_label (const CcXkbOption *option)
+{
+  g_assert (option != NULL);
+
+  return g_dpgettext2 (NULL, "keyboard key", option->label);
+}
+
 static const CcXkbOption*
 get_xkb_option_from_name (const CcXkbModifier *modifier, const gchar* name)
 {
@@ -245,7 +253,8 @@ add_radio_buttons (CcXkbModifierPage *self)
       GtkWidget *radio_button;
 
       row = ADW_ACTION_ROW (adw_action_row_new ());
-      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), options[i].label);
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
+                                     get_translated_xkb_option_label (&options[i]));
 
       radio_button = gtk_check_button_new ();
       gtk_widget_set_valign (radio_button, GTK_ALIGN_CENTER);
@@ -329,7 +338,6 @@ xcb_modifier_transform_binding_to_label (GValue   *value,
       entry = get_xkb_option_from_name(modifier, modifier->default_option);
     }
 
-  g_value_set_string (value,
-                      g_dpgettext2 (NULL, "keyboard key", entry->label));
+  g_value_set_string (value, get_translated_xkb_option_label (entry));
   return TRUE;
 }
