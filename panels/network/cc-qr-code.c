@@ -30,18 +30,17 @@
 #endif
 
 #include "cc-qr-code.h"
-#include "qrcodegen.c"
+
+#include <gnome-qr/gnome-qr.h>
 
 /**
  * SECTION: cc-qr_code
  * @title: CcQrCode
- * @short_description: A Simple QR Code wrapper around libqrencode
+ * @short_description: A Simple QR Code wrapper around gnome-qr
  * @include: "cc-qr-code.h"
  *
  * Generate a QR image from a given text.
  */
-
-#define BYTES_PER_R8G8B8 3
 
 struct _CcQrCode
 {
@@ -101,32 +100,14 @@ cc_qr_code_set_text (CcQrCode    *self,
   return TRUE;
 }
 
-static void
-cc_fill_pixel (GByteArray *array,
-               guint8     value,
-               int        pixel_size)
-{
-  guint i;
-
-  for (i = 0; i < pixel_size; i++)
-    {
-      g_byte_array_append (array, &value, 1); /* R */
-      g_byte_array_append (array, &value, 1); /* G */
-      g_byte_array_append (array, &value, 1); /* B */
-    }
-}
-
 GdkPaintable *
 cc_qr_code_get_paintable (CcQrCode *self,
                           gint      size)
 {
-  uint8_t qr_code[qrcodegen_BUFFER_LEN_FOR_VERSION (qrcodegen_VERSION_MAX)];
-  uint8_t temp_buf[qrcodegen_BUFFER_LEN_FOR_VERSION (qrcodegen_VERSION_MAX)];
   g_autoptr (GBytes) bytes = NULL;
-  GByteArray *qr_matrix;
-  gint pixel_size, qr_size, total_size;
-  gint column, row, i;
-  gboolean success = FALSE;
+  g_autoptr (GError) error = NULL;
+  static const GnomeQrPixelFormat format = GNOME_QR_PIXEL_FORMAT_RGB_888;
+  size_t pixel_size;
 
   g_return_val_if_fail (CC_IS_QR_CODE (self), NULL);
   g_return_val_if_fail (size > 0, NULL);
@@ -142,45 +123,28 @@ cc_qr_code_get_paintable (CcQrCode *self,
 
   self->size = size;
 
-  success = qrcodegen_encodeText (self->text,
-                                  temp_buf,
-                                  qr_code,
-                                  qrcodegen_Ecc_LOW,
-                                  qrcodegen_VERSION_MIN,
-                                  qrcodegen_VERSION_MAX,
-                                  qrcodegen_Mask_AUTO,
-                                  FALSE);
-
-  if (!success)
-    return NULL;
-
-  qr_size = qrcodegen_getSize (qr_code);
-  pixel_size = MAX (1, size / (qr_size));
-  total_size = qr_size * pixel_size;
-  qr_matrix = g_byte_array_sized_new (total_size * total_size * pixel_size * BYTES_PER_R8G8B8);
-
-  for (column = 0; column < total_size; column++)
+  bytes = gnome_qr_generate_qr_code_sync (self->text,
+                                          size,
+                                          NULL,
+                                          NULL,
+                                          format,
+                                          GNOME_QR_ECC_LEVEL_LOW,
+                                          &pixel_size,
+                                          NULL,
+                                          &error);
+  if (!bytes)
     {
-      for (i = 0; i < pixel_size; i++)
-        {
-          for (row = 0; row < total_size / pixel_size; row++)
-            {
-              if (qrcodegen_getModule (qr_code, column, row))
-                cc_fill_pixel (qr_matrix, 0x00, pixel_size);
-              else
-                cc_fill_pixel (qr_matrix, 0xff, pixel_size);
-            }
-        }
+      g_warning ("Failed to generate QR code: %s", error->message);
+      return NULL;
     }
 
-  bytes = g_byte_array_free_to_bytes (qr_matrix);
-
   g_clear_object (&self->texture);
-  self->texture = gdk_memory_texture_new (total_size,
-                                          total_size,
+  self->texture = gdk_memory_texture_new (pixel_size,
+                                          pixel_size,
                                           GDK_MEMORY_R8G8B8,
                                           bytes,
-                                          total_size * BYTES_PER_R8G8B8);
+                                          pixel_size *
+                                          GNOME_QR_BYTES_PER_FORMAT (format));
 
   return GDK_PAINTABLE (self->texture);
 }
