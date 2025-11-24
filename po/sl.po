@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2025-11-19 19:57+0000\n"
-"PO-Revision-Date: 2025-11-20 18:26+0100\n"
+"POT-Creation-Date: 2025-11-24 14:07+0000\n"
+"PO-Revision-Date: 2025-11-24 15:13+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:7
 msgid "Add Keyboard Shortcuts"
@@ -171,8 +171,8 @@ msgstr "Prejme sistemska iskanja in pošlji zadetke"
 #. TRANSLATORS: device status
 #. translators:
 #. * The device has been disabled
-#: panels/applications/cc-applications-panel.blp:227 panels/applications/cc-applications-panel.blp:269 panels/applications/cc-applications-panel.blp:290 panels/applications/cc-applications-panel.blp:304 panels/applications/cc-applications-panel.blp:318 panels/keyboard/cc-keyboard-shortcut-editor.blp:120
-#: panels/keyboard/cc-xkb-modifier-page.c:324 panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336 panels/system/users/cc-user-page.c:368 panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:475 subprojects/gvc/gvc-mixer-control.c:1872
+#: panels/applications/cc-applications-panel.blp:227 panels/applications/cc-applications-panel.blp:269 panels/applications/cc-applications-panel.blp:290 panels/applications/cc-applications-panel.blp:304 panels/applications/cc-applications-panel.blp:318 panels/keyboard/cc-keyboard-panel.c:87
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:120 panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336 panels/system/users/cc-user-page.c:368 panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:475 subprojects/gvc/gvc-mixer-control.c:1872
 msgid "Disabled"
 msgstr "Onemogočeno"
 
@@ -2239,72 +2239,85 @@ msgstr "Drugotna tipka"
 msgid "The alternate characters key can be used to enter additional characters. These are sometimes printed as a third-option on your keyboard."
 msgstr "Tipka za izmenjavo omogoča uporabo dodatnih znakov. Ti so pogosto natisnjeni na tipkovnici kot tretja možnost."
 
+#: panels/keyboard/cc-keyboard-panel.c:65
+msgid "Layout Default"
+msgstr "Privzeta postavitev"
+
 #: panels/keyboard/cc-keyboard-panel.c:66
+msgid "Default"
+msgstr "Privzeto"
+
+#: panels/keyboard/cc-keyboard-panel.c:69
+msgctxt "keyboard key"
+msgid "None"
+msgstr "Ni določeno"
+
+#: panels/keyboard/cc-keyboard-panel.c:70
 msgctxt "keyboard key"
 msgid "Left Alt"
 msgstr "Leva izmenjalka (Alt)"
 
-#: panels/keyboard/cc-keyboard-panel.c:67 panels/keyboard/cc-keyboard-panel.c:84
+#: panels/keyboard/cc-keyboard-panel.c:71 panels/keyboard/cc-keyboard-panel.c:90 panels/keyboard/cc-xkb-modifier-page.c:278
 msgctxt "keyboard key"
 msgid "Right Alt"
 msgstr "Desna izmenjalka (Alt)"
 
-#: panels/keyboard/cc-keyboard-panel.c:68 panels/keyboard/cc-keyboard-panel.c:85
+#: panels/keyboard/cc-keyboard-panel.c:72 panels/keyboard/cc-keyboard-panel.c:91
 msgctxt "keyboard key"
 msgid "Left Super"
 msgstr "Leva tipka Super"
 
-#: panels/keyboard/cc-keyboard-panel.c:69 panels/keyboard/cc-keyboard-panel.c:86
+#: panels/keyboard/cc-keyboard-panel.c:73 panels/keyboard/cc-keyboard-panel.c:92
 msgctxt "keyboard key"
 msgid "Right Super"
 msgstr "Desna tipka Super"
 
-#: panels/keyboard/cc-keyboard-panel.c:70 panels/keyboard/cc-keyboard-panel.c:87
+#: panels/keyboard/cc-keyboard-panel.c:74 panels/keyboard/cc-keyboard-panel.c:93
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "Tipka Meni"
 
-#: panels/keyboard/cc-keyboard-panel.c:71 panels/keyboard/cc-keyboard-panel.c:89
+#: panels/keyboard/cc-keyboard-panel.c:75 panels/keyboard/cc-keyboard-panel.c:95
 msgctxt "keyboard key"
 msgid "Right Ctrl"
 msgstr "Desna krmilka (Ctrl)"
 
-#: panels/keyboard/cc-keyboard-panel.c:79
+#: panels/keyboard/cc-keyboard-panel.c:82 panels/keyboard/cc-keyboard-panel.c:86
 msgid "Compose Key"
 msgstr "Sestavljalna tipka"
 
-#: panels/keyboard/cc-keyboard-panel.c:80
+#: panels/keyboard/cc-keyboard-panel.c:83
 msgid "The compose key allows a wide variety of characters to be entered. To use it, press compose then a sequence of characters.  For example, compose key followed by <b>o</b> and <b>c</b> will enter <b>©</b>, <b>a</b> followed by <b>'</b> will enter <b>á</b>."
 msgstr ""
 "Sestavljalna tipka omogoča vnos velikega števila različnih znakov. Za uporabo najprej pritisnite sestavljalno tipko, nato pa zaporedje drugih znakov. Primer: pritisnite sestavljalko, nato <b>o</b> in nato <b>c</b>. Izpisal se bo znak <b>©</b>. Zaporedje sestavljalka, <b>a</b> in nato <b>'</b> pa ustvari znak "
 "<b>á</b>."
 
-#: panels/keyboard/cc-keyboard-panel.c:88
+#: panels/keyboard/cc-keyboard-panel.c:94
 msgctxt "keyboard key"
 msgid "Left Ctrl"
 msgstr "Leva krmilka"
 
-#: panels/keyboard/cc-keyboard-panel.c:90
+#: panels/keyboard/cc-keyboard-panel.c:96
 msgctxt "keyboard key"
 msgid "Caps Lock"
 msgstr "Tipka zaklepa črk"
 
-#: panels/keyboard/cc-keyboard-panel.c:91
+#: panels/keyboard/cc-keyboard-panel.c:97
 msgctxt "keyboard key"
 msgid "Scroll Lock"
 msgstr "Tipka zaklepa drsnika"
 
-#: panels/keyboard/cc-keyboard-panel.c:92
+#: panels/keyboard/cc-keyboard-panel.c:98
 msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Tipka zajema zaslona"
 
-#: panels/keyboard/cc-keyboard-panel.c:93
+#: panels/keyboard/cc-keyboard-panel.c:99
 msgctxt "keyboard key"
 msgid "Insert"
-msgstr "Vstavljalna tipka"
+msgstr "Vstavljalka"
 
-#: panels/keyboard/cc-keyboard-panel.c:209
+#: panels/keyboard/cc-keyboard-panel.c:214
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -5848,8 +5861,8 @@ msgstr "Upravljanje dostopa do strojne opreme, storitev in podatkov."
 #: panels/privacy/gnome-privacy-panel.desktop.in:14
 msgid "Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;Recording;Security;Firmware;Thunderbolt;"
 msgstr ""
-"Zasebnost;Zaklepanje zaslona;Zasebno;Uporaba;Nedavna;Zgodovina;Datoteke;Začasno;Tmp;Koš;Smeti;Čiščenje;Ohraniti;Diagnostika;Zlom;Lokacija;GPS;Kamera;Fotografije;Fotoaparat;Video;Spletna kamera;Mikrofon;Snemanje;Varnost;Firmware;Thunderbolt;Strojna "
-"oprema;Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;Recording;Security;Firmware;Thunderbolt;"
+"Zasebnost;Zaklepanje zaslona;Zasebno;Uporaba;Nedavna;Zgodovina;Datoteke;Začasno;Tmp;Koš;Smeti;Čiščenje;Ohraniti;Diagnostika;Zlom;Lokacija;GPS;Kamera;Fotografije;Fotoaparat;Video;Spletna kamera;Mikrofon;Snemanje;Varnost;Firmware;Thunderbolt;Strojna oprema;Privacy;Screen;Lock;Private;Usage;Recent;History;Files;"
+"Temporary;Tmp;Trash;Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;Recording;Security;Firmware;Thunderbolt;"
 
 #: panels/privacy/location/cc-location-page.blp:15
 msgid "_Automatic Device Location"
@@ -6536,8 +6549,8 @@ msgstr "Pregled podrobnosti sistema"
 #: panels/system/about/gnome-about-panel.desktop.in:18
 msgid "device;system;information;hostname;memory;processor;version;default;application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;winver;"
 msgstr ""
-"naprava;sistem;podrobnosti;podatki;ime gostitelja;gostitelj;pomnilnik;procesor;različica;privzeto;program:prednostno;cd;dvd;usb;zvok;slika;video;disk;odstrani;predstavnost;samodejni "
-"zagon;device;system;information;hostname;memory;processor;version;default;application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;winver;"
+"naprava;sistem;podrobnosti;podatki;ime gostitelja;gostitelj;pomnilnik;procesor;različica;privzeto;program:prednostno;cd;dvd;usb;zvok;slika;video;disk;odstrani;predstavnost;samodejni zagon;device;system;information;hostname;memory;processor;version;default;application;preferred;cd;dvd;usb;audio;video;disc;"
+"removable;media;autorun;winver;"
 
 #: panels/system/cc-system-panel.blp:16
 msgid "_Region &amp; Language"
