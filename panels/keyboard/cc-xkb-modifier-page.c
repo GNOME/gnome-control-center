@@ -228,7 +228,7 @@ get_layout_default_str (CcXkbModifierPage *self)
   GdkDevice *keyboard;
   GSList *l;
   int custom_event_code = 0;
-  g_autoptr(GdkKeymapKey) keys = NULL;
+  g_autofree GdkKeymapKey *keys = NULL;
   int n_keys;
 
   if (!g_str_equal (self->modifier->prefix, "lv3:"))
