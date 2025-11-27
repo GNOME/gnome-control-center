@@ -47,6 +47,20 @@ template $CcWacomPage: Box {
       show-arrow: true;
       activated => $on_map_buttons_activated(template);
     }
+
+    Label tablet_mouse_configuration {
+      accessible-role: link;
+      use-markup: true;
+      margin-top: 9;
+      xalign: 0.0;
+      visible: false;
+      wrap: true;
+      activate-link => $on_mouse_settings_activated(template);
+
+      styles [
+        "dim-label",
+      ]
+    }
   }
 
   Adw.PreferencesGroup display_section {

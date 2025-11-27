@@ -468,7 +468,15 @@ update_current_tool (CcWacomPanel  *self,
 			return;
         }
 
-	add_stylus (self, stylus);
+	if (cc_wacom_tool_is_puck (stylus)) {
+		CcWacomPage *page;
+
+		page = g_hash_table_lookup (self->pages, wacom_device);
+		if (page)
+			cc_wacom_page_set_mouse_config_visible (page, TRUE);
+	} else {
+		add_stylus (self, stylus);
+	}
 
 	update_highlighted_stylus (self, stylus);
 
@@ -618,14 +626,19 @@ add_known_device (CcWacomPanel *self,
 
 	tools = cc_tablet_tool_map_list_tools (self->tablet_tool_map, device);
 
-	for (l = tools; l != NULL; l = l->next) {
-		add_stylus (self, l->data);
-	}
-
 	if (is_remote)
 		page = cc_wacom_ekr_page_new (self, device);
 	else
 		page = cc_wacom_page_new (self, device);
+
+	for (l = tools; l != NULL; l = l->next) {
+		if (cc_wacom_tool_is_puck (l->data)) {
+			cc_wacom_page_set_mouse_config_visible (CC_WACOM_PAGE (page),
+								TRUE);
+		} else {
+			add_stylus (self, l->data);
+		}
+	}
 
 	gtk_box_append (GTK_BOX (self->tablets), page);
 	g_hash_table_insert (self->pages, g_steal_pointer (&device), page);

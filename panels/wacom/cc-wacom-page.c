@@ -63,6 +63,7 @@ struct _CcWacomPage
 	GtkWidget      *tablet_display;
 	GtkWidget      *tablet_calibrate;
 	GtkWidget      *tablet_map_buttons;
+	GtkWidget      *tablet_mouse_configuration;
 	AdwSwitchRow   *tablet_mode_row;
 	AdwActionRow   *tablet_button_location_row;
 	AdwToggleGroup *tablet_button_location_group;
@@ -455,6 +456,12 @@ has_monitor (CcWacomPage *page)
 }
 
 static void
+on_mouse_settings_activated (CcWacomPage *self)
+{
+	cc_wacom_panel_switch_to_panel (self->panel, "mouse");
+}
+
+static void
 on_map_buttons_activated (CcWacomPage *self)
 {
 	set_osd_visibility (self);
@@ -580,12 +587,14 @@ cc_wacom_page_class_init (CcWacomPageClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_display);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_calibrate);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_map_buttons);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_mouse_configuration);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_mode_row);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_button_location_row);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_button_location_group);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_aspect_ratio_row);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, display_section);
 
+	gtk_widget_class_bind_template_callback (widget_class, on_mouse_settings_activated);
 	gtk_widget_class_bind_template_callback (widget_class, on_map_buttons_activated);
 	gtk_widget_class_bind_template_callback (widget_class, on_calibrate_activated);
 	gtk_widget_class_bind_template_callback (widget_class, on_display_selected);
@@ -690,6 +699,7 @@ update_displays_model (CcWacomPage *page)
 static void
 cc_wacom_page_init (CcWacomPage *page)
 {
+	g_autofree char *mouse_panel_link = NULL, *label = NULL;
 	g_autoptr (GError) error = NULL;
 
 	gtk_widget_init_template (GTK_WIDGET (page));
@@ -697,6 +707,13 @@ cc_wacom_page_init (CcWacomPage *page)
 	g_signal_connect_object (page->display_config_manager, "changed",
 				 G_CALLBACK (update_displays_model), page,
 				 G_CONNECT_SWAPPED);
+
+	/* Translators: This will be presented as the text of a link to the Mouse & Touchpad panel */
+	mouse_panel_link = g_strdup_printf ("<a href='#'>%s</a>", _("Mouse"));
+	/* Translators: %s is a link to the Mouse & Touchpad panel with the label "Mouse" */
+	label = g_strdup_printf (_("Mouse devices can be configured in %s settings"), mouse_panel_link);
+
+	gtk_label_set_label (GTK_LABEL (page->tablet_mouse_configuration), label);
 }
 
 static void
@@ -889,4 +906,11 @@ cc_wacom_page_can_calibrate (CcWacomPage *page)
 			      FALSE);
 
 	return has_monitor (page);
+}
+
+void
+cc_wacom_page_set_mouse_config_visible (CcWacomPage *page,
+					gboolean     visible)
+{
+	gtk_widget_set_visible (page->tablet_mouse_configuration, visible);
 }

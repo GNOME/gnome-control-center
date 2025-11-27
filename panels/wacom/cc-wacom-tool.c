@@ -372,3 +372,15 @@ cc_wacom_tool_get_description (CcWacomTool *tool)
 
 	return NULL;
 }
+
+gboolean
+cc_wacom_tool_is_puck (CcWacomTool *tool)
+{
+	WacomStylusType type;
+
+	g_return_val_if_fail (CC_IS_WACOM_TOOL (tool), FALSE);
+
+	type = libwacom_stylus_get_type (tool->wstylus);
+
+	return type == WSTYLUS_PUCK;
+}

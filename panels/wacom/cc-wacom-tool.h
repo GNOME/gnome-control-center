@@ -44,3 +44,5 @@ guint           cc_wacom_tool_get_num_buttons (CcWacomTool   *tool);
 gboolean        cc_wacom_tool_get_has_paired_eraser  (CcWacomTool   *tool);
 
 const gchar   * cc_wacom_tool_get_description (CcWacomTool   *tool);
+
+gboolean        cc_wacom_tool_is_puck         (CcWacomTool   *tool);

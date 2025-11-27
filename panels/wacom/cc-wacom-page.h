@@ -36,4 +36,7 @@ void        cc_wacom_page_calibrate        (CcWacomPage *page);
 
 gboolean    cc_wacom_page_can_calibrate    (CcWacomPage *page);
 
+void        cc_wacom_page_set_mouse_config_visible (CcWacomPage *page,
+						    gboolean     visible);
+
 G_END_DECLS
