@@ -31,11 +31,4 @@ G_BEGIN_DECLS
 #define CC_TYPE_INPUT_LIST_BOX (cc_input_list_box_get_type ())
 G_DECLARE_FINAL_TYPE (CcInputListBox, cc_input_list_box, CC, INPUT_LIST_BOX, AdwBin)
 
-void cc_input_list_box_set_login_auto_apply (CcInputListBox *box,
-                                             gboolean        auto_apply);
-void cc_input_list_box_set_localed          (CcInputListBox *box,
-                                             GDBusProxy     *localed);
-void cc_input_list_box_set_permission       (CcInputListBox *box,
-                                             GPermission    *permission);
-
 G_END_DECLS

@@ -32,6 +32,9 @@
 #include "cc-input-source-xkb.h"
 #include "cc-ui-util.h"
 
+#include <act/act.h>
+#include <polkit/polkit.h>
+
 #ifdef HAVE_IBUS
 #include <ibus.h>
 #endif
@@ -48,9 +51,10 @@ struct _CcInputListBox {
 
   GCancellable    *cancellable;
 
-  gboolean     login_auto_apply;
-  GPermission *permission;
-  GDBusProxy  *localed;
+  gboolean        login_auto_apply;
+  GPermission    *permission;
+  GDBusProxy     *localed;
+  ActUserManager *user_manager;
 
   GSettings *input_settings;
   GnomeXkbInfo *xkb_info;
@@ -415,7 +419,7 @@ static void
 update_input (CcInputListBox *self)
 {
   set_input_settings (self);
-  if (self->login_auto_apply)
+  if (self->login_auto_apply && self->localed)
     set_localed_input (self);
 }
 
@@ -665,6 +669,9 @@ cc_input_list_box_finalize (GObject *object)
   g_clear_pointer (&self->ibus_engines, g_hash_table_destroy);
 #endif
 
+  g_clear_object (&self->permission);
+  g_clear_object (&self->localed);
+
   G_OBJECT_CLASS (cc_input_list_box_parent_class)->finalize (object);
 }
 
@@ -683,6 +690,73 @@ cc_input_list_box_class_init (CcInputListBoxClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, input_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, cc_util_keynav_propagate_vertical);
+}
+
+static void
+localed_proxy_ready (GObject      *source,
+                     GAsyncResult *res,
+                     gpointer      data)
+{
+  CcInputListBox *self = data;
+  GDBusProxy *proxy;
+  g_autoptr(GError) error = NULL;
+
+  proxy = g_dbus_proxy_new_finish (res, &error);
+
+  if (!proxy) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to contact localed: %s\n", error->message);
+    return;
+  }
+
+  self->localed = proxy;
+}
+
+static void
+user_manager_loaded (CcInputListBox *self)
+{
+  gboolean has_multiple_users;
+  g_object_get (self->user_manager, "has-multiple-users", &has_multiple_users, NULL);
+  self->login_auto_apply = !has_multiple_users && (self->permission != NULL) && g_permission_get_allowed (self->permission);
+}
+
+static void
+setup_localed_proxy (CcInputListBox *self)
+{
+  g_autoptr(GDBusConnection) bus = NULL;
+  g_autoptr(GError) error = NULL;
+
+  self->permission = polkit_permission_new_sync ("org.freedesktop.locale1.set-locale", NULL, NULL, &error);
+  if (self->permission == NULL) {
+    g_debug ("Could not get 'org.freedesktop.locale1.set-locale' permission: %s",
+             error->message);
+    return;
+  }
+
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
+  g_dbus_proxy_new (bus,
+                    G_DBUS_PROXY_FLAGS_NONE,
+                    NULL,
+                    "org.freedesktop.locale1",
+                    "/org/freedesktop/locale1",
+                    "org.freedesktop.locale1",
+                    self->cancellable,
+                    (GAsyncReadyCallback) localed_proxy_ready,
+                    self);
+}
+
+static void
+setup_user_manager (CcInputListBox *self)
+{
+  gboolean loaded;
+
+  self->user_manager = act_user_manager_get_default ();
+  g_object_get (self->user_manager, "is-loaded", &loaded, NULL);
+  if (loaded)
+    user_manager_loaded (self);
+  else
+    g_signal_connect_object (self->user_manager, "notify::is-loaded",
+                             G_CALLBACK (user_manager_loaded), self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -718,22 +792,7 @@ cc_input_list_box_init (CcInputListBox *self)
                            G_CALLBACK (input_sources_changed), self, G_CONNECT_SWAPPED);
 
   add_input_sources_from_settings (self);
-}
 
-void
-cc_input_list_box_set_login_auto_apply (CcInputListBox *self, gboolean login_auto_apply)
-{
-  self->login_auto_apply = login_auto_apply;
-}
-
-void
-cc_input_list_box_set_localed (CcInputListBox *self, GDBusProxy *localed)
-{
-  self->localed = localed;
-}
-
-void
-cc_input_list_box_set_permission (CcInputListBox *self, GPermission *permission)
-{
-  self->permission = permission;
+  setup_localed_proxy (self);
+  setup_user_manager (self);
 }

@@ -108,6 +108,7 @@ resources_ch = gnome.compile_resources(
 sources += resources_ch
 
 deps = common_deps + [
+  accounts_dep,
   keyboard_shortcuts_dep,
   gnome_desktop_dep,
 ]
