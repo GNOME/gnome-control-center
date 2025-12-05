@@ -231,6 +231,7 @@ cc_battery_row_new (UpDevice *device,
   UpDeviceState state;
   g_autofree gchar *s = NULL;
   g_autofree gchar *icon_name = NULL;
+  g_autofree gchar *model = NULL;
   const gchar *name;
   CcBatteryRow *self;
   guint64 time_empty, time_full, time;
@@ -243,7 +244,7 @@ cc_battery_row_new (UpDevice *device,
   g_object_get (device,
                 "kind", &kind,
                 "state", &state,
-                "model", &name,
+                "model", &model,
                 "percentage", &percentage,
                 "icon-name", &icon_name,
                 "time-to-empty", &time_empty,
@@ -252,6 +253,7 @@ cc_battery_row_new (UpDevice *device,
                 "energy-rate", &energy_rate,
                 "battery-level", &battery_level,
                 NULL);
+
   if (state == UP_DEVICE_STATE_DISCHARGING)
     time = time_empty;
   else
@@ -267,9 +269,13 @@ cc_battery_row_new (UpDevice *device,
       else
         name = C_("Battery name", "Extra");
     }
-  else if (name == NULL || name[0] == '\0')
+  else if (model == NULL || model[0] == '\0')
     {
       name = _(kind_to_description (kind));
+    }
+  else
+    {
+      name = model;
     }
   gtk_label_set_text (self->name_label, name);
 
