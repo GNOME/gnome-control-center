@@ -427,7 +427,7 @@ get_places_list (CcSearchLocationsPage *self)
   for (l = xdg_list; l != NULL; l = l->next)
     {
       place = l->data;
-      g_hash_table_insert (places, place->location, place);
+      g_hash_table_insert (places, g_object_ref (place->location), place);
     }
 
   /* then, insert all the tracker locations that are not XDG dirs */
