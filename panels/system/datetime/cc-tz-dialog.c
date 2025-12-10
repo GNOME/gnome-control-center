@@ -73,6 +73,9 @@ match_tz_item (CcTzItem   *item,
   g_autofree char *country = NULL;
   g_autofree char *name = NULL;
   g_autofree char *zone = NULL;
+  g_autofree char *name_fold = NULL;
+  g_autofree char *zone_fold = NULL;
+  g_autofree char *country_fold = NULL;
   const char *search_terms;
 
   g_assert (CC_IS_TZ_ITEM (item));
@@ -92,6 +95,11 @@ match_tz_item (CcTzItem   *item,
   if (!name || !zone || !country)
     return FALSE;
 
+  /* Prepare case-folded versions for UTF-8 safe comparison */
+  name_fold = g_utf8_casefold (name, -1);
+  zone_fold = g_utf8_casefold (zone, -1);
+  country_fold = g_utf8_casefold (country, -1);
+
   /* Search for each word separated by spaces */
   strv = g_strsplit (search_terms, " ", 0);
 
@@ -102,14 +110,17 @@ match_tz_item (CcTzItem   *item,
    */
   for (guint i = 0; strv[i]; i++)
     {
+      g_autofree char *str_fold = NULL;
       const char *str = strv[i];
 
       if (!str || !*str)
         continue;
 
-      if (!strcasestr (name, str) &&
-          !strcasestr (zone, str) &&
-          !strcasestr (country, str))
+      str_fold = g_utf8_casefold (str, -1);
+
+      if (!g_strstr_len (name_fold, -1, str_fold) &&
+          !g_strstr_len (zone_fold, -1, str_fold) &&
+          !g_strstr_len (country_fold, -1, str_fold))
         return FALSE;
     }
 
