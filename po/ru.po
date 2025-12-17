@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2025-11-24 12:38+0000\n"
-"PO-Revision-Date: 2025-11-28 17:59+0300\n"
+"POT-Creation-Date: 2025-12-05 11:11+0000\n"
+"PO-Revision-Date: 2025-12-06 16:18+0300\n"
 "Last-Translator: Artur So <arturios2005@mail.ru>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -290,7 +290,7 @@ msgstr "Глобальные ком_бинации клавиш"
 msgid "Global actions that have been registered for use"
 msgstr "Глобальные действия, которые были зарегистрированы для использования"
 
-#: panels/applications/cc-applications-panel.blp:341 panels/mouse/cc-mouse-panel.blp:58 panels/mouse/cc-mouse-panel.blp:175 panels/multitasking/cc-multitasking-panel.blp:11 panels/power/cc-power-panel.blp:152
+#: panels/applications/cc-applications-panel.blp:341 panels/mouse/cc-mouse-panel.blp:58 panels/mouse/cc-mouse-panel.blp:175 panels/power/cc-power-panel.blp:152
 msgid "General"
 msgstr "Общие"
 
@@ -420,7 +420,7 @@ msgstr[2] "%u разрешений"
 msgid "Type removed"
 msgstr "Тип удален"
 
-#: panels/applications/cc-applications-panel.c:1082 panels/background/cc-background-chooser.c:170 panels/network/net-device-wifi.c:889 panels/printers/cc-printers-panel.c:673
+#: panels/applications/cc-applications-panel.c:1082 panels/background/cc-background-chooser.c:170 panels/network/net-device-wifi.c:896 panels/printers/cc-printers-panel.c:673
 msgid "_Undo"
 msgstr "_Отменить"
 
@@ -2085,7 +2085,7 @@ msgctxt "keybinding"
 msgid "Search"
 msgstr "Поиск"
 
-#: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.blp:15 panels/system/cc-system-panel.blp:7 panels/system/gnome-system-panel.desktop.in:2
+#: panels/keyboard/01-system.xml.in:2 panels/multitasking/cc-multitasking-panel.blp:40 panels/privacy/cc-privacy-panel.blp:15 panels/system/cc-system-panel.blp:7 panels/system/gnome-system-panel.desktop.in:2
 msgid "System"
 msgstr "Система"
 
@@ -2670,67 +2670,79 @@ msgstr "Изменение чувствительности мыши или се
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "Трэкпад;Курсор;Щелчок;Нажатие;Двойной;Кнопка;Трэкбол;Прокрутка;"
 
-#: panels/multitasking/cc-multitasking-panel.blp:15
+#: panels/multitasking/cc-multitasking-panel.blp:11
+msgid "Screen Edges"
+msgstr "Границы экрана"
+
+#: panels/multitasking/cc-multitasking-panel.blp:16
 msgid "_Hot Corner"
 msgstr "_Горячий угол"
 
-#: panels/multitasking/cc-multitasking-panel.blp:16
+#: panels/multitasking/cc-multitasking-panel.blp:17
 msgid "Touch the top-left corner to open the Activities Overview"
 msgstr "Прикоснитесь к верхнему левому углу экрана, чтобы открыть Обзор"
 
-#: panels/multitasking/cc-multitasking-panel.blp:27
-msgid "_Active Screen Edges"
-msgstr "_Активные границы экрана"
-
 #: panels/multitasking/cc-multitasking-panel.blp:28
+msgid "_Window Resize"
+msgstr "Изменение размера ок_на"
+
+#: panels/multitasking/cc-multitasking-panel.blp:29
 msgid "Drag windows against the top, left, and right screen edges to resize them"
 msgstr "Перетащите окна к верхней, левой или правой границе экрана, чтобы автоматически изменить размер"
 
-#: panels/multitasking/cc-multitasking-panel.blp:39
+#: panels/multitasking/cc-multitasking-panel.blp:44
+msgid "Reopen Windows After Login"
+msgstr "Повторно открыть окна после входа в систему"
+
+#: panels/multitasking/cc-multitasking-panel.blp:45
+msgid "Restore windows that were open when you last used the computer"
+msgstr "Восстановить окна, которые были открыты при последнем использовании компьютера"
+
+#: panels/multitasking/cc-multitasking-panel.blp:50
 msgid "Workspaces"
 msgstr "Рабочие столы"
 
-#: panels/multitasking/cc-multitasking-panel.blp:43
+#: panels/multitasking/cc-multitasking-panel.blp:54
 msgid "_Dynamic Workspaces"
 msgstr "_Динамические рабочие столы"
 
-#: panels/multitasking/cc-multitasking-panel.blp:44
+#: panels/multitasking/cc-multitasking-panel.blp:55
 msgid "Automatically removes empty workspaces"
 msgstr "Автоматически удаляет пустые рабочие столы"
 
-#: panels/multitasking/cc-multitasking-panel.blp:55
+#: panels/multitasking/cc-multitasking-panel.blp:66
 msgid "_Fixed Number of Workspaces"
 msgstr "_Фиксированные рабочие столы"
 
-#: panels/multitasking/cc-multitasking-panel.blp:56
+#: panels/multitasking/cc-multitasking-panel.blp:67
 msgid "Specify a number of permanent workspaces"
 msgstr "Укажите количество постоянных рабочих столов"
 
-#: panels/multitasking/cc-multitasking-panel.blp:69
+#: panels/multitasking/cc-multitasking-panel.blp:80
 msgid "_Number of Workspaces"
 msgstr "_Количество рабочих столов"
 
-#: panels/multitasking/cc-multitasking-panel.blp:77
+#: panels/multitasking/cc-multitasking-panel.blp:88
 msgid "Multi-Monitor"
 msgstr "Для нескольких мониторов"
 
-#: panels/multitasking/cc-multitasking-panel.blp:81
+#: panels/multitasking/cc-multitasking-panel.blp:92
 msgid "Workspaces on _primary display only"
 msgstr "Рабочие столы только на _основном дисплее"
 
-#: panels/multitasking/cc-multitasking-panel.blp:93
+#: panels/multitasking/cc-multitasking-panel.blp:104
 msgid "Workspaces on all d_isplays"
 msgstr "Рабочие столы на _всех дисплеях"
 
-#: panels/multitasking/cc-multitasking-panel.blp:106
+#: panels/multitasking/cc-multitasking-panel.blp:117
 msgid "App Switching"
 msgstr "Переключение между приложениями"
 
-#: panels/multitasking/cc-multitasking-panel.blp:111
+#: panels/multitasking/cc-multitasking-panel.blp:122
 msgid "Include apps from all _workspaces"
 msgstr "Включать приложения со всех _рабочих столов"
 
-#: panels/multitasking/cc-multitasking-panel.blp:122
+#: panels/multitasking/cc-multitasking-panel.blp:133
 msgid "Include apps from the _current workspace only"
 msgstr "Включать приложения только с _текущего рабочего стола"
 
@@ -3025,7 +3037,7 @@ msgstr "Выключение отключит любые устройства, �
 msgid "_Turn Off"
 msgstr "_Выключить"
 
-#: panels/network/cc-wifi-panel.c:420 panels/network/gnome-wifi-panel.desktop.in:2 panels/network/network-wifi.blp:53 panels/network/network-wifi.blp:58
+#: panels/network/cc-wifi-panel.c:421 panels/network/gnome-wifi-panel.desktop.in:2 panels/network/network-wifi.blp:53 panels/network/network-wifi.blp:58
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
@@ -3699,12 +3711,12 @@ msgstr "Проводное подключение"
 msgid "Add new connection"
 msgstr "Добавить новое подключение"
 
-#: panels/network/net-device-wifi.c:887
+#: panels/network/net-device-wifi.c:894
 msgid "Network deleted"
 msgstr "Сеть удалена"
 
 #. Translators: %d is the number of network connections deleted.
-#: panels/network/net-device-wifi.c:902
+#: panels/network/net-device-wifi.c:909
 #, c-format
 msgid "%d network deleted"
 msgid_plural "%d networks deleted"
@@ -3712,15 +3724,15 @@ msgstr[0] "%d сеть удалена"
 msgstr[1] "%d сети удалены"
 msgstr[2] "%d сетей удалено"
 
-#: panels/network/net-device-wifi.c:1143
+#: panels/network/net-device-wifi.c:1150
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Использование в качестве точки доступа запрещено системной политикой"
 
-#: panels/network/net-device-wifi.c:1146
+#: panels/network/net-device-wifi.c:1153
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Беспроводное устройство не поддерживает режим точки доступа"
 
-#: panels/network/net-device-wifi.c:1172
+#: panels/network/net-device-wifi.c:1179
 msgid "Searching for networks…"
 msgstr "Поиск сетей…"
 
