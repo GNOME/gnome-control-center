@@ -69,46 +69,6 @@ struct _CcUaSeeingPage
 G_DEFINE_TYPE (CcUaSeeingPage, cc_ua_seeing_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
-orca_get_version_cb (GObject      *source_object,
-                     GAsyncResult *res,
-                     gpointer      data)
-{
-  g_autoptr(GVariant) val = NULL;
-  g_autoptr(GError) error = NULL;
-  CcUaSeeingPage *self = data;
-
-  g_assert (CC_IS_UA_SEEING_PAGE (self));
-
-  val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
-                                  res, &error);
-  if (!val)
-    {
-      /* Orca implemented a DBus interface at the same time as ShowPreferences,
-       * so apparently this Orca version is too old. So, hide the row.
-       * No need to check the version otherwise for now.
-       */
-      g_debug ("Failed to get Orca version: %s", error->message);
-      gtk_widget_set_visible (GTK_WIDGET (self->configure_screen_reader_row), FALSE);
-      return;
-    }
-}
-
-static void
-check_orca_show_preferences_support (CcUaSeeingPage *self)
-{
-  g_assert (CC_IS_UA_SEEING_PAGE (self));
-
-  g_dbus_proxy_call (self->proxy,
-                     "GetVersion",
-                     NULL,
-                     G_DBUS_CALL_FLAGS_NONE,
-                     -1,
-                     NULL,
-                     orca_get_version_cb,
-                     self);
-}
-
-static void
 on_orca_proxy_ready (GObject      *source_object,
                      GAsyncResult *res,
                      gpointer      data)
@@ -124,10 +84,7 @@ on_orca_proxy_ready (GObject      *source_object,
     {
       g_warning ("Error creating proxy: %s", error->message);
       gtk_widget_set_visible (GTK_WIDGET  (self->configure_screen_reader_row), FALSE);
-      return;
     }
-
-  check_orca_show_preferences_support (self);
 }
 
 static gboolean
