@@ -12,15 +12,15 @@
 # Lupescu Mircea <mircea.crazy@gmail.com>, 2011.
 # Jobava <jobaval10n@gmail.com>, 2015.
 # Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2011, 2016-2018, 2020.
-# Antonio Marin <gnmer.6qxyg@slmail.me>, 2025.
+# Antonio Marin <gnmer.6qxyg@slmail.me>, 2025-2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2025-11-30 09:32+0000\n"
-"PO-Revision-Date: 2025-12-01 11:38+0100\n"
+"POT-Creation-Date: 2025-12-18 08:48+0000\n"
+"PO-Revision-Date: 2026-01-03 15:59+0100\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -98,7 +98,7 @@ msgstr "Scurtături globale"
 
 #: panels/applications/cc-application-shortcut-dialog.c:138
 msgid "Remove All Shortcuts?"
-msgstr "Să elimin toate scurtăturile?"
+msgstr "Se elimină toate scurtăturile?"
 
 #: panels/applications/cc-application-shortcut-dialog.c:143
 #, c-format
@@ -366,7 +366,6 @@ msgstr "Acțiuni globale care au fost înregistrate pentru utilizare"
 
 #: panels/applications/cc-applications-panel.blp:341
 #: panels/mouse/cc-mouse-panel.blp:58 panels/mouse/cc-mouse-panel.blp:175
-#: panels/multitasking/cc-multitasking-panel.blp:11
 #: panels/power/cc-power-panel.blp:152
 msgid "General"
 msgstr "Generale"
@@ -473,7 +472,7 @@ msgstr "Are acces la rețea"
 #: panels/applications/cc-applications-panel.c:888
 #: panels/search/cc-search-locations-page.c:421
 msgid "Home"
-msgstr "Acasă"
+msgstr "Dosar personal"
 
 #: panels/applications/cc-applications-panel.c:888
 #: panels/applications/cc-applications-panel.c:893
@@ -520,7 +519,7 @@ msgstr "Tip eliminat"
 
 #: panels/applications/cc-applications-panel.c:1082
 #: panels/background/cc-background-chooser.c:170
-#: panels/network/net-device-wifi.c:889 panels/printers/cc-printers-panel.c:673
+#: panels/network/net-device-wifi.c:896 panels/printers/cc-printers-panel.c:673
 msgid "_Undo"
 msgstr "An_ulează"
 
@@ -2282,8 +2281,9 @@ msgctxt "keybinding"
 msgid "Search"
 msgstr "Caută"
 
-#: panels/keyboard/01-system.xml.in:2 panels/privacy/cc-privacy-panel.blp:15
-#: panels/system/cc-system-panel.blp:7
+#: panels/keyboard/01-system.xml.in:2
+#: panels/multitasking/cc-multitasking-panel.blp:40
+#: panels/privacy/cc-privacy-panel.blp:15 panels/system/cc-system-panel.blp:7
 #: panels/system/gnome-system-panel.desktop.in:2
 msgid "System"
 msgstr "Sistem"
@@ -2780,11 +2780,11 @@ msgid ""
 "but can also make the mouse more difficult to use."
 msgstr ""
 "Dezactivarea accelerației mausului poate permite mișcări mai rapide și mai "
-"precise, dar poate face mausul și mai dificil de utilizat."
+"precise, dar poate face mausul mai dificil de utilizat."
 
 #: panels/mouse/cc-mouse-panel.blp:137 panels/mouse/cc-mouse-panel.blp:259
 msgid "Scroll Direction"
-msgstr "Direcție de derulare"
+msgstr "Direcția de derulare"
 
 #: panels/mouse/cc-mouse-panel.blp:138
 msgid "Tra_ditional"
@@ -2940,72 +2940,86 @@ msgstr ""
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;Clic;Derulare;Panou;Tactil;Dublu;Buton;Atinge;Cursor;"
 
-#: panels/multitasking/cc-multitasking-panel.blp:15
+#: panels/multitasking/cc-multitasking-panel.blp:11
+msgid "Screen Edges"
+msgstr "Marginile ecranului"
+
+#: panels/multitasking/cc-multitasking-panel.blp:16
 msgid "_Hot Corner"
 msgstr "Colț _important"
 
-#: panels/multitasking/cc-multitasking-panel.blp:16
+#: panels/multitasking/cc-multitasking-panel.blp:17
 msgid "Touch the top-left corner to open the Activities Overview"
 msgstr ""
 "Atinge colțul din stânga sus pentru a deschide Prezentarea generală a "
 "activităților"
 
-#: panels/multitasking/cc-multitasking-panel.blp:27
-msgid "_Active Screen Edges"
-msgstr "Margini de ecran _active"
-
 #: panels/multitasking/cc-multitasking-panel.blp:28
+msgid "_Window Resize"
+msgstr "Redimensionarea _ferestrei"
+
+#: panels/multitasking/cc-multitasking-panel.blp:29
 msgid ""
 "Drag windows against the top, left, and right screen edges to resize them"
 msgstr ""
 "Trage ferestrele spre marginile de sus, stânga și dreapta pentru a le "
 "redimensiona"
 
-#: panels/multitasking/cc-multitasking-panel.blp:39
+#: panels/multitasking/cc-multitasking-panel.blp:44
+msgid "Reopen Windows After Login"
+msgstr "Redeschide ferestrele după autentificare"
+
+#: panels/multitasking/cc-multitasking-panel.blp:45
+msgid "Restore windows that were open when you last used the computer"
+msgstr ""
+"Deschide din nou ferestrele care erau deschise la ultima închidere a "
+"computerului"
+
+#: panels/multitasking/cc-multitasking-panel.blp:50
 msgid "Workspaces"
 msgstr "Spații de lucru"
 
-#: panels/multitasking/cc-multitasking-panel.blp:43
+#: panels/multitasking/cc-multitasking-panel.blp:54
 msgid "_Dynamic Workspaces"
 msgstr "Spații de lucru _dinamice"
 
-#: panels/multitasking/cc-multitasking-panel.blp:44
+#: panels/multitasking/cc-multitasking-panel.blp:55
 msgid "Automatically removes empty workspaces"
 msgstr "Elimină automat spațiile de lucru goale"
 
-#: panels/multitasking/cc-multitasking-panel.blp:55
+#: panels/multitasking/cc-multitasking-panel.blp:66
 msgid "_Fixed Number of Workspaces"
 msgstr "Număr _fix de spații de lucru"
 
-#: panels/multitasking/cc-multitasking-panel.blp:56
+#: panels/multitasking/cc-multitasking-panel.blp:67
 msgid "Specify a number of permanent workspaces"
 msgstr "Specifică un număr de spații de lucru permanente"
 
-#: panels/multitasking/cc-multitasking-panel.blp:69
+#: panels/multitasking/cc-multitasking-panel.blp:80
 msgid "_Number of Workspaces"
 msgstr "_Număr de spații de lucru"
 
-#: panels/multitasking/cc-multitasking-panel.blp:77
+#: panels/multitasking/cc-multitasking-panel.blp:88
 msgid "Multi-Monitor"
 msgstr "Multi-Monitor"
 
-#: panels/multitasking/cc-multitasking-panel.blp:81
+#: panels/multitasking/cc-multitasking-panel.blp:92
 msgid "Workspaces on _primary display only"
 msgstr "Spații de lucru doar pe ecranul _principal"
 
-#: panels/multitasking/cc-multitasking-panel.blp:93
+#: panels/multitasking/cc-multitasking-panel.blp:104
 msgid "Workspaces on all d_isplays"
 msgstr "Spații de lucru pe toate _ecranele"
 
-#: panels/multitasking/cc-multitasking-panel.blp:106
+#: panels/multitasking/cc-multitasking-panel.blp:117
 msgid "App Switching"
 msgstr "Schimbare aplicații"
 
-#: panels/multitasking/cc-multitasking-panel.blp:111
+#: panels/multitasking/cc-multitasking-panel.blp:122
 msgid "Include apps from all _workspaces"
 msgstr "Include aplicații din toate _spațiile de lucru"
 
-#: panels/multitasking/cc-multitasking-panel.blp:122
+#: panels/multitasking/cc-multitasking-panel.blp:133
 msgid "Include apps from the _current workspace only"
 msgstr "In_clude aplicații doar din spațiul de lucru actual"
 
@@ -3350,7 +3364,7 @@ msgstr "Oprirea va deconecta toate aparatele care utilizează punctul de acces."
 msgid "_Turn Off"
 msgstr "_Oprește"
 
-#: panels/network/cc-wifi-panel.c:420
+#: panels/network/cc-wifi-panel.c:421
 #: panels/network/gnome-wifi-panel.desktop.in:2
 #: panels/network/network-wifi.blp:53 panels/network/network-wifi.blp:58
 msgid "Wi-Fi"
@@ -4165,12 +4179,12 @@ msgstr "Prin cablu"
 msgid "Add new connection"
 msgstr "Adaugă o nouă conexiune"
 
-#: panels/network/net-device-wifi.c:887
+#: panels/network/net-device-wifi.c:894
 msgid "Network deleted"
 msgstr "Rețea ștearsă"
 
 #. Translators: %d is the number of network connections deleted.
-#: panels/network/net-device-wifi.c:902
+#: panels/network/net-device-wifi.c:909
 #, c-format
 msgid "%d network deleted"
 msgid_plural "%d networks deleted"
@@ -4178,15 +4192,15 @@ msgstr[0] "%d rețea ștearsă"
 msgstr[1] "%d rețele șterse"
 msgstr[2] "%d de rețele șterse"
 
-#: panels/network/net-device-wifi.c:1143
+#: panels/network/net-device-wifi.c:1150
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Regulile sistemului interzic utilizarea ca punct de acces"
 
-#: panels/network/net-device-wifi.c:1146
+#: panels/network/net-device-wifi.c:1153
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Dispozitivul fără cablu nu acceptă modul „punct de acces”"
 
-#: panels/network/net-device-wifi.c:1172
+#: panels/network/net-device-wifi.c:1179
 msgid "Searching for networks…"
 msgstr "Se caută rețele…"
 
@@ -4845,18 +4859,18 @@ msgstr "Dispozitiv de intrare pentru jocuri"
 msgid "Battery"
 msgstr "Baterie"
 
-#: panels/power/cc-battery-row.c:266
+#: panels/power/cc-battery-row.c:268
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Principal"
 
-#: panels/power/cc-battery-row.c:268
+#: panels/power/cc-battery-row.c:270
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Extra"
 
 #. TRANSLATORS: This is the battery charge level percentage (e.g. 50%). This could be localized to account for local Percent sign formatting guidelines. See https://en.wikipedia.org/wiki/Percent_sign#Correct_style
-#: panels/power/cc-battery-row.c:289
+#: panels/power/cc-battery-row.c:295
 #, c-format
 msgid "%d %%"
 msgstr "%d %%"
@@ -8708,7 +8722,8 @@ msgstr "Clic-dreapta _simulat"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:62
 msgid "Secondary click by holding down the primary mouse button"
-msgstr "Clic-dreapta prin menținerea apăsată a butonului principal al mausului"
+msgstr ""
+"Clic-dreapta prin menținerea apăsată a butonului din stânga al mausului"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:67
 #: panels/universal-access/cc-ua-typing-page.blp:155
@@ -8722,7 +8737,7 @@ msgstr "_Clic automat"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:91
 msgid "Trigger a click when the pointer hovers"
-msgstr "Declanșează un clic când se oprește mișcarea cursorului"
+msgstr "Declanșează un clic când se oprește mișcarea indicatorului"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:96
 #: panels/universal-access/cc-ua-typing-page.blp:110
@@ -8731,11 +8746,11 @@ msgstr "Întârziere"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:119
 msgid "Motion Threshold"
-msgstr "Pragul de mișcare"
+msgstr "Limita de mișcare"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:126
 msgid "Small"
-msgstr "Mic"
+msgstr "Mică"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:128
 msgid "Large"
@@ -9084,7 +9099,7 @@ msgstr "Liniile mi_rei"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:104
 msgid "Mark the cursor location in the magnifier region using lines"
-msgstr "Marchează locul cursorului în regiunea lupei utilizând linii"
+msgstr "Marchează locul cursorului în zona lupei utilizând linii"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:109
 msgid "_Overlap Mouse Cursor"
@@ -9164,7 +9179,7 @@ msgstr "Facilitează vederea, auzirea, tastarea, indicarea și apăsarea"
 msgid "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;overamplification;"
 msgstr ""
 "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;hearing;audio;typing;animations;Tastatură;Maus;Șoricel;Accesibilitate;Acces "
-"universal;Sunet;Lupă;Ecran;Cititor;mare;ridicat;larg;caracter;mărime;dimensiune;Lipicioase;Taste;Încet;Salt;Dublu;clic;Întârziere;Viteză;Asistă;Repetă;Clipește;Intermitent;Indicator;caută;localizează;vizual;auz;tastare;animații;supraamplificare;"
+"universal;Sunet;Lupă;Ecran;Cititor;mare;ridicat;larg;caracter;mărime;dimensiune;Lipicioase;Persistente;Taste;Încet;Salt;Dublu;clic;Întârziere;Viteză;Asistă;Repetă;Clipește;Intermitent;Indicator;caută;localizează;vizual;auz;tastare;animații;supraamplificare;"
 
 #: panels/wacom/button-mapping.blp:6
 msgid "Map Buttons"
@@ -10331,7 +10346,7 @@ msgid "translator-credits"
 msgstr ""
 "Florentina Mușat <florentina [dot] musat [dot] 28 [at] gmail [dot] com>, "
 "2024\n"
-"Antonio Marin, 2025"
+"Antonio Marin <gnmer.6qxyg@slmail.me>"
 
 #: shell/cc-application.c:127
 #, c-format
