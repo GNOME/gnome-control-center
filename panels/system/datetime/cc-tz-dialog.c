@@ -41,6 +41,7 @@ struct _CcTzDialog
 {
   AdwDialog           parent_instance;
 
+  GtkSearchBar       *search_bar;
   GtkSearchEntry     *location_entry;
 
   GtkStack           *main_stack;
@@ -213,6 +214,11 @@ cc_tz_dialog_map (GtkWidget *widget)
 {
   CcTzDialog *self = (CcTzDialog *)widget;
 
+  /* Make sure search entry is shown because it could have been
+   * unintentionally hidden by pressing ESC on it - Issue #3642 */
+  if (!gtk_search_bar_get_search_mode (self->search_bar))
+    gtk_search_bar_set_search_mode (self->search_bar, TRUE);
+
   gtk_editable_set_text (GTK_EDITABLE (self->location_entry), "");
   gtk_widget_grab_focus (GTK_WIDGET (self->location_entry));
 
@@ -251,6 +257,7 @@ cc_tz_dialog_class_init (CcTzDialogClass *klass)
                                                "/org/gnome/control-center/"
                                                "system/datetime/cc-tz-dialog.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcTzDialog, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcTzDialog, location_entry);
 
   gtk_widget_class_bind_template_child (widget_class, CcTzDialog, main_stack);
