@@ -275,6 +275,15 @@ setup_model (CcWindow *self)
   g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), self, G_CONNECT_SWAPPED);
 }
 
+static void
+close_visible_dialog (CcWindow *self)
+{
+  AdwDialog *dialog;
+  dialog = adw_application_window_get_visible_dialog (ADW_APPLICATION_WINDOW (self));
+  if (dialog)
+    adw_dialog_force_close (dialog);
+}
+
 static gboolean
 set_active_panel_from_id (CcWindow     *self,
                           const gchar  *start_id,
@@ -300,6 +309,8 @@ set_active_panel_from_id (CcWindow     *self,
   /* When loading the same panel again, just set its parameters */
   if (g_strcmp0 (self->current_panel_id, start_id) == 0)
     {
+      /* Close any opened dialogs */
+      close_visible_dialog (self);
       g_object_set (G_OBJECT (self->current_panel), "parameters", parameters, NULL);
       if (force_moving_to_the_panel || self->previous_list_view == view)
         adw_navigation_split_view_set_show_content (self->split_view, TRUE);
@@ -313,6 +324,9 @@ set_active_panel_from_id (CcWindow     *self,
       g_warning ("Could not find settings panel \"%s\"", start_id);
       CC_RETURN (TRUE);
     }
+
+  /* Close any opened dialogs before loading a new panel - Issue #3391 */
+  close_visible_dialog (self);
 
   self->old_panel = self->current_panel;
   if (self->old_panel)
