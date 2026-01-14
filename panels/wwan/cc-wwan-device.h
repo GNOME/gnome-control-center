@@ -153,5 +153,6 @@ GPtrArray     *cc_wwan_device_get_sim_slots           (CcWwanDevice        *self
 void           cc_wwan_device_set_primary_sim_slot    (CcWwanDevice        *self, 
                                                        guint                sim_slot, 
                                                        GCancellable        *cancellable);
+guint          cc_wwan_device_get_primary_sim_slot (CcWwanDevice *self);
 
 G_END_DECLS

@@ -101,6 +101,12 @@ cc_wwan_device_set_primary_sim_slot (CcWwanDevice *self, guint sim_slot, GCancel
     g_warning ("Error:%s", error->message);
 }
 
+guint
+cc_wwan_device_get_primary_sim_slot (CcWwanDevice *self)
+{
+  return mm_modem_get_primary_sim_slot (self->modem);
+}
+
 GPtrArray *
 cc_wwan_device_get_sim_slots (CcWwanDevice *self, GCancellable *cancellable)
 {

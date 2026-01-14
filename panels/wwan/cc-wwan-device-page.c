@@ -490,7 +490,7 @@ wwan_device_set_primary_sim_slot_cb (CcWwanDevicePage *self)
 {
   guint primary_slot = adw_combo_row_get_selected (self->sim_slot_row);
 
-  cc_wwan_device_set_primary_sim_slot (self->device, primary_slot, NULL); // FIXME: cancellable
+  cc_wwan_device_set_primary_sim_slot (self->device, primary_slot + 1, NULL); // FIXME: cancellable
   g_debug ("Setting primary sim slot to %d", primary_slot);
 }
 
@@ -529,10 +529,10 @@ cc_wwan_update_sim_slots_row (CcWwanDevicePage *self)
      * For example: "Slot 1 Physical" or "Slot 2 ESIM". */
     sim_label = g_strdup_printf (_("Slot %d %s"), i+1, sim_type_label);
     gtk_string_list_append (self->sim_slot_string_list, sim_label);
-
-    if (sim != NULL && mm_sim_get_active (sim))
-        adw_combo_row_set_selected (self->sim_slot_row, i);
   }
+
+  adw_combo_row_set_selected (self->sim_slot_row,
+                              cc_wwan_device_get_primary_sim_slot (self->device) - 1);
 }
 
 static void
