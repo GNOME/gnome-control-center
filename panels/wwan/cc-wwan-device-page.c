@@ -504,24 +504,33 @@ cc_wwan_update_sim_slots_row (CcWwanDevicePage *self)
   gtk_widget_set_visible (GTK_WIDGET (self->sim_slot_row), sim_slots->len > 0);
 
   for (i = 0; i < sim_slots->len; i++) {
-    MMSim *sim = MM_SIM (g_ptr_array_index (sim_slots, i));
-    MMSimType sim_type = mm_sim_get_sim_type (sim);
+    MMSim *sim = g_ptr_array_index (sim_slots, i);
     g_autofree gchar *sim_type_label = NULL;
     g_autofree gchar *sim_label = NULL;
 
-    if (sim_type == MM_SIM_TYPE_PHYSICAL)
-        sim_type_label = g_strdup_printf ("[%s]", _("Physical"));
-    else if (sim_type == MM_SIM_TYPE_ESIM)
-        sim_type_label = g_strdup ("[ESIM]"); /* Let's not translate ESIM. */
+    /* Empty slot - no SIM card inserted */
+    if (sim == NULL)
+      {
+        sim_type_label = g_strdup_printf ("[%s]", _("Empty"));
+      }
     else
-        sim_type_label = g_strdup_printf ("[%s]", _("Unknown"));
+      {
+        MMSimType sim_type = mm_sim_get_sim_type (sim);
+
+        if (sim_type == MM_SIM_TYPE_PHYSICAL)
+            sim_type_label = g_strdup_printf ("[%s]", _("Physical"));
+        else if (sim_type == MM_SIM_TYPE_ESIM)
+            sim_type_label = g_strdup ("[eSIM]"); /* Let's not translate eSIM. */
+        else
+            sim_type_label = g_strdup_printf ("[%s]", _("Unknown"));
+      }
 
     /* Translators: This refers to a physical or esim slot in a modem.
      * For example: "Slot 1 Physical" or "Slot 2 ESIM". */
     sim_label = g_strdup_printf (_("Slot %d %s"), i+1, sim_type_label);
     gtk_string_list_append (self->sim_slot_string_list, sim_label);
 
-    if (mm_sim_get_active (sim))
+    if (sim != NULL && mm_sim_get_active (sim))
         adw_combo_row_set_selected (self->sim_slot_row, i);
   }
 }
