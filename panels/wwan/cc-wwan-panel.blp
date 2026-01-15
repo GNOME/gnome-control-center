@@ -68,6 +68,15 @@ template $CcWwanPanel: $CcPanel {
               }
 
               StackPage {
+                name: "loading-page";
+
+                child: Adw.StatusPage {
+                  title: _("Loading Devices");
+                  child: Adw.Spinner {};
+                };
+              }
+
+              StackPage {
                 name: "device-settings";
 
                 child: Box {

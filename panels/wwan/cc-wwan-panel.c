@@ -370,6 +370,8 @@ cc_wwan_panel_add_device (CcWwanPanel  *self,
   cc_wwan_device_page_set_sim_index (device_page, n_items);
   gtk_stack_add_titled (self->devices_stack,
                         GTK_WIDGET (device_page), stack_name, operator_name);
+
+  gtk_stack_set_visible_child_name (self->main_stack, "device-settings");
 }
 
 static void
@@ -560,6 +562,8 @@ wwan_panel_device_removed_cb (CcWwanPanel *self,
 
   gtk_revealer_set_reveal_child (self->multi_device_revealer,
                                  g_list_model_get_n_items (G_LIST_MODEL (self->devices)) > 1);
+
+  gtk_stack_set_visible_child_name (self->main_stack, "loading-page");
 }
 
 static GPtrArray *
@@ -829,9 +833,6 @@ cc_wwan_panel_static_init_func (void)
     }
 
   g_debug ("Monitoring ModemManager for WWAN devices");
-
-  g_signal_connect (mm_manager, "object-added", G_CALLBACK (wwan_update_panel_visibility), NULL);
-  g_signal_connect (mm_manager, "object-removed", G_CALLBACK (wwan_update_panel_visibility), NULL);
 
   wwan_update_panel_visibility (mm_manager);
 }
