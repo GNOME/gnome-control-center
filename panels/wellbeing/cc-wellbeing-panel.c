@@ -246,6 +246,7 @@ get_session_limits_cb (GObject          *source,
       !g_error_matches (error, MCT_MANAGER_ERROR, MCT_MANAGER_ERROR_DISABLED))
     g_warning ("Error retrieving session limits: %s", error->message);
 
+  update_settings_bindings (self);
   update_daily_time_limit_and_grayscale_row_sensitivity (self);
 }
 
@@ -328,6 +329,27 @@ is_parental_controls_enabled (CcWellbeingPanel *self)
 static void
 update_settings_bindings (CcWellbeingPanel *self)
 {
+#ifdef HAVE_MALCONTENT
+  if (is_parental_controls_enabled (self))
+    {
+      gboolean daily_limit;
+      unsigned int limit_secs;
+
+      g_settings_unbind (self->screen_time_limit_row, "active");
+      g_settings_unbind (self->daily_time_limit_row, "duration");
+      g_settings_unbind (self->grayscale_row, "active");
+
+      g_clear_signal_handler (&self->screen_time_limits_settings_writable_changed_daily_limit_seconds_id, self->screen_time_limits_settings);
+
+      daily_limit = mct_session_limits_get_daily_limit (self->limits, &limit_secs);
+
+      adw_switch_row_set_active (self->screen_time_limit_row, daily_limit);
+      cc_duration_row_set_duration (CC_DURATION_ROW (self->daily_time_limit_row), limit_secs / 60);
+      adw_switch_row_set_active (self->grayscale_row, FALSE);
+
+      return;
+    }
+#endif
   g_settings_bind (self->screen_time_limits_settings,
                    "daily-limit-enabled",
                    self->screen_time_limit_row,
