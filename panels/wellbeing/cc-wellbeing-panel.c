@@ -588,6 +588,8 @@ update_daily_time_limit_and_grayscale_row_sensitivity (CcWellbeingPanel *self)
   gtk_widget_set_sensitive (GTK_WIDGET (self->grayscale_row),
                             !session_limits_enabled &&
                             history_enabled && daily_limit_enabled && grayscale_writable);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->screen_time_statistics_info_button),
+                            !session_limits_enabled);
 }
 
 static void
