@@ -275,6 +275,41 @@ setup_model (CcWindow *self)
   g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), self, G_CONNECT_SWAPPED);
 }
 
+/* Closes any toplevel window which is currently visible and is not @self,
+ * taking into account to close any opened dialogs on them too.
+ * As for @self, it just checks any opened dialog and close it */
+static void
+close_toplevels_and_dialogs (CcWindow *self)
+{
+  AdwDialog *dialog;
+  GList *toplevels, *item;
+  toplevels = item = gtk_window_list_toplevels ();
+
+  for (; item != NULL; item = g_list_next (item))
+    {
+      GtkWindow *window = GTK_WINDOW (item->data);
+      /* If the toplevel is not CcWindow and is currently visible */
+      if (window != GTK_WINDOW (self) && gtk_widget_is_visible (GTK_WIDGET (window)))
+        {
+          /* Close any opened dialog of the toplevel*/
+          if (ADW_IS_WINDOW (window))
+            {
+              dialog = adw_window_get_visible_dialog (ADW_WINDOW (window));
+              if (dialog)
+                adw_dialog_force_close (dialog);
+            }
+          /* Close the toplevel itself */
+          gtk_window_close (window);
+        }
+    }
+  g_list_free (toplevels);
+
+  /* Close any opened dialog of CcWindow */
+  dialog = adw_application_window_get_visible_dialog (ADW_APPLICATION_WINDOW (self));
+  if (dialog)
+    adw_dialog_force_close (dialog);
+}
+
 static gboolean
 set_active_panel_from_id (CcWindow     *self,
                           const gchar  *start_id,
@@ -313,6 +348,9 @@ set_active_panel_from_id (CcWindow     *self,
       g_warning ("Could not find settings panel \"%s\"", start_id);
       CC_RETURN (TRUE);
     }
+
+  /* Close toplevel windows and opened dialogs before loading a new panel - Issue #3391 */
+  close_toplevels_and_dialogs (self);
 
   self->old_panel = self->current_panel;
   if (self->old_panel)
