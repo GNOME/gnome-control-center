@@ -505,29 +505,25 @@ cc_wwan_update_sim_slots_row (CcWwanDevicePage *self)
 
   for (i = 0; i < sim_slots->len; i++) {
     MMSim *sim = g_ptr_array_index (sim_slots, i);
-    g_autofree gchar *sim_type_label = NULL;
+    g_autofree gchar *slot_state = NULL;
     g_autofree gchar *sim_label = NULL;
 
     /* Empty slot - no SIM card inserted */
     if (sim == NULL)
-      {
-        sim_type_label = g_strdup_printf ("[%s]", _("Empty"));
-      }
-    else
-      {
-        MMSimType sim_type = mm_sim_get_sim_type (sim);
+      slot_state = g_strdup_printf ("[%s]", _("Empty"));
+    else {
+      const gchar *operator_name = mm_sim_get_operator_name (sim);
+      if (operator_name)
+        slot_state = g_strdup_printf ("[%s]", operator_name);
+      else
+        slot_state = g_strdup ("");
+    }
 
-        if (sim_type == MM_SIM_TYPE_PHYSICAL)
-            sim_type_label = g_strdup_printf ("[%s]", _("Physical"));
-        else if (sim_type == MM_SIM_TYPE_ESIM)
-            sim_type_label = g_strdup ("[eSIM]"); /* Let's not translate eSIM. */
-        else
-            sim_type_label = g_strdup_printf ("[%s]", _("Unknown"));
-      }
-
-    /* Translators: This refers to a physical or esim slot in a modem.
-     * For example: "Slot 1 Physical" or "Slot 2 ESIM". */
-    sim_label = g_strdup_printf (_("Slot %d %s"), i+1, sim_type_label);
+    /* Translators: This refers to a sim slot in a modem.
+     * For example: "Slot 1 [Operator Name]", "Slot 1" or "Slot 2 [Empty]".
+     * Notice that all variations above are valid. Sometimes "Operator Name"
+     * will be ommitted.*/
+    sim_label = g_strdup_printf (_("Slot %d %s"), i+1, slot_state);
     gtk_string_list_append (self->sim_slot_string_list, sim_label);
   }
 
