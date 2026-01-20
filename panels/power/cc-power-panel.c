@@ -81,6 +81,9 @@ struct _CcPowerPanel
   gboolean       has_batteries;
   char          *chassis_type;
 
+  gboolean       can_suspend;
+  gboolean       can_hibernate;
+
   GDBusProxy    *iio_proxy;
   guint          iio_proxy_watch_id;
   GDBusProxy    *shell_brightness_proxy;
@@ -571,23 +574,13 @@ populate_power_button_row (CcNumberRow *row,
 }
 
 static gboolean
-can_suspend_or_hibernate (CcPowerPanel *self,
-                          const char   *method_name)
+can_power_action (CcPowerPanel    *self,
+                  GDBusConnection *connection,
+                  const char      *method_name)
 {
-  g_autoptr(GDBusConnection) connection = NULL;
   g_autoptr(GVariant) variant = NULL;
   g_autoptr(GError) error = NULL;
   const char *s;
-
-  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM,
-                               cc_panel_get_cancellable (CC_PANEL (self)),
-                               &error);
-  if (!connection)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("system bus not available: %s", error->message);
-      return FALSE;
-    }
 
   variant = g_dbus_connection_call_sync (connection,
                                          "org.freedesktop.login1",
@@ -610,6 +603,26 @@ can_suspend_or_hibernate (CcPowerPanel *self,
 
   g_variant_get (variant, "(&s)", &s);
   return g_strcmp0 (s, "yes") == 0 || g_strcmp0 (s, "inhibited") == 0;
+}
+
+static void
+setup_can_suspend_and_hibernate (CcPowerPanel *self)
+{
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GError) error = NULL;
+
+  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM,
+                               cc_panel_get_cancellable (CC_PANEL (self)),
+                               &error);
+  if (!connection)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("system bus not available: %s", error->message);
+      return;
+    }
+
+  self->can_suspend = can_power_action (self, connection, "CanSuspend");
+  self->can_hibernate = can_power_action (self, connection, "CanHibernate");
 }
 
 static void
@@ -770,8 +783,7 @@ setup_power_saving (CcPowerPanel *self)
     }
 
   /* Automatic suspend rows */
-  if (can_suspend_or_hibernate (self, "CanSuspend") && 
-      g_strcmp0 (self->chassis_type, "vm") != 0)
+  if (self->can_suspend && g_strcmp0 (self->chassis_type, "vm") != 0)
     {
       gtk_widget_set_visible (GTK_WIDGET (self->suspend_on_ac_group), TRUE);
 
@@ -1182,12 +1194,9 @@ switch_to_single_page_layout (CcPowerPanel *self)
 static void
 setup_general_section (CcPowerPanel *self)
 {
-  gboolean can_suspend, can_hibernate, show_section = FALSE;
+  gboolean show_section = FALSE;
 
-  can_suspend = can_suspend_or_hibernate (self, "CanSuspend");
-  can_hibernate = can_suspend_or_hibernate (self, "CanHibernate");
-
-  if ((can_hibernate || can_suspend) &&
+  if ((self->can_hibernate || self->can_suspend) &&
       g_strcmp0 (self->chassis_type, "vm") != 0 &&
       g_strcmp0 (self->chassis_type, "tablet") != 0 &&
       g_strcmp0 (self->chassis_type, "handset") != 0)
@@ -1195,8 +1204,8 @@ setup_general_section (CcPowerPanel *self)
       gtk_widget_set_visible (GTK_WIDGET (self->power_button_row), TRUE);
 
       populate_power_button_row (self->power_button_row,
-                                 can_suspend,
-                                 can_hibernate);
+                                 self->can_suspend,
+                                 self->can_hibernate);
 
       cc_number_row_bind_settings (self->power_button_row, self->gsd_settings, "power-button-action");
 
@@ -1342,6 +1351,8 @@ cc_power_panel_init (CcPowerPanel *self)
   self->up_client = up_client_new ();
   self->devices = up_client_get_devices2 (self->up_client);
   self->has_batteries = devices_have_batteries (self->devices);
+
+  setup_can_suspend_and_hibernate (self);
 
   self->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
   self->session_settings = g_settings_new ("org.gnome.desktop.session");
