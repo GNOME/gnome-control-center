@@ -539,17 +539,6 @@ get_sleep_type (GValue   *value,
   return TRUE;
 }
 
-static void
-update_suspend_notice_visibility (CcPowerPanel *self)
-{
-  gboolean suspend = adw_switch_row_get_active (self->suspend_on_ac_switch_row);
-  if (self->has_batteries) {
-    suspend = suspend && adw_switch_row_get_active (self->suspend_on_battery_switch_row);
-  }
-
-  gtk_widget_set_visible (GTK_WIDGET (self->suspend_notice_group), !suspend);
-}
-
 static GVariant *
 set_sleep_type (const GValue       *value,
                 const GVariantType *expected_type,
@@ -657,6 +646,21 @@ setup_can_auto_suspend_and_hibernate (CcPowerPanel *self)
 
   self->can_auto_suspend = can_auto_power_action (self, connection, "CanSuspend");
   self->can_auto_hibernate = can_auto_power_action (self, connection, "CanHibernate");
+}
+
+static void
+update_suspend_notice_visibility (CcPowerPanel *self)
+{
+  gboolean supported, enabled;
+
+  supported = self->can_auto_suspend && g_strcmp0 (self->chassis_type, "vm") != 0;
+
+  enabled = adw_switch_row_get_active (self->suspend_on_ac_switch_row);
+  if (enabled && self->has_batteries)
+    enabled = adw_switch_row_get_active (self->suspend_on_battery_switch_row);
+
+  gtk_widget_set_visible (GTK_WIDGET (self->suspend_notice_group),
+                          supported && !enabled);
 }
 
 static void
@@ -834,6 +838,8 @@ setup_power_saving (CcPowerPanel *self)
       setup_suspend_delay_rows (self);
 
       set_ac_battery_ui_mode (self);
+
+      update_suspend_notice_visibility (self);
     }
 }
 
