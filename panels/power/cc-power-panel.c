@@ -609,7 +609,7 @@ can_suspend_or_hibernate (CcPowerPanel *self,
     }
 
   g_variant_get (variant, "(&s)", &s);
-  return g_strcmp0 (s, "yes") == 0;
+  return g_strcmp0 (s, "yes") == 0 || g_strcmp0 (s, "inhibited") == 0;
 }
 
 static void
