@@ -592,6 +592,22 @@ static gboolean
 can_suspend_or_hibernate (CcPowerPanel *self,
                           const char   *method_name)
 {
+  const char *allowed_states[] = {
+    /* Action is allowed without authentication */
+    "yes",
+
+    /* Introduced in systemd v260. The action is normally available without
+     * authentication, but an inhibitor is temporarily... */
+    "inhibited", /* ...demanding auth */
+    "inhibitor-blocked", /* ...blocking the action */
+
+    /* Note that while an action is technically available whenever systemd returns
+     * "challange" or "challenge-inhibitor-blocked", automatic power management
+     * can't work with Polkit prompts. Thus, here it doesn't make sense to treat
+     * the action as available in this case */
+    NULL
+  };
+
   g_autoptr(GDBusConnection) connection = NULL;
   g_autoptr(GVariant) variant = NULL;
   g_autoptr(GError) error = NULL;
@@ -627,7 +643,7 @@ can_suspend_or_hibernate (CcPowerPanel *self,
     }
 
   g_variant_get (variant, "(&s)", &s);
-  return g_strcmp0 (s, "yes") == 0;
+  return g_strv_contains (allowed_states, s);
 }
 
 static void
