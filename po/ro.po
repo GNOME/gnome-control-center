@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-01-05 14:17+0000\n"
-"PO-Revision-Date: 2026-01-09 11:23+0100\n"
+"POT-Creation-Date: 2026-01-22 10:44+0000\n"
+"PO-Revision-Date: 2026-01-22 11:52+0100\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -1776,6 +1776,7 @@ msgid "Error — some settings cannot be unlocked"
 msgstr "Eroare — unele preferințe nu pot fi deblocate"
 
 #: panels/common/cc-permission-infobar.c:55
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:10
 msgid "Some settings are locked"
 msgstr "Unele preferințe sunt blocate"
 
@@ -1783,23 +1784,23 @@ msgstr "Unele preferințe sunt blocate"
 msgid "_Unlock…"
 msgstr "_Deblochează…"
 
-#: panels/common/cc-timelike-editor.blp:17
+#: panels/common/cc-timelike-editor.blp:25
 msgid "Increment Hour"
 msgstr "Incrementează ora"
 
-#: panels/common/cc-timelike-editor.blp:40
+#: panels/common/cc-timelike-editor.blp:48
 msgid "Increment Minute"
 msgstr "Incrementează minutul"
 
-#: panels/common/cc-timelike-editor.blp:52
+#: panels/common/cc-timelike-editor.blp:60
 msgid "Time"
 msgstr "Ora"
 
-#: panels/common/cc-timelike-editor.blp:69
+#: panels/common/cc-timelike-editor.blp:77
 msgid "Decrement Hour"
 msgstr "Decrementează ora"
 
-#: panels/common/cc-timelike-editor.blp:92
+#: panels/common/cc-timelike-editor.blp:100
 msgid "Decrement Minute"
 msgstr "Decrementează minutul"
 
@@ -2743,7 +2744,8 @@ msgstr "_Stânga"
 msgid "_Right"
 msgstr "D_reapta"
 
-#: panels/mouse/cc-mouse-panel.blp:92
+#. Translators: This will be presented as the text of a link to the Mouse & Touchpad panel
+#: panels/mouse/cc-mouse-panel.blp:92 panels/wacom/cc-wacom-page.c:712
 msgid "Mouse"
 msgstr "Maus"
 
@@ -3066,7 +3068,7 @@ msgstr "C_onfigurare"
 #: panels/network/connection-editor/ip6-page.blp:36
 #: panels/network/connection-editor/ip6-page.blp:187
 #: panels/network/connection-editor/ip6-page.blp:242
-#: panels/wacom/cc-wacom-page.c:675
+#: panels/wacom/cc-wacom-page.c:684
 msgid "Automatic"
 msgstr "Automat"
 
@@ -5009,29 +5011,29 @@ msgstr "UPS"
 msgid "Battery Level"
 msgstr "Nivel baterie"
 
-#: panels/power/cc-power-panel.c:551
+#: panels/power/cc-power-panel.c:562
 msgid "Suspend"
 msgstr "Suspendă"
 
-#: panels/power/cc-power-panel.c:552
+#: panels/power/cc-power-panel.c:563
 msgid "Power Off"
 msgstr "Oprește"
 
-#: panels/power/cc-power-panel.c:553
+#: panels/power/cc-power-panel.c:564
 msgid "Hibernate"
 msgstr "Hibernează"
 
-#: panels/power/cc-power-panel.c:554
+#: panels/power/cc-power-panel.c:565
 msgid "Nothing"
 msgstr "Nimic"
 
-#: panels/power/cc-power-panel.c:859
+#: panels/power/cc-power-panel.c:870
 msgid "Performance mode temporarily disabled due to high operating temperature"
 msgstr ""
 "Modul Performanță este dezactivat temporar din cauza temperaturii mari de "
 "funcționare"
 
-#: panels/power/cc-power-panel.c:861
+#: panels/power/cc-power-panel.c:872
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -5040,11 +5042,11 @@ msgstr ""
 "Aparatul trebuie mutat pe o suprafață stabilă pentru a folosi modul "
 "Performanță."
 
-#: panels/power/cc-power-panel.c:863
+#: panels/power/cc-power-panel.c:874
 msgid "Performance mode temporarily disabled"
 msgstr "Modul Performanță este dezactivat temporar"
 
-#: panels/power/cc-power-panel.c:905
+#: panels/power/cc-power-panel.c:916
 msgid ""
 "Power saver enabled due to low battery. Previous mode will be restored when "
 "battery is charged."
@@ -5053,13 +5055,13 @@ msgstr ""
 "anterior va fi restabilit atunci când bateria este încărcată."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:913
+#: panels/power/cc-power-panel.c:924
 #, c-format
 msgid "Power Saver mode activated by “%s”"
 msgstr "Modul Economie de energie activat de „%s”."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:917
+#: panels/power/cc-power-panel.c:928
 #, c-format
 msgid "Performance mode activated by “%s”"
 msgstr "Modul Performanță a fost activat de „%s”."
@@ -6848,10 +6850,10 @@ msgid "File Sharing _Address"
 msgstr "_Adresa pentru distribuirea fișierelor"
 
 #: panels/sharing/cc-sharing-panel.blp:73
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:47
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:68
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:89
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:106
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:57
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:78
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:99
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:116
 #: panels/system/remote-desktop/cc-remote-login-page.blp:46
 #: panels/system/remote-desktop/cc-remote-login-page.blp:68
 #: panels/system/remote-desktop/cc-remote-login-page.blp:89
@@ -7640,7 +7642,11 @@ msgstr "Alege limba și formatele regionale"
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Language;Layout;Keyboard;Input;Limba;Aranjament;Intrare;"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:9
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:11
+msgid "Unlock…"
+msgstr "Deblochează…"
+
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:19
 msgid ""
 "Share your existing desktop with other devices. The remote connection uses "
 "the existing screen resolution."
@@ -7648,24 +7654,24 @@ msgstr ""
 "Împărtășește propriul computer cu alte aparate. Conexiunea de la distanță "
 "utilizează rezoluția existentă a ecranului."
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:22
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:32
 msgid "_Desktop Sharing"
 msgstr "Împăr_tășire computer"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:27
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:37
 msgid "Remote _Control"
 msgstr "_Control de la distanță"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:29
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:39
 msgid "Allows desktop shares to control the screen"
 msgstr "Permite controlul ecranului când este împărtășit computerul"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:34
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:44
 #: panels/system/remote-desktop/cc-remote-login-page.blp:33
 msgid "How to Connect"
 msgstr "Cum să te conectezi"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:35
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:45
 #: panels/system/remote-desktop/cc-remote-login-page.blp:34
 msgid ""
 "Use a remote desktop app to connect using the RDP protocol. Additional "
@@ -7675,59 +7681,59 @@ msgstr ""
 "computerului, pentru conectarea utilizând protocolul RDP. Pot fi necesare "
 "informații suplimentare privind calea de rețea a aparatului."
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:38
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:48
 #: panels/system/remote-desktop/cc-remote-login-page.blp:37
 msgid "_Hostname"
 msgstr "Nume _gazdă"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:59
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:69
 #: panels/system/remote-desktop/cc-remote-login-page.blp:58
 msgid "_Port"
 msgstr "_Port"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:81
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:91
 #: panels/system/remote-desktop/cc-remote-login-page.blp:81
 msgid "Login Details"
 msgstr "Detalii de autentificare"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:84
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:94
 #: panels/system/remote-desktop/cc-remote-login-page.blp:84
 #: panels/system/users/cc-add-user-dialog.blp:56
 #: panels/system/users/cc-enterprise-login-dialog.blp:81
 msgid "_Username"
 msgstr "Nume de _utilizator"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:101
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:111
 #: panels/system/remote-desktop/cc-remote-login-page.blp:101
 msgid "P_assword"
 msgstr "P_arola"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:123
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:133
 #: panels/system/remote-desktop/cc-remote-login-page.blp:124
 msgid "_Generate New Password"
 msgstr "_Generează o parolă nouă"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:130
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:140
 #: panels/system/remote-desktop/cc-remote-login-page.blp:131
 msgid "_Verify Encryption"
 msgstr "_Verifică cifrarea"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:355
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:357
 #: panels/system/remote-desktop/cc-remote-login-page.c:96
 msgid "Device address copied to clipboard"
 msgstr "Adresa aparatului a fost copiată"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:364
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:366
 #: panels/system/remote-desktop/cc-remote-login-page.c:105
 msgid "Port number copied to clipboard"
 msgstr "Numărul portului a fost copiat"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:375
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:377
 #: panels/system/remote-desktop/cc-remote-login-page.c:116
 msgid "Username copied to clipboard"
 msgstr "Numele de utilizator a fost copiat"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.c:386
+#: panels/system/remote-desktop/cc-desktop-sharing-page.c:388
 #: panels/system/remote-desktop/cc-remote-login-page.c:127
 msgid "Password copied to clipboard"
 msgstr "Parola a fost copiată"
@@ -9282,29 +9288,35 @@ msgstr "Locul butoanelor"
 msgid "The location of the physical buttons on the tablet"
 msgstr "Amplasarea butoanelor fizice pe tabletă"
 
-#: panels/wacom/cc-wacom-page.blp:55
+#: panels/wacom/cc-wacom-page.blp:69
 msgctxt "display setting"
 msgid "Map to _Monitor"
 msgstr "Alocă la _monitor"
 
-#: panels/wacom/cc-wacom-page.blp:61
+#: panels/wacom/cc-wacom-page.blp:75
 msgid "_Keep Aspect Ratio"
 msgstr "_Păstrează raportul de aspect"
 
-#: panels/wacom/cc-wacom-page.blp:62
+#: panels/wacom/cc-wacom-page.blp:76
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr ""
 "Utilizează doar o porțiune a suprafeței tabletei pentru a păstra raportul de "
 "aspect al monitorului"
 
-#: panels/wacom/cc-wacom-page.blp:67
+#: panels/wacom/cc-wacom-page.blp:81
 msgid "_Calibrate"
 msgstr "_Calibrează"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:662
+#: panels/wacom/cc-wacom-page.c:671
 msgid "All Displays"
 msgstr "Toate ecranele"
+
+#. Translators: %s is a link to the Mouse & Touchpad panel with the label "Mouse"
+#: panels/wacom/cc-wacom-page.c:714
+#, c-format
+msgid "Mouse devices can be configured in %s settings"
+msgstr "Preferințele pentru maus pot fi stabilite în %s"
 
 #: panels/wacom/cc-wacom-panel.blp:49
 msgid "No tablet detected"
