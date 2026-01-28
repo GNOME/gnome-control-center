@@ -1091,7 +1091,7 @@ cc_display_panel_init (CcDisplayPanel *self)
                            G_LIST_MODEL (self->primary_display_list));
 
   self->up_client = up_client_new ();
-  if (up_client_get_lid_is_present (self->up_client))
+  if (self->up_client && up_client_get_lid_is_present (self->up_client))
     {
       g_signal_connect_object (self->up_client, "notify::lid-is-closed",
                                G_CALLBACK (cc_display_panel_up_client_changed), self, G_CONNECT_SWAPPED);
