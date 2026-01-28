@@ -129,10 +129,13 @@ static void
 update_power_saver_low_battery_row_visibility (CcPowerPanel *self)
 {
   g_autoptr(UpDevice) composite = NULL;
-  UpDeviceKind kind;
+  UpDeviceKind kind = UP_DEVICE_KIND_UNKNOWN;
 
-  composite = up_client_get_display_device (self->up_client);
-  g_object_get (composite, "kind", &kind, NULL);
+  if (self->up_client)
+    {
+      composite = up_client_get_display_device (self->up_client);
+      g_object_get (composite, "kind", &kind, NULL);
+    }
   gtk_widget_set_visible (GTK_WIDGET (self->power_saver_low_battery_row),
                           self->power_profiles_proxy && kind == UP_DEVICE_KIND_BATTERY);
 }
@@ -235,7 +238,7 @@ static void
 up_client_changed (CcPowerPanel *self)
 {
   gint i;
-  UpDeviceKind kind;
+  UpDeviceKind kind = UP_DEVICE_KIND_UNKNOWN;
   guint n_batteries;
   gboolean on_ups;
   gboolean charge_threshold_supported;
@@ -253,8 +256,12 @@ up_client_changed (CcPowerPanel *self)
   charge_threshold_enabled = FALSE;
   on_ups = FALSE;
   n_batteries = 0;
-  composite = up_client_get_display_device (self->up_client);
-  g_object_get (composite, "kind", &kind, NULL);
+  if (self->up_client)
+    {
+      composite = up_client_get_display_device (self->up_client);
+      g_object_get (composite, "kind", &kind, NULL);
+    }
+
   if (kind == UP_DEVICE_KIND_UPS)
     {
       on_ups = TRUE;
@@ -1351,7 +1358,7 @@ cc_power_panel_init (CcPowerPanel *self)
   self->chassis_type = cc_hostname_get_chassis_type (cc_hostname_get_default ());
 
   self->up_client = up_client_new ();
-  self->devices = up_client_get_devices2 (self->up_client);
+  self->devices = self->up_client ? up_client_get_devices2 (self->up_client) : g_ptr_array_new ();
   self->has_batteries = devices_have_batteries (self->devices);
 
   self->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
@@ -1377,8 +1384,11 @@ cc_power_panel_init (CcPowerPanel *self)
   setup_general_section (self);
 
   /* populate batteries */
-  g_signal_connect_object (self->up_client, "device-added", G_CALLBACK (up_client_device_added), self, G_CONNECT_SWAPPED);
-  g_signal_connect_object (self->up_client, "device-removed", G_CALLBACK (up_client_device_removed), self, G_CONNECT_SWAPPED);
+  if (self->up_client)
+    {
+      g_signal_connect_object (self->up_client, "device-added", G_CALLBACK (up_client_device_added), self, G_CONNECT_SWAPPED);
+      g_signal_connect_object (self->up_client, "device-removed", G_CALLBACK (up_client_device_removed), self, G_CONNECT_SWAPPED);
+    }
 
   for (i = 0; self->devices != NULL && i < self->devices->len; i++) {
     UpDevice *device = g_ptr_array_index (self->devices, i);
