@@ -16,10 +16,11 @@
  */
 
 #include <config.h>
+
+#include <gnome-qr-gtk/gnome-qr-widget.h>
+
 #include "cc-qr-code-dialog.h"
 #include "cc-qr-code.h"
-
-#define QR_IMAGE_SIZE 200
 
 struct _CcQrCodeDialog
 {
@@ -27,7 +28,7 @@ struct _CcQrCodeDialog
   NMConnection *connection;
   AdwActionRow *network_name_row;
   AdwActionRow *network_password_row;
-  GtkWidget    *qr_image;
+  GtkWidget    *qr_code;
 };
 
 enum
@@ -84,7 +85,6 @@ cc_qr_code_dialog_set_property (GObject      *object,
 static void
 cc_qr_code_dialog_constructed (GObject *object)
 {
-  g_autoptr (CcQrCode) qr_code = NULL;
   g_autoptr (GVariant) variant = NULL;
   g_autoptr (GError) error = NULL;
   g_autofree gchar *qr_connection_string = NULL;
@@ -143,18 +143,8 @@ cc_qr_code_dialog_constructed (GObject *object)
   else
     gtk_widget_set_visible (GTK_WIDGET (self->network_password_row), FALSE);
 
-  qr_code = cc_qr_code_new ();
   qr_connection_string = get_qr_string_for_connection (self->connection);
-  if (cc_qr_code_set_text (qr_code, qr_connection_string))
-    {
-      gint scale = gtk_widget_get_scale_factor (self->qr_image);
-      GdkPaintable *paintable = cc_qr_code_get_paintable (qr_code, QR_IMAGE_SIZE * scale);
-      gtk_picture_set_paintable (GTK_PICTURE (self->qr_image), paintable);
-    }
-  else
-    {
-      // TODO what should happen in this case?
-    }
+  gnome_qr_widget_set_text (GNOME_QR_WIDGET (self->qr_code), qr_connection_string);
 }
 
 static void
@@ -188,7 +178,7 @@ cc_qr_code_dialog_class_init (CcQrCodeDialogClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-qr-code-dialog.ui");
   gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, network_name_row);
   gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, network_password_row);
-  gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, qr_image);
+  gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, qr_code);
 }
 
 void

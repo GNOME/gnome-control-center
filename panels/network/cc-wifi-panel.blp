@@ -1,4 +1,5 @@
 using Gtk 4.0;
+using GnomeQRGtk 4.0;
 using Adw 1;
 
 template $CcWifiPanel: $CcPanel {
@@ -81,7 +82,7 @@ template $CcWifiPanel: $CcPanel {
                 margin-top: 36;
                 margin-bottom: 24;
 
-                Picture wifi_qr_image {
+                GnomeQRGtk.Widget wifi_qr {
                   halign: center;
                   width-request: 180;
                   height-request: 180;
