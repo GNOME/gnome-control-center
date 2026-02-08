@@ -1,15 +1,73 @@
 using Gtk 4.0;
+using Adw 1;
 
 template $CcStreamRow: ListBoxRow {
   activatable: false;
 
-  Box {
+  child: Adw.MultiLayoutView layout_view {
     margin-top: 12;
     margin-bottom: 12;
     margin-start: 12;
     margin-end: 12;
-    spacing: 12;
+    layout-name: bind $get_layout_name_cb(template.narrow) as <string>;
 
+    Adw.Layout {
+      name: "wide";
+
+      content: Box {
+        spacing: 12;
+
+        Adw.LayoutSlot {
+          id: "label";
+        }
+
+        Adw.LayoutSlot {
+          id: "slider";
+        }
+
+        Adw.LayoutSlot {
+          id: "level";
+        }
+      };
+    }
+
+    Adw.Layout {
+      name: "narrow";
+
+      content: Box {
+        spacing: 12;
+        orientation: vertical;
+
+        Box {
+          spacing: 12;
+
+          Adw.LayoutSlot {
+            id: "label";
+          }
+
+          Adw.Clamp {
+            hexpand: true;
+            halign: end;
+
+            child: Adw.LayoutSlot {
+              id: "level";
+            };
+          }
+        }
+
+        Adw.LayoutSlot {
+          id: "slider";
+        }
+      };
+    }
+
+    [level]
+    $CcLevelBar level_bar {
+      valign: center;
+      width-request: 32;
+    }
+
+    [label]
     Box label_box {
       spacing: 6;
 
@@ -27,13 +85,9 @@ template $CcStreamRow: ListBoxRow {
       }
     }
 
+    [slider]
     $CcVolumeSlider volume_slider {
       hexpand: true;
     }
-
-    $CcLevelBar level_bar {
-      valign: center;
-      width-request: 32;
-    }
-  }
+  };
 }

@@ -4,35 +4,48 @@ using Adw 1;
 template $CcVolumeLevelsPage: Adw.NavigationPage {
   title: _("Volume Levels");
 
-  child: Adw.ToolbarView {
-    [top]
-    Adw.HeaderBar {}
+  child: Adw.BreakpointBin {
+    width-request: bind template.root as <Window>.width-request;
+    height-request: bind template.root as <Window>.height-request;
 
-    content: Stack stack {
-      StackPage {
-        name: "no-streams-found-page";
+    Adw.Breakpoint {
+      condition ("max-width: 500sp")
 
-        child: Adw.StatusPage {
-          icon-name: "org.gnome.Settings-sound-symbolic";
-          title: _("No Sound Playing");
-        };
+      setters {
+        template.narrow: true;
       }
+    }
 
-      StackPage {
-        name: "streams-page";
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
 
-        child: Adw.PreferencesPage {
-          Adw.PreferencesGroup output_group {
-            visible: false;
-            title: _("Outputs");
-          }
+      content: Stack stack {
+        StackPage {
+          name: "no-streams-found-page";
 
-          Adw.PreferencesGroup input_group {
-            visible: false;
-            title: _("Inputs");
-          }
-        };
-      }
+          child: Adw.StatusPage {
+            icon-name: "org.gnome.Settings-sound-symbolic";
+            title: _("No Sound Playing");
+          };
+        }
+
+        StackPage {
+          name: "streams-page";
+
+          child: Adw.PreferencesPage {
+            Adw.PreferencesGroup output_group {
+              visible: false;
+              title: _("Outputs");
+            }
+
+            Adw.PreferencesGroup input_group {
+              visible: false;
+              title: _("Inputs");
+            }
+          };
+        }
+      };
     };
   };
 }

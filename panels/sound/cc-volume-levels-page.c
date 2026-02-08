@@ -23,6 +23,11 @@
 #include "cc-stream-row.h"
 #include "cc-volume-levels-page.h"
 
+enum {
+    PROP_0,
+    PROP_NARROW
+};
+
 struct _CcVolumeLevelsPage {
     AdwNavigationPage parent_instance;
 
@@ -35,6 +40,8 @@ struct _CcVolumeLevelsPage {
     GListStore *stream_list;
     GtkFilterListModel *input_model;
     GtkFilterListModel *output_model;
+
+    gboolean narrow;
 };
 
 G_DEFINE_FINAL_TYPE (CcVolumeLevelsPage, cc_volume_levels_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -116,6 +123,8 @@ create_stream_row (gpointer item, gpointer user_data)
     id = gvc_mixer_stream_get_id (stream);
     row = cc_stream_row_new (self->label_size_group, stream, id, get_stream_type (stream), self->mixer_control);
 
+    g_object_bind_property (self, "narrow", row, "narrow", G_BINDING_SYNC_CREATE);
+
     return GTK_WIDGET (row);
 }
 
@@ -183,6 +192,34 @@ cc_volume_levels_page_dispose (GObject *object)
     G_OBJECT_CLASS (cc_volume_levels_page_parent_class)->dispose (object);
 }
 
+static void
+cc_volume_levels_page_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
+{
+    CcVolumeLevelsPage *self = CC_VOLUME_LEVELS_PAGE (object);
+
+    switch (prop_id) {
+    case PROP_NARROW:
+        g_value_set_boolean (value, self->narrow);
+        break;
+    default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
+cc_volume_levels_page_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
+{
+    CcVolumeLevelsPage *self = CC_VOLUME_LEVELS_PAGE (object);
+
+    switch (prop_id) {
+    case PROP_NARROW:
+        self->narrow = g_value_get_boolean (value);
+        break;
+    default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
 void
 cc_volume_levels_page_class_init (CcVolumeLevelsPageClass *klass)
 {
@@ -190,6 +227,8 @@ cc_volume_levels_page_class_init (CcVolumeLevelsPageClass *klass)
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
     object_class->dispose = cc_volume_levels_page_dispose;
+    object_class->get_property = cc_volume_levels_page_get_property;
+    object_class->set_property = cc_volume_levels_page_set_property;
 
     gtk_widget_class_set_template_from_resource (widget_class,
                                                  "/org/gnome/control-center/sound/cc-volume-levels-page.ui");
@@ -198,6 +237,8 @@ cc_volume_levels_page_class_init (CcVolumeLevelsPageClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsPage, stack);
     gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsPage, input_group);
     gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsPage, output_group);
+    g_object_class_install_property (object_class, PROP_NARROW,
+                                     g_param_spec_boolean ("narrow", NULL, NULL, FALSE, G_PARAM_READWRITE));
 }
 
 void

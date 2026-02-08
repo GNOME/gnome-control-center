@@ -23,6 +23,11 @@
 
 #define SPEECH_DISPATCHER_PREFIX "speech-dispatcher-"
 
+enum {
+    PROP_0,
+    PROP_NARROW
+};
+
 struct _CcStreamRow {
     GtkListBoxRow parent_instance;
 
@@ -34,6 +39,7 @@ struct _CcStreamRow {
 
     GvcMixerStream *stream;
     guint id;
+    gboolean narrow;
 };
 
 G_DEFINE_FINAL_TYPE (CcStreamRow, cc_stream_row, GTK_TYPE_LIST_BOX_ROW)
@@ -48,6 +54,40 @@ cc_stream_row_dispose (GObject *object)
     G_OBJECT_CLASS (cc_stream_row_parent_class)->dispose (object);
 }
 
+static void
+cc_stream_row_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
+{
+    CcStreamRow *self = CC_STREAM_ROW (object);
+
+    switch (prop_id) {
+    case PROP_NARROW:
+        g_value_set_boolean (value, self->narrow);
+        break;
+    default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
+cc_stream_row_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
+{
+    CcStreamRow *self = CC_STREAM_ROW (object);
+
+    switch (prop_id) {
+    case PROP_NARROW:
+        self->narrow = g_value_get_boolean (value);
+        break;
+    default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static char *
+get_layout_name_cb (CcStreamRow *self, gboolean is_narrow)
+{
+    return g_strdup (is_narrow ? "narrow" : "wide");
+}
+
 void
 cc_stream_row_class_init (CcStreamRowClass *klass)
 {
@@ -55,6 +95,8 @@ cc_stream_row_class_init (CcStreamRowClass *klass)
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
     object_class->dispose = cc_stream_row_dispose;
+    object_class->get_property = cc_stream_row_get_property;
+    object_class->set_property = cc_stream_row_set_property;
 
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-stream-row.ui");
 
@@ -63,6 +105,10 @@ cc_stream_row_class_init (CcStreamRowClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcStreamRow, name_label);
     gtk_widget_class_bind_template_child (widget_class, CcStreamRow, volume_slider);
     gtk_widget_class_bind_template_child (widget_class, CcStreamRow, level_bar);
+    gtk_widget_class_bind_template_callback (widget_class, get_layout_name_cb);
+
+    g_object_class_install_property (object_class, PROP_NARROW,
+                                     g_param_spec_boolean ("narrow", NULL, NULL, FALSE, G_PARAM_READWRITE));
 }
 
 void
