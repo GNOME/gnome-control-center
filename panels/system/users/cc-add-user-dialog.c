@@ -68,6 +68,16 @@ struct _CcAddUserDialog {
         gchar              *password_hint_text;
 };
 
+enum
+{
+  USER_ADDED,
+  NUM_SIGNALS,
+};
+
+static gint signals[NUM_SIGNALS] = {
+  0,
+};
+
 G_DEFINE_TYPE (CcAddUserDialog, cc_add_user_dialog, ADW_TYPE_DIALOG);
 
 static void
@@ -130,6 +140,8 @@ user_loaded_cb (CcAddUserDialog *self,
         act_user_set_password (user, password, "");
 
   self->user = g_object_ref (user);
+  g_signal_emit (self, signals[USER_ADDED], 0, user);
+
   adw_dialog_close (ADW_DIALOG (self));
 }
 
@@ -507,6 +519,11 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, verify_entry_changed_cb);
         gtk_widget_class_bind_template_callback (widget_class, password_focus_out_event_cb);
         gtk_widget_class_bind_template_callback (widget_class, password_page_validate);
+
+        signals[USER_ADDED] = g_signal_new ("user-added", CC_TYPE_ADD_USER_DIALOG,
+                                            G_SIGNAL_RUN_FIRST, 0, NULL, NULL,
+                                            g_cclosure_marshal_generic,
+                                            G_TYPE_NONE, 1, ACT_TYPE_USER);
 }
 
 CcAddUserDialog *

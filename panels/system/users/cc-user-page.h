@@ -37,5 +37,8 @@ CcUserPage *cc_user_page_new      (void);
 void        cc_user_page_set_user (CcUserPage *self, ActUser *user, GPermission *permission);
 ActUser    *cc_user_page_get_user (CcUserPage *self);
 
+void cc_user_page_util_ensure_avatar (CcUserPage *self,
+                                      ActUser *user);
+
 G_END_DECLS
 
