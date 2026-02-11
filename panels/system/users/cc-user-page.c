@@ -786,3 +786,30 @@ cc_user_page_get_user (CcUserPage *self)
 
     return self->user;
 }
+
+void
+cc_user_page_util_ensure_avatar (CcUserPage *self,
+                                 ActUser *user)
+{
+  g_autoptr (GdkTexture) texture = NULL;
+  g_autoptr (GdkPaintable) custom_image = NULL;
+
+  g_assert (CC_IS_USER_PAGE (self));
+  g_assert (ACT_IS_USER (user));
+
+  if (adw_avatar_get_custom_image (self->avatar) != NULL)
+    custom_image = g_object_ref (adw_avatar_get_custom_image (self->avatar));
+
+  adw_avatar_set_custom_image (self->avatar, NULL);
+
+  /* temporarily hijack AdwAvatar widget, to be able to use
+     snapshot of it as the avatar image source */
+  setup_avatar_for_user (self->avatar, user);
+
+  texture = draw_avatar_to_texture (self->avatar, AVATAR_PIXEL_SIZE);
+  set_user_icon_data (user, texture, IMAGE_SOURCE_VALUE_GENERATED);
+
+  setup_avatar_for_user (self->avatar, self->user);
+  if (custom_image != NULL)
+    adw_avatar_set_custom_image (self->avatar, custom_image);
+}

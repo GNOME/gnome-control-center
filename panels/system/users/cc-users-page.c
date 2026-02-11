@@ -73,9 +73,23 @@ add_enterprise_user (CcUsersPage *self)
 }
 
 static void
+update_new_user_avatar_cb (CcUsersPage *self,
+                           ActUser *user)
+{
+  CcUserPage *page;
+
+  page = CC_USER_PAGE (adw_navigation_view_get_visible_page (self->navigation));
+
+  cc_user_page_util_ensure_avatar (page, user);
+}
+
+static void
 add_user (CcUsersPage *self)
 {
     CcAddUserDialog *dialog = cc_add_user_dialog_new (self->permission);
+
+    g_signal_connect_swapped (dialog, "user-added",
+                              G_CALLBACK (update_new_user_avatar_cb), self);
 
     adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
