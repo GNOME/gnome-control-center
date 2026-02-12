@@ -1,0 +1,76 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcFactoryResetPage: Adw.NavigationPage {
+  title: _("Factory Reset");
+  tag: "factoryreset";
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      description: _("The following data will be permanantly erased from this device. <b>This cannot be undone!</b>");
+
+      Adw.PreferencesGroup users_group {
+        title: _("Users");
+        description: _("All personal files associated with these users");
+      }
+
+      Adw.PreferencesGroup apps_group {
+        title: _("Apps");
+        description: _("All apps will be uninstalled and associated app data will be deleted from this device. You'll be signed out of all accounts.");
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Settings");
+        description: _("All settings will be reset to their defaults")
+
+        Adw.ActionRow {
+          title: _("Network");
+          subtitle: _("All saved Wi-Fi networks, Ethernet settings, and VPNs");
+          icon-name: "org.gnome.Settings-network-symbolic";
+        }
+
+        Adw.ActionRow {
+          title: _("Bluetooth");
+          subtitle: _("All paired devices will be forgotten");
+          icon-name: "org.gnome.Settings-bluetooth-symbolic";
+        }
+
+        Adw.ActionRow {
+          title: _("Appearance");
+          subtitle: _("All personalizations, such as background and accent color");
+          icon-name: "org.gnome.Settings-appearance-symbolic";
+        }
+
+        Adw.ActionRow {
+          title: _("Locale");
+          subtitle: _("Languages, input methods, and time zones");
+          icon-name: "org.gnome.Settings-region-symbolic";
+        }
+
+        Adw.ActionRow {
+          title: _("Accessibility");
+          subtitle: _("Screen reader, zoom, visual alerts, and all other accessibility settings");
+          icon-name: "org.gnome.Settings-accessibility-symbolic";
+        }
+
+        Adw.ActionRow {
+          title: _("Everything Else");
+          subtitle: _("All other settings not listed here");
+          icon-name: "org.gnome.Settings-system-symbolic";
+        }
+      }
+
+      Adw.PreferencesGroup {
+        Adw.ButtonRow {
+            title: _("Erase All Data");
+            activated => $on_confirm_clicked(template);
+            styles ["destructive-action"]
+        }
+      }
+    };
+
+  };
+}

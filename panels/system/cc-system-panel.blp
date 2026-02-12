@@ -57,6 +57,15 @@ template $CcSystemPanel: $CcPanel {
             activated => $on_secure_shell_row_clicked(template);
           }
 
+          $CcListRow factory_reset_row {
+            title: _("_Factory Reset");
+            subtitle: _("Erase all apps, files, and, settings");
+            icon-name: "factory-reset-symbolic";
+            show-arrow: true;
+            activated => $on_factory_reset_row_clicked(template);
+            //visible: false;
+          }
+
           $CcListRow about_row {
             title: _("_About");
             subtitle: _("Hardware details and software versions");
@@ -87,4 +96,16 @@ template $CcSystemPanel: $CcPanel {
       };
     };
   }
+}
+
+Adw.AlertDialog factory_reset_dialog {
+  heading: _("Factory Reset");
+  body: _("All apps, files, and settings will be permanantly erased from this device. This cannot be undone.");
+  content-width: 360;
+  default-response: "close";
+  response => $on_factory_reset_response(template);
+  responses [
+    close: _("Cancel"),
+    confirm: _("Erase All Data") destructive,
+  ]
 }

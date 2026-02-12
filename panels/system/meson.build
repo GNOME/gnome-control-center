@@ -49,6 +49,7 @@ sources = files(
   'datetime/cc-tz-dialog.c',
   'datetime/date-endian.c',
   'datetime/tz.c',
+  'factory-reset/cc-factory-reset-page.c',
   'region/cc-region-page.c',
   'region/cc-format-chooser.c',
   'region/cc-format-preview.c',
@@ -143,6 +144,7 @@ cflags += [
 
 subdir('about')
 subdir('datetime')
+subdir('factory-reset')
 subdir('icons')
 subdir('region')
 subdir('remote-desktop')

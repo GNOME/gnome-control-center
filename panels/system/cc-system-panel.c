@@ -30,6 +30,7 @@
 
 #include "about/cc-about-page.h"
 #include "datetime/cc-datetime-page.h"
+#include "factory-reset/cc-factory-reset-page.h"
 #include "region/cc-region-page.h"
 #include "remote-desktop/cc-remote-desktop-page.h"
 #include "secure-shell/cc-secure-shell-page.h"
@@ -44,8 +45,10 @@ struct _CcSystemPanel
   AdwActionRow *region_row;
   AdwActionRow *remote_desktop_row;
   AdwActionRow *users_row;
+  AdwActionRow *factory_reset_row;
 
   CcSecureShellPage *secure_shell_dialog;
+  AdwAlertDialog *factory_reset_dialog;
   AdwNavigationPage *software_updates_group;
 };
 
@@ -132,9 +135,69 @@ on_secure_shell_row_clicked (CcSystemPanel *self)
 }
 
 static void
+init_factory_reset (CcSystemPanel *self)
+{
+  g_autoptr (GError) error = NULL;
+
+  self->logind_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                      G_DBUS_PROXY_FLAGS_NONE,
+                                                      NULL,
+                                                      "org.freedesktop.login1",
+                                                      "/org/freedesktop/login1",
+                                                      "org.freedesktop.login1.Manager",
+                                                      NULL,
+                                                      &error);
+  if (!self->logind_proxy)
+    {
+      g_warning ("Failed to get logind proxy: %s", error->message);
+      return;
+    }
+
+  // TODO: Call CanFactoryReset
+  // TODO:    Show/hide the row based on return value
+}
+
+static void
+on_factory_reset_row_clicked (CcSystemPanel *self)
+{
+  adw_dialog_present (ADW_DIALOG (self->factory_reset_dialog), GTK_WIDGET (self));
+}
+
+static void
+on_factory_reset_response (CcSystemPanel *self,
+                           gchar         *response)
+{
+  if (strcmp (response, "confirm") != 0)
+    return;
+
+  // TODO: Use the logind proxy instead
+  g_autoptr(GError) error = NULL;
+  gboolean ret;
+  char *argv[3];
+  argv[0] = "systemctl";
+  argv[1] = "factory-reset";
+  argv[2] = NULL;
+  ret = g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
+  if (!ret)
+    g_warning ("Failed to spawn systemctl factory-reset: %s", error->message);
+
+  // TODO: Notification in the event of an error (inhibited)? Or maybe, we should
+  //       show a different dialog asking to try again later? IDK
+}
+
+static void
+cc_system_panel_dispoase (CcSystemPanel *self)
+{
+  g_clear_object (&self->logind_proxy);
+}
+
+static void
 cc_system_panel_class_init (CcSystemPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  object_class->dispose = cc_system_panel_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/cc-system-panel.ui");
 
@@ -143,10 +206,14 @@ cc_system_panel_class_init (CcSystemPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, region_row);
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, remote_desktop_row);
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, users_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, factory_reset_row);
   gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, software_updates_group);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemPanel, factory_reset_dialog);
 
   gtk_widget_class_bind_template_callback (widget_class, cc_system_page_open_software_update);
   gtk_widget_class_bind_template_callback (widget_class, on_secure_shell_row_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, on_factory_reset_row_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, on_factory_reset_response);
 
   g_type_ensure (CC_TYPE_ABOUT_PAGE);
   g_type_ensure (CC_TYPE_DATE_TIME_PAGE);
@@ -171,8 +238,11 @@ cc_system_panel_init (CcSystemPanel *self)
                                                                  service_state == CC_SERVICE_STATE_DISABLED);
   gtk_widget_set_visible (GTK_WIDGET (self->software_updates_group), show_software_updates_group (self));
 
+  init_factory_reset (self);
+
   cc_panel_add_static_subpage (CC_PANEL (self), "about", CC_TYPE_ABOUT_PAGE);
   cc_panel_add_static_subpage (CC_PANEL (self), "datetime", CC_TYPE_DATE_TIME_PAGE);
+  cc_panel_add_static_subpage (CC_PANEL (self), "factoryreset", CC_TYPE_FACTORY_RESET_PAGE);
   cc_panel_add_static_subpage (CC_PANEL (self), "region", CC_TYPE_REGION_PAGE);
   cc_panel_add_static_subpage (CC_PANEL (self), "remote-desktop", CC_TYPE_REMOTE_DESKTOP_PAGE);
   cc_panel_add_static_subpage (CC_PANEL (self), "users", CC_TYPE_USERS_PAGE);
