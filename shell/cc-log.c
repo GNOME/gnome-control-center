@@ -103,11 +103,11 @@ matches_domain (const char *log_domains,
       !domain || !*domain)
     return FALSE;
 
-  domain_list = g_strsplit (log_domains, ",", -1);
+  domain_list = g_strsplit_set (log_domains, ", ", -1);
 
   for (guint i = 0; domain_list[i]; i++)
     {
-      if (g_str_has_prefix (domain, domain_list[i]))
+      if (*domain_list[i] && g_str_has_prefix (domain, domain_list[i]))
         return TRUE;
     }
 
