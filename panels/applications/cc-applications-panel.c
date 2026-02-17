@@ -169,8 +169,10 @@ enum
 static gboolean
 gnome_software_is_installed (void)
 {
-  g_autofree gchar *path = g_find_program_in_path ("gnome-software");
-  return path != NULL;
+  g_autoptr (GDesktopAppInfo) info = NULL;
+
+  info = g_desktop_app_info_new ("org.gnome.Software.desktop");
+  return info != NULL;
 }
 
 /* Callbacks */
@@ -178,20 +180,61 @@ gnome_software_is_installed (void)
 static void
 open_software_cb (CcApplicationsPanel *self)
 {
-  const gchar *argv[] = { "gnome-software", "--details", "appid", NULL };
-  g_autofree gchar *argv_app_id = NULL;
+  GtkWindow *window;
+  GApplication *app;
+  GDBusConnection *bus;
+  GVariant *call_params;
+  GVariantBuilder params_builder;
+  g_autofree gchar *app_id = NULL;
 
-  if (self->current_app_id == NULL)
-    argv[1] = NULL;
-  else if (g_str_has_prefix (self->current_app_id, "org.gnome.Epiphany.WebApp_"))
-    /* GNOME Software only shows info on the webapp desktop file itself */
-    argv_app_id = g_strdup_printf ("%s.desktop", self->current_app_id);
+  if (!self->current_app_id)
+    {
+      g_autoptr (GAppInfo) info = G_APP_INFO (g_desktop_app_info_new ("org.gnome.Software.desktop"));
+      if (info)
+        g_app_info_launch (info, NULL, NULL, NULL);
+      return;
+    }
+
+  window = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
+  if (!window)
+    return;
+
+  app = G_APPLICATION (gtk_window_get_application (window));
+  if (!app)
+    return;
+
+  bus = g_application_get_dbus_connection (app);
+  if (!bus)
+    return;
+
+  if (g_str_has_prefix (self->current_app_id, "org.gnome.Epiphany.WebApp_"))
+    app_id = g_strdup_printf ("%s.desktop", self->current_app_id);
   else
-    argv_app_id = g_strdup (self->current_app_id);
+    app_id = g_strdup (self->current_app_id);
 
-  argv[2] = argv_app_id;
+  g_variant_builder_init (&params_builder, G_VARIANT_TYPE ("av"));
+  g_variant_builder_add (&params_builder,
+                         "v",
+                         g_variant_new ("(ss)",
+                                        app_id,
+                                        ""));
 
-  g_spawn_async (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
+  call_params = g_variant_new ("(sava{sv})",
+                               "details",
+                               &params_builder,
+                               NULL);
+  g_dbus_connection_call (bus,
+                          "org.gnome.Software",
+                          "/org/gnome/Software",
+                          "org.gtk.Actions",
+                          "Activate",
+                          call_params,
+                          NULL,
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1,
+                          NULL,
+                          NULL,
+                          NULL);
 }
 
 /* --- portal permissions and utilities --- */
