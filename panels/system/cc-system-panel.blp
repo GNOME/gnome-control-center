@@ -62,8 +62,8 @@ template $CcSystemPanel: $CcPanel {
             subtitle: _("Erase all apps, files, and, settings");
             icon-name: "factory-reset-symbolic";
             show-arrow: true;
-            activated => $on_factory_reset_row_clicked(template);
-            //visible: false;
+            action-name: "navigation.push";
+            action-target: "'factory-reset'";
           }
 
           $CcListRow about_row {
@@ -96,16 +96,4 @@ template $CcSystemPanel: $CcPanel {
       };
     };
   }
-}
-
-Adw.AlertDialog factory_reset_dialog {
-  heading: _("Factory Reset");
-  body: _("All apps, files, and settings will be permanantly erased from this device. This cannot be undone.");
-  content-width: 360;
-  default-response: "close";
-  response => $on_factory_reset_response(template);
-  responses [
-    close: _("Cancel"),
-    confirm: _("Erase All Data") destructive,
-  ]
 }
