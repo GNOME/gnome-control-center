@@ -111,6 +111,7 @@ deps = common_deps + [
   accounts_dep,
   keyboard_shortcuts_dep,
   gnome_desktop_dep,
+  polkit_gobject_dep,
 ]
 
 if enable_ibus
