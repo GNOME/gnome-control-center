@@ -497,7 +497,9 @@ setup_login_details_group (GObject      *source_object,
                                                  NULL, &error);
   if (!collection)
     {
-      g_debug ("Can't load secret collection: %s", error->message);
+      const char *msg = error ? error->message : "No such collection";
+
+      g_debug ("Can't load secret collection: %s", msg);
       return;
     }
 
