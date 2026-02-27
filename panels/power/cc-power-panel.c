@@ -36,6 +36,19 @@
 #include "cc-power-resources.h"
 #include "cc-ui-util.h"
 
+/* This enum represents the availability of power actions, ordered from least
+ * to most available so that the code can compare w/ inequality operators */
+typedef enum
+{
+  /* Power action isn't available */
+  ACTION_UNAVAILABLE,
+  /* Power action is available, but suitable only for interactive use (i.e.
+   * explicitly triggered by user action) */
+  ACTION_INTERACTIVE,
+  /* Power action is available and usable for automatic power management */
+  ACTION_AUTOMATIC,
+} ActionAvailability;
+
 struct _CcPowerPanel
 {
   CcPanel            parent_instance;
@@ -81,8 +94,8 @@ struct _CcPowerPanel
   gboolean       has_batteries;
   char          *chassis_type;
 
-  gboolean       can_auto_suspend;
-  gboolean       can_auto_hibernate;
+  ActionAvailability can_suspend;
+  ActionAvailability can_hibernate;
 
   GDBusProxy    *iio_proxy;
   guint          iio_proxy_watch_id;
@@ -580,24 +593,31 @@ populate_power_button_row (CcNumberRow *row,
     }
 }
 
-static gboolean
-can_auto_power_action (CcPowerPanel    *self,
-                       GDBusConnection *connection,
-                       const char      *method_name)
+static ActionAvailability
+can_power_action (CcPowerPanel    *self,
+                  GDBusConnection *connection,
+                  const char      *method_name)
 {
-  const char *allowed_states[] = {
-    /* Action is allowed without authentication */
-    "yes",
+  static const char *allowed_automatic_states[] = {
+    "yes", /* Action is allowed without authentication */
 
     /* Introduced in systemd v260. The action is normally available without
      * authentication, but an inhibitor is temporarily... */
     "inhibited", /* ...demanding auth */
     "inhibitor-blocked", /* ...blocking the action */
+    NULL
+  };
+  static const char *allowed_interactive_states[] = {
+    "challenge", /* Action is allowed with authentication */
 
-    /* Note that while an action is technically available whenever systemd returns
-     * "challange" or "challenge-inhibitor-blocked", automatic power management
-     * can't work with Polkit prompts. Thus, here it doesn't make sense to treat
-     * the action as available in this case */
+    /* Introduced in systemd v260. The action is normally available with
+     * authentication, but an inhibitor is temporarily blocking the action */
+    "challenge-inhibitor-blocked",
+    NULL
+  };
+  static const char *known_unavailable_states[] = {
+    "no", /* Action disabled by administrator */
+    "na", /* Action entirely unavailable */
     NULL
   };
 
@@ -621,15 +641,25 @@ can_auto_power_action (CcPowerPanel    *self,
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_debug ("Failed to call %s(): %s", method_name, error->message);
-      return FALSE;
+      return ACTION_UNAVAILABLE;
     }
 
   g_variant_get (variant, "(&s)", &s);
-  return g_strv_contains (allowed_states, s);
+
+  if (g_strv_contains (allowed_automatic_states, s))
+    return ACTION_AUTOMATIC;
+
+  if (g_strv_contains (allowed_interactive_states, s))
+    return ACTION_INTERACTIVE;
+
+  if (!g_strv_contains (known_unavailable_states, s))
+    g_warning ("%s() returned unknown state: %s", method_name, s);
+
+  return ACTION_UNAVAILABLE;
 }
 
 static void
-setup_can_auto_suspend_and_hibernate (CcPowerPanel *self)
+setup_can_suspend_and_hibernate (CcPowerPanel *self)
 {
   g_autoptr(GDBusConnection) connection = NULL;
   g_autoptr(GError) error = NULL;
@@ -644,8 +674,8 @@ setup_can_auto_suspend_and_hibernate (CcPowerPanel *self)
       return;
     }
 
-  self->can_auto_suspend = can_auto_power_action (self, connection, "CanSuspend");
-  self->can_auto_hibernate = can_auto_power_action (self, connection, "CanHibernate");
+  self->can_suspend = can_power_action (self, connection, "CanSuspend");
+  self->can_hibernate = can_power_action (self, connection, "CanHibernate");
 }
 
 static void
@@ -653,7 +683,8 @@ update_suspend_notice_visibility (CcPowerPanel *self)
 {
   gboolean supported, enabled;
 
-  supported = self->can_auto_suspend && g_strcmp0 (self->chassis_type, "vm") != 0;
+  supported = self->can_suspend == ACTION_AUTOMATIC &&
+              g_strcmp0 (self->chassis_type, "vm") != 0;
 
   enabled = adw_switch_row_get_active (self->suspend_on_ac_switch_row);
   if (enabled && self->has_batteries)
@@ -821,7 +852,7 @@ setup_power_saving (CcPowerPanel *self)
     }
 
   /* Automatic suspend rows */
-  if (self->can_auto_suspend && g_strcmp0 (self->chassis_type, "vm") != 0)
+  if (self->can_suspend == ACTION_AUTOMATIC && g_strcmp0 (self->chassis_type, "vm") != 0)
     {
       gtk_widget_set_visible (GTK_WIDGET (self->suspend_on_ac_group), TRUE);
 
@@ -1236,7 +1267,8 @@ setup_general_section (CcPowerPanel *self)
 {
   gboolean show_section = FALSE;
 
-  if ((self->can_auto_hibernate || self->can_auto_suspend) &&
+  if ((self->can_hibernate > ACTION_UNAVAILABLE ||
+       self->can_suspend > ACTION_UNAVAILABLE) &&
       g_strcmp0 (self->chassis_type, "vm") != 0 &&
       g_strcmp0 (self->chassis_type, "tablet") != 0 &&
       g_strcmp0 (self->chassis_type, "handset") != 0)
@@ -1244,8 +1276,8 @@ setup_general_section (CcPowerPanel *self)
       gtk_widget_set_visible (GTK_WIDGET (self->power_button_row), TRUE);
 
       populate_power_button_row (self->power_button_row,
-                                 self->can_auto_suspend,
-                                 self->can_auto_hibernate);
+                                 self->can_suspend > ACTION_UNAVAILABLE,
+                                 self->can_hibernate > ACTION_UNAVAILABLE);
 
       cc_number_row_bind_settings (self->power_button_row, self->gsd_settings, "power-button-action");
 
@@ -1392,7 +1424,7 @@ cc_power_panel_init (CcPowerPanel *self)
   self->devices = self->up_client ? up_client_get_devices2 (self->up_client) : g_ptr_array_new ();
   self->has_batteries = devices_have_batteries (self->devices);
 
-  setup_can_auto_suspend_and_hibernate (self);
+  setup_can_suspend_and_hibernate (self);
 
   self->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
   self->session_settings = g_settings_new ("org.gnome.desktop.session");
