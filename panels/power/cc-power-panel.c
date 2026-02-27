@@ -346,6 +346,12 @@ up_client_changed (CcPowerPanel *self)
 
   if (charge_threshold_supported)
     {
+      /* Block the signal handler to prevent infinite feedback loop when
+       * updating UI state on systems with multiple batteries */
+      g_signal_handlers_block_by_func (self->preserve_battery_radio,
+                                       battery_health_radio_changed_cb,
+                                       self);
+
       if (charge_threshold_enabled)
         {
           gtk_check_button_set_active (self->preserve_battery_radio, TRUE);
@@ -354,6 +360,11 @@ up_client_changed (CcPowerPanel *self)
         {
           gtk_check_button_set_active (self->maximize_charge_radio, TRUE);
         }
+
+      g_signal_handlers_unblock_by_func (self->preserve_battery_radio,
+                                         battery_health_radio_changed_cb,
+                                         self);
+
       gtk_widget_set_visible (GTK_WIDGET (self->battery_charging_section), TRUE);
     }
 
