@@ -28,8 +28,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-02-06 11:35+0000\n"
-"PO-Revision-Date: 2026-02-06 23:13+0100\n"
+"POT-Creation-Date: 2026-02-10 13:00+0000\n"
+"PO-Revision-Date: 2026-02-19 21:28+0100\n"
 "Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
@@ -187,7 +187,7 @@ msgstr "System durchsuchen und Ergebnisse anzeigen"
 #. translators:
 #. * The device has been disabled
 #: panels/applications/cc-applications-panel.blp:227 panels/applications/cc-applications-panel.blp:269 panels/applications/cc-applications-panel.blp:290 panels/applications/cc-applications-panel.blp:304 panels/applications/cc-applications-panel.blp:318 panels/keyboard/cc-keyboard-panel.c:87 panels/keyboard/cc-keyboard-shortcut-editor.blp:120 panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336
-#: panels/system/users/cc-user-page.c:368 panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:475 subprojects/gvc/gvc-mixer-control.c:1910
+#: panels/system/users/cc-user-page.c:368 panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:483 subprojects/gvc/gvc-mixer-control.c:1910
 msgid "Disabled"
 msgstr "Deaktiviert"
 
@@ -3309,7 +3309,7 @@ msgid "WireGuard"
 msgstr "WireGuard"
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
-#: panels/network/connection-editor/ce-page-wireguard.c:370 panels/privacy/firmware-security/cc-firmware-security-dialog.c:167 panels/sound/cc-alert-chooser-page.c:350 panels/system/about/cc-about-page.c:73 panels/system/about/cc-system-details-window.c:286 panels/system/about/cc-system-details-window.c:338 panels/system/about/cc-system-details-window.c:837 panels/wwan/cc-wwan-details-dialog.c:101
+#: panels/network/connection-editor/ce-page-wireguard.c:370 panels/privacy/firmware-security/cc-firmware-security-dialog.c:167 panels/sound/cc-alert-chooser-page.c:350 panels/system/about/cc-about-page.c:73 panels/system/about/cc-system-details-window.c:290 panels/system/about/cc-system-details-window.c:342 panels/system/about/cc-system-details-window.c:872 panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Unbekannt"
 
@@ -4308,7 +4308,7 @@ msgid "Not charging"
 msgstr "Lädt nicht"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-battery-row.c:142 panels/power/cc-battery-row.c:172
+#: panels/power/cc-battery-row.c:142 panels/power/cc-battery-row.c:172 panels/wwan/cc-wwan-device-page.c:514
 msgid "Empty"
 msgstr "Leer"
 
@@ -4500,66 +4500,66 @@ msgid "Disabling automatic suspend will result in higher power consumption. It i
 msgstr "Deaktivierte automatische Bereitschaft resultiert in höherem Energieverbrauch. Es wird empfohlen automatische Bereitschaft einzuschalten."
 
 #. TRANSLATORS: This is the same title as the title from the .ui file, but without mnemonic
-#: panels/power/cc-power-panel.c:208
+#: panels/power/cc-power-panel.c:211
 msgid "Power Saving"
 msgstr "Energiesparen"
 
-#: panels/power/cc-power-panel.c:304
+#: panels/power/cc-power-panel.c:311
 msgid "Battery Levels"
 msgstr "Akkustände"
 
 # https://de.wikipedia.org/wiki/Unterbrechungsfreie_Stromversorgung
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:309
+#: panels/power/cc-power-panel.c:316
 msgid "UPS"
 msgstr "USV"
 
-#: panels/power/cc-power-panel.c:312
+#: panels/power/cc-power-panel.c:319
 msgid "Battery Level"
 msgstr "Akkustand"
 
-#: panels/power/cc-power-panel.c:562
+#: panels/power/cc-power-panel.c:569
 msgid "Suspend"
 msgstr "Bereitschaft"
 
-#: panels/power/cc-power-panel.c:563
+#: panels/power/cc-power-panel.c:570
 msgid "Power Off"
 msgstr "Ausschalten"
 
-#: panels/power/cc-power-panel.c:564
+#: panels/power/cc-power-panel.c:571
 msgid "Hibernate"
 msgstr "Ruhezustand"
 
-#: panels/power/cc-power-panel.c:565
+#: panels/power/cc-power-panel.c:572
 msgid "Nothing"
 msgstr "Nichts"
 
-#: panels/power/cc-power-panel.c:870
+#: panels/power/cc-power-panel.c:877
 msgid "Performance mode temporarily disabled due to high operating temperature"
 msgstr "Leistungsmodus aufgrund hoher Betriebstemperaturen vorübergehend nicht verfügbar"
 
 # Klingt komisch, ist aber so :) https://gitlab.freedesktop.org/hadess/power-profiles-daemon/-/blob/main/src/net.hadess.PowerProfiles.xml
-#: panels/power/cc-power-panel.c:872
+#: panels/power/cc-power-panel.c:879
 msgid "Lap detected: performance mode temporarily unavailable. Move the device to a stable surface to restore."
 msgstr "Schoß erkannt: Der Leistungsmodus ist vorübergehend nicht verfügbar. Bringen Sie das Gerät auf eine stabile Oberfläche, um in den Leistungsmodus wechseln zu können."
 
-#: panels/power/cc-power-panel.c:874
+#: panels/power/cc-power-panel.c:881
 msgid "Performance mode temporarily disabled"
 msgstr "Leistungsmodus vorübergehend deaktiviert"
 
-#: panels/power/cc-power-panel.c:916
+#: panels/power/cc-power-panel.c:923
 msgid "Power saver enabled due to low battery. Previous mode will be restored when battery is charged."
 msgstr "Energiesparmodus wegen niedrigem Akkustand aktiviert. Der vorherige Modus wird wieder verwendet, wenn der Akku geladen ist."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:924
+#: panels/power/cc-power-panel.c:931
 #, c-format
 msgid "Power Saver mode activated by “%s”"
 msgstr "Energiesparmodus durch »%s« aktiviert"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:928
+#: panels/power/cc-power-panel.c:935
 #, c-format
 msgid "Performance mode activated by “%s”"
 msgstr "Leistungsmodus durch »%s« aktiviert"
@@ -5796,7 +5796,7 @@ msgstr "Nicht gültig"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/firmware-security/cc-firmware-security-utils.c:45 panels/system/users/cc-user-page.c:366 panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:473
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:45 panels/system/users/cc-user-page.c:366 panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:481
 msgid "Enabled"
 msgstr "Aktiviert"
 
@@ -6503,41 +6503,41 @@ msgstr "Virtualisierung"
 msgid "Kernel Version"
 msgstr "Kernel-Version"
 
-#: panels/system/about/cc-system-details-window.c:312
+#: panels/system/about/cc-system-details-window.c:316
 msgid "Graphics"
 msgstr "Grafik"
 
-#: panels/system/about/cc-system-details-window.c:314
+#: panels/system/about/cc-system-details-window.c:318
 #, c-format
 msgid "Graphics %d"
 msgstr "Grafik %d"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-system-details-window.c:356
+#: panels/system/about/cc-system-details-window.c:360
 #, c-format
 msgid "64-bit"
 msgstr "64-bit"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-system-details-window.c:359
+#: panels/system/about/cc-system-details-window.c:363
 #, c-format
 msgid "32-bit"
 msgstr "32-bit"
 
-#: panels/system/about/cc-system-details-window.c:611
+#: panels/system/about/cc-system-details-window.c:646
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/system/about/cc-system-details-window.c:613
+#: panels/system/about/cc-system-details-window.c:648
 msgctxt "Windowing system (Wayland, or Unknown)"
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: panels/system/about/cc-system-details-window.c:781
+#: panels/system/about/cc-system-details-window.c:816
 msgid "**Windowing System:**"
 msgstr "**Fenstermanager:**"
 
-#: panels/system/about/cc-system-details-window.c:797
+#: panels/system/about/cc-system-details-window.c:832
 msgid "Details copied to clipboard"
 msgstr "Details wurden in die Zwischenablage kopiert"
 
@@ -7739,7 +7739,7 @@ msgstr "Das neue Passwort enthält nicht genug unterschiedliche Zeichen"
 #: panels/system/users/run-passwd.c:503
 #, c-format
 msgid "Password does not meet your organization's security policies. Try a different password or contact your system administrator."
-msgstr ""
+msgstr "Das Passwort entspricht nicht den Sicherheitsvorgaben Ihrer Organisation. Geben Sie ein anderes Passwort ein, oder nehmen Sie Kontakt mit dem Systemverwalter auf."
 
 #: panels/system/users/run-passwd.c:507 panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
@@ -8010,7 +8010,7 @@ msgstr "Bildlaufleisten immer sichtbar machen"
 msgid "Text Size"
 msgstr "Textgröße"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:109 panels/wwan/cc-wwan-device-page.c:187
+#: panels/universal-access/cc-ua-seeing-page.blp:109 panels/wwan/cc-wwan-device-page.c:191
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -8020,7 +8020,6 @@ msgstr "Stellen Sie mit dem Schieberegler die Schriftgröße der Benutzeroberfl�
 
 #. Translators: Single letter next to the text size slider
 #: panels/universal-access/cc-ua-seeing-page.blp:137 panels/universal-access/cc-ua-seeing-page.blp:157
-#| msgid "AM"
 msgid "A"
 msgstr "A"
 
@@ -8334,12 +8333,10 @@ msgstr "Sehen, Hören, Tastatur benutzen, Zeigen und Klicken erleichtern"
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:14
-#, fuzzy
-#| msgid "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;"
 msgid "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;overamplification;magnify;magnifier;magnification;"
 msgstr ""
-"Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;Tastatur;Maus;Cursor;Barrierefreiheit;Kontrast;Zeiger;Klang;Ton;Audio;Zoom;Vergrößern;Bildschirm;Bildschirmleser;groß;Text;Schrift;Größe;AccessX;Klebrige "
-"Tasten;Tasten;Langsam;Springende Tasten;Tastaturmaus;Doppelklick;Klick;Verzögerung;Geschwindigkeit;Assistent;Wiederholen;Blinken;finden;visuell;Hören;Audio;Tippen;Eingabe;Animationen;Einrastfunktion;"
+"Keyboard;Tastatur;Maus;Cursor;Barrierefreiheit;Bedienungshilfe;Allgemein;Kontrast;Zeiger;Klang;Ton;Audio;Zoom;Vergrößern;Bildschirm;Bildschirmleser;groß;Text;Schrift;Größe;AccessX;Klebrige Tasten;Tasten;Langsam;Springende "
+"Tasten;Tastaturmaus;Doppelklick;Klick;Verzögerung;Geschwindigkeit;Assistent;Wiederholen;Blinken;Zeiger;finden;visuell;Hören;Audio;Tippen;Eingabe;Animationen;Übersteuerung;Vergrößerung;Lupe;Einrastfunktion;"
 
 #: panels/wacom/button-mapping.blp:6
 msgid "Map Buttons"
@@ -8460,10 +8457,9 @@ msgstr "Alle Bildschirme"
 
 #. Translators: %s is a link to the Mouse & Touchpad panel with the label "Mouse"
 #: panels/wacom/cc-wacom-page.c:714
-#, fuzzy, c-format
-#| msgid "System volume can be adjusted in %s settings"
+#, c-format
 msgid "Mouse devices can be configured in %s settings"
-msgstr "Die Systemlautstärke kann in den »%s«-Einstellungen angepasst werden"
+msgstr "Maus-Eingabegeräte werden in den »%s«-Einstellungen eingerichtet"
 
 #: panels/wacom/cc-wacom-panel.blp:49
 msgid "No tablet detected"
@@ -8772,16 +8768,12 @@ msgid "Placeholder for a bar chart of screen time usage. No data is currently av
 msgstr "Platzhalter für ein Balkendiagramm der Bildschirmzeitnutzung. Derzeit sind keine Daten verfügbar."
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:17
-#, fuzzy
-#| msgid "Open the Parental Controls app"
 msgid "Some settings are being managed by the Parental Controls app"
-msgstr "Die Kindersicherungs-Anwendung öffnen"
+msgstr "Einige Einstellungen werden durch die App zur Kindersicherung verwaltet"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:18
-#, fuzzy
-#| msgid "_Parental Controls"
 msgid "Open _Parental Controls"
-msgstr "_Kindersicherung"
+msgstr "_Kindersicherung öffnen"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:23
 msgid "Screen Time"
@@ -8965,179 +8957,179 @@ msgstr "Suchen"
 msgid "Denied"
 msgstr "Verweigert"
 
-#: panels/wwan/cc-wwan-device.c:988
+#: panels/wwan/cc-wwan-device.c:1019
 msgid "2G Only"
 msgstr "Nur 2G"
 
-#: panels/wwan/cc-wwan-device.c:991
+#: panels/wwan/cc-wwan-device.c:1022
 msgid "3G Only"
 msgstr "Nur 3G"
 
-#: panels/wwan/cc-wwan-device.c:994
+#: panels/wwan/cc-wwan-device.c:1025
 msgid "4G Only"
 msgstr "Nur 4G"
 
-#: panels/wwan/cc-wwan-device.c:997
+#: panels/wwan/cc-wwan-device.c:1028
 msgid "5G Only"
 msgstr "Nur 5G"
 
-#: panels/wwan/cc-wwan-device.c:1007
+#: panels/wwan/cc-wwan-device.c:1038
 msgid "2G, 3G, 4G, 5G (Preferred)"
 msgstr "2G, 3G, 4G, 5G (bevorzugt)"
 
-#: panels/wwan/cc-wwan-device.c:1009
+#: panels/wwan/cc-wwan-device.c:1040
 msgid "2G, 3G, 4G (Preferred), 5G"
 msgstr "2G, 3G, 4G (bevorzugt), 5G"
 
-#: panels/wwan/cc-wwan-device.c:1011
+#: panels/wwan/cc-wwan-device.c:1042
 msgid "2G, 3G (Preferred), 4G, 5G"
 msgstr "2G, 3G (bevorzugt), 4G, 5G"
 
-#: panels/wwan/cc-wwan-device.c:1013
+#: panels/wwan/cc-wwan-device.c:1044
 msgid "2G (Preferred), 3G, 4G, 5G"
 msgstr "2G (bevorzugt), 3G, 4G, 5G"
 
-#: panels/wwan/cc-wwan-device.c:1015
+#: panels/wwan/cc-wwan-device.c:1046
 msgid "2G, 3G, 4G, 5G"
 msgstr "2G, 3G, 4G, 5G"
 
-#: panels/wwan/cc-wwan-device.c:1022
+#: panels/wwan/cc-wwan-device.c:1053
 msgid "2G, 3G, 4G (Preferred)"
 msgstr "2G, 3G, 4G (bevorzugt)"
 
-#: panels/wwan/cc-wwan-device.c:1024
+#: panels/wwan/cc-wwan-device.c:1055
 msgid "2G, 3G (Preferred), 4G"
 msgstr "2G, 3G (bevorzugt), 4G"
 
-#: panels/wwan/cc-wwan-device.c:1026
+#: panels/wwan/cc-wwan-device.c:1057
 msgid "2G (Preferred), 3G, 4G"
 msgstr "2G (bevorzugt), 3G, 4G"
 
-#: panels/wwan/cc-wwan-device.c:1028
+#: panels/wwan/cc-wwan-device.c:1059
 msgid "2G, 3G, 4G"
 msgstr "2G, 3G, 4G"
 
-#: panels/wwan/cc-wwan-device.c:1035
+#: panels/wwan/cc-wwan-device.c:1066
 msgid "3G, 4G, 5G (Preferred)"
 msgstr "3G, 4G, 5G (bevorzugt)"
 
-#: panels/wwan/cc-wwan-device.c:1037
+#: panels/wwan/cc-wwan-device.c:1068
 msgid "3G, 4G (Preferred), 5G"
 msgstr "3G, 4G (bevorzugt), 5G"
 
-#: panels/wwan/cc-wwan-device.c:1039
+#: panels/wwan/cc-wwan-device.c:1070
 msgid "3G (Preferred), 4G, 5G"
 msgstr "3G (bevorzugt), 4G, 5G"
 
-#: panels/wwan/cc-wwan-device.c:1041
+#: panels/wwan/cc-wwan-device.c:1072
 msgid "3G, 4G, 5G"
 msgstr "3G, 4G, 5G"
 
-#: panels/wwan/cc-wwan-device.c:1048
+#: panels/wwan/cc-wwan-device.c:1079
 msgid "2G, 4G, 5G (Preferred)"
 msgstr "2G, 4G, 5G (bevorzugt)"
 
-#: panels/wwan/cc-wwan-device.c:1050
+#: panels/wwan/cc-wwan-device.c:1081
 msgid "2G, 4G (Preferred), 5G"
 msgstr "2G, 4G (bevorzugt), 5G"
 
-#: panels/wwan/cc-wwan-device.c:1052
+#: panels/wwan/cc-wwan-device.c:1083
 msgid "2G (Preferred), 4G, 5G"
 msgstr "2G (bevorzugt), 4G, 5G"
 
-#: panels/wwan/cc-wwan-device.c:1054
+#: panels/wwan/cc-wwan-device.c:1085
 msgid "2G, 4G, 5G"
 msgstr "2G, 4G, 5G"
 
-#: panels/wwan/cc-wwan-device.c:1061
+#: panels/wwan/cc-wwan-device.c:1092
 msgid "2G, 3G, 5G (Preferred)"
 msgstr "2G, 3G, 5G (bevorzugt)"
 
-#: panels/wwan/cc-wwan-device.c:1063
+#: panels/wwan/cc-wwan-device.c:1094
 msgid "2G, 3G (Preferred), 5G"
 msgstr "2G, 3G (bevorzugt), 5G"
 
-#: panels/wwan/cc-wwan-device.c:1065
+#: panels/wwan/cc-wwan-device.c:1096
 msgid "2G (Preferred), 3G, 5G"
 msgstr "2G (bevorzugt), 3G, 5G"
 
-#: panels/wwan/cc-wwan-device.c:1067
+#: panels/wwan/cc-wwan-device.c:1098
 msgid "2G, 3G, 5G"
 msgstr "2G, 3G, 5G"
 
-#: panels/wwan/cc-wwan-device.c:1073
+#: panels/wwan/cc-wwan-device.c:1104
 msgid "3G, 4G (Preferred)"
 msgstr "3G, 4G (bevorzugt)"
 
-#: panels/wwan/cc-wwan-device.c:1075
+#: panels/wwan/cc-wwan-device.c:1106
 msgid "3G (Preferred), 4G"
 msgstr "3G (bevorzugt), 4G"
 
-#: panels/wwan/cc-wwan-device.c:1077
+#: panels/wwan/cc-wwan-device.c:1108
 msgid "3G, 4G"
 msgstr "3G, 4G"
 
-#: panels/wwan/cc-wwan-device.c:1083
+#: panels/wwan/cc-wwan-device.c:1114
 msgid "2G, 4G (Preferred)"
 msgstr "2G, 4G (bevorzugt)"
 
-#: panels/wwan/cc-wwan-device.c:1085
+#: panels/wwan/cc-wwan-device.c:1116
 msgid "2G (Preferred), 4G"
 msgstr "2G (bevorzugt), 4G"
 
-#: panels/wwan/cc-wwan-device.c:1087
+#: panels/wwan/cc-wwan-device.c:1118
 msgid "2G, 4G"
 msgstr "2G, 4G"
 
-#: panels/wwan/cc-wwan-device.c:1093
+#: panels/wwan/cc-wwan-device.c:1124
 msgid "2G, 3G (Preferred)"
 msgstr "2G, 3G (bevorzugt)"
 
-#: panels/wwan/cc-wwan-device.c:1095
+#: panels/wwan/cc-wwan-device.c:1126
 msgid "2G (Preferred), 3G"
 msgstr "2G (bevorzugt), 3G"
 
-#: panels/wwan/cc-wwan-device.c:1097
+#: panels/wwan/cc-wwan-device.c:1128
 msgid "2G, 3G"
 msgstr "2G, 3G"
 
-#: panels/wwan/cc-wwan-device.c:1103
+#: panels/wwan/cc-wwan-device.c:1134
 msgid "2G, 5G (Preferred)"
 msgstr "2G, 5G (bevorzugt)"
 
-#: panels/wwan/cc-wwan-device.c:1105
+#: panels/wwan/cc-wwan-device.c:1136
 msgid "2G (Preferred), 5G"
 msgstr "2G (bevorzugt), 5G"
 
-#: panels/wwan/cc-wwan-device.c:1107
+#: panels/wwan/cc-wwan-device.c:1138
 msgid "2G, 5G"
 msgstr "2G, 5G"
 
-#: panels/wwan/cc-wwan-device.c:1113
+#: panels/wwan/cc-wwan-device.c:1144
 msgid "3G, 5G (Preferred)"
 msgstr "3G, 5G (bevorzugt)"
 
-#: panels/wwan/cc-wwan-device.c:1115
+#: panels/wwan/cc-wwan-device.c:1146
 msgid "3G (Preferred), 5G"
 msgstr "3G (bevorzugt), 5G"
 
-#: panels/wwan/cc-wwan-device.c:1117
+#: panels/wwan/cc-wwan-device.c:1148
 msgid "3G, 5G"
 msgstr "3G, 5G"
 
-#: panels/wwan/cc-wwan-device.c:1123
+#: panels/wwan/cc-wwan-device.c:1154
 msgid "4G, 5G (Preferred)"
 msgstr "3G, 5G (bevorzugt)"
 
-#: panels/wwan/cc-wwan-device.c:1125
+#: panels/wwan/cc-wwan-device.c:1156
 msgid "4G (Preferred), 5G"
 msgstr "3G (bevorzugt), 5G"
 
-#: panels/wwan/cc-wwan-device.c:1127
+#: panels/wwan/cc-wwan-device.c:1158
 msgid "4G, 5G"
 msgstr "4G, 5G"
 
-#: panels/wwan/cc-wwan-device.c:1131
+#: panels/wwan/cc-wwan-device.c:1162
 msgctxt "Network mode"
 msgid "Unknown"
 msgstr "Unbekannt"
@@ -9198,65 +9190,78 @@ msgstr "SIM mit PIN-Code sperren"
 msgid "M_odem Details"
 msgstr "M_odem-Details"
 
-#: panels/wwan/cc-wwan-device-page.c:185
+#: panels/wwan/cc-wwan-device-page.blp:128
+msgid "Primary S_IM Slot"
+msgstr "Primärer S_IM-Steckplatz"
+
+#: panels/wwan/cc-wwan-device-page.c:189
 msgid "Unlock SIM card"
 msgstr "SIM-Karte entsperren"
 
-#: panels/wwan/cc-wwan-device-page.c:186 panels/wwan/cc-wwan-device-page.c:234
+#: panels/wwan/cc-wwan-device-page.c:190 panels/wwan/cc-wwan-device-page.c:238
 msgid "Unlock"
 msgstr "Entsperren"
 
-#: panels/wwan/cc-wwan-device-page.c:191
+#: panels/wwan/cc-wwan-device-page.c:195
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "Bitte geben Sie den PIN-Code für die SIM-Karte %d an"
 
-#: panels/wwan/cc-wwan-device-page.c:192
+#: panels/wwan/cc-wwan-device-page.c:196
 msgid "Enter PIN to unlock your SIM card"
 msgstr "PIN-Code eingeben, um die SIM-Karte zu entsperren"
 
-#: panels/wwan/cc-wwan-device-page.c:196
+#: panels/wwan/cc-wwan-device-page.c:200
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "Bitte geben Sie den PUK-Code für die SIM-Karte %d an"
 
-#: panels/wwan/cc-wwan-device-page.c:197
+#: panels/wwan/cc-wwan-device-page.c:201
 msgid "Enter PUK to unlock your SIM card"
 msgstr "PUK-Code eingeben, um die SIM-Karte zu entsperren"
 
-#: panels/wwan/cc-wwan-device-page.c:215
+#: panels/wwan/cc-wwan-device-page.c:219
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
 msgstr[0] "Falsches Passwort eingegeben. Sie haben %1$u Versuch übrig"
 msgstr[1] "Falsches Passwort eingegeben. Sie haben %1$u Versuche übrig"
 
-#: panels/wwan/cc-wwan-device-page.c:218
+#: panels/wwan/cc-wwan-device-page.c:222
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
 msgstr[0] "Sie haben %u Versuch übrig"
 msgstr[1] "Sie haben %u Versuche übrig"
 
-#: panels/wwan/cc-wwan-device-page.c:223
+#: panels/wwan/cc-wwan-device-page.c:227
 msgid "Wrong password entered."
 msgstr "Falsches Passwort eingegeben."
 
-#: panels/wwan/cc-wwan-device-page.c:268
+#: panels/wwan/cc-wwan-device-page.c:272
 msgid "PUK code should be an 8 digit number"
 msgstr "Der PUK-Code sollte eine Zahl mit 8 Ziffern sein"
 
-#: panels/wwan/cc-wwan-device-page.c:292
+#: panels/wwan/cc-wwan-device-page.c:296
 msgid "Enter New PIN"
 msgstr "Neuen PIN-Code eingeben"
 
-#: panels/wwan/cc-wwan-device-page.c:296
+#: panels/wwan/cc-wwan-device-page.c:300
 msgid "PIN code should be a 4-8 digit number"
 msgstr "Der PIN-Code sollte eine Zahl mit 4-8 Ziffern sein"
 
-#: panels/wwan/cc-wwan-device-page.c:314
+#: panels/wwan/cc-wwan-device-page.c:318
 msgid "Unlocking…"
 msgstr "Wird entsperrt …"
+
+#. Translators: This refers to a sim slot in a modem.
+#. * For example: "Slot 1 [Operator Name]", "Slot 1" or "Slot 2 [Empty]".
+#. * Notice that all variations above are valid. Sometimes "Operator Name"
+#. * will be ommitted.
+#: panels/wwan/cc-wwan-device-page.c:527
+#, c-format
+msgid "Slot %d %s"
+msgstr "Einschub %d %s"
 
 #: panels/wwan/cc-wwan-errors-private.h:40
 msgid "Phone failure"
@@ -9379,15 +9384,19 @@ msgstr "Stellen Sie sicher, dass Sie ein Weitverkehrsfunk/Mobilfunk-Gerät besit
 msgid "Wireless Wan is disabled when airplane mode is on"
 msgstr "Weitverkehrs-Funkverbindungen sind im Flugzeugmodus deaktiviert"
 
-#: panels/wwan/cc-wwan-panel.blp:90
+#: panels/wwan/cc-wwan-panel.blp:74
+msgid "Loading Devices"
+msgstr "Geräte werden geladen"
+
+#: panels/wwan/cc-wwan-panel.blp:99
 msgid "Data Connection"
 msgstr "Datenverbindung"
 
-#: panels/wwan/cc-wwan-panel.blp:91
+#: panels/wwan/cc-wwan-panel.blp:100
 msgid "SIM card used for internet"
 msgstr "Für Internet genutzte SIM-Karte"
 
-#: panels/wwan/cc-wwan-panel.c:366 panels/wwan/cc-wwan-panel.c:397
+#: panels/wwan/cc-wwan-panel.c:366 panels/wwan/cc-wwan-panel.c:399
 #, c-format
 msgid "SIM %d"
 msgstr "SIM %d"
@@ -10839,9 +10848,6 @@ msgstr "Systemklänge"
 
 #~ msgid "Don't leave traces"
 #~ msgstr "Keine Spuren hinterlassen"
-
-#~ msgid "Primary Menu"
-#~ msgstr "Primäres Menü"
 
 #~ msgid "%s has the following permissions built-in. These cannot be altered. If you are concerned about these permissions, consider removing this application."
 #~ msgstr "%s hat die folgenden Berechtigungen eingebaut, die nicht geändert werden können. Falls Sie diesbezüglich Bedenken haben, sollten Sie in Erwägung ziehen, diese Anwendung zu löschen."
