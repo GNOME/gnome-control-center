@@ -1,3 +1,40 @@
+=============
+Version 50.rc
+=============
+
+- Various translation updates
+- Allow space-separated domains in G_MESSAGES_DEBUG
+- Update gnome-control-center man page
+
+About
+- Make gmobile dependency (optional)
+- Fallback to getting hardware model via device tree on phones
+
+Display
+- Gracefully handle missing UPower
+
+Keyboard
+- Add missing polkit dependency for keyboard panel
+
+Power
+- Hide EU warning when suspend is unsupported
+- Cache results of CanSuspend/CanHibernate
+- Show suspend settings when inhibited by systemd inhibitors
+- Gracefully handle missing UPower
+
+Remote Desktop
+- Correctly handle missing secret collection (e.g. fresh auto-login)
+- Rename "Verify Encryption" to "Verify Fingerprint"
+
+Sound
+- Update libgnome-volume-control revision (fix device switching)
+
+Wacom
+- Pass keybinding keys through to the action dialog
+
+WWAN
+- Add Primary Sim Slot setting
+
 ================
 Version 50.beta
 ================
