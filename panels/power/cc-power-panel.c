@@ -94,6 +94,7 @@ struct _CcPowerPanel
   gboolean       has_batteries;
   char          *chassis_type;
 
+  ActionAvailability can_shutdown;
   ActionAvailability can_suspend;
   ActionAvailability can_hibernate;
 
@@ -563,18 +564,17 @@ set_sleep_type (const GValue       *value,
 }
 
 static void
-populate_power_button_row (CcNumberRow *row,
-                           gboolean     can_suspend,
-                           gboolean     can_hibernate)
+populate_power_button_row (CcPowerPanel *self)
 {
   static const struct {
     char *name;
     GsdPowerButtonActionType value;
+    size_t availability;
   } actions[] = {
-    { N_("Suspend"), GSD_POWER_BUTTON_ACTION_SUSPEND },
-    { N_("Power Off"), GSD_POWER_BUTTON_ACTION_INTERACTIVE },
-    { N_("Hibernate"), GSD_POWER_BUTTON_ACTION_HIBERNATE },
-    { N_("Nothing"), GSD_POWER_BUTTON_ACTION_NOTHING }
+    { N_("Suspend"), GSD_POWER_BUTTON_ACTION_SUSPEND, offsetof (CcPowerPanel, can_suspend) },
+    { N_("Power Off"), GSD_POWER_BUTTON_ACTION_INTERACTIVE, offsetof (CcPowerPanel, can_shutdown) },
+    { N_("Hibernate"), GSD_POWER_BUTTON_ACTION_HIBERNATE, offsetof (CcPowerPanel, can_hibernate) },
+    { N_("Nothing"), GSD_POWER_BUTTON_ACTION_NOTHING, 0 }
   };
   guint i;
 
@@ -583,13 +583,17 @@ populate_power_button_row (CcNumberRow *row,
       const char *name = actions[i].name;
       const int value = actions[i].value;
 
-      if (!can_suspend && value == GSD_POWER_BUTTON_ACTION_SUSPEND)
-        continue;
+      if (value != GSD_POWER_BUTTON_ACTION_NOTHING)
+        {
+          const size_t offset = actions[i].availability;
+          ActionAvailability availability = G_STRUCT_MEMBER (ActionAvailability,
+                                                             self, offset);
+          if (availability < ACTION_INTERACTIVE)
+            continue;
+        }
 
-      if (!can_hibernate && value == GSD_POWER_BUTTON_ACTION_HIBERNATE)
-        continue;
-
-      cc_number_row_add_value_full (row, value, _(name), CC_NUMBER_ORDER_DEFAULT);
+      cc_number_row_add_value_full (self->power_button_row, value, _(name),
+                                    CC_NUMBER_ORDER_DEFAULT);
     }
 }
 
@@ -659,7 +663,7 @@ can_power_action (CcPowerPanel    *self,
 }
 
 static void
-setup_can_suspend_and_hibernate (CcPowerPanel *self)
+setup_can_power_actions (CcPowerPanel *self)
 {
   g_autoptr(GDBusConnection) connection = NULL;
   g_autoptr(GError) error = NULL;
@@ -674,6 +678,7 @@ setup_can_suspend_and_hibernate (CcPowerPanel *self)
       return;
     }
 
+  self->can_shutdown = can_power_action (self, connection, "CanPowerOff");
   self->can_suspend = can_power_action (self, connection, "CanSuspend");
   self->can_hibernate = can_power_action (self, connection, "CanHibernate");
 }
@@ -1275,9 +1280,7 @@ setup_general_section (CcPowerPanel *self)
     {
       gtk_widget_set_visible (GTK_WIDGET (self->power_button_row), TRUE);
 
-      populate_power_button_row (self->power_button_row,
-                                 self->can_suspend > ACTION_UNAVAILABLE,
-                                 self->can_hibernate > ACTION_UNAVAILABLE);
+      populate_power_button_row (self);
 
       cc_number_row_bind_settings (self->power_button_row, self->gsd_settings, "power-button-action");
 
@@ -1424,7 +1427,7 @@ cc_power_panel_init (CcPowerPanel *self)
   self->devices = self->up_client ? up_client_get_devices2 (self->up_client) : g_ptr_array_new ();
   self->has_batteries = devices_have_batteries (self->devices);
 
-  setup_can_suspend_and_hibernate (self);
+  setup_can_power_actions (self);
 
   self->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
   self->session_settings = g_settings_new ("org.gnome.desktop.session");
