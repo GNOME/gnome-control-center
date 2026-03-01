@@ -42,7 +42,6 @@
 
 #include <gdk/gdk.h>
 
-#include <gdk/wayland/gdkwayland.h>
 #include <locale.h>
 
 #include "cc-system-details-window.h"
@@ -68,7 +67,6 @@ struct _CcSystemDetailsWindow
   CcInfoEntry       *os_build_row;
   CcInfoEntry       *os_type_row;
   CcInfoEntry       *gnome_version_row;
-  CcInfoEntry       *windowing_system_row;
   CcInfoEntry       *virtualization_row;
   CcInfoEntry       *kernel_row;
 };
@@ -635,19 +633,6 @@ system_details_window_setup_virt (CcSystemDetailsWindow *self)
   set_virtualization_label (self, g_variant_get_string (inner, NULL));
 }
 
-static const char *
-get_windowing_system (void)
-{
-  GdkDisplay *display;
-
-  display = gdk_display_get_default ();
-
-  if (GDK_IS_WAYLAND_DISPLAY (display))
-    return _("Wayland");
-
-  return C_("Windowing system (Wayland, or Unknown)", "Unknown");
-}
-
 guint64
 get_ram_size_libgtop (void)
 {
@@ -715,7 +700,6 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
   g_autofree char *os_build_text = NULL;
   g_autofree char *hardware_model_text = NULL;
   g_autofree char *firmware_version_text = NULL;
-  g_autofree char *windowing_system_text = NULL;
   g_autofree char *kernel_version_text = NULL;
   g_autoslist(GpuData) graphics_hardware_list = NULL;
   GSList *l;
@@ -813,10 +797,6 @@ on_copy_button_clicked_cb (GtkWidget              *widget,
   g_string_append_printf (result_str, "%s\n", MAJOR_VERSION);
 
   g_string_append (result_str, "- ");
-  system_details_window_title_print_padding (_("**Windowing System:**"), result_str, 0);
-  g_string_append_printf (result_str, "%s\n", get_windowing_system ());
-
-  g_string_append (result_str, "- ");
   system_details_window_title_print_padding ("**Kernel Version:**", result_str, 0);
   kernel_version_text = get_kernel_version_string ();
   g_string_append_printf (result_str, "%s\n", kernel_version_text);
@@ -884,8 +864,6 @@ system_details_window_setup_overview (CcSystemDetailsWindow *self)
 
   cc_info_entry_set_value (self->gnome_version_row, MAJOR_VERSION);
 
-  cc_info_entry_set_value (self->windowing_system_row, get_windowing_system ());
-
   kernel_version_text = get_kernel_version_string ();
   cc_info_entry_set_value (self->kernel_row, kernel_version_text);
   gtk_widget_set_visible (GTK_WIDGET (self->kernel_row), kernel_version_text != NULL);
@@ -922,7 +900,6 @@ cc_system_details_window_class_init (CcSystemDetailsWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, os_type_row);
   gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, processor_row);
   gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, virtualization_row);
-  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, windowing_system_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_copy_button_clicked_cb);
 
