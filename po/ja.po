@@ -35,7 +35,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
 "POT-Creation-Date: 2026-02-27 12:58+0000\n"
-"PO-Revision-Date: 2026-02-28 23:08+0900\n"
+"PO-Revision-Date: 2026-03-03 18:49+0900\n"
 "Last-Translator: 小山田 純 <oyamadajun@outlook.jp>\n"
 "Language-Team: Japanese <https://l10n.gnome.org/teams/ja/>\n"
 "Language: ja\n"
@@ -424,22 +424,23 @@ msgid "%u permission"
 msgid_plural "%u permissions"
 msgstr[0] "%u 個の権限"
 
+# アプリの設定の開くファイルの設定で、
+# ファイルフォーマットを削除したときの
+# トースターメッセージ
 #: panels/applications/cc-applications-panel.c:1081
-#, fuzzy
-#| msgid "%s removed"
 msgid "Type removed"
-msgstr "%s を削除しました"
+msgstr "フォーマットを削除しました"
 
 #: panels/applications/cc-applications-panel.c:1082 panels/background/cc-background-chooser.c:170 panels/network/net-device-wifi.c:896 panels/printers/cc-printers-panel.c:673
 msgid "_Undo"
 msgstr "元に戻す(_U)"
 
+# アプリの設定の開くファイルの設定で、ファイルフォーマットを削除したときのトースターメッセージ
 #: panels/applications/cc-applications-panel.c:1097
-#, fuzzy, c-format
-#| msgid "%s removed"
+#, c-format
 msgid "%d type removed"
 msgid_plural "%d types removed"
-msgstr[0] "%s を削除しました"
+msgstr[0] "%d つのフォーマットを削除しました"
 
 #: panels/applications/cc-applications-panel.c:1126
 msgid "Remove Link Type"
@@ -6536,12 +6537,10 @@ msgstr "システム情報を表示します"
 #. "Preferred Applications" is the old name for the preference, so make
 #. sure that you use the same "translation" for those keywords
 #: panels/system/about/gnome-about-panel.desktop.in:18
-#, fuzzy
-#| msgid "device;system;information;hostname;memory;processor;version;default;application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgid "device;system;information;hostname;memory;processor;version;default;application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;winver;"
 msgstr ""
-"device;system;information;hostname;memory;processor;version;default;application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;デバイス;システム;情報;ホスト名;メモリ;プロセッサ;バージョン;デフォルト;アプリケーション;設定;オーディオ;音声;音楽;ミュージック;ビデオ;動画;ディスク;リムーバブルメディア;媒体;自"
-"動起動;オートラン;Details;詳細;ホスト名;"
+"device;system;information;hostname;memory;processor;version;default;application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;winver;デバイス;システム;情報;ホスト名;メモリ;プロセッサ;バージョン;デフォルト;アプリケーション;設定;オーディオ;音声;音楽;ミュージック;ビデオ;動画;ディスク;リムーバブルメディア;"
+"媒体;自動起動;オートラン;Details;詳細;ホスト名;バージョン;"
 
 #: panels/system/cc-system-panel.blp:16
 msgid "_Region &amp; Language"
@@ -6842,11 +6841,9 @@ msgstr "用紙サイズ"
 
 #. Translators: "US Customary" refers to the measurement system as used in the USA
 #: panels/system/region/cc-format-preview.c:149
-#, fuzzy
-#| msgid "Custom"
 msgctxt "measurement format"
 msgid "US Customary"
-msgstr "その他"
+msgstr "米国慣用単位"
 
 #: panels/system/region/cc-format-preview.c:151
 msgctxt "measurement format"
@@ -6954,11 +6951,10 @@ msgstr "パスワード(_A)"
 msgid "_Generate New Password"
 msgstr "新しいパスワードを生成(_G)"
 
+# システム>リモートデスクトップ　の中のボタン。フィンガープリントは暗号化におけるフィンガープリント。手の指紋ではない。
 #: panels/system/remote-desktop/cc-desktop-sharing-page.blp:140 panels/system/remote-desktop/cc-remote-login-page.blp:131
-#, fuzzy
-#| msgid "Fingerprint"
 msgid "_Verify Fingerprint"
-msgstr "指紋認証"
+msgstr "フィンガープリントを検証(_V)"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.c:357 panels/system/remote-desktop/cc-remote-login-page.c:96
 msgid "Device address copied to clipboard"
@@ -7729,10 +7725,9 @@ msgstr "原因不明のエラー"
 
 #. Translators: '%s' is an invalid character, such as @, #, etc...
 #: panels/system/users/user-utils.c:148
-#, fuzzy, c-format
-#| msgid "Usernames cannot include “%c”"
+#, c-format
 msgid "Usernames cannot include “%s”"
-msgstr "ユーザー名に “%c” は使えません"
+msgstr "ユーザー名に “%s” は使えません"
 
 #: panels/system/users/user-utils.c:152
 msgid "Username is already in use — please choose another"
@@ -7933,11 +7928,10 @@ msgstr "スクリーンリーダー(_R)"
 msgid "The screen reader reads displayed text as you move the focus"
 msgstr "フォーカスの移動に合わせて表示されているテキストを読み上げます"
 
+# スクリーンリーダー(orca)の設定を別ウィンドウで開くボタン
 #: panels/universal-access/cc-ua-seeing-page.blp:32
-#, fuzzy
-#| msgid "C_onfiguration"
 msgid "Co_nfigure"
-msgstr "設定(_O)"
+msgstr "スクリーンリーダーを設定する(_N)"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:43
 msgid "_High Contrast"
@@ -8320,12 +8314,10 @@ msgstr "見る、聞く、タイピング、クリック操作など、コンピ
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:14
-#, fuzzy
-#| msgid "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;"
 msgid "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;overamplification;magnify;magnifier;magnification;"
 msgstr ""
-"Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;キーボード;マウス;アクセシビリティ;ユニバーサル;アクセ"
-"ス;コントラスト;カーソル;サウンド;拡大鏡;画面;リーダー;大きい;高い;大きな;テキスト;フォント;サイズ;固定キー;スロー;バウンス;マウス;ダブルクリック;間隔;速さ;支援;繰り返し;点滅;ポインター;見つける;見る;聴く;オーディオ;タイピング;アニメーション;"
+"Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;overamplification;magnify;magnifier;magnification;キー"
+"ボード;マウス;アクセシビリティ;ユニバーサル;アクセス;コントラスト;カーソル;サウンド;拡大鏡;画面;リーダー;大きい;高い;大きな;テキスト;フォント;サイズ;固定キー;スロー;バウンス;マウス;ダブルクリック;間隔;速さ;支援;繰り返し;点滅;ポインター;見つける;見る;聴く;オーディオ;タイピング;アニメーション;拡大;倍率;"
 
 #: panels/wacom/button-mapping.blp:6
 msgid "Map Buttons"
@@ -8444,10 +8436,9 @@ msgstr "すべてのディスプレイ"
 
 #. Translators: %s is a link to the Mouse & Touchpad panel with the label "Mouse"
 #: panels/wacom/cc-wacom-page.c:714
-#, fuzzy, c-format
-#| msgid "System volume can be adjusted in %s settings"
+#, c-format
 msgid "Mouse devices can be configured in %s settings"
-msgstr "%s 設定でシステム音量は調整することができます"
+msgstr "%s 設定でマウスの設定を変更できます"
 
 #: panels/wacom/cc-wacom-panel.blp:49
 msgid "No tablet detected"
@@ -8754,10 +8745,8 @@ msgid "Placeholder for a bar chart of screen time usage. No data is currently av
 msgstr "スクリーンタイム使用量の棒グラフのプレースホルダー。現在、データは利用できません。"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:17
-#, fuzzy
-#| msgid "Open the Parental Controls app"
 msgid "Some settings are being managed by the Parental Controls app"
-msgstr "『ペアレンタルコントロール』アプリを開く"
+msgstr "「ペアレンタルコントロール」アプリで設定を変更できます"
 
 #: panels/wellbeing/cc-wellbeing-panel.blp:18
 msgid "Open _Parental Controls"
@@ -9250,7 +9239,7 @@ msgstr "ロック解除…"
 #: panels/wwan/cc-wwan-device-page.c:527
 #, c-format
 msgid "Slot %d %s"
-msgstr ""
+msgstr "スロット%d %s"
 
 #: panels/wwan/cc-wwan-errors-private.h:40
 msgid "Phone failure"
