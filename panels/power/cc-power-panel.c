@@ -665,8 +665,11 @@ can_power_action (CcPowerPanel    *self,
 static void
 setup_can_power_actions (CcPowerPanel *self)
 {
+  g_autoptr(GSettings) lockdown_settings = NULL;
   g_autoptr(GDBusConnection) connection = NULL;
   g_autoptr(GError) error = NULL;
+
+  lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
 
   connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM,
                                cc_panel_get_cancellable (CC_PANEL (self)),
@@ -678,7 +681,11 @@ setup_can_power_actions (CcPowerPanel *self)
       return;
     }
 
-  self->can_shutdown = can_power_action (self, connection, "CanPowerOff");
+  if (g_settings_get_boolean (lockdown_settings, "disable-log-out"))
+    self->can_shutdown = ACTION_UNAVAILABLE;
+  else
+    self->can_shutdown = can_power_action (self, connection, "CanPowerOff");
+
   self->can_suspend = can_power_action (self, connection, "CanSuspend");
   self->can_hibernate = can_power_action (self, connection, "CanHibernate");
 }
