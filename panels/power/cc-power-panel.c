@@ -563,9 +563,15 @@ set_sleep_type (const GValue       *value,
   return g_variant_new_string (sleep_str);
 }
 
-static void
+static gboolean
 populate_power_button_row (CcPowerPanel *self)
 {
+  static const char *hidden_on_chassis[] = {
+    "vm", /* Hard-coded to shutdown via logind (not interactive, as below!) */
+    "tablet", /* Should be left to the default action of suspending */
+    "handset", /* This means phone. Similar to tablet */
+    NULL
+  };
   static const struct {
     char *name;
     GsdPowerButtonActionType value;
@@ -576,7 +582,11 @@ populate_power_button_row (CcPowerPanel *self)
     { N_("Hibernate"), GSD_POWER_BUTTON_ACTION_HIBERNATE, offsetof (CcPowerPanel, can_hibernate) },
     { N_("Nothing"), GSD_POWER_BUTTON_ACTION_NOTHING, 0 }
   };
+  guint n_options = 0;
   guint i;
+
+  if (g_strv_contains (hidden_on_chassis, self->chassis_type))
+    return FALSE;
 
   for (i = 0; i < G_N_ELEMENTS (actions); i++)
     {
@@ -594,7 +604,10 @@ populate_power_button_row (CcPowerPanel *self)
 
       cc_number_row_add_value_full (self->power_button_row, value, _(name),
                                     CC_NUMBER_ORDER_DEFAULT);
+      n_options++;
     }
+
+  return n_options > 1;
 }
 
 static ActionAvailability
@@ -1279,18 +1292,11 @@ setup_general_section (CcPowerPanel *self)
 {
   gboolean show_section = FALSE;
 
-  if ((self->can_hibernate > ACTION_UNAVAILABLE ||
-       self->can_suspend > ACTION_UNAVAILABLE) &&
-      g_strcmp0 (self->chassis_type, "vm") != 0 &&
-      g_strcmp0 (self->chassis_type, "tablet") != 0 &&
-      g_strcmp0 (self->chassis_type, "handset") != 0)
+  if (populate_power_button_row (self))
     {
       gtk_widget_set_visible (GTK_WIDGET (self->power_button_row), TRUE);
-
-      populate_power_button_row (self);
-
-      cc_number_row_bind_settings (self->power_button_row, self->gsd_settings, "power-button-action");
-
+      cc_number_row_bind_settings (self->power_button_row, self->gsd_settings,
+                                   "power-button-action");
       show_section = TRUE;
     }
 
