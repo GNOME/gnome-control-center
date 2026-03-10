@@ -181,8 +181,8 @@ on_row_action_combo_box_changed (CcWacomButtonRow *row)
     change_button_action_type (row, type);
 }
 
-static gboolean
-on_key_shortcut_button_press_event (CcWacomButtonRow *row)
+static void
+on_key_shortcut_button_pressed (GtkGestureClick *gesture, int n_press, double x, double y, CcWacomButtonRow *row)
 {
     GtkListBox *list_box;
 
@@ -190,8 +190,6 @@ on_key_shortcut_button_press_event (CcWacomButtonRow *row)
     list_box = GTK_LIST_BOX (gtk_widget_get_parent (GTK_WIDGET (row)));
     if (list_box && gtk_list_box_get_selected_row (list_box) != GTK_LIST_BOX_ROW (row))
         gtk_list_box_select_row (list_box, GTK_LIST_BOX_ROW (row));
-
-    return FALSE;
 }
 
 static void
@@ -209,6 +207,7 @@ cc_wacom_button_row_new (guint button, GSettings *settings)
 {
     CcWacomButtonRow *row;
     GtkWidget *grid, *combo, *label, *shortcut_button;
+    GtkGesture *gesture;
     g_autofree gchar *name = NULL;
 
     row = g_object_new (CC_WACOM_TYPE_BUTTON_ROW, NULL);
@@ -238,8 +237,10 @@ cc_wacom_button_row_new (guint button, GSettings *settings)
                              G_CONNECT_SWAPPED);
     g_signal_connect_object (shortcut_button, "key-shortcut-edited", G_CALLBACK (on_key_shortcut_edited), row,
                              G_CONNECT_SWAPPED);
-    g_signal_connect_object (shortcut_button, "button-press-event", G_CALLBACK (on_key_shortcut_button_press_event),
-                             row, G_CONNECT_SWAPPED);
+
+    gesture = gtk_gesture_click_new ();
+    g_signal_connect (gesture, "pressed", G_CALLBACK (on_key_shortcut_button_pressed), row);
+    gtk_widget_add_controller (shortcut_button, GTK_EVENT_CONTROLLER (gesture));
 
     gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), grid);
 

@@ -327,11 +327,12 @@ setup_button_mapping (CcWacomPage *page)
     }
 }
 
-static void
+static gboolean
 button_mapping_dialog_closed (CcWacomPage *page)
 {
-    gtk_window_destroy (GTK_WINDOW (MWID ("button-mapping-dialog")));
     g_clear_object (&page->mapping_builder);
+
+    return FALSE;
 }
 
 static void
@@ -357,7 +358,8 @@ show_button_mapping_dialog (CcWacomPage *page)
     toplevel = GTK_WIDGET (gtk_widget_get_native (GTK_WIDGET (page)));
     gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
     gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-    g_signal_connect_object (dialog, "response", G_CALLBACK (button_mapping_dialog_closed), page, G_CONNECT_SWAPPED);
+    g_signal_connect_object (dialog, "close-request", G_CALLBACK (button_mapping_dialog_closed), page,
+                             G_CONNECT_SWAPPED);
 
     gtk_window_present (GTK_WINDOW (dialog));
 

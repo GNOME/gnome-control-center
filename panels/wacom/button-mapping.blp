@@ -1,6 +1,6 @@
 using Gtk 4.0;
 
-Dialog button-mapping-dialog {
+Window button-mapping-dialog {
   width-request: 600;
   height-request: 450;
   title: _("Map Buttons");
@@ -17,7 +17,6 @@ Dialog button-mapping-dialog {
       orientation: vertical;
       spacing: 6;
       hexpand: true;
-      vexpand: true;
 
       Label label1 {
         xalign: 0;
@@ -31,6 +30,7 @@ Dialog button-mapping-dialog {
 
       ScrolledWindow actions_swindow {
         hscrollbar-policy: never;
+        vexpand: true;
 
         ListBox shortcuts_list {}
       }
@@ -52,12 +52,18 @@ Dialog button-mapping-dialog {
       }
     }
 
-    $GtkButtonBox dialog-action_area1 {
-      layout-style: end;
+    Box dialog-action_area1 {
+      halign: end;
+      spacing: 6;
+      margin-top: 12;
+      margin-bottom: 12;
+      margin-start: 12;
+      margin-end: 12;
 
       Button close_button {
         label: _("_Close");
         use-underline: true;
+        clicked => $gtk_window_close(button-mapping-dialog);
       }
     }
   }
