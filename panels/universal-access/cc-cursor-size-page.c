@@ -17,6 +17,7 @@
  */
 
 #include "cc-cursor-size-page.h"
+#include <glib/gi18n.h>
 
 #define INTERFACE_SETTINGS           "org.gnome.desktop.interface"
 #define KEY_MOUSE_CURSOR_SIZE        "cursor-size"
@@ -71,7 +72,18 @@ cc_cursor_size_page_class_init (CcCursorSizePageClass *klass)
 static void
 cc_cursor_size_page_init (CcCursorSizePage *self)
 {
-  guint cursor_sizes[] = { 24, 32, 48, 64, 96 };
+  struct
+  {
+    guint size;
+    const gchar *label;
+  } cursor_data[] = {
+    { 24, N_("Default") },
+    { 32, N_("Medium") },
+    { 48, N_("Large") },
+    { 64, N_("Extra Large") },
+    { 96, N_("Largest") }
+  };
+
   guint current_cursor_size, i;
   GtkWidget *last_radio_button = NULL;
 
@@ -82,27 +94,32 @@ cc_cursor_size_page_init (CcCursorSizePage *self)
   current_cursor_size = g_settings_get_int (self->interface_settings,
                                             KEY_MOUSE_CURSOR_SIZE);
 
-  for (i = 0; i < G_N_ELEMENTS(cursor_sizes); i++)
+  for (i = 0; i < G_N_ELEMENTS (cursor_data); i++)
     {
       GtkWidget *image, *button;
       g_autofree gchar *cursor_image_name = NULL;
 
-      cursor_image_name = g_strdup_printf ("/org/gnome/control-center/universal-access/left_ptr_%dpx.png", cursor_sizes[i]);
+      cursor_image_name = g_strdup_printf ("/org/gnome/control-center/universal-access/left_ptr_%dpx.png", cursor_data[i].size);
       image = gtk_picture_new_for_resource (cursor_image_name);
       gtk_picture_set_content_fit (GTK_PICTURE (image), GTK_CONTENT_FIT_SCALE_DOWN);
 
       button = gtk_toggle_button_new ();
       gtk_toggle_button_set_group (GTK_TOGGLE_BUTTON (button), GTK_TOGGLE_BUTTON (last_radio_button));
       last_radio_button = button;
-      g_object_set_data (G_OBJECT (button), "cursor-size", GUINT_TO_POINTER (cursor_sizes[i]));
+      g_object_set_data (G_OBJECT (button), "cursor-size", GUINT_TO_POINTER (cursor_data[i].size));
 
       gtk_button_set_child (GTK_BUTTON (button), image);
       gtk_flow_box_append (self->cursor_box, button);
 
+      gtk_accessible_update_property (GTK_ACCESSIBLE (button),
+                                      GTK_ACCESSIBLE_PROPERTY_LABEL,
+                                      _(cursor_data[i].label),
+                                      -1);
+
       g_signal_connect_object (button, "toggled",
                                G_CALLBACK (cursor_size_toggled), self, G_CONNECT_SWAPPED);
 
-      if (current_cursor_size == cursor_sizes[i])
+      if (current_cursor_size == cursor_data[i].size)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
     }
 }
