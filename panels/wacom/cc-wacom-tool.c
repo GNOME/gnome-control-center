@@ -354,23 +354,30 @@ cc_wacom_tool_get_has_paired_eraser (CcWacomTool *tool)
 	return libwacom_stylus_has_eraser (tool->wstylus);
 }
 
-const gchar *
+gchar *
 cc_wacom_tool_get_description (CcWacomTool *tool)
 {
 	WacomAxisTypeFlags axes;
+	const char *description = NULL;
+	g_autofree char *serial = NULL;
 
 	axes = libwacom_stylus_get_axes (tool->wstylus);
 
 	if ((~axes & (WACOM_AXIS_TYPE_TILT | WACOM_AXIS_TYPE_PRESSURE | WACOM_AXIS_TYPE_SLIDER)) == 0)
-		return _("Airbrush stylus with pressure, tilt, and integrated slider");
+		description = _("Airbrush stylus with pressure, tilt, and integrated slider");
 	else if ((~axes & (WACOM_AXIS_TYPE_TILT | WACOM_AXIS_TYPE_PRESSURE | WACOM_AXIS_TYPE_ROTATION_Z)) == 0)
-		return _("Art pen with pressure, tilt, and rotation");
+		description = _("Art pen with pressure, tilt, and rotation");
 	else if ((~axes & (WACOM_AXIS_TYPE_TILT | WACOM_AXIS_TYPE_PRESSURE)) == 0)
-		return _("Stylus with pressure and tilt");
+		description = _("Stylus with pressure and tilt");
 	else if ((~axes & WACOM_AXIS_TYPE_PRESSURE) == 0)
-		return _("Stylus with pressure");
+		description = _("Stylus with pressure");
+	else
+		return NULL;
 
-	return NULL;
+	if (tool->serial)
+		serial = g_strdup_printf (_(", serial 0x%" PRIX64), tool->serial);
+
+	return g_strdup_printf("%s%s", description, serial ? serial : "");
 }
 
 gboolean

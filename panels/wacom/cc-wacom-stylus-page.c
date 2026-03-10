@@ -328,6 +328,7 @@ cc_wacom_stylus_page_new (CcWacomPanel *panel,
 	CcWacomStylusPage *page;
 	guint num_buttons;
 	gboolean has_paired_eraser;
+	g_autofree char *tool_description;
 
 	g_return_val_if_fail (CC_IS_WACOM_TOOL (stylus), NULL);
 
@@ -339,8 +340,9 @@ cc_wacom_stylus_page_new (CcWacomPanel *panel,
 	/* Stylus name */
 	adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (page->stylus_section),
 					 cc_wacom_tool_get_name (stylus));
+	tool_description = cc_wacom_tool_get_description (stylus);
 	adw_preferences_group_set_description (ADW_PREFERENCES_GROUP (page->stylus_section),
-					       cc_wacom_tool_get_description (stylus));
+					       tool_description);
 
 	/* Icon */
 	set_icon_name (page, cc_wacom_tool_get_icon_name (stylus));
