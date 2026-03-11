@@ -170,11 +170,9 @@ get_reduced_motion_mapping (GValue   *value,
                             GVariant *variant,
                             gpointer  user_data)
 {
-  guint32 val;
+  const char *val = g_variant_get_string (variant, NULL);
 
-  val = g_variant_get_uint32 (variant);
-
-  if (val == 0)
+  if (!g_strcmp0 (val, "no-preference"))
     g_value_set_boolean (value, FALSE);
   else
     g_value_set_boolean (value, TRUE);
@@ -190,7 +188,7 @@ set_reduced_motion_mapping (const GValue       *value,
   GSettings *settings = user_data;
 
   if (g_value_get_boolean (value))
-    return g_variant_new_uint32 (1);
+    return g_variant_new_string ("reduce");
 
   g_settings_reset (settings, KEY_REDUCED_MOTION);
 
