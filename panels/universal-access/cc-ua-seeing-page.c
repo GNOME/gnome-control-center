@@ -50,7 +50,7 @@ struct _CcUaSeeingPage
 
   AdwSwitchRow       *high_contrast_row;
   AdwSwitchRow       *status_shapes_row;
-  GtkSwitch          *reduced_motion_switch;
+  AdwSwitchRow       *reduced_motion_switch;
   CcListRow          *text_size_row;
   GtkScale           *text_size_scale;
   CcListRow          *cursor_size_row;

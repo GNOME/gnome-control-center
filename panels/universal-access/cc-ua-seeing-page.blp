@@ -51,16 +51,10 @@ template $CcUaSeeingPage: Adw.NavigationPage {
           use-underline: true;
         }
 
-        Adw.ActionRow {
+        Adw.SwitchRow reduced_motion_switch {
           title: _("_Reduced Motion");
           subtitle: _("Toggle reduced motion animations throughout the user interface");
           use-underline: true;
-          activatable-widget: reduced_motion_switch;
-
-          [suffix]
-          Switch reduced_motion_switch {
-            valign: center;
-          }
         }
 
         $CcListRow text_size_row {
