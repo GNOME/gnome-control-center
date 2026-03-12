@@ -250,9 +250,14 @@ template $CcFingerprintDialog: Adw.Dialog {
 Popover add_print_popover {
   position: bottom;
 
-  Box add_print_popover_box {
-    can-focus: false;
-    spacing: 6;
-    orientation: vertical;
+  ScrolledWindow {
+    propagate-natural-width: true;
+    propagate-natural-height: true;
+
+    Box add_print_popover_box {
+      can-focus: false;
+      spacing: 6;
+      orientation: vertical;
+    }
   }
 }
