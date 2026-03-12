@@ -29,7 +29,7 @@ template $CcUaSeeingPage: Adw.NavigationPage {
           }
 
           Adw.ButtonRow configure_screen_reader_row {
-            title: _("Co_nfigure");
+            title: _("Co_nfigure Screen Reader");
             use-underline: true;
             sensitive: bind screen_reader_row.active;
             activated => $configure_screen_reader_activated_cb(template);
