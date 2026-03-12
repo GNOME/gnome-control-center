@@ -50,7 +50,7 @@ struct _CcUaSeeingPage
 
   AdwSwitchRow       *high_contrast_row;
   AdwSwitchRow       *status_shapes_row;
-  AdwSwitchRow       *reduced_motion_switch;
+  AdwSwitchRow       *reduced_motion_row;
   CcListRow          *text_size_row;
   GtkScale           *text_size_scale;
   CcListRow          *cursor_size_row;
@@ -319,7 +319,7 @@ cc_ua_seeing_page_class_init (CcUaSeeingPageClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, high_contrast_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, status_shapes_row);
-  gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, reduced_motion_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, reduced_motion_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, text_size_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, text_size_scale);
   gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, cursor_size_row);
@@ -362,7 +362,7 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
 
   /* Reduced motion */
   g_settings_bind_with_mapping (self->a11y_interface_settings, KEY_REDUCED_MOTION,
-                                self->reduced_motion_switch, "active",
+                                self->reduced_motion_row, "active",
                                 G_SETTINGS_BIND_DEFAULT,
                                 get_reduced_motion_mapping,
                                 set_reduced_motion_mapping,
