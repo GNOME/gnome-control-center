@@ -55,6 +55,7 @@ struct _CcMousePanel
   GtkScale          *touchpad_speed_scale;
   AdwSwitchRow      *touchpad_toggle_row;
   AdwSwitchRow      *touchpad_typing_row;
+  AdwSwitchRow      *touchpad_external_mouse_row;
 
   GtkSwitch         *pointingstick_accel_switch;
   AdwViewStackPage  *pointingstick_stack_page;
@@ -170,7 +171,7 @@ touchpad_enabled_get_mapping (GValue    *value,
 {
   gboolean enabled;
 
-  enabled = g_strcmp0 (g_variant_get_string (variant, NULL), "enabled") == 0;
+  enabled = g_strcmp0 (g_variant_get_string (variant, NULL), "disabled") != 0;
   g_value_set_boolean (value, enabled);
 
   return TRUE;
@@ -186,6 +187,31 @@ touchpad_enabled_set_mapping (const GValue              *value,
   enabled = g_value_get_boolean (value);
 
   return g_variant_new_string (enabled ? "enabled" : "disabled");
+}
+
+static gboolean
+touchpad_disable_on_external_mouse_get_mapping (GValue    *value,
+                                                GVariant  *variant,
+                                                gpointer   user_data)
+{
+  gboolean disabled;
+
+  disabled = g_strcmp0 (g_variant_get_string (variant, NULL), "disabled-on-external-mouse") == 0;
+  g_value_set_boolean (value, disabled);
+
+  return TRUE;
+}
+
+static GVariant *
+touchpad_disable_on_external_mouse_set_mapping (const GValue              *value,
+                                                const GVariantType        *type,
+                                                gpointer                   user_data)
+{
+  gboolean disabled;
+
+  disabled = g_value_get_boolean (value);
+
+  return g_variant_new_string (disabled ? "disabled-on-external-mouse" : "enabled");
 }
 
 static gboolean
@@ -355,6 +381,13 @@ setup_dialog (CcMousePanel *self)
                    self->touchpad_typing_row, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
+  g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
+                                self->touchpad_external_mouse_row, "active",
+                                G_SETTINGS_BIND_DEFAULT,
+                                touchpad_disable_on_external_mouse_get_mapping,
+                                touchpad_disable_on_external_mouse_set_mapping,
+                                NULL, NULL);
+
   /* Pointing stick section */
   g_settings_bind (self->pointingstick_settings, "speed",
                    gtk_range_get_adjustment (GTK_RANGE (self->pointingstick_speed_scale)), "value",
@@ -486,6 +519,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_speed_scale);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_toggle_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_typing_row);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_external_mouse_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, two_finger_push_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_primary_button_changed_cb);
