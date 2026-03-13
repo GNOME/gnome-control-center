@@ -82,7 +82,7 @@ static const CcXkbModifier COMPOSE_MODIFIER = {
   N_("Compose Key"),
   N_("The compose key allows a wide variety of characters to be entered. To use it, press compose then a sequence of characters. "
      " For example, compose key followed by <b>o</b> and <b>c</b> will enter <b>©</b>, "
-     "<b>a</b> followed by <b>'</b> will enter <b>á</b>."),
+     "<b>'</b> followed by <b>a</b> will enter <b>á</b>."),
   N_("Compose Key"),
   N_("Disabled"),
   FALSE,
