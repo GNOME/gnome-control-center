@@ -79,48 +79,16 @@ template $CcUserPage: Adw.NavigationPage {
             apply => $fullname_entry_apply_cb(template);
           }
 
-          $CcListRow password_row {
-            sensitive: bind template.editable;
-            has-tooltip: bind template.editable no-sync-create inverted;
-            tooltip-text: _("Unlock to Change This Setting");
-            activatable: true;
-            title: _("Pa_ssword");
-            use-underline: true;
-            show-arrow: true;
-            activated => $change_password(template);
-          }
 
-          $CcListRow fingerprint_row {
-            sensitive: bind template.editable;
-            has-tooltip: bind template.editable no-sync-create inverted;
-            tooltip-text: _("Unlock to Change This Setting");
-            visible: false;
-            title: _("_Fingerprint Login");
-            use-underline: true;
-            activatable: true;
-            show-arrow: true;
-            activated => $change_fingerprint(template);
-          }
 
-          Adw.ActionRow auto_login_row {
-            title: _("A_utomatic Login");
-            use-underline: true;
-            activatable-widget: auto_login_switch;
+          $CcListRow security_login_row {
             sensitive: bind template.locked no-sync-create inverted;
-            has-tooltip: bind template.locked;
+            has-tooltip: bind template.editable no-sync-create inverted;
             tooltip-text: _("Unlock to Change This Setting");
-
-            [suffix]
-            $CcListRowInfoButton {
-              valign: center;
-              text: _("Automatic login opens the user account when the device starts, without requiring authentication. Authentication is still required at other times, such as when unlocking the screen.");
-            }
-
-            [suffix]
-            Switch auto_login_switch {
-              valign: center;
-              notify::active => $autologin_changed(template);
-            }
+            title: _("_Security &amp; Login");
+            show-arrow: true;
+            action-name: "navigation.push";
+            action-target: "'security-login'";
           }
         }
 

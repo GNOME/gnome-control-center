@@ -1,0 +1,57 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcSecurityLoginPage: Adw.NavigationPage {
+  tag: "security-login";
+  title: _("Security & Login");
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        title: _("Authentication Methods");
+
+        $CcListRow fingerprint_row {
+          visible: false;
+          title: _("_Fingerprint Login");
+          use-underline: true;
+          activatable: true;
+          show-arrow: true;
+          activated => $change_fingerprint(template);
+        }
+
+        $CcListRow password_row {
+          activatable: true;
+          title: _("Account _Password");
+          use-underline: true;
+          show-arrow: true;
+          activated => $change_password(template);
+        }
+      }
+
+      Adw.PreferencesGroup {
+        title: _("Login Screen");
+
+        Adw.ActionRow auto_login_row {
+          title: _("A_utomatic Login");
+          use-underline: true;
+          activatable-widget: auto_login_switch;
+
+          [suffix]
+          $CcListRowInfoButton {
+            valign: center;
+            text: _("Automatic login opens the user account when the device starts, without requiring authentication. Authentication is still required at other times, such as when unlocking the screen.");
+          }
+
+          [suffix]
+          Switch auto_login_switch {
+            valign: center;
+            notify::active => $autologin_changed(template);
+          }
+        }
+      }
+    };
+  };
+}

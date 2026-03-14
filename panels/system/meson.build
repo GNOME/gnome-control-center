@@ -69,6 +69,7 @@ sources = files(
   'users/cc-fingerprint-manager.c',
   'users/cc-password-dialog.c',
   'users/cc-realm-manager.c',
+  'users/cc-security-login-page.c',
   'users/cc-user-page.c',
   'users/cc-users-page.c',
   'users/pw-utils.c',

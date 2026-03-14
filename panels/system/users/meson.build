@@ -15,6 +15,7 @@ ui_sources = files(
   'cc-entry-feedback.blp',
   'cc-fingerprint-dialog.blp',
   'cc-password-dialog.blp',
+  'cc-security-login-page.blp',
   'cc-user-page.blp',
   'cc-users-page.blp',
 )

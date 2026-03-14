@@ -34,6 +34,7 @@
 #include "cc-users-page.h"
 #include "cc-list-row.h"
 #include "cc-user-page.h"
+#include "cc-security-login-page.h"
 #include "user-utils.h"
 
 #include <act/act.h>
@@ -60,6 +61,8 @@ struct _CcUsersPage {
     GListStore        *model;
     GPermission       *permission;
     ActUserManager    *user_manager;
+
+    CcSecurityLoginPage *security_login_page;
 };
 
 G_DEFINE_TYPE (CcUsersPage, cc_users_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -93,6 +96,7 @@ on_user_row_activated (CcUsersPage  *self,
 
     user_page = cc_user_page_new ();
     cc_user_page_set_user (user_page, user, self->permission);
+    cc_security_login_page_set_user (self->security_login_page, user);
     adw_navigation_view_push (self->navigation, ADW_NAVIGATION_PAGE (user_page));
 }
 
@@ -219,6 +223,7 @@ users_loaded (CcUsersPage *self)
 
         if (act_user_get_uid (user) == getuid ()) {
             cc_user_page_set_user (self->current_user_page, user, self->permission);
+            cc_security_login_page_set_user (self->security_login_page, user);
 
             continue;
         }
@@ -366,6 +371,7 @@ cc_users_page_class_init (CcUsersPageClass * klass)
 
     g_type_ensure (CC_TYPE_LIST_ROW);
     g_type_ensure (CC_TYPE_USER_PAGE);
+    g_type_ensure (CC_TYPE_SECURITY_LOGIN_PAGE);
 
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-users-page.ui");
 
@@ -374,6 +380,7 @@ cc_users_page_class_init (CcUsersPageClass * klass)
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, current_user_page);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, navigation);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, other_users_group);
+    gtk_widget_class_bind_template_child (widget_class, CcUsersPage, security_login_page);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, user_list);
 
     gtk_widget_class_bind_template_callback (widget_class, add_user);

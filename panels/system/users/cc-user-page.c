@@ -31,12 +31,9 @@
 
 #include "cc-user-page.h"
 #include "cc-avatar-chooser.h"
-#include "cc-fingerprint-dialog.h"
-#include "cc-fingerprint-manager.h"
 #include "cc-language-chooser.h"
 #include "cc-list-row.h"
 #include "cc-list-row-info-button.h"
-#include "cc-password-dialog.h"
 #include "cc-permission-infobar.h"
 #include "user-utils.h"
 
@@ -63,16 +60,12 @@ struct _CcUserPage {
     CcAvatarChooser     *avatar_chooser;
     GtkMenuButton       *avatar_edit_button;
     GtkButton           *avatar_remove_button;
-    AdwActionRow        *auto_login_row;
-    GtkSwitch           *auto_login_switch;
     AdwPreferencesGroup *button_group;
-    CcListRow           *fingerprint_row;
     CcListRow           *language_row;
     AdwEntryRow         *fullname_row;
 #ifdef HAVE_MALCONTENT
     CcListRow           *parental_controls_row;
 #endif
-    CcListRow           *password_row;
     CcPermissionInfobar *permission_infobar;
     AdwPreferencesPage  *preferences_page;
     AdwSwitchRow        *remove_local_files_choice;
@@ -80,9 +73,7 @@ struct _CcUserPage {
     AdwAlertDialog      *remove_local_user_dialog;
 
     ActUser              *user;
-    GSettings            *login_screen_settings;
     GPermission          *permission;
-    CcFingerprintManager *fingerprint_manager;
 
     gboolean              locked;
     gboolean              editable;
@@ -142,18 +133,6 @@ would_demote_only_admin (ActUser *user)
     return TRUE;
 }
 
-static gboolean
-get_autologin_possible (ActUser *user)
-{
-    gboolean locked;
-    gboolean set_password_at_login;
-
-    locked = act_user_get_locked (user);
-    set_password_at_login = (act_user_get_password_mode (user) == ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
-
-    return !(locked || set_password_at_login);
-}
-
 static gchar *
 get_user_language (ActUser *user)
 {
@@ -165,60 +144,6 @@ get_user_language (ActUser *user)
     }
 
     return g_strdup ("—");
-}
-
-static const gchar *
-get_invisible_text (void)
-{
-     GtkWidget *entry;
-     gunichar invisible_char;
-     static gchar invisible_text[40];
-     gchar *p;
-     gint i;
-
-     entry = gtk_entry_new ();
-     invisible_char = gtk_entry_get_invisible_char (GTK_ENTRY (entry));
-     if (invisible_char == 0) {
-        invisible_char = 0x2022;
-     }
-
-     g_object_ref_sink (entry);
-     g_object_unref (entry);
-
-     /* five bullets */
-     p = invisible_text;
-     for (i = 0; i < 5; i++) {
-        p += g_unichar_to_utf8 (invisible_char, p);
-     }
-     *p = 0;
-
-     return invisible_text;
-}
-
-static const gchar *
-get_password_mode_text (ActUser *user)
-{
-    const gchar *text;
-
-    if (act_user_get_locked (user)) {
-        text = C_("Password mode", "Account disabled");
-    } else {
-        switch (act_user_get_password_mode (user)) {
-        case ACT_USER_PASSWORD_MODE_REGULAR:
-            text = get_invisible_text ();
-            break;
-        case ACT_USER_PASSWORD_MODE_SET_AT_LOGIN:
-            text = C_("Password mode", "To be set at next login");
-            break;
-        case ACT_USER_PASSWORD_MODE_NONE:
-            text = C_("Password mode", "None");
-            break;
-        default:
-            g_assert_not_reached ();
-        }
-    }
-
-    return text;
 }
 
 static void
@@ -304,77 +229,6 @@ show_language_chooser (CcUserPage *self)
     }
 
     adw_dialog_present (ADW_DIALOG (language_chooser), GTK_WIDGET (self));
-}
-
-static void
-change_password (CcUserPage *self)
-{
-    CcPasswordDialog *dialog = cc_password_dialog_new (self->user);
-
-    adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
-}
-
-static void
-autologin_changed (CcUserPage *self)
-{
-    ActUserManager *user_manager = act_user_manager_get_default ();
-    gboolean active;
-
-    active = gtk_switch_get_active (self->auto_login_switch);
-    if (active != act_user_get_automatic_login (self->user)) {
-        act_user_set_automatic_login (self->user, active);
-
-        if (act_user_get_automatic_login (self->user)) {
-            g_autoptr(GSList) list = NULL;
-            GSList *l;
-            list = act_user_manager_list_users (user_manager);
-            for (l = list; l != NULL; l = l->next) {
-                ActUser *u = l->data;
-                if (act_user_get_uid (u) != act_user_get_uid (self->user)) {
-                    act_user_set_automatic_login (self->user, FALSE);
-                }
-            }
-        }
-    }
-}
-
-static void
-update_fingerprint_row_state (CcUserPage           *self,
-                              GParamSpec           *spec,
-                              CcFingerprintManager *manager)
-{
-    CcFingerprintState state = cc_fingerprint_manager_get_state (manager);
-    gboolean visible = FALSE;
-
-    visible = (act_user_get_uid (self->user) == getuid () &&
-               act_user_is_local_account (self->user) &&
-               (self->login_screen_settings &&
-                g_settings_get_boolean (self->login_screen_settings,
-                                        "enable-fingerprint-authentication")));
-    gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), visible);
-    if (!visible)
-        return;
-
-    if (state != CC_FINGERPRINT_STATE_UPDATING)
-        gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row),
-                                state != CC_FINGERPRINT_STATE_NONE);
-
-    gtk_widget_set_sensitive (GTK_WIDGET (self->fingerprint_row),
-                              state != CC_FINGERPRINT_STATE_UPDATING);
-
-    if (state == CC_FINGERPRINT_STATE_ENABLED)
-        cc_list_row_set_secondary_label (self->fingerprint_row, _("Enabled"));
-    else if (state == CC_FINGERPRINT_STATE_DISABLED)
-        cc_list_row_set_secondary_label (self->fingerprint_row, _("Disabled"));
-}
-
-static void
-change_fingerprint (CcUserPage *self)
-{
-    CcFingerprintDialog *dialog;
-
-    dialog = cc_fingerprint_dialog_new (self->fingerprint_manager);
-    adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
 
 static void
@@ -531,16 +385,6 @@ is_parental_controls_enabled_for_user (ActUser *user)
 #endif
 
 static void
-cc_user_page_dispose (GObject *object)
-{
-    CcUserPage *self = CC_USER_PAGE (object);
-
-    g_clear_object (&self->login_screen_settings);
-
-    G_OBJECT_CLASS (cc_user_page_parent_class)->dispose (object);
-}
-
-static void
 cc_user_page_get_property (GObject    *object,
                            guint       prop_id,
                            GValue     *value,
@@ -600,7 +444,6 @@ cc_user_page_class_init (CcUserPageClass * klass)
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
     GObjectClass   *object_class = G_OBJECT_CLASS (klass);
 
-    object_class->dispose = cc_user_page_dispose;
     object_class->get_property = cc_user_page_get_property;
     object_class->set_property = cc_user_page_set_property;
 
@@ -650,16 +493,12 @@ cc_user_page_class_init (CcUserPageClass * klass)
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, avatar_remove_button);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, account_type_row);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, account_type_switch);
-    gtk_widget_class_bind_template_child (widget_class, CcUserPage, auto_login_row);
-    gtk_widget_class_bind_template_child (widget_class, CcUserPage, auto_login_switch);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, button_group);
-    gtk_widget_class_bind_template_child (widget_class, CcUserPage, fingerprint_row);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, fullname_row);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, language_row);
 #ifdef HAVE_MALCONTENT
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, parental_controls_row);
 #endif
-    gtk_widget_class_bind_template_child (widget_class, CcUserPage, password_row);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, permission_infobar);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, preferences_page);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, remove_local_files_choice);
@@ -667,10 +506,7 @@ cc_user_page_class_init (CcUserPageClass * klass)
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, remove_user_button);
 
     gtk_widget_class_bind_template_callback (widget_class, account_type_changed);
-    gtk_widget_class_bind_template_callback (widget_class, autologin_changed);
-    gtk_widget_class_bind_template_callback (widget_class, change_fingerprint);
     gtk_widget_class_bind_template_callback (widget_class, show_language_chooser);
-    gtk_widget_class_bind_template_callback (widget_class, change_password);
     gtk_widget_class_bind_template_callback (widget_class, fullname_entry_apply_cb);
     gtk_widget_class_bind_template_callback (widget_class, remove_local_user_response);
     gtk_widget_class_bind_template_callback (widget_class, remove_user);
@@ -704,8 +540,6 @@ cc_user_page_init (CcUserPage *self)
                              self,
                              G_CONNECT_SWAPPED);
 #endif
-
-    self->login_screen_settings = settings_or_null ("org.gnome.login-screen");
 }
 
 CcUserPage *
@@ -739,7 +573,6 @@ cc_user_page_set_user (CcUserPage  *self,
     gtk_widget_set_visible (GTK_WIDGET (self->avatar_remove_button),
                             adw_avatar_get_custom_image (self->avatar) != NULL);
 
-
     gtk_editable_set_text (GTK_EDITABLE (self->fullname_row), act_user_get_real_name (user));
 
     gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), !would_demote_only_admin (user));
@@ -753,24 +586,8 @@ cc_user_page_set_user (CcUserPage  *self,
                                      _("Enabled") : _("Disabled"));
 #endif
 
-    g_signal_handlers_block_by_func (self->auto_login_switch, autologin_changed, self);
-    gtk_widget_set_visible (GTK_WIDGET (self->auto_login_row), get_autologin_possible (user));
-    gtk_switch_set_active (self->auto_login_switch, act_user_get_automatic_login (user));
-    g_signal_handlers_unblock_by_func (self->auto_login_switch, autologin_changed, self);
-
-    cc_list_row_set_secondary_label (self->password_row, get_password_mode_text (user));
     user_language = get_user_language (user);
     cc_list_row_set_secondary_label (self->language_row, user_language);
-
-    if (!self->fingerprint_manager) {
-        self->fingerprint_manager = cc_fingerprint_manager_new (user);
-        g_signal_connect_object (self->fingerprint_manager,
-                                 "notify::state",
-                                 G_CALLBACK (update_fingerprint_row_state),
-                                 self,
-                                 G_CONNECT_SWAPPED);
-        update_fingerprint_row_state (self, NULL, self->fingerprint_manager);
-    }
 
     cc_permission_infobar_set_permission (self->permission_infobar, permission);
     g_object_bind_property (permission, "allowed", self, "locked", G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
