@@ -670,6 +670,7 @@ on_click_gesture_pressed_cb (CcDisplayArrangement *self,
       self->drag_active = TRUE;
       self->drag_anchor_x = event_x - mon_x;
       self->drag_anchor_y = event_y - mon_y;
+      gtk_widget_set_cursor_from_name (GTK_WIDGET (self), "grabbing");
     }
 
   return TRUE;
@@ -693,7 +694,7 @@ on_click_gesture_released_cb (CcDisplayArrangement *self,
 
   output = cc_display_arrangement_find_monitor_at (self, x, y);
   gtk_widget_set_cursor_from_name (GTK_WIDGET (self),
-                                   output != NULL ? "fleur" : NULL);
+                                   output != NULL ? "grab" : NULL);
 
   /* And queue a redraw to recenter everything */
   gtk_widget_queue_draw (GTK_WIDGET (self));
@@ -724,7 +725,7 @@ on_motion_controller_motion_cb (CcDisplayArrangement *self,
       output = cc_display_arrangement_find_monitor_at (self, x, y);
 
       gtk_widget_set_cursor_from_name (GTK_WIDGET (self),
-                                       output != NULL ? "fleur" : NULL);
+                                       output != NULL ? "grab" : NULL);
       if (self->prelit_output != output)
         gtk_widget_queue_draw (GTK_WIDGET (self));
 
