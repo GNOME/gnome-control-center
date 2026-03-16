@@ -40,15 +40,14 @@
 
 typedef enum {
   DIALOG_STATE_NONE                   = 0,
-  DIALOG_STATE_DEVICES_LISTING        = (1 << 0),
-  DIALOG_STATE_DEVICE_CLAIMING        = (1 << 1),
-  DIALOG_STATE_DEVICE_CLAIMED         = (1 << 2),
-  DIALOG_STATE_DEVICE_PRINTS_LISTING  = (1 << 3),
-  DIALOG_STATE_DEVICE_RELEASING       = (1 << 4),
-  DIALOG_STATE_DEVICE_ENROLL_STARTING = (1 << 5),
-  DIALOG_STATE_DEVICE_ENROLLING       = (1 << 6),
-  DIALOG_STATE_DEVICE_ENROLL_STOPPING = (1 << 7),
-  DIALOG_STATE_DEVICE_DELETING        = (1 << 8),
+  DIALOG_STATE_DEVICE_CLAIMING        = (1 << 0),
+  DIALOG_STATE_DEVICE_CLAIMED         = (1 << 1),
+  DIALOG_STATE_DEVICE_PRINTS_LISTING  = (1 << 2),
+  DIALOG_STATE_DEVICE_RELEASING       = (1 << 3),
+  DIALOG_STATE_DEVICE_ENROLL_STARTING = (1 << 4),
+  DIALOG_STATE_DEVICE_ENROLLING       = (1 << 5),
+  DIALOG_STATE_DEVICE_ENROLL_STOPPING = (1 << 6),
+  DIALOG_STATE_DEVICE_DELETING        = (1 << 7),
 
   DIALOG_STATE_IDLE = DIALOG_STATE_DEVICE_CLAIMED | DIALOG_STATE_DEVICE_ENROLLING,
 } DialogState;
@@ -57,7 +56,6 @@ struct _CcFingerprintDialog
 {
   AdwDialog       parent_instance;
 
-  GtkButton      *back_button;
   GtkButton      *cancel_button;
   GtkButton      *delete_prints_button;
   GtkButton      *done_button;
@@ -69,12 +67,10 @@ struct _CcFingerprintDialog
   GtkLabel       *enroll_message;
   GtkLabel       *enroll_result_message;
   GtkLabel       *infobar_error;
-  GtkListBox     *devices_list;
   GtkPopover     *add_print_popover;
   AdwSpinner     *spinner;
   GtkStack       *stack;
   GtkWidget      *add_print_icon;
-  GtkWidget      *device_selector;
   GtkWidget      *enroll_print_bin;
   GtkWidget      *enroll_result_icon;
   GtkWidget      *enrollment_view;
@@ -109,6 +105,7 @@ G_DEFINE_TYPE (CcFingerprintDialog, cc_fingerprint_dialog, ADW_TYPE_DIALOG)
 enum {
   PROP_0,
   PROP_MANAGER,
+  PROP_DEVICE,
   N_PROPS
 };
 
@@ -150,10 +147,12 @@ const char * ENROLL_STATE_CLASSES[N_ENROLL_STATES] = {
 static GParamSpec *properties[N_PROPS];
 
 CcFingerprintDialog *
-cc_fingerprint_dialog_new (CcFingerprintManager *manager)
+cc_fingerprint_dialog_new (CcFingerprintManager *manager,
+                           CcFprintdDevice      *device)
 {
   return g_object_new (CC_TYPE_FINGERPRINT_DIALOG,
                        "fingerprint-manager", manager,
+                       "device", device,
                        NULL);
 }
 
@@ -288,6 +287,10 @@ cc_fingerprint_dialog_get_property (GObject    *object,
       g_value_set_object (value, self->manager);
       break;
 
+    case PROP_DEVICE:
+      g_value_set_object (value, self->device);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -305,6 +308,10 @@ cc_fingerprint_dialog_set_property (GObject      *object,
     {
     case PROP_MANAGER:
       g_set_object (&self->manager, g_value_get_object (value));
+      break;
+
+    case PROP_DEVICE:
+      g_set_object (&self->device, g_value_get_object (value));
       break;
 
     default:
@@ -579,6 +586,12 @@ delete_prints_cb (GObject      *object,
                  cc_fprintd_device_get_name (self->device), error->message);
       notify_error (self, error_message);
     }
+  else
+    {
+      g_object_set_data (G_OBJECT (self->device), "cc-has-enrolled-fingers",
+                         GINT_TO_POINTER (FALSE));
+      cc_fingerprint_manager_notify_device_enrolled_changed (self->manager, self->device);
+    }
 
   update_prints_store (self);
   cc_fingerprint_manager_update_state (self->manager, NULL, NULL);
@@ -626,16 +639,6 @@ get_finger_name (const char *finger_id)
     return _("Right little finger");
 
   g_return_val_if_reached (_("Unknown Finger"));
-}
-
-static gboolean
-have_multiple_devices (CcFingerprintDialog *self)
-{
-  g_autoptr(GList) devices_rows = NULL;
-
-  devices_rows = get_container_children (GTK_WIDGET (self->devices_list));
-
-  return devices_rows && devices_rows->next;
 }
 
 static void
@@ -889,9 +892,6 @@ get_enrollment_string (CcFingerprintDialog *self,
   device_name = NULL;
   scan_type = cc_fprintd_device_get_scan_type (self->device);
   is_swipe = g_str_equal (scan_type, "swipe");
-
-  if (have_multiple_devices (self))
-    device_name = cc_fprintd_device_get_name (self->device);
 
   ret = finger_str_to_msg (finger_id, device_name, is_swipe);
 
@@ -1225,7 +1225,6 @@ on_stack_child_changed (CcFingerprintDialog *self)
   /* Set an empty string for status pages (stack pages with no title). */
   adw_dialog_set_title (ADW_DIALOG (self), title ? title : "");
 
-  gtk_widget_set_visible (GTK_WIDGET (self->back_button), FALSE);
   gtk_widget_set_visible (GTK_WIDGET (self->cancel_button), FALSE);
   gtk_widget_set_visible (GTK_WIDGET (self->done_button), FALSE);
 
@@ -1235,8 +1234,6 @@ on_stack_child_changed (CcFingerprintDialog *self)
 
   if (visible_child == self->prints_manager)
     {
-      gtk_widget_set_visible (GTK_WIDGET (self->back_button),
-                              have_multiple_devices (self));
       notify_error (self, NULL);
       update_prints_store (self);
 
@@ -1278,82 +1275,6 @@ cc_fingerprint_dialog_init (CcFingerprintDialog *self)
 }
 
 static void
-select_device_row (CcFingerprintDialog *self,
-                   GtkListBoxRow       *row,
-                   GtkListBox          *listbox)
-{
-  CcFprintdDevice *device = g_object_get_data (G_OBJECT (row), "device");
-
-  g_return_if_fail (CC_FPRINTD_DEVICE (device));
-
-  g_set_object (&self->device, device);
-  gtk_stack_set_visible_child (self->stack, self->prints_manager);
-}
-
-static void
-on_devices_list (GObject      *object,
-                 GAsyncResult *res,
-                 gpointer      user_data)
-{
-  g_autolist (CcFprintdDevice) fprintd_devices = NULL;
-  g_autoptr(DialogStateRemover) state_remover = NULL;
-  g_autoptr(GError) error = NULL;
-  CcFingerprintManager *fingerprint_manager = CC_FINGERPRINT_MANAGER (object);
-  CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (user_data);
-
-  fprintd_devices = cc_fingerprint_manager_get_devices_finish (fingerprint_manager,
-                                                               res, &error);
-
-  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-    return;
-
-  state_remover = auto_state_remover (self, DIALOG_STATE_DEVICES_LISTING);
-
-  if (fprintd_devices == NULL)
-    {
-      if (error)
-        {
-          g_autofree char *error_message = NULL;
-
-          error_message = g_strdup_printf (_("Failed to get fingerprint devices: %s"),
-                                           dbus_error_to_human (self, error));
-          g_warning ("Retrieving fingerprint devices failed: %s", error->message);
-          notify_error (self, error_message);
-        }
-
-      gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->no_devices_found));
-    }
-  else if (fprintd_devices->next == NULL)
-    {
-      /* We have just one device... Skip devices selection */
-      self->device = g_object_ref (fprintd_devices->data);
-      gtk_stack_set_visible_child (self->stack, self->prints_manager);
-    }
-  else
-    {
-      GList *l;
-
-      for (l = fprintd_devices; l; l = l->next)
-        {
-          CcFprintdDevice *device = l->data;
-          CcListRow *device_row;
-
-          device_row = g_object_new (CC_TYPE_LIST_ROW,
-                                     "visible", TRUE,
-                                     "icon-name", "go-next-symbolic",
-                                     "title", cc_fprintd_device_get_name (device),
-                                     NULL);
-
-          gtk_list_box_insert (self->devices_list, GTK_WIDGET (device_row), -1);
-          g_object_set_data_full (G_OBJECT (device_row), "device",
-                                  g_object_ref (device), g_object_unref);
-        }
-
-      gtk_stack_set_visible_child (self->stack, self->device_selector);
-    }
-}
-
-static void
 cc_fingerprint_dialog_constructed (GObject *object)
 {
   CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (object);
@@ -1363,22 +1284,10 @@ cc_fingerprint_dialog_constructed (GObject *object)
   bindtextdomain ("fprintd", GNOMELOCALEDIR);
   bind_textdomain_codeset ("fprintd", "UTF-8");
 
-  add_dialog_state (self, DIALOG_STATE_DEVICES_LISTING);
-  cc_fingerprint_manager_get_devices (self->manager, self->cancellable,
-                                      on_devices_list, self);
-}
-
-static void
-back_button_clicked_cb (CcFingerprintDialog *self)
-{
-  if (gtk_stack_get_visible_child (self->stack) == self->prints_manager)
-    {
-      notify_error (self, NULL);
-      gtk_stack_set_visible_child (self->stack, self->device_selector);
-      return;
-    }
-
-  g_return_if_reached ();
+  if (self->device)
+    gtk_stack_set_visible_child (self->stack, self->prints_manager);
+  else
+    gtk_stack_set_visible_child (self->stack, self->no_devices_found);
 }
 
 static void
@@ -1490,15 +1399,19 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
                          CC_TYPE_FINGERPRINT_MANAGER,
                          G_PARAM_STATIC_STRINGS | G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
+  properties[PROP_DEVICE] =
+    g_param_spec_object ("device",
+                         "Device",
+                         "The fingerprint device to manage",
+                         CC_FPRINTD_TYPE_DEVICE,
+                         G_PARAM_STATIC_STRINGS | G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, add_print_popover);
   gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, add_print_popover_box);
-  gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, back_button);
   gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, cancel_button);
   gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, delete_prints_button);
-  gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, device_selector);
-  gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, devices_list);
   gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, done_button);
   gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, enroll_message);
   gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, enroll_print_bin);
@@ -1513,10 +1426,8 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, stack);
   gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, titlebar);
 
-  gtk_widget_class_bind_template_callback (widget_class, back_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, cancel_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, delete_prints_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, done_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_print_activated_cb);
-  gtk_widget_class_bind_template_callback (widget_class, select_device_row);
   }

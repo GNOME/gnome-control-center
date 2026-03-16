@@ -24,6 +24,7 @@
 
 #include <adwaita.h>
 #include "cc-fingerprint-manager.h"
+#include "cc-fprintd-generated.h"
 
 G_BEGIN_DECLS
 
@@ -31,6 +32,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcFingerprintDialog, cc_fingerprint_dialog,
                       CC, FINGERPRINT_DIALOG, AdwDialog)
 
-CcFingerprintDialog *cc_fingerprint_dialog_new (CcFingerprintManager *manager);
+CcFingerprintDialog *cc_fingerprint_dialog_new (CcFingerprintManager *manager,
+                                                CcFprintdDevice      *device);
 
 G_END_DECLS

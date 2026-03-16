@@ -10,17 +10,8 @@ template $CcSecurityLoginPage: Adw.NavigationPage {
     Adw.HeaderBar {}
 
     content: Adw.PreferencesPage {
-      Adw.PreferencesGroup {
+      Adw.PreferencesGroup auth_methods_group {
         title: _("Authentication Methods");
-
-        $CcListRow fingerprint_row {
-          visible: false;
-          title: _("_Fingerprint Login");
-          use-underline: true;
-          activatable: true;
-          show-arrow: true;
-          activated => $change_fingerprint(template);
-        }
 
         $CcListRow password_row {
           activatable: true;

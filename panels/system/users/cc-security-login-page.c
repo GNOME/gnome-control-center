@@ -32,6 +32,7 @@
 #include "cc-security-login-page.h"
 #include "cc-fingerprint-dialog.h"
 #include "cc-fingerprint-manager.h"
+#include "cc-fprintd-generated.h"
 #include "cc-password-dialog.h"
 #include "cc-list-row.h"
 #include "user-utils.h"
@@ -47,14 +48,16 @@
 struct _CcSecurityLoginPage {
   AdwNavigationPage  parent_instance;
 
-  AdwActionRow *auto_login_row;
-  GtkSwitch    *auto_login_switch;
-  CcListRow    *fingerprint_row;
-  CcListRow    *password_row;
+  AdwActionRow       *auto_login_row;
+  GtkSwitch          *auto_login_switch;
+  AdwPreferencesGroup *auth_methods_group;
+  CcListRow          *password_row;
 
   ActUser *user;
   GSettings            *login_screen_settings;
   CcFingerprintManager *fingerprint_manager;
+  GCancellable         *devices_cancellable;
+  GList                *fingerprint_rows;
 };
 
 G_DEFINE_TYPE (CcSecurityLoginPage, cc_security_login_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -103,36 +106,47 @@ update_fingerprint_row_state (CcSecurityLoginPage  *self,
                               CcFingerprintManager *manager)
 {
   CcFingerprintState state = cc_fingerprint_manager_get_state (manager);
-  gboolean visible = FALSE;
+  gboolean visible;
+  GList *l;
 
   visible = (act_user_get_uid (self->user) == getuid () &&
              act_user_is_local_account (self->user) &&
              (self->login_screen_settings &&
-             g_settings_get_boolean (self->login_screen_settings,
-                                     "enable-fingerprint-authentication")));
-  gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), visible);
-  if (!visible)
-    return;
+              g_settings_get_boolean (self->login_screen_settings,
+                                      "enable-fingerprint-authentication")));
 
-  if (state != CC_FINGERPRINT_STATE_UPDATING)
-      gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row),
-                              state != CC_FINGERPRINT_STATE_NONE);
+  for (l = self->fingerprint_rows; l != NULL; l = l->next)
+    {
+      CcListRow *row = l->data;
+      CcFprintdDevice *device = g_object_get_data (G_OBJECT (row), "device");
 
-  gtk_widget_set_sensitive (GTK_WIDGET (self->fingerprint_row),
-                            state != CC_FINGERPRINT_STATE_UPDATING);
+      gtk_widget_set_visible (GTK_WIDGET (row), visible);
+      if (!visible)
+        continue;
 
-  if (state == CC_FINGERPRINT_STATE_ENABLED)
-    cc_list_row_set_secondary_label (self->fingerprint_row, _("Enabled"));
-  else if (state == CC_FINGERPRINT_STATE_DISABLED)
-    cc_list_row_set_secondary_label (self->fingerprint_row, _("Disabled"));
+      if (state != CC_FINGERPRINT_STATE_UPDATING)
+        gtk_widget_set_visible (GTK_WIDGET (row), state != CC_FINGERPRINT_STATE_NONE);
+
+      gtk_widget_set_sensitive (GTK_WIDGET (row), state != CC_FINGERPRINT_STATE_UPDATING);
+
+      if (device && cc_fingerprint_manager_device_has_enrolled_fingers (manager, device))
+        cc_list_row_set_secondary_label (row, _("Enabled"));
+      else
+        cc_list_row_set_secondary_label (row, _("Disabled"));
+    }
 }
 
 static void
-change_fingerprint (CcSecurityLoginPage *self)
+change_fingerprint_for_device (CcSecurityLoginPage *self,
+                               CcListRow          *row)
 {
   CcFingerprintDialog *dialog;
+  CcFprintdDevice *device;
 
-  dialog = cc_fingerprint_dialog_new (self->fingerprint_manager);
+  device = g_object_get_data (G_OBJECT (row), "device");
+  g_return_if_fail (CC_FPRINTD_IS_DEVICE (device));
+
+  dialog = cc_fingerprint_dialog_new (self->fingerprint_manager, device);
   adw_dialog_present (ADW_DIALOG (dialog), GTK_WIDGET (self));
 }
 
@@ -162,6 +176,94 @@ get_password_mode_text (ActUser *user)
   return text;
 }
 
+#define DEVICE_HAS_ENROLLED_FINGERS_KEY "cc-has-enrolled-fingers"
+
+static void
+on_device_enrolled_fingers (GObject      *object,
+                            GAsyncResult *res,
+                            gpointer      user_data)
+{
+  CcFprintdDevice *device = CC_FPRINTD_DEVICE (object);
+  CcListRow *row = user_data;
+  g_autoptr(GError) error = NULL;
+  g_auto(GStrv) enrolled_fingers = NULL;
+  gboolean has_fingers;
+
+  cc_fprintd_device_call_list_enrolled_fingers_finish (device, &enrolled_fingers, res, &error);
+  has_fingers = !error && enrolled_fingers && g_strv_length (enrolled_fingers) > 0;
+
+  g_object_set_data (G_OBJECT (device), DEVICE_HAS_ENROLLED_FINGERS_KEY,
+                     GINT_TO_POINTER (has_fingers));
+  cc_list_row_set_secondary_label (row, has_fingers ? _("Enabled") : _("Disabled"));
+  g_object_unref (row);
+}
+
+static void
+on_devices_list (GObject      *object,
+                 GAsyncResult *res,
+                 gpointer      user_data)
+{
+  g_autolist (CcFprintdDevice) fprintd_devices = NULL;
+  g_autoptr(GError) error = NULL;
+  CcFingerprintManager *manager = CC_FINGERPRINT_MANAGER (object);
+  CcSecurityLoginPage *self = CC_SECURITY_LOGIN_PAGE (user_data);
+  GList *l;
+  const char *row_title;
+  const char *user_name;
+  guint n_devices;
+
+  fprintd_devices = cc_fingerprint_manager_get_devices_finish (manager, res, &error);
+
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+    return;
+
+  g_clear_object (&self->devices_cancellable);
+
+  /* Clear existing fingerprint rows */
+  for (l = self->fingerprint_rows; l != NULL; l = l->next)
+    adw_preferences_group_remove (self->auth_methods_group, GTK_WIDGET (l->data));
+  g_clear_list (&self->fingerprint_rows, g_object_unref);
+
+  if (fprintd_devices == NULL)
+    {
+      if (error)
+        g_warning ("Retrieving fingerprint devices failed: %s", error->message);
+      update_fingerprint_row_state (self, NULL, self->fingerprint_manager);
+      return;
+    }
+
+  n_devices = g_list_length (fprintd_devices);
+  row_title = (n_devices == 1) ? _("_Fingerprint Login") : NULL;
+  user_name = act_user_get_user_name (self->user);
+
+  for (l = fprintd_devices; l != NULL; l = l->next)
+    {
+      CcFprintdDevice *device = l->data;
+      CcListRow *row;
+
+      row = g_object_new (CC_TYPE_LIST_ROW,
+                          "visible", TRUE,
+                          "use-underline", TRUE,
+                          "activatable", TRUE,
+                          "show-arrow", TRUE,
+                          "title", row_title ? row_title : cc_fprintd_device_get_name (device),
+                          NULL);
+
+      g_object_set_data_full (G_OBJECT (row), "device", g_object_ref (device), g_object_unref);
+      g_signal_connect_object (row, "activated", G_CALLBACK (change_fingerprint_for_device),
+                              self, G_CONNECT_SWAPPED);
+
+      adw_preferences_group_add (self->auth_methods_group, GTK_WIDGET (row));
+      self->fingerprint_rows = g_list_append (self->fingerprint_rows, g_object_ref (row));
+
+      cc_fprintd_device_call_list_enrolled_fingers (device, user_name, NULL,
+                                                    on_device_enrolled_fingers,
+                                                    g_object_ref (row));
+    }
+
+  update_fingerprint_row_state (self, NULL, self->fingerprint_manager);
+}
+
 static void
 change_password (CcSecurityLoginPage *self)
 {
@@ -174,6 +276,17 @@ static void
 cc_security_login_page_dispose (GObject *object)
 {
   CcSecurityLoginPage *self = CC_SECURITY_LOGIN_PAGE (object);
+  GList *l;
+
+  if (self->devices_cancellable)
+    {
+      g_cancellable_cancel (self->devices_cancellable);
+      g_clear_object (&self->devices_cancellable);
+    }
+
+  for (l = self->fingerprint_rows; l != NULL; l = l->next)
+    adw_preferences_group_remove (self->auth_methods_group, GTK_WIDGET (l->data));
+  g_clear_list (&self->fingerprint_rows, g_object_unref);
 
   g_clear_object (&self->fingerprint_manager);
   g_clear_object (&self->login_screen_settings);
@@ -203,12 +316,11 @@ cc_security_login_page_class_init (CcSecurityLoginPageClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcSecurityLoginPage, auto_login_row);
   gtk_widget_class_bind_template_child (widget_class, CcSecurityLoginPage, auto_login_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcSecurityLoginPage, fingerprint_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSecurityLoginPage, auth_methods_group);
   gtk_widget_class_bind_template_child (widget_class, CcSecurityLoginPage, password_row);
 
   gtk_widget_class_bind_template_callback (widget_class, autologin_changed);
   gtk_widget_class_bind_template_callback (widget_class, change_password);
-  gtk_widget_class_bind_template_callback (widget_class, change_fingerprint);
 }
 
 void
@@ -218,19 +330,33 @@ cc_security_login_page_set_user (CcSecurityLoginPage *self,
   g_clear_object (&self->user);
   self->user = g_object_ref (user);
 
+  if (self->devices_cancellable)
+    {
+      g_cancellable_cancel (self->devices_cancellable);
+      g_clear_object (&self->devices_cancellable);
+    }
+
   g_clear_object (&self->fingerprint_manager);
 
   cc_list_row_set_secondary_label (self->password_row, get_password_mode_text (user));
 
-  if (!self->fingerprint_manager) {
-    self->fingerprint_manager = cc_fingerprint_manager_new (user);
-    g_signal_connect_object (self->fingerprint_manager,
-                             "notify::state",
-                             G_CALLBACK (update_fingerprint_row_state),
-                             self,
-                             G_CONNECT_SWAPPED);
-    update_fingerprint_row_state (self, NULL, self->fingerprint_manager);
-  }
+  self->fingerprint_manager = cc_fingerprint_manager_new (user);
+  g_signal_connect_object (self->fingerprint_manager,
+                           "notify::state",
+                           G_CALLBACK (update_fingerprint_row_state),
+                           self,
+                           G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->fingerprint_manager,
+                           "device-enrolled-changed",
+                           G_CALLBACK (update_fingerprint_row_state),
+                           self,
+                           G_CONNECT_SWAPPED);
+
+  self->devices_cancellable = g_cancellable_new ();
+  cc_fingerprint_manager_get_devices (self->fingerprint_manager,
+                                      self->devices_cancellable,
+                                      on_devices_list,
+                                      self);
 
   g_signal_handlers_block_by_func (self->auto_login_switch, autologin_changed, self);
   gtk_widget_set_visible (GTK_WIDGET (self->auto_login_row), get_autologin_possible (user));

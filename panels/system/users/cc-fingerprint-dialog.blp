@@ -19,16 +19,6 @@ template $CcFingerprintDialog: Adw.Dialog {
         clicked => $cancel_button_clicked_cb(template);
       }
 
-      [start]
-      Button back_button {
-        tooltip-text: _("Back");
-        can-focus: false;
-        receives-default: false;
-        valign: center;
-        icon-name: "go-previous-symbolic";
-        clicked => $back_button_clicked_cb(template);
-      }
-
       [end]
       Box {
         Adw.Spinner spinner {}
@@ -113,45 +103,6 @@ template $CcFingerprintDialog: Adw.Dialog {
               Label {
                 label: _("Ensure the device is properly connected");
                 wrap: true;
-              }
-            };
-          }
-
-          StackPage {
-            name: "fingerprint-device";
-            title: _("Fingerprint Device");
-
-            child: Box device_selector {
-              can-focus: false;
-              halign: center;
-              valign: center;
-              spacing: 10;
-              orientation: vertical;
-
-              Label {
-                label: _("Choose the fingerprint device you want to configure");
-                wrap: true;
-                halign: start;
-
-                styles [
-                  "heading",
-                ]
-              }
-
-              ScrolledWindow {
-                can-focus: false;
-                hscrollbar-policy: never;
-                propagate-natural-height: true;
-
-                ListBox devices_list {
-                  selection-mode: none;
-                  valign: center;
-                  row-activated => $select_device_row(template);
-
-                  styles [
-                    "frame",
-                  ]
-                }
               }
             };
           }
