@@ -30,6 +30,8 @@ G_BEGIN_DECLS
 #define CC_TYPE_FINGERPRINT_MANAGER (cc_fingerprint_manager_get_type ())
 G_DECLARE_FINAL_TYPE (CcFingerprintManager, cc_fingerprint_manager, CC, FINGERPRINT_MANAGER, GObject)
 
+typedef struct _CcFprintdDevice CcFprintdDevice;
+
 /**
  * CcFingerprintManager:
  * @CC_FINGERPRINT_STATE_NONE: Fingerprint recognition is not available
@@ -69,5 +71,11 @@ void cc_fingerprint_manager_get_devices (CcFingerprintManager *fp_manager,
 GList *cc_fingerprint_manager_get_devices_finish (CcFingerprintManager *fp_manager,
                                                   GAsyncResult         *res,
                                                   GError              **error);
+
+gboolean cc_fingerprint_manager_device_has_enrolled_fingers (CcFingerprintManager *fp_manager,
+                                                              CcFprintdDevice      *device);
+
+void cc_fingerprint_manager_notify_device_enrolled_changed (CcFingerprintManager *fp_manager,
+                                                             CcFprintdDevice      *device);
 
 G_END_DECLS

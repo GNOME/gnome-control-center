@@ -153,6 +153,12 @@ cc_fingerprint_manager_class_init (CcFingerprintManagerClass *klass)
                        G_PARAM_STATIC_STRINGS | G_PARAM_READABLE);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
+
+  g_signal_new ("device-enrolled-changed",
+                G_TYPE_FROM_CLASS (klass),
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL, NULL,
+                G_TYPE_NONE, 1, G_TYPE_OBJECT);
 }
 
 static void
@@ -411,6 +417,7 @@ set_state (CcFingerprintManager *self,
 typedef struct
 {
   guint                     waiting_devices;
+  gboolean                  any_has_fingers;
   CcFingerprintStateUpdated callback;
   gpointer                  user_data;
 } UpdateStateData;
@@ -452,6 +459,8 @@ update_state_callback (GObject      *object,
     data->callback (self, state, data->user_data, error);
 }
 
+#define DEVICE_HAS_ENROLLED_FINGERS_KEY "cc-has-enrolled-fingers"
+
 static void
 on_device_list_enrolled (GObject      *object,
                          GAsyncResult *res,
@@ -463,6 +472,7 @@ on_device_list_enrolled (GObject      *object,
   g_auto(GStrv) enrolled_fingers = NULL;
   UpdateStateData *data = g_task_get_task_data (task);
   guint num_enrolled_fingers;
+  gboolean has_fingers;
 
   cc_fprintd_device_call_list_enrolled_fingers_finish (fprintd_device,
                                                        &enrolled_fingers,
@@ -489,20 +499,18 @@ on_device_list_enrolled (GObject      *object,
     }
 
   num_enrolled_fingers = enrolled_fingers ? g_strv_length (enrolled_fingers) : 0;
+  has_fingers = (num_enrolled_fingers > 0);
+  data->any_has_fingers |= has_fingers;
+
+  g_object_set_data (G_OBJECT (fprintd_device), DEVICE_HAS_ENROLLED_FINGERS_KEY,
+                     GINT_TO_POINTER (has_fingers));
 
   g_debug ("Device %s has %u enrolled fingers",
            cc_fprintd_device_get_name (fprintd_device),
            num_enrolled_fingers);
 
-  if (num_enrolled_fingers > 0)
-    {
-      data->waiting_devices = 0;
-      g_task_return_int (task, CC_FINGERPRINT_STATE_ENABLED);
-    }
-  else if (data->waiting_devices == 0)
-    {
-      g_task_return_int (task, CC_FINGERPRINT_STATE_DISABLED);
-    }
+  if (data->waiting_devices == 0)
+    g_task_return_int (task, data->any_has_fingers ? CC_FINGERPRINT_STATE_ENABLED : CC_FINGERPRINT_STATE_DISABLED);
 }
 
 static void
@@ -602,4 +610,27 @@ cc_fingerprint_manager_get_user (CcFingerprintManager *self)
   g_return_val_if_fail (CC_IS_FINGERPRINT_MANAGER (self), NULL);
 
   return priv->user;
+}
+
+gboolean
+cc_fingerprint_manager_device_has_enrolled_fingers (CcFingerprintManager *self,
+                                                    CcFprintdDevice      *device)
+{
+  gpointer data;
+
+  g_return_val_if_fail (CC_IS_FINGERPRINT_MANAGER (self), FALSE);
+  g_return_val_if_fail (CC_FPRINTD_IS_DEVICE (device), FALSE);
+
+  data = g_object_get_data (G_OBJECT (device), DEVICE_HAS_ENROLLED_FINGERS_KEY);
+  return GPOINTER_TO_INT (data);
+}
+
+void
+cc_fingerprint_manager_notify_device_enrolled_changed (CcFingerprintManager *self,
+                                                        CcFprintdDevice      *device)
+{
+  g_return_if_fail (CC_IS_FINGERPRINT_MANAGER (self));
+  g_return_if_fail (CC_FPRINTD_IS_DEVICE (device));
+
+  g_signal_emit_by_name (self, "device-enrolled-changed", device);
 }
