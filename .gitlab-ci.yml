@@ -104,6 +104,7 @@ build.container.fedora@x86_64:
       dnf builddep -y gnome-settings-daemon && \
       dnf builddep -y libadwaita && \
       dnf builddep -y gnome-online-accounts && \
+      dnf install -y tinycdb-devel && \
       dnf builddep -y malcontent && \
       git clone --depth 1 https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
         cd gsettings-desktop-schemas && \
