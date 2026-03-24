@@ -63,7 +63,7 @@ struct _CcKeyboardShortcutEditor
 
   CcKeyCombo         *custom_combo;
   gboolean            custom_is_modifier;
-  gboolean            edited : 1;
+  gboolean            edited;
 };
 
 static void          command_entry_changed_cb                    (CcKeyboardShortcutEditor *self);
