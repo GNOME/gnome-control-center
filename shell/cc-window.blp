@@ -67,19 +67,6 @@ template $CcWindow: Adw.ApplicationWindow {
   };
 }
 
-Adw.AlertDialog development_warning_dialog {
-  heading: _("Warning: Development Version");
-  body: _("This version of Settings should only be used for development purposes. You may experience incorrect system behavior, data loss, and other unexpected issues. ");
-  default-response: "ok";
-  close-response: "ok";
-
-  responses [
-    ok: _("_OK"),
-  ]
-
-  response => $on_development_warning_dialog_responded_cb(template);
-}
-
 menu primary_menu {
   section {
     item {

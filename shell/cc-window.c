@@ -52,7 +52,6 @@ struct _CcWindow
 
   AdwBreakpoint *break_point;
 
-  AdwDialog         *development_warning_dialog;
   AdwNavigationSplitView *split_view;
   CcPanelList       *panel_list;
   GtkSearchBar      *search_bar;
@@ -106,12 +105,6 @@ load_window_state (CcWindow *self)
     gtk_window_set_default_size (GTK_WINDOW (self), current_width, current_height);
   if (maximized)
     gtk_window_maximize (GTK_WINDOW (self));
-}
-
-static gboolean
-in_flatpak_sandbox (void)
-{
-  return g_strcmp0 (PROFILE, "development") == 0;
 }
 
 static gboolean
@@ -543,15 +536,6 @@ search_shortcut_cb (GtkWidget *widget,
   return GDK_EVENT_STOP;
 }
 
-static void
-on_development_warning_dialog_responded_cb (CcWindow *self)
-{
-  g_debug ("Disabling development build warning dialog");
-  g_settings_set_boolean (self->settings, "show-development-warning", FALSE);
-
-  adw_dialog_close (self->development_warning_dialog);
-}
-
 /* CcShell implementation */
 static gboolean
 cc_window_set_active_panel_from_id (CcShell      *shell,
@@ -578,19 +562,6 @@ cc_shell_iface_init (CcShellInterface *iface)
 {
   iface->set_active_panel_from_id = cc_window_set_active_panel_from_id;
   iface->get_toplevel = cc_window_get_toplevel;
-}
-
-/* GtkWidget overrides */
-static void
-cc_window_map (GtkWidget *widget)
-{
-  CcWindow *self = (CcWindow *) widget;
-
-  GTK_WIDGET_CLASS (cc_window_parent_class)->map (widget);
-
-  /* Show a warning for Flatpak builds */
-  if (in_flatpak_sandbox () && g_settings_get_boolean (self->settings, "show-development-warning"))
-    adw_dialog_present (self->development_warning_dialog, GTK_WIDGET (self));
 }
 
 static void
@@ -767,7 +738,6 @@ cc_window_class_init (CcWindowClass *klass)
   object_class->dispose = cc_window_dispose;
   object_class->finalize = cc_window_finalize;
 
-  widget_class->map = cc_window_map;
   widget_class->unmap = cc_window_unmap;
 
   g_object_class_override_property (object_class, PROP_ACTIVE_PANEL, "active-panel");
@@ -791,14 +761,12 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/gtk/cc-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWindow, break_point);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, development_warning_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, split_view);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_entry);
 
   gtk_widget_class_bind_template_callback (widget_class, on_split_view_collapsed_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_development_warning_dialog_responded_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, show_panel_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_key_pressed_cb);
@@ -822,10 +790,6 @@ cc_window_init (CcWindow *self)
   self->settings = g_settings_new ("org.gnome.Settings");
   self->previous_panels = g_queue_new ();
   self->previous_list_view = cc_panel_list_get_view (self->panel_list);
-
-  /* Add a custom CSS class on development builds */
-  if (in_flatpak_sandbox ())
-    gtk_widget_add_css_class (GTK_WIDGET (self), "devel");
 
   gtk_search_bar_set_key_capture_widget (self->search_bar, GTK_WIDGET (self));
 }
