@@ -35,10 +35,6 @@ config_h.set_quoted('TEST_NM_PYTHON', python.full_path())
 
 application_id = 'org.gnome.Settings'
 
-if get_option('profile') == 'development'
-    application_id += '.' + 'Devel'
-endif
-
 version_split = meson.project_version().split('.')
 
 # defines
@@ -49,7 +45,6 @@ set_defines = [
   ['PACKAGE_VERSION', meson.project_version()],
   ['VERSION', meson.project_version()],
   ['MAJOR_VERSION', version_split[0]],
-  ['PROFILE', get_option('profile')],
   # i18n
   ['GETTEXT_PACKAGE', control_center_gettext]
 ]
