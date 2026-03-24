@@ -341,6 +341,11 @@ config_h.set('HAVE_LOCATION_SERVICES', location_services.enabled(),
 # Snap support and wellbeing panel
 json_glib_dep = dependency('json-glib-1.0')
 
+# SSHD socket activation support
+ssh_socket_activation = get_option('ssh_socket_activation')
+config_h.set('HAVE_SSH_SOCKET_ACTIVATION', ssh_socket_activation,
+             description: 'Whether SSH socket activation is enabled')
+
 if host_is_linux
   # ModemManager
   mm_dep =  dependency('mm-glib', version: '>= 0.7')

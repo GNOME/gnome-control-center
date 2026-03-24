@@ -18,6 +18,8 @@
  * Author: Thomas Wood <thomas.wood@intel.com>
  *
  */
+#include "config.h"
+
 #include "cc-secure-shell.h"
 #include "cc-systemd-service.h"
 
@@ -28,8 +30,10 @@
 #define SSHD_SERVICE "sshd.service"
 #endif
 
-#ifndef SSHD_SOCKET
-#define SSHD_SOCKET "ssh.socket"
+#if defined (HAVE_SSH_SOCKET_ACTIVATION)
+#  ifndef SSHD_SOCKET
+#    define SSHD_SOCKET "ssh.socket"
+#  endif
 #endif
 
 typedef struct
@@ -44,19 +48,25 @@ G_DEFINE_AUTOPTR_CLEANUP_FUNC (CallbackData, g_free)
 void
 cc_secure_shell_get_enabled (AdwSwitchRow  *widget)
 {
+  gboolean sshd_enabled;
+
   /* disable the switch until the current state is known */
   gtk_widget_set_sensitive (GTK_WIDGET (widget), FALSE);
 
-  adw_switch_row_set_active (widget,
-                             (cc_get_service_state (SSHD_SERVICE, G_BUS_TYPE_SYSTEM) == CC_SERVICE_STATE_ENABLED ||
-                              cc_get_service_state (SSHD_SOCKET, G_BUS_TYPE_SYSTEM) == CC_SERVICE_STATE_ENABLED));
+  sshd_enabled = cc_get_service_state (SSHD_SERVICE, G_BUS_TYPE_SYSTEM) == CC_SERVICE_STATE_ENABLED;
 
+#ifdef HAVE_SSH_SOCKET_ACTIVATION
+  sshd_enabled |= cc_get_service_state (SSHD_SOCKET, G_BUS_TYPE_SYSTEM) == CC_SERVICE_STATE_ENABLED;
+#endif
+
+  adw_switch_row_set_active (widget, sshd_enabled);
   gtk_widget_set_sensitive (GTK_WIDGET (widget), TRUE);
 }
 
 static void
 enable_ssh_service (GError** error)
 {
+#ifdef HAVE_SSH_SOCKET_ACTIVATION
   g_autoptr(GError) local_error = NULL;
 
   if (cc_enable_service (SSHD_SOCKET, G_BUS_TYPE_SYSTEM, &local_error))
@@ -68,6 +78,7 @@ enable_ssh_service (GError** error)
 
   g_warning ("Failed to enable '%s' socket: %s. Enabling '%s' service instead.",
              SSHD_SOCKET, local_error->message, SSHD_SERVICE);
+#endif
 
   cc_enable_service (SSHD_SERVICE, G_BUS_TYPE_SYSTEM, error);
 }
@@ -78,7 +89,9 @@ disable_ssh_service (GError** error)
   if (!cc_disable_service (SSHD_SERVICE, G_BUS_TYPE_SYSTEM, error))
     return;
 
+#ifdef HAVE_SSH_SOCKET_ACTIVATION
   cc_disable_service (SSHD_SOCKET, G_BUS_TYPE_SYSTEM, error);
+#endif
 }
 
 static void
