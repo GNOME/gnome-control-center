@@ -427,7 +427,7 @@ append_sections_from_file (CcKeyboardManager  *self,
   key.name = NULL;
   g_array_append_val (keylist->entries, key);
 
-  keys = (KeyListEntry *) g_array_free (keylist->entries, FALSE);
+  keys = (KeyListEntry *) (gpointer) g_array_free (keylist->entries, FALSE);
   if (keylist->package)
     {
       g_autofree gchar *localedir = NULL;
@@ -499,7 +499,7 @@ append_sections_from_gsettings (CcKeyboardManager *self)
       key.name = NULL;
       g_array_append_val (entries, key);
 
-      keys = (KeyListEntry *) entries->data;
+      keys = (KeyListEntry *) (gpointer) entries->data;
       append_section (self, _("Custom Shortcuts"), CUSTOM_SHORTCUTS_ID, BINDING_GROUP_USER, keys);
       for (i = 0; i < entries->len; ++i)
         {
@@ -544,7 +544,7 @@ append_section_for_app_global_shortcuts (CcKeyboardManager *self,
   /* Empty KeyListEntry to end the array */
   key.name = NULL;
   g_array_append_val (entries, key);
-  keys = (KeyListEntry *) entries->data;
+  keys = (KeyListEntry *) (gpointer) entries->data;
 
   section_name = cc_util_app_id_to_display_name (app_id);
   append_section (self, section_name, app_id, BINDING_GROUP_USER, keys);

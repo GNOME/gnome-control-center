@@ -527,7 +527,7 @@ get_above_tab_keysyms (void)
     }
 
 out:
-  return (guint *)g_array_free (keysyms, FALSE);
+  return (guint *) (gpointer) g_array_free (keysyms, FALSE);
 }
 
 /*

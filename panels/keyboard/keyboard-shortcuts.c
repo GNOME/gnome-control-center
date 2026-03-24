@@ -340,7 +340,7 @@ parse_keylist_from_file (const gchar *path)
       g_free (keylist->wm_name);
 
       for (i = 0; i < keylist->entries->len; i++)
-        g_free (((KeyListEntry *) &(keylist->entries->data[i]))->name);
+        g_free (g_array_index (keylist->entries, KeyListEntry, i).name);
 
       g_array_free (keylist->entries, TRUE);
       g_free (keylist);
