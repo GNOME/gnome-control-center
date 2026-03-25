@@ -84,12 +84,15 @@ cc_cursor_size_page_init (CcCursorSizePage *self)
 
   for (i = 0; i < G_N_ELEMENTS(cursor_sizes); i++)
     {
-      GtkWidget *image, *button;
+      GtkWidget *flowbox_child, *image, *button;
       g_autofree gchar *cursor_image_name = NULL;
 
       cursor_image_name = g_strdup_printf ("/org/gnome/control-center/universal-access/left_ptr_%dpx.png", cursor_sizes[i]);
       image = gtk_picture_new_for_resource (cursor_image_name);
       gtk_picture_set_content_fit (GTK_PICTURE (image), GTK_CONTENT_FIT_SCALE_DOWN);
+
+      flowbox_child = gtk_flow_box_child_new ();
+      gtk_widget_set_focusable (flowbox_child, FALSE);
 
       button = gtk_toggle_button_new ();
       gtk_toggle_button_set_group (GTK_TOGGLE_BUTTON (button), GTK_TOGGLE_BUTTON (last_radio_button));
@@ -97,7 +100,9 @@ cc_cursor_size_page_init (CcCursorSizePage *self)
       g_object_set_data (G_OBJECT (button), "cursor-size", GUINT_TO_POINTER (cursor_sizes[i]));
 
       gtk_button_set_child (GTK_BUTTON (button), image);
-      gtk_flow_box_append (self->cursor_box, button);
+
+      gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (flowbox_child), button);
+      gtk_flow_box_append (self->cursor_box, flowbox_child);
 
       g_signal_connect_object (button, "toggled",
                                G_CALLBACK (cursor_size_toggled), self, G_CONNECT_SWAPPED);
