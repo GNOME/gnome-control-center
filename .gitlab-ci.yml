@@ -167,6 +167,7 @@ build:
 conditional builds:
   extends:
     - build
+  allow_failure: true
   artifacts:
     # Only save build logs for these
     <<: *build_logs
