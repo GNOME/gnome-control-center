@@ -3,130 +3,119 @@ using Adw 1;
 
 template $CcKeyboardShortcutPage: Adw.NavigationPage {
   title: _("Keyboard Shortcuts");
+  showing => $on_shortcut_page_showing_cb(template);
 
-  child: Adw.NavigationView navigation_view {
-    notify::visible-page => $shortcut_page_visible_page_changed_cb(template);
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
 
-    Adw.NavigationPage main_page {
-      title: bind template.title;
+    [top]
+    SearchBar {
+      search-mode-enabled: true;
+      key-capture-widget: template;
 
-      child: Adw.ToolbarView {
-        [top]
-        Adw.HeaderBar {}
+      child: Adw.Clamp {
+        maximum-size: 400;
+        hexpand: true;
+        margin-start: 6;
+        margin-end: 6;
 
-        [top]
-        SearchBar {
-          search-mode-enabled: true;
-          key-capture-widget: template;
+        SearchEntry search_entry {
+          placeholder-text: _("Search shortcuts");
+          search-changed => $shortcut_search_entry_changed_cb(template);
+          stop-search => $shortcut_search_entry_stopped_cb(template);
 
-          child: Adw.Clamp {
-            maximum-size: 400;
-            hexpand: true;
-            margin-start: 6;
-            margin-end: 6;
+          accessibility {
+            label: _("Search Shortcuts");
+          }
+        }
+      };
+    }
 
-            SearchEntry search_entry {
-              placeholder-text: _("Search shortcuts");
-              search-changed => $shortcut_search_entry_changed_cb(template);
-              stop-search => $shortcut_search_entry_stopped_cb(template);
+    content: Stack section_stack {
+      vhomogeneous: false;
 
-              accessibility {
-                label: _("Search Shortcuts");
-              }
-            }
-          };
+      css-classes: [
+        "shortcut-list",
+      ];
+
+      Adw.PreferencesPage section_list_page {
+        Adw.PreferencesGroup {
+          ListBox section_list_box {
+            selection-mode: none;
+            tab-behavior: item;
+            row-activated => $shortcut_section_row_activated_cb(template);
+
+            styles [
+              "boxed-list",
+            ]
+          }
         }
 
-        content: Stack section_stack {
-          vhomogeneous: false;
-
-          css-classes: [
-            "shortcut-list",
-          ];
-
-          Adw.PreferencesPage section_list_page {
-            Adw.PreferencesGroup {
-              ListBox section_list_box {
-                selection-mode: none;
-                tab-behavior: item;
-                row-activated => $shortcut_section_row_activated_cb(template);
-
-                styles [
-                  "boxed-list",
-                ]
-              }
-            }
-
-            Adw.PreferencesGroup {
-              Adw.SwitchRow overview_shortcut_row {
-                title: _("Activities _Overview Shortcut");
-                use-underline: true;
-                subtitle: _("Use the Super key to open the overview");
-              }
-            }
-
-            Adw.PreferencesGroup {
-              Adw.ButtonRow reset_all_button_row {
-                title: _("_Reset All…");
-                use-underline: true;
-                activated => $adw_dialog_present(reset_all_dialog);
-
-                styles [
-                  "destructive-action",
-                ]
-              }
-            }
+        Adw.PreferencesGroup {
+          Adw.SwitchRow overview_shortcut_row {
+            title: _("Activities _Overview Shortcut");
+            use-underline: true;
+            subtitle: _("Use the Super key to open the overview");
           }
+        }
 
-          Adw.PreferencesPage search_result_page {}
+        Adw.PreferencesGroup {
+          Adw.ButtonRow reset_all_button_row {
+            title: _("_Reset All…");
+            use-underline: true;
+            activated => $adw_dialog_present(reset_all_dialog);
 
-          Adw.StatusPage empty_results_page {
-            vexpand: true;
-            icon-name: "edit-find-symbolic";
-            title: _("No Results Found");
-            description: _("Try a different search");
+            styles [
+              "destructive-action",
+            ]
           }
-        };
-      };
-    }
+        }
+      }
 
-    Adw.NavigationPage subview_page {
-      /* The title is set dynamically at the code, but is set after the
-       * widgets are constructed/mapped. Adding a blank title here prevents a
-       * warning about AdwNavigationPage missing a title.
-       */
-      title: " ";
+      Adw.PreferencesPage search_result_page {}
 
-      child: Adw.ToolbarView {
-        [top]
-        Adw.HeaderBar {}
+      Adw.StatusPage empty_results_page {
+        vexpand: true;
+        icon-name: "edit-find-symbolic";
+        title: _("No Results Found");
+        description: _("Try a different search");
+      }
+    };
+  };
+}
 
-        content: Stack subview_stack {
-          Stack shortcut_list_stack {
-            vhomogeneous: false;
-          }
+Adw.NavigationPage subview_page {
+  title: " ";
 
-          Adw.StatusPage empty_custom_shortcut_page {
-            vexpand: true;
-            icon-name: "input-keyboard-symbolic";
-            title: _("Add Custom Shortcuts");
-            description: _("Set up custom shortcuts for launching apps, running scripts, and more");
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
 
-            Button {
-              halign: center;
-              use-underline: true;
-              label: _("_Add Shortcut…");
-              clicked => $add_custom_shortcut_clicked_cb(template);
+    content: Stack subview_stack {
+      Stack shortcut_list_stack {
+        vhomogeneous: false;
+      }
 
-              styles [
-                "suggested-action",
-                "pill",
-              ]
-            }
-          }
-        };
-      };
-    }
+      Adw.StatusPage empty_custom_shortcut_page {
+        vexpand: true;
+        icon-name: "input-keyboard-symbolic";
+        title: _("Add Custom Shortcuts");
+        description: _("Set up custom shortcuts for launching apps, running scripts, and more");
+
+        Button {
+          halign: center;
+          use-underline: true;
+          label: _("_Add Shortcut…");
+          clicked => $add_custom_shortcut_clicked_cb(template);
+
+          styles [
+            "suggested-action",
+            "pill",
+          ]
+        }
+      }
+    };
   };
 }
 
