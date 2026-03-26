@@ -461,7 +461,7 @@ unlock_gnome_keyring (CcDesktopSharingPage *self)
                                                  NULL, &error);
   if (!collection)
     {
-      g_debug ("Can't load secret collection: %s", error->message);
+      g_debug ("Can't load secret collection: %s", error ? error->message : "No such collection");
       return;
     }
 
