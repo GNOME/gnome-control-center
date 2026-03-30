@@ -24,8 +24,6 @@
 
 #pragma once
 
-#include <shell/cc-shell.h>
-
 G_BEGIN_DECLS
 
 #define CC_TYPE_BLUETOOTH_PANEL (cc_bluetooth_panel_get_type ())

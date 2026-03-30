@@ -197,15 +197,15 @@ ensure_panel_types (void)
 
 /**
  * cc_panel_loader_load_by_name:
- * @shell: a #CcShell implementation
+ * @window: a #CcWindow
  * @name: name of the panel
  * @parameters: parameters passed to the new panel
  *
  * Creates a new instance of a #CcPanel from @name, and sets the
- * @shell and @parameters properties at construction time.
+ * @window and @parameters properties at construction time.
  */
 CcPanel *
-cc_panel_loader_load_by_name (CcShell *shell, const gchar *name, const gchar *title, GVariant *parameters)
+cc_panel_loader_load_by_name (CcWindow *window, const gchar *name, const gchar *title, GVariant *parameters)
 {
     GType (*get_type) (void);
 
@@ -214,7 +214,7 @@ cc_panel_loader_load_by_name (CcShell *shell, const gchar *name, const gchar *ti
     get_type = g_hash_table_lookup (panel_types, name);
     g_assert (get_type != NULL);
 
-    return g_object_new (get_type (), "shell", shell, "parameters", parameters, "title", title, NULL);
+    return g_object_new (get_type (), "window", window, "parameters", parameters, "title", title, NULL);
 }
 
 #endif /* CC_PANEL_LOADER_NO_GTYPES */

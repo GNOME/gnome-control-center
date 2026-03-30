@@ -35,6 +35,7 @@
 #include "gsd-device-manager.h"
 #include "shell/cc-application.h"
 #include "shell/cc-log.h"
+#include "shell/cc-window.h"
 
 #include <gdk/wayland/gdkwayland.h>
 
@@ -262,11 +263,11 @@ static void
 cc_wacom_panel_dispose (GObject *object)
 {
     CcWacomPanel *self = CC_WACOM_PANEL (object);
-    CcShell *shell;
+    CcWindow *window;
 
-    shell = cc_panel_get_shell (CC_PANEL (self));
-    if (shell) {
-        gtk_widget_remove_controller (GTK_WIDGET (shell), GTK_EVENT_CONTROLLER (self->stylus_gesture));
+    window = cc_panel_get_toplevel (CC_PANEL (self));
+    if (window) {
+        gtk_widget_remove_controller (GTK_WIDGET (window), GTK_EVENT_CONTROLLER (self->stylus_gesture));
     }
 
     g_clear_pointer (&self->devices, g_hash_table_unref);
@@ -493,16 +494,16 @@ static void
 cc_wacom_panel_constructed (GObject *object)
 {
     CcWacomPanel *self = CC_WACOM_PANEL (object);
-    CcShell *shell;
+    CcWindow *window;
 
     G_OBJECT_CLASS (cc_wacom_panel_parent_class)->constructed (object);
 
     /* Add test area button to shell header. */
-    shell = cc_panel_get_shell (CC_PANEL (self));
+    window = cc_panel_get_toplevel (CC_PANEL (self));
 
     self->stylus_gesture = gtk_gesture_stylus_new ();
     g_signal_connect_swapped (self->stylus_gesture, "proximity", G_CALLBACK (on_stylus_proximity_cb), self);
-    gtk_widget_add_controller (GTK_WIDGET (shell), GTK_EVENT_CONTROLLER (self->stylus_gesture));
+    gtk_widget_add_controller (GTK_WIDGET (window), GTK_EVENT_CONTROLLER (self->stylus_gesture));
 
     if (g_getenv ("UMOCKDEV_DIR") != NULL)
         self->mock_stylus_id = g_idle_add_once (show_mock_stylus_cb, self);
@@ -634,13 +635,13 @@ device_added_cb (CcWacomPanel *self, GsdDevice *device)
 void
 cc_wacom_panel_switch_to_panel (CcWacomPanel *self, const char *panel)
 {
-    CcShell *shell;
+    CcWindow *window;
     g_autoptr(GError) error = NULL;
 
     g_return_if_fail (self);
 
-    shell = cc_panel_get_shell (CC_PANEL (self));
-    if (!cc_shell_set_active_panel_from_id (shell, panel, NULL, &error))
+    window = cc_panel_get_toplevel (CC_PANEL (self));
+    if (!cc_window_set_active_panel_from_id (window, panel, NULL, &error))
         g_warning ("Failed to activate '%s' panel: %s", panel, error->message);
 }
 

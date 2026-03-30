@@ -27,6 +27,7 @@
 #include "shell/cc-application.h"
 #include "shell/cc-log.h"
 #include "shell/cc-object-storage.h"
+#include "shell/cc-window.h"
 
 #include <NetworkManager.h>
 #include <glib/gi18n.h>
@@ -180,8 +181,8 @@ wifi_panel_update_qr_image_cb (CcWifiPanel *self)
 
     if (hotspot) {
         g_autofree gchar *str = NULL;
-        g_autoptr(GVariant) secrets = NULL;
-        g_autoptr(GError) error = NULL;
+        g_autoptr (GVariant) secrets = NULL;
+        g_autoptr (GError) error = NULL;
 
         secrets = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (hotspot),
                                                     NM_SETTING_WIRELESS_SECURITY_SETTING_NAME, NULL, &error);
@@ -417,7 +418,7 @@ handle_argv_for_device (CcWifiPanel *self, NetDeviceWifi *net_device)
     NMDevice *device;
     gboolean ret;
 
-    toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
+    toplevel = GTK_WIDGET (cc_panel_get_toplevel (CC_PANEL (self)));
     device = net_device_wifi_get_device (net_device);
     ret = FALSE;
 

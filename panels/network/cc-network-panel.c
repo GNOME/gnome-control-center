@@ -23,6 +23,7 @@
 #include <stdlib.h>
 
 #include "shell/cc-object-storage.h"
+#include "shell/cc-window.h"
 
 #include "cc-network-panel.h"
 #include "cc-network-resources.h"
@@ -275,7 +276,7 @@ panel_refresh_device_titles (CcNetworkPanel *self)
 static gboolean
 handle_argv_for_device (CcNetworkPanel *self, NMDevice *device)
 {
-    GtkWidget *toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
+    GtkWidget *toplevel = GTK_WIDGET (cc_panel_get_toplevel (CC_PANEL (self)));
 
     if (self->arg_operation == OPERATION_NULL)
         return TRUE;

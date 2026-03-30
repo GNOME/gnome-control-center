@@ -26,7 +26,7 @@
 
 #include <bluetooth-settings-widget.h>
 #include <shell/cc-object-storage.h>
-#include <shell/cc-shell.h>
+#include <shell/cc-window.h>
 
 #include "cc-bluetooth-panel.h"
 #include "cc-bluetooth-resources.h"
@@ -194,11 +194,11 @@ airplane_mode_off_button_clicked_cb (CcBluetoothPanel *self)
 static void
 panel_changed_cb (CcBluetoothPanel *self, const char *panel)
 {
-    CcShell *shell;
+    CcWindow *window;
     g_autoptr(GError) error = NULL;
 
-    shell = cc_panel_get_shell (CC_PANEL (self));
-    if (cc_shell_set_active_panel_from_id (shell, panel, NULL, &error) == FALSE)
+    window = cc_panel_get_toplevel (CC_PANEL (self));
+    if (cc_window_set_active_panel_from_id (window, panel, NULL, &error) == FALSE)
         g_warning ("Failed to activate '%s' panel: %s", panel, error->message);
 }
 
