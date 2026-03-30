@@ -36,7 +36,6 @@
 
 #include "cc-application.h"
 #include "cc-panel.h"
-#include "cc-shell.h"
 #include "cc-shell-model.h"
 #include "cc-panel-list.h"
 #include "cc-panel-loader.h"
@@ -73,10 +72,7 @@ struct _CcWindow
   CcPanelListView previous_list_view;
 };
 
-static void     cc_shell_iface_init         (CcShellInterface      *iface);
-
-G_DEFINE_FINAL_TYPE_WITH_CODE (CcWindow, cc_window, ADW_TYPE_APPLICATION_WINDOW,
-                         G_IMPLEMENT_INTERFACE (CC_TYPE_SHELL, cc_shell_iface_init))
+G_DEFINE_FINAL_TYPE (CcWindow, cc_window, ADW_TYPE_APPLICATION_WINDOW)
 
 enum
 {
@@ -133,8 +129,8 @@ activate_panel (CcWindow          *self,
 
   if (self->current_panel)
     g_signal_handlers_disconnect_by_data (self->current_panel, self);
-  self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, name, parameters));
-  cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
+  self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_WINDOW (self), id, name, parameters));
+  cc_window_set_active_panel (CC_WINDOW (self), CC_PANEL (self->current_panel));
 
   adw_navigation_split_view_set_content (self->split_view, ADW_NAVIGATION_PAGE (self->current_panel));
 
@@ -268,9 +264,6 @@ setup_model (CcWindow *self)
   g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), self, G_CONNECT_SWAPPED);
 }
 
-/* Closes any toplevel window which is currently visible and is not @self,
- * taking into account to close any opened dialogs on them too.
- * As for @self, it just checks any opened dialog and close it */
 static void
 close_toplevels_and_dialogs (CcWindow *self)
 {
@@ -281,23 +274,19 @@ close_toplevels_and_dialogs (CcWindow *self)
   for (; item != NULL; item = g_list_next (item))
     {
       GtkWindow *window = GTK_WINDOW (item->data);
-      /* If the toplevel is not CcWindow and is currently visible */
       if (window != GTK_WINDOW (self) && gtk_widget_is_visible (GTK_WIDGET (window)))
         {
-          /* Close any opened dialog of the toplevel*/
           if (ADW_IS_WINDOW (window))
             {
               dialog = adw_window_get_visible_dialog (ADW_WINDOW (window));
               if (dialog)
                 adw_dialog_force_close (dialog);
             }
-          /* Close the toplevel itself */
           gtk_window_close (window);
         }
     }
   g_list_free (toplevels);
 
-  /* Close any opened dialog of CcWindow */
   dialog = adw_application_window_get_visible_dialog (ADW_APPLICATION_WINDOW (self));
   if (dialog)
     adw_dialog_force_close (dialog);
@@ -413,7 +402,7 @@ static void
 set_active_panel (CcWindow *self,
                   CcPanel  *panel)
 {
-  g_return_if_fail (CC_IS_SHELL (self));
+  g_return_if_fail (CC_IS_WINDOW (self));
   g_return_if_fail (panel == NULL || CC_IS_PANEL (panel));
 
   if (panel != self->active_panel)
@@ -536,33 +525,69 @@ search_shortcut_cb (GtkWidget *widget,
   return GDK_EVENT_STOP;
 }
 
-/* CcShell implementation */
-static gboolean
-cc_window_set_active_panel_from_id (CcShell      *shell,
+/**
+ * cc_window_get_active_panel:
+ * @window: A #CcWindow
+ *
+ * Get the current active panel
+ *
+ * Returns: a #CcPanel or NULL if no panel is active
+ */
+CcPanel *
+cc_window_get_active_panel (CcWindow *window)
+{
+  CcPanel *panel = NULL;
+
+  g_return_val_if_fail (CC_IS_WINDOW (window), NULL);
+
+  g_object_get (window, "active-panel", &panel, NULL);
+
+  return panel;
+}
+
+/**
+ * cc_window_set_active_panel:
+ * @window: A #CcWindow
+ * @panel: A #CcPanel
+ *
+ * Set the current active panel. If @panel is NULL, then the window is returned
+ * to a state where no panel is being displayed (for example, the list of panels
+ * may be shown instead).
+ *
+ */
+void
+cc_window_set_active_panel (CcWindow *window,
+                            CcPanel  *panel)
+{
+  g_return_if_fail (CC_IS_WINDOW (window));
+  g_return_if_fail (panel == NULL || CC_IS_PANEL (panel));
+
+  g_object_set (window, "active-panel", panel, NULL);
+}
+
+/**
+ * cc_window_set_active_panel_from_id:
+ * @window: A #CcWindow
+ * @id: The ID of the panel to set as active
+ * @parameters: A #GVariant with additional parameters
+ * @error: A #GError
+ *
+ * Find a panel corresponding to the specified id and set it as active.
+ *
+ * Returns: #TRUE if the panel was found and set as the active panel
+ */
+gboolean
+cc_window_set_active_panel_from_id (CcWindow     *window,
                                     const gchar  *start_id,
                                     GVariant     *parameters,
                                     GError      **error)
 {
-  CcWindow *self = CC_WINDOW (shell);
+  g_return_val_if_fail (window != NULL, FALSE);
 
-  g_return_val_if_fail (self != NULL, FALSE);
-
-  cc_panel_list_center_activated_row (self->panel_list, TRUE);
-  return set_active_panel_from_id (self, start_id, parameters, TRUE, TRUE, error);
+  cc_panel_list_center_activated_row (window->panel_list, TRUE);
+  return set_active_panel_from_id (window, start_id, parameters, TRUE, TRUE, error);
 }
 
-static GtkWidget *
-cc_window_get_toplevel (CcShell *self)
-{
-  return GTK_WIDGET (self);
-}
-
-static void
-cc_shell_iface_init (CcShellInterface *iface)
-{
-  iface->set_active_panel_from_id = cc_window_set_active_panel_from_id;
-  iface->get_toplevel = cc_window_get_toplevel;
-}
 
 static void
 cc_window_unmap (GtkWidget *widget)
@@ -740,7 +765,13 @@ cc_window_class_init (CcWindowClass *klass)
 
   widget_class->unmap = cc_window_unmap;
 
-  g_object_class_override_property (object_class, PROP_ACTIVE_PANEL, "active-panel");
+  g_object_class_install_property (object_class,
+                                   PROP_ACTIVE_PANEL,
+                                   g_param_spec_object ("active-panel",
+                                                        "active panel",
+                                                        "The currently active Panel",
+                                                        CC_TYPE_PANEL,
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_MODEL,
@@ -811,12 +842,12 @@ cc_window_new (GtkApplication *application,
 }
 
 void
-cc_window_set_search_item (CcWindow   *center,
+cc_window_set_search_item (CcWindow   *window,
                            const char *search)
 {
-  gtk_search_bar_set_search_mode (center->search_bar, TRUE);
-  gtk_editable_set_text (GTK_EDITABLE (center->search_entry), search);
-  gtk_editable_set_position (GTK_EDITABLE (center->search_entry), -1);
+  gtk_search_bar_set_search_mode (window->search_bar, TRUE);
+  gtk_editable_set_text (GTK_EDITABLE (window->search_entry), search);
+  gtk_editable_set_position (GTK_EDITABLE (window->search_entry), -1);
 }
 
 void

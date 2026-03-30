@@ -61,8 +61,8 @@ typedef enum
   CC_PANEL_VISIBLE,
 } CcPanelVisibility;
 
-/* cc-shell.h requires CcPanel, so make sure it is defined first */
-#include "cc-shell.h"
+/* Forward declaration to avoid circular includes with cc-window.h */
+typedef struct _CcWindow CcWindow;
 
 G_BEGIN_DECLS
 
@@ -79,7 +79,7 @@ struct _CcPanelClass
   const gchar* (*get_help_uri)       (CcPanel *panel);
 };
 
-CcShell*      cc_panel_get_shell          (CcPanel     *panel);
+CcWindow*     cc_panel_get_toplevel        (CcPanel     *panel);
 
 GPermission*  cc_panel_get_permission     (CcPanel     *panel);
 

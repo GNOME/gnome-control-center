@@ -41,7 +41,7 @@ typedef struct
 
 void     cc_panel_loader_fill_model     (CcShellModel  *model);
 void     cc_panel_loader_list_panels    (void);
-CcPanel *cc_panel_loader_load_by_name   (CcShell       *shell,
+CcPanel *cc_panel_loader_load_by_name   (CcWindow      *window,
                                          const char    *name,
                                          const gchar   *title,
                                          GVariant      *parameters);

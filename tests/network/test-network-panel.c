@@ -71,11 +71,10 @@ fixture_set_up_empty (NetworkPanelFixture  *fixture,
   fixture->shell = GTK_WINDOW (cc_test_window_new ());
 
   fixture->panel = g_object_new (cc_network_panel_get_type (),
-                                 "shell", CC_SHELL (fixture->shell),
                                  NULL);
 
   g_object_ref (fixture->panel);
-  cc_shell_set_active_panel (CC_SHELL (fixture->shell), fixture->panel);
+  g_object_set (fixture->shell, "active-panel", fixture->panel, NULL);
 
   gtk_window_present (fixture->shell);
 }
