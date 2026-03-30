@@ -860,8 +860,6 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
 static void
 cc_keyboard_shortcut_editor_init (CcKeyboardShortcutEditor *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
-
   gtk_widget_init_template (GTK_WIDGET (self));
 
   g_signal_connect (self, "closed",
@@ -872,13 +870,6 @@ cc_keyboard_shortcut_editor_init (CcKeyboardShortcutEditor *self)
   self->mode = CC_SHORTCUT_EDITOR_EDIT;
   self->custom_is_modifier = TRUE;
   self->custom_combo = g_new0 (CcKeyCombo, 1);
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider,
-                                       "/org/gnome/control-center/keyboard/data/cc-keyboard-shortcut-editor.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   gtk_widget_set_direction (GTK_WIDGET (self->shortcut_action_row), GTK_TEXT_DIR_LTR);
   gtk_widget_set_direction (GTK_WIDGET (self->shortcut_accel_label), GTK_TEXT_DIR_LTR);
