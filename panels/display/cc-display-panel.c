@@ -27,6 +27,7 @@
 #include <math.h>
 
 #include "shell/cc-object-storage.h"
+#include "shell/cc-window.h"
 #include <libupower-glib/upower.h>
 
 #include "cc-list-row.h"
@@ -407,11 +408,11 @@ reset_titlebar (CcDisplayPanel *self)
 static void
 active_panel_changed (CcPanel *self)
 {
-  CcShell *shell;
+  CcWindow *window;
   g_autoptr(CcPanel) panel = NULL;
 
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  g_object_get (shell, "active-panel", &panel, NULL);
+  window = cc_panel_get_toplevel (CC_PANEL (self));
+  g_object_get (window, "active-panel", &panel, NULL);
   if (panel != self)
     reset_titlebar (CC_DISPLAY_PANEL (self));
 }
@@ -420,7 +421,7 @@ static void
 cc_display_panel_dispose (GObject *object)
 {
   CcDisplayPanel *self = CC_DISPLAY_PANEL (object);
-  GtkWidget *toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
+  GtkWidget *toplevel = GTK_WIDGET (cc_panel_get_toplevel (CC_PANEL (self)));
 
   reset_titlebar (CC_DISPLAY_PANEL (object));
 
@@ -544,10 +545,9 @@ on_toplevel_escape_pressed_cb (GtkWidget      *widget,
 static void
 cc_display_panel_constructed (GObject *object)
 {
-  CcShell *shell = cc_panel_get_shell (CC_PANEL (object));
-  GtkWidget *toplevel = cc_shell_get_toplevel (shell);
+  GtkWidget *toplevel = GTK_WIDGET (cc_panel_get_toplevel (CC_PANEL (object)));
 
-  g_signal_connect_object (cc_panel_get_shell (CC_PANEL (object)), "notify::active-panel",
+  g_signal_connect_object (toplevel, "notify::active-panel",
                            G_CALLBACK (active_panel_changed), object, G_CONNECT_SWAPPED);
 
   g_signal_connect_swapped (toplevel, "notify::collapsed", G_CALLBACK (on_toplevel_collapsed), object);
@@ -982,11 +982,9 @@ cancel_current_configuration (CcDisplayPanel *panel)
 static void
 mapped_cb (CcDisplayPanel *self)
 {
-  CcShell *shell;
   GtkWidget *toplevel;
 
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  toplevel = cc_shell_get_toplevel (shell);
+  toplevel = GTK_WIDGET (cc_panel_get_toplevel (CC_PANEL (self)));
   if (toplevel && !self->focus_id)
     self->focus_id = g_signal_connect_object (toplevel, "notify::is-active",
                                               G_CALLBACK (dialog_toplevel_is_active_changed), self, G_CONNECT_SWAPPED);

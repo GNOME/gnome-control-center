@@ -39,7 +39,7 @@
 #include <gdesktop-enums.h>
 #include <glib/gi18n-lib.h>
 
-#include "shell/cc-shell.h"
+#include "shell/cc-window.h"
 #include "cc-ua-macros.h"
 #include "cc-ua-hearing-page.h"
 
@@ -72,14 +72,14 @@ static gboolean
 ua_hearing_sound_settings_clicked_cb (CcUaHearingPage *self)
 {
   g_autoptr(GError) error = NULL;
-  CcShell *shell;
+  CcWindow *window;
   CcPanel *panel;
 
   g_assert (CC_IS_UA_HEARING_PAGE (self));
 
   panel = (CcPanel *)gtk_widget_get_ancestor (GTK_WIDGET (self), CC_TYPE_PANEL);
-  shell = cc_panel_get_shell (CC_PANEL (panel));
-  if (!cc_shell_set_active_panel_from_id (shell, "sound", NULL, &error))
+  window = cc_panel_get_toplevel (CC_PANEL (panel));
+  if (!cc_window_set_active_panel_from_id (window, "sound", NULL, &error))
     g_warning ("Failed to activate 'sound' panel: %s", error->message);
 
   return TRUE;

@@ -63,7 +63,7 @@ struct _CcPanelList
 
   /* When true, the next row being activated will be vertically centered on
    * the visible part of panel list. Currently we do that for panels activated
-   * from Search or from the set_active_panel_from_id() CcShell iface */
+   * from Search or from set_active_panel_from_id() in CcWindow */
   gboolean            center_activated_row;
 };
 
@@ -1019,7 +1019,7 @@ cc_panel_list_set_active_panel (CcPanelList *self,
   self->current_panel_id = g_strdup (id);
 
   /* This centering is currently set for panels activated from Search
-   * or from set_active_panel_from_id() CcShell iface */
+   * or from set_active_panel_from_id() in CcWindow */
   if (scroll_to_center)
     {
       /* Scroll the sidebar to the selected panel row, as that row may be

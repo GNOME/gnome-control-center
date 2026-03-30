@@ -29,6 +29,7 @@
 
 #include <gio/gdesktopappinfo.h>
 
+#include "shell/cc-window.h"
 #include "cc-application-shortcut-dialog.h"
 #include "cc-applications-panel.h"
 #include "cc-applications-row.h"
@@ -698,11 +699,10 @@ dialog_closed_cb (CcApplicationsPanel *self)
 static void
 global_shortcuts_cb (CcApplicationsPanel *self)
 {
-  CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
   AdwDialog *shortcut_dialog;
 
   shortcut_dialog = ADW_DIALOG (cc_application_shortcut_dialog_new (self->current_app_id));
-  adw_dialog_present (shortcut_dialog, cc_shell_get_toplevel (shell));
+  adw_dialog_present (shortcut_dialog, GTK_WIDGET (cc_panel_get_toplevel (CC_PANEL (self))));
   g_signal_connect_object (shortcut_dialog, "closed",
                            G_CALLBACK (dialog_closed_cb), self,
                            G_CONNECT_SWAPPED);

@@ -24,6 +24,7 @@
 #include <gdesktop-enums.h>
 #include <gtk/gtk.h>
 
+#include "shell/cc-window.h"
 #include "cc-illustrated-row.h"
 #include "cc-split-row.h"
 #include "cc-list-row-info-button.h"
@@ -449,10 +450,8 @@ cc_mouse_panel_get_help_uri (CcPanel *panel)
 static void
 test_button_row_activated_cb (CcMousePanel *self)
 {
-  CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
-
   gtk_window_set_transient_for (self->mouse_test,
-                                GTK_WINDOW (cc_shell_get_toplevel (shell)));
+                                GTK_WINDOW (cc_panel_get_toplevel (CC_PANEL (self))));
   gtk_window_present (self->mouse_test);
 }
 

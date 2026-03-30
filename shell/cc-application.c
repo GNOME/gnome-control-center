@@ -98,8 +98,8 @@ help_activated (GSimpleAction *action,
 
   if (self->window)
     {
-      window = cc_shell_get_toplevel (CC_SHELL (self->window));
-      panel = cc_shell_get_active_panel (CC_SHELL (self->window));
+      window = GTK_WIDGET (self->window);
+      panel = cc_window_get_active_panel (self->window);
     }
 
   if (panel)
@@ -158,7 +158,7 @@ launch_panel_activated (GSimpleAction *action,
 
   g_application_activate (G_APPLICATION (self));
 
-  if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), panel_id, parameters, &error))
+  if (!cc_window_set_active_panel_from_id (self->window, panel_id, parameters, &error))
     g_warning ("Failed to activate the '%s' panel: %s", panel_id, error->message);
 }
 
@@ -277,7 +277,7 @@ cc_application_command_line (GApplication            *application,
       for (i = 1; start_panels[i] != NULL; i++)
         g_variant_builder_add (&builder, "v", g_variant_new_string (start_panels[i]));
       parameters = g_variant_builder_end (&builder);
-      if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), start_id, parameters, &err))
+      if (!cc_window_set_active_panel_from_id (self->window, start_id, parameters, &err))
         {
           g_warning ("Could not load setting panel \"%s\": %s", start_id,
                      (err) ? err->message : "Unknown error");

@@ -9,14 +9,8 @@
 
 #define FIXED_WIDTH 675
 
-CcShell *
-cc_panel_get_shell (CcPanel *self)
-{
-	return NULL;
-}
-
-GtkWidget *
-cc_shell_get_toplevel (CcShell *shell)
+CcWindow *
+cc_panel_get_toplevel (CcPanel *self)
 {
 	return NULL;
 }

@@ -21,7 +21,6 @@
 #pragma once
 
 #include <adwaita.h>
-#include "cc-shell.h"
 #include "cc-shell-model.h"
 
 G_BEGIN_DECLS
@@ -29,10 +28,21 @@ G_BEGIN_DECLS
 #define CC_TYPE_WINDOW (cc_window_get_type ())
 G_DECLARE_FINAL_TYPE (CcWindow, cc_window, CC, WINDOW, AdwApplicationWindow)
 
+/* Forward declaration to avoid circular includes with cc-panel.h */
+typedef struct _CcPanel CcPanel;
+
 CcWindow *cc_window_new (GtkApplication *application,
                          CcShellModel   *model);
 
-void cc_window_set_search_item (CcWindow *center,
+CcPanel *       cc_window_get_active_panel         (CcWindow     *window);
+void            cc_window_set_active_panel         (CcWindow     *window,
+                                                    CcPanel      *panel);
+gboolean        cc_window_set_active_panel_from_id (CcWindow     *window,
+                                                    const gchar  *id,
+                                                    GVariant     *parameters,
+                                                    GError      **error);
+
+void cc_window_set_search_item (CcWindow   *window,
                                 const char *search);
 
 void cc_window_enable_single_panel_mode (CcWindow *self);

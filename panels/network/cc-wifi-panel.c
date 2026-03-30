@@ -27,6 +27,7 @@
 #include "shell/cc-application.h"
 #include "shell/cc-log.h"
 #include "shell/cc-object-storage.h"
+#include "shell/cc-window.h"
 
 #include <glib/gi18n.h>
 #include <NetworkManager.h>
@@ -468,7 +469,7 @@ handle_argv_for_device (CcWifiPanel *self, NetDeviceWifi *net_device)
   NMDevice *device;
   gboolean ret;
 
-  toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
+  toplevel = GTK_WIDGET (cc_panel_get_toplevel (CC_PANEL (self)));
   device = net_device_wifi_get_device (net_device);
   ret = FALSE;
 
