@@ -61,7 +61,6 @@ common_sources = files(
   'cc-object-storage.c',
   'cc-panel-loader.c',
   'cc-panel.c',
-  'cc-shell.c',
   'cc-panel-list.c',
   'cc-window.c',
 )

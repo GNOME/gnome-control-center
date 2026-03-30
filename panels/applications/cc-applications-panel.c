@@ -37,6 +37,7 @@
 #include "cc-list-row-info-button.h"
 #include "cc-list-row.h"
 #include "cc-removable-media-settings.h"
+#include "shell/cc-window.h"
 #ifdef HAVE_SNAP
 #include "cc-snap-row.h"
 #include "cc-snapd-client.h"
@@ -166,7 +167,7 @@ enum {
 static gboolean
 gnome_software_is_installed (void)
 {
-    g_autoptr(GDesktopAppInfo) info = NULL;
+    g_autoptr (GDesktopAppInfo) info = NULL;
 
     info = g_desktop_app_info_new (GNOME_SOFTWARE_DESKTOP_ID);
     return info != NULL;
@@ -177,8 +178,8 @@ gnome_software_is_installed (void)
 static void
 open_software_details_cb (GObject *source_object, GAsyncResult *result, gpointer user_data)
 {
-    g_autoptr(GVariant) retval = NULL;
-    g_autoptr(GError) error = NULL;
+    g_autoptr (GVariant) retval = NULL;
+    g_autoptr (GError) error = NULL;
 
     retval = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object), result, &error);
     if (retval == NULL)
@@ -197,7 +198,7 @@ open_software_cb (CcApplicationsPanel *self)
     g_autofree gchar *app_id = NULL;
 
     if (!self->current_app_id) {
-        g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (GNOME_SOFTWARE_DESKTOP_ID));
+        g_autoptr (GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (GNOME_SOFTWARE_DESKTOP_ID));
         if (info)
             g_app_info_launch (info, NULL, NULL, NULL);
         return;
@@ -665,11 +666,10 @@ dialog_closed_cb (CcApplicationsPanel *self)
 static void
 global_shortcuts_cb (CcApplicationsPanel *self)
 {
-    CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
     AdwDialog *shortcut_dialog;
 
     shortcut_dialog = ADW_DIALOG (cc_application_shortcut_dialog_new (self->current_app_id));
-    adw_dialog_present (shortcut_dialog, cc_shell_get_toplevel (shell));
+    adw_dialog_present (shortcut_dialog, GTK_WIDGET (cc_panel_get_toplevel (CC_PANEL (self))));
     g_signal_connect_object (shortcut_dialog, "closed", G_CALLBACK (dialog_closed_cb), self, G_CONNECT_SWAPPED);
 }
 

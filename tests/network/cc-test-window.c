@@ -33,7 +33,7 @@
 
 #include "cc-util.h"
 #include "shell/cc-panel.h"
-#include "shell/cc-shell.h"
+#include "shell/cc-window.h"
 
 struct _CcTestWindow {
     GtkWindow parent;
@@ -44,10 +44,7 @@ struct _CcTestWindow {
     CcPanel *active_panel;
 };
 
-static void cc_shell_iface_init (CcShellInterface *iface);
-
-G_DEFINE_FINAL_TYPE_WITH_CODE (CcTestWindow, cc_test_window, GTK_TYPE_WINDOW,
-                               G_IMPLEMENT_INTERFACE (CC_TYPE_SHELL, cc_shell_iface_init))
+G_DEFINE_FINAL_TYPE (CcTestWindow, cc_test_window, GTK_TYPE_WINDOW)
 
 enum {
     PROP_0,
@@ -57,7 +54,6 @@ enum {
 static void
 set_active_panel (CcTestWindow *shell, CcPanel *panel)
 {
-    g_assert (CC_IS_SHELL (shell));
     g_assert (CC_IS_PANEL (panel));
 
     /* Only allow setting to a non NULL value once. */
@@ -67,27 +63,6 @@ set_active_panel (CcTestWindow *shell, CcPanel *panel)
         shell->active_panel = g_object_ref (panel);
         gtk_box_append (GTK_BOX (shell->main_box), GTK_WIDGET (panel));
     }
-}
-
-/* CcShell implementation */
-static gboolean
-cc_test_window_set_active_panel_from_id (CcShell *shell, const gchar *start_id, GVariant *parameters, GError **error)
-{
-    /* Not implemented */
-    g_assert_not_reached ();
-}
-
-static GtkWidget *
-cc_test_window_get_toplevel (CcShell *shell)
-{
-    return GTK_WIDGET (shell);
-}
-
-static void
-cc_shell_iface_init (CcShellInterface *iface)
-{
-    iface->set_active_panel_from_id = cc_test_window_set_active_panel_from_id;
-    iface->get_toplevel = cc_test_window_get_toplevel;
 }
 
 /* GObject Implementation */

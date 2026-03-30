@@ -33,6 +33,7 @@
 #include "config.h"
 
 #include "cc-panel.h"
+#include "cc-window.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -41,7 +42,7 @@
 #include <gtk/gtk.h>
 
 typedef struct {
-    CcShell *shell;
+    CcWindow *window;
     GCancellable *cancellable;
 
     AdwNavigationView *navigation;
@@ -58,7 +59,7 @@ G_DEFINE_TYPE_WITH_CODE (CcPanel, cc_panel, ADW_TYPE_NAVIGATION_PAGE,
 
 enum {
     PROP_0,
-    PROP_SHELL,
+    PROP_WINDOW,
     PROP_PARAMETERS,
     N_PROPS
 };
@@ -130,9 +131,9 @@ cc_panel_set_property (GObject *object, guint prop_id, const GValue *value, GPar
     CcPanelPrivate *priv = cc_panel_get_instance_private (CC_PANEL (object));
 
     switch (prop_id) {
-    case PROP_SHELL:
+    case PROP_WINDOW:
         /* construct only property */
-        priv->shell = g_value_get_object (value);
+        priv->window = g_value_get_object (value);
         break;
 
     case PROP_PARAMETERS: {
@@ -177,8 +178,8 @@ cc_panel_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec
     CcPanelPrivate *priv = cc_panel_get_instance_private (CC_PANEL (object));
 
     switch (prop_id) {
-    case PROP_SHELL:
-        g_value_set_object (value, priv->shell);
+    case PROP_WINDOW:
+        g_value_set_object (value, priv->window);
         break;
 
     default:
@@ -209,8 +210,8 @@ cc_panel_class_init (CcPanelClass *klass)
     object_class->set_property = cc_panel_set_property;
     object_class->finalize = cc_panel_finalize;
 
-    properties[PROP_SHELL] = g_param_spec_object ("shell", NULL, NULL, CC_TYPE_SHELL,
-                                                  G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+    properties[PROP_WINDOW] = g_param_spec_object ("window", NULL, NULL, CC_TYPE_WINDOW,
+                                                   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
     properties[PROP_PARAMETERS] = g_param_spec_variant ("parameters", NULL, NULL, G_VARIANT_TYPE ("av"), NULL,
                                                         G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
@@ -236,15 +237,15 @@ cc_panel_init (CcPanel *panel)
 }
 
 /**
- * cc_panel_get_shell:
+ * cc_panel_get_toplevel:
  * @panel: A #CcPanel
  *
- * Get the shell that the panel resides in
+ * Get the toplevel window that the panel resides in.
  *
- * Returns: a #CcShell
+ * Returns: a #CcWindow
  */
-CcShell *
-cc_panel_get_shell (CcPanel *panel)
+CcWindow *
+cc_panel_get_toplevel (CcPanel *panel)
 {
     CcPanelPrivate *priv;
 
@@ -252,7 +253,7 @@ cc_panel_get_shell (CcPanel *panel)
 
     priv = cc_panel_get_instance_private (panel);
 
-    return priv->shell;
+    return priv->window;
 }
 
 const gchar *
