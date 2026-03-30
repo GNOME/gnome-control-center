@@ -28,7 +28,6 @@
 
 #include <gio/gio.h>
 #include <gtk/gtk.h>
-#include <gdk/gdkkeysyms.h>
 #include <string.h>
 
 #include "shell/cc-panel.h"
@@ -130,7 +129,13 @@ cc_test_window_class_init (CcTestWindowClass *klass)
   object_class->set_property = cc_test_window_set_property;
   object_class->dispose = cc_test_window_dispose;
 
-  g_object_class_override_property (object_class, PROP_ACTIVE_PANEL, "active-panel");
+  g_object_class_install_property (object_class,
+                                   PROP_ACTIVE_PANEL,
+                                   g_param_spec_object ("active-panel",
+                                                        "active panel",
+                                                        "The currently active Panel",
+                                                        CC_TYPE_PANEL,
+                                                        G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 static void
