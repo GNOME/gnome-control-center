@@ -1463,12 +1463,6 @@ cc_wwan_data_apn_get_initial_eps_apn (CcWwanDataApn *apn)
       setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
       return nm_setting_gsm_get_initial_eps_apn (setting);
     }
-  /*
-  else if (apn->access_method)
-    {
-      return nma_mobile_access_method_get_3gpp_apn (apn->access_method);
-    }
-  */
 
   return NULL;
 }
@@ -1599,12 +1593,6 @@ cc_wwan_data_apn_get_initial_eps_password (CcWwanDataApn *apn)
       setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
       return nm_setting_gsm_get_initial_eps_password (setting);
     }
-  /*
-  else if (apn->access_method)
-    {
-      return nma_mobile_access_method_get_password (apn->access_method);
-    }
-  */
 
   return NULL;
 }
@@ -1793,12 +1781,6 @@ cc_wwan_data_apn_should_configure_initial_eps_bearer (CcWwanDataApn *apn)
     setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
     apn_type = nm_setting_gsm_get_initial_eps_config (setting);
   }
-  /*
-  else if (apn->access_method)
-    {
-      apn_name = nma_mobile_access_method_get_3gpp_apn (apn->access_method);
-    }
-  */
 
   return apn_type;
 }
