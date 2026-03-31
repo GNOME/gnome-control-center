@@ -229,10 +229,6 @@ get_connection_security_type (NMConnection *c)
 
   key_mgmt = nm_setting_wireless_security_get_key_mgmt (setting);
 
-  /* No IEEE 802.1x */
-  if (g_strcmp0 (key_mgmt, "none") == 0)
-    return "WEP";
-
   if (g_strcmp0 (key_mgmt, "wpa-psk") == 0)
     return "WPA";
 
@@ -266,8 +262,7 @@ is_qr_code_supported (NMConnection *c)
 
   key_mgmt = nm_setting_wireless_security_get_key_mgmt (setting);
 
-  if (g_str_equal (key_mgmt, "none") ||
-      g_str_equal (key_mgmt, "wpa-psk") ||
+  if (g_str_equal (key_mgmt, "wpa-psk") ||
       g_str_equal (key_mgmt, "sae"))
     return TRUE;
 
@@ -279,7 +274,6 @@ get_wifi_password (NMConnection *c)
 {
   NMSettingWirelessSecurity *setting;
   const gchar *sec_type, *password;
-  gint wep_index;
 
   sec_type = get_connection_security_type (c);
   setting = nm_connection_get_setting_wireless_security (c);
@@ -287,15 +281,7 @@ get_wifi_password (NMConnection *c)
   if (g_str_equal (sec_type, "nopass"))
     return NULL;
 
-  if (g_str_equal (sec_type, "WEP"))
-    {
-      wep_index = nm_setting_wireless_security_get_wep_tx_keyidx (setting);
-      password = nm_setting_wireless_security_get_wep_key (setting, wep_index);
-    }
-  else
-    {
-      password = nm_setting_wireless_security_get_psk (setting);
-    }
+  password = nm_setting_wireless_security_get_psk (setting);
 
   return g_strdup (password);
 }

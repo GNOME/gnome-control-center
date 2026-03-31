@@ -76,14 +76,10 @@ get_default_type_for_security (NMSettingWirelessSecurity *sec)
         key_mgmt = nm_setting_wireless_security_get_key_mgmt (sec);
         auth_alg = nm_setting_wireless_security_get_auth_alg (sec);
 
-        /* No IEEE 802.1x */
-        if (!strcmp (key_mgmt, "none"))
-                return NMU_SEC_STATIC_WEP;
-
         if (!strcmp (key_mgmt, "ieee8021x")) {
                 if (auth_alg && !strcmp (auth_alg, "leap"))
                         return NMU_SEC_LEAP;
-                return NMU_SEC_DYNAMIC_WEP;
+                return NMU_SEC_INVALID;
         }
 
 #if NM_CHECK_VERSION(1,24,0)
@@ -237,9 +233,7 @@ finish_setup (CEPageSecurity *self)
 
         self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-        dev_caps =   NM_WIFI_DEVICE_CAP_CIPHER_WEP40
-                   | NM_WIFI_DEVICE_CAP_CIPHER_WEP104
-                   | NM_WIFI_DEVICE_CAP_CIPHER_TKIP
+        dev_caps =   NM_WIFI_DEVICE_CAP_CIPHER_TKIP
                    | NM_WIFI_DEVICE_CAP_CIPHER_CCMP
                    | NM_WIFI_DEVICE_CAP_WPA
                    | NM_WIFI_DEVICE_CAP_RSN;
@@ -277,38 +271,6 @@ finish_setup (CEPageSecurity *self)
         }
 #endif
 
-        if (nm_utils_security_valid (NMU_SEC_STATIC_WEP, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
-                NMAWsWepKey *ws_wep;
-                NMWepKeyType wep_type = NM_WEP_KEY_TYPE_KEY;
-
-                if (default_type == NMU_SEC_STATIC_WEP) {
-                        sws = nm_connection_get_setting_wireless_security (self->connection);
-                        if (sws)
-                                wep_type = nm_setting_wireless_security_get_wep_key_type (sws);
-                        if (wep_type == NM_WEP_KEY_TYPE_UNKNOWN)
-                                wep_type = NM_WEP_KEY_TYPE_KEY;
-                }
-
-                ws_wep = nma_ws_wep_key_new (self->connection, NM_WEP_KEY_TYPE_KEY, FALSE, FALSE);
-                if (ws_wep) {
-                        add_security_item (self, NMA_WS (ws_wep), sec_model,
-                                           &iter, _("WEP 40/128-bit Key (Hex or ASCII)"),
-                                           TRUE);
-                        if ((active < 0) && (default_type == NMU_SEC_STATIC_WEP) && (wep_type == NM_WEP_KEY_TYPE_KEY))
-                                active = item;
-                        item++;
-                }
-
-                ws_wep = nma_ws_wep_key_new (self->connection, NM_WEP_KEY_TYPE_PASSPHRASE, FALSE, FALSE);
-                if (ws_wep) {
-                        add_security_item (self, NMA_WS (ws_wep), sec_model,
-                                           &iter, _("WEP 128-bit Passphrase"), TRUE);
-                        if ((active < 0) && (default_type == NMU_SEC_STATIC_WEP) && (wep_type == NM_WEP_KEY_TYPE_PASSPHRASE))
-                                active = item;
-                        item++;
-                }
-        }
-
         if (nm_utils_security_valid (NMU_SEC_LEAP, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
                 NMAWsLeap *ws_leap;
 
@@ -317,19 +279,6 @@ finish_setup (CEPageSecurity *self)
                         add_security_item (self, NMA_WS (ws_leap), sec_model,
                                            &iter, _("LEAP"), FALSE);
                         if ((active < 0) && (default_type == NMU_SEC_LEAP))
-                                active = item;
-                        item++;
-                }
-        }
-
-        if (nm_utils_security_valid (NMU_SEC_DYNAMIC_WEP, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
-                NMAWsDynamicWep *ws_dynamic_wep;
-
-                ws_dynamic_wep = nma_ws_dynamic_wep_new (self->connection, TRUE, FALSE);
-                if (ws_dynamic_wep) {
-                        add_security_item (self, NMA_WS (ws_dynamic_wep), sec_model,
-                                           &iter, _("Dynamic WEP (802.1x)"), FALSE);
-                        if ((active < 0) && (default_type == NMU_SEC_DYNAMIC_WEP))
                                 active = item;
                         item++;
                 }
@@ -526,8 +475,7 @@ ce_page_security_new (NMConnection *connection)
         if (sws)
                 default_type = get_default_type_for_security (sws);
 
-        if (default_type == NMU_SEC_STATIC_WEP ||
-            default_type == NMU_SEC_LEAP ||
+        if (default_type == NMU_SEC_LEAP ||
             default_type == NMU_SEC_WPA_PSK ||
 #if NM_CHECK_VERSION(1,20,6)
 	    default_type == NMU_SEC_SAE ||
@@ -539,8 +487,7 @@ ce_page_security_new (NMConnection *connection)
                 self->security_setting = NM_SETTING_WIRELESS_SECURITY_SETTING_NAME;
         }
 
-        if (default_type == NMU_SEC_DYNAMIC_WEP ||
-            default_type == NMU_SEC_WPA_ENTERPRISE ||
+        if (default_type == NMU_SEC_WPA_ENTERPRISE ||
             default_type == NMU_SEC_WPA2_ENTERPRISE) {
                 self->security_setting = NM_SETTING_802_1X_SETTING_NAME;
         }
