@@ -61,7 +61,6 @@ typedef enum
 {
   NM_AP_SEC_UNKNOWN,
   NM_AP_SEC_NONE,
-  NM_AP_SEC_WEP,
   NM_AP_SEC_WPA,
   NM_AP_SEC_WPA2,
   NM_AP_SEC_SAE,
@@ -94,12 +93,6 @@ get_access_point_security (NMAccessPoint *ap)
       rsn_flags == NM_802_11_AP_SEC_NONE)
     {
       type = NM_AP_SEC_NONE;
-    }
-  else if ((flags & NM_802_11_AP_FLAGS_PRIVACY) &&
-           wpa_flags == NM_802_11_AP_SEC_NONE &&
-           rsn_flags == NM_802_11_AP_SEC_NONE)
-    {
-      type = NM_AP_SEC_WEP;
     }
   else if (!(flags & NM_802_11_AP_FLAGS_PRIVACY) &&
            wpa_flags != NM_802_11_AP_SEC_NONE &&
@@ -149,10 +142,6 @@ get_connection_security (NMConnection *con)
 
   if (!key_mgmt)
     return NM_AP_SEC_NONE;
-  else if (g_str_equal (key_mgmt, "none"))
-    return NM_AP_SEC_WEP;
-  else if (g_str_equal (key_mgmt, "ieee8021x"))
-    return NM_AP_SEC_WEP;
   else if (g_str_equal (key_mgmt, "wpa-eap"))
     return NM_AP_SEC_WPA2;
   else if (strncmp (key_mgmt, "wpa-", 4) == 0)
@@ -267,12 +256,7 @@ update_ui (CcWifiConnectionRow *self)
       const gchar *icon_name = "lock-small-symbolic";
 
       gtk_widget_set_child_visible (GTK_WIDGET (self->encrypted_icon), TRUE);
-      if (security == NM_AP_SEC_WEP)
-	{
-          icon_name = "warning-small-symbolic";
-	  gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Insecure network (WEP)"));
-	}
-      else if (security == NM_AP_SEC_WPA)
+      if (security == NM_AP_SEC_WPA)
 	{
           gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA)"));
 	}

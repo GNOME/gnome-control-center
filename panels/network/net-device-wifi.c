@@ -227,16 +227,8 @@ device_get_hotspot_security_details (NetDeviceWifi *self,
         tmp_secret = NULL;
         tmp_security = C_("Wifi security", "None");
 
-        /* Key management values:
-         * "none" = WEP or no password protection
-         * "wpa-psk" = WPAv2 Ad-Hoc mode (eg IBSS RSN) and AP-mode WPA v1 and v2
-         */
         key_mgmt = nm_setting_wireless_security_get_key_mgmt (sws);
-        if (strcmp (key_mgmt, "none") == 0) {
-                tmp_secret = nm_setting_wireless_security_get_wep_key (sws, 0);
-                tmp_security = _("WEP");
-        }
-        else if (strcmp (key_mgmt, "wpa-psk") == 0) {
+        if (strcmp (key_mgmt, "wpa-psk") == 0) {
                 tmp_secret = nm_setting_wireless_security_get_psk (sws);
                 tmp_security = _("WPA");
         } else {

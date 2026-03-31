@@ -103,20 +103,12 @@ static gchar *
 get_ap_security_string (NMAccessPoint *ap)
 {
         NM80211ApSecurityFlags wpa_flags, rsn_flags;
-        NM80211ApFlags flags;
         GString *str;
 
-        flags = nm_access_point_get_flags (ap);
         wpa_flags = nm_access_point_get_wpa_flags (ap);
         rsn_flags = nm_access_point_get_rsn_flags (ap);
 
         str = g_string_new ("");
-        if ((flags & NM_802_11_AP_FLAGS_PRIVACY) &&
-            (wpa_flags == NM_802_11_AP_SEC_NONE) &&
-            (rsn_flags == NM_802_11_AP_SEC_NONE)) {
-                /* TRANSLATORS: this WEP WiFi security */
-                g_string_append_printf (str, "%s, ", _("WEP"));
-        }
         if (wpa_flags != NM_802_11_AP_SEC_NONE) {
                 /* TRANSLATORS: this WPA WiFi security */
                 g_string_append_printf (str, "%s, ", _("WPA"));
