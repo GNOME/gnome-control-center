@@ -1261,21 +1261,18 @@ cc_wwan_data_apn_set_name (CcWwanDataApn *apn,
 const gchar *
 cc_wwan_data_apn_get_apn (CcWwanDataApn *apn)
 {
-  const gchar *apn_name;
-
   if (apn->remote_connection)
     {
       NMSettingGsm *setting;
 
       setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
-      apn_name = nm_setting_gsm_get_apn (setting);
-    }
-  else if (apn->access_method)
-    {
-      apn_name = nma_mobile_access_method_get_3gpp_apn (apn->access_method);
+      return nm_setting_gsm_get_apn (setting);
     }
 
-  return apn_name;
+  if (apn->access_method)
+    return nma_mobile_access_method_get_3gpp_apn (apn->access_method);
+
+  return NULL;
 }
 
 /**
@@ -1324,21 +1321,18 @@ cc_wwan_data_apn_set_apn (CcWwanDataApn *apn,
 const gchar *
 cc_wwan_data_apn_get_username (CcWwanDataApn *apn)
 {
-  const gchar *username;
-
   if (apn->remote_connection)
     {
       NMSettingGsm *setting;
 
       setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
-      username = nm_setting_gsm_get_username (setting);
-    }
-  else if (apn->access_method)
-    {
-      username = nma_mobile_access_method_get_username (apn->access_method);
+      return nm_setting_gsm_get_username (setting);
     }
 
-  return username;
+  if (apn->access_method)
+    return nma_mobile_access_method_get_username (apn->access_method);
+
+  return NULL;
 }
 
 /**
@@ -1385,8 +1379,6 @@ cc_wwan_data_apn_set_username (CcWwanDataApn *apn,
 const gchar *
 cc_wwan_data_apn_get_password (CcWwanDataApn *apn)
 {
-  const gchar *password;
-
   if (NM_IS_REMOTE_CONNECTION (apn->remote_connection))
     {
       g_autoptr(GVariant) secrets = NULL;
@@ -1411,14 +1403,13 @@ cc_wwan_data_apn_get_password (CcWwanDataApn *apn)
       NMSettingGsm *setting;
 
       setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
-      password = nm_setting_gsm_get_password (setting);
-    }
-  else if (apn->access_method)
-    {
-      password = nma_mobile_access_method_get_password (apn->access_method);
+      return nm_setting_gsm_get_password (setting);
     }
 
-  return password;
+  if (apn->access_method)
+    return nma_mobile_access_method_get_password (apn->access_method);
+
+  return NULL;
 }
 
 /**
