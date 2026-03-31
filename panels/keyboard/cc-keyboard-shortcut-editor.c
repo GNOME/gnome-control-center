@@ -52,7 +52,6 @@ struct _CcKeyboardShortcutEditor
 
   CcKeyboardManager  *manager;
   CcKeyboardItem     *item;
-  GBinding           *reset_item_binding;
 
   CcKeyboardItem     *collision_item;
 
@@ -84,7 +83,6 @@ typedef enum
 {
   HEADER_MODE_NONE,
   HEADER_MODE_ADD,
-  HEADER_MODE_SET,
   HEADER_MODE_CUSTOM_CANCEL,
   HEADER_MODE_CUSTOM_EDIT
 } HeaderMode;
@@ -500,42 +498,6 @@ replace_button_clicked_cb (CcKeyboardShortcutEditor *self)
 }
 
 static void
-reset_custom_clicked_cb (CcKeyboardShortcutEditor *self)
-{
-  if (self->item)
-    cc_keyboard_manager_reset_shortcut (self->manager, self->item);
-
-  set_header_mode (self, self->mode == CC_SHORTCUT_EDITOR_EDIT ? HEADER_MODE_CUSTOM_EDIT : HEADER_MODE_ADD);
-
-  gtk_widget_set_visible (GTK_WIDGET (self->new_shortcut_conflict_label), FALSE);
-
-  self->collision_item = NULL;
-  memset (self->custom_combo, 0, sizeof (CcKeyCombo));
-}
-
-static void
-reset_item_clicked_cb (CcKeyboardShortcutEditor *self)
-{
-  CcKeyCombo combo;
-  gchar *accel;
-
-  /* Reset first, then update the shortcut */
-  cc_keyboard_manager_reset_shortcut (self->manager, self->item);
-
-  combo = cc_keyboard_item_get_primary_combo (self->item);
-  accel = gtk_accelerator_name (combo.keyval, combo.mask);
-  gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->shortcut_accel_label), accel);
-
-  set_header_mode (self, HEADER_MODE_CUSTOM_CANCEL);
-
-  gtk_widget_set_visible (GTK_WIDGET (self->shortcut_accel_label), FALSE);
-  gtk_widget_set_visible (GTK_WIDGET (self->shortcut_conflict_label), FALSE);
-
-  memset (self->custom_combo, 0, sizeof (CcKeyCombo));
-  g_free (accel);
-}
-
-static void
 set_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
   update_shortcut (self);
@@ -595,8 +557,6 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self)
 
   /* Accelerator label */
   gtk_shortcut_label_set_accelerator (self->shortcut_accel_label, accel);
-
-  g_clear_pointer (&self->reset_item_binding, g_binding_unbind);
 
   /* Setup the custom entries */
   if (is_custom)
@@ -853,8 +813,6 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_key_pressed_cb);
   gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, replace_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, reset_custom_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, reset_item_clicked_cb);
 }
 
 static void
