@@ -156,7 +156,7 @@ cc_keyboard_shortcut_get_description (CcKeyboardShortcutEditor *self)
       description = original;
     }
 
-    return g_strdup (description);
+    return description;
 }
 
 static const gchar*
@@ -179,7 +179,7 @@ cc_keyboard_shortcut_get_command (CcKeyboardShortcutEditor *self)
       command = original;
     }
 
-    return g_strdup (command);
+    return command;
 }
 
 static const char*
@@ -190,11 +190,11 @@ cc_keyboard_shortcut_get_info_action_label (CcKeyboardShortcutEditor *self)
 
   if (!self->item || is_empty_binding (self->custom_combo))
     {
-      return g_strdup (info_action);
+      return info_action;
     }
   else
     {
-      return g_strdup (info_action_complete);
+      return info_action_complete;
     }
 }
 
