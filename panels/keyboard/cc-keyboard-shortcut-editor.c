@@ -304,10 +304,6 @@ update_shortcut (CcKeyboardShortcutEditor *self)
   if (!self->item)
     return;
 
-  /* Backspace disabled */
-  if (!self->edited)
-    cc_keyboard_item_disable (self->item);
-
   /* Setup the binding */
   apply_custom_item_fields (self, self->item);
 
