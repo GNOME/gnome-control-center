@@ -415,6 +415,7 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
                                                 cc_keyboard_item_get_description (collision_item));
 
       gtk_label_set_markup (collision_label, collision_text);
+      gtk_widget_set_visible (GTK_WIDGET (self->remove_button), FALSE);
     }
   gtk_widget_set_visible (GTK_WIDGET (collision_label), collision_item != NULL);
 

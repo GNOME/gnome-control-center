@@ -3,7 +3,7 @@ using Adw 1;
 
 template $CcKeyboardShortcutEditor: Adw.Dialog {
   content-width: 500;
-  content-height: 390;
+  content-height: 350;
 
   child: Adw.ToolbarView {
     [top]
@@ -110,6 +110,7 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
         Adw.PreferencesGroup {
           Label shortcut_conflict_label {
             justify: center;
+            visible: false;
             wrap: true;
             wrap-mode: char;
             width-chars: 0;
@@ -162,10 +163,9 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
               "pill",
             ]
           }
-        }
 
-        Adw.PreferencesGroup {
           Label new_shortcut_conflict_label {
+            visible: false;
             justify: center;
             wrap: true;
             wrap-mode: char;
