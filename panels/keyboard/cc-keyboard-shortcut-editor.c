@@ -39,7 +39,7 @@ struct _CcKeyboardShortcutEditor
   AdwEntryRow        *name_entry;
   GtkLabel           *new_shortcut_conflict_label;
   GtkButton          *remove_button;
-  GtkShortcutLabel   *shortcut_accel_label;
+  AdwShortcutLabel   *shortcut_accel_label;
   GtkLabel           *shortcut_conflict_label;
   AdwPreferencesPage *standard_page;
   GtkStack           *stack;
@@ -377,7 +377,7 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
       set_shortcut_editor_page (self, PAGE_STANDARD);
 
       accel = gtk_accelerator_name (self->custom_combo->keyval, self->custom_combo->mask);
-      gtk_shortcut_label_set_accelerator (self->shortcut_accel_label, accel);
+      adw_shortcut_label_set_accelerator (self->shortcut_accel_label, accel);
 
       gtk_widget_set_visible (GTK_WIDGET (self->shortcut_accel_label), !is_accel_empty);
       gtk_widget_set_visible (GTK_WIDGET (self->shortcut_disabled_label), is_accel_empty);
@@ -553,7 +553,7 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self)
   gtk_label_set_text (self->info_action_label, cc_keyboard_shortcut_get_info_action_label (self));
 
   /* Accelerator label */
-  gtk_shortcut_label_set_accelerator (self->shortcut_accel_label, accel);
+  adw_shortcut_label_set_accelerator (self->shortcut_accel_label, accel);
 
   /* Setup the custom entries */
   if (is_custom)
