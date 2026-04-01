@@ -208,4 +208,7 @@ gboolean          cc_display_mode_is_preferred              (CcDisplayMode     *
 int               cc_display_mode_get_freq                  (CcDisplayMode     *mode);
 double            cc_display_mode_get_freq_f                (CcDisplayMode     *mode);
 
+gboolean          cc_display_same_scale                     (double a,
+                                                             double b);
+
 G_END_DECLS

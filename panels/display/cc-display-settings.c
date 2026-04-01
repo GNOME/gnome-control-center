@@ -607,13 +607,14 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       g_autofree gchar *scale_str = NULL;
       g_autoptr(GObject) value_object = NULL;
       double scale = g_array_index (scales, double, i);
+      double selected_scale;
       AdwToggle *scale_toggle;
       gboolean is_selected;
 
       /* ComboRow */
       scale_str = make_scale_string (scale);
-      is_selected = G_APPROX_VALUE (cc_display_monitor_get_scale (self->selected_output),
-                                    scale, DBL_EPSILON);
+      selected_scale = cc_display_monitor_get_scale (self->selected_output);
+      is_selected = cc_display_same_scale (scale, selected_scale);
 
       gtk_string_list_append (GTK_STRING_LIST (self->scale_list), scale_str);
       value_object = g_list_model_get_item (self->scale_list, i);
