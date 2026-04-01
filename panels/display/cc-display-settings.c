@@ -37,7 +37,7 @@ struct _CcDisplaySettings
   CcDisplayPanel   *panel;
 
   gboolean          updating;
-  gboolean          num_scales;
+  guint             num_scales;
   gboolean          collapsed;
   guint             idle_udpate_id;
 
