@@ -35,7 +35,8 @@ template $CcSharingPanel: $CcPanel {
             show-arrow: true;
             subtitle: _("Stream music, photos and videos to devices on the current network");
             title: _("_Media Sharing");
-            activated => $adw_dialog_present(media_sharing_dialog);
+            action-name: "navigation.push";
+            action-target: "'media-sharing'";
           }
         }
       };
@@ -119,38 +120,38 @@ template $CcSharingPanel: $CcPanel {
       };
     };
   }
-}
 
-Adw.Dialog media_sharing_dialog {
-  can-close: false;
-  title: _("Media Sharing");
-  content-width: 360;
+  [subpage]
+  Adw.NavigationPage {
+    tag: "media-sharing";
+    title: _("Media Sharing");
 
-  child: Adw.ToolbarView {
-    [top]
-    Adw.HeaderBar {}
+    child: Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {}
 
-    content: Adw.PreferencesPage media_sharing_page {
-      description: _("Media sharing allows streaming pictures, music and video to DLNA enabled devices on the current network.");
+      content: Adw.PreferencesPage media_sharing_page {
+        description: _("Media sharing allows streaming pictures, music and video to DLNA enabled devices on the current network.");
 
-      Adw.PreferencesGroup {
-        Adw.ActionRow media_sharing_enable_row {
-          title: _("_Media Sharing");
-          use-underline: true;
+        Adw.PreferencesGroup {
+          Adw.ActionRow media_sharing_enable_row {
+            title: _("_Media Sharing");
+            use-underline: true;
+          }
         }
-      }
 
-      Adw.PreferencesGroup {
-        title: _("Folders");
+        Adw.PreferencesGroup {
+          title: _("Folders");
 
-        ListBox shared_folders_listbox {
-          selection-mode: none;
+          ListBox shared_folders_listbox {
+            selection-mode: none;
 
-          styles [
-            "boxed-list",
-          ]
+            styles [
+              "boxed-list",
+            ]
+          }
         }
-      }
+      };
     };
-  };
+  }
 }

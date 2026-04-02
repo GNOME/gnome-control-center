@@ -50,7 +50,6 @@ struct _CcSharingPanel
   CcPanel parent_instance;
 
   GtkWidget *hostname_entry;
-  AdwDialog *media_sharing_dialog;
   AdwPreferencesPage *media_sharing_page;
   AdwActionRow *media_sharing_enable_row;
   GtkWidget *media_sharing_row;
@@ -74,14 +73,6 @@ CC_PANEL_REGISTER (CcSharingPanel, cc_sharing_panel)
 static void
 cc_sharing_panel_dispose (GObject *object)
 {
-  CcSharingPanel *self = CC_SHARING_PANEL (object);
-
-  if (self->media_sharing_dialog)
-    {
-      adw_dialog_force_close (self->media_sharing_dialog);
-      self->media_sharing_dialog = NULL;
-    }
-
   G_OBJECT_CLASS (cc_sharing_panel_parent_class)->dispose (object);
 }
 
@@ -130,7 +121,6 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sharing/cc-sharing-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, hostname_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_page);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_enable_row);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_row);
@@ -329,15 +319,6 @@ cc_sharing_panel_save_media_sharing_folders (CcSharingPanel *self)
   cc_media_sharing_set_preferences ((gchar **) folders->pdata);
 }
 
-static void
-cc_sharing_panel_media_sharing_dialog_close_attempt (CcSharingPanel *self)
-{
-  cc_sharing_panel_save_media_sharing_folders (self);
-
-  adw_dialog_set_can_close (self->media_sharing_dialog, TRUE);
-  adw_dialog_close (self->media_sharing_dialog);
-}
-
 #define ICON_NAME_FOLDER                "folder-symbolic"
 #define ICON_NAME_FOLDER_DESKTOP        "user-desktop-symbolic"
 #define ICON_NAME_FOLDER_DOCUMENTS      "folder-documents-symbolic"
@@ -472,15 +453,11 @@ cc_sharing_panel_check_media_sharing_available (void)
 }
 
 static void
-cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
+cc_sharing_panel_setup_media_sharing_page (CcSharingPanel *self)
 {
   g_auto(GStrv) folders = NULL;
   GStrv list;
   GtkWidget *row, *networks, *w;
-
-  g_signal_connect_object (self->media_sharing_dialog, "close-attempt",
-                           G_CALLBACK (cc_sharing_panel_media_sharing_dialog_close_attempt),
-                           self, G_CONNECT_SWAPPED);
 
   cc_media_sharing_get_preferences (&folders);
 
@@ -648,7 +625,7 @@ sharing_proxy_ready (GObject      *source,
 
   /* media sharing */
   if (cc_sharing_panel_check_media_sharing_available ())
-    cc_sharing_panel_setup_media_sharing_dialog (self);
+    cc_sharing_panel_setup_media_sharing_page (self);
   else
     gtk_widget_set_visible (self->media_sharing_row, FALSE);
 
