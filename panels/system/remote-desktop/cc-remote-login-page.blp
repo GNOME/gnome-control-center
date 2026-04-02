@@ -9,18 +9,7 @@ template $CcRemoteLoginPage: Adw.Bin {
       $CcPermissionInfobar permission_infobar {}
 
       Adw.PreferencesPage {
-        Adw.PreferencesGroup {
-          Label {
-            label: _("Remotely connect to your user account when it isn’t being used. The display resolution can be set from the remote.");
-            hexpand: true;
-            justify: center;
-            wrap: true;
-
-            styles [
-              "dim-label",
-            ]
-          }
-        }
+        description: _("Remotely connect to your user account when it isn’t being used. The display resolution can be set from the remote.");
 
         Adw.PreferencesGroup {
           Adw.SwitchRow remote_login_row {
