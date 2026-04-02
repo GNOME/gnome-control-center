@@ -41,6 +41,7 @@
 
 static GtkWidget *cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
                                                           CcSharingPanel *self);
+static void cc_sharing_panel_save_media_sharing_folders (CcSharingPanel *self);
 
 #define FILE_SHARING_SCHEMA_ID "org.gnome.desktop.file-sharing"
 
@@ -245,6 +246,8 @@ on_folder_selected_cb (GObject      *source_object,
       gtk_list_box_insert (GTK_LIST_BOX (self->shared_folders_listbox),
                            row,
                            n_rows - 1);
+
+      cc_sharing_panel_save_media_sharing_folders (self);
     }
 }
 
@@ -297,10 +300,12 @@ cc_sharing_panel_remove_folder (CcSharingPanel *self,
 
   row = g_object_get_data (G_OBJECT (button), "row");
   gtk_list_box_remove (GTK_LIST_BOX (self->shared_folders_listbox), row);
+
+  cc_sharing_panel_save_media_sharing_folders (self);
 }
 
 static void
-cc_sharing_panel_media_sharing_dialog_close_attempt (CcSharingPanel *self)
+cc_sharing_panel_save_media_sharing_folders (CcSharingPanel *self)
 {
   g_autoptr(GPtrArray) folders = NULL;
   GtkWidget *child;
@@ -322,6 +327,12 @@ cc_sharing_panel_media_sharing_dialog_close_attempt (CcSharingPanel *self)
   g_ptr_array_add (folders, NULL);
 
   cc_media_sharing_set_preferences ((gchar **) folders->pdata);
+}
+
+static void
+cc_sharing_panel_media_sharing_dialog_close_attempt (CcSharingPanel *self)
+{
+  cc_sharing_panel_save_media_sharing_folders (self);
 
   adw_dialog_set_can_close (self->media_sharing_dialog, TRUE);
   adw_dialog_close (self->media_sharing_dialog);
