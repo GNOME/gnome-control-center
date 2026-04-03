@@ -328,7 +328,7 @@ cc_wacom_stylus_page_new (CcWacomPanel *panel,
 	CcWacomStylusPage *page;
 	guint num_buttons;
 	gboolean has_paired_eraser;
-	g_autofree char *tool_description;
+	g_autofree char *tool_description = NULL;
 
 	g_return_val_if_fail (CC_IS_WACOM_TOOL (stylus), NULL);
 
