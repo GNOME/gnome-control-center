@@ -30,7 +30,7 @@ include:
 variables:
   FDO_UPSTREAM_REPO: gnome/gnome-control-center
   MESON_BUILD_DIR: _build
-  MESON_SETUP_ARGS: "--fatal-meson-warnings --werror -Dwarning_level=2"
+  MESON_SETUP_ARGS: "--fatal-meson-warnings -Dgnome-control-center:werror=true -Dwarning_level=2"
 
 stages:
   - prepare
