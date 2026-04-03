@@ -63,8 +63,8 @@ static void
 update_format_examples (CcFormatPreview *self)
 {
   const gchar *region = self->region;
-  locale_t locale;
-  locale_t old_locale;
+  locale_t locale = 0;
+  locale_t old_locale = 0;
   g_autoptr(GDateTime) dt = NULL;
   g_autofree gchar *s = NULL;
 #ifdef LC_MEASUREMENT
