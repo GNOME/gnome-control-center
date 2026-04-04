@@ -217,12 +217,12 @@ static void time_changed_cb (CcDateTimePage *self,
                              CcTimeEditor   *editor);
 
 static gchar*
-get_weekday_name (AdwEnumListItem *item,
+get_weekday_name (GtkEnumListItem *item,
                   gpointer         user_data)
 {
   gint selected_value;
 
-  selected_value = adw_enum_list_item_get_value (item);
+  selected_value = gtk_enum_list_item_get_value (item);
   if (selected_value == 0)
     return g_strdup (_("Locale Default"));
 

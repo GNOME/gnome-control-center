@@ -158,7 +158,7 @@ template $CcDateTimePage: Adw.NavigationPage {
             use-underline: true;
             expression: expr $get_weekday_name() as <string>;
 
-            model: Adw.EnumListModel {
+            model: EnumList {
               enum-type: typeof<$GDesktopWeekday>;
             };
           }
