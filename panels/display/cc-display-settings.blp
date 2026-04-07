@@ -26,6 +26,13 @@ template $CcDisplaySettings: Box {
       "boxed-list",
     ]
 
+    Adw.SwitchRow auto_orientation_row {
+      width-request: 100;
+      title: C_("display setting", "_Auto Rotate");
+      use-underline: true;
+      notify::active => $on_auto_orientation_changed_cb(template);
+    }
+
     Adw.ComboRow orientation_row {
       width-request: 100;
       title: C_("display setting", "_Orientation");
