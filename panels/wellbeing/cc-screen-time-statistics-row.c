@@ -793,7 +793,7 @@ load_session_active_history_data (CcScreenTimeStatisticsRow  *self,
   if (out_new_model_n_days != NULL)
     *out_new_model_n_days = new_model_screen_time_per_day->len;
   if (out_new_model_screen_time_per_day != NULL)
-    *out_new_model_screen_time_per_day = (double *) g_array_free (g_steal_pointer (&new_model_screen_time_per_day), FALSE);
+    *out_new_model_screen_time_per_day = (double *)  (gpointer) g_array_free (g_steal_pointer (&new_model_screen_time_per_day), FALSE);
 
   return TRUE;
 }
