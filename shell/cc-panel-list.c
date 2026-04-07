@@ -50,7 +50,7 @@ struct _CcPanelList
   /* When clicking on Details or Devices row, show it
    * automatically select the first panel of the list.
    */
-  gboolean            autoselect_panel : 1;
+  gboolean            autoselect_panel;
 
   gchar              *current_panel_id;
   gchar              *search_query;
