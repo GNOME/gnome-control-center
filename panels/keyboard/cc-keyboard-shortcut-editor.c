@@ -486,7 +486,7 @@ remove_button_clicked_cb (CcKeyboardShortcutEditor *self)
 }
 
 static void
-replace_button_clicked_cb (CcKeyboardShortcutEditor *self)
+on_done_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
   if (self->mode == CC_SHORTCUT_EDITOR_CREATE)
     add_button_clicked_cb (self);
@@ -809,7 +809,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, name_entry_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_key_pressed_cb);
   gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, replace_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_done_button_clicked_cb);
 }
 
 static void

@@ -31,7 +31,7 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
       Button done_button {
         label: _("_Done");
         use-underline: true;
-        clicked => $replace_button_clicked_cb(template);
+        clicked => $on_done_button_clicked_cb(template);
 
         styles [
           "suggested-action",
