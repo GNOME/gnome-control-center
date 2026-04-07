@@ -7,7 +7,6 @@ This documentation is focused on developers, designers, and translators, contrib
 ## Guides/HowDoI
 
 * [Building GNOME Settings with Toolbx](BUILDING_WITH_TOOLBX.md)
-* [Building GNOME Settings with Flatpak/GNOME Builder](BUILDING_WITH_FLATPAK_BUILDER.md)
 * [Testing the Printers panel without a printer](PRINTERS_TESTING.md)
 * [Testing the Fingerprint settings without a fingerprint reader](USERS_FINGERPRINT_MOCKING.md)
 * [Testing the Wacom settings without a tablet](WACOM_TESTING.md)
