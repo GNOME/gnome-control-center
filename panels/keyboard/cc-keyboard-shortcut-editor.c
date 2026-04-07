@@ -563,9 +563,11 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self)
 
       /* Name entry */
       gtk_editable_set_text (GTK_EDITABLE (self->name_entry), cc_keyboard_shortcut_get_description (self));
+      gtk_widget_set_sensitive (GTK_WIDGET (self->name_entry), cc_keyboard_item_get_desc_editable (self->item));
 
       /* Command entry */
       gtk_editable_set_text (GTK_EDITABLE (self->command_entry), cc_keyboard_shortcut_get_command (self));
+      gtk_widget_set_sensitive (GTK_WIDGET (self->name_entry), cc_keyboard_item_get_cmd_editable (self->item));
 
       /* Accelerator label */
       accel = convert_keysym_state_to_string (&combo);
