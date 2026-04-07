@@ -308,7 +308,7 @@ keyfile_add_device_stylus (CcTabletToolMap *map,
 
 	g_array_append_val (array, tool_key);
 	g_key_file_set_string_list (map->tablets, device_key, KEY_DEVICE_STYLI,
-				    (const gchar **) array->data, array->len);
+				    (const gchar **) (gpointer) array->data, array->len);
 }
 
 static void
