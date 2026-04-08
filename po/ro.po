@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-04-02 09:47+0000\n"
-"PO-Revision-Date: 2026-04-02 16:38+0200\n"
+"POT-Creation-Date: 2026-04-08 10:03+0000\n"
+"PO-Revision-Date: 2026-04-08 14:36+0200\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -1975,102 +1975,107 @@ msgstr "Aceasta poate fi din cauza limitărilor echipamentului."
 
 #: panels/display/cc-display-settings.blp:31
 msgctxt "display setting"
+msgid "_Auto Rotate"
+msgstr "Rotire _automată"
+
+#: panels/display/cc-display-settings.blp:38
+msgctxt "display setting"
 msgid "_Orientation"
 msgstr "_Orientare"
 
-#: panels/display/cc-display-settings.blp:38
+#: panels/display/cc-display-settings.blp:45
 msgctxt "display setting"
 msgid "_Resolution"
 msgstr "_Rezoluție"
 
-#: panels/display/cc-display-settings.blp:45
 #: panels/display/cc-display-settings.blp:52
+#: panels/display/cc-display-settings.blp:59
 msgid "R_efresh Rate"
 msgstr "Fr_ecvența de actualizare"
 
-#: panels/display/cc-display-settings.blp:60
+#: panels/display/cc-display-settings.blp:67
 msgid "_Variable Refresh Rate"
 msgstr "Frecvență de actualizare _variabilă"
 
-#: panels/display/cc-display-settings.blp:67
+#: panels/display/cc-display-settings.blp:74
 msgid "Re_fresh Rate"
 msgstr "_Frecvența de actualizare"
 
-#: panels/display/cc-display-settings.blp:75
+#: panels/display/cc-display-settings.blp:82
 msgid "_HDR (High Dynamic Range)"
 msgstr "_HDR (Interval dinamic superior)"
 
-#: panels/display/cc-display-settings.blp:82
+#: panels/display/cc-display-settings.blp:89
 msgid "Adjust for _TV"
 msgstr "Reglează pentru _TV"
 
-#: panels/display/cc-display-settings.blp:89
-#: panels/display/cc-display-settings.blp:101
+#: panels/display/cc-display-settings.blp:96
+#: panels/display/cc-display-settings.blp:108
 msgctxt "display setting"
 msgid "_Scale"
 msgstr "_Scara"
 
-#: panels/display/cc-display-settings.c:124
+#: panels/display/cc-display-settings.c:131
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Orizontal"
 
-#: panels/display/cc-display-settings.c:127
+#: panels/display/cc-display-settings.c:134
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Vertical dreapta"
 
-#: panels/display/cc-display-settings.c:130
+#: panels/display/cc-display-settings.c:137
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Vertical stânga"
 
-#: panels/display/cc-display-settings.c:133
+#: panels/display/cc-display-settings.c:140
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Orizontal (inversat)"
 
-#: panels/display/cc-display-settings.c:144
+#: panels/display/cc-display-settings.c:151
 msgctxt "Display rotation"
 msgid "Portrait"
 msgstr "Vertical"
 
-#: panels/display/cc-display-settings.c:147
+#: panels/display/cc-display-settings.c:154
 msgctxt "Display rotation"
 msgid "Landscape Right"
 msgstr "Orizontal dreapta"
 
-#: panels/display/cc-display-settings.c:150
+#: panels/display/cc-display-settings.c:157
 msgctxt "Display rotation"
 msgid "Landscape Left"
 msgstr "Orizontal stânga"
 
-#: panels/display/cc-display-settings.c:153
+#: panels/display/cc-display-settings.c:160
 msgctxt "Display rotation"
 msgid "Portrait (flipped)"
 msgstr "Vertical (inversat)"
 
-#: panels/display/cc-display-settings.c:164
+#: panels/display/cc-display-settings.c:171
 msgctxt "Display rotation"
 msgid "Upright"
 msgstr "Normal"
 
-#: panels/display/cc-display-settings.c:167
+#: panels/display/cc-display-settings.c:174
 msgctxt "Display rotation"
 msgid "Right"
 msgstr "În dreapta"
 
-#: panels/display/cc-display-settings.c:170
+#: panels/display/cc-display-settings.c:177
 msgctxt "Display rotation"
 msgid "Left"
 msgstr "În stânga"
 
-#: panels/display/cc-display-settings.c:173
+#: panels/display/cc-display-settings.c:180
 msgctxt "Display rotation"
 msgid "Flipped"
 msgstr "Inversat"
 
-#: panels/display/cc-display-settings.c:239
+#: panels/display/cc-display-settings.c:246
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
 
@@ -2079,12 +2084,12 @@ msgstr "%.2lf Hz"
 #. * 2. The formatting sequence is a range separated by an en-dash
 #. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
 #.
-#: panels/display/cc-display-settings.c:256
+#: panels/display/cc-display-settings.c:263
 msgid "Variable (%d–%.2lf Hz)"
 msgstr "Variabilă (%d–%.2lf Hz)"
 
 #. Translators: "Variable" is an adjective that refers to the refresh rate
-#: panels/display/cc-display-settings.c:263
+#: panels/display/cc-display-settings.c:270
 msgid "Variable (up to %.2lf Hz)"
 msgstr "Variabilă (până la %.2lf Hz)"
 
@@ -4647,21 +4652,21 @@ msgid "Google"
 msgstr "Google"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:58
-#: panels/online-accounts/cc-online-account-provider-row.c:59
-msgid "Email, calendar, contacts, files"
-msgstr "E-mail, calendar, contacte, fișiere"
+#: panels/online-accounts/cc-online-account-provider-row.c:60
+msgid "Email, calendar, contacts"
+msgstr "E-mail, calendar, contacte"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:59
 msgid "Microsoft 365"
 msgstr "Microsoft 365"
 
+#: panels/online-accounts/cc-online-account-provider-row.c:59
+msgid "Email, calendar, contacts, files"
+msgstr "E-mail, calendar, contacte, fișiere"
+
 #: panels/online-accounts/cc-online-account-provider-row.c:60
 msgid "Microsoft Exchange"
 msgstr "Microsoft Exchange"
-
-#: panels/online-accounts/cc-online-account-provider-row.c:60
-msgid "Email, calendar, contacts"
-msgstr "E-mail, calendar, contacte"
 
 #: panels/online-accounts/cc-online-account-provider-row.c:61
 msgid "Fedora"
@@ -10388,8 +10393,7 @@ msgstr "Afișează numărul versiunii"
 #: shell/cc-application.c:73
 msgid "Enable verbose mode. Specify multiple times to increase verbosity"
 msgstr ""
-"Activează modul detaliat. Specifică-l de mai multe ori pentru a crește "
-"nivelul de detaliere"
+"Activează modul detaliat. Specificat de mai multe ori va crește detalierea"
 
 #: shell/cc-application.c:74
 msgid "Search for the string"
