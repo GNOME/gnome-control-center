@@ -880,3 +880,46 @@ label.continuous-axis-label {
 label.discrete-axis-label {
   margin-top: 6px;
 }
+
+/* Dark style for Bar chart */
+@media (prefers-color-scheme: dark) {
+  bar-chart bar-group:hover {
+    background-color: color-mix(in srgb, currentColor 7%, transparent);  /* equivalent to $hover_color from libadwaita */
+  }
+
+  bar-chart bar {
+    background-color: color-mix(in srgb, var(--accent-color) 38%, transparent);
+  }
+
+  bar-chart bar:selected {
+    background-color: var(--accent-bg-color);
+  }
+}
+
+/* High contrast for Bar chart & Chart labels */
+@media (prefers-contrast: more) {
+  row.screen-time-statistics-row .secondary-label {
+    color: var(--view-fg-color);
+  }
+
+  row.screen-time-statistics-row .secondary-value {
+    color: var(--view-fg-color);
+  }
+
+  /* Bar chart */
+  bar-chart bar {
+    background-color: color-mix(in srgb, var(--accent-bg-color) 60%, var(--view-bg-color));
+  }
+
+  bar-chart bar:selected {
+    background-color: var(--accent-bg-color);
+  }
+
+  bar-chart bar-group:focus-within {
+    outline-color: color-mix(in srgb, var(--accent-color) 80%, transparent);  /* equivalent to $focus_border_color from libadwaita */
+  }
+
+  label.continuous-axis-label {
+    color: var(--view-fg-color);
+  }
+}
