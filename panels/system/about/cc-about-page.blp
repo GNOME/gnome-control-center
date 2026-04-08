@@ -51,52 +51,11 @@ template $CcAboutPage: Adw.NavigationPage {
           }
         }
 
-        Adw.PreferencesGroup hardware_group {
-          title: _("Hardware Information");
-
-          Adw.ActionRow hardware_model_row {
-            title: _("Model");
-            subtitle-selectable: true;
-
-            styles [
-              "property",
-            ]
-          }
-
-          Adw.ActionRow memory_row {
-            title: _("Memory");
-            subtitle-selectable: true;
-
-            styles [
-              "property",
-            ]
-          }
-
-          Adw.ActionRow processor_row {
-            title: _("Processor");
-            subtitle-selectable: true;
-
-            styles [
-              "property",
-            ]
-          }
-
-          Adw.ActionRow disk_row {
-            title: _("Disk Capacity");
-            subtitle: _("Calculating…");
-            subtitle-selectable: true;
-
-            styles [
-              "property",
-            ]
-          }
-        }
-
         Adw.PreferencesGroup {
           title: _("Software Information");
 
-          Adw.ActionRow firmware_version_row {
-            title: _("Firmware Version");
+          Adw.ActionRow gnome_version_row {
+            title: _("GNOME Version");
             subtitle-selectable: true;
 
             styles [
@@ -134,15 +93,6 @@ template $CcAboutPage: Adw.NavigationPage {
             ]
           }
 
-          Adw.ActionRow gnome_version_row {
-            title: _("GNOME Version");
-            subtitle-selectable: true;
-
-            styles [
-              "property",
-            ]
-          }
-
           Adw.ActionRow virtualization_row {
             title: _("Virtualization");
             subtitle-selectable: true;
@@ -154,6 +104,57 @@ template $CcAboutPage: Adw.NavigationPage {
 
           Adw.ActionRow kernel_row {
             title: _("Kernel Version");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow firmware_version_row {
+            title: _("Firmware Version");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+        }
+
+        Adw.PreferencesGroup hardware_group {
+          title: _("Hardware Information");
+
+          Adw.ActionRow hardware_model_row {
+            title: _("Model");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow memory_row {
+            title: _("Memory");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow processor_row {
+            title: _("Processor");
+            subtitle-selectable: true;
+
+            styles [
+              "property",
+            ]
+          }
+
+          Adw.ActionRow disk_row {
+            title: _("Disk Capacity");
+            subtitle: _("Calculating…");
             subtitle-selectable: true;
 
             styles [
