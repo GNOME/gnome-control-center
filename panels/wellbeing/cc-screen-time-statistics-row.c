@@ -1355,12 +1355,12 @@ cc_screen_time_statistics_row_set_selected_date (CcScreenTimeStatisticsRow *self
     return;
 
   /* Log the selected date */
-    {
-      char date_str[200];
-      if (selected_date != NULL)
-        g_date_strftime (date_str, sizeof (date_str), "%x", selected_date);
-      g_debug ("%s: %s", G_STRFUNC, (selected_date != NULL) ? date_str : "(unset)");
-    }
+  {
+    char date_str[200];
+    if (selected_date != NULL)
+      g_date_strftime (date_str, sizeof (date_str), "%x", selected_date);
+    g_debug ("%s: %s", G_STRFUNC, (selected_date != NULL) ? date_str : "(unset)");
+  }
 
   self->selected_date = *selected_date;
 
