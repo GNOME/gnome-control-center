@@ -178,6 +178,21 @@ gnome_software_is_installed (void)
 /* Callbacks */
 
 static void
+open_software_details_cb (GObject      *source_object,
+                          GAsyncResult *result,
+                          gpointer      user_data)
+{
+  g_autoptr (GVariant) retval = NULL;
+  g_autoptr (GError) error = NULL;
+
+  retval = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
+                                          result, &error);
+  if (retval == NULL)
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to open GNOME Software application details: %s", error->message);
+}
+
+static void
 open_software_cb (CcApplicationsPanel *self)
 {
   GtkWindow *window;
@@ -232,9 +247,9 @@ open_software_cb (CcApplicationsPanel *self)
                           NULL,
                           G_DBUS_CALL_FLAGS_NONE,
                           -1,
-                          NULL,
-                          NULL,
-                          NULL);
+                          cc_panel_get_cancellable (CC_PANEL (self)),
+                          open_software_details_cb,
+                          g_object_ref (self));
 }
 
 /* --- portal permissions and utilities --- */
