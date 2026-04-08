@@ -56,6 +56,8 @@
 
 #define PORTAL_SNAP_PREFIX "snap."
 
+#define GNOME_SOFTWARE_DESKTOP_ID "org.gnome.Software.desktop"
+
 struct _CcApplicationsPanel
 {
   CcPanel          parent;
@@ -171,7 +173,7 @@ gnome_software_is_installed (void)
 {
   g_autoptr (GDesktopAppInfo) info = NULL;
 
-  info = g_desktop_app_info_new ("org.gnome.Software.desktop");
+  info = g_desktop_app_info_new (GNOME_SOFTWARE_DESKTOP_ID);
   return info != NULL;
 }
 
@@ -204,7 +206,7 @@ open_software_cb (CcApplicationsPanel *self)
 
   if (!self->current_app_id)
     {
-      g_autoptr (GAppInfo) info = G_APP_INFO (g_desktop_app_info_new ("org.gnome.Software.desktop"));
+      g_autoptr (GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (GNOME_SOFTWARE_DESKTOP_ID));
       if (info)
         g_app_info_launch (info, NULL, NULL, NULL);
       return;
@@ -249,7 +251,7 @@ open_software_cb (CcApplicationsPanel *self)
                           -1,
                           cc_panel_get_cancellable (CC_PANEL (self)),
                           open_software_details_cb,
-                          g_object_ref (self));
+                          NULL);
 }
 
 /* --- portal permissions and utilities --- */
