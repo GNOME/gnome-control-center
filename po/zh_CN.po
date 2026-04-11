@@ -29,6 +29,7 @@
 # Liu Tao <lyuutau@outlook.com>, 2021.
 # Dingzhong Chen <wsxy162@gmail.com>, 2016-2021.
 # Chengbing Wu <cbing2002@outlook.com>, 2025.
+# Luke Na <narukeu@outlook.com>, 2026.
 # lumingzh <lumingzh@qq.com>, 2022-2026.
 #
 msgid ""
@@ -36,8 +37,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-02-10 13:00+0000\n"
-"PO-Revision-Date: 2026-02-18 09:31+0800\n"
+"POT-Creation-Date: 2026-04-01 11:51+0000\n"
+"PO-Revision-Date: 2026-04-11 18:03+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -45,7 +46,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 49.0\n"
+"X-Generator: Gtranslator 50.0\n"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:7
 msgid "Add Keyboard Shortcuts"
@@ -62,7 +63,7 @@ msgstr "添加键盘快捷键"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.blp:144
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:13
 #: panels/network/cc-net-proxy-page.blp:15
-#: panels/network/cc-wifi-hotspot-dialog.blp:122
+#: panels/network/cc-wifi-hotspot-dialog.blp:129
 #: panels/network/cc-wifi-panel.blp:180
 #: panels/network/connection-editor/ce-page-details.c:89
 #: panels/network/connection-editor/connection-editor.blp:17
@@ -258,7 +259,7 @@ msgstr "接收系统搜索并发送结果"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336
 #: panels/system/users/cc-user-page.c:368
 #: panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:483
-#: subprojects/gvc/gvc-mixer-control.c:1910
+#: subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "已禁用"
 
@@ -315,7 +316,7 @@ msgstr "禁止快捷键(_I)"
 
 #: panels/applications/cc-applications-panel.blp:275
 msgid "Block standard keyboard shortcuts"
-msgstr "封锁标准的键盘快捷键"
+msgstr "屏蔽标准的键盘快捷键"
 
 #: panels/applications/cc-applications-panel.blp:281
 msgid "C_amera"
@@ -494,8 +495,8 @@ msgstr "文件系统"
 
 #: panels/applications/cc-applications-panel.c:897
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:7 shell/cc-window.blp:20
-#: shell/cc-window.c:804 shell/org.gnome.Settings.desktop.in:2
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:8 shell/cc-window.blp:20
+#: shell/cc-window.c:842 shell/org.gnome.Settings.desktop.in:2
 msgid "Settings"
 msgstr "设置"
 
@@ -509,7 +510,7 @@ msgstr "可以更改设置"
 msgid ""
 "%s requires access to the following system resources. To stop this access, "
 "the app must be removed."
-msgstr "%s 需要访问以下系统资源。要停止访问必须移除该应用。"
+msgstr "%s 需要访问以下系统资源。要停止此访问，必须移除该应用。"
 
 #: panels/applications/cc-applications-panel.c:905
 #, c-format
@@ -826,7 +827,7 @@ msgstr "使用和配置调制解调器"
 
 #: panels/applications/cc-snap-row.c:303
 msgid "Read system mount information and disk quotas"
-msgstr "阅读系统安装信息和磁盘配额"
+msgstr "读取系统挂载信息和磁盘配额"
 
 #: panels/applications/cc-snap-row.c:305
 msgid "Control music and video players"
@@ -910,7 +911,7 @@ msgstr "访问存储框架服务"
 
 #: panels/applications/cc-snap-row.c:345
 msgid "Read process and system information"
-msgstr "读取过程和系统信息"
+msgstr "读取进程和系统信息"
 
 #: panels/applications/cc-snap-row.c:347
 msgid "Monitor and control any running program"
@@ -938,7 +939,7 @@ msgstr "访问能源使用数据"
 
 #: panels/applications/cc-snap-row.c:359
 msgid "Read/write access to U2F devices exposed"
-msgstr "U2F 设备的读/写访问已开启"
+msgstr "对已暴露 U2F 设备的读/写访问"
 
 #: panels/applications/gnome-applications-panel.desktop.in:3
 msgid "Control various app permissions and settings"
@@ -1161,7 +1162,7 @@ msgstr "将您的校准设备放在方块上并按“开始”"
 #: panels/color/cc-color-calibrate.c:375
 msgid ""
 "Move your calibration device to the calibrate position and press “Continue”"
-msgstr "将您的校准器移动到校准位置并按“继续”"
+msgstr "将您的校准设备移动到校准位置，然后按“继续”"
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
@@ -1422,7 +1423,7 @@ msgstr "请选择通常使用的显示亮度。色彩管理在此亮度下将最
 msgid ""
 "Alternatively, you can use the brightness level used with one of the other "
 "profiles for this device."
-msgstr "或者，也可以使用亮度配合此设备的其它特性文件使用。"
+msgstr "或者，也可以使用此设备其它特性文件所对应的亮度级别。"
 
 #: panels/color/cc-color-panel.ui:214
 msgid "Profile Name"
@@ -2060,7 +2061,7 @@ msgstr "夜灯不可用"
 #. Translators: Inhibit the redshift functionality until the next day starts
 #: panels/display/cc-night-light-page.blp:34
 msgid "Temporarily Disabled Until Tomorrow"
-msgstr "暂时禁用直到明天"
+msgstr "已暂时禁用，明天恢复"
 
 #. Translators: This cancels the redshift inhibit.
 #: panels/display/cc-night-light-page.blp:49
@@ -2071,7 +2072,7 @@ msgstr "重启滤镜"
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
-msgstr "夜灯使屏幕颜色更暖。这可以帮助预防眼疲劳和失眠。"
+msgstr "夜灯功能可使屏幕色温变暖，这有助于缓解眼部疲劳并改善睡眠质量。"
 
 #: panels/display/cc-night-light-page.blp:68
 msgid "_Schedule"
@@ -2131,7 +2132,7 @@ msgstr "虚拟机中不能使用夜灯"
 msgid ""
 "This could be the result of the graphics driver being used, or the desktop "
 "being used remotely."
-msgstr "这可能是使用的显卡驱动或者桌面是远程使用造成的。"
+msgstr "这可能是由于当前使用的显卡驱动，或该桌面正在被远程使用所致。"
 
 #: panels/display/gnome-display-panel.desktop.in:3
 msgid "Use Night Light and choose how to use connected monitors and projectors"
@@ -3107,7 +3108,7 @@ msgstr "网络名称"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-qr-code-dialog.blp:64
-#: panels/network/cc-wifi-hotspot-dialog.blp:79
+#: panels/network/cc-wifi-hotspot-dialog.blp:83
 #: panels/printers/pp-jobs-dialog.blp:171
 #: panels/printers/pp-new-printer-dialog.ui:300
 #: panels/system/users/cc-add-user-dialog.blp:89
@@ -3172,18 +3173,18 @@ msgid ""
 "Wi-Fi network that they can connect to. To do this, you must have an "
 "internet connection through a source other than Wi-Fi."
 msgstr ""
-"Wi-Fi 热点允许其他人通过创建他们可以连接的 Wi-Fi 网络来共享您的互联网连接。 "
-"为此，您必须通过 Wi-Fi 以外的其它来源建立互联网连接。"
+"Wi-Fi 热点会创建一个其他人可以加入的 Wi-Fi 网络，从而让他们共享您的网络连接。"
+"要使用此功能，您必须通过 Wi-Fi 以外的其它方式连接至互联网。"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:92
+#: panels/network/cc-wifi-hotspot-dialog.blp:96
 msgid "Generate Random Password"
 msgstr "生成随机密码"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:93
+#: panels/network/cc-wifi-hotspot-dialog.blp:97
 msgid "Autogenerate Password"
 msgstr "自动生成密码"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:128
+#: panels/network/cc-wifi-hotspot-dialog.blp:135
 msgid "_Turn On"
 msgstr "打开(_T)"
 
@@ -3618,7 +3619,7 @@ msgstr "WPA 和 WPA2 企业"
 
 #: panels/network/connection-editor/ce-page-security.c:373
 msgid "WPA3 Personal"
-msgstr "WPA3个人"
+msgstr "WPA3 个人"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
 #: panels/network/connection-editor/net-connection-editor.c:880
@@ -4022,7 +4023,7 @@ msgid "seconds"
 msgstr "秒"
 
 #: panels/network/connection-editor/wireguard-peer.blp:227
-#: panels/universal-access/cc-ua-seeing-page.blp:115
+#: panels/universal-access/cc-ua-seeing-page.blp:109
 msgid "Apply"
 msgstr "应用"
 
@@ -4886,68 +4887,68 @@ msgid ""
 msgstr "禁用自动挂起会导致更高的能耗。推荐保持启用自动挂起。"
 
 #. TRANSLATORS: This is the same title as the title from the .ui file, but without mnemonic
-#: panels/power/cc-power-panel.c:211
+#: panels/power/cc-power-panel.c:228
 msgid "Power Saving"
 msgstr "节电"
 
-#: panels/power/cc-power-panel.c:311
+#: panels/power/cc-power-panel.c:328
 msgid "Battery Levels"
 msgstr "电池电量"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:316
+#: panels/power/cc-power-panel.c:333
 msgid "UPS"
 msgstr "UPS"
 
-#: panels/power/cc-power-panel.c:319
+#: panels/power/cc-power-panel.c:336
 msgid "Battery Level"
 msgstr "电池电量"
 
-#: panels/power/cc-power-panel.c:569
+#: panels/power/cc-power-panel.c:580
 msgid "Suspend"
 msgstr "挂起"
 
-#: panels/power/cc-power-panel.c:570
+#: panels/power/cc-power-panel.c:581
 msgid "Power Off"
 msgstr "电源关闭"
 
-#: panels/power/cc-power-panel.c:571
+#: panels/power/cc-power-panel.c:582
 msgid "Hibernate"
 msgstr "休眠"
 
-#: panels/power/cc-power-panel.c:572
+#: panels/power/cc-power-panel.c:583
 msgid "Nothing"
 msgstr "不处理"
 
-#: panels/power/cc-power-panel.c:877
+#: panels/power/cc-power-panel.c:967
 msgid "Performance mode temporarily disabled due to high operating temperature"
 msgstr "由于工作温度高已暂时禁用性能模式"
 
-#: panels/power/cc-power-panel.c:879
+#: panels/power/cc-power-panel.c:969
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
-msgstr "检测到膝上使用：性能模式暂时不可用。将设备移动到稳定的表面以恢复。"
+msgstr "检测到膝上使用：性能模式暂时不可用。请将设备放置在平稳的表面上以恢复。"
 
-#: panels/power/cc-power-panel.c:881
+#: panels/power/cc-power-panel.c:971
 msgid "Performance mode temporarily disabled"
 msgstr "性能模式已暂时禁用"
 
-#: panels/power/cc-power-panel.c:923
+#: panels/power/cc-power-panel.c:1013
 msgid ""
 "Power saver enabled due to low battery. Previous mode will be restored when "
 "battery is charged."
 msgstr "由于电池电量低已启用节电模式。电池充满电时将恢复之前的模式。"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:931
+#: panels/power/cc-power-panel.c:1021
 #, c-format
 msgid "Power Saver mode activated by “%s”"
 msgstr "节电模式已由“%s”激活"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:935
+#: panels/power/cc-power-panel.c:1025
 #, c-format
 msgid "Performance mode activated by “%s”"
 msgstr "性能模式已由“%s”激活"
@@ -5267,7 +5268,7 @@ msgstr[0] "%u 项任务需要认证"
 #: panels/printers/pp-jobs-dialog.c:456
 #, c-format
 msgid "Enter credentials to print from %s"
-msgstr "从 %s 输入凭据以打印"
+msgstr "输入凭据以从 %s 打印"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
 #: panels/printers/pp-new-printer.c:1200
@@ -5462,7 +5463,7 @@ msgstr "色彩"
 #: panels/printers/pp-options-dialog.c:649
 msgctxt "Printer Option Group"
 msgid "Finishing"
-msgstr "正在完成"
+msgstr "后处理"
 
 #. Translators: "Advanced" tab contains all others settings
 #: panels/printers/pp-options-dialog.c:652
@@ -5509,7 +5510,7 @@ msgstr "转换为 PS 等级 1"
 #. Translators: this is an option of "GhostScript"
 #: panels/printers/pp-ppd-option-widget.c:93
 msgid "Convert to PS level 2"
-msgstr "转换为 PS 等级 1"
+msgstr "转换为 PS 等级 2"
 
 #. Translators: this is an option of "GhostScript"
 #: panels/printers/pp-ppd-option-widget.c:95
@@ -5568,7 +5569,7 @@ msgstr "打印选项"
 #. Translators: Set this printer as default
 #: panels/printers/pp-printer-entry.blp:233
 msgid "Use Printer by Default"
-msgstr "默认使用的打印机"
+msgstr "设为默认打印机"
 
 #. Translators: This button executes command which cleans print heads of the printer.
 #: panels/printers/pp-printer-entry.blp:239
@@ -7657,8 +7658,8 @@ msgid ""
 "changing login settings, and removing software. Parental controls cannot be "
 "applied to administrators."
 msgstr ""
-"管理员具有额外的能力，包括添加和删除用户、更改登录设置以及删除软件。家长控制"
-"不能应用于管理员。"
+"管理员拥有额外权限，包括添加和删除用户、更改登录设置以及删除软件。家长控制无"
+"法应用于管理员账号。"
 
 #: panels/system/users/cc-add-user-dialog.blp:93
 msgid "User sets password on _first login"
@@ -7863,11 +7864,11 @@ msgstr "指纹登记"
 
 #: panels/system/users/cc-fingerprint-dialog.c:234
 msgid "the device needs to be claimed to perform this action"
-msgstr "设备需要被请求执行该动作"
+msgstr "执行此操作前需要独占设备"
 
 #: panels/system/users/cc-fingerprint-dialog.c:236
 msgid "the device is already claimed by another process"
-msgstr "设备正被另一个进程请求"
+msgstr "该设备已经被另一个进程占用"
 
 #: panels/system/users/cc-fingerprint-dialog.c:238
 msgid "you do not have permission to perform the action"
@@ -7875,7 +7876,7 @@ msgstr "您没有权限执行该动作"
 
 #: panels/system/users/cc-fingerprint-dialog.c:240
 msgid "no prints have been enrolled"
-msgstr "没有登记到指纹"
+msgstr "尚未登记任何指纹"
 
 #: panels/system/users/cc-fingerprint-dialog.c:249
 msgid "Failed to communicate with the device during enrollment"
@@ -7983,7 +7984,7 @@ msgstr "停止登记过程失败：%s"
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
-msgstr "要登记指纹，请重复将手指举起然后放置在读取设备上的动作"
+msgstr "请重复将手指放上并抬离读取器以登记指纹"
 
 #: panels/system/users/cc-fingerprint-dialog.c:1015
 msgid "_Re-enroll this finger…"
@@ -8357,7 +8358,7 @@ msgstr "密码在您首次认证后已经更改！"
 #: panels/system/users/run-passwd.c:500
 #, c-format
 msgid "The new password does not contain enough different characters"
-msgstr "新密码必须一定量不同的字符"
+msgstr "新密码必须包含足够多不同的字符"
 
 #: panels/system/users/run-passwd.c:503
 #, c-format
@@ -8619,85 +8620,85 @@ msgstr "减少动画(_R)"
 msgid "Toggle reduced motion animations throughout the user interface"
 msgstr "减少贯穿用户界面动画效果的切换开关"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:67
+#: panels/universal-access/cc-ua-seeing-page.blp:61
 msgid "_Text Size"
 msgstr "文字大小(_T)"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:74
+#: panels/universal-access/cc-ua-seeing-page.blp:68
 msgid "_Cursor Size"
 msgstr "指针大小(_C)"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:75
+#: panels/universal-access/cc-ua-seeing-page.blp:69
 msgid "Increase the size of the cursor"
 msgstr "增大指针大小"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:81
+#: panels/universal-access/cc-ua-seeing-page.blp:75
 msgid "_Sound Keys"
 msgstr "发声键(_S)"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:82
+#: panels/universal-access/cc-ua-seeing-page.blp:76
 msgid "Beep when Num Lock or Caps Lock are turned on or off"
 msgstr "数字键盘锁定或大小写锁定开启或关闭时发出蜂鸣声"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:87
+#: panels/universal-access/cc-ua-seeing-page.blp:81
 msgid "Always Show Scroll_bars"
 msgstr "始终显示滚动条(_B)"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:88
+#: panels/universal-access/cc-ua-seeing-page.blp:82
 msgid "Make scrollbars always visible"
 msgstr "使滚动条始终可见"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:97
+#: panels/universal-access/cc-ua-seeing-page.blp:91
 msgid "Text Size"
 msgstr "文字大小"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:109
+#: panels/universal-access/cc-ua-seeing-page.blp:103
 #: panels/wwan/cc-wwan-device-page.c:191
 msgid "Cancel"
 msgstr "取消"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:125
+#: panels/universal-access/cc-ua-seeing-page.blp:119
 msgid "Use the slider to adjust the size of user interface text"
 msgstr "使用该滑块调节用户界面文字的大小"
 
 #. Translators: Single letter next to the text size slider
-#: panels/universal-access/cc-ua-seeing-page.blp:137
-#: panels/universal-access/cc-ua-seeing-page.blp:157
+#: panels/universal-access/cc-ua-seeing-page.blp:131
+#: panels/universal-access/cc-ua-seeing-page.blp:151
 msgid "A"
 msgstr "A"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:168
+#: panels/universal-access/cc-ua-seeing-page.blp:162
 msgid "Sample text"
 msgstr "示例文本"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-seeing-page.c:215
+#: panels/universal-access/cc-ua-seeing-page.c:213
 msgctxt "cursor size"
 msgid "Default"
 msgstr "默认"
 
-#: panels/universal-access/cc-ua-seeing-page.c:218
+#: panels/universal-access/cc-ua-seeing-page.c:216
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "中"
 
-#: panels/universal-access/cc-ua-seeing-page.c:221
+#: panels/universal-access/cc-ua-seeing-page.c:219
 msgctxt "cursor size"
 msgid "Large"
 msgstr "大"
 
-#: panels/universal-access/cc-ua-seeing-page.c:224
+#: panels/universal-access/cc-ua-seeing-page.c:222
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "更大"
 
-#: panels/universal-access/cc-ua-seeing-page.c:227
+#: panels/universal-access/cc-ua-seeing-page.c:225
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "最大"
 
-#: panels/universal-access/cc-ua-seeing-page.c:231
+#: panels/universal-access/cc-ua-seeing-page.c:229
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -10106,16 +10107,16 @@ msgstr "配置电话和移动数据连接"
 msgid "cellular;wwan;telephony;sim;mobile;"
 msgstr "cellular;wwan;telephony;sim;mobile;蜂窝;移动;无线;"
 
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:8
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:9
 msgid "Utility to configure the GNOME desktop"
 msgstr "用来配置 GNOME 桌面的工具"
 
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:10
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:11
 msgid "Settings is the primary interface for configuring your system."
 msgstr "“设置”是配置您的系统的主要界面。"
 
 #. developer_name tag deprecated with Appstream 1.0
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:39
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:40
 msgid "The GNOME Project"
 msgstr "GNOME 项目"
 
@@ -10176,7 +10177,8 @@ msgstr ""
 "lumingzh <lumingzh@qq.com>, 2022-2026.\n"
 "Boyuan Yang <073plan@gmail.com>, 2023.\n"
 "Victor_Trista <ljlzjzm@hotmail.com>, 2023.\n"
-"Chengbing Wu <cbing2002@outlook.com>, 2025."
+"Chengbing Wu <cbing2002@outlook.com>, 2025.\n"
+"Luke Na <narukeu@outlook.com>, 2026."
 
 #: shell/cc-application.c:127
 #, c-format
@@ -10231,13 +10233,14 @@ msgstr "Preferences;Settings;首选项;设置;"
 
 #: shell/org.gnome.Settings.gschema.xml:5
 msgid "The identifier for the last Settings panel to be opened"
-msgstr "要打开最后面板的身份"
+msgstr "最后打开的设置面板的标识"
 
 #: shell/org.gnome.Settings.gschema.xml:6
 msgid ""
 "The identifier for the last Settings panel to be opened. Unrecognised values "
 "will be ignored and the first panel in the list selected."
-msgstr "要打开最近面板的身份。未识别的值将被忽略，然后选中第一个面板。"
+msgstr ""
+"最后打开的设置面板的标识。无法识别的值将被忽略，并选中列表中的第一个面板。"
 
 #: shell/org.gnome.Settings.gschema.xml:13
 msgid "Show warning when running a development build of Settings"
@@ -10300,7 +10303,7 @@ msgstr "取消搜索"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1926
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -10308,13 +10311,13 @@ msgstr[0] "%u 路输出"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1927
+#: subprojects/gvc/gvc-mixer-control.c:1936
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u 路输入"
 
-#: subprojects/gvc/gvc-mixer-control.c:2910
+#: subprojects/gvc/gvc-mixer-control.c:2919
 msgid "System Sounds"
 msgstr "系统声音"
 
@@ -11016,7 +11019,7 @@ msgstr "系统声音"
 #~ msgstr "自动挂起"
 
 #~ msgid "Reproduce sounds."
-#~ msgstr "再现声音。"
+#~ msgstr "播放声音。"
 
 #~ msgid "Links &amp; Files"
 #~ msgstr "链接和文件"
