@@ -52,6 +52,8 @@ struct _CEPageIP4
         GtkBox            *content_box;
         GtkBox            *dns_box;
         GtkEntry          *dns_entry;
+        GtkBox            *dns_search_box;
+        GtkEntry          *dns_search_entry;
         GtkGrid           *main_box;
         GtkCheckButton    *never_default_check;
         GtkBox            *routes_box;
@@ -382,6 +384,32 @@ add_dns_section (CEPageIP4 *self)
 }
 
 static void
+add_dns_search_section (CEPageIP4 *self)
+{
+        GString *string;
+        gint i;
+
+        string = g_string_new ("");
+
+        for (i = 0; i < nm_setting_ip_config_get_num_dns_searches (self->setting); i++) {
+                const char *domain;
+
+                domain = nm_setting_ip_config_get_dns_search (self->setting, i);
+
+                if (i > 0)
+                        g_string_append (string, ", ");
+
+                g_string_append (string, domain);
+        }
+
+        gtk_editable_set_text (GTK_EDITABLE (self->dns_search_entry), string->str);
+
+        g_signal_connect_object (self->dns_search_entry, "notify::text", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+
+        g_string_free (string, TRUE);
+}
+
+static void
 add_route_row (CEPageIP4   *self,
                const gchar *address,
                const gchar *netmask,
@@ -529,6 +557,7 @@ connect_ip4_page (CEPageIP4 *self)
 
         add_address_box (self);
         add_dns_section (self);
+        add_dns_search_section (self);
         add_route_config_box (self);
 
         str_method = nm_setting_ip_config_get_method (self->setting);
@@ -770,6 +799,22 @@ ui_to_setting (CEPageIP4 *self)
                       NM_SETTING_IP_CONFIG_NEVER_DEFAULT, never_default,
                       NULL);
 
+        /* Save DNS search domains if the field is sensitive */
+        if (gtk_widget_get_sensitive (GTK_WIDGET (self->dns_search_box))) {
+                g_autofree gchar *search_text = NULL;
+                g_auto(GStrv) search_domains = NULL;
+
+                nm_setting_ip_config_clear_dns_searches (self->setting);
+                search_text = g_strstrip (g_strdup (gtk_editable_get_text (GTK_EDITABLE (self->dns_search_entry))));
+                if (search_text[0] != '\0') {
+                        search_domains = g_strsplit_set (search_text, ", ", -1);
+                        for (i = 0; search_domains && search_domains[i]; i++) {
+                                if (search_domains[i][0] != '\0')
+                                        nm_setting_ip_config_add_dns_search (self->setting, search_domains[i]);
+                        }
+                }
+        }
+
 out:
         if (addresses)
                 g_ptr_array_free (addresses, TRUE);
@@ -843,6 +888,8 @@ ce_page_ip4_class_init (CEPageIP4Class *klass)
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, content_box);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, dns_box);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, dns_entry);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, dns_search_box);
+        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, dns_search_entry);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, main_box);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, never_default_check);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, address_address_label);

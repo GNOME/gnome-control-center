@@ -207,6 +207,43 @@ template $CEPageIP4: Adw.Bin {
             }
           }
 
+          Box dns_search_box {
+            orientation: vertical;
+            spacing: 6;
+            sensitive: bind dns_box.sensitive;
+
+            Label {
+              margin-top: 24;
+              hexpand: true;
+              xalign: 0;
+              label: _("DNS Search Domains");
+
+              styles [
+                "heading",
+              ]
+            }
+
+            Entry dns_search_entry {
+              accessibility {
+                label: _("DNS search domain(s)");
+
+                described-by: [
+                  dns_search_help,
+                ];
+              }
+            }
+
+            Label dns_search_help {
+              xalign: 0;
+              label: _("Separate search domains with commas");
+
+              styles [
+                "dim-label",
+                "caption",
+              ]
+            }
+          }
+
           Box routes_box {
             orientation: vertical;
             spacing: 6;
