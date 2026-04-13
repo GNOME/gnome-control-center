@@ -82,7 +82,7 @@ gboolean
 bolt_error_propagate_stripped (GError **dest,
                                GError **source)
 {
-  GError *src;
+  GError *src = NULL;
 
   g_return_val_if_fail (source != NULL, FALSE);
 
