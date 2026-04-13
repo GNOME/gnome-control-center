@@ -76,7 +76,7 @@ typedef struct
 static RowData *
 row_data_new (CcInputListBox *panel, CcInputRow *source, CcInputRow *dest)
 {
-  RowData *data = g_malloc0 (sizeof (RowData));
+  RowData *data = g_new0 (RowData, 1);
   data->panel = panel;
   data->source = g_object_ref (source);
   if (dest != NULL)

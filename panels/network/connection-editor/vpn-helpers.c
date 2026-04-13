@@ -165,7 +165,7 @@ vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data)
 	home_folder = g_file_new_for_path (g_get_home_dir ());
 	gtk_file_dialog_set_initial_folder (dialog, home_folder);
 
-	info = g_malloc0 (sizeof (ActionInfo));
+	info = g_new0 (ActionInfo, 1);
 	info->callback = callback;
 	info->user_data = user_data;
 	info->parent = parent;
