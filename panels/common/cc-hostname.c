@@ -43,7 +43,7 @@ struct _CcHostname
   GDBusProxy *proxy;
 };
 
-G_DEFINE_TYPE (CcHostname, cc_hostname, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcHostname, cc_hostname, G_TYPE_OBJECT)
 
 static void
 cc_hostname_dispose (GObject *object)

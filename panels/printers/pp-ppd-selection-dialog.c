@@ -63,7 +63,7 @@ struct _PpPPDSelectionDialog {
   PPDList *list;
 };
 
-G_DEFINE_TYPE (PpPPDSelectionDialog, pp_ppd_selection_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_FINAL_TYPE (PpPPDSelectionDialog, pp_ppd_selection_dialog, ADW_TYPE_WINDOW)
 
 static void
 manufacturer_selection_changed_cb (PpPPDSelectionDialog *self)

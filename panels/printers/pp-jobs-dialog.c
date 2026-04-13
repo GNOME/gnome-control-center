@@ -74,7 +74,7 @@ struct _PpJobsDialog {
   GCancellable *get_jobs_cancellable;
 };
 
-G_DEFINE_TYPE (PpJobsDialog, pp_jobs_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (PpJobsDialog, pp_jobs_dialog, ADW_TYPE_DIALOG)
 
 static gboolean
 is_info_required (PpJobsDialog *self,

@@ -57,7 +57,7 @@ struct _CcKeyboardShortcutGroup
   gboolean                 is_empty;
 };
 
-G_DEFINE_TYPE (CcKeyboardShortcutGroup, cc_keyboard_shortcut_group, ADW_TYPE_PREFERENCES_GROUP)
+G_DEFINE_FINAL_TYPE (CcKeyboardShortcutGroup, cc_keyboard_shortcut_group, ADW_TYPE_PREFERENCES_GROUP)
 
 enum {
   PROP_0,

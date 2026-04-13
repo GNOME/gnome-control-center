@@ -93,7 +93,7 @@ struct _CcUserPage {
 static GtkBuildableIface *parent_buildable_iface;
 static void cc_user_page_buildable_init (GtkBuildableIface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CcUserPage, cc_user_page, ADW_TYPE_NAVIGATION_PAGE,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CcUserPage, cc_user_page, ADW_TYPE_NAVIGATION_PAGE,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, cc_user_page_buildable_init))
 
 enum {

@@ -48,7 +48,7 @@ enum {
 
 static gint signals[NUM_SIGNALS] = { 0, };
 
-G_DEFINE_TYPE (CcRealmManager, cc_realm_manager, CC_REALM_TYPE_OBJECT_MANAGER_CLIENT);
+G_DEFINE_FINAL_TYPE (CcRealmManager, cc_realm_manager, CC_REALM_TYPE_OBJECT_MANAGER_CLIENT);
 
 GQuark
 cc_realm_error_get_quark (void)

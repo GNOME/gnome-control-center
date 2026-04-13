@@ -75,7 +75,7 @@ struct _CcWindow
 
 static void     cc_shell_iface_init         (CcShellInterface      *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CcWindow, cc_window, ADW_TYPE_APPLICATION_WINDOW,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CcWindow, cc_window, ADW_TYPE_APPLICATION_WINDOW,
                          G_IMPLEMENT_INTERFACE (CC_TYPE_SHELL, cc_shell_iface_init))
 
 enum

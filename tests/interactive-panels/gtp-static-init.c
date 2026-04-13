@@ -25,7 +25,7 @@ struct _GtpStaticInit
   CcPanel parent;
 };
 
-G_DEFINE_TYPE (GtpStaticInit, gtp_static_init, CC_TYPE_PANEL)
+G_DEFINE_FINAL_TYPE (GtpStaticInit, gtp_static_init, CC_TYPE_PANEL)
 
 void
 gtp_static_init_func (void)

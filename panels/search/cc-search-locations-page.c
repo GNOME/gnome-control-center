@@ -56,7 +56,7 @@ struct _CcSearchLocationsPage {
   GtkWidget           *others_list;
 };
 
-G_DEFINE_TYPE (CcSearchLocationsPage, cc_search_locations_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcSearchLocationsPage, cc_search_locations_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static const gchar *path_from_tracker_dir (const gchar *value);
 

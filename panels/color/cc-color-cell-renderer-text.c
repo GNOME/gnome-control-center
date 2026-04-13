@@ -38,7 +38,7 @@ struct _CcColorCellRendererText
   gboolean             is_dim_label;
 };
 
-G_DEFINE_TYPE (CcColorCellRendererText, cc_color_cell_renderer_text, GTK_TYPE_CELL_RENDERER_TEXT)
+G_DEFINE_FINAL_TYPE (CcColorCellRendererText, cc_color_cell_renderer_text, GTK_TYPE_CELL_RENDERER_TEXT)
 
 static gpointer parent_class = NULL;
 

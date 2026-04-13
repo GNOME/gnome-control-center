@@ -65,7 +65,7 @@ struct _PpNewPrinter
   GCancellable *cancellable;
 };
 
-G_DEFINE_TYPE (PpNewPrinter, pp_new_printer, G_TYPE_OBJECT);
+G_DEFINE_FINAL_TYPE (PpNewPrinter, pp_new_printer, G_TYPE_OBJECT);
 
 enum {
   PROP_0 = 0,

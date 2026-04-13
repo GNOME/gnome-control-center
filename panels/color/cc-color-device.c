@@ -40,7 +40,7 @@ struct _CcColorDevice
   GtkWidget   *widget_nocalib;
 };
 
-G_DEFINE_TYPE (CcColorDevice, cc_color_device, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcColorDevice, cc_color_device, ADW_TYPE_ACTION_ROW)
 
 enum
 {

@@ -46,7 +46,7 @@ struct _CcDurationRow {
   CcDurationEditor *editor;
 };
 
-G_DEFINE_TYPE (CcDurationRow, cc_duration_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcDurationRow, cc_duration_row, ADW_TYPE_ACTION_ROW)
 
 typedef enum {
   PROP_DURATION = 1,

@@ -47,7 +47,7 @@ struct _CcColorProfile
 
 #define IMAGE_WIDGET_PADDING 12
 
-G_DEFINE_TYPE (CcColorProfile, cc_color_profile, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcColorProfile, cc_color_profile, ADW_TYPE_ACTION_ROW)
 
 enum
 {

@@ -56,7 +56,7 @@ struct _CcWwanSimLockDialog
   GtkStack     *pin_settings_stack;
 };
 
-G_DEFINE_TYPE (CcWwanSimLockDialog, cc_wwan_sim_lock_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcWwanSimLockDialog, cc_wwan_sim_lock_dialog, GTK_TYPE_DIALOG)
 
 
 enum {

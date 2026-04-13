@@ -32,7 +32,7 @@ struct _CcOnlineAccountRow
   GoaObject *object;
 };
 
-G_DEFINE_TYPE (CcOnlineAccountRow, cc_online_account_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcOnlineAccountRow, cc_online_account_row, ADW_TYPE_ACTION_ROW)
 
 static gboolean
 is_gicon_symbolic (GtkWidget *widget,

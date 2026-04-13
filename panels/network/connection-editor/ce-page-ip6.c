@@ -80,7 +80,7 @@ struct _CEPageIP6
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPageIP6, ce_page_ip6, ADW_TYPE_BIN,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageIP6, ce_page_ip6, ADW_TYPE_BIN,
                          G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 enum {

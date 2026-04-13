@@ -32,7 +32,7 @@ struct _PpPrinter
   gchar   *printer_name;
 };
 
-G_DEFINE_TYPE (PpPrinter, pp_printer, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (PpPrinter, pp_printer, G_TYPE_OBJECT)
 
 static void
 pp_printer_dispose (GObject *object)

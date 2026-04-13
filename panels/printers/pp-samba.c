@@ -38,7 +38,7 @@ struct _PpSamba
   gboolean  waiting;
 };
 
-G_DEFINE_TYPE (PpSamba, pp_samba, PP_TYPE_HOST);
+G_DEFINE_FINAL_TYPE (PpSamba, pp_samba, PP_TYPE_HOST);
 
 static void
 pp_samba_finalize (GObject *object)

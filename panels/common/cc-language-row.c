@@ -38,7 +38,7 @@ struct _CcLanguageRow {
   gboolean is_extra;
 };
 
-G_DEFINE_TYPE (CcLanguageRow, cc_language_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_FINAL_TYPE (CcLanguageRow, cc_language_row, GTK_TYPE_LIST_BOX_ROW)
 
 static gchar *
 get_language_label (const gchar *language_code,

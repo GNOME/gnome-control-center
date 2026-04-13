@@ -49,7 +49,7 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
-G_DEFINE_TYPE (CcBackgroundXml, cc_background_xml, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcBackgroundXml, cc_background_xml, G_TYPE_OBJECT)
 
 static gboolean
 cc_background_xml_get_bool (const xmlNode *parent,

@@ -32,7 +32,7 @@ struct _CcInputRow
   gdouble          drag_y;
 };
 
-G_DEFINE_TYPE (CcInputRow, cc_input_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcInputRow, cc_input_row, ADW_TYPE_ACTION_ROW)
 
 enum
 {

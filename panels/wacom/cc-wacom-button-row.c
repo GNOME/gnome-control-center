@@ -43,7 +43,7 @@ struct _CcWacomButtonRow {
   GsdWacomKeyShortcutButton *key_shortcut_button;
 };
 
-G_DEFINE_TYPE (CcWacomButtonRow, cc_wacom_button_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_FINAL_TYPE (CcWacomButtonRow, cc_wacom_button_row, GTK_TYPE_LIST_BOX_ROW)
 
 static GtkWidget *
 create_actions_combo (void)

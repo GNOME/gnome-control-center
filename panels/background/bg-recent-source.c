@@ -39,7 +39,7 @@ struct _BgRecentSource
   GHashTable   *items;
 };
 
-G_DEFINE_TYPE (BgRecentSource, bg_recent_source, BG_TYPE_SOURCE)
+G_DEFINE_FINAL_TYPE (BgRecentSource, bg_recent_source, BG_TYPE_SOURCE)
 
 static int
 sort_func (gconstpointer a,

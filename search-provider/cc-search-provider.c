@@ -49,7 +49,7 @@ typedef enum {
   MATCH_SUBSTRING
 } PanelSearchMatch;
 
-G_DEFINE_TYPE (CcSearchProvider, cc_search_provider, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcSearchProvider, cc_search_provider, G_TYPE_OBJECT)
 
 static char **
 get_casefolded_terms (char **terms)

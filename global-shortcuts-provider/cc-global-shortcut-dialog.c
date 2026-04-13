@@ -84,7 +84,7 @@ struct _CcGlobalShortcutDialog
   gboolean has_new_shortcuts;
 };
 
-G_DEFINE_TYPE (CcGlobalShortcutDialog,
+G_DEFINE_FINAL_TYPE (CcGlobalShortcutDialog,
                cc_global_shortcut_dialog,
                ADW_TYPE_WINDOW)
 

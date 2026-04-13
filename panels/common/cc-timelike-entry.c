@@ -63,7 +63,7 @@ static void editable_insert_text_cb (GtkText         *text,
 
 static void gtk_editable_interface_init (GtkEditableInterface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CcTimelikeEntry, cc_timelike_entry, GTK_TYPE_WIDGET,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CcTimelikeEntry, cc_timelike_entry, GTK_TYPE_WIDGET,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE, gtk_editable_interface_init));
 
 typedef enum {

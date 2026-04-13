@@ -30,7 +30,7 @@ struct _CcFadeSlider
   guint          volume_changed_handler_id;
 };
 
-G_DEFINE_TYPE (CcFadeSlider, cc_fade_slider, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcFadeSlider, cc_fade_slider, GTK_TYPE_WIDGET)
 
 static void
 changed_cb (CcFadeSlider *self)

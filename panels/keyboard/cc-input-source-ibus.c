@@ -30,7 +30,7 @@ struct _CcInputSourceIBus
 #endif
 };
 
-G_DEFINE_TYPE (CcInputSourceIBus, cc_input_source_ibus, CC_TYPE_INPUT_SOURCE)
+G_DEFINE_FINAL_TYPE (CcInputSourceIBus, cc_input_source_ibus, CC_TYPE_INPUT_SOURCE)
 
 static gchar *
 cc_input_source_ibus_get_label (CcInputSource *source)

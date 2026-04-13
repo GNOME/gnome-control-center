@@ -28,7 +28,7 @@ struct _CcDeviceComboRow
   gboolean         is_output;
 };
 
-G_DEFINE_TYPE (CcDeviceComboRow, cc_device_combo_row, ADW_TYPE_COMBO_ROW)
+G_DEFINE_FINAL_TYPE (CcDeviceComboRow, cc_device_combo_row, ADW_TYPE_COMBO_ROW)
 
 static void
 selected_item_changed (CcDeviceComboRow *self,

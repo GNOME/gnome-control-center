@@ -29,7 +29,7 @@
  *
  * use: CC_PANEL_REGISTER (PluginName, plugin_name)
  */
-#define CC_PANEL_REGISTER(PluginName, plugin_name) G_DEFINE_TYPE (PluginName, plugin_name, CC_TYPE_PANEL)
+#define CC_PANEL_REGISTER(PluginName, plugin_name) G_DEFINE_FINAL_TYPE (PluginName, plugin_name, CC_TYPE_PANEL)
 
 /**
  * CcPanelStaticInitFunc:

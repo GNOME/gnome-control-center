@@ -70,7 +70,7 @@ static void on_row_forget_cb        (CcWifiConnectionList *self,
 static void on_row_show_qr_code_cb (CcWifiConnectionList *self,
                                     CcWifiConnectionRow  *row);
 
-G_DEFINE_TYPE (CcWifiConnectionList, cc_wifi_connection_list, ADW_TYPE_BIN)
+G_DEFINE_FINAL_TYPE (CcWifiConnectionList, cc_wifi_connection_list, ADW_TYPE_BIN)
 
 enum
 {

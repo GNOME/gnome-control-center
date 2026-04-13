@@ -39,7 +39,7 @@ struct _CcVolumeSlider
   guint            notify_is_muted_handler_id;
 };
 
-G_DEFINE_TYPE (CcVolumeSlider, cc_volume_slider, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcVolumeSlider, cc_volume_slider, GTK_TYPE_WIDGET)
 
 static void notify_is_muted_cb (CcVolumeSlider *self);
 

@@ -88,7 +88,7 @@ struct _CcRegionPage {
         GCancellable      *cancellable;
 };
 
-G_DEFINE_TYPE (CcRegionPage, cc_region_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcRegionPage, cc_region_page, ADW_TYPE_NAVIGATION_PAGE)
 
 /* Auxiliary methods */
 

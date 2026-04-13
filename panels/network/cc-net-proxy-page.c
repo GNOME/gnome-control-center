@@ -66,7 +66,7 @@ struct _CcNetProxyPage
   gboolean             is_loading;
 };
 
-G_DEFINE_TYPE (CcNetProxyPage, cc_net_proxy_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcNetProxyPage, cc_net_proxy_page, ADW_TYPE_NAVIGATION_PAGE)
 
 typedef enum
 {

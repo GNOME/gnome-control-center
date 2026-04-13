@@ -67,7 +67,7 @@ struct _CcPanelList
   gboolean            center_activated_row;
 };
 
-G_DEFINE_TYPE (CcPanelList, cc_panel_list, ADW_TYPE_BIN)
+G_DEFINE_FINAL_TYPE (CcPanelList, cc_panel_list, ADW_TYPE_BIN)
 
 enum
 {

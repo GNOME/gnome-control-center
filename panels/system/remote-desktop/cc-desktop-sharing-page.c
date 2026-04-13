@@ -79,7 +79,7 @@ struct _CcDesktopSharingPage {
   GCancellable *cancellable;
 };
 
-G_DEFINE_TYPE (CcDesktopSharingPage, cc_desktop_sharing_page, ADW_TYPE_BIN)
+G_DEFINE_FINAL_TYPE (CcDesktopSharingPage, cc_desktop_sharing_page, ADW_TYPE_BIN)
 
 static void
 on_generate_password_button_row_activated (CcDesktopSharingPage *self)

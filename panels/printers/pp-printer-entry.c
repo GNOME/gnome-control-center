@@ -91,7 +91,7 @@ struct _PpPrinterEntryClass
   void (*printer_renamed) (PpPrinterEntry *printer_entry, const gchar *new_name);
 };
 
-G_DEFINE_TYPE (PpPrinterEntry, pp_printer_entry, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_FINAL_TYPE (PpPrinterEntry, pp_printer_entry, GTK_TYPE_LIST_BOX_ROW)
 
 enum {
   IS_DEFAULT_PRINTER,

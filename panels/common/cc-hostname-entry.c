@@ -33,7 +33,7 @@ struct _CcHostnameEntry
   guint                set_hostname_timeout_source_id;
 };
 
-G_DEFINE_TYPE (CcHostnameEntry, cc_hostname_entry, ADW_TYPE_ENTRY_ROW)
+G_DEFINE_FINAL_TYPE (CcHostnameEntry, cc_hostname_entry, ADW_TYPE_ENTRY_ROW)
 
 #define SET_HOSTNAME_TIMEOUT 1
 

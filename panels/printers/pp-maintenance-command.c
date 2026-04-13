@@ -45,7 +45,7 @@ struct _PpMaintenanceCommand
   gchar *title;
 };
 
-G_DEFINE_TYPE (PpMaintenanceCommand, pp_maintenance_command, G_TYPE_OBJECT);
+G_DEFINE_FINAL_TYPE (PpMaintenanceCommand, pp_maintenance_command, G_TYPE_OBJECT);
 
 enum {
   PROP_0 = 0,

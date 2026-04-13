@@ -63,7 +63,7 @@ struct _CcBarChartBar {
   char *accessible_description;
 };
 
-G_DEFINE_TYPE (CcBarChartBar, cc_bar_chart_bar, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcBarChartBar, cc_bar_chart_bar, GTK_TYPE_WIDGET)
 
 typedef enum {
   PROP_VALUE = 1,

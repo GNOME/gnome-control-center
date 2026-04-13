@@ -46,7 +46,7 @@ struct _CcSharingNetworks {
 };
 
 
-G_DEFINE_TYPE (CcSharingNetworks, cc_sharing_networks, ADW_TYPE_PREFERENCES_GROUP)
+G_DEFINE_FINAL_TYPE (CcSharingNetworks, cc_sharing_networks, ADW_TYPE_PREFERENCES_GROUP)
 
 enum {
   PROP_0,

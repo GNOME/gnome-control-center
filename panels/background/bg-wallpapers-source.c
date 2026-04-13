@@ -33,7 +33,7 @@ struct _BgWallpapersSource
   CcBackgroundXml *xml;
 };
 
-G_DEFINE_TYPE (BgWallpapersSource, bg_wallpapers_source, BG_TYPE_SOURCE)
+G_DEFINE_FINAL_TYPE (BgWallpapersSource, bg_wallpapers_source, BG_TYPE_SOURCE)
 
 static int
 sort_func (gconstpointer a,

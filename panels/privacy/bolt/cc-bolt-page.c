@@ -135,7 +135,7 @@ static void      on_permission_notify_cb (GPermission *permission,
                                           GParamSpec  *pspec,
                                           CcBoltPage  *self);
 
-G_DEFINE_TYPE (CcBoltPage, cc_bolt_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcBoltPage, cc_bolt_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 update_visibility (BoltClient  *client,

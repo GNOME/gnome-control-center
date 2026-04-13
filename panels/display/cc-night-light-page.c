@@ -73,7 +73,7 @@ struct _CcNightLightPage {
   CcDisplayConfigManager *config_manager;
 };
 
-G_DEFINE_TYPE (CcNightLightPage, cc_night_light_page, ADW_TYPE_BIN);
+G_DEFINE_FINAL_TYPE (CcNightLightPage, cc_night_light_page, ADW_TYPE_BIN);
 
 #define CLOCK_SCHEMA     "org.gnome.desktop.interface"
 #define DISPLAY_SCHEMA   "org.gnome.settings-daemon.plugins.color"

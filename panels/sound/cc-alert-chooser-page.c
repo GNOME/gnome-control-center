@@ -38,7 +38,7 @@ struct _CcAlertChooserPage
   GSettings      *sound_settings;
 };
 
-G_DEFINE_TYPE (CcAlertChooserPage, cc_alert_chooser_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcAlertChooserPage, cc_alert_chooser_page, ADW_TYPE_NAVIGATION_PAGE)
 
 #define CUSTOM_THEME_NAME "__custom"
 

@@ -35,7 +35,7 @@ struct _CcKeyboardShortcutRow
   CcKeyboardManager        *manager;
 };
 
-G_DEFINE_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, ADW_TYPE_ACTION_ROW)
 
 static void
 reset_shortcut_cb (CcKeyboardShortcutRow *self)

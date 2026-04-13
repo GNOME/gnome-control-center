@@ -61,7 +61,7 @@ enum {
 static guint signals[SIGNAL_LAST] = {0};
 
 
-G_DEFINE_TYPE (BoltClient,
+G_DEFINE_FINAL_TYPE (BoltClient,
                bolt_client,
                BOLT_TYPE_PROXY);
 

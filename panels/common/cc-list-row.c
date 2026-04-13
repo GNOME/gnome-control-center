@@ -42,7 +42,7 @@ struct _CcListRow
   gboolean      show_arrow;
 };
 
-G_DEFINE_TYPE (CcListRow, cc_list_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcListRow, cc_list_row, ADW_TYPE_ACTION_ROW)
 
 
 enum {

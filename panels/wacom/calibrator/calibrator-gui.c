@@ -52,7 +52,7 @@ struct _CcCalibArea
   gpointer       user_data;
 };
 
-G_DEFINE_TYPE (CcCalibArea, cc_calib_area, GTK_TYPE_WINDOW)
+G_DEFINE_FINAL_TYPE (CcCalibArea, cc_calib_area, GTK_TYPE_WINDOW)
 
 /* Timeout parameters */
 #define MAX_TIME                15000 /* 15000 = 15 sec */

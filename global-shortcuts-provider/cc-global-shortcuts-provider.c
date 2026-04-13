@@ -56,7 +56,7 @@ typedef enum
   MATCH_SUBSTRING
 } PanelSearchMatch;
 
-G_DEFINE_TYPE (CcGlobalShortcutsProvider,
+G_DEFINE_FINAL_TYPE (CcGlobalShortcutsProvider,
                cc_global_shortcuts_provider,
                G_TYPE_OBJECT)
 

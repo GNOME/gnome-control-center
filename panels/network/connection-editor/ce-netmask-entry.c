@@ -34,7 +34,7 @@ struct _CENetmaskEntry
 
 static void ce_netmask_entry_editable_init (GtkEditableInterface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CENetmaskEntry, ce_netmask_entry, GTK_TYPE_ENTRY,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CENetmaskEntry, ce_netmask_entry, GTK_TYPE_ENTRY,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE,
                                                 ce_netmask_entry_editable_init))
 

@@ -42,7 +42,7 @@ struct _CcOutputTestWheel
   GSoundContext *context;
 };
 
-G_DEFINE_TYPE (CcOutputTestWheel, cc_output_test_wheel, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcOutputTestWheel, cc_output_test_wheel, GTK_TYPE_WIDGET)
 
 static GtkWidget*
 create_speaker_button (CcOutputTestWheel     *self,

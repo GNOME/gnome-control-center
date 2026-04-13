@@ -35,7 +35,7 @@ struct _CcDiagnosticsPage
   GSettings           *privacy_settings;
 };
 
-G_DEFINE_TYPE (CcDiagnosticsPage, cc_diagnostics_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcDiagnosticsPage, cc_diagnostics_page, ADW_TYPE_NAVIGATION_PAGE)
 
 /* Static init function */
 

@@ -46,7 +46,7 @@ struct _CEPageEthernet
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPageEthernet, ce_page_ethernet, ADW_TYPE_BIN,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageEthernet, ce_page_ethernet, ADW_TYPE_BIN,
                          G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 static void

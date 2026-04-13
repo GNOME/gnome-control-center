@@ -68,7 +68,7 @@ typedef enum
   NM_AP_SEC_OWE_TM
 } NMAccessPointSecurity;
 
-G_DEFINE_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, ADW_TYPE_ACTION_ROW)
 
 static GParamSpec *props[PROP_LAST];
 

@@ -57,7 +57,7 @@ struct _CcTzItem
   char           *zone;
 };
 
-G_DEFINE_TYPE (CcTzItem, cc_tz_item, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcTzItem, cc_tz_item, G_TYPE_OBJECT)
 
 enum {
   PROP_0,

@@ -62,7 +62,7 @@ struct _CcUsersPage {
     ActUserManager    *user_manager;
 };
 
-G_DEFINE_TYPE (CcUsersPage, cc_users_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcUsersPage, cc_users_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 cc_users_page_map (GtkWidget *widget)

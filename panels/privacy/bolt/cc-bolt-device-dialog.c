@@ -57,7 +57,7 @@ struct _CcBoltDeviceDialog
 static void     on_forget_button_clicked_cb (CcBoltDeviceDialog *dialog);
 static void     on_connect_button_clicked_cb (CcBoltDeviceDialog *dialog);
 
-G_DEFINE_TYPE (CcBoltDeviceDialog, cc_bolt_device_dialog, ADW_TYPE_WINDOW);
+G_DEFINE_FINAL_TYPE (CcBoltDeviceDialog, cc_bolt_device_dialog, ADW_TYPE_WINDOW);
 
 #define RESOURCE_UI "/org/gnome/control-center/privacy/bolt/cc-bolt-device-dialog.ui"
 

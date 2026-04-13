@@ -37,7 +37,7 @@ struct _CcXkbModifierPage
   GSList         *radio_group;
 };
 
-G_DEFINE_TYPE (CcXkbModifierPage, cc_xkb_modifier_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcXkbModifierPage, cc_xkb_modifier_page, ADW_TYPE_NAVIGATION_PAGE)
 
 #define RADIO_STORAGE_KEY "cc-xkb-option"
 

@@ -39,7 +39,7 @@ struct _CcPowerProfileRow
   CcPowerProfile power_profile;
 };
 
-G_DEFINE_TYPE (CcPowerProfileRow, cc_power_profile_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcPowerProfileRow, cc_power_profile_row, ADW_TYPE_ACTION_ROW)
 
 enum {
   BUTTON_TOGGLED,

@@ -42,7 +42,7 @@ struct _CcNumberObject {
     CcNumberOrder  order;
 };
 
-G_DEFINE_TYPE (CcNumberObject, cc_number_object, G_TYPE_OBJECT);
+G_DEFINE_FINAL_TYPE (CcNumberObject, cc_number_object, G_TYPE_OBJECT);
 
 enum {
     OBJ_PROP_0,
@@ -303,7 +303,7 @@ struct _CcNumberRow {
     gulong     number_row_selected_changed_id;
 };
 
-G_DEFINE_TYPE(CcNumberRow, cc_number_row, ADW_TYPE_COMBO_ROW)
+G_DEFINE_FINAL_TYPE(CcNumberRow, cc_number_row, ADW_TYPE_COMBO_ROW)
 
 enum {
     ROW_PROP_0,

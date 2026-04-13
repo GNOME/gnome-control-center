@@ -27,7 +27,7 @@ struct _CcObjectStorage
   GHashTable *id_to_object;
 };
 
-G_DEFINE_TYPE (CcObjectStorage, cc_object_storage, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcObjectStorage, cc_object_storage, G_TYPE_OBJECT)
 
 /* Singleton instance */
 static CcObjectStorage *_instance = NULL;

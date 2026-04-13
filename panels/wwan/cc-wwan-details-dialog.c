@@ -55,7 +55,7 @@ struct _CcWwanDetailsDialog
   CcWwanDevice *device;
 };
 
-G_DEFINE_TYPE (CcWwanDetailsDialog, cc_wwan_details_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcWwanDetailsDialog, cc_wwan_details_dialog, ADW_TYPE_DIALOG)
 
 
 enum {

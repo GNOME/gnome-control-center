@@ -68,7 +68,7 @@ struct _CcPasswordDialog
         PasswdHandler      *passwd_handler;
 };
 
-G_DEFINE_TYPE (CcPasswordDialog, cc_password_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcPasswordDialog, cc_password_dialog, ADW_TYPE_DIALOG)
 
 static gboolean
 update_password_strength (CcPasswordDialog *self)

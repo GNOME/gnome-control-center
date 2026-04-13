@@ -31,7 +31,7 @@ struct _CcApplicationsRow
   GAppInfo     *info;
 };
 
-G_DEFINE_TYPE (CcApplicationsRow, cc_applications_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcApplicationsRow, cc_applications_row, ADW_TYPE_ACTION_ROW)
 
 static void
 cc_applications_row_finalize (GObject *object)

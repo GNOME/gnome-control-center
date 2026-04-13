@@ -35,7 +35,7 @@ struct _PpJobRow
   PpJob *job;
 };
 
-G_DEFINE_TYPE (PpJobRow, pp_job_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (PpJobRow, pp_job_row, ADW_TYPE_ACTION_ROW)
 
 enum {
   PRIORITY_CHANGED,

@@ -70,7 +70,7 @@ struct _CcCropArea {
     int min_crop_height;
 };
 
-G_DEFINE_TYPE (CcCropArea, cc_crop_area, GTK_TYPE_WIDGET);
+G_DEFINE_FINAL_TYPE (CcCropArea, cc_crop_area, GTK_TYPE_WIDGET);
 
 static void
 update_image_and_crop (CcCropArea *area)

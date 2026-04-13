@@ -45,7 +45,7 @@ struct _NetDeviceBluetooth
         gboolean      updating_device;
 };
 
-G_DEFINE_TYPE (NetDeviceBluetooth, net_device_bluetooth, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, ADW_TYPE_ACTION_ROW)
 
 static void
 update_off_switch_from_device_state (GtkSwitch *sw,

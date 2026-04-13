@@ -83,7 +83,7 @@ struct _CcWacomPage
 	GsdDeviceManager *manager;
 };
 
-G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
+G_DEFINE_FINAL_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 
 /* Different types of layout for the tablet config */
 enum {

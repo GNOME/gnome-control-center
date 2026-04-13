@@ -42,7 +42,7 @@ struct _CcPermissionInfobar
   GCancellable *cancellable;
 };
 
-G_DEFINE_TYPE (CcPermissionInfobar, cc_permission_infobar, ADW_TYPE_BIN)
+G_DEFINE_FINAL_TYPE (CcPermissionInfobar, cc_permission_infobar, ADW_TYPE_BIN)
 
 static void
 on_permission_changed (CcPermissionInfobar *self)

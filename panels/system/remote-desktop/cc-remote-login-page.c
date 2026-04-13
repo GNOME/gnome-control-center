@@ -76,7 +76,7 @@ struct _CcRemoteLoginPage {
   gboolean have_credentials;
 };
 
-G_DEFINE_TYPE (CcRemoteLoginPage, cc_remote_login_page, ADW_TYPE_BIN)
+G_DEFINE_FINAL_TYPE (CcRemoteLoginPage, cc_remote_login_page, ADW_TYPE_BIN)
 static void fetch_credentials (CcRemoteLoginPage *self);
 
 static void

@@ -97,7 +97,7 @@ struct _CcWwanDevicePage
   gboolean is_retry;
 };
 
-G_DEFINE_TYPE (CcWwanDevicePage, cc_wwan_device_page, GTK_TYPE_BOX)
+G_DEFINE_FINAL_TYPE (CcWwanDevicePage, cc_wwan_device_page, GTK_TYPE_BOX)
 
 enum {
   PROP_0,

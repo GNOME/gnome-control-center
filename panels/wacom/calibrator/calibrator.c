@@ -85,7 +85,7 @@ struct _CcCalibrator
     int threshold_misclick;
 };
 
-G_DEFINE_TYPE (CcCalibrator, cc_calibrator, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcCalibrator, cc_calibrator, G_TYPE_OBJECT)
 
 #define SWAP(valtype,x,y)		\
     G_STMT_START {			\

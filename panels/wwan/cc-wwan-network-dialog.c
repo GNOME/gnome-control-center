@@ -62,7 +62,7 @@ struct _CcWwanNetworkDialog
   gboolean      no_update_network;
 };
 
-G_DEFINE_TYPE (CcWwanNetworkDialog, cc_wwan_network_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcWwanNetworkDialog, cc_wwan_network_dialog, GTK_TYPE_DIALOG)
 
 
 enum {

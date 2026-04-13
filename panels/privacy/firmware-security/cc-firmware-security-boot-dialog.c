@@ -35,7 +35,7 @@ struct _CcFirmwareSecurityBootDialog
   GtkWidget        *secure_boot_description;
 };
 
-G_DEFINE_TYPE (CcFirmwareSecurityBootDialog, cc_firmware_security_boot_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcFirmwareSecurityBootDialog, cc_firmware_security_boot_dialog, ADW_TYPE_DIALOG)
 
 static void
 cc_firmware_security_boot_dialog_class_init (CcFirmwareSecurityBootDialogClass *klass)

@@ -77,7 +77,7 @@ enum {
   PROP_PARAMETERS
 };
 
-G_DEFINE_TYPE (CcWwanPanel, cc_wwan_panel, CC_TYPE_PANEL)
+G_DEFINE_FINAL_TYPE (CcWwanPanel, cc_wwan_panel, CC_TYPE_PANEL)
 
 
 #define CC_TYPE_DATA_DEVICE_ROW (cc_data_device_row_get_type())

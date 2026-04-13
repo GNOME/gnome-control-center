@@ -40,7 +40,7 @@ struct _CcListRowInfoButton
   GtkLabel      *label;
 };
 
-G_DEFINE_TYPE (CcListRowInfoButton, cc_list_row_info_button, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcListRowInfoButton, cc_list_row_info_button, GTK_TYPE_WIDGET)
 
 
 enum {

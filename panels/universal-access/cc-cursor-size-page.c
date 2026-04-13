@@ -31,7 +31,7 @@ struct _CcCursorSizePage
   GSettings *interface_settings;
 };
 
-G_DEFINE_TYPE (CcCursorSizePage, cc_cursor_size_page, ADW_TYPE_NAVIGATION_PAGE);
+G_DEFINE_FINAL_TYPE (CcCursorSizePage, cc_cursor_size_page, ADW_TYPE_NAVIGATION_PAGE);
 
 static void
 cursor_size_toggled (CcCursorSizePage *self, GtkWidget *button)

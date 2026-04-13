@@ -100,7 +100,7 @@ enum {
         PROP_LAST,
 };
 
-G_DEFINE_TYPE (NetDeviceWifi, net_device_wifi, ADW_TYPE_BIN)
+G_DEFINE_FINAL_TYPE (NetDeviceWifi, net_device_wifi, ADW_TYPE_BIN)
 
 static void
 disable_scan_timeout (NetDeviceWifi *self)

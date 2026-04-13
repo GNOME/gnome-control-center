@@ -42,7 +42,7 @@ struct _CcTimeEditor {
   CcTimelikeEditor *editor;
 };
 
-G_DEFINE_TYPE (CcTimeEditor, cc_time_editor, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcTimeEditor, cc_time_editor, GTK_TYPE_WIDGET)
 
 static void cc_time_editor_dispose (GObject *object);
 

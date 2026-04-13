@@ -63,7 +63,7 @@ struct _CcColorCalibrate
 
 #define COLORD_SETTINGS_SCHEMA  "org.freedesktop.ColorHelper"
 
-G_DEFINE_TYPE (CcColorCalibrate, cc_color_calibrate, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcColorCalibrate, cc_color_calibrate, G_TYPE_OBJECT)
 
 static GQuark
 cc_color_calibrate_error_quark (void)

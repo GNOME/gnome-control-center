@@ -58,7 +58,7 @@ struct _CcFormatChooser {
   gchar **filter_words;
 };
 
-G_DEFINE_TYPE (CcFormatChooser, cc_format_chooser, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcFormatChooser, cc_format_chooser, ADW_TYPE_DIALOG)
 
 enum
 {

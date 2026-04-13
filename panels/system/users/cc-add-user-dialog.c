@@ -78,7 +78,7 @@ static gint signals[NUM_SIGNALS] = {
   0,
 };
 
-G_DEFINE_TYPE (CcAddUserDialog, cc_add_user_dialog, ADW_TYPE_DIALOG);
+G_DEFINE_FINAL_TYPE (CcAddUserDialog, cc_add_user_dialog, ADW_TYPE_DIALOG);
 
 static void
 show_error_dialog (CcAddUserDialog *self,

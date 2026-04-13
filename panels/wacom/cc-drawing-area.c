@@ -30,7 +30,7 @@ struct _CcDrawingArea {
 	cairo_t *cr;
 };
 
-G_DEFINE_TYPE (CcDrawingArea, cc_drawing_area, GTK_TYPE_DRAWING_AREA)
+G_DEFINE_FINAL_TYPE (CcDrawingArea, cc_drawing_area, GTK_TYPE_DRAWING_AREA)
 
 static void
 ensure_drawing_surface (CcDrawingArea *area,

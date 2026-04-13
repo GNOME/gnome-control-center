@@ -48,7 +48,7 @@ struct _CcAvatarChooser {
         ActUser *user;
 };
 
-G_DEFINE_TYPE (CcAvatarChooser, cc_avatar_chooser, GTK_TYPE_POPOVER)
+G_DEFINE_FINAL_TYPE (CcAvatarChooser, cc_avatar_chooser, GTK_TYPE_POPOVER)
 
 static void
 crop_dialog_response (CcAvatarChooser *self,

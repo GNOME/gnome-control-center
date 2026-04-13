@@ -72,7 +72,7 @@ struct _CcTimelikeEditorLayout {
   unsigned int column_spacing;
 };
 
-G_DEFINE_TYPE (CcTimelikeEditorLayout, cc_timelike_editor_layout, GTK_TYPE_LAYOUT_MANAGER)
+G_DEFINE_FINAL_TYPE (CcTimelikeEditorLayout, cc_timelike_editor_layout, GTK_TYPE_LAYOUT_MANAGER)
 
 typedef enum {
   PROP_ROW_SPACING = 1,

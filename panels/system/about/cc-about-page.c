@@ -74,7 +74,7 @@ struct _CcAboutPage
   AdwActionRow      *kernel_row;
 };
 
-G_DEFINE_TYPE (CcAboutPage, cc_about_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcAboutPage, cc_about_page, ADW_TYPE_NAVIGATION_PAGE)
 
 #if !defined(DISTRIBUTOR_LOGO) || defined(DARK_MODE_DISTRIBUTOR_LOGO)
 static gboolean

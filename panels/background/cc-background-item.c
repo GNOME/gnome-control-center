@@ -95,7 +95,7 @@ static GThread *thread;
 
 static void     cc_background_item_finalize       (GObject               *object);
 
-G_DEFINE_TYPE (CcBackgroundItem, cc_background_item, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcBackgroundItem, cc_background_item, G_TYPE_OBJECT)
 
 typedef struct
 {

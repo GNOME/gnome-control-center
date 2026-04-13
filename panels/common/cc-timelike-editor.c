@@ -74,7 +74,7 @@ struct _CcTimelikeEditor
   CcTimelikeEditorMode mode;
 };
 
-G_DEFINE_TYPE (CcTimelikeEditor, cc_timelike_editor, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcTimelikeEditor, cc_timelike_editor, GTK_TYPE_WIDGET)
 
 typedef enum {
   PROP_MODE = 1,

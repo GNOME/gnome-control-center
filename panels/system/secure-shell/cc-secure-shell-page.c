@@ -42,7 +42,7 @@ struct _CcSecureShellPage {
   GCancellable *cancellable;
 };
 
-G_DEFINE_TYPE (CcSecureShellPage, cc_secure_shell_page, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcSecureShellPage, cc_secure_shell_page, ADW_TYPE_DIALOG)
 
 static void
 on_copy_ssh_command_button_clicked (CcSecureShellPage *self)

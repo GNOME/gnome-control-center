@@ -47,7 +47,7 @@ struct _CcEntryFeedback
   gboolean spinner_showing;
 };
 
-G_DEFINE_TYPE (CcEntryFeedback, cc_entry_feedback, GTK_TYPE_BOX)
+G_DEFINE_FINAL_TYPE (CcEntryFeedback, cc_entry_feedback, GTK_TYPE_BOX)
 
 enum
 {

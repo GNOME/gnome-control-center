@@ -50,7 +50,7 @@ enum
   PROP_REGION
 };
 
-G_DEFINE_TYPE (CcFormatPreview, cc_format_preview, ADW_TYPE_PREFERENCES_GROUP)
+G_DEFINE_FINAL_TYPE (CcFormatPreview, cc_format_preview, ADW_TYPE_PREFERENCES_GROUP)
 
 static void
 display_date (AdwActionRow *row, GDateTime *dt, const gchar *format)

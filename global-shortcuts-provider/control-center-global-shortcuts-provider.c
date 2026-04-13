@@ -35,7 +35,7 @@ struct _CcGlobalShortcutsProviderApp
   CcGlobalShortcutsProvider *global_shortcuts_provider;
 };
 
-G_DEFINE_TYPE (CcGlobalShortcutsProviderApp,
+G_DEFINE_FINAL_TYPE (CcGlobalShortcutsProviderApp,
                cc_global_shortcuts_provider_app,
                ADW_TYPE_APPLICATION)
 

@@ -79,7 +79,7 @@ struct _CcEnterpriseLoginDialog
   GCancellable        *cancellable;
 };
 
-G_DEFINE_TYPE (CcEnterpriseLoginDialog, cc_enterprise_login_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcEnterpriseLoginDialog, cc_enterprise_login_dialog, ADW_TYPE_DIALOG)
 
 static gboolean
 add_button_is_valid (CcEnterpriseLoginDialog *self)

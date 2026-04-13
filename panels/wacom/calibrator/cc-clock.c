@@ -52,7 +52,7 @@ enum {
 
 static guint signals[N_SIGNALS] = { 0, };
 
-G_DEFINE_TYPE (CcClock, cc_clock, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcClock, cc_clock, GTK_TYPE_WIDGET)
 
 static gint64
 cc_clock_get_time_diff (CcClock *clock)

@@ -58,7 +58,7 @@ struct _CcFirmwareSecurityDialog
   guint                hsi_number;
 };
 
-G_DEFINE_TYPE (CcFirmwareSecurityDialog, cc_firmware_security_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcFirmwareSecurityDialog, cc_firmware_security_dialog, ADW_TYPE_DIALOG)
 
 static void
 set_dialog_item_layer1 (CcFirmwareSecurityDialog *self,

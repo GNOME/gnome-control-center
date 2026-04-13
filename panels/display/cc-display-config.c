@@ -162,19 +162,19 @@ struct _CcDisplayConfig
   GHashTable *logical_monitors;
 };
 
-G_DEFINE_TYPE (CcDisplayMode,
+G_DEFINE_FINAL_TYPE (CcDisplayMode,
                cc_display_mode,
                G_TYPE_OBJECT)
 
-G_DEFINE_TYPE (CcDisplayMonitor,
+G_DEFINE_FINAL_TYPE (CcDisplayMonitor,
                cc_display_monitor,
                G_TYPE_OBJECT)
 
-G_DEFINE_TYPE (CcDisplayLogicalMonitor,
+G_DEFINE_FINAL_TYPE (CcDisplayLogicalMonitor,
                cc_display_logical_monitor,
                G_TYPE_OBJECT)
 
-G_DEFINE_TYPE (CcDisplayConfig,
+G_DEFINE_FINAL_TYPE (CcDisplayConfig,
                cc_display_config,
                G_TYPE_OBJECT)
 

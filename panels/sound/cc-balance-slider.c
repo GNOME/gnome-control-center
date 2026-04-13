@@ -30,7 +30,7 @@ struct _CcBalanceSlider
   guint          volume_changed_handler_id;
 };
 
-G_DEFINE_TYPE (CcBalanceSlider, cc_balance_slider, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcBalanceSlider, cc_balance_slider, GTK_TYPE_WIDGET)
 
 static void
 changed_cb (CcBalanceSlider *self)

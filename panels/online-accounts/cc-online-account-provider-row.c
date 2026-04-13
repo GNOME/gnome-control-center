@@ -35,7 +35,7 @@ struct _CcOnlineAccountProviderRow
   GoaProvider *provider;
 };
 
-G_DEFINE_TYPE (CcOnlineAccountProviderRow, cc_online_account_provider_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcOnlineAccountProviderRow, cc_online_account_provider_row, ADW_TYPE_ACTION_ROW)
 
 typedef struct
 {

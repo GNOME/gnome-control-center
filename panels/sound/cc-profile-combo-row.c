@@ -30,7 +30,7 @@ struct _CcProfileComboRow
   GvcMixerUIDevice *device;
 };
 
-G_DEFINE_TYPE (CcProfileComboRow, cc_profile_combo_row, ADW_TYPE_COMBO_ROW)
+G_DEFINE_FINAL_TYPE (CcProfileComboRow, cc_profile_combo_row, ADW_TYPE_COMBO_ROW)
 
 static void
 selected_item_changed (CcProfileComboRow *self,

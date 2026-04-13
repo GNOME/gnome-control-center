@@ -72,7 +72,7 @@ struct _CcWwanDevice
   gboolean     network_is_manual;
 };
 
-G_DEFINE_TYPE (CcWwanDevice, cc_wwan_device, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcWwanDevice, cc_wwan_device, G_TYPE_OBJECT)
 
 
 enum {

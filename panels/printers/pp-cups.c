@@ -36,7 +36,7 @@ struct _PpCups
   GObject parent_instance;
 };
 
-G_DEFINE_TYPE (PpCups, pp_cups, G_TYPE_OBJECT);
+G_DEFINE_FINAL_TYPE (PpCups, pp_cups, G_TYPE_OBJECT);
 
 static void
 pp_cups_class_init (PpCupsClass *klass)

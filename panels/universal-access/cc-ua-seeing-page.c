@@ -73,7 +73,7 @@ struct _CcUaSeeingPage
   GSettings          *a11y_interface_settings;
 };
 
-G_DEFINE_TYPE (CcUaSeeingPage, cc_ua_seeing_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcUaSeeingPage, cc_ua_seeing_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 set_label_scale (CcUaSeeingPage *self,

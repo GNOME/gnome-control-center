@@ -37,7 +37,7 @@ struct _CcStreamRow
   guint           id;
 };
 
-G_DEFINE_TYPE (CcStreamRow, cc_stream_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_FINAL_TYPE (CcStreamRow, cc_stream_row, GTK_TYPE_LIST_BOX_ROW)
 
 static void
 cc_stream_row_dispose (GObject *object)

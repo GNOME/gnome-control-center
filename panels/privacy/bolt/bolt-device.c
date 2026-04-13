@@ -59,7 +59,7 @@ enum {
 
 static GParamSpec *props[PROP_LAST] = {NULL, };
 
-G_DEFINE_TYPE (BoltDevice,
+G_DEFINE_FINAL_TYPE (BoltDevice,
                bolt_device,
                BOLT_TYPE_PROXY);
 

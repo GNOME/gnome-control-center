@@ -51,12 +51,12 @@ struct _CcWifiHotspotDialog
   gchar           *host_name;
 };
 
-G_DEFINE_TYPE (CcWifiHotspotDialog, cc_wifi_hotspot_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcWifiHotspotDialog, cc_wifi_hotspot_dialog, ADW_TYPE_DIALOG)
 
 enum
 {
-    SIGNAL_HOTSPOT_ENABLED,
-    SIGNAL_LAST
+  SIGNAL_HOTSPOT_ENABLED,
+  SIGNAL_LAST
 };
 
 static guint signals[SIGNAL_LAST] = { 0, };

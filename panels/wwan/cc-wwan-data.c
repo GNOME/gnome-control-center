@@ -93,7 +93,7 @@ struct _CcWwanData
   gboolean apn_list_updated;    /* APN list updated from mobile-provider-info */
 };
 
-G_DEFINE_TYPE (CcWwanData, cc_wwan_data, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcWwanData, cc_wwan_data, G_TYPE_OBJECT)
 
 /*
  * Default Access Point Settings Logic:
@@ -144,7 +144,7 @@ struct _CcWwanDataApn {
   gboolean modified;
 };
 
-G_DEFINE_TYPE (CcWwanDataApn, cc_wwan_data_apn, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcWwanDataApn, cc_wwan_data_apn, G_TYPE_OBJECT)
 
 enum {
   PROP_0,

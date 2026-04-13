@@ -63,7 +63,7 @@ struct _PpOptionsDialog {
   gboolean sensitive;
 };
 
-G_DEFINE_TYPE (PpOptionsDialog, pp_options_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_FINAL_TYPE (PpOptionsDialog, pp_options_dialog, ADW_TYPE_WINDOW)
 
 enum
 {

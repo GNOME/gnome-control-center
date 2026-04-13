@@ -66,7 +66,7 @@ static gboolean cmd_verbose_cb     (const char    *option_name,
                                     gpointer       data,
                                     GError       **error);
 
-G_DEFINE_TYPE (CcApplication, cc_application, ADW_TYPE_APPLICATION)
+G_DEFINE_FINAL_TYPE (CcApplication, cc_application, ADW_TYPE_APPLICATION)
 
 const GOptionEntry all_options[] = {
   { "version", 0, 0, G_OPTION_ARG_NONE, NULL, N_("Display version number"), NULL },

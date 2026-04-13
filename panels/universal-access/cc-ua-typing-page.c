@@ -77,7 +77,7 @@ struct _CcUaTypingPage
   GSettings          *kb_settings;
 };
 
-G_DEFINE_TYPE (CcUaTypingPage, cc_ua_typing_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcUaTypingPage, cc_ua_typing_page, ADW_TYPE_NAVIGATION_PAGE)
 
 /*
  * In the UI We are showing the speed, but in the settings we

@@ -50,7 +50,7 @@ struct _CcWacomStylusActionDialog
 	char                 *keybinding_button;
 };
 
-G_DEFINE_TYPE (CcWacomStylusActionDialog, cc_wacom_stylus_action_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcWacomStylusActionDialog, cc_wacom_stylus_action_dialog, ADW_TYPE_DIALOG)
 
 static void
 cc_wacom_stylus_action_dialog_finalize (GObject *object)

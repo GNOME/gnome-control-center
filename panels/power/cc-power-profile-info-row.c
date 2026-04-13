@@ -35,7 +35,7 @@ struct _CcPowerProfileInfoRow
   AdwActionRow parent_instance;
 };
 
-G_DEFINE_TYPE (CcPowerProfileInfoRow, cc_power_profile_info_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcPowerProfileInfoRow, cc_power_profile_info_row, ADW_TYPE_ACTION_ROW)
 
 static void
 cc_power_profile_info_row_class_init (CcPowerProfileInfoRowClass *klass)

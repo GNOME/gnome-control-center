@@ -50,7 +50,7 @@ struct _CcScreenPage
   AdwSwitchRow        *usb_protection_row;
 };
 
-G_DEFINE_TYPE (CcScreenPage, cc_screen_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcScreenPage, cc_screen_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 on_usb_protection_properties_changed_cb (GDBusProxy   *usb_proxy,

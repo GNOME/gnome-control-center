@@ -57,7 +57,7 @@ enum {
 
 static guint signals[LAST_SIGNAL] = { 0, };
 
-G_DEFINE_TYPE (CcLanguageChooser, cc_language_chooser, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcLanguageChooser, cc_language_chooser, ADW_TYPE_DIALOG)
 
 static void
 add_all_languages (CcLanguageChooser *self)

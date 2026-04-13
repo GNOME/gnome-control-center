@@ -80,9 +80,9 @@ struct _WireguardPeer
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPageWireguard, ce_page_wireguard, GTK_TYPE_BOX,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageWireguard, ce_page_wireguard, GTK_TYPE_BOX,
                          G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init));
-G_DEFINE_TYPE (WireguardPeer, wireguard_peer, GTK_TYPE_BOX);
+G_DEFINE_FINAL_TYPE (WireguardPeer, wireguard_peer, GTK_TYPE_BOX);
 
 static void
 ce_page_wireguard_dispose (GObject *object)

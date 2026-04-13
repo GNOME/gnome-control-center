@@ -58,7 +58,7 @@ static GParamSpec *properties [N_PROPS];
 
 static void cc_background_paintable_paintable_init (GdkPaintableInterface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CcBackgroundPaintable, cc_background_paintable, G_TYPE_OBJECT,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CcBackgroundPaintable, cc_background_paintable, G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (GDK_TYPE_PAINTABLE,
                                                 cc_background_paintable_paintable_init))
 

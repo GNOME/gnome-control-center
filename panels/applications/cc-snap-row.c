@@ -47,7 +47,7 @@ struct _CcSnapRow
   guint          change_timeout;
 };
 
-G_DEFINE_TYPE (CcSnapRow, cc_snap_row, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (CcSnapRow, cc_snap_row, ADW_TYPE_ACTION_ROW)
 
 static void
 update_state (CcSnapRow *self)

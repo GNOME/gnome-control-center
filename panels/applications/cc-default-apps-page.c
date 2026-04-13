@@ -63,7 +63,7 @@ struct _CcDefaultAppsPage
 };
 
 
-G_DEFINE_TYPE (CcDefaultAppsPage, cc_default_apps_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcDefaultAppsPage, cc_default_apps_page, ADW_TYPE_NAVIGATION_PAGE)
 
 #ifdef BUILD_WWAN
 static void

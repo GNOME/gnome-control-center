@@ -50,7 +50,7 @@ struct _NetDeviceEthernet
         GHashTable         *connections;
 };
 
-G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, ADW_TYPE_PREFERENCES_GROUP)
+G_DEFINE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, ADW_TYPE_PREFERENCES_GROUP)
 
 static void
 add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar *value)

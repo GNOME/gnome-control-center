@@ -35,7 +35,7 @@ struct _CEIPAddressEntry
 
 static void ce_ip_address_entry_editable_init (GtkEditableInterface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CEIPAddressEntry, ce_ip_address_entry, GTK_TYPE_ENTRY,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CEIPAddressEntry, ce_ip_address_entry, GTK_TYPE_ENTRY,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE,
                                                 ce_ip_address_entry_editable_init))
 

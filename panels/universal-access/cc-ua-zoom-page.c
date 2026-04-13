@@ -70,7 +70,7 @@ struct _CcUaZoomPage
   gboolean            is_self_update;
 };
 
-G_DEFINE_TYPE (CcUaZoomPage, cc_ua_zoom_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcUaZoomPage, cc_ua_zoom_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 ua_zoom_magnifier_settings_changed_cb (CcUaZoomPage *self,

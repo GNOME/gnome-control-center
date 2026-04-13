@@ -39,7 +39,7 @@ struct _CcTabletToolMap {
 	gchar *tool_path;
 };
 
-G_DEFINE_TYPE (CcTabletToolMap, cc_tablet_tool_map, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcTabletToolMap, cc_tablet_tool_map, G_TYPE_OBJECT)
 
 static void
 load_keyfiles (CcTabletToolMap *map)

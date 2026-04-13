@@ -49,7 +49,7 @@ struct _CcWacomTool {
 
 static void cc_wacom_tool_initable_iface_init (GInitableIface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CcWacomTool, cc_wacom_tool, G_TYPE_OBJECT,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CcWacomTool, cc_wacom_tool, G_TYPE_OBJECT,
 			 G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE,
 						cc_wacom_tool_initable_iface_init))
 

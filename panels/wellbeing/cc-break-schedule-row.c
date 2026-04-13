@@ -43,7 +43,7 @@ struct _CcBreakSchedule {
   guint interval_secs;
 };
 
-G_DEFINE_TYPE (CcBreakSchedule, cc_break_schedule, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcBreakSchedule, cc_break_schedule, G_TYPE_OBJECT)
 
 static void
 cc_break_schedule_class_init (CcBreakScheduleClass *klass)
@@ -170,7 +170,7 @@ struct _CcBreakScheduleRow {
   GtkSizeGroup *interval_size_group;
 };
 
-G_DEFINE_TYPE (CcBreakScheduleRow, cc_break_schedule_row, ADW_TYPE_COMBO_ROW)
+G_DEFINE_FINAL_TYPE (CcBreakScheduleRow, cc_break_schedule_row, ADW_TYPE_COMBO_ROW)
 
 static void cc_break_schedule_row_dispose (GObject *object);
 static void factory_setup_cb (GtkSignalListItemFactory *factory,

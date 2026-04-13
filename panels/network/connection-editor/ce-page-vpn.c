@@ -47,7 +47,7 @@ struct _CEPageVpn
 
 static void ce_page_iface_init (CEPageInterface *);
 
-G_DEFINE_TYPE_WITH_CODE (CEPageVpn, ce_page_vpn, GTK_TYPE_BOX,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageVpn, ce_page_vpn, GTK_TYPE_BOX,
                          G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 /* Hack to make the plugin-provided editor widget fit in better with

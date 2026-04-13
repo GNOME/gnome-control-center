@@ -78,7 +78,7 @@ static void          rfkill_switch_notify_activate_cb            (CcWifiPanel   
 
 static void          update_devices_names                        (CcWifiPanel        *self);
 
-G_DEFINE_TYPE (CcWifiPanel, cc_wifi_panel, CC_TYPE_PANEL)
+G_DEFINE_FINAL_TYPE (CcWifiPanel, cc_wifi_panel, CC_TYPE_PANEL)
 
 enum
 {

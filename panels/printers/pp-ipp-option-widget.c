@@ -53,7 +53,7 @@ struct _PpIPPOptionWidget
   GCancellable *cancellable;
 };
 
-G_DEFINE_TYPE (PpIPPOptionWidget, pp_ipp_option_widget, GTK_TYPE_BOX)
+G_DEFINE_FINAL_TYPE (PpIPPOptionWidget, pp_ipp_option_widget, GTK_TYPE_BOX)
 
 static const struct {
   const char *keyword;

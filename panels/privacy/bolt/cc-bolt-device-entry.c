@@ -40,7 +40,7 @@ struct _CcBoltDeviceEntry
 
 static const char *   device_status_to_brief_for_ui (BoltDevice *dev);
 
-G_DEFINE_TYPE (CcBoltDeviceEntry, cc_bolt_device_entry, ADW_TYPE_ACTION_ROW);
+G_DEFINE_FINAL_TYPE (CcBoltDeviceEntry, cc_bolt_device_entry, ADW_TYPE_ACTION_ROW);
 
 enum
 {

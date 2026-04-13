@@ -104,7 +104,7 @@ struct _CcFingerprintDialog
   - Devices hotplug (object manager)
  */
 
-G_DEFINE_TYPE (CcFingerprintDialog, cc_fingerprint_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcFingerprintDialog, cc_fingerprint_dialog, ADW_TYPE_DIALOG)
 
 enum {
   PROP_0,

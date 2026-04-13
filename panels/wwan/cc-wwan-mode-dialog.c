@@ -53,7 +53,7 @@ struct _CcWwanModeDialog
   MMModemMode new_preferred;
 };
 
-G_DEFINE_TYPE (CcWwanModeDialog, cc_wwan_mode_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcWwanModeDialog, cc_wwan_mode_dialog, GTK_TYPE_DIALOG)
 
 
 enum {

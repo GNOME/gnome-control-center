@@ -27,7 +27,7 @@ struct _CcLevelBar
   pa_stream   *level_stream;
 };
 
-G_DEFINE_TYPE (CcLevelBar, cc_level_bar, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcLevelBar, cc_level_bar, GTK_TYPE_WIDGET)
 
 #define SMOOTHING 0.3
 

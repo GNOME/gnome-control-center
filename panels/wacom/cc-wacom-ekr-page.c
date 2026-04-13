@@ -41,7 +41,7 @@ enum {
 
 static GParamSpec *props[N_PROPS] = { 0, };
 
-G_DEFINE_TYPE (CcWacomEkrPage, cc_wacom_ekr_page, GTK_TYPE_BOX)
+G_DEFINE_FINAL_TYPE (CcWacomEkrPage, cc_wacom_ekr_page, GTK_TYPE_BOX)
 
 static void
 set_osd_visibility_cb (GObject      *source_object,

@@ -80,7 +80,7 @@ static void     cc_keyboard_item_class_init     (CcKeyboardItemClass *klass);
 static void     cc_keyboard_item_init           (CcKeyboardItem      *keyboard_item);
 static void     cc_keyboard_item_finalize       (GObject               *object);
 
-G_DEFINE_TYPE (CcKeyboardItem, cc_keyboard_item, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcKeyboardItem, cc_keyboard_item, G_TYPE_OBJECT)
 
 static const CcKeyCombo EMPTY_COMBO = { 0, 0, 0 };
 

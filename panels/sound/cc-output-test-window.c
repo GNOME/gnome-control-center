@@ -25,7 +25,7 @@ struct _CcOutputTestWindow
   CcOutputTestWheel *wheel;
 };
 
-G_DEFINE_TYPE (CcOutputTestWindow, cc_output_test_window, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcOutputTestWindow, cc_output_test_window, ADW_TYPE_DIALOG)
 
 void
 cc_output_test_window_class_init (CcOutputTestWindowClass *klass)

@@ -27,7 +27,7 @@ struct _CcInputSourceXkb
   gchar         *variant;
 };
 
-G_DEFINE_TYPE (CcInputSourceXkb, cc_input_source_xkb, CC_TYPE_INPUT_SOURCE)
+G_DEFINE_FINAL_TYPE (CcInputSourceXkb, cc_input_source_xkb, CC_TYPE_INPUT_SOURCE)
 
 static gchar *
 cc_input_source_xkb_get_label (CcInputSource *source)

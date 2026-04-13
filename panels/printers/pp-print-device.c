@@ -40,7 +40,7 @@ struct _PpPrintDevice
   gboolean  is_network_device;
 };
 
-G_DEFINE_TYPE (PpPrintDevice, pp_print_device, G_TYPE_OBJECT);
+G_DEFINE_FINAL_TYPE (PpPrintDevice, pp_print_device, G_TYPE_OBJECT);
 
 enum
 {

@@ -72,7 +72,7 @@ struct _CcKeyboardShortcutPage
   GStrv                 search_terms;
  };
 
-G_DEFINE_TYPE (CcKeyboardShortcutPage, cc_keyboard_shortcut_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcKeyboardShortcutPage, cc_keyboard_shortcut_page, ADW_TYPE_NAVIGATION_PAGE)
 
 
 static GListStore *

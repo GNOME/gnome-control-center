@@ -93,7 +93,7 @@ struct _CcScreenTimeStatisticsRow {
   unsigned int daily_limit_minutes;
 };
 
-G_DEFINE_TYPE (CcScreenTimeStatisticsRow, cc_screen_time_statistics_row, ADW_TYPE_PREFERENCES_ROW)
+G_DEFINE_FINAL_TYPE (CcScreenTimeStatisticsRow, cc_screen_time_statistics_row, ADW_TYPE_PREFERENCES_ROW)
 
 typedef enum {
   PROP_HISTORY_FILE = 1,

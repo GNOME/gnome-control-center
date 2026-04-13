@@ -33,7 +33,7 @@ struct _CcSnapdClient
   SoupSession *session;
 };
 
-G_DEFINE_TYPE (CcSnapdClient, cc_snapd_client, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcSnapdClient, cc_snapd_client, G_TYPE_OBJECT)
 
 // Make an HTTP request to send to snapd.
 static SoupMessage *

@@ -57,7 +57,7 @@ struct _CcTzDialog
   CcTzItem           *selected_item;
 };
 
-G_DEFINE_TYPE (CcTzDialog, cc_tz_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcTzDialog, cc_tz_dialog, ADW_TYPE_DIALOG)
 
 enum {
   TZ_SELECTED,

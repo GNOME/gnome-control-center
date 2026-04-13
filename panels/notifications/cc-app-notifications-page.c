@@ -65,7 +65,7 @@ struct _CcAppNotificationsPage {
   gulong notifications_page_change_signal_handler_id;
 };
 
-G_DEFINE_TYPE (CcAppNotificationsPage, cc_app_notifications_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcAppNotificationsPage, cc_app_notifications_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 on_perm_store_set_done (GObject *source_object,

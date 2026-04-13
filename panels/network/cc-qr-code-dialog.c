@@ -38,7 +38,7 @@ enum
   PROP_LAST
 };
 
-G_DEFINE_TYPE (CcQrCodeDialog, cc_qr_code_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcQrCodeDialog, cc_qr_code_dialog, ADW_TYPE_DIALOG)
 
 static GParamSpec *props[PROP_LAST];
 

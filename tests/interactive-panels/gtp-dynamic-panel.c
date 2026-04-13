@@ -30,7 +30,7 @@ struct _GtpDynamicPanel
   CcPanel parent;
 };
 
-G_DEFINE_TYPE (GtpDynamicPanel, gtp_dynamic_panel, CC_TYPE_PANEL)
+G_DEFINE_FINAL_TYPE (GtpDynamicPanel, gtp_dynamic_panel, CC_TYPE_PANEL)
 
 /* Auxiliary methods */
 

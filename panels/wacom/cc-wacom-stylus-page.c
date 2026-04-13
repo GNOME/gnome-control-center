@@ -54,7 +54,7 @@ struct _CcWacomStylusPage
 	gboolean        highlighted;
 };
 
-G_DEFINE_TYPE (CcWacomStylusPage, cc_wacom_stylus_page, GTK_TYPE_BOX)
+G_DEFINE_FINAL_TYPE (CcWacomStylusPage, cc_wacom_stylus_page, GTK_TYPE_BOX)
 
 static void
 map_pressurecurve (double val, graphene_point_t *p1, graphene_point_t *p2)

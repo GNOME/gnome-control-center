@@ -76,7 +76,7 @@ struct _GsdWacomKeyShortcutButton
   guint clear_keyval;
 };
 
-G_DEFINE_TYPE (GsdWacomKeyShortcutButton, gsd_wacom_key_shortcut_button, GTK_TYPE_BUTTON);
+G_DEFINE_FINAL_TYPE (GsdWacomKeyShortcutButton, gsd_wacom_key_shortcut_button, GTK_TYPE_BUTTON);
 
 static guint signals[LAST_SIGNAL] = { 0 };
 

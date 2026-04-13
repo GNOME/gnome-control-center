@@ -60,7 +60,7 @@ struct _PpDetailsDialog {
   PpPPDSelectionDialog *pp_ppd_selection_dialog;
 };
 
-G_DEFINE_TYPE (PpDetailsDialog, pp_details_dialog, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (PpDetailsDialog, pp_details_dialog, ADW_TYPE_DIALOG)
 
 static void
 printer_name_changed (PpDetailsDialog *self)

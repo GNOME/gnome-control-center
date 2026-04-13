@@ -76,7 +76,7 @@ struct _CcBarChartGroup {
   GPtrArray *bars;  /* (not nullable) (owned) (element-type CcBarChartBar) */
 };
 
-G_DEFINE_TYPE (CcBarChartGroup, cc_bar_chart_group, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcBarChartGroup, cc_bar_chart_group, GTK_TYPE_WIDGET)
 
 typedef enum {
   PROP_SELECTABLE = 1,

@@ -62,7 +62,7 @@ struct _CcRemovableMediaSettings
 };
 
 
-G_DEFINE_TYPE (CcRemovableMediaSettings, cc_removable_media_settings, ADW_TYPE_PREFERENCES_GROUP)
+G_DEFINE_FINAL_TYPE (CcRemovableMediaSettings, cc_removable_media_settings, ADW_TYPE_PREFERENCES_GROUP)
 
 static char **
 remove_elem_from_str_array (char       **v,

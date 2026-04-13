@@ -39,7 +39,7 @@ struct _CcVolumeLevelsPage
   GtkFilterListModel *output_model;
 };
 
-G_DEFINE_TYPE (CcVolumeLevelsPage, cc_volume_levels_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcVolumeLevelsPage, cc_volume_levels_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static gint
 sort_stream (gconstpointer a,

@@ -74,7 +74,7 @@ typedef struct {
 #define MINOR_SNAP_DISTANCE 5
 #define MIN_OVERLAP 25
 
-G_DEFINE_TYPE (CcDisplayArrangement, cc_display_arrangement, GTK_TYPE_DRAWING_AREA)
+G_DEFINE_FINAL_TYPE (CcDisplayArrangement, cc_display_arrangement, GTK_TYPE_DRAWING_AREA)
 
 static GParamSpec *props[PROP_LAST];
 

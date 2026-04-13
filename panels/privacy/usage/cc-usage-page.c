@@ -40,7 +40,7 @@ struct _CcUsagePage
   CcNumberRow  *retain_history_row;
 };
 
-G_DEFINE_TYPE (CcUsagePage, cc_usage_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcUsagePage, cc_usage_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 on_clear_history_response_cb (void)

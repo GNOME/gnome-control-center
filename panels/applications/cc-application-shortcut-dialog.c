@@ -53,7 +53,7 @@ struct _CcApplicationShortcutDialog
   const char *app_id;
 };
 
-G_DEFINE_TYPE (CcApplicationShortcutDialog,
+G_DEFINE_FINAL_TYPE (CcApplicationShortcutDialog,
                cc_application_shortcut_dialog,
                ADW_TYPE_DIALOG)
 

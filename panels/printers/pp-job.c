@@ -56,7 +56,7 @@ struct _PpJob
   GStrv   auth_info_required;
 };
 
-G_DEFINE_TYPE (PpJob, pp_job, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (PpJob, pp_job, G_TYPE_OBJECT)
 
 static void
 pp_job_cancel_purge_async_dbus_cb (GObject      *source_object,

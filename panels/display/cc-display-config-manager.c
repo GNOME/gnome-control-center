@@ -35,7 +35,7 @@ struct _CcDisplayConfigManager
   gboolean night_light_supported;
 };
 
-G_DEFINE_TYPE (CcDisplayConfigManager,
+G_DEFINE_FINAL_TYPE (CcDisplayConfigManager,
                cc_display_config_manager,
                G_TYPE_OBJECT)
 

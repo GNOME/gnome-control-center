@@ -125,7 +125,7 @@ struct _CcDateTimePage
   int        month; /* index starts from 1 */
 };
 
-G_DEFINE_TYPE (CcDateTimePage, cc_date_time_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcDateTimePage, cc_date_time_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void update_time (CcDateTimePage *self);
 

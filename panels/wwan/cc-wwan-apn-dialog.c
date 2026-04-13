@@ -65,7 +65,7 @@ struct _CcWwanApnDialog
   gboolean           enable_roaming;
 };
 
-G_DEFINE_TYPE (CcWwanApnDialog, cc_wwan_apn_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcWwanApnDialog, cc_wwan_apn_dialog, GTK_TYPE_DIALOG)
 
 
 enum {

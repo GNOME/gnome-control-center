@@ -46,7 +46,7 @@ struct _CcWacomDevice {
 
 static void cc_wacom_device_initable_iface_init (GInitableIface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CcWacomDevice, cc_wacom_device, G_TYPE_OBJECT,
+G_DEFINE_FINAL_TYPE_WITH_CODE (CcWacomDevice, cc_wacom_device, G_TYPE_OBJECT,
 			 G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE,
 						cc_wacom_device_initable_iface_init))
 

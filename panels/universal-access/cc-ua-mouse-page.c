@@ -62,7 +62,7 @@ struct _CcUaMousePage
   GSettings          *gds_mouse_settings;
 };
 
-G_DEFINE_TYPE (CcUaMousePage, cc_ua_mouse_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcUaMousePage, cc_ua_mouse_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static gboolean
 focus_mode_get_mapping (GValue    *value,

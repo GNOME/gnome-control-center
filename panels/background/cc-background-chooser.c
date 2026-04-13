@@ -62,7 +62,7 @@ typedef struct {
   GtkWidget          *parent;
 } UndoData;
 
-G_DEFINE_TYPE (CcBackgroundChooser, cc_background_chooser, GTK_TYPE_BOX)
+G_DEFINE_FINAL_TYPE (CcBackgroundChooser, cc_background_chooser, GTK_TYPE_BOX)
 
 enum
 {

@@ -48,7 +48,7 @@ struct _CcKeyboardManager
   GSettings          *global_shortcuts_settings;
 };
 
-G_DEFINE_TYPE (CcKeyboardManager, cc_keyboard_manager, G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcKeyboardManager, cc_keyboard_manager, G_TYPE_OBJECT)
 
 enum
 {

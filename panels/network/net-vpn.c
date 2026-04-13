@@ -44,7 +44,7 @@ struct _NetVpn
         gboolean                 updating_device;
 };
 
-G_DEFINE_TYPE (NetVpn, net_vpn, ADW_TYPE_ACTION_ROW)
+G_DEFINE_FINAL_TYPE (NetVpn, net_vpn, ADW_TYPE_ACTION_ROW)
 
 static void
 nm_device_refresh_vpn_ui (NetVpn *self)

@@ -31,7 +31,7 @@ struct _CcSpeakerTestButton
   gint                  event_index;
 };
 
-G_DEFINE_TYPE (CcSpeakerTestButton, cc_speaker_test_button, GTK_TYPE_BUTTON)
+G_DEFINE_FINAL_TYPE (CcSpeakerTestButton, cc_speaker_test_button, GTK_TYPE_BUTTON)
 
 #define TEST_SOUND_ID 1
 

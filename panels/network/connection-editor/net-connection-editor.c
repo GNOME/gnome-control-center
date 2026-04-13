@@ -77,7 +77,7 @@ struct _NetConnectionEditor
         gboolean          title_set;
 };
 
-G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, ADW_TYPE_WINDOW)
+G_DEFINE_FINAL_TYPE (NetConnectionEditor, net_connection_editor, ADW_TYPE_WINDOW)
 
 /* Used as both GSettings keys and GObject data tags */
 #define IGNORE_CA_CERT_TAG "ignore-ca-cert"

@@ -84,7 +84,7 @@ enum {
         COLUMN_LAST
 };
 
-G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, GTK_TYPE_BOX)
+G_DEFINE_FINAL_TYPE (NetDeviceMobile, net_device_mobile, GTK_TYPE_BOX)
 
 static void
 connection_activate_cb (GObject *source_object,

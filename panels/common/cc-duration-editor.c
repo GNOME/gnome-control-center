@@ -47,7 +47,7 @@ struct _CcDurationEditor {
   guint maximum;
 };
 
-G_DEFINE_TYPE (CcDurationEditor, cc_duration_editor, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcDurationEditor, cc_duration_editor, GTK_TYPE_WIDGET)
 
 typedef enum {
   PROP_DURATION = 1,

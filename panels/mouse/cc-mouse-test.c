@@ -42,7 +42,7 @@ struct _CcMouseTest
     guint reset_timeout_id;
 };
 
-G_DEFINE_TYPE (CcMouseTest, cc_mouse_test, ADW_TYPE_WINDOW);
+G_DEFINE_FINAL_TYPE (CcMouseTest, cc_mouse_test, ADW_TYPE_WINDOW);
 
 static void
 on_scroll_adjustment_changed_cb (GtkAdjustment *adjustment,

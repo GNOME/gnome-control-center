@@ -64,7 +64,7 @@ struct _CcInputListBox {
 #endif
 };
 
-G_DEFINE_TYPE (CcInputListBox, cc_input_list_box, ADW_TYPE_BIN)
+G_DEFINE_FINAL_TYPE (CcInputListBox, cc_input_list_box, ADW_TYPE_BIN)
  
 typedef struct
 {

@@ -41,7 +41,7 @@ struct _CcBatteryRow {
   gboolean      primary;
 };
 
-G_DEFINE_TYPE (CcBatteryRow, cc_battery_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_FINAL_TYPE (CcBatteryRow, cc_battery_row, GTK_TYPE_LIST_BOX_ROW)
 
 static void
 cc_battery_row_class_init (CcBatteryRowClass *klass)

@@ -33,7 +33,7 @@ struct _CcShellModel
   GStrv        sort_terms;
 };
 
-G_DEFINE_TYPE (CcShellModel, cc_shell_model, GTK_TYPE_LIST_STORE)
+G_DEFINE_FINAL_TYPE (CcShellModel, cc_shell_model, GTK_TYPE_LIST_STORE)
 
 static gint
 sort_by_name (GtkTreeModel *model,

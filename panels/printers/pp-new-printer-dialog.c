@@ -153,7 +153,7 @@ struct _PpNewPrinterDialog
   guint    host_search_timeout_id;
 };
 
-G_DEFINE_TYPE (PpNewPrinterDialog, pp_new_printer_dialog, ADW_TYPE_WINDOW)
+G_DEFINE_FINAL_TYPE (PpNewPrinterDialog, pp_new_printer_dialog, ADW_TYPE_WINDOW)
 
 typedef struct
 {

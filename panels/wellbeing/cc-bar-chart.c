@@ -167,7 +167,7 @@ struct _CcBarChart {
   unsigned int cached_continuous_axis_label_collision_modulus;
 };
 
-G_DEFINE_TYPE (CcBarChart, cc_bar_chart, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcBarChart, cc_bar_chart, GTK_TYPE_WIDGET)
 
 typedef enum {
   PROP_SELECTED_INDEX = 1,

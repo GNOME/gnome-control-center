@@ -40,7 +40,7 @@ struct _CcBackgroundPreview
   CcBackgroundItem *item;
 };
 
-G_DEFINE_TYPE (CcBackgroundPreview, cc_background_preview, GTK_TYPE_WIDGET)
+G_DEFINE_FINAL_TYPE (CcBackgroundPreview, cc_background_preview, GTK_TYPE_WIDGET)
 
 enum
 {

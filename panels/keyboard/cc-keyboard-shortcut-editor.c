@@ -69,7 +69,7 @@ static void          name_entry_changed_cb                       (CcKeyboardShor
 static void          set_button_clicked_cb                       (CcKeyboardShortcutEditor *self);
 static void          setup_keyboard_item                         (CcKeyboardShortcutEditor *self);
 
-G_DEFINE_TYPE (CcKeyboardShortcutEditor, cc_keyboard_shortcut_editor, ADW_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcKeyboardShortcutEditor, cc_keyboard_shortcut_editor, ADW_TYPE_DIALOG)
 
 enum
 {

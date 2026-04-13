@@ -81,7 +81,7 @@ struct _CcFirmwareSecurityPage
   SecureBootState   secure_boot_state;
 };
 
-G_DEFINE_TYPE (CcFirmwareSecurityPage, cc_firmware_security_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcFirmwareSecurityPage, cc_firmware_security_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 set_hsi_button_view (CcFirmwareSecurityPage *self);

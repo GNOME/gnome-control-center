@@ -46,7 +46,7 @@ struct _CcCameraPage
   GtkSizeGroup *camera_icon_size_group;
 };
 
-G_DEFINE_TYPE (CcCameraPage, cc_camera_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcCameraPage, cc_camera_page, ADW_TYPE_NAVIGATION_PAGE)
 
 typedef struct
 {

@@ -58,7 +58,7 @@ struct _PpPPDOptionWidget
   GCancellable *cancellable;
 };
 
-G_DEFINE_TYPE (PpPPDOptionWidget, pp_ppd_option_widget, GTK_TYPE_BOX)
+G_DEFINE_FINAL_TYPE (PpPPDOptionWidget, pp_ppd_option_widget, GTK_TYPE_BOX)
 
 /* This list comes from Gtk+ */
 static const struct {

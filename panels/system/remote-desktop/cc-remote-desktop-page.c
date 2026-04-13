@@ -36,7 +36,7 @@ struct _CcRemoteDesktopPage {
   GCancellable *cancellable;
 };
 
-G_DEFINE_TYPE (CcRemoteDesktopPage, cc_remote_desktop_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcRemoteDesktopPage, cc_remote_desktop_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
 cc_remote_desktop_page_dispose (GObject *object)
