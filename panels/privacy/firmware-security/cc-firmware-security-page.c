@@ -145,7 +145,7 @@ fu_security_attr_get_description_for_eventlog (FwupdSecurityAttr *attr)
 
   /* nothing to do */
   if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS)
-    return g_string_free (str, FALSE);
+    return g_string_free_and_steal (str);
 
   if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONTACT_OEM &&
       attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW)
@@ -171,7 +171,7 @@ fu_security_attr_get_description_for_eventlog (FwupdSecurityAttr *attr)
                                 "change, or because of malicious software on this system."));
     }
 
-  return g_string_free (str, FALSE);
+  return g_string_free_and_steal (str);
 }
 
 static void

@@ -37,7 +37,7 @@ allowed_chars (void)
 		g_string_append_c (s, i);
 	g_string_append_c (s, '-');
 
-	return g_string_free (s, FALSE);
+	return g_string_free_and_steal (s);
 }
 
 static char *

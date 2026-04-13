@@ -147,7 +147,7 @@ get_ap_security_string (NMAccessPoint *ap)
         else {
                 g_string_append (str, C_("Wifi security", "None"));
         }
-        return g_string_free (str, FALSE);
+        return g_string_free_and_steal (str);
 }
 
 static void

@@ -356,7 +356,7 @@ panel_device_status_to_localized_string (NMDevice *nm_device,
                 }
         }
 
-        return g_string_free (string, FALSE);
+        return g_string_free_and_steal (string);
 }
 
 NMConnection *

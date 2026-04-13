@@ -181,7 +181,7 @@ bolt_flags_class_to_string (GFlagsClass *flags_class,
       return NULL;
     }
 
-  return g_string_free (g_steal_pointer (&str), FALSE);
+  return g_string_free_and_steal (g_steal_pointer (&str));
 }
 
 gboolean

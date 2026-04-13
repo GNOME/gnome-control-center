@@ -85,7 +85,7 @@ cc_color_device_get_title (CdDevice *device)
       break;
   }
 out:
-  return g_string_free (string, FALSE);
+  return g_string_free_and_steal (string);
 }
 
 static const gchar *

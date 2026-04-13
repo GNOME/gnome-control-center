@@ -1161,7 +1161,7 @@ cc_wwan_device_get_string_from_mode (CcWwanDevice *self,
   if (!str->len)
     g_string_append (str, C_("Network mode", "Unknown"));
 
-  return g_string_free (str, FALSE);
+  return g_string_free_and_steal (str);
 }
 
 static void
@@ -1400,7 +1400,7 @@ cc_wwan_device_dup_signal_string (CcWwanDevice *self)
         g_string_append_printf (str, "snr: %.2g dB ", value);
     }
 
-  return g_string_free (str, FALSE);
+  return g_string_free_and_steal (str);
 }
 
 const gchar *

@@ -57,7 +57,7 @@ escape_string (const gchar *str,
   if (quote)
     g_string_append_c (string, '"');
 
-  return g_string_free (string, FALSE);
+  return g_string_free_and_steal (string);
 }
 
 static const gchar *
@@ -186,5 +186,5 @@ get_qr_string_for_connection (NMConnection *c)
     g_string_append (string, "H:true");
   g_string_append_c (string, ';');
 
-  return g_string_free (string, FALSE);
+  return g_string_free_and_steal (string);
 }

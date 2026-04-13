@@ -397,7 +397,7 @@ cc_realm_calculate_login (CcRealmCommon *realm,
                 GString *string = g_string_new (formats[0]);
                 string_replace (string, "%U", username);
                 string_replace (string, "%D", cc_realm_common_get_name (realm));
-                return g_string_free (string, FALSE);
+                return g_string_free_and_steal (string);
         }
 
         return NULL;

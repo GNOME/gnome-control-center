@@ -276,7 +276,7 @@ device_mobile_find_provider (NetDeviceMobile *self,
                 }
         }
 
-        return (name != NULL ? g_string_free (name, FALSE) : NULL);
+        return (name != NULL ? g_string_free_and_steal (name) : NULL);
 }
 
 static void

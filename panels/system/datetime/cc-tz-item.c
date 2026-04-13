@@ -271,7 +271,7 @@ cc_tz_item_new (TzLocation *location)
   /* eg: +0530 -> UTC+0530 */
   g_string_prepend (offset, "UTC");
 
-  self->offset = g_string_free (offset, FALSE);
+  self->offset = g_string_free_and_steal (offset);
 
   return self;
 }
