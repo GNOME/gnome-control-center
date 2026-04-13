@@ -533,6 +533,8 @@ cc_crop_area_finalize (GObject *object)
     CcCropArea *area = CC_CROP_AREA (object);
 
     g_clear_object (&area->paintable);
+
+    G_OBJECT_CLASS (cc_crop_area_parent_class)->finalize (object);
 }
 
 static void
