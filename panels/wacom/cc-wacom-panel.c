@@ -498,7 +498,7 @@ on_stylus_proximity_cb (CcWacomPanel     *self,
 	update_current_tool (self, device, tool);
 }
 
-static gboolean
+static void
 show_mock_stylus_cb (gpointer user_data)
 {
 	CcWacomPanel *self = user_data;
@@ -511,7 +511,7 @@ show_mock_stylus_cb (gpointer user_data)
 	device_list = g_hash_table_get_values (self->devices);
 	if (device_list == NULL) {
 		g_warning ("Could not create fake stylus event because could not find tablet device");
-		return G_SOURCE_REMOVE;
+		return;
 	}
 
 	wacom_device = device_list->data;
@@ -522,8 +522,6 @@ show_mock_stylus_cb (gpointer user_data)
 	update_highlighted_stylus (self, stylus);
 	cc_tablet_tool_map_add_relation (self->tablet_tool_map,
 					 wacom_device, stylus);
-
-	return G_SOURCE_REMOVE;
 }
 
 static void
@@ -544,7 +542,7 @@ cc_wacom_panel_constructed (GObject *object)
 				   GTK_EVENT_CONTROLLER (self->stylus_gesture));
 
 	if (g_getenv ("UMOCKDEV_DIR") != NULL)
-		self->mock_stylus_id = g_idle_add (show_mock_stylus_cb, self);
+		self->mock_stylus_id = g_idle_add_once (show_mock_stylus_cb, self);
 }
 
 static const char *

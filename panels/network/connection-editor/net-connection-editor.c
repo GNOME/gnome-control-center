@@ -522,12 +522,10 @@ page_changed (NetConnectionEditor *self)
         validate (self);
 }
 
-static gboolean
+static void
 idle_validate (gpointer user_data)
 {
         validate (NET_CONNECTION_EDITOR (user_data));
-
-        return G_SOURCE_REMOVE;
 }
 
 static void
@@ -539,7 +537,7 @@ recheck_initialization (NetConnectionEditor *self)
         gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->notebook));
         gtk_notebook_set_current_page (self->notebook, 0);
 
-        g_idle_add (idle_validate, self);
+        g_idle_add_once (idle_validate, self);
 
         if (self->is_new_connection)
                 adw_bin_set_child (self->add_connection_frame, NULL);
