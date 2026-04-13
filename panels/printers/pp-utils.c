@@ -2101,8 +2101,8 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
   g_autoptr(GVariant) output = NULL;
   g_autoptr(GDAData)  data = user_data;
   g_autoptr(GError)   error = NULL;
-  gchar              *device_id = NULL;
-  gchar              *device_make_and_model = NULL;
+  g_autofree gchar   *device_id = NULL;
+  g_autofree gchar   *device_make_and_model = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -2183,12 +2183,6 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
     {
       GVariantBuilder *include_scheme_builder = NULL;
       GVariantBuilder *exclude_scheme_builder = NULL;
-
-      g_free (device_id);
-      g_free (device_make_and_model);
-
-      device_id = NULL;
-      device_make_and_model = NULL;
 
       if (data->backend_list && !g_cancellable_is_cancelled (data->cancellable))
         {

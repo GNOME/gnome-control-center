@@ -176,7 +176,7 @@ add_location_app (CcLocationPage *self,
   GtkWidget *row, *w;
   GIcon *icon;
   gchar *last_used_str;
-  gchar *desktop_id;
+  g_autofree gchar *desktop_id = NULL;
 
   w = g_hash_table_lookup (self->location_app_switches, app_id);
   if (w != NULL)
@@ -187,7 +187,6 @@ add_location_app (CcLocationPage *self,
 
   desktop_id = g_strdup_printf ("%s.desktop", app_id);
   app_info = g_desktop_app_info_new (desktop_id);
-  g_free (desktop_id);
   if (app_info == NULL)
       return;
 

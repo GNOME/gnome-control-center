@@ -193,7 +193,7 @@ cc_wacom_tool_initable_init (GInitable     *initable,
 {
 	CcWacomTool *tool = CC_WACOM_TOOL (initable);
 	WacomDeviceDatabase *wacom_db;
-	gchar *path;
+	g_autofree gchar *path = NULL;
 
 	wacom_db = cc_wacom_device_database_get ();
 
@@ -233,7 +233,6 @@ cc_wacom_tool_initable_init (GInitable     *initable,
 
 	tool->settings = g_settings_new_with_path ("org.gnome.desktop.peripherals.tablet.stylus",
 						   path);
-	g_free (path);
 
 	return TRUE;
 }
