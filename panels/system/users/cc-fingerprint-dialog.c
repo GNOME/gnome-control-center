@@ -681,7 +681,7 @@ stage_passed_timeout_cb (gpointer user_data)
   set_enroll_result_message (self, ENROLL_STATE_NORMAL, current_message);
   self->enroll_stage_passed_id = 0;
 
-  return FALSE;
+  return G_SOURCE_REMOVE;
 }
 
 static void

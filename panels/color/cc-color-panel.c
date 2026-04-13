@@ -333,7 +333,7 @@ gcm_prefs_calib_delayed_complete_cb (gpointer user_data)
 
   assistant = GTK_ASSISTANT (self->assistant_calib);
   gtk_assistant_set_page_complete (assistant, self->box_calib_brightness, TRUE);
-  return FALSE;
+  return G_SOURCE_REMOVE;
 }
 
 static void
