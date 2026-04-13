@@ -55,8 +55,10 @@ enum
   PROP_DEVICE,
   PROP_PROFILE,
   PROP_IS_DEFAULT,
-  PROP_LAST
+  N_PROPS
 };
+
+static GParamSpec *properties[N_PROPS];
 
 static gchar *
 cc_color_profile_get_profile_date (CdProfile *profile)
@@ -419,21 +421,22 @@ cc_color_profile_class_init (CcColorProfileClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcColorProfile, widget_image);
   gtk_widget_class_bind_template_child (widget_class, CcColorProfile, widget_info);
 
-  g_object_class_install_property (object_class, PROP_DEVICE,
-                                   g_param_spec_object ("device", NULL,
-                                                        NULL,
-                                                        CD_TYPE_DEVICE,
-                                                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-  g_object_class_install_property (object_class, PROP_PROFILE,
-                                   g_param_spec_object ("profile", NULL,
-                                                        NULL,
-                                                        CD_TYPE_PROFILE,
-                                                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-  g_object_class_install_property (object_class, PROP_IS_DEFAULT,
-                                   g_param_spec_boolean ("is-default", NULL,
-                                                         NULL,
-                                                         FALSE,
-                                                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+  properties[PROP_DEVICE] =
+      g_param_spec_object ("device", NULL,
+                           NULL,
+                           CD_TYPE_DEVICE,
+                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+  properties[PROP_PROFILE] =
+      g_param_spec_object ("profile", NULL,
+                           NULL,
+                           CD_TYPE_PROFILE,
+                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+  properties[PROP_IS_DEFAULT] =
+      g_param_spec_boolean ("is-default", NULL,
+                            NULL,
+                            FALSE,
+                            G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 }
 
 static void

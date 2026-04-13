@@ -38,7 +38,10 @@ enum {
   PROP_0 = 0,
   PROP_HOSTNAME,
   PROP_PORT,
+  N_PROPS
 };
+
+static GParamSpec *props[N_PROPS];
 
 enum {
   AUTHENTICATION_REQUIRED,
@@ -118,19 +121,21 @@ pp_host_class_init (PpHostClass *klass)
   gobject_class->get_property = pp_host_get_property;
   gobject_class->finalize = pp_host_finalize;
 
-  g_object_class_install_property (gobject_class, PROP_HOSTNAME,
-    g_param_spec_string ("hostname",
-                         "Hostname",
-                         "The hostname",
-                         NULL,
-                         G_PARAM_READWRITE));
+  props[PROP_HOSTNAME] =
+      g_param_spec_string ("hostname",
+                           "Hostname",
+                           "The hostname",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class, PROP_PORT,
-    g_param_spec_int ("port",
-                      "Port",
-                      "The port",
-                      -1, G_MAXINT32, PP_HOST_UNSET_PORT,
-                      G_PARAM_READWRITE));
+  props[PROP_PORT] =
+      g_param_spec_int ("port",
+                        "Port",
+                        "The port",
+                        -1, G_MAXINT32, PP_HOST_UNSET_PORT,
+                        G_PARAM_READWRITE);
+
+  g_object_class_install_properties (gobject_class, N_PROPS, props);
 
   signals[AUTHENTICATION_REQUIRED] =
     g_signal_new ("authentication-required",

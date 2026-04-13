@@ -39,7 +39,10 @@ enum
   PROP_0,
   PROP_STATE,
   PROP_CONNECTION,
+  N_PROPS
 };
+
+static GParamSpec *props[N_PROPS];
 
 typedef enum _CcDisplayModeFlags
 {
@@ -1776,7 +1779,6 @@ static void
 cc_display_config_class_init (CcDisplayConfigClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-  GParamSpec *pspec;
 
   gobject_class->set_property = cc_display_config_set_property;
   gobject_class->get_property = cc_display_config_get_property;
@@ -1784,24 +1786,23 @@ cc_display_config_class_init (CcDisplayConfigClass *klass)
   gobject_class->constructed = cc_display_config_constructed;
   gobject_class->dispose = cc_display_config_dispose;
 
-  pspec = g_param_spec_variant ("state",
-                                "GVariant",
-                                "GVariant",
-                                G_VARIANT_TYPE (CURRENT_STATE_FORMAT),
-                                NULL,
-                                G_PARAM_READWRITE |
-                                G_PARAM_STATIC_STRINGS |
-                                G_PARAM_CONSTRUCT_ONLY);
-  g_object_class_install_property (gobject_class, PROP_STATE, pspec);
+  props[PROP_STATE] = g_param_spec_variant ("state",
+                                            "GVariant",
+                                            "GVariant",
+                                            G_VARIANT_TYPE (CURRENT_STATE_FORMAT),
+                                            NULL,
+                                            G_PARAM_READWRITE |
+                                            G_PARAM_STATIC_STRINGS |
+                                            G_PARAM_CONSTRUCT_ONLY);
 
-  pspec = g_param_spec_object ("connection",
-                               "GDBusConnection",
-                               "GDBusConnection",
-                                G_TYPE_DBUS_CONNECTION,
-                                G_PARAM_READWRITE |
-                                G_PARAM_STATIC_STRINGS |
-                                G_PARAM_CONSTRUCT_ONLY);
-  g_object_class_install_property (gobject_class, PROP_CONNECTION, pspec);
+  props[PROP_CONNECTION] = g_param_spec_object ("connection",
+                                                "GDBusConnection",
+                                                "GDBusConnection",
+                                                G_TYPE_DBUS_CONNECTION,
+                                                G_PARAM_READWRITE |
+                                                G_PARAM_STATIC_STRINGS |
+                                                G_PARAM_CONSTRUCT_ONLY);
+  g_object_class_install_properties (gobject_class, N_PROPS, props);
 
   g_signal_new ("primary",
                 CC_TYPE_DISPLAY_CONFIG,

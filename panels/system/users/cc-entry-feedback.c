@@ -57,7 +57,10 @@ enum
   PROP_DEFAULT_ICON_NAME,
   PROP_DEFAULT_TEXT,
   PROP_ENTRY,
+  N_PROPS
 };
+
+static GParamSpec *properties[N_PROPS];
 
 static void
 cc_entry_feedback_get_property (GObject    *object,
@@ -212,41 +215,37 @@ cc_entry_feedback_class_init (CcEntryFeedbackClass * klass)
   gtk_widget_class_bind_template_child (widget_class, CcEntryFeedback, image);
   gtk_widget_class_bind_template_child (widget_class, CcEntryFeedback, label);
 
-  g_object_class_install_property (object_class,
-                                   PROP_ICON_NAME,
-                                   g_param_spec_string ("icon-name",
-                                                        "Icon name",
-                                                        "The icon theme name for the icon to be shown",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
-                                   PROP_TEXT,
-                                   g_param_spec_string ("text",
-                                                        "Text",
-                                                        "The text to be displayed.",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
-                                   PROP_DEFAULT_ICON_NAME,
-                                   g_param_spec_string ("default-icon-name",
-                                                        "Default icon name",
-                                                        "The icon theme name for the icon to be shown by default.",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
-                                   PROP_DEFAULT_TEXT,
-                                   g_param_spec_string ("default-text",
-                                                        "Default text",
-                                                        "The text to be displayed by default.",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
-  g_object_class_install_property (object_class,
-                                   PROP_ENTRY,
-                                   g_param_spec_object ("entry",
-                                                       "Entry Widget",
-                                                       "The entry widget correspondend to this object",
-                                                       GTK_TYPE_WIDGET,
-                                                       G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS));
+  properties[PROP_ICON_NAME] =
+      g_param_spec_string ("icon-name",
+                           "Icon name",
+                           "The icon theme name for the icon to be shown",
+                           NULL,
+                           G_PARAM_READWRITE);
+  properties[PROP_TEXT] =
+      g_param_spec_string ("text",
+                           "Text",
+                           "The text to be displayed.",
+                           NULL,
+                           G_PARAM_READWRITE);
+  properties[PROP_DEFAULT_ICON_NAME] =
+      g_param_spec_string ("default-icon-name",
+                           "Default icon name",
+                           "The icon theme name for the icon to be shown by default.",
+                           NULL,
+                           G_PARAM_READWRITE);
+  properties[PROP_DEFAULT_TEXT] =
+      g_param_spec_string ("default-text",
+                           "Default text",
+                           "The text to be displayed by default.",
+                           NULL,
+                           G_PARAM_READWRITE);
+  properties[PROP_ENTRY] =
+      g_param_spec_object ("entry",
+                           "Entry Widget",
+                           "The entry widget correspondend to this object",
+                           GTK_TYPE_WIDGET,
+                           G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 }
 
 void

@@ -52,8 +52,11 @@ enum {
   PROP_0,
   PROP_PROXY,
   PROP_SERVICE_NAME,
-  PROP_STATUS
+  PROP_STATUS,
+  N_PROPS
 };
+
+static GParamSpec *properties[N_PROPS];
 
 static void     cc_sharing_networks_class_init     (CcSharingNetworksClass *klass);
 static void     cc_sharing_networks_init           (CcSharingNetworks      *self);
@@ -489,29 +492,28 @@ cc_sharing_networks_class_init (CcSharingNetworksClass *klass)
   object_class->finalize = cc_sharing_networks_finalize;
   object_class->constructed = cc_sharing_networks_constructed;
 
-  g_object_class_install_property (object_class,
-                                   PROP_PROXY,
-                                   g_param_spec_object ("proxy",
-                                                        "proxy",
-                                                        "proxy",
-                                                        GSD_TYPE_SHARING_PROXY,
-                                                        G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
+  properties[PROP_PROXY] =
+      g_param_spec_object ("proxy",
+                           "proxy",
+                           "proxy",
+                           GSD_TYPE_SHARING_PROXY,
+                           G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY);
 
-  g_object_class_install_property (object_class,
-                                   PROP_SERVICE_NAME,
-                                   g_param_spec_string ("service-name",
-                                                        "service-name",
-                                                        "service-name",
-                                                        NULL,
-                                                        G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
+  properties[PROP_SERVICE_NAME] =
+      g_param_spec_string ("service-name",
+                           "service-name",
+                           "service-name",
+                           NULL,
+                           G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY);
 
-  g_object_class_install_property (object_class,
-                                   PROP_STATUS,
-                                   g_param_spec_uint ("status",
-                                                      "status",
-                                                      "status",
-                                                      CC_SHARING_STATUS_UNSET, CC_SHARING_STATUS_ACTIVE + 1, CC_SHARING_STATUS_OFF,
-                                                      G_PARAM_READABLE));
+  properties[PROP_STATUS] =
+      g_param_spec_uint ("status",
+                         "status",
+                         "status",
+                         CC_SHARING_STATUS_UNSET, CC_SHARING_STATUS_ACTIVE + 1, CC_SHARING_STATUS_OFF,
+                         G_PARAM_READABLE);
+
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/sharing/cc-sharing-networks.ui");

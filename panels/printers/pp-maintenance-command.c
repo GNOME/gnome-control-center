@@ -52,8 +52,11 @@ enum {
   PROP_PRINTER_NAME,
   PROP_COMMAND,
   PROP_PARAMETERS,
-  PROP_TITLE
+  PROP_TITLE,
+  N_PROPS
 };
+
+static GParamSpec *props[N_PROPS];
 
 static void
 pp_maintenance_command_finalize (GObject *object)
@@ -141,33 +144,35 @@ pp_maintenance_command_class_init (PpMaintenanceCommandClass *klass)
   gobject_class->get_property = pp_maintenance_command_get_property;
   gobject_class->finalize = pp_maintenance_command_finalize;
 
-  g_object_class_install_property (gobject_class, PROP_PRINTER_NAME,
-    g_param_spec_string ("printer-name",
-                         "Printer name",
-                         "Name of the printer",
-                         NULL,
-                         G_PARAM_READWRITE));
+  props[PROP_PRINTER_NAME] =
+      g_param_spec_string ("printer-name",
+                           "Printer name",
+                           "Name of the printer",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class, PROP_COMMAND,
-    g_param_spec_string ("command",
-                         "Maintenance command",
-                         "Command to execute",
-                         NULL,
-                         G_PARAM_READWRITE));
+  props[PROP_COMMAND] =
+      g_param_spec_string ("command",
+                           "Maintenance command",
+                           "Command to execute",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class, PROP_PARAMETERS,
-    g_param_spec_string ("parameters",
-                         "Optional parameters",
-                         "Optional parameters for the maintenance command",
-                         NULL,
-                         G_PARAM_READWRITE));
+  props[PROP_PARAMETERS] =
+      g_param_spec_string ("parameters",
+                           "Optional parameters",
+                           "Optional parameters for the maintenance command",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class, PROP_TITLE,
-    g_param_spec_string ("title",
-                         "Command title",
-                         "Title of the job by which the command will be executed",
-                         NULL,
-                         G_PARAM_READWRITE));
+  props[PROP_TITLE] =
+      g_param_spec_string ("title",
+                           "Command title",
+                           "Title of the job by which the command will be executed",
+                           NULL,
+                           G_PARAM_READWRITE);
+
+  g_object_class_install_properties (gobject_class, N_PROPS, props);
 }
 
 static void

@@ -58,8 +58,11 @@ enum
   PROP_HOST_PORT,
   PROP_IS_AUTHENTICATED_SERVER,
   PROP_ACQUISITION_METHOD,
-  PROP_IS_NETWORK_DEVICE
+  PROP_IS_NETWORK_DEVICE,
+  N_PROPS
 };
+
+static GParamSpec *props[N_PROPS];
 
 static void
 pp_print_device_finalize (GObject *object)
@@ -220,117 +223,105 @@ pp_print_device_class_init (PpPrintDeviceClass *klass)
 
   gobject_class->finalize = pp_print_device_finalize;
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_DEVICE_NAME,
-                                   g_param_spec_string ("device-name",
-                                                        "Device name",
-                                                        "Name of the device",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
+  props[PROP_DEVICE_NAME] =
+      g_param_spec_string ("device-name",
+                           "Device name",
+                           "Name of the device",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_DISPLAY_NAME,
-                                   g_param_spec_string ("display-name",
-                                                        "Display name",
-                                                        "Name of the device formatted for users",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
+  props[PROP_DISPLAY_NAME] =
+      g_param_spec_string ("display-name",
+                           "Display name",
+                           "Name of the device formatted for users",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_DEVICE_ORIGINAL_NAME,
-                                   g_param_spec_string ("device-original-name",
-                                                        "Device original name",
-                                                        "Original name of the device",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
+  props[PROP_DEVICE_ORIGINAL_NAME] =
+      g_param_spec_string ("device-original-name",
+                           "Device original name",
+                           "Original name of the device",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_DEVICE_MAKE_AND_MODEL,
-                                   g_param_spec_string ("device-make-and-model",
-                                                        "Device make and model",
-                                                        "Make and model of the device",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
+  props[PROP_DEVICE_MAKE_AND_MODEL] =
+      g_param_spec_string ("device-make-and-model",
+                           "Device make and model",
+                           "Make and model of the device",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_DEVICE_LOCATION,
-                                   g_param_spec_string ("device-location",
-                                                        "Device location",
-                                                        "Locaton of the device",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
+  props[PROP_DEVICE_LOCATION] =
+      g_param_spec_string ("device-location",
+                           "Device location",
+                           "Locaton of the device",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_DEVICE_INFO,
-                                   g_param_spec_string ("device-info",
-                                                        "Device info",
-                                                        "Information about the device",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
+  props[PROP_DEVICE_INFO] =
+      g_param_spec_string ("device-info",
+                           "Device info",
+                           "Information about the device",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_DEVICE_URI,
-                                   g_param_spec_string ("device-uri",
-                                                        "Device URI",
-                                                        "URI of the device",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
+  props[PROP_DEVICE_URI] =
+      g_param_spec_string ("device-uri",
+                           "Device URI",
+                           "URI of the device",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_DEVICE_ID,
-                                   g_param_spec_string ("device-id",
-                                                        "DeviceID",
-                                                        "DeviceID of the device",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
+  props[PROP_DEVICE_ID] =
+      g_param_spec_string ("device-id",
+                           "DeviceID",
+                           "DeviceID of the device",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_DEVICE_PPD,
-                                   g_param_spec_string ("device-ppd",
-                                                        "Device PPD",
-                                                        "Name of the PPD of the device",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
+  props[PROP_DEVICE_PPD] =
+      g_param_spec_string ("device-ppd",
+                           "Device PPD",
+                           "Name of the PPD of the device",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_HOST_NAME,
-                                   g_param_spec_string ("host-name",
-                                                        "Host name",
-                                                        "Hostname of the device",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
+  props[PROP_HOST_NAME] =
+      g_param_spec_string ("host-name",
+                           "Host name",
+                           "Hostname of the device",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_HOST_PORT,
-                                   g_param_spec_int ("host-port",
-                                                     "Host port",
-                                                     "The port of the host",
-                                                     0, G_MAXINT32, 0,
-                                                     G_PARAM_READWRITE));
+  props[PROP_HOST_PORT] =
+      g_param_spec_int ("host-port",
+                        "Host port",
+                        "The port of the host",
+                        0, G_MAXINT32, 0,
+                        G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_IS_AUTHENTICATED_SERVER,
-                                   g_param_spec_boolean ("is-authenticated-server",
-                                                         "Is authenticated server",
-                                                         "Whether the device is a server which needs authentication",
-                                                         FALSE,
-                                                         G_PARAM_READWRITE));
+  props[PROP_IS_AUTHENTICATED_SERVER] =
+      g_param_spec_boolean ("is-authenticated-server",
+                            "Is authenticated server",
+                            "Whether the device is a server which needs authentication",
+                            FALSE,
+                            G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_ACQUISITION_METHOD,
-                                   g_param_spec_int ("acquisition-method",
-                                                     "Acquisition method",
-                                                     "Acquisition method of the device",
-                                                     0, G_MAXINT32, 0,
-                                                     G_PARAM_READWRITE));
+  props[PROP_ACQUISITION_METHOD] =
+      g_param_spec_int ("acquisition-method",
+                        "Acquisition method",
+                        "Acquisition method of the device",
+                        0, G_MAXINT32, 0,
+                        G_PARAM_READWRITE);
 
-  g_object_class_install_property (gobject_class,
-                                   PROP_IS_NETWORK_DEVICE,
-                                   g_param_spec_boolean ("is-network-device",
-                                                         "Network device",
-                                                         "Whether the device is a network device",
-                                                         FALSE,
-                                                         G_PARAM_READWRITE));
+  props[PROP_IS_NETWORK_DEVICE] =
+      g_param_spec_boolean ("is-network-device",
+                            "Network device",
+                            "Whether the device is a network device",
+                            FALSE,
+                            G_PARAM_READWRITE);
+
+  g_object_class_install_properties (gobject_class, N_PROPS, props);
 }
 
 static void

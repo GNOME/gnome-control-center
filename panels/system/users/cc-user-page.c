@@ -102,8 +102,11 @@ enum {
     PROP_EDITABLE,
     PROP_AVATAR_EDITABLE,
     PROP_IS_ADMIN,
-    PROP_IS_CURRENT_USER
+    PROP_IS_CURRENT_USER,
+    N_PROPS
 };
+
+static GParamSpec *properties[N_PROPS];
 
 static guint
 get_num_active_admin (ActUserManager *um)
@@ -604,41 +607,37 @@ cc_user_page_class_init (CcUserPageClass * klass)
     object_class->get_property = cc_user_page_get_property;
     object_class->set_property = cc_user_page_set_property;
 
-    g_object_class_install_property (object_class,
-                                     PROP_EDITABLE,
-                                     g_param_spec_boolean ("editable",
-                                                           "Editable",
-                                                           "Whether the panel is editable",
-                                                           FALSE,
-                                                           G_PARAM_READWRITE));
-    g_object_class_install_property (object_class,
-                                     PROP_AVATAR_EDITABLE,
-                                     g_param_spec_boolean ("avatar-editable",
-                                                           "Editable avatar",
-                                                           "Whether the avatar is editable",
-                                                           FALSE,
-                                                           G_PARAM_READWRITE));
-    g_object_class_install_property (object_class,
-                                     PROP_LOCKED,
-                                     g_param_spec_boolean ("locked",
-                                                           "Locked",
-                                                           "Whether changes require authentication",
-                                                           TRUE,
-                                                           G_PARAM_READWRITE));
-    g_object_class_install_property (object_class,
-                                     PROP_IS_ADMIN,
-                                     g_param_spec_boolean ("is-admin",
-                                                           "Is Admin",
-                                                           "Whether the displayed user is administrator",
-                                                           FALSE,
-                                                           G_PARAM_READABLE));
-    g_object_class_install_property (object_class,
-                                     PROP_IS_CURRENT_USER,
-                                     g_param_spec_boolean ("is-current-user",
-                                                           "Is Current User",
-                                                           "Whether the displayed user is the current logged user",
-                                                           FALSE,
-                                                           G_PARAM_READABLE));
+    properties[PROP_EDITABLE] =
+        g_param_spec_boolean ("editable",
+                              "Editable",
+                              "Whether the panel is editable",
+                              FALSE,
+                              G_PARAM_READWRITE);
+    properties[PROP_AVATAR_EDITABLE] =
+        g_param_spec_boolean ("avatar-editable",
+                              "Editable avatar",
+                              "Whether the avatar is editable",
+                              FALSE,
+                              G_PARAM_READWRITE);
+    properties[PROP_LOCKED] =
+        g_param_spec_boolean ("locked",
+                              "Locked",
+                              "Whether changes require authentication",
+                              TRUE,
+                              G_PARAM_READWRITE);
+    properties[PROP_IS_ADMIN] =
+        g_param_spec_boolean ("is-admin",
+                              "Is Admin",
+                              "Whether the displayed user is administrator",
+                              FALSE,
+                              G_PARAM_READABLE);
+    properties[PROP_IS_CURRENT_USER] =
+        g_param_spec_boolean ("is-current-user",
+                              "Is Current User",
+                              "Whether the displayed user is the current logged user",
+                              FALSE,
+                              G_PARAM_READABLE);
+    g_object_class_install_properties (object_class, N_PROPS, properties);
     g_type_ensure (CC_TYPE_LIST_ROW);
     g_type_ensure (CC_TYPE_LIST_ROW_INFO_BUTTON);
     g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);

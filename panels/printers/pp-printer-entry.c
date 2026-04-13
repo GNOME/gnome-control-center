@@ -106,7 +106,10 @@ enum {
   PROP_0,
   PROP_DEFAULT,
   PROP_COMPACT,
+  N_PROPS
 };
+
+static GParamSpec *properties[N_PROPS];
 
 static InkLevelData *
 ink_level_data_new (void)
@@ -1050,21 +1053,21 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
   object_class->get_property = pp_printer_entry_get_property;
   object_class->set_property = pp_printer_entry_set_property;
 
-  g_object_class_install_property (object_class,
-                                   PROP_DEFAULT,
-                                   g_param_spec_boolean ("default",
-                                                         "default",
-                                                         "default",
-                                                         FALSE,
-                                                         G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY));
+  properties[PROP_DEFAULT] =
+      g_param_spec_boolean ("default",
+                            "default",
+                            "default",
+                            FALSE,
+                            G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
 
-  g_object_class_install_property (object_class,
-                                   PROP_COMPACT,
-                                   g_param_spec_boolean ("compact",
-                                                         "compact",
-                                                         "compact",
-                                                         FALSE,
-                                                         G_PARAM_READWRITE));
+  properties[PROP_COMPACT] =
+      g_param_spec_boolean ("compact",
+                            "compact",
+                            "compact",
+                            FALSE,
+                            G_PARAM_READWRITE);
+
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 
   signals[IS_DEFAULT_PRINTER] =
     g_signal_new ("printer-changed",

@@ -59,8 +59,11 @@ enum {
 	PROP_TYPE,
 	PROP_WIDTH,
 	PROP_HEIGHT,
-	PROP_GROUP
+	PROP_GROUP,
+	N_PROPS
 };
+
+static GParamSpec *properties[N_PROPS];
 
 enum {
 	DEVICE_ADDED,
@@ -196,70 +199,63 @@ gsd_device_class_init (GsdDeviceClass *klass)
 	object_class->get_property = gsd_device_get_property;
 	object_class->finalize = gsd_device_finalize;
 
-	g_object_class_install_property (object_class,
-					 PROP_NAME,
-					 g_param_spec_string ("name",
-							      "Name",
-							      "Name",
-							      NULL,
-							      G_PARAM_READWRITE |
-							      G_PARAM_CONSTRUCT_ONLY));
-	g_object_class_install_property (object_class,
-					 PROP_DEVICE_FILE,
-					 g_param_spec_string ("device-file",
-							      "Device file",
-							      "Device file",
-							      NULL,
-							      G_PARAM_READWRITE |
-							      G_PARAM_CONSTRUCT_ONLY));
-	g_object_class_install_property (object_class,
-					 PROP_VENDOR_ID,
-					 g_param_spec_string ("vendor-id",
-							      "Vendor ID",
-							      "Vendor ID",
-							      NULL,
-							      G_PARAM_READWRITE |
-							      G_PARAM_CONSTRUCT_ONLY));
-	g_object_class_install_property (object_class,
-					 PROP_PRODUCT_ID,
-					 g_param_spec_string ("product-id",
-							      "Product ID",
-							      "Product ID",
-							      NULL,
-							      G_PARAM_READWRITE |
-							      G_PARAM_CONSTRUCT_ONLY));
-	g_object_class_install_property (object_class,
-					 PROP_TYPE,
-					 g_param_spec_flags ("type",
-							     "Device type",
-							     "Device type",
-							     GSD_TYPE_DEVICE_TYPE, 0,
-							     G_PARAM_READWRITE |
-							     G_PARAM_CONSTRUCT_ONLY));
-	g_object_class_install_property (object_class,
-					 PROP_WIDTH,
-					 g_param_spec_uint ("width",
-							    "Width",
-							    "Width",
-							    0, G_MAXUINT, 0,
-							    G_PARAM_READWRITE |
-							    G_PARAM_CONSTRUCT_ONLY));
-	g_object_class_install_property (object_class,
-					 PROP_HEIGHT,
-					 g_param_spec_uint ("height",
-							    "Height",
-							    "Height",
-							    0, G_MAXUINT, 0,
-							    G_PARAM_READWRITE |
-							    G_PARAM_CONSTRUCT_ONLY));
-	g_object_class_install_property (object_class,
-					 PROP_GROUP,
-					 g_param_spec_string ("group",
-							      "Group",
-							      "Group",
-							      NULL,
-							      G_PARAM_READWRITE |
-							      G_PARAM_CONSTRUCT_ONLY));
+	properties[PROP_NAME] =
+	    g_param_spec_string ("name",
+				 "Name",
+				 "Name",
+				 NULL,
+				 G_PARAM_READWRITE |
+				 G_PARAM_CONSTRUCT_ONLY);
+	properties[PROP_DEVICE_FILE] =
+	    g_param_spec_string ("device-file",
+				 "Device file",
+				 "Device file",
+				 NULL,
+				 G_PARAM_READWRITE |
+				 G_PARAM_CONSTRUCT_ONLY);
+	properties[PROP_VENDOR_ID] =
+	    g_param_spec_string ("vendor-id",
+				 "Vendor ID",
+				 "Vendor ID",
+				 NULL,
+				 G_PARAM_READWRITE |
+				 G_PARAM_CONSTRUCT_ONLY);
+	properties[PROP_PRODUCT_ID] =
+	    g_param_spec_string ("product-id",
+				 "Product ID",
+				 "Product ID",
+				 NULL,
+				 G_PARAM_READWRITE |
+				 G_PARAM_CONSTRUCT_ONLY);
+	properties[PROP_TYPE] =
+	    g_param_spec_flags ("type",
+				"Device type",
+				"Device type",
+				GSD_TYPE_DEVICE_TYPE, 0,
+				G_PARAM_READWRITE |
+				G_PARAM_CONSTRUCT_ONLY);
+	properties[PROP_WIDTH] =
+	    g_param_spec_uint ("width",
+			       "Width",
+			       "Width",
+			       0, G_MAXUINT, 0,
+			       G_PARAM_READWRITE |
+			       G_PARAM_CONSTRUCT_ONLY);
+	properties[PROP_HEIGHT] =
+	    g_param_spec_uint ("height",
+			       "Height",
+			       "Height",
+			       0, G_MAXUINT, 0,
+			       G_PARAM_READWRITE |
+			       G_PARAM_CONSTRUCT_ONLY);
+	properties[PROP_GROUP] =
+	    g_param_spec_string ("group",
+				 "Group",
+				 "Group",
+				 NULL,
+				 G_PARAM_READWRITE |
+				 G_PARAM_CONSTRUCT_ONLY);
+	g_object_class_install_properties (object_class, N_PROPS, properties);
 }
 
 static void

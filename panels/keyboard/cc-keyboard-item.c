@@ -73,8 +73,11 @@ enum
   PROP_TYPE,
   PROP_IS_VALUE_DEFAULT,
   PROP_COMMAND,
-  PROP_KEY_COMBOS
+  PROP_KEY_COMBOS,
+  N_PROPS
 };
+
+static GParamSpec *properties[N_PROPS];
 
 static void     cc_keyboard_item_class_init     (CcKeyboardItemClass *klass);
 static void     cc_keyboard_item_init           (CcKeyboardItem      *keyboard_item);
@@ -280,54 +283,50 @@ cc_keyboard_item_class_init (CcKeyboardItemClass *klass)
   object_class->set_property = cc_keyboard_item_set_property;
   object_class->finalize = cc_keyboard_item_finalize;
 
-  g_object_class_install_property (object_class,
-                                   PROP_DESCRIPTION,
-                                   g_param_spec_string ("description",
-                                                        "description",
-                                                        "description",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
+  properties[PROP_DESCRIPTION] =
+      g_param_spec_string ("description",
+                           "description",
+                           "description",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (object_class,
-                                   PROP_EDITABLE,
-                                   g_param_spec_boolean ("editable",
-                                                         NULL,
-                                                         NULL,
-                                                         FALSE,
-                                                         G_PARAM_READABLE));
+  properties[PROP_EDITABLE] =
+      g_param_spec_boolean ("editable",
+                            NULL,
+                            NULL,
+                            FALSE,
+                            G_PARAM_READABLE);
 
-  g_object_class_install_property (object_class,
-                                   PROP_TYPE,
-                                   g_param_spec_int ("type",
-                                                     NULL,
-                                                     NULL,
-                                                     CC_KEYBOARD_ITEM_TYPE_NONE,
-                                                     CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT,
-                                                     CC_KEYBOARD_ITEM_TYPE_NONE,
-                                                     G_PARAM_CONSTRUCT_ONLY | G_PARAM_WRITABLE));
+  properties[PROP_TYPE] =
+      g_param_spec_int ("type",
+                        NULL,
+                        NULL,
+                        CC_KEYBOARD_ITEM_TYPE_NONE,
+                        CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT,
+                        CC_KEYBOARD_ITEM_TYPE_NONE,
+                        G_PARAM_CONSTRUCT_ONLY | G_PARAM_WRITABLE);
 
-  g_object_class_install_property (object_class,
-                                   PROP_COMMAND,
-                                   g_param_spec_string ("command",
-                                                        "command",
-                                                        "command",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
+  properties[PROP_COMMAND] =
+      g_param_spec_string ("command",
+                           "command",
+                           "command",
+                           NULL,
+                           G_PARAM_READWRITE);
 
-  g_object_class_install_property (object_class,
-                                   PROP_IS_VALUE_DEFAULT,
-                                   g_param_spec_boolean ("is-value-default",
-                                                         "is value default",
-                                                         "is value default",
-                                                         TRUE,
-                                                         G_PARAM_READABLE));
+  properties[PROP_IS_VALUE_DEFAULT] =
+      g_param_spec_boolean ("is-value-default",
+                            "is value default",
+                            "is value default",
+                            TRUE,
+                            G_PARAM_READABLE);
 
-  g_object_class_install_property (object_class,
-                                   PROP_KEY_COMBOS,
-                                   g_param_spec_pointer ("key-combos",
-                                                         "key combos",
-                                                         "key combos",
-                                                         G_PARAM_READABLE));
+  properties[PROP_KEY_COMBOS] =
+      g_param_spec_pointer ("key-combos",
+                            "key combos",
+                            "key combos",
+                            G_PARAM_READABLE);
+
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 }
 
 static void
