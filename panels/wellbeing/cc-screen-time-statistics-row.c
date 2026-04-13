@@ -457,7 +457,7 @@ get_week_start (void)
 # define GTK_WEEK_START "calendar:week_start:0"
   gtk_week_start = dgettext ("gtk40", GTK_WEEK_START);
 
-  if (strncmp (gtk_week_start, "calendar:week_start:", 20) == 0)
+  if (g_str_has_prefix (gtk_week_start, "calendar:week_start:"))
     week_start = *(gtk_week_start + 20) - '0';
   else
     week_start = -1;

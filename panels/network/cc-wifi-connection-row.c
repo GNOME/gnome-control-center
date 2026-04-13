@@ -144,7 +144,7 @@ get_connection_security (NMConnection *con)
     return NM_AP_SEC_NONE;
   else if (g_str_equal (key_mgmt, "wpa-eap"))
     return NM_AP_SEC_WPA2;
-  else if (strncmp (key_mgmt, "wpa-", 4) == 0)
+  else if (g_str_has_prefix (key_mgmt, "wpa-"))
     return NM_AP_SEC_WPA;
   else if (g_str_equal (key_mgmt, "sae"))
     return NM_AP_SEC_SAE;

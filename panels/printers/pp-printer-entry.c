@@ -829,7 +829,7 @@ pp_printer_entry_update (PpPrinterEntry *self,
       for (i = 0; i < g_strv_length (printer_reasons); i++)
         {
           for (j = 0; j < G_N_ELEMENTS (reasons); j++)
-            if (strncmp (printer_reasons[i], reasons[j], strlen (reasons[j])) == 0)
+            if (g_str_has_prefix (printer_reasons[i], reasons[j]))
                 {
                   if (g_str_has_suffix (printer_reasons[i], "-report"))
                     {
