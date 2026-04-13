@@ -139,8 +139,7 @@ poll_change_cb (gpointer user_data)
 static void
 monitor_change (CcSnapRow *self, const gchar *change_id)
 {
-  g_free (self->change_id);
-  self->change_id = g_strdup (change_id);
+  g_set_str (&self->change_id, change_id);
   g_clear_handle_id (&self->change_timeout, g_source_remove);
   self->change_timeout = g_timeout_add (CHANGE_POLL_TIME, poll_change_cb, self);
 }

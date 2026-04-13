@@ -456,8 +456,7 @@ get_places_list (CcSearchLocationsPage *self)
         }
       else
         {
-          g_free (old_place->display_name);
-          old_place->display_name = g_strdup (p->display_name);
+          g_set_str (&old_place->display_name, p->display_name);
 
           if (old_place->place_type == PLACE_OTHER)
             old_place->place_type = PLACE_BOOKMARKS;

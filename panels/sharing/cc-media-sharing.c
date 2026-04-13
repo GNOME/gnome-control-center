@@ -116,20 +116,17 @@ cc_media_sharing_set_preferences (gchar    **folders)
     {
       if (g_strcmp0 (*str_list, g_get_user_special_dir (G_USER_DIRECTORY_MUSIC)) == 0)
         {
-          g_free (*str_list);
-          *str_list = g_strdup ("@MUSIC@");
+          g_set_str (str_list, "@MUSIC@");
         }
 
       if (g_strcmp0 (*str_list, g_get_user_special_dir (G_USER_DIRECTORY_VIDEOS)) == 0)
         {
-          g_free (*str_list);
-          *str_list = g_strdup ("@VIDEOS@");
+          g_set_str (str_list, "@VIDEOS@");
         }
 
       if (g_strcmp0 (*str_list, g_get_user_special_dir (G_USER_DIRECTORY_PICTURES)) == 0)
         {
-          g_free (*str_list);
-          *str_list = g_strdup ("@PICTURES@");
+          g_set_str (str_list, "@PICTURES@");
         }
 
       str_list++;

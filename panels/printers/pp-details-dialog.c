@@ -154,8 +154,7 @@ ppd_selection_dialog_response_cb (GtkWindow *dialog,
                                  set_ppd_cb,
                                  self);
 
-          g_clear_pointer (&self->ppd_file_name, g_free);
-          self->ppd_file_name = g_strdup (ppd_name);
+          g_set_str (&self->ppd_file_name, ppd_name);
         }
     }
 
@@ -183,8 +182,7 @@ select_ppd_in_dialog (PpDetailsDialog *self)
   g_autofree gchar *manufacturer = NULL;
   GtkWindow *toplevel;
 
-  g_clear_pointer (&self->ppd_file_name, g_free);
-  self->ppd_file_name = g_strdup (cupsGetPPD (self->printer_name));
+  g_set_str (&self->ppd_file_name, cupsGetPPD (self->printer_name));
 
   if (!self->pp_ppd_selection_dialog)
     {
@@ -251,8 +249,7 @@ ppd_file_select_response_cb (GObject      *source,
   ppd_filename = g_file_get_path (file);
   if (self->printer_name && ppd_filename)
     {
-      g_clear_pointer (&self->ppd_file_name, g_free);
-      self->ppd_file_name = g_strdup (ppd_filename);
+      g_set_str (&self->ppd_file_name, ppd_filename);
 
       printer_set_ppd_file_async (self->printer_name,
                                   ppd_filename,

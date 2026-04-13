@@ -423,8 +423,7 @@ update_info (CcBackgroundItem *item,
             || g_file_info_get_content_type (info) == NULL) {
                 if (item->uri == NULL) {
                         item->mime_type = g_strdup ("image/x-no-data");
-                        g_free (item->name);
-                        item->name = g_strdup (_("No Desktop Background"));
+                        g_set_str (&item->name, _("No Desktop Background"));
                 }
         } else {
                 if (item->name == NULL)
@@ -470,8 +469,7 @@ static void
 _set_name (CcBackgroundItem *item,
            const char       *value)
 {
-        g_free (item->name);
-        item->name = g_strdup (value);
+        g_set_str (&item->name, value);
 }
 
 const char *
@@ -556,8 +554,7 @@ static void
 _set_primary_color (CcBackgroundItem *item,
                     const char       *value)
 {
-        g_free (item->primary_color);
-        item->primary_color = g_strdup (value);
+        g_set_str (&item->primary_color, value);
         _add_flag (item, CC_BACKGROUND_ITEM_HAS_PCOLOR);
 }
 
@@ -573,8 +570,7 @@ static void
 _set_secondary_color (CcBackgroundItem *item,
                       const char       *value)
 {
-        g_free (item->secondary_color);
-        item->secondary_color = g_strdup (value);
+        g_set_str (&item->secondary_color, value);
         _add_flag (item, CC_BACKGROUND_ITEM_HAS_SCOLOR);
 }
 
@@ -613,8 +609,7 @@ static void
 _set_source_url (CcBackgroundItem *item,
                  const char       *value)
 {
-        g_free (item->source_url);
-        item->source_url = g_strdup (value);
+        g_set_str (&item->source_url, value);
 }
 
 const char *
@@ -629,8 +624,7 @@ static void
 _set_source_xml (CcBackgroundItem *item,
                  const char       *value)
 {
-        g_free (item->source_xml);
-        item->source_xml = g_strdup (value);
+        g_set_str (&item->source_xml, value);
 }
 
 const char *

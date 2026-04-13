@@ -260,7 +260,6 @@ void
 cc_format_preview_set_region (CcFormatPreview *self,
                               const gchar     *region)
 {
-  g_free (self->region);
-  self->region = g_strdup (region);
+  g_set_str (&self->region, region);
   update_format_examples (self);
 }

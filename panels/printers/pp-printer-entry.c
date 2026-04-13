@@ -794,18 +794,15 @@ pp_printer_entry_update (PpPrinterEntry *self,
         }
       else if (g_strcmp0 (printer.options[i].name, "marker-levels") == 0)
         {
-          g_free (self->inklevel->marker_levels);
-          self->inklevel->marker_levels = g_strdup (printer.options[i].value);
+          g_set_str (&self->inklevel->marker_levels, printer.options[i].value);
         }
       else if (g_strcmp0 (printer.options[i].name, "marker-colors") == 0)
         {
-          g_free (self->inklevel->marker_colors);
-          self->inklevel->marker_colors = g_strdup (printer.options[i].value);
+          g_set_str (&self->inklevel->marker_colors, printer.options[i].value);
         }
       else if (g_strcmp0 (printer.options[i].name, "marker-types") == 0)
         {
-          g_free (self->inklevel->marker_types);
-          self->inklevel->marker_types = g_strdup (printer.options[i].value);
+          g_set_str (&self->inklevel->marker_types, printer.options[i].value);
         }
       else if (g_strcmp0 (printer.options[i].name, "printer-make-and-model") == 0)
         printer_make_and_model = printer.options[i].value;
@@ -900,8 +897,7 @@ pp_printer_entry_update (PpPrinterEntry *self,
         break;
     }
 
-  g_free (self->printer_location);
-  self->printer_location = g_strdup (location);
+  g_set_str (&self->printer_location, location);
 
   self->is_accepting_jobs = is_accepting_jobs;
   self->is_authorized = is_authorized;

@@ -105,37 +105,32 @@ parse_start_tag (GMarkupParseContext *ctx,
         {
           if (keylist->name)
             g_warning ("Duplicate section name");
-          g_free (keylist->name);
-          keylist->name = g_strdup (name);
+          g_set_str (&keylist->name, name);
         }
       if (wm_name)
         {
           if (keylist->wm_name)
             g_warning ("Duplicate window manager name");
-          g_free (keylist->wm_name);
-          keylist->wm_name = g_strdup (wm_name);
+          g_set_str (&keylist->wm_name, wm_name);
         }
       if (package)
         {
           if (keylist->package)
             g_warning ("Duplicate gettext package name");
-          g_free (keylist->package);
-          keylist->package = g_strdup (package);
+          g_set_str (&keylist->package, package);
 	  bind_textdomain_codeset (keylist->package, "UTF-8");
         }
       if (group)
         {
           if (keylist->group)
             g_warning ("Duplicate group");
-          g_free (keylist->group);
-          keylist->group = g_strdup (group);
+          g_set_str (&keylist->group, group);
         }
       if (schema)
         {
           if (keylist->schema)
             g_warning ("Duplicate schema");
-          g_free (keylist->schema);
-          keylist->schema = g_strdup (schema);
+          g_set_str (&keylist->schema, schema);
 	}
       return;
     }

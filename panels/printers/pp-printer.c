@@ -88,8 +88,7 @@ printer_rename_thread (GTask        *task,
 
   if (result)
     {
-      g_free (self->printer_name);
-      self->printer_name = g_strdup (new_printer_name);
+      g_set_str (&self->printer_name, new_printer_name);
     }
 
   g_task_return_boolean (task, result);
@@ -124,8 +123,7 @@ printer_rename_dbus_cb (GObject      *source_object,
       else
         {
           result = TRUE;
-          g_free (self->printer_name);
-          self->printer_name = g_strdup (g_task_get_task_data (task));
+          g_set_str (&self->printer_name, g_task_get_task_data (task));
         }
 
       g_task_return_boolean (task, result);

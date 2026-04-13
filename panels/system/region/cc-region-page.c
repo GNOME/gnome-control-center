@@ -286,8 +286,7 @@ set_system_language (CcRegionPage *self,
         if (g_strcmp0 (language, self->system_language) == 0)
                 return;
 
-        g_free (self->system_language);
-        self->system_language = g_strdup (language);
+        g_set_str (&self->system_language, language);
 
         set_localed_locale (self);
 }
@@ -338,8 +337,7 @@ set_system_region (CcRegionPage *self,
         if (g_strcmp0 (region, self->system_region) == 0)
                 return;
 
-        g_free (self->system_region);
-        self->system_region = g_strdup (region);
+        g_set_str (&self->system_region, region);
 
         set_localed_locale (self);
 }
@@ -546,8 +544,7 @@ update_language_from_user (CcRegionPage *self)
         if (language == NULL || *language == '\0')
                 language = setlocale (LC_MESSAGES, NULL);
 
-        g_free (self->language);
-        self->language = g_strdup (language);
+        g_set_str (&self->language, language);
         update_user_language_row (self);
 }
 
@@ -659,10 +656,8 @@ on_localed_properties_changed (GDBusProxy    *localed_proxy,
                 if (!messages) {
                         messages = lang;
                 }
-                g_free (self->system_language);
-                self->system_language = g_strdup (messages);
-                g_free (self->system_region);
-                self->system_region = g_strdup (time);
+                g_set_str (&self->system_language, messages);
+                g_set_str (&self->system_region, time);
 
                 update_login_language (self);
         }

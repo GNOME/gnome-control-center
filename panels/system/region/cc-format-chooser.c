@@ -96,8 +96,7 @@ set_locale_id (CcFormatChooser *self,
 {
         g_autofree gchar *locale_name = NULL;
 
-        g_free (self->region);
-        self->region = g_strdup (locale_id);
+        g_set_str (&self->region, locale_id);
 
         update_check_button_for_list (self->region_listbox, locale_id);
         update_check_button_for_list (self->common_region_listbox, locale_id);

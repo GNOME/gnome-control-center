@@ -221,8 +221,7 @@ set_locale_id (CcLanguageChooser *self,
                 }
         }
 
-        g_free (self->language);
-        self->language = g_strdup (locale_id);
+        g_set_str (&self->language, locale_id);
 }
 
 static void

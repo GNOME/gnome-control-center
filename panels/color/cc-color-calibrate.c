@@ -134,8 +134,7 @@ cc_color_calibrate_set_title (CcColorCalibrate *calibrate,
 {
   g_return_if_fail (CC_IS_COLOR_CALIBRATE (calibrate));
   g_return_if_fail (title != NULL);
-  g_free (calibrate->title);
-  calibrate->title = g_strdup (title);
+  g_set_str (&calibrate->title, title);
 }
 
 CdProfile *

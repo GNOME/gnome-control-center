@@ -471,8 +471,7 @@ cc_wifi_hotspot_dialog_set_hostname (CcWifiHotspotDialog *self,
 {
   g_return_if_fail (CC_IS_WIFI_HOTSPOT_DIALOG (self));
 
-  g_clear_pointer (&self->host_name, g_free);
-  self->host_name = g_strdup (host_name);
+  g_set_str (&self->host_name, host_name);
 }
 
 void

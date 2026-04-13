@@ -233,8 +233,8 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	    g_object_get (G_OBJECT (item), "name", &name, NULL);
 
 	    if (name == NULL && nodelang == NULL) {
-	       g_free (cname);
-	       cname = g_strdup (g_strstrip ((gchar *)wpa->last->content));
+	       g_autofree gchar *tmp = g_strdup ((gchar *) wpa->last->content);
+	       g_set_str (&cname, g_strstrip (tmp));
 	       g_object_set (G_OBJECT (item), "name", cname, NULL);
             } else {
 	       for (i = 0; syslangs[i] != NULL; i++) {

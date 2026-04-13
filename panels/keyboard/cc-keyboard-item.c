@@ -164,8 +164,7 @@ static void
 _set_description (CcKeyboardItem *item,
                   const char       *value)
 {
-  g_free (item->description);
-  item->description = g_strdup (value);
+  g_set_str (&item->description, value);
 }
 
 const char *
@@ -195,8 +194,7 @@ static void
 _set_command (CcKeyboardItem *item,
               const char       *value)
 {
-  g_free (item->command);
-  item->command = g_strdup (value);
+  g_set_str (&item->command, value);
 }
 
 const char *

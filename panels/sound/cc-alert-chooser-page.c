@@ -302,8 +302,7 @@ cc_alert_chooser_page_init (CcAlertChooserPage *self)
       g_strcmp0 (alert_name, "swing") != 0)
     {
       set_custom_theme (self, "click");
-      g_free (alert_name);
-      alert_name = g_strdup ("click");
+      g_set_str (&alert_name, "click");
     }
 
   if (!g_settings_get_boolean (self->sound_settings, "event-sounds"))
