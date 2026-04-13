@@ -1007,7 +1007,7 @@ bolt_client_set_authmode_async (BoltClient         *client,
 
   bolt_proxy_set_property_async (BOLT_PROXY (client),
                                  g_param_spec_get_nick (pspec),
-                                 g_variant_new ("s", str),
+                                 g_variant_new_string (str),
                                  cancellable,
                                  callback,
                                  user_data);
