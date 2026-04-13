@@ -621,11 +621,7 @@ populate_options_real (PpOptionsDialog *self)
     }
 
   self->ipp_attributes_set = FALSE;
-  if (self->ipp_attributes)
-    {
-      g_hash_table_unref (self->ipp_attributes);
-      self->ipp_attributes = NULL;
-    }
+  g_clear_pointer (&self->ipp_attributes, g_hash_table_unref);
 
   /* Translators: "General" tab contains general printer options */
   tab_add (self, C_("Printer Option Group", "General"), general_tab_grid);
@@ -890,11 +886,7 @@ pp_options_dialog_dispose (GObject *object)
       self->destination = NULL;
     }
 
-  if (self->ipp_attributes)
-    {
-      g_hash_table_unref (self->ipp_attributes);
-      self->ipp_attributes = NULL;
-    }
+  g_clear_pointer (&self->ipp_attributes, g_hash_table_unref);
 
   G_OBJECT_CLASS (pp_options_dialog_parent_class)->dispose (object);
 }
