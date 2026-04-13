@@ -278,7 +278,7 @@ cc_clock_set_duration (CcClock *clock,
                        guint    duration)
 {
   clock->duration = duration;
-  g_object_notify (G_OBJECT (clock), "duration");
+  g_object_notify_by_pspec (G_OBJECT (clock), props[PROP_DURATION]);
   cc_clock_reset (clock);
 }
 

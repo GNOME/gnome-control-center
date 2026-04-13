@@ -100,6 +100,8 @@ enum {
         PROP_LAST,
 };
 
+static GParamSpec *props[PROP_LAST];
+
 G_DEFINE_FINAL_TYPE (NetDeviceWifi, net_device_wifi, ADW_TYPE_BIN)
 
 static void
@@ -293,7 +295,7 @@ set_scanning (NetDeviceWifi *self,
         self->last_scan = last_scan;
 
         if (scanning_changed)
-                g_object_notify (G_OBJECT (self), "scanning");
+                g_object_notify_by_pspec (G_OBJECT (self), props[PROP_SCANNING]);
 }
 
 static gboolean
@@ -1058,13 +1060,13 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         object_class->finalize = net_device_wifi_finalize;
         object_class->get_property = net_device_wifi_get_property;
 
-        g_object_class_install_property (object_class,
-                                         PROP_SCANNING,
-                                         g_param_spec_boolean ("scanning",
-                                                               "Scanning",
-                                                               "Whether the device is scanning for access points",
-                                                               FALSE,
-                                                               G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
+        props[PROP_SCANNING] =
+            g_param_spec_boolean ("scanning",
+                                  "Scanning",
+                                  "Whether the device is scanning for access points",
+                                  FALSE,
+                                  G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+        g_object_class_install_properties (object_class, PROP_LAST, props);
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-wifi.ui");
 

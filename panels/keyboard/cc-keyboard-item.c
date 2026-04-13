@@ -642,10 +642,10 @@ settings_get_key_combos (GSettings  *settings,
 static void
 binding_changed_notify (CcKeyboardItem *item)
 {
-  g_object_notify (G_OBJECT (item), "key-combos");
-  g_object_notify (G_OBJECT (item), "is-value-default");
+  g_object_notify_by_pspec (G_OBJECT (item), properties[PROP_KEY_COMBOS]);
+  g_object_notify_by_pspec (G_OBJECT (item), properties[PROP_IS_VALUE_DEFAULT]);
   if (item->reverse_item)
-    g_object_notify (G_OBJECT (item->reverse_item), "is-value-default");
+    g_object_notify_by_pspec (G_OBJECT (item->reverse_item), properties[PROP_IS_VALUE_DEFAULT]);
 }
 
 static void
@@ -916,13 +916,13 @@ cc_keyboard_item_reset (CcKeyboardItem *self)
       binding_changed_notify (self);
     }
 
-  g_object_notify (G_OBJECT (self), "is-value-default");
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_IS_VALUE_DEFAULT]);
 
   /* Also reset the reverse item */
   if (reverse)
     {
       g_settings_reset (reverse->settings, reverse->key);
-      g_object_notify (G_OBJECT (reverse), "is-value-default");
+      g_object_notify_by_pspec (G_OBJECT (reverse), properties[PROP_IS_VALUE_DEFAULT]);
     }
 }
 

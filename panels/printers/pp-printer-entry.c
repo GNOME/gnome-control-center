@@ -438,7 +438,7 @@ set_as_default_printer (PpPrinterEntry *self)
 
   self->is_default = TRUE;
 
-  g_object_notify (G_OBJECT (self), "default");
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_DEFAULT]);
 
   g_signal_emit_by_name (self, "printer-changed");
 }
@@ -911,7 +911,7 @@ pp_printer_entry_update (PpPrinterEntry *self,
   gtk_label_set_text (self->printer_status, printer_status);
   gtk_label_set_text (self->printer_name_label, instance);
   self->is_default = printer.is_default;
-  g_object_notify (G_OBJECT (self), "default");
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_DEFAULT]);
 
   self->printer_make_and_model = sanitize_printer_model (printer_make_and_model);
 

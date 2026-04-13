@@ -471,10 +471,10 @@ static void
 update_editable_state (CcUserPage *self)
 {
     self->avatar_editable = (is_current_user (self->user) || !self->locked);
-    g_object_notify (G_OBJECT (self), "avatar-editable");
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_AVATAR_EDITABLE]);
 
     self->editable = self->avatar_editable && act_user_is_local_account (self->user);
-    g_object_notify (G_OBJECT (self), "editable");
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_EDITABLE]);
 }
 
 #ifdef HAVE_MALCONTENT
@@ -726,8 +726,8 @@ cc_user_page_set_user (CcUserPage  *self,
 
     g_clear_object (&self->user);
     self->user = g_object_ref (user);
-    g_object_notify (G_OBJECT (self), "is-current-user");
-    g_object_notify (G_OBJECT (self), "is-admin");
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_IS_CURRENT_USER]);
+    g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_IS_ADMIN]);
 
     if (!is_current_user (user))
       adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), get_real_or_user_name (user));

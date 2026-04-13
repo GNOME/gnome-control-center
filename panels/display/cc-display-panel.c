@@ -106,7 +106,10 @@ struct _CcDisplayPanel
 enum {
   PROP_0,
   PROP_SHOWING_APPLY_TITLEBAR,
+  N_PROPS
 };
+
+static GParamSpec *properties[N_PROPS];
 
 CC_PANEL_REGISTER (CcDisplayPanel, cc_display_panel)
 
@@ -401,7 +404,7 @@ static void
 reset_titlebar (CcDisplayPanel *self)
 {
   self->showing_apply_titlebar = FALSE;
-  g_object_notify (G_OBJECT (self), "showing-apply-titlebar");
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SHOWING_APPLY_TITLEBAR]);
 }
 
 static void
@@ -578,13 +581,13 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   object_class->dispose = cc_display_panel_dispose;
   object_class->get_property = cc_display_panel_get_property;
 
-  g_object_class_install_property (object_class,
-                                   PROP_SHOWING_APPLY_TITLEBAR,
-                                   g_param_spec_boolean ("showing-apply-titlebar",
-                                                         NULL,
-                                                         NULL,
-                                                         FALSE,
-                                                         G_PARAM_READABLE));
+  properties[PROP_SHOWING_APPLY_TITLEBAR] =
+      g_param_spec_boolean ("showing-apply-titlebar",
+                            NULL,
+                            NULL,
+                            FALSE,
+                            G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+  g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/display/cc-display-panel.ui");
 
@@ -921,7 +924,7 @@ show_apply_titlebar (CcDisplayPanel *self, gboolean is_applicable)
     }
 
   self->showing_apply_titlebar = TRUE;
-  g_object_notify (G_OBJECT (self), "showing-apply-titlebar");
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SHOWING_APPLY_TITLEBAR]);
 }
 
 static void
