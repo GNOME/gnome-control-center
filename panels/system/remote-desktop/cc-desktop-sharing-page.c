@@ -655,7 +655,7 @@ format_port_for_row (GBinding     *binding,
   int port = g_value_get_int (from_value);
 
   if (port <= 0)
-    g_value_set_string (to_value, "—");
+    g_value_set_static_string (to_value, "—");
   else
     g_value_take_string (to_value, g_strdup_printf ("%u", port));
 
