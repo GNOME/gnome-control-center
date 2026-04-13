@@ -30,8 +30,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_INPUT_SOURCE_IBUS (cc_input_source_ibus_get_type ())
-G_DECLARE_FINAL_TYPE (CcInputSourceIBus, cc_input_source_ibus, CC, INPUT_SOURCE_IBUS, CcInputSource)
-
+G_DECLARE_FINAL_TYPE (CcInputSourceIBus, cc_input_source_ibus, CC, INPUT_SOURCE_IBUS, CcInputSource);
 CcInputSourceIBus *cc_input_source_ibus_new             (const gchar       *engine_name);
 
 #ifdef HAVE_IBUS

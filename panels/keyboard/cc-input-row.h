@@ -26,8 +26,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_INPUT_ROW (cc_input_row_get_type ())
-G_DECLARE_FINAL_TYPE (CcInputRow, cc_input_row, CC, INPUT_ROW, AdwActionRow)
-
+G_DECLARE_FINAL_TYPE (CcInputRow, cc_input_row, CC, INPUT_ROW, AdwActionRow);
 CcInputRow      *cc_input_row_new           (CcInputSource *source);
 
 CcInputSource   *cc_input_row_get_source    (CcInputRow    *row);

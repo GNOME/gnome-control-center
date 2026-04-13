@@ -26,8 +26,7 @@
 G_BEGIN_DECLS
 
 #define GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON (gsd_wacom_key_shortcut_button_get_type ())
-G_DECLARE_FINAL_TYPE (GsdWacomKeyShortcutButton, gsd_wacom_key_shortcut_button, GSD, WACOM_KEY_SHORTCUT_BUTTON, GtkButton)
-
+G_DECLARE_FINAL_TYPE (GsdWacomKeyShortcutButton, gsd_wacom_key_shortcut_button, GSD, WACOM_KEY_SHORTCUT_BUTTON, GtkButton);
 GType gsd_wacom_key_shortcut_button_mode_type (void) G_GNUC_CONST;
 #define GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON_MODE (gsd_wacom_key_shortcut_button_mode_type ())
 

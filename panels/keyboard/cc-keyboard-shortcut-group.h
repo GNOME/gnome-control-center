@@ -31,8 +31,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_KEYBOARD_SHORTCUT_GROUP (cc_keyboard_shortcut_group_get_type ())
-G_DECLARE_FINAL_TYPE (CcKeyboardShortcutGroup, cc_keyboard_shortcut_group, CC, KEYBOARD_SHORTCUT_GROUP, AdwPreferencesGroup)
-
+G_DECLARE_FINAL_TYPE (CcKeyboardShortcutGroup, cc_keyboard_shortcut_group, CC, KEYBOARD_SHORTCUT_GROUP, AdwPreferencesGroup);
 GtkWidget  *cc_keyboard_shortcut_group_new          (GListModel               *shortcut_items,
                                                      const char               *section_id,
                                                      const char               *section_title,

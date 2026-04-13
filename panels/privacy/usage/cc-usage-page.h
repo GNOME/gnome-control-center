@@ -25,6 +25,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_USAGE_PAGE (cc_usage_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcUsagePage, cc_usage_page, CC, USAGE_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcUsagePage, cc_usage_page, CC, USAGE_PAGE, AdwNavigationPage);
 G_END_DECLS

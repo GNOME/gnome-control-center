@@ -30,7 +30,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcGlobalShortcutsProviderApp,
                       cc_global_shortcuts_provider_app,
                       CC, GLOBAL_SHORTCUTS_PROVIDER_APP,
-                      AdwApplication)
+                      AdwApplication);
 
 CcGlobalShortcutsProviderApp *cc_global_shortcuts_provider_app_get (void);
 

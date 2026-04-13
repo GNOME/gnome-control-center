@@ -27,7 +27,7 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_DISPLAY_CONFIG_MANAGER (cc_display_config_manager_get_type ())
 G_DECLARE_FINAL_TYPE (CcDisplayConfigManager, cc_display_config_manager,
-                      CC, DISPLAY_CONFIG_MANAGER, GObject)
+                      CC, DISPLAY_CONFIG_MANAGER, GObject);
 
 CcDisplayConfig * cc_display_config_manager_get_current (CcDisplayConfigManager *self);
 

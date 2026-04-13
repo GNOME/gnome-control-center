@@ -25,6 +25,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_MULTITASKING_PANEL (cc_multitasking_panel_get_type())
-G_DECLARE_FINAL_TYPE (CcMultitaskingPanel, cc_multitasking_panel, CC, MULTITASKING_PANEL, CcPanel)
-
+G_DECLARE_FINAL_TYPE (CcMultitaskingPanel, cc_multitasking_panel, CC, MULTITASKING_PANEL, CcPanel);
 G_END_DECLS

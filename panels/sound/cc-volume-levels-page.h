@@ -23,8 +23,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_VOLUME_LEVELS_PAGE (cc_volume_levels_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcVolumeLevelsPage, cc_volume_levels_page, CC, VOLUME_LEVELS_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcVolumeLevelsPage, cc_volume_levels_page, CC, VOLUME_LEVELS_PAGE, AdwNavigationPage);
 CcVolumeLevelsPage *cc_volume_levels_page_new (GvcMixerControl *mixer_control);
 
 G_END_DECLS

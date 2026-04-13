@@ -23,8 +23,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_INPUT_SOURCE (cc_input_source_get_type ())
-G_DECLARE_DERIVABLE_TYPE (CcInputSource, cc_input_source, CC, INPUT_SOURCE, GObject)
-
+G_DECLARE_DERIVABLE_TYPE (CcInputSource, cc_input_source, CC, INPUT_SOURCE, GObject);
 struct _CcInputSourceClass
 {
   GObjectClass parent_class;

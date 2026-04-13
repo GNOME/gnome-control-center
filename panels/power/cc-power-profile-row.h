@@ -40,8 +40,7 @@ typedef enum
 } CcPowerProfile;
 
 #define CC_TYPE_POWER_PROFILE_ROW (cc_power_profile_row_get_type())
-G_DECLARE_FINAL_TYPE (CcPowerProfileRow, cc_power_profile_row, CC, POWER_PROFILE_ROW, AdwActionRow)
-
+G_DECLARE_FINAL_TYPE (CcPowerProfileRow, cc_power_profile_row, CC, POWER_PROFILE_ROW, AdwActionRow);
 CcPowerProfileRow *cc_power_profile_row_new           (CcPowerProfile  power_profile);
 CcPowerProfile cc_power_profile_row_get_profile       (CcPowerProfileRow *row);
 GtkCheckButton *cc_power_profile_row_get_radio_button (CcPowerProfileRow *row);

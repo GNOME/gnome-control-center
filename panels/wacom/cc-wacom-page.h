@@ -27,8 +27,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_WACOM_PAGE (cc_wacom_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcWacomPage, cc_wacom_page, CC, WACOM_PAGE, GtkBox)
-
+G_DECLARE_FINAL_TYPE (CcWacomPage, cc_wacom_page, CC, WACOM_PAGE, GtkBox);
 GtkWidget * cc_wacom_page_new (CcWacomPanel  *panel,
 			       CcWacomDevice *stylus);
 

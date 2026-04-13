@@ -30,8 +30,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_LIST_ROW (cc_list_row_get_type())
-G_DECLARE_FINAL_TYPE (CcListRow, cc_list_row, CC, LIST_ROW, AdwActionRow)
-
+G_DECLARE_FINAL_TYPE (CcListRow, cc_list_row, CC, LIST_ROW, AdwActionRow);
 void     cc_list_row_set_show_arrow       (CcListRow   *self,
                                            gboolean     show_arrow);
 void     cc_list_row_set_secondary_label  (CcListRow   *self,

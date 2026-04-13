@@ -25,6 +25,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_LOCATION_PAGE (cc_location_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcLocationPage, cc_location_page, CC, LOCATION_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcLocationPage, cc_location_page, CC, LOCATION_PAGE, AdwNavigationPage);
 G_END_DECLS

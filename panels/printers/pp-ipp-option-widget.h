@@ -29,8 +29,7 @@
 G_BEGIN_DECLS
 
 #define PP_TYPE_IPP_OPTION_WIDGET (pp_ipp_option_widget_get_type ())
-G_DECLARE_FINAL_TYPE (PpIPPOptionWidget, pp_ipp_option_widget, PP, IPP_OPTION_WIDGET, GtkBox)
-
+G_DECLARE_FINAL_TYPE (PpIPPOptionWidget, pp_ipp_option_widget, PP, IPP_OPTION_WIDGET, GtkBox);
 GtkWidget   *pp_ipp_option_widget_new (IPPAttribute *attr_supported,
                                        IPPAttribute *attr_default,
                                        const gchar  *option_name,

@@ -26,6 +26,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_UA_PANEL (cc_ua_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcUaPanel, cc_ua_panel, CC, UA_PANEL, CcPanel)
-
+G_DECLARE_FINAL_TYPE (CcUaPanel, cc_ua_panel, CC, UA_PANEL, CcPanel);
 G_END_DECLS

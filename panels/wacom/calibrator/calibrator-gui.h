@@ -39,8 +39,7 @@ typedef struct
 } XYinfo;
 
 #define CC_TYPE_CALIB_AREA (cc_calib_area_get_type ())
-G_DECLARE_FINAL_TYPE (CcCalibArea, cc_calib_area, CC, CALIB_AREA, GtkWindow)
-
+G_DECLARE_FINAL_TYPE (CcCalibArea, cc_calib_area, CC, CALIB_AREA, GtkWindow);
 typedef void (*FinishCallback) (CcCalibArea *area, gpointer user_data);
 
 CcCalibArea * cc_calib_area_new (GdkDisplay      *display,

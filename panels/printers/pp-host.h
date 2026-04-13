@@ -27,8 +27,7 @@
 G_BEGIN_DECLS
 
 #define PP_TYPE_HOST (pp_host_get_type ())
-G_DECLARE_DERIVABLE_TYPE (PpHost, pp_host, PP, HOST, GObject)
-
+G_DECLARE_DERIVABLE_TYPE (PpHost, pp_host, PP, HOST, GObject);
 struct _PpHostClass
 {
   GObjectClass parent_class;

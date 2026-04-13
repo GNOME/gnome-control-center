@@ -26,8 +26,7 @@
 G_BEGIN_DECLS
 
 #define PP_TYPE_NEW_PRINTER (pp_new_printer_get_type ())
-G_DECLARE_FINAL_TYPE (PpNewPrinter, pp_new_printer, PP, NEW_PRINTER, GObject)
-
+G_DECLARE_FINAL_TYPE (PpNewPrinter, pp_new_printer, PP, NEW_PRINTER, GObject);
 PpNewPrinter *pp_new_printer_new        (void);
 
 void          pp_new_printer_add_async  (PpNewPrinter         *host,

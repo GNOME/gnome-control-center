@@ -46,8 +46,7 @@ typedef struct
 } CcXkbModifier;
 
 #define CC_TYPE_XKB_MODIFIER_PAGE (cc_xkb_modifier_page_get_type())
-G_DECLARE_FINAL_TYPE (CcXkbModifierPage, cc_xkb_modifier_page, CC, XKB_MODIFIER_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcXkbModifierPage, cc_xkb_modifier_page, CC, XKB_MODIFIER_PAGE, AdwNavigationPage);
 CcXkbModifierPage *cc_xkb_modifier_page_new (GSettings *input_settings, const CcXkbModifier*);
 
 gboolean xcb_modifier_transform_binding_to_label (GValue*, GVariant*, gpointer);

@@ -26,8 +26,7 @@
 G_BEGIN_DECLS
 
 #define BG_TYPE_RECENT_SOURCE (bg_recent_source_get_type())
-G_DECLARE_FINAL_TYPE (BgRecentSource, bg_recent_source, BG, RECENT_SOURCE, BgSource)
-
+G_DECLARE_FINAL_TYPE (BgRecentSource, bg_recent_source, BG, RECENT_SOURCE, BgSource);
 BgRecentSource* bg_recent_source_new         (void);
 
 void            bg_recent_source_add_file    (BgRecentSource   *self,

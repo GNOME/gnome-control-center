@@ -32,8 +32,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_WWAN_APN_DIALOG (cc_wwan_apn_dialog_get_type())
-G_DECLARE_FINAL_TYPE (CcWwanApnDialog, cc_wwan_apn_dialog, CC, WWAN_APN_DIALOG, GtkDialog)
-
+G_DECLARE_FINAL_TYPE (CcWwanApnDialog, cc_wwan_apn_dialog, CC, WWAN_APN_DIALOG, GtkDialog);
 GtkWindow *cc_wwan_apn_dialog_new   (GtkWindow       *parent_window,
                                      CcWwanDevice    *device);
 

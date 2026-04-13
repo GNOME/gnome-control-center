@@ -30,8 +30,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_NET_PROXY_PAGE (cc_net_proxy_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcNetProxyPage, cc_net_proxy_page, CC, NET_PROXY_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcNetProxyPage, cc_net_proxy_page, CC, NET_PROXY_PAGE, AdwNavigationPage);
 gboolean  cc_net_proxy_page_get_enabled     (CcNetProxyPage *self);
 void      cc_net_proxy_page_set_enabled     (CcNetProxyPage *self,
                                              gboolean        enable);

@@ -31,8 +31,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_TZ_ITEM (cc_tz_item_get_type ())
-G_DECLARE_FINAL_TYPE (CcTzItem, cc_tz_item, CC, TZ_ITEM, GObject)
-
+G_DECLARE_FINAL_TYPE (CcTzItem, cc_tz_item, CC, TZ_ITEM, GObject);
 CcTzItem   *cc_tz_item_new            (TzLocation *location);
 TzLocation *cc_tz_item_get_location   (CcTzItem *self);
 

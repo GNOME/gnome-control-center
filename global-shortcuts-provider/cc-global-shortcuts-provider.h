@@ -31,7 +31,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcGlobalShortcutsProvider,
                       cc_global_shortcuts_provider,
                       CC, GLOBAL_SHORTCUTS_PROVIDER,
-                      GObject)
+                      GObject);
 
 CcGlobalShortcutsProvider *cc_global_shortcuts_provider_new (GtkApplication *app);
 

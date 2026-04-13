@@ -27,8 +27,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_LANGUAGE_CHOOSER (cc_language_chooser_get_type ())
-G_DECLARE_FINAL_TYPE (CcLanguageChooser, cc_language_chooser, CC, LANGUAGE_CHOOSER, AdwDialog)
-
+G_DECLARE_FINAL_TYPE (CcLanguageChooser, cc_language_chooser, CC, LANGUAGE_CHOOSER, AdwDialog);
 CcLanguageChooser *cc_language_chooser_new          (void);
 void               cc_language_chooser_clear_filter (CcLanguageChooser *chooser);
 const gchar       *cc_language_chooser_get_language (CcLanguageChooser *chooser);

@@ -23,8 +23,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_LANGUAGE_ROW (cc_language_row_get_type ())
-G_DECLARE_FINAL_TYPE (CcLanguageRow, cc_language_row, CC, LANGUAGE_ROW, GtkListBoxRow)
-
+G_DECLARE_FINAL_TYPE (CcLanguageRow, cc_language_row, CC, LANGUAGE_ROW, GtkListBoxRow);
 CcLanguageRow *cc_language_row_new                (const gchar *locale_id);
 
 const gchar   *cc_language_row_get_locale_id      (CcLanguageRow *row);

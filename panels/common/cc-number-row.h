@@ -78,8 +78,7 @@ typedef enum
 } CcNumberSortType;
 
 #define CC_TYPE_NUMBER_OBJECT (cc_number_object_get_type())
-G_DECLARE_FINAL_TYPE (CcNumberObject, cc_number_object, CC, NUMBER_OBJECT, GObject)
-
+G_DECLARE_FINAL_TYPE (CcNumberObject, cc_number_object, CC, NUMBER_OBJECT, GObject);
 CcNumberObject *cc_number_object_new             (int value);
 CcNumberObject *cc_number_object_new_full        (int value, const char *string, CcNumberOrder order);
 
@@ -88,8 +87,7 @@ char*         cc_number_object_get_string (CcNumberObject *self);
 CcNumberOrder cc_number_object_get_order  (CcNumberObject *self);
 
 #define CC_TYPE_NUMBER_ROW (cc_number_row_get_type())
-G_DECLARE_FINAL_TYPE (CcNumberRow, cc_number_row, CC, NUMBER_ROW, AdwComboRow)
-
+G_DECLARE_FINAL_TYPE (CcNumberRow, cc_number_row, CC, NUMBER_ROW, AdwComboRow);
 CcNumberRow *cc_number_row_new (CcNumberValueType value_type, CcNumberSortType sort_type);
 
 guint    cc_number_row_add_value      (CcNumberRow *self, int value);

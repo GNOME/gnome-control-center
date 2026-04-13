@@ -26,6 +26,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_SYSTEM_PANEL (cc_system_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcSystemPanel, cc_system_panel, CC, SYSTEM_PANEL, CcPanel)
-
+G_DECLARE_FINAL_TYPE (CcSystemPanel, cc_system_panel, CC, SYSTEM_PANEL, CcPanel);
 G_END_DECLS

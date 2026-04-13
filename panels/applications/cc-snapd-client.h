@@ -25,8 +25,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_SNAPD_CLIENT (cc_snapd_client_get_type())
-G_DECLARE_FINAL_TYPE (CcSnapdClient, cc_snapd_client, CC, SNAPD_CLIENT, GObject)
-
+G_DECLARE_FINAL_TYPE (CcSnapdClient, cc_snapd_client, CC, SNAPD_CLIENT, GObject);
 // Creates a client to contact snapd.
 CcSnapdClient *cc_snapd_client_new                       (void);
 

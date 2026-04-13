@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcGlobalShortcutDialog,
                       cc_global_shortcut_dialog,
                       CC, GLOBAL_SHORTCUT_DIALOG,
-                      AdwWindow)
+                      AdwWindow);
 
 CcGlobalShortcutDialog *cc_global_shortcut_dialog_new (const char *app_id,
                                                        const char *parent_window,

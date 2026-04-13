@@ -25,8 +25,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_NIGHT_LIGHT_PAGE (cc_night_light_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcNightLightPage, cc_night_light_page, CC, NIGHT_LIGHT_PAGE, AdwBin)
-
+G_DECLARE_FINAL_TYPE (CcNightLightPage, cc_night_light_page, CC, NIGHT_LIGHT_PAGE, AdwBin);
 CcNightLightPage* cc_night_light_page_new (void);
 
 G_END_DECLS

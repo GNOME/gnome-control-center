@@ -25,8 +25,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_KEYBOARD_ITEM (cc_keyboard_item_get_type ())
-G_DECLARE_FINAL_TYPE (CcKeyboardItem, cc_keyboard_item, CC, KEYBOARD_ITEM, GObject)
-
+G_DECLARE_FINAL_TYPE (CcKeyboardItem, cc_keyboard_item, CC, KEYBOARD_ITEM, GObject);
 typedef enum
 {
   BINDING_GROUP_SYSTEM,

@@ -27,8 +27,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_PASSWORD_DIALOG (cc_password_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcPasswordDialog, cc_password_dialog, CC, PASSWORD_DIALOG, AdwDialog)
-
+G_DECLARE_FINAL_TYPE (CcPasswordDialog, cc_password_dialog, CC, PASSWORD_DIALOG, AdwDialog);
 CcPasswordDialog *cc_password_dialog_new (ActUser *user);
 
 G_END_DECLS

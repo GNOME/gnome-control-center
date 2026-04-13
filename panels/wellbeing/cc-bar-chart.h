@@ -29,8 +29,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_BAR_CHART (cc_bar_chart_get_type())
-G_DECLARE_FINAL_TYPE (CcBarChart, cc_bar_chart, CC, BAR_CHART, GtkWidget)
-
+G_DECLARE_FINAL_TYPE (CcBarChart, cc_bar_chart, CC, BAR_CHART, GtkWidget);
 CcBarChart *cc_bar_chart_new (void);
 
 const char * const *cc_bar_chart_get_discrete_axis_labels (CcBarChart *self,

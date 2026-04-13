@@ -26,8 +26,7 @@
 G_BEGIN_DECLS
 
 #define PP_TYPE_MAINTENANCE_COMMAND (pp_maintenance_command_get_type ())
-G_DECLARE_FINAL_TYPE (PpMaintenanceCommand, pp_maintenance_command, PP, MAINTENANCE_COMMAND, GObject)
-
+G_DECLARE_FINAL_TYPE (PpMaintenanceCommand, pp_maintenance_command, PP, MAINTENANCE_COMMAND, GObject);
 PpMaintenanceCommand *pp_maintenance_command_new                 (const gchar *printer_name,
                                                                   const gchar *command,
                                                                   const gchar *parameters,

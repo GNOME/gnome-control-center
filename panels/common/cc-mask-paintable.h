@@ -26,8 +26,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_MASK_PAINTABLE (cc_mask_paintable_get_type())
-G_DECLARE_FINAL_TYPE (CcMaskPaintable, cc_mask_paintable, CC, MASK_PAINTABLE, GObject)
-
+G_DECLARE_FINAL_TYPE (CcMaskPaintable, cc_mask_paintable, CC, MASK_PAINTABLE, GObject);
 GdkPaintable *cc_mask_paintable_new (void);
 
 GdkPaintable *cc_mask_paintable_get_paintable (CcMaskPaintable *self);

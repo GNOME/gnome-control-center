@@ -26,8 +26,7 @@
 G_BEGIN_DECLS
 
 #define PP_TYPE_SAMBA (pp_samba_get_type ())
-G_DECLARE_FINAL_TYPE (PpSamba, pp_samba, PP, SAMBA, PpHost)
-
+G_DECLARE_FINAL_TYPE (PpSamba, pp_samba, PP, SAMBA, PpHost);
 PpSamba       *pp_samba_new                (const gchar         *hostname);
 
 void           pp_samba_get_devices_async  (PpSamba             *samba,

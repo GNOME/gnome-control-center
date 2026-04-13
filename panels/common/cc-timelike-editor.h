@@ -44,8 +44,7 @@ typedef enum {
 
 #define CC_TYPE_TIMELIKE_EDITOR (cc_timelike_editor_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcTimelikeEditor, cc_timelike_editor, CC, TIMELIKE_EDITOR, GtkWidget)
-
+G_DECLARE_FINAL_TYPE (CcTimelikeEditor, cc_timelike_editor, CC, TIMELIKE_EDITOR, GtkWidget);
 CcTimelikeEditor *cc_timelike_editor_new    (void);
 void          cc_timelike_editor_set_time   (CcTimelikeEditor *self,
                                              guint             hour,

@@ -29,8 +29,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_TIMELIKE_ENTRY (cc_timelike_entry_get_type ())
-G_DECLARE_FINAL_TYPE (CcTimelikeEntry, cc_timelike_entry, CC, TIMELIKE_ENTRY, GtkWidget)
-
+G_DECLARE_FINAL_TYPE (CcTimelikeEntry, cc_timelike_entry, CC, TIMELIKE_ENTRY, GtkWidget);
 GtkWidget *cc_timelike_entry_new        (void);
 void       cc_timelike_entry_set_time   (CcTimelikeEntry *self,
                                          guint            hour,

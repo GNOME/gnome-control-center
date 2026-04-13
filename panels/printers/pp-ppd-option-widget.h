@@ -27,8 +27,7 @@
 G_BEGIN_DECLS
 
 #define PP_TYPE_PPD_OPTION_WIDGET (pp_ppd_option_widget_get_type ())
-G_DECLARE_FINAL_TYPE (PpPPDOptionWidget, pp_ppd_option_widget, PP, PPD_OPTION_WIDGET, GtkBox)
-
+G_DECLARE_FINAL_TYPE (PpPPDOptionWidget, pp_ppd_option_widget, PP, PPD_OPTION_WIDGET, GtkBox);
 GtkWidget   *pp_ppd_option_widget_new      (ppd_option_t *source,
                                             const gchar  *printer_name);
 

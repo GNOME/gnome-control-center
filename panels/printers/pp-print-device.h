@@ -26,8 +26,7 @@
 G_BEGIN_DECLS
 
 #define PP_TYPE_PRINT_DEVICE (pp_print_device_get_type ())
-G_DECLARE_FINAL_TYPE (PpPrintDevice, pp_print_device, PP, PRINT_DEVICE, GObject)
-
+G_DECLARE_FINAL_TYPE (PpPrintDevice, pp_print_device, PP, PRINT_DEVICE, GObject);
 PpPrintDevice *pp_print_device_new                       (void);
 PpPrintDevice *pp_print_device_copy                      (PpPrintDevice *device);
 gchar         *pp_print_device_get_device_name           (PpPrintDevice *device);

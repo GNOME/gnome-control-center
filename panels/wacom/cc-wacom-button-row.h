@@ -25,8 +25,7 @@
 G_BEGIN_DECLS
 
 #define CC_WACOM_TYPE_BUTTON_ROW (cc_wacom_button_row_get_type ())
-G_DECLARE_FINAL_TYPE (CcWacomButtonRow, cc_wacom_button_row, CC, WACOM_BUTTON_ROW, GtkListBoxRow)
-
+G_DECLARE_FINAL_TYPE (CcWacomButtonRow, cc_wacom_button_row, CC, WACOM_BUTTON_ROW, GtkListBoxRow);
 static struct {
   GDesktopPadButtonAction  action_type;
   const gchar             *action_name;

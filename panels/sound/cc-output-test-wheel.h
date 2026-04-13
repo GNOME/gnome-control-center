@@ -23,8 +23,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_OUTPUT_TEST_WHEEL (cc_output_test_wheel_get_type ())
-G_DECLARE_FINAL_TYPE (CcOutputTestWheel, cc_output_test_wheel, CC, OUTPUT_TEST_WHEEL, GtkWidget)
-
+G_DECLARE_FINAL_TYPE (CcOutputTestWheel, cc_output_test_wheel, CC, OUTPUT_TEST_WHEEL, GtkWidget);
 void cc_output_test_wheel_set_stream (CcOutputTestWheel *self,
                                       GvcMixerStream    *stream);
 

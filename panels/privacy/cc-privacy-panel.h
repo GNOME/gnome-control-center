@@ -24,6 +24,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_PRIVACY_PANEL (cc_privacy_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcPrivacyPanel, cc_privacy_panel, CC, PRIVACY_PANEL, CcPanel)
-
+G_DECLARE_FINAL_TYPE (CcPrivacyPanel, cc_privacy_panel, CC, PRIVACY_PANEL, CcPanel);
 G_END_DECLS

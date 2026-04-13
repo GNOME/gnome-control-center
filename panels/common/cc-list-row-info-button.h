@@ -30,8 +30,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_LIST_ROW_INFO_BUTTON (cc_list_row_info_button_get_type())
-G_DECLARE_FINAL_TYPE (CcListRowInfoButton, cc_list_row_info_button, CC, LIST_ROW_INFO_BUTTON, GtkWidget)
-
+G_DECLARE_FINAL_TYPE (CcListRowInfoButton, cc_list_row_info_button, CC, LIST_ROW_INFO_BUTTON, GtkWidget);
 void     cc_list_row_info_button_set_text (CcListRowInfoButton *self,
                                            const gchar         *text);
 

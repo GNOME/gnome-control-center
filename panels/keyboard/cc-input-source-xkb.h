@@ -25,8 +25,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_INPUT_SOURCE_XKB (cc_input_source_xkb_get_type ())
-G_DECLARE_FINAL_TYPE (CcInputSourceXkb, cc_input_source_xkb, CC, INPUT_SOURCE_XKB, CcInputSource)
-
+G_DECLARE_FINAL_TYPE (CcInputSourceXkb, cc_input_source_xkb, CC, INPUT_SOURCE_XKB, CcInputSource);
 CcInputSourceXkb *cc_input_source_xkb_new         (GnomeXkbInfo     *xkb_info,
                                                    const gchar      *layout,
                                                    const gchar      *variant);

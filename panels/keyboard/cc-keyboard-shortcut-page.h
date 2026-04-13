@@ -27,8 +27,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_KEYBOARD_SHORTCUT_PAGE (cc_keyboard_shortcut_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcKeyboardShortcutPage, cc_keyboard_shortcut_page, CC, KEYBOARD_SHORTCUT_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcKeyboardShortcutPage, cc_keyboard_shortcut_page, CC, KEYBOARD_SHORTCUT_PAGE, AdwNavigationPage);
 GtkWidget* cc_keyboard_shortcut_page_new (void);
 
 G_END_DECLS

@@ -37,8 +37,7 @@ typedef enum {
 GQuark           cc_realm_error_get_quark         (void) G_GNUC_CONST;
 
 #define CC_TYPE_REALM_MANAGER (cc_realm_manager_get_type ())
-G_DECLARE_FINAL_TYPE (CcRealmManager, cc_realm_manager, CC, REALM_MANAGER, CcRealmObjectManagerClient)
-
+G_DECLARE_FINAL_TYPE (CcRealmManager, cc_realm_manager, CC, REALM_MANAGER, CcRealmObjectManagerClient);
 void             cc_realm_manager_new             (GCancellable *cancellable,
                                                    GAsyncReadyCallback callback,
                                                    gpointer user_data);

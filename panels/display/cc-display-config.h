@@ -90,19 +90,19 @@ typedef enum _CcDisplayColorMode
 
 #define CC_TYPE_DISPLAY_MODE (cc_display_mode_get_type ())
 G_DECLARE_FINAL_TYPE (CcDisplayMode, cc_display_mode,
-                      CC, DISPLAY_MODE, GObject)
+                      CC, DISPLAY_MODE, GObject);
 
 #define CC_TYPE_DISPLAY_MONITOR (cc_display_monitor_get_type ())
 G_DECLARE_FINAL_TYPE (CcDisplayMonitor, cc_display_monitor,
-                      CC, DISPLAY_MONITOR, GObject)
+                      CC, DISPLAY_MONITOR, GObject);
 
 #define CC_TYPE_DISPLAY_LOGICAL_MONITOR (cc_display_logical_monitor_get_type ())
 G_DECLARE_FINAL_TYPE (CcDisplayLogicalMonitor, cc_display_logical_monitor,
-                      CC, DISPLAY_LOGICAL_MONITOR, GObject)
+                      CC, DISPLAY_LOGICAL_MONITOR, GObject);
 
 #define CC_TYPE_DISPLAY_CONFIG (cc_display_config_get_type ())
 G_DECLARE_FINAL_TYPE (CcDisplayConfig, cc_display_config,
-                      CC, DISPLAY_CONFIG, GObject)
+                      CC, DISPLAY_CONFIG, GObject);
 
 GList*            cc_display_config_get_monitors            (CcDisplayConfig    *config);
 GList*            cc_display_config_get_ui_sorted_monitors  (CcDisplayConfig    *config);

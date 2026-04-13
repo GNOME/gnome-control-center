@@ -34,11 +34,9 @@ G_BEGIN_DECLS
 #define CC_WWAN_APN_PRIORITY_HIGH (2)
 
 #define CC_TYPE_WWAN_DATA_APN (cc_wwan_data_apn_get_type())
-G_DECLARE_FINAL_TYPE (CcWwanDataApn, cc_wwan_data_apn, CC, WWAN_DATA_APN, GObject)
-
+G_DECLARE_FINAL_TYPE (CcWwanDataApn, cc_wwan_data_apn, CC, WWAN_DATA_APN, GObject);
 #define CC_TYPE_WWAN_DATA (cc_wwan_data_get_type())
-G_DECLARE_FINAL_TYPE (CcWwanData, cc_wwan_data, CC, WWAN_DATA, GObject)
-
+G_DECLARE_FINAL_TYPE (CcWwanData, cc_wwan_data, CC, WWAN_DATA, GObject);
 CcWwanData    *cc_wwan_data_new                   (MMObject             *mm_object,
                                                    NMClient             *nm_client);
 GError        *cc_wwan_data_get_error             (CcWwanData           *self);

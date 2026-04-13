@@ -29,8 +29,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_TIME_EDITOR (cc_time_editor_get_type())
-G_DECLARE_FINAL_TYPE (CcTimeEditor, cc_time_editor, CC, TIME_EDITOR, GtkWidget)
-
+G_DECLARE_FINAL_TYPE (CcTimeEditor, cc_time_editor, CC, TIME_EDITOR, GtkWidget);
 CcTimeEditor *cc_time_editor_new (void);
 
 void          cc_time_editor_set_time   (CcTimeEditor *self,

@@ -28,8 +28,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_COLOR_CALIBRATE (cc_color_calibrate_get_type ())
-G_DECLARE_FINAL_TYPE (CcColorCalibrate, cc_color_calibrate, CC, COLOR_CALIBRATE, GObject)
-
+G_DECLARE_FINAL_TYPE (CcColorCalibrate, cc_color_calibrate, CC, COLOR_CALIBRATE, GObject);
 CcColorCalibrate *cc_color_calibrate_new    (void);
 void      cc_color_calibrate_set_kind       (CcColorCalibrate *calibrate,
                                              CdSensorCap       kind);

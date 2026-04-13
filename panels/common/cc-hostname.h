@@ -31,8 +31,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_HOSTNAME (cc_hostname_get_type())
-G_DECLARE_FINAL_TYPE (CcHostname, cc_hostname, CC, HOSTNAME, GObject)
-
+G_DECLARE_FINAL_TYPE (CcHostname, cc_hostname, CC, HOSTNAME, GObject);
 CcHostname  *cc_hostname_get_default          (void);
 
 gchar       *cc_hostname_get_display_hostname (CcHostname *self);

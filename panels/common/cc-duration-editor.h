@@ -31,8 +31,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_DURATION_EDITOR (cc_duration_editor_get_type())
-G_DECLARE_FINAL_TYPE (CcDurationEditor, cc_duration_editor, CC, DURATION_EDITOR, GtkWidget)
-
+G_DECLARE_FINAL_TYPE (CcDurationEditor, cc_duration_editor, CC, DURATION_EDITOR, GtkWidget);
 CcDurationEditor *cc_duration_editor_new (void);
 
 guint cc_duration_editor_get_duration (CcDurationEditor *self);

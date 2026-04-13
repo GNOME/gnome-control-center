@@ -28,8 +28,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_BACKGROUND_ITEM (cc_background_item_get_type ())
-G_DECLARE_FINAL_TYPE (CcBackgroundItem, cc_background_item, CC, BACKGROUND_ITEM, GObject)
-
+G_DECLARE_FINAL_TYPE (CcBackgroundItem, cc_background_item, CC, BACKGROUND_ITEM, GObject);
 typedef enum {
 	CC_BACKGROUND_ITEM_HAS_SHADING   = 1 << 0,
 	CC_BACKGROUND_ITEM_HAS_PLACEMENT = 1 << 1,

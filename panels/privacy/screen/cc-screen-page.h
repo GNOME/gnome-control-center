@@ -25,6 +25,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_SCREEN_PAGE (cc_screen_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcScreenPage, cc_screen_page, CC, SCREEN_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcScreenPage, cc_screen_page, CC, SCREEN_PAGE, AdwNavigationPage);
 G_END_DECLS

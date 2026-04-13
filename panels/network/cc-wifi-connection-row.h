@@ -25,8 +25,7 @@ G_BEGIN_DECLS
 typedef struct _CcWifiConnectionRow CcWifiConnectionRow;
 
 #define CC_TYPE_WIFI_CONNECTION_ROW (cc_wifi_connection_row_get_type ())
-G_DECLARE_FINAL_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, CC, WIFI_CONNECTION_ROW, AdwActionRow)
-
+G_DECLARE_FINAL_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, CC, WIFI_CONNECTION_ROW, AdwActionRow);
 CcWifiConnectionRow *cc_wifi_connection_row_new                 (NMDeviceWifi  *device,
                                                                  NMConnection  *connection,
                                                                  GPtrArray     *aps,

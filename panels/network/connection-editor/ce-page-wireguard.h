@@ -27,11 +27,9 @@
 G_BEGIN_DECLS
 
 #define CE_TYPE_PAGE_WIREGUARD (ce_page_wireguard_get_type ())
-G_DECLARE_FINAL_TYPE (CEPageWireguard, ce_page_wireguard, CE, PAGE_WIREGUARD, GtkBox)
-
+G_DECLARE_FINAL_TYPE (CEPageWireguard, ce_page_wireguard, CE, PAGE_WIREGUARD, GtkBox);
 #define WIREGUARD_TYPE_PEER (wireguard_peer_get_type ())
-G_DECLARE_FINAL_TYPE (WireguardPeer, wireguard_peer, WIREGUARD, PEER, GtkBox)
-
+G_DECLARE_FINAL_TYPE (WireguardPeer, wireguard_peer, WIREGUARD, PEER, GtkBox);
 gchar *peer_allowed_ips_to_str (NMWireGuardPeer *peer);
 WireguardPeer *add_nm_wg_peer_to_list (CEPageWireguard *self, NMWireGuardPeer *peer);
 

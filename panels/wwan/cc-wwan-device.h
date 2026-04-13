@@ -46,8 +46,7 @@ typedef enum
 typedef struct _CcWwanData CcWwanData;
 
 #define CC_TYPE_WWAN_DEVICE (cc_wwan_device_get_type())
-G_DECLARE_FINAL_TYPE (CcWwanDevice, cc_wwan_device, CC, WWAN_DEVICE, GObject)
-
+G_DECLARE_FINAL_TYPE (CcWwanDevice, cc_wwan_device, CC, WWAN_DEVICE, GObject);
 CcWwanDevice  *cc_wwan_device_new                (MMObject            *mm_object,
                                                   GObject             *nm_client);
 gboolean       cc_wwan_device_has_sim            (CcWwanDevice        *self);

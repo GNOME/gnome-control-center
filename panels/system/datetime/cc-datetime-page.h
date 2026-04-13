@@ -26,6 +26,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_DATE_TIME_PAGE (cc_date_time_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcDateTimePage, cc_date_time_page, CC, DATE_TIME_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcDateTimePage, cc_date_time_page, CC, DATE_TIME_PAGE, AdwNavigationPage);
 G_END_DECLS

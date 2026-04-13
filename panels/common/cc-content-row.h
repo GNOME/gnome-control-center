@@ -28,8 +28,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_CONTENT_ROW (cc_content_row_get_type())
-G_DECLARE_DERIVABLE_TYPE (CcContentRow, cc_content_row, CC, CONTENT_ROW, AdwPreferencesRow)
-
+G_DECLARE_DERIVABLE_TYPE (CcContentRow, cc_content_row, CC, CONTENT_ROW, AdwPreferencesRow);
 /**
  * CcContentRowClass
  * @parent_class: The parent class

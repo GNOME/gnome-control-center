@@ -31,8 +31,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_BAR_CHART_GROUP (cc_bar_chart_group_get_type())
-G_DECLARE_FINAL_TYPE (CcBarChartGroup, cc_bar_chart_group, CC, BAR_CHART_GROUP, GtkWidget)
-
+G_DECLARE_FINAL_TYPE (CcBarChartGroup, cc_bar_chart_group, CC, BAR_CHART_GROUP, GtkWidget);
 CcBarChartGroup *cc_bar_chart_group_new (void);
 
 CcBarChartBar * const *cc_bar_chart_group_get_bars (CcBarChartGroup *self,

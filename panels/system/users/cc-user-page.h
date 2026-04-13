@@ -31,8 +31,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_USER_PAGE (cc_user_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcUserPage, cc_user_page, CC, USER_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcUserPage, cc_user_page, CC, USER_PAGE, AdwNavigationPage);
 CcUserPage *cc_user_page_new      (void);
 void        cc_user_page_set_user (CcUserPage *self, ActUser *user, GPermission *permission);
 ActUser    *cc_user_page_get_user (CcUserPage *self);

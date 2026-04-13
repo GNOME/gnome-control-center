@@ -30,8 +30,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_SCREEN_TIME_STATISTICS_ROW (cc_screen_time_statistics_row_get_type())
-G_DECLARE_FINAL_TYPE (CcScreenTimeStatisticsRow, cc_screen_time_statistics_row, CC, SCREEN_TIME_STATISTICS_ROW, AdwActionRow)
-
+G_DECLARE_FINAL_TYPE (CcScreenTimeStatisticsRow, cc_screen_time_statistics_row, CC, SCREEN_TIME_STATISTICS_ROW, AdwActionRow);
 CcScreenTimeStatisticsRow *cc_screen_time_statistics_row_new (void);
 
 GFile *cc_screen_time_statistics_row_get_history_file (CcScreenTimeStatisticsRow *self);

@@ -37,8 +37,7 @@ typedef enum {
 } CcCalibratorState;
 
 #define CC_TYPE_CALIBRATOR (cc_calibrator_get_type ())
-G_DECLARE_FINAL_TYPE (CcCalibrator, cc_calibrator, CC, CALIBRATOR, GObject)
-
+G_DECLARE_FINAL_TYPE (CcCalibrator, cc_calibrator, CC, CALIBRATOR, GObject);
 CcCalibrator * cc_calibrator_new (int threshold_doubleclick,
                                   int threshold_mislick);
 

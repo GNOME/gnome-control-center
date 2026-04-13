@@ -24,8 +24,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_APP_NOTIFICATIONS_PAGE (cc_app_notifications_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcAppNotificationsPage, cc_app_notifications_page, CC, APP_NOTIFICATIONS_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcAppNotificationsPage, cc_app_notifications_page, CC, APP_NOTIFICATIONS_PAGE, AdwNavigationPage);
 CcAppNotificationsPage *cc_app_notifications_page_new (const gchar          *app_id,
                                                        const gchar          *title,
                                                        GSettings            *settings,

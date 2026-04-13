@@ -29,6 +29,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_INPUT_LIST_BOX (cc_input_list_box_get_type ())
-G_DECLARE_FINAL_TYPE (CcInputListBox, cc_input_list_box, CC, INPUT_LIST_BOX, AdwBin)
-
+G_DECLARE_FINAL_TYPE (CcInputListBox, cc_input_list_box, CC, INPUT_LIST_BOX, AdwBin);
 G_END_DECLS

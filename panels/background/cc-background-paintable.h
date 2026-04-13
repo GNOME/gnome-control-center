@@ -28,8 +28,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_BACKGROUND_PAINTABLE (cc_background_paintable_get_type ())
-G_DECLARE_FINAL_TYPE (CcBackgroundPaintable, cc_background_paintable, CC, BACKGROUND_PAINTABLE, GObject)
-
+G_DECLARE_FINAL_TYPE (CcBackgroundPaintable, cc_background_paintable, CC, BACKGROUND_PAINTABLE, GObject);
 typedef enum {
     CC_BACKGROUND_PAINT_LIGHT = 1 << 0,
     CC_BACKGROUND_PAINT_DARK  = 1 << 1

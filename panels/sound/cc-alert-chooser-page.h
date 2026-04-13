@@ -22,8 +22,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_ALERT_CHOOSER_PAGE (cc_alert_chooser_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcAlertChooserPage, cc_alert_chooser_page, CC, ALERT_CHOOSER_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcAlertChooserPage, cc_alert_chooser_page, CC, ALERT_CHOOSER_PAGE, AdwNavigationPage);
 CcAlertChooserPage *cc_alert_chooser_page_new (void);
 
 const gchar *get_selected_alert_display_name (void);

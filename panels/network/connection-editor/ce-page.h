@@ -30,7 +30,7 @@
 G_BEGIN_DECLS
 
 #define CE_TYPE_PAGE (ce_page_get_type ())
-G_DECLARE_INTERFACE (CEPage, ce_page, CE, PAGE, GObject)
+G_DECLARE_INTERFACE (CEPage, ce_page, CE, PAGE, GObject);
 
 struct _CEPageInterface
 {

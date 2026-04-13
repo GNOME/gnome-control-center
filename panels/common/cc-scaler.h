@@ -27,8 +27,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_SCALER (cc_scaler_get_type ())
-G_DECLARE_FINAL_TYPE (CcScaler, cc_scaler, CC, SCALER, GObject)
-
+G_DECLARE_FINAL_TYPE (CcScaler, cc_scaler, CC, SCALER, GObject);
 GdkPaintable *cc_scaler_new (GdkPaintable   *paintable,
                              double          scale);
 

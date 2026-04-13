@@ -27,6 +27,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_FIRMWARE_SECURITY_PAGE (cc_firmware_security_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcFirmwareSecurityPage, cc_firmware_security_page, CC, FIRMWARE_SECURITY_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcFirmwareSecurityPage, cc_firmware_security_page, CC, FIRMWARE_SECURITY_PAGE, AdwNavigationPage);
 G_END_DECLS

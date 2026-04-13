@@ -25,6 +25,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_CAMERA_PAGE (cc_camera_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcCameraPage, cc_camera_page, CC, CAMERA_PAGE, AdwNavigationPage)
-
+G_DECLARE_FINAL_TYPE (CcCameraPage, cc_camera_page, CC, CAMERA_PAGE, AdwNavigationPage);
 G_END_DECLS

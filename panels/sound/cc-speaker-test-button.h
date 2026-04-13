@@ -24,8 +24,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_SPEAKER_TEST_BUTTON (cc_speaker_test_button_get_type ())
-G_DECLARE_FINAL_TYPE (CcSpeakerTestButton, cc_speaker_test_button, CC, SPEAKER_TEST_BUTTON, GtkButton)
-
+G_DECLARE_FINAL_TYPE (CcSpeakerTestButton, cc_speaker_test_button, CC, SPEAKER_TEST_BUTTON, GtkButton);
 GtkWidget *cc_speaker_test_button_new (GSoundContext         *context,
                                        pa_channel_position_t  position);
 

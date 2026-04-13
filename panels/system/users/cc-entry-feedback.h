@@ -31,8 +31,7 @@ G_BEGIN_DECLS
 #define CC_ENTRY_LOADING "spinner"
 
 #define CC_TYPE_ENTRY_FEEDBACK (cc_entry_feedback_get_type ())
-G_DECLARE_FINAL_TYPE (CcEntryFeedback, cc_entry_feedback, CC, ENTRY_FEEDBACK, GtkBox)
-
+G_DECLARE_FINAL_TYPE (CcEntryFeedback, cc_entry_feedback, CC, ENTRY_FEEDBACK, GtkBox);
 void    cc_entry_feedback_reset  (CcEntryFeedback *self);
 
 void    cc_entry_feedback_update (CcEntryFeedback *self,

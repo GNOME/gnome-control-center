@@ -25,6 +25,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_COLOR_PANEL (cc_color_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcColorPanel, cc_color_panel, CC, COLOR_PANEL, CcPanel)
-
+G_DECLARE_FINAL_TYPE (CcColorPanel, cc_color_panel, CC, COLOR_PANEL, CcPanel);
 G_END_DECLS

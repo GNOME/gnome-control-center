@@ -27,6 +27,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_KEYBOARD_PANEL (cc_keyboard_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcKeyboardPanel, cc_keyboard_panel, CC, KEYBOARD_PANEL, CcPanel)
-
+G_DECLARE_FINAL_TYPE (CcKeyboardPanel, cc_keyboard_panel, CC, KEYBOARD_PANEL, CcPanel);
 G_END_DECLS

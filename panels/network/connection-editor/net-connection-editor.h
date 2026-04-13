@@ -28,8 +28,7 @@
 G_BEGIN_DECLS
 
 #define NET_TYPE_CONNECTION_EDITOR (net_connection_editor_get_type ())
-G_DECLARE_FINAL_TYPE (NetConnectionEditor, net_connection_editor, NET, CONNECTION_EDITOR, AdwWindow)
-
+G_DECLARE_FINAL_TYPE (NetConnectionEditor, net_connection_editor, NET, CONNECTION_EDITOR, AdwWindow);
 NetConnectionEditor *net_connection_editor_new      (NMConnection     *connection,
                                                      NMDevice         *device,
                                                      NMAccessPoint    *ap,

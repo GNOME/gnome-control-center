@@ -26,11 +26,9 @@
 G_BEGIN_DECLS
 
 #define GSD_TYPE_DEVICE (gsd_device_get_type ())
-G_DECLARE_DERIVABLE_TYPE (GsdDevice, gsd_device, GSD, DEVICE, GObject)
-
+G_DECLARE_DERIVABLE_TYPE (GsdDevice, gsd_device, GSD, DEVICE, GObject);
 #define GSD_TYPE_DEVICE_MANAGER (gsd_device_manager_get_type ())
-G_DECLARE_DERIVABLE_TYPE (GsdDeviceManager, gsd_device_manager, GSD, DEVICE_MANAGER, GObject)
-
+G_DECLARE_DERIVABLE_TYPE (GsdDeviceManager, gsd_device_manager, GSD, DEVICE_MANAGER, GObject);
 typedef enum {
 	GSD_DEVICE_TYPE_MOUSE	      = 1 << 0,
 	GSD_DEVICE_TYPE_KEYBOARD      = 1 << 1,

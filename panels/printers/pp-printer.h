@@ -28,8 +28,7 @@
 G_BEGIN_DECLS
 
 #define PP_TYPE_PRINTER (pp_printer_get_type ())
-G_DECLARE_FINAL_TYPE (PpPrinter, pp_printer, PP, PRINTER, GObject)
-
+G_DECLARE_FINAL_TYPE (PpPrinter, pp_printer, PP, PRINTER, GObject);
 GType        pp_printer_get_type      (void) G_GNUC_CONST;
 
 PpPrinter   *pp_printer_new           (const gchar          *name);

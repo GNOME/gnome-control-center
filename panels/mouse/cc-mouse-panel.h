@@ -25,6 +25,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_MOUSE_PANEL (cc_mouse_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcMousePanel, cc_mouse_panel, CC, MOUSE_PANEL, CcPanel)
-
+G_DECLARE_FINAL_TYPE (CcMousePanel, cc_mouse_panel, CC, MOUSE_PANEL, CcPanel);
 G_END_DECLS

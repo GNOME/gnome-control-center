@@ -25,6 +25,5 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_ONLINE_ACCOUTS_PANEL (cc_online_accounts_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcOnlineAccountsPanel, cc_online_accounts_panel, CC, ONLINE_ACCOUNTS_PANEL, CcPanel)
-
+G_DECLARE_FINAL_TYPE (CcOnlineAccountsPanel, cc_online_accounts_panel, CC, ONLINE_ACCOUNTS_PANEL, CcPanel);
 G_END_DECLS

@@ -27,8 +27,7 @@
 G_BEGIN_DECLS
 
 #define PP_TYPE_CUPS (pp_cups_get_type ())
-G_DECLARE_FINAL_TYPE (PpCups, pp_cups, PP, CUPS, GObject)
-
+G_DECLARE_FINAL_TYPE (PpCups, pp_cups, PP, CUPS, GObject);
 typedef struct{
   cups_dest_t *dests;
   gint         num_of_dests;
