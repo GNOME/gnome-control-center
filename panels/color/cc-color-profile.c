@@ -378,6 +378,8 @@ cc_color_profile_constructed (GObject *object)
   g_autofree gchar *sortable_device = NULL;
   g_autofree gchar *title = NULL;
 
+  G_OBJECT_CLASS (cc_color_profile_parent_class)->constructed (object);
+
   /* watch to see if the default changes */
   g_signal_connect_object (self->device, "changed",
                            G_CALLBACK (cc_color_profile_changed_cb), self, G_CONNECT_SWAPPED);

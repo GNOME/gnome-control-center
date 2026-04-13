@@ -1611,6 +1611,8 @@ cc_display_config_constructed (GObject *object)
 {
   CcDisplayConfig *self = CC_DISPLAY_CONFIG (object);
   GList *monitors;
+
+  G_OBJECT_CLASS (cc_display_config_parent_class)->constructed (object);
   GList *l;
   g_autoptr(GVariantIter) monitors_iter = NULL;
   g_autoptr(GVariantIter) logical_monitors_iter = NULL;

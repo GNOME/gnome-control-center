@@ -207,6 +207,8 @@ cc_color_device_constructed (GObject *object)
   CcColorDevice *self = CC_COLOR_DEVICE (object);
   g_autofree gchar *sortable_tmp = NULL;
 
+  G_OBJECT_CLASS (cc_color_device_parent_class)->constructed (object);
+
   /* watch the device for changes */
   g_signal_connect_object (self->device, "changed",
                            G_CALLBACK (cc_color_device_changed_cb), self, G_CONNECT_SWAPPED);

@@ -85,6 +85,8 @@ cc_hostname_entry_constructed (GObject *object)
 {
   CcHostnameEntry *self = CC_HOSTNAME_ENTRY (object);
   GPermission *permission;
+
+  G_OBJECT_CLASS (cc_hostname_entry_parent_class)->constructed (object);
   g_autoptr(GError) error = NULL;
   g_autofree gchar *str = NULL;
 

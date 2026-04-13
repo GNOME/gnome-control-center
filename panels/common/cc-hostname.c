@@ -61,6 +61,8 @@ cc_hostname_constructed (GObject *object)
   CcHostname *self = CC_HOSTNAME (object);
   g_autoptr(GError) error = NULL;
 
+  G_OBJECT_CLASS (cc_hostname_parent_class)->constructed (object);
+
   self->proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                G_DBUS_PROXY_FLAGS_NONE,
                                                NULL,
