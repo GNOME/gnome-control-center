@@ -538,13 +538,13 @@ cc_timelike_entry_class_init (CcTimelikeEntryClass *klass)
   gtk_widget_class_set_layout_manager_type (widget_class, GTK_TYPE_BIN_LAYOUT);
   gtk_widget_class_set_accessible_role (widget_class, GTK_ACCESSIBLE_ROLE_TEXT_BOX);
 
-  gtk_widget_class_add_binding (widget_class, GDK_KEY_Up, 0,
+  gtk_widget_class_add_binding (widget_class, GDK_KEY_Up, GDK_NO_MODIFIER_MASK,
                                 change_value_cb, "i", GTK_SCROLL_STEP_UP);
-  gtk_widget_class_add_binding (widget_class, GDK_KEY_KP_Up, 0,
+  gtk_widget_class_add_binding (widget_class, GDK_KEY_KP_Up, GDK_NO_MODIFIER_MASK,
                                 change_value_cb, "i", GTK_SCROLL_STEP_UP);
-  gtk_widget_class_add_binding (widget_class, GDK_KEY_Down, 0,
+  gtk_widget_class_add_binding (widget_class, GDK_KEY_Down, GDK_NO_MODIFIER_MASK,
                                 change_value_cb, "i", GTK_SCROLL_STEP_DOWN);
-  gtk_widget_class_add_binding (widget_class, GDK_KEY_KP_Down, 0,
+  gtk_widget_class_add_binding (widget_class, GDK_KEY_KP_Down, GDK_NO_MODIFIER_MASK,
                                 change_value_cb, "i", GTK_SCROLL_STEP_DOWN);
 }
 

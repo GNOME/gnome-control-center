@@ -391,51 +391,51 @@ cc_bar_chart_class_init (CcBarChartClass *klass)
   gtk_widget_class_set_activate_signal (widget_class, signals[SIGNAL_ACTIVATE_CURSOR_BAR]);
 
   gtk_widget_class_add_binding_signal (widget_class,
-                                       GDK_KEY_Home, 0,
+                                       GDK_KEY_Home, GDK_NO_MODIFIER_MASK,
                                        "move-cursor",
                                        "(ii)", GTK_MOVEMENT_BUFFER_ENDS, -1);
   gtk_widget_class_add_binding_signal (widget_class,
-                                       GDK_KEY_KP_Home, 0,
+                                       GDK_KEY_KP_Home, GDK_NO_MODIFIER_MASK,
                                        "move-cursor",
                                        "(ii)", GTK_MOVEMENT_BUFFER_ENDS, -1);
   gtk_widget_class_add_binding_signal (widget_class,
-                                       GDK_KEY_End, 0,
+                                       GDK_KEY_End, GDK_NO_MODIFIER_MASK,
                                        "move-cursor",
                                        "(ii)", GTK_MOVEMENT_BUFFER_ENDS, 1);
   gtk_widget_class_add_binding_signal (widget_class,
-                                       GDK_KEY_KP_End, 0,
+                                       GDK_KEY_KP_End, GDK_NO_MODIFIER_MASK,
                                        "move-cursor",
                                        "(ii)", GTK_MOVEMENT_BUFFER_ENDS, 1);
   gtk_widget_class_add_binding_signal (widget_class,
-                                       GDK_KEY_Up, 0,
+                                       GDK_KEY_Up, GDK_NO_MODIFIER_MASK,
                                        "move-cursor",
                                        "(ii)", GTK_MOVEMENT_LOGICAL_POSITIONS, -1);
   gtk_widget_class_add_binding_signal (widget_class,
-                                       GDK_KEY_KP_Up, 0,
+                                       GDK_KEY_KP_Up, GDK_NO_MODIFIER_MASK,
                                        "move-cursor",
                                        "(ii)", GTK_MOVEMENT_LOGICAL_POSITIONS, -1);
   gtk_widget_class_add_binding_signal (widget_class,
-                                       GDK_KEY_Down, 0,
+                                       GDK_KEY_Down, GDK_NO_MODIFIER_MASK,
                                        "move-cursor",
                                        "(ii)", GTK_MOVEMENT_LOGICAL_POSITIONS, 1);
   gtk_widget_class_add_binding_signal (widget_class,
-                                       GDK_KEY_KP_Down, 0,
+                                       GDK_KEY_KP_Down, GDK_NO_MODIFIER_MASK,
                                        "move-cursor",
                                        "(ii)", GTK_MOVEMENT_LOGICAL_POSITIONS, 1);
   gtk_widget_class_add_binding_signal (widget_class,
-                                       GDK_KEY_Left, 0,
+                                       GDK_KEY_Left, GDK_NO_MODIFIER_MASK,
                                        "move-cursor",
                                        "(ii)", GTK_MOVEMENT_VISUAL_POSITIONS, -1);
   gtk_widget_class_add_binding_signal (widget_class,
-                                       GDK_KEY_KP_Left, 0,
+                                       GDK_KEY_KP_Left, GDK_NO_MODIFIER_MASK,
                                        "move-cursor",
                                        "(ii)", GTK_MOVEMENT_VISUAL_POSITIONS, -1);
   gtk_widget_class_add_binding_signal (widget_class,
-                                       GDK_KEY_Right, 0,
+                                       GDK_KEY_Right, GDK_NO_MODIFIER_MASK,
                                        "move-cursor",
                                        "(ii)", GTK_MOVEMENT_VISUAL_POSITIONS, 1);
   gtk_widget_class_add_binding_signal (widget_class,
-                                       GDK_KEY_KP_Right, 0,
+                                       GDK_KEY_KP_Right, GDK_NO_MODIFIER_MASK,
                                        "move-cursor",
                                        "(ii)", GTK_MOVEMENT_VISUAL_POSITIONS, 1);
 

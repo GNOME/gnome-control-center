@@ -125,7 +125,7 @@ setup_os_logo (CcAboutPage *self)
                                                    192,
                                                    gtk_widget_get_scale_factor (GTK_WIDGET (self)),
                                                    gtk_widget_get_direction (GTK_WIDGET (self)),
-                                                   0);
+                                                   GTK_ICON_LOOKUP_NONE);
   gtk_picture_set_paintable (self->os_logo, GDK_PAINTABLE (icon_paintable));
 #endif
 }

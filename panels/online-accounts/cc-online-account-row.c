@@ -47,7 +47,7 @@ is_gicon_symbolic (GtkWidget *widget,
                                                    32,
                                                    gtk_widget_get_scale_factor (widget),
                                                    gtk_widget_get_direction (widget),
-                                                   0);
+                                                   GTK_ICON_LOOKUP_NONE);
 
   return icon_paintable && gtk_icon_paintable_is_symbolic (icon_paintable);
 }

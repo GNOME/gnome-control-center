@@ -1472,7 +1472,7 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   AdwDialogClass *dialog_class = ADW_DIALOG_CLASS (klass);
 
-  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, GDK_NO_MODIFIER_MASK, "window.close", NULL);
 
   gtk_widget_class_set_template_from_resource (widget_class,
     "/org/gnome/control-center/system/users/cc-fingerprint-dialog.ui");
