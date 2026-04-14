@@ -470,7 +470,7 @@ update_editable_state (CcUserPage *self)
     self->avatar_editable = (is_current_user (self->user) || !self->locked);
     g_object_notify (G_OBJECT (self), "avatar-editable");
 
-    self->editable = self->avatar_editable;
+    self->editable = self->avatar_editable && act_user_is_local_account (self->user);
     g_object_notify (G_OBJECT (self), "editable");
 }
 
