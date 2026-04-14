@@ -433,6 +433,10 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
                                  cc_display_monitor_get_ui_name (self->selected_output));
   adw_switch_row_set_active (self->enabled_row,
                              cc_display_monitor_is_active (self->selected_output));
+  /* Make Enable Row insensitive if this is the last display available. */
+  gtk_widget_set_sensitive (GTK_WIDGET (self->enabled_listbox),
+                            cc_display_config_count_useful_monitors (self->config) != 1 ||
+                            !cc_display_monitor_is_useful (self->selected_output));
 
   if (should_show_rotation (self))
     {
@@ -1178,6 +1182,14 @@ cc_display_settings_set_multimonitor (CcDisplaySettings *self,
                                       gboolean           multimonitor)
 {
   gtk_widget_set_visible (self->enabled_listbox, multimonitor);
+
+  if (multimonitor && self->config && self->selected_output)
+    {
+      /* Make Enable Row insensitive if this is the last display available. */
+      gtk_widget_set_sensitive (self->enabled_listbox,
+                                cc_display_config_count_useful_monitors (self->config) != 1 ||
+                                !cc_display_monitor_is_useful (self->selected_output));
+    }
 
   if (!multimonitor)
     adw_switch_row_set_active (self->enabled_row, TRUE);
