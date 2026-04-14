@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-04-08 10:03+0000\n"
-"PO-Revision-Date: 2026-04-08 14:36+0200\n"
+"POT-Creation-Date: 2026-04-14 08:03+0000\n"
+"PO-Revision-Date: 2026-04-14 14:51+0200\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -74,7 +74,7 @@ msgstr "_Renunță"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:25
 #: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.blp:24
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:32
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:20
 #: panels/network/connection-editor/net-connection-editor.c:653
 #: panels/printers/pp-new-printer-dialog.ui:96
 #: panels/system/users/cc-add-user-dialog.blp:27
@@ -110,7 +110,7 @@ msgstr ""
 "vor fi eliminate."
 
 #: panels/applications/cc-application-shortcut-dialog.c:148
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:20
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:156
 #: panels/system/users/cc-user-page.blp:198
 msgid "_Remove"
 msgstr "_Elimină"
@@ -228,7 +228,6 @@ msgstr "Primește căutările sistemului și trimite rezultatele"
 #: panels/applications/cc-applications-panel.blp:280
 #: panels/applications/cc-applications-panel.blp:294
 #: panels/keyboard/cc-keyboard-panel.c:87
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:122
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336
 #: panels/system/users/cc-user-page.c:368
 #: panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:483
@@ -411,33 +410,33 @@ msgstr "Total"
 msgid "_Clear Cache"
 msgstr "Șterge _cache"
 
-#: panels/applications/cc-applications-panel.c:865
+#: panels/applications/cc-applications-panel.c:925
 msgid "System Bus"
 msgstr "Magistrala sistemului"
 
-#: panels/applications/cc-applications-panel.c:865
-#: panels/applications/cc-applications-panel.c:867
-#: panels/applications/cc-applications-panel.c:880
-#: panels/applications/cc-applications-panel.c:885
+#: panels/applications/cc-applications-panel.c:925
+#: panels/applications/cc-applications-panel.c:927
+#: panels/applications/cc-applications-panel.c:940
+#: panels/applications/cc-applications-panel.c:945
 msgid "Full access"
 msgstr "Acces complet"
 
-#: panels/applications/cc-applications-panel.c:867
+#: panels/applications/cc-applications-panel.c:927
 msgid "Session Bus"
 msgstr "Magistrala sesiunilor"
 
-#: panels/applications/cc-applications-panel.c:871
+#: panels/applications/cc-applications-panel.c:931
 #: panels/privacy/bolt/cc-bolt-page.blp:118
 #: panels/privacy/bolt/cc-bolt-page.blp:143
 #: panels/privacy/cc-privacy-panel.blp:57
 msgid "Devices"
 msgstr "Dispozitive"
 
-#: panels/applications/cc-applications-panel.c:871
+#: panels/applications/cc-applications-panel.c:931
 msgid "Full access to /dev"
 msgstr "Acces total la /dev"
 
-#: panels/applications/cc-applications-panel.c:875
+#: panels/applications/cc-applications-panel.c:935
 #: panels/network/cc-network-panel.blp:7
 #: panels/network/gnome-network-panel.desktop.in:2
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.blp:49
@@ -445,39 +444,39 @@ msgstr "Acces total la /dev"
 msgid "Network"
 msgstr "Rețea"
 
-#: panels/applications/cc-applications-panel.c:875
+#: panels/applications/cc-applications-panel.c:935
 msgid "Has network access"
 msgstr "Are acces la rețea"
 
-#: panels/applications/cc-applications-panel.c:880
-#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:940
+#: panels/applications/cc-applications-panel.c:942
 #: panels/search/cc-search-locations-page.c:421
 msgid "Home"
 msgstr "Dosar personal"
 
-#: panels/applications/cc-applications-panel.c:882
-#: panels/applications/cc-applications-panel.c:887
+#: panels/applications/cc-applications-panel.c:942
+#: panels/applications/cc-applications-panel.c:947
 msgid "Read-only"
 msgstr "Doar citire"
 
-#: panels/applications/cc-applications-panel.c:885
-#: panels/applications/cc-applications-panel.c:887
+#: panels/applications/cc-applications-panel.c:945
+#: panels/applications/cc-applications-panel.c:947
 msgid "File System"
 msgstr "Sistem de fișiere"
 
-#: panels/applications/cc-applications-panel.c:891
+#: panels/applications/cc-applications-panel.c:951
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:8 shell/cc-window.blp:20
 #: shell/cc-window.c:806 shell/org.gnome.Settings.desktop.in:2
 msgid "Settings"
 msgstr "Preferințe"
 
-#: panels/applications/cc-applications-panel.c:891
+#: panels/applications/cc-applications-panel.c:951
 msgid "Can change settings"
 msgstr "Poate schimba preferințele"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:895
+#: panels/applications/cc-applications-panel.c:955
 #, c-format
 msgid ""
 "%s requires access to the following system resources. To stop this access, "
@@ -486,7 +485,7 @@ msgstr ""
 "%s necesită acces la următoarele resurse de sistem. Pentru a opri acest "
 "acces, aplicația trebuie eliminată."
 
-#: panels/applications/cc-applications-panel.c:899
+#: panels/applications/cc-applications-panel.c:959
 #, c-format
 msgid "%u permission"
 msgid_plural "%u permissions"
@@ -494,17 +493,17 @@ msgstr[0] "%u permisiune"
 msgstr[1] "%u permisiuni"
 msgstr[2] "%u de permisiuni"
 
-#: panels/applications/cc-applications-panel.c:1075
+#: panels/applications/cc-applications-panel.c:1135
 msgid "Type removed"
 msgstr "Tip eliminat"
 
-#: panels/applications/cc-applications-panel.c:1076
+#: panels/applications/cc-applications-panel.c:1136
 #: panels/background/cc-background-chooser.c:170
-#: panels/network/net-device-wifi.c:896 panels/printers/cc-printers-panel.c:672
+#: panels/network/net-device-wifi.c:888 panels/printers/cc-printers-panel.c:672
 msgid "_Undo"
 msgstr "An_ulează"
 
-#: panels/applications/cc-applications-panel.c:1091
+#: panels/applications/cc-applications-panel.c:1151
 #, c-format
 msgid "%d type removed"
 msgid_plural "%d types removed"
@@ -512,15 +511,15 @@ msgstr[0] "%d tip eliminat"
 msgstr[1] "%d tipuri eliminate"
 msgstr[2] "%d de tipuri eliminate"
 
-#: panels/applications/cc-applications-panel.c:1120
+#: panels/applications/cc-applications-panel.c:1180
 msgid "Remove Link Type"
 msgstr "Elimină tipul de legătură"
 
-#: panels/applications/cc-applications-panel.c:1151
+#: panels/applications/cc-applications-panel.c:1211
 msgid "Remove File Type"
 msgstr "Elimină tipul de fișier"
 
-#: panels/applications/cc-applications-panel.c:1284
+#: panels/applications/cc-applications-panel.c:1344
 #, c-format
 msgid "%u type"
 msgid_plural "%u types"
@@ -529,19 +528,19 @@ msgstr[1] "%u tipuri"
 msgstr[2] "%u de tipuri"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:1293
+#: panels/applications/cc-applications-panel.c:1353
 #, c-format
 msgid "%s is used to open the following types of files and links"
 msgstr ""
 "%s este utilizat pentru a deschide următoarele tipuri de fișiere și legături"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:1336
+#: panels/applications/cc-applications-panel.c:1396
 #, c-format
 msgid "How much disk space %s is occupying with app data and caches"
 msgstr "Cât spațiu pe disc ocupă %s cu datele aplicației și cache"
 
-#: panels/applications/cc-applications-panel.c:1501
+#: panels/applications/cc-applications-panel.c:1561
 #, c-format
 msgid "%u action"
 msgid_plural "%u actions"
@@ -1151,6 +1150,7 @@ msgstr "_Continuă"
 
 #. Translators: This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.blp:40
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:32
 #: panels/system/users/cc-fingerprint-dialog.blp:39
 msgid "_Done"
 msgstr "_Gata"
@@ -1805,13 +1805,13 @@ msgid "Decrement Minute"
 msgstr "Decrementează minutul"
 
 #: panels/common/cc-util.c:130
-#: panels/network/connection-editor/ce-page-details.c:188
+#: panels/network/connection-editor/ce-page-details.c:180
 #: panels/wellbeing/cc-screen-time-statistics-row.c:975
 msgid "Today"
 msgstr "Azi"
 
 #: panels/common/cc-util.c:134
-#: panels/network/connection-editor/ce-page-details.c:190
+#: panels/network/connection-editor/ce-page-details.c:182
 msgid "Yesterday"
 msgstr "Ieri"
 
@@ -2569,19 +2569,8 @@ msgstr ""
 "Sursele de intrare pot fi schimbate folosind scurtătura %s.\n"
 "Aceasta poate fi schimbată din opțiunile pentru scurtături."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:44
-msgid "Re_place"
-msgstr "Î_nlocuiește"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:55
-#: panels/wwan/cc-wwan-mode-dialog.blp:34
-#: panels/wwan/cc-wwan-network-dialog.blp:102
-#: panels/wwan/cc-wwan-sim-lock-dialog.c:228
-msgid "_Set"
-msgstr "_Stabilește"
-
 #. Translators: Do not break or remove the <b> and </b> tags around Esc and Backspace.
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:103
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:68
 msgid ""
 "Press <b>Esc</b> to cancel or <b>Backspace</b> to disable the keyboard "
 "shortcut"
@@ -2589,30 +2578,8 @@ msgstr ""
 "Se apasă <b>Esc</b> pentru a anula sau <b>Backspace</b> pentru a dezactiva "
 "scurtătura"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:127
-#: panels/keyboard/cc-keyboard-shortcut-row.blp:22
-msgid "Reset Shortcut"
-msgstr "Restabilește scurtătura"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:155
-#: panels/wwan/cc-wwan-apn-dialog.blp:77
-msgid "Name"
-msgstr "Nume"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:166
-msgid "Command"
-msgstr "Comandă"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:177
-msgid "Shortcut"
-msgstr "Scurtătură"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:228
-msgid "Reset"
-msgstr "Restabilește"
-
 #. Translators: This is a mark in the Grayscale scale
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:243
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:92
 #: panels/sound/cc-alert-chooser-page.blp:14
 #: panels/sound/cc-alert-chooser-page.c:340
 #: panels/universal-access/cc-ua-zoom-page.blp:240
@@ -2620,47 +2587,72 @@ msgstr "Restabilește"
 msgid "None"
 msgstr "Niciuna"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:252
-msgid "_Set Shortcut…"
-msgstr "_Stabilește scurtătura…"
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:96
+msgid "Shortcut Disabled"
+msgstr "Scurtătură dezactivată"
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:125
+#: panels/wwan/cc-wwan-apn-dialog.blp:77
+msgid "Name"
+msgstr "Nume"
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:130
+msgid "Command"
+msgstr "Comandă"
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:135
+msgid "Shortcut"
+msgstr "Scurtătură"
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:186
+msgid ""
+"Press Esc to cancel. Press Backspace to disable the keyboard shortcut for "
+"this action."
+msgstr ""
+"Se apasă Esc pentru a anula. Se apasă Backspace pentru a dezactiva "
+"scurtătura pentru această acțiune."
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:187
+msgid "Press Esc to cancel."
+msgstr "Apasă Esc pentru a anula."
 
 #. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:373
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:409
 #, c-format
 msgid ""
-"<b>%s</b> is already being used for %s. If you replace it, %s will be "
-"disabled"
+"<b>This key combination is already being used for “%s”. This shortcut will "
+"be disabled.</b>"
 msgstr ""
-"<b>%s</b> este deja utilizată pentru %s. Dacă se înlocuiește, %s va fi "
-"dezactivată"
+"<b>Această combinație de taste este deja utilizată pentru „%s”. Această "
+"scurtătură va fi dezactivată.</b>"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:515
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:521
 msgid "Enter the new shortcut"
 msgstr "Introdu noua scurtătură"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:530
-msgid "Set Custom Shortcut"
-msgstr "Stabilește scurtătura personalizată"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:530
-msgid "Set Shortcut"
-msgstr "Stabilește scurtătura"
-
-#. Setup the top label
+#. Setup the top labels
 #.
 #. * TRANSLATORS: %s is replaced with a description of the keyboard shortcut,
 #. * don't translate/transliterate <b>%s</b>
 #.
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:543
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:547
 #, c-format
-msgid "Enter new shortcut to change <b>%s</b>"
-msgstr "Introdu scurtătura nouă pentru a schimba <b>%s</b>"
+msgid "Enter new keyboard shortcut for <b>“%s”</b>"
+msgstr "Introdu noua scurtătură pentru <b>„%s”</b>"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:929
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:909
 msgid "Add Custom Shortcut"
 msgstr "Adaugă scurtătura personalizată"
 
-#: panels/keyboard/cc-keyboard-shortcut-group.c:135
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:922
+msgid "Custom Shortcut"
+msgstr "Scurtătură personalizată"
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:922
+msgid "Edit Shortcut"
+msgstr "Modifică scurtătura"
+
+#: panels/keyboard/cc-keyboard-shortcut-group.c:136
 #, c-format
 msgid "%d modified"
 msgid_plural "%d modified"
@@ -2668,7 +2660,7 @@ msgstr[0] "%d modificată"
 msgstr[1] "%d modificate"
 msgstr[2] "%d modificate"
 
-#: panels/keyboard/cc-keyboard-shortcut-group.c:153
+#: panels/keyboard/cc-keyboard-shortcut-group.c:154
 msgid "_Add Shortcut"
 msgstr "_Adaugă scurtătura"
 
@@ -2718,6 +2710,10 @@ msgstr "Toate schimbările aduse scurtăturilor vor fi pierdute"
 #: panels/keyboard/cc-keyboard-shortcut-page.blp:131
 msgid "_Reset All"
 msgstr "_Restabilește toate"
+
+#: panels/keyboard/cc-keyboard-shortcut-row.blp:22
+msgid "Reset Shortcut"
+msgstr "Restabilește scurtătura"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:3
 msgid ""
@@ -3212,38 +3208,34 @@ msgid "Forget Network"
 msgstr "Uită rețeaua"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:222
+#: panels/network/cc-wifi-connection-row.c:211
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
 #. TRANSLATORS: device status
-#: panels/network/cc-wifi-connection-row.c:261 panels/network/panel-common.c:63
+#: panels/network/cc-wifi-connection-row.c:250 panels/network/panel-common.c:63
 msgid "Connected"
 msgstr "Conectat"
 
-#: panels/network/cc-wifi-connection-row.c:273
-msgid "Insecure network (WEP)"
-msgstr "Rețea nesigură (WEP)"
-
-#: panels/network/cc-wifi-connection-row.c:277
+#: panels/network/cc-wifi-connection-row.c:261
 msgid "Secure network (WPA)"
 msgstr "Rețea sigură (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:281
+#: panels/network/cc-wifi-connection-row.c:265
 msgid "Secure network (WPA2)"
 msgstr "Rețea sigură (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:285
+#: panels/network/cc-wifi-connection-row.c:269
 msgid "Secure network (WPA3)"
 msgstr "Rețea sigură (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:289
+#: panels/network/cc-wifi-connection-row.c:273
 msgid "Secure network"
 msgstr "Rețea sigură"
 
-#: panels/network/cc-wifi-connection-row.c:318
+#: panels/network/cc-wifi-connection-row.c:302
 #, c-format
 msgid "Signal strength %d%%"
 msgstr "Putere semnal %d%%"
@@ -3276,7 +3268,7 @@ msgid "_Turn On"
 msgstr "_Pornește"
 
 #. TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name
-#: panels/network/cc-wifi-hotspot-dialog.c:134
+#: panels/network/cc-wifi-hotspot-dialog.c:111
 #, c-format
 msgid ""
 "Turning on the hotspot will disconnect from %s, and it will not be possible "
@@ -3285,20 +3277,20 @@ msgstr ""
 "Activarea punctului de acces Wi-Fi te va deconecta de la %s, și nu va fi "
 "posibilă accesarea internetului prin Wi-Fi."
 
-#: panels/network/cc-wifi-hotspot-dialog.c:250
+#: panels/network/cc-wifi-hotspot-dialog.c:221
 msgid "Network name cannot be empty"
 msgstr "Numele rețelei nu poate fi lăsat gol"
 
 #. SSID length needs to be in the 1-32 byte range
-#: panels/network/cc-wifi-hotspot-dialog.c:256
+#: panels/network/cc-wifi-hotspot-dialog.c:227
 msgid "Network name is too long"
 msgstr "Numele rețelei este prea lung"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:277
+#: panels/network/cc-wifi-hotspot-dialog.c:248
 msgid "Must have a minimum of 8 characters"
 msgstr "Trebuie să aibă minimum 8 caractere"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:282
+#: panels/network/cc-wifi-hotspot-dialog.c:255
 #, c-format
 msgid "Must have a maximum of %d character"
 msgid_plural "Must have a maximum of %d characters"
@@ -3409,7 +3401,7 @@ msgid "Netmask value not valid"
 msgstr "Valoarea măștii de rețea nu este corectă"
 
 #: panels/network/connection-editor/ce-page-8021x-security.c:106
-#: panels/network/connection-editor/ce-page-security.c:416
+#: panels/network/connection-editor/ce-page-security.c:365
 #: panels/network/connection-editor/details-page.blp:85
 #: panels/sharing/cc-sharing-panel.blp:96
 msgid "Security"
@@ -3480,52 +3472,46 @@ msgstr "Să uit conexiunea?"
 msgid "_Forget"
 msgstr "_Uită"
 
-#. TRANSLATORS: this WEP WiFi security
-#: panels/network/connection-editor/ce-page-details.c:118
-#: panels/network/net-device-wifi.c:237
-msgid "WEP"
-msgstr "WEP"
-
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:122
-#: panels/network/net-device-wifi.c:241
+#: panels/network/connection-editor/ce-page-details.c:114
+#: panels/network/net-device-wifi.c:233
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:128
+#: panels/network/connection-editor/ce-page-details.c:120
 msgid "WPA3"
 msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:133
-#: panels/network/connection-editor/ce-page-security.c:271
+#: panels/network/connection-editor/ce-page-details.c:125
+#: panels/network/connection-editor/ce-page-security.c:265
 msgid "Enhanced Open"
 msgstr "Enhanced Open"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:145
+#: panels/network/connection-editor/ce-page-details.c:137
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:151
+#: panels/network/connection-editor/ce-page-details.c:143
 msgid "Enterprise"
 msgstr "Enterprise"
 
-#: panels/network/connection-editor/ce-page-details.c:156
+#: panels/network/connection-editor/ce-page-details.c:148
 #: panels/network/net-device-wifi.c:228
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Nimic"
 
 #. Translators: Option for Blank Screen in Screen Lock page
-#: panels/network/connection-editor/ce-page-details.c:177
+#: panels/network/connection-editor/ce-page-details.c:169
 #: panels/privacy/screen/cc-screen-page.blp:27
 msgid "Never"
 msgstr "Niciodată"
 
-#: panels/network/connection-editor/ce-page-details.c:192
+#: panels/network/connection-editor/ce-page-details.c:184
 #: panels/network/net-device-ethernet.c:106
 #, c-format
 msgid "%i day ago"
@@ -3534,77 +3520,77 @@ msgstr[0] "acum %i zi"
 msgstr[1] "acum %i zile"
 msgstr[2] "acum %i de zile"
 
-#: panels/network/connection-editor/ce-page-details.c:319
+#: panels/network/connection-editor/ce-page-details.c:311
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Mb/s (%1.1f GHz)"
 
-#: panels/network/connection-editor/ce-page-details.c:321
+#: panels/network/connection-editor/ce-page-details.c:313
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: panels/network/connection-editor/ce-page-details.c:339
+#: panels/network/connection-editor/ce-page-details.c:331
 msgid "2.4 GHz / 5 GHz / 6 GHz"
 msgstr "2.4 GHz / 5 GHz / 6 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:342
+#: panels/network/connection-editor/ce-page-details.c:334
 msgid "5 GHz / 6 GHz"
 msgstr "5 GHz / 6 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:347
+#: panels/network/connection-editor/ce-page-details.c:339
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 GHz / 5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:349
+#: panels/network/connection-editor/ce-page-details.c:341
 msgid "2.4 GHz"
 msgstr "2.4 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:351
+#: panels/network/connection-editor/ce-page-details.c:343
 msgid "5 GHz"
 msgstr "5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:371
+#: panels/network/connection-editor/ce-page-details.c:363
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Nimic"
 
-#: panels/network/connection-editor/ce-page-details.c:373
+#: panels/network/connection-editor/ce-page-details.c:365
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Slab"
 
-#: panels/network/connection-editor/ce-page-details.c:375
+#: panels/network/connection-editor/ce-page-details.c:367
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "În regulă"
 
-#: panels/network/connection-editor/ce-page-details.c:377
+#: panels/network/connection-editor/ce-page-details.c:369
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bun"
 
-#: panels/network/connection-editor/ce-page-details.c:379
+#: panels/network/connection-editor/ce-page-details.c:371
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excelent"
 
-#: panels/network/connection-editor/ce-page-details.c:446
+#: panels/network/connection-editor/ce-page-details.c:438
 #: panels/network/connection-editor/details-page.blp:102
 #: panels/network/net-device-ethernet.c:145
 #: panels/network/net-device-mobile.c:441
 msgid "IPv4 Address"
 msgstr "Adresa IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:447
+#: panels/network/connection-editor/ce-page-details.c:439
 #: panels/network/connection-editor/details-page.blp:119
 #: panels/network/net-device-ethernet.c:147
 #: panels/network/net-device-mobile.c:442 panels/network/network-mobile.ui:177
 msgid "IPv6 Address"
 msgstr "Adresa IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:449
-#: panels/network/connection-editor/ce-page-details.c:450
+#: panels/network/connection-editor/ce-page-details.c:441
+#: panels/network/connection-editor/ce-page-details.c:442
 #: panels/network/net-device-ethernet.c:150
 #: panels/network/net-device-ethernet.c:152
 #: panels/network/net-device-mobile.c:445
@@ -3612,20 +3598,20 @@ msgstr "Adresa IPv6"
 msgid "IP Address"
 msgstr "Adresa IP"
 
-#: panels/network/connection-editor/ce-page-details.c:454
+#: panels/network/connection-editor/ce-page-details.c:446
 #: panels/network/net-device-ethernet.c:167
 #: panels/network/net-device-mobile.c:450
 msgid "DNS4"
 msgstr "DNS4"
 
-#: panels/network/connection-editor/ce-page-details.c:455
+#: panels/network/connection-editor/ce-page-details.c:447
 #: panels/network/net-device-ethernet.c:168
 #: panels/network/net-device-mobile.c:451
 msgid "DNS6"
 msgstr "DNS6"
 
-#: panels/network/connection-editor/ce-page-details.c:457
-#: panels/network/connection-editor/ce-page-details.c:458
+#: panels/network/connection-editor/ce-page-details.c:449
+#: panels/network/connection-editor/ce-page-details.c:450
 #: panels/network/connection-editor/details-page.blp:188
 #: panels/network/connection-editor/details-page.blp:206
 #: panels/network/connection-editor/ip4-page.blp:166
@@ -3638,23 +3624,23 @@ msgstr "DNS6"
 msgid "DNS"
 msgstr "DNS"
 
-#: panels/network/connection-editor/ce-page-details.c:512
+#: panels/network/connection-editor/ce-page-details.c:504
 msgid "Forget Connection…"
 msgstr "Uită conexiunea…"
 
-#: panels/network/connection-editor/ce-page-details.c:514
+#: panels/network/connection-editor/ce-page-details.c:506
 msgid "Remove Connection Profile…"
 msgstr "Elimină profilul conexiunii…"
 
-#: panels/network/connection-editor/ce-page-details.c:516
+#: panels/network/connection-editor/ce-page-details.c:508
 msgid "Remove Connection…"
 msgstr "Elimină conexiunea…"
 
-#: panels/network/connection-editor/ce-page-details.c:519
+#: panels/network/connection-editor/ce-page-details.c:511
 msgid "Remove VPN…"
 msgstr "Elimină VPN-ul…"
 
-#: panels/network/connection-editor/ce-page-details.c:540
+#: panels/network/connection-editor/ce-page-details.c:532
 msgid "Details"
 msgstr "Detalii"
 
@@ -3685,36 +3671,24 @@ msgstr "IPv4"
 msgid "IPv6"
 msgstr "IPv6"
 
-#: panels/network/connection-editor/ce-page-security.c:260
+#: panels/network/connection-editor/ce-page-security.c:254
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Nimic"
 
-#: panels/network/connection-editor/ce-page-security.c:295
-msgid "WEP 40/128-bit Key (Hex or ASCII)"
-msgstr "WEP cheie 40/128-bit (Hex sau ASCII)"
-
-#: panels/network/connection-editor/ce-page-security.c:305
-msgid "WEP 128-bit Passphrase"
-msgstr "Frază secretă WEP 128-bit"
-
-#: panels/network/connection-editor/ce-page-security.c:318
+#: panels/network/connection-editor/ce-page-security.c:280
 msgid "LEAP"
 msgstr "LEAP"
 
-#: panels/network/connection-editor/ce-page-security.c:331
-msgid "Dynamic WEP (802.1x)"
-msgstr "WEP Dinamic (802.1x)"
-
-#: panels/network/connection-editor/ce-page-security.c:345
+#: panels/network/connection-editor/ce-page-security.c:294
 msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 Personal"
 
-#: panels/network/connection-editor/ce-page-security.c:359
+#: panels/network/connection-editor/ce-page-security.c:308
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Enterprise"
 
-#: panels/network/connection-editor/ce-page-security.c:373
+#: panels/network/connection-editor/ce-page-security.c:322
 msgid "WPA3 Personal"
 msgstr "WPA3 personal"
 
@@ -3727,10 +3701,9 @@ msgstr "WireGuard"
 #: panels/network/connection-editor/ce-page-wireguard.c:370
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:167
 #: panels/sound/cc-alert-chooser-page.c:350
-#: panels/system/about/cc-about-page.c:73
-#: panels/system/about/cc-system-details-window.c:288
-#: panels/system/about/cc-system-details-window.c:340
-#: panels/system/about/cc-system-details-window.c:852
+#: panels/system/about/cc-about-page.c:351
+#: panels/system/about/cc-about-page.c:407
+#: panels/system/about/cc-about-page.c:920
 #: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Necunoscut"
@@ -3974,7 +3947,7 @@ msgstr ""
 
 #: panels/network/connection-editor/vpn-helpers.c:148
 #: panels/system/users/cc-add-user-dialog.c:98
-#: panels/system/users/cc-password-dialog.c:165
+#: panels/system/users/cc-password-dialog.c:158
 msgid "_OK"
 msgstr "_Bine"
 
@@ -4198,12 +4171,12 @@ msgstr "Prin cablu"
 msgid "Add new connection"
 msgstr "Adaugă o nouă conexiune"
 
-#: panels/network/net-device-wifi.c:894
+#: panels/network/net-device-wifi.c:886
 msgid "Network deleted"
 msgstr "Rețea ștearsă"
 
 #. Translators: %d is the number of network connections deleted.
-#: panels/network/net-device-wifi.c:909
+#: panels/network/net-device-wifi.c:901
 #, c-format
 msgid "%d network deleted"
 msgid_plural "%d networks deleted"
@@ -4211,15 +4184,15 @@ msgstr[0] "%d rețea ștearsă"
 msgstr[1] "%d rețele șterse"
 msgstr[2] "%d de rețele șterse"
 
-#: panels/network/net-device-wifi.c:1150
+#: panels/network/net-device-wifi.c:1142
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Regulile sistemului interzic utilizarea ca punct de acces"
 
-#: panels/network/net-device-wifi.c:1153
+#: panels/network/net-device-wifi.c:1145
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Dispozitivul fără cablu nu acceptă modul „punct de acces”"
 
-#: panels/network/net-device-wifi.c:1179
+#: panels/network/net-device-wifi.c:1171
 msgid "Searching for networks…"
 msgstr "Se caută rețele…"
 
@@ -5677,7 +5650,7 @@ msgid "No Active Jobs"
 msgstr "Nicio lucrare activă"
 
 #: panels/printers/pp-printer-entry.blp:57
-#: panels/system/about/cc-system-details-window.blp:67
+#: panels/system/about/cc-about-page.blp:129
 #: panels/wwan/cc-wwan-details-dialog.blp:70
 msgid "Model"
 msgstr "Model"
@@ -6841,7 +6814,7 @@ msgid "Sharing"
 msgstr "Distribuie"
 
 #: panels/sharing/cc-sharing-panel.blp:18
-#: panels/system/about/cc-about-page.blp:48
+#: panels/system/about/cc-about-page.blp:49
 msgid "_Device Name"
 msgstr "_Numele aparatului"
 
@@ -7149,124 +7122,104 @@ msgstr "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Microfon;Că
 msgid "About"
 msgstr "Despre"
 
-#: panels/system/about/cc-about-page.blp:22
+#: panels/system/about/cc-about-page.blp:23
 msgid "System Logo"
 msgstr "Marca sistemului"
 
-#: panels/system/about/cc-about-page.blp:29
+#: panels/system/about/cc-about-page.blp:30
 msgid "Support GNOME"
 msgstr "Susține GNOME"
 
-#: panels/system/about/cc-about-page.blp:30
+#: panels/system/about/cc-about-page.blp:31
 msgid "GNOME needs your help. Please donate today."
 msgstr "GNOME are nevoie de ajutorul tău. Donează astăzi."
 
-#: panels/system/about/cc-about-page.blp:34
+#: panels/system/about/cc-about-page.blp:35
 msgid "D_onate"
 msgstr "D_onează"
 
-#. Translators: this field contains the distro name and version
-#: panels/system/about/cc-about-page.blp:56
-msgid "Operating System"
-msgstr "Sistem de operare"
-
-#: panels/system/about/cc-about-page.blp:66
-msgid "Hardware Model"
-msgstr "Modelul aparatului"
-
-#: panels/system/about/cc-about-page.blp:75
-#: panels/system/about/cc-system-details-window.blp:75
-msgid "Processor"
-msgstr "Procesor"
-
-#: panels/system/about/cc-about-page.blp:84
-#: panels/system/about/cc-system-details-window.blp:71
-msgid "Memory"
-msgstr "Memorie"
-
-#: panels/system/about/cc-about-page.blp:93
-#: panels/system/about/cc-system-details-window.blp:84
-msgid "Disk Capacity"
-msgstr "Capacitate disc"
-
-#: panels/system/about/cc-about-page.blp:94
-msgid "Calculating…"
-msgstr "Se calculează…"
-
-#: panels/system/about/cc-about-page.blp:103
-msgid "_System Details"
-msgstr "Detaliile _sistemului"
-
-#: panels/system/about/cc-system-details-window.blp:5
-msgid "System Details"
-msgstr "Detalii sistem"
-
-#: panels/system/about/cc-system-details-window.blp:29
-msgid "_Copy"
-msgstr "_Copiază"
-
-#: panels/system/about/cc-system-details-window.blp:58
-msgid "Hardware Information"
-msgstr "Informații aparat"
-
-#: panels/system/about/cc-system-details-window.blp:101
+#: panels/system/about/cc-about-page.blp:55
 msgid "Software Information"
 msgstr "Informații programe"
 
-#: panels/system/about/cc-system-details-window.blp:110
+#: panels/system/about/cc-about-page.blp:58
+msgid "GNOME Version"
+msgstr "Versiune GNOME"
+
+#. Translators: this field contains the distro name and version
+#: panels/system/about/cc-about-page.blp:68
+msgid "Operating System Name"
+msgstr "Numele sistemului"
+
+#. Translators: this field contains the distro build
+#: panels/system/about/cc-about-page.blp:78
+msgid "Operating System Build"
+msgstr "Versiunea sistemului"
+
+#. Translators: this field contains the distro type
+#: panels/system/about/cc-about-page.blp:88
+msgid "Operating System Type"
+msgstr "Tipul sistemului"
+
+#: panels/system/about/cc-about-page.blp:97
+msgid "Virtualization"
+msgstr "Virtualizare"
+
+#: panels/system/about/cc-about-page.blp:106
+msgid "Kernel Version"
+msgstr "Versiune nucleu"
+
+#: panels/system/about/cc-about-page.blp:115
 #: panels/wwan/cc-wwan-details-dialog.blp:78
 msgid "Firmware Version"
 msgstr "Versiune firmware"
 
-#. Translators: this field contains the distro name and version
-#: panels/system/about/cc-system-details-window.blp:115
-msgid "OS Name"
-msgstr "Nume SO"
+#: panels/system/about/cc-about-page.blp:126
+msgid "Hardware Information"
+msgstr "Informații aparat"
 
-#. Translators: this field contains the distro build
-#: panels/system/about/cc-system-details-window.blp:120
-msgid "OS Build"
-msgstr "Versiune compilată SO"
+#: panels/system/about/cc-about-page.blp:138
+msgid "Memory"
+msgstr "Memorie"
 
-#. Translators: this field contains the distro type
-#: panels/system/about/cc-system-details-window.blp:125
-msgid "OS Type"
-msgstr "Tip de SO"
+#: panels/system/about/cc-about-page.blp:147
+msgid "Processor"
+msgstr "Procesor"
 
-#: panels/system/about/cc-system-details-window.blp:129
-msgid "GNOME Version"
-msgstr "Versiune GNOME"
+#: panels/system/about/cc-about-page.blp:156
+msgid "Disk Capacity"
+msgstr "Capacitate disc"
 
-#: panels/system/about/cc-system-details-window.blp:133
-msgid "Virtualization"
-msgstr "Virtualizare"
+#: panels/system/about/cc-about-page.blp:157
+msgid "Calculating…"
+msgstr "Se calculează…"
 
-#: panels/system/about/cc-system-details-window.blp:137
-msgid "Kernel Version"
-msgstr "Versiune nucleu"
+#: panels/system/about/cc-about-page.blp:169
+msgid "_Copy"
+msgstr "_Copiază"
 
-#: panels/system/about/cc-system-details-window.c:314
+#: panels/system/about/cc-about-page.c:377
 msgid "Graphics"
 msgstr "Grafică"
 
-#: panels/system/about/cc-system-details-window.c:316
+#: panels/system/about/cc-about-page.c:379
 #, c-format
 msgid "Graphics %d"
 msgstr "Grafică %d"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-system-details-window.c:358
+#: panels/system/about/cc-about-page.c:425
 #, c-format
 msgid "64-bit"
 msgstr "64-biți"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-system-details-window.c:361
+#: panels/system/about/cc-about-page.c:428
 #, c-format
 msgid "32-bit"
 msgstr "32-biți"
 
-#: panels/system/about/cc-system-details-window.c:812
+#: panels/system/about/cc-about-page.c:880
 msgid "Details copied to clipboard"
 msgstr "Detaliile au fost copiate"
 
@@ -7887,14 +7840,14 @@ msgid "Failed to add account"
 msgstr "Nu s-a putut adăuga contul"
 
 #: panels/system/users/cc-add-user-dialog.c:302
-#: panels/system/users/cc-password-dialog.c:278
-#: panels/system/users/cc-password-dialog.c:363
+#: panels/system/users/cc-password-dialog.c:271
+#: panels/system/users/cc-password-dialog.c:356
 msgid "Passwords match"
 msgstr "Parolele se potrivesc"
 
 #: panels/system/users/cc-add-user-dialog.c:302
-#: panels/system/users/cc-password-dialog.c:274
-#: panels/system/users/cc-password-dialog.c:406
+#: panels/system/users/cc-password-dialog.c:267
+#: panels/system/users/cc-password-dialog.c:399
 msgid "Passwords do not match"
 msgstr "Parolele nu se potrivesc"
 
@@ -8538,56 +8491,47 @@ msgstr "Parolă excelentă!"
 msgid "Authentication failed"
 msgstr "Autentificarea a eșuat"
 
-#: panels/system/users/run-passwd.c:470
+#: panels/system/users/run-passwd.c:469
 #, c-format
 msgid "The new password is too short"
 msgstr "Parola nouă este prea scurtă"
 
-#: panels/system/users/run-passwd.c:476
+#: panels/system/users/run-passwd.c:475
 #, c-format
 msgid "The new password is too simple"
 msgstr "Parola nouă este prea simplă"
 
-#: panels/system/users/run-passwd.c:482
+#: panels/system/users/run-passwd.c:481
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "Vechea și noua parolă sunt foarte asemănătoare"
 
-#: panels/system/users/run-passwd.c:485
+#: panels/system/users/run-passwd.c:484
 #, c-format
 msgid "The new password has already been used recently."
 msgstr "Noua parolă a mai fost utilizată recent."
 
-#: panels/system/users/run-passwd.c:488
+#: panels/system/users/run-passwd.c:487
 #, c-format
 msgid "The new password must contain numeric or special characters"
 msgstr "Noua parolă trebuie să conțină caractere numerice sau speciale"
 
-#: panels/system/users/run-passwd.c:492
+#: panels/system/users/run-passwd.c:491
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "Vechea și noua parolă sunt identice"
 
-#: panels/system/users/run-passwd.c:496
+#: panels/system/users/run-passwd.c:495
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "Parola ta a fost schimbată după prima autentificare!"
 
-#: panels/system/users/run-passwd.c:500
+#: panels/system/users/run-passwd.c:499
 #, c-format
 msgid "The new password does not contain enough different characters"
 msgstr "Noua parolă nu conține suficiente caractere diferite"
 
-#: panels/system/users/run-passwd.c:503
-#, c-format
-msgid ""
-"Password does not meet your organization's security policies. Try a "
-"different password or contact your system administrator."
-msgstr ""
-"Parola nu respectă criteriile de siguranță ale organizației. Schimbă parola "
-"sau contactează administratorul de sistem."
-
-#: panels/system/users/run-passwd.c:507 panels/wwan/cc-wwan-errors-private.h:72
+#: panels/system/users/run-passwd.c:503 panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Eroare necunoscută"
@@ -8830,8 +8774,8 @@ msgid "The screen reader reads displayed text as you move the focus"
 msgstr "Cititorul de ecran citește textul afișat pe măsură ce se mută atenția"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:32
-msgid "Co_nfigure"
-msgstr "Pers_onalizare"
+msgid "Co_nfigure Screen Reader"
+msgstr "Perso_nalizare Cititor de ecran"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:43
 msgid "_High Contrast"
@@ -10289,6 +10233,12 @@ msgstr "Eroare necunoscută"
 #: panels/wwan/cc-wwan-mode-dialog.blp:5
 msgid "Network Mode"
 msgstr "Mod de rețea"
+
+#: panels/wwan/cc-wwan-mode-dialog.blp:34
+#: panels/wwan/cc-wwan-network-dialog.blp:102
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:228
+msgid "_Set"
+msgstr "_Stabilește"
 
 #: panels/wwan/cc-wwan-network-dialog.blp:35
 msgid "_Automatic"
