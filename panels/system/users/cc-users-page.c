@@ -65,6 +65,22 @@ struct _CcUsersPage {
 G_DEFINE_TYPE (CcUsersPage, cc_users_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static void
+cc_users_page_map (GtkWidget *widget)
+{
+  CcUsersPage *self = CC_USERS_PAGE (widget);
+  GtkWidget *nav;
+
+  GTK_WIDGET_CLASS (cc_users_page_parent_class)->map (widget);
+
+  if (self->navigation != NULL)
+    return;
+
+  nav = gtk_widget_get_ancestor (GTK_WIDGET (self), ADW_TYPE_NAVIGATION_VIEW);
+  if (nav != NULL)
+    self->navigation = ADW_NAVIGATION_VIEW (nav);
+}
+
+static void
 add_enterprise_user (CcUsersPage *self)
 {
     CcEnterpriseLoginDialog *dialog = cc_enterprise_login_dialog_new ();
@@ -77,8 +93,13 @@ update_new_user_avatar_cb (CcUsersPage *self,
                            ActUser *user)
 {
   CcUserPage *page;
+  AdwNavigationPage *visible;
 
-  page = CC_USER_PAGE (adw_navigation_view_get_visible_page (self->navigation));
+  visible = adw_navigation_view_get_visible_page (self->navigation);
+  if (CC_IS_USER_PAGE (visible))
+    page = CC_USER_PAGE (visible);
+  else
+    page = self->current_user_page;
 
   cc_user_page_util_ensure_avatar (page, user);
 }
@@ -188,8 +209,7 @@ on_user_added (CcUsersPage *self,
 
   g_list_store_insert_sorted (self->model, user, sort_users, self);
 
-  page = CC_USER_PAGE (adw_navigation_view_get_visible_page (self->navigation));
-  if (page != self->current_user_page)
+  if (adw_navigation_view_get_visible_page (self->navigation) != ADW_NAVIGATION_PAGE (self))
     return;
 
   /* We're on the current user's page and a new user was just created. It's very likely the user
@@ -212,7 +232,7 @@ on_user_removed (CcUsersPage *self,
 
   page = adw_navigation_view_find_page (self->navigation, act_user_get_user_name (user));
   if (page != NULL)
-    adw_navigation_view_pop_to_page (self->navigation, ADW_NAVIGATION_PAGE (self->current_user_page));
+    adw_navigation_view_pop_to_page (self->navigation, ADW_NAVIGATION_PAGE (self));
 }
 
 static void
@@ -375,10 +395,11 @@ cc_users_page_class_init (CcUsersPageClass * klass)
 
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-users-page.ui");
 
+    widget_class->map = cc_users_page_map;
+
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, add_enterprise_user_button_row);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, add_user_button_row);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, current_user_page);
-    gtk_widget_class_bind_template_child (widget_class, CcUsersPage, navigation);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, other_users_group);
     gtk_widget_class_bind_template_child (widget_class, CcUsersPage, user_list);
 
