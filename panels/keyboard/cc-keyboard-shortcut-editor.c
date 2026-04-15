@@ -183,8 +183,9 @@ cc_keyboard_shortcut_get_command (CcKeyboardShortcutEditor *self)
 static const char*
 cc_keyboard_shortcut_get_info_action_label (CcKeyboardShortcutEditor *self)
 {
-  const char *info_action_complete = _("Press Esc to cancel. Press Backspace to disable the keyboard shortcut for this action.");
-  const char *info_action = _("Press Esc to cancel.");
+  /* TRANSLATORS: Don't break or remove the <b> and </b> tags around Esc and Backspace. */
+  const char *info_action_complete = _("Press <b>Esc</b> to cancel. Press <b>Backspace</b> to disable the keyboard shortcut for this action.");
+  const char *info_action = _("Press <b>Esc</b> to cancel.");
 
   if (!self->item || is_empty_binding (self->custom_combo))
     {
@@ -523,7 +524,7 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self)
     accel = convert_keysym_state_to_string (self->custom_combo);
     adw_action_row_set_subtitle (self->shortcut_action_row, accel);
 
-    gtk_label_set_text (self->info_action_label, cc_keyboard_shortcut_get_info_action_label (self));
+    gtk_label_set_markup (self->info_action_label, cc_keyboard_shortcut_get_info_action_label (self));
 
     return;
   }
@@ -549,8 +550,7 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self)
 
   gtk_label_set_markup (self->top_info_label, text);
   gtk_label_set_markup (self->standard_info_label, text);
-
-  gtk_label_set_text (self->info_action_label, cc_keyboard_shortcut_get_info_action_label (self));
+  gtk_label_set_markup (self->info_action_label, cc_keyboard_shortcut_get_info_action_label (self));
 
   /* Accelerator label */
   adw_shortcut_label_set_accelerator (self->shortcut_accel_label, accel);
