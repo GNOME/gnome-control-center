@@ -5,6 +5,8 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
   content-width: 500;
   content-height: 350;
 
+  closed => $cc_keyboard_shortcut_editor_closed(template);
+
   child: Adw.ToolbarView {
     [top]
     Adw.HeaderBar headerbar {
@@ -178,13 +180,6 @@ template $CcKeyboardShortcutEditor: Adw.Dialog {
   EventControllerKey {
     propagation-phase: capture;
     key-pressed => $on_key_pressed_cb(template);
-  }
-
-  ShortcutController {
-    Shortcut {
-      trigger: "Escape";
-      action: "action(window.close)";
-    }
   }
 }
 

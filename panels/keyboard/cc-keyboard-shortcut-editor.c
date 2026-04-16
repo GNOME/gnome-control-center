@@ -802,6 +802,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, info_action_label);
 
   gtk_widget_class_bind_template_callback (widget_class, add_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, cc_keyboard_shortcut_editor_closed);
   gtk_widget_class_bind_template_callback (widget_class, cancel_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, change_custom_shortcut_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, command_entry_changed_cb);
@@ -816,9 +817,6 @@ cc_keyboard_shortcut_editor_init (CcKeyboardShortcutEditor *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  g_signal_connect (self, "closed",
-                    G_CALLBACK (cc_keyboard_shortcut_editor_closed),
-                    NULL);
   g_signal_connect_swapped (self, "map", G_CALLBACK (cc_keyboard_shortcut_editor_mapped), self);
 
   self->mode = CC_SHORTCUT_EDITOR_EDIT;
