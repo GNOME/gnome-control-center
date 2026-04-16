@@ -707,9 +707,6 @@ on_key_pressed_cb (CcKeyboardShortcutEditor *self,
 static void
 cc_keyboard_shortcut_editor_closed (CcKeyboardShortcutEditor *self)
 {
-  if (self->mode == CC_SHORTCUT_EDITOR_EDIT && get_shortcut_editor_page (self) != PAGE_STANDARD)
-    update_shortcut (self);
-
   clear_custom_entries (self);
 }
 
