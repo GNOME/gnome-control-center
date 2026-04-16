@@ -33,10 +33,6 @@
 #include "cc-network-resources.h"
 #include "ui-helpers.h"
 
-/**
- * @short_description: WWAN network type selection dialog
- */
-
 struct _CcWifiHotspotDialog
 {
   AdwDialog        parent_instance;
