@@ -85,7 +85,6 @@ struct _NetDeviceWifi
         gchar                   *selected_ssid_title;
         gchar                   *selected_connection_id;
         gchar                   *selected_ap_id;
-        CcWifiHotspotDialog     *hotspot_dialog;
 
         gint64                   last_scan;
         gboolean                 scanning;
@@ -681,25 +680,23 @@ on_wifi_hotspot_dialog_response_cb (AdwDialog *dialog,
 static void
 start_hotspot (NetDeviceWifi *self)
 {
+        CcWifiHotspotDialog *hotspot_dialog;
         NMConnection *c;
         g_autofree gchar *hostname = NULL;
         g_autofree gchar *ssid = NULL;
 
-        if (!self->hotspot_dialog) {
-                self->hotspot_dialog = cc_wifi_hotspot_dialog_new ();
-                g_object_ref_sink (self->hotspot_dialog);
-        }
-        cc_wifi_hotspot_dialog_set_device (self->hotspot_dialog, NM_DEVICE_WIFI (self->device));
+        hotspot_dialog = cc_wifi_hotspot_dialog_new ();
+        cc_wifi_hotspot_dialog_set_device (hotspot_dialog, NM_DEVICE_WIFI (self->device));
         hostname = cc_hostname_get_display_hostname (cc_hostname_get_default ());
         ssid =  pretty_hostname_to_ssid (hostname);
-        cc_wifi_hotspot_dialog_set_hostname (self->hotspot_dialog, ssid);
+        cc_wifi_hotspot_dialog_set_hostname (hotspot_dialog, ssid);
                 c = net_device_wifi_get_hotspot_connection (self);
         if (c)
-                cc_wifi_hotspot_dialog_set_connection (self->hotspot_dialog, c);
+                cc_wifi_hotspot_dialog_set_connection (hotspot_dialog, c);
 
-        g_signal_connect_after (self->hotspot_dialog, "hotspot-enabled", G_CALLBACK (on_wifi_hotspot_dialog_response_cb), self);
+        g_signal_connect_after (hotspot_dialog,"hotspot-enabled", G_CALLBACK (on_wifi_hotspot_dialog_response_cb), self);
 
-        adw_dialog_present (ADW_DIALOG (self->hotspot_dialog), GTK_WIDGET (self));
+        adw_dialog_present (ADW_DIALOG (hotspot_dialog), GTK_WIDGET (self));
 }
 
 static void
@@ -735,20 +732,6 @@ static void
 show_wifi_list (NetDeviceWifi *self)
 {
         gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->listbox_box));
-}
-
-static void
-net_device_wifi_dispose (GObject *object)
-{
-        NetDeviceWifi *self = NET_DEVICE_WIFI (object);
-
-        if (self->hotspot_dialog) {
-                adw_dialog_close (ADW_DIALOG (self->hotspot_dialog));
-                g_object_unref (self->hotspot_dialog);
-                self->hotspot_dialog = NULL;
-        }
-
-        G_OBJECT_CLASS (net_device_wifi_parent_class)->dispose (object);
 }
 
 static void
@@ -1072,7 +1055,6 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-        object_class->dispose = net_device_wifi_dispose;
         object_class->finalize = net_device_wifi_finalize;
         object_class->get_property = net_device_wifi_get_property;
 
