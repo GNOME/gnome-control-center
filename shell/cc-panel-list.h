@@ -34,8 +34,7 @@ typedef enum
 } CcPanelListView;
 
 #define CC_TYPE_PANEL_LIST (cc_panel_list_get_type())
-G_DECLARE_FINAL_TYPE (CcPanelList, cc_panel_list, CC, PANEL_LIST, AdwBin)
-
+G_DECLARE_FINAL_TYPE (CcPanelList, cc_panel_list, CC, PANEL_LIST, AdwBin);
 GtkWidget*           cc_panel_list_new                           (void);
 
 gboolean             cc_panel_list_activate                      (CcPanelList        *self);

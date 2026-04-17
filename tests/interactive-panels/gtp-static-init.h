@@ -25,8 +25,7 @@
 G_BEGIN_DECLS
 
 #define GTP_TYPE_STATIC_INIT (gtp_static_init_get_type())
-G_DECLARE_FINAL_TYPE (GtpStaticInit, gtp_static_init, GTP, STATIC_INIT, CcPanel)
-
+G_DECLARE_FINAL_TYPE (GtpStaticInit, gtp_static_init, GTP, STATIC_INIT, CcPanel);
 void gtp_static_init_func (void);
 
 G_END_DECLS

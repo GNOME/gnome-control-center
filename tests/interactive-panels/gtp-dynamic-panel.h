@@ -25,6 +25,5 @@
 G_BEGIN_DECLS
 
 #define GTP_TYPE_DYNAMIC_PANEL (gtp_dynamic_panel_get_type())
-G_DECLARE_FINAL_TYPE (GtpDynamicPanel, gtp_dynamic_panel, GTP, DYNAMIC_PANEL, CcPanel)
-
+G_DECLARE_FINAL_TYPE (GtpDynamicPanel, gtp_dynamic_panel, GTP, DYNAMIC_PANEL, CcPanel);
 G_END_DECLS

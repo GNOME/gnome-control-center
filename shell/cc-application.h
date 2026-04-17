@@ -26,8 +26,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_APPLICATION (cc_application_get_type())
-G_DECLARE_FINAL_TYPE (CcApplication, cc_application, CC, APPLICATION, AdwApplication)
-
+G_DECLARE_FINAL_TYPE (CcApplication, cc_application, CC, APPLICATION, AdwApplication);
 GtkApplication        *cc_application_new                    (void);
 
 CcShellModel          *cc_application_get_model              (CcApplication *self);

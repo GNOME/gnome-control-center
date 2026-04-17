@@ -27,8 +27,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_TEST_WINDOW (cc_test_window_get_type ())
-G_DECLARE_FINAL_TYPE (CcTestWindow, cc_test_window, CC, TEST_WINDOW, GtkWindow)
-
+G_DECLARE_FINAL_TYPE (CcTestWindow, cc_test_window, CC, TEST_WINDOW, GtkWindow);
 CcTestWindow *cc_test_window_new (void);
 
 G_END_DECLS

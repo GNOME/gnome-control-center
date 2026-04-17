@@ -46,8 +46,7 @@ typedef void (*CcPanelStaticInitFunc) (void);
 
 
 #define CC_TYPE_PANEL (cc_panel_get_type())
-G_DECLARE_DERIVABLE_TYPE (CcPanel, cc_panel, CC, PANEL, AdwNavigationPage)
-
+G_DECLARE_DERIVABLE_TYPE (CcPanel, cc_panel, CC, PANEL, AdwNavigationPage);
 /**
  * CcPanelVisibility:
  *
