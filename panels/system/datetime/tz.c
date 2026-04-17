@@ -225,6 +225,18 @@ tz_location_get_base_utc_offset (TzLocation *loc)
 	return offset;
 }
 
+gint
+tz_location_set_locally (TzLocation *loc)
+{
+	g_return_val_if_fail (loc != NULL, -1);
+	g_return_val_if_fail (loc->zone != NULL, -1);
+
+	if (setenv ("TZ", loc->zone, 1) != 0)
+		return -1;
+	tzset ();
+	return 0;
+}
+
 TzInfo *
 tz_info_from_location (TzLocation *loc)
 {

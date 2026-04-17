@@ -127,7 +127,6 @@ G_DEFINE_AUTOPTR_CLEANUP_FUNC (FwupdSecurityAttr, fu_security_attr_free)
 gboolean     firmware_security_attr_has_flag                    (FwupdSecurityAttr       *attr,
                                                                  FwupdSecurityAttrFlags   flag);
 const gchar *fwupd_security_attr_result_to_string               (FwupdSecurityAttrResult  result);
-gboolean     fwupd_get_result_status                            (FwupdSecurityAttrResult  result);
 void         hsi_report_title_print_padding                     (const gchar *title, GString *dst_string, gsize maxlen);
 
 G_END_DECLS

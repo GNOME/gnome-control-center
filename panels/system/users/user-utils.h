@@ -37,12 +37,6 @@ G_BEGIN_DECLS
 #define IMAGE_SOURCE_VALUE_FACE "gnome-face"
 #define IMAGE_SOURCE_VALUE_CUSTOM "gnome-custom"
 
-void     set_entry_generation_icon        (GtkEntry    *entry);
-void     set_entry_validation_checkmark   (GtkEntry    *entry);
-void     set_entry_validation_error       (GtkEntry    *entry,
-                                           const gchar *text);
-void     clear_entry_validation_error     (GtkEntry    *entry);
-
 const gchar *get_real_or_user_name        (ActUser *user);
 gsize    get_username_max_length          (void);
 gboolean is_username_used                 (const gchar *username);

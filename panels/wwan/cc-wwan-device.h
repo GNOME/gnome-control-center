@@ -140,7 +140,6 @@ gboolean       cc_wwan_device_register_network_finish (CcWwanDevice        *self
                                                        GAsyncResult        *result,
                                                        GError             **error);
 const gchar   *cc_wwan_device_get_simple_error        (CcWwanDevice        *self);
-GSList        *cc_wwan_device_get_apn_list            (CcWwanDevice        *self);
 gboolean       cc_wwan_device_is_nm_device            (CcWwanDevice        *self,
                                                        GObject             *nm_device);
 const gchar   *cc_wwan_device_get_path                (CcWwanDevice        *self);
