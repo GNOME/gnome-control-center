@@ -129,7 +129,7 @@ libgvc = subproject(
 libgvc_dep = libgvc.get_variable('libgvc_dep')
 
 libadwaita_version = '>= 1.8.alpha'
-gtk_version = '>= 4.15.2'
+gtk_version = '>= 4.23.0'
 goa_req_version = '>= 3.51.0'
 pulse_req_version = '>= 2.0'
 malcontent_version = '>= 0.14.alpha'
