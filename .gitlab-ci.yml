@@ -57,7 +57,7 @@ stages:
     # Should probably also switch away from 'rawhide',
     # to stable fedora branch as well.
     BRANCH_NAME: 'main'
-    CONTAINER_TAG: '2026-04-17.0'
+    CONTAINER_TAG: '2026-04-17.1'
     FEDORA_VERSION: rawhide
     # Derive FDO variables from this automatically.
     # DO NOT edit, instead change the variables above
@@ -114,7 +114,7 @@ build.container.fedora@x86_64:
         cd .. && \
       git clone --depth 1 https://gitlab.gnome.org/GNOME/gtk.git && \
         cd gtk && \
-        meson setup $MESON_BUILD_DIR --prefix=/usr && \
+        meson setup $MESON_BUILD_DIR --prefix=/usr -Dintrospection=enabled && \
         meson compile -C $MESON_BUILD_DIR && \
         meson install -C $MESON_BUILD_DIR && \
         cd .. && \
