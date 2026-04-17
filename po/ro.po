@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-04-15 09:55+0000\n"
-"PO-Revision-Date: 2026-04-15 14:21+0200\n"
+"POT-Creation-Date: 2026-04-16 14:22+0000\n"
+"PO-Revision-Date: 2026-04-17 11:24+0200\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -45,7 +45,7 @@ msgstr "Adaugă scurtături"
 #: panels/display/cc-display-panel.blp:139
 #: panels/display/cc-display-panel.blp:186
 #: panels/keyboard/cc-input-chooser.blp:16
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:13
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:15
 #: panels/keyboard/cc-keyboard-shortcut-page.blp:130
 #: panels/network/cc-net-proxy-page.blp:15
 #: panels/network/cc-wifi-hotspot-dialog.blp:129
@@ -74,7 +74,7 @@ msgstr "_Renunță"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:25
 #: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.blp:24
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:20
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:22
 #: panels/network/connection-editor/net-connection-editor.c:653
 #: panels/printers/pp-new-printer-dialog.ui:96
 #: panels/system/users/cc-add-user-dialog.blp:27
@@ -1150,7 +1150,7 @@ msgstr "_Continuă"
 
 #. Translators: This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.blp:40
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:32
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:34
 #: panels/system/users/cc-fingerprint-dialog.blp:39
 msgid "_Done"
 msgstr "_Gata"
@@ -2569,15 +2569,6 @@ msgstr ""
 "Sursele de intrare pot fi schimbate folosind scurtătura %s.\n"
 "Aceasta poate fi schimbată din opțiunile pentru scurtături."
 
-#. Translators: Do not break or remove the <b> and </b> tags around Esc and Backspace.
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:68
-msgid ""
-"Press <b>Esc</b> to cancel or <b>Backspace</b> to disable the keyboard "
-"shortcut"
-msgstr ""
-"Se apasă <b>Esc</b> pentru a anula sau <b>Backspace</b> pentru a dezactiva "
-"scurtătura"
-
 #. Translators: This is a mark in the Grayscale scale
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:92
 #: panels/sound/cc-alert-chooser-page.blp:14
@@ -2604,20 +2595,21 @@ msgstr "Comandă"
 msgid "Shortcut"
 msgstr "Scurtătură"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:186
-msgid ""
-"Press Esc to cancel. Press Backspace to disable the keyboard shortcut for "
-"this action."
-msgstr ""
-"Se apasă Esc pentru a anula. Se apasă Backspace pentru a dezactiva "
-"scurtătura pentru această acțiune."
-
+#. TRANSLATORS: Don't break or remove the <b> and </b> tags around Esc and Backspace.
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:187
-msgid "Press Esc to cancel."
-msgstr "Apasă Esc pentru a anula."
+msgid ""
+"Press <b>Esc</b> to cancel. Press <b>Backspace</b> to disable the keyboard "
+"shortcut for this action."
+msgstr ""
+"Se apasă <b>Esc</b> pentru a anula. Se apasă <b>Backspace</b> pentru a "
+"dezactiva scurtătura pentru această acțiune."
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:188
+msgid "Press <b>Esc</b> to cancel."
+msgstr "Apasă <b>Esc</b> pentru a anula."
 
 #. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:409
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:410
 #, c-format
 msgid ""
 "<b>This key combination is already being used for “%s”. This shortcut will "
@@ -2626,7 +2618,7 @@ msgstr ""
 "<b>Această combinație de taste este deja utilizată pentru „%s”. Această "
 "scurtătură va fi dezactivată.</b>"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:521
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:522
 msgid "Enter the new shortcut"
 msgstr "Introdu noua scurtătură"
 
@@ -2635,20 +2627,20 @@ msgstr "Introdu noua scurtătură"
 #. * TRANSLATORS: %s is replaced with a description of the keyboard shortcut,
 #. * don't translate/transliterate <b>%s</b>
 #.
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:547
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:548
 #, c-format
 msgid "Enter new keyboard shortcut for <b>“%s”</b>"
 msgstr "Introdu noua scurtătură pentru <b>„%s”</b>"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:909
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:904
 msgid "Add Custom Shortcut"
 msgstr "Adaugă scurtătura personalizată"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:922
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:917
 msgid "Custom Shortcut"
 msgstr "Scurtătură personalizată"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:922
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:917
 msgid "Edit Shortcut"
 msgstr "Modifică scurtătura"
 
@@ -8361,6 +8353,7 @@ msgstr "Niciuna"
 msgid "Remove %s?"
 msgstr "Se elimină %s?"
 
+#: panels/system/users/cc-users-page.blp:6
 #: panels/system/users/cc-users-page.blp:9
 #: panels/system/users/gnome-users-panel.desktop.in:2
 msgid "Users"
