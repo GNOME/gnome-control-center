@@ -299,18 +299,32 @@ uninhibit_system_shortcuts (CcKeyboardShortcutEditor *self)
     }
 }
 
+/* Remove only the accelerator being reassigned from the other action, so
+ * multi-accelerator shortcuts (e.g. Super+Tab and Alt+Tab on the same action)
+ * keep their remaining bindings. */
+static void
+resolve_keyboard_shortcut_collision (CcKeyboardShortcutEditor *self)
+{
+  if (!self->collision_item || !self->edited)
+    return;
+
+  if (is_empty_binding (self->custom_combo))
+    return;
+
+  cc_keyboard_item_remove_key_combo (self->collision_item, self->custom_combo);
+}
+
 static void
 update_shortcut (CcKeyboardShortcutEditor *self)
 {
   if (!self->item)
     return;
 
+  /* Handle multi-accelerator shortcuts */
+  resolve_keyboard_shortcut_collision (self);
+
   /* Setup the binding */
   apply_custom_item_fields (self, self->item);
-
-  /* Eventually disable the conflict shortcut */
-  if (self->collision_item)
-    cc_keyboard_item_disable (self->collision_item);
 
   /* Cleanup whatever was set before */
   clear_custom_entries (self);
@@ -436,12 +450,10 @@ add_button_clicked_cb (CcKeyboardShortcutEditor *self)
 
   item = cc_keyboard_manager_create_custom_shortcut (self->manager);
 
+  resolve_keyboard_shortcut_collision (self);
+
   /* Apply the custom shortcut setup at the new item */
   apply_custom_item_fields (self, item);
-
-  /* Eventually disable the conflict shortcut */
-  if (self->collision_item)
-    cc_keyboard_item_disable (self->collision_item);
 
   /* Cleanup everything once we're done */
   clear_custom_entries (self);
