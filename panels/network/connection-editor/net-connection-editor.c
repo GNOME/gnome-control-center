@@ -508,8 +508,7 @@ validate (NetConnectionEditor *self)
 
         update_sensitivity (self);
 done:
-        if (apply_tooltip != NULL)
-                gtk_widget_set_tooltip_text(GTK_WIDGET (self->apply_button), apply_tooltip);
+        gtk_widget_set_tooltip_text (GTK_WIDGET (self->apply_button), apply_tooltip);
 
         gtk_widget_set_sensitive (GTK_WIDGET (self->apply_button), valid && self->is_changed);
 }
