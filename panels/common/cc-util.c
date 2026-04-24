@@ -254,8 +254,8 @@ cc_util_app_id_to_display_name (const char *app_id)
 char *
 cc_util_get_localized_weekday_name (gint iso_weekday_number)
 {
-  g_autoptr (GDateTime) first_sunday = NULL;
-  g_autoptr (GDateTime) item_date = NULL;
+  g_autoptr(GDateTime) first_sunday = NULL;
+  g_autoptr(GDateTime) item_date = NULL;
 
   /* 1970-01-04 was a Sunday */
   first_sunday = g_date_time_new_from_unix_utc_usec (G_TIME_SPAN_DAY * 3);

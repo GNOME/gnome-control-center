@@ -231,7 +231,7 @@ static void
 ellipsize_app_chooser (GtkAppChooserButton *button)
 {
   GtkWidget *child;
-  g_autoptr (GList) cells = NULL;
+  g_autoptr(GList) cells = NULL;
   GtkCellRenderer *renderer;
 
   g_assert (GTK_IS_APP_CHOOSER_BUTTON (button));

@@ -424,7 +424,7 @@ children_changed (CcNotificationsPanel *self,
                   const char           *key)
 {
   int i;
-  g_auto (GStrv) new_app_ids = NULL;
+  g_auto(GStrv) new_app_ids = NULL;
 
   g_settings_get (self->master_settings,
                   "application-children",

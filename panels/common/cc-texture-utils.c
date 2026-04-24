@@ -55,9 +55,9 @@ cc_texture_new_from_bytes_scaled (GBytes *bytes,
                                   double  scale)
 {
   LoaderData loader_data;
-  g_autoptr (GdkTexture) texture = NULL;
-  g_autoptr (GdkPaintable) paintable = NULL;
-  g_autoptr (GdkPixbufLoader) loader = NULL;
+  g_autoptr(GdkTexture) texture = NULL;
+  g_autoptr(GdkPaintable) paintable = NULL;
+  g_autoptr(GdkPixbufLoader) loader = NULL;
   gboolean success;
 
   loader_data.scale = scale;
@@ -85,7 +85,7 @@ GdkPaintable *
 cc_texture_new_from_resource_scaled (const char *path,
                                      double      scale)
 {
-  g_autoptr (GBytes) bytes = NULL;
+  g_autoptr(GBytes) bytes = NULL;
 
   bytes = g_resources_lookup_data (path, G_RESOURCE_LOOKUP_FLAGS_NONE, NULL);
   if (!bytes)

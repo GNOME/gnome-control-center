@@ -63,7 +63,7 @@ acquire_cb (GObject      *source,
             gpointer      user_data)
 {
   CcPermissionInfobar *self = CC_PERMISSION_INFOBAR (user_data);
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GError) error = NULL;
 
   if (!g_permission_acquire_finish (self->permission, result, &error))
     {
@@ -79,7 +79,7 @@ release_cb (GObject      *source,
             gpointer      user_data)
 {
   CcPermissionInfobar *self = CC_PERMISSION_INFOBAR (user_data);
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GError) error = NULL;
 
   if (!g_permission_release_finish (self->permission, result, &error))
     {

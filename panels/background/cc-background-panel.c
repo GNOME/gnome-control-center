@@ -76,7 +76,7 @@ static void on_settings_changed (CcBackgroundPanel *self);
 static void
 transition_screen (CcBackgroundPanel *self)
 {
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GError) error = NULL;
 
   if (!self->proxy)
     return;
@@ -359,8 +359,8 @@ reset_settings_if_defaults (CcBackgroundPanel *self,
 
   for (i = 0; keys[i] != NULL; i++)
     {
-      g_autoptr (GVariant) default_value = NULL;
-      g_autoptr (GVariant) user_value = NULL;
+      g_autoptr(GVariant) default_value = NULL;
+      g_autoptr(GVariant) user_value = NULL;
       gboolean setting_is_default;
 
       if (!check_dark && g_str_equal (keys[i], WP_URI_DARK_KEY))

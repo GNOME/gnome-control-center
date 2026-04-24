@@ -225,7 +225,7 @@ calibrate (CcWacomPage *page)
 	gsize ncal;
 	GdkDisplay *display;
 	g_autoptr(GdkMonitor) monitor = NULL;
-	g_autoptr (CcDisplayConfig) config = NULL;
+	g_autoptr(CcDisplayConfig) config = NULL;
 	CcDisplayMonitor *output;
 	g_autoptr(GError) error = NULL;
 	GDBusProxy *input_mapping_proxy;
@@ -471,7 +471,7 @@ static void
 on_display_selected (CcWacomPage *page)
 {
 	GListModel *list;
-	g_autoptr (GObject) obj = NULL;
+	g_autoptr(GObject) obj = NULL;
 	GVariant *variant;
 	gint idx;
 
@@ -604,13 +604,13 @@ cc_wacom_page_class_init (CcWacomPageClass *klass)
 static void
 update_displays_model (CcWacomPage *page)
 {
-	g_autoptr (GtkStringList) list = NULL;
-	g_autoptr (CcDisplayConfig) config = NULL;
+	g_autoptr(GtkStringList) list = NULL;
+	g_autoptr(CcDisplayConfig) config = NULL;
 	CcDisplayMonitor *cur_output;
 	GList *monitors;
 	GList *l, *k;
 	int idx = 0, cur = -1;
-	g_autoptr (GObject) obj = NULL;
+	g_autoptr(GObject) obj = NULL;
 	GVariant *variant;
 	gboolean need_connector_name = false;
 
@@ -678,7 +678,7 @@ update_displays_model (CcWacomPage *page)
 
 	/* "Automatic" item */
 	if (get_layout_type (page->stylus) == LAYOUT_SCREEN) {
-		g_autoptr (GVariant) user_value = NULL;
+		g_autoptr(GVariant) user_value = NULL;
 
 		idx++;
 		gtk_string_list_append (list, _("Automatic"));
@@ -700,7 +700,7 @@ static void
 cc_wacom_page_init (CcWacomPage *page)
 {
 	g_autofree char *mouse_panel_link = NULL, *label = NULL;
-	g_autoptr (GError) error = NULL;
+	g_autoptr(GError) error = NULL;
 
 	gtk_widget_init_template (GTK_WIDGET (page));
 	page->display_config_manager = cc_display_config_manager_new ();
@@ -822,7 +822,7 @@ GtkWidget *
 cc_wacom_page_new (CcWacomPanel  *panel,
 		   CcWacomDevice *stylus)
 {
-	g_autoptr (GList) pads = NULL;
+	g_autoptr(GList) pads = NULL;
 	CcWacomPage *page;
 	GList *l;
 	gboolean left_handed;

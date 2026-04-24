@@ -145,7 +145,7 @@ cc_screen_page_class_init (CcScreenPageClass *klass)
 static void
 update_display_config (CcScreenPage *self)
 {
-  g_autoptr (CcDisplayConfig) config = NULL;
+  g_autoptr(CcDisplayConfig) config = NULL;
   gboolean any_privacy_screen = FALSE;
   gboolean any_configurable_privacy_screen = FALSE;
   GList *monitors;

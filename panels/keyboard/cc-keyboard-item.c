@@ -567,7 +567,7 @@ translate_above_tab (char **original_bindings,
         }
       else
         {
-          g_auto (GStrv) split_str = g_strsplit (*str, "Above_Tab", -1);
+          g_auto(GStrv) split_str = g_strsplit (*str, "Above_Tab", -1);
           int i;
 
           for (i = 0; above_tab_keysyms[i]; i++)
@@ -716,7 +716,7 @@ cc_keyboard_item_load_from_global_shortcuts (CcKeyboardItem *item,
 {
   GVariantDict dict;
   GVariant *shortcuts;
-  g_autoptr (GSettings) settings = NULL;
+  g_autoptr(GSettings) settings = NULL;
 
   g_variant_dict_init (&dict, properties);
 

@@ -229,7 +229,7 @@ update_cursor (CcCropArea *area,
 
     if (cursor_type != area->current_cursor) {
         GtkNative *native;
-        g_autoptr (GdkCursor) cursor = NULL;
+        g_autoptr(GdkCursor) cursor = NULL;
 
         native = gtk_widget_get_native (GTK_WIDGET (area));
         if (!native) {
@@ -598,11 +598,11 @@ cc_crop_area_new (void)
 GdkPixbuf *
 cc_crop_area_create_pixbuf (CcCropArea *area)
 {
-    g_autoptr (GtkSnapshot) snapshot = NULL;
-    g_autoptr (GskRenderNode) node = NULL;
-    g_autoptr (GskRenderer) renderer = NULL;
-    g_autoptr (GdkTexture) texture = NULL;
-    g_autoptr (GError) error = NULL;
+    g_autoptr(GtkSnapshot) snapshot = NULL;
+    g_autoptr(GskRenderNode) node = NULL;
+    g_autoptr(GskRenderer) renderer = NULL;
+    g_autoptr(GdkTexture) texture = NULL;
+    g_autoptr(GError) error = NULL;
     graphene_rect_t viewport;
 
     g_return_val_if_fail (CC_IS_CROP_AREA (area), NULL);

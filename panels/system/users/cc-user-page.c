@@ -790,8 +790,8 @@ void
 cc_user_page_util_ensure_avatar (CcUserPage *self,
                                  ActUser *user)
 {
-  g_autoptr (GdkTexture) texture = NULL;
-  g_autoptr (GdkPaintable) custom_image = NULL;
+  g_autoptr(GdkTexture) texture = NULL;
+  g_autoptr(GdkPaintable) custom_image = NULL;
 
   g_assert (CC_IS_USER_PAGE (self));
   g_assert (ACT_IS_USER (user));
