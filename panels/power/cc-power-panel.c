@@ -161,9 +161,9 @@ static void
 battery_health_radio_changed_cb (CcPowerPanel *self)
 {
   guint i;
-  g_autoptr (GDBusConnection) connection = NULL;
-  g_autoptr (GVariant) variant = NULL;
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GVariant) variant = NULL;
+  g_autoptr(GError) error = NULL;
   gboolean enabled;
 
   enabled = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->preserve_battery_radio));

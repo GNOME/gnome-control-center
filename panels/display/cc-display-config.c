@@ -1403,7 +1403,7 @@ cc_display_monitor_new (GVariant        *variant,
         }
       else if (g_str_equal (s, "supported-color-modes"))
         {
-          g_autoptr (GVariantIter) iter = NULL;
+          g_autoptr(GVariantIter) iter = NULL;
           guint32 color_mode;
 
           g_variant_get (v, "au", &iter);
@@ -2325,7 +2325,7 @@ cc_display_config_generate_cloning_modes (CcDisplayConfig *self)
     {
       CcDisplayMode *mode = l->data;
       CcDisplayMode *virtual_mode;
-      g_autoptr (GArray) supported_scales = NULL;
+      g_autoptr(GArray) supported_scales = NULL;
 
       supported_scales =
         cc_display_mode_get_supported_scales (CC_DISPLAY_MODE (mode));

@@ -1295,7 +1295,7 @@ on_devices_list (GObject      *object,
                  GAsyncResult *res,
                  gpointer      user_data)
 {
-  g_autolist (CcFprintdDevice) fprintd_devices = NULL;
+  g_autolist(CcFprintdDevice) fprintd_devices = NULL;
   g_autoptr(DialogStateRemover) state_remover = NULL;
   g_autoptr(GError) error = NULL;
   CcFingerprintManager *fingerprint_manager = CC_FINGERPRINT_MANAGER (object);

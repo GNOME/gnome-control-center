@@ -171,7 +171,7 @@ enum
 static gboolean
 gnome_software_is_installed (void)
 {
-  g_autoptr (GDesktopAppInfo) info = NULL;
+  g_autoptr(GDesktopAppInfo) info = NULL;
 
   info = g_desktop_app_info_new (GNOME_SOFTWARE_DESKTOP_ID);
   return info != NULL;
@@ -184,8 +184,8 @@ open_software_details_cb (GObject      *source_object,
                           GAsyncResult *result,
                           gpointer      user_data)
 {
-  g_autoptr (GVariant) retval = NULL;
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GVariant) retval = NULL;
+  g_autoptr(GError) error = NULL;
 
   retval = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           result, &error);
@@ -206,7 +206,7 @@ open_software_cb (CcApplicationsPanel *self)
 
   if (!self->current_app_id)
     {
-      g_autoptr (GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (GNOME_SOFTWARE_DESKTOP_ID));
+      g_autoptr(GAppInfo) info = G_APP_INFO (g_desktop_app_info_new (GNOME_SOFTWARE_DESKTOP_ID));
       if (info)
         g_app_info_launch (info, NULL, NULL, NULL);
       return;

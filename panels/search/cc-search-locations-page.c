@@ -374,7 +374,7 @@ get_tracker_locations (CcSearchLocationsPage *self)
   GList *list;
   Place *location;
   const gchar *path;
-  g_autoptr (GStrvBuilder) builder = g_strv_builder_new ();
+  g_autoptr(GStrvBuilder) builder = g_strv_builder_new ();
 
   locations = g_settings_get_strv (self->tracker_preferences, TRACKER_KEY_RECURSIVE_DIRECTORIES);
   locations_single = g_settings_get_strv (self->tracker_preferences, TRACKER_KEY_SINGLE_DIRECTORIES);

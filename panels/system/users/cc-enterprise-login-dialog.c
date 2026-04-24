@@ -127,7 +127,7 @@ cache_user_cb (GObject      *source,
                gpointer      user_data)
 {
   g_autoptr(CcEnterpriseLoginDialog) self = CC_ENTERPRISE_LOGIN_DIALOG (user_data);
-  g_autoptr (ActUser) user = NULL;
+  g_autoptr(ActUser) user = NULL;
   g_autoptr(GError) error = NULL;
 
   user = act_user_manager_cache_user_finish (ACT_USER_MANAGER (source), result, &error);

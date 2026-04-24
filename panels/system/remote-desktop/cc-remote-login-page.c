@@ -290,7 +290,7 @@ fail:
 static void
 enable_remote_login (CcRemoteLoginPage *self)
 {
-  g_autoptr (GKeyFile) conf_file = NULL;
+  g_autoptr(GKeyFile) conf_file = NULL;
 
   block_remote_login_row_activation (self);
 
@@ -637,7 +637,7 @@ on_connected_to_remote_desktop_configuration_rdp_server (GObject      *source_ob
                                                          gpointer      user_data)
 {
   CcRemoteLoginPage *self = user_data;
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GError) error = NULL;
 
   g_clear_object (&self->configuration_rdp_server);
   self->configuration_rdp_server = gsd_remote_desktop_configuration_rdp_server_proxy_new_finish (result, &error);
@@ -659,8 +659,8 @@ on_connected_to_remote_desktop_configuration_rdp_server (GObject      *source_ob
 static void
 connect_to_remote_desktop_configuration_rdp_server (CcRemoteLoginPage *self)
 {
-  g_autoptr (GError) error = NULL;
-  g_autoptr (GDBusConnection) connection = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GDBusConnection) connection = NULL;
 
   connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, self->cancellable, &error);
 

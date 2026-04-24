@@ -85,8 +85,8 @@ cc_qr_code_dialog_set_property (GObject      *object,
 static void
 cc_qr_code_dialog_constructed (GObject *object)
 {
-  g_autoptr (GVariant) variant = NULL;
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GVariant) variant = NULL;
+  g_autoptr(GError) error = NULL;
   g_autofree gchar *qr_connection_string = NULL;
   g_autofree gchar *subtitle_text = NULL;
   g_autofree gchar *ssid_text = NULL;

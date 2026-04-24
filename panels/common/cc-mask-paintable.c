@@ -81,7 +81,7 @@ update_mask_color (CcMaskPaintable *self)
 static void
 reload_scalable_resource (CcMaskPaintable *self)
 {
-  g_autoptr (GdkPaintable) paintable = NULL;
+  g_autoptr(GdkPaintable) paintable = NULL;
   int scale;
 
   g_return_if_fail (self->parent_widget != NULL);
@@ -241,7 +241,7 @@ cc_mask_paintable_snapshot (GdkPaintable *paintable,
 {
   CcMaskPaintable *self = CC_MASK_PAINTABLE (paintable);
   GtkSnapshot *inner_snapshot;
-  g_autoptr (GskRenderNode) node = NULL;
+  g_autoptr(GskRenderNode) node = NULL;
 
   if (!self->paintable)
     return;
@@ -449,7 +449,7 @@ cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self,
 
   if (!resource_is_scalable)
     {
-      g_autoptr (GtkMediaStream) media_stream = NULL;
+      g_autoptr(GtkMediaStream) media_stream = NULL;
 
       media_stream = gtk_media_file_new_for_resource (self->resource_path);
       cc_mask_paintable_set_paintable (self, GDK_PAINTABLE (media_stream));

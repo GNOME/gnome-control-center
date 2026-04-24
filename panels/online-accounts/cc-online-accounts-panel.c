@@ -113,7 +113,7 @@ show_account_cb (GoaProvider *provider,
                  GAsyncResult *result,
                  CcOnlineAccountsPanel *self)
 {
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GError) error = NULL;
 
   if (!goa_provider_show_account_finish (provider, result, &error))
     {
@@ -126,7 +126,7 @@ static void
 show_account (CcOnlineAccountsPanel *self,
               GoaObject             *object)
 {
-  g_autoptr (GoaProvider) provider = NULL;
+  g_autoptr(GoaProvider) provider = NULL;
   GtkRoot *root;
   GoaAccount *account;
   const char *provider_type;
@@ -156,8 +156,8 @@ create_account_cb (GoaProvider *provider,
                    GAsyncResult *result,
                    CcOnlineAccountsPanel *self)
 {
-  g_autoptr (GoaObject) object = NULL;
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GoaObject) object = NULL;
+  g_autoptr(GError) error = NULL;
 
   object = goa_provider_add_account_finish (provider, result, &error);
   if (error != NULL)
@@ -226,7 +226,7 @@ command_add (CcOnlineAccountsPanel *self,
              GVariant              *parameters)
 {
   const gchar *provider_name = NULL;
-  g_autoptr (GVariant) v = NULL;
+  g_autoptr(GVariant) v = NULL;
 
   g_assert (self != NULL);
   g_assert (parameters != NULL);
@@ -249,7 +249,7 @@ command_add (CcOnlineAccountsPanel *self,
 
   if (provider_name != NULL)
     {
-      g_autoptr (GoaProvider) provider = NULL;
+      g_autoptr(GoaProvider) provider = NULL;
       unsigned int n_items = 0;
 
       n_items = g_list_model_get_n_items (G_LIST_MODEL (self->providers));
@@ -398,10 +398,10 @@ goa_provider_get_all_cb (GObject *object,
                          GAsyncResult *res,
                          gpointer user_data)
 {
-  g_autoptr (CcOnlineAccountsPanel) self = CC_ONLINE_ACCOUNTS_PANEL (user_data);
-  g_autolist (GoaProvider) providers = NULL;
-  g_autolist (GoaAccount) accounts = NULL;
-  g_autoptr (GError) error = NULL;
+  g_autoptr(CcOnlineAccountsPanel) self = CC_ONLINE_ACCOUNTS_PANEL (user_data);
+  g_autolist(GoaProvider) providers = NULL;
+  g_autolist(GoaAccount) accounts = NULL;
+  g_autoptr(GError) error = NULL;
 
   /* goa_provider_get_all() doesn't have a cancellable argument, so check if
    * the panel cancellable was triggered.
@@ -439,7 +439,7 @@ goa_provider_get_all_cb (GObject *object,
 
   if (self->parameters != NULL)
     {
-      g_autoptr (GVariant) parameters = NULL;
+      g_autoptr(GVariant) parameters = NULL;
 
       parameters = g_steal_pointer (&self->parameters);
       g_object_set (self, "parameters", parameters, NULL);
@@ -451,8 +451,8 @@ goa_client_new_cb (GObject *object,
                    GAsyncResult *res,
                    gpointer user_data)
 {
-  g_autoptr (CcOnlineAccountsPanel) self = CC_ONLINE_ACCOUNTS_PANEL (user_data);
-  g_autoptr (GError) error = NULL;
+  g_autoptr(CcOnlineAccountsPanel) self = CC_ONLINE_ACCOUNTS_PANEL (user_data);
+  g_autoptr(GError) error = NULL;
 
   self->client = goa_client_new_finish (res, &error);
   if (self->client == NULL)
@@ -488,7 +488,7 @@ cc_online_accounts_panel_set_property (GObject      *object,
       case PROP_PARAMETERS:
         {
           GVariant *parameters;
-          g_autoptr (GVariant) v = NULL;
+          g_autoptr(GVariant) v = NULL;
           const gchar *first_arg = NULL;
 
           parameters = g_value_get_variant (value);

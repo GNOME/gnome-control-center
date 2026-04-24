@@ -179,8 +179,8 @@ parse_event_variant_iter (CcFirmwareSecurityPage *self,
                           GVariantIter           *iter)
 {
   g_autofree gchar *date_string = NULL;
-  g_autoptr (GDateTime) date = NULL;
-  g_autoptr (FwupdSecurityAttr) attr = fu_security_attr_new_from_variant(iter);
+  g_autoptr(GDateTime) date = NULL;
+  g_autoptr(FwupdSecurityAttr) attr = fu_security_attr_new_from_variant(iter);
   GtkWidget *row, *icon;
 
   /* unknown to us */
@@ -252,7 +252,7 @@ static void
 parse_variant_iter (CcFirmwareSecurityPage *self,
                     GVariantIter           *iter)
 {
-  g_autoptr (FwupdSecurityAttr) attr = fu_security_attr_new_from_variant(iter);
+  g_autoptr(FwupdSecurityAttr) attr = fu_security_attr_new_from_variant(iter);
   const gchar *appstream_id = attr->appstream_id;
 
   /* invalid */
@@ -309,7 +309,7 @@ parse_data_from_variant (CcFirmwareSecurityPage *self,
                          const gboolean          is_event)
 {
   const gchar *type_string;
-  g_autoptr (GVariantIter) iter = NULL;
+  g_autoptr(GVariantIter) iter = NULL;
 
   type_string = g_variant_get_type_string (value);
   if (g_strcmp0 (type_string, "(a{sv})") == 0)
@@ -340,13 +340,13 @@ parse_array_from_variant (CcFirmwareSecurityPage *self,
                           const gboolean          is_event)
 {
   gsize sz;
-  g_autoptr (GVariant) untuple = NULL;
+  g_autoptr(GVariant) untuple = NULL;
 
   untuple = g_variant_get_child_value (value, 0);
   sz = g_variant_n_children (untuple);
   for (guint i = 0; i < sz; i++)
     {
-      g_autoptr (GVariant) data = NULL;
+      g_autoptr(GVariant) data = NULL;
       data = g_variant_get_child_value (untuple, i);
       if (is_event)
         parse_data_from_variant (self, data, TRUE);
@@ -360,8 +360,8 @@ on_bus_event_done_cb (GObject      *source,
                       GAsyncResult *res,
                       gpointer      user_data)
 {
-  g_autoptr (GError) error = NULL;
-  g_autoptr (GVariant) val = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) val = NULL;
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
 
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
@@ -404,8 +404,8 @@ on_bus_done (GObject      *source,
              gpointer      user_data)
 {
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
-  g_autoptr (GError) error = NULL;
-  g_autoptr (GVariant) val = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) val = NULL;
 
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
   if (val == NULL)
@@ -424,7 +424,7 @@ on_bus_ready_cb (GObject       *source_object,
                  GAsyncResult  *res,
                  gpointer       user_data)
 {
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GError) error = NULL;
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
 
   self->bus_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
@@ -566,8 +566,8 @@ on_properties_bus_done_cb (GObject      *source,
                            GAsyncResult *res,
                            gpointer      user_data)
 {
-  g_autoptr (GError) error = NULL;
-  g_autoptr (GVariant) val = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) val = NULL;
   const gchar *hsi_str = NULL;
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
 
@@ -597,7 +597,7 @@ on_properties_bus_ready_cb (GObject      *source_object,
                             gpointer      user_data)
 {
   CcFirmwareSecurityPage *self = CC_FIRMWARE_SECURITY_PAGE (user_data);
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GError) error = NULL;
 
   self->properties_bus_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
   if (self->properties_bus_proxy == NULL)

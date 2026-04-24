@@ -681,7 +681,7 @@ on_connected_to_remote_desktop_rdp_server (GObject      *source_object,
                                            gpointer      user_data)
 {
   CcDesktopSharingPage *self = user_data;
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GError) error = NULL;
 
   g_clear_object (&self->rdp_server);
   self->rdp_server = gsd_remote_desktop_rdp_server_proxy_new_finish (result, &error);
@@ -712,8 +712,8 @@ on_connected_to_remote_desktop_rdp_server (GObject      *source_object,
 static void
 connect_to_remote_desktop_rdp_server (CcDesktopSharingPage *self)
 {
-  g_autoptr (GError) error = NULL;
-  g_autoptr (GDBusConnection) connection = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GDBusConnection) connection = NULL;
 
   connection = g_bus_get_sync (G_BUS_TYPE_SESSION, self->cancellable, &error);
 

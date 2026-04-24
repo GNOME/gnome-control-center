@@ -189,8 +189,8 @@ wifi_panel_update_qr_image_cb (CcWifiPanel *self)
   if (hotspot)
     {
       g_autofree gchar *str = NULL;
-      g_autoptr (GVariant) secrets = NULL;
-      g_autoptr (GError) error = NULL;
+      g_autoptr(GVariant) secrets = NULL;
+      g_autoptr(GError) error = NULL;
 
       secrets = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (hotspot),
                                                   NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,

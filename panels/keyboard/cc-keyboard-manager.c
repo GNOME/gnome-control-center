@@ -555,7 +555,7 @@ append_sections_from_global_shortcuts_settings (CcKeyboardManager *self,
                                                 const gchar       *overlay_app_id,
                                                 GVariant          *overlay_app_shortcuts)
 {
-  g_auto (GStrv) children = NULL;
+  g_auto(GStrv) children = NULL;
   gboolean overlay_added = FALSE;
   int i;
 
@@ -563,7 +563,7 @@ append_sections_from_global_shortcuts_settings (CcKeyboardManager *self,
 
   for (i = 0; children[i]; i++)
     {
-      g_autoptr (GVariant) shortcuts = NULL;
+      g_autoptr(GVariant) shortcuts = NULL;
 
       if (overlay_app_id && g_strcmp0 (overlay_app_id, children[i]) == 0)
         {
@@ -1110,7 +1110,7 @@ void
 cc_keyboard_manager_reset_global_shortcuts (CcKeyboardManager  *self,
                                             const char         *app_id)
 {
-  g_autoptr (GSettings) settings = NULL;
+  g_autoptr(GSettings) settings = NULL;
   g_autofree char *path = NULL;
 
   path = g_strdup_printf (GLOBAL_SHORTCUTS_PATH "%s/", app_id);

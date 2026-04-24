@@ -225,10 +225,10 @@ on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
 {
   GdkClipboard *clip_board;
   GdkDisplay *display;
-  g_autoptr (GList) hash_keys = NULL;
-  g_autoptr (GString) result_str = NULL;
+  g_autoptr(GList) hash_keys = NULL;
+  g_autoptr(GString) result_str = NULL;
   g_autofree gchar *date_string = NULL;
-  g_autoptr (GDateTime) date = NULL;
+  g_autoptr(GDateTime) date = NULL;
   g_autofree gchar *fwupd_ver = NULL;
   g_autofree gchar *vendor = NULL;
   g_autofree gchar *product = NULL;
@@ -236,7 +236,7 @@ on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
   g_autofree gchar *hsi_level = NULL;
   g_autofree gchar *cpu_model = NULL;
   const gchar *hsi_result;
-  g_autoptr (GString) tmp_str = NULL;
+  g_autoptr(GString) tmp_str = NULL;
 
   GHashTable *hsi_dict = NULL;
 

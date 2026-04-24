@@ -862,7 +862,7 @@ set_week_start_day_setting (const GValue       *property_value,
                             const GVariantType *expected_type,
                             gpointer            user_data)
 {
-  g_autoptr (GEnumClass) schema_weekday_enum_class = g_type_class_ref (G_DESKTOP_TYPE_WEEKDAY);
+  g_autoptr(GEnumClass) schema_weekday_enum_class = g_type_class_ref (G_DESKTOP_TYPE_WEEKDAY);
   guint selected_index = g_value_get_uint (property_value);
   GEnumValue *enum_value;
 
@@ -878,7 +878,7 @@ get_week_start_day_setting (GValue   *property_value,
                             GVariant *setting_source,
                             gpointer  user_data)
 {
-  g_autoptr (GEnumClass) schema_weekday_enum_class = g_type_class_ref (G_DESKTOP_TYPE_WEEKDAY);
+  g_autoptr(GEnumClass) schema_weekday_enum_class = g_type_class_ref (G_DESKTOP_TYPE_WEEKDAY);
   const gchar *nick = g_variant_get_string (setting_source, NULL);
   GEnumValue *enum_value = g_enum_get_value_by_nick (schema_weekday_enum_class, nick);
 

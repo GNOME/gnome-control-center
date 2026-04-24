@@ -477,8 +477,8 @@ get_primary_disk_info (void)
 static char *
 get_hardware_model_string_from_device_tree (void)
 {
-  g_auto (GStrv) compatibles = gm_device_tree_get_compatibles (NULL, NULL);
-  g_autoptr (GmDeviceInfo) info = NULL;
+  g_auto(GStrv) compatibles = gm_device_tree_get_compatibles (NULL, NULL);
+  g_autoptr(GmDeviceInfo) info = NULL;
   const char *name;
   GmDisplayPanel *panel;
 
@@ -759,7 +759,7 @@ on_copy_row_activated_cb (GtkWidget    *widget,
   GdkClipboard *clip_board;
   GdkDisplay *display;
   g_autofree gchar *date_string = NULL;
-  g_autoptr (GDateTime) date = NULL;
+  g_autoptr(GDateTime) date = NULL;
   guint64 ram_size;
   g_autofree char *memory_text = NULL;
   g_autofree char *cpu_text = NULL;
@@ -772,7 +772,7 @@ on_copy_row_activated_cb (GtkWidget    *widget,
   g_autoslist(GpuData) graphics_hardware_list = NULL;
   GSList *l;
   g_autofree gchar *disk_capacity_string = NULL;
-  g_autoptr (GString) result_str;
+  g_autoptr(GString) result_str;
   locale_t untranslated_locale;
 
   /* Don't use translations for the copied content */

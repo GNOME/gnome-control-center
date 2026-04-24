@@ -164,7 +164,7 @@ static char *
 get_profile_description (GtkListItem *list_item,
                          CdProfile   *profile)
 {
-  g_autoptr (GString) string = NULL;
+  g_autoptr(GString) string = NULL;
   const char *prefix;
 
   if (!profile)
