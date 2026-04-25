@@ -20,6 +20,8 @@
  * Copyright 2008 - 2011 Red Hat, Inc. 
  */
 
+#include <gtk/gtk.h>
+
 #include <NetworkManager.h>
 #include <nma-wifi-dialog.h>
 #include <nma-mobile-wizard.h>
