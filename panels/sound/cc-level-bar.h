@@ -18,10 +18,7 @@
 #pragma once
 
 #include <gtk/gtk.h>
-#include <pulse/pulseaudio.h>
 #include <gvc-mixer-stream.h>
-
-#include "cc-sound-enums.h"
 
 G_BEGIN_DECLS
 

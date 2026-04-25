@@ -16,6 +16,7 @@
  */
 
 #include <pulse/pulseaudio.h>
+
 #include <gvc-mixer-control.h>
 
 #include "cc-sound-resources.h"

@@ -18,7 +18,6 @@
 #pragma once
 
 #include <gtk/gtk.h>
-#include <pulse/pulseaudio.h>
 #include <gvc-channel-map.h>
 
 G_BEGIN_DECLS

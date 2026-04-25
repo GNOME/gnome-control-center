@@ -18,6 +18,7 @@
 
 #include <adwaita.h>
 #include <glib/gi18n.h>
+#include <pulse/pulseaudio.h>
 
 #include "cc-speaker-test-button.h"
 #include "cc-output-test-wheel.h"

@@ -15,8 +15,9 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <pulse/pulseaudio.h>
+
 #include "cc-level-bar.h"
-#include "cc-sound-enums.h"
 #include "gvc-mixer-stream-private.h"
 
 struct _CcLevelBar
