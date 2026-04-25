@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-02-10 13:00+0000\n"
-"PO-Revision-Date: 2026-02-23 19:59+0100\n"
+"POT-Creation-Date: 2026-03-28 07:55+0000\n"
+"PO-Revision-Date: 2026-03-30 11:40+0200\n"
 "Last-Translator: Ibai Oihanguren Sala <ibaios@disroot.org>\n"
 "Language-Team: Basque\n"
 "Language: eu\n"
@@ -30,7 +30,7 @@ msgstr ""
 "X-DL-Branch: main\n"
 "X-DL-Domain: po\n"
 "X-DL-State: None\n"
-"X-Generator: Gtranslator 49.0\n"
+"X-Generator: Gtranslator 50.0\n"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:7
 msgid "Add Keyboard Shortcuts"
@@ -44,10 +44,10 @@ msgstr "Gehitu laster-teklak"
 #: panels/display/cc-display-panel.blp:139
 #: panels/display/cc-display-panel.blp:186
 #: panels/keyboard/cc-input-chooser.blp:16
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:144
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:13
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:130
 #: panels/network/cc-net-proxy-page.blp:15
-#: panels/network/cc-wifi-hotspot-dialog.blp:122
+#: panels/network/cc-wifi-hotspot-dialog.blp:129
 #: panels/network/cc-wifi-panel.blp:180
 #: panels/network/connection-editor/ce-page-details.c:89
 #: panels/network/connection-editor/connection-editor.blp:17
@@ -78,7 +78,7 @@ msgstr "_Utzi"
 #: panels/printers/pp-new-printer-dialog.ui:96
 #: panels/system/users/cc-add-user-dialog.blp:27
 #: panels/system/users/cc-add-user-dialog.blp:134
-#: panels/system/users/cc-add-user-dialog.c:370
+#: panels/system/users/cc-add-user-dialog.c:382
 #: panels/system/users/cc-enterprise-login-dialog.blp:47
 msgid "_Add"
 msgstr "_Gehitu"
@@ -142,16 +142,16 @@ msgstr ""
 "Ezarri zein aplikaziok irekitzen dituzten estekak, fitxategiak eta multimedia"
 
 #: panels/applications/cc-applications-panel.blp:64
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:89
-#: panels/printers/cc-printers-panel.blp:96
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:81
+#: panels/printers/cc-printers-panel.blp:90
 #: panels/system/datetime/cc-tz-dialog.blp:37
 #: panels/system/region/cc-format-chooser.blp:114 shell/cc-panel-list.blp:40
 msgid "No Results Found"
 msgstr "Ez da emaitzarik aurkitu"
 
 #: panels/applications/cc-applications-panel.blp:65
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:90
-#: panels/printers/cc-printers-panel.blp:97
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:82
+#: panels/printers/cc-printers-panel.blp:91
 #: panels/system/datetime/cc-tz-dialog.blp:38
 #: panels/system/region/cc-format-chooser.blp:115 shell/cc-panel-list.blp:41
 msgid "Try a different search"
@@ -179,32 +179,15 @@ msgstr ""
 "Errorea bat gertatu da eta aplikazioak ezin dira zerrendatu.\n"
 "Errorearen xehetasunak: Gurasoen kontrolak ez daude instalatuta."
 
-#: panels/applications/cc-applications-panel.blp:107
-#: panels/applications/cc-default-apps-page.blp:5
-msgid "Default Apps"
-msgstr "Aplikazio lehenetsiak"
-
-#: panels/applications/cc-applications-panel.blp:118
-msgid "Removable Media"
-msgstr "Euskarri aldagarriak"
-
-#: panels/applications/cc-applications-panel.blp:121
-msgid "Med_ia Autostart"
-msgstr "Mult_imedien abiarazte automatikoa"
-
-#: panels/applications/cc-applications-panel.blp:122
-msgid "Start apps or prompt when media is connected"
-msgstr "Abiarazi aplikazioak edo galdetu multimediak konektatzen direnean"
-
-#: panels/applications/cc-applications-panel.blp:134
+#: panels/applications/cc-applications-panel.blp:110
 msgid "App Settings"
 msgstr "Aplikazio-ezarpenak"
 
-#: panels/applications/cc-applications-panel.blp:146
+#: panels/applications/cc-applications-panel.blp:122
 msgid "App is not sandboxed"
 msgstr "Aplikazioa ez dago isolatuta"
 
-#: panels/applications/cc-applications-panel.blp:153
+#: panels/applications/cc-applications-panel.blp:129
 msgid ""
 "App settings cannot be fully enforced for apps which are not sandboxed. "
 "These apps may use permissions which are not shown."
@@ -212,24 +195,24 @@ msgstr ""
 "Aplikazio-ezarpenak ezin dira guztiz behartu isolatuta ez dauden "
 "aplikazioetan. Aplikazio horiek erakusten ez diren baimenak eduki ditzakete."
 
-#: panels/applications/cc-applications-panel.blp:189
+#: panels/applications/cc-applications-panel.blp:165
 msgid "_Open"
 msgstr "_Ireki"
 
-#: panels/applications/cc-applications-panel.blp:201
+#: panels/applications/cc-applications-panel.blp:177
 msgid "App _Details"
 msgstr "Aplikazioaren _xehetasunak"
 
-#: panels/applications/cc-applications-panel.blp:214
+#: panels/applications/cc-applications-panel.blp:190
 msgid "Permissions"
 msgstr "Baimenak"
 
 #. Translators: This row shows/sets whether the app shown in this page can add results to the GNOME Shell search results. Internally this enables/disables the app's Shell Search Provider
-#: panels/applications/cc-applications-panel.blp:218
+#: panels/applications/cc-applications-panel.blp:194
 msgid "_Search"
 msgstr "_Bilatu"
 
-#: panels/applications/cc-applications-panel.blp:219
+#: panels/applications/cc-applications-panel.blp:195
 msgid "Receive system searches and send results"
 msgstr "Jaso sistema-bilaketak eta bidali emaitzak"
 
@@ -239,222 +222,222 @@ msgstr "Jaso sistema-bilaketak eta bidali emaitzak"
 #. TRANSLATORS: device status
 #. translators:
 #. * The device has been disabled
-#: panels/applications/cc-applications-panel.blp:227
-#: panels/applications/cc-applications-panel.blp:269
-#: panels/applications/cc-applications-panel.blp:290
-#: panels/applications/cc-applications-panel.blp:304
-#: panels/applications/cc-applications-panel.blp:318
+#: panels/applications/cc-applications-panel.blp:203
+#: panels/applications/cc-applications-panel.blp:245
+#: panels/applications/cc-applications-panel.blp:266
+#: panels/applications/cc-applications-panel.blp:280
+#: panels/applications/cc-applications-panel.blp:294
 #: panels/keyboard/cc-keyboard-panel.c:87
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:120
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336
 #: panels/system/users/cc-user-page.c:368
 #: panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:483
-#: subprojects/gvc/gvc-mixer-control.c:1910
+#: subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "Desgaituta"
 
-#: panels/applications/cc-applications-panel.blp:232
+#: panels/applications/cc-applications-panel.blp:208
 msgid "_Notifications"
 msgstr "_Jakinarazpenak"
 
-#: panels/applications/cc-applications-panel.blp:233
+#: panels/applications/cc-applications-panel.blp:209
 msgid "Show system notifications"
 msgstr "Erakutsi sistemaren jakinarazpenak"
 
-#: panels/applications/cc-applications-panel.blp:239
+#: panels/applications/cc-applications-panel.blp:215
 msgid "_Run in Background"
 msgstr "_Exekutatu atzeko planoan"
 
-#: panels/applications/cc-applications-panel.blp:240
+#: panels/applications/cc-applications-panel.blp:216
 msgid "Allow activity when the app is closed"
 msgstr "Onartu jarduera aplikazioa itxita dagoenean"
 
-#: panels/applications/cc-applications-panel.blp:246
+#: panels/applications/cc-applications-panel.blp:222
 msgid "Scr_eenshots"
 msgstr "_Pantaila-argazkiak"
 
-#: panels/applications/cc-applications-panel.blp:247
+#: panels/applications/cc-applications-panel.blp:223
 msgid "Take pictures of the screen at any time"
 msgstr "Egin pantailaren argazkiak nahieran"
 
-#: panels/applications/cc-applications-panel.blp:253
+#: panels/applications/cc-applications-panel.blp:229
 msgid "Change _Wallpaper"
 msgstr "Aldatu _horma-papera"
 
-#: panels/applications/cc-applications-panel.blp:254
+#: panels/applications/cc-applications-panel.blp:230
 msgid "Change the desktop wallpaper"
 msgstr "Aldatu mahaigainaren horma-papera"
 
-#: panels/applications/cc-applications-panel.blp:260
+#: panels/applications/cc-applications-panel.blp:236
 msgid "So_unds"
 msgstr "_Soinuak"
 
-#: panels/applications/cc-applications-panel.blp:261
-#: panels/applications/cc-applications-panel.blp:268
+#: panels/applications/cc-applications-panel.blp:237
+#: panels/applications/cc-applications-panel.blp:244
 msgid "Reproduce sounds"
 msgstr "Erreproduzitu soinuak"
 
-#: panels/applications/cc-applications-panel.blp:267
+#: panels/applications/cc-applications-panel.blp:243
 #: panels/sound/cc-sound-panel.blp:204
 msgid "Sounds"
 msgstr "Soinuak"
 
-#: panels/applications/cc-applications-panel.blp:274
+#: panels/applications/cc-applications-panel.blp:250
 msgid "_Inhibit Shortcuts"
 msgstr "_Indargabetu lasterbideak"
 
-#: panels/applications/cc-applications-panel.blp:275
+#: panels/applications/cc-applications-panel.blp:251
 msgid "Block standard keyboard shortcuts"
 msgstr "Bloketau teklatuko lasterbide estandarrak"
 
-#: panels/applications/cc-applications-panel.blp:281
+#: panels/applications/cc-applications-panel.blp:257
 msgid "C_amera"
 msgstr "K_amera"
 
-#: panels/applications/cc-applications-panel.blp:282
-#: panels/applications/cc-applications-panel.blp:289
+#: panels/applications/cc-applications-panel.blp:258
+#: panels/applications/cc-applications-panel.blp:265
 msgid "Take pictures with the camera"
 msgstr "Sortu irudiak kamerarekin"
 
-#: panels/applications/cc-applications-panel.blp:288
+#: panels/applications/cc-applications-panel.blp:264
 msgid "Camera"
 msgstr "Kamera"
 
-#: panels/applications/cc-applications-panel.blp:295
+#: panels/applications/cc-applications-panel.blp:271
 msgid "_Microphone"
 msgstr "_Mikrofonoa"
 
-#: panels/applications/cc-applications-panel.blp:296
-#: panels/applications/cc-applications-panel.blp:303
+#: panels/applications/cc-applications-panel.blp:272
+#: panels/applications/cc-applications-panel.blp:279
 msgid "Record audio with the microphone"
 msgstr "Grabatu audioa mikrofonoarekin"
 
-#: panels/applications/cc-applications-panel.blp:302
+#: panels/applications/cc-applications-panel.blp:278
 msgid "Microphone"
 msgstr "Mikrofonoa"
 
-#: panels/applications/cc-applications-panel.blp:309
+#: panels/applications/cc-applications-panel.blp:285
 msgid "_Location Services"
 msgstr "_Kokaleku-zerbitzuak"
 
-#: panels/applications/cc-applications-panel.blp:310
-#: panels/applications/cc-applications-panel.blp:317
+#: panels/applications/cc-applications-panel.blp:286
+#: panels/applications/cc-applications-panel.blp:293
 msgid "Access device location data"
 msgstr "Atzitu gailuaren kokaleku-datuak"
 
-#: panels/applications/cc-applications-panel.blp:316
+#: panels/applications/cc-applications-panel.blp:292
 msgid "Location Services"
 msgstr "Kokaleku-zerbitzuak"
 
-#: panels/applications/cc-applications-panel.blp:325
+#: panels/applications/cc-applications-panel.blp:301
 msgid "Re_quired Permissions"
 msgstr "Be_harrezko baimenak"
 
-#: panels/applications/cc-applications-panel.blp:326
+#: panels/applications/cc-applications-panel.blp:302
 msgid "System permissions that the app requires"
 msgstr "Aplikazioak behar dituen sistema-baimenak"
 
-#: panels/applications/cc-applications-panel.blp:333
+#: panels/applications/cc-applications-panel.blp:309
 msgid "Global S_hortcuts"
 msgstr "Laster-tekla _globalak"
 
-#: panels/applications/cc-applications-panel.blp:334
+#: panels/applications/cc-applications-panel.blp:310
 msgid "Global actions that have been registered for use"
 msgstr "Erabiltzeko erregistratu diren ekintza globalak"
 
-#: panels/applications/cc-applications-panel.blp:341
+#: panels/applications/cc-applications-panel.blp:317
 #: panels/mouse/cc-mouse-panel.blp:58 panels/mouse/cc-mouse-panel.blp:175
 #: panels/power/cc-power-panel.blp:152
 msgid "General"
 msgstr "Orokorra"
 
-#: panels/applications/cc-applications-panel.blp:344
+#: panels/applications/cc-applications-panel.blp:320
 msgid "_Files &amp; Links"
 msgstr "_Fitxategiak eta estekak"
 
-#: panels/applications/cc-applications-panel.blp:345
+#: panels/applications/cc-applications-panel.blp:321
 msgid "File and link types that are opened by the app"
 msgstr "Aplikazioak irekitzen dituen fitxategi eta esteka motak"
 
-#: panels/applications/cc-applications-panel.blp:352
+#: panels/applications/cc-applications-panel.blp:328
 msgid "S_torage"
 msgstr "B_iltegiratzea"
 
-#: panels/applications/cc-applications-panel.blp:353
+#: panels/applications/cc-applications-panel.blp:329
 msgid "Disk space being used"
 msgstr "Erabiltzen ari den disko-espazioa"
 
-#: panels/applications/cc-applications-panel.blp:366
+#: panels/applications/cc-applications-panel.blp:342
 msgid "Required Permissions"
 msgstr "Beharrezko baimenak"
 
-#: panels/applications/cc-applications-panel.blp:389
+#: panels/applications/cc-applications-panel.blp:365
 msgid "Files & Links"
 msgstr "Fitxategiak eta estekak"
 
-#: panels/applications/cc-applications-panel.blp:399
+#: panels/applications/cc-applications-panel.blp:375
 msgid "File Types"
 msgstr "Fitxategi motak"
 
-#: panels/applications/cc-applications-panel.blp:403
+#: panels/applications/cc-applications-panel.blp:379
 msgid "Link Types"
 msgstr "Esteka motak"
 
-#: panels/applications/cc-applications-panel.blp:408
+#: panels/applications/cc-applications-panel.blp:384
 msgid "_Reset"
 msgstr "_Berrezarri"
 
-#: panels/applications/cc-applications-panel.blp:424
+#: panels/applications/cc-applications-panel.blp:400
 msgid "Storage"
 msgstr "Biltegiratzea"
 
-#: panels/applications/cc-applications-panel.blp:434
+#: panels/applications/cc-applications-panel.blp:410
 msgid "App"
 msgstr "Aplikazioa"
 
-#: panels/applications/cc-applications-panel.blp:442
+#: panels/applications/cc-applications-panel.blp:418
 msgid "Data"
 msgstr "Datuak"
 
-#: panels/applications/cc-applications-panel.blp:450
+#: panels/applications/cc-applications-panel.blp:426
 msgid "Cache"
 msgstr "Cachea"
 
-#: panels/applications/cc-applications-panel.blp:458
+#: panels/applications/cc-applications-panel.blp:434
 msgid "Total"
 msgstr "Guztira"
 
-#: panels/applications/cc-applications-panel.blp:468
+#: panels/applications/cc-applications-panel.blp:444
 msgid "_Clear Cache"
 msgstr "Garbitu _cachea"
 
-#: panels/applications/cc-applications-panel.c:871
+#: panels/applications/cc-applications-panel.c:865
 msgid "System Bus"
 msgstr "Sistemaren bus-a"
 
-#: panels/applications/cc-applications-panel.c:871
-#: panels/applications/cc-applications-panel.c:873
-#: panels/applications/cc-applications-panel.c:886
-#: panels/applications/cc-applications-panel.c:891
+#: panels/applications/cc-applications-panel.c:865
+#: panels/applications/cc-applications-panel.c:867
+#: panels/applications/cc-applications-panel.c:880
+#: panels/applications/cc-applications-panel.c:885
 msgid "Full access"
 msgstr "Sarbide osoa"
 
-#: panels/applications/cc-applications-panel.c:873
+#: panels/applications/cc-applications-panel.c:867
 msgid "Session Bus"
 msgstr "Saioaren bus-a"
 
-#: panels/applications/cc-applications-panel.c:877
+#: panels/applications/cc-applications-panel.c:871
 #: panels/privacy/bolt/cc-bolt-page.blp:118
 #: panels/privacy/bolt/cc-bolt-page.blp:143
 #: panels/privacy/cc-privacy-panel.blp:57
 msgid "Devices"
 msgstr "Gailuak"
 
-#: panels/applications/cc-applications-panel.c:877
+#: panels/applications/cc-applications-panel.c:871
 msgid "Full access to /dev"
 msgstr "Sarbide osoa /dev direktoriora"
 
-#: panels/applications/cc-applications-panel.c:881
+#: panels/applications/cc-applications-panel.c:875
 #: panels/network/cc-network-panel.blp:7
 #: panels/network/gnome-network-panel.desktop.in:2
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.blp:49
@@ -462,39 +445,39 @@ msgstr "Sarbide osoa /dev direktoriora"
 msgid "Network"
 msgstr "Sarea"
 
-#: panels/applications/cc-applications-panel.c:881
+#: panels/applications/cc-applications-panel.c:875
 msgid "Has network access"
 msgstr "Sarea atzitu dezake"
 
-#: panels/applications/cc-applications-panel.c:886
-#: panels/applications/cc-applications-panel.c:888
+#: panels/applications/cc-applications-panel.c:880
+#: panels/applications/cc-applications-panel.c:882
 #: panels/search/cc-search-locations-page.c:421
 msgid "Home"
 msgstr "Karpeta nagusia"
 
-#: panels/applications/cc-applications-panel.c:888
-#: panels/applications/cc-applications-panel.c:893
+#: panels/applications/cc-applications-panel.c:882
+#: panels/applications/cc-applications-panel.c:887
 msgid "Read-only"
 msgstr "Irakurtzeko soilik"
 
-#: panels/applications/cc-applications-panel.c:891
-#: panels/applications/cc-applications-panel.c:893
+#: panels/applications/cc-applications-panel.c:885
+#: panels/applications/cc-applications-panel.c:887
 msgid "File System"
 msgstr "Fitxategi-sistema"
 
-#: panels/applications/cc-applications-panel.c:897
+#: panels/applications/cc-applications-panel.c:891
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:7 shell/cc-window.blp:20
-#: shell/cc-window.c:804 shell/org.gnome.Settings.desktop.in:2
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:8 shell/cc-window.blp:20
+#: shell/cc-window.c:806 shell/org.gnome.Settings.desktop.in:2
 msgid "Settings"
 msgstr "Ezarpenak"
 
-#: panels/applications/cc-applications-panel.c:897
+#: panels/applications/cc-applications-panel.c:891
 msgid "Can change settings"
 msgstr "Ezarpenak aldatu ditzake"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:901
+#: panels/applications/cc-applications-panel.c:895
 #, c-format
 msgid ""
 "%s requires access to the following system resources. To stop this access, "
@@ -503,39 +486,39 @@ msgstr ""
 "%s aplikazioak hurrengo sistema-baliabideetara sartu behar du. Sarbide hori "
 "gelditzeko, aplikazioa kendu behar da."
 
-#: panels/applications/cc-applications-panel.c:905
+#: panels/applications/cc-applications-panel.c:899
 #, c-format
 msgid "%u permission"
 msgid_plural "%u permissions"
 msgstr[0] "Baimen %u"
 msgstr[1] "%u baimen"
 
-#: panels/applications/cc-applications-panel.c:1081
+#: panels/applications/cc-applications-panel.c:1075
 msgid "Type removed"
 msgstr "Mota kendu da"
 
-#: panels/applications/cc-applications-panel.c:1082
+#: panels/applications/cc-applications-panel.c:1076
 #: panels/background/cc-background-chooser.c:170
-#: panels/network/net-device-wifi.c:896 panels/printers/cc-printers-panel.c:673
+#: panels/network/net-device-wifi.c:896 panels/printers/cc-printers-panel.c:672
 msgid "_Undo"
 msgstr "_Desegin"
 
-#: panels/applications/cc-applications-panel.c:1097
+#: panels/applications/cc-applications-panel.c:1091
 #, c-format
 msgid "%d type removed"
 msgid_plural "%d types removed"
 msgstr[0] "Mota %d kendu da"
 msgstr[1] "%d mota kendu dira"
 
-#: panels/applications/cc-applications-panel.c:1126
+#: panels/applications/cc-applications-panel.c:1120
 msgid "Remove Link Type"
 msgstr "Kendu esteka mota"
 
-#: panels/applications/cc-applications-panel.c:1157
+#: panels/applications/cc-applications-panel.c:1151
 msgid "Remove File Type"
 msgstr "Kendu fitxategi mota"
 
-#: panels/applications/cc-applications-panel.c:1290
+#: panels/applications/cc-applications-panel.c:1284
 #, c-format
 msgid "%u type"
 msgid_plural "%u types"
@@ -543,56 +526,73 @@ msgstr[0] "Mota %u"
 msgstr[1] "%u mota"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:1299
+#: panels/applications/cc-applications-panel.c:1293
 #, c-format
 msgid "%s is used to open the following types of files and links"
 msgstr "%s hurrengo fitxategi motak eta estekak irekitzeko erabiltzen da"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:1342
+#: panels/applications/cc-applications-panel.c:1336
 #, c-format
 msgid "How much disk space %s is occupying with app data and caches"
 msgstr "Diskoko zenbat espazio betetzen ari den %s datuekin eta cacheekin"
 
-#: panels/applications/cc-applications-panel.c:1507
+#: panels/applications/cc-applications-panel.c:1501
 #, c-format
 msgid "%u action"
 msgid_plural "%u actions"
 msgstr[0] "Ekintza %u"
 msgstr[1] "%u ekintza"
 
-#: panels/applications/cc-default-apps-page.blp:8
+#: panels/applications/cc-default-apps-page.blp:5
+#: panels/applications/cc-default-apps-page.blp:14
+msgid "Default Apps"
+msgstr "Aplikazio lehenetsiak"
+
+#: panels/applications/cc-default-apps-page.blp:17
 msgid "_Web"
 msgstr "_Weba"
 
-#: panels/applications/cc-default-apps-page.blp:16
+#: panels/applications/cc-default-apps-page.blp:25
 msgid "_Mail"
 msgstr "_Mezua"
 
-#: panels/applications/cc-default-apps-page.blp:23
+#: panels/applications/cc-default-apps-page.blp:32
 msgid "_Calendar"
 msgstr "_Egutegia"
 
-#: panels/applications/cc-default-apps-page.blp:30
+#: panels/applications/cc-default-apps-page.blp:39
 msgid "M_usic"
 msgstr "M_usika"
 
-#: panels/applications/cc-default-apps-page.blp:38
+#: panels/applications/cc-default-apps-page.blp:47
 msgid "_Video"
 msgstr "_Bideoa"
 
-#: panels/applications/cc-default-apps-page.blp:46
+#: panels/applications/cc-default-apps-page.blp:55
 msgid "_Photos"
 msgstr "_Argazkiak"
 
 #. Translators: This is a telephone call
-#: panels/applications/cc-default-apps-page.blp:57
+#: panels/applications/cc-default-apps-page.blp:66
 msgid "Ca_lls"
 msgstr "_Deiak"
 
-#: panels/applications/cc-default-apps-page.blp:65
+#: panels/applications/cc-default-apps-page.blp:74
 msgid "_SMS"
 msgstr "_SMSa"
+
+#: panels/applications/cc-default-apps-page.blp:82
+msgid "Removable Media"
+msgstr "Euskarri aldagarriak"
+
+#: panels/applications/cc-default-apps-page.blp:85
+msgid "Med_ia Autostart"
+msgstr "Mult_imedien abiarazte automatikoa"
+
+#: panels/applications/cc-default-apps-page.blp:86
+msgid "Start apps or prompt when media is connected"
+msgstr "Abiarazi aplikazioak edo galdetu multimediak konektatzen direnean"
 
 #: panels/applications/cc-default-apps-row.c:138
 msgid "No Apps Available"
@@ -1011,43 +1011,43 @@ msgstr "Atzeko planoa"
 msgid "_Add Picture…"
 msgstr "_Gehitu irudia…"
 
-#: panels/background/cc-background-panel.c:139
+#: panels/background/cc-background-panel.c:127
 msgid "Blue"
 msgstr "Urdina"
 
-#: panels/background/cc-background-panel.c:141
+#: panels/background/cc-background-panel.c:129
 msgid "Teal"
 msgstr "Anila"
 
-#: panels/background/cc-background-panel.c:143
+#: panels/background/cc-background-panel.c:131
 msgid "Green"
 msgstr "Berdea"
 
-#: panels/background/cc-background-panel.c:145
+#: panels/background/cc-background-panel.c:133
 msgid "Yellow"
 msgstr "Horia"
 
-#: panels/background/cc-background-panel.c:147
+#: panels/background/cc-background-panel.c:135
 msgid "Orange"
 msgstr "Laranja"
 
-#: panels/background/cc-background-panel.c:149
+#: panels/background/cc-background-panel.c:137
 msgid "Red"
 msgstr "Gorria"
 
-#: panels/background/cc-background-panel.c:151
+#: panels/background/cc-background-panel.c:139
 msgid "Pink"
 msgstr "Arrosa"
 
-#: panels/background/cc-background-panel.c:153
+#: panels/background/cc-background-panel.c:141
 msgid "Purple"
 msgstr "Morea"
 
-#: panels/background/cc-background-panel.c:155
+#: panels/background/cc-background-panel.c:143
 msgid "Slate"
 msgstr "Grisa"
 
-#: panels/background/cc-background-panel.c:341
+#: panels/background/cc-background-panel.c:329
 msgid "Current background"
 msgstr "Uneko atzeko planoa"
 
@@ -2424,7 +2424,7 @@ msgid "_Compose Key"
 msgstr "_Compose tekla"
 
 #: panels/keyboard/cc-keyboard-panel.blp:70
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:7
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:5
 msgid "Keyboard Shortcuts"
 msgstr "Laster-teklak"
 
@@ -2449,6 +2449,7 @@ msgid "Layout Default"
 msgstr "Diseinu-lehenespena"
 
 #: panels/keyboard/cc-keyboard-panel.c:66
+#: panels/universal-access/cc-cursor-size-page.c:80
 #: panels/universal-access/cc-ua-seeing-page.c:123
 msgid "Default"
 msgstr "Lehenetsia"
@@ -2503,13 +2504,13 @@ msgstr "Compose tekla"
 msgid ""
 "The compose key allows a wide variety of characters to be entered. To use "
 "it, press compose then a sequence of characters.  For example, compose key "
-"followed by <b>o</b> and <b>c</b> will enter <b>©</b>, <b>a</b> followed by "
-"<b>'</b> will enter <b>á</b>."
+"followed by <b>o</b> and <b>c</b> will enter <b>©</b>, <b>'</b> followed by "
+"<b>a</b> will enter <b>á</b>."
 msgstr ""
 "Compose teklak mota askotako karaktereak sartzea ahalbidetzen du. Hura "
 "erabiltzeko, sakatu Compose tekla eta, ondoren, karaktereen sekuentzia bat.  "
 "Adibidez, Compose tekla sakatuta, eta ondoren <b>o</b> eta <b>c</b> "
-"erabilita, <b>©</b> sartuko du; <b>a</b> eta ondoren <b>'</b> erabilita, "
+"erabilita, <b>©</b> sartuko du; <b>'</b> eta ondoren <b>a</b> erabilita, "
 "<b>á</b> sartuko du."
 
 #: panels/keyboard/cc-keyboard-panel.c:94
@@ -2545,52 +2546,6 @@ msgid ""
 msgstr ""
 "Sarrerako iturburuak %s lasterbidea erabilita txandakatu daitezke.\n"
 "Lasterbide hori ezarpenetan aldatu daiteke."
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:32
-msgid "Search shortcuts"
-msgstr "Bilaketaren lasterbideak"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:37
-msgid "Search Shortcuts"
-msgstr "Bilatu lasterbideak"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:65
-msgid "Activities _Overview Shortcut"
-msgstr "Ikuspegi _orokorraren lasterbidea"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:67
-msgid "Use the Super key to open the overview"
-msgstr "Erabili Super tekla ikuspegia irekitzeko"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:73
-msgid "_Reset All…"
-msgstr "_Berrezarri denak…"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:115
-msgid "Add Custom Shortcuts"
-msgstr "Gehitu lasterbide pertsonalizatuak"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:116
-msgid "Set up custom shortcuts for launching apps, running scripts, and more"
-msgstr ""
-"Konfiguratu lasterbide pertsonalizatuak aplikazioak abiarazteko, scriptak "
-"exekutatzeko eta gehiagorako"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:121
-msgid "_Add Shortcut…"
-msgstr "Ge_hitu lasterbidea…"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:137
-msgid "Reset All Shortcuts?"
-msgstr "Berrezarri lasterbide guztiak?"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:138
-msgid "All changes to keyboard shortcuts will be lost"
-msgstr "Laster-tekla guztiei egindako aldaketa guztiak galduko dira"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.blp:145
-msgid "_Reset All"
-msgstr "_Berrezarri denak"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:44
 msgid "Re_place"
@@ -2691,6 +2646,52 @@ msgstr[1] "%d aldatu da"
 msgid "_Add Shortcut"
 msgstr "Ge_hitu lasterbidea"
 
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:24
+msgid "Search shortcuts"
+msgstr "Bilaketaren lasterbideak"
+
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:29
+msgid "Search Shortcuts"
+msgstr "Bilatu lasterbideak"
+
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:57
+msgid "Activities _Overview Shortcut"
+msgstr "Ikuspegi _orokorraren lasterbidea"
+
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:59
+msgid "Use the Super key to open the overview"
+msgstr "Erabili Super tekla ikuspegia irekitzeko"
+
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:65
+msgid "_Reset All…"
+msgstr "_Berrezarri denak…"
+
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:103
+msgid "Add Custom Shortcuts"
+msgstr "Gehitu lasterbide pertsonalizatuak"
+
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:104
+msgid "Set up custom shortcuts for launching apps, running scripts, and more"
+msgstr ""
+"Konfiguratu lasterbide pertsonalizatuak aplikazioak abiarazteko, scriptak "
+"exekutatzeko eta gehiagorako"
+
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:109
+msgid "_Add Shortcut…"
+msgstr "Ge_hitu lasterbidea…"
+
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:123
+msgid "Reset All Shortcuts?"
+msgstr "Berrezarri lasterbide guztiak?"
+
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:124
+msgid "All changes to keyboard shortcuts will be lost"
+msgstr "Laster-tekla guztiei egindako aldaketa guztiak galduko dira"
+
+#: panels/keyboard/cc-keyboard-shortcut-page.blp:131
+msgid "_Reset All"
+msgstr "_Berrezarri denak"
+
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:3
 msgid ""
 "Change keyboard shortcuts and set your typing preferences, keyboard layouts "
@@ -2732,20 +2733,20 @@ msgstr "E_skuina"
 msgid "Mouse"
 msgstr "Sagua"
 
-#: panels/mouse/cc-mouse-panel.blp:95 panels/mouse/cc-mouse-panel.blp:183
-#: panels/mouse/cc-mouse-panel.blp:291
+#: panels/mouse/cc-mouse-panel.blp:95 panels/mouse/cc-mouse-panel.blp:188
+#: panels/mouse/cc-mouse-panel.blp:296
 msgid "Po_inter Speed"
 msgstr "Erakuslearen _abiadura"
 
-#: panels/mouse/cc-mouse-panel.blp:104 panels/mouse/cc-mouse-panel.blp:192
-#: panels/mouse/cc-mouse-panel.blp:300
+#: panels/mouse/cc-mouse-panel.blp:104 panels/mouse/cc-mouse-panel.blp:197
+#: panels/mouse/cc-mouse-panel.blp:305
 #: panels/universal-access/cc-ua-typing-page.blp:52
 #: panels/universal-access/cc-ua-typing-page.blp:97
 msgid "Slow"
 msgstr "Motela"
 
-#: panels/mouse/cc-mouse-panel.blp:106 panels/mouse/cc-mouse-panel.blp:194
-#: panels/mouse/cc-mouse-panel.blp:302
+#: panels/mouse/cc-mouse-panel.blp:106 panels/mouse/cc-mouse-panel.blp:199
+#: panels/mouse/cc-mouse-panel.blp:307
 #: panels/universal-access/cc-ua-typing-page.blp:50
 #: panels/universal-access/cc-ua-typing-page.blp:95
 msgid "Fast"
@@ -2755,7 +2756,7 @@ msgstr "Bizkorra"
 msgid "Mouse _Acceleration"
 msgstr "Saguaren a_zelerazioa"
 
-#: panels/mouse/cc-mouse-panel.blp:120 panels/mouse/cc-mouse-panel.blp:316
+#: panels/mouse/cc-mouse-panel.blp:120 panels/mouse/cc-mouse-panel.blp:321
 msgid "Recommended for most users and applications"
 msgstr "Erabiltzaile eta aplikazio gehienetarako gomendatua"
 
@@ -2767,7 +2768,7 @@ msgstr ""
 "Saguaren azelerazioa desaktibatzen bada, mugimenduak azkarragoak eta "
 "zehatzagoak izango dira, baina sagua erabiltzea zailagoa izan daiteke."
 
-#: panels/mouse/cc-mouse-panel.blp:137 panels/mouse/cc-mouse-panel.blp:259
+#: panels/mouse/cc-mouse-panel.blp:137 panels/mouse/cc-mouse-panel.blp:264
 msgid "Scroll Direction"
 msgstr "Korritzearen norabidea"
 
@@ -2775,20 +2776,20 @@ msgstr "Korritzearen norabidea"
 msgid "Tra_ditional"
 msgstr "Tra_dizionala"
 
-#: panels/mouse/cc-mouse-panel.blp:139 panels/mouse/cc-mouse-panel.blp:261
+#: panels/mouse/cc-mouse-panel.blp:139 panels/mouse/cc-mouse-panel.blp:266
 msgid "Scrolling moves the view"
 msgstr "Korritzeak ikuspegia aldatzen du lekuz"
 
-#: panels/mouse/cc-mouse-panel.blp:141 panels/mouse/cc-mouse-panel.blp:263
+#: panels/mouse/cc-mouse-panel.blp:141 panels/mouse/cc-mouse-panel.blp:268
 msgid "_Natural"
 msgstr "_Naturala"
 
-#: panels/mouse/cc-mouse-panel.blp:142 panels/mouse/cc-mouse-panel.blp:264
+#: panels/mouse/cc-mouse-panel.blp:142 panels/mouse/cc-mouse-panel.blp:269
 msgid "Scrolling moves the content"
 msgstr "Korritzeak edukia aldatzen du lekuz"
 
-#: panels/mouse/cc-mouse-panel.blp:149 panels/mouse/cc-mouse-panel.blp:271
-#: panels/mouse/cc-mouse-panel.blp:335 panels/wacom/cc-wacom-panel.blp:11
+#: panels/mouse/cc-mouse-panel.blp:149 panels/mouse/cc-mouse-panel.blp:276
+#: panels/mouse/cc-mouse-panel.blp:340 panels/wacom/cc-wacom-panel.blp:11
 msgid "Test _Settings"
 msgstr "Probatu _ezarpenak"
 
@@ -2801,82 +2802,86 @@ msgid "T_ouchpad"
 msgstr "U_kipen-panela"
 
 #: panels/mouse/cc-mouse-panel.blp:178
-msgid "_Disable Touchpad While Typing"
-msgstr "_Desgaitu ukipen-panela idaztean"
+msgid "_Disable While Typing"
+msgstr "_Desgaitu idaztean"
 
-#: panels/mouse/cc-mouse-panel.blp:208
+#: panels/mouse/cc-mouse-panel.blp:183
+msgid "Disable While a _Mouse Is Connected"
+msgstr "Desgaitu _sagua konektatua dagoenean"
+
+#: panels/mouse/cc-mouse-panel.blp:213
 msgid "Clicking"
 msgstr "Klik egitea"
 
-#: panels/mouse/cc-mouse-panel.blp:212 panels/mouse/cc-mouse-test.blp:110
+#: panels/mouse/cc-mouse-panel.blp:217 panels/mouse/cc-mouse-test.blp:110
 msgid "Secondary Click"
 msgstr "Bigarren mailako klik egitea"
 
-#: panels/mouse/cc-mouse-panel.blp:213
+#: panels/mouse/cc-mouse-panel.blp:218
 msgid "Two _Finger Push"
 msgstr "Bi hatzeko _bultzada"
 
-#: panels/mouse/cc-mouse-panel.blp:214
+#: panels/mouse/cc-mouse-panel.blp:219
 msgid "Push anywhere with 2 fingers"
 msgstr "Bultzatu edonora bi hatzekin"
 
-#: panels/mouse/cc-mouse-panel.blp:216
+#: panels/mouse/cc-mouse-panel.blp:221
 msgid "_Corner Push"
 msgstr "_Izkinako bultzada"
 
-#: panels/mouse/cc-mouse-panel.blp:217
+#: panels/mouse/cc-mouse-panel.blp:222
 msgid "Push with a single finger in the corner"
 msgstr "Bultzatu hatz bakarrarekin izkinatik"
 
-#: panels/mouse/cc-mouse-panel.blp:227
+#: panels/mouse/cc-mouse-panel.blp:232
 msgid "T_ap to Click"
 msgstr "K_olpetxoa klik egiteko"
 
-#: panels/mouse/cc-mouse-panel.blp:229
+#: panels/mouse/cc-mouse-panel.blp:234
 msgid "Quickly touch the touchpad to click"
 msgstr "Klik egiteko, ukitu panela azkar"
 
-#: panels/mouse/cc-mouse-panel.blp:240
+#: panels/mouse/cc-mouse-panel.blp:245
 msgid "Scrolling"
 msgstr "Korritzea"
 
-#: panels/mouse/cc-mouse-panel.blp:244
+#: panels/mouse/cc-mouse-panel.blp:249
 msgid "Scroll Method"
 msgstr "Korritze-metodoa"
 
-#: panels/mouse/cc-mouse-panel.blp:245
+#: panels/mouse/cc-mouse-panel.blp:250
 msgid "T_wo Finger"
 msgstr "_Bi hatz"
 
-#: panels/mouse/cc-mouse-panel.blp:246
+#: panels/mouse/cc-mouse-panel.blp:251
 msgid "Drag two fingers on the touchpad"
 msgstr "Arrastatu bi hatz ukipen-panelean"
 
-#: panels/mouse/cc-mouse-panel.blp:248
+#: panels/mouse/cc-mouse-panel.blp:253
 msgid "_Edge"
 msgstr "_Ertza"
 
-#: panels/mouse/cc-mouse-panel.blp:249
+#: panels/mouse/cc-mouse-panel.blp:254
 msgid "Drag one finger on the edge"
 msgstr "Arrastatu hatz bat ertzera"
 
-#: panels/mouse/cc-mouse-panel.blp:260
+#: panels/mouse/cc-mouse-panel.blp:265
 msgid "T_raditional"
 msgstr "T_radizionala"
 
-#: panels/mouse/cc-mouse-panel.blp:282
+#: panels/mouse/cc-mouse-panel.blp:287
 msgid "_Pointing Stick"
 msgstr "_Makila erakuslea"
 
-#: panels/mouse/cc-mouse-panel.blp:288
+#: panels/mouse/cc-mouse-panel.blp:293
 msgid "Pointing Stick"
 msgstr "Makila erakuslea"
 
-#: panels/mouse/cc-mouse-panel.blp:315
+#: panels/mouse/cc-mouse-panel.blp:320
 msgid "Pointing Stick _Acceleration"
 msgstr "Makila erakuslearen a_zelerazioa"
 
-#: panels/mouse/cc-mouse-panel.blp:323
+#: panels/mouse/cc-mouse-panel.blp:328
 msgid ""
 "Turning pointing stick acceleration off can allow faster and more precise "
 "movements, but can also make the pointing stick more difficult to use."
@@ -3077,8 +3082,8 @@ msgstr "HTTP proxya"
 #: panels/network/cc-net-proxy-page.blp:109
 #: panels/network/cc-net-proxy-page.blp:126
 #: panels/network/cc-net-proxy-page.blp:143
-msgid "URL"
-msgstr "URLa"
+msgid "Host"
+msgstr "Ostalaria"
 
 #: panels/network/cc-net-proxy-page.blp:96
 #: panels/network/cc-net-proxy-page.blp:113
@@ -3096,8 +3101,8 @@ msgid "FTP Proxy"
 msgstr "FTP proxya"
 
 #: panels/network/cc-net-proxy-page.blp:140
-msgid "SOCKS Host"
-msgstr "SOCKS ostalaria"
+msgid "SOCKS Proxy"
+msgstr "SOCKS proxya"
 
 #: panels/network/cc-net-proxy-page.blp:158
 msgid "Ignored Hosts"
@@ -3127,6 +3132,7 @@ msgid "Add VPN"
 msgstr "Gehitu VPNa"
 
 #: panels/network/cc-network-panel.blp:73
+#: panels/network/network-ethernet.blp:22
 msgid "Not set up"
 msgstr "Konfiguratu gabe"
 
@@ -3154,7 +3160,7 @@ msgstr "Sarearen izena"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-qr-code-dialog.blp:64
-#: panels/network/cc-wifi-hotspot-dialog.blp:79
+#: panels/network/cc-wifi-hotspot-dialog.blp:83
 #: panels/printers/pp-jobs-dialog.blp:171
 #: panels/printers/pp-new-printer-dialog.ui:300
 #: panels/system/users/cc-add-user-dialog.blp:89
@@ -3164,7 +3170,7 @@ msgstr "Pasahitza"
 
 #: panels/network/cc-wifi-connection-row.blp:49
 #: panels/network/network-bluetooth.blp:16
-#: panels/network/network-ethernet.blp:43
+#: panels/network/network-ethernet.blp:63
 msgid "Network Options"
 msgstr "Sareko aukerak"
 
@@ -3223,15 +3229,15 @@ msgstr ""
 "haiek konektatu ahal izango diren wifi-sare bat sortuko baituzu. Hori "
 "egiteko, wifi bidezkoa ez den interneteko konexio bat izan behar duzu."
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:92
+#: panels/network/cc-wifi-hotspot-dialog.blp:96
 msgid "Generate Random Password"
 msgstr "Sortu ausazko pasahitza"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:93
+#: panels/network/cc-wifi-hotspot-dialog.blp:97
 msgid "Autogenerate Password"
 msgstr "Sortu pasahitza automatikoki"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:128
+#: panels/network/cc-wifi-hotspot-dialog.blp:135
 msgid "_Turn On"
 msgstr "_Piztu"
 
@@ -3486,7 +3492,7 @@ msgid "Never"
 msgstr "Inoiz ere ez"
 
 #: panels/network/connection-editor/ce-page-details.c:192
-#: panels/network/net-device-ethernet.c:105
+#: panels/network/net-device-ethernet.c:106
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -3550,35 +3556,35 @@ msgstr "Oso ona"
 
 #: panels/network/connection-editor/ce-page-details.c:446
 #: panels/network/connection-editor/details-page.blp:102
-#: panels/network/net-device-ethernet.c:144
+#: panels/network/net-device-ethernet.c:145
 #: panels/network/net-device-mobile.c:441
 msgid "IPv4 Address"
 msgstr "IPv4 helbidea"
 
 #: panels/network/connection-editor/ce-page-details.c:447
 #: panels/network/connection-editor/details-page.blp:119
-#: panels/network/net-device-ethernet.c:146
+#: panels/network/net-device-ethernet.c:147
 #: panels/network/net-device-mobile.c:442 panels/network/network-mobile.ui:177
 msgid "IPv6 Address"
 msgstr "IPv6 helbidea"
 
 #: panels/network/connection-editor/ce-page-details.c:449
 #: panels/network/connection-editor/ce-page-details.c:450
-#: panels/network/net-device-ethernet.c:149
-#: panels/network/net-device-ethernet.c:151
+#: panels/network/net-device-ethernet.c:150
+#: panels/network/net-device-ethernet.c:152
 #: panels/network/net-device-mobile.c:445
 #: panels/network/net-device-mobile.c:446 panels/network/network-mobile.ui:163
 msgid "IP Address"
 msgstr "IP helbidea"
 
 #: panels/network/connection-editor/ce-page-details.c:454
-#: panels/network/net-device-ethernet.c:166
+#: panels/network/net-device-ethernet.c:167
 #: panels/network/net-device-mobile.c:450
 msgid "DNS4"
 msgstr "DNS4"
 
 #: panels/network/connection-editor/ce-page-details.c:455
-#: panels/network/net-device-ethernet.c:167
+#: panels/network/net-device-ethernet.c:168
 #: panels/network/net-device-mobile.c:451
 msgid "DNS6"
 msgstr "DNS6"
@@ -3589,8 +3595,8 @@ msgstr "DNS6"
 #: panels/network/connection-editor/details-page.blp:206
 #: panels/network/connection-editor/ip4-page.blp:166
 #: panels/network/connection-editor/ip6-page.blp:177
-#: panels/network/net-device-ethernet.c:169
-#: panels/network/net-device-ethernet.c:171
+#: panels/network/net-device-ethernet.c:170
+#: panels/network/net-device-ethernet.c:172
 #: panels/network/net-device-mobile.c:453
 #: panels/network/net-device-mobile.c:454 panels/network/network-mobile.ui:206
 #: panels/network/network-mobile.ui:221
@@ -3687,9 +3693,9 @@ msgstr "WireGuard"
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:167
 #: panels/sound/cc-alert-chooser-page.c:350
 #: panels/system/about/cc-about-page.c:73
-#: panels/system/about/cc-system-details-window.c:290
-#: panels/system/about/cc-system-details-window.c:342
-#: panels/system/about/cc-system-details-window.c:872
+#: panels/system/about/cc-system-details-window.c:288
+#: panels/system/about/cc-system-details-window.c:340
+#: panels/system/about/cc-system-details-window.c:852
 #: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Ezezaguna"
@@ -3716,7 +3722,7 @@ msgid "1Mb/sec"
 msgstr "1Mb/sec"
 
 #: panels/network/connection-editor/details-page.blp:136
-#: panels/network/net-device-ethernet.c:154
+#: panels/network/net-device-ethernet.c:155
 msgid "Hardware Address"
 msgstr "Hardwarearen helbidea"
 
@@ -3725,9 +3731,9 @@ msgid "Supported Frequencies"
 msgstr "Onartutako maiztasunak"
 
 #: panels/network/connection-editor/details-page.blp:170
-#: panels/network/net-device-ethernet.c:158
-#: panels/network/net-device-ethernet.c:160
-#: panels/network/net-device-ethernet.c:162
+#: panels/network/net-device-ethernet.c:159
+#: panels/network/net-device-ethernet.c:161
+#: panels/network/net-device-ethernet.c:163
 #: panels/network/network-mobile.ui:191
 msgid "Default Route"
 msgstr "Ibilbide lehenetsia"
@@ -3932,8 +3938,8 @@ msgstr ""
 "Errorea: %s."
 
 #: panels/network/connection-editor/vpn-helpers.c:148
-#: panels/system/users/cc-add-user-dialog.c:88
-#: panels/system/users/cc-password-dialog.c:165 shell/cc-window.blp:77
+#: panels/system/users/cc-add-user-dialog.c:98
+#: panels/system/users/cc-password-dialog.c:165
 msgid "_OK"
 msgstr "_Ados"
 
@@ -4021,7 +4027,7 @@ msgid "No peers set up"
 msgstr "Ez da parekorik konfiguratu"
 
 #: panels/network/connection-editor/wireguard-peer.blp:45
-#: panels/network/net-device-ethernet.c:326
+#: panels/network/net-device-ethernet.c:327
 #: panels/network/network-mobile.ui:328
 msgid "Options…"
 msgstr "Aukerak…"
@@ -4096,7 +4102,7 @@ msgid "seconds"
 msgstr "segundo"
 
 #: panels/network/connection-editor/wireguard-peer.blp:227
-#: panels/universal-access/cc-ua-seeing-page.blp:115
+#: panels/universal-access/cc-ua-seeing-page.blp:109
 msgid "Apply"
 msgstr "Aplikatu"
 
@@ -4118,25 +4124,25 @@ msgstr "Kontrolatu haririk gabeko sareetara nola konektatuko zaren"
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr "Sarea;Haririk gabea;Wi-Fia;Wifia;IPa;LANa;Bandazabala;DNSa;Wifigunea;"
 
-#: panels/network/net-device-ethernet.c:93
+#: panels/network/net-device-ethernet.c:94
 msgid "never"
 msgstr "inoiz ere ez"
 
-#: panels/network/net-device-ethernet.c:101
+#: panels/network/net-device-ethernet.c:102
 msgid "today"
 msgstr "gaur"
 
-#: panels/network/net-device-ethernet.c:103
+#: panels/network/net-device-ethernet.c:104
 msgid "yesterday"
 msgstr "atzo"
 
-#: panels/network/net-device-ethernet.c:177
+#: panels/network/net-device-ethernet.c:178
 msgid "Last used"
 msgstr "Erabilitako azkena"
 
 #. Translators: the %'d is replaced by the network device speed with
 #. * thousands separator, so do not change to %d
-#: panels/network/net-device-ethernet.c:218
+#: panels/network/net-device-ethernet.c:219
 #, c-format
 msgid "%'d Mb/s"
 msgstr "%'d Mb/s"
@@ -4146,7 +4152,7 @@ msgstr "%'d Mb/s"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:265
+#: panels/network/net-device-ethernet.c:266
 #: panels/network/network-bluetooth.blp:6 panels/network/network-ethernet.blp:5
 msgid "Wired"
 msgstr "Hariduna"
@@ -4964,47 +4970,47 @@ msgstr ""
 "Esekitze automatikoa gaituta uztea gomendatzen da."
 
 #. TRANSLATORS: This is the same title as the title from the .ui file, but without mnemonic
-#: panels/power/cc-power-panel.c:211
+#: panels/power/cc-power-panel.c:228
 msgid "Power Saving"
 msgstr "Energia aurreztea"
 
-#: panels/power/cc-power-panel.c:311
+#: panels/power/cc-power-panel.c:328
 msgid "Battery Levels"
 msgstr "Bateria-mailak"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:316
+#: panels/power/cc-power-panel.c:333
 msgid "UPS"
 msgstr "UPS"
 
-#: panels/power/cc-power-panel.c:319
+#: panels/power/cc-power-panel.c:336
 msgid "Battery Level"
 msgstr "Bateria-maila"
 
-#: panels/power/cc-power-panel.c:569
+#: panels/power/cc-power-panel.c:580
 msgid "Suspend"
 msgstr "Eseki"
 
-#: panels/power/cc-power-panel.c:570
+#: panels/power/cc-power-panel.c:581
 msgid "Power Off"
 msgstr "Itzali"
 
-#: panels/power/cc-power-panel.c:571
+#: panels/power/cc-power-panel.c:582
 msgid "Hibernate"
 msgstr "Hibernatu"
 
-#: panels/power/cc-power-panel.c:572
+#: panels/power/cc-power-panel.c:583
 msgid "Nothing"
 msgstr "Ezer ez"
 
-#: panels/power/cc-power-panel.c:877
+#: panels/power/cc-power-panel.c:967
 msgid "Performance mode temporarily disabled due to high operating temperature"
 msgstr ""
 "Errendimendu modua desgaitu egin da aldi batez laneko tenperatura asko igo "
 "delako"
 
-#: panels/power/cc-power-panel.c:879
+#: panels/power/cc-power-panel.c:969
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -5012,11 +5018,11 @@ msgstr ""
 "Eramangarria detektatu da: errendimendu modua ez dago erabilgarri momentu "
 "honetan. Eraman gailua gainazal egonkor batera hura leheneratzeko."
 
-#: panels/power/cc-power-panel.c:881
+#: panels/power/cc-power-panel.c:971
 msgid "Performance mode temporarily disabled"
 msgstr "Errendimendu modua desgaitu egin da aldi batez"
 
-#: panels/power/cc-power-panel.c:923
+#: panels/power/cc-power-panel.c:1013
 msgid ""
 "Power saver enabled due to low battery. Previous mode will be restored when "
 "battery is charged."
@@ -5025,13 +5031,13 @@ msgstr ""
 "dagoenean aurreko modua leheneratuko da."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:931
+#: panels/power/cc-power-panel.c:1021
 #, c-format
 msgid "Power Saver mode activated by “%s”"
 msgstr "Energia aurrezteko modua aktibatuta: “%s”"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:935
+#: panels/power/cc-power-panel.c:1025
 #, c-format
 msgid "Performance mode activated by “%s”"
 msgstr "Errendimendu modua aktibatuta: “%s”"
@@ -5081,7 +5087,7 @@ msgstr ""
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
 #: panels/printers/cc-printers-panel.blp:34
-#: panels/printers/cc-printers-panel.blp:113
+#: panels/printers/cc-printers-panel.blp:107
 msgid "_Add Printer…"
 msgstr "Ge_hitu inprimagailua…"
 
@@ -5089,27 +5095,27 @@ msgstr "Ge_hitu inprimagailua…"
 msgid "Search printers"
 msgstr "Bilatu inprimagailuak"
 
-#: panels/printers/cc-printers-panel.blp:109
+#: panels/printers/cc-printers-panel.blp:103
 msgid "No Printers"
 msgstr "Inprimagailurik ez"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.blp:134
+#: panels/printers/cc-printers-panel.blp:128
 msgid "No Print Service"
 msgstr "Ez dago inprimatzeko zerbitzurik"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.blp:137
+#: panels/printers/cc-printers-panel.blp:131
 msgid "The system printing service doesn’t seem to be available"
 msgstr "Badirudi sistemako inprimatzeko zerbitzua ez dagoela erabilgarri"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:683
+#: panels/printers/cc-printers-panel.c:682
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "\"%s” inprimagailua ezabatu da"
 
-#: panels/printers/cc-printers-panel.c:925
+#: panels/printers/cc-printers-panel.c:916
 msgid "Failed to add new printer."
 msgstr "Huts egin du inprimagailu berria gehitzean."
 
@@ -5424,7 +5430,7 @@ msgstr "Zerbitzariak autentifikazioa eskatzen du"
 #. Translators: this is the "go back" action of a button
 #: panels/printers/pp-new-printer-dialog.ui:78
 #: panels/system/users/cc-fingerprint-dialog.blp:24
-#: panels/wacom/cc-wacom-stylus-page.c:426
+#: panels/wacom/cc-wacom-stylus-page.c:428
 #: panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
 msgstr "Atzera"
@@ -6099,13 +6105,13 @@ msgstr ""
 "edo informatikako teknikariekin."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:71
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:70
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:122
 msgid "Secure Boot is Active"
 msgstr "Abio segurua aktibatuta dago"
 
 #. TRANSLATORS: this is the first section of the decription
-#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:76
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:75
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned on and is functioning correctly."
@@ -6114,12 +6120,12 @@ msgstr ""
 "kargatu dadin. Une honetan aktibatuta dago eta ongi funtzionatzen du."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:82
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:81
 msgid "Secure Boot Has Problems"
 msgstr "Abio seguruak arazoak ditu"
 
 #. TRANSLATORS: this is the first section of the decription.
-#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:86
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:85
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned on, but will not work due to having an "
@@ -6130,7 +6136,7 @@ msgstr ""
 "baliogabea duelako."
 
 #. TRANSLATORS: this is the second section of description.
-#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:89
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:88
 msgid ""
 "Secure boot problems can often be resolved from your device's UEFI firmware "
 "settings (BIOS) and your hardware manufacturer may provide information on "
@@ -6141,19 +6147,19 @@ msgstr ""
 "informazio gehiago eman diezazuke."
 
 #. TRANSLATORS: this is the third section of description.
-#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:92
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:91
 msgid "For help, contact your hardware manufacturer or IT support provider."
 msgstr ""
 "Laguntza jasotzeko, jarri harremanetan zure hardwarearen fabrikatzailearekin "
 "edo laguntza informatikoa ematen dizunarekin."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:98
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:97
 msgid "Secure Boot is Turned Off"
 msgstr "Abio segurua desaktibatuta dago"
 
 #. TRANSLATORS: this is the first section of the description.
-#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:102
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:101
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device "
 "starts. It is currently turned off."
@@ -6162,7 +6168,7 @@ msgstr ""
 "kargatu dadin. Une honetan desaktibatuta dago."
 
 #. TRANSLATORS: this is the second section of the description.
-#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:105
+#: panels/privacy/firmware-security/cc-firmware-security-boot-dialog.c:104
 msgid ""
 "Secure boot can often be turned on from your device's UEFI firmware settings "
 "(BIOS). For help, contact your hardware manufacturer or IT support provider."
@@ -6960,7 +6966,7 @@ msgstr "Balantzea"
 msgid "Fade"
 msgstr "Iraungi"
 
-#: panels/sound/cc-output-test-wheel.c:212
+#: panels/sound/cc-output-test-wheel.c:200
 msgid "Select a Speaker"
 msgstr "Hautatu bozgorailua"
 
@@ -7189,52 +7195,35 @@ msgid "GNOME Version"
 msgstr "GNOMEren bertsioa"
 
 #: panels/system/about/cc-system-details-window.blp:133
-msgid "Windowing System"
-msgstr "Leiho-sistema"
-
-#: panels/system/about/cc-system-details-window.blp:137
 msgid "Virtualization"
 msgstr "Birtualizazioa"
 
-#: panels/system/about/cc-system-details-window.blp:141
+#: panels/system/about/cc-system-details-window.blp:137
 msgid "Kernel Version"
 msgstr "Kernelaren bertsioa"
 
-#: panels/system/about/cc-system-details-window.c:316
+#: panels/system/about/cc-system-details-window.c:314
 msgid "Graphics"
 msgstr "Grafikoak"
 
-#: panels/system/about/cc-system-details-window.c:318
+#: panels/system/about/cc-system-details-window.c:316
 #, c-format
 msgid "Graphics %d"
 msgstr "%d grafikoak"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-system-details-window.c:360
+#: panels/system/about/cc-system-details-window.c:358
 #, c-format
 msgid "64-bit"
 msgstr "64 bit"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-system-details-window.c:363
+#: panels/system/about/cc-system-details-window.c:361
 #, c-format
 msgid "32-bit"
 msgstr "32 bit"
 
-#: panels/system/about/cc-system-details-window.c:646
-msgid "Wayland"
-msgstr "Wayland"
-
-#: panels/system/about/cc-system-details-window.c:648
-msgctxt "Windowing system (Wayland, or Unknown)"
-msgid "Unknown"
-msgstr "Ezezaguna"
-
-#: panels/system/about/cc-system-details-window.c:816
-msgid "**Windowing System:**"
-msgstr "**Leiho-sistema:**"
-
-#: panels/system/about/cc-system-details-window.c:832
+#: panels/system/about/cc-system-details-window.c:812
 msgid "Details copied to clipboard"
 msgstr "Xehetasunak arbelean kopiatu dira"
 
@@ -7851,23 +7840,23 @@ msgstr ""
 msgid "_Confirm Password"
 msgstr "_Berretsi pasahitza"
 
-#: panels/system/users/cc-add-user-dialog.c:152
+#: panels/system/users/cc-add-user-dialog.c:164
 msgid "Failed to add account"
 msgstr "Huts egin du kontua gehitzean"
 
-#: panels/system/users/cc-add-user-dialog.c:290
+#: panels/system/users/cc-add-user-dialog.c:302
 #: panels/system/users/cc-password-dialog.c:278
 #: panels/system/users/cc-password-dialog.c:363
 msgid "Passwords match"
 msgstr "Pasahitzak bat datoz"
 
-#: panels/system/users/cc-add-user-dialog.c:290
+#: panels/system/users/cc-add-user-dialog.c:302
 #: panels/system/users/cc-password-dialog.c:274
 #: panels/system/users/cc-password-dialog.c:406
 msgid "Passwords do not match"
 msgstr "Pasahitzak ez datoz bat"
 
-#: panels/system/users/cc-add-user-dialog.c:370
+#: panels/system/users/cc-add-user-dialog.c:382
 #: panels/wwan/cc-wwan-sim-lock-dialog.blp:21
 msgid "_Next"
 msgstr "_Hurrengoa"
@@ -8004,23 +7993,23 @@ msgstr "Ez dago hatz-marken gailurik"
 msgid "No Fingerprint device"
 msgstr "Ez dago hatz-marken gailurik"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:114
+#: panels/system/users/cc-fingerprint-dialog.blp:116
 msgid "Ensure the device is properly connected"
 msgstr "Ziurtatu gailua ongi konektatuta dagoela"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:122
+#: panels/system/users/cc-fingerprint-dialog.blp:124
 msgid "Fingerprint Device"
 msgstr "Hatz-marken gailua"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:132
+#: panels/system/users/cc-fingerprint-dialog.blp:134
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Aukeratu konfiguratu nahi duzun hatz-marken gailua"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:160
+#: panels/system/users/cc-fingerprint-dialog.blp:162
 msgid "Fingerprint Login"
 msgstr "Hatz-marken bidezko saio-hasiera"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:168
+#: panels/system/users/cc-fingerprint-dialog.blp:170
 msgid ""
 "Fingerprint login allows you to unlock and log into your device with your "
 "finger"
@@ -8028,11 +8017,11 @@ msgstr ""
 "Hatz-marken bidezko saio-hasierak hatza erabilita gailua desblokeatzea eta "
 "saioa hastea ahalbidetzen du."
 
-#: panels/system/users/cc-fingerprint-dialog.blp:194
+#: panels/system/users/cc-fingerprint-dialog.blp:196
 msgid "_Delete Fingerprints"
 msgstr "_Ezabatu hatz-markak"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:207
+#: panels/system/users/cc-fingerprint-dialog.blp:209
 msgid "Fingerprint Enroll"
 msgstr "Hatz-marken erregistroa"
 
@@ -8587,6 +8576,24 @@ msgstr ""
 "Kurtsorearen tamaina zoomarekin konbinatu daiteke hura errazago ikusi ahal "
 "izateko"
 
+#: panels/universal-access/cc-cursor-size-page.c:81
+msgid "Medium"
+msgstr "Ertaina"
+
+#: panels/universal-access/cc-cursor-size-page.c:82
+#: panels/universal-access/cc-ua-mouse-page.blp:128
+#: panels/universal-access/cc-ua-seeing-page.c:123
+msgid "Large"
+msgstr "Handia"
+
+#: panels/universal-access/cc-cursor-size-page.c:83
+msgid "Extra Large"
+msgstr "Oso handia"
+
+#: panels/universal-access/cc-cursor-size-page.c:84
+msgid "Largest"
+msgstr "Handiena"
+
 #: panels/universal-access/cc-ua-hearing-page.blp:5
 msgid "Hearing"
 msgstr "Entzumena"
@@ -8733,11 +8740,6 @@ msgstr "Mugimenduaren atalasea"
 msgid "Small"
 msgstr "Txikia"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:128
-#: panels/universal-access/cc-ua-seeing-page.c:123
-msgid "Large"
-msgstr "Handia"
-
 #: panels/universal-access/cc-ua-panel.blp:16
 msgid "_Always Show Accessibility Menu"
 msgstr "Bistaratu _beti erabilerraztasun-menua"
@@ -8813,88 +8815,88 @@ msgstr "Mugimendu _motela"
 msgid "Toggle reduced motion animations throughout the user interface"
 msgstr "Aktibatu eta desaktibatu mugimendu motela erabiltzaile-interfazean"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:67
+#: panels/universal-access/cc-ua-seeing-page.blp:61
 msgid "_Text Size"
 msgstr "_Testu-tamaina"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:74
+#: panels/universal-access/cc-ua-seeing-page.blp:68
 msgid "_Cursor Size"
 msgstr "_Kurtsorearen tamaina"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:75
+#: panels/universal-access/cc-ua-seeing-page.blp:69
 msgid "Increase the size of the cursor"
 msgstr "Handiagotu kurtsorearen tamaina"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:81
+#: panels/universal-access/cc-ua-seeing-page.blp:75
 msgid "_Sound Keys"
 msgstr "Teklak _soinuarekin"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:82
+#: panels/universal-access/cc-ua-seeing-page.blp:76
 msgid "Beep when Num Lock or Caps Lock are turned on or off"
 msgstr ""
 "Jo soinua zenbakiak blokeatzeko edo maiuskulak blokeatzeko teklak aktibatzen "
 "edo desaktibatzen direnean"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:87
+#: panels/universal-access/cc-ua-seeing-page.blp:81
 msgid "Always Show Scroll_bars"
 msgstr "Erakutsi beti _korritze-barrak"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:88
+#: panels/universal-access/cc-ua-seeing-page.blp:82
 msgid "Make scrollbars always visible"
 msgstr "Erakutsi beti korritze-barrak"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:97
+#: panels/universal-access/cc-ua-seeing-page.blp:91
 msgid "Text Size"
 msgstr "Testu-tamaina"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:109
+#: panels/universal-access/cc-ua-seeing-page.blp:103
 #: panels/wwan/cc-wwan-device-page.c:191
 msgid "Cancel"
 msgstr "Utzi"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:125
+#: panels/universal-access/cc-ua-seeing-page.blp:119
 msgid "Use the slider to adjust the size of user interface text"
 msgstr ""
 "Erabili graduatzailea erabiltzaile-interfazearen testuaren tamaina doitzeko"
 
 #. Translators: Single letter next to the text size slider
-#: panels/universal-access/cc-ua-seeing-page.blp:137
-#: panels/universal-access/cc-ua-seeing-page.blp:157
+#: panels/universal-access/cc-ua-seeing-page.blp:131
+#: panels/universal-access/cc-ua-seeing-page.blp:151
 msgid "A"
 msgstr "A"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:168
+#: panels/universal-access/cc-ua-seeing-page.blp:162
 msgid "Sample text"
 msgstr "Adibideko testua"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-seeing-page.c:215
+#: panels/universal-access/cc-ua-seeing-page.c:213
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Lehenetsia"
 
-#: panels/universal-access/cc-ua-seeing-page.c:218
+#: panels/universal-access/cc-ua-seeing-page.c:216
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Tartekoa"
 
-#: panels/universal-access/cc-ua-seeing-page.c:221
+#: panels/universal-access/cc-ua-seeing-page.c:219
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Handia"
 
-#: panels/universal-access/cc-ua-seeing-page.c:224
+#: panels/universal-access/cc-ua-seeing-page.c:222
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Oso handia"
 
-#: panels/universal-access/cc-ua-seeing-page.c:227
+#: panels/universal-access/cc-ua-seeing-page.c:225
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Oso oso handia"
 
-#: panels/universal-access/cc-ua-seeing-page.c:231
+#: panels/universal-access/cc-ua-seeing-page.c:229
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -9324,7 +9326,7 @@ msgstr "Konektatu edo piztu Wacom tableta"
 
 #: panels/wacom/cc-wacom-stylus-action-dialog.blp:100
 #: panels/wacom/cc-wacom-stylus-action-dialog.blp:132
-#: panels/wacom/cc-wacom-stylus-page.c:433
+#: panels/wacom/cc-wacom-stylus-page.c:435
 msgid "Assign Keystroke"
 msgstr "Esleitu tekla-sakatzea"
 
@@ -9376,44 +9378,49 @@ msgstr "_3. botoia"
 msgid "_Eraser Pressure Feel"
 msgstr "_Borragomaren presioaren sentikortasuna"
 
-#: panels/wacom/cc-wacom-stylus-page.c:416
+#: panels/wacom/cc-wacom-stylus-page.c:418
 msgid "Left Mousebutton Click"
 msgstr "Ezkerreko sagu-botoiaren klik egitea"
 
-#: panels/wacom/cc-wacom-stylus-page.c:419
+#: panels/wacom/cc-wacom-stylus-page.c:421
 msgid "Middle Mousebutton Click"
 msgstr "Erdiko sagu-botoiaren klik egitea"
 
-#: panels/wacom/cc-wacom-stylus-page.c:422
+#: panels/wacom/cc-wacom-stylus-page.c:424
 msgid "Right Mousebutton Click"
 msgstr "Eskuineko sagu-botoiaren klik egitea"
 
 #. Translators: this is the "go forward" action of a button
-#: panels/wacom/cc-wacom-stylus-page.c:430
+#: panels/wacom/cc-wacom-stylus-page.c:432
 msgid "Forward"
 msgstr "Aurrera"
 
-#: panels/wacom/cc-wacom-stylus-page.c:436
+#: panels/wacom/cc-wacom-stylus-page.c:438
 msgid "Switch Monitor"
 msgstr "Aldatu monitorea"
 
-#: panels/wacom/cc-wacom-tool.c:365
+#: panels/wacom/cc-wacom-tool.c:367
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
 msgstr ""
 "Airbrush stylus gailua presioarekin, inklinazioarekin eta integratutako "
 "graduatzailearekin"
 
-#: panels/wacom/cc-wacom-tool.c:367
+#: panels/wacom/cc-wacom-tool.c:369
 msgid "Art pen with pressure, tilt, and rotation"
 msgstr "Arte-arkatza presioarekin, inklinazioarekin eta biraketarekin"
 
-#: panels/wacom/cc-wacom-tool.c:369
+#: panels/wacom/cc-wacom-tool.c:371
 msgid "Stylus with pressure and tilt"
 msgstr "Arkatza presioarekin eta inklinazioarekin"
 
-#: panels/wacom/cc-wacom-tool.c:371
+#: panels/wacom/cc-wacom-tool.c:373
 msgid "Stylus with pressure"
 msgstr "Arkatza presioarekin"
+
+#: panels/wacom/cc-wacom-tool.c:378
+#, c-format
+msgid ", serial 0x%<PRIX64>"
+msgstr ", seriekoa 0x%<PRIX64>"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in:2
 msgid "Graphics Tablets"
@@ -9461,7 +9468,7 @@ msgstr ""
 
 #: panels/wellbeing/cc-screen-time-statistics-row.blp:164
 msgid "Average Week"
-msgstr "Batez besteko astea"
+msgstr "Asteko batezbestekoa"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.blp:208
 msgid "Previous Week"
@@ -9551,36 +9558,36 @@ msgstr "Fitxategia hutsik dago"
 #. G_DATE_BAD_WEEKDAY
 #: panels/wellbeing/cc-screen-time-statistics-row.c:922
 msgid "Average Monday"
-msgstr "Batez besteko astelehena"
+msgstr "Asteleheneko batezbestekoa"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:923
 msgid "Average Tuesday"
-msgstr "Batez besteko asteartea"
+msgstr "Astearteko batezbestekoa"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:924
 msgid "Average Wednesday"
-msgstr "Batez besteko asteazkena"
+msgstr "Asteazkeneko batezbestekoa"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:925
 msgid "Average Thursday"
-msgstr "Batez besteko osteguna"
+msgstr "Osteguneko batezbestekoa"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:926
 msgid "Average Friday"
-msgstr "Batez besteko ostirala"
+msgstr "Ostiraleko batezbestekoa"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:927
 msgid "Average Saturday"
-msgstr "Average larunbata"
+msgstr "Larunbateko batezbestekoa"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:928
 msgid "Average Sunday"
-msgstr "Average igandea"
+msgstr "Igandeko batezbestekoa"
 
 #. Translators: This a medium-length date, for example ‘15 April’
 #: panels/wellbeing/cc-screen-time-statistics-row.c:980
 msgid "%-d %B"
-msgstr "%-d %B"
+msgstr "%Bk %-d"
 
 #: panels/wellbeing/cc-screen-time-statistics-row.c:993
 #: panels/wellbeing/cc-screen-time-statistics-row.c:1004
@@ -9597,14 +9604,14 @@ msgstr "Aste honetan"
 #: panels/wellbeing/cc-screen-time-statistics-row.c:1019
 #, c-format
 msgid "%u–%u %s"
-msgstr "%u–%u %s"
+msgstr "%3$sk %1$u–%2$u"
 
 #. Translators: This is a range of days spanning two months.
 #. * For example, ‘27 April–4 May’. The dash is an en-dash.
 #: panels/wellbeing/cc-screen-time-statistics-row.c:1036
 #, c-format
 msgid "%u %s–%u %s"
-msgstr "%u %s–%u %s"
+msgstr "%2$sk %1$u – %4$sk %3$u"
 
 #. Translators: The first placeholder is a formatted date string
 #. * (formatted using the `%x` strftime placeholder, which gives the
@@ -10316,16 +10323,16 @@ msgstr "Konfiguratu telefoniako eta datu mugikorreko konexioak"
 msgid "cellular;wwan;telephony;sim;mobile;"
 msgstr "telefonoa;wwan;telefonia;sim;mugikorra;"
 
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:8
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:9
 msgid "Utility to configure the GNOME desktop"
 msgstr "GNOME mahaigaina konfiguratzeko utilitatea"
 
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:10
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:11
 msgid "Settings is the primary interface for configuring your system."
 msgstr "Ezarpenak zure sistema konfiguratzeko interfaze nagusia da."
 
 #. developer_name tag deprecated with Appstream 1.0
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:39
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:40
 msgid "The GNOME Project"
 msgstr "GNOME proiektua"
 
@@ -10379,29 +10386,15 @@ msgstr "Menu nagusia"
 msgid "Search settings"
 msgstr "Bilaketa-ezarpenak"
 
-#: shell/cc-window.blp:71
-msgid "Warning: Development Version"
-msgstr "Abisua: garapen-bertsioa"
-
-#: shell/cc-window.blp:72
-msgid ""
-"This version of Settings should only be used for development purposes. You "
-"may experience incorrect system behavior, data loss, and other unexpected "
-"issues. "
-msgstr ""
-"Ezarpenen bertsio hau garapenerako soilik erabili beharko litzateke. "
-"Sistemaren portaera okerra, datuen galera eta espero gabeko beste arazo "
-"batzuk gerta daitezke. "
-
-#: shell/cc-window.blp:86
+#: shell/cc-window.blp:73
 msgid "_Keyboard Shortcuts"
 msgstr "Las_ter-teklak"
 
-#: shell/cc-window.blp:91
+#: shell/cc-window.blp:78
 msgid "_Help"
 msgstr "_Laguntza"
 
-#: shell/cc-window.blp:96
+#: shell/cc-window.blp:83
 msgid "_About Settings"
 msgstr "Ezarpenak aplikazioari _buruz"
 
@@ -10423,21 +10416,10 @@ msgstr ""
 "balioak ezikusi egingo dira eta zerrendako lehen panela hautatuko da."
 
 #: shell/org.gnome.Settings.gschema.xml:13
-msgid "Show warning when running a development build of Settings"
-msgstr "Erakutsi abisu bat ezarpenen garapen-bertsio bat exekutatzean"
-
-#: shell/org.gnome.Settings.gschema.xml:14
-msgid ""
-"Whether Settings should show a warning when running a development build."
-msgstr ""
-"Ezarpenek abisu bat erakutsi behar duen ala ez garapen-bertsio bat "
-"exekutatzen denean."
-
-#: shell/org.gnome.Settings.gschema.xml:20
 msgid "Initial state of the window"
 msgstr "Leihoaren hasierako egoera"
 
-#: shell/org.gnome.Settings.gschema.xml:21
+#: shell/org.gnome.Settings.gschema.xml:14
 msgid ""
 "A tuple containing the initial width, height and maximized state of the app "
 "window."
@@ -10487,7 +10469,7 @@ msgstr "Utzi bilaketa"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1926
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -10496,16 +10478,53 @@ msgstr[1] "%u irteera"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1927
+#: subprojects/gvc/gvc-mixer-control.c:1936
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "Sarrera %u"
 msgstr[1] "%u sarrera"
 
-#: subprojects/gvc/gvc-mixer-control.c:2910
+#: subprojects/gvc/gvc-mixer-control.c:2919
 msgid "System Sounds"
 msgstr "Sistemaren soinuak"
+
+#~ msgid "URL"
+#~ msgstr "URLa"
+
+#~ msgid "Windowing System"
+#~ msgstr "Leiho-sistema"
+
+#~ msgid "Wayland"
+#~ msgstr "Wayland"
+
+#~ msgctxt "Windowing system (Wayland, or Unknown)"
+#~ msgid "Unknown"
+#~ msgstr "Ezezaguna"
+
+#~ msgid "**Windowing System:**"
+#~ msgstr "**Leiho-sistema:**"
+
+#~ msgid "Warning: Development Version"
+#~ msgstr "Abisua: garapen-bertsioa"
+
+#~ msgid ""
+#~ "This version of Settings should only be used for development purposes. "
+#~ "You may experience incorrect system behavior, data loss, and other "
+#~ "unexpected issues. "
+#~ msgstr ""
+#~ "Ezarpenen bertsio hau garapenerako soilik erabili beharko litzateke. "
+#~ "Sistemaren portaera okerra, datuen galera eta espero gabeko beste arazo "
+#~ "batzuk gerta daitezke. "
+
+#~ msgid "Show warning when running a development build of Settings"
+#~ msgstr "Erakutsi abisu bat ezarpenen garapen-bertsio bat exekutatzean"
+
+#~ msgid ""
+#~ "Whether Settings should show a warning when running a development build."
+#~ msgstr ""
+#~ "Ezarpenek abisu bat erakutsi behar duen ala ez garapen-bertsio bat "
+#~ "exekutatzen denean."
 
 #~ msgid "_Verify Encryption"
 #~ msgstr "Egiaztatu zi_fratzea"
