@@ -18,15 +18,11 @@
 #include "config.h"
 
 #include <libintl.h>
-#include <stdlib.h>
-#include <string.h>
+#include <pulse/pulseaudio.h>
 #include <unistd.h>
-#include <errno.h>
 
 #include <glib/gi18n-lib.h>
-#include <glib.h>
-#include <gtk/gtk.h>
-#include <pulse/pulseaudio.h>
+#include <adwaita.h>
 #include <gvc-mixer-control.h>
 
 #include "cc-list-row.h"

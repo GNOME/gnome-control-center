@@ -15,6 +15,8 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <pulse/pulseaudio.h>
+
 #include "cc-sound-resources.h"
 #include "cc-balance-slider.h"
 #include "gvc-channel-map-private.h"

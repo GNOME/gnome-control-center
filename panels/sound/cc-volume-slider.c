@@ -17,7 +17,6 @@
 
 #include <glib/gi18n.h>
 #include <math.h>
-#include <pulse/pulseaudio.h>
 #include <gvc-mixer-control.h>
 
 #include "cc-sound-resources.h"

@@ -18,7 +18,6 @@
 #pragma once
 
 #include <gtk/gtk.h>
-#include <pulse/pulseaudio.h>
 #include <gvc-mixer-control.h>
 #include <gvc-mixer-stream.h>
 

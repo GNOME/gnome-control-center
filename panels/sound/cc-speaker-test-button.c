@@ -18,7 +18,6 @@
 #include <gsound.h>
 #include <pulse/pulseaudio.h>
 
-#include "cc-sound-resources.h"
 #include "cc-speaker-test-button.h"
 
 struct _CcSpeakerTestButton

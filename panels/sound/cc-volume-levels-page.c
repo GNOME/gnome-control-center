@@ -16,7 +16,6 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <pulse/pulseaudio.h>
 #include <gvc-mixer-sink.h>
 #include <gvc-mixer-source.h>
 #include <gvc-mixer-source-output.h>
