@@ -783,6 +783,14 @@ cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
 {
   g_autofree char *signal_name = NULL;
   g_autoptr(GVariant) variant = NULL;
+  g_autoptr(GSettingsSchema) schema_obj = NULL;
+
+  schema_obj = g_settings_schema_source_lookup (g_settings_schema_source_get_default (),
+                                                schema,
+                                                TRUE);
+  /* Let's skip shortcuts that don't have a matching schema key. */
+  if (schema_obj == NULL || !g_settings_schema_has_key (schema_obj, key))
+    return FALSE;
 
   item->schema = g_strdup (schema);
   item->key = g_strdup (key);
