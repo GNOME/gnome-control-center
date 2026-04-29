@@ -601,7 +601,7 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self)
    * TRANSLATORS: %s is replaced with a description of the keyboard shortcut,
    * don't translate/transliterate <b>%s</b>
    */
-  text = g_markup_printf_escaped (_("Enter new keyboard shortcut for <b>“%s”</b>"),
+  text = g_markup_printf_escaped (_("Press new keyboard shortcut for <b>%s</b>"),
                                   cc_keyboard_shortcut_get_description (self));
 
   gtk_label_set_markup (self->top_info_label, text);
