@@ -302,6 +302,38 @@ uninhibit_system_shortcuts (CcKeyboardShortcutEditor *self)
 /* Remove only the accelerator being reassigned from the other action, so
  * multi-accelerator shortcuts (e.g. Super+Tab and Alt+Tab on the same action)
  * keep their remaining bindings. */
+static gboolean
+shortcut_combo_equal (const CcKeyCombo *a,
+                      const CcKeyCombo *b)
+{
+  return a->keyval == b->keyval
+      && a->keycode == b->keycode
+      && a->mask == b->mask;
+}
+
+static gchar *
+find_alternative_shortcut_for_collision (CcKeyboardItem *collision_item,
+                                         CcKeyCombo     *replaced_combo)
+{
+  GList *combos;
+
+  combos = cc_keyboard_item_get_key_combos (collision_item);
+  for (GList *l = combos; l != NULL; l = l->next)
+    {
+      CcKeyCombo *c = l->data;
+
+      if (is_empty_binding (c))
+        continue;
+      if (shortcut_combo_equal (c, replaced_combo))
+        continue;
+
+      return convert_keysym_state_to_string (c);
+    }
+
+  /* There was no alternative left for shortcut */
+  return NULL;
+}
+
 static void
 resolve_keyboard_shortcut_collision (CcKeyboardShortcutEditor *self)
 {
@@ -419,11 +451,23 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
   if (collision_item)
     {
       g_autofree gchar *collision_text = NULL;
+      g_autofree gchar *alternative_shortcut = NULL;
 
-      /* TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used */
-      collision_text = g_markup_printf_escaped (_("<b>This key combination is already being used for “%s”. "
-                                                  "This shortcut will be disabled.</b>"),
-                                                cc_keyboard_item_get_description (collision_item));
+      alternative_shortcut = find_alternative_shortcut_for_collision (collision_item, self->custom_combo);
+      if (alternative_shortcut != NULL)
+        {
+          /* TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used */
+          collision_text = g_markup_printf_escaped (_("This will replace the existing <b>%s</b> shortcut."
+                                                      "\n<b>%s</b> can also be used for this action."),
+                                                    cc_keyboard_item_get_description (collision_item),
+                                                    alternative_shortcut);
+        }
+      else
+        {
+          /* TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used */
+          collision_text = g_markup_printf_escaped (_("This will replace the existing <b>%s</b> shortcut."),
+                                                    cc_keyboard_item_get_description (collision_item));
+        }
 
       gtk_label_set_markup (collision_label, collision_text);
       gtk_widget_set_visible (GTK_WIDGET (self->remove_button), FALSE);
