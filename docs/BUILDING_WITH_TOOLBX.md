@@ -5,25 +5,13 @@
 ## Create a Toolbx with:
 
 ```bash
- toolbox create --release <release-number>
+toolbox create control-center-toolbox -i registry.gitlab.gnome.org/gnome/gnome-control-center/main:2026-04-17.1-fedora-rawhide
 ```
-(preferably choose the latest Fedora release)
 
 After creation, you can enter your toolbx with
 
 ```bash
-toolbox enter --release <release-number>
-```
-
-## Install development packages for GNOME Settings
-
-To install the development dependencies in GNOME Settings you can use:
-
-```bash
-sudo dnf install -y gnome-desktop4-devel libgweather4-devel \
-                    gnome-settings-daemon-devel libnma-gtk4-devel \
-                    colord-gtk4-devel
-sudo dnf builddep gnome-control-center
+toolbox enter control-center-toolbox
 ```
 
 ## Perform a local build
@@ -50,10 +38,6 @@ With that, you can run GNOME Settings from its executable:
 ```bash
 ./shell/gnome-control-center
 ```
-## Tips
-
-* If `meson _build` is still missing dependencies, you can check which dependencies we are using in our Fedora CI build for reference to what to install. See `FDO_DISTRIBUTION_PACKAGES` for the whole list of packages in https://gitlab.gnome.org/GNOME/gnome-control-center/-/blob/main/.gitlab-ci.yml#L88
-
 
 ## Additional packages for specific components
 
