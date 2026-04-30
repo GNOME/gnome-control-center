@@ -28,15 +28,11 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_COLOR_PROFILE (cc_color_profile_get_type ())
 G_DECLARE_FINAL_TYPE (CcColorProfile, cc_color_profile, CC, COLOR_PROFILE, AdwActionRow);
-GtkWidget   *cc_color_profile_new              (CdDevice        *device,
-                                                CdProfile       *profile,
-                                                gboolean         is_default);
-gboolean     cc_color_profile_get_is_default   (CcColorProfile  *color_profile);
-void         cc_color_profile_set_is_default   (CcColorProfile  *color_profile,
-                                                gboolean         profile_is_default);
-CdDevice    *cc_color_profile_get_device       (CcColorProfile  *color_profile);
-CdProfile   *cc_color_profile_get_profile      (CcColorProfile  *color_profile);
-const gchar *cc_color_profile_get_sortable     (CcColorProfile  *color_profile);
+GtkWidget *cc_color_profile_new (CdDevice *device, CdProfile *profile, gboolean is_default);
+gboolean cc_color_profile_get_is_default (CcColorProfile *color_profile);
+void cc_color_profile_set_is_default (CcColorProfile *color_profile, gboolean profile_is_default);
+CdDevice *cc_color_profile_get_device (CcColorProfile *color_profile);
+CdProfile *cc_color_profile_get_profile (CcColorProfile *color_profile);
+const gchar *cc_color_profile_get_sortable (CcColorProfile *color_profile);
 
 G_END_DECLS
-

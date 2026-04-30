@@ -28,60 +28,50 @@ G_BEGIN_DECLS
 #define BOLT_TYPE_DEVICE (bolt_device_get_type ())
 G_DECLARE_FINAL_TYPE (BoltDevice, bolt_device, BOLT, DEVICE, BoltProxy);
 
-BoltDevice *  bolt_device_new_for_object_path (GDBusConnection *bus,
-                                               const char      *path,
-                                               GCancellable    *cancellable,
-                                               GError         **error);
+BoltDevice *bolt_device_new_for_object_path (GDBusConnection *bus, const char *path, GCancellable *cancellable,
+                                             GError **error);
 
-gboolean      bolt_device_authorize (BoltDevice   *dev,
-                                     BoltAuthCtrl  flags,
-                                     GCancellable *cancellable,
-                                     GError      **error);
+gboolean bolt_device_authorize (BoltDevice *dev, BoltAuthCtrl flags, GCancellable *cancellable, GError **error);
 
-void          bolt_device_authorize_async (BoltDevice         *dev,
-                                           BoltAuthCtrl        flags,
-                                           GCancellable       *cancellable,
-                                           GAsyncReadyCallback callback,
-                                           gpointer            user_data);
+void bolt_device_authorize_async (BoltDevice *dev, BoltAuthCtrl flags, GCancellable *cancellable,
+                                  GAsyncReadyCallback callback, gpointer user_data);
 
-gboolean      bolt_device_authorize_finish (BoltDevice   *dev,
-                                            GAsyncResult *res,
-                                            GError      **error);
+gboolean bolt_device_authorize_finish (BoltDevice *dev, GAsyncResult *res, GError **error);
 
 /* getter */
-const char *      bolt_device_get_uid (BoltDevice *dev);
+const char *bolt_device_get_uid (BoltDevice *dev);
 
-const char *      bolt_device_get_name (BoltDevice *dev);
+const char *bolt_device_get_name (BoltDevice *dev);
 
-const char *      bolt_device_get_vendor (BoltDevice *dev);
+const char *bolt_device_get_vendor (BoltDevice *dev);
 
-BoltDeviceType    bolt_device_get_device_type (BoltDevice *dev);
+BoltDeviceType bolt_device_get_device_type (BoltDevice *dev);
 
-BoltStatus        bolt_device_get_status (BoltDevice *dev);
+BoltStatus bolt_device_get_status (BoltDevice *dev);
 
-BoltAuthFlags     bolt_device_get_authflags (BoltDevice *dev);
+BoltAuthFlags bolt_device_get_authflags (BoltDevice *dev);
 
-const char *      bolt_device_get_parent (BoltDevice *dev);
+const char *bolt_device_get_parent (BoltDevice *dev);
 
-const char *      bolt_device_get_syspath (BoltDevice *dev);
+const char *bolt_device_get_syspath (BoltDevice *dev);
 
-guint64           bolt_device_get_conntime (BoltDevice *dev);
+guint64 bolt_device_get_conntime (BoltDevice *dev);
 
-guint64           bolt_device_get_authtime (BoltDevice *dev);
+guint64 bolt_device_get_authtime (BoltDevice *dev);
 
-gboolean          bolt_device_is_stored (BoltDevice *dev);
+gboolean bolt_device_is_stored (BoltDevice *dev);
 
-BoltPolicy        bolt_device_get_policy (BoltDevice *dev);
+BoltPolicy bolt_device_get_policy (BoltDevice *dev);
 
-BoltKeyState      bolt_device_get_keystate (BoltDevice *dev);
+BoltKeyState bolt_device_get_keystate (BoltDevice *dev);
 
-guint64           bolt_device_get_storetime (BoltDevice *dev);
+guint64 bolt_device_get_storetime (BoltDevice *dev);
 
-const char *      bolt_device_get_label (BoltDevice *dev);
+const char *bolt_device_get_label (BoltDevice *dev);
 
 /* derived getter */
-char *            bolt_device_get_display_name (BoltDevice *dev);
+char *bolt_device_get_display_name (BoltDevice *dev);
 
-guint64           bolt_device_get_timestamp (BoltDevice *dev);
+guint64 bolt_device_get_timestamp (BoltDevice *dev);
 
 G_END_DECLS

@@ -23,8 +23,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WIFI_PANEL (cc_wifi_panel_get_type())
+#define CC_TYPE_WIFI_PANEL (cc_wifi_panel_get_type ())
 G_DECLARE_FINAL_TYPE (CcWifiPanel, cc_wifi_panel, CC, WIFI_PANEL, CcPanel);
-void                 cc_wifi_panel_static_init_func              (void);
+void cc_wifi_panel_static_init_func (void);
 
 G_END_DECLS

@@ -28,8 +28,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_POWER_PROFILE_INFO_ROW (cc_power_profile_info_row_get_type())
+#define CC_TYPE_POWER_PROFILE_INFO_ROW (cc_power_profile_info_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcPowerProfileInfoRow, cc_power_profile_info_row, CC, POWER_PROFILE_INFO_ROW, AdwActionRow);
-CcPowerProfileInfoRow *cc_power_profile_info_row_new           (const char *text);
+CcPowerProfileInfoRow *cc_power_profile_info_row_new (const char *text);
 
 G_END_DECLS

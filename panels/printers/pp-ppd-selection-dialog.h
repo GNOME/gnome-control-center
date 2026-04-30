@@ -20,20 +20,17 @@
 
 #pragma once
 
-#include <adwaita.h>
 #include "pp-utils.h"
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define PP_TYPE_PPD_SELECTION_DIALOG (pp_ppd_selection_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (PpPPDSelectionDialog, pp_ppd_selection_dialog, PP, PPD_SELECTION_DIALOG, AdwWindow);
-PpPPDSelectionDialog *pp_ppd_selection_dialog_new                  (PPDList                   *ppd_list,
-                                                                    const gchar               *manufacturer,
-                                                                    UserResponseCallback       user_callback,
-                                                                    gpointer                   user_data);
-gchar                *pp_ppd_selection_dialog_get_ppd_name         (PpPPDSelectionDialog      *dialog);
-gchar                *pp_ppd_selection_dialog_get_ppd_display_name (PpPPDSelectionDialog      *dialog);
-void                  pp_ppd_selection_dialog_set_ppd_list         (PpPPDSelectionDialog      *dialog,
-                                                                    PPDList                   *list);
+PpPPDSelectionDialog *pp_ppd_selection_dialog_new (PPDList *ppd_list, const gchar *manufacturer,
+                                                   UserResponseCallback user_callback, gpointer user_data);
+gchar *pp_ppd_selection_dialog_get_ppd_name (PpPPDSelectionDialog *dialog);
+gchar *pp_ppd_selection_dialog_get_ppd_display_name (PpPPDSelectionDialog *dialog);
+void pp_ppd_selection_dialog_set_ppd_list (PpPPDSelectionDialog *dialog, PPDList *list);
 
 G_END_DECLS

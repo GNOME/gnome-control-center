@@ -23,11 +23,10 @@
 
 #include "file-share-properties.h"
 
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
 #include <glib.h>
-
 
 #define REALM "Please log in as the user guest"
 #define USER "guest"
@@ -49,7 +48,7 @@ file_share_write_out_password (const char *password)
 
     file = fopen (filename, "w");
     if (file != NULL) {
-	fwrite (line, strlen (line), 1, file);
-	fclose (file);
+        fwrite (line, strlen (line), 1, file);
+        fclose (file);
     }
 }

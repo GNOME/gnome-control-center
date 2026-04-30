@@ -27,9 +27,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_GLOBAL_SHORTCUTS_PROVIDER_APP cc_global_shortcuts_provider_app_get_type ()
-G_DECLARE_FINAL_TYPE (CcGlobalShortcutsProviderApp,
-                      cc_global_shortcuts_provider_app,
-                      CC, GLOBAL_SHORTCUTS_PROVIDER_APP,
+G_DECLARE_FINAL_TYPE (CcGlobalShortcutsProviderApp, cc_global_shortcuts_provider_app, CC, GLOBAL_SHORTCUTS_PROVIDER_APP,
                       AdwApplication);
 
 CcGlobalShortcutsProviderApp *cc_global_shortcuts_provider_app_get (void);

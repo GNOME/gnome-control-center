@@ -25,7 +25,6 @@
 
 G_BEGIN_DECLS
 
-GdkPaintable *cc_texture_new_from_resource_scaled (const char *path,
-                                                   double      scale);
+GdkPaintable *cc_texture_new_from_resource_scaled (const char *path, double scale);
 
 G_END_DECLS

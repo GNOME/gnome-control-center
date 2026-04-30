@@ -21,7 +21,7 @@
 
 #include <gtk/gtk.h>
 
-void widget_set_error   (GtkWidget *widget);
+void widget_set_error (GtkWidget *widget);
 void widget_unset_error (GtkWidget *widget);
 
-#endif  /* _UI_HELPERS_H_ */
+#endif /* _UI_HELPERS_H_ */

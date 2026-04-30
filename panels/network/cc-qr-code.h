@@ -25,13 +25,13 @@
 #pragma once
 
 #include <NetworkManager.h>
-#include <gtk/gtk.h>
 #include <glib-object.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-gchar        *get_qr_string_for_connection (NMConnection *c);
-gboolean      is_qr_code_supported         (NMConnection *c);
-gchar        *get_wifi_password            (NMConnection *c);
+gchar *get_qr_string_for_connection (NMConnection *c);
+gboolean is_qr_code_supported (NMConnection *c);
+gchar *get_wifi_password (NMConnection *c);
 
 G_END_DECLS

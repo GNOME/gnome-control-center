@@ -20,8 +20,8 @@
 
 #pragma once
 
-#include <glib-object.h>
 #include <gio/gio.h>
+#include <glib-object.h>
 
 #include "pp-utils.h"
 
@@ -29,55 +29,32 @@ G_BEGIN_DECLS
 
 #define PP_TYPE_PRINTER (pp_printer_get_type ())
 G_DECLARE_FINAL_TYPE (PpPrinter, pp_printer, PP, PRINTER, GObject);
-GType        pp_printer_get_type      (void) G_GNUC_CONST;
+GType pp_printer_get_type (void) G_GNUC_CONST;
 
-PpPrinter   *pp_printer_new           (const gchar          *name);
+PpPrinter *pp_printer_new (const gchar *name);
 
-const gchar *pp_printer_get_name      (PpPrinter            *printer);
+const gchar *pp_printer_get_name (PpPrinter *printer);
 
-void         pp_printer_rename_async  (PpPrinter            *printer,
-                                       const gchar          *new_printer_name,
-                                       GCancellable         *cancellable,
-                                       GAsyncReadyCallback   callback,
-                                       gpointer              user_data);
+void pp_printer_rename_async (PpPrinter *printer, const gchar *new_printer_name, GCancellable *cancellable,
+                              GAsyncReadyCallback callback, gpointer user_data);
 
-gboolean     pp_printer_rename_finish (PpPrinter            *printer,
-                                       GAsyncResult         *res,
-                                       GError              **error);
+gboolean pp_printer_rename_finish (PpPrinter *printer, GAsyncResult *res, GError **error);
 
-void         pp_printer_delete_async  (PpPrinter            *printer,
-                                       GCancellable         *cancellable,
-                                       GAsyncReadyCallback   callback,
-                                       gpointer              user_data);
+void pp_printer_delete_async (PpPrinter *printer, GCancellable *cancellable, GAsyncReadyCallback callback,
+                              gpointer user_data);
 
-gboolean     pp_printer_delete_finish (PpPrinter            *printer,
-                                       GAsyncResult         *res,
-                                       GError              **error);
+gboolean pp_printer_delete_finish (PpPrinter *printer, GAsyncResult *res, GError **error);
 
-gboolean     pp_printer_delete_sync   (PpPrinter            *self,
-                                       GCancellable         *cancellable,
-                                       GError              **error);
+gboolean pp_printer_delete_sync (PpPrinter *self, GCancellable *cancellable, GError **error);
 
-void         pp_printer_get_jobs_async (PpPrinter           *printer,
-                                        gboolean             myjobs,
-                                        gint                 which_jobs,
-                                        GCancellable        *cancellable,
-                                        GAsyncReadyCallback  callback,
-                                        gpointer             user_data);
+void pp_printer_get_jobs_async (PpPrinter *printer, gboolean myjobs, gint which_jobs, GCancellable *cancellable,
+                                GAsyncReadyCallback callback, gpointer user_data);
 
-GPtrArray   *pp_printer_get_jobs_finish (PpPrinter          *printer,
-                                         GAsyncResult       *res,
-                                         GError            **error);
+GPtrArray *pp_printer_get_jobs_finish (PpPrinter *printer, GAsyncResult *res, GError **error);
 
-void         pp_printer_print_file_async (PpPrinter           *printer,
-                                          const gchar         *filename,
-                                          const gchar         *job_name,
-                                          GCancellable        *cancellable,
-                                          GAsyncReadyCallback  callback,
-                                          gpointer             user_data);
+void pp_printer_print_file_async (PpPrinter *printer, const gchar *filename, const gchar *job_name,
+                                  GCancellable *cancellable, GAsyncReadyCallback callback, gpointer user_data);
 
-gboolean     pp_printer_print_file_finish (PpPrinter         *printer,
-                                           GAsyncResult      *res,
-                                           GError           **error);
+gboolean pp_printer_print_file_finish (PpPrinter *printer, GAsyncResult *res, GError **error);
 
 G_END_DECLS

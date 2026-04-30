@@ -30,7 +30,8 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_APPLICATION_SHORTCUT_DIALOG (cc_application_shortcut_dialog_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcApplicationShortcutDialog, cc_application_shortcut_dialog, CC, APPLICATION_SHORTCUT_DIALOG, AdwDialog);
+G_DECLARE_FINAL_TYPE (CcApplicationShortcutDialog, cc_application_shortcut_dialog, CC, APPLICATION_SHORTCUT_DIALOG,
+                      AdwDialog);
 CcApplicationShortcutDialog *cc_application_shortcut_dialog_new (const char *app_id);
 
 G_END_DECLS

@@ -38,26 +38,22 @@ G_BEGIN_DECLS
  * or a duration.
  */
 typedef enum {
-  CC_TIMELIKE_EDITOR_MODE_TIME,
-  CC_TIMELIKE_EDITOR_MODE_DURATION,
+    CC_TIMELIKE_EDITOR_MODE_TIME,
+    CC_TIMELIKE_EDITOR_MODE_DURATION,
 } CcTimelikeEditorMode;
 
 #define CC_TYPE_TIMELIKE_EDITOR (cc_timelike_editor_get_type ())
 
 G_DECLARE_FINAL_TYPE (CcTimelikeEditor, cc_timelike_editor, CC, TIMELIKE_EDITOR, GtkWidget);
-CcTimelikeEditor *cc_timelike_editor_new    (void);
-void          cc_timelike_editor_set_time   (CcTimelikeEditor *self,
-                                             guint             hour,
-                                             guint             minute);
-guint         cc_timelike_editor_get_hour   (CcTimelikeEditor *self);
-guint         cc_timelike_editor_get_minute (CcTimelikeEditor *self);
+CcTimelikeEditor *cc_timelike_editor_new (void);
+void cc_timelike_editor_set_time (CcTimelikeEditor *self, guint hour, guint minute);
+guint cc_timelike_editor_get_hour (CcTimelikeEditor *self);
+guint cc_timelike_editor_get_minute (CcTimelikeEditor *self);
 
-CcTimelikeEditorMode cc_timelike_editor_get_mode (CcTimelikeEditor     *self);
-void                 cc_timelike_editor_set_mode (CcTimelikeEditor     *self,
-                                                  CcTimelikeEditorMode  mode);
+CcTimelikeEditorMode cc_timelike_editor_get_mode (CcTimelikeEditor *self);
+void cc_timelike_editor_set_mode (CcTimelikeEditor *self, CcTimelikeEditorMode mode);
 
 guint cc_timelike_editor_get_minute_increment (CcTimelikeEditor *self);
-void  cc_timelike_editor_set_minute_increment (CcTimelikeEditor *self,
-                                               guint             minutes);
+void cc_timelike_editor_set_minute_increment (CcTimelikeEditor *self, guint minutes);
 
 G_END_DECLS

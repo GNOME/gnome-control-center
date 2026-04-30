@@ -20,9 +20,8 @@
 
 #include "gtp-static-init.h"
 
-struct _GtpStaticInit
-{
-  CcPanel parent;
+struct _GtpStaticInit {
+    CcPanel parent;
 };
 
 G_DEFINE_FINAL_TYPE (GtpStaticInit, gtp_static_init, CC_TYPE_PANEL)
@@ -30,20 +29,20 @@ G_DEFINE_FINAL_TYPE (GtpStaticInit, gtp_static_init, CC_TYPE_PANEL)
 void
 gtp_static_init_func (void)
 {
-  g_message ("GtpStaticInit: running outside the panel instance");
+    g_message ("GtpStaticInit: running outside the panel instance");
 }
 
 static void
 gtp_static_init_class_init (GtpStaticInitClass *klass)
 {
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/tests/panels/gtp-static-init.ui");
-
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/tests/panels/gtp-static-init.ui");
 }
 
 static void
 gtp_static_init_init (GtpStaticInit *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 }

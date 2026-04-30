@@ -24,4 +24,4 @@
 
 #define CC_TYPE_SEARCH_LOCATIONS_PAGE (cc_search_locations_page_get_type ())
 G_DECLARE_FINAL_TYPE (CcSearchLocationsPage, cc_search_locations_page, CC, SEARCH_LOCATIONS_PAGE, AdwNavigationPage);
-gboolean cc_search_locations_page_is_available        (void);
+gboolean cc_search_locations_page_is_available (void);

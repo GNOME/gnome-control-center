@@ -26,15 +26,15 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include <adwaita.h>
 #include <config.h>
 #include <glib/gi18n.h>
-#include <adwaita.h>
 
-#include "cc-keyboard-shortcut-page.h"
 #include "cc-keyboard-item.h"
 #include "cc-keyboard-manager.h"
 #include "cc-keyboard-shortcut-editor.h"
 #include "cc-keyboard-shortcut-group.h"
+#include "cc-keyboard-shortcut-page.h"
 #include "cc-keyboard-shortcut-row.h"
 #include "cc-list-row.h"
 #include "cc-util.h"
@@ -43,528 +43,481 @@
 #define OLD_ACTIVITIES_OVERVIEW_SHORTCUT "Super_L"
 #define DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT "Super"
 
-struct _CcKeyboardShortcutPage
-{
-  AdwNavigationPage     parent_instance;
+struct _CcKeyboardShortcutPage {
+    AdwNavigationPage parent_instance;
 
-  AdwSwitchRow         *overview_shortcut_row;
-  AdwButtonRow         *reset_all_button_row;
-  AdwDialog            *reset_all_dialog;
-  GtkSearchEntry       *search_entry;
-  GtkStack             *section_stack;
-  AdwPreferencesPage   *section_list_page;
-  GtkListBox           *section_list_box;
-  AdwPreferencesPage   *search_result_page;
-  AdwStatusPage        *empty_results_page;
+    AdwSwitchRow *overview_shortcut_row;
+    AdwButtonRow *reset_all_button_row;
+    AdwDialog *reset_all_dialog;
+    GtkSearchEntry *search_entry;
+    GtkStack *section_stack;
+    AdwPreferencesPage *section_list_page;
+    GtkListBox *section_list_box;
+    AdwPreferencesPage *search_result_page;
+    AdwStatusPage *empty_results_page;
 
-  AdwNavigationPage    *subview_page;
-  GtkStack             *subview_stack;
-  GtkStack             *shortcut_list_stack;
-  AdwStatusPage        *empty_custom_shortcut_page;
-  GtkSizeGroup         *accelerator_size_group;
+    AdwNavigationPage *subview_page;
+    GtkStack *subview_stack;
+    GtkStack *shortcut_list_stack;
+    AdwStatusPage *empty_custom_shortcut_page;
+    GtkSizeGroup *accelerator_size_group;
 
-  /* A GListStore of sections containing a GListStore of CcKeyboardItem */
-  GListStore           *sections;
-  GListStore           *visible_section;
-  GtkFlattenListModel  *filtered_shortcuts;
+    /* A GListStore of sections containing a GListStore of CcKeyboardItem */
+    GListStore *sections;
+    GListStore *visible_section;
+    GtkFlattenListModel *filtered_shortcuts;
 
-  CcKeyboardManager    *manager;
-  GStrv                 search_terms;
- };
+    CcKeyboardManager *manager;
+    GStrv search_terms;
+};
 
 G_DEFINE_FINAL_TYPE (CcKeyboardShortcutPage, cc_keyboard_shortcut_page, ADW_TYPE_NAVIGATION_PAGE)
 
-
 static GListStore *
-keyboard_shortcut_get_section_store (CcKeyboardShortcutPage *self,
-                                     const char             *section_id,
-                                     const char             *section_title)
+keyboard_shortcut_get_section_store (CcKeyboardShortcutPage *self, const char *section_id, const char *section_title)
 {
-  g_autoptr(GListStore) section = NULL;
-  GtkWidget *group;
-  guint n_items;
+    g_autoptr(GListStore) section = NULL;
+    GtkWidget *group;
+    guint n_items;
 
-  g_assert (CC_IS_KEYBOARD_SHORTCUT_PAGE (self));
-  g_assert (section_id && *section_id);
+    g_assert (CC_IS_KEYBOARD_SHORTCUT_PAGE (self));
+    g_assert (section_id && *section_id);
 
-  n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
+    n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
 
-  for (guint i = 0; i < n_items; i++)
-    {
-      g_autoptr(GObject) item = NULL;
-      const char *item_section_id;
+    for (guint i = 0; i < n_items; i++) {
+        g_autoptr(GObject) item = NULL;
+        const char *item_section_id;
 
-      item = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
-      item_section_id = g_object_get_data (item, "id");
+        item = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
+        item_section_id = g_object_get_data (item, "id");
 
-      if (g_str_equal (item_section_id, section_id))
-        return G_LIST_STORE (item);
+        if (g_str_equal (item_section_id, section_id))
+            return G_LIST_STORE (item);
     }
 
-  /* Found no matching section, so create one */
-  section = g_list_store_new (CC_TYPE_KEYBOARD_ITEM);
-  g_object_set_data_full (G_OBJECT (section), "id", g_strdup (section_id), g_free);
-  g_object_set_data_full (G_OBJECT (section), "title", g_strdup (section_title), g_free);
+    /* Found no matching section, so create one */
+    section = g_list_store_new (CC_TYPE_KEYBOARD_ITEM);
+    g_object_set_data_full (G_OBJECT (section), "id", g_strdup (section_id), g_free);
+    g_object_set_data_full (G_OBJECT (section), "title", g_strdup (section_title), g_free);
 
-  /* This group shall be shown in the search results page */
-  group = cc_keyboard_shortcut_group_new (G_LIST_MODEL (section),
-                                          section_id, section_title,
-                                          self->manager,
-                                          self->accelerator_size_group);
-  g_object_set_data (G_OBJECT (section), "search-group", group);
+    /* This group shall be shown in the search results page */
+    group = cc_keyboard_shortcut_group_new (G_LIST_MODEL (section), section_id, section_title, self->manager,
+                                            self->accelerator_size_group);
+    g_object_set_data (G_OBJECT (section), "search-group", group);
 
-  /* This group shall be shown when a section title row is activated */
-  group = cc_keyboard_shortcut_group_new (G_LIST_MODEL (section),
-                                          section_id, NULL,
-                                          self->manager,
-                                          self->accelerator_size_group);
-  g_object_set_data (G_OBJECT (section), "group", group);
+    /* This group shall be shown when a section title row is activated */
+    group = cc_keyboard_shortcut_group_new (G_LIST_MODEL (section), section_id, NULL, self->manager,
+                                            self->accelerator_size_group);
+    g_object_set_data (G_OBJECT (section), "group", group);
 
-  g_list_store_append (self->sections, section);
+    g_list_store_append (self->sections, section);
 
-  return section;
+    return section;
 }
 
 static void
-shortcut_added_cb (CcKeyboardShortcutPage *self,
-                   CcKeyboardItem         *item,
-                   const char             *section_id,
-                   const char             *section_title)
+shortcut_added_cb (CcKeyboardShortcutPage *self, CcKeyboardItem *item, const char *section_id,
+                   const char *section_title)
 {
-  GListStore *section;
+    GListStore *section;
 
-  /* Global shortcuts sections are already presented in the apps panel.
-   * _GVARIANT should never appear in this dialog, so filter it only out of
-   * caution.
-   */
-  if (cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT)
-    return;
+    /* Global shortcuts sections are already presented in the apps panel.
+     * _GVARIANT should never appear in this dialog, so filter it only out of
+     * caution.
+     */
+    if (cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GLOBAL_SHORTCUT)
+        return;
 
-  section = keyboard_shortcut_get_section_store (self, section_id, section_title);
-  g_object_set_data (G_OBJECT (item), "section", section);
-  g_list_store_append (section, item);
+    section = keyboard_shortcut_get_section_store (self, section_id, section_title);
+    g_object_set_data (G_OBJECT (item), "section", section);
+    g_list_store_append (section, item);
 }
 
 static void
-shortcut_removed_cb (CcKeyboardShortcutPage *self,
-                     CcKeyboardItem         *item)
+shortcut_removed_cb (CcKeyboardShortcutPage *self, CcKeyboardItem *item)
 {
-  GListStore *section;
-  guint position;
+    GListStore *section;
+    guint position;
 
-  section = g_object_get_data (G_OBJECT (item), "section");
-  g_return_if_fail (section);
+    section = g_object_get_data (G_OBJECT (item), "section");
+    g_return_if_fail (section);
 
-  if (g_list_store_find (section, item, &position))
-    g_list_store_remove (section, position);
+    if (g_list_store_find (section, item, &position))
+        g_list_store_remove (section, position);
 }
 
 static void
 shortcut_custom_items_changed (CcKeyboardShortcutPage *self)
 {
-  GListStore *section;
-  GtkWidget *page;
+    GListStore *section;
+    GtkWidget *page;
 
-  g_assert (CC_IS_KEYBOARD_SHORTCUT_PAGE (self));
+    g_assert (CC_IS_KEYBOARD_SHORTCUT_PAGE (self));
 
-  section = keyboard_shortcut_get_section_store (self, "custom", "Custom Shortcuts");
+    section = keyboard_shortcut_get_section_store (self, "custom", "Custom Shortcuts");
 
-  if (self->visible_section == section)
-    {
-      guint n_items;
+    if (self->visible_section == section) {
+        guint n_items;
 
-      n_items = g_list_model_get_n_items (G_LIST_MODEL (section));
+        n_items = g_list_model_get_n_items (G_LIST_MODEL (section));
 
-      if (n_items)
+        if (n_items)
+            page = GTK_WIDGET (self->shortcut_list_stack);
+        else
+            page = GTK_WIDGET (self->empty_custom_shortcut_page);
+    } else
         page = GTK_WIDGET (self->shortcut_list_stack);
-      else
-        page = GTK_WIDGET (self->empty_custom_shortcut_page);
-    }
-  else
-    page = GTK_WIDGET (self->shortcut_list_stack);
 
-  gtk_stack_set_visible_child (self->subview_stack, page);
+    gtk_stack_set_visible_child (self->subview_stack, page);
 }
 
 static int
-compare_sections_title (gconstpointer a,
-                        gconstpointer b,
-                        gpointer     user_data)
+compare_sections_title (gconstpointer a, gconstpointer b, gpointer user_data)
 {
-  GObject *obj_a, *obj_b;
+    GObject *obj_a, *obj_b;
 
-  const char *title_a, *title_b, *id_a, *id_b;
+    const char *title_a, *title_b, *id_a, *id_b;
 
-  obj_a = G_OBJECT (a);
-  obj_b = G_OBJECT (b);
+    obj_a = G_OBJECT (a);
+    obj_b = G_OBJECT (b);
 
-  id_a = g_object_get_data (obj_a, "id");
-  id_b = g_object_get_data (obj_b, "id");
+    id_a = g_object_get_data (obj_a, "id");
+    id_b = g_object_get_data (obj_b, "id");
 
-  /* Always place custom row as the last item */
-  if (g_str_equal (id_a, "custom"))
-    return 1;
+    /* Always place custom row as the last item */
+    if (g_str_equal (id_a, "custom"))
+        return 1;
 
-  if (g_str_equal (id_b, "custom"))
-    return -1;
+    if (g_str_equal (id_b, "custom"))
+        return -1;
 
-  title_a = _(g_object_get_data (obj_a, "title"));
-  title_b = _(g_object_get_data (obj_b, "title"));
+    title_a = _(g_object_get_data (obj_a, "title"));
+    title_b = _(g_object_get_data (obj_b, "title"));
 
-  return g_strcmp0 (title_a, title_b);
+    return g_strcmp0 (title_a, title_b);
 }
 
 static void
 shortcut_search_result_changed_cb (CcKeyboardShortcutPage *self)
 {
-  GListModel *model;
-  GtkWidget *page;
-  guint n_items;
+    GListModel *model;
+    GtkWidget *page;
+    guint n_items;
 
-  g_assert (CC_IS_KEYBOARD_SHORTCUT_PAGE (self));
+    g_assert (CC_IS_KEYBOARD_SHORTCUT_PAGE (self));
 
-  /* If a section is already shown, it is handled in search change callback */
-  if (self->visible_section)
-    return;
+    /* If a section is already shown, it is handled in search change callback */
+    if (self->visible_section)
+        return;
 
-  model = G_LIST_MODEL (self->filtered_shortcuts);
-  n_items = g_list_model_get_n_items (model);
+    model = G_LIST_MODEL (self->filtered_shortcuts);
+    n_items = g_list_model_get_n_items (model);
 
-  if (n_items == 0)
-    page = GTK_WIDGET (self->empty_results_page);
-  else if (self->search_terms)
-    page = GTK_WIDGET (self->search_result_page);
-  else
-    page = GTK_WIDGET (self->section_list_page);
+    if (n_items == 0)
+        page = GTK_WIDGET (self->empty_results_page);
+    else if (self->search_terms)
+        page = GTK_WIDGET (self->search_result_page);
+    else
+        page = GTK_WIDGET (self->section_list_page);
 
-  gtk_stack_set_visible_child (self->section_stack, page);
+    gtk_stack_set_visible_child (self->section_stack, page);
 }
 
 /* All items have loaded, now sort the groups and add them to the page */
 static void
 shortcuts_loaded_cb (CcKeyboardShortcutPage *self)
 {
-  g_autoptr(GPtrArray) filtered_items = NULL;
-  g_autoptr(GPtrArray) widgets = NULL;
-  GListStore *filtered_lists;
-  GListStore *custom_store;
-  guint n_items;
+    g_autoptr(GPtrArray) filtered_items = NULL;
+    g_autoptr(GPtrArray) widgets = NULL;
+    GListStore *filtered_lists;
+    GListStore *custom_store;
+    guint n_items;
 
-  /* Ensure that custom shorcuts section exists */
-  custom_store = keyboard_shortcut_get_section_store (self, "custom", "Custom Shortcuts");
-  n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
-  widgets = g_ptr_array_new ();
-  filtered_items = g_ptr_array_new ();
-  filtered_lists = g_list_store_new (G_TYPE_LIST_MODEL);
+    /* Ensure that custom shorcuts section exists */
+    custom_store = keyboard_shortcut_get_section_store (self, "custom", "Custom Shortcuts");
+    n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
+    widgets = g_ptr_array_new ();
+    filtered_items = g_ptr_array_new ();
+    filtered_lists = g_list_store_new (G_TYPE_LIST_MODEL);
 
-  g_signal_connect_object (custom_store, "items-changed",
-                           G_CALLBACK (shortcut_custom_items_changed),
-                           self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (custom_store, "items-changed", G_CALLBACK (shortcut_custom_items_changed), self,
+                             G_CONNECT_SWAPPED);
 
-  g_list_store_sort (self->sections, compare_sections_title, NULL);
+    g_list_store_sort (self->sections, compare_sections_title, NULL);
 
-  for (guint i = 0; i < n_items; i++)
-    {
-      g_autoptr(GObject) item = NULL;
-      CcKeyboardShortcutGroup *group;
-      GListModel *model;
-      GtkWidget *page;
+    for (guint i = 0; i < n_items; i++) {
+        g_autoptr(GObject) item = NULL;
+        CcKeyboardShortcutGroup *group;
+        GListModel *model;
+        GtkWidget *page;
 
-      item = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
-      group = g_object_get_data (item, "search-group");
-      g_ptr_array_add (widgets, group);
+        item = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
+        group = g_object_get_data (item, "search-group");
+        g_ptr_array_add (widgets, group);
 
-      model = cc_keyboard_shortcut_group_get_model (group);
-      g_ptr_array_add (filtered_items, model);
+        model = cc_keyboard_shortcut_group_get_model (group);
+        g_ptr_array_add (filtered_items, model);
 
-      /* Populate shortcut section page */
-      group = g_object_get_data (item, "group");
-      page = adw_preferences_page_new ();
-      g_object_set_data (item, "page", page);
-      adw_preferences_page_add (ADW_PREFERENCES_PAGE (page), ADW_PREFERENCES_GROUP (group));
-      gtk_stack_add_child (self->shortcut_list_stack, page);
+        /* Populate shortcut section page */
+        group = g_object_get_data (item, "group");
+        page = adw_preferences_page_new ();
+        g_object_set_data (item, "page", page);
+        adw_preferences_page_add (ADW_PREFERENCES_PAGE (page), ADW_PREFERENCES_GROUP (group));
+        gtk_stack_add_child (self->shortcut_list_stack, page);
     }
 
-  /* Populate search results page */
-  for (guint i = 0; i < widgets->len; i++)
-    adw_preferences_page_add (self->search_result_page, widgets->pdata[i]);
+    /* Populate search results page */
+    for (guint i = 0; i < widgets->len; i++)
+        adw_preferences_page_add (self->search_result_page, widgets->pdata[i]);
 
-  /* Keep track of search results so as to update empty state */
-  g_list_store_splice (filtered_lists, 0, 0, filtered_items->pdata, filtered_items->len);
-  self->filtered_shortcuts = gtk_flatten_list_model_new (G_LIST_MODEL (filtered_lists));
+    /* Keep track of search results so as to update empty state */
+    g_list_store_splice (filtered_lists, 0, 0, filtered_items->pdata, filtered_items->len);
+    self->filtered_shortcuts = gtk_flatten_list_model_new (G_LIST_MODEL (filtered_lists));
 
-  g_signal_connect_object (self->filtered_shortcuts, "items-changed",
-                           G_CALLBACK (shortcut_search_result_changed_cb),
-                           self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->filtered_shortcuts, "items-changed", G_CALLBACK (shortcut_search_result_changed_cb),
+                             self, G_CONNECT_SWAPPED);
 }
 
 static GtkWidget *
-shortcut_page_row_new (gpointer item,
-                       gpointer user_data)
+shortcut_page_row_new (gpointer item, gpointer user_data)
 {
-  GtkWidget *row, *group;
-  const char *title;
+    GtkWidget *row, *group;
+    const char *title;
 
-  group = g_object_get_data (item, "search-group");
-  title = g_object_get_data (item, "title");
-  row = g_object_new (CC_TYPE_LIST_ROW,
-                      "title", _(title),
-                      "show-arrow", TRUE,
-                      NULL);
+    group = g_object_get_data (item, "search-group");
+    title = g_object_get_data (item, "title");
+    row = g_object_new (CC_TYPE_LIST_ROW, "title", _(title), "show-arrow", TRUE, NULL);
 
-  g_object_set_data (G_OBJECT (row), "section", item);
+    g_object_set_data (G_OBJECT (row), "section", item);
 
-  g_object_bind_property (group, "modified-text",
-                          row, "secondary-label",
-                          G_BINDING_SYNC_CREATE);
+    g_object_bind_property (group, "modified-text", row, "secondary-label", G_BINDING_SYNC_CREATE);
 
-  return row;
+    return row;
 }
 
 static void
 add_custom_shortcut_clicked_cb (CcKeyboardShortcutPage *self)
 {
-  CcKeyboardShortcutEditor *shortcut_editor;
+    CcKeyboardShortcutEditor *shortcut_editor;
 
-  shortcut_editor = cc_keyboard_shortcut_editor_new (self->manager);
+    shortcut_editor = cc_keyboard_shortcut_editor_new (self->manager);
 
-  cc_keyboard_shortcut_editor_set_mode (shortcut_editor, CC_SHORTCUT_EDITOR_CREATE);
-  cc_keyboard_shortcut_editor_set_item (shortcut_editor, NULL);
+    cc_keyboard_shortcut_editor_set_mode (shortcut_editor, CC_SHORTCUT_EDITOR_CREATE);
+    cc_keyboard_shortcut_editor_set_item (shortcut_editor, NULL);
 
-  adw_dialog_present (ADW_DIALOG (shortcut_editor), GTK_WIDGET (self));
+    adw_dialog_present (ADW_DIALOG (shortcut_editor), GTK_WIDGET (self));
 }
 
 static void
 on_reset_all_dialog_response_cb (CcKeyboardShortcutPage *self)
 {
-  guint n_items, j_items;
+    guint n_items, j_items;
 
-  n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
+    n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
 
-  for (guint i = 0; i < n_items; i++)
-    {
-      g_autoptr(GListModel) section = NULL;
+    for (guint i = 0; i < n_items; i++) {
+        g_autoptr(GListModel) section = NULL;
 
-      section = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
-      j_items = g_list_model_get_n_items (section);
+        section = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
+        j_items = g_list_model_get_n_items (section);
 
-      for (guint j = 0; j < j_items; j++)
-        {
-          g_autoptr(CcKeyboardItem) item = NULL;
+        for (guint j = 0; j < j_items; j++) {
+            g_autoptr(CcKeyboardItem) item = NULL;
 
-          item = g_list_model_get_item (section, j);
+            item = g_list_model_get_item (section, j);
 
-          /* Don't reset custom shortcuts */
-          if (cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
-            return;
+            /* Don't reset custom shortcuts */
+            if (cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
+                return;
 
-          /* cc_keyboard_manager_reset_shortcut() already resets conflicting shortcuts,
-           * so no other check is needed here. */
-          cc_keyboard_manager_reset_shortcut (self->manager, item);
+            /* cc_keyboard_manager_reset_shortcut() already resets conflicting shortcuts,
+             * so no other check is needed here. */
+            cc_keyboard_manager_reset_shortcut (self->manager, item);
         }
     }
 
-  adw_switch_row_set_active (self->overview_shortcut_row, TRUE);
+    adw_switch_row_set_active (self->overview_shortcut_row, TRUE);
 }
 
 static void
 on_shortcut_page_showing_cb (CcKeyboardShortcutPage *self)
 {
-  gtk_editable_set_text (GTK_EDITABLE (self->search_entry), "");
-  self->visible_section = NULL;
+    gtk_editable_set_text (GTK_EDITABLE (self->search_entry), "");
+    self->visible_section = NULL;
 }
 
 static void
 shortcut_search_entry_changed_cb (CcKeyboardShortcutPage *self)
 {
-  g_autofree char *search = NULL;
-  const char *search_text;
-  guint n_items;
+    g_autofree char *search = NULL;
+    const char *search_text;
+    guint n_items;
 
-  g_assert (CC_IS_KEYBOARD_SHORTCUT_PAGE (self));
+    g_assert (CC_IS_KEYBOARD_SHORTCUT_PAGE (self));
 
-  /* Don't update search if we are in a subview */
-  if (self->visible_section)
-    return;
+    /* Don't update search if we are in a subview */
+    if (self->visible_section)
+        return;
 
-  n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
-  search_text = gtk_editable_get_text (GTK_EDITABLE (self->search_entry));
-  search = cc_util_normalize_casefold_and_unaccent (search_text);
+    n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
+    search_text = gtk_editable_get_text (GTK_EDITABLE (self->search_entry));
+    search = cc_util_normalize_casefold_and_unaccent (search_text);
 
-  g_clear_pointer (&self->search_terms, g_strfreev);
-  if (search && *search && *search != ' ')
-    self->search_terms = g_strsplit (search, " ", -1);
+    g_clear_pointer (&self->search_terms, g_strfreev);
+    if (search && *search && *search != ' ')
+        self->search_terms = g_strsplit (search, " ", -1);
 
-  /* "Reset all..." button row should be sensitive only if the search is not active */
-  gtk_widget_set_sensitive (GTK_WIDGET (self->reset_all_button_row), !self->search_terms);
+    /* "Reset all..." button row should be sensitive only if the search is not active */
+    gtk_widget_set_sensitive (GTK_WIDGET (self->reset_all_button_row), !self->search_terms);
 
-  for (guint i = 0; i < n_items; i++)
-    {
-      g_autoptr(GObject) item = NULL;
-      CcKeyboardShortcutGroup *group;
+    for (guint i = 0; i < n_items; i++) {
+        g_autoptr(GObject) item = NULL;
+        CcKeyboardShortcutGroup *group;
 
-      item = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
-      group = g_object_get_data (item, "search-group");
+        item = g_list_model_get_item (G_LIST_MODEL (self->sections), i);
+        group = g_object_get_data (item, "search-group");
 
-      cc_keyboard_shortcut_group_set_filter (group, self->search_terms);
+        cc_keyboard_shortcut_group_set_filter (group, self->search_terms);
     }
 
-  shortcut_search_result_changed_cb (self);
+    shortcut_search_result_changed_cb (self);
 }
 
 static void
 shortcut_search_entry_stopped_cb (CcKeyboardShortcutPage *self)
 {
-  const char *search_text;
-  search_text = gtk_editable_get_text (GTK_EDITABLE (self->search_entry));
+    const char *search_text;
+    search_text = gtk_editable_get_text (GTK_EDITABLE (self->search_entry));
 
-  if (search_text && g_strcmp0 (search_text, "") != 0)
-    gtk_editable_set_text (GTK_EDITABLE (self->search_entry), "");
-  else
-    gtk_widget_activate_action (GTK_WIDGET (self), "navigation.pop", NULL);
+    if (search_text && g_strcmp0 (search_text, "") != 0)
+        gtk_editable_set_text (GTK_EDITABLE (self->search_entry), "");
+    else
+        gtk_widget_activate_action (GTK_WIDGET (self), "navigation.pop", NULL);
 }
 
 static void
-shortcut_section_row_activated_cb (CcKeyboardShortcutPage *self,
-                                   GtkListBoxRow          *row)
+shortcut_section_row_activated_cb (CcKeyboardShortcutPage *self, GtkListBoxRow *row)
 {
-  AdwNavigationView *nav_view;
-  GListStore *section;
-  GtkWidget *page;
-  const char *title;
+    AdwNavigationView *nav_view;
+    GListStore *section;
+    GtkWidget *page;
+    const char *title;
 
-  g_assert (CC_IS_KEYBOARD_SHORTCUT_PAGE (self));
-  g_assert (GTK_IS_LIST_BOX_ROW (row));
+    g_assert (CC_IS_KEYBOARD_SHORTCUT_PAGE (self));
+    g_assert (GTK_IS_LIST_BOX_ROW (row));
 
-  section = g_object_get_data (G_OBJECT (row), "section");
-  self->visible_section = section;
+    section = g_object_get_data (G_OBJECT (row), "section");
+    self->visible_section = section;
 
-  title = g_object_get_data (G_OBJECT (section), "title");
-  adw_navigation_page_set_title (self->subview_page, _(title) ?: "");
+    title = g_object_get_data (G_OBJECT (section), "title");
+    adw_navigation_page_set_title (self->subview_page, _(title) ?: "");
 
-  page = g_object_get_data (G_OBJECT (section), "page");
-  gtk_stack_set_visible_child (self->shortcut_list_stack, page);
+    page = g_object_get_data (G_OBJECT (section), "page");
+    gtk_stack_set_visible_child (self->shortcut_list_stack, page);
 
-  nav_view = ADW_NAVIGATION_VIEW (gtk_widget_get_ancestor (GTK_WIDGET (self), ADW_TYPE_NAVIGATION_VIEW));
-  adw_navigation_view_push (nav_view, self->subview_page);
+    nav_view = ADW_NAVIGATION_VIEW (gtk_widget_get_ancestor (GTK_WIDGET (self), ADW_TYPE_NAVIGATION_VIEW));
+    adw_navigation_view_push (nav_view, self->subview_page);
 
-  shortcut_custom_items_changed (self);
+    shortcut_custom_items_changed (self);
 }
 
 static gboolean
-get_overview_shortcut_setting (GValue   *value,
-                               GVariant *variant,
-                               gpointer  user_data)
+get_overview_shortcut_setting (GValue *value, GVariant *variant, gpointer user_data)
 {
-  const char *overlay_key = g_variant_get_string (variant, NULL);
-  gboolean enabled = g_strcmp0 (overlay_key, DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT) == 0 ||
-                     g_strcmp0 (overlay_key, OLD_ACTIVITIES_OVERVIEW_SHORTCUT) == 0;
-  g_value_set_boolean (value, enabled);
+    const char *overlay_key = g_variant_get_string (variant, NULL);
+    gboolean enabled = g_strcmp0 (overlay_key, DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT) == 0
+                       || g_strcmp0 (overlay_key, OLD_ACTIVITIES_OVERVIEW_SHORTCUT) == 0;
+    g_value_set_boolean (value, enabled);
 
-  return TRUE;
+    return TRUE;
 }
 
 static GVariant *
-set_overview_shortcut_setting (const GValue       *value,
-                               const GVariantType *variant,
-                               gpointer            user_data)
+set_overview_shortcut_setting (const GValue *value, const GVariantType *variant, gpointer user_data)
 {
-  gboolean enabled = g_value_get_boolean (value);
+    gboolean enabled = g_value_get_boolean (value);
 
-  return g_variant_new_string (enabled ? DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT : "");
+    return g_variant_new_string (enabled ? DEFAULT_ACTIVITIES_OVERVIEW_SHORTCUT : "");
 }
 
 static void
 cc_keyboard_shortcut_page_finalize (GObject *object)
 {
-  CcKeyboardShortcutPage *self = CC_KEYBOARD_SHORTCUT_PAGE (object);
+    CcKeyboardShortcutPage *self = CC_KEYBOARD_SHORTCUT_PAGE (object);
 
-  g_clear_object (&self->manager);
-  g_clear_object (&self->sections);
-  g_clear_pointer (&self->search_terms, g_strfreev);
-  g_clear_object (&self->sections);
-  g_clear_object (&self->filtered_shortcuts);
+    g_clear_object (&self->manager);
+    g_clear_object (&self->sections);
+    g_clear_pointer (&self->search_terms, g_strfreev);
+    g_clear_object (&self->sections);
+    g_clear_object (&self->filtered_shortcuts);
 
-  G_OBJECT_CLASS (cc_keyboard_shortcut_page_parent_class)->finalize (object);
+    G_OBJECT_CLASS (cc_keyboard_shortcut_page_parent_class)->finalize (object);
 }
 
 static void
 cc_keyboard_shortcut_page_class_init (CcKeyboardShortcutPageClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->finalize = cc_keyboard_shortcut_page_finalize;
+    object_class->finalize = cc_keyboard_shortcut_page_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/control-center/"
-                                               "keyboard/cc-keyboard-shortcut-page.ui");
+    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/"
+                                                               "keyboard/cc-keyboard-shortcut-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, overview_shortcut_row);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, reset_all_button_row);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, reset_all_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, search_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, section_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, section_list_page);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, section_list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, search_result_page);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, empty_results_page);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, overview_shortcut_row);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, reset_all_button_row);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, reset_all_dialog);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, search_entry);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, section_stack);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, section_list_page);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, section_list_box);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, search_result_page);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, empty_results_page);
 
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, subview_page);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, subview_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, shortcut_list_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, empty_custom_shortcut_page);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, accelerator_size_group);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, subview_page);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, subview_stack);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, shortcut_list_stack);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, empty_custom_shortcut_page);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutPage, accelerator_size_group);
 
-  gtk_widget_class_bind_template_callback (widget_class, add_custom_shortcut_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_reset_all_dialog_response_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_shortcut_page_showing_cb);
-  gtk_widget_class_bind_template_callback (widget_class, shortcut_search_entry_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, shortcut_search_entry_stopped_cb);
-  gtk_widget_class_bind_template_callback (widget_class, shortcut_section_row_activated_cb);
+    gtk_widget_class_bind_template_callback (widget_class, add_custom_shortcut_clicked_cb);
+    gtk_widget_class_bind_template_callback (widget_class, on_reset_all_dialog_response_cb);
+    gtk_widget_class_bind_template_callback (widget_class, on_shortcut_page_showing_cb);
+    gtk_widget_class_bind_template_callback (widget_class, shortcut_search_entry_changed_cb);
+    gtk_widget_class_bind_template_callback (widget_class, shortcut_search_entry_stopped_cb);
+    gtk_widget_class_bind_template_callback (widget_class, shortcut_section_row_activated_cb);
 }
 
 static void
 cc_keyboard_shortcut_page_init (CcKeyboardShortcutPage *self)
 {
-  g_autoptr(GSettings) mutter_settings = g_settings_new ("org.gnome.mutter");
+    g_autoptr(GSettings) mutter_settings = g_settings_new ("org.gnome.mutter");
 
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->manager = cc_keyboard_manager_new ();
+    self->manager = cc_keyboard_manager_new ();
 
-  self->sections = g_list_store_new (G_TYPE_LIST_STORE);
+    self->sections = g_list_store_new (G_TYPE_LIST_STORE);
 
-  g_signal_connect_object (self->manager,
-                           "shortcut-added",
-                           G_CALLBACK (shortcut_added_cb),
-                           self, G_CONNECT_SWAPPED);
-  g_signal_connect_object (self->manager,
-                           "shortcut-removed",
-                           G_CALLBACK (shortcut_removed_cb),
-                           self, G_CONNECT_SWAPPED);
-  g_signal_connect_object (self->manager,
-                           "shortcuts-loaded",
-                           G_CALLBACK (shortcuts_loaded_cb),
-                           self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->manager, "shortcut-added", G_CALLBACK (shortcut_added_cb), self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->manager, "shortcut-removed", G_CALLBACK (shortcut_removed_cb), self,
+                             G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->manager, "shortcuts-loaded", G_CALLBACK (shortcuts_loaded_cb), self,
+                             G_CONNECT_SWAPPED);
 
-  cc_keyboard_manager_load_shortcuts (self->manager);
+    cc_keyboard_manager_load_shortcuts (self->manager);
 
-  gtk_list_box_bind_model (self->section_list_box,
-                           G_LIST_MODEL (self->sections),
-                           shortcut_page_row_new,
-                           self, NULL);
+    gtk_list_box_bind_model (self->section_list_box, G_LIST_MODEL (self->sections), shortcut_page_row_new, self, NULL);
 
-  g_settings_bind_with_mapping (mutter_settings, "overlay-key",
-                                self->overview_shortcut_row, "active",
-				G_SETTINGS_BIND_DEFAULT,
-				get_overview_shortcut_setting,
-				set_overview_shortcut_setting,
-				NULL, NULL);
+    g_settings_bind_with_mapping (mutter_settings, "overlay-key", self->overview_shortcut_row, "active",
+                                  G_SETTINGS_BIND_DEFAULT, get_overview_shortcut_setting, set_overview_shortcut_setting,
+                                  NULL, NULL);
 }
 
-GtkWidget*
+GtkWidget *
 cc_keyboard_shortcut_page_new (void)
 {
-  return g_object_new (CC_TYPE_KEYBOARD_SHORTCUT_PAGE, NULL);
+    return g_object_new (CC_TYPE_KEYBOARD_SHORTCUT_PAGE, NULL);
 }

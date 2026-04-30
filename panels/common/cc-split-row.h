@@ -28,43 +28,35 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SPLIT_ROW (cc_split_row_get_type())
+#define CC_TYPE_SPLIT_ROW (cc_split_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcSplitRow, cc_split_row, CC, SPLIT_ROW, CcContentRow);
-void         cc_split_row_set_default_illustration_resource (CcSplitRow  *self,
-                                                             const gchar *resource_path);
+void cc_split_row_set_default_illustration_resource (CcSplitRow *self, const gchar *resource_path);
 
 const gchar *cc_split_row_get_default_illustration_resource (CcSplitRow *self);
 
-void         cc_split_row_set_alternative_illustration_resource (CcSplitRow  *self,
-                                                                 const gchar *resource_path);
+void cc_split_row_set_alternative_illustration_resource (CcSplitRow *self, const gchar *resource_path);
 
 const gchar *cc_split_row_get_alternative_illustration_resource (CcSplitRow *self);
 
-void         cc_split_row_set_use_default (CcSplitRow *self,
-                                           gboolean    use_default);
+void cc_split_row_set_use_default (CcSplitRow *self, gboolean use_default);
 
-gboolean     cc_split_row_get_use_default (CcSplitRow *self);
+gboolean cc_split_row_get_use_default (CcSplitRow *self);
 
-void         cc_split_row_set_compact (CcSplitRow *self,
-                                       gboolean    compact);
+void cc_split_row_set_compact (CcSplitRow *self, gboolean compact);
 
-gboolean     cc_split_row_get_compact (CcSplitRow *self);
+gboolean cc_split_row_get_compact (CcSplitRow *self);
 
 const gchar *cc_split_row_get_default_option_title (CcSplitRow *self);
 
-void         cc_split_row_set_default_option_title (CcSplitRow  *self,
-                                                    const gchar *title);
+void cc_split_row_set_default_option_title (CcSplitRow *self, const gchar *title);
 const gchar *cc_split_row_get_default_option_subtitle (CcSplitRow *self);
 
-void         cc_split_row_set_default_option_subtitle (CcSplitRow  *self,
-                                                       const gchar *subtitle);
+void cc_split_row_set_default_option_subtitle (CcSplitRow *self, const gchar *subtitle);
 const gchar *cc_split_row_get_alternative_option_title (CcSplitRow *self);
 
-void         cc_split_row_set_alternative_option_title (CcSplitRow  *self,
-                                                        const gchar *title);
+void cc_split_row_set_alternative_option_title (CcSplitRow *self, const gchar *title);
 const gchar *cc_split_row_get_alternative_option_subtitle (CcSplitRow *self);
 
-void         cc_split_row_set_alternative_option_subtitle (CcSplitRow  *self,
-                                                           const gchar *subtitle);
+void cc_split_row_set_alternative_option_subtitle (CcSplitRow *self, const gchar *subtitle);
 
 G_END_DECLS

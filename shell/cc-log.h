@@ -31,60 +31,41 @@
 G_BEGIN_DECLS
 
 #ifndef CC_LOG_LEVEL_TRACE
-# define CC_LOG_LEVEL_TRACE ((GLogLevelFlags)(1 << G_LOG_LEVEL_USER_SHIFT))
-# define CC_LOG_DETAILED ((GLogLevelFlags)(1 << (G_LOG_LEVEL_USER_SHIFT + 1)))
+#define CC_LOG_LEVEL_TRACE ((GLogLevelFlags) (1 << G_LOG_LEVEL_USER_SHIFT))
+#define CC_LOG_DETAILED ((GLogLevelFlags) (1 << (G_LOG_LEVEL_USER_SHIFT + 1)))
 #endif
 
-#define CC_DEBUG_MSG(fmt, ...)                          \
-  cc_log (G_LOG_DOMAIN,                                 \
-          G_LOG_LEVEL_DEBUG | CC_LOG_DETAILED,          \
-          NULL, __FILE__, G_STRINGIFY (__LINE__),       \
-          G_STRFUNC, fmt, ##__VA_ARGS__)
-#define CC_TRACE_MSG(fmt, ...)                          \
-  cc_log (G_LOG_DOMAIN,                                 \
-          CC_LOG_LEVEL_TRACE | CC_LOG_DETAILED,         \
-          NULL, __FILE__, G_STRINGIFY (__LINE__),       \
-          G_STRFUNC, fmt, ##__VA_ARGS__)
-#define CC_TRACE(fmt, ...)                              \
-  cc_log (G_LOG_DOMAIN,                                 \
-          CC_LOG_LEVEL_TRACE,                           \
-          NULL, __FILE__, G_STRINGIFY (__LINE__),       \
-          G_STRFUNC, fmt, ##__VA_ARGS__)
-#define CC_TODO(_msg)                                   \
-  g_log_structured (G_LOG_DOMAIN, CC_LOG_LEVEL_TRACE,   \
-                    "MESSAGE", " TODO: %s():%d: %s",    \
-                    G_STRFUNC, __LINE__, _msg)
-#define CC_ENTRY                                        \
-  g_log_structured (G_LOG_DOMAIN, CC_LOG_LEVEL_TRACE,   \
-                    "MESSAGE", "ENTRY: %s():%d",        \
-                    G_STRFUNC, __LINE__)
-#define CC_EXIT                                         \
-  G_STMT_START {                                        \
-    g_log_structured (G_LOG_DOMAIN, CC_LOG_LEVEL_TRACE, \
-                      "MESSAGE", "EXIT: %s():%d",       \
-                      G_STRFUNC, __LINE__);             \
-    return;                                             \
-  } G_STMT_END
-#define CC_RETURN(_r)                                   \
-  G_STMT_START {                                        \
-    g_log_structured (G_LOG_DOMAIN, CC_LOG_LEVEL_TRACE, \
-                      "MESSAGE", "EXIT: %s():%d ",      \
-                      G_STRFUNC, __LINE__);             \
-    return _r;                                          \
-  } G_STMT_END
+#define CC_DEBUG_MSG(fmt, ...)                                                                                         \
+    cc_log (G_LOG_DOMAIN, G_LOG_LEVEL_DEBUG | CC_LOG_DETAILED, NULL, __FILE__, G_STRINGIFY (__LINE__), G_STRFUNC, fmt, \
+            ##__VA_ARGS__)
+#define CC_TRACE_MSG(fmt, ...)                                                                                         \
+    cc_log (G_LOG_DOMAIN, CC_LOG_LEVEL_TRACE | CC_LOG_DETAILED, NULL, __FILE__, G_STRINGIFY (__LINE__), G_STRFUNC,     \
+            fmt, ##__VA_ARGS__)
+#define CC_TRACE(fmt, ...)                                                                                             \
+    cc_log (G_LOG_DOMAIN, CC_LOG_LEVEL_TRACE, NULL, __FILE__, G_STRINGIFY (__LINE__), G_STRFUNC, fmt, ##__VA_ARGS__)
+#define CC_TODO(_msg)                                                                                                  \
+    g_log_structured (G_LOG_DOMAIN, CC_LOG_LEVEL_TRACE, "MESSAGE", " TODO: %s():%d: %s", G_STRFUNC, __LINE__, _msg)
+#define CC_ENTRY g_log_structured (G_LOG_DOMAIN, CC_LOG_LEVEL_TRACE, "MESSAGE", "ENTRY: %s():%d", G_STRFUNC, __LINE__)
+#define CC_EXIT                                                                                                        \
+    G_STMT_START                                                                                                       \
+    {                                                                                                                  \
+        g_log_structured (G_LOG_DOMAIN, CC_LOG_LEVEL_TRACE, "MESSAGE", "EXIT: %s():%d", G_STRFUNC, __LINE__);          \
+        return;                                                                                                        \
+    }                                                                                                                  \
+    G_STMT_END
+#define CC_RETURN(_r)                                                                                                  \
+    G_STMT_START                                                                                                       \
+    {                                                                                                                  \
+        g_log_structured (G_LOG_DOMAIN, CC_LOG_LEVEL_TRACE, "MESSAGE", "EXIT: %s():%d ", G_STRFUNC, __LINE__);         \
+        return _r;                                                                                                     \
+    }                                                                                                                  \
+    G_STMT_END
 
-void cc_log_init               (void);
+void cc_log_init (void);
 void cc_log_increase_verbosity (void);
-int  cc_log_get_verbosity      (void);
-void cc_log                    (const char     *domain,
-                                GLogLevelFlags  log_level,
-                                const char     *value,
-                                const char     *file,
-                                const char     *line,
-                                const char     *func,
-                                const char     *message_format,
-                                ...) G_GNUC_PRINTF (7, 8);
-void cc_log_anonymize_value    (GString        *str,
-                                const char     *value);
+int cc_log_get_verbosity (void);
+void cc_log (const char *domain, GLogLevelFlags log_level, const char *value, const char *file, const char *line,
+             const char *func, const char *message_format, ...) G_GNUC_PRINTF (7, 8);
+void cc_log_anonymize_value (GString *str, const char *value);
 
 G_END_DECLS

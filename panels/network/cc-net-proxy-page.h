@@ -31,11 +31,10 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_NET_PROXY_PAGE (cc_net_proxy_page_get_type ())
 G_DECLARE_FINAL_TYPE (CcNetProxyPage, cc_net_proxy_page, CC, NET_PROXY_PAGE, AdwNavigationPage);
-gboolean  cc_net_proxy_page_get_enabled     (CcNetProxyPage *self);
-void      cc_net_proxy_page_set_enabled     (CcNetProxyPage *self,
-                                             gboolean        enable);
-gboolean  cc_net_proxy_page_has_modified    (CcNetProxyPage *self);
-void      cc_net_proxy_page_save_changes    (CcNetProxyPage *self);
-void      cc_net_proxy_page_cancel_changes  (CcNetProxyPage *self);
+gboolean cc_net_proxy_page_get_enabled (CcNetProxyPage *self);
+void cc_net_proxy_page_set_enabled (CcNetProxyPage *self, gboolean enable);
+gboolean cc_net_proxy_page_has_modified (CcNetProxyPage *self);
+void cc_net_proxy_page_save_changes (CcNetProxyPage *self);
+void cc_net_proxy_page_cancel_changes (CcNetProxyPage *self);
 
 G_END_DECLS

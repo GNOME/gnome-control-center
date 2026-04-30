@@ -24,73 +24,46 @@
 
 G_BEGIN_DECLS
 
-typedef struct BoltProxySignal
-{
+typedef struct BoltProxySignal {
 
-  const char *theirs;
-  void (*handle)(GObject    *self,
-                 GDBusProxy *bus_proxy,
-                 GVariant   *params);
+    const char *theirs;
+    void (*handle) (GObject *self, GDBusProxy *bus_proxy, GVariant *params);
 
 } BoltProxySignal;
 
 #define BOLT_TYPE_PROXY (bolt_proxy_get_type ())
 G_DECLARE_DERIVABLE_TYPE (BoltProxy, bolt_proxy, BOLT, PROXY, GDBusProxy);
-struct _BoltProxyClass
-{
-  GDBusProxyClass parent;
+struct _BoltProxyClass {
+    GDBusProxyClass parent;
 
-  /* virtuals */
-  const BoltProxySignal * (*get_dbus_signals) (guint *n);
+    /* virtuals */
+    const BoltProxySignal *(*get_dbus_signals) (guint *n);
 };
 
-gboolean          bolt_proxy_get_dbus_property (GObject    *proxy,
-                                                GParamSpec *spec,
-                                                GValue     *value);
+gboolean bolt_proxy_get_dbus_property (GObject *proxy, GParamSpec *spec, GValue *value);
 
-gboolean          bolt_proxy_has_name_owner (BoltProxy *proxy);
+gboolean bolt_proxy_has_name_owner (BoltProxy *proxy);
 
-gboolean          bolt_proxy_get_property_bool (BoltProxy  *proxy,
-                                                const char *name,
-                                                gboolean   *value);
+gboolean bolt_proxy_get_property_bool (BoltProxy *proxy, const char *name, gboolean *value);
 
-gboolean          bolt_proxy_get_property_enum (BoltProxy  *proxy,
-                                                const char *name,
-                                                gint       *value);
+gboolean bolt_proxy_get_property_enum (BoltProxy *proxy, const char *name, gint *value);
 
-gboolean          bolt_proxy_get_property_flags (BoltProxy  *proxy,
-                                                 const char *name,
-                                                 guint      *value);
+gboolean bolt_proxy_get_property_flags (BoltProxy *proxy, const char *name, guint *value);
 
-gboolean          bolt_proxy_get_property_uint32 (BoltProxy  *proxy,
-                                                  const char *name,
-                                                  guint      *value);
+gboolean bolt_proxy_get_property_uint32 (BoltProxy *proxy, const char *name, guint *value);
 
-gboolean          bolt_proxy_get_property_int64 (BoltProxy  *proxy,
-                                                 const char *name,
-                                                 gint64     *value);
+gboolean bolt_proxy_get_property_int64 (BoltProxy *proxy, const char *name, gint64 *value);
 
-gboolean          bolt_proxy_get_property_uint64 (BoltProxy  *proxy,
-                                                  const char *name,
-                                                  guint64    *value);
+gboolean bolt_proxy_get_property_uint64 (BoltProxy *proxy, const char *name, guint64 *value);
 
-const char *      bolt_proxy_get_property_string (BoltProxy  *proxy,
-                                                  const char *name);
+const char *bolt_proxy_get_property_string (BoltProxy *proxy, const char *name);
 
-gboolean          bolt_proxy_set_property (BoltProxy    *proxy,
-                                           const char   *name,
-                                           GVariant     *value,
-                                           GCancellable *cancellable,
-                                           GError      **error);
+gboolean bolt_proxy_set_property (BoltProxy *proxy, const char *name, GVariant *value, GCancellable *cancellable,
+                                  GError **error);
 
-void              bolt_proxy_set_property_async (BoltProxy          *proxy,
-                                                 const char         *name,
-                                                 GVariant           *value,
-                                                 GCancellable       *cancellable,
-                                                 GAsyncReadyCallback callback,
-                                                 gpointer            user_data);
+void bolt_proxy_set_property_async (BoltProxy *proxy, const char *name, GVariant *value, GCancellable *cancellable,
+                                    GAsyncReadyCallback callback, gpointer user_data);
 
-gboolean         bolt_proxy_set_property_finish (GAsyncResult *res,
-                                                 GError      **error);
+gboolean bolt_proxy_set_property_finish (GAsyncResult *res, GError **error);
 
 G_END_DECLS

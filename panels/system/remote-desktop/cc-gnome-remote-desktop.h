@@ -23,13 +23,11 @@
 
 G_BEGIN_DECLS
 
-const SecretSchema * cc_grd_rdp_credentials_get_schema (void);
+const SecretSchema *cc_grd_rdp_credentials_get_schema (void);
 
-void cc_grd_store_rdp_credentials (const gchar  *username,
-                                   const gchar  *password,
-                                   GCancellable *cancellable);
+void cc_grd_store_rdp_credentials (const gchar *username, const gchar *password, GCancellable *cancellable);
 
-gchar * cc_grd_lookup_rdp_username (GCancellable *cancellable);
-gchar * cc_grd_lookup_rdp_password (GCancellable *cancellable);
+gchar *cc_grd_lookup_rdp_username (GCancellable *cancellable);
+gchar *cc_grd_lookup_rdp_password (GCancellable *cancellable);
 
 G_END_DECLS

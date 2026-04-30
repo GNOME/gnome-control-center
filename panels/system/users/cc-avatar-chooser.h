@@ -20,17 +20,16 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include <act/act.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_AVATAR_CHOOSER (cc_avatar_chooser_get_type())
+#define CC_TYPE_AVATAR_CHOOSER (cc_avatar_chooser_get_type ())
 G_DECLARE_FINAL_TYPE (CcAvatarChooser, cc_avatar_chooser, CC, AVATAR_CHOOSER, GtkPopover);
 typedef struct _CcAvatarChooser CcAvatarChooser;
 
-CcAvatarChooser *cc_avatar_chooser_new      (void);
-void             cc_avatar_chooser_set_user (CcAvatarChooser *self,
-                                             ActUser         *user);
+CcAvatarChooser *cc_avatar_chooser_new (void);
+void cc_avatar_chooser_set_user (CcAvatarChooser *self, ActUser *user);
 
 G_END_DECLS

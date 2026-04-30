@@ -33,67 +33,63 @@
  */
 
 static const GDBusErrorEntry bolt_error_entries[] = {
-  {BOLT_ERROR_FAILED,     BOLT_DBUS_NAME ".Error.Failed"},
-  {BOLT_ERROR_UDEV,       BOLT_DBUS_NAME ".Error.UDev"},
+    { BOLT_ERROR_FAILED, BOLT_DBUS_NAME ".Error.Failed" },
+    { BOLT_ERROR_UDEV, BOLT_DBUS_NAME ".Error.UDev" },
 };
-
 
 GQuark
 bolt_error_quark (void)
 {
-  static volatile gsize quark_volatile = 0;
+    static volatile gsize quark_volatile = 0;
 
-  g_dbus_error_register_error_domain ("bolt-error-quark",
-                                      &quark_volatile,
-                                      bolt_error_entries,
-                                      G_N_ELEMENTS (bolt_error_entries));
-  return (GQuark) quark_volatile;
+    g_dbus_error_register_error_domain ("bolt-error-quark", &quark_volatile, bolt_error_entries,
+                                        G_N_ELEMENTS (bolt_error_entries));
+    return (GQuark) quark_volatile;
 }
 
 gboolean
 bolt_err_notfound (const GError *error)
 {
-  return g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND) ||
-         g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_NOENT) ||
-         g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND) ||
-         g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_GROUP_NOT_FOUND);
+    return g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_FOUND)
+           || g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_NOENT)
+           || g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND)
+           || g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_GROUP_NOT_FOUND);
 }
 
 gboolean
 bolt_err_exists (const GError *error)
 {
-  return g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS) ||
-         g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_EXIST);
+    return g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS)
+           || g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_EXIST);
 }
 
 gboolean
 bolt_err_inval (const GError *error)
 {
-  return g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_INVALID_VALUE);
+    return g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_INVALID_VALUE);
 }
 
 gboolean
 bolt_err_cancelled (const GError *error)
 {
-  return g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED);
+    return g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED);
 }
 
 gboolean
-bolt_error_propagate_stripped (GError **dest,
-                               GError **source)
+bolt_error_propagate_stripped (GError **dest, GError **source)
 {
-  GError *src = NULL;
+    GError *src = NULL;
 
-  g_return_val_if_fail (source != NULL, FALSE);
+    g_return_val_if_fail (source != NULL, FALSE);
 
-  src = *source;
+    src = *source;
 
-  if (src == NULL)
-    return TRUE;
+    if (src == NULL)
+        return TRUE;
 
-  if (g_dbus_error_is_remote_error (src))
-    g_dbus_error_strip_remote_error (src);
+    if (g_dbus_error_is_remote_error (src))
+        g_dbus_error_strip_remote_error (src);
 
-  g_propagate_error (dest, g_steal_pointer (source));
-  return FALSE;
+    g_propagate_error (dest, g_steal_pointer (source));
+    return FALSE;
 }

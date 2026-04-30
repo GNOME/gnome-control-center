@@ -24,22 +24,22 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_LANGUAGE_ROW (cc_language_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcLanguageRow, cc_language_row, CC, LANGUAGE_ROW, GtkListBoxRow);
-CcLanguageRow *cc_language_row_new                (const gchar *locale_id);
+CcLanguageRow *cc_language_row_new (const gchar *locale_id);
 
-const gchar   *cc_language_row_get_locale_id      (CcLanguageRow *row);
+const gchar *cc_language_row_get_locale_id (CcLanguageRow *row);
 
-const gchar   *cc_language_row_get_language       (CcLanguageRow *row);
+const gchar *cc_language_row_get_language (CcLanguageRow *row);
 
-const gchar   *cc_language_row_get_language_local (CcLanguageRow *row);
+const gchar *cc_language_row_get_language_local (CcLanguageRow *row);
 
-const gchar   *cc_language_row_get_country        (CcLanguageRow *row);
+const gchar *cc_language_row_get_country (CcLanguageRow *row);
 
-const gchar   *cc_language_row_get_country_local  (CcLanguageRow *row);
+const gchar *cc_language_row_get_country_local (CcLanguageRow *row);
 
-void           cc_language_row_set_checked        (CcLanguageRow *row, gboolean checked);
+void cc_language_row_set_checked (CcLanguageRow *row, gboolean checked);
 
-void           cc_language_row_set_is_extra       (CcLanguageRow *row, gboolean is_extra);
+void cc_language_row_set_is_extra (CcLanguageRow *row, gboolean is_extra);
 
-gboolean       cc_language_row_get_is_extra       (CcLanguageRow *row);
+gboolean cc_language_row_get_is_extra (CcLanguageRow *row);
 
 G_END_DECLS

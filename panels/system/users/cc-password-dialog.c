@@ -20,16 +20,16 @@
 
 #include "config.h"
 
-#include <unistd.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
+#include <act/act.h>
 #include <adwaita.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <act/act.h>
 
 #include "cc-entry-feedback.h"
 #include "cc-password-dialog.h"
@@ -39,33 +39,32 @@
 
 #define PASSWORD_CHECK_TIMEOUT 600
 
-struct _CcPasswordDialog
-{
-        AdwDialog parent_instance;
+struct _CcPasswordDialog {
+    AdwDialog parent_instance;
 
-        GtkCheckButton    *action_login_radio;
-        GtkCheckButton    *action_now_radio;
-        GtkButton         *generate_password_button;
-        GtkButton          *ok_button;
-        AdwPasswordEntryRow *old_password_entry;
-        CcEntryFeedback     *verify_old_password_hint;
-        AdwPreferencesGroup *password_group;
-        AdwPreferencesGroup *password_on_next_login_group;
-        AdwPasswordEntryRow *password_entry;
-        CcEntryFeedback     *password_hint_label;
-        gchar               *password_hint_text;
-        GtkLevelBar        *strength_indicator;
-        AdwPasswordEntryRow *verify_entry;
+    GtkCheckButton *action_login_radio;
+    GtkCheckButton *action_now_radio;
+    GtkButton *generate_password_button;
+    GtkButton *ok_button;
+    AdwPasswordEntryRow *old_password_entry;
+    CcEntryFeedback *verify_old_password_hint;
+    AdwPreferencesGroup *password_group;
+    AdwPreferencesGroup *password_on_next_login_group;
+    AdwPasswordEntryRow *password_entry;
+    CcEntryFeedback *password_hint_label;
+    gchar *password_hint_text;
+    GtkLevelBar *strength_indicator;
+    AdwPasswordEntryRow *verify_entry;
 
-        gint                password_entry_timeout_id;
+    gint password_entry_timeout_id;
 
-        ActUser            *user;
-        ActUserPasswordMode password_mode;
+    ActUser *user;
+    ActUserPasswordMode password_mode;
 
-        gboolean            old_password_ok;
-        gint                old_password_entry_timeout_id;
+    gboolean old_password_ok;
+    gint old_password_entry_timeout_id;
 
-        PasswdHandler      *passwd_handler;
+    PasswdHandler *passwd_handler;
 };
 
 G_DEFINE_FINAL_TYPE (CcPasswordDialog, cc_password_dialog, ADW_TYPE_DIALOG)
@@ -73,453 +72,426 @@ G_DEFINE_FINAL_TYPE (CcPasswordDialog, cc_password_dialog, ADW_TYPE_DIALOG)
 static gboolean
 update_password_strength (CcPasswordDialog *self)
 {
-        const gchar *password;
-        const gchar *old_password;
-        const gchar *username;
-        gint strength_level;
-        const gchar *hint;
-        const gchar *verify;
-        gboolean enforcing, accept;
+    const gchar *password;
+    const gchar *old_password;
+    const gchar *username;
+    gint strength_level;
+    const gchar *hint;
+    const gchar *verify;
+    gboolean enforcing, accept;
 
-        password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
-        old_password = gtk_editable_get_text (GTK_EDITABLE (self->old_password_entry));
-        username = act_user_get_user_name (self->user);
+    password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
+    old_password = gtk_editable_get_text (GTK_EDITABLE (self->old_password_entry));
+    username = act_user_get_user_name (self->user);
 
-        pw_strength (password, old_password, username,
-                     &hint, &strength_level, &enforcing);
+    pw_strength (password, old_password, username, &hint, &strength_level, &enforcing);
 
-        gtk_level_bar_set_value (self->strength_indicator, strength_level);
+    gtk_level_bar_set_value (self->strength_indicator, strength_level);
 
-        if (g_strcmp0 (hint, self->password_hint_text) != 0) {
-            cc_entry_feedback_update (self->password_hint_label,
-                                      strength_level > 1 ? "check-outlined-symbolic" : "dialog-error-symbolic",
-                                      hint);
-            self->password_hint_text = g_strdup (hint);
-        }
+    if (g_strcmp0 (hint, self->password_hint_text) != 0) {
+        cc_entry_feedback_update (self->password_hint_label,
+                                  strength_level > 1 ? "check-outlined-symbolic" : "dialog-error-symbolic", hint);
+        self->password_hint_text = g_strdup (hint);
+    }
 
-        if (strength_level > 1) {
-                gtk_widget_remove_css_class (GTK_WIDGET (self->password_entry), "error");
-        } else if (strlen (password) == 0) {
-                //gtk_widget_set_visible (GTK_WIDGET (self->password_entry_status_icon), FALSE);
-                //gtk_widget_set_visible (GTK_WIDGET (self->generate_password_button), TRUE);
-        } else {
-                gtk_widget_add_css_class (GTK_WIDGET (self->password_entry), "error");
-        }
+    if (strength_level > 1) {
+        gtk_widget_remove_css_class (GTK_WIDGET (self->password_entry), "error");
+    } else if (strlen (password) == 0) {
+        // gtk_widget_set_visible (GTK_WIDGET (self->password_entry_status_icon), FALSE);
+        // gtk_widget_set_visible (GTK_WIDGET (self->generate_password_button), TRUE);
+    } else {
+        gtk_widget_add_css_class (GTK_WIDGET (self->password_entry), "error");
+    }
 
-        accept = strength_level > 1 || !enforcing;
+    accept = strength_level > 1 || !enforcing;
 
-        verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_entry));
-        if (strlen (verify) == 0) {
-                gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), accept);
-        }
+    verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_entry));
+    if (strlen (verify) == 0) {
+        gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), accept);
+    }
 
-        return accept;
+    return accept;
 }
 
 static void
-password_changed_cb (PasswdHandler    *handler,
-                     GError           *error,
-                     CcPasswordDialog *self)
+password_changed_cb (PasswdHandler *handler, GError *error, CcPasswordDialog *self)
 {
-        AdwDialog *dialog;
-        const gchar *primary_text;
-        const gchar *secondary_text;
+    AdwDialog *dialog;
+    const gchar *primary_text;
+    const gchar *secondary_text;
 
-        gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
+    gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
 
-        if (!error) {
-                adw_dialog_close (ADW_DIALOG (self));
-                return;
-        }
+    if (!error) {
+        adw_dialog_close (ADW_DIALOG (self));
+        return;
+    }
 
-        if (error->code == PASSWD_ERROR_REJECTED) {
-                primary_text = error->message;
-                secondary_text = _("Please choose another password.");
+    if (error->code == PASSWD_ERROR_REJECTED) {
+        primary_text = error->message;
+        secondary_text = _("Please choose another password.");
 
-                gtk_editable_set_text (GTK_EDITABLE (self->password_entry), "");
-                gtk_widget_grab_focus (GTK_WIDGET (self->password_entry));
+        gtk_editable_set_text (GTK_EDITABLE (self->password_entry), "");
+        gtk_widget_grab_focus (GTK_WIDGET (self->password_entry));
 
-                gtk_editable_set_text (GTK_EDITABLE (self->verify_entry), "");
-        }
-        else if (error->code == PASSWD_ERROR_AUTH_FAILED) {
-                primary_text = error->message;
-                secondary_text = _("Please type your current password again.");
+        gtk_editable_set_text (GTK_EDITABLE (self->verify_entry), "");
+    } else if (error->code == PASSWD_ERROR_AUTH_FAILED) {
+        primary_text = error->message;
+        secondary_text = _("Please type your current password again.");
 
-                gtk_editable_set_text (GTK_EDITABLE (self->old_password_entry), "");
-                gtk_widget_grab_focus (GTK_WIDGET (self->old_password_entry));
-        }
-        else {
-                primary_text = _("Password could not be changed");
-                secondary_text = error->message;
-        }
+        gtk_editable_set_text (GTK_EDITABLE (self->old_password_entry), "");
+        gtk_widget_grab_focus (GTK_WIDGET (self->old_password_entry));
+    } else {
+        primary_text = _("Password could not be changed");
+        secondary_text = error->message;
+    }
 
-        dialog = adw_alert_dialog_new (primary_text, secondary_text);
-        adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog),
-                                        "ok",  _("_OK"),
-                                        NULL);
+    dialog = adw_alert_dialog_new (primary_text, secondary_text);
+    adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog), "ok", _("_OK"), NULL);
 
-        adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog),
-                                               "ok");
+    adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "ok");
 
-        adw_dialog_present (dialog, GTK_WIDGET (self));
+    adw_dialog_present (dialog, GTK_WIDGET (self));
 }
 
 static void
 ok_button_clicked_cb (CcPasswordDialog *self)
 {
-        const gchar *password;
+    const gchar *password;
 
-        password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
+    password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
 
-        switch (self->password_mode) {
-                case ACT_USER_PASSWORD_MODE_REGULAR:
-                        if (act_user_get_uid (self->user) == getuid ()) {
-                                /* When setting a password for the current user,
-                                 * use passwd directly, to preserve the audit trail
-                                 * and to e.g. update the keyring password.
-                                 */
-                                passwd_change_password (self->passwd_handler, password,
-                                                        (PasswdCallback) password_changed_cb, self);
-                                gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
-                                return;
-                        }
-
-                        act_user_set_password_mode (self->user, ACT_USER_PASSWORD_MODE_REGULAR);
-                        act_user_set_password (self->user, password, "");
-                        break;
-
-                case ACT_USER_PASSWORD_MODE_SET_AT_LOGIN:
-                        act_user_set_password_mode (self->user, self->password_mode);
-                        act_user_set_automatic_login (self->user, FALSE);
-                        break;
-
-                default:
-                        g_assert_not_reached ();
+    switch (self->password_mode) {
+    case ACT_USER_PASSWORD_MODE_REGULAR:
+        if (act_user_get_uid (self->user) == getuid ()) {
+            /* When setting a password for the current user,
+             * use passwd directly, to preserve the audit trail
+             * and to e.g. update the keyring password.
+             */
+            passwd_change_password (self->passwd_handler, password, (PasswdCallback) password_changed_cb, self);
+            gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
+            return;
         }
 
-        adw_dialog_close (ADW_DIALOG (self));
+        act_user_set_password_mode (self->user, ACT_USER_PASSWORD_MODE_REGULAR);
+        act_user_set_password (self->user, password, "");
+        break;
+
+    case ACT_USER_PASSWORD_MODE_SET_AT_LOGIN:
+        act_user_set_password_mode (self->user, self->password_mode);
+        act_user_set_automatic_login (self->user, FALSE);
+        break;
+
+    default:
+        g_assert_not_reached ();
+    }
+
+    adw_dialog_close (ADW_DIALOG (self));
 }
 
 static void
 update_sensitivity (CcPasswordDialog *self)
 {
-        const gchar *password, *verify;
-        gboolean can_change;
-        gboolean accept;
+    const gchar *password, *verify;
+    gboolean can_change;
+    gboolean accept;
 
-        password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
-        verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_entry));
+    password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
+    verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_entry));
 
-        if (self->password_mode == ACT_USER_PASSWORD_MODE_REGULAR) {
-                accept = update_password_strength (self);
-                can_change = accept && strcmp (password, verify) == 0 &&
-                             (self->old_password_ok || !gtk_widget_get_visible (GTK_WIDGET (self->old_password_entry)));
-        }
-        else {
-                can_change = TRUE;
-        }
+    if (self->password_mode == ACT_USER_PASSWORD_MODE_REGULAR) {
+        accept = update_password_strength (self);
+        can_change = accept && strcmp (password, verify) == 0
+                     && (self->old_password_ok || !gtk_widget_get_visible (GTK_WIDGET (self->old_password_entry)));
+    } else {
+        can_change = TRUE;
+    }
 
-        gtk_widget_set_sensitive (GTK_WIDGET (self->password_entry), self->old_password_ok);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), self->old_password_ok);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button), can_change);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->password_entry), self->old_password_ok);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), self->old_password_ok);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button), can_change);
 }
 
 static void
-mode_change (CcPasswordDialog *self,
-             ActUserPasswordMode mode)
+mode_change (CcPasswordDialog *self, ActUserPasswordMode mode)
 {
-        gboolean active;
+    gboolean active;
 
-        active = (mode == ACT_USER_PASSWORD_MODE_REGULAR);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->password_entry), self->old_password_ok);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), self->old_password_ok);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->old_password_entry), active);
-        gtk_check_button_set_active (GTK_CHECK_BUTTON (self->action_now_radio), active);
-        gtk_check_button_set_active (GTK_CHECK_BUTTON (self->action_login_radio), !active);
+    active = (mode == ACT_USER_PASSWORD_MODE_REGULAR);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->password_entry), self->old_password_ok);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), self->old_password_ok);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->old_password_entry), active);
+    gtk_check_button_set_active (GTK_CHECK_BUTTON (self->action_now_radio), active);
+    gtk_check_button_set_active (GTK_CHECK_BUTTON (self->action_login_radio), !active);
 
-        self->password_mode = mode;
-        update_sensitivity (self);
+    self->password_mode = mode;
+    update_sensitivity (self);
 }
 
 static void
 action_now_radio_toggled_cb (CcPasswordDialog *self)
 {
-        gint active;
-        ActUserPasswordMode mode;
+    gint active;
+    ActUserPasswordMode mode;
 
-        active = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->action_now_radio));
-        mode = active ? ACT_USER_PASSWORD_MODE_REGULAR : ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
-        mode_change (self, mode);
+    active = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->action_now_radio));
+    mode = active ? ACT_USER_PASSWORD_MODE_REGULAR : ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
+    mode_change (self, mode);
 }
 
 static void
 update_password_match (CcPasswordDialog *self)
 {
-        const gchar *password;
-        const gchar *verify;
+    const gchar *password;
+    const gchar *verify;
 
-        password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
-        verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_entry));
+    password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
+    verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_entry));
 
-        if (strlen (verify) > 0) {
-                if (strcmp (password, verify) != 0) {
-                        gtk_widget_add_css_class (GTK_WIDGET (self->verify_entry), "error");
-                        cc_entry_feedback_update (self->password_hint_label, "dialog-error-symbolic", _("Passwords do not match"));
-                }
-                else {
-                        gtk_widget_remove_css_class (GTK_WIDGET (self->verify_entry), "error");
-                        cc_entry_feedback_update (self->password_hint_label, "check-outlined-symbolic", _("Passwords match"));
-                }
+    if (strlen (verify) > 0) {
+        if (strcmp (password, verify) != 0) {
+            gtk_widget_add_css_class (GTK_WIDGET (self->verify_entry), "error");
+            cc_entry_feedback_update (self->password_hint_label, "dialog-error-symbolic", _("Passwords do not match"));
+        } else {
+            gtk_widget_remove_css_class (GTK_WIDGET (self->verify_entry), "error");
+            cc_entry_feedback_update (self->password_hint_label, "check-outlined-symbolic", _("Passwords match"));
         }
+    }
 }
 
 static gboolean
 password_entry_timeout (CcPasswordDialog *self)
 {
-        update_password_strength (self);
-        update_sensitivity (self);
-        update_password_match (self);
+    update_password_strength (self);
+    update_sensitivity (self);
+    update_password_match (self);
 
-        self->password_entry_timeout_id = 0;
+    self->password_entry_timeout_id = 0;
 
-        return FALSE;
+    return FALSE;
 }
 
 static void
 recheck_password_match (CcPasswordDialog *self)
 {
-        g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
+    g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
 
-        gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button), FALSE);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button), FALSE);
 
-        self->password_entry_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT,
-                                                         (GSourceFunc) password_entry_timeout,
-                                                         self);
+    self->password_entry_timeout_id =
+        g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) password_entry_timeout, self);
 }
 
 static void
 password_entry_changed (CcPasswordDialog *self)
 {
-        gtk_widget_add_css_class (GTK_WIDGET (self->password_entry), "error");
-        gtk_widget_add_css_class (GTK_WIDGET (self->verify_entry), "error");
-        gtk_widget_set_visible (GTK_WIDGET (self->password_hint_label), TRUE);
-        recheck_password_match (self);
+    gtk_widget_add_css_class (GTK_WIDGET (self->password_entry), "error");
+    gtk_widget_add_css_class (GTK_WIDGET (self->verify_entry), "error");
+    gtk_widget_set_visible (GTK_WIDGET (self->password_hint_label), TRUE);
+    recheck_password_match (self);
 }
 
 static void
 verify_entry_changed (CcPasswordDialog *self)
 {
-        gtk_widget_add_css_class (GTK_WIDGET (self->verify_entry), "error");
-        recheck_password_match (self);
+    gtk_widget_add_css_class (GTK_WIDGET (self->verify_entry), "error");
+    recheck_password_match (self);
 }
 
 static gboolean
 password_entry_focus_out_cb (CcPasswordDialog *self)
 {
-        g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
+    g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
 
-        if (self->user != NULL)
-                password_entry_timeout (self);
+    if (self->user != NULL)
+        password_entry_timeout (self);
 
-        return FALSE;
+    return FALSE;
 }
 
-
 static gboolean
-password_entry_key_press_cb (CcPasswordDialog      *self,
-                             guint                  keyval,
-                             guint                  keycode,
-                             GdkModifierType        state,
+password_entry_key_press_cb (CcPasswordDialog *self, guint keyval, guint keycode, GdkModifierType state,
                              GtkEventControllerKey *controller)
 {
-        g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
+    g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
 
-        if (keyval == GDK_KEY_Tab)
-               password_entry_timeout (self);
+    if (keyval == GDK_KEY_Tab)
+        password_entry_timeout (self);
 
-        return FALSE;
+    return FALSE;
 }
 
 static void
-auth_cb (PasswdHandler    *handler,
-         GError           *error,
-         CcPasswordDialog *self)
+auth_cb (PasswdHandler *handler, GError *error, CcPasswordDialog *self)
 {
-        if (error) {
-                self->old_password_ok = FALSE;
-        }
-        else {
-                self->old_password_ok = TRUE;
-                gtk_widget_remove_css_class (GTK_WIDGET (self->old_password_entry), "error");
-                cc_entry_feedback_update (self->verify_old_password_hint,
-                                          "check-outlined-symbolic",
-                                          _("Passwords match"));
-        }
+    if (error) {
+        self->old_password_ok = FALSE;
+    } else {
+        self->old_password_ok = TRUE;
+        gtk_widget_remove_css_class (GTK_WIDGET (self->old_password_entry), "error");
+        cc_entry_feedback_update (self->verify_old_password_hint, "check-outlined-symbolic", _("Passwords match"));
+    }
 
-        update_sensitivity (self);
+    update_sensitivity (self);
 }
 
 static gboolean
 old_password_entry_timeout (CcPasswordDialog *self)
 {
-        const gchar *text;
+    const gchar *text;
 
-        update_sensitivity (self);
+    update_sensitivity (self);
 
-        text = gtk_editable_get_text (GTK_EDITABLE (self->old_password_entry));
-        if (!self->old_password_ok) {
-                passwd_authenticate (self->passwd_handler, text, (PasswdCallback)auth_cb, self);
-        }
+    text = gtk_editable_get_text (GTK_EDITABLE (self->old_password_entry));
+    if (!self->old_password_ok) {
+        passwd_authenticate (self->passwd_handler, text, (PasswdCallback) auth_cb, self);
+    }
 
-        self->old_password_entry_timeout_id = 0;
+    self->old_password_entry_timeout_id = 0;
 
-        return FALSE;
+    return FALSE;
 }
 
 static gboolean
 old_password_entry_focus_out_cb (CcPasswordDialog *self)
 {
-        g_clear_handle_id (&self->old_password_entry_timeout_id, g_source_remove);
+    g_clear_handle_id (&self->old_password_entry_timeout_id, g_source_remove);
 
-        if (self->user != NULL)
-                old_password_entry_timeout (self);
+    if (self->user != NULL)
+        old_password_entry_timeout (self);
 
-        return FALSE;
+    return FALSE;
 }
 
 static void
 old_password_entry_changed (CcPasswordDialog *self)
 {
-        g_clear_handle_id (&self->old_password_entry_timeout_id, g_source_remove);
+    g_clear_handle_id (&self->old_password_entry_timeout_id, g_source_remove);
 
-        gtk_widget_add_css_class (GTK_WIDGET (self->old_password_entry), "error");
-        gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button), FALSE);
-        cc_entry_feedback_update (self->verify_old_password_hint,
-                                  "dialog-error-symbolic",
-                                  _("Passwords do not match"));
+    gtk_widget_add_css_class (GTK_WIDGET (self->old_password_entry), "error");
+    gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button), FALSE);
+    cc_entry_feedback_update (self->verify_old_password_hint, "dialog-error-symbolic", _("Passwords do not match"));
 
-        self->old_password_ok = FALSE;
-        gtk_widget_set_sensitive (GTK_WIDGET (self->password_entry), self->old_password_ok);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), self->old_password_ok);
-        self->old_password_entry_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT,
-                                                             (GSourceFunc) old_password_entry_timeout,
-                                                             self);
+    self->old_password_ok = FALSE;
+    gtk_widget_set_sensitive (GTK_WIDGET (self->password_entry), self->old_password_ok);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), self->old_password_ok);
+    self->old_password_entry_timeout_id =
+        g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) old_password_entry_timeout, self);
 }
 
 static void
 generate_password (CcPasswordDialog *self)
 {
-        g_autofree gchar *pwd = NULL;
+    g_autofree gchar *pwd = NULL;
 
-        pwd = pw_generate ();
-        if (pwd == NULL)
-                return;
+    pwd = pw_generate ();
+    if (pwd == NULL)
+        return;
 
-        gtk_editable_set_text (GTK_EDITABLE (self->password_entry), pwd);
-        gtk_editable_set_text (GTK_EDITABLE (self->verify_entry), pwd);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), TRUE);
+    gtk_editable_set_text (GTK_EDITABLE (self->password_entry), pwd);
+    gtk_editable_set_text (GTK_EDITABLE (self->verify_entry), pwd);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->verify_entry), TRUE);
 
-        gtk_widget_set_visible (GTK_WIDGET (self->generate_password_button), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->generate_password_button), FALSE);
 }
 
 static void
 cc_password_dialog_dispose (GObject *object)
 {
-        CcPasswordDialog *self = CC_PASSWORD_DIALOG (object);
+    CcPasswordDialog *self = CC_PASSWORD_DIALOG (object);
 
-        g_clear_object (&self->user);
+    g_clear_object (&self->user);
 
-        if (self->passwd_handler) {
-                passwd_destroy (self->passwd_handler);
-                self->passwd_handler = NULL;
-        }
+    if (self->passwd_handler) {
+        passwd_destroy (self->passwd_handler);
+        self->passwd_handler = NULL;
+    }
 
-        g_clear_pointer (&self->password_hint_text, g_free);
+    g_clear_pointer (&self->password_hint_text, g_free);
 
-        g_clear_handle_id (&self->old_password_entry_timeout_id, g_source_remove);
-        g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
+    g_clear_handle_id (&self->old_password_entry_timeout_id, g_source_remove);
+    g_clear_handle_id (&self->password_entry_timeout_id, g_source_remove);
 
-        G_OBJECT_CLASS (cc_password_dialog_parent_class)->dispose (object);
+    G_OBJECT_CLASS (cc_password_dialog_parent_class)->dispose (object);
 }
 
 static void
 cc_password_dialog_class_init (CcPasswordDialogClass *klass)
 {
-        GObjectClass   *object_class = G_OBJECT_CLASS (klass);
-        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-        object_class->dispose = cc_password_dialog_dispose;
+    object_class->dispose = cc_password_dialog_dispose;
 
-        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-password-dialog.ui");
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/system/users/cc-password-dialog.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, action_login_radio);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, action_now_radio);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, generate_password_button);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, ok_button);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, old_password_entry);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_group);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_on_next_login_group);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_entry);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_hint_label);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, strength_indicator);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, verify_entry);
-        gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, verify_old_password_hint);
+    gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, action_login_radio);
+    gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, action_now_radio);
+    gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, generate_password_button);
+    gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, ok_button);
+    gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, old_password_entry);
+    gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_group);
+    gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_on_next_login_group);
+    gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_entry);
+    gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, password_hint_label);
+    gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, strength_indicator);
+    gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, verify_entry);
+    gtk_widget_class_bind_template_child (widget_class, CcPasswordDialog, verify_old_password_hint);
 
-        gtk_widget_class_bind_template_callback (widget_class, action_now_radio_toggled_cb);
-        gtk_widget_class_bind_template_callback (widget_class, generate_password);
-        gtk_widget_class_bind_template_callback (widget_class, old_password_entry_changed);
-        gtk_widget_class_bind_template_callback (widget_class, old_password_entry_focus_out_cb);
-        gtk_widget_class_bind_template_callback (widget_class, ok_button_clicked_cb);
-        gtk_widget_class_bind_template_callback (widget_class, password_entry_changed);
-        gtk_widget_class_bind_template_callback (widget_class, password_entry_focus_out_cb);
-        gtk_widget_class_bind_template_callback (widget_class, password_entry_key_press_cb);
-        gtk_widget_class_bind_template_callback (widget_class, verify_entry_changed);
+    gtk_widget_class_bind_template_callback (widget_class, action_now_radio_toggled_cb);
+    gtk_widget_class_bind_template_callback (widget_class, generate_password);
+    gtk_widget_class_bind_template_callback (widget_class, old_password_entry_changed);
+    gtk_widget_class_bind_template_callback (widget_class, old_password_entry_focus_out_cb);
+    gtk_widget_class_bind_template_callback (widget_class, ok_button_clicked_cb);
+    gtk_widget_class_bind_template_callback (widget_class, password_entry_changed);
+    gtk_widget_class_bind_template_callback (widget_class, password_entry_focus_out_cb);
+    gtk_widget_class_bind_template_callback (widget_class, password_entry_key_press_cb);
+    gtk_widget_class_bind_template_callback (widget_class, verify_entry_changed);
 }
 
 static void
 cc_password_dialog_init (CcPasswordDialog *self)
 {
-        gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 CcPasswordDialog *
 cc_password_dialog_new (ActUser *user)
 {
-        CcPasswordDialog *self;
+    CcPasswordDialog *self;
 
-        g_return_val_if_fail (ACT_IS_USER (user), NULL);
+    g_return_val_if_fail (ACT_IS_USER (user), NULL);
 
-        self = g_object_new (CC_TYPE_PASSWORD_DIALOG,
-                             NULL);
+    self = g_object_new (CC_TYPE_PASSWORD_DIALOG, NULL);
 
-        self->user = g_object_ref (user);
+    self->user = g_object_ref (user);
 
-        if (act_user_get_uid (self->user) == getuid ()) {
-                gboolean visible;
+    if (act_user_get_uid (self->user) == getuid ()) {
+        gboolean visible;
 
-                mode_change (self, ACT_USER_PASSWORD_MODE_REGULAR);
-                gtk_widget_set_visible (GTK_WIDGET (self->password_on_next_login_group), FALSE);
+        mode_change (self, ACT_USER_PASSWORD_MODE_REGULAR);
+        gtk_widget_set_visible (GTK_WIDGET (self->password_on_next_login_group), FALSE);
 
-                visible = (act_user_get_password_mode (user) != ACT_USER_PASSWORD_MODE_NONE);
-                gtk_widget_set_visible (GTK_WIDGET (self->old_password_entry), visible);
-                self->old_password_ok = !visible;
+        visible = (act_user_get_password_mode (user) != ACT_USER_PASSWORD_MODE_NONE);
+        gtk_widget_set_visible (GTK_WIDGET (self->old_password_entry), visible);
+        self->old_password_ok = !visible;
 
-                self->passwd_handler = passwd_init ();
-        }
-        else {
-                mode_change (self, ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
-                gtk_widget_set_visible (GTK_WIDGET (self->password_on_next_login_group), TRUE);
+        self->passwd_handler = passwd_init ();
+    } else {
+        mode_change (self, ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
+        gtk_widget_set_visible (GTK_WIDGET (self->password_on_next_login_group), TRUE);
 
-                gtk_widget_set_visible (GTK_WIDGET (self->old_password_entry), FALSE);
-                self->old_password_ok = TRUE;
-        }
+        gtk_widget_set_visible (GTK_WIDGET (self->old_password_entry), FALSE);
+        self->old_password_ok = TRUE;
+    }
 
-        if (self->old_password_ok == FALSE)
-                gtk_widget_grab_focus (GTK_WIDGET (self->old_password_entry));
-        else
-                gtk_widget_grab_focus (GTK_WIDGET (self->password_entry));
+    if (self->old_password_ok == FALSE)
+        gtk_widget_grab_focus (GTK_WIDGET (self->old_password_entry));
+    else
+        gtk_widget_grab_focus (GTK_WIDGET (self->password_entry));
 
-        adw_dialog_set_default_widget (ADW_DIALOG (self), GTK_WIDGET (self->ok_button));
+    adw_dialog_set_default_widget (ADW_DIALOG (self), GTK_WIDGET (self->ok_button));
 
-        return self;
+    return self;
 }

@@ -24,7 +24,6 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_BALANCE_SLIDER (cc_balance_slider_get_type ())
 G_DECLARE_FINAL_TYPE (CcBalanceSlider, cc_balance_slider, CC, BALANCE_SLIDER, GtkWidget);
-void cc_balance_slider_set_channel_map (CcBalanceSlider *self,
-                                        GvcChannelMap   *channel_map);
+void cc_balance_slider_set_channel_map (CcBalanceSlider *self, GvcChannelMap *channel_map);
 
 G_END_DECLS

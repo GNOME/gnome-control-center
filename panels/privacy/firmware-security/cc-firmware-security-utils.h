@@ -71,62 +71,61 @@ G_BEGIN_DECLS
 #define FWUPD_SECURITY_ATTR_ID_PLATFORM_FUSED "org.fwupd.hsi.PlatformFused"
 
 typedef enum {
-  SECURE_BOOT_STATE_UNKNOWN,
-  SECURE_BOOT_STATE_ACTIVE,
-  SECURE_BOOT_STATE_INACTIVE,
-  SECURE_BOOT_STATE_PROBLEMS,
+    SECURE_BOOT_STATE_UNKNOWN,
+    SECURE_BOOT_STATE_ACTIVE,
+    SECURE_BOOT_STATE_INACTIVE,
+    SECURE_BOOT_STATE_PROBLEMS,
 } SecureBootState;
 
 typedef enum {
-  FWUPD_SECURITY_ATTR_FLAG_NONE = 0,
-  FWUPD_SECURITY_ATTR_FLAG_SUCCESS = 1 << 0,
-  FWUPD_SECURITY_ATTR_FLAG_OBSOLETED = 1 << 1,
-  FWUPD_SECURITY_ATTR_FLAG_RUNTIME_UPDATES = 1 << 8,
-  FWUPD_SECURITY_ATTR_FLAG_RUNTIME_ATTESTATION = 1 << 9,
-  FWUPD_SECURITY_ATTR_FLAG_RUNTIME_ISSUE = 1 << 10,
-  FWUPD_SECURITY_ATTR_FLAG_ACTION_CONTACT_OEM = 1 << 11,
-  FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW = 1 << 12,
-  FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_OS = 1 << 13,
+    FWUPD_SECURITY_ATTR_FLAG_NONE = 0,
+    FWUPD_SECURITY_ATTR_FLAG_SUCCESS = 1 << 0,
+    FWUPD_SECURITY_ATTR_FLAG_OBSOLETED = 1 << 1,
+    FWUPD_SECURITY_ATTR_FLAG_RUNTIME_UPDATES = 1 << 8,
+    FWUPD_SECURITY_ATTR_FLAG_RUNTIME_ATTESTATION = 1 << 9,
+    FWUPD_SECURITY_ATTR_FLAG_RUNTIME_ISSUE = 1 << 10,
+    FWUPD_SECURITY_ATTR_FLAG_ACTION_CONTACT_OEM = 1 << 11,
+    FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW = 1 << 12,
+    FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_OS = 1 << 13,
 } FwupdSecurityAttrFlags;
 
 typedef enum {
-  FWUPD_SECURITY_ATTR_RESULT_UNKNOWN,
-  FWUPD_SECURITY_ATTR_RESULT_ENABLED,
-  FWUPD_SECURITY_ATTR_RESULT_NOT_ENABLED,
-  FWUPD_SECURITY_ATTR_RESULT_VALID,
-  FWUPD_SECURITY_ATTR_RESULT_NOT_VALID,
-  FWUPD_SECURITY_ATTR_RESULT_LOCKED,
-  FWUPD_SECURITY_ATTR_RESULT_NOT_LOCKED,
-  FWUPD_SECURITY_ATTR_RESULT_ENCRYPTED,
-  FWUPD_SECURITY_ATTR_RESULT_NOT_ENCRYPTED,
-  FWUPD_SECURITY_ATTR_RESULT_TAINTED,
-  FWUPD_SECURITY_ATTR_RESULT_NOT_TAINTED,
-  FWUPD_SECURITY_ATTR_RESULT_FOUND,
-  FWUPD_SECURITY_ATTR_RESULT_NOT_FOUND,
-  FWUPD_SECURITY_ATTR_RESULT_SUPPORTED,
-  FWUPD_SECURITY_ATTR_RESULT_NOT_SUPPORTED,
-  FWUPD_SECURITY_ATTR_RESULT_LAST
+    FWUPD_SECURITY_ATTR_RESULT_UNKNOWN,
+    FWUPD_SECURITY_ATTR_RESULT_ENABLED,
+    FWUPD_SECURITY_ATTR_RESULT_NOT_ENABLED,
+    FWUPD_SECURITY_ATTR_RESULT_VALID,
+    FWUPD_SECURITY_ATTR_RESULT_NOT_VALID,
+    FWUPD_SECURITY_ATTR_RESULT_LOCKED,
+    FWUPD_SECURITY_ATTR_RESULT_NOT_LOCKED,
+    FWUPD_SECURITY_ATTR_RESULT_ENCRYPTED,
+    FWUPD_SECURITY_ATTR_RESULT_NOT_ENCRYPTED,
+    FWUPD_SECURITY_ATTR_RESULT_TAINTED,
+    FWUPD_SECURITY_ATTR_RESULT_NOT_TAINTED,
+    FWUPD_SECURITY_ATTR_RESULT_FOUND,
+    FWUPD_SECURITY_ATTR_RESULT_NOT_FOUND,
+    FWUPD_SECURITY_ATTR_RESULT_SUPPORTED,
+    FWUPD_SECURITY_ATTR_RESULT_NOT_SUPPORTED,
+    FWUPD_SECURITY_ATTR_RESULT_LAST
 } FwupdSecurityAttrResult;
 
 typedef struct {
-  FwupdSecurityAttrResult  result;
-  FwupdSecurityAttrResult  result_fallback;
-  FwupdSecurityAttrFlags   flags;
-  guint32                  hsi_level;
-  guint64                  timestamp;
-  gchar                   *appstream_id;
-  gchar                   *title;
-  gchar                   *description;
+    FwupdSecurityAttrResult result;
+    FwupdSecurityAttrResult result_fallback;
+    FwupdSecurityAttrFlags flags;
+    guint32 hsi_level;
+    guint64 timestamp;
+    gchar *appstream_id;
+    gchar *title;
+    gchar *description;
 } FwupdSecurityAttr;
 
-FwupdSecurityAttr *fu_security_attr_new_from_variant  (GVariantIter *iter);
-void               fu_security_attr_free              (FwupdSecurityAttr *attr);
+FwupdSecurityAttr *fu_security_attr_new_from_variant (GVariantIter *iter);
+void fu_security_attr_free (FwupdSecurityAttr *attr);
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (FwupdSecurityAttr, fu_security_attr_free)
 
-gboolean     firmware_security_attr_has_flag                    (FwupdSecurityAttr       *attr,
-                                                                 FwupdSecurityAttrFlags   flag);
-const gchar *fwupd_security_attr_result_to_string               (FwupdSecurityAttrResult  result);
-void         hsi_report_title_print_padding                     (const gchar *title, GString *dst_string, gsize maxlen);
+gboolean firmware_security_attr_has_flag (FwupdSecurityAttr *attr, FwupdSecurityAttrFlags flag);
+const gchar *fwupd_security_attr_result_to_string (FwupdSecurityAttrResult result);
+void hsi_report_title_print_padding (const gchar *title, GString *dst_string, gsize maxlen);
 
 G_END_DECLS

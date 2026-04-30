@@ -22,70 +22,49 @@
 #ifndef __NM_DEFAULT_H__
 #define __NM_DEFAULT_H__
 
-#define NM_NETWORKMANAGER_COMPILATION_WITH_GLIB                 (1 <<  0)
-#define NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_LIB        (1 <<  1)
-#define NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_PROG       (1 <<  2)
-#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM                (1 <<  3)
-#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_PRIVATE        (1 <<  4)
-#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE           (1 <<  5)
-#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_INTERNAL  (1 <<  6)
-#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_PRIVATE   (1 <<  7)
-#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_UTIL           (1 <<  8)
-#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_GLIB           (1 <<  9)
-#define NM_NETWORKMANAGER_COMPILATION_WITH_DAEMON               (1 << 10)
-#define NM_NETWORKMANAGER_COMPILATION_WITH_SYSTEMD              (1 << 11)
+#define NM_NETWORKMANAGER_COMPILATION_WITH_GLIB (1 << 0)
+#define NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_LIB (1 << 1)
+#define NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_PROG (1 << 2)
+#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM (1 << 3)
+#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_PRIVATE (1 << 4)
+#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE (1 << 5)
+#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_INTERNAL (1 << 6)
+#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_PRIVATE (1 << 7)
+#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_UTIL (1 << 8)
+#define NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_GLIB (1 << 9)
+#define NM_NETWORKMANAGER_COMPILATION_WITH_DAEMON (1 << 10)
+#define NM_NETWORKMANAGER_COMPILATION_WITH_SYSTEMD (1 << 11)
 
-#define NM_NETWORKMANAGER_COMPILATION_LIBNM_CORE     ( 0 \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_LIB \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_PRIVATE \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_INTERNAL \
-                                                     )
+#define NM_NETWORKMANAGER_COMPILATION_LIBNM_CORE                                                                       \
+    (0 | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_LIB                    \
+     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_PRIVATE           \
+     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_INTERNAL)
 
-#define NM_NETWORKMANAGER_COMPILATION_LIBNM          ( 0 \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_LIB \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_PRIVATE \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_INTERNAL \
-                                                     )
+#define NM_NETWORKMANAGER_COMPILATION_LIBNM                                                                            \
+    (0 | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_LIB                    \
+     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_PRIVATE                     \
+     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_INTERNAL)
 
-#define NM_NETWORKMANAGER_COMPILATION_LIBNM_UTIL     ( 0 \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_LIB \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_UTIL \
-                                                     )
+#define NM_NETWORKMANAGER_COMPILATION_LIBNM_UTIL                                                                       \
+    (0 | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_LIB                    \
+     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_UTIL)
 
-#define NM_NETWORKMANAGER_COMPILATION_LIBNM_GLIB     ( 0 \
-                                                     | NM_NETWORKMANAGER_COMPILATION_LIBNM_UTIL \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_GLIB \
-                                                     )
+#define NM_NETWORKMANAGER_COMPILATION_LIBNM_GLIB                                                                       \
+    (0 | NM_NETWORKMANAGER_COMPILATION_LIBNM_UTIL | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_GLIB)
 
-#define NM_NETWORKMANAGER_COMPILATION_CLIENT         ( 0 \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_PROG \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE \
-                                                     )
+#define NM_NETWORKMANAGER_COMPILATION_CLIENT                                                                           \
+    (0 | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_PROG                   \
+     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE)
 
-#define NM_NETWORKMANAGER_COMPILATION_DAEMON         ( 0 \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_PROG \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_INTERNAL \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_DAEMON \
-                                                     )
+#define NM_NETWORKMANAGER_COMPILATION_DAEMON                                                                           \
+    (0 | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB_I18N_PROG                   \
+     | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_INTERNAL          \
+     | NM_NETWORKMANAGER_COMPILATION_WITH_DAEMON)
 
-#define NM_NETWORKMANAGER_COMPILATION_SYSTEMD        ( 0 \
-                                                     | NM_NETWORKMANAGER_COMPILATION_DAEMON \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_SYSTEMD \
-                                                     )
+#define NM_NETWORKMANAGER_COMPILATION_SYSTEMD                                                                          \
+    (0 | NM_NETWORKMANAGER_COMPILATION_DAEMON | NM_NETWORKMANAGER_COMPILATION_WITH_SYSTEMD)
 
-#define NM_NETWORKMANAGER_COMPILATION_GLIB           ( 0 \
-                                                     | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB \
-                                                     )
+#define NM_NETWORKMANAGER_COMPILATION_GLIB (0 | NM_NETWORKMANAGER_COMPILATION_WITH_GLIB)
 
 #ifndef NETWORKMANAGER_COMPILATION
 #error Define NETWORKMANAGER_COMPILATION accordingly
@@ -99,7 +78,8 @@
 #else
 #error Need to define G_LOG_DOMAIN
 #endif
-#elif defined (NETWORKMANAGER_COMPILATION_TEST) || (NETWORKMANAGER_COMPILATION & NM_NETWORKMANAGER_COMPILATION_WITH_DAEMON)
+#elif defined(NETWORKMANAGER_COMPILATION_TEST)                                                                         \
+    || (NETWORKMANAGER_COMPILATION & NM_NETWORKMANAGER_COMPILATION_WITH_DAEMON)
 #error Do not define G_LOG_DOMAIN with NM_NETWORKMANAGER_COMPILATION_WITH_DAEMON
 #endif
 
@@ -115,7 +95,7 @@
 /* for internal compilation we don't want the deprecation macros
  * to be in effect. Define the widest range of versions to effectively
  * disable deprecation checks */
-#define NM_VERSION_MIN_REQUIRED  NM_VERSION_0_9_8
+#define NM_VERSION_MIN_REQUIRED NM_VERSION_0_9_8
 
 #ifndef NM_MORE_ASSERTS
 #define NM_MORE_ASSERTS 0
@@ -231,52 +211,46 @@
  * assertion fails. That shall suffice. */
 
 static inline void
-_nm_g_return_if_fail_warning (const char *log_domain,
-                              const char *file,
-                              int line)
+_nm_g_return_if_fail_warning (const char *log_domain, const char *file, int line)
 {
-	char file_buf[256 + 15];
+    char file_buf[256 + 15];
 
-	g_snprintf (file_buf, sizeof (file_buf), "((%s:%d))", file, line);
-	g_return_if_fail_warning (log_domain, file_buf, "<dropped>");
+    g_snprintf (file_buf, sizeof (file_buf), "((%s:%d))", file, line);
+    g_return_if_fail_warning (log_domain, file_buf, "<dropped>");
 }
 
-#define g_return_if_fail_warning(log_domain, pretty_function, expression) \
-	_nm_g_return_if_fail_warning (log_domain, __FILE__, __LINE__)
+#define g_return_if_fail_warning(log_domain, pretty_function, expression)                                              \
+    _nm_g_return_if_fail_warning (log_domain, __FILE__, __LINE__)
 
-#define g_assertion_message_expr(domain, file, line, func, expr) \
-	g_assertion_message_expr(domain, file, line, "<unknown-fcn>", (expr) ? "<dropped>" : NULL)
+#define g_assertion_message_expr(domain, file, line, func, expr)                                                       \
+    g_assertion_message_expr (domain, file, line, "<unknown-fcn>", (expr) ? "<dropped>" : NULL)
 
 #undef g_return_val_if_reached
-#define g_return_val_if_reached(val) \
-    G_STMT_START { \
-        g_log (G_LOG_DOMAIN, \
-               G_LOG_LEVEL_CRITICAL, \
-               "file %s: line %d (%s): should not be reached", \
-               __FILE__, \
-               __LINE__, \
-               "<dropped>"); \
-        return (val); \
-    } G_STMT_END
+#define g_return_val_if_reached(val)                                                                                   \
+    G_STMT_START                                                                                                       \
+    {                                                                                                                  \
+        g_log (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "file %s: line %d (%s): should not be reached", __FILE__, __LINE__, \
+               "<dropped>");                                                                                           \
+        return (val);                                                                                                  \
+    }                                                                                                                  \
+    G_STMT_END
 
 #undef g_return_if_reached
-#define g_return_if_reached() \
-    G_STMT_START { \
-        g_log (G_LOG_DOMAIN, \
-               G_LOG_LEVEL_CRITICAL, \
-               "file %s: line %d (%s): should not be reached", \
-               __FILE__, \
-               __LINE__, \
-               "<dropped>"); \
-        return; \
-    } G_STMT_END
+#define g_return_if_reached()                                                                                          \
+    G_STMT_START                                                                                                       \
+    {                                                                                                                  \
+        g_log (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, "file %s: line %d (%s): should not be reached", __FILE__, __LINE__, \
+               "<dropped>");                                                                                           \
+        return;                                                                                                        \
+    }                                                                                                                  \
+    G_STMT_END
 
 #define NM_ASSERT_G_RETURN_EXPR(expr) "<dropped>"
 #define NM_ASSERT_NO_MSG 1
 
 #else
 
-#define NM_ASSERT_G_RETURN_EXPR(expr) ""expr""
+#define NM_ASSERT_G_RETURN_EXPR(expr) "" expr ""
 #define NM_ASSERT_NO_MSG 0
 
 #endif
@@ -294,18 +268,22 @@ _nm_g_return_if_fail_warning (const char *log_domain,
 
 /*****************************************************************************/
 
-#if (NETWORKMANAGER_COMPILATION) & (NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_UTIL)
+#if (NETWORKMANAGER_COMPILATION)                                                                                       \
+    & (NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_UTIL)
 #include "nm-version.h"
 #endif
 
 /*****************************************************************************/
 
 #if (NETWORKMANAGER_COMPILATION) & NM_NETWORKMANAGER_COMPILATION_WITH_DAEMON
-#include "nm-types.h"
 #include "nm-logging.h"
+#include "nm-types.h"
 #endif
 
-#if ((NETWORKMANAGER_COMPILATION) & NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM) && !((NETWORKMANAGER_COMPILATION) & (NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_PRIVATE | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_INTERNAL))
+#if ((NETWORKMANAGER_COMPILATION) & NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM)                                          \
+    && !(                                                                                                              \
+        (NETWORKMANAGER_COMPILATION)                                                                                   \
+        & (NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_PRIVATE | NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_CORE_INTERNAL))
 #include "NetworkManager.h"
 #endif
 

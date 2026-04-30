@@ -22,14 +22,13 @@
 
 #pragma once
 
-#include <adwaita.h>
 #include "cc-fingerprint-manager.h"
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_FINGERPRINT_DIALOG (cc_fingerprint_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcFingerprintDialog, cc_fingerprint_dialog,
-                      CC, FINGERPRINT_DIALOG, AdwDialog);
+G_DECLARE_FINAL_TYPE (CcFingerprintDialog, cc_fingerprint_dialog, CC, FINGERPRINT_DIALOG, AdwDialog);
 
 CcFingerprintDialog *cc_fingerprint_dialog_new (CcFingerprintManager *manager);
 

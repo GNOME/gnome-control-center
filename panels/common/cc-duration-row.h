@@ -28,20 +28,17 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_DURATION_ROW (cc_duration_row_get_type())
+#define CC_TYPE_DURATION_ROW (cc_duration_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcDurationRow, cc_duration_row, CC, DURATION_ROW, AdwActionRow);
 CcDurationRow *cc_duration_row_new (void);
 
 guint cc_duration_row_get_duration (CcDurationRow *self);
-void cc_duration_row_set_duration (CcDurationRow *self,
-                                   guint          duration);
+void cc_duration_row_set_duration (CcDurationRow *self, guint duration);
 
 guint cc_duration_row_get_minimum (CcDurationRow *self);
-void cc_duration_row_set_minimum (CcDurationRow *self,
-                                  guint          minimum);
+void cc_duration_row_set_minimum (CcDurationRow *self, guint minimum);
 
 guint cc_duration_row_get_maximum (CcDurationRow *self);
-void cc_duration_row_set_maximum (CcDurationRow *self,
-                                  guint          maximum);
+void cc_duration_row_set_maximum (CcDurationRow *self, guint maximum);
 
 G_END_DECLS

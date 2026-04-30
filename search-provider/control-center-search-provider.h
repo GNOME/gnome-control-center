@@ -21,26 +21,25 @@
 
 #include <gtk/gtk.h>
 
-#include <shell/cc-shell-model.h>
 #include "cc-search-provider.h"
+#include <shell/cc-shell-model.h>
 
 G_BEGIN_DECLS
 
 typedef struct {
-  GtkApplication parent;
+    GtkApplication parent;
 
-  CcShellModel     *model;
-  CcSearchProvider *search_provider;
+    CcShellModel *model;
+    CcSearchProvider *search_provider;
 } CcSearchProviderApp;
 
 typedef struct {
-  GtkApplicationClass parent_class;
+    GtkApplicationClass parent_class;
 } CcSearchProviderAppClass;
 
 #define CC_TYPE_SEARCH_PROVIDER_APP (cc_search_provider_app_get_type ())
-#define CC_SEARCH_PROVIDER_APP(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_SEARCH_PROVIDER_APP, CcSearchProviderApp))
+#define CC_SEARCH_PROVIDER_APP(obj)                                                                                    \
+    (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TYPE_SEARCH_PROVIDER_APP, CcSearchProviderApp))
 
 GType cc_search_provider_app_get_type (void) G_GNUC_CONST;
 

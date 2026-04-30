@@ -20,19 +20,17 @@
 
 #pragma once
 
-#include <adwaita.h>
-#include "cc-shell.h"
 #include "cc-shell-model.h"
+#include "cc-shell.h"
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_WINDOW (cc_window_get_type ())
 G_DECLARE_FINAL_TYPE (CcWindow, cc_window, CC, WINDOW, AdwApplicationWindow);
-CcWindow *cc_window_new (GtkApplication *application,
-                         CcShellModel   *model);
+CcWindow *cc_window_new (GtkApplication *application, CcShellModel *model);
 
-void cc_window_set_search_item (CcWindow *center,
-                                const char *search);
+void cc_window_set_search_item (CcWindow *center, const char *search);
 
 void cc_window_enable_single_panel_mode (CcWindow *self);
 

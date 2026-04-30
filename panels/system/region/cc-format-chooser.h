@@ -26,10 +26,9 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_FORMAT_CHOOSER (cc_format_chooser_get_type ())
 G_DECLARE_FINAL_TYPE (CcFormatChooser, cc_format_chooser, CC, FORMAT_CHOOSER, GtkDialog);
-CcFormatChooser *cc_format_chooser_new          (void);
-void             cc_format_chooser_clear_filter (CcFormatChooser *self);
-const gchar     *cc_format_chooser_get_region   (CcFormatChooser *self);
-void             cc_format_chooser_set_region   (CcFormatChooser *self,
-                                                 const gchar     *region);
+CcFormatChooser *cc_format_chooser_new (void);
+void cc_format_chooser_clear_filter (CcFormatChooser *self);
+const gchar *cc_format_chooser_get_region (CcFormatChooser *self);
+void cc_format_chooser_set_region (CcFormatChooser *self, const gchar *region);
 
 G_END_DECLS

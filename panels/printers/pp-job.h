@@ -20,8 +20,8 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include <glib-object.h>
+#include <gtk/gtk.h>
 
 #include "pp-utils.h"
 
@@ -29,62 +29,39 @@ G_BEGIN_DECLS
 
 #define PP_TYPE_JOB (pp_job_get_type ())
 G_DECLARE_FINAL_TYPE (PpJob, pp_job, PP, JOB, GObject);
-PpJob         *pp_job_new                        (gint                  id,
-                                                  const gchar          *title,
-                                                  gint                  state,
-                                                  gint                  priority,
-                                                  GStrv                 auth_info_required);
+PpJob *pp_job_new (gint id, const gchar *title, gint state, gint priority, GStrv auth_info_required);
 
-const gchar   *pp_job_get_title                  (PpJob                *job);
+const gchar *pp_job_get_title (PpJob *job);
 
-gint           pp_job_get_state                  (PpJob                *job);
+gint pp_job_get_state (PpJob *job);
 
-gboolean       pp_job_priority_get_sensitive     (PpJob                *job);
+gboolean pp_job_priority_get_sensitive (PpJob *job);
 
-void           pp_job_priority_set_sensitive     (PpJob                *job,
-                                                  gboolean              sensitive);
+void pp_job_priority_set_sensitive (PpJob *job, gboolean sensitive);
 
-gint           pp_job_get_priority               (PpJob                *job);
+gint pp_job_get_priority (PpJob *job);
 
-void           pp_job_set_priority               (PpJob                *job,
-                                                  gint                  priority);
+void pp_job_set_priority (PpJob *job, gint priority);
 
-GStrv          pp_job_get_auth_info_required     (PpJob                *job);
+GStrv pp_job_get_auth_info_required (PpJob *job);
 
-void           pp_job_set_hold_until_async       (PpJob                *job,
-                                                  const gchar          *job_hold_until);
+void pp_job_set_hold_until_async (PpJob *job, const gchar *job_hold_until);
 
-void           pp_job_cancel_purge_async         (PpJob                *job,
-                                                  gboolean              job_purge);
+void pp_job_cancel_purge_async (PpJob *job, gboolean job_purge);
 
-void           pp_job_get_attributes_async       (PpJob                *job,
-                                                  gchar               **attributes_names,
-                                                  GCancellable         *cancellable,
-                                                  GAsyncReadyCallback   callback,
-                                                  gpointer              user_data);
+void pp_job_get_attributes_async (PpJob *job, gchar **attributes_names, GCancellable *cancellable,
+                                  GAsyncReadyCallback callback, gpointer user_data);
 
-GVariant      *pp_job_get_attributes_finish      (PpJob                *job,
-                                                  GAsyncResult         *result,
-                                                  GError              **error);
+GVariant *pp_job_get_attributes_finish (PpJob *job, GAsyncResult *result, GError **error);
 
-void           pp_job_authenticate_async         (PpJob                *job,
-                                                  gchar               **auth_info,
-                                                  GCancellable         *cancellable,
-                                                  GAsyncReadyCallback   callback,
-                                                  gpointer              user_data);
+void pp_job_authenticate_async (PpJob *job, gchar **auth_info, GCancellable *cancellable, GAsyncReadyCallback callback,
+                                gpointer user_data);
 
-gboolean       pp_job_authenticate_finish        (PpJob                *job,
-                                                  GAsyncResult         *result,
-                                                  GError              **error);
+gboolean pp_job_authenticate_finish (PpJob *job, GAsyncResult *result, GError **error);
 
-void           pp_job_set_priority_async         (PpJob                *job,
-                                                  gint                  priority,
-                                                  GCancellable         *cancellable,
-                                                  GAsyncReadyCallback   callback,
-                                                  gpointer              user_data);
+void pp_job_set_priority_async (PpJob *job, gint priority, GCancellable *cancellable, GAsyncReadyCallback callback,
+                                gpointer user_data);
 
-gboolean       pp_job_set_priority_finish        (PpJob                *job,
-                                                  GAsyncResult         *result,
-                                                  GError              **error);
+gboolean pp_job_set_priority_finish (PpJob *job, GAsyncResult *result, GError **error);
 
 G_END_DECLS

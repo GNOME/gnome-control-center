@@ -20,18 +20,17 @@
 
 #pragma once
 
-#include <adwaita.h>
 #include "cc-keyboard-item.h"
 #include "cc-keyboard-manager.h"
 #include "cc-keyboard-shortcut-editor.h"
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_KEYBOARD_SHORTCUT_ROW (cc_keyboard_shortcut_row_get_type())
+#define CC_TYPE_KEYBOARD_SHORTCUT_ROW (cc_keyboard_shortcut_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, CC, KEYBOARD_SHORTCUT_ROW, AdwActionRow);
-CcKeyboardShortcutRow *cc_keyboard_shortcut_row_new (CcKeyboardItem           *item,
-                                                     CcKeyboardManager        *manager,
-                                                     GtkSizeGroup             *size_group);
-CcKeyboardItem        *cc_keyboard_shortcut_row_get_item  (CcKeyboardShortcutRow   *self);
+CcKeyboardShortcutRow *cc_keyboard_shortcut_row_new (CcKeyboardItem *item, CcKeyboardManager *manager,
+                                                     GtkSizeGroup *size_group);
+CcKeyboardItem *cc_keyboard_shortcut_row_get_item (CcKeyboardShortcutRow *self);
 
 G_END_DECLS

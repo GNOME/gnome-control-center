@@ -21,8 +21,8 @@
 
 #pragma once
 
-#include <glib-object.h>
 #include "shell/cc-shell.h"
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 

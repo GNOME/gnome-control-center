@@ -21,10 +21,9 @@
 
 G_BEGIN_DECLS
 
-typedef enum
-{
-  CC_STREAM_TYPE_OUTPUT,
-  CC_STREAM_TYPE_INPUT,
+typedef enum {
+    CC_STREAM_TYPE_OUTPUT,
+    CC_STREAM_TYPE_INPUT,
 } CcStreamType;
 
 G_END_DECLS

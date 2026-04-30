@@ -24,29 +24,25 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_INPUT_SOURCE (cc_input_source_get_type ())
 G_DECLARE_DERIVABLE_TYPE (CcInputSource, cc_input_source, CC, INPUT_SOURCE, GObject);
-struct _CcInputSourceClass
-{
-  GObjectClass parent_class;
+struct _CcInputSourceClass {
+    GObjectClass parent_class;
 
-  gchar*       (*get_label)          (CcInputSource *source);
-  gboolean     (*matches)            (CcInputSource *source,
-                                      CcInputSource *source2);
-  const gchar* (*get_layout)         (CcInputSource *source);
-  const gchar* (*get_layout_variant) (CcInputSource *source);
+    gchar *(*get_label) (CcInputSource *source);
+    gboolean (*matches) (CcInputSource *source, CcInputSource *source2);
+    const gchar *(*get_layout) (CcInputSource *source);
+    const gchar *(*get_layout_variant) (CcInputSource *source);
 };
 
-void             cc_input_source_emit_label_changed (CcInputSource *source);
+void cc_input_source_emit_label_changed (CcInputSource *source);
 
-gchar           *cc_input_source_get_label          (CcInputSource *source);
+gchar *cc_input_source_get_label (CcInputSource *source);
 
-gboolean         cc_input_source_matches            (CcInputSource *source,
-                                                     CcInputSource *source2);
+gboolean cc_input_source_matches (CcInputSource *source, CcInputSource *source2);
 
-const gchar     *cc_input_source_get_layout         (CcInputSource *source);
+const gchar *cc_input_source_get_layout (CcInputSource *source);
 
-const gchar     *cc_input_source_get_layout_variant (CcInputSource *source);
+const gchar *cc_input_source_get_layout_variant (CcInputSource *source);
 
-void             cc_input_source_launch_previewer   (CcInputSource *source,
-                                                     GtkWidget     *requester);
+void cc_input_source_launch_previewer (CcInputSource *source, GtkWidget *requester);
 
 G_END_DECLS

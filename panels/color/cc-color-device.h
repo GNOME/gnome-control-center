@@ -28,10 +28,9 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_COLOR_DEVICE (cc_color_device_get_type ())
 G_DECLARE_FINAL_TYPE (CcColorDevice, cc_color_device, CC, COLOR_DEVICE, AdwActionRow);
-GtkWidget   *cc_color_device_new           (CdDevice       *device);
-CdDevice    *cc_color_device_get_device    (CcColorDevice  *color_device);
-const gchar *cc_color_device_get_sortable  (CcColorDevice  *color_device);
-void         cc_color_device_set_expanded  (CcColorDevice  *color_device,
-                                            gboolean        expanded);
+GtkWidget *cc_color_device_new (CdDevice *device);
+CdDevice *cc_color_device_get_device (CcColorDevice *color_device);
+const gchar *cc_color_device_get_sortable (CcColorDevice *color_device);
+void cc_color_device_set_expanded (CcColorDevice *color_device, gboolean expanded);
 
 G_END_DECLS

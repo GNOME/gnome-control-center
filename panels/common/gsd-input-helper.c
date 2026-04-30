@@ -25,37 +25,36 @@
 
 #include <sys/types.h>
 
-#include "gsd-input-helper.h"
 #include "gsd-device-manager.h"
+#include "gsd-input-helper.h"
 
 static gboolean
 device_type_is_present (GsdDeviceType type)
 {
-        g_autoptr(GList) l = gsd_device_manager_list_devices (gsd_device_manager_get (),
-                                                              type);
-        return l != NULL;
+    g_autoptr(GList) l = gsd_device_manager_list_devices (gsd_device_manager_get (), type);
+    return l != NULL;
 }
 
 gboolean
 touchscreen_is_present (void)
 {
-        return device_type_is_present (GSD_DEVICE_TYPE_TOUCHSCREEN);
+    return device_type_is_present (GSD_DEVICE_TYPE_TOUCHSCREEN);
 }
 
 gboolean
 touchpad_is_present (void)
 {
-        return device_type_is_present (GSD_DEVICE_TYPE_TOUCHPAD);
+    return device_type_is_present (GSD_DEVICE_TYPE_TOUCHPAD);
 }
 
 gboolean
 mouse_is_present (void)
 {
-        return device_type_is_present (GSD_DEVICE_TYPE_MOUSE);
+    return device_type_is_present (GSD_DEVICE_TYPE_MOUSE);
 }
 
 gboolean
 pointingstick_is_present (void)
 {
-        return device_type_is_present (GSD_DEVICE_TYPE_POINTINGSTICK);
+    return device_type_is_present (GSD_DEVICE_TYPE_POINTINGSTICK);
 }

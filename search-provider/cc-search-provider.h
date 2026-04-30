@@ -19,23 +19,20 @@
 
 #pragma once
 
-#include <glib-object.h>
-#include <gio/gio.h>
 #include "cc-shell-search-provider-generated.h"
+#include <gio/gio.h>
+#include <glib-object.h>
 #include <shell/cc-shell-model.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SEARCH_PROVIDER (cc_search_provider_get_type())
+#define CC_TYPE_SEARCH_PROVIDER (cc_search_provider_get_type ())
 G_DECLARE_FINAL_TYPE (CcSearchProvider, cc_search_provider, CC, SEARCH_PROVIDER, GObject);
 CcSearchProvider *cc_search_provider_new (void);
 
-gboolean cc_search_provider_dbus_register   (CcSearchProvider  *provider,
-                                             GDBusConnection   *connection,
-                                             const char        *object_path,
-                                             GError           **error);
-void     cc_search_provider_dbus_unregister (CcSearchProvider  *provider,
-                                             GDBusConnection   *connection,
-                                             const char        *object_path);
+gboolean cc_search_provider_dbus_register (CcSearchProvider *provider, GDBusConnection *connection,
+                                           const char *object_path, GError **error);
+void cc_search_provider_dbus_unregister (CcSearchProvider *provider, GDBusConnection *connection,
+                                         const char *object_path);
 
 G_END_DECLS

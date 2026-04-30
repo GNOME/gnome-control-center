@@ -28,8 +28,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WWAN_PANEL (cc_wwan_panel_get_type())
+#define CC_TYPE_WWAN_PANEL (cc_wwan_panel_get_type ())
 G_DECLARE_FINAL_TYPE (CcWwanPanel, cc_wwan_panel, CC, WWAN_PANEL, CcPanel);
-void                 cc_wwan_panel_static_init_func              (void);
+void cc_wwan_panel_static_init_func (void);
 
 G_END_DECLS

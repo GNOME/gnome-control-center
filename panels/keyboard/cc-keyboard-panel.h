@@ -18,11 +18,10 @@
  *
  */
 
-
 #pragma once
 
-#include <shell/cc-panel.h>
 #include <gtk/gtk.h>
+#include <shell/cc-panel.h>
 
 G_BEGIN_DECLS
 

@@ -19,15 +19,14 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
-#include "cc-wacom-panel.h"
 #include "cc-wacom-device.h"
+#include "cc-wacom-panel.h"
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_WACOM_EKR_PAGE (cc_wacom_ekr_page_get_type ())
 G_DECLARE_FINAL_TYPE (CcWacomEkrPage, cc_wacom_ekr_page, CC, WACOM_EKR_PAGE, GtkBox);
-GtkWidget * cc_wacom_ekr_page_new (CcWacomPanel  *panel,
-				   CcWacomDevice *stylus);
+GtkWidget *cc_wacom_ekr_page_new (CcWacomPanel *panel, CcWacomDevice *stylus);
 
 G_END_DECLS

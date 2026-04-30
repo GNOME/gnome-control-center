@@ -25,15 +25,15 @@
 #include "cc-remote-login-page.h"
 
 #ifdef HAVE_CONFIG_H
-# include "config.h"
+#include "config.h"
 #endif
 
 struct _CcRemoteDesktopPage {
-  AdwNavigationPage parent_instance;
+    AdwNavigationPage parent_instance;
 
-  CcDesktopSharingPage *desktop_sharing_page;
+    CcDesktopSharingPage *desktop_sharing_page;
 
-  GCancellable *cancellable;
+    GCancellable *cancellable;
 };
 
 G_DEFINE_FINAL_TYPE (CcRemoteDesktopPage, cc_remote_desktop_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -41,36 +41,37 @@ G_DEFINE_FINAL_TYPE (CcRemoteDesktopPage, cc_remote_desktop_page, ADW_TYPE_NAVIG
 static void
 cc_remote_desktop_page_dispose (GObject *object)
 {
-  CcRemoteDesktopPage *self = (CcRemoteDesktopPage *)object;
+    CcRemoteDesktopPage *self = (CcRemoteDesktopPage *) object;
 
-  g_cancellable_cancel (self->cancellable);
-  g_clear_object (&self->cancellable);
+    g_cancellable_cancel (self->cancellable);
+    g_clear_object (&self->cancellable);
 
-  G_OBJECT_CLASS (cc_remote_desktop_page_parent_class)->dispose (object);
+    G_OBJECT_CLASS (cc_remote_desktop_page_parent_class)->dispose (object);
 }
 
 static void
-cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass * klass)
+cc_remote_desktop_page_class_init (CcRemoteDesktopPageClass *klass)
 {
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->dispose = cc_remote_desktop_page_dispose;
+    object_class->dispose = cc_remote_desktop_page_dispose;
 
-  g_type_ensure (CC_TYPE_DESKTOP_SHARING_PAGE);
-  g_type_ensure (CC_TYPE_REMOTE_LOGIN_PAGE);
+    g_type_ensure (CC_TYPE_DESKTOP_SHARING_PAGE);
+    g_type_ensure (CC_TYPE_REMOTE_LOGIN_PAGE);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/remote-desktop/cc-remote-desktop-page.ui");
+    gtk_widget_class_set_template_from_resource (
+        widget_class, "/org/gnome/control-center/system/remote-desktop/cc-remote-desktop-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, desktop_sharing_page);
+    gtk_widget_class_bind_template_child (widget_class, CcRemoteDesktopPage, desktop_sharing_page);
 }
 
 static void
 cc_remote_desktop_page_init (CcRemoteDesktopPage *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
+    g_autoptr(GtkCssProvider) provider = NULL;
 
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->cancellable = g_cancellable_new ();
+    self->cancellable = g_cancellable_new ();
 }

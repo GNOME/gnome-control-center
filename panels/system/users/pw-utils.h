@@ -22,11 +22,7 @@
 
 #include <glib.h>
 
-gint     pw_min_length (void);
-gchar   *pw_generate   (void);
-gdouble  pw_strength   (const gchar  *password,
-                        const gchar  *old_password,
-                        const gchar  *username,
-                        const gchar **hint,
-                        gint         *strength_level,
-                        gboolean     *enforcing);
+gint pw_min_length (void);
+gchar *pw_generate (void);
+gdouble pw_strength (const gchar *password, const gchar *old_password, const gchar *username, const gchar **hint,
+                     gint *strength_level, gboolean *enforcing);

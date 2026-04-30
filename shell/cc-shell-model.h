@@ -28,55 +28,43 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_SHELL_MODEL (cc_shell_model_get_type ())
 G_DECLARE_FINAL_TYPE (CcShellModel, cc_shell_model, CC, SHELL_MODEL, GtkListStore);
-typedef enum
-{
-  CC_CATEGORY_CONNECTIVITY,
-  CC_CATEGORY_PERSONALIZATION,
-  CC_CATEGORY_ACCOUNT,
-  CC_CATEGORY_HARDWARE,
-  CC_CATEGORY_DEVICES,
-  CC_CATEGORY_DETAILS,
-  CC_CATEGORY_SYSTEM,
-  CC_CATEGORY_PRIVACY,
-  CC_CATEGORY_LAST
+typedef enum {
+    CC_CATEGORY_CONNECTIVITY,
+    CC_CATEGORY_PERSONALIZATION,
+    CC_CATEGORY_ACCOUNT,
+    CC_CATEGORY_HARDWARE,
+    CC_CATEGORY_DEVICES,
+    CC_CATEGORY_DETAILS,
+    CC_CATEGORY_SYSTEM,
+    CC_CATEGORY_PRIVACY,
+    CC_CATEGORY_LAST
 } CcPanelCategory;
 
-enum
-{
-  COL_NAME,
-  COL_CASEFOLDED_NAME,
-  COL_APP,
-  COL_ID,
-  COL_CATEGORY,
-  COL_DESCRIPTION,
-  COL_CASEFOLDED_DESCRIPTION,
-  COL_GICON,
-  COL_KEYWORDS,
-  COL_VISIBILITY,
+enum {
+    COL_NAME,
+    COL_CASEFOLDED_NAME,
+    COL_APP,
+    COL_ID,
+    COL_CATEGORY,
+    COL_DESCRIPTION,
+    COL_CASEFOLDED_DESCRIPTION,
+    COL_GICON,
+    COL_KEYWORDS,
+    COL_VISIBILITY,
 
-  N_COLS
+    N_COLS
 };
 
+CcShellModel *cc_shell_model_new (void);
 
-CcShellModel* cc_shell_model_new                 (void);
+void cc_shell_model_add_item (CcShellModel *model, CcPanelCategory category, GAppInfo *appinfo, const char *id);
 
-void          cc_shell_model_add_item            (CcShellModel       *model,
-                                                  CcPanelCategory     category,
-                                                  GAppInfo           *appinfo,
-                                                  const char         *id);
+gboolean cc_shell_model_has_panel (CcShellModel *model, const char *id);
 
-gboolean      cc_shell_model_has_panel           (CcShellModel       *model,
-                                                  const char         *id);
+gboolean cc_shell_model_iter_matches_search (CcShellModel *model, GtkTreeIter *iter, const char *term);
 
-gboolean      cc_shell_model_iter_matches_search (CcShellModel       *model,
-                                                  GtkTreeIter        *iter,
-                                                  const char         *term);
+void cc_shell_model_set_sort_terms (CcShellModel *model, GStrv terms);
 
-void          cc_shell_model_set_sort_terms       (CcShellModel      *model,
-                                                   GStrv              terms);
-
-void          cc_shell_model_set_panel_visibility (CcShellModel      *self,
-                                                   const gchar       *id,
-                                                   CcPanelVisibility  visible);
+void cc_shell_model_set_panel_visibility (CcShellModel *self, const gchar *id, CcPanelVisibility visible);
 
 G_END_DECLS

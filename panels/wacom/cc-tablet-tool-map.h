@@ -20,24 +20,19 @@
 
 #pragma once
 
-#include "config.h"
-#include <gtk/gtk.h>
 #include "cc-wacom-device.h"
 #include "cc-wacom-tool.h"
+#include "config.h"
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_TABLET_TOOL_MAP (cc_tablet_tool_map_get_type ())
 G_DECLARE_FINAL_TYPE (CcTabletToolMap, cc_tablet_tool_map, CC, TABLET_TOOL_MAP, GObject);
-CcTabletToolMap * cc_tablet_tool_map_new        (void);
+CcTabletToolMap *cc_tablet_tool_map_new (void);
 
-GList           * cc_tablet_tool_map_list_tools  (CcTabletToolMap *map,
-						  CcWacomDevice   *device);
-CcWacomTool     * cc_tablet_tool_map_lookup_tool (CcTabletToolMap *map,
-						  CcWacomDevice   *device,
-						  guint64          serial);
-void              cc_tablet_tool_map_add_relation (CcTabletToolMap *map,
-						   CcWacomDevice   *device,
-						   CcWacomTool     *tool);
+GList *cc_tablet_tool_map_list_tools (CcTabletToolMap *map, CcWacomDevice *device);
+CcWacomTool *cc_tablet_tool_map_lookup_tool (CcTabletToolMap *map, CcWacomDevice *device, guint64 serial);
+void cc_tablet_tool_map_add_relation (CcTabletToolMap *map, CcWacomDevice *device, CcWacomTool *tool);
 
 G_END_DECLS

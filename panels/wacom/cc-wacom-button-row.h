@@ -19,24 +19,21 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include <gdesktop-enums.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 #define CC_WACOM_TYPE_BUTTON_ROW (cc_wacom_button_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcWacomButtonRow, cc_wacom_button_row, CC, WACOM_BUTTON_ROW, GtkListBoxRow);
 static struct {
-  GDesktopPadButtonAction  action_type;
-  const gchar             *action_name;
-} action_table[] = {
-  { G_DESKTOP_PAD_BUTTON_ACTION_NONE, NC_("Wacom action-type", "Application defined") },
-  { G_DESKTOP_PAD_BUTTON_ACTION_KEYBINDING, NC_("Wacom action-type", "Send Keystroke") },
-  { G_DESKTOP_PAD_BUTTON_ACTION_SWITCH_MONITOR, NC_("Wacom action-type", "Switch Monitor") },
-  { G_DESKTOP_PAD_BUTTON_ACTION_HELP, NC_("Wacom action-type", "Show On-Screen Help") }
-};
+    GDesktopPadButtonAction action_type;
+    const gchar *action_name;
+} action_table[] = { { G_DESKTOP_PAD_BUTTON_ACTION_NONE, NC_("Wacom action-type", "Application defined") },
+                       { G_DESKTOP_PAD_BUTTON_ACTION_KEYBINDING, NC_("Wacom action-type", "Send Keystroke") },
+                         { G_DESKTOP_PAD_BUTTON_ACTION_SWITCH_MONITOR, NC_("Wacom action-type", "Switch Monitor") },
+                           { G_DESKTOP_PAD_BUTTON_ACTION_HELP, NC_("Wacom action-type", "Show On-Screen Help") } };
 
-GtkWidget * cc_wacom_button_row_new      (guint      button,
-                                          GSettings *settings);
+GtkWidget *cc_wacom_button_row_new (guint button, GSettings *settings);
 
 G_END_DECLS

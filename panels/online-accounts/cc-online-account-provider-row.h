@@ -18,8 +18,8 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include <adwaita.h>
+#include <gtk/gtk.h>
 
 #define GOA_API_IS_SUBJECT_TO_CHANGE
 #define GOA_BACKEND_API_IS_SUBJECT_TO_CHANGE
@@ -28,7 +28,8 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_ONLINE_ACCOUNT_PROVIDER_ROW (cc_online_account_provider_row_get_type ())
-G_DECLARE_FINAL_TYPE (CcOnlineAccountProviderRow, cc_online_account_provider_row, CC, ONLINE_ACCOUNT_PROVIDER_ROW, AdwActionRow);
+G_DECLARE_FINAL_TYPE (CcOnlineAccountProviderRow, cc_online_account_provider_row, CC, ONLINE_ACCOUNT_PROVIDER_ROW,
+                      AdwActionRow);
 CcOnlineAccountProviderRow *cc_online_account_provider_row_new (GoaProvider *provider);
 
 GoaProvider *cc_online_account_provider_row_get_provider (CcOnlineAccountProviderRow *row);

@@ -24,20 +24,15 @@
 #define REMOTE_DESKTOP_SERVICE "gnome-remote-desktop.service"
 
 typedef enum {
-  CC_SERVICE_STATE_ENABLED,
-  CC_SERVICE_STATE_DISABLED,
-  CC_SERVICE_STATE_STATIC,
-  CC_SERVICE_STATE_MASKED,
-  CC_SERVICE_STATE_NOT_FOUND
+    CC_SERVICE_STATE_ENABLED,
+    CC_SERVICE_STATE_DISABLED,
+    CC_SERVICE_STATE_STATIC,
+    CC_SERVICE_STATE_MASKED,
+    CC_SERVICE_STATE_NOT_FOUND
 } CcServiceState;
 
-CcServiceState cc_get_service_state (const char  *service,
-                                     GBusType     bus_type);
+CcServiceState cc_get_service_state (const char *service, GBusType bus_type);
 
-gboolean cc_enable_service (const char  *service,
-                            GBusType     bus_type,
-                            GError     **error);
+gboolean cc_enable_service (const char *service, GBusType bus_type, GError **error);
 
-gboolean cc_disable_service (const char  *service,
-                             GBusType     bus_type,
-                             GError     **error);
+gboolean cc_disable_service (const char *service, GBusType bus_type, GError **error);

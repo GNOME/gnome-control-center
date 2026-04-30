@@ -27,11 +27,10 @@ G_BEGIN_DECLS
 
 #define BG_TYPE_SOURCE (bg_source_get_type ())
 G_DECLARE_DERIVABLE_TYPE (BgSource, bg_source, BG, SOURCE, GObject);
-struct _BgSourceClass
-{
-  GObjectClass parent_class;
+struct _BgSourceClass {
+    GObjectClass parent_class;
 };
 
-GListStore* bg_source_get_liststore (BgSource *source);
+GListStore *bg_source_get_liststore (BgSource *source);
 
 G_END_DECLS

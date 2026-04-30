@@ -18,48 +18,37 @@
 
 #pragma once
 
-#include <glib-object.h>
 #include <gio/gio.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 
 /* Default storage keys */
-#define CC_OBJECT_NMCLIENT     "CcObjectStorage::nm-client"
-#define CC_OBJECT_HOSTNAME     "CcObjectStorage::hostname"
-#define CC_OBJECT_MMMANAGER    "CcObjectStorage::mm-manager"
+#define CC_OBJECT_NMCLIENT "CcObjectStorage::nm-client"
+#define CC_OBJECT_HOSTNAME "CcObjectStorage::hostname"
+#define CC_OBJECT_MMMANAGER "CcObjectStorage::mm-manager"
 #define CC_OBJECT_PWQ_SETTINGS "CcObjectStorage::pw-quality-settings"
 
-#define CC_TYPE_OBJECT_STORAGE (cc_object_storage_get_type())
+#define CC_TYPE_OBJECT_STORAGE (cc_object_storage_get_type ())
 G_DECLARE_FINAL_TYPE (CcObjectStorage, cc_object_storage, CC, OBJECT_STORAGE, GObject);
-gboolean cc_object_storage_has_object             (const gchar         *key);
+gboolean cc_object_storage_has_object (const gchar *key);
 
-void     cc_object_storage_add_object             (const gchar         *key,
-                                                   gpointer             object);
+void cc_object_storage_add_object (const gchar *key, gpointer object);
 
-gpointer cc_object_storage_get_object             (const gchar         *key);
+gpointer cc_object_storage_get_object (const gchar *key);
 
-gpointer cc_object_storage_create_dbus_proxy_sync (GBusType             bus_type,
-                                                   GDBusProxyFlags     flags,
-                                                   const gchar         *name,
-                                                   const gchar         *path,
-                                                   const gchar         *interface,
-                                                   GCancellable        *cancellable,
-                                                   GError             **error);
+gpointer cc_object_storage_create_dbus_proxy_sync (GBusType bus_type, GDBusProxyFlags flags, const gchar *name,
+                                                   const gchar *path, const gchar *interface, GCancellable *cancellable,
+                                                   GError **error);
 
-void     cc_object_storage_create_dbus_proxy      (GBusType              bus_type,
-                                                   GDBusProxyFlags       flags,
-                                                   const gchar          *name,
-                                                   const gchar          *path,
-                                                   const gchar          *interface,
-                                                   GCancellable         *cancellable,
-                                                   GAsyncReadyCallback   callback,
-                                                   gpointer              user_data);
+void cc_object_storage_create_dbus_proxy (GBusType bus_type, GDBusProxyFlags flags, const gchar *name,
+                                          const gchar *path, const gchar *interface, GCancellable *cancellable,
+                                          GAsyncReadyCallback callback, gpointer user_data);
 
-gpointer cc_object_storage_create_dbus_proxy_finish (GAsyncResult       *result,
-                                                     GError            **error);
+gpointer cc_object_storage_create_dbus_proxy_finish (GAsyncResult *result, GError **error);
 
-void     cc_object_storage_initialize               (void);
+void cc_object_storage_initialize (void);
 
-void     cc_object_storage_destroy                  (void);
+void cc_object_storage_destroy (void);
 
 G_END_DECLS

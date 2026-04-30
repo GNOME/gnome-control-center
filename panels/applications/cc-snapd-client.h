@@ -24,46 +24,31 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SNAPD_CLIENT (cc_snapd_client_get_type())
+#define CC_TYPE_SNAPD_CLIENT (cc_snapd_client_get_type ())
 G_DECLARE_FINAL_TYPE (CcSnapdClient, cc_snapd_client, CC, SNAPD_CLIENT, GObject);
 // Creates a client to contact snapd.
-CcSnapdClient *cc_snapd_client_new                       (void);
+CcSnapdClient *cc_snapd_client_new (void);
 
 // Get information on an installed snap.
-JsonObject    *cc_snapd_client_get_snap_sync             (CcSnapdClient      *client,
-                                                          const gchar        *name,
-                                                          GCancellable       *cancellable,
-                                                          GError            **error);
+JsonObject *cc_snapd_client_get_snap_sync (CcSnapdClient *client, const gchar *name, GCancellable *cancellable,
+                                           GError **error);
 
 // Get information on a snap change.
-JsonObject    *cc_snapd_client_get_change_sync           (CcSnapdClient      *client,
-                                                          const gchar        *change_id,
-                                                          GCancellable       *cancellable,
-                                                          GError            **error);
+JsonObject *cc_snapd_client_get_change_sync (CcSnapdClient *client, const gchar *change_id, GCancellable *cancellable,
+                                             GError **error);
 
 // Get the state of the snap interface connections.
-gboolean       cc_snapd_client_get_all_connections_sync  (CcSnapdClient      *client,
-                                                          JsonArray         **plugs,
-                                                          JsonArray         **slots,
-                                                          GCancellable       *cancellable,
-                                                          GError            **error);
+gboolean cc_snapd_client_get_all_connections_sync (CcSnapdClient *client, JsonArray **plugs, JsonArray **slots,
+                                                   GCancellable *cancellable, GError **error);
 
 // Connect a plug to a slot. Returns the change ID to monitor for completion of this task.
-gchar         *cc_snapd_client_connect_interface_sync    (CcSnapdClient      *client,
-                                                          const gchar        *plug_snap,
-                                                          const gchar        *plug_name,
-                                                          const gchar        *slot_snap,
-                                                          const gchar        *slot_name,
-                                                          GCancellable       *cancellable,
-                                                          GError            **error);
+gchar *cc_snapd_client_connect_interface_sync (CcSnapdClient *client, const gchar *plug_snap, const gchar *plug_name,
+                                               const gchar *slot_snap, const gchar *slot_name,
+                                               GCancellable *cancellable, GError **error);
 
 // Disconnect a plug to a slot. Returns the change ID to monitor for completion of this task.
-gchar         *cc_snapd_client_disconnect_interface_sync (CcSnapdClient      *client,
-                                                          const gchar        *plug_snap,
-                                                          const gchar        *plug_name,
-                                                          const gchar        *slot_snap,
-                                                          const gchar        *slot_name,
-                                                          GCancellable       *cancellable,
-                                                          GError            **error);
+gchar *cc_snapd_client_disconnect_interface_sync (CcSnapdClient *client, const gchar *plug_snap, const gchar *plug_name,
+                                                  const gchar *slot_snap, const gchar *slot_name,
+                                                  GCancellable *cancellable, GError **error);
 
 G_END_DECLS

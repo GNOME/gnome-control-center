@@ -31,45 +31,44 @@
 #include <glib.h>
 
 /* Including ‘.c’ file to test static functions */
-#include "cc-wifi-panel.c"
 #include "cc-qr-code.c"
+#include "cc-wifi-panel.c"
 
 static void
 test_escape_qr_string (void)
 {
-  char *str;
+    char *str;
 
-  str = escape_string (NULL, TRUE);
-  g_assert_null (str);
+    str = escape_string (NULL, TRUE);
+    g_assert_null (str);
 
-  str = escape_string ("Wifi's password:empty", TRUE);
-  g_assert_cmpstr (str, ==, "\"Wifi\'s password\\:empty\"");
-  g_free (str);
+    str = escape_string ("Wifi's password:empty", TRUE);
+    g_assert_cmpstr (str, ==, "\"Wifi\'s password\\:empty\"");
+    g_free (str);
 
-  str = escape_string ("random;string:;\\", TRUE);
-  g_assert_cmpstr (str, ==, "\"random\\;string\\:\\;\\\\\"");
-  g_free (str);
+    str = escape_string ("random;string:;\\", TRUE);
+    g_assert_cmpstr (str, ==, "\"random\\;string\\:\\;\\\\\"");
+    g_free (str);
 
-  str = escape_string ("random-string", TRUE);
-  g_assert_cmpstr (str, ==, "\"random-string\"");
-  g_free (str);
+    str = escape_string ("random-string", TRUE);
+    g_assert_cmpstr (str, ==, "\"random-string\"");
+    g_free (str);
 
-  str = escape_string ("random-string", FALSE);
-  g_assert_cmpstr (str, ==, "random-string");
-  g_free (str);
+    str = escape_string ("random-string", FALSE);
+    g_assert_cmpstr (str, ==, "random-string");
+    g_free (str);
 
-  str = escape_string ("വൈഫൈ", TRUE);
-  g_assert_cmpstr (str, ==, "\"വൈഫൈ\"");
-  g_free (str);
+    str = escape_string ("വൈഫൈ", TRUE);
+    g_assert_cmpstr (str, ==, "\"വൈഫൈ\"");
+    g_free (str);
 }
 
 int
-main (int   argc,
-      char *argv[])
+main (int argc, char *argv[])
 {
-  g_test_init (&argc, &argv, NULL);
+    g_test_init (&argc, &argv, NULL);
 
-  g_test_add_func ("/wifi/escape-qr-string", test_escape_qr_string);
+    g_test_add_func ("/wifi/escape-qr-string", test_escape_qr_string);
 
-  return g_test_run ();
+    return g_test_run ();
 }

@@ -30,35 +30,26 @@ G_BEGIN_DECLS
 #include "gsd-device-manager.h"
 
 /* struct to hold min/max info of the X and Y axis */
-typedef struct
-{
-	gdouble x_min;
-	gdouble x_max;
-	gdouble y_min;
-	gdouble y_max;
+typedef struct {
+    gdouble x_min;
+    gdouble x_max;
+    gdouble y_min;
+    gdouble y_max;
 } XYinfo;
 
 #define CC_TYPE_CALIB_AREA (cc_calib_area_get_type ())
 G_DECLARE_FINAL_TYPE (CcCalibArea, cc_calib_area, CC, CALIB_AREA, GtkWindow);
 typedef void (*FinishCallback) (CcCalibArea *area, gpointer user_data);
 
-CcCalibArea * cc_calib_area_new (GdkDisplay      *display,
-                                 GdkMonitor     *monitor,
-                                 GsdDevice      *device,
-                                 FinishCallback  callback,
-                                 gpointer        user_data,
-                                 int             threshold_doubleclick,
-                                 int             threshold_misclick);
+CcCalibArea *cc_calib_area_new (GdkDisplay *display, GdkMonitor *monitor, GsdDevice *device, FinishCallback callback,
+                                gpointer user_data, int threshold_doubleclick, int threshold_misclick);
 
 gboolean cc_calib_area_finish (CcCalibArea *area);
 
 void cc_calib_area_free (CcCalibArea *area);
 
-void cc_calib_area_get_axis (CcCalibArea *area,
-                             XYinfo      *new_axis,
-                             gboolean    *swap_xy);
+void cc_calib_area_get_axis (CcCalibArea *area, XYinfo *new_axis, gboolean *swap_xy);
 
-void cc_calib_area_get_padding (CcCalibArea *area,
-                                XYinfo      *padding);
+void cc_calib_area_get_padding (CcCalibArea *area, XYinfo *padding);
 
 G_END_DECLS

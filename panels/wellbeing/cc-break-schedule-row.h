@@ -29,21 +29,19 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_BREAK_SCHEDULE (cc_break_schedule_get_type())
+#define CC_TYPE_BREAK_SCHEDULE (cc_break_schedule_get_type ())
 G_DECLARE_FINAL_TYPE (CcBreakSchedule, cc_break_schedule, CC, BREAK_SCHEDULE, GObject);
-CcBreakSchedule *cc_break_schedule_new (guint duration_secs,
-                                        guint interval_secs);
+CcBreakSchedule *cc_break_schedule_new (guint duration_secs, guint interval_secs);
 
 char *cc_break_schedule_get_formatted_duration (CcBreakSchedule *self);
 char *cc_break_schedule_get_formatted_interval (CcBreakSchedule *self);
 
-gint cc_break_schedule_compare (CcBreakSchedule *a,
-                                CcBreakSchedule *b);
+gint cc_break_schedule_compare (CcBreakSchedule *a, CcBreakSchedule *b);
 
 guint cc_break_schedule_get_duration_secs (CcBreakSchedule *self);
 guint cc_break_schedule_get_interval_secs (CcBreakSchedule *self);
 
-#define CC_TYPE_BREAK_SCHEDULE_ROW (cc_break_schedule_row_get_type())
+#define CC_TYPE_BREAK_SCHEDULE_ROW (cc_break_schedule_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcBreakScheduleRow, cc_break_schedule_row, CC, BREAK_SCHEDULE_ROW, AdwComboRow);
 CcBreakScheduleRow *cc_break_schedule_row_new (void) G_GNUC_WARN_UNUSED_RESULT;
 

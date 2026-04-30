@@ -29,39 +29,32 @@
 
 #define CC_TYPE_WACOM_DEVICE (cc_wacom_device_get_type ())
 G_DECLARE_FINAL_TYPE (CcWacomDevice, cc_wacom_device, CC, WACOM_DEVICE, GObject);
-WacomDeviceDatabase *
-                cc_wacom_device_database_get    (void);
+WacomDeviceDatabase *cc_wacom_device_database_get (void);
 
-CcWacomDevice * cc_wacom_device_new             (GsdDevice *device);
-CcWacomDevice * cc_wacom_device_new_fake        (const gchar *name);
+CcWacomDevice *cc_wacom_device_new (GsdDevice *device);
+CcWacomDevice *cc_wacom_device_new_fake (const gchar *name);
 
-const gchar   * cc_wacom_device_get_name        (CcWacomDevice *device);
-const gchar   * cc_wacom_device_get_icon_name   (CcWacomDevice *device);
+const gchar *cc_wacom_device_get_name (CcWacomDevice *device);
+const gchar *cc_wacom_device_get_icon_name (CcWacomDevice *device);
 
-gboolean        cc_wacom_device_is_reversible   (CcWacomDevice *device);
+gboolean cc_wacom_device_is_reversible (CcWacomDevice *device);
 
-gboolean        cc_wacom_device_is_fallback     (CcWacomDevice *device);
+gboolean cc_wacom_device_is_fallback (CcWacomDevice *device);
 
-gboolean        cc_wacom_device_is_remote       (CcWacomDevice *device);
+gboolean cc_wacom_device_is_remote (CcWacomDevice *device);
 
-WacomIntegrationFlags
-		cc_wacom_device_get_integration_flags (CcWacomDevice *device);
+WacomIntegrationFlags cc_wacom_device_get_integration_flags (CcWacomDevice *device);
 
-GsdDevice     * cc_wacom_device_get_device      (CcWacomDevice *device);
-GSettings     * cc_wacom_device_get_settings    (CcWacomDevice *device);
+GsdDevice *cc_wacom_device_get_device (CcWacomDevice *device);
+GSettings *cc_wacom_device_get_settings (CcWacomDevice *device);
 
-const gint    * cc_wacom_device_get_supported_tools (CcWacomDevice *device,
-						     gint          *n_tools);
+const gint *cc_wacom_device_get_supported_tools (CcWacomDevice *device, gint *n_tools);
 
-CcDisplayMonitor *cc_wacom_device_get_output    (CcWacomDevice   *device,
-						 CcDisplayConfig *screen);
-void            cc_wacom_device_set_output      (CcWacomDevice    *wacom_device,
-						 CcDisplayMonitor *monitor);
+CcDisplayMonitor *cc_wacom_device_get_output (CcWacomDevice *device, CcDisplayConfig *screen);
+void cc_wacom_device_set_output (CcWacomDevice *wacom_device, CcDisplayMonitor *monitor);
 
-guint           cc_wacom_device_get_num_buttons (CcWacomDevice *wacom_device);
+guint cc_wacom_device_get_num_buttons (CcWacomDevice *wacom_device);
 
-GSettings     * cc_wacom_device_get_button_settings (CcWacomDevice *device,
-						     guint          button);
+GSettings *cc_wacom_device_get_button_settings (CcWacomDevice *device, guint button);
 
-const gchar   * cc_wacom_device_get_description (CcWacomDevice *device);
-
+const gchar *cc_wacom_device_get_description (CcWacomDevice *device);

@@ -25,21 +25,19 @@
 G_BEGIN_DECLS
 
 enum {
-        LOCALE_COL,
-        DISPLAY_LOCALE_COL,
-        SEPARATOR_COL,
-        USER_LANGUAGE,
-        NUM_COLS
+    LOCALE_COL,
+    DISPLAY_LOCALE_COL,
+    SEPARATOR_COL,
+    USER_LANGUAGE,
+    NUM_COLS
 };
 
-gboolean cc_common_language_get_iter_for_language   (GtkTreeModel     *model,
-						     const gchar      *lang,
-						     GtkTreeIter      *iter);
-gboolean cc_common_language_has_font                (const gchar  *locale);
-gchar   *cc_common_language_get_current_language    (void);
+gboolean cc_common_language_get_iter_for_language (GtkTreeModel *model, const gchar *lang, GtkTreeIter *iter);
+gboolean cc_common_language_has_font (const gchar *locale);
+gchar *cc_common_language_get_current_language (void);
 
-GHashTable *cc_common_language_get_initial_languages   (void);
+GHashTable *cc_common_language_get_initial_languages (void);
 
-void     cc_common_language_add_user_languages (GtkTreeModel *model);
+void cc_common_language_add_user_languages (GtkTreeModel *model);
 
 G_END_DECLS

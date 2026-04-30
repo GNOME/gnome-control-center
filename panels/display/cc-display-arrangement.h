@@ -1,5 +1,5 @@
 /* -*- mode: c; style: linux -*-
- * 
+ *
  * Copyright (C) 2017 Red Hat, Inc.
  *
  * Written by: Benjamin Berg <bberg@redhat.com>
@@ -20,27 +20,24 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include "cc-display-config.h"
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_DISPLAY_ARRANGEMENT (cc_display_arrangement_get_type ())
 G_DECLARE_FINAL_TYPE (CcDisplayArrangement, cc_display_arrangement, CC, DISPLAY_ARRANGEMENT, GtkDrawingArea);
 
-CcDisplayArrangement* cc_display_arrangement_new                 (CcDisplayConfig      *config);
+CcDisplayArrangement *cc_display_arrangement_new (CcDisplayConfig *config);
 
-CcDisplayConfig*      cc_display_arrangement_get_config          (CcDisplayArrangement *self);
-void                  cc_display_arrangement_set_config          (CcDisplayArrangement *self,
-                                                                  CcDisplayConfig      *config);
+CcDisplayConfig *cc_display_arrangement_get_config (CcDisplayArrangement *self);
+void cc_display_arrangement_set_config (CcDisplayArrangement *self, CcDisplayConfig *config);
 
-CcDisplayMonitor*     cc_display_arrangement_get_selected_output (CcDisplayArrangement *arr);
-void                  cc_display_arrangement_set_selected_output (CcDisplayArrangement *arr,
-                                                                  CcDisplayMonitor     *output);
+CcDisplayMonitor *cc_display_arrangement_get_selected_output (CcDisplayArrangement *arr);
+void cc_display_arrangement_set_selected_output (CcDisplayArrangement *arr, CcDisplayMonitor *output);
 
 /* This is a bit of an odd-ball, but it currently makes sense to have it with
  * the arrangement widget where the snapping code lives. */
-void                  cc_display_config_snap_outputs             (CcDisplayConfig  *config);
+void cc_display_config_snap_outputs (CcDisplayConfig *config);
 
 G_END_DECLS
-

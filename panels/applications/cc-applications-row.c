@@ -21,14 +21,13 @@
 #include <config.h>
 #include <glib/gi18n.h>
 
-#include "cc-applications-row.h"
 #include "cc-applications-resources.h"
+#include "cc-applications-row.h"
 
-struct _CcApplicationsRow
-{
-  AdwActionRow  parent;
+struct _CcApplicationsRow {
+    AdwActionRow parent;
 
-  GAppInfo     *info;
+    GAppInfo *info;
 };
 
 G_DEFINE_FINAL_TYPE (CcApplicationsRow, cc_applications_row, ADW_TYPE_ACTION_ROW)
@@ -36,63 +35,61 @@ G_DEFINE_FINAL_TYPE (CcApplicationsRow, cc_applications_row, ADW_TYPE_ACTION_ROW
 static void
 cc_applications_row_finalize (GObject *object)
 {
-  CcApplicationsRow *self = CC_APPLICATIONS_ROW (object);
+    CcApplicationsRow *self = CC_APPLICATIONS_ROW (object);
 
-  g_object_unref (self->info);
+    g_object_unref (self->info);
 
-  G_OBJECT_CLASS (cc_applications_row_parent_class)->finalize (object);
+    G_OBJECT_CLASS (cc_applications_row_parent_class)->finalize (object);
 }
 
 static void
 cc_applications_row_class_init (CcApplicationsRowClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->finalize = cc_applications_row_finalize;
+    object_class->finalize = cc_applications_row_finalize;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-applications-row.ui");
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/applications/cc-applications-row.ui");
 }
 
 static void
 cc_applications_row_init (CcApplicationsRow *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 CcApplicationsRow *
 cc_applications_row_new (GAppInfo *info)
 {
-  CcApplicationsRow *self;
-  g_autoptr(GIcon) icon = NULL;
-  GtkWidget *w;
+    CcApplicationsRow *self;
+    g_autoptr(GIcon) icon = NULL;
+    GtkWidget *w;
 
-  self = g_object_new (CC_TYPE_APPLICATIONS_ROW, NULL);
+    self = g_object_new (CC_TYPE_APPLICATIONS_ROW, NULL);
 
-  self->info = g_object_ref (info);
+    self->info = g_object_ref (info);
 
-  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self), TRUE);
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), g_app_info_get_display_name (info));
+    gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self), TRUE);
+    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), g_app_info_get_display_name (info));
 
-  icon = g_app_info_get_icon (info);
-  if (icon != NULL)
-    g_object_ref (icon);
-  else
-    icon = g_themed_icon_new ("application-x-executable");
-  w = g_object_new (GTK_TYPE_IMAGE,
-                    "accessible-role", GTK_ACCESSIBLE_ROLE_PRESENTATION,
-                    "gicon", icon,
-                    NULL);
+    icon = g_app_info_get_icon (info);
+    if (icon != NULL)
+        g_object_ref (icon);
+    else
+        icon = g_themed_icon_new ("application-x-executable");
+    w = g_object_new (GTK_TYPE_IMAGE, "accessible-role", GTK_ACCESSIBLE_ROLE_PRESENTATION, "gicon", icon, NULL);
 
-  gtk_widget_add_css_class (w, "lowres-icon");
-  gtk_image_set_icon_size (GTK_IMAGE (w), GTK_ICON_SIZE_LARGE);
-  adw_action_row_add_prefix (ADW_ACTION_ROW (self), w);
+    gtk_widget_add_css_class (w, "lowres-icon");
+    gtk_image_set_icon_size (GTK_IMAGE (w), GTK_ICON_SIZE_LARGE);
+    adw_action_row_add_prefix (ADW_ACTION_ROW (self), w);
 
-  return self;
+    return self;
 }
 
 GAppInfo *
 cc_applications_row_get_info (CcApplicationsRow *self)
 {
-  return self->info;
+    return self->info;
 }

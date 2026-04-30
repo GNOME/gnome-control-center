@@ -29,32 +29,33 @@
 /*****************************************************************************/
 
 typedef struct {
-	GDBusConnection *bus;
-	GDBusProxy *proxy;
-	GPid pid;
-	int keepalive_fd;
+    GDBusConnection *bus;
+    GDBusProxy *proxy;
+    GPid pid;
+    int keepalive_fd;
 #if (NETWORKMANAGER_COMPILATION) & NM_NETWORKMANAGER_COMPILATION_WITH_LIBNM_GLIB
-	struct {
-		DBusGConnection *bus;
-	} libdbus;
+    struct {
+        DBusGConnection *bus;
+    } libdbus;
 #endif
 } NMTstcServiceInfo;
 
 NMTstcServiceInfo *nmtstc_service_init (void);
 void nmtstc_service_cleanup (NMTstcServiceInfo *info);
 
-static inline void _nmtstc_auto_service_cleanup (NMTstcServiceInfo **info)
+static inline void
+_nmtstc_auto_service_cleanup (NMTstcServiceInfo **info)
 {
-	if (info && *info) {
-		nmtstc_service_cleanup (*info);
-		*info = NULL;
-	}
+    if (info && *info) {
+        nmtstc_service_cleanup (*info);
+        *info = NULL;
+    }
 }
 
-#define NMTSTC_SERVICE_INFO_SETUP(sinfo) \
-	NM_PRAGMA_WARNING_DISABLE ("-Wunused-variable") \
-	__attribute__ ((cleanup(_nmtstc_auto_service_cleanup))) NMTstcServiceInfo *sinfo = nmtstc_service_init (); \
-	NM_PRAGMA_WARNING_REENABLE
+#define NMTSTC_SERVICE_INFO_SETUP(sinfo)                                                                               \
+    NM_PRAGMA_WARNING_DISABLE ("-Wunused-variable")                                                                    \
+    __attribute__ ((cleanup (_nmtstc_auto_service_cleanup))) NMTstcServiceInfo *sinfo = nmtstc_service_init ();        \
+    NM_PRAGMA_WARNING_REENABLE
 
 /*****************************************************************************/
 
@@ -68,38 +69,23 @@ NMRemoteSettings *nmtstc_nm_remote_settings_new (void);
 
 #else
 
-NMDevice *nmtstc_service_add_device (NMTstcServiceInfo *info,
-                                     NMClient *client,
-                                     const char *method,
-                                     const char *ifname);
+NMDevice *nmtstc_service_add_device (NMTstcServiceInfo *info, NMClient *client, const char *method, const char *ifname);
 
-NMDevice * nmtstc_service_add_wired_device (NMTstcServiceInfo *sinfo,
-                                            NMClient *client,
-                                            const char *ifname,
-                                            const char *hwaddr,
-                                            const char **subchannels);
+NMDevice *nmtstc_service_add_wired_device (NMTstcServiceInfo *sinfo, NMClient *client, const char *ifname,
+                                           const char *hwaddr, const char **subchannels);
 
 #endif
 
 /*****************************************************************************/
 
-void nmtstc_service_add_connection (NMTstcServiceInfo *sinfo,
-                                    NMConnection *connection,
-                                    gboolean verify_connection,
+void nmtstc_service_add_connection (NMTstcServiceInfo *sinfo, NMConnection *connection, gboolean verify_connection,
                                     char **out_path);
 
-void nmtstc_service_add_connection_variant (NMTstcServiceInfo *sinfo,
-                                            GVariant *connection,
-                                            gboolean verify_connection,
+void nmtstc_service_add_connection_variant (NMTstcServiceInfo *sinfo, GVariant *connection, gboolean verify_connection,
                                             char **out_path);
 
-void nmtstc_service_update_connection (NMTstcServiceInfo *sinfo,
-                                       const char *path,
-                                       NMConnection *connection,
+void nmtstc_service_update_connection (NMTstcServiceInfo *sinfo, const char *path, NMConnection *connection,
                                        gboolean verify_connection);
 
-void nmtstc_service_update_connection_variant (NMTstcServiceInfo *sinfo,
-                                               const char *path,
-                                               GVariant *connection,
+void nmtstc_service_update_connection_variant (NMTstcServiceInfo *sinfo, const char *path, GVariant *connection,
                                                gboolean verify_connection);
-

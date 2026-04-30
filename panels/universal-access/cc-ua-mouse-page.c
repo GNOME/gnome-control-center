@@ -33,143 +33,127 @@
 #define G_LOG_DOMAIN "cc-ua-mouse-page"
 
 #ifdef HAVE_CONFIG_H
-# include "config.h"
+#include "config.h"
 #endif
 
 #include "cc-ua-macros.h"
 #include "cc-ua-mouse-page.h"
 
-struct _CcUaMousePage
-{
-  AdwNavigationPage   parent_instance;
+struct _CcUaMousePage {
+    AdwNavigationPage parent_instance;
 
-  AdwSwitchRow       *mouse_keys_row;
-  AdwSwitchRow       *locate_pointer_row;
-  AdwSwitchRow       *focus_windows_on_hover_row;
-  GtkScale           *double_click_delay_scale;
+    AdwSwitchRow *mouse_keys_row;
+    AdwSwitchRow *locate_pointer_row;
+    AdwSwitchRow *focus_windows_on_hover_row;
+    GtkScale *double_click_delay_scale;
 
-  AdwExpanderRow     *secondary_click_row;
-  GtkScale           *secondary_delay_scale;
+    AdwExpanderRow *secondary_click_row;
+    GtkScale *secondary_delay_scale;
 
-  AdwExpanderRow     *hover_click_row;
-  GtkScale           *hover_delay_scale;
-  GtkScale           *motion_threshold_scale;
+    AdwExpanderRow *hover_click_row;
+    GtkScale *hover_delay_scale;
+    GtkScale *motion_threshold_scale;
 
-  GSettings          *kb_settings;
-  GSettings          *wm_settings;
-  GSettings          *mouse_settings;
-  GSettings          *interface_settings;
-  GSettings          *gds_mouse_settings;
+    GSettings *kb_settings;
+    GSettings *wm_settings;
+    GSettings *mouse_settings;
+    GSettings *interface_settings;
+    GSettings *gds_mouse_settings;
 };
 
 G_DEFINE_FINAL_TYPE (CcUaMousePage, cc_ua_mouse_page, ADW_TYPE_NAVIGATION_PAGE)
 
 static gboolean
-focus_mode_get_mapping (GValue    *value,
-                        GVariant  *variant,
-                        gpointer   user_data)
+focus_mode_get_mapping (GValue *value, GVariant *variant, gpointer user_data)
 {
-  gboolean enabled;
+    gboolean enabled;
 
-  enabled = g_strcmp0 (g_variant_get_string (variant, NULL), "click") != 0 &&
-  g_strcmp0 (g_variant_get_string (variant, NULL), "mouse") != 0;
+    enabled = g_strcmp0 (g_variant_get_string (variant, NULL), "click") != 0
+              && g_strcmp0 (g_variant_get_string (variant, NULL), "mouse") != 0;
 
-  g_value_set_boolean (value, enabled);
+    g_value_set_boolean (value, enabled);
 
-  return TRUE;
+    return TRUE;
 }
 
 static GVariant *
-focus_mode_set_mapping (const GValue       *value,
-                        const GVariantType *type,
-                        gpointer            user_data)
+focus_mode_set_mapping (const GValue *value, const GVariantType *type, gpointer user_data)
 {
-  return g_variant_new_string (g_value_get_boolean (value) ? "sloppy" : "click");
+    return g_variant_new_string (g_value_get_boolean (value) ? "sloppy" : "click");
 }
 
 static void
 cc_ua_mouse_page_dispose (GObject *object)
 {
-  CcUaMousePage *self = (CcUaMousePage *)object;
+    CcUaMousePage *self = (CcUaMousePage *) object;
 
-  g_clear_object (&self->gds_mouse_settings);
-  g_clear_object (&self->interface_settings);
-  g_clear_object (&self->mouse_settings);
-  g_clear_object (&self->kb_settings);
-  g_clear_object (&self->wm_settings);
+    g_clear_object (&self->gds_mouse_settings);
+    g_clear_object (&self->interface_settings);
+    g_clear_object (&self->mouse_settings);
+    g_clear_object (&self->kb_settings);
+    g_clear_object (&self->wm_settings);
 
-  G_OBJECT_CLASS (cc_ua_mouse_page_parent_class)->dispose (object);
+    G_OBJECT_CLASS (cc_ua_mouse_page_parent_class)->dispose (object);
 }
 
 static void
 cc_ua_mouse_page_class_init (CcUaMousePageClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->dispose = cc_ua_mouse_page_dispose;
+    object_class->dispose = cc_ua_mouse_page_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/control-center/"
-                                               "universal-access/cc-ua-mouse-page.ui");
+    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/"
+                                                               "universal-access/cc-ua-mouse-page.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, mouse_keys_row);
-  gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, locate_pointer_row);
-  gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, focus_windows_on_hover_row);
-  gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, double_click_delay_scale);
+    gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, mouse_keys_row);
+    gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, locate_pointer_row);
+    gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, focus_windows_on_hover_row);
+    gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, double_click_delay_scale);
 
-  gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, secondary_click_row);
-  gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, secondary_delay_scale);
+    gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, secondary_click_row);
+    gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, secondary_delay_scale);
 
-  gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, hover_click_row);
-  gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, hover_delay_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, motion_threshold_scale);
+    gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, hover_click_row);
+    gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, hover_delay_scale);
+    gtk_widget_class_bind_template_child (widget_class, CcUaMousePage, motion_threshold_scale);
 }
 
 static void
 cc_ua_mouse_page_init (CcUaMousePage *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->gds_mouse_settings = g_settings_new (MOUSE_PERIPHERAL_SETTINGS);
-  self->interface_settings = g_settings_new (INTERFACE_SETTINGS);
-  self->mouse_settings = g_settings_new (MOUSE_SETTINGS);
-  self->kb_settings = g_settings_new (KEYBOARD_SETTINGS);
-  self->wm_settings = g_settings_new (WM_SETTINGS);
+    self->gds_mouse_settings = g_settings_new (MOUSE_PERIPHERAL_SETTINGS);
+    self->interface_settings = g_settings_new (INTERFACE_SETTINGS);
+    self->mouse_settings = g_settings_new (MOUSE_SETTINGS);
+    self->kb_settings = g_settings_new (KEYBOARD_SETTINGS);
+    self->wm_settings = g_settings_new (WM_SETTINGS);
 
-  g_settings_bind (self->kb_settings, KEY_MOUSEKEYS_ENABLED,
-                   self->mouse_keys_row, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (self->interface_settings, KEY_LOCATE_POINTER,
-                   self->locate_pointer_row, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind_with_mapping (self->wm_settings, "focus-mode",
-                                self->focus_windows_on_hover_row, "active",
-                                G_SETTINGS_BIND_DEFAULT,
-                                focus_mode_get_mapping,
-                                focus_mode_set_mapping,
-                                NULL, NULL);
-  g_settings_bind (self->gds_mouse_settings, "double-click",
-                   gtk_range_get_adjustment (GTK_RANGE (self->double_click_delay_scale)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
+    g_settings_bind (self->kb_settings, KEY_MOUSEKEYS_ENABLED, self->mouse_keys_row, "active", G_SETTINGS_BIND_DEFAULT);
+    g_settings_bind (self->interface_settings, KEY_LOCATE_POINTER, self->locate_pointer_row, "active",
+                     G_SETTINGS_BIND_DEFAULT);
+    g_settings_bind_with_mapping (self->wm_settings, "focus-mode", self->focus_windows_on_hover_row, "active",
+                                  G_SETTINGS_BIND_DEFAULT, focus_mode_get_mapping, focus_mode_set_mapping, NULL, NULL);
+    g_settings_bind (self->gds_mouse_settings, "double-click",
+                     gtk_range_get_adjustment (GTK_RANGE (self->double_click_delay_scale)), "value",
+                     G_SETTINGS_BIND_DEFAULT);
 
-  /* Click Assist */
-  /* Simulated Secondary Click */
-  g_settings_bind (self->mouse_settings, KEY_SECONDARY_CLICK_ENABLED,
-                   self->secondary_click_row, "enable-expansion",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (self->mouse_settings, KEY_SECONDARY_CLICK_TIME,
-                   gtk_range_get_adjustment (GTK_RANGE (self->secondary_delay_scale)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
+    /* Click Assist */
+    /* Simulated Secondary Click */
+    g_settings_bind (self->mouse_settings, KEY_SECONDARY_CLICK_ENABLED, self->secondary_click_row, "enable-expansion",
+                     G_SETTINGS_BIND_DEFAULT);
+    g_settings_bind (self->mouse_settings, KEY_SECONDARY_CLICK_TIME,
+                     gtk_range_get_adjustment (GTK_RANGE (self->secondary_delay_scale)), "value",
+                     G_SETTINGS_BIND_DEFAULT);
 
-  /* Hover Click */
-  g_settings_bind (self->mouse_settings, KEY_DWELL_CLICK_ENABLED,
-                   self->hover_click_row, "enable-expansion",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (self->mouse_settings, KEY_DWELL_TIME,
-                   gtk_range_get_adjustment (GTK_RANGE (self->hover_delay_scale)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (self->mouse_settings, KEY_DWELL_THRESHOLD,
-                   gtk_range_get_adjustment (GTK_RANGE (self->motion_threshold_scale)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
+    /* Hover Click */
+    g_settings_bind (self->mouse_settings, KEY_DWELL_CLICK_ENABLED, self->hover_click_row, "enable-expansion",
+                     G_SETTINGS_BIND_DEFAULT);
+    g_settings_bind (self->mouse_settings, KEY_DWELL_TIME,
+                     gtk_range_get_adjustment (GTK_RANGE (self->hover_delay_scale)), "value", G_SETTINGS_BIND_DEFAULT);
+    g_settings_bind (self->mouse_settings, KEY_DWELL_THRESHOLD,
+                     gtk_range_get_adjustment (GTK_RANGE (self->motion_threshold_scale)), "value",
+                     G_SETTINGS_BIND_DEFAULT);
 }

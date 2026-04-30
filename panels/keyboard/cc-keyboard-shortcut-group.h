@@ -31,14 +31,12 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_KEYBOARD_SHORTCUT_GROUP (cc_keyboard_shortcut_group_get_type ())
-G_DECLARE_FINAL_TYPE (CcKeyboardShortcutGroup, cc_keyboard_shortcut_group, CC, KEYBOARD_SHORTCUT_GROUP, AdwPreferencesGroup);
-GtkWidget  *cc_keyboard_shortcut_group_new          (GListModel               *shortcut_items,
-                                                     const char               *section_id,
-                                                     const char               *section_title,
-                                                     CcKeyboardManager        *manager,
-                                                     GtkSizeGroup             *size_group);
-GListModel *cc_keyboard_shortcut_group_get_model    (CcKeyboardShortcutGroup  *self);
-void        cc_keyboard_shortcut_group_set_filter   (CcKeyboardShortcutGroup  *self,
-                                                     GStrv                     search_terms);
+G_DECLARE_FINAL_TYPE (CcKeyboardShortcutGroup, cc_keyboard_shortcut_group, CC, KEYBOARD_SHORTCUT_GROUP,
+                      AdwPreferencesGroup);
+GtkWidget *cc_keyboard_shortcut_group_new (GListModel *shortcut_items, const char *section_id,
+                                           const char *section_title, CcKeyboardManager *manager,
+                                           GtkSizeGroup *size_group);
+GListModel *cc_keyboard_shortcut_group_get_model (CcKeyboardShortcutGroup *self);
+void cc_keyboard_shortcut_group_set_filter (CcKeyboardShortcutGroup *self, GStrv search_terms);
 
 G_END_DECLS

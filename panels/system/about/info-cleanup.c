@@ -20,112 +20,94 @@
 
 #include <config.h>
 
-#include <glib.h>
 #include "info-cleanup.h"
+#include <glib.h>
 
-typedef struct
-{
-  char *regex;
-  char *replacement;
+typedef struct {
+    char *regex;
+    char *replacement;
 } ReplaceStrings;
 
 static char *
 prettify_info (const char *info)
 {
-  g_autofree char *escaped = NULL;
-  g_autofree gchar *pretty = NULL;
-  int   i;
-  static const ReplaceStrings rs[] = {
-    { "Mesa DRI ", ""},
-    { "Mesa Intel", "Intel"},
-    { "[(]R[)]", "\302\256"},
-    { "[(](tm|TM)[)]", "\342\204\242"},
-    { "(ATI|EPYC|AMD FX|Radeon|Ryzen|Threadripper|GeForce RTX) ", "\\1\342\204\242 "},
-    { "Gallium \\d+\\.\\d+ on (.*)", "\\1"},
-    { " CPU| Processor| \\S+-Core| @ \\d+\\.\\d+GHz", ""},
-    { " x86|/MMX|/SSE2|/PCIe", ""},
-    { " [(][^)]*(DRM|MESA|LLVM)[^)]*[)]?", ""},
-    { "Graphics Controller", "Graphics"},
-    { ".*llvmpipe.*", "Software Rendering"},
-  };
+    g_autofree char *escaped = NULL;
+    g_autofree gchar *pretty = NULL;
+    int i;
+    static const ReplaceStrings rs[] = {
+        { "Mesa DRI ", "" },
+        { "Mesa Intel", "Intel" },
+        { "[(]R[)]", "\302\256" },
+        { "[(](tm|TM)[)]", "\342\204\242" },
+        { "(ATI|EPYC|AMD FX|Radeon|Ryzen|Threadripper|GeForce RTX) ", "\\1\342\204\242 " },
+        { "Gallium \\d+\\.\\d+ on (.*)", "\\1" },
+        { " CPU| Processor| \\S+-Core| @ \\d+\\.\\d+GHz", "" },
+        { " x86|/MMX|/SSE2|/PCIe", "" },
+        { " [(][^)]*(DRM|MESA|LLVM)[^)]*[)]?", "" },
+        { "Graphics Controller", "Graphics" },
+        { ".*llvmpipe.*", "Software Rendering" },
+    };
 
-  if (*info == '\0')
-    return NULL;
+    if (*info == '\0')
+        return NULL;
 
-  escaped = g_markup_escape_text (info, -1);
-  pretty = g_strdup (g_strstrip (escaped));
+    escaped = g_markup_escape_text (info, -1);
+    pretty = g_strdup (g_strstrip (escaped));
 
-  for (i = 0; i < G_N_ELEMENTS (rs); i++)
-    {
-      g_autoptr(GError) error = NULL;
-      g_autoptr(GRegex) re = NULL;
-      g_autofree gchar *new = NULL;
+    for (i = 0; i < G_N_ELEMENTS (rs); i++) {
+        g_autoptr(GError) error = NULL;
+        g_autoptr(GRegex) re = NULL;
+        g_autofree gchar *new = NULL;
 
-      re = g_regex_new (rs[i].regex, 0, 0, &error);
-      if (re == NULL)
-        {
-          g_warning ("Error building regex: %s", error->message);
-          continue;
+        re = g_regex_new (rs[i].regex, 0, 0, &error);
+        if (re == NULL) {
+            g_warning ("Error building regex: %s", error->message);
+            continue;
         }
 
-      new = g_regex_replace (re,
-                             pretty,
-                             -1,
-                             0,
-                             rs[i].replacement,
-                             0,
-                             &error);
+        new = g_regex_replace (re, pretty, -1, 0, rs[i].replacement, 0, &error);
 
-      if (error != NULL)
-        {
-          g_warning ("Error replacing %s: %s", rs[i].regex, error->message);
-          continue;
+        if (error != NULL) {
+            g_warning ("Error replacing %s: %s", rs[i].regex, error->message);
+            continue;
         }
 
-      g_free (pretty);
-      pretty = g_steal_pointer (&new);
+        g_free (pretty);
+        pretty = g_steal_pointer (&new);
     }
 
-  return g_steal_pointer (&pretty);
+    return g_steal_pointer (&pretty);
 }
 
 static char *
 remove_duplicate_whitespace (const char *old)
 {
-  g_autofree gchar *new = NULL;
-  g_autoptr(GRegex) re = NULL;
-  g_autoptr(GError) error = NULL;
+    g_autofree gchar *new = NULL;
+    g_autoptr(GRegex) re = NULL;
+    g_autoptr(GError) error = NULL;
 
-  if (old == NULL)
-    return NULL;
+    if (old == NULL)
+        return NULL;
 
-  re = g_regex_new ("[ \t\n\r]+", G_REGEX_MULTILINE, 0, &error);
-  if (re == NULL)
-    {
-      g_warning ("Error building regex: %s", error->message);
-      return g_strdup (old);
+    re = g_regex_new ("[ \t\n\r]+", G_REGEX_MULTILINE, 0, &error);
+    if (re == NULL) {
+        g_warning ("Error building regex: %s", error->message);
+        return g_strdup (old);
     }
-  new = g_regex_replace (re,
-                         old,
-                         -1,
-                         0,
-                         " ",
-                         0,
-                         &error);
-  if (new == NULL)
-    {
-      g_warning ("Error replacing string: %s", error->message);
-      return g_strdup (old);
+    new = g_regex_replace (re, old, -1, 0, " ", 0, &error);
+    if (new == NULL) {
+        g_warning ("Error replacing string: %s", error->message);
+        return g_strdup (old);
     }
 
-  return g_steal_pointer (&new);
+    return g_steal_pointer (&new);
 }
 
 char *
 info_cleanup (const char *input)
 {
-  g_autofree char *pretty = NULL;
+    g_autofree char *pretty = NULL;
 
-  pretty = prettify_info (input);
-  return remove_duplicate_whitespace (pretty);
+    pretty = prettify_info (input);
+    return remove_duplicate_whitespace (pretty);
 }

@@ -25,24 +25,19 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_MASK_PAINTABLE (cc_mask_paintable_get_type())
+#define CC_TYPE_MASK_PAINTABLE (cc_mask_paintable_get_type ())
 G_DECLARE_FINAL_TYPE (CcMaskPaintable, cc_mask_paintable, CC, MASK_PAINTABLE, GObject);
 GdkPaintable *cc_mask_paintable_new (void);
 
 GdkPaintable *cc_mask_paintable_get_paintable (CcMaskPaintable *self);
-void          cc_mask_paintable_set_paintable (CcMaskPaintable *self,
-                                               GdkPaintable    *paintable);
+void cc_mask_paintable_set_paintable (CcMaskPaintable *self, GdkPaintable *paintable);
 
-GdkRGBA      *cc_mask_paintable_get_rgba      (CcMaskPaintable *self);
-void          cc_mask_paintable_set_rgba      (CcMaskPaintable *self,
-                                               GdkRGBA         *rgba);
+GdkRGBA *cc_mask_paintable_get_rgba (CcMaskPaintable *self);
+void cc_mask_paintable_set_rgba (CcMaskPaintable *self, GdkRGBA *rgba);
 
-gboolean      cc_mask_paintable_get_follow_accent (CcMaskPaintable *self);
-void          cc_mask_paintable_set_follow_accent (CcMaskPaintable *self,
-                                                   gboolean         follow_accent);
+gboolean cc_mask_paintable_get_follow_accent (CcMaskPaintable *self);
+void cc_mask_paintable_set_follow_accent (CcMaskPaintable *self, gboolean follow_accent);
 
-void          cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self,
-                                                     const char      *resource_path,
-                                                     GtkWidget       *parent_widget);
+void cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self, const char *resource_path, GtkWidget *parent_widget);
 
 G_END_DECLS

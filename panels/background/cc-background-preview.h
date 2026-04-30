@@ -26,10 +26,9 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_BACKGROUND_PREVIEW (cc_background_preview_get_type())
+#define CC_TYPE_BACKGROUND_PREVIEW (cc_background_preview_get_type ())
 G_DECLARE_FINAL_TYPE (CcBackgroundPreview, cc_background_preview, CC, BACKGROUND_PREVIEW, GtkWidget);
-CcBackgroundItem* cc_background_preview_get_item (CcBackgroundPreview *self);
-void              cc_background_preview_set_item (CcBackgroundPreview *self,
-                                                  CcBackgroundItem    *item);
+CcBackgroundItem *cc_background_preview_get_item (CcBackgroundPreview *self);
+void cc_background_preview_set_item (CcBackgroundPreview *self, CcBackgroundItem *item);
 
 G_END_DECLS

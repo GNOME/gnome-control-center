@@ -27,10 +27,10 @@ G_BEGIN_DECLS
 
 #define CE_TYPE_IP_ADDRESS_ENTRY (ce_ip_address_entry_get_type ())
 G_DECLARE_FINAL_TYPE (CEIPAddressEntry, ce_ip_address_entry, CE, IP_ADDRESS_ENTRY, GtkEntry);
-CEIPAddressEntry *ce_ip_address_entry_new      (int family);
+CEIPAddressEntry *ce_ip_address_entry_new (int family);
 
-gboolean          ce_ip_address_entry_is_empty (CEIPAddressEntry *entry);
+gboolean ce_ip_address_entry_is_empty (CEIPAddressEntry *entry);
 
-gboolean          ce_ip_address_entry_is_valid (CEIPAddressEntry *entry);
+gboolean ce_ip_address_entry_is_valid (CEIPAddressEntry *entry);
 
 G_END_DECLS

@@ -31,9 +31,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WWAN_NETWORK_DIALOG (cc_wwan_network_dialog_get_type())
+#define CC_TYPE_WWAN_NETWORK_DIALOG (cc_wwan_network_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (CcWwanNetworkDialog, cc_wwan_network_dialog, CC, WWAN_NETWORK_DIALOG, GtkDialog);
-GtkWindow *cc_wwan_network_dialog_new (GtkWindow    *parent_window,
-                                       CcWwanDevice *device);
+GtkWindow *cc_wwan_network_dialog_new (GtkWindow *parent_window, CcWwanDevice *device);
 
 G_END_DECLS

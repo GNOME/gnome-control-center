@@ -30,37 +30,26 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_KEYBOARD_MANAGER (cc_keyboard_manager_get_type ())
 G_DECLARE_FINAL_TYPE (CcKeyboardManager, cc_keyboard_manager, CC, KEYBOARD_MANAGER, GObject);
-CcKeyboardManager*   cc_keyboard_manager_new                     (void);
+CcKeyboardManager *cc_keyboard_manager_new (void);
 
-void                 cc_keyboard_manager_load_shortcuts          (CcKeyboardManager  *self);
+void cc_keyboard_manager_load_shortcuts (CcKeyboardManager *self);
 
-void                 cc_keyboard_manager_load_global_shortcuts   (CcKeyboardManager *self,
-                                                                  const char        *app_id,
-                                                                  GVariant          *shortcuts);
+void cc_keyboard_manager_load_global_shortcuts (CcKeyboardManager *self, const char *app_id, GVariant *shortcuts);
 
-void                 cc_keyboard_manager_store_global_shortcuts  (CcKeyboardManager  *self,
-                                                                  const char         *app_id);
+void cc_keyboard_manager_store_global_shortcuts (CcKeyboardManager *self, const char *app_id);
 
-GVariant *           cc_keyboard_manager_get_global_shortcuts    (CcKeyboardManager  *self,
-                                                                  const char         *section_id);
+GVariant *cc_keyboard_manager_get_global_shortcuts (CcKeyboardManager *self, const char *section_id);
 
-CcKeyboardItem*      cc_keyboard_manager_create_custom_shortcut  (CcKeyboardManager  *self);
+CcKeyboardItem *cc_keyboard_manager_create_custom_shortcut (CcKeyboardManager *self);
 
-void                 cc_keyboard_manager_add_custom_shortcut     (CcKeyboardManager  *self,
-                                                                  CcKeyboardItem     *item);
+void cc_keyboard_manager_add_custom_shortcut (CcKeyboardManager *self, CcKeyboardItem *item);
 
-void                 cc_keyboard_manager_remove_custom_shortcut  (CcKeyboardManager  *self,
-                                                                  CcKeyboardItem     *item);
+void cc_keyboard_manager_remove_custom_shortcut (CcKeyboardManager *self, CcKeyboardItem *item);
 
-CcKeyboardItem*      cc_keyboard_manager_get_collision           (CcKeyboardManager  *self,
-                                                                  CcKeyboardItem     *item,
-                                                                  CcKeyCombo         *combo);
+CcKeyboardItem *cc_keyboard_manager_get_collision (CcKeyboardManager *self, CcKeyboardItem *item, CcKeyCombo *combo);
 
-void                 cc_keyboard_manager_reset_shortcut          (CcKeyboardManager  *self,
-                                                                  CcKeyboardItem     *item);
+void cc_keyboard_manager_reset_shortcut (CcKeyboardManager *self, CcKeyboardItem *item);
 
-void                 cc_keyboard_manager_reset_global_shortcuts  (CcKeyboardManager  *self,
-                                                                  const char         *app_id);
+void cc_keyboard_manager_reset_global_shortcuts (CcKeyboardManager *self, const char *app_id);
 
 G_END_DECLS
-

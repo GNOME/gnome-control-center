@@ -21,17 +21,16 @@
 
 #pragma once
 
+#include <NetworkManager.h>
 #include <adwaita.h>
 #include <gtk/gtk.h>
-#include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
 #define NET_TYPE_DEVICE_ETHERNET (net_device_ethernet_get_type ())
 G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERNET, AdwPreferencesGroup);
-NetDeviceEthernet *net_device_ethernet_new        (NMClient          *client,
-                                                   NMDevice          *device);
+NetDeviceEthernet *net_device_ethernet_new (NMClient *client, NMDevice *device);
 
-NMDevice          *net_device_ethernet_get_device (NetDeviceEthernet *device);
+NMDevice *net_device_ethernet_get_device (NetDeviceEthernet *device);
 
 G_END_DECLS

@@ -20,9 +20,9 @@
 
 #pragma once
 
+#include <act/act.h>
 #include <adwaita.h>
 #include <gtk/gtk.h>
-#include <act/act.h>
 
 G_BEGIN_DECLS
 
@@ -37,25 +37,16 @@ G_BEGIN_DECLS
 #define IMAGE_SOURCE_VALUE_FACE "gnome-face"
 #define IMAGE_SOURCE_VALUE_CUSTOM "gnome-custom"
 
-const gchar *get_real_or_user_name        (ActUser *user);
-gsize    get_username_max_length          (void);
-gboolean is_username_used                 (const gchar *username);
-gboolean is_valid_name                    (const gchar *name);
-void     is_valid_username_async          (const gchar *username,
-                                           GCancellable *cancellable,
-                                           GAsyncReadyCallback callback,
-                                           gpointer callback_data);
-gboolean is_valid_username_finish         (GAsyncResult *result,
-                                           gchar **tip,
-                                           gchar **username,
-                                           GError **error);
-GdkTexture *draw_avatar_to_texture        (AdwAvatar *avatar,
-                                           int        size);
-void       set_user_icon_data             (ActUser     *user,
-                                           GdkTexture  *texture,
-                                           const gchar *image_source);
-void       setup_avatar_for_user          (AdwAvatar *avatar,
-                                           ActUser *user);
-GSettings *settings_or_null               (const gchar *schema);
+const gchar *get_real_or_user_name (ActUser *user);
+gsize get_username_max_length (void);
+gboolean is_username_used (const gchar *username);
+gboolean is_valid_name (const gchar *name);
+void is_valid_username_async (const gchar *username, GCancellable *cancellable, GAsyncReadyCallback callback,
+                              gpointer callback_data);
+gboolean is_valid_username_finish (GAsyncResult *result, gchar **tip, gchar **username, GError **error);
+GdkTexture *draw_avatar_to_texture (AdwAvatar *avatar, int size);
+void set_user_icon_data (ActUser *user, GdkTexture *texture, const gchar *image_source);
+void setup_avatar_for_user (AdwAvatar *avatar, ActUser *user);
+GSettings *settings_or_null (const gchar *schema);
 
 G_END_DECLS

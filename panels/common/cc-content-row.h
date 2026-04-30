@@ -27,50 +27,40 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_CONTENT_ROW (cc_content_row_get_type())
+#define CC_TYPE_CONTENT_ROW (cc_content_row_get_type ())
 G_DECLARE_DERIVABLE_TYPE (CcContentRow, cc_content_row, CC, CONTENT_ROW, AdwPreferencesRow);
 /**
  * CcContentRowClass
  * @parent_class: The parent class
  * @activate: Activates the row to trigger its main action.
  */
-struct _CcContentRowClass
-{
-  AdwPreferencesRowClass parent_class;
+struct _CcContentRowClass {
+    AdwPreferencesRowClass parent_class;
 
-  void (*activate) (CcContentRow *self);
+    void (*activate) (CcContentRow *self);
 };
 
 GtkWidget *cc_content_row_new (void);
 
-void cc_content_row_add_prefix (CcContentRow *self,
-                                GtkWidget    *widget);
-void cc_content_row_add_suffix (CcContentRow *self,
-                                GtkWidget    *widget);
-void cc_content_row_add_content (CcContentRow *self,
-                                 GtkWidget    *widget);
-void cc_content_row_remove     (CcContentRow *self,
-                                GtkWidget    *widget);
+void cc_content_row_add_prefix (CcContentRow *self, GtkWidget *widget);
+void cc_content_row_add_suffix (CcContentRow *self, GtkWidget *widget);
+void cc_content_row_add_content (CcContentRow *self, GtkWidget *widget);
+void cc_content_row_remove (CcContentRow *self, GtkWidget *widget);
 
 const char *cc_content_row_get_subtitle (CcContentRow *self);
-void        cc_content_row_set_subtitle (CcContentRow *self,
-                                         const char   *subtitle);
+void cc_content_row_set_subtitle (CcContentRow *self, const char *subtitle);
 
 GtkWidget *cc_content_row_get_activatable_widget (CcContentRow *self);
-void       cc_content_row_set_activatable_widget (CcContentRow *self,
-                                                  GtkWidget    *widget);
+void cc_content_row_set_activatable_widget (CcContentRow *self, GtkWidget *widget);
 
-int  cc_content_row_get_title_lines (CcContentRow *self);
-void cc_content_row_set_title_lines (CcContentRow *self,
-                                     int           title_lines);
+int cc_content_row_get_title_lines (CcContentRow *self);
+void cc_content_row_set_title_lines (CcContentRow *self, int title_lines);
 
-int  cc_content_row_get_subtitle_lines (CcContentRow *self);
-void cc_content_row_set_subtitle_lines (CcContentRow *self,
-                                        int           subtitle_lines);
+int cc_content_row_get_subtitle_lines (CcContentRow *self);
+void cc_content_row_set_subtitle_lines (CcContentRow *self, int subtitle_lines);
 
 gboolean cc_content_row_get_subtitle_selectable (CcContentRow *self);
-void     cc_content_row_set_subtitle_selectable (CcContentRow *self,
-                                                 gboolean      subtitle_selectable);
+void cc_content_row_set_subtitle_selectable (CcContentRow *self, gboolean subtitle_selectable);
 
 void cc_content_row_activate (CcContentRow *self);
 

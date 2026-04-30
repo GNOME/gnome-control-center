@@ -25,14 +25,13 @@
 
 G_BEGIN_DECLS
 
-void bolt_erase_n (void *data,
-                   gsize n);
+void bolt_erase_n (void *data, gsize n);
 void bolt_str_erase (char *str);
 void bolt_str_erase_clear (char **str);
 
 #define bolt_streq(s1, s2) (g_strcmp0 (s1, s2) == 0)
 
-GStrv   bolt_strv_from_ptr_array (GPtrArray **array);
+GStrv bolt_strv_from_ptr_array (GPtrArray **array);
 
 #define bolt_yesno(val) val ? "yes" : "no"
 

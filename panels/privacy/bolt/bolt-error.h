@@ -32,13 +32,12 @@ G_BEGIN_DECLS
  * Error codes used inside Bolt.
  */
 typedef enum {
-  BOLT_ERROR_FAILED = 0,
-  BOLT_ERROR_UDEV,
-  BOLT_ERROR_NOKEY,
-  BOLT_ERROR_BADKEY,
-  BOLT_ERROR_CFG,
+    BOLT_ERROR_FAILED = 0,
+    BOLT_ERROR_UDEV,
+    BOLT_ERROR_NOKEY,
+    BOLT_ERROR_BADKEY,
+    BOLT_ERROR_CFG,
 } BoltError;
-
 
 GQuark bolt_error_quark (void);
 #define BOLT_ERROR (bolt_error_quark ())
@@ -49,7 +48,6 @@ gboolean bolt_err_exists (const GError *error);
 gboolean bolt_err_inval (const GError *error);
 gboolean bolt_err_cancelled (const GError *error);
 
-gboolean bolt_error_propagate_stripped (GError **dest,
-                                        GError **source);
+gboolean bolt_error_propagate_stripped (GError **dest, GError **source);
 
 G_END_DECLS

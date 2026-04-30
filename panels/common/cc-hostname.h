@@ -25,25 +25,25 @@
 
 #pragma once
 
-#include <glib-object.h>
 #include <gio/gio.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_HOSTNAME (cc_hostname_get_type())
+#define CC_TYPE_HOSTNAME (cc_hostname_get_type ())
 G_DECLARE_FINAL_TYPE (CcHostname, cc_hostname, CC, HOSTNAME, GObject);
-CcHostname  *cc_hostname_get_default          (void);
+CcHostname *cc_hostname_get_default (void);
 
-gchar       *cc_hostname_get_display_hostname (CcHostname *self);
+gchar *cc_hostname_get_display_hostname (CcHostname *self);
 
-gchar       *cc_hostname_get_static_hostname  (CcHostname *self);
+gchar *cc_hostname_get_static_hostname (CcHostname *self);
 
-void         cc_hostname_set_hostname         (CcHostname *self, const gchar *hostname);
+void cc_hostname_set_hostname (CcHostname *self, const gchar *hostname);
 
-gchar       *cc_hostname_get_property         (CcHostname *self, const gchar *property);
+gchar *cc_hostname_get_property (CcHostname *self, const gchar *property);
 
-gchar       *cc_hostname_get_chassis_type     (CcHostname *self);
+gchar *cc_hostname_get_chassis_type (CcHostname *self);
 
-gboolean     cc_hostname_is_vm_chassis        (CcHostname *self);
+gboolean cc_hostname_is_vm_chassis (CcHostname *self);
 
 G_END_DECLS

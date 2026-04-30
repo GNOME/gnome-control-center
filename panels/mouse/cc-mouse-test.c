@@ -25,9 +25,8 @@
 
 #include "cc-mouse-test.h"
 
-struct _CcMouseTest
-{
-    AdwWindow  parent_instance;
+struct _CcMouseTest {
+    AdwWindow parent_instance;
 
     GtkWidget *arrow_down;
     GtkWidget *arrow_up;
@@ -45,8 +44,7 @@ struct _CcMouseTest
 G_DEFINE_FINAL_TYPE (CcMouseTest, cc_mouse_test, ADW_TYPE_WINDOW);
 
 static void
-on_scroll_adjustment_changed_cb (GtkAdjustment *adjustment,
-                                 gpointer       user_data)
+on_scroll_adjustment_changed_cb (GtkAdjustment *adjustment, gpointer user_data)
 {
     CcMouseTest *self = CC_MOUSE_TEST (user_data);
     gboolean is_bottom, is_top;
@@ -73,11 +71,7 @@ reset_indicators (CcMouseTest *self)
 }
 
 static void
-on_test_button_clicked_cb (GtkGestureClick *gesture,
-                           gint             n_press,
-                           gdouble          x,
-                           gdouble          y,
-                           gpointer         user_data)
+on_test_button_clicked_cb (GtkGestureClick *gesture, gint n_press, gdouble x, gdouble y, gpointer user_data)
 {
     CcMouseTest *self = CC_MOUSE_TEST (user_data);
     guint button;
@@ -96,8 +90,7 @@ on_test_button_clicked_cb (GtkGestureClick *gesture,
     }
 
     /* Reset the buttons to default state after double_click_delay * 2 */
-    self->reset_timeout_id =
-        g_timeout_add (self->double_click_delay * 2, (GSourceFunc) reset_indicators, self);
+    self->reset_timeout_id = g_timeout_add (self->double_click_delay * 2, (GSourceFunc) reset_indicators, self);
 }
 
 static void

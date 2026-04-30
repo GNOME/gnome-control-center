@@ -29,25 +29,24 @@
 
 G_BEGIN_DECLS
 
-typedef enum
-{
-  CC_POWER_PROFILE_PERFORMANCE,
-  CC_POWER_PROFILE_BALANCED,
-  CC_POWER_PROFILE_POWER_SAVER,
-  NUM_CC_POWER_PROFILES,
-  /* The unknown profile is intentionally not counted as a profile. It exists to handle unsupported profiles. */
-  CC_POWER_PROFILE_UNKNOWN
+typedef enum {
+    CC_POWER_PROFILE_PERFORMANCE,
+    CC_POWER_PROFILE_BALANCED,
+    CC_POWER_PROFILE_POWER_SAVER,
+    NUM_CC_POWER_PROFILES,
+    /* The unknown profile is intentionally not counted as a profile. It exists to handle unsupported profiles. */
+    CC_POWER_PROFILE_UNKNOWN
 } CcPowerProfile;
 
-#define CC_TYPE_POWER_PROFILE_ROW (cc_power_profile_row_get_type())
+#define CC_TYPE_POWER_PROFILE_ROW (cc_power_profile_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcPowerProfileRow, cc_power_profile_row, CC, POWER_PROFILE_ROW, AdwActionRow);
-CcPowerProfileRow *cc_power_profile_row_new           (CcPowerProfile  power_profile);
-CcPowerProfile cc_power_profile_row_get_profile       (CcPowerProfileRow *row);
+CcPowerProfileRow *cc_power_profile_row_new (CcPowerProfile power_profile);
+CcPowerProfile cc_power_profile_row_get_profile (CcPowerProfileRow *row);
 GtkCheckButton *cc_power_profile_row_get_radio_button (CcPowerProfileRow *row);
-void cc_power_profile_row_set_active                  (CcPowerProfileRow *row, gboolean active);
-gboolean cc_power_profile_row_get_active              (CcPowerProfileRow *row);
+void cc_power_profile_row_set_active (CcPowerProfileRow *row, gboolean active);
+gboolean cc_power_profile_row_get_active (CcPowerProfileRow *row);
 
 CcPowerProfile cc_power_profile_from_str (const char *profile);
-const char *cc_power_profile_to_str      (CcPowerProfile profile);
+const char *cc_power_profile_to_str (CcPowerProfile profile);
 
 G_END_DECLS

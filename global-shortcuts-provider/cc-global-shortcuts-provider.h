@@ -28,19 +28,13 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_GLOBAL_SHORTCUTS_PROVIDER (cc_global_shortcuts_provider_get_type ())
-G_DECLARE_FINAL_TYPE (CcGlobalShortcutsProvider,
-                      cc_global_shortcuts_provider,
-                      CC, GLOBAL_SHORTCUTS_PROVIDER,
-                      GObject);
+G_DECLARE_FINAL_TYPE (CcGlobalShortcutsProvider, cc_global_shortcuts_provider, CC, GLOBAL_SHORTCUTS_PROVIDER, GObject);
 
 CcGlobalShortcutsProvider *cc_global_shortcuts_provider_new (GtkApplication *app);
 
-gboolean cc_global_shortcuts_provider_dbus_register (CcGlobalShortcutsProvider  *provider,
-                                                     GDBusConnection            *connection,
-                                                     const char                 *object_path,
-                                                     GError                    **error);
-void cc_global_shortcuts_provider_dbus_unregister (CcGlobalShortcutsProvider *provider,
-                                                   GDBusConnection           *connection,
-                                                   const char                *object_path);
+gboolean cc_global_shortcuts_provider_dbus_register (CcGlobalShortcutsProvider *provider, GDBusConnection *connection,
+                                                     const char *object_path, GError **error);
+void cc_global_shortcuts_provider_dbus_unregister (CcGlobalShortcutsProvider *provider, GDBusConnection *connection,
+                                                   const char *object_path);
 
 G_END_DECLS
