@@ -2,28 +2,18 @@
 
 [Toolbx](https://containertoolbx.org/) provides a Fedora-based development container that is ideal for developing GNOME Settings without risking messing up with your host operating system.
 
+Our custom toolbox container image is used in some of our CI jobs, therefore it should be up to date with the needed dependencies.
+
 ## Create a Toolbx with:
 
 ```bash
- toolbox create --release <release-number>
+toolbox create control-center-toolbox -i registry.gitlab.gnome.org/gnome/gnome-control-center/main:toolbox
 ```
-(preferably choose the latest Fedora release)
 
 After creation, you can enter your toolbx with
 
 ```bash
-toolbox enter --release <release-number>
-```
-
-## Install development packages for GNOME Settings
-
-To install the development dependencies in GNOME Settings you can use:
-
-```bash
-sudo dnf install -y gnome-desktop4-devel libgweather4-devel \
-                    gnome-settings-daemon-devel libnma-gtk4-devel \
-                    colord-gtk4-devel
-sudo dnf builddep gnome-control-center
+toolbox enter control-center-toolbox
 ```
 
 ## Perform a local build
@@ -50,10 +40,6 @@ With that, you can run GNOME Settings from its executable:
 ```bash
 ./shell/gnome-control-center
 ```
-## Tips
-
-* If `meson _build` is still missing dependencies, you can check which dependencies we are using in our Fedora CI build for reference to what to install. See `FDO_DISTRIBUTION_PACKAGES` for the whole list of packages in https://gitlab.gnome.org/GNOME/gnome-control-center/-/blob/main/.gitlab-ci.yml#L88
-
 
 ## Additional packages for specific components
 
@@ -72,4 +58,20 @@ sudo dnf install -y rygel gnome-user-share gnome-shell flatpak \
                     gnome-backgrounds fedora-workstation-backgrounds \
                     NetworkManager-{vpnc,openvpn,openconnect,pptp,ssh}-gnome \
                     yelp gnome-user-docs
+```
+
+## Keeping your toolbox updated
+
+You can update you toolbox with:
+
+```bash
+sudo dnf update
+```
+
+There might be a time when your toolbox container gets too old and new changes in gnome-control-center aren't available in it. In this case, it is recommended that you delete the toolbox container and create a new one.
+
+### Deleting the toolbox container
+
+```bash
+toolbox rm control-center-toolbox
 ```
