@@ -25,14 +25,12 @@
 
 G_BEGIN_DECLS
 
-#define BG_TYPE_RECENT_SOURCE (bg_recent_source_get_type())
+#define BG_TYPE_RECENT_SOURCE (bg_recent_source_get_type ())
 G_DECLARE_FINAL_TYPE (BgRecentSource, bg_recent_source, BG, RECENT_SOURCE, BgSource);
-BgRecentSource* bg_recent_source_new         (void);
+BgRecentSource *bg_recent_source_new (void);
 
-void            bg_recent_source_add_file    (BgRecentSource   *self,
-                                              const gchar      *path);
+void bg_recent_source_add_file (BgRecentSource *self, const gchar *path);
 
-void            bg_recent_source_remove_item (BgRecentSource   *self,
-                                              CcBackgroundItem *item);
+void bg_recent_source_remove_item (BgRecentSource *self, CcBackgroundItem *item);
 
 G_END_DECLS

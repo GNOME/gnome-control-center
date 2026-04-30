@@ -22,20 +22,18 @@
 #include "cc-qr-code-dialog.h"
 #include "cc-qr-code.h"
 
-struct _CcQrCodeDialog
-{
-  AdwDialog     parent_instance;
-  NMConnection *connection;
-  AdwActionRow *network_name_row;
-  AdwActionRow *network_password_row;
-  GtkWidget    *qr_code;
+struct _CcQrCodeDialog {
+    AdwDialog parent_instance;
+    NMConnection *connection;
+    AdwActionRow *network_name_row;
+    AdwActionRow *network_password_row;
+    GtkWidget *qr_code;
 };
 
-enum
-{
-  PROP_0,
-  PROP_CONNECTION,
-  PROP_LAST
+enum {
+    PROP_0,
+    PROP_CONNECTION,
+    PROP_LAST
 };
 
 G_DEFINE_FINAL_TYPE (CcQrCodeDialog, cc_qr_code_dialog, ADW_TYPE_DIALOG)
@@ -43,154 +41,132 @@ G_DEFINE_FINAL_TYPE (CcQrCodeDialog, cc_qr_code_dialog, ADW_TYPE_DIALOG)
 static GParamSpec *props[PROP_LAST];
 
 static void
-cc_qr_code_dialog_get_property (GObject    *object,
-                                guint       prop_id,
-                                GValue     *value,
-                                GParamSpec *pspec)
+cc_qr_code_dialog_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
 {
-  CcQrCodeDialog *self = CC_QR_CODE_DIALOG (object);
+    CcQrCodeDialog *self = CC_QR_CODE_DIALOG (object);
 
-  switch (prop_id)
-    {
+    switch (prop_id) {
     case PROP_CONNECTION:
-      g_value_set_object (value, self->connection);
-      break;
+        g_value_set_object (value, self->connection);
+        break;
 
     default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
 }
 
 static void
-cc_qr_code_dialog_set_property (GObject      *object,
-                                guint         prop_id,
-                                const GValue *value,
-                                GParamSpec   *pspec)
+cc_qr_code_dialog_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
 {
-  CcQrCodeDialog *self = CC_QR_CODE_DIALOG (object);
+    CcQrCodeDialog *self = CC_QR_CODE_DIALOG (object);
 
-  switch (prop_id)
-    {
+    switch (prop_id) {
     case PROP_CONNECTION:
-      g_assert (self->connection == NULL);
-      self->connection = g_value_dup_object (value);
-      g_assert (self->connection != NULL);
-      break;
+        g_assert (self->connection == NULL);
+        self->connection = g_value_dup_object (value);
+        g_assert (self->connection != NULL);
+        break;
 
     default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
 }
 
 static void
 cc_qr_code_dialog_constructed (GObject *object)
 {
-  g_autoptr(GVariant) variant = NULL;
-  g_autoptr(GError) error = NULL;
-  g_autofree gchar *qr_connection_string = NULL;
-  g_autofree gchar *subtitle_text = NULL;
-  g_autofree gchar *ssid_text = NULL;
-  g_autofree gchar *password_text = NULL;
+    g_autoptr(GVariant) variant = NULL;
+    g_autoptr(GError) error = NULL;
+    g_autofree gchar *qr_connection_string = NULL;
+    g_autofree gchar *subtitle_text = NULL;
+    g_autofree gchar *ssid_text = NULL;
+    g_autofree gchar *password_text = NULL;
 
+    NMSettingWireless *setting;
+    CcQrCodeDialog *self;
+    GBytes *ssid;
 
-  NMSettingWireless *setting;
-  CcQrCodeDialog *self;
-  GBytes *ssid;
+    self = CC_QR_CODE_DIALOG (object);
 
-  self = CC_QR_CODE_DIALOG (object);
+    G_OBJECT_CLASS (cc_qr_code_dialog_parent_class)->constructed (object);
 
-  G_OBJECT_CLASS (cc_qr_code_dialog_parent_class)->constructed (object);
-
-  variant = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (self->connection),
-                                              NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                              NULL,
-                                              &error);
-  if (variant)
-    {
-      if (!nm_connection_update_secrets (self->connection,
-                                         NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                         variant,
-                                         &error))
-        {
-          g_warning ("Couldn't update secrets: %s", error->message);
-          return;
+    variant = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (self->connection),
+                                                NM_SETTING_WIRELESS_SECURITY_SETTING_NAME, NULL, &error);
+    if (variant) {
+        if (!nm_connection_update_secrets (self->connection, NM_SETTING_WIRELESS_SECURITY_SETTING_NAME, variant,
+                                           &error)) {
+            g_warning ("Couldn't update secrets: %s", error->message);
+            return;
         }
-    }
-  else
-    {
-      if (!g_error_matches (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_SETTING_NOT_FOUND))
-        {
-          g_warning ("Couldn't get secrets: %s", error->message);
-          return;
+    } else {
+        if (!g_error_matches (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_SETTING_NOT_FOUND)) {
+            g_warning ("Couldn't get secrets: %s", error->message);
+            return;
         }
     }
 
-  setting = nm_connection_get_setting_wireless (self->connection);
-  ssid = nm_setting_wireless_get_ssid (setting);
-  ssid_text = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
-  password_text = get_wifi_password (self->connection);
+    setting = nm_connection_get_setting_wireless (self->connection);
+    ssid = nm_setting_wireless_get_ssid (setting);
+    ssid_text = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
+    password_text = get_wifi_password (self->connection);
 
-  adw_action_row_set_subtitle (self->network_name_row, ssid_text);
+    adw_action_row_set_subtitle (self->network_name_row, ssid_text);
 
-  if (password_text)
-    {
-      /* Use markup to not insert a hyphen in case the password wraps */
-      g_autofree gchar *password_markup =
-        g_markup_printf_escaped ("<span insert_hyphens='false'>%s</span>", password_text);
+    if (password_text) {
+        /* Use markup to not insert a hyphen in case the password wraps */
+        g_autofree gchar *password_markup =
+            g_markup_printf_escaped ("<span insert_hyphens='false'>%s</span>", password_text);
 
-      adw_action_row_set_subtitle (self->network_password_row, password_markup);
-    }
-  else
-    gtk_widget_set_visible (GTK_WIDGET (self->network_password_row), FALSE);
+        adw_action_row_set_subtitle (self->network_password_row, password_markup);
+    } else
+        gtk_widget_set_visible (GTK_WIDGET (self->network_password_row), FALSE);
 
-  qr_connection_string = get_qr_string_for_connection (self->connection);
-  gnome_qr_widget_set_text (GNOME_QR_WIDGET (self->qr_code), qr_connection_string);
+    qr_connection_string = get_qr_string_for_connection (self->connection);
+    gnome_qr_widget_set_text (GNOME_QR_WIDGET (self->qr_code), qr_connection_string);
 }
 
 static void
 cc_qr_code_dialog_finalize (GObject *object)
 {
-  CcQrCodeDialog *self = CC_QR_CODE_DIALOG (object);
+    CcQrCodeDialog *self = CC_QR_CODE_DIALOG (object);
 
-  g_clear_object (&self->connection);
+    g_clear_object (&self->connection);
 
-  G_OBJECT_CLASS (cc_qr_code_dialog_parent_class)->finalize (object);
+    G_OBJECT_CLASS (cc_qr_code_dialog_parent_class)->finalize (object);
 }
 
 void
 cc_qr_code_dialog_class_init (CcQrCodeDialogClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->constructed = cc_qr_code_dialog_constructed;
-  object_class->get_property = cc_qr_code_dialog_get_property;
-  object_class->set_property = cc_qr_code_dialog_set_property;
-  object_class->finalize = cc_qr_code_dialog_finalize;
+    object_class->constructed = cc_qr_code_dialog_constructed;
+    object_class->get_property = cc_qr_code_dialog_get_property;
+    object_class->set_property = cc_qr_code_dialog_set_property;
+    object_class->finalize = cc_qr_code_dialog_finalize;
 
-  props[PROP_CONNECTION] = g_param_spec_object ("connection", "Connection",
-                                                "The NMConnection for which to show a QR code",
-                                                NM_TYPE_CONNECTION,
-                                                G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+    props[PROP_CONNECTION] =
+        g_param_spec_object ("connection", "Connection", "The NMConnection for which to show a QR code",
+                             NM_TYPE_CONNECTION, G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  g_object_class_install_properties (object_class, PROP_LAST, props);
+    g_object_class_install_properties (object_class, PROP_LAST, props);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-qr-code-dialog.ui");
-  gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, network_name_row);
-  gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, network_password_row);
-  gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, qr_code);
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/network/cc-qr-code-dialog.ui");
+    gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, network_name_row);
+    gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, network_password_row);
+    gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, qr_code);
 }
 
 void
 cc_qr_code_dialog_init (CcQrCodeDialog *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 GtkWidget *
 cc_qr_code_dialog_new (NMConnection *connection)
 {
-  return g_object_new (CC_TYPE_QR_CODE_DIALOG,
-                       "connection", connection,
-                       NULL);
+    return g_object_new (CC_TYPE_QR_CODE_DIALOG, "connection", connection, NULL);
 }

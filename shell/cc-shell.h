@@ -25,10 +25,10 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SHELL (cc_shell_get_type())
+#define CC_TYPE_SHELL (cc_shell_get_type ())
 #define CC_SHELL(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TYPE_SHELL, CcShell))
 #define CC_IS_SHELL(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CC_TYPE_SHELL))
-#define CC_SHELL_GET_IFACE(obj)  (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CC_TYPE_SHELL, CcShellInterface))
+#define CC_SHELL_GET_IFACE(obj) (G_TYPE_INSTANCE_GET_INTERFACE ((obj), CC_TYPE_SHELL, CcShellInterface))
 
 #define CC_SHELL_PANEL_EXTENSION_POINT "control-center-1"
 
@@ -44,27 +44,19 @@ typedef struct _CcShellInterface CcShellInterface;
  *                            id string
  *
  */
-struct _CcShellInterface
-{
-  GTypeInterface g_iface;
+struct _CcShellInterface {
+    GTypeInterface g_iface;
 
-  /* methods */
-  gboolean    (*set_active_panel_from_id) (CcShell      *shell,
-                                           const gchar  *id,
-                                           GVariant     *parameters,
-                                           GError      **error);
-  GtkWidget * (*get_toplevel)             (CcShell      *shell);
+    /* methods */
+    gboolean (*set_active_panel_from_id) (CcShell *shell, const gchar *id, GVariant *parameters, GError **error);
+    GtkWidget *(*get_toplevel) (CcShell *shell);
 };
 
-GType           cc_shell_get_type                 (void) G_GNUC_CONST;
+GType cc_shell_get_type (void) G_GNUC_CONST;
 
-CcPanel *       cc_shell_get_active_panel         (CcShell      *shell);
-void            cc_shell_set_active_panel         (CcShell      *shell,
-                                                   CcPanel      *panel);
-gboolean        cc_shell_set_active_panel_from_id (CcShell      *shell,
-                                                   const gchar  *id,
-                                                   GVariant     *parameters,
-                                                   GError      **error);
-GtkWidget *     cc_shell_get_toplevel             (CcShell      *shell);
+CcPanel *cc_shell_get_active_panel (CcShell *shell);
+void cc_shell_set_active_panel (CcShell *shell, CcPanel *panel);
+gboolean cc_shell_set_active_panel_from_id (CcShell *shell, const gchar *id, GVariant *parameters, GError **error);
+GtkWidget *cc_shell_get_toplevel (CcShell *shell);
 
 G_END_DECLS

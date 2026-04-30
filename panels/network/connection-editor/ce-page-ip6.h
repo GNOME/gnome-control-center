@@ -21,14 +21,13 @@
 
 #pragma once
 
-#include <adwaita.h>
 #include <NetworkManager.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CE_TYPE_PAGE_IP6 (ce_page_ip6_get_type ())
 G_DECLARE_FINAL_TYPE (CEPageIP6, ce_page_ip6, CE, PAGE_IP6, AdwBin);
-CEPageIP6 *ce_page_ip6_new (NMConnection     *connection,
-                            NMClient         *client);
+CEPageIP6 *ce_page_ip6_new (NMConnection *connection, NMClient *client);
 
 G_END_DECLS

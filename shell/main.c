@@ -21,28 +21,27 @@
 
 #include "config.h"
 
-#include <stdlib.h>
-#include <locale.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <locale.h>
+#include <stdlib.h>
 
-#include "cc-log.h"
 #include "cc-application.h"
+#include "cc-log.h"
 
 int
-main (gint    argc,
-      gchar **argv)
+main (gint argc, gchar **argv)
 {
-  g_autoptr(GtkApplication) application = NULL;
+    g_autoptr(GtkApplication) application = NULL;
 
-  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  textdomain (GETTEXT_PACKAGE);
+    bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    textdomain (GETTEXT_PACKAGE);
 
-  setlocale (LC_ALL, "");
-  cc_log_init ();
+    setlocale (LC_ALL, "");
+    cc_log_init ();
 
-  application = cc_application_new ();
+    application = cc_application_new ();
 
-  return g_application_run (G_APPLICATION (application), argc, argv);
+    return g_application_run (G_APPLICATION (application), argc, argv);
 }

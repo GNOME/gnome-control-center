@@ -33,11 +33,10 @@ G_BEGIN_DECLS
  * Defines a special, fixed ordering of a `CcNumberObject` inside a
  * `CcNumberRow`.
  */
-typedef enum
-{
-  CC_NUMBER_ORDER_FIRST,
-  CC_NUMBER_ORDER_DEFAULT,
-  CC_NUMBER_ORDER_LAST
+typedef enum {
+    CC_NUMBER_ORDER_FIRST,
+    CC_NUMBER_ORDER_DEFAULT,
+    CC_NUMBER_ORDER_LAST
 } CcNumberOrder;
 
 /**
@@ -52,14 +51,13 @@ typedef enum
  * Defines how a `CcNumberRow` interprets a value in order to map it to
  * a string in the list.
  */
-typedef enum
-{
-  CC_NUMBER_VALUE_CUSTOM,
-  CC_NUMBER_VALUE_STRING,
-  CC_NUMBER_VALUE_SECONDS,
-  CC_NUMBER_VALUE_MINUTES,
-  CC_NUMBER_VALUE_HOURS,
-  CC_NUMBER_VALUE_DAYS
+typedef enum {
+    CC_NUMBER_VALUE_CUSTOM,
+    CC_NUMBER_VALUE_STRING,
+    CC_NUMBER_VALUE_SECONDS,
+    CC_NUMBER_VALUE_MINUTES,
+    CC_NUMBER_VALUE_HOURS,
+    CC_NUMBER_VALUE_DAYS
 } CcNumberValueType;
 
 /**
@@ -70,32 +68,31 @@ typedef enum
  *
  * Defines how the list of a `CcNumberRow` is sorted.
  */
-typedef enum
-{
-  CC_NUMBER_SORT_ASCENDING,
-  CC_NUMBER_SORT_DESCENDING,
-  CC_NUMBER_SORT_NONE
+typedef enum {
+    CC_NUMBER_SORT_ASCENDING,
+    CC_NUMBER_SORT_DESCENDING,
+    CC_NUMBER_SORT_NONE
 } CcNumberSortType;
 
-#define CC_TYPE_NUMBER_OBJECT (cc_number_object_get_type())
+#define CC_TYPE_NUMBER_OBJECT (cc_number_object_get_type ())
 G_DECLARE_FINAL_TYPE (CcNumberObject, cc_number_object, CC, NUMBER_OBJECT, GObject);
-CcNumberObject *cc_number_object_new             (int value);
-CcNumberObject *cc_number_object_new_full        (int value, const char *string, CcNumberOrder order);
+CcNumberObject *cc_number_object_new (int value);
+CcNumberObject *cc_number_object_new_full (int value, const char *string, CcNumberOrder order);
 
-int           cc_number_object_get_value  (CcNumberObject *self);
-char*         cc_number_object_get_string (CcNumberObject *self);
-CcNumberOrder cc_number_object_get_order  (CcNumberObject *self);
+int cc_number_object_get_value (CcNumberObject *self);
+char *cc_number_object_get_string (CcNumberObject *self);
+CcNumberOrder cc_number_object_get_order (CcNumberObject *self);
 
-#define CC_TYPE_NUMBER_ROW (cc_number_row_get_type())
+#define CC_TYPE_NUMBER_ROW (cc_number_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcNumberRow, cc_number_row, CC, NUMBER_ROW, AdwComboRow);
 CcNumberRow *cc_number_row_new (CcNumberValueType value_type, CcNumberSortType sort_type);
 
-guint    cc_number_row_add_value      (CcNumberRow *self, int value);
-guint    cc_number_row_add_value_full (CcNumberRow *self, int value, const char *string, CcNumberOrder order);
-int      cc_number_row_get_value      (CcNumberRow *self, guint position);
-gboolean cc_number_row_has_value      (CcNumberRow *self, int value, guint *position);
+guint cc_number_row_add_value (CcNumberRow *self, int value);
+guint cc_number_row_add_value_full (CcNumberRow *self, int value, const char *string, CcNumberOrder order);
+int cc_number_row_get_value (CcNumberRow *self, guint position);
+gboolean cc_number_row_has_value (CcNumberRow *self, int value, guint *position);
 
-void cc_number_row_bind_settings   (CcNumberRow *self, GSettings *settings, const char *key);
+void cc_number_row_bind_settings (CcNumberRow *self, GSettings *settings, const char *key);
 void cc_number_row_unbind_settings (CcNumberRow *self);
 
 G_END_DECLS

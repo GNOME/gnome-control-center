@@ -49,7 +49,6 @@ G_BEGIN_DECLS
 #define BOLT_LOG_MSG_IDLEN 33
 #define BOLT_LOG_MSG_ID_STARTUP "dd11929c788e48bdbb6276fb5f26b08a"
 
-
 /* dbus */
 
 #define BOLT_DBUS_NAME "org.freedesktop.bolt"
@@ -67,7 +66,6 @@ G_BEGIN_DECLS
 
 /* helper functions */
 
-char *      bolt_gen_object_path (const char *path_base,
-                                  const char *object_id);
+char *bolt_gen_object_path (const char *path_base, const char *object_id);
 
 G_END_DECLS

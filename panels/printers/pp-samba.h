@@ -27,20 +27,13 @@ G_BEGIN_DECLS
 
 #define PP_TYPE_SAMBA (pp_samba_get_type ())
 G_DECLARE_FINAL_TYPE (PpSamba, pp_samba, PP, SAMBA, PpHost);
-PpSamba       *pp_samba_new                (const gchar         *hostname);
+PpSamba *pp_samba_new (const gchar *hostname);
 
-void           pp_samba_get_devices_async  (PpSamba             *samba,
-                                            gboolean             auth_if_needed,
-                                            GCancellable        *cancellable,
-                                            GAsyncReadyCallback  callback,
-                                            gpointer             user_data);
+void pp_samba_get_devices_async (PpSamba *samba, gboolean auth_if_needed, GCancellable *cancellable,
+                                 GAsyncReadyCallback callback, gpointer user_data);
 
-GPtrArray     *pp_samba_get_devices_finish (PpSamba             *samba,
-                                            GAsyncResult        *result,
-                                            GError             **error);
+GPtrArray *pp_samba_get_devices_finish (PpSamba *samba, GAsyncResult *result, GError **error);
 
-void           pp_samba_set_auth_info      (PpSamba             *samba,
-                                            const gchar         *username,
-                                            const gchar         *password);
+void pp_samba_set_auth_info (PpSamba *samba, const gchar *username, const gchar *password);
 
 G_END_DECLS

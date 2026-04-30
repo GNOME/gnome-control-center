@@ -21,27 +21,23 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
 #include <NetworkManager.h>
+#include <shell/cc-panel.h>
 
 G_BEGIN_DECLS
 
 #define NET_TYPE_DEVICE_WIFI (net_device_wifi_get_type ())
 G_DECLARE_FINAL_TYPE (NetDeviceWifi, net_device_wifi, NET, DEVICE_WIFI, AdwBin);
-NetDeviceWifi *net_device_wifi_new               (CcPanel       *panel,
-                                                  NMClient      *client,
-                                                  NMDevice      *device);
+NetDeviceWifi *net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device);
 
-NMDevice      *net_device_wifi_get_device        (NetDeviceWifi *device);
+NMDevice *net_device_wifi_get_device (NetDeviceWifi *device);
 
-void           net_device_wifi_set_title         (NetDeviceWifi *device,
-                                                  const gchar   *title);
+void net_device_wifi_set_title (NetDeviceWifi *device, const gchar *title);
 
-GtkWidget     *net_device_wifi_get_header_widget (NetDeviceWifi *device);
+GtkWidget *net_device_wifi_get_header_widget (NetDeviceWifi *device);
 
-GtkWidget     *net_device_wifi_get_title_widget  (NetDeviceWifi *device);
+GtkWidget *net_device_wifi_get_title_widget (NetDeviceWifi *device);
 
-void           net_device_wifi_turn_off_hotspot  (NetDeviceWifi *self);
+void net_device_wifi_turn_off_hotspot (NetDeviceWifi *self);
 
 G_END_DECLS
-

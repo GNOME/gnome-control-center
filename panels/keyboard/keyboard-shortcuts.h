@@ -24,62 +24,57 @@
 #include "cc-keyboard-item.h"
 
 typedef struct {
-  /* The untranslated name, combine with ->package to translate */
-  char *name;
-  /* The group of keybindings (system or application) */
-  char *group;
-  /* The gettext package to use to translate the section title */
-  char *package;
-  /* Name of the window manager the keys would apply to */
-  char *wm_name;
-  /* The GSettings schema for the whole file, if any */
-  char *schema;
-  /* an array of KeyListEntry */
-  GArray *entries;
+    /* The untranslated name, combine with ->package to translate */
+    char *name;
+    /* The group of keybindings (system or application) */
+    char *group;
+    /* The gettext package to use to translate the section title */
+    char *package;
+    /* Name of the window manager the keys would apply to */
+    char *wm_name;
+    /* The GSettings schema for the whole file, if any */
+    char *schema;
+    /* an array of KeyListEntry */
+    GArray *entries;
 } KeyList;
 
-typedef struct
-{
-  CcKeyboardItemType type;
-  char *schema; /* GSettings schema name, if any */
-  char *description; /* description for GSettings types */
-  char *name; /* GSettings schema path, or GSettings key name, or globalshortcut id, depending on type */
-  char *reverse_entry;
-  GVariant *properties; /* Initialization data used in GlobalShortcuts */
-  gboolean is_reversed;
-  gboolean hidden;
+typedef struct {
+    CcKeyboardItemType type;
+    char *schema;      /* GSettings schema name, if any */
+    char *description; /* description for GSettings types */
+    char *name;        /* GSettings schema path, or GSettings key name, or globalshortcut id, depending on type */
+    char *reverse_entry;
+    GVariant *properties; /* Initialization data used in GlobalShortcuts */
+    gboolean is_reversed;
+    gboolean hidden;
 } KeyListEntry;
 
 typedef struct {
-  CcKeyboardItem *orig_item;
-  CcKeyboardItem *conflict_item;
-  guint new_keyval;
-  GdkModifierType new_mask;
-  guint new_keycode;
+    CcKeyboardItem *orig_item;
+    CcKeyboardItem *conflict_item;
+    guint new_keyval;
+    GdkModifierType new_mask;
+    guint new_keycode;
 } CcUniquenessData;
 
-enum
-{
-  SECTION_DESCRIPTION_COLUMN,
-  SECTION_ID_COLUMN,
-  SECTION_GROUP_COLUMN,
-  SECTION_N_COLUMNS
+enum {
+    SECTION_DESCRIPTION_COLUMN,
+    SECTION_ID_COLUMN,
+    SECTION_GROUP_COLUMN,
+    SECTION_N_COLUMNS
 };
 
-gchar*   find_free_settings_path        (GSettings *settings);
+gchar *find_free_settings_path (GSettings *settings);
 
-gboolean is_valid_binding               (const CcKeyCombo *combo);
+gboolean is_valid_binding (const CcKeyCombo *combo);
 
-gboolean is_empty_binding               (const CcKeyCombo *combo);
+gboolean is_empty_binding (const CcKeyCombo *combo);
 
-gboolean is_valid_accel                 (const CcKeyCombo *combo);
+gboolean is_valid_accel (const CcKeyCombo *combo);
 
-KeyList* parse_keylist_from_file        (const gchar *path);
+KeyList *parse_keylist_from_file (const gchar *path);
 
-gchar*   convert_keysym_state_to_string (const CcKeyCombo *combo);
+gchar *convert_keysym_state_to_string (const CcKeyCombo *combo);
 
-void     normalize_keyval_and_mask      (guint            keyval,
-                                         GdkModifierType  mask,
-                                         guint            group,
-                                         guint           *out_keyval,
-                                         GdkModifierType *out_mask);
+void normalize_keyval_and_mask (guint keyval, GdkModifierType mask, guint group, guint *out_keyval,
+                                GdkModifierType *out_mask);

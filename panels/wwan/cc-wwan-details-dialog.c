@@ -38,30 +38,28 @@
  * @short_description: Dialog to Show Device Details
  */
 
-struct _CcWwanDetailsDialog
-{
-  AdwDialog     parent_instance;
+struct _CcWwanDetailsDialog {
+    AdwDialog parent_instance;
 
-  CcListRow    *device_identifier;
-  CcListRow    *device_model;
-  CcListRow    *firmware_version;
-  CcListRow    *manufacturer;
-  CcListRow    *network_status;
-  CcListRow    *network_type;
-  CcListRow    *operator_name;
-  CcListRow    *own_numbers;
-  CcListRow    *signal_strength;
+    CcListRow *device_identifier;
+    CcListRow *device_model;
+    CcListRow *firmware_version;
+    CcListRow *manufacturer;
+    CcListRow *network_status;
+    CcListRow *network_type;
+    CcListRow *operator_name;
+    CcListRow *own_numbers;
+    CcListRow *signal_strength;
 
-  CcWwanDevice *device;
+    CcWwanDevice *device;
 };
 
 G_DEFINE_FINAL_TYPE (CcWwanDetailsDialog, cc_wwan_details_dialog, ADW_TYPE_DIALOG)
 
-
 enum {
-  PROP_0,
-  PROP_DEVICE,
-  N_PROPS
+    PROP_0,
+    PROP_DEVICE,
+    N_PROPS
 };
 
 static GParamSpec *properties[N_PROPS];
@@ -69,186 +67,174 @@ static GParamSpec *properties[N_PROPS];
 static void
 cc_wwan_details_update_network_status (CcWwanDetailsDialog *self)
 {
-  CcWwanState state;
+    CcWwanState state;
 
-  g_assert (CC_IS_WWAN_DETAILS_DIALOG (self));
+    g_assert (CC_IS_WWAN_DETAILS_DIALOG (self));
 
-  state = cc_wwan_device_get_network_state (self->device);
+    state = cc_wwan_device_get_network_state (self->device);
 
-  switch (state)
-    {
+    switch (state) {
     case CC_WWAN_REGISTRATION_STATE_IDLE:
-      cc_list_row_set_secondary_label (self->network_status, _("Not Registered"));
-      break;
+        cc_list_row_set_secondary_label (self->network_status, _("Not Registered"));
+        break;
 
     case CC_WWAN_REGISTRATION_STATE_REGISTERED:
-      cc_list_row_set_secondary_label (self->network_status, _("Registered"));
-      break;
+        cc_list_row_set_secondary_label (self->network_status, _("Registered"));
+        break;
 
     case CC_WWAN_REGISTRATION_STATE_ROAMING:
-      cc_list_row_set_secondary_label (self->network_status, _("Roaming"));
-      break;
+        cc_list_row_set_secondary_label (self->network_status, _("Roaming"));
+        break;
 
     case CC_WWAN_REGISTRATION_STATE_SEARCHING:
-      cc_list_row_set_secondary_label (self->network_status, _("Searching"));
-      break;
+        cc_list_row_set_secondary_label (self->network_status, _("Searching"));
+        break;
 
     case CC_WWAN_REGISTRATION_STATE_DENIED:
-      cc_list_row_set_secondary_label (self->network_status, _("Denied"));
-      break;
+        cc_list_row_set_secondary_label (self->network_status, _("Denied"));
+        break;
 
     default:
-      cc_list_row_set_secondary_label (self->network_status, _("Unknown"));
-      break;
+        cc_list_row_set_secondary_label (self->network_status, _("Unknown"));
+        break;
     }
 }
 
 static void
 cc_wwan_details_signal_changed_cb (CcWwanDetailsDialog *self)
 {
-  g_autofree gchar *network_type_string = NULL;
-  g_autofree gchar *signal_string = NULL;
-  const gchar *operator_name;
+    g_autofree gchar *network_type_string = NULL;
+    g_autofree gchar *signal_string = NULL;
+    const gchar *operator_name;
 
-  g_assert (CC_IS_WWAN_DETAILS_DIALOG (self));
+    g_assert (CC_IS_WWAN_DETAILS_DIALOG (self));
 
-  operator_name = cc_wwan_device_get_operator_name (self->device);
-  if (operator_name)
-    cc_list_row_set_secondary_label (self->operator_name, operator_name);
+    operator_name = cc_wwan_device_get_operator_name (self->device);
+    if (operator_name)
+        cc_list_row_set_secondary_label (self->operator_name, operator_name);
 
-  network_type_string = cc_wwan_device_dup_network_type_string (self->device);
-  if (network_type_string)
-    cc_list_row_set_secondary_label (self->network_type, network_type_string);
+    network_type_string = cc_wwan_device_dup_network_type_string (self->device);
+    if (network_type_string)
+        cc_list_row_set_secondary_label (self->network_type, network_type_string);
 
-  signal_string = cc_wwan_device_dup_signal_string (self->device);
-  if (signal_string)
-    cc_list_row_set_secondary_label (self->signal_strength, signal_string);
+    signal_string = cc_wwan_device_dup_signal_string (self->device);
+    if (signal_string)
+        cc_list_row_set_secondary_label (self->signal_strength, signal_string);
 
-  cc_wwan_details_update_network_status (self);
+    cc_wwan_details_update_network_status (self);
 }
 
 static void
 cc_wwan_details_update_hardware_details (CcWwanDetailsDialog *self)
 {
-  const gchar *str;
+    const gchar *str;
 
-  g_assert (CC_IS_WWAN_DETAILS_DIALOG (self));
+    g_assert (CC_IS_WWAN_DETAILS_DIALOG (self));
 
-  str = cc_wwan_device_get_manufacturer (self->device);
-  if (str)
-    cc_list_row_set_secondary_label (self->manufacturer, str);
+    str = cc_wwan_device_get_manufacturer (self->device);
+    if (str)
+        cc_list_row_set_secondary_label (self->manufacturer, str);
 
-  str = cc_wwan_device_get_model (self->device);
-  if (str)
-    cc_list_row_set_secondary_label (self->device_model, str);
+    str = cc_wwan_device_get_model (self->device);
+    if (str)
+        cc_list_row_set_secondary_label (self->device_model, str);
 
-  str = cc_wwan_device_get_firmware_version (self->device);
-  if (str)
-    cc_list_row_set_secondary_label (self->firmware_version, str);
+    str = cc_wwan_device_get_firmware_version (self->device);
+    if (str)
+        cc_list_row_set_secondary_label (self->firmware_version, str);
 
-  str = cc_wwan_device_get_identifier (self->device);
-  if (str)
-    cc_list_row_set_secondary_label (self->device_identifier, str);
+    str = cc_wwan_device_get_identifier (self->device);
+    if (str)
+        cc_list_row_set_secondary_label (self->device_identifier, str);
 }
 
 static void
-cc_wwan_details_dialog_set_property (GObject      *object,
-                                     guint         prop_id,
-                                     const GValue *value,
-                                     GParamSpec   *pspec)
+cc_wwan_details_dialog_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
 {
-  CcWwanDetailsDialog *self = CC_WWAN_DETAILS_DIALOG (object);
+    CcWwanDetailsDialog *self = CC_WWAN_DETAILS_DIALOG (object);
 
-  switch (prop_id)
-    {
+    switch (prop_id) {
     case PROP_DEVICE:
-      self->device = g_value_dup_object (value);
-      break;
+        self->device = g_value_dup_object (value);
+        break;
 
     default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
 }
 
 static void
 cc_wwan_details_dialog_constructed (GObject *object)
 {
-  CcWwanDetailsDialog *self = CC_WWAN_DETAILS_DIALOG (object);
-  g_autofree char *numbers = NULL;
+    CcWwanDetailsDialog *self = CC_WWAN_DETAILS_DIALOG (object);
+    g_autofree char *numbers = NULL;
 
-  G_OBJECT_CLASS (cc_wwan_details_dialog_parent_class)->constructed (object);
+    G_OBJECT_CLASS (cc_wwan_details_dialog_parent_class)->constructed (object);
 
-  g_signal_connect_object (self->device, "notify::signal",
-                           G_CALLBACK (cc_wwan_details_signal_changed_cb),
-                           self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->device, "notify::signal", G_CALLBACK (cc_wwan_details_signal_changed_cb), self,
+                             G_CONNECT_SWAPPED);
 
-  numbers = cc_wwan_device_dup_own_numbers (self->device);
-  gtk_widget_set_visible (GTK_WIDGET (self->own_numbers), !!numbers);
+    numbers = cc_wwan_device_dup_own_numbers (self->device);
+    gtk_widget_set_visible (GTK_WIDGET (self->own_numbers), !!numbers);
 
-  if (numbers)
-    cc_list_row_set_secondary_label (self->own_numbers, numbers);
+    if (numbers)
+        cc_list_row_set_secondary_label (self->own_numbers, numbers);
 
-  cc_wwan_details_signal_changed_cb (self);
-  cc_wwan_details_update_hardware_details (self);
+    cc_wwan_details_signal_changed_cb (self);
+    cc_wwan_details_update_hardware_details (self);
 }
 
 static void
 cc_wwan_details_dialog_dispose (GObject *object)
 {
-  CcWwanDetailsDialog *self = CC_WWAN_DETAILS_DIALOG (object);
+    CcWwanDetailsDialog *self = CC_WWAN_DETAILS_DIALOG (object);
 
-  g_clear_object (&self->device);
+    g_clear_object (&self->device);
 
-  G_OBJECT_CLASS (cc_wwan_details_dialog_parent_class)->dispose (object);
+    G_OBJECT_CLASS (cc_wwan_details_dialog_parent_class)->dispose (object);
 }
 
 static void
 cc_wwan_details_dialog_class_init (CcWwanDetailsDialogClass *klass)
 {
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->set_property = cc_wwan_details_dialog_set_property;
-  object_class->constructed  = cc_wwan_details_dialog_constructed;
-  object_class->dispose = cc_wwan_details_dialog_dispose;
+    object_class->set_property = cc_wwan_details_dialog_set_property;
+    object_class->constructed = cc_wwan_details_dialog_constructed;
+    object_class->dispose = cc_wwan_details_dialog_dispose;
 
-  properties[PROP_DEVICE] =
-    g_param_spec_object ("device",
-                         "Device",
-                         "The WWAN Device",
-                         CC_TYPE_WWAN_DEVICE,
-                         G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT_ONLY);
+    properties[PROP_DEVICE] = g_param_spec_object ("device", "Device", "The WWAN Device", CC_TYPE_WWAN_DEVICE,
+                                                   G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT_ONLY);
 
-  g_object_class_install_properties (object_class, N_PROPS, properties);
+    g_object_class_install_properties (object_class, N_PROPS, properties);
 
-  g_type_ensure (CC_TYPE_LIST_ROW);
+    g_type_ensure (CC_TYPE_LIST_ROW);
 
-  gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/org/gnome/control-center/wwan/cc-wwan-details-dialog.ui");
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/wwan/cc-wwan-details-dialog.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, device_identifier);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, device_model);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, firmware_version);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, manufacturer);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, network_status);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, network_type);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, operator_name);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, own_numbers);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, signal_strength);
+    gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, device_identifier);
+    gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, device_model);
+    gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, firmware_version);
+    gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, manufacturer);
+    gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, network_status);
+    gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, network_type);
+    gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, operator_name);
+    gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, own_numbers);
+    gtk_widget_class_bind_template_child (widget_class, CcWwanDetailsDialog, signal_strength);
 }
 
 static void
 cc_wwan_details_dialog_init (CcWwanDetailsDialog *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 AdwDialog *
 cc_wwan_details_dialog_new (CcWwanDevice *device)
 {
-  g_return_val_if_fail (CC_IS_WWAN_DEVICE (device), NULL);
+    g_return_val_if_fail (CC_IS_WWAN_DEVICE (device), NULL);
 
-  return ADW_DIALOG (g_object_new (CC_TYPE_WWAN_DETAILS_DIALOG,
-                                   "device", device,
-                                   NULL));
+    return ADW_DIALOG (g_object_new (CC_TYPE_WWAN_DETAILS_DIALOG, "device", device, NULL));
 }

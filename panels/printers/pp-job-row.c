@@ -21,25 +21,24 @@
 #include <config.h>
 #include <glib/gi18n.h>
 
-#include "pp-job-row.h"
 #include "cc-printers-resources.h"
+#include "pp-job-row.h"
 
-struct _PpJobRow
-{
-  AdwActionRow parent;
+struct _PpJobRow {
+    AdwActionRow parent;
 
-  GtkButton *pause_button;
-  GtkButton *priority_button;
-  GtkLabel  *state_label;
+    GtkButton *pause_button;
+    GtkButton *priority_button;
+    GtkLabel *state_label;
 
-  PpJob *job;
+    PpJob *job;
 };
 
 G_DEFINE_FINAL_TYPE (PpJobRow, pp_job_row, ADW_TYPE_ACTION_ROW)
 
 enum {
-  PRIORITY_CHANGED,
-  LAST_SIGNAL,
+    PRIORITY_CHANGED,
+    LAST_SIGNAL,
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };
@@ -47,137 +46,126 @@ static guint signals[LAST_SIGNAL] = { 0 };
 static void
 update_pause_button (PpJobRow *self, gboolean paused)
 {
-  gtk_button_set_icon_name (self->pause_button,
-                            paused ? "media-playback-start-symbolic" : "media-playback-pause-symbolic");
-  gtk_widget_set_tooltip_text (GTK_WIDGET (self->pause_button),
-                               paused ? _("Resume") : _("Pause"));
+    gtk_button_set_icon_name (self->pause_button,
+                              paused ? "media-playback-start-symbolic" : "media-playback-pause-symbolic");
+    gtk_widget_set_tooltip_text (GTK_WIDGET (self->pause_button), paused ? _("Resume") : _("Pause"));
 }
 
 static void
 pause_cb (PpJobRow *self)
 {
-  pp_job_set_hold_until_async (self->job, pp_job_get_state (self->job) == IPP_JOB_HELD ? "no-hold" : "indefinite");
-  update_pause_button (self,
-                       pp_job_get_state (self->job) == IPP_JOB_HELD);
-                                              }
+    pp_job_set_hold_until_async (self->job, pp_job_get_state (self->job) == IPP_JOB_HELD ? "no-hold" : "indefinite");
+    update_pause_button (self, pp_job_get_state (self->job) == IPP_JOB_HELD);
+}
 
 static void
 stop_cb (PpJobRow *self)
 {
-  pp_job_cancel_purge_async (self->job, FALSE);
+    pp_job_cancel_purge_async (self->job, FALSE);
 }
 
 static void
 priority_cb (PpJobRow *self)
 {
-  g_signal_emit_by_name (self, "priority-changed");
+    g_signal_emit_by_name (self, "priority-changed");
 }
 
 static void
 pp_job_row_dispose (GObject *object)
 {
-  PpJobRow *self = PP_JOB_ROW (object);
+    PpJobRow *self = PP_JOB_ROW (object);
 
-  g_clear_object (&self->job);
+    g_clear_object (&self->job);
 
-  G_OBJECT_CLASS (pp_job_row_parent_class)->dispose (object);
+    G_OBJECT_CLASS (pp_job_row_parent_class)->dispose (object);
 }
 
 static void
 pp_job_row_class_init (PpJobRowClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->dispose = pp_job_row_dispose;
+    object_class->dispose = pp_job_row_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-job-row.ui");
+    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-job-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, PpJobRow, pause_button);
-  gtk_widget_class_bind_template_child (widget_class, PpJobRow, priority_button);
-  gtk_widget_class_bind_template_child (widget_class, PpJobRow, state_label);
+    gtk_widget_class_bind_template_child (widget_class, PpJobRow, pause_button);
+    gtk_widget_class_bind_template_child (widget_class, PpJobRow, priority_button);
+    gtk_widget_class_bind_template_child (widget_class, PpJobRow, state_label);
 
-  gtk_widget_class_bind_template_callback (widget_class, pause_cb);
-  gtk_widget_class_bind_template_callback (widget_class, stop_cb);
-  gtk_widget_class_bind_template_callback (widget_class, priority_cb);
+    gtk_widget_class_bind_template_callback (widget_class, pause_cb);
+    gtk_widget_class_bind_template_callback (widget_class, stop_cb);
+    gtk_widget_class_bind_template_callback (widget_class, priority_cb);
 
-  signals[PRIORITY_CHANGED] =
-    g_signal_new ("priority-changed",
-                  G_TYPE_FROM_CLASS (klass),
-                  G_SIGNAL_RUN_LAST,
-                  0,
-                  NULL, NULL, NULL,
-                  G_TYPE_NONE, 0);
+    signals[PRIORITY_CHANGED] = g_signal_new ("priority-changed", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_LAST, 0, NULL,
+                                              NULL, NULL, G_TYPE_NONE, 0);
 }
 
 static void
 pp_job_row_init (PpJobRow *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 PpJob *
 pp_job_row_get_job (PpJobRow *self)
 {
-  return self->job;
+    return self->job;
 }
 
 PpJobRow *
 pp_job_row_new (PpJob *job)
 {
-  PpJobRow *self;
-  gboolean  status;
-  g_autofree gchar *state_string = NULL;
+    PpJobRow *self;
+    gboolean status;
+    g_autofree gchar *state_string = NULL;
 
-  self = g_object_new (PP_TYPE_JOB_ROW, NULL);
+    self = g_object_new (PP_TYPE_JOB_ROW, NULL);
 
-  self->job = g_object_ref (job);
+    self->job = g_object_ref (job);
 
-  switch (pp_job_get_state (job))
-    {
-      case IPP_JOB_PENDING:
+    switch (pp_job_get_state (job)) {
+    case IPP_JOB_PENDING:
         /* Translators: Job's state (job is waiting to be printed) */
         state_string = g_strdup (C_("print job", "Pending"));
         break;
-      case IPP_JOB_HELD:
-        if (pp_job_get_auth_info_required (job) == NULL)
-          {
+    case IPP_JOB_HELD:
+        if (pp_job_get_auth_info_required (job) == NULL) {
             /* Translators: Job's state (job is held for printing) */
             state_string = g_strdup (C_("print job", "Paused"));
-          }
-        else
-          {
+        } else {
             /* Translators: Job's state (job needs authentication to proceed further) */
-            state_string = g_strdup_printf ("<span foreground=\"#ff0000\">%s</span>", C_("print job", "Authentication required"));
-          }
+            state_string =
+                g_strdup_printf ("<span foreground=\"#ff0000\">%s</span>", C_("print job", "Authentication required"));
+        }
         break;
-      case IPP_JOB_PROCESSING:
+    case IPP_JOB_PROCESSING:
         /* Translators: Job's state (job is currently printing) */
         state_string = g_strdup (C_("print job", "Processing"));
         break;
-      case IPP_JOB_STOPPED:
+    case IPP_JOB_STOPPED:
         /* Translators: Job's state (job has been stopped) */
         state_string = g_strdup (C_("print job", "Stopped"));
         break;
-      case IPP_JOB_CANCELED:
+    case IPP_JOB_CANCELED:
         /* Translators: Job's state (job has been cancelled) */
         state_string = g_strdup (C_("print job", "Cancelled"));
         break;
-      case IPP_JOB_ABORTED:
+    case IPP_JOB_ABORTED:
         /* Translators: Job's state (job has aborted due to error) */
         state_string = g_strdup (C_("print job", "Aborted"));
         break;
-      case IPP_JOB_COMPLETED:
+    case IPP_JOB_COMPLETED:
         /* Translators: Job's state (job has completed successfully) */
         state_string = g_strdup (C_("print job", "Completed"));
         break;
     }
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), pp_job_get_title (job));
-  gtk_label_set_markup (self->state_label, state_string);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->pause_button), pp_job_get_auth_info_required (job) == NULL);
-  status = pp_job_priority_get_sensitive (job);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->priority_button), status);
-  update_pause_button (self,
-                       pp_job_get_state (self->job) == IPP_JOB_HELD);
-  return self;
+    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), pp_job_get_title (job));
+    gtk_label_set_markup (self->state_label, state_string);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->pause_button), pp_job_get_auth_info_required (job) == NULL);
+    status = pp_job_priority_get_sensitive (job);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->priority_button), status);
+    update_pause_button (self, pp_job_get_state (self->job) == IPP_JOB_HELD);
+    return self;
 }

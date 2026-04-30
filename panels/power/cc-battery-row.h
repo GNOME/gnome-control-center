@@ -25,12 +25,11 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_BATTERY_ROW (cc_battery_row_get_type())
+#define CC_TYPE_BATTERY_ROW (cc_battery_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcBatteryRow, cc_battery_row, CC, BATTERY_ROW, GtkListBoxRow);
-CcBatteryRow* cc_battery_row_new                    (UpDevice *device,
-                                                     gboolean  primary);
+CcBatteryRow *cc_battery_row_new (UpDevice *device, gboolean primary);
 
-gboolean      cc_battery_row_get_primary             (CcBatteryRow *row);
-UpDeviceKind  cc_battery_row_get_kind                (CcBatteryRow *row);
+gboolean cc_battery_row_get_primary (CcBatteryRow *row);
+UpDeviceKind cc_battery_row_get_kind (CcBatteryRow *row);
 
 G_END_DECLS

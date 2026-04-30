@@ -21,37 +21,35 @@
 #include "cc-ui-util.h"
 
 gboolean
-cc_util_keynav_propagate_vertical (GtkWidget        *self,
-                                   GtkDirectionType  direction)
+cc_util_keynav_propagate_vertical (GtkWidget *self, GtkDirectionType direction)
 {
-  GtkWidget *root = GTK_WIDGET (gtk_widget_get_root (self));
+    GtkWidget *root = GTK_WIDGET (gtk_widget_get_root (self));
 
-  if (root == NULL)
-    return FALSE;
+    if (root == NULL)
+        return FALSE;
 
-  switch (direction) {
-  case GTK_DIR_UP:
-    return gtk_widget_child_focus (root, GTK_DIR_TAB_BACKWARD);
-  case GTK_DIR_DOWN:
-    return gtk_widget_child_focus (root, GTK_DIR_TAB_FORWARD);
-  default:
-    return FALSE;
-  }
+    switch (direction) {
+    case GTK_DIR_UP:
+        return gtk_widget_child_focus (root, GTK_DIR_TAB_BACKWARD);
+    case GTK_DIR_DOWN:
+        return gtk_widget_child_focus (root, GTK_DIR_TAB_FORWARD);
+    default:
+        return FALSE;
+    }
 }
 
 gboolean
-cc_util_keynav_propagate_up (GtkWidget        *self,
-                             GtkDirectionType  direction)
+cc_util_keynav_propagate_up (GtkWidget *self, GtkDirectionType direction)
 {
-  GtkWidget *root = GTK_WIDGET (gtk_widget_get_root (self));
+    GtkWidget *root = GTK_WIDGET (gtk_widget_get_root (self));
 
-  if (root == NULL)
-    return FALSE;
+    if (root == NULL)
+        return FALSE;
 
-  switch (direction) {
-  case GTK_DIR_UP:
-    return gtk_widget_child_focus (root, GTK_DIR_TAB_BACKWARD);
-  default:
-    return FALSE;
-  }
+    switch (direction) {
+    case GTK_DIR_UP:
+        return gtk_widget_child_focus (root, GTK_DIR_TAB_BACKWARD);
+    default:
+        return FALSE;
+    }
 }

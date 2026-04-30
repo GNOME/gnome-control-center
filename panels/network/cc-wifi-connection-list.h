@@ -17,30 +17,24 @@
 
 #pragma once
 
-#include <adwaita.h>
 #include <NetworkManager.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WIFI_CONNECTION_LIST (cc_wifi_connection_list_get_type())
+#define CC_TYPE_WIFI_CONNECTION_LIST (cc_wifi_connection_list_get_type ())
 G_DECLARE_FINAL_TYPE (CcWifiConnectionList, cc_wifi_connection_list, CC, WIFI_CONNECTION_LIST, AdwBin);
-CcWifiConnectionList *cc_wifi_connection_list_new (NMClient     *client,
-                                                   NMDeviceWifi *device,
-                                                   gboolean      hide_unavailable,
-                                                   gboolean      show_aps,
-                                                   gboolean      checkable,
-                                                   gboolean      forgettable,
-                                                   gboolean      activatable);
+CcWifiConnectionList *cc_wifi_connection_list_new (NMClient *client, NMDeviceWifi *device, gboolean hide_unavailable,
+                                                   gboolean show_aps, gboolean checkable, gboolean forgettable,
+                                                   gboolean activatable);
 
+void cc_wifi_connection_list_freeze (CcWifiConnectionList *list);
+void cc_wifi_connection_list_thaw (CcWifiConnectionList *list);
 
-void                  cc_wifi_connection_list_freeze (CcWifiConnectionList  *list);
-void                  cc_wifi_connection_list_thaw   (CcWifiConnectionList  *list);
+GtkListBox *cc_wifi_connection_list_get_list_box (CcWifiConnectionList *self);
 
-GtkListBox           *cc_wifi_connection_list_get_list_box (CcWifiConnectionList *self);
+gboolean cc_wifi_connection_list_is_empty (CcWifiConnectionList *self);
 
-gboolean              cc_wifi_connection_list_is_empty (CcWifiConnectionList *self);
-
-void                  cc_wifi_connection_list_set_placeholder_text (CcWifiConnectionList *self,
-                                                                    const gchar          *placeholder_text);
+void cc_wifi_connection_list_set_placeholder_text (CcWifiConnectionList *self, const gchar *placeholder_text);
 
 G_END_DECLS

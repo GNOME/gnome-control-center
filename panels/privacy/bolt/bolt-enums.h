@@ -20,50 +20,28 @@
 
 #pragma once
 
-#include "bolt-names.h"
 #include "bolt-enum-types.h"
+#include "bolt-names.h"
 
+gboolean bolt_enum_validate (GType enum_type, gint value, GError **error);
 
-gboolean          bolt_enum_validate (GType    enum_type,
-                                      gint     value,
-                                      GError **error);
+gboolean bolt_enum_class_validate (GEnumClass *enum_class, gint value, GError **error);
 
-gboolean          bolt_enum_class_validate (GEnumClass *enum_class,
-                                            gint        value,
-                                            GError    **error);
+const char *bolt_enum_to_string (GType enum_type, gint value, GError **error);
 
-const char *      bolt_enum_to_string (GType    enum_type,
-                                       gint     value,
-                                       GError **error);
+gint bolt_enum_from_string (GType enum_type, const char *string, GError **error);
 
-gint              bolt_enum_from_string (GType       enum_type,
-                                         const char *string,
-                                         GError    **error);
+char *bolt_flags_class_to_string (GFlagsClass *flags_class, guint value, GError **error);
 
+gboolean bolt_flags_class_from_string (GFlagsClass *flags_class, const char *string, guint *flags_out, GError **error);
 
-char *            bolt_flags_class_to_string (GFlagsClass *flags_class,
-                                              guint        value,
-                                              GError     **error);
+char *bolt_flags_to_string (GType flags_type, guint value, GError **error);
 
-gboolean          bolt_flags_class_from_string (GFlagsClass *flags_class,
-                                                const char  *string,
-                                                guint       *flags_out,
-                                                GError     **error);
+gboolean bolt_flags_from_string (GType flags_type, const char *string, guint *flags_out, GError **error);
 
-char *            bolt_flags_to_string (GType    flags_type,
-                                        guint    value,
-                                        GError **error);
+gboolean bolt_flags_update (guint from, guint *to, guint mask);
 
-gboolean          bolt_flags_from_string (GType       flags_type,
-                                          const char *string,
-                                          guint      *flags_out,
-                                          GError    **error);
-
-gboolean          bolt_flags_update (guint  from,
-                                     guint *to,
-                                     guint  mask);
-
-#define bolt_flag_isset(flags_, flag_)  (!!(flags_ & flag_))
+#define bolt_flag_isset(flags_, flag_) (!!(flags_ & flag_))
 #define bolt_flag_isclear(flags_, flag_) (!(flags_ & flag_))
 
 /**
@@ -83,26 +61,26 @@ gboolean          bolt_flags_update (guint  from,
  */
 typedef enum {
 
-  BOLT_STATUS_UNKNOWN = -1,
-  BOLT_STATUS_DISCONNECTED = 0,
-  BOLT_STATUS_CONNECTING,
-  BOLT_STATUS_CONNECTED,
-  BOLT_STATUS_AUTHORIZING,
-  BOLT_STATUS_AUTH_ERROR,
-  BOLT_STATUS_AUTHORIZED,
+    BOLT_STATUS_UNKNOWN = -1,
+    BOLT_STATUS_DISCONNECTED = 0,
+    BOLT_STATUS_CONNECTING,
+    BOLT_STATUS_CONNECTED,
+    BOLT_STATUS_AUTHORIZING,
+    BOLT_STATUS_AUTH_ERROR,
+    BOLT_STATUS_AUTHORIZED,
 
-  /* deprecated, do not use */
-  BOLT_STATUS_AUTHORIZED_SECURE,
-  BOLT_STATUS_AUTHORIZED_NEWKEY,
-  BOLT_STATUS_AUTHORIZED_DPONLY
+    /* deprecated, do not use */
+    BOLT_STATUS_AUTHORIZED_SECURE,
+    BOLT_STATUS_AUTHORIZED_NEWKEY,
+    BOLT_STATUS_AUTHORIZED_DPONLY
 
 } BoltStatus;
 
-const char *     bolt_status_to_string (BoltStatus status);
-gboolean         bolt_status_is_authorized (BoltStatus status);
-gboolean         bolt_status_is_connected (BoltStatus status);
-gboolean         bolt_status_is_pending (BoltStatus status);
-gboolean         bolt_status_validate (BoltStatus status);
+const char *bolt_status_to_string (BoltStatus status);
+gboolean bolt_status_is_authorized (BoltStatus status);
+gboolean bolt_status_is_connected (BoltStatus status);
+gboolean bolt_status_is_pending (BoltStatus status);
+gboolean bolt_status_validate (BoltStatus status);
 
 /**
  * BoltAuthFlags:
@@ -116,11 +94,11 @@ gboolean         bolt_status_validate (BoltStatus status);
  */
 typedef enum { /*< flags >*/
 
-  BOLT_AUTH_NONE   = 0,
-  BOLT_AUTH_NOPCIE = 1 << 0,
-  BOLT_AUTH_SECURE = 1 << 1,
-  BOLT_AUTH_NOKEY  = 1 << 2,
-  BOLT_AUTH_BOOT   = 1 << 3,
+    BOLT_AUTH_NONE = 0,
+    BOLT_AUTH_NOPCIE = 1 << 0,
+    BOLT_AUTH_SECURE = 1 << 1,
+    BOLT_AUTH_NOKEY = 1 << 2,
+    BOLT_AUTH_BOOT = 1 << 3,
 
 } BoltAuthFlags;
 
@@ -136,10 +114,10 @@ typedef enum { /*< flags >*/
 
 typedef enum {
 
-  BOLT_KEY_UNKNOWN = -1,
-  BOLT_KEY_MISSING = 0,
-  BOLT_KEY_HAVE = 1,
-  BOLT_KEY_NEW = 2
+    BOLT_KEY_UNKNOWN = -1,
+    BOLT_KEY_MISSING = 0,
+    BOLT_KEY_HAVE = 1,
+    BOLT_KEY_NEW = 2
 
 } BoltKeyState;
 
@@ -158,20 +136,19 @@ typedef enum {
  */
 typedef enum {
 
-  BOLT_SECURITY_UNKNOWN = -1,
-  BOLT_SECURITY_NONE = 0,
-  BOLT_SECURITY_DPONLY = 1,
-  BOLT_SECURITY_USER = '1',
-  BOLT_SECURITY_SECURE = '2',
-  BOLT_SECURITY_USBONLY = 4,
+    BOLT_SECURITY_UNKNOWN = -1,
+    BOLT_SECURITY_NONE = 0,
+    BOLT_SECURITY_DPONLY = 1,
+    BOLT_SECURITY_USER = '1',
+    BOLT_SECURITY_SECURE = '2',
+    BOLT_SECURITY_USBONLY = 4,
 
 } BoltSecurity;
 
-
-BoltSecurity     bolt_security_from_string (const char *str);
-const char *     bolt_security_to_string (BoltSecurity security);
-gboolean         bolt_security_validate (BoltSecurity security);
-gboolean         bolt_security_allows_pcie (BoltSecurity security);
+BoltSecurity bolt_security_from_string (const char *str);
+const char *bolt_security_to_string (BoltSecurity security);
+gboolean bolt_security_validate (BoltSecurity security);
+gboolean bolt_security_allows_pcie (BoltSecurity security);
 
 /**
  * BoltPolicy:
@@ -186,17 +163,16 @@ gboolean         bolt_security_allows_pcie (BoltSecurity security);
  */
 typedef enum {
 
-  BOLT_POLICY_UNKNOWN = -1,
-  BOLT_POLICY_DEFAULT = 0,
-  BOLT_POLICY_MANUAL = 1,
-  BOLT_POLICY_AUTO = 2,
+    BOLT_POLICY_UNKNOWN = -1,
+    BOLT_POLICY_DEFAULT = 0,
+    BOLT_POLICY_MANUAL = 1,
+    BOLT_POLICY_AUTO = 2,
 
 } BoltPolicy;
 
-
-BoltPolicy       bolt_policy_from_string (const char *str);
-const char *     bolt_policy_to_string (BoltPolicy policy);
-gboolean         bolt_policy_validate (BoltPolicy policy);
+BoltPolicy bolt_policy_from_string (const char *str);
+const char *bolt_policy_to_string (BoltPolicy policy);
+gboolean bolt_policy_validate (BoltPolicy policy);
 
 /**
  * BoltAuthCtrl:
@@ -206,7 +182,7 @@ gboolean         bolt_policy_validate (BoltPolicy policy);
  */
 typedef enum { /*< flags >*/
 
-  BOLT_AUTHCTRL_NONE = 0
+    BOLT_AUTHCTRL_NONE = 0
 
 } BoltAuthCtrl;
 
@@ -220,16 +196,16 @@ typedef enum { /*< flags >*/
  */
 typedef enum {
 
-  BOLT_DEVICE_UNKNOWN_TYPE = -1,
-  BOLT_DEVICE_HOST = 0,
-  BOLT_DEVICE_PERIPHERAL
+    BOLT_DEVICE_UNKNOWN_TYPE = -1,
+    BOLT_DEVICE_HOST = 0,
+    BOLT_DEVICE_PERIPHERAL
 
 } BoltDeviceType;
 
-BoltDeviceType   bolt_device_type_from_string (const char *str);
-const char *     bolt_device_type_to_string (BoltDeviceType type);
-gboolean         bolt_device_type_validate (BoltDeviceType type);
-gboolean         bolt_device_type_is_host (BoltDeviceType type);
+BoltDeviceType bolt_device_type_from_string (const char *str);
+const char *bolt_device_type_to_string (BoltDeviceType type);
+gboolean bolt_device_type_validate (BoltDeviceType type);
+gboolean bolt_device_type_is_host (BoltDeviceType type);
 
 /**
  * BoltAuthMode:
@@ -240,8 +216,8 @@ gboolean         bolt_device_type_is_host (BoltDeviceType type);
  */
 typedef enum { /*< flags >*/
 
-  BOLT_AUTH_DISABLED = 0,
-  BOLT_AUTH_ENABLED  = 1
+    BOLT_AUTH_DISABLED = 0,
+    BOLT_AUTH_ENABLED = 1
 
 } BoltAuthMode;
 

@@ -35,11 +35,11 @@
  */
 
 struct _CcNumberObject {
-    GObject        parent_instance;
+    GObject parent_instance;
 
-    int            value;
-    char          *string;
-    CcNumberOrder  order;
+    int value;
+    char *string;
+    CcNumberOrder order;
 };
 
 G_DEFINE_FINAL_TYPE (CcNumberObject, cc_number_object, G_TYPE_OBJECT);
@@ -55,10 +55,7 @@ enum {
 static GParamSpec *obj_props[OBJ_N_PROPS];
 
 static void
-cc_number_object_get_property (GObject    *object,
-                               guint       prop_id,
-                               GValue     *value,
-                               GParamSpec *pspec)
+cc_number_object_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
 {
     CcNumberObject *self = CC_NUMBER_OBJECT (object);
 
@@ -78,10 +75,7 @@ cc_number_object_get_property (GObject    *object,
 }
 
 static void
-cc_number_object_set_property (GObject      *object,
-                               guint         prop_id,
-                               const GValue *value,
-                               GParamSpec   *pspec)
+cc_number_object_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
 {
     CcNumberObject *self = CC_NUMBER_OBJECT (object);
 
@@ -90,7 +84,7 @@ cc_number_object_set_property (GObject      *object,
         self->value = g_value_get_int (value);
         break;
     case OBJ_PROP_STRING:
-        self->string = g_value_dup_string (value);  /* Construct only, no need to free old str */
+        self->string = g_value_dup_string (value); /* Construct only, no need to free old str */
         break;
     case OBJ_PROP_ORDER:
         self->order = g_value_get_enum (value);
@@ -120,34 +114,28 @@ cc_number_object_class_init (CcNumberObjectClass *klass)
     object_class->set_property = cc_number_object_set_property;
 
     /**
-    * CcNumberObject:value: (attributes org.gtk.Property.get=cc_number_object_get_value)
-    *
-    * The numeric value.
-    */
-    obj_props[OBJ_PROP_VALUE] =
-        g_param_spec_int ("value", NULL, NULL,
-                          INT_MIN, INT_MAX, 0,
-                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+     * CcNumberObject:value: (attributes org.gtk.Property.get=cc_number_object_get_value)
+     *
+     * The numeric value.
+     */
+    obj_props[OBJ_PROP_VALUE] = g_param_spec_int ("value", NULL, NULL, INT_MIN, INT_MAX, 0,
+                                                  G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
     /**
-    * CcNumberObject:string: (attributes org.gtk.Property.get=cc_number_object_get_string)
-    *
-    * The (optional) fixed string representation of the stored value.
-    */
-    obj_props[OBJ_PROP_STRING] =
-        g_param_spec_string ("string", NULL, NULL,
-                             NULL,
-                             G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+     * CcNumberObject:string: (attributes org.gtk.Property.get=cc_number_object_get_string)
+     *
+     * The (optional) fixed string representation of the stored value.
+     */
+    obj_props[OBJ_PROP_STRING] = g_param_spec_string (
+        "string", NULL, NULL, NULL, G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
     /**
-    * CcNumberObject:order: (attributes org.gtk.Property.get=cc_number_object_get_order)
-    *
-    * The (optional) fixed ordering of the `CcNumberObject` inside a `CcNumberRow` list.
-    */
-    obj_props[OBJ_PROP_ORDER] =
-        g_param_spec_enum ("order", NULL, NULL,
-                           CC_TYPE_NUMBER_ORDER, CC_NUMBER_ORDER_DEFAULT,
-                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+     * CcNumberObject:order: (attributes org.gtk.Property.get=cc_number_object_get_order)
+     *
+     * The (optional) fixed ordering of the `CcNumberObject` inside a `CcNumberRow` list.
+     */
+    obj_props[OBJ_PROP_ORDER] = g_param_spec_enum ("order", NULL, NULL, CC_TYPE_NUMBER_ORDER, CC_NUMBER_ORDER_DEFAULT,
+                                                   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
     g_object_class_install_properties (object_class, OBJ_N_PROPS, obj_props);
 }
@@ -156,7 +144,6 @@ static void
 cc_number_object_init (CcNumberObject *self)
 {
 }
-
 
 /**
  * cc_number_object_new:
@@ -184,12 +171,9 @@ cc_number_object_new (int value)
  * Returns: the newly created `CcNumberObject`
  */
 CcNumberObject *
-cc_number_object_new_full (int            value,
-                           const char    *string,
-                           CcNumberOrder  order)
+cc_number_object_new_full (int value, const char *string, CcNumberOrder order)
 {
-    return g_object_new (CC_TYPE_NUMBER_OBJECT, "value", value, "string", string,
-                         "order", order, NULL);
+    return g_object_new (CC_TYPE_NUMBER_OBJECT, "value", value, "string", string, "order", order, NULL);
 }
 
 /**
@@ -216,7 +200,7 @@ cc_number_object_get_value (CcNumberObject *self)
  *
  * Returns: (transfer full) (nullable): the fixed string representation
  */
-char*
+char *
 cc_number_object_get_string (CcNumberObject *self)
 {
     g_return_val_if_fail (CC_IS_NUMBER_OBJECT (self), NULL);
@@ -277,8 +261,7 @@ cc_number_object_to_string_for_days (CcNumberObject *self)
     if (self->string)
         return g_strdup (self->string);
 
-    return g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d day", "%d days", self->value),
-                            self->value);
+    return g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d day", "%d days", self->value), self->value);
 }
 
 /**
@@ -289,21 +272,21 @@ cc_number_object_to_string_for_days (CcNumberObject *self)
  */
 
 struct _CcNumberRow {
-    AdwComboRow  parent_instance;
+    AdwComboRow parent_instance;
 
-    GListStore        *store;
-    CcNumberValueType  value_type;
-    CcNumberSortType   sort_type;
+    GListStore *store;
+    CcNumberValueType value_type;
+    CcNumberSortType sort_type;
 
     /* For binding GSettings to the row */
     GSettings *bind_settings;
-    char      *bind_key;
-    GType      bind_type;
-    gulong     number_row_settings_changed_id;
-    gulong     number_row_selected_changed_id;
+    char *bind_key;
+    GType bind_type;
+    gulong number_row_settings_changed_id;
+    gulong number_row_selected_changed_id;
 };
 
-G_DEFINE_FINAL_TYPE(CcNumberRow, cc_number_row, ADW_TYPE_COMBO_ROW)
+G_DEFINE_FINAL_TYPE (CcNumberRow, cc_number_row, ADW_TYPE_COMBO_ROW)
 
 enum {
     ROW_PROP_0,
@@ -317,8 +300,7 @@ enum {
 static GParamSpec *row_props[ROW_N_PROPS];
 
 static void
-cc_number_row_add_values_from_variant (CcNumberRow *self,
-                                       GVariant    *variant)
+cc_number_row_add_values_from_variant (CcNumberRow *self, GVariant *variant)
 {
     const int *values;
     gsize n_elements, i;
@@ -339,10 +321,7 @@ cc_number_row_add_values_from_variant (CcNumberRow *self,
 }
 
 static void
-cc_number_row_set_property (GObject      *object,
-                            guint         prop_id,
-                            const GValue *value,
-                            GParamSpec   *pspec)
+cc_number_row_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
 {
     CcNumberRow *self = CC_NUMBER_ROW (object);
     CcNumberObject *number;
@@ -369,13 +348,10 @@ cc_number_row_set_property (GObject      *object,
 }
 
 static int
-compare_numbers (CcNumberObject *number_a,
-                 CcNumberObject *number_b,
-                 CcNumberRow    *self)
+compare_numbers (CcNumberObject *number_a, CcNumberObject *number_b, CcNumberRow *self)
 {
     /* Handle special order first (works because of the ordering of CcNumberOrder) */
-    if (number_a->order != CC_NUMBER_ORDER_DEFAULT ||
-        number_b->order != CC_NUMBER_ORDER_DEFAULT)
+    if (number_a->order != CC_NUMBER_ORDER_DEFAULT || number_b->order != CC_NUMBER_ORDER_DEFAULT)
         return number_a->order - number_b->order;
 
     /* Otherwise normal value comparison */
@@ -400,7 +376,7 @@ cc_number_row_constructed (GObject *obj)
 
     /* And set the expression based on the value-type */
     if (self->value_type != CC_NUMBER_VALUE_CUSTOM) {
-        char * (*number_to_string_func)(CcNumberObject *);
+        char *(*number_to_string_func) (CcNumberObject *);
         g_autoptr(GtkExpression) expression = NULL;
 
         switch (self->value_type) {
@@ -423,10 +399,8 @@ cc_number_row_constructed (GObject *obj)
             g_assert_not_reached ();
         }
 
-        expression = gtk_cclosure_expression_new (G_TYPE_STRING, NULL,
-                                                0, NULL,
-                                                G_CALLBACK (number_to_string_func),
-                                                NULL, NULL);
+        expression =
+            gtk_cclosure_expression_new (G_TYPE_STRING, NULL, 0, NULL, G_CALLBACK (number_to_string_func), NULL, NULL);
         adw_combo_row_set_expression (ADW_COMBO_ROW (self), expression);
     }
 
@@ -441,7 +415,6 @@ cc_number_row_clear_settings_binding (CcNumberRow *self)
 
     g_clear_object (&self->bind_settings);
     g_clear_pointer (&self->bind_key, g_free);
-
 }
 
 static void
@@ -467,50 +440,45 @@ cc_number_row_class_init (CcNumberRowClass *klass)
     object_class->set_property = cc_number_row_set_property;
 
     /**
-    * CcNumberRow:value-type:
-    *
-    * The interpretation of the values in the list of the row. Determines what
-    * strings will be generated to represent the value in the list. The
-    * `string` property of a number will always take priority if it is set.
-    * Sets the `expression` property of the underlying AdwComboRow, unless the
-    * value type is `CC_NUMBER_VALUE_CUSTOM`.
-    */
+     * CcNumberRow:value-type:
+     *
+     * The interpretation of the values in the list of the row. Determines what
+     * strings will be generated to represent the value in the list. The
+     * `string` property of a number will always take priority if it is set.
+     * Sets the `expression` property of the underlying AdwComboRow, unless the
+     * value type is `CC_NUMBER_VALUE_CUSTOM`.
+     */
     row_props[ROW_PROP_VALUE_TYPE] =
-        g_param_spec_enum ("value-type", NULL, NULL,
-                           CC_TYPE_NUMBER_VALUE_TYPE, CC_NUMBER_VALUE_CUSTOM,
+        g_param_spec_enum ("value-type", NULL, NULL, CC_TYPE_NUMBER_VALUE_TYPE, CC_NUMBER_VALUE_CUSTOM,
                            G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
     /**
-    * CcNumberRow:sort-type:
-    *
-    * The sorting of the numbers in the list of the row.
-    */
+     * CcNumberRow:sort-type:
+     *
+     * The sorting of the numbers in the list of the row.
+     */
     row_props[ROW_PROP_SORT_TYPE] =
-        g_param_spec_enum ("sort-type", NULL, NULL,
-                           CC_TYPE_NUMBER_SORT_TYPE, CC_NUMBER_SORT_ASCENDING,
+        g_param_spec_enum ("sort-type", NULL, NULL, CC_TYPE_NUMBER_SORT_TYPE, CC_NUMBER_SORT_ASCENDING,
                            G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
     /**
-    * CcNumberRow:values:
-    *
-    * A variant array of integer values. Mainly useful in .ui files, where it
-    * allows for convenient array notation like [num1, num2, num3, ...].
-    */
+     * CcNumberRow:values:
+     *
+     * A variant array of integer values. Mainly useful in .ui files, where it
+     * allows for convenient array notation like [num1, num2, num3, ...].
+     */
     values_type = g_variant_type_new_array (G_VARIANT_TYPE_INT32);
-    row_props[ROW_PROP_VALUES] =
-        g_param_spec_variant ("values", NULL, NULL,
-                              values_type, NULL,
-                              G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+    row_props[ROW_PROP_VALUES] = g_param_spec_variant (
+        "values", NULL, NULL, values_type, NULL, G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
     /**
-    * CcNumberRow:special-value:
-    *
-    * One special value to add to the list of the row. Mainly useful in .ui files.
-    * If more special values are needed, use `cc_number_row_add_value_full()`.
-    */
+     * CcNumberRow:special-value:
+     *
+     * One special value to add to the list of the row. Mainly useful in .ui files.
+     * If more special values are needed, use `cc_number_row_add_value_full()`.
+     */
     row_props[ROW_PROP_SPECIAL_VALUE] =
-        g_param_spec_object ("special-value", NULL, NULL,
-                             CC_TYPE_NUMBER_OBJECT,
+        g_param_spec_object ("special-value", NULL, NULL, CC_TYPE_NUMBER_OBJECT,
                              G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
     g_object_class_install_properties (object_class, ROW_N_PROPS, row_props);
@@ -531,24 +499,18 @@ cc_number_row_init (CcNumberRow *self)
  * Returns: the newly created `CcNumberRow`
  */
 CcNumberRow *
-cc_number_row_new (CcNumberValueType value_type,
-                   CcNumberSortType  sort_type)
+cc_number_row_new (CcNumberValueType value_type, CcNumberSortType sort_type)
 {
-    return g_object_new (CC_TYPE_NUMBER_ROW,
-                         "value-type", value_type,
-                         "sort-type", sort_type,
-                         NULL);
+    return g_object_new (CC_TYPE_NUMBER_ROW, "value-type", value_type, "sort-type", sort_type, NULL);
 }
 
 static guint
-cc_number_row_add_number (CcNumberRow    *self,
-                          CcNumberObject *number)
+cc_number_row_add_number (CcNumberRow *self, CcNumberObject *number)
 {
     g_return_val_if_fail (CC_IS_NUMBER_ROW (self), 0);
     g_return_val_if_fail (CC_IS_NUMBER_OBJECT (number), 0);
 
-    return g_list_store_insert_sorted (self->store, number,
-                                       (GCompareDataFunc) compare_numbers, self);
+    return g_list_store_insert_sorted (self->store, number, (GCompareDataFunc) compare_numbers, self);
 }
 
 /**
@@ -564,8 +526,7 @@ cc_number_row_add_number (CcNumberRow    *self,
  * Returns: the position in the list where the value got stored
  */
 guint
-cc_number_row_add_value (CcNumberRow *self,
-                         int          value)
+cc_number_row_add_value (CcNumberRow *self, int value)
 {
     g_autoptr(CcNumberObject) number = cc_number_object_new (value);
 
@@ -590,10 +551,7 @@ cc_number_row_add_value (CcNumberRow *self,
  * Returns: the position in the list where the value got stored
  */
 guint
-cc_number_row_add_value_full (CcNumberRow   *self,
-                              int            value,
-                              const char    *string,
-                              CcNumberOrder  order)
+cc_number_row_add_value_full (CcNumberRow *self, int value, const char *string, CcNumberOrder order)
 {
     g_autoptr(CcNumberObject) number = cc_number_object_new_full (value, string, order);
 
@@ -610,8 +568,7 @@ cc_number_row_add_value_full (CcNumberRow   *self,
  * Returns: the value at @position
  */
 int
-cc_number_row_get_value (CcNumberRow *self,
-                         guint        position)
+cc_number_row_get_value (CcNumberRow *self, guint position)
 {
     g_autoptr(CcNumberObject) number = NULL;
 
@@ -625,9 +582,7 @@ cc_number_row_get_value (CcNumberRow *self,
 }
 
 static gboolean
-equal_numbers (CcNumberObject *number,
-               gconstpointer   not_a_number,
-               int            *value)
+equal_numbers (CcNumberObject *number, gconstpointer not_a_number, int *value)
 {
     if (!number)
         return FALSE;
@@ -647,15 +602,11 @@ equal_numbers (CcNumberObject *number,
  * Returns: true if the list contains @value, false otherwise
  */
 gboolean
-cc_number_row_has_value (CcNumberRow *self,
-                         int          value,
-                         guint       *position)
+cc_number_row_has_value (CcNumberRow *self, int value, guint *position)
 {
     g_return_val_if_fail (CC_IS_NUMBER_ROW (self), FALSE);
 
-    return g_list_store_find_with_equal_func_full (self->store, NULL,
-                                                   (GEqualFuncFull) equal_numbers, &value,
-                                                   position);
+    return g_list_store_find_with_equal_func_full (self->store, NULL, (GEqualFuncFull) equal_numbers, &value, position);
 }
 
 static void
@@ -740,9 +691,7 @@ number_row_selected_changed_cb (CcNumberRow *self)
  * new binding.
  */
 void
-cc_number_row_bind_settings (CcNumberRow *self,
-                             GSettings   *settings,
-                             const char  *key)
+cc_number_row_bind_settings (CcNumberRow *self, GSettings *settings, const char *key)
 {
     g_autoptr(GSettingsSchema) schema = NULL;
     g_autoptr(GSettingsSchemaKey) schema_key = NULL;
@@ -783,8 +732,7 @@ cc_number_row_bind_settings (CcNumberRow *self,
     detailed_changed_key = g_strdup_printf ("changed::%s", key);
 
     self->number_row_settings_changed_id =
-        g_signal_connect_swapped (settings, detailed_changed_key,
-                                  G_CALLBACK (number_row_settings_changed_cb), self);
+        g_signal_connect_swapped (settings, detailed_changed_key, G_CALLBACK (number_row_settings_changed_cb), self);
 
     self->number_row_selected_changed_id =
         g_signal_connect (self, "notify::selected", G_CALLBACK (number_row_selected_changed_cb), NULL);

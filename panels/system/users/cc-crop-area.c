@@ -23,8 +23,8 @@
 
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
 #include <gsk/gsk.h>
+#include <gtk/gtk.h>
 
 #include "cc-crop-area.h"
 
@@ -121,8 +121,7 @@ update_image_and_crop (CcCropArea *area)
 
 /* Returns area->crop in widget coordinates (vs paintable coordsinates) */
 static void
-get_scaled_crop (CcCropArea    *area,
-               GdkRectangle  *crop)
+get_scaled_crop (CcCropArea *area, GdkRectangle *crop)
 {
     crop->x = area->image.x + area->crop.x * area->scale;
     crop->y = area->image.y + area->crop.y * area->scale;
@@ -139,9 +138,7 @@ typedef enum {
 } Range;
 
 static Range
-find_range (int x,
-            int min,
-            int max)
+find_range (int x, int min, int max)
 {
     int tolerance = 12;
 
@@ -158,18 +155,14 @@ find_range (int x,
 
 /* Finds the location of (@x, @y) relative to the crop @rect */
 static Location
-find_location (GdkRectangle *rect,
-               int           x,
-               int           y)
+find_location (GdkRectangle *rect, int x, int y)
 {
     Range x_range, y_range;
-    Location location[5][5] = {
-        { OUTSIDE, OUTSIDE,     OUTSIDE, OUTSIDE,      OUTSIDE },
-        { OUTSIDE, TOP_LEFT,    TOP,     TOP_RIGHT,    OUTSIDE },
-        { OUTSIDE, LEFT,        INSIDE,  RIGHT,        OUTSIDE },
-        { OUTSIDE, BOTTOM_LEFT, BOTTOM,  BOTTOM_RIGHT, OUTSIDE },
-        { OUTSIDE, OUTSIDE,     OUTSIDE, OUTSIDE,      OUTSIDE }
-    };
+    Location location[5][5] = { { OUTSIDE, OUTSIDE, OUTSIDE, OUTSIDE, OUTSIDE },
+                                { OUTSIDE, TOP_LEFT, TOP, TOP_RIGHT, OUTSIDE },
+                                { OUTSIDE, LEFT, INSIDE, RIGHT, OUTSIDE },
+                                { OUTSIDE, BOTTOM_LEFT, BOTTOM, BOTTOM_RIGHT, OUTSIDE },
+                                { OUTSIDE, OUTSIDE, OUTSIDE, OUTSIDE, OUTSIDE } };
 
     x_range = find_range (x, rect->x, rect->x + rect->width);
     y_range = find_range (y, rect->y, rect->y + rect->height);
@@ -178,9 +171,7 @@ find_location (GdkRectangle *rect,
 }
 
 static void
-update_cursor (CcCropArea *area,
-               int         x,
-               int         y)
+update_cursor (CcCropArea *area, int x, int y)
 {
     const char *cursor_type;
     GdkRectangle crop;
@@ -243,9 +234,7 @@ update_cursor (CcCropArea *area,
 }
 
 static gboolean
-on_motion (CcCropArea *area,
-           double      event_x,
-           double      event_y)
+on_motion (CcCropArea *area, double event_x, double event_y)
 {
     if (area->paintable == NULL)
         return FALSE;
@@ -266,9 +255,7 @@ on_leave (CcCropArea *area)
 }
 
 static void
-on_drag_begin (CcCropArea     *area,
-               double          start_x,
-               double          start_y)
+on_drag_begin (CcCropArea *area, double start_x, double start_y)
 {
     GdkRectangle crop;
 
@@ -286,10 +273,7 @@ on_drag_begin (CcCropArea     *area,
 }
 
 static void
-on_drag_update (CcCropArea     *area,
-                double          offset_x,
-                double          offset_y,
-                GtkGestureDrag *gesture)
+on_drag_update (CcCropArea *area, double offset_x, double offset_y, GtkGestureDrag *gesture)
 {
     double start_x, start_y;
     int x, y, delta_x, delta_y;
@@ -438,9 +422,7 @@ on_drag_update (CcCropArea     *area,
 }
 
 static void
-on_drag_end (CcCropArea     *area,
-             double          offset_x,
-             double          offset_y)
+on_drag_end (CcCropArea *area, double offset_x, double offset_y)
 {
     area->active_region = OUTSIDE;
     area->drag_offx = 0.0;
@@ -448,8 +430,7 @@ on_drag_end (CcCropArea     *area,
 }
 
 static void
-on_drag_cancel (CcCropArea       *area,
-                GdkEventSequence *sequence)
+on_drag_cancel (CcCropArea *area, GdkEventSequence *sequence)
 {
     area->active_region = OUTSIDE;
     area->drag_offx = 0;
@@ -461,8 +442,7 @@ on_drag_cancel (CcCropArea       *area,
 #define CORNER_SIZE (CORNER_LINE_LENGTH + CORNER_LINE_WIDTH / 2)
 
 static void
-cc_crop_area_snapshot (GtkWidget   *widget,
-                       GtkSnapshot *snapshot)
+cc_crop_area_snapshot (GtkWidget *widget, GtkSnapshot *snapshot)
 {
     CcCropArea *area = CC_CROP_AREA (widget);
     cairo_t *cr;
@@ -472,7 +452,6 @@ cc_crop_area_snapshot (GtkWidget   *widget,
         return;
 
     update_image_and_crop (area);
-
 
     gtk_snapshot_save (snapshot);
 
@@ -608,8 +587,7 @@ cc_crop_area_create_pixbuf (CcCropArea *area)
     g_return_val_if_fail (CC_IS_CROP_AREA (area), NULL);
 
     snapshot = gtk_snapshot_new ();
-    gdk_paintable_snapshot (area->paintable, snapshot,
-                            gdk_paintable_get_intrinsic_width (area->paintable),
+    gdk_paintable_snapshot (area->paintable, snapshot, gdk_paintable_get_intrinsic_width (area->paintable),
                             gdk_paintable_get_intrinsic_height (area->paintable));
     node = gtk_snapshot_free_to_node (g_steal_pointer (&snapshot));
 
@@ -618,8 +596,7 @@ cc_crop_area_create_pixbuf (CcCropArea *area)
         g_warning ("Couldn't realize GL renderer: %s", error->message);
         return NULL;
     }
-    viewport = GRAPHENE_RECT_INIT (area->crop.x, area->crop.y,
-                                   area->crop.width, area->crop.height);
+    viewport = GRAPHENE_RECT_INIT (area->crop.x, area->crop.y, area->crop.width, area->crop.height);
     texture = gsk_renderer_render_texture (renderer, node, &viewport);
     gsk_renderer_unrealize (renderer);
 
@@ -643,8 +620,7 @@ cc_crop_area_get_paintable (CcCropArea *area)
 }
 
 void
-cc_crop_area_set_paintable (CcCropArea   *area,
-                            GdkPaintable *paintable)
+cc_crop_area_set_paintable (CcCropArea *area, GdkPaintable *paintable)
 {
     g_return_if_fail (CC_IS_CROP_AREA (area));
     g_return_if_fail (GDK_IS_PAINTABLE (paintable));
@@ -669,16 +645,12 @@ cc_crop_area_set_paintable (CcCropArea   *area,
  * Sets the minimal size of the crop rectangle (in paintable coordinates)
  */
 void
-cc_crop_area_set_min_size (CcCropArea *area,
-                           int         width,
-                           int         height)
+cc_crop_area_set_min_size (CcCropArea *area, int width, int height)
 {
     g_return_if_fail (CC_IS_CROP_AREA (area));
 
     area->min_crop_width = width;
     area->min_crop_height = height;
 
-    gtk_widget_set_size_request (GTK_WIDGET (area),
-                                 area->min_crop_width,
-                                 area->min_crop_height);
+    gtk_widget_set_size_request (GTK_WIDGET (area), area->min_crop_width, area->min_crop_height);
 }

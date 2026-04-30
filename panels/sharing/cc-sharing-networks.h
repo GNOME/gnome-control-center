@@ -26,13 +26,12 @@ G_BEGIN_DECLS
 #define CC_TYPE_SHARING_NETWORKS (cc_sharing_networks_get_type ())
 G_DECLARE_FINAL_TYPE (CcSharingNetworks, cc_sharing_networks, CC, SHARING_NETWORKS, AdwPreferencesGroup);
 typedef enum {
-  CC_SHARING_STATUS_UNSET,
-  CC_SHARING_STATUS_OFF,
-  CC_SHARING_STATUS_ENABLED,
-  CC_SHARING_STATUS_ACTIVE
+    CC_SHARING_STATUS_UNSET,
+    CC_SHARING_STATUS_OFF,
+    CC_SHARING_STATUS_ENABLED,
+    CC_SHARING_STATUS_ACTIVE
 } CcSharingStatus;
 
-GtkWidget    * cc_sharing_networks_new       (GDBusProxy *proxy,
-					      const char *service_name);
+GtkWidget *cc_sharing_networks_new (GDBusProxy *proxy, const char *service_name);
 
 G_END_DECLS

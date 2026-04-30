@@ -29,18 +29,14 @@ G_BEGIN_DECLS
 #define CC_TYPE_BOLT_DEVICE_DIALOG (cc_bolt_device_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (CcBoltDeviceDialog, cc_bolt_device_dialog, CC, BOLT_DEVICE_DIALOG, AdwWindow);
 
-CcBoltDeviceDialog * cc_bolt_device_dialog_new (void);
+CcBoltDeviceDialog *cc_bolt_device_dialog_new (void);
 
-void                 cc_bolt_device_dialog_set_client (CcBoltDeviceDialog *dialog,
-                                                       BoltClient         *client);
+void cc_bolt_device_dialog_set_client (CcBoltDeviceDialog *dialog, BoltClient *client);
 
-void                 cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
-                                                       BoltDevice         *device,
-						       GPtrArray          *parents);
+void cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog, BoltDevice *device, GPtrArray *parents);
 
-BoltDevice *         cc_bolt_device_dialog_peek_device (CcBoltDeviceDialog *dialog);
+BoltDevice *cc_bolt_device_dialog_peek_device (CcBoltDeviceDialog *dialog);
 
-gboolean             cc_bolt_device_dialog_device_equal (CcBoltDeviceDialog *dialog,
-                                                         BoltDevice         *device);
+gboolean cc_bolt_device_dialog_device_equal (CcBoltDeviceDialog *dialog, BoltDevice *device);
 
 G_END_DECLS

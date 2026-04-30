@@ -21,9 +21,9 @@
 
 #pragma once
 
+#include <NetworkManager.h>
 #include <adwaita.h>
 #include <gtk/gtk.h>
-#include <NetworkManager.h>
 
 G_BEGIN_DECLS
 

@@ -25,9 +25,8 @@
 #include "shell/cc-application.h"
 #include "shell/cc-shell-model.h"
 
-struct _GtpDynamicPanel
-{
-  CcPanel parent;
+struct _GtpDynamicPanel {
+    CcPanel parent;
 };
 
 G_DEFINE_FINAL_TYPE (GtpDynamicPanel, gtp_dynamic_panel, CC_TYPE_PANEL)
@@ -37,13 +36,13 @@ G_DEFINE_FINAL_TYPE (GtpDynamicPanel, gtp_dynamic_panel, CC_TYPE_PANEL)
 static void
 set_visibility (CcPanelVisibility visibility)
 {
-  GApplication *application;
-  CcShellModel *model;
+    GApplication *application;
+    CcShellModel *model;
 
-  application = g_application_get_default ();
-  model = cc_application_get_model (CC_APPLICATION (application));
+    application = g_application_get_default ();
+    model = cc_application_get_model (CC_APPLICATION (application));
 
-  cc_shell_model_set_panel_visibility (model, "dynamic-panel", visibility);
+    cc_shell_model_set_panel_visibility (model, "dynamic-panel", visibility);
 }
 
 /* Callbacks */
@@ -51,35 +50,35 @@ set_visibility (CcPanelVisibility visibility)
 static gboolean
 show_panel_cb (gpointer data)
 {
-  g_debug ("Showing panel");
+    g_debug ("Showing panel");
 
-  set_visibility (CC_PANEL_VISIBLE);
+    set_visibility (CC_PANEL_VISIBLE);
 
-  return G_SOURCE_REMOVE;
+    return G_SOURCE_REMOVE;
 }
 
 static void
-on_button_clicked_cb (GtkButton       *button,
-                      GtpDynamicPanel *self)
+on_button_clicked_cb (GtkButton *button, GtpDynamicPanel *self)
 {
-  g_debug ("Hiding panel");
+    g_debug ("Hiding panel");
 
-  set_visibility (CC_PANEL_HIDDEN);
-  g_timeout_add_seconds (3, show_panel_cb, self);
+    set_visibility (CC_PANEL_HIDDEN);
+    g_timeout_add_seconds (3, show_panel_cb, self);
 }
 
 static void
 gtp_dynamic_panel_class_init (GtpDynamicPanelClass *klass)
 {
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/tests/panels/gtp-dynamic-panel.ui");
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/tests/panels/gtp-dynamic-panel.ui");
 
-  gtk_widget_class_bind_template_callback (widget_class, on_button_clicked_cb);
+    gtk_widget_class_bind_template_callback (widget_class, on_button_clicked_cb);
 }
 
 static void
 gtp_dynamic_panel_init (GtpDynamicPanel *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 }

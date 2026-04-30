@@ -31,10 +31,9 @@
  *  For Symbols: [0x20D0,0x20FF]
  *  Half marks:  [0xFE20,0xFE2F]
  */
-#define IS_CDM_UCS4(c) (((c) >= 0x0300 && (c) <= 0x036F)  || \
-                        ((c) >= 0x1DC0 && (c) <= 0x1DFF)  || \
-                        ((c) >= 0x20D0 && (c) <= 0x20FF)  || \
-                        ((c) >= 0xFE20 && (c) <= 0xFE2F))
+#define IS_CDM_UCS4(c)                                                                                                 \
+    (((c) >= 0x0300 && (c) <= 0x036F) || ((c) >= 0x1DC0 && (c) <= 0x1DFF) || ((c) >= 0x20D0 && (c) <= 0x20FF)          \
+     || ((c) >= 0xFE20 && (c) <= 0xFE2F))
 
 #define IS_SOFT_HYPHEN(c) ((c) == 0x00AD)
 
@@ -46,124 +45,109 @@
 char *
 cc_util_normalize_casefold_and_unaccent (const char *str)
 {
-  g_autofree gchar *normalized = NULL;
-  gchar *tmp;
-  int i = 0, j = 0, ilen;
+    g_autofree gchar *normalized = NULL;
+    gchar *tmp;
+    int i = 0, j = 0, ilen;
 
-  if (str == NULL)
-    return NULL;
+    if (str == NULL)
+        return NULL;
 
-  normalized = g_utf8_normalize (str, -1, G_NORMALIZE_NFKD);
-  tmp = g_utf8_casefold (normalized, -1);
+    normalized = g_utf8_normalize (str, -1, G_NORMALIZE_NFKD);
+    tmp = g_utf8_casefold (normalized, -1);
 
-  ilen = strlen (tmp);
+    ilen = strlen (tmp);
 
-  while (i < ilen)
-    {
-      gunichar unichar;
-      gchar *next_utf8;
-      gint utf8_len;
+    while (i < ilen) {
+        gunichar unichar;
+        gchar *next_utf8;
+        gint utf8_len;
 
-      /* Get next character of the word as UCS4 */
-      unichar = g_utf8_get_char_validated (&tmp[i], -1);
+        /* Get next character of the word as UCS4 */
+        unichar = g_utf8_get_char_validated (&tmp[i], -1);
 
-      /* Invalid UTF-8 character or end of original string. */
-      if (unichar == (gunichar) -1 ||
-          unichar == (gunichar) -2)
-        {
-          break;
+        /* Invalid UTF-8 character or end of original string. */
+        if (unichar == (gunichar) -1 || unichar == (gunichar) -2) {
+            break;
         }
 
-      /* Find next UTF-8 character */
-      next_utf8 = g_utf8_next_char (&tmp[i]);
-      utf8_len = next_utf8 - &tmp[i];
+        /* Find next UTF-8 character */
+        next_utf8 = g_utf8_next_char (&tmp[i]);
+        utf8_len = next_utf8 - &tmp[i];
 
-      if (IS_CDM_UCS4 (unichar) || IS_SOFT_HYPHEN (unichar))
-        {
-          /* If the given unichar is a combining diacritical mark,
-           * just update the original index, not the output one */
-          i += utf8_len;
-          continue;
+        if (IS_CDM_UCS4 (unichar) || IS_SOFT_HYPHEN (unichar)) {
+            /* If the given unichar is a combining diacritical mark,
+             * just update the original index, not the output one */
+            i += utf8_len;
+            continue;
         }
 
-      /* If already found a previous combining
-       * diacritical mark, indexes are different so
-       * need to copy characters. As output and input
-       * buffers may overlap, need to use memmove
-       * instead of memcpy */
-      if (i != j)
-        {
-          memmove (&tmp[j], &tmp[i], utf8_len);
+        /* If already found a previous combining
+         * diacritical mark, indexes are different so
+         * need to copy characters. As output and input
+         * buffers may overlap, need to use memmove
+         * instead of memcpy */
+        if (i != j) {
+            memmove (&tmp[j], &tmp[i], utf8_len);
         }
 
-      /* Update both indexes */
-      i += utf8_len;
-      j += utf8_len;
+        /* Update both indexes */
+        i += utf8_len;
+        j += utf8_len;
     }
 
-  /* Force proper string end */
-  tmp[j] = '\0';
+    /* Force proper string end */
+    tmp[j] = '\0';
 
-  return tmp;
+    return tmp;
 }
 
 char *
 cc_util_get_smart_date (GDateTime *date)
 {
-        g_autoptr(GDateTime) today = NULL;
-        g_autoptr(GDateTime) local = NULL;
-        GTimeSpan span;
+    g_autoptr(GDateTime) today = NULL;
+    g_autoptr(GDateTime) local = NULL;
+    GTimeSpan span;
 
-        if (date == NULL)
-          return NULL;
+    if (date == NULL)
+        return NULL;
 
-        /* Set today date */
-        local = g_date_time_new_now_local ();
-        today = g_date_time_new_local (g_date_time_get_year (local),
-                                       g_date_time_get_month (local),
-                                       g_date_time_get_day_of_month (local),
-                                       0, 0, 0);
+    /* Set today date */
+    local = g_date_time_new_now_local ();
+    today = g_date_time_new_local (g_date_time_get_year (local), g_date_time_get_month (local),
+                                   g_date_time_get_day_of_month (local), 0, 0, 0);
 
-        span = g_date_time_difference (today, date);
-        if (span <= 0)
-          {
-            return g_strdup (_("Today"));
-          }
-        else if (span <= G_TIME_SPAN_DAY)
-          {
-            return g_strdup (_("Yesterday"));
-          }
-        else
-          {
-            if (g_date_time_get_year (date) == g_date_time_get_year (today))
-              {
-                /* Translators: This is a date format string in the style of "Feb 24". */
-                /* xgettext:no-c-format */
-                return g_date_time_format (date, _("%b %e"));
-              }
-            else
-              {
-                /* Translators: This is a date format string in the style of "Feb 24, 2013". */
-                return g_date_time_format (date, _("%b %e, %Y"));
-              }
-          }
+    span = g_date_time_difference (today, date);
+    if (span <= 0) {
+        return g_strdup (_("Today"));
+    } else if (span <= G_TIME_SPAN_DAY) {
+        return g_strdup (_("Yesterday"));
+    } else {
+        if (g_date_time_get_year (date) == g_date_time_get_year (today)) {
+            /* Translators: This is a date format string in the style of "Feb 24". */
+            /* xgettext:no-c-format */
+            return g_date_time_format (date, _("%b %e"));
+        } else {
+            /* Translators: This is a date format string in the style of "Feb 24, 2013". */
+            return g_date_time_format (date, _("%b %e, %Y"));
+        }
+    }
 }
 
 char *
 cc_util_get_smart_date_time (GDateTime *date)
 {
-  g_autofree gchar *date_str = NULL;
-  g_autofree gchar *smart_date = NULL;
+    g_autofree gchar *date_str = NULL;
+    g_autofree gchar *smart_date = NULL;
 
-  if (date == NULL)
-    return NULL;
+    if (date == NULL)
+        return NULL;
 
-  smart_date = cc_util_get_smart_date (date);
-  date_str = g_date_time_format (date, "\%X");
-  /* TRANSLATORS: This is the datetime format in the style of
-     "Aug 1, 10:10:10 PM", "Feb 24, 2013, 10:10:10 PM", "Today, 10:10:10 AM",
-     and "Yesterday, 10:10:10 AM" */
-  return g_strdup_printf (_("%1$s, %2$s"), smart_date, date_str);
+    smart_date = cc_util_get_smart_date (date);
+    date_str = g_date_time_format (date, "\%X");
+    /* TRANSLATORS: This is the datetime format in the style of
+       "Aug 1, 10:10:10 PM", "Feb 24, 2013, 10:10:10 PM", "Today, 10:10:10 AM",
+       and "Yesterday, 10:10:10 AM" */
+    return g_strdup_printf (_("%1$s, %2$s"), smart_date, date_str);
 }
 
 /* Copied from src/plugins/properties/bacon-video-widget-properties.c
@@ -171,97 +155,82 @@ cc_util_get_smart_date_time (GDateTime *date)
 char *
 cc_util_time_to_string_text (gint64 msecs)
 {
-  g_autofree gchar *hours = NULL;
-  g_autofree gchar *mins = NULL;
-  g_autofree gchar *secs = NULL;
-  gint sec, min, hour, _time;
+    g_autofree gchar *hours = NULL;
+    g_autofree gchar *mins = NULL;
+    g_autofree gchar *secs = NULL;
+    gint sec, min, hour, _time;
 
-  _time = (int) (msecs / 1000);
-  sec = _time % 60;
-  _time = _time - sec;
-  min = (_time % (60*60)) / 60;
-  _time = _time - (min * 60);
-  hour = _time / (60*60);
+    _time = (int) (msecs / 1000);
+    sec = _time % 60;
+    _time = _time - sec;
+    min = (_time % (60 * 60)) / 60;
+    _time = _time - (min * 60);
+    hour = _time / (60 * 60);
 
-  hours = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d hour", "%d hours", hour), hour);
-  mins = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d minute", "%d minutes", min), min);
-  secs = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d second", "%d seconds", sec), sec);
+    hours = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d hour", "%d hours", hour), hour);
+    mins = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d minute", "%d minutes", min), min);
+    secs = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d second", "%d seconds", sec), sec);
 
-  if (hour > 0)
-    {
-      if (min > 0 && sec > 0)
-        {
-          /* 5 hours 2 minutes 12 seconds */
-          return g_strdup_printf (C_("hours minutes seconds", "%s %s %s"), hours, mins, secs);
+    if (hour > 0) {
+        if (min > 0 && sec > 0) {
+            /* 5 hours 2 minutes 12 seconds */
+            return g_strdup_printf (C_("hours minutes seconds", "%s %s %s"), hours, mins, secs);
+        } else if (min > 0) {
+            /* 5 hours 2 minutes */
+            return g_strdup_printf (C_("hours minutes", "%s %s"), hours, mins);
+        } else {
+            /* 5 hours */
+            return g_strdup_printf (C_("hours", "%s"), hours);
         }
-      else if (min > 0)
-        {
-          /* 5 hours 2 minutes */
-          return g_strdup_printf (C_("hours minutes", "%s %s"), hours, mins);
+    } else if (min > 0) {
+        if (sec > 0) {
+            /* 2 minutes 12 seconds */
+            return g_strdup_printf (C_("minutes seconds", "%s %s"), mins, secs);
+        } else {
+            /* 2 minutes */
+            return g_strdup_printf (C_("minutes", "%s"), mins);
         }
-      else
-        {
-          /* 5 hours */
-          return g_strdup_printf (C_("hours", "%s"), hours);
-        }
-    }
-  else if (min > 0)
-    {
-      if (sec > 0)
-        {
-          /* 2 minutes 12 seconds */
-          return g_strdup_printf (C_("minutes seconds", "%s %s"), mins, secs);
-        }
-      else
-        {
-          /* 2 minutes */
-          return g_strdup_printf (C_("minutes", "%s"), mins);
-        }
-    }
-  else if (sec > 0)
-    {
-      /* 10 seconds */
-      return g_strdup (secs);
-    }
-  else
-    {
-      /* 0 seconds */
-      return g_strdup (_("0 seconds"));
+    } else if (sec > 0) {
+        /* 10 seconds */
+        return g_strdup (secs);
+    } else {
+        /* 0 seconds */
+        return g_strdup (_("0 seconds"));
     }
 }
 
 char *
 cc_util_app_id_to_display_name (const char *app_id)
 {
-  g_autofree char *id = NULL;
-  g_autoptr(GAppInfo) info = NULL;
+    g_autofree char *id = NULL;
+    g_autoptr(GAppInfo) info = NULL;
 
-  id = g_strconcat (app_id, ".desktop", NULL);
-  info = G_APP_INFO (g_desktop_app_info_new (id));
+    id = g_strconcat (app_id, ".desktop", NULL);
+    info = G_APP_INFO (g_desktop_app_info_new (id));
 
-  if (info)
-    return g_strdup (g_app_info_get_display_name (info));
+    if (info)
+        return g_strdup (g_app_info_get_display_name (info));
 
-  return g_strdup (app_id);
+    return g_strdup (app_id);
 }
 
 /**
  * cc_util_get_localized_weekday_name:
  * @iso_weekday_number: ISO day number (Monday: 1, Sunday: 7)
- * 
+ *
  * Returns: (transfer full): the name of the weekday in active locale.
  */
 char *
 cc_util_get_localized_weekday_name (gint iso_weekday_number)
 {
-  g_autoptr(GDateTime) first_sunday = NULL;
-  g_autoptr(GDateTime) item_date = NULL;
+    g_autoptr(GDateTime) first_sunday = NULL;
+    g_autoptr(GDateTime) item_date = NULL;
 
-  /* 1970-01-04 was a Sunday */
-  first_sunday = g_date_time_new_from_unix_utc_usec (G_TIME_SPAN_DAY * 3);
-  item_date = g_date_time_add_days (first_sunday, iso_weekday_number);
+    /* 1970-01-04 was a Sunday */
+    first_sunday = g_date_time_new_from_unix_utc_usec (G_TIME_SPAN_DAY * 3);
+    item_date = g_date_time_add_days (first_sunday, iso_weekday_number);
 
-  g_assert_nonnull (item_date);
+    g_assert_nonnull (item_date);
 
-  return g_date_time_format (item_date, "%A");
+    return g_date_time_format (item_date, "%A");
 }

@@ -24,86 +24,60 @@
 
 #pragma once
 
+#include <NetworkManager.h>
 #include <glib-object.h>
 #include <libmm-glib.h>
-#include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-#define CC_WWAN_APN_PRIORITY_LOW  (1)
+#define CC_WWAN_APN_PRIORITY_LOW (1)
 #define CC_WWAN_APN_PRIORITY_HIGH (2)
 
-#define CC_TYPE_WWAN_DATA_APN (cc_wwan_data_apn_get_type())
+#define CC_TYPE_WWAN_DATA_APN (cc_wwan_data_apn_get_type ())
 G_DECLARE_FINAL_TYPE (CcWwanDataApn, cc_wwan_data_apn, CC, WWAN_DATA_APN, GObject);
-#define CC_TYPE_WWAN_DATA (cc_wwan_data_get_type())
+#define CC_TYPE_WWAN_DATA (cc_wwan_data_get_type ())
 G_DECLARE_FINAL_TYPE (CcWwanData, cc_wwan_data, CC, WWAN_DATA, GObject);
-CcWwanData    *cc_wwan_data_new                   (MMObject             *mm_object,
-                                                   NMClient             *nm_client);
-GError        *cc_wwan_data_get_error             (CcWwanData           *self);
-const gchar   *cc_wwan_data_get_simple_html_error (CcWwanData           *self);
-GListModel    *cc_wwan_data_get_apn_list          (CcWwanData           *self);
-void           cc_wwan_data_save_apn              (CcWwanData           *self,
-                                                   CcWwanDataApn        *apn,
-                                                   GCancellable         *cancellable,
-                                                   GAsyncReadyCallback   callback,
-                                                   gpointer              user_data);
-CcWwanDataApn *cc_wwan_data_save_apn_finish       (CcWwanData           *self,
-                                                   GAsyncResult         *result,
-                                                   GError              **error);
-void           cc_wwan_data_save_settings         (CcWwanData          *self,
-                                                   GCancellable        *cancellable,
-                                                   GAsyncReadyCallback  callback,
-                                                   gpointer             user_data);
-gboolean       cc_wwan_data_save_settings_finish  (CcWwanData          *self,
-                                                   GAsyncResult        *result,
-                                                   GError             **error);
-gboolean       cc_wwan_data_delete_apn            (CcWwanData          *self,
-                                                   CcWwanDataApn       *apn,
-                                                   GCancellable        *cancellable,
-                                                   GError             **error);
-gboolean       cc_wwan_data_set_default_apn       (CcWwanData          *self,
-                                                   CcWwanDataApn       *apn);
-CcWwanDataApn *cc_wwan_data_get_default_apn       (CcWwanData          *self);
-gboolean       cc_wwan_data_get_enabled           (CcWwanData          *self);
-void           cc_wwan_data_set_enabled           (CcWwanData          *self,
-                                                   gboolean             enabled);
-gboolean       cc_wwan_data_get_roaming_enabled   (CcWwanData          *self);
-void           cc_wwan_data_set_roaming_enabled   (CcWwanData          *self,
-                                                   gboolean             enable_roaming);
+CcWwanData *cc_wwan_data_new (MMObject *mm_object, NMClient *nm_client);
+GError *cc_wwan_data_get_error (CcWwanData *self);
+const gchar *cc_wwan_data_get_simple_html_error (CcWwanData *self);
+GListModel *cc_wwan_data_get_apn_list (CcWwanData *self);
+void cc_wwan_data_save_apn (CcWwanData *self, CcWwanDataApn *apn, GCancellable *cancellable,
+                            GAsyncReadyCallback callback, gpointer user_data);
+CcWwanDataApn *cc_wwan_data_save_apn_finish (CcWwanData *self, GAsyncResult *result, GError **error);
+void cc_wwan_data_save_settings (CcWwanData *self, GCancellable *cancellable, GAsyncReadyCallback callback,
+                                 gpointer user_data);
+gboolean cc_wwan_data_save_settings_finish (CcWwanData *self, GAsyncResult *result, GError **error);
+gboolean cc_wwan_data_delete_apn (CcWwanData *self, CcWwanDataApn *apn, GCancellable *cancellable, GError **error);
+gboolean cc_wwan_data_set_default_apn (CcWwanData *self, CcWwanDataApn *apn);
+CcWwanDataApn *cc_wwan_data_get_default_apn (CcWwanData *self);
+gboolean cc_wwan_data_get_enabled (CcWwanData *self);
+void cc_wwan_data_set_enabled (CcWwanData *self, gboolean enabled);
+gboolean cc_wwan_data_get_roaming_enabled (CcWwanData *self);
+void cc_wwan_data_set_roaming_enabled (CcWwanData *self, gboolean enable_roaming);
 
-CcWwanDataApn *cc_wwan_data_apn_new          (void);
-const gchar   *cc_wwan_data_apn_get_name     (CcWwanDataApn *apn);
-void           cc_wwan_data_apn_set_name     (CcWwanDataApn *apn,
-                                              const gchar   *name);
-const gchar   *cc_wwan_data_apn_get_apn      (CcWwanDataApn *apn);
-void           cc_wwan_data_apn_set_apn      (CcWwanDataApn *apn,
-                                              const gchar   *apn_name);
-const gchar   *cc_wwan_data_apn_get_username (CcWwanDataApn *apn);
-void           cc_wwan_data_apn_set_username (CcWwanDataApn *apn,
-                                              const gchar   *username);
-const gchar   *cc_wwan_data_apn_get_password (CcWwanDataApn *apn);
-void           cc_wwan_data_apn_set_password (CcWwanDataApn *apn,
-                                              const gchar   *password);
-gint           cc_wwan_data_get_priority     (CcWwanData    *self);
-void           cc_wwan_data_set_priority     (CcWwanData    *self,
-                                              int            priority);
-const gchar   *cc_wwan_data_apn_get_initial_eps_apn      (CcWwanDataApn *apn);
-void           cc_wwan_data_apn_set_initial_eps_apn      (CcWwanDataApn *apn,
-                                                          const gchar   *apn_name);
-const gchar   *cc_wwan_data_apn_get_initial_eps_username (CcWwanDataApn *apn);
-void           cc_wwan_data_apn_set_initial_eps_username (CcWwanDataApn *apn,
-                                                          const gchar   *username);
-const gchar   *cc_wwan_data_apn_get_initial_eps_password (CcWwanDataApn *apn);
-void           cc_wwan_data_apn_set_initial_eps_password (CcWwanDataApn *apn,
-                                                          const gchar   *password);
+CcWwanDataApn *cc_wwan_data_apn_new (void);
+const gchar *cc_wwan_data_apn_get_name (CcWwanDataApn *apn);
+void cc_wwan_data_apn_set_name (CcWwanDataApn *apn, const gchar *name);
+const gchar *cc_wwan_data_apn_get_apn (CcWwanDataApn *apn);
+void cc_wwan_data_apn_set_apn (CcWwanDataApn *apn, const gchar *apn_name);
+const gchar *cc_wwan_data_apn_get_username (CcWwanDataApn *apn);
+void cc_wwan_data_apn_set_username (CcWwanDataApn *apn, const gchar *username);
+const gchar *cc_wwan_data_apn_get_password (CcWwanDataApn *apn);
+void cc_wwan_data_apn_set_password (CcWwanDataApn *apn, const gchar *password);
+gint cc_wwan_data_get_priority (CcWwanData *self);
+void cc_wwan_data_set_priority (CcWwanData *self, int priority);
+const gchar *cc_wwan_data_apn_get_initial_eps_apn (CcWwanDataApn *apn);
+void cc_wwan_data_apn_set_initial_eps_apn (CcWwanDataApn *apn, const gchar *apn_name);
+const gchar *cc_wwan_data_apn_get_initial_eps_username (CcWwanDataApn *apn);
+void cc_wwan_data_apn_set_initial_eps_username (CcWwanDataApn *apn, const gchar *username);
+const gchar *cc_wwan_data_apn_get_initial_eps_password (CcWwanDataApn *apn);
+void cc_wwan_data_apn_set_initial_eps_password (CcWwanDataApn *apn, const gchar *password);
 
 guint cc_wwan_data_apn_get_initial_eps_auth_method (CcWwanDataApn *apn);
-void cc_wwan_data_apn_set_initial_eps_auth_method  (CcWwanDataApn *apn,
-                                                    guint allowed_auth);
+void cc_wwan_data_apn_set_initial_eps_auth_method (CcWwanDataApn *apn, guint allowed_auth);
 
 gboolean cc_wwan_data_apn_should_configure_initial_eps_bearer (CcWwanDataApn *apn);
 
-void cc_wwan_data_apn_set_should_configure_initial_eps_bearer (CcWwanDataApn *apn,
-                                                               gboolean       configure);
+void cc_wwan_data_apn_set_should_configure_initial_eps_bearer (CcWwanDataApn *apn, gboolean configure);
 
 G_END_DECLS

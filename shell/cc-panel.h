@@ -44,8 +44,7 @@
  */
 typedef void (*CcPanelStaticInitFunc) (void);
 
-
-#define CC_TYPE_PANEL (cc_panel_get_type())
+#define CC_TYPE_PANEL (cc_panel_get_type ())
 G_DECLARE_DERIVABLE_TYPE (CcPanel, cc_panel, CC, PANEL, AdwNavigationPage);
 /**
  * CcPanelVisibility:
@@ -54,11 +53,10 @@ G_DECLARE_DERIVABLE_TYPE (CcPanel, cc_panel, CC, PANEL, AdwNavigationPage);
  * @CC_PANEL_VISIBLE_IN_SEARCH: Panel is hidden from main view, but can be accessed from search.
  * @CC_PANEL_VISIBLE: Panel is visible everywhere.
  */
-typedef enum
-{
-  CC_PANEL_HIDDEN,
-  CC_PANEL_VISIBLE_IN_SEARCH,
-  CC_PANEL_VISIBLE,
+typedef enum {
+    CC_PANEL_HIDDEN,
+    CC_PANEL_VISIBLE_IN_SEARCH,
+    CC_PANEL_VISIBLE,
 } CcPanelVisibility;
 
 /* cc-shell.h requires CcPanel, so make sure it is defined first */
@@ -71,38 +69,32 @@ G_BEGIN_DECLS
  *
  * The contents of this struct are private and should not be accessed directly.
  */
-struct _CcPanelClass
-{
-  /*< private >*/
-  AdwNavigationPageClass parent_class;
+struct _CcPanelClass {
+    /*< private >*/
+    AdwNavigationPageClass parent_class;
 
-  const gchar* (*get_help_uri)       (CcPanel *panel);
+    const gchar *(*get_help_uri) (CcPanel *panel);
 };
 
-CcShell*      cc_panel_get_shell          (CcPanel     *panel);
+CcShell *cc_panel_get_shell (CcPanel *panel);
 
-GPermission*  cc_panel_get_permission     (CcPanel     *panel);
+GPermission *cc_panel_get_permission (CcPanel *panel);
 
-const gchar*  cc_panel_get_help_uri       (CcPanel     *panel);
+const gchar *cc_panel_get_help_uri (CcPanel *panel);
 
-GCancellable *cc_panel_get_cancellable    (CcPanel     *panel);
+GCancellable *cc_panel_get_cancellable (CcPanel *panel);
 
-void          cc_panel_deactivate         (CcPanel     *panel);
+void cc_panel_deactivate (CcPanel *panel);
 
-void          cc_panel_add_subpage        (CcPanel     *panel,
-                                           const gchar *page_tag,
-                                           AdwNavigationPage *subpage);
+void cc_panel_add_subpage (CcPanel *panel, const gchar *page_tag, AdwNavigationPage *subpage);
 
-void          cc_panel_add_static_subpage (CcPanel     *panel,
-                                           const gchar *page_name,
-                                           GType        page_type);
+void cc_panel_add_static_subpage (CcPanel *panel, const gchar *page_name, GType page_type);
 
-void          cc_panel_push_subpage       (CcPanel     *panel,
-                                           AdwNavigationPage *subpage);
+void cc_panel_push_subpage (CcPanel *panel, AdwNavigationPage *subpage);
 
-void          cc_panel_pop_visible_subpage (CcPanel    *panel);
+void cc_panel_pop_visible_subpage (CcPanel *panel);
 
-void          cc_panel_enable_single_page_mode (CcPanel   *panel);
+void cc_panel_enable_single_page_mode (CcPanel *panel);
 
 AdwNavigationPage *cc_panel_get_visible_subpage (CcPanel *panel);
 

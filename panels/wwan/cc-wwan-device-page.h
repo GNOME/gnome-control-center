@@ -30,12 +30,10 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WWAN_DEVICE_PAGE (cc_wwan_device_page_get_type())
+#define CC_TYPE_WWAN_DEVICE_PAGE (cc_wwan_device_page_get_type ())
 G_DECLARE_FINAL_TYPE (CcWwanDevicePage, cc_wwan_device_page, CC, WWAN_DEVICE_PAGE, GtkBox);
-CcWwanDevicePage *cc_wwan_device_page_new           (CcWwanDevice     *device,
-                                                     GtkWidget        *toast_overlay);
-CcWwanDevice     *cc_wwan_device_page_get_device    (CcWwanDevicePage *self);
-void              cc_wwan_device_page_set_sim_index (CcWwanDevicePage *self,
-                                                     gint              sim_index);
+CcWwanDevicePage *cc_wwan_device_page_new (CcWwanDevice *device, GtkWidget *toast_overlay);
+CcWwanDevice *cc_wwan_device_page_get_device (CcWwanDevicePage *self);
+void cc_wwan_device_page_set_sim_index (CcWwanDevicePage *self, gint sim_index);
 
 G_END_DECLS

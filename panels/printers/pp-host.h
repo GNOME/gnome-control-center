@@ -20,60 +20,43 @@
 
 #pragma once
 
-#include <glib-object.h>
-#include <gio/gio.h>
 #include "pp-utils.h"
+#include <gio/gio.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 
 #define PP_TYPE_HOST (pp_host_get_type ())
 G_DECLARE_DERIVABLE_TYPE (PpHost, pp_host, PP, HOST, GObject);
-struct _PpHostClass
-{
-  GObjectClass parent_class;
+struct _PpHostClass {
+    GObjectClass parent_class;
 };
 
-#define PP_HOST_UNSET_PORT               -1
-#define PP_HOST_DEFAULT_IPP_PORT        631
+#define PP_HOST_UNSET_PORT -1
+#define PP_HOST_DEFAULT_IPP_PORT 631
 #define PP_HOST_DEFAULT_JETDIRECT_PORT 9100
-#define PP_HOST_DEFAULT_LPD_PORT        515
+#define PP_HOST_DEFAULT_LPD_PORT 515
 
-PpHost        *pp_host_new                            (const gchar          *hostname);
+PpHost *pp_host_new (const gchar *hostname);
 
-void           pp_host_get_snmp_devices_async         (PpHost               *host,
-                                                       GCancellable         *cancellable,
-                                                       GAsyncReadyCallback   callback,
-                                                       gpointer              user_data);
+void pp_host_get_snmp_devices_async (PpHost *host, GCancellable *cancellable, GAsyncReadyCallback callback,
+                                     gpointer user_data);
 
-GPtrArray     *pp_host_get_snmp_devices_finish        (PpHost               *host,
-                                                       GAsyncResult         *result,
-                                                       GError              **error);
+GPtrArray *pp_host_get_snmp_devices_finish (PpHost *host, GAsyncResult *result, GError **error);
 
-void           pp_host_get_remote_cups_devices_async  (PpHost               *host,
-                                                       GCancellable         *cancellable,
-                                                       GAsyncReadyCallback   callback,
-                                                       gpointer              user_data);
+void pp_host_get_remote_cups_devices_async (PpHost *host, GCancellable *cancellable, GAsyncReadyCallback callback,
+                                            gpointer user_data);
 
-GPtrArray     *pp_host_get_remote_cups_devices_finish (PpHost               *host,
-                                                       GAsyncResult         *result,
-                                                       GError              **error);
+GPtrArray *pp_host_get_remote_cups_devices_finish (PpHost *host, GAsyncResult *result, GError **error);
 
-void           pp_host_get_jetdirect_devices_async    (PpHost               *host,
-                                                       GCancellable         *cancellable,
-                                                       GAsyncReadyCallback   callback,
-                                                       gpointer              user_data);
+void pp_host_get_jetdirect_devices_async (PpHost *host, GCancellable *cancellable, GAsyncReadyCallback callback,
+                                          gpointer user_data);
 
-GPtrArray     *pp_host_get_jetdirect_devices_finish   (PpHost               *host,
-                                                       GAsyncResult         *result,
-                                                       GError              **error);
+GPtrArray *pp_host_get_jetdirect_devices_finish (PpHost *host, GAsyncResult *result, GError **error);
 
-void           pp_host_get_lpd_devices_async          (PpHost               *host,
-                                                       GCancellable         *cancellable,
-                                                       GAsyncReadyCallback   callback,
-                                                       gpointer              user_data);
+void pp_host_get_lpd_devices_async (PpHost *host, GCancellable *cancellable, GAsyncReadyCallback callback,
+                                    gpointer user_data);
 
-GPtrArray     *pp_host_get_lpd_devices_finish         (PpHost               *host,
-                                                       GAsyncResult         *result,
-                                                       GError              **error);
+GPtrArray *pp_host_get_lpd_devices_finish (PpHost *host, GAsyncResult *result, GError **error);
 
 G_END_DECLS

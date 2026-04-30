@@ -19,20 +19,19 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#include <glib/gi18n.h>
 #include "cc-keyboard-shortcut-row.h"
 #include "keyboard-shortcuts.h"
+#include <glib/gi18n.h>
 
-struct _CcKeyboardShortcutRow
-{
-  AdwActionRow              parent_instance;
+struct _CcKeyboardShortcutRow {
+    AdwActionRow parent_instance;
 
-  GtkLabel                 *accelerator_label;
-  GtkButton                *reset_button;
-  GtkRevealer              *reset_revealer;
+    GtkLabel *accelerator_label;
+    GtkButton *reset_button;
+    GtkRevealer *reset_revealer;
 
-  CcKeyboardItem           *item;
-  CcKeyboardManager        *manager;
+    CcKeyboardItem *item;
+    CcKeyboardManager *manager;
 };
 
 G_DEFINE_FINAL_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, ADW_TYPE_ACTION_ROW)
@@ -40,98 +39,84 @@ G_DEFINE_FINAL_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, ADW_TYPE_A
 static void
 reset_shortcut_cb (CcKeyboardShortcutRow *self)
 {
-  cc_keyboard_manager_reset_shortcut (self->manager, self->item);
+    cc_keyboard_manager_reset_shortcut (self->manager, self->item);
 }
 
 static void
 cc_keyboard_shortcut_row_class_init (CcKeyboardShortcutRowClass *klass)
 {
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-keyboard-shortcut-row.ui");
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/keyboard/cc-keyboard-shortcut-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutRow, accelerator_label);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutRow, reset_button);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutRow, reset_revealer);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutRow, accelerator_label);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutRow, reset_button);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutRow, reset_revealer);
 
-  gtk_widget_class_bind_template_callback (widget_class, reset_shortcut_cb);
+    gtk_widget_class_bind_template_callback (widget_class, reset_shortcut_cb);
 }
 
 static void
 cc_keyboard_shortcut_row_init (CcKeyboardShortcutRow *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
 cc_kbd_shortcut_is_default_changed_cb (CcKeyboardShortcutRow *self)
 {
-  /* Embolden the label when the shortcut is modified */
-  if (cc_keyboard_item_is_value_default (self->item))
-    gtk_widget_remove_css_class (GTK_WIDGET (self->accelerator_label), "heading");
-  else
-    gtk_widget_add_css_class (GTK_WIDGET (self->accelerator_label), "heading");
+    /* Embolden the label when the shortcut is modified */
+    if (cc_keyboard_item_is_value_default (self->item))
+        gtk_widget_remove_css_class (GTK_WIDGET (self->accelerator_label), "heading");
+    else
+        gtk_widget_add_css_class (GTK_WIDGET (self->accelerator_label), "heading");
 }
 
 static gboolean
-transform_binding_to_accel (GBinding     *binding,
-                            const GValue *from_value,
-                            GValue       *to_value,
-                            gpointer      user_data)
+transform_binding_to_accel (GBinding *binding, const GValue *from_value, GValue *to_value, gpointer user_data)
 {
-  g_autoptr(CcKeyboardItem) item = NULL;
-  CcKeyCombo combo;
-  gchar *accelerator;
+    g_autoptr(CcKeyboardItem) item = NULL;
+    CcKeyCombo combo;
+    gchar *accelerator;
 
-  item = CC_KEYBOARD_ITEM (g_binding_dup_source (binding));
-  combo = cc_keyboard_item_get_primary_combo (item);
-  accelerator = convert_keysym_state_to_string (&combo);
+    item = CC_KEYBOARD_ITEM (g_binding_dup_source (binding));
+    combo = cc_keyboard_item_get_primary_combo (item);
+    accelerator = convert_keysym_state_to_string (&combo);
 
-  g_value_take_string (to_value, accelerator);
+    g_value_take_string (to_value, accelerator);
 
-  return TRUE;
+    return TRUE;
 }
 
 CcKeyboardShortcutRow *
-cc_keyboard_shortcut_row_new (CcKeyboardItem           *item,
-                              CcKeyboardManager        *manager,
-                              GtkSizeGroup             *size_group)
+cc_keyboard_shortcut_row_new (CcKeyboardItem *item, CcKeyboardManager *manager, GtkSizeGroup *size_group)
 {
-  CcKeyboardShortcutRow *self;
+    CcKeyboardShortcutRow *self;
 
-  self = g_object_new (CC_TYPE_KEYBOARD_SHORTCUT_ROW, NULL);
-  self->item = item;
-  self->manager = manager;
+    self = g_object_new (CC_TYPE_KEYBOARD_SHORTCUT_ROW, NULL);
+    self->item = item;
+    self->manager = manager;
 
-  g_object_bind_property (item, "description",
-                          self, "title",
-                          G_BINDING_SYNC_CREATE);
-  g_object_bind_property (item, "is-value-default",
-                          self->reset_revealer, "reveal-child",
-                          G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
-  g_object_bind_property_full (item,
-                               "key-combos",
-                               self->accelerator_label,
-                               "label",
-                               G_BINDING_SYNC_CREATE,
-                               transform_binding_to_accel,
-                               NULL, NULL, NULL);
+    g_object_bind_property (item, "description", self, "title", G_BINDING_SYNC_CREATE);
+    g_object_bind_property (item, "is-value-default", self->reset_revealer, "reveal-child",
+                            G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
+    g_object_bind_property_full (item, "key-combos", self->accelerator_label, "label", G_BINDING_SYNC_CREATE,
+                                 transform_binding_to_accel, NULL, NULL, NULL);
 
-  g_signal_connect_object (item, "notify::is-value-default",
-                           G_CALLBACK (cc_kbd_shortcut_is_default_changed_cb),
-                           self, G_CONNECT_SWAPPED);
-  cc_kbd_shortcut_is_default_changed_cb (self);
+    g_signal_connect_object (item, "notify::is-value-default", G_CALLBACK (cc_kbd_shortcut_is_default_changed_cb), self,
+                             G_CONNECT_SWAPPED);
+    cc_kbd_shortcut_is_default_changed_cb (self);
 
-  gtk_size_group_add_widget(size_group,
-                            GTK_WIDGET (self->accelerator_label));
+    gtk_size_group_add_widget (size_group, GTK_WIDGET (self->accelerator_label));
 
-  return self;
+    return self;
 }
 
 CcKeyboardItem *
 cc_keyboard_shortcut_row_get_item (CcKeyboardShortcutRow *self)
 {
-  g_return_val_if_fail (CC_IS_KEYBOARD_SHORTCUT_ROW (self), NULL);
+    g_return_val_if_fail (CC_IS_KEYBOARD_SHORTCUT_ROW (self), NULL);
 
-  return self->item;
+    return self->item;
 }

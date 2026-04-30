@@ -25,15 +25,12 @@
 
 G_BEGIN_DECLS
 
-gchar           *panel_device_status_to_localized_string       (NMDevice *nm_device,
-                                                                const gchar *speed);
+gchar *panel_device_status_to_localized_string (NMDevice *nm_device, const gchar *speed);
 
-NMConnection *net_device_get_find_connection   (NMClient *client,
-                                                NMDevice *device);
+NMConnection *net_device_get_find_connection (NMClient *client, NMDevice *device);
 
-GSList       *net_device_get_valid_connections (NMClient *client,
-                                                NMDevice *device);
+GSList *net_device_get_valid_connections (NMClient *client, NMDevice *device);
 
-gchar   *net_device_get_ip6_addresses (NMIPConfig *ipv6_config);
+gchar *net_device_get_ip6_addresses (NMIPConfig *ipv6_config);
 
 G_END_DECLS

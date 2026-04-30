@@ -23,9 +23,9 @@
 #ifndef _VPN_HELPERS_H_
 #define _VPN_HELPERS_H_
 
+#include <NetworkManager.h>
 #include <glib.h>
 #include <gtk/gtk.h>
-#include <NetworkManager.h>
 
 GSList *vpn_get_plugins (void);
 
@@ -34,4 +34,4 @@ NMVpnEditorPlugin *vpn_get_plugin_by_service (const char *service);
 typedef void (*VpnImportCallback) (NMConnection *connection, gpointer user_data);
 void vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data);
 
-#endif  /* _VPN_HELPERS_H_ */
+#endif /* _VPN_HELPERS_H_ */

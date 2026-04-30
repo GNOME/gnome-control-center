@@ -18,8 +18,8 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include <adwaita.h>
+#include <gtk/gtk.h>
 
 #define GOA_API_IS_SUBJECT_TO_CHANGE
 #include <goa/goa.h>
@@ -28,8 +28,8 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_ONLINE_ACCOUNT_ROW (cc_online_account_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcOnlineAccountRow, cc_online_account_row, CC, ONLINE_ACCOUNT_ROW, AdwActionRow);
-CcOnlineAccountRow *cc_online_account_row_new        (GoaObject *object);
+CcOnlineAccountRow *cc_online_account_row_new (GoaObject *object);
 
-GoaObject          *cc_online_account_row_get_object (CcOnlineAccountRow *row);
+GoaObject *cc_online_account_row_get_object (CcOnlineAccountRow *row);
 
 G_END_DECLS

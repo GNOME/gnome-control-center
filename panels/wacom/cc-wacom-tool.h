@@ -20,28 +20,26 @@
 
 #pragma once
 
+#include "cc-wacom-device.h"
 #include "config.h"
 #include "gsd-device-manager.h"
-#include "cc-wacom-device.h"
 #include <glib.h>
 
 #define CC_TYPE_WACOM_TOOL (cc_wacom_tool_get_type ())
 G_DECLARE_FINAL_TYPE (CcWacomTool, cc_wacom_tool, CC, WACOM_TOOL, GObject);
-CcWacomTool   * cc_wacom_tool_new             (guint64        serial,
-					       guint64        id,
-					       CcWacomDevice *device);
+CcWacomTool *cc_wacom_tool_new (guint64 serial, guint64 id, CcWacomDevice *device);
 
-guint64         cc_wacom_tool_get_serial      (CcWacomTool   *tool);
-guint64         cc_wacom_tool_get_id          (CcWacomTool   *tool);
+guint64 cc_wacom_tool_get_serial (CcWacomTool *tool);
+guint64 cc_wacom_tool_get_id (CcWacomTool *tool);
 
-const gchar   * cc_wacom_tool_get_name        (CcWacomTool   *tool);
-const gchar   * cc_wacom_tool_get_icon_name   (CcWacomTool   *tool);
+const gchar *cc_wacom_tool_get_name (CcWacomTool *tool);
+const gchar *cc_wacom_tool_get_icon_name (CcWacomTool *tool);
 
-GSettings     * cc_wacom_tool_get_settings    (CcWacomTool   *tool);
+GSettings *cc_wacom_tool_get_settings (CcWacomTool *tool);
 
-guint           cc_wacom_tool_get_num_buttons (CcWacomTool   *tool);
-gboolean        cc_wacom_tool_get_has_paired_eraser  (CcWacomTool   *tool);
+guint cc_wacom_tool_get_num_buttons (CcWacomTool *tool);
+gboolean cc_wacom_tool_get_has_paired_eraser (CcWacomTool *tool);
 
-gchar         * cc_wacom_tool_get_description (CcWacomTool   *tool);
+gchar *cc_wacom_tool_get_description (CcWacomTool *tool);
 
-gboolean        cc_wacom_tool_is_puck         (CcWacomTool   *tool);
+gboolean cc_wacom_tool_is_puck (CcWacomTool *tool);

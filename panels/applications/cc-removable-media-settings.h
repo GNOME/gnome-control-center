@@ -24,7 +24,8 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_REMOVABLE_MEDIA_SETTINGS (cc_removable_media_settings_get_type ())
-G_DECLARE_FINAL_TYPE (CcRemovableMediaSettings, cc_removable_media_settings, CC, REMOVABLE_MEDIA_SETTINGS, AdwPreferencesGroup);
-CcRemovableMediaSettings* cc_removable_media_settings_new (void);
+G_DECLARE_FINAL_TYPE (CcRemovableMediaSettings, cc_removable_media_settings, CC, REMOVABLE_MEDIA_SETTINGS,
+                      AdwPreferencesGroup);
+CcRemovableMediaSettings *cc_removable_media_settings_new (void);
 
 G_END_DECLS

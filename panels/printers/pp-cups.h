@@ -20,56 +20,39 @@
 
 #pragma once
 
-#include <glib-object.h>
-#include <gio/gio.h>
 #include "pp-utils.h"
+#include <gio/gio.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 
 #define PP_TYPE_CUPS (pp_cups_get_type ())
 G_DECLARE_FINAL_TYPE (PpCups, pp_cups, PP, CUPS, GObject);
-typedef struct{
-  cups_dest_t *dests;
-  gint         num_of_dests;
+typedef struct {
+    cups_dest_t *dests;
+    gint num_of_dests;
 } PpCupsDests;
 
-PpCups      *pp_cups_new              (void);
+PpCups *pp_cups_new (void);
 
-void         pp_cups_get_dests_async  (PpCups               *cups,
-                                       GCancellable         *cancellable,
-                                       GAsyncReadyCallback   callback,
-                                       gpointer              user_data);
+void pp_cups_get_dests_async (PpCups *cups, GCancellable *cancellable, GAsyncReadyCallback callback,
+                              gpointer user_data);
 
-PpCupsDests *pp_cups_get_dests_finish (PpCups               *cups,
-                                       GAsyncResult         *result,
-                                       GError              **error);
+PpCupsDests *pp_cups_get_dests_finish (PpCups *cups, GAsyncResult *result, GError **error);
 
-void         pp_cups_connection_test_async (PpCups              *cups,
-                                            GCancellable        *cancellable,
-                                            GAsyncReadyCallback  callback,
-                                            gpointer             user_data);
+void pp_cups_connection_test_async (PpCups *cups, GCancellable *cancellable, GAsyncReadyCallback callback,
+                                    gpointer user_data);
 
-gboolean     pp_cups_connection_test_finish (PpCups         *cups,
-                                             GAsyncResult   *result,
-                                             GError        **error);
+gboolean pp_cups_connection_test_finish (PpCups *cups, GAsyncResult *result, GError **error);
 
-void         pp_cups_cancel_subscription_async    (PpCups              *cups,
-                                                   gint                 subscription_id,
-                                                   GAsyncReadyCallback  callback,
-                                                   gpointer             user_data);
+void pp_cups_cancel_subscription_async (PpCups *cups, gint subscription_id, GAsyncReadyCallback callback,
+                                        gpointer user_data);
 
-gboolean     pp_cups_cancel_subscription_finish   (PpCups                *cups,
-                                                   GAsyncResult          *result);
+gboolean pp_cups_cancel_subscription_finish (PpCups *cups, GAsyncResult *result);
 
-void         pp_cups_renew_subscription_async  (PpCups                *cups,
-                                                gint                   subscription_id,
-                                                gchar                **events,
-                                                gint                   lease_duration,
-                                                GCancellable          *cancellable,
-                                                GAsyncReadyCallback    callback,
-                                                gpointer               user_data);
+void pp_cups_renew_subscription_async (PpCups *cups, gint subscription_id, gchar **events, gint lease_duration,
+                                       GCancellable *cancellable, GAsyncReadyCallback callback, gpointer user_data);
 
-gint         pp_cups_renew_subscription_finish (PpCups                *cups,
-                                                GAsyncResult          *result);
+gint pp_cups_renew_subscription_finish (PpCups *cups, GAsyncResult *result);
 
 G_END_DECLS

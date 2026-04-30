@@ -20,9 +20,9 @@
 
 #pragma once
 
+#include <act/act.h>
 #include <adwaita.h>
 #include <gtk/gtk.h>
-#include <act/act.h>
 
 G_BEGIN_DECLS
 

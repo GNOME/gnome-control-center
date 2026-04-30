@@ -20,14 +20,13 @@
 
 #pragma once
 
-#include <adwaita.h>
 #include "pp-utils.h"
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define PP_TYPE_OPTIONS_DIALOG (pp_options_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (PpOptionsDialog, pp_options_dialog, PP, OPTIONS_DIALOG, AdwWindow);
-PpOptionsDialog *pp_options_dialog_new (gchar   *printer_name,
-                                        gboolean sensitive);
+PpOptionsDialog *pp_options_dialog_new (gchar *printer_name, gboolean sensitive);
 
 G_END_DECLS

@@ -24,40 +24,24 @@
 
 G_BEGIN_DECLS
 
-gboolean         bonsai_is_tls_hash                                       (const gchar          *hash);
-GTlsCertificate *bonsai_tls_certificate_new_generate                      (const gchar          *public_key_path,
-                                                                           const gchar          *private_key_path,
-                                                                           const gchar          *c,
-                                                                           const gchar          *cn,
-                                                                           GCancellable         *cancellable,
-                                                                           GError              **error);
-void             bonsai_tls_certificate_new_generate_async                (const gchar          *public_key_path,
-                                                                           const gchar          *private_key_path,
-                                                                           const gchar          *c,
-                                                                           const gchar          *cn,
-                                                                           GCancellable         *cancellable,
-                                                                           GAsyncReadyCallback   callback,
-                                                                           gpointer              user_data);
-GTlsCertificate *bonsai_tls_certificate_new_generate_finish               (GAsyncResult         *result,
-                                                                           GError              **error);
-gchar           *bonsai_tls_certificate_get_hash                          (GTlsCertificate      *cert);
-GTlsCertificate *bonsai_tls_certificate_new_from_files_or_generate        (const gchar          *public_key_path,
-                                                                           const gchar          *private_key_path,
-                                                                           const gchar          *c,
-                                                                           const gchar          *cn,
-                                                                           GCancellable         *cancellable,
-                                                                           GError              **error);
-void             bonsai_tls_certificate_new_from_files_or_generate_async  (const gchar          *public_key_path,
-                                                                           const gchar          *private_key_path,
-                                                                           const gchar          *c,
-                                                                           const gchar          *cn,
-                                                                           GCancellable         *cancellable,
-                                                                           GAsyncReadyCallback   callback,
-                                                                           gpointer              user_data);
-GTlsCertificate *bonsai_tls_certificate_new_from_files_or_generate_finish (GAsyncResult         *result,
-                                                                           GError              **error);
-GTlsCertificate *bonsai_tls_certificate_new_for_user                      (GCancellable         *cancellable,
-                                                                           GError              **error);
+gboolean bonsai_is_tls_hash (const gchar *hash);
+GTlsCertificate *bonsai_tls_certificate_new_generate (const gchar *public_key_path, const gchar *private_key_path,
+                                                      const gchar *c, const gchar *cn, GCancellable *cancellable,
+                                                      GError **error);
+void bonsai_tls_certificate_new_generate_async (const gchar *public_key_path, const gchar *private_key_path,
+                                                const gchar *c, const gchar *cn, GCancellable *cancellable,
+                                                GAsyncReadyCallback callback, gpointer user_data);
+GTlsCertificate *bonsai_tls_certificate_new_generate_finish (GAsyncResult *result, GError **error);
+gchar *bonsai_tls_certificate_get_hash (GTlsCertificate *cert);
+GTlsCertificate *bonsai_tls_certificate_new_from_files_or_generate (const gchar *public_key_path,
+                                                                    const gchar *private_key_path, const gchar *c,
+                                                                    const gchar *cn, GCancellable *cancellable,
+                                                                    GError **error);
+void bonsai_tls_certificate_new_from_files_or_generate_async (const gchar *public_key_path,
+                                                              const gchar *private_key_path, const gchar *c,
+                                                              const gchar *cn, GCancellable *cancellable,
+                                                              GAsyncReadyCallback callback, gpointer user_data);
+GTlsCertificate *bonsai_tls_certificate_new_from_files_or_generate_finish (GAsyncResult *result, GError **error);
+GTlsCertificate *bonsai_tls_certificate_new_for_user (GCancellable *cancellable, GError **error);
 
 G_END_DECLS
-

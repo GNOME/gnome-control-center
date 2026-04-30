@@ -17,8 +17,8 @@
 
 #pragma once
 
-#include <adwaita.h>
 #include <NetworkManager.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
@@ -29,4 +29,3 @@ G_DECLARE_FINAL_TYPE (CcQrCodeDialog, cc_qr_code_dialog, CC, QR_CODE_DIALOG, Adw
 GtkWidget *cc_qr_code_dialog_new (NMConnection *connection);
 
 G_END_DECLS
-

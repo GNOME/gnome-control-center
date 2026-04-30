@@ -20,22 +20,18 @@
 
 #pragma once
 
-#include <glib-object.h>
 #include <gio/gio.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 
 #define PP_TYPE_NEW_PRINTER (pp_new_printer_get_type ())
 G_DECLARE_FINAL_TYPE (PpNewPrinter, pp_new_printer, PP, NEW_PRINTER, GObject);
-PpNewPrinter *pp_new_printer_new        (void);
+PpNewPrinter *pp_new_printer_new (void);
 
-void          pp_new_printer_add_async  (PpNewPrinter         *host,
-                                         GCancellable         *cancellable,
-                                         GAsyncReadyCallback   callback,
-                                         gpointer              user_data);
+void pp_new_printer_add_async (PpNewPrinter *host, GCancellable *cancellable, GAsyncReadyCallback callback,
+                               gpointer user_data);
 
-gboolean      pp_new_printer_add_finish (PpNewPrinter         *host,
-                                         GAsyncResult         *result,
-                                         GError              **error);
+gboolean pp_new_printer_add_finish (PpNewPrinter *host, GAsyncResult *result, GError **error);
 
 G_END_DECLS

@@ -20,8 +20,8 @@
 
 #pragma once
 
-#include <adwaita.h>
 #include "cc-display-config.h"
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
@@ -30,21 +30,15 @@ typedef struct _CcDisplayPanel CcDisplayPanel;
 #define CC_TYPE_DISPLAY_SETTINGS (cc_display_settings_get_type ())
 G_DECLARE_FINAL_TYPE (CcDisplaySettings, cc_display_settings, CC, DISPLAY_SETTINGS, GtkBox);
 
-CcDisplaySettings*  cc_display_settings_new                 (CcDisplayPanel *panel);
+CcDisplaySettings *cc_display_settings_new (CcDisplayPanel *panel);
 
-gboolean            cc_display_settings_get_has_accelerometer (CcDisplaySettings    *settings);
-void                cc_display_settings_set_has_accelerometer (CcDisplaySettings    *settings,
-                                                               gboolean              has_accelerometer);
-CcDisplayConfig*    cc_display_settings_get_config            (CcDisplaySettings    *settings);
-void                cc_display_settings_set_config            (CcDisplaySettings    *settings,
-                                                               CcDisplayConfig      *config);
-CcDisplayMonitor*   cc_display_settings_get_selected_output   (CcDisplaySettings    *settings);
-void                cc_display_settings_set_selected_output   (CcDisplaySettings    *settings,
-                                                               CcDisplayMonitor     *output);
-void                cc_display_settings_refresh_layout        (CcDisplaySettings    *settings,
-                                                               gboolean              collapsed);
-void                cc_display_settings_set_multimonitor      (CcDisplaySettings    *self,
-                                                               gboolean              multimonitor);
+gboolean cc_display_settings_get_has_accelerometer (CcDisplaySettings *settings);
+void cc_display_settings_set_has_accelerometer (CcDisplaySettings *settings, gboolean has_accelerometer);
+CcDisplayConfig *cc_display_settings_get_config (CcDisplaySettings *settings);
+void cc_display_settings_set_config (CcDisplaySettings *settings, CcDisplayConfig *config);
+CcDisplayMonitor *cc_display_settings_get_selected_output (CcDisplaySettings *settings);
+void cc_display_settings_set_selected_output (CcDisplaySettings *settings, CcDisplayMonitor *output);
+void cc_display_settings_refresh_layout (CcDisplaySettings *settings, gboolean collapsed);
+void cc_display_settings_set_multimonitor (CcDisplaySettings *self, gboolean multimonitor);
 
 G_END_DECLS
-

@@ -31,9 +31,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WWAN_SIM_LOCK_DIALOG (cc_wwan_sim_lock_dialog_get_type())
+#define CC_TYPE_WWAN_SIM_LOCK_DIALOG (cc_wwan_sim_lock_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (CcWwanSimLockDialog, cc_wwan_sim_lock_dialog, CC, WWAN_SIM_LOCK_DIALOG, GtkDialog);
-GtkWindow *cc_wwan_sim_lock_dialog_new (GtkWindow    *parent_window,
-                                        CcWwanDevice *device);
+GtkWindow *cc_wwan_sim_lock_dialog_new (GtkWindow *parent_window, CcWwanDevice *device);
 
 G_END_DECLS

@@ -29,23 +29,19 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_KEYBOARD_SHORTCUT_EDITOR (cc_keyboard_shortcut_editor_get_type ())
 G_DECLARE_FINAL_TYPE (CcKeyboardShortcutEditor, cc_keyboard_shortcut_editor, CC, KEYBOARD_SHORTCUT_EDITOR, AdwDialog);
-typedef enum
-{
-  CC_SHORTCUT_EDITOR_CREATE,
-  CC_SHORTCUT_EDITOR_EDIT
+typedef enum {
+    CC_SHORTCUT_EDITOR_CREATE,
+    CC_SHORTCUT_EDITOR_EDIT
 } CcShortcutEditorMode;
 
-CcKeyboardShortcutEditor* cc_keyboard_shortcut_editor_new        (CcKeyboardManager        *manager);
+CcKeyboardShortcutEditor *cc_keyboard_shortcut_editor_new (CcKeyboardManager *manager);
 
-CcKeyboardItem*      cc_keyboard_shortcut_editor_get_item        (CcKeyboardShortcutEditor *self);
+CcKeyboardItem *cc_keyboard_shortcut_editor_get_item (CcKeyboardShortcutEditor *self);
 
-void                 cc_keyboard_shortcut_editor_set_item        (CcKeyboardShortcutEditor *self,
-                                                                  CcKeyboardItem           *item);
+void cc_keyboard_shortcut_editor_set_item (CcKeyboardShortcutEditor *self, CcKeyboardItem *item);
 
-CcShortcutEditorMode cc_keyboard_shortcut_editor_get_mode        (CcKeyboardShortcutEditor *self);
+CcShortcutEditorMode cc_keyboard_shortcut_editor_get_mode (CcKeyboardShortcutEditor *self);
 
-void                 cc_keyboard_shortcut_editor_set_mode        (CcKeyboardShortcutEditor *self,
-                                                                  CcShortcutEditorMode      mode);
+void cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self, CcShortcutEditorMode mode);
 
 G_END_DECLS
-

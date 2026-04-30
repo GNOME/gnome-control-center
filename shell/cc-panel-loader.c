@@ -21,12 +21,12 @@
 
 #include <config.h>
 
-#include <string.h>
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
+#include <string.h>
 
-#include "cc-panel.h"
 #include "cc-panel-loader.h"
+#include "cc-panel.h"
 
 #ifndef CC_PANEL_LOADER_NO_GTYPES
 
@@ -84,38 +84,37 @@ extern void cc_wwan_panel_static_init_func (void);
 
 #endif
 
-static CcPanelLoaderVtable default_panels[] =
-{
-  PANEL_TYPE("applications",     cc_applications_panel_get_type,         NULL),
-  PANEL_TYPE("background",       cc_background_panel_get_type,           NULL),
+static CcPanelLoaderVtable default_panels[] = {
+    PANEL_TYPE ("applications", cc_applications_panel_get_type, NULL),
+    PANEL_TYPE ("background", cc_background_panel_get_type, NULL),
 #ifdef BUILD_BLUETOOTH
-  PANEL_TYPE("bluetooth",        cc_bluetooth_panel_get_type,            NULL),
+    PANEL_TYPE ("bluetooth", cc_bluetooth_panel_get_type, NULL),
 #endif
-  PANEL_TYPE("color",            cc_color_panel_get_type,                NULL),
-  PANEL_TYPE("display",          cc_display_panel_get_type,              NULL),
-  PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type,             NULL),
-  PANEL_TYPE("mouse",            cc_mouse_panel_get_type,                NULL),
-  PANEL_TYPE("multitasking",     cc_multitasking_panel_get_type,         NULL),
+    PANEL_TYPE ("color", cc_color_panel_get_type, NULL),
+    PANEL_TYPE ("display", cc_display_panel_get_type, NULL),
+    PANEL_TYPE ("keyboard", cc_keyboard_panel_get_type, NULL),
+    PANEL_TYPE ("mouse", cc_mouse_panel_get_type, NULL),
+    PANEL_TYPE ("multitasking", cc_multitasking_panel_get_type, NULL),
 #ifdef BUILD_NETWORK
-  PANEL_TYPE("network",          cc_network_panel_get_type,              NULL),
-  PANEL_TYPE("wifi",             cc_wifi_panel_get_type,                 cc_wifi_panel_static_init_func),
+    PANEL_TYPE ("network", cc_network_panel_get_type, NULL),
+    PANEL_TYPE ("wifi", cc_wifi_panel_get_type, cc_wifi_panel_static_init_func),
 #endif
-  PANEL_TYPE("notifications",    cc_notifications_panel_get_type,        NULL),
-  PANEL_TYPE("online-accounts",  cc_online_accounts_panel_get_type,      NULL),
-  PANEL_TYPE("power",            cc_power_panel_get_type,                NULL),
-  PANEL_TYPE("printers",         cc_printers_panel_get_type,             NULL),
-  PANEL_TYPE("privacy",          cc_privacy_panel_get_type,              NULL),
-  PANEL_TYPE("search",           cc_search_panel_get_type,               NULL),
-  PANEL_TYPE("sharing",          cc_sharing_panel_get_type,              cc_sharing_panel_static_init_func),
-  PANEL_TYPE("sound",            cc_sound_panel_get_type,                NULL),
-  PANEL_TYPE("system",           cc_system_panel_get_type,               NULL),
-  PANEL_TYPE("universal-access", cc_ua_panel_get_type,                   NULL),
+    PANEL_TYPE ("notifications", cc_notifications_panel_get_type, NULL),
+    PANEL_TYPE ("online-accounts", cc_online_accounts_panel_get_type, NULL),
+    PANEL_TYPE ("power", cc_power_panel_get_type, NULL),
+    PANEL_TYPE ("printers", cc_printers_panel_get_type, NULL),
+    PANEL_TYPE ("privacy", cc_privacy_panel_get_type, NULL),
+    PANEL_TYPE ("search", cc_search_panel_get_type, NULL),
+    PANEL_TYPE ("sharing", cc_sharing_panel_get_type, cc_sharing_panel_static_init_func),
+    PANEL_TYPE ("sound", cc_sound_panel_get_type, NULL),
+    PANEL_TYPE ("system", cc_system_panel_get_type, NULL),
+    PANEL_TYPE ("universal-access", cc_ua_panel_get_type, NULL),
 #ifdef BUILD_WACOM
-  PANEL_TYPE("wacom",            cc_wacom_panel_get_type,                cc_wacom_panel_static_init_func),
+    PANEL_TYPE ("wacom", cc_wacom_panel_get_type, cc_wacom_panel_static_init_func),
 #endif
-  PANEL_TYPE("wellbeing",        cc_wellbeing_panel_get_type,            NULL),
+    PANEL_TYPE ("wellbeing", cc_wellbeing_panel_get_type, NULL),
 #ifdef BUILD_WWAN
-  PANEL_TYPE("wwan",             cc_wwan_panel_get_type,                 cc_wwan_panel_static_init_func),
+    PANEL_TYPE ("wwan", cc_wwan_panel_get_type, cc_wwan_panel_static_init_func),
 #endif
 };
 
@@ -125,18 +124,16 @@ static CcPanelLoaderVtable default_panels[] =
 static CcPanelLoaderVtable *panels_vtable = default_panels;
 static gsize panels_vtable_len = G_N_ELEMENTS (default_panels);
 
-typedef struct
-{
-  CcPanelCategory category;
-  const gchar *name;
+typedef struct {
+    CcPanelCategory category;
+    const gchar *name;
 } CcSubpageLoaderVtable;
 
-static CcSubpageLoaderVtable default_subpages[] =
-{
-  {CC_CATEGORY_SYSTEM, "about"},
-  {CC_CATEGORY_SYSTEM, "datetime"},
-  {CC_CATEGORY_SYSTEM, "region"},
-  {CC_CATEGORY_SYSTEM, "users"},
+static CcSubpageLoaderVtable default_subpages[] = {
+    { CC_CATEGORY_SYSTEM, "about" },
+    { CC_CATEGORY_SYSTEM, "datetime" },
+    { CC_CATEGORY_SYSTEM, "region" },
+    { CC_CATEGORY_SYSTEM, "users" },
 };
 static CcSubpageLoaderVtable *subpages_vtable = default_subpages;
 static gsize supages_vtable_len = G_N_ELEMENTS (default_subpages);
@@ -144,43 +141,41 @@ static gsize supages_vtable_len = G_N_ELEMENTS (default_subpages);
 static int
 parse_categories (GDesktopAppInfo *app)
 {
-  g_auto(GStrv) split = NULL;
-  const gchar *categories;
-  gint retval;
+    g_auto(GStrv) split = NULL;
+    const gchar *categories;
+    gint retval;
 
-  categories = g_desktop_app_info_get_categories (app);
-  split = g_strsplit (categories, ";", -1);
+    categories = g_desktop_app_info_get_categories (app);
+    split = g_strsplit (categories, ";", -1);
 
-  retval = -1;
+    retval = -1;
 
-#define const_strv(s) ((const gchar* const*) s)
+#define const_strv(s) ((const gchar *const *) s)
 
-  if (g_strv_contains (const_strv (split), "X-GNOME-ConnectivitySettings"))
-    retval = CC_CATEGORY_CONNECTIVITY;
-  else if (g_strv_contains (const_strv (split), "X-GNOME-PersonalizationSettings"))
-    retval = CC_CATEGORY_PERSONALIZATION;
-  else if (g_strv_contains (const_strv (split), "X-GNOME-AccountSettings"))
-    retval = CC_CATEGORY_ACCOUNT;
-  else if (g_strv_contains (const_strv (split), "X-GNOME-DevicesSettings"))
-    retval = CC_CATEGORY_DEVICES;
-  else if (g_strv_contains (const_strv (split), "X-GNOME-DetailsSettings"))
-    retval = CC_CATEGORY_DETAILS;
-  else if (g_strv_contains (const_strv (split), "X-GNOME-SystemSettings"))
-    retval = CC_CATEGORY_SYSTEM;
-  else if (g_strv_contains (const_strv (split), "X-GNOME-PrivacySettings"))
-    retval = CC_CATEGORY_PRIVACY;
-  else if (g_strv_contains (const_strv (split), "HardwareSettings"))
-    retval = CC_CATEGORY_HARDWARE;
+    if (g_strv_contains (const_strv (split), "X-GNOME-ConnectivitySettings"))
+        retval = CC_CATEGORY_CONNECTIVITY;
+    else if (g_strv_contains (const_strv (split), "X-GNOME-PersonalizationSettings"))
+        retval = CC_CATEGORY_PERSONALIZATION;
+    else if (g_strv_contains (const_strv (split), "X-GNOME-AccountSettings"))
+        retval = CC_CATEGORY_ACCOUNT;
+    else if (g_strv_contains (const_strv (split), "X-GNOME-DevicesSettings"))
+        retval = CC_CATEGORY_DEVICES;
+    else if (g_strv_contains (const_strv (split), "X-GNOME-DetailsSettings"))
+        retval = CC_CATEGORY_DETAILS;
+    else if (g_strv_contains (const_strv (split), "X-GNOME-SystemSettings"))
+        retval = CC_CATEGORY_SYSTEM;
+    else if (g_strv_contains (const_strv (split), "X-GNOME-PrivacySettings"))
+        retval = CC_CATEGORY_PRIVACY;
+    else if (g_strv_contains (const_strv (split), "HardwareSettings"))
+        retval = CC_CATEGORY_HARDWARE;
 
 #undef const_strv
 
-  if (retval < 0)
-    {
-      g_warning ("Invalid categories %s for panel %s",
-                 categories, g_app_info_get_id (G_APP_INFO (app)));
+    if (retval < 0) {
+        g_warning ("Invalid categories %s for panel %s", categories, g_app_info_get_id (G_APP_INFO (app)));
     }
 
-  return retval;
+    return retval;
 }
 
 #ifndef CC_PANEL_LOADER_NO_GTYPES
@@ -190,14 +185,14 @@ static GHashTable *panel_types;
 static void
 ensure_panel_types (void)
 {
-  int i;
+    int i;
 
-  if (G_LIKELY (panel_types != NULL))
-    return;
+    if (G_LIKELY (panel_types != NULL))
+        return;
 
-  panel_types = g_hash_table_new (g_str_hash, g_str_equal);
-  for (i = 0; i < panels_vtable_len; i++)
-    g_hash_table_insert (panel_types, (char*)panels_vtable[i].name, panels_vtable[i].get_type);
+    panel_types = g_hash_table_new (g_str_hash, g_str_equal);
+    for (i = 0; i < panels_vtable_len; i++)
+        g_hash_table_insert (panel_types, (char *) panels_vtable[i].name, panels_vtable[i].get_type);
 }
 
 /**
@@ -210,23 +205,16 @@ ensure_panel_types (void)
  * @shell and @parameters properties at construction time.
  */
 CcPanel *
-cc_panel_loader_load_by_name (CcShell     *shell,
-                              const gchar *name,
-                              const gchar *title,
-                              GVariant    *parameters)
+cc_panel_loader_load_by_name (CcShell *shell, const gchar *name, const gchar *title, GVariant *parameters)
 {
-  GType (*get_type) (void);
+    GType (*get_type) (void);
 
-  ensure_panel_types ();
+    ensure_panel_types ();
 
-  get_type = g_hash_table_lookup (panel_types, name);
-  g_assert (get_type != NULL);
+    get_type = g_hash_table_lookup (panel_types, name);
+    g_assert (get_type != NULL);
 
-  return g_object_new (get_type (),
-                       "shell", shell,
-                       "parameters", parameters,
-                       "title", title,
-                       NULL);
+    return g_object_new (get_type (), "shell", shell, "parameters", parameters, "title", title, NULL);
 }
 
 #endif /* CC_PANEL_LOADER_NO_GTYPES */
@@ -243,57 +231,52 @@ cc_panel_loader_load_by_name (CcShell     *shell,
 void
 cc_panel_loader_fill_model (CcShellModel *model)
 {
-  guint i;
+    guint i;
 
-  for (i = 0; i < panels_vtable_len; i++)
-    {
-      g_autoptr(GDesktopAppInfo) app = NULL;
-      g_autofree gchar *desktop_name = NULL;
-      gint category;
+    for (i = 0; i < panels_vtable_len; i++) {
+        g_autoptr(GDesktopAppInfo) app = NULL;
+        g_autofree gchar *desktop_name = NULL;
+        gint category;
 
-      desktop_name = g_strconcat ("gnome-", panels_vtable[i].name, "-panel.desktop", NULL);
-      app = g_desktop_app_info_new (desktop_name);
+        desktop_name = g_strconcat ("gnome-", panels_vtable[i].name, "-panel.desktop", NULL);
+        app = g_desktop_app_info_new (desktop_name);
 
-      if (!app)
-        {
-          g_warning ("Ignoring broken panel %s (missing desktop file)", panels_vtable[i].name);
-          continue;
+        if (!app) {
+            g_warning ("Ignoring broken panel %s (missing desktop file)", panels_vtable[i].name);
+            continue;
         }
 
-      category = parse_categories (app);
-      if (G_UNLIKELY (category < 0))
-        continue;
+        category = parse_categories (app);
+        if (G_UNLIKELY (category < 0))
+            continue;
 
-      cc_shell_model_add_item (model, category, G_APP_INFO (app), panels_vtable[i].name);
+        cc_shell_model_add_item (model, category, G_APP_INFO (app), panels_vtable[i].name);
     }
 
-  for (i = 0; i < supages_vtable_len; i++)
-    {
-      g_autoptr(GDesktopAppInfo) app = NULL;
-      g_autofree gchar *desktop_name = NULL;
+    for (i = 0; i < supages_vtable_len; i++) {
+        g_autoptr(GDesktopAppInfo) app = NULL;
+        g_autofree gchar *desktop_name = NULL;
 
-      desktop_name = g_strconcat ("gnome-", subpages_vtable[i].name, "-panel.desktop", NULL);
-      app = g_desktop_app_info_new (desktop_name);
+        desktop_name = g_strconcat ("gnome-", subpages_vtable[i].name, "-panel.desktop", NULL);
+        app = g_desktop_app_info_new (desktop_name);
 
-      if (!app)
-        {
-          g_warning ("Ignoring broken panel %s (missing desktop file)", subpages_vtable[i].name);
-          continue;
+        if (!app) {
+            g_warning ("Ignoring broken panel %s (missing desktop file)", subpages_vtable[i].name);
+            continue;
         }
 
-      cc_shell_model_add_item (model, subpages_vtable[i].category, G_APP_INFO (app), subpages_vtable[i].name);
-      cc_shell_model_set_panel_visibility (model, subpages_vtable[i].name, CC_PANEL_VISIBLE_IN_SEARCH);
+        cc_shell_model_add_item (model, subpages_vtable[i].category, G_APP_INFO (app), subpages_vtable[i].name);
+        cc_shell_model_set_panel_visibility (model, subpages_vtable[i].name, CC_PANEL_VISIBLE_IN_SEARCH);
     }
 
-  /* If there's an static init function, execute it after adding all panels to
-   * the model. This will allow the panels to show or hide themselves without
-   * having an instance running.
-   */
+    /* If there's an static init function, execute it after adding all panels to
+     * the model. This will allow the panels to show or hide themselves without
+     * having an instance running.
+     */
 #ifndef CC_PANEL_LOADER_NO_GTYPES
-  for (i = 0; i < panels_vtable_len; i++)
-    {
-      if (panels_vtable[i].static_init_func)
-        panels_vtable[i].static_init_func ();
+    for (i = 0; i < panels_vtable_len; i++) {
+        if (panels_vtable[i].static_init_func)
+            panels_vtable[i].static_init_func ();
     }
 #endif
 }
@@ -308,13 +291,12 @@ cc_panel_loader_fill_model (CcShellModel *model)
 void
 cc_panel_loader_list_panels (void)
 {
-  guint i;
+    guint i;
 
-  g_print ("%s\n", _("Available panels:"));
+    g_print ("%s\n", _("Available panels:"));
 
-  for (i = 0; i < panels_vtable_len; i++)
-    g_print ("\t%s\n", panels_vtable[i].name);
-
+    for (i = 0; i < panels_vtable_len; i++)
+        g_print ("\t%s\n", panels_vtable[i].name);
 }
 
 /**
@@ -328,14 +310,13 @@ cc_panel_loader_list_panels (void)
  * header widgets, permissions, etc).
  */
 void
-cc_panel_loader_override_vtable (CcPanelLoaderVtable *override_vtable,
-                                 gsize                n_elements)
+cc_panel_loader_override_vtable (CcPanelLoaderVtable *override_vtable, gsize n_elements)
 {
-  g_assert (override_vtable != NULL);
-  g_assert (n_elements > 0);
+    g_assert (override_vtable != NULL);
+    g_assert (n_elements > 0);
 
-  g_debug ("Overriding default panel vtable");
+    g_debug ("Overriding default panel vtable");
 
-  panels_vtable = override_vtable;
-  panels_vtable_len = n_elements;
+    panels_vtable = override_vtable;
+    panels_vtable_len = n_elements;
 }

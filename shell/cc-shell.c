@@ -29,7 +29,6 @@
  * instance of CcShell available that represents the current shell.
  */
 
-
 #include "cc-shell.h"
 #include "cc-panel.h"
 
@@ -38,12 +37,9 @@ G_DEFINE_INTERFACE (CcShell, cc_shell, GTK_TYPE_WIDGET)
 static void
 cc_shell_default_init (CcShellInterface *iface)
 {
-  g_object_interface_install_property (iface,
-                                       g_param_spec_object ("active-panel",
-                                                            "active panel",
-                                                            "The currently active Panel",
-                                                            CC_TYPE_PANEL,
-                                                            G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+    g_object_interface_install_property (iface, g_param_spec_object ("active-panel", "active panel",
+                                                                     "The currently active Panel", CC_TYPE_PANEL,
+                                                                     G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }
 
 /**
@@ -57,13 +53,13 @@ cc_shell_default_init (CcShellInterface *iface)
 CcPanel *
 cc_shell_get_active_panel (CcShell *shell)
 {
-  CcPanel *panel = NULL;
+    CcPanel *panel = NULL;
 
-  g_return_val_if_fail (CC_IS_SHELL (shell), NULL);
+    g_return_val_if_fail (CC_IS_SHELL (shell), NULL);
 
-  g_object_get (shell, "active-panel", &panel, NULL);
+    g_object_get (shell, "active-panel", &panel, NULL);
 
-  return panel;
+    return panel;
 }
 
 /**
@@ -77,13 +73,12 @@ cc_shell_get_active_panel (CcShell *shell)
  *
  */
 void
-cc_shell_set_active_panel (CcShell *shell,
-                           CcPanel *panel)
+cc_shell_set_active_panel (CcShell *shell, CcPanel *panel)
 {
-  g_return_if_fail (CC_IS_SHELL (shell));
-  g_return_if_fail (panel == NULL || CC_IS_PANEL (panel));
+    g_return_if_fail (CC_IS_SHELL (shell));
+    g_return_if_fail (panel == NULL || CC_IS_PANEL (panel));
 
-  g_object_set (shell, "active-panel", panel, NULL);
+    g_object_set (shell, "active-panel", panel, NULL);
 }
 
 /**
@@ -98,27 +93,21 @@ cc_shell_set_active_panel (CcShell *shell,
  * Returns: #TRUE if the panel was found and set as the active panel
  */
 gboolean
-cc_shell_set_active_panel_from_id (CcShell      *shell,
-                                   const gchar  *id,
-                                   GVariant     *parameters,
-                                   GError      **error)
+cc_shell_set_active_panel_from_id (CcShell *shell, const gchar *id, GVariant *parameters, GError **error)
 {
-  CcShellInterface *iface;
+    CcShellInterface *iface;
 
-  g_return_val_if_fail (CC_IS_SHELL (shell), FALSE);
+    g_return_val_if_fail (CC_IS_SHELL (shell), FALSE);
 
-  iface = CC_SHELL_GET_IFACE (shell);
+    iface = CC_SHELL_GET_IFACE (shell);
 
-  if (!iface->set_active_panel_from_id)
-    {
-      g_warning ("Object of type \"%s\" does not implement required interface"
-                 " method \"set_active_panel_from_id\",",
-                 G_OBJECT_TYPE_NAME (shell));
-      return FALSE;
-    }
-  else
-    {
-      return iface->set_active_panel_from_id (shell, id, parameters, error);
+    if (!iface->set_active_panel_from_id) {
+        g_warning ("Object of type \"%s\" does not implement required interface"
+                   " method \"set_active_panel_from_id\",",
+                   G_OBJECT_TYPE_NAME (shell));
+        return FALSE;
+    } else {
+        return iface->set_active_panel_from_id (shell, id, parameters, error);
     }
 }
 
@@ -133,20 +122,19 @@ cc_shell_set_active_panel_from_id (CcShell      *shell,
 GtkWidget *
 cc_shell_get_toplevel (CcShell *shell)
 {
-  CcShellInterface *iface;
+    CcShellInterface *iface;
 
-  g_return_val_if_fail (CC_IS_SHELL (shell), NULL);
+    g_return_val_if_fail (CC_IS_SHELL (shell), NULL);
 
-  iface = CC_SHELL_GET_IFACE (shell);
+    iface = CC_SHELL_GET_IFACE (shell);
 
-  if (iface->get_toplevel)
-    {
+    if (iface->get_toplevel) {
         return iface->get_toplevel (shell);
     }
 
-  g_warning ("Object of type \"%s\" does not implement required interface"
-             " method \"get_toplevel\",",
-             G_OBJECT_TYPE_NAME (shell));
+    g_warning ("Object of type \"%s\" does not implement required interface"
+               " method \"get_toplevel\",",
+               G_OBJECT_TYPE_NAME (shell));
 
-  return NULL;
+    return NULL;
 }

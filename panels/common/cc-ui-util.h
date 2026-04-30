@@ -22,7 +22,5 @@
 
 #include <gtk/gtk.h>
 
-gboolean cc_util_keynav_propagate_vertical (GtkWidget        *self,
-                                            GtkDirectionType  direction);
-gboolean cc_util_keynav_propagate_up (GtkWidget        *self,
-                                      GtkDirectionType  direction);
+gboolean cc_util_keynav_propagate_vertical (GtkWidget *self, GtkDirectionType direction);
+gboolean cc_util_keynav_propagate_up (GtkWidget *self, GtkDirectionType direction);

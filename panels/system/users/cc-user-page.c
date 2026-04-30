@@ -26,26 +26,26 @@
 #define G_LOG_DOMAIN "cc-user-page"
 
 #ifdef HAVE_CONFIG_H
-# include "config.h"
+#include "config.h"
 #endif
 
-#include "cc-user-page.h"
 #include "cc-avatar-chooser.h"
 #include "cc-fingerprint-dialog.h"
 #include "cc-fingerprint-manager.h"
 #include "cc-language-chooser.h"
-#include "cc-list-row.h"
 #include "cc-list-row-info-button.h"
+#include "cc-list-row.h"
 #include "cc-password-dialog.h"
 #include "cc-permission-infobar.h"
+#include "cc-user-page.h"
 #include "user-utils.h"
 
 #include <config.h>
 #include <errno.h>
-#include <locale.h>
-#include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <locale.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
@@ -55,46 +55,46 @@
 #endif
 
 struct _CcUserPage {
-    AdwNavigationPage    parent_instance;
+    AdwNavigationPage parent_instance;
 
-    CcListRow           *account_type_row;
-    GtkSwitch           *account_type_switch;
-    AdwAvatar           *avatar;
-    CcAvatarChooser     *avatar_chooser;
-    GtkMenuButton       *avatar_edit_button;
-    GtkButton           *avatar_remove_button;
-    AdwActionRow        *auto_login_row;
-    GtkSwitch           *auto_login_switch;
+    CcListRow *account_type_row;
+    GtkSwitch *account_type_switch;
+    AdwAvatar *avatar;
+    CcAvatarChooser *avatar_chooser;
+    GtkMenuButton *avatar_edit_button;
+    GtkButton *avatar_remove_button;
+    AdwActionRow *auto_login_row;
+    GtkSwitch *auto_login_switch;
     AdwPreferencesGroup *button_group;
-    CcListRow           *fingerprint_row;
-    CcListRow           *language_row;
-    AdwEntryRow         *fullname_row;
+    CcListRow *fingerprint_row;
+    CcListRow *language_row;
+    AdwEntryRow *fullname_row;
 #ifdef HAVE_MALCONTENT
-    CcListRow           *parental_controls_row;
+    CcListRow *parental_controls_row;
 #endif
-    CcListRow           *password_row;
+    CcListRow *password_row;
     CcPermissionInfobar *permission_infobar;
-    AdwPreferencesPage  *preferences_page;
-    AdwSwitchRow        *remove_local_files_choice;
-    GtkWidget           *remove_user_button;
-    AdwAlertDialog      *remove_local_user_dialog;
+    AdwPreferencesPage *preferences_page;
+    AdwSwitchRow *remove_local_files_choice;
+    GtkWidget *remove_user_button;
+    AdwAlertDialog *remove_local_user_dialog;
 
-    ActUser              *user;
-    GSettings            *login_screen_settings;
-    GPermission          *permission;
+    ActUser *user;
+    GSettings *login_screen_settings;
+    GPermission *permission;
     CcFingerprintManager *fingerprint_manager;
 
-    gboolean              locked;
-    gboolean              editable;
-    gboolean              avatar_editable;
-    gboolean              can_be_demoted;
+    gboolean locked;
+    gboolean editable;
+    gboolean avatar_editable;
+    gboolean can_be_demoted;
 };
 
 static GtkBuildableIface *parent_buildable_iface;
 static void cc_user_page_buildable_init (GtkBuildableIface *iface);
 
 G_DEFINE_FINAL_TYPE_WITH_CODE (CcUserPage, cc_user_page, ADW_TYPE_NAVIGATION_PAGE,
-                         G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, cc_user_page_buildable_init))
+                               G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, cc_user_page_buildable_init))
 
 enum {
     PROP_0,
@@ -173,29 +173,29 @@ get_user_language (ActUser *user)
 static const gchar *
 get_invisible_text (void)
 {
-     GtkWidget *entry;
-     gunichar invisible_char;
-     static gchar invisible_text[40];
-     gchar *p;
-     gint i;
+    GtkWidget *entry;
+    gunichar invisible_char;
+    static gchar invisible_text[40];
+    gchar *p;
+    gint i;
 
-     entry = gtk_entry_new ();
-     invisible_char = gtk_entry_get_invisible_char (GTK_ENTRY (entry));
-     if (invisible_char == 0) {
+    entry = gtk_entry_new ();
+    invisible_char = gtk_entry_get_invisible_char (GTK_ENTRY (entry));
+    if (invisible_char == 0) {
         invisible_char = 0x2022;
-     }
+    }
 
-     g_object_ref_sink (entry);
-     g_object_unref (entry);
+    g_object_ref_sink (entry);
+    g_object_unref (entry);
 
-     /* five bullets */
-     p = invisible_text;
-     for (i = 0; i < 5; i++) {
+    /* five bullets */
+    p = invisible_text;
+    for (i = 0; i < 5; i++) {
         p += g_unichar_to_utf8 (invisible_char, p);
-     }
-     *p = 0;
+    }
+    *p = 0;
 
-     return invisible_text;
+    return invisible_text;
 }
 
 static const gchar *
@@ -241,12 +241,12 @@ account_type_changed (CcUserPage *self)
 static void
 update_generated_avatar (CcUserPage *self)
 {
-        g_autoptr(GdkTexture) texture = NULL;
+    g_autoptr(GdkTexture) texture = NULL;
 
-        adw_avatar_set_custom_image (self->avatar, NULL);
+    adw_avatar_set_custom_image (self->avatar, NULL);
 
-        texture = draw_avatar_to_texture (self->avatar, AVATAR_PIXEL_SIZE);
-        set_user_icon_data (self->user, texture, IMAGE_SOURCE_VALUE_GENERATED);
+    texture = draw_avatar_to_texture (self->avatar, AVATAR_PIXEL_SIZE);
+    set_user_icon_data (self->user, texture, IMAGE_SOURCE_VALUE_GENERATED);
 }
 
 static void
@@ -269,8 +269,7 @@ fullname_entry_apply_cb (CcUserPage *self)
 }
 
 static void
-language_response (CcUserPage        *self,
-                   CcLanguageChooser *chooser)
+language_response (CcUserPage *self, CcLanguageChooser *chooser)
 {
     g_autofree gchar *language_name = NULL;
     const gchar *selected_language;
@@ -298,8 +297,7 @@ show_language_chooser (CcUserPage *self)
 
     language_chooser = cc_language_chooser_new ();
 
-    g_signal_connect_object (language_chooser, "language-selected",
-                             G_CALLBACK (language_response), self,
+    g_signal_connect_object (language_chooser, "language-selected", G_CALLBACK (language_response), self,
                              G_CONNECT_SWAPPED);
 
     if (current_language && *current_language != '\0') {
@@ -342,28 +340,22 @@ autologin_changed (CcUserPage *self)
 }
 
 static void
-update_fingerprint_row_state (CcUserPage           *self,
-                              GParamSpec           *spec,
-                              CcFingerprintManager *manager)
+update_fingerprint_row_state (CcUserPage *self, GParamSpec *spec, CcFingerprintManager *manager)
 {
     CcFingerprintState state = cc_fingerprint_manager_get_state (manager);
     gboolean visible = FALSE;
 
-    visible = (act_user_get_uid (self->user) == getuid () &&
-               act_user_is_local_account (self->user) &&
-               (self->login_screen_settings &&
-                g_settings_get_boolean (self->login_screen_settings,
-                                        "enable-fingerprint-authentication")));
+    visible = (act_user_get_uid (self->user) == getuid () && act_user_is_local_account (self->user)
+               && (self->login_screen_settings
+                   && g_settings_get_boolean (self->login_screen_settings, "enable-fingerprint-authentication")));
     gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), visible);
     if (!visible)
         return;
 
     if (state != CC_FINGERPRINT_STATE_UPDATING)
-        gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row),
-                                state != CC_FINGERPRINT_STATE_NONE);
+        gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), state != CC_FINGERPRINT_STATE_NONE);
 
-    gtk_widget_set_sensitive (GTK_WIDGET (self->fingerprint_row),
-                              state != CC_FINGERPRINT_STATE_UPDATING);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->fingerprint_row), state != CC_FINGERPRINT_STATE_UPDATING);
 
     if (state == CC_FINGERPRINT_STATE_ENABLED)
         cc_list_row_set_secondary_label (self->fingerprint_row, _("Enabled"));
@@ -381,15 +373,12 @@ change_fingerprint (CcUserPage *self)
 }
 
 static void
-delete_user_done (ActUserManager *manager,
-                  GAsyncResult   *res,
-                  void           *user_data)
+delete_user_done (ActUserManager *manager, GAsyncResult *res, void *user_data)
 {
     g_autoptr(GError) error = NULL;
 
     if (!act_user_manager_delete_user_finish (manager, res, &error)) {
-        if (!g_error_matches (error, ACT_USER_MANAGER_ERROR,
-                              ACT_USER_MANAGER_ERROR_PERMISSION_DENIED))
+        if (!g_error_matches (error, ACT_USER_MANAGER_ERROR, ACT_USER_MANAGER_ERROR_PERMISSION_DENIED))
             g_critical ("Failed to delete user: %s", error->message);
     }
 }
@@ -410,19 +399,16 @@ remove_local_user_response (CcUserPage *self)
     gtk_widget_set_sensitive (GTK_WIDGET (self->remove_user_button), FALSE);
 
     remove_files = adw_switch_row_get_active (self->remove_local_files_choice);
-    act_user_manager_delete_user_async (act_user_manager_get_default (),
-                                        self->user,
-                                        remove_files,
-                                        NULL,
-                                        (GAsyncReadyCallback)delete_user_done,
-                                        NULL);
+    act_user_manager_delete_user_async (act_user_manager_get_default (), self->user, remove_files, NULL,
+                                        (GAsyncReadyCallback) delete_user_done, NULL);
 }
 
 static void
 remove_user (CcUserPage *self)
 {
     // TODO: Handle enterprise accounts
-    adw_alert_dialog_format_heading (self->remove_local_user_dialog, _("Remove %s?"), get_real_or_user_name (self->user));
+    adw_alert_dialog_format_heading (self->remove_local_user_dialog, _("Remove %s?"),
+                                                                       get_real_or_user_name (self->user));
     adw_dialog_present (ADW_DIALOG (self->remove_local_user_dialog), GTK_WIDGET (self));
 }
 
@@ -434,10 +420,7 @@ remove_avatar (CcUserPage *self)
 }
 
 static void
-cc_user_page_buildable_add_child (GtkBuildable *buildable,
-                                  GtkBuilder   *builder,
-                                  GObject      *child,
-                                  const gchar  *type)
+cc_user_page_buildable_add_child (GtkBuildable *buildable, GtkBuilder *builder, GObject *child, const gchar *type)
 {
     CcUserPage *self = CC_USER_PAGE (buildable);
 
@@ -482,10 +465,7 @@ static void
 spawn_malcontent_control (CcUserPage *self)
 {
     g_autoptr(GError) error = NULL;
-    const gchar *argv[] = { "malcontent-control",
-                        "--user", act_user_get_user_name (self->user),
-                        NULL
-    };
+    const gchar *argv[] = { "malcontent-control", "--user", act_user_get_user_name (self->user), NULL };
 
     /* no-op if the user is administrator */
     if (act_user_get_account_type (self->user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
@@ -494,7 +474,7 @@ spawn_malcontent_control (CcUserPage *self)
         return;
     }
 
-    if (!g_spawn_async (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error)) {
+    if (!g_spawn_async (NULL, (char **) argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error)) {
         g_debug ("Couldn't launch malcontent-control: %s", error->message);
     }
 }
@@ -515,16 +495,11 @@ is_parental_controls_enabled_for_user (ActUser *user)
     }
 
     manager = mct_manager_new (system_bus);
-    app_filter = mct_manager_get_app_filter (manager,
-                                             act_user_get_uid (user),
-                                             MCT_MANAGER_GET_VALUE_FLAGS_NONE,
-                                             NULL,
-                                             &error);
+    app_filter =
+        mct_manager_get_app_filter (manager, act_user_get_uid (user), MCT_MANAGER_GET_VALUE_FLAGS_NONE, NULL, &error);
     if (error) {
         if (!g_error_matches (error, MCT_MANAGER_ERROR, MCT_MANAGER_ERROR_DISABLED))
-                g_warning ("Error retrieving app filter for user %s: %s",
-                           act_user_get_user_name (user),
-                           error->message);
+            g_warning ("Error retrieving app filter for user %s: %s", act_user_get_user_name (user), error->message);
 
         return FALSE;
     }
@@ -544,10 +519,7 @@ cc_user_page_dispose (GObject *object)
 }
 
 static void
-cc_user_page_get_property (GObject    *object,
-                           guint       prop_id,
-                           GValue     *value,
-                           GParamSpec *pspec)
+cc_user_page_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
 {
     CcUserPage *self = CC_USER_PAGE (object);
 
@@ -577,10 +549,7 @@ cc_user_page_get_property (GObject    *object,
 }
 
 static void
-cc_user_page_set_property (GObject      *object,
-                           guint         prop_id,
-                           const GValue *value,
-                           GParamSpec   *pspec)
+cc_user_page_set_property (GObject *object, guint prop_id, const GValue *value, GParamSpec *pspec)
 {
     CcUserPage *self = CC_USER_PAGE (object);
 
@@ -598,51 +567,33 @@ cc_user_page_set_property (GObject      *object,
 }
 
 static void
-cc_user_page_class_init (CcUserPageClass * klass)
+cc_user_page_class_init (CcUserPageClass *klass)
 {
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-    GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
     object_class->dispose = cc_user_page_dispose;
     object_class->get_property = cc_user_page_get_property;
     object_class->set_property = cc_user_page_set_property;
 
     properties[PROP_EDITABLE] =
-        g_param_spec_boolean ("editable",
-                              "Editable",
-                              "Whether the panel is editable",
-                              FALSE,
-                              G_PARAM_READWRITE);
-    properties[PROP_AVATAR_EDITABLE] =
-        g_param_spec_boolean ("avatar-editable",
-                              "Editable avatar",
-                              "Whether the avatar is editable",
-                              FALSE,
-                              G_PARAM_READWRITE);
+        g_param_spec_boolean ("editable", "Editable", "Whether the panel is editable", FALSE, G_PARAM_READWRITE);
+    properties[PROP_AVATAR_EDITABLE] = g_param_spec_boolean (
+        "avatar-editable", "Editable avatar", "Whether the avatar is editable", FALSE, G_PARAM_READWRITE);
     properties[PROP_LOCKED] =
-        g_param_spec_boolean ("locked",
-                              "Locked",
-                              "Whether changes require authentication",
-                              TRUE,
-                              G_PARAM_READWRITE);
-    properties[PROP_IS_ADMIN] =
-        g_param_spec_boolean ("is-admin",
-                              "Is Admin",
-                              "Whether the displayed user is administrator",
-                              FALSE,
-                              G_PARAM_READABLE);
+        g_param_spec_boolean ("locked", "Locked", "Whether changes require authentication", TRUE, G_PARAM_READWRITE);
+    properties[PROP_IS_ADMIN] = g_param_spec_boolean (
+        "is-admin", "Is Admin", "Whether the displayed user is administrator", FALSE, G_PARAM_READABLE);
     properties[PROP_IS_CURRENT_USER] =
-        g_param_spec_boolean ("is-current-user",
-                              "Is Current User",
-                              "Whether the displayed user is the current logged user",
-                              FALSE,
-                              G_PARAM_READABLE);
+        g_param_spec_boolean ("is-current-user", "Is Current User",
+                              "Whether the displayed user is the current logged user", FALSE, G_PARAM_READABLE);
     g_object_class_install_properties (object_class, N_PROPS, properties);
     g_type_ensure (CC_TYPE_LIST_ROW);
     g_type_ensure (CC_TYPE_LIST_ROW_INFO_BUTTON);
     g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);
 
-    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/system/users/cc-user-page.ui");
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/system/users/cc-user-page.ui");
 
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, avatar);
     gtk_widget_class_bind_template_child (widget_class, CcUserPage, avatar_edit_button);
@@ -692,15 +643,9 @@ cc_user_page_init (CcUserPage *self)
      * libmalcontent is installed but malcontent-control is not). */
     malcontent_control_path = g_find_program_in_path ("malcontent-control");
     if (malcontent_control_path)
-        g_object_bind_property (self,
-                                "is-admin",
-                                self->parental_controls_row,
-                                "visible",
+        g_object_bind_property (self, "is-admin", self->parental_controls_row, "visible",
                                 G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
-    g_signal_connect_object (self->parental_controls_row,
-                             "activated",
-                             G_CALLBACK (spawn_malcontent_control),
-                             self,
+    g_signal_connect_object (self->parental_controls_row, "activated", G_CALLBACK (spawn_malcontent_control), self,
                              G_CONNECT_SWAPPED);
 #endif
 
@@ -714,11 +659,9 @@ cc_user_page_new (void)
 }
 
 void
-cc_user_page_set_user (CcUserPage  *self,
-                       ActUser     *user,
-                       GPermission *permission)
+cc_user_page_set_user (CcUserPage *self, ActUser *user, GPermission *permission)
 {
-    gboolean is_admin = FALSE; 
+    gboolean is_admin = FALSE;
     g_autofree gchar *user_language = NULL;
 
     g_assert (CC_IS_USER_PAGE (self));
@@ -730,14 +673,13 @@ cc_user_page_set_user (CcUserPage  *self,
     g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_IS_ADMIN]);
 
     if (!is_current_user (user))
-      adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), get_real_or_user_name (user));
+        adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), get_real_or_user_name (user));
     adw_navigation_page_set_tag (ADW_NAVIGATION_PAGE (self), act_user_get_user_name (user));
 
     cc_avatar_chooser_set_user (self->avatar_chooser, self->user);
     setup_avatar_for_user (self->avatar, self->user);
     gtk_widget_set_visible (GTK_WIDGET (self->avatar_remove_button),
                             adw_avatar_get_custom_image (self->avatar) != NULL);
-
 
     gtk_editable_set_text (GTK_EDITABLE (self->fullname_row), act_user_get_real_name (user));
 
@@ -746,10 +688,11 @@ cc_user_page_set_user (CcUserPage  *self,
     gtk_switch_set_active (self->account_type_switch, is_admin);
 
 #ifdef HAVE_MALCONTENT
-    cc_list_row_set_secondary_label (self->parental_controls_row,
-                                     is_parental_controls_enabled_for_user (user) ?
+    cc_list_row_set_secondary_label (self->parental_controls_row, is_parental_controls_enabled_for_user (user)
+                                     ?
                                      /* TRANSLATORS: Status of Parental Controls setup */
-                                     _("Enabled") : _("Disabled"));
+                                     _("Enabled")
+                                     : _("Disabled"));
 #endif
 
     g_signal_handlers_block_by_func (self->auto_login_switch, autologin_changed, self);
@@ -763,11 +706,8 @@ cc_user_page_set_user (CcUserPage  *self,
 
     if (!self->fingerprint_manager) {
         self->fingerprint_manager = cc_fingerprint_manager_new (user);
-        g_signal_connect_object (self->fingerprint_manager,
-                                 "notify::state",
-                                 G_CALLBACK (update_fingerprint_row_state),
-                                 self,
-                                 G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->fingerprint_manager, "notify::state", G_CALLBACK (update_fingerprint_row_state),
+                                 self, G_CONNECT_SWAPPED);
         update_fingerprint_row_state (self, NULL, self->fingerprint_manager);
     }
 
@@ -787,28 +727,27 @@ cc_user_page_get_user (CcUserPage *self)
 }
 
 void
-cc_user_page_util_ensure_avatar (CcUserPage *self,
-                                 ActUser *user)
+cc_user_page_util_ensure_avatar (CcUserPage *self, ActUser *user)
 {
-  g_autoptr(GdkTexture) texture = NULL;
-  g_autoptr(GdkPaintable) custom_image = NULL;
+    g_autoptr(GdkTexture) texture = NULL;
+    g_autoptr(GdkPaintable) custom_image = NULL;
 
-  g_assert (CC_IS_USER_PAGE (self));
-  g_assert (ACT_IS_USER (user));
+    g_assert (CC_IS_USER_PAGE (self));
+    g_assert (ACT_IS_USER (user));
 
-  if (adw_avatar_get_custom_image (self->avatar) != NULL)
-    custom_image = g_object_ref (adw_avatar_get_custom_image (self->avatar));
+    if (adw_avatar_get_custom_image (self->avatar) != NULL)
+        custom_image = g_object_ref (adw_avatar_get_custom_image (self->avatar));
 
-  adw_avatar_set_custom_image (self->avatar, NULL);
+    adw_avatar_set_custom_image (self->avatar, NULL);
 
-  /* temporarily hijack AdwAvatar widget, to be able to use
-     snapshot of it as the avatar image source */
-  setup_avatar_for_user (self->avatar, user);
+    /* temporarily hijack AdwAvatar widget, to be able to use
+       snapshot of it as the avatar image source */
+    setup_avatar_for_user (self->avatar, user);
 
-  texture = draw_avatar_to_texture (self->avatar, AVATAR_PIXEL_SIZE);
-  set_user_icon_data (user, texture, IMAGE_SOURCE_VALUE_GENERATED);
+    texture = draw_avatar_to_texture (self->avatar, AVATAR_PIXEL_SIZE);
+    set_user_icon_data (user, texture, IMAGE_SOURCE_VALUE_GENERATED);
 
-  setup_avatar_for_user (self->avatar, self->user);
-  if (custom_image != NULL)
-    adw_avatar_set_custom_image (self->avatar, custom_image);
+    setup_avatar_for_user (self->avatar, self->user);
+    if (custom_image != NULL)
+        adw_avatar_set_custom_image (self->avatar, custom_image);
 }

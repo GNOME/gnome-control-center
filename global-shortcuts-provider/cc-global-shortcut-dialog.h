@@ -30,14 +30,10 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_GLOBAL_SHORTCUT_DIALOG (cc_global_shortcut_dialog_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcGlobalShortcutDialog,
-                      cc_global_shortcut_dialog,
-                      CC, GLOBAL_SHORTCUT_DIALOG,
-                      AdwWindow);
+G_DECLARE_FINAL_TYPE (CcGlobalShortcutDialog, cc_global_shortcut_dialog, CC, GLOBAL_SHORTCUT_DIALOG, AdwWindow);
 
-CcGlobalShortcutDialog *cc_global_shortcut_dialog_new (const char *app_id,
-                                                       const char *parent_window,
-                                                       GVariant   *shortcuts);
+CcGlobalShortcutDialog *cc_global_shortcut_dialog_new (const char *app_id, const char *parent_window,
+                                                       GVariant *shortcuts);
 
 void cc_global_shortcut_dialog_present (CcGlobalShortcutDialog *dialog);
 

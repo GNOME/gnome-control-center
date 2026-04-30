@@ -17,8 +17,8 @@
 
 #pragma once
 
-#include <adwaita.h>
 #include <NetworkManager.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
@@ -26,31 +26,23 @@ typedef struct _CcWifiConnectionRow CcWifiConnectionRow;
 
 #define CC_TYPE_WIFI_CONNECTION_ROW (cc_wifi_connection_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, CC, WIFI_CONNECTION_ROW, AdwActionRow);
-CcWifiConnectionRow *cc_wifi_connection_row_new                 (NMDeviceWifi  *device,
-                                                                 NMConnection  *connection,
-                                                                 GPtrArray     *aps,
-                                                                 gboolean       checkable,
-                                                                 gboolean       known_connection,
-                                                                 gboolean       forgettable,
-                                                                 gboolean       activatable);
+CcWifiConnectionRow *cc_wifi_connection_row_new (NMDeviceWifi *device, NMConnection *connection, GPtrArray *aps,
+                                                 gboolean checkable, gboolean known_connection, gboolean forgettable,
+                                                 gboolean activatable);
 
-gboolean             cc_wifi_connection_row_get_checkable       (CcWifiConnectionRow   *row);
-gboolean             cc_wifi_connection_row_get_checked         (CcWifiConnectionRow   *row);
-NMDeviceWifi        *cc_wifi_connection_row_get_device          (CcWifiConnectionRow   *row);
-const GPtrArray     *cc_wifi_connection_row_get_access_points   (CcWifiConnectionRow   *row);
-NMConnection        *cc_wifi_connection_row_get_connection      (CcWifiConnectionRow   *row);
-gboolean             cc_wifi_connection_row_get_forgettable     (CcWifiConnectionRow   *row);
+gboolean cc_wifi_connection_row_get_checkable (CcWifiConnectionRow *row);
+gboolean cc_wifi_connection_row_get_checked (CcWifiConnectionRow *row);
+NMDeviceWifi *cc_wifi_connection_row_get_device (CcWifiConnectionRow *row);
+const GPtrArray *cc_wifi_connection_row_get_access_points (CcWifiConnectionRow *row);
+NMConnection *cc_wifi_connection_row_get_connection (CcWifiConnectionRow *row);
+gboolean cc_wifi_connection_row_get_forgettable (CcWifiConnectionRow *row);
 
-void                 cc_wifi_connection_row_set_checked         (CcWifiConnectionRow   *row,
-                                                                 gboolean               value);
+void cc_wifi_connection_row_set_checked (CcWifiConnectionRow *row, gboolean value);
 
-NMAccessPoint       *cc_wifi_connection_row_best_access_point   (CcWifiConnectionRow   *row);
-void                 cc_wifi_connection_row_add_access_point    (CcWifiConnectionRow   *row,
-                                                                 NMAccessPoint         *ap);
-gboolean             cc_wifi_connection_row_remove_access_point (CcWifiConnectionRow   *row,
-                                                                 NMAccessPoint         *ap);
-gboolean             cc_wifi_connection_row_has_access_point    (CcWifiConnectionRow   *row,
-                                                                 NMAccessPoint         *ap);
+NMAccessPoint *cc_wifi_connection_row_best_access_point (CcWifiConnectionRow *row);
+void cc_wifi_connection_row_add_access_point (CcWifiConnectionRow *row, NMAccessPoint *ap);
+gboolean cc_wifi_connection_row_remove_access_point (CcWifiConnectionRow *row, NMAccessPoint *ap);
+gboolean cc_wifi_connection_row_has_access_point (CcWifiConnectionRow *row, NMAccessPoint *ap);
 
-void                 cc_wifi_connection_row_update              (CcWifiConnectionRow   *row);
+void cc_wifi_connection_row_update (CcWifiConnectionRow *row);
 G_END_DECLS

@@ -26,29 +26,27 @@
 
 G_BEGIN_DECLS
 
-typedef struct
-{
-  gchar *label;
-  gchar *xkb_option;
-  guint event_code;
+typedef struct {
+    gchar *label;
+    gchar *xkb_option;
+    guint event_code;
 } CcXkbOption;
 
-typedef struct
-{
-  gchar *prefix;
-  gchar *title;
-  gchar *description;
-  gchar *switch_label;
-  gchar *unset_label;
-  gboolean switch_inverted;
+typedef struct {
+    gchar *prefix;
+    gchar *title;
+    gchar *description;
+    gchar *switch_label;
+    gchar *unset_label;
+    gboolean switch_inverted;
 
-  CcXkbOption *options;
+    CcXkbOption *options;
 } CcXkbModifier;
 
-#define CC_TYPE_XKB_MODIFIER_PAGE (cc_xkb_modifier_page_get_type())
+#define CC_TYPE_XKB_MODIFIER_PAGE (cc_xkb_modifier_page_get_type ())
 G_DECLARE_FINAL_TYPE (CcXkbModifierPage, cc_xkb_modifier_page, CC, XKB_MODIFIER_PAGE, AdwNavigationPage);
-CcXkbModifierPage *cc_xkb_modifier_page_new (GSettings *input_settings, const CcXkbModifier*);
+CcXkbModifierPage *cc_xkb_modifier_page_new (GSettings *input_settings, const CcXkbModifier *);
 
-gboolean xcb_modifier_transform_binding_to_label (GValue*, GVariant*, gpointer);
+gboolean xcb_modifier_transform_binding_to_label (GValue *, GVariant *, gpointer);
 
 G_END_DECLS

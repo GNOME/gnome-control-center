@@ -26,238 +26,210 @@
 
 #include <glib/gi18n.h>
 
+#include "cc-input-list-box.h"
 #include "cc-keyboard-panel.h"
 #include "cc-keyboard-resources.h"
 #include "cc-keyboard-shortcut-page.h"
-#include "cc-input-list-box.h"
-#include "cc-xkb-modifier-page.h"
 #include "cc-list-row.h"
+#include "cc-xkb-modifier-page.h"
 
 #include "keyboard-shortcuts.h"
 
-struct _CcKeyboardPanel
-{
-  CcPanel             parent_instance;
+struct _CcKeyboardPanel {
+    CcPanel parent_instance;
 
-  GtkCheckButton      *per_window_source;
-  GtkCheckButton      *same_source;
-  GSettings           *keybindings_settings;
+    GtkCheckButton *per_window_source;
+    GtkCheckButton *same_source;
+    GSettings *keybindings_settings;
 
-  GSettings           *input_source_settings;
-  AdwPreferencesGroup *input_switch_group;
-  CcListRow           *alt_chars_row;
-  CcListRow           *compose_row;
+    GSettings *input_source_settings;
+    AdwPreferencesGroup *input_switch_group;
+    CcListRow *alt_chars_row;
+    CcListRow *compose_row;
 
-  AdwActionRow        *common_shortcuts_row;
+    AdwActionRow *common_shortcuts_row;
 };
 
 CC_PANEL_REGISTER (CcKeyboardPanel, cc_keyboard_panel)
 
 enum {
-  PROP_0,
-  PROP_PARAMETERS
+    PROP_0,
+    PROP_PARAMETERS
 };
 
 static const CcXkbModifier LV3_MODIFIER = {
-  "lv3:",
-  N_("Alternate Characters Key"),
-  N_("The alternate characters key can be used to enter additional characters. These are sometimes printed as a third-option on your keyboard."),
-  N_("Layout Default"),
-  N_("Default"),
-  TRUE,
-  (CcXkbOption[]){
-    { NC_("keyboard key", "None"),        "lv3:ralt_alt",    0 },
-    { NC_("keyboard key", "Left Alt"),    "lv3:lalt_switch", KEY_LEFTALT },
-    { NC_("keyboard key", "Right Alt"),   "lv3:ralt_switch", KEY_RIGHTALT },
-    { NC_("keyboard key", "Left Super"),  "lv3:lwin_switch", KEY_LEFTMETA },
-    { NC_("keyboard key", "Right Super"), "lv3:rwin_switch", KEY_RIGHTMETA },
-    { NC_("keyboard key", "Menu key"),    "lv3:menu_switch", KEY_MENU },
-    { NC_("keyboard key", "Right Ctrl"),  "lv3:switch",      KEY_RIGHTCTRL },
-    { NULL,                               NULL,              0 }
-  },
-};
+    "lv3:",
+    N_("Alternate Characters Key"),
+       N_("The alternate characters key can be used to enter additional characters. These are sometimes printed as a third-option on your keyboard."),
+          N_("Layout Default"),
+             N_("Default"), TRUE,
+                (CcXkbOption[]){ { NC_("keyboard key", "None"), "lv3:ralt_alt", 0 },
+                                   { NC_("keyboard key", "Left Alt"), "lv3:lalt_switch", KEY_LEFTALT },
+                                     { NC_("keyboard key", "Right Alt"), "lv3:ralt_switch", KEY_RIGHTALT },
+                                       { NC_("keyboard key", "Left Super"), "lv3:lwin_switch", KEY_LEFTMETA },
+                                         { NC_("keyboard key", "Right Super"), "lv3:rwin_switch", KEY_RIGHTMETA },
+                                           { NC_("keyboard key", "Menu key"), "lv3:menu_switch", KEY_MENU },
+                                             { NC_("keyboard key", "Right Ctrl"), "lv3:switch", KEY_RIGHTCTRL },
+                                               { NULL, NULL, 0 } },
+                                       };
 
 static const CcXkbModifier COMPOSE_MODIFIER = {
-  "compose:",
-  N_("Compose Key"),
-  N_("The compose key allows a wide variety of characters to be entered. To use it, press compose then a sequence of characters. "
+    "compose:",
+    N_("Compose Key"),
+       N_("The compose key allows a wide variety of characters to be entered. To use it, press compose then a sequence of characters. "
      " For example, compose key followed by <b>o</b> and <b>c</b> will enter <b>©</b>, "
      "<b>'</b> followed by <b>a</b> will enter <b>á</b>."),
-  N_("Compose Key"),
-  N_("Disabled"),
-  FALSE,
-  (CcXkbOption[]){
-    { NC_("keyboard key", "Right Alt"),    "compose:ralt",  KEY_RIGHTALT },
-    { NC_("keyboard key", "Left Super"),   "compose:lwin",  KEY_LEFTMETA },
-    { NC_("keyboard key", "Right Super"),  "compose:rwin",  KEY_RIGHTMETA },
-    { NC_("keyboard key", "Menu key"),     "compose:menu",  KEY_MENU },
-    { NC_("keyboard key", "Left Ctrl"),    "compose:lctrl", KEY_LEFTCTRL },
-    { NC_("keyboard key", "Right Ctrl"),   "compose:rctrl", KEY_RIGHTCTRL },
-    { NC_("keyboard key", "Caps Lock"),    "compose:caps",  KEY_CAPSLOCK },
-    { NC_("keyboard key", "Scroll Lock"),  "compose:sclk",  KEY_SCROLLLOCK },
-    { NC_("keyboard key", "Print Screen"), "compose:prsc",  KEY_SYSRQ },
-    { NC_("keyboard key", "Insert"),       "compose:ins",   KEY_INSERT },
-    { NULL,                                NULL,            0 }
-  },
-};
+          N_("Compose Key"),
+             N_("Disabled"), FALSE,
+                (CcXkbOption[]){ { NC_("keyboard key", "Right Alt"), "compose:ralt", KEY_RIGHTALT },
+                                   { NC_("keyboard key", "Left Super"), "compose:lwin", KEY_LEFTMETA },
+                                     { NC_("keyboard key", "Right Super"), "compose:rwin", KEY_RIGHTMETA },
+                                       { NC_("keyboard key", "Menu key"), "compose:menu", KEY_MENU },
+                                         { NC_("keyboard key", "Left Ctrl"), "compose:lctrl", KEY_LEFTCTRL },
+                                           { NC_("keyboard key", "Right Ctrl"), "compose:rctrl", KEY_RIGHTCTRL },
+                                             { NC_("keyboard key", "Caps Lock"), "compose:caps", KEY_CAPSLOCK },
+                                               { NC_("keyboard key", "Scroll Lock"), "compose:sclk", KEY_SCROLLLOCK },
+                                                 { NC_("keyboard key", "Print Screen"), "compose:prsc", KEY_SYSRQ },
+                                                   { NC_("keyboard key", "Insert"), "compose:ins", KEY_INSERT },
+                                                     { NULL, NULL, 0 } },
+                                             };
 
 static void
 show_modifier_page (CcKeyboardPanel *self, const CcXkbModifier *modifier)
 {
-  AdwNavigationPage *page;
+    AdwNavigationPage *page;
 
-  page = ADW_NAVIGATION_PAGE (cc_xkb_modifier_page_new (self->input_source_settings, modifier));
+    page = ADW_NAVIGATION_PAGE (cc_xkb_modifier_page_new (self->input_source_settings, modifier));
 
-  cc_panel_push_subpage (CC_PANEL (self), page);
+    cc_panel_push_subpage (CC_PANEL (self), page);
 }
 
 static void
 alt_chars_row_activated (CcKeyboardPanel *self)
 {
-  show_modifier_page (self, &LV3_MODIFIER);
+    show_modifier_page (self, &LV3_MODIFIER);
 }
 
 static void
 compose_row_activated (CcKeyboardPanel *self)
 {
-  show_modifier_page (self, &COMPOSE_MODIFIER);
+    show_modifier_page (self, &COMPOSE_MODIFIER);
 }
 
 static void
 keyboard_shortcuts_activated (CcKeyboardPanel *self)
 {
-  AdwNavigationPage *page;
+    AdwNavigationPage *page;
 
-  page = ADW_NAVIGATION_PAGE (cc_keyboard_shortcut_page_new ());
-  cc_panel_push_subpage (CC_PANEL (self), page);
+    page = ADW_NAVIGATION_PAGE (cc_keyboard_shortcut_page_new ());
+    cc_panel_push_subpage (CC_PANEL (self), page);
 }
 
 static void
-cc_keyboard_panel_set_property (GObject      *object,
-                               guint         property_id,
-                               const GValue *value,
-                               GParamSpec   *pspec)
+cc_keyboard_panel_set_property (GObject *object, guint property_id, const GValue *value, GParamSpec *pspec)
 {
-  switch (property_id)
-    {
+    switch (property_id) {
     case PROP_PARAMETERS:
-      break;
+        break;
 
     default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
 }
 
 static const char *
 cc_keyboard_panel_get_help_uri (CcPanel *panel)
 {
-  return "help:gnome-help/keyboard";
+    return "help:gnome-help/keyboard";
 }
 
 static void
 cc_keyboard_panel_finalize (GObject *object)
 {
-  CcKeyboardPanel *self = CC_KEYBOARD_PANEL (object);
+    CcKeyboardPanel *self = CC_KEYBOARD_PANEL (object);
 
-  g_clear_object (&self->input_source_settings);
-  g_clear_object (&self->keybindings_settings);
+    g_clear_object (&self->input_source_settings);
+    g_clear_object (&self->keybindings_settings);
 
-  G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->finalize (object);
+    G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->finalize (object);
 }
 
 static void
 cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 {
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
-  panel_class->get_help_uri = cc_keyboard_panel_get_help_uri;
+    panel_class->get_help_uri = cc_keyboard_panel_get_help_uri;
 
-  object_class->set_property = cc_keyboard_panel_set_property;
-  object_class->finalize = cc_keyboard_panel_finalize;
+    object_class->set_property = cc_keyboard_panel_set_property;
+    object_class->finalize = cc_keyboard_panel_finalize;
 
-  g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
+    g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
-  g_type_ensure (CC_TYPE_INPUT_LIST_BOX);
-  g_type_ensure (CC_TYPE_LIST_ROW);
+    g_type_ensure (CC_TYPE_INPUT_LIST_BOX);
+    g_type_ensure (CC_TYPE_LIST_ROW);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-keyboard-panel.ui");
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/keyboard/cc-keyboard-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, input_switch_group);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, per_window_source);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, same_source);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, alt_chars_row);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, compose_row);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, common_shortcuts_row);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, input_switch_group);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, per_window_source);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, same_source);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, alt_chars_row);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, compose_row);
+    gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, common_shortcuts_row);
 
-  gtk_widget_class_bind_template_callback (widget_class, alt_chars_row_activated);
-  gtk_widget_class_bind_template_callback (widget_class, compose_row_activated);
-  gtk_widget_class_bind_template_callback (widget_class, keyboard_shortcuts_activated);
+    gtk_widget_class_bind_template_callback (widget_class, alt_chars_row_activated);
+    gtk_widget_class_bind_template_callback (widget_class, compose_row_activated);
+    gtk_widget_class_bind_template_callback (widget_class, keyboard_shortcuts_activated);
 }
 
 static gboolean
-translate_switch_input_source (GValue *value,
-                               GVariant *variant,
-                               gpointer user_data)
+translate_switch_input_source (GValue *value, GVariant *variant, gpointer user_data)
 {
-  g_autofree const gchar **strv = NULL;
-  g_autofree gchar *accel_text = NULL;
-  g_autofree gchar *label = NULL;
-  CcKeyCombo combo = { 0 };
+    g_autofree const gchar **strv = NULL;
+    g_autofree gchar *accel_text = NULL;
+    g_autofree gchar *label = NULL;
+    CcKeyCombo combo = { 0 };
 
-  strv = g_variant_get_strv (variant, NULL);
+    strv = g_variant_get_strv (variant, NULL);
 
-  gtk_accelerator_parse (strv[0] ? strv[0] : "", &combo.keyval, &combo.mask);
-  accel_text = convert_keysym_state_to_string (&combo);
+    gtk_accelerator_parse (strv[0] ? strv[0] : "", &combo.keyval, &combo.mask);
+    accel_text = convert_keysym_state_to_string (&combo);
 
-  label = g_strdup_printf (_("Input sources can be switched using the %s "
+    label = g_strdup_printf (_("Input sources can be switched using the %s "
                              "keyboard shortcut.\nThis can be changed in "
                              "the keyboard shortcut settings."),
-                           accel_text);
+                               accel_text);
 
-  g_value_set_string (value, label);
+    g_value_set_string (value, label);
 
-  return TRUE;
+    return TRUE;
 }
 
 static void
 cc_keyboard_panel_init (CcKeyboardPanel *self)
 {
-  g_resources_register (cc_keyboard_get_resource ());
+    g_resources_register (cc_keyboard_get_resource ());
 
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->input_source_settings = g_settings_new ("org.gnome.desktop.input-sources");
+    self->input_source_settings = g_settings_new ("org.gnome.desktop.input-sources");
 
-  /* "Input Source Switching" section */
-  g_settings_bind (self->input_source_settings, "per-window",
-                   self->same_source, "active",
-                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
-  self->keybindings_settings = g_settings_new ("org.gnome.desktop.wm.keybindings");
-  g_settings_bind_with_mapping (self->keybindings_settings, "switch-input-source",
-                                self->input_switch_group, "description",
-                                G_SETTINGS_BIND_GET,
-                                translate_switch_input_source,
-                                NULL, NULL, NULL);
+    /* "Input Source Switching" section */
+    g_settings_bind (self->input_source_settings, "per-window", self->same_source, "active",
+                     G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
+    self->keybindings_settings = g_settings_new ("org.gnome.desktop.wm.keybindings");
+    g_settings_bind_with_mapping (self->keybindings_settings, "switch-input-source", self->input_switch_group,
+                                  "description", G_SETTINGS_BIND_GET, translate_switch_input_source, NULL, NULL, NULL);
 
-  /* "Type Special Characters" section */
-  g_settings_bind_with_mapping (self->input_source_settings,
-                                "xkb-options",
-                                self->alt_chars_row,
-                                "secondary-label",
-                                G_SETTINGS_BIND_GET,
-                                xcb_modifier_transform_binding_to_label,
-                                NULL,
-                                (gpointer)&LV3_MODIFIER,
-                                NULL);
-  g_settings_bind_with_mapping (self->input_source_settings,
-                                "xkb-options",
-                                self->compose_row,
-                                "secondary-label",
-                                G_SETTINGS_BIND_GET,
-                                xcb_modifier_transform_binding_to_label,
-                                NULL,
-                                (gpointer)&COMPOSE_MODIFIER,
-                                NULL);
+    /* "Type Special Characters" section */
+    g_settings_bind_with_mapping (self->input_source_settings, "xkb-options", self->alt_chars_row, "secondary-label",
+                                  G_SETTINGS_BIND_GET, xcb_modifier_transform_binding_to_label, NULL,
+                                  (gpointer) &LV3_MODIFIER, NULL);
+    g_settings_bind_with_mapping (self->input_source_settings, "xkb-options", self->compose_row, "secondary-label",
+                                  G_SETTINGS_BIND_GET, xcb_modifier_transform_binding_to_label, NULL,
+                                  (gpointer) &COMPOSE_MODIFIER, NULL);
 }

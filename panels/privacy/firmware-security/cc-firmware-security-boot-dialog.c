@@ -26,13 +26,12 @@
 
 #include "cc-firmware-security-boot-dialog.h"
 
-struct _CcFirmwareSecurityBootDialog
-{
-  AdwDialog         parent;
+struct _CcFirmwareSecurityBootDialog {
+    AdwDialog parent;
 
-  GtkWidget        *secure_boot_icon;
-  GtkWidget        *secure_boot_title;
-  GtkWidget        *secure_boot_description;
+    GtkWidget *secure_boot_icon;
+    GtkWidget *secure_boot_title;
+    GtkWidget *secure_boot_description;
 };
 
 G_DEFINE_FINAL_TYPE (CcFirmwareSecurityBootDialog, cc_firmware_security_boot_dialog, ADW_TYPE_DIALOG)
@@ -40,72 +39,75 @@ G_DEFINE_FINAL_TYPE (CcFirmwareSecurityBootDialog, cc_firmware_security_boot_dia
 static void
 cc_firmware_security_boot_dialog_class_init (CcFirmwareSecurityBootDialogClass *klass)
 {
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/privacy/firmware-security/cc-firmware-security-boot-dialog.ui");
+    gtk_widget_class_set_template_from_resource (
+        widget_class, "/org/gnome/control-center/privacy/firmware-security/cc-firmware-security-boot-dialog.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityBootDialog, secure_boot_title);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityBootDialog, secure_boot_icon);
-  gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityBootDialog, secure_boot_description);
+    gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityBootDialog, secure_boot_title);
+    gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityBootDialog, secure_boot_icon);
+    gtk_widget_class_bind_template_child (widget_class, CcFirmwareSecurityBootDialog, secure_boot_description);
 }
 
 static void
 cc_firmware_security_boot_dialog_init (CcFirmwareSecurityBootDialog *dialog)
 {
-  gtk_widget_init_template (GTK_WIDGET (dialog));
+    gtk_widget_init_template (GTK_WIDGET (dialog));
 }
 
 GtkWidget *
 cc_firmware_security_boot_dialog_new (SecureBootState secure_boot_state)
 {
-  CcFirmwareSecurityBootDialog *dialog;
-  g_autofree gchar *status_description = NULL;
+    CcFirmwareSecurityBootDialog *dialog;
+    g_autofree gchar *status_description = NULL;
 
-  dialog = g_object_new (CC_TYPE_FIRMWARE_SECURITY_BOOT_DIALOG, NULL);
+    dialog = g_object_new (CC_TYPE_FIRMWARE_SECURITY_BOOT_DIALOG, NULL);
 
-  switch (secure_boot_state)
-    {
+    switch (secure_boot_state) {
     case SECURE_BOOT_STATE_ACTIVE:
-      /* TRANSLATORS: secure boot refers to the system firmware security mode */
-      gtk_label_set_text (GTK_LABEL(dialog->secure_boot_title), _("Secure Boot is Active"));
-      gtk_image_set_from_icon_name (GTK_IMAGE (dialog->secure_boot_icon), "channel-secure-symbolic");
-      gtk_widget_add_css_class (dialog->secure_boot_icon, "good");
-      status_description = g_strdup_printf ("%s",
-                                             /* TRANSLATORS: this is the first section of the decription */
-                                            _("Secure boot prevents malicious software from being loaded when the device starts. "
+        /* TRANSLATORS: secure boot refers to the system firmware security mode */
+        gtk_label_set_text (GTK_LABEL (dialog->secure_boot_title), _("Secure Boot is Active"));
+        gtk_image_set_from_icon_name (GTK_IMAGE (dialog->secure_boot_icon), "channel-secure-symbolic");
+        gtk_widget_add_css_class (dialog->secure_boot_icon, "good");
+        status_description =
+            g_strdup_printf ("%s",
+                             /* TRANSLATORS: this is the first section of the decription */
+                             _("Secure boot prevents malicious software from being loaded when the device starts. "
                                               "It is currently turned on and is functioning correctly."));
-      break;
+        break;
 
     case SECURE_BOOT_STATE_PROBLEMS:
-      /* TRANSLATORS: secure boot refers to the system firmware security mode */
-      gtk_label_set_text (GTK_LABEL (dialog->secure_boot_title), _("Secure Boot Has Problems"));
-      gtk_widget_add_css_class (dialog->secure_boot_icon, "error");
-      status_description = g_strdup_printf ("%s\n\n%s\n\n%s",
-                                            /* TRANSLATORS: this is the first section of the decription. */
-                                            _("Secure boot prevents malicious software from being loaded when the device "
+        /* TRANSLATORS: secure boot refers to the system firmware security mode */
+        gtk_label_set_text (GTK_LABEL (dialog->secure_boot_title), _("Secure Boot Has Problems"));
+        gtk_widget_add_css_class (dialog->secure_boot_icon, "error");
+        status_description =
+            g_strdup_printf ("%s\n\n%s\n\n%s",
+                             /* TRANSLATORS: this is the first section of the decription. */
+                             _("Secure boot prevents malicious software from being loaded when the device "
                                               "starts. It is currently turned on, but will not work due to having an invalid key."),
-                                            /* TRANSLATORS: this is the second section of description. */
-                                            _("Secure boot problems can often be resolved from your device's UEFI firmware settings "
+                               /* TRANSLATORS: this is the second section of description. */
+                               _("Secure boot problems can often be resolved from your device's UEFI firmware settings "
                                               "(BIOS) and your hardware manufacturer may provide information on how to do this."),
-                                            /* TRANSLATORS: this is the third section of description. */
-                                            _("For help, contact your hardware manufacturer or IT support provider."));
-      break;
+                                 /* TRANSLATORS: this is the third section of description. */
+                                 _("For help, contact your hardware manufacturer or IT support provider."));
+        break;
 
     case SECURE_BOOT_STATE_INACTIVE:
     case SECURE_BOOT_STATE_UNKNOWN:
-      /* TRANSLATORS: secure boot refers to the system firmware security mode */
-      gtk_label_set_text (GTK_LABEL (dialog->secure_boot_title), _("Secure Boot is Turned Off"));
-      gtk_widget_add_css_class (dialog->secure_boot_icon, "error");
-      status_description = g_strdup_printf ("%s\n\n%s",
-                                            /* TRANSLATORS: this is the first section of the description. */
-                                            _("Secure boot prevents malicious software from being loaded when the device starts. It is "
+        /* TRANSLATORS: secure boot refers to the system firmware security mode */
+        gtk_label_set_text (GTK_LABEL (dialog->secure_boot_title), _("Secure Boot is Turned Off"));
+        gtk_widget_add_css_class (dialog->secure_boot_icon, "error");
+        status_description = g_strdup_printf (
+            "%s\n\n%s",
+            /* TRANSLATORS: this is the first section of the description. */
+            _("Secure boot prevents malicious software from being loaded when the device starts. It is "
                                               "currently turned off."),
-                                            /* TRANSLATORS: this is the second section of the description. */
-                                            _("Secure boot can often be turned on from your device's UEFI firmware settings (BIOS). "
+              /* TRANSLATORS: this is the second section of the description. */
+              _("Secure boot can often be turned on from your device's UEFI firmware settings (BIOS). "
                                               "For help, contact your hardware manufacturer or IT support provider."));
-      break;
+        break;
     }
-  gtk_label_set_text (GTK_LABEL(dialog->secure_boot_description), status_description);
+    gtk_label_set_text (GTK_LABEL (dialog->secure_boot_description), status_description);
 
-  return GTK_WIDGET (dialog);
+    return GTK_WIDGET (dialog);
 }

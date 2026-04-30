@@ -30,25 +30,19 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_TIMELIKE_ENTRY (cc_timelike_entry_get_type ())
 G_DECLARE_FINAL_TYPE (CcTimelikeEntry, cc_timelike_entry, CC, TIMELIKE_ENTRY, GtkWidget);
-GtkWidget *cc_timelike_entry_new        (void);
-void       cc_timelike_entry_set_time   (CcTimelikeEntry *self,
-                                         guint            hour,
-                                         guint            minute);
-guint      cc_timelike_entry_get_minute (CcTimelikeEntry *self);
-guint      cc_timelike_entry_get_hour   (CcTimelikeEntry *self);
-gboolean   cc_timelike_entry_get_is_am  (CcTimelikeEntry *self);
-void       cc_timelike_entry_set_is_am  (CcTimelikeEntry *self,
-                                         gboolean         is_am);
-gboolean   cc_timelike_entry_get_am_pm  (CcTimelikeEntry *self);
-void       cc_timelike_entry_set_am_pm  (CcTimelikeEntry *self,
-                                         gboolean         is_am_pm);
+GtkWidget *cc_timelike_entry_new (void);
+void cc_timelike_entry_set_time (CcTimelikeEntry *self, guint hour, guint minute);
+guint cc_timelike_entry_get_minute (CcTimelikeEntry *self);
+guint cc_timelike_entry_get_hour (CcTimelikeEntry *self);
+gboolean cc_timelike_entry_get_is_am (CcTimelikeEntry *self);
+void cc_timelike_entry_set_is_am (CcTimelikeEntry *self, gboolean is_am);
+gboolean cc_timelike_entry_get_am_pm (CcTimelikeEntry *self);
+void cc_timelike_entry_set_am_pm (CcTimelikeEntry *self, gboolean is_am_pm);
 
-guint      cc_timelike_entry_get_minute_increment (CcTimelikeEntry *self);
-void       cc_timelike_entry_set_minute_increment (CcTimelikeEntry *self,
-                                                   guint            minutes);
+guint cc_timelike_entry_get_minute_increment (CcTimelikeEntry *self);
+void cc_timelike_entry_set_minute_increment (CcTimelikeEntry *self, guint minutes);
 
-void        cc_timelike_entry_get_hours_and_minutes_midpoints (CcTimelikeEntry *self,
-                                                               float           *out_hours_midpoint_x,
-                                                               float           *out_minutes_midpoint_x);
+void cc_timelike_entry_get_hours_and_minutes_midpoints (CcTimelikeEntry *self, float *out_hours_midpoint_x,
+                                                        float *out_minutes_midpoint_x);
 
 G_END_DECLS

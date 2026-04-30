@@ -20,28 +20,28 @@
 
 #pragma once
 
-#include <glib-object.h>
 #include <gio/gio.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 
 #define PP_TYPE_PRINT_DEVICE (pp_print_device_get_type ())
 G_DECLARE_FINAL_TYPE (PpPrintDevice, pp_print_device, PP, PRINT_DEVICE, GObject);
-PpPrintDevice *pp_print_device_new                       (void);
-PpPrintDevice *pp_print_device_copy                      (PpPrintDevice *device);
-gchar         *pp_print_device_get_device_name           (PpPrintDevice *device);
-gchar         *pp_print_device_get_display_name          (PpPrintDevice *device);
-gchar         *pp_print_device_get_device_original_name  (PpPrintDevice *device);
-gchar         *pp_print_device_get_device_make_and_model (PpPrintDevice *device);
-gchar         *pp_print_device_get_device_location       (PpPrintDevice *device);
-gchar         *pp_print_device_get_device_info           (PpPrintDevice *device);
-gchar         *pp_print_device_get_device_uri            (PpPrintDevice *device);
-gchar         *pp_print_device_get_device_id             (PpPrintDevice *device);
-gchar         *pp_print_device_get_device_ppd            (PpPrintDevice *device);
-gchar         *pp_print_device_get_host_name             (PpPrintDevice *device);
-gint           pp_print_device_get_host_port             (PpPrintDevice *device);
-gboolean       pp_print_device_is_authenticated_server   (PpPrintDevice *device);
-gint           pp_print_device_get_acquisition_method    (PpPrintDevice *device);
-gboolean       pp_print_device_is_network_device         (PpPrintDevice *device);
+PpPrintDevice *pp_print_device_new (void);
+PpPrintDevice *pp_print_device_copy (PpPrintDevice *device);
+gchar *pp_print_device_get_device_name (PpPrintDevice *device);
+gchar *pp_print_device_get_display_name (PpPrintDevice *device);
+gchar *pp_print_device_get_device_original_name (PpPrintDevice *device);
+gchar *pp_print_device_get_device_make_and_model (PpPrintDevice *device);
+gchar *pp_print_device_get_device_location (PpPrintDevice *device);
+gchar *pp_print_device_get_device_info (PpPrintDevice *device);
+gchar *pp_print_device_get_device_uri (PpPrintDevice *device);
+gchar *pp_print_device_get_device_id (PpPrintDevice *device);
+gchar *pp_print_device_get_device_ppd (PpPrintDevice *device);
+gchar *pp_print_device_get_host_name (PpPrintDevice *device);
+gint pp_print_device_get_host_port (PpPrintDevice *device);
+gboolean pp_print_device_is_authenticated_server (PpPrintDevice *device);
+gint pp_print_device_get_acquisition_method (PpPrintDevice *device);
+gboolean pp_print_device_is_network_device (PpPrintDevice *device);
 
 G_END_DECLS

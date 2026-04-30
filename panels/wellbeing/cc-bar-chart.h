@@ -28,14 +28,12 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_BAR_CHART (cc_bar_chart_get_type())
+#define CC_TYPE_BAR_CHART (cc_bar_chart_get_type ())
 G_DECLARE_FINAL_TYPE (CcBarChart, cc_bar_chart, CC, BAR_CHART, GtkWidget);
 CcBarChart *cc_bar_chart_new (void);
 
-const char * const *cc_bar_chart_get_discrete_axis_labels (CcBarChart *self,
-                                                           size_t     *out_n_discrete_axis_labels);
-void cc_bar_chart_set_discrete_axis_labels (CcBarChart         *self,
-                                            const char * const *labels);
+const char *const *cc_bar_chart_get_discrete_axis_labels (CcBarChart *self, size_t *out_n_discrete_axis_labels);
+void cc_bar_chart_set_discrete_axis_labels (CcBarChart *self, const char *const *labels);
 
 /**
  * CcBarChartLabelCallback:
@@ -58,14 +56,10 @@ void cc_bar_chart_set_discrete_axis_labels (CcBarChart         *self,
  *
  * Returns: (not nullable) (transfer full): human readable text form of @value
  */
-typedef char *(*CcBarChartLabelCallback) (CcBarChart *chart,
-                                          double      value,
-                                          void       *user_data);
+typedef char *(*CcBarChartLabelCallback) (CcBarChart *chart, double value, void *user_data);
 
-void cc_bar_chart_set_continuous_axis_label_callback (CcBarChart              *self,
-                                                      CcBarChartLabelCallback  callback,
-                                                      void                    *user_data,
-                                                      GDestroyNotify           destroy_notify);
+void cc_bar_chart_set_continuous_axis_label_callback (CcBarChart *self, CcBarChartLabelCallback callback,
+                                                      void *user_data, GDestroyNotify destroy_notify);
 
 /**
  * CcBarChartGridLineCallback:
@@ -90,29 +84,18 @@ void cc_bar_chart_set_continuous_axis_label_callback (CcBarChart              *s
  *
  * Returns: @idx-th grid line value
  */
-typedef double (*CcBarChartGridLineCallback) (CcBarChart   *chart,
-                                              unsigned int  idx,
-                                              void         *user_data);
+typedef double (*CcBarChartGridLineCallback) (CcBarChart *chart, unsigned int idx, void *user_data);
 
-void cc_bar_chart_set_continuous_axis_grid_line_callback (CcBarChart                 *self,
-                                                          CcBarChartGridLineCallback  callback,
-                                                          void                       *user_data,
-                                                          GDestroyNotify              destroy_notify);
+void cc_bar_chart_set_continuous_axis_grid_line_callback (CcBarChart *self, CcBarChartGridLineCallback callback,
+                                                          void *user_data, GDestroyNotify destroy_notify);
 
-const double *cc_bar_chart_get_data (CcBarChart *self,
-                                     size_t     *out_n_data);
-void cc_bar_chart_set_data (CcBarChart   *self,
-                            const double *data,
-                            size_t        n_data);
+const double *cc_bar_chart_get_data (CcBarChart *self, size_t *out_n_data);
+void cc_bar_chart_set_data (CcBarChart *self, const double *data, size_t n_data);
 
 double cc_bar_chart_get_overlay_line_value (CcBarChart *self);
-void cc_bar_chart_set_overlay_line_value (CcBarChart *self,
-                                          double      value);
+void cc_bar_chart_set_overlay_line_value (CcBarChart *self, double value);
 
-gboolean cc_bar_chart_get_selected_index (CcBarChart *self,
-                                          size_t     *out_index);
-void cc_bar_chart_set_selected_index (CcBarChart *self,
-                                      gboolean    is_selected,
-                                      size_t      idx);
+gboolean cc_bar_chart_get_selected_index (CcBarChart *self, size_t *out_index);
+void cc_bar_chart_set_selected_index (CcBarChart *self, gboolean is_selected, size_t idx);
 
 G_END_DECLS

@@ -21,91 +21,87 @@
 
 #include "config.h"
 
-#include <glib/gi18n.h>
 #include <NetworkManager.h>
+#include <glib/gi18n.h>
 
-#include "ce-page.h"
 #include "ce-page-bluetooth.h"
+#include "ce-page.h"
 #include "ui-helpers.h"
 
-struct _CEPageBluetooth
-{
-        GtkGrid parent;
+struct _CEPageBluetooth {
+    GtkGrid parent;
 
-        GtkEntry        *name_entry;
+    GtkEntry *name_entry;
 
-        NMSettingConnection *setting_connection;
+    NMSettingConnection *setting_connection;
 };
 
 static void ce_page_iface_init (CEPageInterface *);
 
 G_DEFINE_FINAL_TYPE_WITH_CODE (CEPageBluetooth, ce_page_bluetooth, GTK_TYPE_GRID,
-                         G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
+                               G_IMPLEMENT_INTERFACE (CE_TYPE_PAGE, ce_page_iface_init))
 
 static void
 connect_bluetooth_page (CEPageBluetooth *self)
 {
-        const gchar *name;
+    const gchar *name;
 
-        name = nm_setting_connection_get_id (self->setting_connection);
-        gtk_editable_set_text (GTK_EDITABLE (self->name_entry), name);
+    name = nm_setting_connection_get_id (self->setting_connection);
+    gtk_editable_set_text (GTK_EDITABLE (self->name_entry), name);
 
-        g_signal_connect_object (self->name_entry, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+    g_signal_connect_object (self->name_entry, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 }
 
 static const gchar *
 ce_page_bluetooth_get_title (CEPage *page)
 {
-        return _("Identity");
+    return _("Identity");
 }
 
 static gboolean
-ce_page_bluetooth_validate (CEPage        *page,
-                            NMConnection  *connection,
-                            GError       **error)
+ce_page_bluetooth_validate (CEPage *page, NMConnection *connection, GError **error)
 {
-        CEPageBluetooth *self = CE_PAGE_BLUETOOTH (page);
+    CEPageBluetooth *self = CE_PAGE_BLUETOOTH (page);
 
-        g_object_set (self->setting_connection,
-                      NM_SETTING_CONNECTION_ID, gtk_editable_get_text (GTK_EDITABLE (self->name_entry)),
-                      NULL);
+    g_object_set (self->setting_connection, NM_SETTING_CONNECTION_ID,
+                  gtk_editable_get_text (GTK_EDITABLE (self->name_entry)), NULL);
 
-        return nm_setting_verify (NM_SETTING (self->setting_connection), NULL, error);
+    return nm_setting_verify (NM_SETTING (self->setting_connection), NULL, error);
 }
 
 static void
 ce_page_bluetooth_init (CEPageBluetooth *self)
 {
-        gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
 ce_page_bluetooth_class_init (CEPageBluetoothClass *klass)
 {
-        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/bluetooth-page.ui");
+    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/bluetooth-page.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, CEPageBluetooth, name_entry);
+    gtk_widget_class_bind_template_child (widget_class, CEPageBluetooth, name_entry);
 }
 
 static void
 ce_page_iface_init (CEPageInterface *iface)
 {
-        iface->get_title = ce_page_bluetooth_get_title;
-        iface->validate = ce_page_bluetooth_validate;
+    iface->get_title = ce_page_bluetooth_get_title;
+    iface->validate = ce_page_bluetooth_validate;
 }
 
 CEPageBluetooth *
-ce_page_bluetooth_new (NMConnection     *connection)
+ce_page_bluetooth_new (NMConnection *connection)
 {
-        CEPageBluetooth *self;
+    CEPageBluetooth *self;
 
-        self = g_object_new (CE_TYPE_PAGE_BLUETOOTH, NULL);
+    self = g_object_new (CE_TYPE_PAGE_BLUETOOTH, NULL);
 
-        self->setting_connection = nm_connection_get_setting_connection (connection);
+    self->setting_connection = nm_connection_get_setting_connection (connection);
 
-        connect_bluetooth_page (self);
+    connect_bluetooth_page (self);
 
-        return self;
+    return self;
 }

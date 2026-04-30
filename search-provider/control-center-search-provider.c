@@ -24,128 +24,118 @@
 
 #include <gio/gio.h>
 
-#include <shell/cc-panel-loader.h>
-#include <shell/cc-shell-model.h>
 #include "cc-search-provider.h"
 #include "control-center-search-provider.h"
+#include <shell/cc-panel-loader.h>
+#include <shell/cc-shell-model.h>
 
 G_DEFINE_TYPE (CcSearchProviderApp, cc_search_provider_app, GTK_TYPE_APPLICATION);
 
 #define INACTIVITY_TIMEOUT 60 * 1000 /* One minute, in milliseconds */
 
 static gboolean
-cc_search_provider_app_dbus_register (GApplication    *application,
-                                      GDBusConnection *connection,
-                                      const gchar     *object_path,
-                                      GError         **error)
+cc_search_provider_app_dbus_register (GApplication *application, GDBusConnection *connection, const gchar *object_path,
+                                      GError **error)
 {
-  CcSearchProviderApp *self;
+    CcSearchProviderApp *self;
 
-  if (!G_APPLICATION_CLASS (cc_search_provider_app_parent_class)->dbus_register (application,
-                                                                                   connection,
-                                                                                   object_path,
-                                                                                   error))
-    return FALSE;
+    if (!G_APPLICATION_CLASS (cc_search_provider_app_parent_class)
+             ->dbus_register (application, connection, object_path, error))
+        return FALSE;
 
-  self = CC_SEARCH_PROVIDER_APP (application);
+    self = CC_SEARCH_PROVIDER_APP (application);
 
-  return cc_search_provider_dbus_register (self->search_provider, connection,
-                                           object_path, error);
+    return cc_search_provider_dbus_register (self->search_provider, connection, object_path, error);
 }
 
 static void
-cc_search_provider_app_dbus_unregister (GApplication    *application,
-                                        GDBusConnection *connection,
-                                        const gchar     *object_path)
+cc_search_provider_app_dbus_unregister (GApplication *application, GDBusConnection *connection,
+                                        const gchar *object_path)
 {
-  CcSearchProviderApp *self;
+    CcSearchProviderApp *self;
 
-  self = CC_SEARCH_PROVIDER_APP (application);
-  if (self->search_provider)
-    cc_search_provider_dbus_unregister (self->search_provider, connection, object_path);
+    self = CC_SEARCH_PROVIDER_APP (application);
+    if (self->search_provider)
+        cc_search_provider_dbus_unregister (self->search_provider, connection, object_path);
 
-  G_APPLICATION_CLASS (cc_search_provider_app_parent_class)->dbus_unregister (application,
-                                                                              connection,
-                                                                              object_path);
+    G_APPLICATION_CLASS (cc_search_provider_app_parent_class)->dbus_unregister (application, connection, object_path);
 }
 
 static void
 cc_search_provider_app_dispose (GObject *object)
 {
-  CcSearchProviderApp *self;
+    CcSearchProviderApp *self;
 
-  self = CC_SEARCH_PROVIDER_APP (object);
+    self = CC_SEARCH_PROVIDER_APP (object);
 
-  g_clear_object (&self->model);
-  g_clear_object (&self->search_provider);
+    g_clear_object (&self->model);
+    g_clear_object (&self->search_provider);
 
-  G_OBJECT_CLASS (cc_search_provider_app_parent_class)->dispose (object);
+    G_OBJECT_CLASS (cc_search_provider_app_parent_class)->dispose (object);
 }
 
 static void
 cc_search_provider_app_init (CcSearchProviderApp *self)
 {
-  self->search_provider = cc_search_provider_new ();
-  g_application_set_inactivity_timeout (G_APPLICATION (self),
-                                        INACTIVITY_TIMEOUT);
+    self->search_provider = cc_search_provider_new ();
+    g_application_set_inactivity_timeout (G_APPLICATION (self), INACTIVITY_TIMEOUT);
 
-  /* HACK: get the inactivity timeout started */
-  g_application_hold (G_APPLICATION (self));
-  g_application_release (G_APPLICATION (self));
+    /* HACK: get the inactivity timeout started */
+    g_application_hold (G_APPLICATION (self));
+    g_application_release (G_APPLICATION (self));
 }
 
 static void
 cc_search_provider_app_startup (GApplication *application)
 {
-  CcSearchProviderApp *self;
+    CcSearchProviderApp *self;
 
-  self = CC_SEARCH_PROVIDER_APP (application);
+    self = CC_SEARCH_PROVIDER_APP (application);
 
-  G_APPLICATION_CLASS (cc_search_provider_app_parent_class)->startup (application);
+    G_APPLICATION_CLASS (cc_search_provider_app_parent_class)->startup (application);
 
-  self->model = cc_shell_model_new ();
-  cc_panel_loader_fill_model (self->model);
+    self->model = cc_shell_model_new ();
+    cc_panel_loader_fill_model (self->model);
 }
 
 static void
 cc_search_provider_app_class_init (CcSearchProviderAppClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GApplicationClass *app_class = G_APPLICATION_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GApplicationClass *app_class = G_APPLICATION_CLASS (klass);
 
-  object_class->dispose = cc_search_provider_app_dispose;
+    object_class->dispose = cc_search_provider_app_dispose;
 
-  app_class->dbus_register = cc_search_provider_app_dbus_register;
-  app_class->dbus_unregister = cc_search_provider_app_dbus_unregister;
-  app_class->startup = cc_search_provider_app_startup;
+    app_class->dbus_register = cc_search_provider_app_dbus_register;
+    app_class->dbus_unregister = cc_search_provider_app_dbus_unregister;
+    app_class->startup = cc_search_provider_app_startup;
 }
 
 CcShellModel *
 cc_search_provider_app_get_model (CcSearchProviderApp *application)
 {
-  return application->model;
+    return application->model;
 }
 
 CcSearchProviderApp *
 cc_search_provider_app_get ()
 {
-  static CcSearchProviderApp *singleton;
+    static CcSearchProviderApp *singleton;
 
-  if (singleton)
+    if (singleton)
+        return singleton;
+
+    singleton = g_object_new (CC_TYPE_SEARCH_PROVIDER_APP, "application-id", "org.gnome.Settings.SearchProvider",
+                              "flags", G_APPLICATION_IS_SERVICE, NULL);
+
     return singleton;
-
-  singleton = g_object_new (CC_TYPE_SEARCH_PROVIDER_APP,
-                            "application-id", "org.gnome.Settings.SearchProvider",
-                            "flags", G_APPLICATION_IS_SERVICE,
-                            NULL);
-
-  return singleton;
 }
 
-int main (int argc, char **argv)
+int
+main (int argc, char **argv)
 {
-  GApplication *app;
+    GApplication *app;
 
-  app = G_APPLICATION (cc_search_provider_app_get ());
-  return g_application_run (app, argc, argv);
+    app = G_APPLICATION (cc_search_provider_app_get ());
+    return g_application_run (app, argc, argv);
 }

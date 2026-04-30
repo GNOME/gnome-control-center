@@ -32,50 +32,35 @@ G_BEGIN_DECLS
 #define CE_TYPE_PAGE (ce_page_get_type ())
 G_DECLARE_INTERFACE (CEPage, ce_page, CE, PAGE, GObject);
 
-struct _CEPageInterface
-{
-        GTypeInterface g_iface;
+struct _CEPageInterface {
+    GTypeInterface g_iface;
 
-        gboolean     (*validate)             (CEPage *page, NMConnection *connection, GError **error);
-        const gchar *(*get_title)            (CEPage *page);
-        const gchar *(*get_security_setting) (CEPage *page);
+    gboolean (*validate) (CEPage *page, NMConnection *connection, GError **error);
+    const gchar *(*get_title) (CEPage *page);
+    const gchar *(*get_security_setting) (CEPage *page);
 };
 
-const gchar *ce_page_get_title       (CEPage           *page);
-const gchar *ce_page_get_security_setting (CEPage           *page);
-gboolean     ce_page_validate        (CEPage           *page,
-                                      NMConnection     *connection,
-                                      GError          **error);
-void         ce_page_changed         (CEPage           *page);
-void         ce_page_complete_init   (CEPage           *page,
-                                      NMConnection     *connection,
-                                      const gchar      *setting_name,
-                                      GVariant         *variant,
-                                      GError           *error);
+const gchar *ce_page_get_title (CEPage *page);
+const gchar *ce_page_get_security_setting (CEPage *page);
+gboolean ce_page_validate (CEPage *page, NMConnection *connection, GError **error);
+void ce_page_changed (CEPage *page);
+void ce_page_complete_init (CEPage *page, NMConnection *connection, const gchar *setting_name, GVariant *variant,
+                            GError *error);
 
-gchar      **ce_page_get_mac_list    (NMClient         *client,
-                                      GType             device_type,
-                                      const gchar      *mac_property);
-void         ce_page_setup_mac_combo (GtkComboBoxText  *combo,
-                                      const gchar      *current_mac,
-                                      gchar           **mac_list);
-void         ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo,
-                                             const char      *current,
-                                             gboolean         is_wifi);
-gint         ce_get_property_default (NMSetting        *setting,
-                                      const gchar      *property_name);
-gboolean     ce_page_address_is_valid (const gchar *addr);
-gchar       *ce_page_trim_address (const gchar *addr);
-char        *ce_page_cloned_mac_get (GtkComboBoxText *combo);
-gboolean     ce_page_cloned_mac_combo_valid (GtkComboBoxText  *combo);
+gchar **ce_page_get_mac_list (NMClient *client, GType device_type, const gchar *mac_property);
+void ce_page_setup_mac_combo (GtkComboBoxText *combo, const gchar *current_mac, gchar **mac_list);
+void ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo, const char *current, gboolean is_wifi);
+gint ce_get_property_default (NMSetting *setting, const gchar *property_name);
+gboolean ce_page_address_is_valid (const gchar *addr);
+gchar *ce_page_trim_address (const gchar *addr);
+char *ce_page_cloned_mac_get (GtkComboBoxText *combo);
+gboolean ce_page_cloned_mac_combo_valid (GtkComboBoxText *combo);
 
 typedef enum {
-        NAME_FORMAT_TYPE,
-        NAME_FORMAT_PROFILE
+    NAME_FORMAT_TYPE,
+    NAME_FORMAT_PROFILE
 } NameFormat;
 
-gchar * ce_page_get_next_available_name (const GPtrArray *connections,
-                                         NameFormat format,
-                                         const gchar *type_name);
+gchar *ce_page_get_next_available_name (const GPtrArray *connections, NameFormat format, const gchar *type_name);
 
 G_END_DECLS

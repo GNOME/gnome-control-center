@@ -25,20 +25,20 @@
 char *
 bolt_epoch_format (guint64 seconds, const char *format)
 {
-  g_autoptr(GDateTime) dt = NULL;
+    g_autoptr(GDateTime) dt = NULL;
 
-  dt = g_date_time_new_from_unix_utc ((gint64) seconds);
+    dt = g_date_time_new_from_unix_utc ((gint64) seconds);
 
-  if (dt == NULL)
-    return NULL;
+    if (dt == NULL)
+        return NULL;
 
-  return g_date_time_format (dt, format);
+    return g_date_time_format (dt, format);
 }
 
 guint64
 bolt_now_in_seconds (void)
 {
-  gint64 now = g_get_real_time ();
+    gint64 now = g_get_real_time ();
 
-  return (guint64) now / G_USEC_PER_SEC;
+    return (guint64) now / G_USEC_PER_SEC;
 }

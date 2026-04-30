@@ -27,23 +27,22 @@
 
 #include <config.h>
 
-#include <glib/gi18n.h>
 #include "cc-power-profile-row.h"
+#include <glib/gi18n.h>
 
-struct _CcPowerProfileRow
-{
-  AdwActionRow parent_instance;
+struct _CcPowerProfileRow {
+    AdwActionRow parent_instance;
 
-  GtkCheckButton *button;
+    GtkCheckButton *button;
 
-  CcPowerProfile power_profile;
+    CcPowerProfile power_profile;
 };
 
 G_DEFINE_FINAL_TYPE (CcPowerProfileRow, cc_power_profile_row, ADW_TYPE_ACTION_ROW)
 
 enum {
-  BUTTON_TOGGLED,
-  N_SIGNALS
+    BUTTON_TOGGLED,
+    N_SIGNALS
 };
 
 static guint signals[N_SIGNALS];
@@ -51,128 +50,121 @@ static guint signals[N_SIGNALS];
 static void
 cc_power_profile_row_button_toggled_cb (CcPowerProfileRow *self)
 {
-  g_signal_emit (self, signals[BUTTON_TOGGLED], 0);
+    g_signal_emit (self, signals[BUTTON_TOGGLED], 0);
 }
 
 static void
 cc_power_profile_row_class_init (CcPowerProfileRowClass *klass)
 {
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-profile-row.ui");
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/power/cc-power-profile-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, button);
+    gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, button);
 
-  gtk_widget_class_bind_template_callback (widget_class, cc_power_profile_row_button_toggled_cb);
+    gtk_widget_class_bind_template_callback (widget_class, cc_power_profile_row_button_toggled_cb);
 
-  signals[BUTTON_TOGGLED] =
-    g_signal_new ("button-toggled",
-                  G_TYPE_FROM_CLASS (klass),
-                  G_SIGNAL_RUN_FIRST,
-                  0, NULL, NULL,
-                  NULL,
-                  G_TYPE_NONE, 0);
+    signals[BUTTON_TOGGLED] = g_signal_new ("button-toggled", G_TYPE_FROM_CLASS (klass), G_SIGNAL_RUN_FIRST, 0, NULL,
+                                            NULL, NULL, G_TYPE_NONE, 0);
 }
 
 static void
 cc_power_profile_row_init (CcPowerProfileRow *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 CcPowerProfile
 cc_power_profile_row_get_profile (CcPowerProfileRow *self)
 {
-  g_return_val_if_fail (CC_IS_POWER_PROFILE_ROW (self), -1);
+    g_return_val_if_fail (CC_IS_POWER_PROFILE_ROW (self), -1);
 
-  return self->power_profile;
+    return self->power_profile;
 }
 
 GtkCheckButton *
 cc_power_profile_row_get_radio_button (CcPowerProfileRow *self)
 {
-  g_return_val_if_fail (CC_IS_POWER_PROFILE_ROW (self), NULL);
+    g_return_val_if_fail (CC_IS_POWER_PROFILE_ROW (self), NULL);
 
-  return self->button;
+    return self->button;
 }
 
 void
-cc_power_profile_row_set_active (CcPowerProfileRow *self,
-                                 gboolean           active)
+cc_power_profile_row_set_active (CcPowerProfileRow *self, gboolean active)
 {
-  g_return_if_fail (CC_IS_POWER_PROFILE_ROW (self));
+    g_return_if_fail (CC_IS_POWER_PROFILE_ROW (self));
 
-  gtk_check_button_set_active (GTK_CHECK_BUTTON (self->button), active);
+    gtk_check_button_set_active (GTK_CHECK_BUTTON (self->button), active);
 }
 
 gboolean
 cc_power_profile_row_get_active (CcPowerProfileRow *self)
 {
-  g_return_val_if_fail (CC_IS_POWER_PROFILE_ROW (self), FALSE);
+    g_return_val_if_fail (CC_IS_POWER_PROFILE_ROW (self), FALSE);
 
-  return gtk_check_button_get_active (GTK_CHECK_BUTTON (self->button));
+    return gtk_check_button_get_active (GTK_CHECK_BUTTON (self->button));
 }
 
 CcPowerProfileRow *
 cc_power_profile_row_new (CcPowerProfile power_profile)
 {
-  CcPowerProfileRow *self;
-  const char *text, *subtext;
+    CcPowerProfileRow *self;
+    const char *text, *subtext;
 
-  self = g_object_new (CC_TYPE_POWER_PROFILE_ROW, NULL);
+    self = g_object_new (CC_TYPE_POWER_PROFILE_ROW, NULL);
 
-  self->power_profile = power_profile;
-  switch (self->power_profile)
-    {
-      case CC_POWER_PROFILE_PERFORMANCE:
+    self->power_profile = power_profile;
+    switch (self->power_profile) {
+    case CC_POWER_PROFILE_PERFORMANCE:
         text = C_("Power profile", "P_erformance");
         subtext = _("High performance and power usage");
         break;
-      case CC_POWER_PROFILE_BALANCED:
+    case CC_POWER_PROFILE_BALANCED:
         text = C_("Power profile", "Ba_lanced");
         subtext = _("Standard performance and power usage");
         break;
-      case CC_POWER_PROFILE_POWER_SAVER:
+    case CC_POWER_PROFILE_POWER_SAVER:
         text = C_("Power profile", "P_ower Saver");
         subtext = _("Reduced performance and power usage");
         break;
-      default:
+    default:
         g_assert_not_reached ();
     }
 
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), text);
-  adw_action_row_set_subtitle (ADW_ACTION_ROW (self), subtext);
+    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), text);
+    adw_action_row_set_subtitle (ADW_ACTION_ROW (self), subtext);
 
-  return self;
+    return self;
 }
 
 CcPowerProfile
 cc_power_profile_from_str (const char *profile)
 {
-  if (g_strcmp0 (profile, "power-saver") == 0)
-    return CC_POWER_PROFILE_POWER_SAVER;
-  if (g_strcmp0 (profile, "balanced") == 0)
-    return CC_POWER_PROFILE_BALANCED;
-  if (g_strcmp0 (profile, "performance") == 0)
-    return CC_POWER_PROFILE_PERFORMANCE;
+    if (g_strcmp0 (profile, "power-saver") == 0)
+        return CC_POWER_PROFILE_POWER_SAVER;
+    if (g_strcmp0 (profile, "balanced") == 0)
+        return CC_POWER_PROFILE_BALANCED;
+    if (g_strcmp0 (profile, "performance") == 0)
+        return CC_POWER_PROFILE_PERFORMANCE;
 
-  g_warning ("Unknown power profile: %s", profile);
+    g_warning ("Unknown power profile: %s", profile);
 
-  return CC_POWER_PROFILE_UNKNOWN;
+    return CC_POWER_PROFILE_UNKNOWN;
 }
 
 const char *
 cc_power_profile_to_str (CcPowerProfile profile)
 {
-  switch (profile)
-  {
-  case CC_POWER_PROFILE_POWER_SAVER:
-    return "power-saver";
-  case CC_POWER_PROFILE_BALANCED:
-    return "balanced";
-  case CC_POWER_PROFILE_PERFORMANCE:
-    return "performance";
-  default:
-    g_assert_not_reached ();
-  }
+    switch (profile) {
+    case CC_POWER_PROFILE_POWER_SAVER:
+        return "power-saver";
+    case CC_POWER_PROFILE_BALANCED:
+        return "balanced";
+    case CC_POWER_PROFILE_PERFORMANCE:
+        return "performance";
+    default:
+        g_assert_not_reached ();
+    }
 }

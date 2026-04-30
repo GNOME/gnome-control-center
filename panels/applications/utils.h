@@ -25,31 +25,20 @@
 
 G_BEGIN_DECLS
 
-void      file_remove_async    (GFile               *file,
-                                GCancellable        *cancellable,
-                                GAsyncReadyCallback  callback,
-                                gpointer             data);
+void file_remove_async (GFile *file, GCancellable *cancellable, GAsyncReadyCallback callback, gpointer data);
 
-gboolean  file_remove_finish   (GFile               *file,
-                                GAsyncResult        *result,
-                                GError             **error);
+gboolean file_remove_finish (GFile *file, GAsyncResult *result, GError **error);
 
-void      file_size_async      (GFile               *file,
-                                GCancellable        *cancellable,
-                                GAsyncReadyCallback  callback,
-                                gpointer             data);
+void file_size_async (GFile *file, GCancellable *cancellable, GAsyncReadyCallback callback, gpointer data);
 
-gboolean  file_size_finish     (GFile               *file,
-                                GAsyncResult        *result,
-                                guint64             *size,
-                                GError             **error);
+gboolean file_size_finish (GFile *file, GAsyncResult *result, guint64 *size, GError **error);
 
-GKeyFile* get_flatpak_metadata (const gchar         *app_id);
+GKeyFile *get_flatpak_metadata (const gchar *app_id);
 
-guint64   get_flatpak_app_size (const gchar         *app_id);
+guint64 get_flatpak_app_size (const gchar *app_id);
 
-guint64   get_snap_app_size    (const gchar         *snap_name);
+guint64 get_snap_app_size (const gchar *snap_name);
 
-gchar*    get_app_id           (GAppInfo            *info);
+gchar *get_app_id (GAppInfo *info);
 
 G_END_DECLS

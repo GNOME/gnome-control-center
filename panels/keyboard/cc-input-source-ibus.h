@@ -31,15 +31,14 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_INPUT_SOURCE_IBUS (cc_input_source_ibus_get_type ())
 G_DECLARE_FINAL_TYPE (CcInputSourceIBus, cc_input_source_ibus, CC, INPUT_SOURCE_IBUS, CcInputSource);
-CcInputSourceIBus *cc_input_source_ibus_new             (const gchar       *engine_name);
+CcInputSourceIBus *cc_input_source_ibus_new (const gchar *engine_name);
 
 #ifdef HAVE_IBUS
-void               cc_input_source_ibus_set_engine_desc (CcInputSourceIBus *source,
-                                                         IBusEngineDesc    *engine_desc);
+void cc_input_source_ibus_set_engine_desc (CcInputSourceIBus *source, IBusEngineDesc *engine_desc);
 #endif
 
-const gchar       *cc_input_source_ibus_get_engine_name (CcInputSourceIBus *source);
+const gchar *cc_input_source_ibus_get_engine_name (CcInputSourceIBus *source);
 
-GDesktopAppInfo   *cc_input_source_ibus_get_app_info    (CcInputSourceIBus *source);
+GDesktopAppInfo *cc_input_source_ibus_get_app_info (CcInputSourceIBus *source);
 
 G_END_DECLS

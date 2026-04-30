@@ -19,26 +19,23 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
 #include <cups/cups.h>
+#include <gtk/gtk.h>
 
 #define PP_PRINTER_ENTRY_TYPE (pp_printer_entry_get_type ())
 G_DECLARE_FINAL_TYPE (PpPrinterEntry, pp_printer_entry, PP, PRINTER_ENTRY, GtkListBoxRow);
-PpPrinterEntry *pp_printer_entry_new  (cups_dest_t printer,
-                                       gboolean    is_authorized);
+PpPrinterEntry *pp_printer_entry_new (cups_dest_t printer, gboolean is_authorized);
 
-const gchar    *pp_printer_entry_get_name (PpPrinterEntry *self);
+const gchar *pp_printer_entry_get_name (PpPrinterEntry *self);
 
-const gchar    *pp_printer_entry_get_location (PpPrinterEntry *self);
+const gchar *pp_printer_entry_get_location (PpPrinterEntry *self);
 
-void            pp_printer_entry_update_jobs_count (PpPrinterEntry *self);
+void pp_printer_entry_update_jobs_count (PpPrinterEntry *self);
 
-GSList         *pp_printer_entry_get_size_group_widgets (PpPrinterEntry *self);
+GSList *pp_printer_entry_get_size_group_widgets (PpPrinterEntry *self);
 
-void            pp_printer_entry_show_jobs_dialog (PpPrinterEntry *self);
+void pp_printer_entry_show_jobs_dialog (PpPrinterEntry *self);
 
-void            pp_printer_entry_authenticate_jobs (PpPrinterEntry *self);
+void pp_printer_entry_authenticate_jobs (PpPrinterEntry *self);
 
-void            pp_printer_entry_update (PpPrinterEntry *self,
-                                         cups_dest_t     printer,
-                                         gboolean        is_authorized);
+void pp_printer_entry_update (PpPrinterEntry *self, cups_dest_t printer, gboolean is_authorized);

@@ -21,18 +21,17 @@
 
 #pragma once
 
+#include <NetworkManager.h>
 #include <adwaita.h>
 #include <gtk/gtk.h>
-#include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
 #define NET_TYPE_VPN (net_vpn_get_type ())
 G_DECLARE_FINAL_TYPE (NetVpn, net_vpn, NET, VPN, AdwActionRow);
-NetVpn       *net_vpn_new                (NMClient     *client,
-                                          NMConnection *connection);
+NetVpn *net_vpn_new (NMClient *client, NMConnection *connection);
 
-NMConnection *net_vpn_get_connection     (NetVpn       *vpn);
+NMConnection *net_vpn_get_connection (NetVpn *vpn);
 
 gboolean nm_is_wireguard_connection (NMActiveConnection *c);
 

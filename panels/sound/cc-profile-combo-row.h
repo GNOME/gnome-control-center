@@ -25,10 +25,9 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_PROFILE_COMBO_ROW (cc_profile_combo_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcProfileComboRow, cc_profile_combo_row, CC, PROFILE_COMBO_ROW, AdwComboRow);
-void                cc_profile_combo_row_set_device        (CcProfileComboRow *self,
-                                                            GvcMixerControl   *mixer_control,
-                                                            GvcMixerUIDevice  *device);
+void cc_profile_combo_row_set_device (CcProfileComboRow *self, GvcMixerControl *mixer_control,
+                                      GvcMixerUIDevice *device);
 
-gint                cc_profile_combo_row_get_profile_count (CcProfileComboRow *self);
+gint cc_profile_combo_row_get_profile_count (CcProfileComboRow *self);
 
 G_END_DECLS

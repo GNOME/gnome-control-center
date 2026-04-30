@@ -27,12 +27,11 @@
 
 #include <config.h>
 
-#include <glib/gi18n.h>
 #include "cc-power-profile-info-row.h"
+#include <glib/gi18n.h>
 
-struct _CcPowerProfileInfoRow
-{
-  AdwActionRow parent_instance;
+struct _CcPowerProfileInfoRow {
+    AdwActionRow parent_instance;
 };
 
 G_DEFINE_FINAL_TYPE (CcPowerProfileInfoRow, cc_power_profile_info_row, ADW_TYPE_ACTION_ROW)
@@ -40,24 +39,25 @@ G_DEFINE_FINAL_TYPE (CcPowerProfileInfoRow, cc_power_profile_info_row, ADW_TYPE_
 static void
 cc_power_profile_info_row_class_init (CcPowerProfileInfoRowClass *klass)
 {
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-profile-info-row.ui");
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/power/cc-power-profile-info-row.ui");
 }
 
 static void
 cc_power_profile_info_row_init (CcPowerProfileInfoRow *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 CcPowerProfileInfoRow *
 cc_power_profile_info_row_new (const char *text)
 {
-  CcPowerProfileInfoRow *self;
+    CcPowerProfileInfoRow *self;
 
-  self = g_object_new (CC_TYPE_POWER_PROFILE_INFO_ROW, NULL);
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), text);
+    self = g_object_new (CC_TYPE_POWER_PROFILE_INFO_ROW, NULL);
+    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), text);
 
-  return self;
+    return self;
 }

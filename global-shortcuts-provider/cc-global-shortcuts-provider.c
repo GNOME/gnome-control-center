@@ -38,159 +38,125 @@
 #include "cc-util.h"
 #include "control-center-global-shortcuts-provider.h"
 
-struct _CcGlobalShortcutsProvider
-{
-  GObject parent;
+struct _CcGlobalShortcutsProvider {
+    GObject parent;
 
-  CcSettingsGlobalShortcutsProvider *skeleton;
+    CcSettingsGlobalShortcutsProvider *skeleton;
 
-  GtkApplication *app;
+    GtkApplication *app;
 
-  GHashTable *dialogs;
+    GHashTable *dialogs;
 };
 
-typedef enum
-{
-  MATCH_NONE,
-  MATCH_PREFIX,
-  MATCH_SUBSTRING
+typedef enum {
+    MATCH_NONE,
+    MATCH_PREFIX,
+    MATCH_SUBSTRING
 } PanelSearchMatch;
 
-G_DEFINE_FINAL_TYPE (CcGlobalShortcutsProvider,
-               cc_global_shortcuts_provider,
-               G_TYPE_OBJECT)
+G_DEFINE_FINAL_TYPE (CcGlobalShortcutsProvider, cc_global_shortcuts_provider, G_TYPE_OBJECT)
 
 static void
-handle_dialog_done (CcGlobalShortcutsProvider *self,
-                    CcGlobalShortcutDialog    *shortcut_dialog,
-                    GVariant                  *response)
+handle_dialog_done (CcGlobalShortcutsProvider *self, CcGlobalShortcutDialog *shortcut_dialog, GVariant *response)
 {
-  GDBusMethodInvocation *invocation;
+    GDBusMethodInvocation *invocation;
 
-  invocation = g_hash_table_lookup (self->dialogs, shortcut_dialog);
+    invocation = g_hash_table_lookup (self->dialogs, shortcut_dialog);
 
-  if (response)
-    {
-      cc_settings_global_shortcuts_provider_complete_bind_shortcuts (self->skeleton,
-                                                                     invocation,
-                                                                     g_variant_ref_sink (response));
-    }
-  else
-    {
-      g_dbus_method_invocation_return_error (invocation,
-                                             G_DBUS_ERROR,
-                                             G_DBUS_ERROR_ACCESS_DENIED,
-                                             "Access denied");
+    if (response) {
+        cc_settings_global_shortcuts_provider_complete_bind_shortcuts (self->skeleton, invocation,
+                                                                       g_variant_ref_sink (response));
+    } else {
+        g_dbus_method_invocation_return_error (invocation, G_DBUS_ERROR, G_DBUS_ERROR_ACCESS_DENIED, "Access denied");
     }
 }
 
 static void
-on_dialog_done (CcGlobalShortcutDialog    *shortcut_dialog,
-                GVariant                  *response,
-                CcGlobalShortcutsProvider *self)
+on_dialog_done (CcGlobalShortcutDialog *shortcut_dialog, GVariant *response, CcGlobalShortcutsProvider *self)
 {
-  handle_dialog_done (self, shortcut_dialog, response);
-  g_hash_table_remove (self->dialogs, shortcut_dialog);
+    handle_dialog_done (self, shortcut_dialog, response);
+    g_hash_table_remove (self->dialogs, shortcut_dialog);
 }
 
 static gboolean
-handle_bind_shortcuts (CcGlobalShortcutsProvider *self,
-                       GDBusMethodInvocation     *invocation,
-                       const char                *app_id,
-                       const char                *parent_window,
-                       GVariant                  *shortcuts)
+handle_bind_shortcuts (CcGlobalShortcutsProvider *self, GDBusMethodInvocation *invocation, const char *app_id,
+                       const char *parent_window, GVariant *shortcuts)
 {
-  g_autoptr(CcGlobalShortcutDialog) shortcut_dialog = NULL;
+    g_autoptr(CcGlobalShortcutDialog) shortcut_dialog = NULL;
 
-  if (!app_id || !app_id[0])
-    {
-      g_warning ("Discarded shortcut bind request from application with an invalid app_id >%s<.", app_id);
-      return G_DBUS_METHOD_INVOCATION_UNHANDLED;
+    if (!app_id || !app_id[0]) {
+        g_warning ("Discarded shortcut bind request from application with an invalid app_id >%s<.", app_id);
+        return G_DBUS_METHOD_INVOCATION_UNHANDLED;
     }
 
-  shortcut_dialog =
-    cc_global_shortcut_dialog_new (app_id,
-                                   parent_window,
-                                   shortcuts);
+    shortcut_dialog = cc_global_shortcut_dialog_new (app_id, parent_window, shortcuts);
 
-  g_signal_connect (shortcut_dialog, "done",
-                    G_CALLBACK (on_dialog_done),
-                    self);
+    g_signal_connect (shortcut_dialog, "done", G_CALLBACK (on_dialog_done), self);
 
-  gtk_application_add_window (self->app, GTK_WINDOW (shortcut_dialog));
+    gtk_application_add_window (self->app, GTK_WINDOW (shortcut_dialog));
 
-  g_hash_table_insert (self->dialogs,
-                       g_object_ref (shortcut_dialog),
-                       g_object_ref (invocation));
+    g_hash_table_insert (self->dialogs, g_object_ref (shortcut_dialog), g_object_ref (invocation));
 
-  cc_global_shortcut_dialog_present (shortcut_dialog);
+    cc_global_shortcut_dialog_present (shortcut_dialog);
 
-  return G_DBUS_METHOD_INVOCATION_HANDLED;
+    return G_DBUS_METHOD_INVOCATION_HANDLED;
 }
 
 static void
 cc_global_shortcuts_provider_init (CcGlobalShortcutsProvider *self)
 {
-  self->dialogs = g_hash_table_new_full (NULL, NULL,
-                                         (GDestroyNotify) gtk_window_destroy,
-                                         (GDestroyNotify) g_object_unref);
-  self->skeleton = cc_settings_global_shortcuts_provider_skeleton_new ();
+    self->dialogs =
+        g_hash_table_new_full (NULL, NULL, (GDestroyNotify) gtk_window_destroy, (GDestroyNotify) g_object_unref);
+    self->skeleton = cc_settings_global_shortcuts_provider_skeleton_new ();
 
-  g_signal_connect_swapped (self->skeleton, "handle-bind-shortcuts",
-                            G_CALLBACK (handle_bind_shortcuts), self);
+    g_signal_connect_swapped (self->skeleton, "handle-bind-shortcuts", G_CALLBACK (handle_bind_shortcuts), self);
 }
 
 gboolean
-cc_global_shortcuts_provider_dbus_register (CcGlobalShortcutsProvider  *self,
-                                            GDBusConnection            *connection,
-                                            const char                 *object_path,
-                                            GError                    **error)
+cc_global_shortcuts_provider_dbus_register (CcGlobalShortcutsProvider *self, GDBusConnection *connection,
+                                            const char *object_path, GError **error)
 {
-  GDBusInterfaceSkeleton *skeleton =
-    G_DBUS_INTERFACE_SKELETON (self->skeleton);
+    GDBusInterfaceSkeleton *skeleton = G_DBUS_INTERFACE_SKELETON (self->skeleton);
 
-  return g_dbus_interface_skeleton_export (skeleton, connection, object_path, error);
+    return g_dbus_interface_skeleton_export (skeleton, connection, object_path, error);
 }
 
 void
-cc_global_shortcuts_provider_dbus_unregister (CcGlobalShortcutsProvider *self,
-                                              GDBusConnection           *connection,
-                                              const char                *object_path)
+cc_global_shortcuts_provider_dbus_unregister (CcGlobalShortcutsProvider *self, GDBusConnection *connection,
+                                              const char *object_path)
 {
-  GDBusInterfaceSkeleton *skeleton =
-    G_DBUS_INTERFACE_SKELETON (self->skeleton);
+    GDBusInterfaceSkeleton *skeleton = G_DBUS_INTERFACE_SKELETON (self->skeleton);
 
-  if (g_dbus_interface_skeleton_has_connection (skeleton, connection))
-    g_dbus_interface_skeleton_unexport_from_connection (skeleton, connection);
+    if (g_dbus_interface_skeleton_has_connection (skeleton, connection))
+        g_dbus_interface_skeleton_unexport_from_connection (skeleton, connection);
 }
 
 static void
 cc_global_shortcuts_provider_dispose (GObject *object)
 {
-  CcGlobalShortcutsProvider *self =
-    CC_GLOBAL_SHORTCUTS_PROVIDER (object);
+    CcGlobalShortcutsProvider *self = CC_GLOBAL_SHORTCUTS_PROVIDER (object);
 
-  g_clear_object (&self->skeleton);
-  g_clear_pointer (&self->dialogs, g_hash_table_unref);
+    g_clear_object (&self->skeleton);
+    g_clear_pointer (&self->dialogs, g_hash_table_unref);
 
-  G_OBJECT_CLASS (cc_global_shortcuts_provider_parent_class)->dispose (object);
+    G_OBJECT_CLASS (cc_global_shortcuts_provider_parent_class)->dispose (object);
 }
 
 static void
 cc_global_shortcuts_provider_class_init (CcGlobalShortcutsProviderClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  object_class->dispose = cc_global_shortcuts_provider_dispose;
+    object_class->dispose = cc_global_shortcuts_provider_dispose;
 }
 
 CcGlobalShortcutsProvider *
 cc_global_shortcuts_provider_new (GtkApplication *app)
 {
-  CcGlobalShortcutsProvider *self;
+    CcGlobalShortcutsProvider *self;
 
-  self = g_object_new (CC_TYPE_GLOBAL_SHORTCUTS_PROVIDER, NULL);
-  self->app = app;
+    self = g_object_new (CC_TYPE_GLOBAL_SHORTCUTS_PROVIDER, NULL);
+    self->app = app;
 
-  return self;
+    return self;
 }

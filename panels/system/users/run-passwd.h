@@ -30,25 +30,19 @@ typedef void (*PasswdCallback) (PasswdHandler *passwd_handler, GError *error, co
 
 /* Error codes */
 typedef enum {
-        PASSWD_ERROR_REJECTED,          /* New password is not secure enough */
-        PASSWD_ERROR_AUTH_FAILED,       /* Wrong old password, or PAM failure */
-        PASSWD_ERROR_REAUTH_FAILED,     /* Password has changed since first authentication */
-        PASSWD_ERROR_BACKEND,           /* Backend error */
-        PASSWD_ERROR_UNKNOWN            /* General error */
+    PASSWD_ERROR_REJECTED,      /* New password is not secure enough */
+    PASSWD_ERROR_AUTH_FAILED,   /* Wrong old password, or PAM failure */
+    PASSWD_ERROR_REAUTH_FAILED, /* Password has changed since first authentication */
+    PASSWD_ERROR_BACKEND,       /* Backend error */
+    PASSWD_ERROR_UNKNOWN        /* General error */
 } PasswdError;
 
+PasswdHandler *passwd_init (void);
 
-PasswdHandler *passwd_init                (void);
+void passwd_destroy (PasswdHandler *passwd_handler);
 
-void           passwd_destroy             (PasswdHandler *passwd_handler);
+void passwd_authenticate (PasswdHandler *passwd_handler, const char *current_password, PasswdCallback cb,
+                          gpointer user_data);
 
-void           passwd_authenticate        (PasswdHandler *passwd_handler,
-                                           const char    *current_password,
-                                           PasswdCallback cb,
-                                           gpointer       user_data);
-
-gboolean       passwd_change_password     (PasswdHandler *passwd_handler,
-                                           const char    *new_password,
-                                           PasswdCallback cb,
-                                           const gpointer user_data);
-
+gboolean passwd_change_password (PasswdHandler *passwd_handler, const char *new_password, PasswdCallback cb,
+                                 const gpointer user_data);

@@ -26,23 +26,21 @@
 #define DBUS_OPATH_VALID_CHARS "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_"
 
 char *
-bolt_gen_object_path (const char *base,
-                      const char *oid)
+bolt_gen_object_path (const char *base, const char *oid)
 {
-  g_autofree char *id = NULL;
+    g_autofree char *id = NULL;
 
-  if (oid)
-    {
-      id = g_strdup (oid);
-      g_strcanon (id, DBUS_OPATH_VALID_CHARS, '_');
+    if (oid) {
+        id = g_strdup (oid);
+        g_strcanon (id, DBUS_OPATH_VALID_CHARS, '_');
     }
 
-  if (base && id)
-    return g_build_path ("/", "/", base, id, NULL);
-  else if (base)
-    return g_build_path ("/", "/", base, NULL);
-  else if (id)
-    return g_build_path ("/", "/", id, NULL);
+    if (base && id)
+        return g_build_path ("/", "/", base, id, NULL);
+    else if (base)
+        return g_build_path ("/", "/", base, NULL);
+    else if (id)
+        return g_build_path ("/", "/", id, NULL);
 
-  return g_strdup ("/");
+    return g_strdup ("/");
 }

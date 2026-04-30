@@ -21,33 +21,24 @@
 
 #pragma once
 
+#include <colord.h>
 #include <glib-object.h>
 #include <gtk/gtk.h>
-#include <colord.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_COLOR_CALIBRATE (cc_color_calibrate_get_type ())
 G_DECLARE_FINAL_TYPE (CcColorCalibrate, cc_color_calibrate, CC, COLOR_CALIBRATE, GObject);
-CcColorCalibrate *cc_color_calibrate_new    (void);
-void      cc_color_calibrate_set_kind       (CcColorCalibrate *calibrate,
-                                             CdSensorCap       kind);
-void      cc_color_calibrate_set_temperature (CcColorCalibrate *calibrate,
-                                             guint             temperature);
-void      cc_color_calibrate_set_quality    (CcColorCalibrate *calibrate,
-                                             CdProfileQuality  quality);
+CcColorCalibrate *cc_color_calibrate_new (void);
+void cc_color_calibrate_set_kind (CcColorCalibrate *calibrate, CdSensorCap kind);
+void cc_color_calibrate_set_temperature (CcColorCalibrate *calibrate, guint temperature);
+void cc_color_calibrate_set_quality (CcColorCalibrate *calibrate, CdProfileQuality quality);
 CdProfileQuality cc_color_calibrate_get_quality (CcColorCalibrate *calibrate);
-void      cc_color_calibrate_set_device     (CcColorCalibrate *calibrate,
-                                             CdDevice         *device);
-void      cc_color_calibrate_set_sensor     (CcColorCalibrate *calibrate,
-                                             CdSensor         *sensor);
-void      cc_color_calibrate_set_title      (CcColorCalibrate *calibrate,
-                                             const gchar      *title);
-gboolean  cc_color_calibrate_start          (CcColorCalibrate *calibrate,
-                                             GtkWindow        *parent,
-                                             GError          **error);
-gboolean  cc_color_calibrate_setup          (CcColorCalibrate *calibrate,
-                                             GError          **error);
-CdProfile *cc_color_calibrate_get_profile   (CcColorCalibrate *calibrate);
+void cc_color_calibrate_set_device (CcColorCalibrate *calibrate, CdDevice *device);
+void cc_color_calibrate_set_sensor (CcColorCalibrate *calibrate, CdSensor *sensor);
+void cc_color_calibrate_set_title (CcColorCalibrate *calibrate, const gchar *title);
+gboolean cc_color_calibrate_start (CcColorCalibrate *calibrate, GtkWindow *parent, GError **error);
+gboolean cc_color_calibrate_setup (CcColorCalibrate *calibrate, GError **error);
+CdProfile *cc_color_calibrate_get_profile (CcColorCalibrate *calibrate);
 
 G_END_DECLS

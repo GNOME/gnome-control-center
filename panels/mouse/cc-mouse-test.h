@@ -1,5 +1,5 @@
 /* -*- mode: c; style: linux -*-
- * 
+ *
  * Copyright (C) 2012 Red Hat, Inc.
  *
  * Written by: Ondrej Holy <oholy@redhat.com>

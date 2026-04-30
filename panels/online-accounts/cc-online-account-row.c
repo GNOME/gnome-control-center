@@ -22,120 +22,103 @@
 #include "cc-online-account-row.h"
 #include "cc-online-accounts-resources.h"
 
-struct _CcOnlineAccountRow
-{
-  AdwActionRow parent;
+struct _CcOnlineAccountRow {
+    AdwActionRow parent;
 
-  GtkImage *icon_image;
-  GtkBox   *error_box;
+    GtkImage *icon_image;
+    GtkBox *error_box;
 
-  GoaObject *object;
+    GoaObject *object;
 };
 
 G_DEFINE_FINAL_TYPE (CcOnlineAccountRow, cc_online_account_row, ADW_TYPE_ACTION_ROW)
 
 static gboolean
-is_gicon_symbolic (GtkWidget *widget,
-                   GIcon     *icon)
+is_gicon_symbolic (GtkWidget *widget, GIcon *icon)
 {
-  g_autoptr(GtkIconPaintable) icon_paintable = NULL;
-  GtkIconTheme *icon_theme;
+    g_autoptr(GtkIconPaintable) icon_paintable = NULL;
+    GtkIconTheme *icon_theme;
 
-  icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
-  icon_paintable = gtk_icon_theme_lookup_by_gicon (icon_theme,
-                                                   icon,
-                                                   32,
-                                                   gtk_widget_get_scale_factor (widget),
-                                                   gtk_widget_get_direction (widget),
-                                                   GTK_ICON_LOOKUP_NONE);
+    icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
+    icon_paintable = gtk_icon_theme_lookup_by_gicon (icon_theme, icon, 32, gtk_widget_get_scale_factor (widget),
+                                                     gtk_widget_get_direction (widget), GTK_ICON_LOOKUP_NONE);
 
-  return icon_paintable && gtk_icon_paintable_is_symbolic (icon_paintable);
+    return icon_paintable && gtk_icon_paintable_is_symbolic (icon_paintable);
 }
 
 static void
 cc_online_account_row_dispose (GObject *object)
 {
-  CcOnlineAccountRow *self = CC_ONLINE_ACCOUNT_ROW (object);
+    CcOnlineAccountRow *self = CC_ONLINE_ACCOUNT_ROW (object);
 
-  g_clear_object (&self->object);
+    g_clear_object (&self->object);
 
-  G_OBJECT_CLASS (cc_online_account_row_parent_class)->dispose (object);
+    G_OBJECT_CLASS (cc_online_account_row_parent_class)->dispose (object);
 }
 
 static void
 cc_online_account_row_class_init (CcOnlineAccountRowClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->dispose = cc_online_account_row_dispose;
+    object_class->dispose = cc_online_account_row_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/online-accounts/cc-online-account-row.ui");
+    gtk_widget_class_set_template_from_resource (widget_class,
+                                                 "/org/gnome/control-center/online-accounts/cc-online-account-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountRow, icon_image);
-  gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountRow, error_box);
+    gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountRow, icon_image);
+    gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountRow, error_box);
 }
 
 static void
 cc_online_account_row_init (CcOnlineAccountRow *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 CcOnlineAccountRow *
 cc_online_account_row_new (GoaObject *object)
 {
-  CcOnlineAccountRow *self;
-  GoaAccount *account;
-  g_autoptr(GIcon) gicon = NULL;
-  g_autoptr(GError) error = NULL;
+    CcOnlineAccountRow *self;
+    GoaAccount *account;
+    g_autoptr(GIcon) gicon = NULL;
+    g_autoptr(GError) error = NULL;
 
-  self = g_object_new (CC_TYPE_ONLINE_ACCOUNT_ROW, NULL);
+    self = g_object_new (CC_TYPE_ONLINE_ACCOUNT_ROW, NULL);
 
-  self->object = g_object_ref (object);
+    self->object = g_object_ref (object);
 
-  account = goa_object_peek_account (object);
+    account = goa_object_peek_account (object);
 
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self),
-                                 goa_account_get_provider_name (account));
-  g_object_bind_property (account, "presentation-identity",
-                          self, "subtitle",
-                          G_BINDING_SYNC_CREATE);
+    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), goa_account_get_provider_name (account));
+    g_object_bind_property (account, "presentation-identity", self, "subtitle", G_BINDING_SYNC_CREATE);
 
-  gicon = g_icon_new_for_string (goa_account_get_provider_icon (account), &error);
-  if (error != NULL)
-    {
-      g_warning ("Error creating GIcon for account: %s (%s, %d)",
-                 error->message,
-                 g_quark_to_string (error->domain),
-                 error->code);
-    }
-  else
-    {
-      gtk_image_set_from_gicon (self->icon_image, gicon);
+    gicon = g_icon_new_for_string (goa_account_get_provider_icon (account), &error);
+    if (error != NULL) {
+        g_warning ("Error creating GIcon for account: %s (%s, %d)", error->message, g_quark_to_string (error->domain),
+                   error->code);
+    } else {
+        gtk_image_set_from_gicon (self->icon_image, gicon);
 
-      if (is_gicon_symbolic (GTK_WIDGET (self), gicon))
-        {
-          gtk_image_set_icon_size (self->icon_image, GTK_ICON_SIZE_NORMAL);
-          gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "symbolic-circular");
-        }
-      else
-        {
-          gtk_image_set_icon_size (self->icon_image, GTK_ICON_SIZE_LARGE);
-          gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "lowres-icon");
+        if (is_gicon_symbolic (GTK_WIDGET (self), gicon)) {
+            gtk_image_set_icon_size (self->icon_image, GTK_ICON_SIZE_NORMAL);
+            gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "symbolic-circular");
+        } else {
+            gtk_image_set_icon_size (self->icon_image, GTK_ICON_SIZE_LARGE);
+            gtk_widget_add_css_class (GTK_WIDGET (self->icon_image), "lowres-icon");
         }
     }
 
-  g_object_bind_property (account, "attention-needed",
-                          self->error_box, "visible",
-                          G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
+    g_object_bind_property (account, "attention-needed", self->error_box, "visible",
+                            G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
 
-  return self;
+    return self;
 }
 
 GoaObject *
 cc_online_account_row_get_object (CcOnlineAccountRow *self)
 {
-  g_return_val_if_fail (CC_IS_ONLINE_ACCOUNT_ROW (self), NULL);
-  return self->object;
+    g_return_val_if_fail (CC_IS_ONLINE_ACCOUNT_ROW (self), NULL);
+    return self->object;
 }

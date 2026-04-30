@@ -24,5 +24,4 @@
 #include <adwaita.h>
 
 void cc_secure_shell_get_enabled (AdwSwitchRow *widget);
-void cc_secure_shell_set_enabled (GCancellable *cancellable,
-                                  AdwSwitchRow *row);
+void cc_secure_shell_set_enabled (GCancellable *cancellable, AdwSwitchRow *row);

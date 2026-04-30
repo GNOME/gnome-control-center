@@ -30,20 +30,17 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_DURATION_EDITOR (cc_duration_editor_get_type())
+#define CC_TYPE_DURATION_EDITOR (cc_duration_editor_get_type ())
 G_DECLARE_FINAL_TYPE (CcDurationEditor, cc_duration_editor, CC, DURATION_EDITOR, GtkWidget);
 CcDurationEditor *cc_duration_editor_new (void);
 
 guint cc_duration_editor_get_duration (CcDurationEditor *self);
-void cc_duration_editor_set_duration (CcDurationEditor *self,
-                                      guint             duration);
+void cc_duration_editor_set_duration (CcDurationEditor *self, guint duration);
 
 guint cc_duration_editor_get_minimum (CcDurationEditor *self);
-void cc_duration_editor_set_minimum (CcDurationEditor *self,
-                                     guint             minimum);
+void cc_duration_editor_set_minimum (CcDurationEditor *self, guint minimum);
 
 guint cc_duration_editor_get_maximum (CcDurationEditor *self);
-void cc_duration_editor_set_maximum (CcDurationEditor *self,
-                                     guint             maximum);
+void cc_duration_editor_set_maximum (CcDurationEditor *self, guint maximum);
 
 G_END_DECLS

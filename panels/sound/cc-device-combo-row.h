@@ -24,10 +24,8 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_DEVICE_COMBO_ROW (cc_device_combo_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcDeviceComboRow, cc_device_combo_row, CC, DEVICE_COMBO_ROW, AdwComboRow);
-void                   cc_device_combo_row_set_mixer_control (CcDeviceComboRow *self,
-                                                              GvcMixerControl  *mixer_control,
-                                                              gboolean          is_output);
+void cc_device_combo_row_set_mixer_control (CcDeviceComboRow *self, GvcMixerControl *mixer_control, gboolean is_output);
 
-GvcMixerUIDevice      *cc_device_combo_row_get_device        (CcDeviceComboRow *self);
+GvcMixerUIDevice *cc_device_combo_row_get_device (CcDeviceComboRow *self);
 
 G_END_DECLS

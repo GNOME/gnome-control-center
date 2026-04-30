@@ -19,67 +19,55 @@
 
 #pragma once
 
-#include <glib-object.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <gdesktop-enums.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <glib-object.h>
 #include <gnome-bg/gnome-bg.h>
+#include <libgnome-desktop/gnome-desktop-thumbnail.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_BACKGROUND_ITEM (cc_background_item_get_type ())
 G_DECLARE_FINAL_TYPE (CcBackgroundItem, cc_background_item, CC, BACKGROUND_ITEM, GObject);
 typedef enum {
-	CC_BACKGROUND_ITEM_HAS_SHADING   = 1 << 0,
-	CC_BACKGROUND_ITEM_HAS_PLACEMENT = 1 << 1,
-	CC_BACKGROUND_ITEM_HAS_PCOLOR    = 1 << 2,
-	CC_BACKGROUND_ITEM_HAS_SCOLOR    = 1 << 3,
-	CC_BACKGROUND_ITEM_HAS_URI       = 1 << 4,
-	CC_BACKGROUND_ITEM_HAS_URI_DARK  = 1 << 5
+    CC_BACKGROUND_ITEM_HAS_SHADING = 1 << 0,
+    CC_BACKGROUND_ITEM_HAS_PLACEMENT = 1 << 1,
+    CC_BACKGROUND_ITEM_HAS_PCOLOR = 1 << 2,
+    CC_BACKGROUND_ITEM_HAS_SCOLOR = 1 << 3,
+    CC_BACKGROUND_ITEM_HAS_URI = 1 << 4,
+    CC_BACKGROUND_ITEM_HAS_URI_DARK = 1 << 5
 } CcBackgroundItemFlags;
 
-#define CC_BACKGROUND_ITEM_HAS_ALL (CC_BACKGROUND_ITEM_HAS_SHADING &	\
-				    CC_BACKGROUND_ITEM_HAS_PLACEMENT &	\
-				    CC_BACKGROUND_ITEM_HAS_PCOLOR &	\
-				    CC_BACKGROUND_ITEM_HAS_SCOLOR &	\
-				    CC_BACKGROUND_ITEM_HAS_FNAME)
+#define CC_BACKGROUND_ITEM_HAS_ALL                                                                                     \
+    (CC_BACKGROUND_ITEM_HAS_SHADING & CC_BACKGROUND_ITEM_HAS_PLACEMENT & CC_BACKGROUND_ITEM_HAS_PCOLOR                 \
+     & CC_BACKGROUND_ITEM_HAS_SCOLOR & CC_BACKGROUND_ITEM_HAS_FNAME)
 
-CcBackgroundItem * cc_background_item_new               (const char                   *uri);
-CcBackgroundItem * cc_background_item_copy              (CcBackgroundItem             *item);
-gboolean           cc_background_item_load              (CcBackgroundItem *item,
-                                                         GFileInfo        *info);
-gboolean           cc_background_item_changes_with_time (CcBackgroundItem             *item);
-gboolean           cc_background_item_has_dark_version  (CcBackgroundItem             *item);
+CcBackgroundItem *cc_background_item_new (const char *uri);
+CcBackgroundItem *cc_background_item_copy (CcBackgroundItem *item);
+gboolean cc_background_item_load (CcBackgroundItem *item, GFileInfo *info);
+gboolean cc_background_item_changes_with_time (CcBackgroundItem *item);
+gboolean cc_background_item_has_dark_version (CcBackgroundItem *item);
 
-void               cc_background_item_get_thumbnail_async  (CcBackgroundItem             *item,
-                                                            GnomeDesktopThumbnailFactory *thumbs,
-                                                            int                           width,
-                                                            int                           height,
-                                                            int                           scale_factor,
-                                                            gboolean                      dark,
-                                                            GCancellable                 *cancellable,
-                                                            GAsyncReadyCallback           callback,
-                                                            gpointer                      user_data);
-GdkPixbuf        * cc_background_item_get_thumbnail_finish (CcBackgroundItem             *item,
-                                                            GAsyncResult                 *result,
-                                                            GError                      **error);
+void cc_background_item_get_thumbnail_async (CcBackgroundItem *item, GnomeDesktopThumbnailFactory *thumbs, int width,
+                                             int height, int scale_factor, gboolean dark, GCancellable *cancellable,
+                                             GAsyncReadyCallback callback, gpointer user_data);
+GdkPixbuf *cc_background_item_get_thumbnail_finish (CcBackgroundItem *item, GAsyncResult *result, GError **error);
 
-GDesktopBackgroundStyle   cc_background_item_get_placement  (CcBackgroundItem *item);
-GDesktopBackgroundShading cc_background_item_get_shading    (CcBackgroundItem *item);
-const char *              cc_background_item_get_uri        (CcBackgroundItem *item);
-const char *              cc_background_item_get_uri_dark   (CcBackgroundItem *item);
-const char *              cc_background_item_get_source_url (CcBackgroundItem *item);
-const char *              cc_background_item_get_source_xml (CcBackgroundItem *item);
-CcBackgroundItemFlags     cc_background_item_get_flags      (CcBackgroundItem *item);
-const char *              cc_background_item_get_pcolor     (CcBackgroundItem *item);
-const char *              cc_background_item_get_scolor     (CcBackgroundItem *item);
-const char *              cc_background_item_get_name       (CcBackgroundItem *item);
-const char *              cc_background_item_get_size       (CcBackgroundItem *item);
-gboolean                  cc_background_item_get_needs_download (CcBackgroundItem *item);
-guint64                   cc_background_item_get_modified   (CcBackgroundItem *item);
+GDesktopBackgroundStyle cc_background_item_get_placement (CcBackgroundItem *item);
+GDesktopBackgroundShading cc_background_item_get_shading (CcBackgroundItem *item);
+const char *cc_background_item_get_uri (CcBackgroundItem *item);
+const char *cc_background_item_get_uri_dark (CcBackgroundItem *item);
+const char *cc_background_item_get_source_url (CcBackgroundItem *item);
+const char *cc_background_item_get_source_xml (CcBackgroundItem *item);
+CcBackgroundItemFlags cc_background_item_get_flags (CcBackgroundItem *item);
+const char *cc_background_item_get_pcolor (CcBackgroundItem *item);
+const char *cc_background_item_get_scolor (CcBackgroundItem *item);
+const char *cc_background_item_get_name (CcBackgroundItem *item);
+const char *cc_background_item_get_size (CcBackgroundItem *item);
+gboolean cc_background_item_get_needs_download (CcBackgroundItem *item);
+guint64 cc_background_item_get_modified (CcBackgroundItem *item);
 
-gboolean                  cc_background_item_compare        (CcBackgroundItem *saved,
-							     CcBackgroundItem *configured);
-void                      cc_background_item_dump           (CcBackgroundItem *item);
+gboolean cc_background_item_compare (CcBackgroundItem *saved, CcBackgroundItem *configured);
+void cc_background_item_dump (CcBackgroundItem *item);
 
 G_END_DECLS

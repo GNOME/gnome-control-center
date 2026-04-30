@@ -21,10 +21,10 @@
 
 #include <stdlib.h>
 
+#include <adwaita.h>
+#include <gio/gio.h>
 #include <glib.h>
 #include <glib/gi18n.h>
-#include <gio/gio.h>
-#include <adwaita.h>
 
 #include "cc-application.h"
 #include "cc-log.h"
@@ -32,372 +32,323 @@
 #include "cc-panel-loader.h"
 #include "cc-window.h"
 
-struct _CcApplication
-{
-  AdwApplication  parent;
+struct _CcApplication {
+    AdwApplication parent;
 
-  CcShellModel   *model;
+    CcShellModel *model;
 
-  CcWindow       *window;
+    CcWindow *window;
 };
 
-static void cc_application_quit    (GSimpleAction *simple,
-                                    GVariant      *parameter,
-                                    gpointer       user_data);
+static void cc_application_quit (GSimpleAction *simple, GVariant *parameter, gpointer user_data);
 
-static void launch_panel_activated (GSimpleAction *action,
-                                    GVariant      *parameter,
-                                    gpointer       user_data);
+static void launch_panel_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data);
 
-static void launch_single_panel_mode_activated (GSimpleAction *action,
-                                                GVariant      *parameter,
-                                                gpointer       user_data);
+static void launch_single_panel_mode_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data);
 
-static void help_activated         (GSimpleAction *action,
-                                    GVariant      *parameter,
-                                    gpointer       user_data);
+static void help_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data);
 
-static void about_activated        (GSimpleAction *action,
-                                    GVariant      *parameter,
-                                    gpointer       user_data);
+static void about_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data);
 
-static gboolean cmd_verbose_cb     (const char    *option_name,
-                                    const char    *value,
-                                    gpointer       data,
-                                    GError       **error);
+static gboolean cmd_verbose_cb (const char *option_name, const char *value, gpointer data, GError **error);
 
 G_DEFINE_FINAL_TYPE (CcApplication, cc_application, ADW_TYPE_APPLICATION)
 
 const GOptionEntry all_options[] = {
-  { "version", 0, 0, G_OPTION_ARG_NONE, NULL, N_("Display version number"), NULL },
-  { "verbose", 'v', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, cmd_verbose_cb, N_("Enable verbose mode. Specify multiple times to increase verbosity"), NULL },
-  { "search", 's', 0, G_OPTION_ARG_STRING, NULL, N_("Search for the string"), "SEARCH" },
-  { "list", 'l', 0, G_OPTION_ARG_NONE, NULL, N_("List possible panel names and exit"), NULL },
-  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, NULL, N_("Panel to display"), N_("[PANEL] [ARGUMENT…]") },
-  { NULL, 0, 0, 0, NULL, NULL, NULL } /* end the list */
-};
+    { "version", 0, 0, G_OPTION_ARG_NONE, NULL, N_("Display version number"), NULL },
+      { "verbose", 'v', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, cmd_verbose_cb,
+        N_("Enable verbose mode. Specify multiple times to increase verbosity"), NULL },
+        { "search", 's', 0, G_OPTION_ARG_STRING, NULL, N_("Search for the string"), "SEARCH" },
+          { "list", 'l', 0, G_OPTION_ARG_NONE, NULL, N_("List possible panel names and exit"), NULL },
+            { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, NULL,
+              N_("Panel to display"), N_("[PANEL] [ARGUMENT…]") },
+              { NULL, 0, 0, 0, NULL, NULL, NULL } /* end the list */
+            };
 
 static const GActionEntry cc_app_actions[] = {
-  { "launch-panel", launch_panel_activated, "(sav)", NULL, NULL, { 0 } },
-  { "launch-single-panel-mode", launch_single_panel_mode_activated, "(sav)", NULL, NULL, { 0 } },
-  { "help", help_activated, NULL, NULL, NULL, { 0 } },
-  { "quit", cc_application_quit, NULL, NULL, NULL, { 0 } },
-  { "about", about_activated, NULL, NULL, NULL, { 0 } }
+    { "launch-panel", launch_panel_activated, "(sav)", NULL, NULL, { 0 } },
+    { "launch-single-panel-mode", launch_single_panel_mode_activated, "(sav)", NULL, NULL, { 0 } },
+    { "help", help_activated, NULL, NULL, NULL, { 0 } },
+    { "quit", cc_application_quit, NULL, NULL, NULL, { 0 } },
+    { "about", about_activated, NULL, NULL, NULL, { 0 } }
 };
 
 static void
-help_activated (GSimpleAction *action,
-                GVariant      *parameter,
-                gpointer       user_data)
+help_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 {
-  CcApplication *self = CC_APPLICATION (user_data);
-  CcPanel *panel = NULL;
-  GtkWidget *window = NULL;
-  g_autoptr(GtkUriLauncher) launcher = NULL;
-  const char *uri = NULL;
+    CcApplication *self = CC_APPLICATION (user_data);
+    CcPanel *panel = NULL;
+    GtkWidget *window = NULL;
+    g_autoptr(GtkUriLauncher) launcher = NULL;
+    const char *uri = NULL;
 
-  if (self->window)
-    {
-      window = cc_shell_get_toplevel (CC_SHELL (self->window));
-      panel = cc_shell_get_active_panel (CC_SHELL (self->window));
+    if (self->window) {
+        window = cc_shell_get_toplevel (CC_SHELL (self->window));
+        panel = cc_shell_get_active_panel (CC_SHELL (self->window));
     }
 
-  if (panel)
-    uri = cc_panel_get_help_uri (panel);
+    if (panel)
+        uri = cc_panel_get_help_uri (panel);
 
-  launcher = gtk_uri_launcher_new (uri ? uri : "help:gnome-help/prefs");
-  gtk_uri_launcher_launch (launcher, GTK_WINDOW (window), NULL, NULL, NULL);
+    launcher = gtk_uri_launcher_new (uri ? uri : "help:gnome-help/prefs");
+    gtk_uri_launcher_launch (launcher, GTK_WINDOW (window), NULL, NULL, NULL);
 }
 
 static void
-about_activated (GSimpleAction *action,
-                 GVariant      *parameter,
-                 gpointer       user_data)
+about_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 
 {
-  CcApplication *self = CC_APPLICATION (user_data);
-  AdwDialog *about_dialog;
-  const char *developer_name;
+    CcApplication *self = CC_APPLICATION (user_data);
+    AdwDialog *about_dialog;
+    const char *developer_name;
 
-  about_dialog = adw_about_dialog_new_from_appdata ("/org/gnome/Settings/metainfo", NULL);
-  adw_about_dialog_set_version (ADW_ABOUT_DIALOG (about_dialog), VERSION);
-  developer_name = adw_about_dialog_get_developer_name (ADW_ABOUT_DIALOG (about_dialog));
-  /* Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s). */
-  adw_about_dialog_set_translator_credits (ADW_ABOUT_DIALOG (about_dialog), _("translator-credits"));
-  adw_about_dialog_set_copyright (ADW_ABOUT_DIALOG (about_dialog), g_strdup_printf (_("© 1998 %s"), developer_name));
+    about_dialog = adw_about_dialog_new_from_appdata ("/org/gnome/Settings/metainfo", NULL);
+    adw_about_dialog_set_version (ADW_ABOUT_DIALOG (about_dialog), VERSION);
+    developer_name = adw_about_dialog_get_developer_name (ADW_ABOUT_DIALOG (about_dialog));
+    /* Translators should localize the following string which will be displayed in the About dialog giving credit to the
+     * translator(s). */
+    adw_about_dialog_set_translator_credits (ADW_ABOUT_DIALOG (about_dialog), _("translator-credits"));
+    adw_about_dialog_set_copyright (ADW_ABOUT_DIALOG (about_dialog), g_strdup_printf (_("© 1998 %s"), developer_name));
 
-  adw_dialog_present (about_dialog, GTK_WIDGET (self->window));
+    adw_dialog_present (about_dialog, GTK_WIDGET (self->window));
 }
 
 static gboolean
-cmd_verbose_cb (const char  *option_name,
-                const char  *value,
-                gpointer     data,
-                GError     **error)
+cmd_verbose_cb (const char *option_name, const char *value, gpointer data, GError **error)
 {
-  cc_log_increase_verbosity ();
+    cc_log_increase_verbosity ();
 
-  return TRUE;
+    return TRUE;
 }
 
 static void
-launch_panel_activated (GSimpleAction *action,
-                        GVariant      *parameter,
-                        gpointer       user_data)
+launch_panel_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 {
-  CcApplication *self = CC_APPLICATION (user_data);
-  g_autoptr(GVariant) parameters = NULL;
-  g_autoptr(GError) error = NULL;
-  gchar *panel_id;
+    CcApplication *self = CC_APPLICATION (user_data);
+    g_autoptr(GVariant) parameters = NULL;
+    g_autoptr(GError) error = NULL;
+    gchar *panel_id;
 
-  g_variant_get (parameter, "(&s@av)", &panel_id, &parameters);
+    g_variant_get (parameter, "(&s@av)", &panel_id, &parameters);
 
-  g_debug ("gnome-control-center: 'launch-panel' activated for panel '%s' with %"G_GSIZE_FORMAT" arguments",
-           panel_id,
-           g_variant_n_children (parameters));
+    g_debug ("gnome-control-center: 'launch-panel' activated for panel '%s' with %" G_GSIZE_FORMAT " arguments",
+             panel_id, g_variant_n_children (parameters));
 
-  g_application_activate (G_APPLICATION (self));
+    g_application_activate (G_APPLICATION (self));
 
-  if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), panel_id, parameters, &error))
-    g_warning ("Failed to activate the '%s' panel: %s", panel_id, error->message);
+    if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), panel_id, parameters, &error))
+        g_warning ("Failed to activate the '%s' panel: %s", panel_id, error->message);
 }
 
 static void
-launch_single_panel_mode_activated (GSimpleAction *action,
-                                    GVariant      *parameter,
-                                    gpointer       user_data)
+launch_single_panel_mode_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
 {
-  CcApplication *self = CC_APPLICATION (user_data);
+    CcApplication *self = CC_APPLICATION (user_data);
 
-  g_application_activate (G_APPLICATION (self));
+    g_application_activate (G_APPLICATION (self));
 
-  cc_window_enable_single_panel_mode (self->window);
+    cc_window_enable_single_panel_mode (self->window);
 
-  launch_panel_activated (action, parameter, user_data);
+    launch_panel_activated (action, parameter, user_data);
 }
 
 static char **
 get_current_desktops (void)
 {
-  const char *envvar;
+    const char *envvar;
 
-  envvar = g_getenv ("XDG_CURRENT_DESKTOP");
+    envvar = g_getenv ("XDG_CURRENT_DESKTOP");
 
-  if (!envvar)
-    return g_new0 (char *, 0 + 1);
+    if (!envvar)
+        return g_new0 (char *, 0 + 1);
 
-  return g_strsplit (envvar, G_SEARCHPATH_SEPARATOR_S, 0);
+    return g_strsplit (envvar, G_SEARCHPATH_SEPARATOR_S, 0);
 }
 
 static gboolean
 is_supported_desktop (void)
 {
-  g_auto(GStrv) desktops = NULL;
-  guint i;
+    g_auto(GStrv) desktops = NULL;
+    guint i;
 
-  desktops = get_current_desktops ();
-  for (i = 0; desktops[i] != NULL; i++)
-    {
-      /* This matches OnlyShowIn in gnome-control-center.desktop.in.in */
-      if (g_ascii_strcasecmp (desktops[i], "GNOME") == 0)
-        return TRUE;
+    desktops = get_current_desktops ();
+    for (i = 0; desktops[i] != NULL; i++) {
+        /* This matches OnlyShowIn in gnome-control-center.desktop.in.in */
+        if (g_ascii_strcasecmp (desktops[i], "GNOME") == 0)
+            return TRUE;
     }
 
-  return FALSE;
+    return FALSE;
 }
 
 static gint
-cc_application_handle_local_options (GApplication *application,
-                                     GVariantDict *options)
+cc_application_handle_local_options (GApplication *application, GVariantDict *options)
 {
-  if (g_variant_dict_contains (options, "version"))
-    {
-      g_print ("Local options %s %s\n", PACKAGE, VERSION);
-      return 0;
+    if (g_variant_dict_contains (options, "version")) {
+        g_print ("Local options %s %s\n", PACKAGE, VERSION);
+        return 0;
     }
 
-  if (!is_supported_desktop ())
-    {
-      g_printerr ("Running gnome-control-center is only supported under GNOME and Unity, exiting\n");
-      return 1;
+    if (!is_supported_desktop ()) {
+        g_printerr ("Running gnome-control-center is only supported under GNOME and Unity, exiting\n");
+        return 1;
     }
 
-  if (g_variant_dict_contains (options, "list"))
-    {
-      cc_panel_loader_list_panels ();
-      return 0;
+    if (g_variant_dict_contains (options, "list")) {
+        cc_panel_loader_list_panels ();
+        return 0;
     }
 
-  return -1;
+    return -1;
 }
 
 static int
-cc_application_command_line (GApplication            *application,
-                             GApplicationCommandLine *command_line)
+cc_application_command_line (GApplication *application, GApplicationCommandLine *command_line)
 {
-  CcApplication *self;
-  g_autofree GStrv start_panels = NULL;
-  GVariantDict *options;
-  int retval = 0;
-  char *search_str;
-  gboolean debug;
+    CcApplication *self;
+    g_autofree GStrv start_panels = NULL;
+    GVariantDict *options;
+    int retval = 0;
+    char *search_str;
+    gboolean debug;
 
-  self = CC_APPLICATION (application);
-  options = g_application_command_line_get_options_dict (command_line);
+    self = CC_APPLICATION (application);
+    options = g_application_command_line_get_options_dict (command_line);
 
-  debug = g_variant_dict_contains (options, "verbose");
+    debug = g_variant_dict_contains (options, "verbose");
 
-  if (debug)
-    cc_log_init ();
+    if (debug)
+        cc_log_init ();
 
-  g_application_activate (application);
+    g_application_activate (application);
 
-  if (g_variant_dict_lookup (options, "search", "&s", &search_str))
-    {
-      cc_window_set_search_item (self->window, search_str);
-    }
-  else if (g_variant_dict_lookup (options, G_OPTION_REMAINING, "^a&ay", &start_panels))
-    {
-      const char *start_id;
-      GError *err = NULL;
-      GVariant *parameters;
-      GVariantBuilder builder;
-      int i;
+    if (g_variant_dict_lookup (options, "search", "&s", &search_str)) {
+        cc_window_set_search_item (self->window, search_str);
+    } else if (g_variant_dict_lookup (options, G_OPTION_REMAINING, "^a&ay", &start_panels)) {
+        const char *start_id;
+        GError *err = NULL;
+        GVariant *parameters;
+        GVariantBuilder builder;
+        int i;
 
-      g_return_val_if_fail (start_panels[0] != NULL, 1);
-      start_id = start_panels[0];
+        g_return_val_if_fail (start_panels[0] != NULL, 1);
+        start_id = start_panels[0];
 
-      if (start_panels[1])
-        g_debug ("Extra argument: %s", start_panels[1]);
-      else
-        g_debug ("No extra argument");
+        if (start_panels[1])
+            g_debug ("Extra argument: %s", start_panels[1]);
+        else
+            g_debug ("No extra argument");
 
-      g_variant_builder_init (&builder, G_VARIANT_TYPE ("av"));
+        g_variant_builder_init (&builder, G_VARIANT_TYPE ("av"));
 
-      for (i = 1; start_panels[i] != NULL; i++)
-        g_variant_builder_add (&builder, "v", g_variant_new_string (start_panels[i]));
-      parameters = g_variant_builder_end (&builder);
-      if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), start_id, parameters, &err))
-        {
-          g_warning ("Could not load setting panel \"%s\": %s", start_id,
-                     (err) ? err->message : "Unknown error");
-          retval = 1;
+        for (i = 1; start_panels[i] != NULL; i++)
+            g_variant_builder_add (&builder, "v", g_variant_new_string (start_panels[i]));
+        parameters = g_variant_builder_end (&builder);
+        if (!cc_shell_set_active_panel_from_id (CC_SHELL (self->window), start_id, parameters, &err)) {
+            g_warning ("Could not load setting panel \"%s\": %s", start_id, (err) ? err->message : "Unknown error");
+            retval = 1;
 
-          if (err)
-            g_clear_error (&err);
+            if (err)
+                g_clear_error (&err);
         }
     }
 
-  return retval;
+    return retval;
 }
 
 static void
-cc_application_quit (GSimpleAction *simple,
-                     GVariant      *parameter,
-                     gpointer       user_data)
+cc_application_quit (GSimpleAction *simple, GVariant *parameter, gpointer user_data)
 {
-  CcApplication *self = CC_APPLICATION (user_data);
+    CcApplication *self = CC_APPLICATION (user_data);
 
-  if (self->window)
-    gtk_window_destroy (GTK_WINDOW (self->window));
+    if (self->window)
+        gtk_window_destroy (GTK_WINDOW (self->window));
 }
-
 
 static void
 cc_application_activate (GApplication *application)
 {
-  CcApplication *self = CC_APPLICATION (application);
+    CcApplication *self = CC_APPLICATION (application);
 
-  if (!self->window)
-    self->window = cc_window_new (GTK_APPLICATION (application), self->model);
+    if (!self->window)
+        self->window = cc_window_new (GTK_APPLICATION (application), self->model);
 
-  gtk_window_present (GTK_WINDOW (self->window));
+    gtk_window_present (GTK_WINDOW (self->window));
 }
 
 static void
 cc_application_startup (GApplication *application)
 {
-  CcApplication *self = CC_APPLICATION (application);
-  const gchar *help_accels[] = { "F1", NULL };
+    CcApplication *self = CC_APPLICATION (application);
+    const gchar *help_accels[] = { "F1", NULL };
 
-  g_action_map_add_action_entries (G_ACTION_MAP (self),
-                                   cc_app_actions,
-                                   G_N_ELEMENTS (cc_app_actions),
-                                   self);
+    g_action_map_add_action_entries (G_ACTION_MAP (self), cc_app_actions, G_N_ELEMENTS (cc_app_actions), self);
 
-  G_APPLICATION_CLASS (cc_application_parent_class)->startup (application);
+    G_APPLICATION_CLASS (cc_application_parent_class)->startup (application);
 
-  gtk_window_set_default_icon_name (APPLICATION_ID);
+    gtk_window_set_default_icon_name (APPLICATION_ID);
 
-  gtk_application_set_accels_for_action (GTK_APPLICATION (application),
-                                         "app.help", help_accels);
+    gtk_application_set_accels_for_action (GTK_APPLICATION (application), "app.help", help_accels);
 
-  self->model = cc_shell_model_new ();
+    self->model = cc_shell_model_new ();
 }
 
 static void
 cc_application_finalize (GObject *object)
 {
-  /* Destroy the object storage cache when finalizing */
-  cc_object_storage_destroy ();
+    /* Destroy the object storage cache when finalizing */
+    cc_object_storage_destroy ();
 
-  G_OBJECT_CLASS (cc_application_parent_class)->finalize (object);
+    G_OBJECT_CLASS (cc_application_parent_class)->finalize (object);
 }
 
 static GObject *
-cc_application_constructor (GType                  type,
-                            guint                  n_construct_params,
-                            GObjectConstructParam *construct_params)
+cc_application_constructor (GType type, guint n_construct_params, GObjectConstructParam *construct_params)
 {
-  static GObject *self = NULL;
+    static GObject *self = NULL;
 
-  if (self == NULL)
-    {
-      self = G_OBJECT_CLASS (cc_application_parent_class)->constructor (type,
-                                                                        n_construct_params,
-                                                                        construct_params);
-      g_object_add_weak_pointer (self, (gpointer) &self);
-      return self;
+    if (self == NULL) {
+        self = G_OBJECT_CLASS (cc_application_parent_class)->constructor (type, n_construct_params, construct_params);
+        g_object_add_weak_pointer (self, (gpointer) &self);
+        return self;
     }
 
-  return g_object_ref (self);
+    return g_object_ref (self);
 }
 
 static void
 cc_application_class_init (CcApplicationClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GApplicationClass *application_class = G_APPLICATION_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GApplicationClass *application_class = G_APPLICATION_CLASS (klass);
 
-  object_class->finalize = cc_application_finalize;
-  object_class->constructor = cc_application_constructor;
-  application_class->activate = cc_application_activate;
-  application_class->startup = cc_application_startup;
-  application_class->command_line = cc_application_command_line;
-  application_class->handle_local_options = cc_application_handle_local_options;
+    object_class->finalize = cc_application_finalize;
+    object_class->constructor = cc_application_constructor;
+    application_class->activate = cc_application_activate;
+    application_class->startup = cc_application_startup;
+    application_class->command_line = cc_application_command_line;
+    application_class->handle_local_options = cc_application_handle_local_options;
 }
 
 static void
 cc_application_init (CcApplication *self)
 {
-  cc_object_storage_initialize ();
+    cc_object_storage_initialize ();
 
-  g_application_add_main_option_entries (G_APPLICATION (self), all_options);
+    g_application_add_main_option_entries (G_APPLICATION (self), all_options);
 }
 
 GtkApplication *
 cc_application_new (void)
 {
-  return g_object_new (CC_TYPE_APPLICATION,
-                       "application-id", APPLICATION_ID,
-                       "flags", G_APPLICATION_HANDLES_COMMAND_LINE,
-                       NULL);
+    return g_object_new (CC_TYPE_APPLICATION, "application-id", APPLICATION_ID, "flags",
+                         G_APPLICATION_HANDLES_COMMAND_LINE, NULL);
 }
 
 CcShellModel *
 cc_application_get_model (CcApplication *self)
 {
-  g_return_val_if_fail (CC_IS_APPLICATION (self), NULL);
+    g_return_val_if_fail (CC_IS_APPLICATION (self), NULL);
 
-  return self->model;
+    return self->model;
 }

@@ -58,13 +58,11 @@ typedef enum {
     VERTICAL,
 } Alignment;
 
-typedef struct
-{
+typedef struct {
     int x, y;
 } Point;
 
-struct _CcCalibrator
-{
+struct _CcCalibrator {
     /* Geometry of the calibration window */
     GdkRectangle geometry;
 
@@ -87,10 +85,15 @@ struct _CcCalibrator
 
 G_DEFINE_FINAL_TYPE (CcCalibrator, cc_calibrator, G_TYPE_OBJECT)
 
-#define SWAP(valtype,x,y)		\
-    G_STMT_START {			\
-    valtype t; t = (x); x = (y); y = t;	\
-    } G_STMT_END
+#define SWAP(valtype, x, y)                                                                                            \
+    G_STMT_START                                                                                                       \
+    {                                                                                                                  \
+        valtype t;                                                                                                     \
+        t = (x);                                                                                                       \
+        x = (y);                                                                                                       \
+        y = t;                                                                                                         \
+    }                                                                                                                  \
+    G_STMT_END
 
 static void
 cc_calibrator_init (CcCalibrator *c)
@@ -104,8 +107,7 @@ cc_calibrator_class_init (CcCalibratorClass *klass)
 }
 
 CcCalibrator *
-cc_calibrator_new (int threshold_doubleclick,
-                   int threshold_misclick)
+cc_calibrator_new (int threshold_doubleclick, int threshold_misclick)
 {
     CcCalibrator *c = g_object_new (CC_TYPE_CALIBRATOR, NULL);
 
@@ -115,9 +117,8 @@ cc_calibrator_new (int threshold_doubleclick,
     return c;
 }
 
-void cc_calibrator_get_thresholds (CcCalibrator *c,
-                                   int *threshold_doubleclick,
-                                   int *threshold_misclick)
+void
+cc_calibrator_get_thresholds (CcCalibrator *c, int *threshold_doubleclick, int *threshold_misclick)
 {
     *threshold_doubleclick = c->threshold_doubleclick;
     *threshold_misclick = c->threshold_misclick;
@@ -136,9 +137,7 @@ cc_calibrator_get_state (CcCalibrator *c)
 }
 
 void
-cc_calibrator_update_geometry (CcCalibrator *c,
-                               int           width,
-                               int           height)
+cc_calibrator_update_geometry (CcCalibrator *c, int width, int height)
 {
     if (c->geometry.width == width && c->geometry.height == height)
         return;
@@ -153,25 +152,19 @@ cc_calibrator_update_geometry (CcCalibrator *c,
  * return true if the value is within the range, false otherwise.
  */
 static gboolean
-along_axis (CcCalibrator       *c,
-            const Point        *new_point,
-            Alignment           alignment,
-            const Point        *reference)
+along_axis (CcCalibrator *c, const Point *new_point, Alignment alignment, const Point *reference)
 {
     gboolean result;
 
     if (c->threshold_misclick <= 0)
         return TRUE;
 
-    switch (alignment)
-    {
+    switch (alignment) {
     case VERTICAL:
-        result = (abs (new_point->x - reference->x) <= c->threshold_misclick) &&
-                 (new_point->y > reference->y);
+        result = (abs (new_point->x - reference->x) <= c->threshold_misclick) && (new_point->y > reference->y);
         break;
     case HORIZONTAL:
-        result = (abs (new_point->y - reference->y) <= c->threshold_misclick) &&
-                 (new_point->x > reference->x);
+        result = (abs (new_point->y - reference->y) <= c->threshold_misclick) && (new_point->x > reference->x);
         break;
     default:
         g_return_val_if_reached (FALSE);
@@ -182,9 +175,7 @@ along_axis (CcCalibrator       *c,
 
 /* add a click with the given coordinates */
 gboolean
-cc_calibrator_add_click (CcCalibrator *c,
-                         int           x,
-                         int           y)
+cc_calibrator_add_click (CcCalibrator *c, int x, int y)
 {
     gboolean misclick = TRUE;
     const Point p = { x, y };
@@ -193,14 +184,11 @@ cc_calibrator_add_click (CcCalibrator *c,
 
     g_debug ("Trying to add click (%d, %d)", x, y);
     /* Double-click detection */
-    if (c->threshold_doubleclick > 0 && c->state > CC_CALIBRATOR_STATE_UPPER_LEFT)
-    {
+    if (c->threshold_doubleclick > 0 && c->state > CC_CALIBRATOR_STATE_UPPER_LEFT) {
         int i = c->state - 1;
-        while (i >= 0)
-        {
-            if (abs(x - c->clicked[i].x) <= c->threshold_doubleclick &&
-                abs(y - c->clicked[i].y) <= c->threshold_doubleclick)
-            {
+        while (i >= 0) {
+            if (abs (x - c->clicked[i].x) <= c->threshold_doubleclick
+                && abs (y - c->clicked[i].y) <= c->threshold_doubleclick) {
                 g_debug ("Detected double-click, ignoring");
                 return FALSE;
             }
@@ -209,8 +197,7 @@ cc_calibrator_add_click (CcCalibrator *c,
     }
 
     /* Mis-click detection */
-    switch (c->state)
-    {
+    switch (c->state) {
     case CC_CALIBRATOR_STATE_UPPER_LEFT:
         misclick = FALSE;
         break;
@@ -221,15 +208,14 @@ cc_calibrator_add_click (CcCalibrator *c,
         misclick = !along_axis (c, &p, VERTICAL, &c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT]);
         break;
     case CC_CALIBRATOR_STATE_LOWER_RIGHT: /* must be x-aligned with UR, y-aligned with LL */
-        misclick = !along_axis (c, &p, VERTICAL, &c->clicked[CC_CALIBRATOR_STATE_UPPER_RIGHT]) ||
-                   !along_axis (c, &p, HORIZONTAL, &c->clicked[CC_CALIBRATOR_STATE_LOWER_LEFT]);
+        misclick = !along_axis (c, &p, VERTICAL, &c->clicked[CC_CALIBRATOR_STATE_UPPER_RIGHT])
+                   || !along_axis (c, &p, HORIZONTAL, &c->clicked[CC_CALIBRATOR_STATE_LOWER_LEFT]);
         break;
     default:
         g_return_val_if_reached (FALSE);
     }
 
-    if (misclick)
-    {
+    if (misclick) {
         g_debug ("Detected misclick, resetting");
         cc_calibrator_reset (c);
         return FALSE;
@@ -243,16 +229,14 @@ cc_calibrator_add_click (CcCalibrator *c,
 
 /* calculate and apply the calibration */
 gboolean
-cc_calibrator_finish (CcCalibrator *c,
-                      XYinfo       *new_axis,
-                      gboolean      *swap)
+cc_calibrator_finish (CcCalibrator *c, XYinfo *new_axis, gboolean *swap)
 {
     gboolean swap_xy;
     float scale_x;
     float scale_y;
     float delta_x;
     float delta_y;
-    XYinfo axis = {-1, -1, -1, -1};
+    XYinfo axis = { -1, -1, -1, -1 };
 
     if (c->state != CC_CALIBRATOR_STATE_COMPLETE)
         return FALSE;
@@ -266,27 +250,31 @@ cc_calibrator_finish (CcCalibrator *c,
     swap_xy = (c->geometry.width < c->geometry.height);
 
     /* Compute the scale to transform from pixel positions to [0..1]. */
-    scale_x = 1 / (float)c->geometry.width;
-    scale_y = 1 / (float)c->geometry.height;
+    scale_x = 1 / (float) c->geometry.width;
+    scale_y = 1 / (float) c->geometry.height;
 
-    axis.x_min = ((((c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT].x + c->clicked[CC_CALIBRATOR_STATE_LOWER_LEFT].x) / 2)) * scale_x);
-    axis.x_max = ((((c->clicked[CC_CALIBRATOR_STATE_UPPER_RIGHT].x + c->clicked[CC_CALIBRATOR_STATE_LOWER_RIGHT].x) / 2)) * scale_x);
-    axis.y_min = ((((c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT].y + c->clicked[CC_CALIBRATOR_STATE_UPPER_RIGHT].y) / 2)) * scale_y);
-    axis.y_max = ((((c->clicked[CC_CALIBRATOR_STATE_LOWER_LEFT].y + c->clicked[CC_CALIBRATOR_STATE_LOWER_RIGHT].y) / 2)) * scale_y);
+    axis.x_min = ((((c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT].x + c->clicked[CC_CALIBRATOR_STATE_LOWER_LEFT].x) / 2))
+                  * scale_x);
+    axis.x_max =
+        ((((c->clicked[CC_CALIBRATOR_STATE_UPPER_RIGHT].x + c->clicked[CC_CALIBRATOR_STATE_LOWER_RIGHT].x) / 2))
+         * scale_x);
+    axis.y_min = ((((c->clicked[CC_CALIBRATOR_STATE_UPPER_LEFT].y + c->clicked[CC_CALIBRATOR_STATE_UPPER_RIGHT].y) / 2))
+                  * scale_y);
+    axis.y_max = ((((c->clicked[CC_CALIBRATOR_STATE_LOWER_LEFT].y + c->clicked[CC_CALIBRATOR_STATE_LOWER_RIGHT].y) / 2))
+                  * scale_y);
 
     /* Add/subtract the offset that comes from not having the points in the
      * corners (using the same coordinate system they are currently in)
      */
-    delta_x = (axis.x_max - axis.x_min) / (float)(NUM_BLOCKS - 2);
+    delta_x = (axis.x_max - axis.x_min) / (float) (NUM_BLOCKS - 2);
     axis.x_min -= delta_x;
     axis.x_max += delta_x;
-    delta_y = (axis.y_max - axis.y_min) / (float)(NUM_BLOCKS - 2);
+    delta_y = (axis.y_max - axis.y_min) / (float) (NUM_BLOCKS - 2);
     axis.y_min -= delta_y;
     axis.y_max += delta_y;
 
     /* If x and y has to be swapped we also have to swap the parameters */
-    if (swap_xy)
-    {
+    if (swap_xy) {
         SWAP (gdouble, axis.x_min, axis.y_min);
         SWAP (gdouble, axis.x_max, axis.y_max);
     }
@@ -296,4 +284,3 @@ cc_calibrator_finish (CcCalibrator *c,
 
     return TRUE;
 }
-

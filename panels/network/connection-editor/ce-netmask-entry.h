@@ -27,12 +27,12 @@ G_BEGIN_DECLS
 
 #define CE_TYPE_NETMASK_ENTRY (ce_netmask_entry_get_type ())
 G_DECLARE_FINAL_TYPE (CENetmaskEntry, ce_netmask_entry, CE, NETMASK_ENTRY, GtkEntry);
-CENetmaskEntry *ce_netmask_entry_new        (void);
+CENetmaskEntry *ce_netmask_entry_new (void);
 
-gboolean        ce_netmask_entry_is_empty   (CENetmaskEntry *entry);
+gboolean ce_netmask_entry_is_empty (CENetmaskEntry *entry);
 
-gboolean        ce_netmask_entry_is_valid   (CENetmaskEntry *entry);
+gboolean ce_netmask_entry_is_valid (CENetmaskEntry *entry);
 
-guint32         ce_netmask_entry_get_prefix (CENetmaskEntry *entry);
+guint32 ce_netmask_entry_get_prefix (CENetmaskEntry *entry);
 
 G_END_DECLS

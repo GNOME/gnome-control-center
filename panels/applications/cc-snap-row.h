@@ -25,10 +25,8 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SNAP_ROW (cc_snap_row_get_type())
+#define CC_TYPE_SNAP_ROW (cc_snap_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcSnapRow, cc_snap_row, CC, SNAP_ROW, AdwActionRow);
-CcSnapRow* cc_snap_row_new      (GCancellable   *cancellable,
-                                 JsonObject     *plug,
-                                 JsonArray      *slots);
+CcSnapRow *cc_snap_row_new (GCancellable *cancellable, JsonObject *plug, JsonArray *slots);
 
 G_END_DECLS

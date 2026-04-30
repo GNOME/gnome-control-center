@@ -27,14 +27,11 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_CROP_AREA (cc_crop_area_get_type ())
 G_DECLARE_FINAL_TYPE (CcCropArea, cc_crop_area, CC, CROP_AREA, GtkWidget);
-GtkWidget *      cc_crop_area_new                  (void);
-GdkPaintable *   cc_crop_area_get_paintable        (CcCropArea   *area);
-void             cc_crop_area_set_paintable        (CcCropArea   *area,
-                                                    GdkPaintable *paintable);
-void             cc_crop_area_set_min_size         (CcCropArea   *area,
-                                                    int           width,
-                                                    int           height);
-GdkPixbuf *      cc_crop_area_create_pixbuf        (CcCropArea   *area);
+GtkWidget *cc_crop_area_new (void);
+GdkPaintable *cc_crop_area_get_paintable (CcCropArea *area);
+void cc_crop_area_set_paintable (CcCropArea *area, GdkPaintable *paintable);
+void cc_crop_area_set_min_size (CcCropArea *area, int width, int height);
+GdkPixbuf *cc_crop_area_create_pixbuf (CcCropArea *area);
 
 G_END_DECLS
 

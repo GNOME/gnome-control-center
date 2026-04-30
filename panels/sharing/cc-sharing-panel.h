@@ -28,6 +28,6 @@ G_BEGIN_DECLS
 #define CC_TYPE_SHARING_PANEL (cc_sharing_panel_get_type ())
 G_DECLARE_FINAL_TYPE (CcSharingPanel, cc_sharing_panel, CC, SHARING_PANEL, CcPanel);
 CcSharingPanel *cc_sharing_panel_new (void);
-void            cc_sharing_panel_static_init_func (void);
+void cc_sharing_panel_static_init_func (void);
 
 G_END_DECLS

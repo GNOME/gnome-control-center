@@ -29,20 +29,18 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_SCREEN_TIME_STATISTICS_ROW (cc_screen_time_statistics_row_get_type())
-G_DECLARE_FINAL_TYPE (CcScreenTimeStatisticsRow, cc_screen_time_statistics_row, CC, SCREEN_TIME_STATISTICS_ROW, AdwActionRow);
+#define CC_TYPE_SCREEN_TIME_STATISTICS_ROW (cc_screen_time_statistics_row_get_type ())
+G_DECLARE_FINAL_TYPE (CcScreenTimeStatisticsRow, cc_screen_time_statistics_row, CC, SCREEN_TIME_STATISTICS_ROW,
+                      AdwActionRow);
 CcScreenTimeStatisticsRow *cc_screen_time_statistics_row_new (void);
 
 GFile *cc_screen_time_statistics_row_get_history_file (CcScreenTimeStatisticsRow *self);
-void cc_screen_time_statistics_row_set_history_file (CcScreenTimeStatisticsRow *self,
-                                                     GFile                     *history_file);
+void cc_screen_time_statistics_row_set_history_file (CcScreenTimeStatisticsRow *self, GFile *history_file);
 
 const GDate *cc_screen_time_statistics_row_get_selected_date (CcScreenTimeStatisticsRow *self);
-void cc_screen_time_statistics_row_set_selected_date (CcScreenTimeStatisticsRow *self,
-                                                      const GDate               *selected_date);
+void cc_screen_time_statistics_row_set_selected_date (CcScreenTimeStatisticsRow *self, const GDate *selected_date);
 
 unsigned int cc_screen_time_statistics_row_get_daily_limit (CcScreenTimeStatisticsRow *self);
-void cc_screen_time_statistics_row_set_daily_limit (CcScreenTimeStatisticsRow *self,
-                                                    unsigned int               daily_limit_minutes);
+void cc_screen_time_statistics_row_set_daily_limit (CcScreenTimeStatisticsRow *self, unsigned int daily_limit_minutes);
 
 G_END_DECLS

@@ -18,8 +18,8 @@
 #pragma once
 
 #include <adwaita.h>
-#include <gtk/gtk.h>
 #include <gio/gdesktopappinfo.h>
+#include <gtk/gtk.h>
 
 #include "cc-input-source.h"
 
@@ -27,14 +27,12 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_INPUT_ROW (cc_input_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcInputRow, cc_input_row, CC, INPUT_ROW, AdwActionRow);
-CcInputRow      *cc_input_row_new           (CcInputSource *source);
+CcInputRow *cc_input_row_new (CcInputSource *source);
 
-CcInputSource   *cc_input_row_get_source    (CcInputRow    *row);
+CcInputSource *cc_input_row_get_source (CcInputRow *row);
 
-void             cc_input_row_set_removable (CcInputRow    *row,
-                                             gboolean       removable);
+void cc_input_row_set_removable (CcInputRow *row, gboolean removable);
 
-void             cc_input_row_set_draggable (CcInputRow    *row,
-                                             gboolean       draggable);
+void cc_input_row_set_draggable (CcInputRow *row, gboolean draggable);
 
 G_END_DECLS

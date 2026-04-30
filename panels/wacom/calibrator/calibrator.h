@@ -23,41 +23,32 @@
 
 #pragma once
 
-#include <glib.h>
 #include "calibrator-gui.h"
+#include <glib.h>
 
 G_BEGIN_DECLS
 
 typedef enum {
-        CC_CALIBRATOR_STATE_UPPER_LEFT,
-        CC_CALIBRATOR_STATE_UPPER_RIGHT,
-        CC_CALIBRATOR_STATE_LOWER_LEFT,
-        CC_CALIBRATOR_STATE_LOWER_RIGHT,
-        CC_CALIBRATOR_STATE_COMPLETE
+    CC_CALIBRATOR_STATE_UPPER_LEFT,
+    CC_CALIBRATOR_STATE_UPPER_RIGHT,
+    CC_CALIBRATOR_STATE_LOWER_LEFT,
+    CC_CALIBRATOR_STATE_LOWER_RIGHT,
+    CC_CALIBRATOR_STATE_COMPLETE
 } CcCalibratorState;
 
 #define CC_TYPE_CALIBRATOR (cc_calibrator_get_type ())
 G_DECLARE_FINAL_TYPE (CcCalibrator, cc_calibrator, CC, CALIBRATOR, GObject);
-CcCalibrator * cc_calibrator_new (int threshold_doubleclick,
-                                  int threshold_mislick);
+CcCalibrator *cc_calibrator_new (int threshold_doubleclick, int threshold_mislick);
 
-void cc_calibrator_get_thresholds (CcCalibrator *c,
-                                   int *threshold_doubleclick,
-                                   int *threshold_misclick);
+void cc_calibrator_get_thresholds (CcCalibrator *c, int *threshold_doubleclick, int *threshold_misclick);
 
-void cc_calibrator_reset         (CcCalibrator *c);
+void cc_calibrator_reset (CcCalibrator *c);
 
-void cc_calibrator_update_geometry (CcCalibrator *c,
-                                    int           width,
-                                    int           height);
+void cc_calibrator_update_geometry (CcCalibrator *c, int width, int height);
 
 CcCalibratorState cc_calibrator_get_state (CcCalibrator *c);
 
-gboolean cc_calibrator_add_click (CcCalibrator *c,
-                                  int           x,
-                                  int           y);
-gboolean cc_calibrator_finish    (CcCalibrator *c,
-                                  XYinfo       *new_axis,
-                                  gboolean     *swap);
+gboolean cc_calibrator_add_click (CcCalibrator *c, int x, int y);
+gboolean cc_calibrator_finish (CcCalibrator *c, XYinfo *new_axis, gboolean *swap);
 
 G_END_DECLS

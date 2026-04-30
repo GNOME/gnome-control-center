@@ -26,14 +26,13 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_CLOCK (cc_clock_get_type ())
 G_DECLARE_FINAL_TYPE (CcClock, cc_clock, CC, CLOCK, GtkWidget);
-GtkWidget * cc_clock_new          (guint duration);
+GtkWidget *cc_clock_new (guint duration);
 
-void        cc_clock_reset        (CcClock *clock);
+void cc_clock_reset (CcClock *clock);
 
-void        cc_clock_set_duration (CcClock *clock,
-                                   guint    duration);
-guint       cc_clock_get_duration (CcClock *clock);
+void cc_clock_set_duration (CcClock *clock, guint duration);
+guint cc_clock_get_duration (CcClock *clock);
 
-GType       cc_clock_get_type     (void);
+GType cc_clock_get_type (void);
 
 G_END_DECLS
