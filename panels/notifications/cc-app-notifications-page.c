@@ -200,7 +200,7 @@ lock_screen_notifications_row_state_set_cb (CcAppNotificationsPage *self)
 static void
 lock_screen_content_row_state_set_cb (CcAppNotificationsPage *self)
 {
-  g_settings_set_boolean (self->settings, "details-in-lock-screen", adw_switch_row_get_active (self->lock_screen_notifications_row));
+  g_settings_set_boolean (self->settings, "details-in-lock-screen", adw_switch_row_get_active (self->lock_screen_content_row));
 }
 
 static void
