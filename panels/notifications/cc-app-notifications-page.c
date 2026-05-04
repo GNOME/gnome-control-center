@@ -40,12 +40,7 @@
  * insensitive when switch above is off
  */
 
-static void update_banner_row (CcAppNotificationsPage *self);
-static void update_banner_content_row (CcAppNotificationsPage *self);
-static void update_lock_screen_row (CcAppNotificationsPage *self);
-static void update_lock_screen_content_row (CcAppNotificationsPage *self);
-static void update_sound_row (CcAppNotificationsPage *self);
-static void update_notification_row (CcAppNotificationsPage *self);
+static void update_switches (CcAppNotificationsPage *self);
 
 struct _CcAppNotificationsPage {
     AdwNavigationPage parent;
@@ -82,9 +77,9 @@ on_perm_store_set_done (GObject *source_object, GAsyncResult *res, gpointer user
 }
 
 static void
-set_portal_permissions_for_app (CcAppNotificationsPage *self, AdwSwitchRow *row)
+set_portal_permissions_for_app (CcAppNotificationsPage *self)
 {
-    gboolean allow = adw_switch_row_get_active (row);
+    gboolean allow = g_settings_get_boolean (self->settings, "enable");
     g_autoptr(GVariant) perms = NULL;
     g_autoptr(GVariant) new_perms = NULL;
     g_autoptr(GVariant) data = NULL;
@@ -134,28 +129,10 @@ set_portal_permissions_for_app (CcAppNotificationsPage *self, AdwSwitchRow *row)
 }
 
 static void
-notifications_row_state_set_cb (CcAppNotificationsPage *self)
-{
-    g_settings_set_boolean (self->settings, "enable", adw_switch_row_get_active (self->notifications_row));
-    set_portal_permissions_for_app (self, self->notifications_row);
-    update_sound_row (self);
-    update_banner_row (self);
-    update_banner_content_row (self);
-    update_lock_screen_row (self);
-    update_lock_screen_content_row (self);
-}
-
-static void
-sound_alerts_row_state_set_cb (CcAppNotificationsPage *self)
-{
-    g_settings_set_boolean (self->settings, "enable-sound-alerts", adw_switch_row_get_active (self->sound_alerts_row));
-}
-
-static void
 notification_banners_row_state_set_cb (CcAppNotificationsPage *self)
 {
     g_settings_set_boolean (self->settings, "show-banners", adw_switch_row_get_active (self->notification_banners_row));
-    update_banner_content_row (self);
+    update_switches (self);
 }
 
 static void
@@ -170,7 +147,7 @@ lock_screen_notifications_row_state_set_cb (CcAppNotificationsPage *self)
 {
     g_settings_set_boolean (self->settings, "show-in-lock-screen",
                             adw_switch_row_get_active (self->lock_screen_notifications_row));
-    update_lock_screen_content_row (self);
+    update_switches (self);
 }
 
 static void
@@ -181,44 +158,29 @@ lock_screen_content_row_state_set_cb (CcAppNotificationsPage *self)
 }
 
 static void
+on_app_notification_settings_changed (GSettings *settings, const char *key, CcAppNotificationsPage *self)
+{
+    if (key != NULL && g_strcmp0 (key, "enable") == 0)
+        set_portal_permissions_for_app (self);
+
+    update_switches (self);
+}
+
+static void
 update_switches (CcAppNotificationsPage *self)
-{
-    update_notification_row (self);
-    update_sound_row (self);
-    update_banner_row (self);
-    update_banner_content_row (self);
-    update_lock_screen_row (self);
-    update_lock_screen_content_row (self);
-}
-
-static void
-update_notification_row (CcAppNotificationsPage *self)
-{
-    g_signal_handlers_block_by_func (G_OBJECT (self->notifications_row), notifications_row_state_set_cb, self);
-    adw_switch_row_set_active (self->notifications_row, g_settings_get_boolean (self->settings, "enable"));
-    g_signal_handlers_unblock_by_func (G_OBJECT (self->notifications_row), notifications_row_state_set_cb, self);
-}
-
-static void
-update_sound_row (CcAppNotificationsPage *self)
-{
-    g_signal_handlers_block_by_func (G_OBJECT (self->sound_alerts_row), sound_alerts_row_state_set_cb, self);
-    adw_switch_row_set_active (self->sound_alerts_row, g_settings_get_boolean (self->settings, "enable-sound-alerts"));
-    g_signal_handlers_unblock_by_func (G_OBJECT (self->sound_alerts_row), sound_alerts_row_state_set_cb, self);
-    gtk_widget_set_sensitive (GTK_WIDGET (self->sound_alerts_row), g_settings_get_boolean (self->settings, "enable"));
-}
-
-static void
-update_banner_row (CcAppNotificationsPage *self)
 {
     gboolean notifications_enabled;
     gboolean show_banners;
+    gboolean show_in_lock_screen;
     gboolean active;
     gboolean sensitive;
 
+    /* Notifications and Sound row */
     show_banners = g_settings_get_boolean (self->master_settings, "show-banners");
     notifications_enabled = g_settings_get_boolean (self->settings, "enable");
+    gtk_widget_set_sensitive (GTK_WIDGET (self->sound_alerts_row), notifications_enabled);
 
+    /* Banners "Show Banners" row */
     active = g_settings_get_boolean (self->settings, "show-banners") && show_banners;
     sensitive = notifications_enabled && show_banners;
     g_signal_handlers_block_by_func (G_OBJECT (self->notification_banners_row), notification_banners_row_state_set_cb,
@@ -227,19 +189,8 @@ update_banner_row (CcAppNotificationsPage *self)
     g_signal_handlers_unblock_by_func (G_OBJECT (self->notification_banners_row), notification_banners_row_state_set_cb,
                                        self);
     gtk_widget_set_sensitive (GTK_WIDGET (self->notification_banners_row), sensitive);
-}
 
-static void
-update_banner_content_row (CcAppNotificationsPage *self)
-{
-    gboolean notifications_enabled;
-    gboolean show_banners;
-    gboolean active;
-    gboolean sensitive;
-
-    show_banners = g_settings_get_boolean (self->master_settings, "show-banners");
-    notifications_enabled = g_settings_get_boolean (self->settings, "enable");
-
+    /* Banners "Show Content" row */
     active = g_settings_get_boolean (self->settings, "force-expanded")
              && g_settings_get_boolean (self->settings, "show-banners") && show_banners;
     sensitive = g_settings_get_boolean (self->settings, "show-banners") && notifications_enabled && show_banners;
@@ -249,19 +200,10 @@ update_banner_content_row (CcAppNotificationsPage *self)
     g_signal_handlers_unblock_by_func (G_OBJECT (self->notification_banners_content_row),
                                        notification_banners_content_row_state_set_cb, self);
     gtk_widget_set_sensitive (GTK_WIDGET (self->notification_banners_content_row), sensitive);
-}
-
-static void
-update_lock_screen_row (CcAppNotificationsPage *self)
-{
-    gboolean notifications_enabled;
-    gboolean show_in_lock_screen;
-    gboolean active;
-    gboolean sensitive;
 
     show_in_lock_screen = g_settings_get_boolean (self->master_settings, "show-in-lock-screen");
-    notifications_enabled = g_settings_get_boolean (self->settings, "enable");
 
+    /* Lock Screen "Show Banners" row */
     active = g_settings_get_boolean (self->settings, "show-in-lock-screen") && show_in_lock_screen;
     sensitive = notifications_enabled && show_in_lock_screen;
 
@@ -271,19 +213,8 @@ update_lock_screen_row (CcAppNotificationsPage *self)
     g_signal_handlers_unblock_by_func (G_OBJECT (self->lock_screen_notifications_row),
                                        lock_screen_notifications_row_state_set_cb, self);
     gtk_widget_set_sensitive (GTK_WIDGET (self->lock_screen_notifications_row), sensitive);
-}
 
-static void
-update_lock_screen_content_row (CcAppNotificationsPage *self)
-{
-    gboolean notifications_enabled;
-    gboolean show_in_lock_screen;
-    gboolean active;
-    gboolean sensitive;
-
-    show_in_lock_screen = g_settings_get_boolean (self->master_settings, "show-in-lock-screen");
-    notifications_enabled = g_settings_get_boolean (self->settings, "enable");
-
+    /* Lock Screen "Show Content" row */
     active = g_settings_get_boolean (self->settings, "details-in-lock-screen")
              && g_settings_get_boolean (self->settings, "show-in-lock-screen") && show_in_lock_screen;
     sensitive =
@@ -329,8 +260,6 @@ cc_app_notifications_page_class_init (CcAppNotificationsPageClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcAppNotificationsPage, lock_screen_notifications_row);
     gtk_widget_class_bind_template_child (widget_class, CcAppNotificationsPage, lock_screen_content_row);
 
-    gtk_widget_class_bind_template_callback (widget_class, notifications_row_state_set_cb);
-    gtk_widget_class_bind_template_callback (widget_class, sound_alerts_row_state_set_cb);
     gtk_widget_class_bind_template_callback (widget_class, notification_banners_row_state_set_cb);
     gtk_widget_class_bind_template_callback (widget_class, notification_banners_content_row_state_set_cb);
     gtk_widget_class_bind_template_callback (widget_class, lock_screen_notifications_row_state_set_cb);
@@ -357,10 +286,12 @@ cc_app_notifications_page_new (const gchar *app_id, const gchar *title, GSetting
     self->app_id = g_strdup (app_id);
     self->perm_store = g_object_ref (perm_store);
 
-    self->notifications_page_change_signal_handler_id =
-        g_signal_connect_swapped (self->settings, "changed", G_CALLBACK (update_switches), self);
+    g_settings_bind (self->settings, "enable", self->notifications_row, "active", G_SETTINGS_BIND_DEFAULT);
+    g_settings_bind (self->settings, "enable-sound-alerts", self->sound_alerts_row, "active", G_SETTINGS_BIND_DEFAULT);
 
     update_switches (self);
+    self->notifications_page_change_signal_handler_id =
+        g_signal_connect (self->settings, "changed", G_CALLBACK (on_app_notification_settings_changed), self);
 
     return self;
 }

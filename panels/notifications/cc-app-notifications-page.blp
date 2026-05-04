@@ -14,7 +14,6 @@ template $CcAppNotificationsPage: Adw.NavigationPage {
           /* Translators: This is the per app switch for message tray usage. */
           title: C_("notifications", "_Notifications");
           subtitle: _("Show in notifications list");
-          notify::active => $notifications_row_state_set_cb(template);
         }
 
         Adw.SwitchRow sound_alerts_row {
@@ -23,7 +22,6 @@ template $CcAppNotificationsPage: Adw.NavigationPage {
           /* Translators: This is the setting to configure sounds associated with notifications. */
           title: C_("notifications", "_Sound");
           subtitle: _("Allow notification sounds from app");
-          notify::active => $sound_alerts_row_state_set_cb(template);
         }
       }
 
