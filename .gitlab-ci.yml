@@ -57,13 +57,14 @@ stages:
     # Should probably also switch away from 'rawhide',
     # to stable fedora branch as well.
     BRANCH_NAME: 'main'
-    CONTAINER_TAG: '2026-04-17.1'
+    CONTAINER_TAG: '2026-05-05'
     FEDORA_VERSION: rawhide
     # Derive FDO variables from this automatically.
     # DO NOT edit, instead change the variables above
     FDO_REPO_SUFFIX: '${BRANCH_NAME}'
     FDO_DISTRIBUTION_TAG: '${CONTAINER_TAG}-fedora-${FEDORA_VERSION}'
     FDO_DISTRIBUTION_VERSION: '${FEDORA_VERSION}'
+    FDO_DISTRIBUTION_POST_EXEC: 'bash .gitlab-ci/retag-toolbox-image.sh'
 
 #############################################
 #          Create CI Docker Images          #
