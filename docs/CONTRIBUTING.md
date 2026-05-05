@@ -6,6 +6,12 @@ All code contributions are made using merge requests.
 
 Please note we have a Code of Conduct, please follow it in all your interactions with the project.
 
+## Building
+
+The recommended way of building GNOME Settings is using [Toolbx](https://containertoolbx.org).
+
+See [Building GNOME Settings with Toolbx](BUILDING_WITH_TOOLBX.md) for more info.
+
 ## Creating Merge Requests
 
 To open a merge request fork the Settings project, and then create a branch for your change.
