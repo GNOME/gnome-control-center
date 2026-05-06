@@ -1370,7 +1370,10 @@ cc_screen_time_statistics_row_set_selected_date (CcScreenTimeStatisticsRow *self
     g_debug ("%s: %s", G_STRFUNC, (selected_date != NULL) ? date_str : "(unset)");
   }
 
-  self->selected_date = *selected_date;
+  if (selected_date != NULL)
+    self->selected_date = *selected_date;
+  else
+    g_date_clear (&self->selected_date, 1);
 
   update_ui_for_model_or_selected_date (self);
 
