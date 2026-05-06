@@ -802,12 +802,10 @@ actualize_printers_list_cb (GObject      *source_object,
 
   cups_dests = pp_cups_get_dests_finish (PP_CUPS (source_object), result, &error);
 
-  if (cups_dests == NULL && error != NULL)
+  if (cups_dests == NULL)
     {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          g_warning ("Could not get dests: %s", error->message);
-        }
+      if (error != NULL && !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Could not get dests: %s", error->message);
 
       return;
     }
