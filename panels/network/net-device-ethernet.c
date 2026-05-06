@@ -359,26 +359,33 @@ populate_ui (NetDeviceEthernet *self)
                         g_hash_table_add (self->connections, connection);
                 }
         }
-        n_connections = g_slist_length (connections);
 
-        if (n_connections > 1) {
+        n_connections = g_slist_length (connections);
+        if (connections == NULL || n_connections == 0) {
+                gtk_widget_set_visible (GTK_WIDGET (self->connection_stack), FALSE);
+                gtk_widget_set_visible (self->empty_connection_list, TRUE);
+                g_slist_free (connections);
+
+                return;
+        }
+
+        if (n_connections == 1) {
+                connection = connections->data;
+                gtk_stack_set_visible_child (self->connection_stack,
+                                             GTK_WIDGET (self->details_listbox));
+                g_object_set_data (G_OBJECT (self->details_button), "row", self->details_button);
+                g_object_set_data (G_OBJECT (self->details_button), "connection", connection);
+        } else {
                 for (l = connections; l; l = l->next) {
                         NMConnection *connection = l->data;
                         add_row (self, connection);
                 }
                 gtk_stack_set_visible_child (self->connection_stack,
                                              GTK_WIDGET (self->connection_list));
-        } else if (n_connections == 1) {
-                connection = connections->data;
-                gtk_stack_set_visible_child (self->connection_stack,
-                                             GTK_WIDGET (self->details_listbox));
-                g_object_set_data (G_OBJECT (self->details_button), "row", self->details_button);
-                g_object_set_data (G_OBJECT (self->details_button), "connection", connection);
-
         }
 
-        gtk_widget_set_visible (GTK_WIDGET (self->connection_stack), n_connections >= 1);
-        gtk_widget_set_visible (self->empty_connection_list, n_connections == 0);
+        gtk_widget_set_visible (GTK_WIDGET (self->connection_stack), TRUE);
+        gtk_widget_set_visible (self->empty_connection_list, FALSE);
 
         g_slist_free (connections);
 }
