@@ -549,6 +549,9 @@ translate_above_tab (char **original_bindings,
   gboolean needs_translation = FALSE;
   char **str;
 
+  if (original_bindings == NULL)
+    return FALSE;
+
   for (str = original_bindings; *str && !needs_translation; str++)
     needs_translation = strstr (*str, "Above_Tab") != NULL;
 
