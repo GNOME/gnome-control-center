@@ -524,6 +524,7 @@ print_file_thread (GTask        *task,
     {
       g_warning ("Failed to get the destination %s - %s.", self->printer_name, cupsLastErrorString ());
       g_task_return_boolean (task, ret);
+      return;
     }
 
   print_file_data = g_task_get_task_data (task);
