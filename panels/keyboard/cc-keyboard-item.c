@@ -603,6 +603,9 @@ variant_get_key_combos (GVariant *variant)
       bindings = g_variant_dup_strv (variant, NULL);
     }
 
+  if (bindings == NULL)
+    return NULL;
+
   if (translate_above_tab (bindings, &translated_bindings))
     {
       g_strfreev (bindings);
