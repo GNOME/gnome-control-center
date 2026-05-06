@@ -69,6 +69,9 @@ get_is_customized (CcXkbModifierPage *self)
 {
   gboolean switch_active = adw_switch_row_get_active (self->switch_row);
 
+  if (self->modifier == NULL)
+    return FALSE;
+
   if (self->modifier->switch_inverted)
     return !switch_active;
 
@@ -79,7 +82,12 @@ static void
 set_is_customized (CcXkbModifierPage *self,
                    gboolean           is_customized)
 {
-  gboolean switch_active = self->modifier->switch_inverted ? !is_customized : is_customized;
+  gboolean switch_active;
+
+  if (self->modifier == NULL)
+    return;
+
+  switch_active = self->modifier->switch_inverted ? !is_customized : is_customized;
 
   adw_switch_row_set_active (self->switch_row, switch_active);
 }
