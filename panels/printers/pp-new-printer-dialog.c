@@ -681,7 +681,7 @@ DBus method \"GroupPhysicalDevices\" to group duplicates in device list.");
     }
   else
     {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      if (error != NULL && !g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
     }
 
