@@ -115,6 +115,9 @@ update_active_radio (CcXkbModifierPage *self)
   g_auto(GStrv) options = NULL;
   guint i;
 
+  if (self->modifier == NULL || self->input_source_settings == NULL)
+    return;
+
   options = g_settings_get_strv (self->input_source_settings, "xkb-options");
 
   for (i = 0; options != NULL && options[i] != NULL; i++)
