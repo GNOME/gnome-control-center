@@ -188,7 +188,7 @@ on_active_radio_changed_cb (CcXkbModifierPage *self,
 static void
 on_xkb_options_changed_cb (CcXkbModifierPage *self)
 {
-  if (self->modifier == NULL)
+  if (self->modifier != NULL)
     update_active_radio (self);
 }
 
