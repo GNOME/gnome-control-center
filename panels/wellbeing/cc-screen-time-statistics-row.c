@@ -811,6 +811,9 @@ allocate_duration_to_days (const GDate *model_start_date,
 
   start_date_time = g_date_time_new_from_unix_local (start_wall_time_secs);
 
+  /* Input is guaranteed to never be too big */
+  g_assert (start_date_time != NULL);
+
   while (duration_secs > 0)
     {
       g_autoptr(GDateTime) start_of_day = NULL, start_of_next_day = NULL;
@@ -857,6 +860,11 @@ allocate_duration_to_day (const GDate *model_start_date,
   GDate start_date;
   int diff_days;
   double *element;
+
+  if (model_start_date == NULL ||
+      model_screen_time_per_day == NULL ||
+      start_date_time == NULL)
+    return;
 
   g_date_clear (&start_date, 1);
   g_date_set_dmy (&start_date,
