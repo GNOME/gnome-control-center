@@ -121,8 +121,7 @@ cc_list_row_info_button_class_init (CcListRowInfoButtonClass *klass)
 
   properties[PROP_TEXT] =
     g_param_spec_string ("text",
-                         "Text",
-                         "Set text for the popover label",
+                         NULL, NULL,
                          NULL,
                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 

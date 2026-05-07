@@ -1485,8 +1485,7 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
 
   properties[PROP_MANAGER] =
     g_param_spec_object ("fingerprint-manager",
-                         "FingerprintManager",
-                         "The CC fingerprint manager",
+                         NULL, NULL,
                          CC_TYPE_FINGERPRINT_MANAGER,
                          G_PARAM_STATIC_STRINGS | G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 

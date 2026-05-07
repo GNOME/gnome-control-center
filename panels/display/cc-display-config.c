@@ -1787,8 +1787,7 @@ cc_display_config_class_init (CcDisplayConfigClass *klass)
   gobject_class->dispose = cc_display_config_dispose;
 
   props[PROP_STATE] = g_param_spec_variant ("state",
-                                            "GVariant",
-                                            "GVariant",
+                                            NULL, NULL,
                                             G_VARIANT_TYPE (CURRENT_STATE_FORMAT),
                                             NULL,
                                             G_PARAM_READWRITE |
@@ -1796,8 +1795,7 @@ cc_display_config_class_init (CcDisplayConfigClass *klass)
                                             G_PARAM_CONSTRUCT_ONLY);
 
   props[PROP_CONNECTION] = g_param_spec_object ("connection",
-                                                "GDBusConnection",
-                                                "GDBusConnection",
+                                                NULL, NULL,
                                                 G_TYPE_DBUS_CONNECTION,
                                                 G_PARAM_READWRITE |
                                                 G_PARAM_STATIC_STRINGS |

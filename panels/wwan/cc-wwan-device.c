@@ -336,15 +336,13 @@ cc_wwan_device_class_init (CcWwanDeviceClass *klass)
 
   properties[PROP_OPERATOR_NAME] =
     g_param_spec_string ("operator-name",
-                         "Operator Name",
-                         "Operator Name the device is connected to",
+                         NULL, NULL,
                          NULL,
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_ENABLED_LOCKS] =
     g_param_spec_int ("enabled-locks",
-                      "Enabled Locks",
-                      "Locks Enabled in Modem",
+                      NULL, NULL,
                       MM_MODEM_3GPP_FACILITY_NONE,
                       MM_MODEM_3GPP_FACILITY_CORP_PERS,
                       MM_MODEM_3GPP_FACILITY_NONE,
@@ -352,29 +350,25 @@ cc_wwan_device_class_init (CcWwanDeviceClass *klass)
 
   properties[PROP_ERROR] =
     g_param_spec_boolean ("error",
-                          "Error",
-                          "Set if some Error occurs",
+                          NULL, NULL,
                           FALSE,
                           G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_HAS_DATA] =
     g_param_spec_boolean ("has-data",
-                          "has-data",
-                          "Data for the device",
+                          NULL, NULL,
                           FALSE,
                           G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_NETWORK_MODE] =
     g_param_spec_string ("network-mode",
-                         "Network Mode",
-                         "A String representing preferred network mode",
+                         NULL, NULL,
                          NULL,
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_REGISTRATION_STATE] =
     g_param_spec_int ("registration-state",
-                      "Registration State",
-                      "The current network registration state",
+                      NULL, NULL,
                       CC_WWAN_REGISTRATION_STATE_UNKNOWN,
                       CC_WWAN_REGISTRATION_STATE_DENIED,
                       CC_WWAN_REGISTRATION_STATE_UNKNOWN,
@@ -382,8 +376,7 @@ cc_wwan_device_class_init (CcWwanDeviceClass *klass)
 
   properties[PROP_UNLOCK_REQUIRED] =
     g_param_spec_int ("unlock-required",
-                      "Unlock Required",
-                      "The Modem lock status changed",
+                      NULL, NULL,
                       MM_MODEM_LOCK_UNKNOWN,
                       MM_MODEM_LOCK_PH_NETSUB_PUK,
                       MM_MODEM_LOCK_UNKNOWN,
@@ -391,8 +384,7 @@ cc_wwan_device_class_init (CcWwanDeviceClass *klass)
 
   properties[PROP_SIGNAL] =
     g_param_spec_int ("signal",
-                      "Signal",
-                      "Get Device Signal",
+                      NULL, NULL,
                       0, 100, 0,
                       G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 

@@ -773,8 +773,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
    * The current keyboard shortcut being edited.
    */
   properties[PROP_KEYBOARD_ITEM] = g_param_spec_object ("keyboard-item",
-                                                        "Keyboard item",
-                                                        "The keyboard item being edited",
+                                                        NULL, NULL,
                                                         CC_TYPE_KEYBOARD_ITEM,
                                                         G_PARAM_READWRITE);
 
@@ -784,8 +783,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
    * The current keyboard panel.
    */
   properties[PROP_MANAGER] = g_param_spec_object ("manager",
-                                                  "Keyboard manager",
-                                                  "The keyboard manager",
+                                                  NULL, NULL,
                                                   CC_TYPE_KEYBOARD_MANAGER,
                                                   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 

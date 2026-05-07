@@ -233,8 +233,7 @@ cc_clock_class_init (CcClockClass *klass)
 
   props[PROP_DURATION] =
     g_param_spec_uint ("duration",
-                       "Duration",
-                       "Duration",
+                       NULL, NULL,
                        0, G_MAXUINT, 0,
                        G_PARAM_READWRITE |
                        G_PARAM_STATIC_STRINGS |

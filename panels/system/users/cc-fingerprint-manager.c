@@ -142,15 +142,13 @@ cc_fingerprint_manager_class_init (CcFingerprintManagerClass *klass)
 
   properties[PROP_USER] =
     g_param_spec_object ("user",
-                         "User",
-                         "The user account we manage the fingerprint for",
+                         NULL, NULL,
                          ACT_TYPE_USER,
                          G_PARAM_STATIC_STRINGS | G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
   properties[PROP_STATE] =
     g_param_spec_enum ("state",
-                       "State",
-                       "The state of the fingerprint for the user",
+                       NULL, NULL,
                        CC_TYPE_FINGERPRINT_STATE, CC_FINGERPRINT_STATE_NONE,
                        G_PARAM_STATIC_STRINGS | G_PARAM_READABLE);
 

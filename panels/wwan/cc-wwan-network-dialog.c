@@ -383,8 +383,7 @@ cc_wwan_network_dialog_class_init (CcWwanNetworkDialogClass *klass)
 
   properties[PROP_DEVICE] =
     g_param_spec_object ("device",
-                         "Device",
-                         "The WWAN Device",
+                         NULL, NULL,
                          CC_TYPE_WWAN_DEVICE,
                          G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT_ONLY);
 

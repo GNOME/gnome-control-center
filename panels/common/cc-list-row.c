@@ -121,15 +121,13 @@ cc_list_row_class_init (CcListRowClass *klass)
 
   properties[PROP_SECONDARY_LABEL] =
     g_param_spec_string ("secondary-label",
-                         "Secondary Label",
-                         "Set Secondary Label",
+                         NULL, NULL,
                          NULL,
                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_SHOW_ARROW] =
     g_param_spec_boolean ("show-arrow",
-                          "Show Arrow",
-                          "Whether to show an arrow at the end of the row",
+                          NULL, NULL,
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 

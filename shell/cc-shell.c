@@ -40,8 +40,7 @@ cc_shell_default_init (CcShellInterface *iface)
 {
   g_object_interface_install_property (iface,
                                        g_param_spec_object ("active-panel",
-                                                            "active panel",
-                                                            "The currently active Panel",
+                                                            NULL, NULL,
                                                             CC_TYPE_PANEL,
                                                             G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 }

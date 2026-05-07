@@ -168,8 +168,7 @@ cc_qr_code_dialog_class_init (CcQrCodeDialogClass *klass)
   object_class->set_property = cc_qr_code_dialog_set_property;
   object_class->finalize = cc_qr_code_dialog_finalize;
 
-  props[PROP_CONNECTION] = g_param_spec_object ("connection", "Connection",
-                                                "The NMConnection for which to show a QR code",
+  props[PROP_CONNECTION] = g_param_spec_object ("connection", NULL, NULL,
                                                 NM_TYPE_CONNECTION,
                                                 G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 

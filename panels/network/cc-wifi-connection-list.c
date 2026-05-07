@@ -723,43 +723,36 @@ cc_wifi_connection_list_class_init (CcWifiConnectionListClass *klass)
   object_class->set_property = cc_wifi_connection_list_set_property;
 
   props[PROP_CHECKABLE] =
-    g_param_spec_boolean ("checkable", "checkable",
-                          "Passed to the created rows to show/hide the checkbox for deletion",
+    g_param_spec_boolean ("checkable", NULL, NULL,
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_HIDE_UNAVAILABLE] =
-    g_param_spec_boolean ("hide-unavailable", "HideUnavailable",
-                          "Whether to show or hide unavailable connections",
+    g_param_spec_boolean ("hide-unavailable", NULL, NULL,
                           TRUE,
                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_SHOW_APS] =
-    g_param_spec_boolean ("show-aps", "ShowAPs",
-                          "Whether to show available SSIDs/APs without a connection",
+    g_param_spec_boolean ("show-aps", NULL, NULL,
                           TRUE,
                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_CLIENT] =
-    g_param_spec_object ("client", "NMClient",
-                         "The NM Client",
+    g_param_spec_object ("client", NULL, NULL,
                          NM_TYPE_CLIENT,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_DEVICE] =
-    g_param_spec_object ("device", "WiFi Device",
-                         "The WiFi Device for this connection list",
+    g_param_spec_object ("device", NULL, NULL,
                          NM_TYPE_DEVICE_WIFI,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
   props[PROP_FORGETTABLE] =
-      g_param_spec_boolean ("forgettable", "forgettable",
-                           "Passed to the created rows to show/hide the checkbox for deletion",
+      g_param_spec_boolean ("forgettable", NULL, NULL,
                            FALSE,
                            G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
   
   props[PROP_ACTIVATABLE] =   
-    g_param_spec_boolean ("activatable", "Activatable",
-                          "Determines if the rows are clickable",
+    g_param_spec_boolean ("activatable", NULL, NULL,
                           TRUE,
                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 

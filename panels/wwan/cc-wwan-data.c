@@ -455,15 +455,13 @@ cc_wwan_data_class_init (CcWwanDataClass *klass)
 
   properties[PROP_ERROR] =
     g_param_spec_boolean ("error",
-                          "Error",
-                          "Set if some Error occurs",
+                          NULL, NULL,
                           FALSE,
                           G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_ENABLED] =
     g_param_spec_boolean ("enabled",
-                          "Enabled",
-                          "Get if the data is enabled",
+                          NULL, NULL,
                           FALSE,
                           G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 

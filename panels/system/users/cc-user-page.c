@@ -609,32 +609,27 @@ cc_user_page_class_init (CcUserPageClass * klass)
 
     properties[PROP_EDITABLE] =
         g_param_spec_boolean ("editable",
-                              "Editable",
-                              "Whether the panel is editable",
+                              NULL, NULL,
                               FALSE,
                               G_PARAM_READWRITE);
     properties[PROP_AVATAR_EDITABLE] =
         g_param_spec_boolean ("avatar-editable",
-                              "Editable avatar",
-                              "Whether the avatar is editable",
+                              NULL, NULL,
                               FALSE,
                               G_PARAM_READWRITE);
     properties[PROP_LOCKED] =
         g_param_spec_boolean ("locked",
-                              "Locked",
-                              "Whether changes require authentication",
+                              NULL, NULL,
                               TRUE,
                               G_PARAM_READWRITE);
     properties[PROP_IS_ADMIN] =
         g_param_spec_boolean ("is-admin",
-                              "Is Admin",
-                              "Whether the displayed user is administrator",
+                              NULL, NULL,
                               FALSE,
                               G_PARAM_READABLE);
     properties[PROP_IS_CURRENT_USER] =
         g_param_spec_boolean ("is-current-user",
-                              "Is Current User",
-                              "Whether the displayed user is the current logged user",
+                              NULL, NULL,
                               FALSE,
                               G_PARAM_READABLE);
     g_object_class_install_properties (object_class, N_PROPS, properties);

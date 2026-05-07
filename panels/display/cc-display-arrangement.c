@@ -827,13 +827,11 @@ cc_display_arrangement_class_init (CcDisplayArrangementClass *klass)
   gobject_class->get_property = cc_display_arrangement_get_property;
   gobject_class->set_property = cc_display_arrangement_set_property;
 
-  props[PROP_CONFIG] = g_param_spec_object ("config", "Display Config",
-                                            "The display configuration to work with",
+  props[PROP_CONFIG] = g_param_spec_object ("config", NULL, NULL,
                                             CC_TYPE_DISPLAY_CONFIG,
                                             G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
-  props[PROP_SELECTED_OUTPUT] = g_param_spec_object ("selected-output", "Selected Output",
-                                                     "The output that is currently selected on the configuration",
+  props[PROP_SELECTED_OUTPUT] = g_param_spec_object ("selected-output", NULL, NULL,
                                                      CC_TYPE_DISPLAY_MONITOR,
                                                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 

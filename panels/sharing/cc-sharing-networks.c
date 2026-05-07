@@ -462,22 +462,19 @@ cc_sharing_networks_class_init (CcSharingNetworksClass *klass)
 
   properties[PROP_PROXY] =
       g_param_spec_object ("proxy",
-                           "proxy",
-                           "proxy",
+                           NULL, NULL,
                            GSD_TYPE_SHARING_PROXY,
                            G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY);
 
   properties[PROP_SERVICE_NAME] =
       g_param_spec_string ("service-name",
-                           "service-name",
-                           "service-name",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY);
 
   properties[PROP_STATUS] =
       g_param_spec_uint ("status",
-                         "status",
-                         "status",
+                         NULL, NULL,
                          CC_SHARING_STATUS_UNSET, CC_SHARING_STATUS_ACTIVE + 1, CC_SHARING_STATUS_OFF,
                          G_PARAM_READABLE);
 
