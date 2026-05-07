@@ -1062,8 +1062,7 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
 
         props[PROP_SCANNING] =
             g_param_spec_boolean ("scanning",
-                                  "Scanning",
-                                  "Whether the device is scanning for access points",
+                                  NULL, NULL,
                                   FALSE,
                                   G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
         g_object_class_install_properties (object_class, PROP_LAST, props);

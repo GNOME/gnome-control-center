@@ -468,38 +468,31 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, forget_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, qr_code_clicked_cb);
 
-  props[PROP_CHECKABLE] = g_param_spec_boolean ("checkable", "checkable",
-                                                "Whether to show a checkbox to select the row",
+  props[PROP_CHECKABLE] = g_param_spec_boolean ("checkable", NULL, NULL,
                                                 FALSE,
                                                 G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  props[PROP_CHECKED] = g_param_spec_boolean ("checked", "Checked",
-                                              "Whether the row is selected by checking it",
+  props[PROP_CHECKED] = g_param_spec_boolean ("checked", NULL, NULL,
                                               FALSE,
                                               G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
-  props[PROP_DEVICE] = g_param_spec_object ("device", "WiFi Device",
-                                            "The WiFi Device for this connection/ap",
+  props[PROP_DEVICE] = g_param_spec_object ("device", NULL, NULL,
                                             NM_TYPE_DEVICE_WIFI,
                                             G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  props[PROP_APS] = g_param_spec_boxed ("aps", "Access Points",
-                                        "The access points for this connection  (may be empty if a connection is given)",
+  props[PROP_APS] = g_param_spec_boxed ("aps", NULL, NULL,
                                          G_TYPE_PTR_ARRAY,
                                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  props[PROP_CONNECTION] = g_param_spec_object ("connection", "Connection",
-                                                "The NMConnection (may be NULL if there is an AP)",
+  props[PROP_CONNECTION] = g_param_spec_object ("connection", NULL, NULL,
                                                  NM_TYPE_CONNECTION,
                                                  G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  props[PROP_KNOWN_CONNECTION] = g_param_spec_boolean ("known-connection", "Known Connection",
-                                                "Whether this row is a known connection or not",
+  props[PROP_KNOWN_CONNECTION] = g_param_spec_boolean ("known-connection", NULL, NULL,
                                                 FALSE,
                                                 G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  props[PROP_FORGETTABLE] = g_param_spec_boolean ("forgettable", "forgettable",
-                                                  "Whether to show a checkbox to select the row",
+  props[PROP_FORGETTABLE] = g_param_spec_boolean ("forgettable", NULL, NULL,
                                                   FALSE,
                                                   G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 

@@ -1055,15 +1055,13 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
 
   properties[PROP_DEFAULT] =
       g_param_spec_boolean ("default",
-                            "default",
-                            "default",
+                            NULL, NULL,
                             FALSE,
                             G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY);
 
   properties[PROP_COMPACT] =
       g_param_spec_boolean ("compact",
-                            "compact",
-                            "compact",
+                            NULL, NULL,
                             FALSE,
                             G_PARAM_READWRITE);
 

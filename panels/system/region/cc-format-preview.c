@@ -233,8 +233,7 @@ cc_format_preview_class_init (CcFormatPreviewClass *klass)
   g_object_class_install_property (object_class,
                                    PROP_REGION,
                                    g_param_spec_string ("region",
-                                                        "region",
-                                                        "region",
+                                                        NULL, NULL,
                                                         NULL,
                                                         G_PARAM_READWRITE));
 

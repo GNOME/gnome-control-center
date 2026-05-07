@@ -134,8 +134,7 @@ cc_illustrated_row_class_init (CcIllustratedRowClass *klass)
 
   props[PROP_RESOURCE] =
     g_param_spec_string ("resource",
-                         "Resource",
-                         "Resource",
+                         NULL, NULL,
                          "",
                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 

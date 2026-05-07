@@ -958,20 +958,17 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/display/cc-display-settings.ui");
 
   props[PROP_HAS_ACCELEROMETER] =
-    g_param_spec_boolean ("has-accelerometer", "Has Accelerometer",
-                          "If an accelerometre is available for the builtin display",
+    g_param_spec_boolean ("has-accelerometer", NULL, NULL,
                           FALSE,
                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_CONFIG] =
-    g_param_spec_object ("config", "Display Config",
-                         "The display configuration to work with",
+    g_param_spec_object ("config", NULL, NULL,
                          CC_TYPE_DISPLAY_CONFIG,
                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_SELECTED_OUTPUT] =
-    g_param_spec_object ("selected-output", "Selected Output",
-                         "The output that is currently selected on the configuration",
+    g_param_spec_object ("selected-output", NULL, NULL,
                          CC_TYPE_DISPLAY_MONITOR,
                          G_PARAM_READWRITE | G_PARAM_EXPLICIT_NOTIFY | G_PARAM_STATIC_STRINGS);
 

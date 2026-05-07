@@ -856,7 +856,7 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
 
   pspec = g_param_spec_uint ("n-devices",
                              NULL,
-                             "Number of managed devices",
+                             NULL,
                              0,
                              G_MAXUINT,
                              0,

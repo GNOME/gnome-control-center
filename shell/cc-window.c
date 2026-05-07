@@ -745,16 +745,14 @@ cc_window_class_init (CcWindowClass *klass)
   g_object_class_install_property (object_class,
                                    PROP_MODEL,
                                    g_param_spec_object ("model",
-                                                        "Model",
-                                                        "The CcShellModel of this application",
+                                                        NULL, NULL,
                                                         CC_TYPE_SHELL_MODEL,
                                                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class,
                                    PROP_COLLAPSED,
                                    g_param_spec_boolean ("collapsed",
-                                                         "Collapsed",
-                                                         "Whether the window is collapsed",
+                                                         NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 

@@ -285,8 +285,7 @@ cc_keyboard_item_class_init (CcKeyboardItemClass *klass)
 
   properties[PROP_DESCRIPTION] =
       g_param_spec_string ("description",
-                           "description",
-                           "description",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
@@ -308,22 +307,19 @@ cc_keyboard_item_class_init (CcKeyboardItemClass *klass)
 
   properties[PROP_COMMAND] =
       g_param_spec_string ("command",
-                           "command",
-                           "command",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   properties[PROP_IS_VALUE_DEFAULT] =
       g_param_spec_boolean ("is-value-default",
-                            "is value default",
-                            "is value default",
+                            NULL, NULL,
                             TRUE,
                             G_PARAM_READABLE);
 
   properties[PROP_KEY_COMBOS] =
       g_param_spec_pointer ("key-combos",
-                            "key combos",
-                            "key combos",
+                            NULL, NULL,
                             G_PARAM_READABLE);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);

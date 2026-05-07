@@ -104,28 +104,28 @@ bolt_client_class_init (BoltClientClass *klass)
 
   props[PROP_VERSION]
     = g_param_spec_uint ("version",
-                         "Version", NULL,
+                         NULL, NULL,
                          0, G_MAXUINT, 0,
                          G_PARAM_READABLE |
                          G_PARAM_STATIC_NAME);
 
   props[PROP_PROBING]
     = g_param_spec_boolean ("probing",
-                            "Probing", NULL,
+                            NULL, NULL,
                             FALSE,
                             G_PARAM_READABLE |
                             G_PARAM_STATIC_NAME);
 
   props[PROP_SECURITY]
     = g_param_spec_enum ("security-level",
-                         "SecurityLevel", NULL,
+                         NULL, NULL,
                          BOLT_TYPE_SECURITY,
                          BOLT_SECURITY_UNKNOWN,
                          G_PARAM_READABLE |
                          G_PARAM_STATIC_NAME);
 
   props[PROP_AUTHMODE] =
-    g_param_spec_flags ("auth-mode", "AuthMode", NULL,
+    g_param_spec_flags ("auth-mode", NULL, NULL,
                         BOLT_TYPE_AUTH_MODE,
                         BOLT_AUTH_ENABLED,
                         G_PARAM_READABLE |

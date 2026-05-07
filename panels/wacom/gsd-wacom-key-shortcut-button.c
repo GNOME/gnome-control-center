@@ -386,8 +386,7 @@ gsd_wacom_key_shortcut_button_class_init (GsdWacomKeyShortcutButtonClass *klass)
 
   obj_properties[PROP_SHORTCUT_KEY_VAL] =
     g_param_spec_uint ("key-value",
-                       "The key value",
-                       "The key value of the shortcut currently set",
+                       NULL, NULL,
                        0,
                        G_MAXUINT,
                        0,
@@ -396,8 +395,7 @@ gsd_wacom_key_shortcut_button_class_init (GsdWacomKeyShortcutButtonClass *klass)
 
   obj_properties[PROP_SHORTCUT_KEY_MODS] =
     g_param_spec_uint ("key-mods",
-                       "The key modifiers",
-                       "The key modifiers of the shortcut currently set",
+                       NULL, NULL,
                        0,
                        G_MAXUINT,
                        0,
@@ -406,8 +404,7 @@ gsd_wacom_key_shortcut_button_class_init (GsdWacomKeyShortcutButtonClass *klass)
 
   obj_properties[PROP_SHORTCUT_CANCEL_KEY] =
     g_param_spec_uint ("cancel-key",
-                       "The cancel key",
-                       "The key which cancels the edition of the shortcut",
+                       NULL, NULL,
                        0,
                        G_MAXUINT,
                        DEFAULT_CANCEL_KEY,
@@ -416,8 +413,7 @@ gsd_wacom_key_shortcut_button_class_init (GsdWacomKeyShortcutButtonClass *klass)
 
   obj_properties[PROP_SHORTCUT_CLEAR_KEY] =
     g_param_spec_uint ("clear-key",
-                       "The clear key",
-                       "The key which clears the currently set shortcut",
+                       NULL, NULL,
                        0,
                        G_MAXUINT,
                        DEFAULT_CLEAR_KEY,
@@ -434,8 +430,7 @@ gsd_wacom_key_shortcut_button_class_init (GsdWacomKeyShortcutButtonClass *klass)
    */
   obj_properties[PROP_SHORTCUT_MODE] =
     g_param_spec_enum ("mode",
-                       "The shortcut mode",
-                       "The mode with which the shortcuts are captured",
+                       NULL, NULL,
                        GSD_WACOM_TYPE_KEY_SHORTCUT_BUTTON_MODE,
                        GSD_WACOM_KEY_SHORTCUT_BUTTON_MODE_OTHER,
                        G_PARAM_READWRITE |

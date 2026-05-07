@@ -162,15 +162,13 @@ cc_wacom_ekr_page_class_init (CcWacomEkrPageClass *klass)
 	gtk_widget_class_bind_template_callback (widget_class, on_map_buttons_activated);
 
 	props[PROP_PANEL] = g_param_spec_object ("panel",
-						 "panel",
-						 "panel",
+						 NULL, NULL,
 						 CC_TYPE_WACOM_PANEL,
 						 G_PARAM_READWRITE |
 						 G_PARAM_CONSTRUCT_ONLY);
 
 	props[PROP_DEVICE] = g_param_spec_object ("device",
-						  "device",
-						  "device",
+						  NULL, NULL,
 						  CC_TYPE_WACOM_DEVICE,
 						  G_PARAM_READWRITE |
 						  G_PARAM_CONSTRUCT_ONLY);

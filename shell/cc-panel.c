@@ -233,14 +233,12 @@ cc_panel_class_init (CcPanelClass *klass)
   object_class->finalize = cc_panel_finalize;
 
   properties[PROP_SHELL] = g_param_spec_object ("shell",
-                                                "Shell",
-                                                "Shell the Panel resides in",
+                                                NULL, NULL,
                                                 CC_TYPE_SHELL,
                                                 G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_PARAMETERS] = g_param_spec_variant ("parameters",
-                                                      "Structured parameters",
-                                                      "Additional parameters passed externally (ie. command line, D-Bus activation)",
+                                                      NULL, NULL,
                                                       G_VARIANT_TYPE ("av"),
                                                       NULL,
                                                       G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);

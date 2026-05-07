@@ -123,15 +123,13 @@ pp_host_class_init (PpHostClass *klass)
 
   props[PROP_HOSTNAME] =
       g_param_spec_string ("hostname",
-                           "Hostname",
-                           "The hostname",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_PORT] =
       g_param_spec_int ("port",
-                        "Port",
-                        "The port",
+                        NULL, NULL,
                         -1, G_MAXINT32, PP_HOST_UNSET_PORT,
                         G_PARAM_READWRITE);
 

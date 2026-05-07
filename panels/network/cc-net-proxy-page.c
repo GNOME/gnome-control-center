@@ -341,21 +341,19 @@ cc_net_proxy_page_class_init (CcNetProxyPageClass *klass)
 
   properties[PROP_STATE_TEXT] =
     g_param_spec_string ("state-text",
-                         "Proxy state text",
-                         "Human readable Proxy state text",
+                         NULL, NULL,
                          NULL,
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_MODIFIED] =
     g_param_spec_boolean ("modified",
-                          "Proxy settings modified",
-                          "Proxy settings modified",
+                          NULL, NULL,
                           FALSE,
                           G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_ENABLED] =
     g_param_spec_boolean ("enabled",
-                          "", "", FALSE,
+                          NULL, NULL, FALSE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);

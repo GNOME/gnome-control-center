@@ -146,29 +146,25 @@ pp_maintenance_command_class_init (PpMaintenanceCommandClass *klass)
 
   props[PROP_PRINTER_NAME] =
       g_param_spec_string ("printer-name",
-                           "Printer name",
-                           "Name of the printer",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_COMMAND] =
       g_param_spec_string ("command",
-                           "Maintenance command",
-                           "Command to execute",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_PARAMETERS] =
       g_param_spec_string ("parameters",
-                           "Optional parameters",
-                           "Optional parameters for the maintenance command",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_TITLE] =
       g_param_spec_string ("title",
-                           "Command title",
-                           "Title of the job by which the command will be executed",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 

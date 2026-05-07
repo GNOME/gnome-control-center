@@ -217,32 +217,27 @@ cc_entry_feedback_class_init (CcEntryFeedbackClass * klass)
 
   properties[PROP_ICON_NAME] =
       g_param_spec_string ("icon-name",
-                           "Icon name",
-                           "The icon theme name for the icon to be shown",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
   properties[PROP_TEXT] =
       g_param_spec_string ("text",
-                           "Text",
-                           "The text to be displayed.",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
   properties[PROP_DEFAULT_ICON_NAME] =
       g_param_spec_string ("default-icon-name",
-                           "Default icon name",
-                           "The icon theme name for the icon to be shown by default.",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
   properties[PROP_DEFAULT_TEXT] =
       g_param_spec_string ("default-text",
-                           "Default text",
-                           "The text to be displayed by default.",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
   properties[PROP_ENTRY] =
       g_param_spec_object ("entry",
-                           "Entry Widget",
-                           "The entry widget correspondend to this object",
+                           NULL, NULL,
                            GTK_TYPE_WIDGET,
                            G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
   g_object_class_install_properties (object_class, N_PROPS, properties);

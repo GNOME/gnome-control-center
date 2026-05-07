@@ -126,8 +126,7 @@ cc_wacom_device_class_init (CcWacomDeviceClass *klass)
 
 	props[PROP_DEVICE] =
 		g_param_spec_object ("device",
-				     "device",
-				     "device",
+				     NULL, NULL,
 				     GSD_TYPE_DEVICE,
 				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 

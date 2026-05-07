@@ -191,36 +191,31 @@ cc_tz_item_class_init (CcTzItemClass *klass)
 
   properties[PROP_COUNTRY] =
     g_param_spec_string ("country",
-                         "Timezone Country",
-                         "Timezone Country",
+                         NULL, NULL,
                          NULL,
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_NAME] =
     g_param_spec_string ("name",
-                         "Timezone Name",
-                         "Timezone Name",
+                         NULL, NULL,
                          NULL,
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_OFFSET] =
     g_param_spec_string ("offset",
-                         "Timezone offset",
-                         "Timezone offset",
+                         NULL, NULL,
                          NULL,
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_TIME] =
     g_param_spec_string ("time",
-                         "Timezone time",
-                         "Timezone time",
+                         NULL, NULL,
                          NULL,
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_ZONE] =
     g_param_spec_string ("zone",
-                         "Timezone zone",
-                         "Timezone zone",
+                         NULL, NULL,
                          NULL,
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 

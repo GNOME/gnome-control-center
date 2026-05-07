@@ -127,20 +127,17 @@ cc_wacom_tool_class_init (CcWacomToolClass *klass)
 
 	props[PROP_SERIAL] =
 		g_param_spec_uint64 ("serial",
-				     "serial",
-				     "serial",
+				     NULL, NULL,
 				     0, G_MAXUINT64, 0,
 				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 	props[PROP_ID] =
 		g_param_spec_uint64 ("id",
-				     "id",
-				     "id",
+				     NULL, NULL,
 				     0, G_MAXUINT64, 0,
 				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 	props[PROP_DEVICE] =
 		g_param_spec_object ("device",
-				     "device",
-				     "device",
+				     NULL, NULL,
 				     CC_TYPE_WACOM_DEVICE,
 				     G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 

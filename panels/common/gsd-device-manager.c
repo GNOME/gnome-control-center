@@ -201,57 +201,49 @@ gsd_device_class_init (GsdDeviceClass *klass)
 
 	properties[PROP_NAME] =
 	    g_param_spec_string ("name",
-				 "Name",
-				 "Name",
+				 NULL, NULL,
 				 NULL,
 				 G_PARAM_READWRITE |
 				 G_PARAM_CONSTRUCT_ONLY);
 	properties[PROP_DEVICE_FILE] =
 	    g_param_spec_string ("device-file",
-				 "Device file",
-				 "Device file",
+				 NULL, NULL,
 				 NULL,
 				 G_PARAM_READWRITE |
 				 G_PARAM_CONSTRUCT_ONLY);
 	properties[PROP_VENDOR_ID] =
 	    g_param_spec_string ("vendor-id",
-				 "Vendor ID",
-				 "Vendor ID",
+				 NULL, NULL,
 				 NULL,
 				 G_PARAM_READWRITE |
 				 G_PARAM_CONSTRUCT_ONLY);
 	properties[PROP_PRODUCT_ID] =
 	    g_param_spec_string ("product-id",
-				 "Product ID",
-				 "Product ID",
+				 NULL, NULL,
 				 NULL,
 				 G_PARAM_READWRITE |
 				 G_PARAM_CONSTRUCT_ONLY);
 	properties[PROP_TYPE] =
 	    g_param_spec_flags ("type",
-				"Device type",
-				"Device type",
+				NULL, NULL,
 				GSD_TYPE_DEVICE_TYPE, 0,
 				G_PARAM_READWRITE |
 				G_PARAM_CONSTRUCT_ONLY);
 	properties[PROP_WIDTH] =
 	    g_param_spec_uint ("width",
-			       "Width",
-			       "Width",
+			       NULL, NULL,
 			       0, G_MAXUINT, 0,
 			       G_PARAM_READWRITE |
 			       G_PARAM_CONSTRUCT_ONLY);
 	properties[PROP_HEIGHT] =
 	    g_param_spec_uint ("height",
-			       "Height",
-			       "Height",
+			       NULL, NULL,
 			       0, G_MAXUINT, 0,
 			       G_PARAM_READWRITE |
 			       G_PARAM_CONSTRUCT_ONLY);
 	properties[PROP_GROUP] =
 	    g_param_spec_string ("group",
-				 "Group",
-				 "Group",
+				 NULL, NULL,
 				 NULL,
 				 G_PARAM_READWRITE |
 				 G_PARAM_CONSTRUCT_ONLY);

@@ -1193,8 +1193,7 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
   g_object_class_install_property (object_class,
                                    PROP_COMPACT,
                                    g_param_spec_boolean ("compact",
-                                                         "compact",
-                                                         "compact",
+                                                         NULL, NULL,
                                                          FALSE,
                                                          G_PARAM_READWRITE));
 

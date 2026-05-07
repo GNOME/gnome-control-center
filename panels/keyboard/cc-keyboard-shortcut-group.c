@@ -344,8 +344,7 @@ cc_keyboard_shortcut_group_class_init (CcKeyboardShortcutGroupClass *klass)
    */
   properties[PROP_EMPTY] =
     g_param_spec_boolean ("empty",
-                          "Empty Shorcuts",
-                          "Whether the group contain no shorcuts",
+                          NULL, NULL,
                           FALSE,
                           G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
@@ -361,8 +360,7 @@ cc_keyboard_shortcut_group_class_init (CcKeyboardShortcutGroupClass *klass)
    */
   properties[PROP_MODIFIED_TEXT] =
     g_param_spec_string ("modified-text",
-                         "Modified Text",
-                         "A string representing the number of modified shortcut items",
+                         NULL, NULL,
                          "",
                          G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 

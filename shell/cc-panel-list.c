@@ -695,8 +695,7 @@ cc_panel_list_class_init (CcPanelListClass *klass)
    * Whether the search is visible or not.
    */
   properties[PROP_SEARCH_MODE] = g_param_spec_boolean ("search-mode",
-                                                       "Search mode",
-                                                       "Whether it's in search mode or not",
+                                                       NULL, NULL,
                                                        FALSE,
                                                        G_PARAM_READWRITE);
 
@@ -706,8 +705,7 @@ cc_panel_list_class_init (CcPanelListClass *klass)
    * The search that is being applied to sidelist.
    */
   properties[PROP_SEARCH_QUERY] = g_param_spec_string ("search-query",
-                                                       "Search query",
-                                                       "The current search query",
+                                                       NULL, NULL,
                                                        NULL,
                                                        G_PARAM_READWRITE);
 
@@ -717,8 +715,7 @@ cc_panel_list_class_init (CcPanelListClass *klass)
    * The current view of the sidelist.
    */
   properties[PROP_VIEW] = g_param_spec_int ("view",
-                                            "View",
-                                            "The current view of the sidelist",
+                                            NULL, NULL,
                                             CC_PANEL_LIST_MAIN,
                                             CC_PANEL_LIST_SEARCH,
                                             CC_PANEL_LIST_MAIN,

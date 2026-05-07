@@ -247,92 +247,79 @@ pp_new_printer_class_init (PpNewPrinterClass *klass)
 
   props[PROP_NAME] =
       g_param_spec_string ("name",
-                           "Name",
-                           "The new printer's name",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_ORIGINAL_NAME] =
       g_param_spec_string ("original-name",
-                           "Original name",
-                           "Original name of the new printer",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_DEVICE_URI] =
       g_param_spec_string ("device-uri",
-                           "Device URI",
-                           "The new printer's device URI",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_DEVICE_ID] =
       g_param_spec_string ("device-id",
-                           "DeviceID",
-                           "The new printer's DeviceID",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_PPD_NAME] =
       g_param_spec_string ("ppd-name",
-                           "PPD name",
-                           "Name of PPD for the new printer",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_PPD_FILE_NAME] =
       g_param_spec_string ("ppd-file-name",
-                           "PPD file name",
-                           "PPD file for the new printer",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_INFO] =
       g_param_spec_string ("info",
-                           "Printer info",
-                           "The new printer's info",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_LOCATION] =
       g_param_spec_string ("location",
-                           "Printer location",
-                           "The new printer's location",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_MAKE_AND_MODEL] =
       g_param_spec_string ("make-and-model",
-                           "Printer make and model",
-                           "The new printer's make and model",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_HOST_NAME] =
       g_param_spec_string ("host-name",
-                           "Hostname",
-                           "The new printer's hostname",
+                           NULL, NULL,
                            NULL,
                            G_PARAM_READWRITE);
 
   props[PROP_HOST_PORT] =
       g_param_spec_int ("host-port",
-                        "Host port",
-                        "The port of the host",
+                        NULL, NULL,
                         0, G_MAXINT32, 631,
                         G_PARAM_READWRITE);
 
   props[PROP_IS_NETWORK_DEVICE] =
       g_param_spec_boolean ("is-network-device",
-                            "Network device",
-                            "Whether the new printer is a network device",
+                            NULL, NULL,
                             FALSE,
                             G_PARAM_READWRITE);
 
   props[PROP_WINDOW_ID] =
       g_param_spec_uint ("window-id",
-                         "WindowID",
-                         "Window ID of parent window",
+                         NULL, NULL,
                          0, G_MAXUINT, 0,
                          G_PARAM_READWRITE);
 

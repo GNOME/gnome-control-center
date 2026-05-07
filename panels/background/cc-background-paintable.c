@@ -250,8 +250,7 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
 
   properties[PROP_THUMBNAIL_FACTORY] =
     g_param_spec_object ("thumbnail-factory",
-                         "Thumbnail factory",
-                         "Thumbnail factory",
+                         NULL, NULL,
                          GNOME_DESKTOP_TYPE_THUMBNAIL_FACTORY,
                          G_PARAM_READWRITE |
                          G_PARAM_CONSTRUCT_ONLY |
@@ -259,8 +258,7 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
 
   properties[PROP_ITEM] =
     g_param_spec_object ("item",
-                         "Item",
-                         "Item",
+                         NULL, NULL,
                          CC_TYPE_BACKGROUND_ITEM,
                          G_PARAM_READWRITE |
                          G_PARAM_CONSTRUCT_ONLY |
@@ -268,8 +266,7 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
 
   properties[PROP_WIDTH] =
     g_param_spec_int ("width",
-                      "Width",
-                      "Width",
+                      NULL, NULL,
                       1, G_MAXINT, 144,
                       G_PARAM_READWRITE |
                       G_PARAM_CONSTRUCT_ONLY |
@@ -277,8 +274,7 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
 
   properties[PROP_HEIGHT] =
     g_param_spec_int ("height",
-                      "Height",
-                      "Height",
+                      NULL, NULL,
                       1, G_MAXINT, 144 * 3 / 4,
                       G_PARAM_READWRITE |
                       G_PARAM_CONSTRUCT_ONLY |
@@ -286,8 +282,7 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
 
   properties[PROP_SCALE_FACTOR] =
     g_param_spec_int ("scale-factor",
-                      "Scale Factor",
-                      "Scale Factor",
+                      NULL, NULL,
                       1, G_MAXINT, 1,
                       G_PARAM_READWRITE |
                       G_PARAM_CONSTRUCT |
@@ -295,8 +290,7 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
 
   properties[PROP_TEXT_DIRECTION] =
     g_param_spec_enum ("text-direction",
-                       "Text Direction",
-                       "Text Direction",
+                       NULL, NULL,
                        GTK_TYPE_TEXT_DIRECTION,
                        GTK_TEXT_DIR_LTR,
                        G_PARAM_READWRITE |
@@ -305,8 +299,7 @@ cc_background_paintable_class_init (CcBackgroundPaintableClass *klass)
 
   properties[PROP_PAINT_FLAGS] =
     g_param_spec_flags ("paint-flags",
-                        "Paint Flags",
-                        "Paint Flags",
+                        NULL, NULL,
                         CC_TYPE_BACKGROUND_PAINT_FLAGS,
                         CC_BACKGROUND_PAINT_LIGHT,
                         G_PARAM_READWRITE |

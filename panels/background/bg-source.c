@@ -76,8 +76,7 @@ bg_source_class_init (BgSourceClass *klass)
   object_class->dispose = bg_source_dispose;
 
   pspec = g_param_spec_object ("liststore",
-                               "Liststore",
-                               "Liststore used in the source",
+                               NULL, NULL,
                                G_TYPE_LIST_STORE,
                                G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
   g_object_class_install_property (object_class, PROP_LISTSTORE, pspec);

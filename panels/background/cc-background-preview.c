@@ -231,14 +231,12 @@ cc_background_preview_class_init (CcBackgroundPreviewClass *klass)
   widget_class->size_allocate = cc_background_preview_size_allocate;
 
   properties[PROP_IS_DARK] = g_param_spec_boolean ("is-dark",
-                                                   "Is dark",
-                                                   "Whether the preview is dark",
+                                                   NULL, NULL,
                                                    FALSE,
                                                    G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_ITEM] = g_param_spec_object ("item",
-                                               "Item",
-                                               "Background item",
+                                               NULL, NULL,
                                                CC_TYPE_BACKGROUND_ITEM,
                                                G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
