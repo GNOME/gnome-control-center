@@ -108,13 +108,15 @@ def main():
                              stdout=subprocess.PIPE,
                              stderr=None,
                              stdin=subprocess.PIPE,
-                             universal_newlines=True)
+                             text=True,
+                             encoding='utf-8',
+                             errors='replace')
         stdout, _ = p.communicate()
         if p.returncode != 0:
             sys.exit(p.returncode)
 
         if not args.i:
-            with open(filename) as f:
+            with open(filename, encoding='utf-8', errors='replace') as f:
                 code = f.readlines()
             formatted_code = StringIO(stdout).readlines()
             diff = difflib.unified_diff(code, formatted_code,
