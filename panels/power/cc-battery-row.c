@@ -69,7 +69,6 @@ cc_battery_row_init (CcBatteryRow *self)
 static gchar *
 get_timestring (guint64 time_secs)
 {
-    gchar *timestring = NULL;
     gint hours;
     gint minutes;
 
@@ -80,18 +79,18 @@ get_timestring (guint64 time_secs)
         return g_strdup (_("Unknown time"));
 
     if (minutes < 60)
-        return timestring = g_strdup_printf (ngettext ("%i minute", "%i minutes", minutes), minutes);
+        return g_strdup_printf (ngettext ("%i minute", "%i minutes", minutes), minutes);
 
     hours = minutes / 60;
     minutes = minutes % 60;
 
     if (minutes == 0)
-        return timestring = g_strdup_printf (ngettext ("%i hour", "%i hours", hours), hours);
+        return g_strdup_printf (ngettext ("%i hour", "%i hours", hours), hours);
 
     /* TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
      * Swap order with "%2$s %2$i %1$s %1$i if needed */
-    return timestring = g_strdup_printf (_("%i %s %i %s"), hours, ngettext ("hour", "hours", hours), minutes,
-                                           ngettext ("minute", "minutes", minutes));
+    return g_strdup_printf (_("%i %s %i %s"), hours, ngettext ("hour", "hours", hours), minutes,
+                              ngettext ("minute", "minutes", minutes));
 }
 
 static gchar *
