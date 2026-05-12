@@ -86,36 +86,12 @@ template $CcFingerprintDialog: Adw.Dialog {
           margin-bottom: 30;
 
           StackPage {
-            child: Box no_devices_found {
-              name: _("No fingerprint device");
-              orientation: vertical;
-              valign: center;
-              spacing: 12;
+            child: Adw.StatusPage no_devices_found {
+              /* Translators: This is the empty state page label which states that there are no devices ready. */
+              title: _("No fingerprint device");
+              icon-name: "fingerprint-detection-symbolic";
 
-              styles [
-                "dim-label",
-              ]
-
-              Image {
-                icon-name: "fingerprint-detection-symbolic";
-                pixel-size: 192;
-              }
-
-              Label {
-                /* Translators: This is the empty state page label which states that there are no devices ready. */
-                label: _("No Fingerprint device");
-                wrap: true;
-                justify: center;
-
-                styles [
-                  "title-1",
-                ]
-              }
-
-              Label {
-                label: _("Ensure the device is properly connected");
-                wrap: true;
-              }
+              description: _("Ensure the device is properly connected");
             };
           }
 
