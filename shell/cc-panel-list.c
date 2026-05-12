@@ -954,7 +954,7 @@ cc_panel_list_set_panel_visibility (CcPanelList *self, const gchar *id, CcPanelV
     }
 
     gtk_widget_set_visible (data->row, visibility == CC_PANEL_VISIBLE);
-    gtk_widget_set_visible (search_data->row, visibility = !CC_PANEL_HIDDEN);
+    gtk_widget_set_visible (search_data->row, visibility != CC_PANEL_HIDDEN);
 }
 
 void
