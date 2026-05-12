@@ -71,154 +71,140 @@ template $CcFingerprintDialog: Adw.Dialog {
         }
       }
 
-      ScrolledWindow {
-        halign: fill;
-        valign: fill;
-        propagate-natural-width: true;
-        can-focus: false;
-        hscrollbar-policy: never;
+      Stack stack {
+        StackPage {
+          child: Adw.StatusPage no_devices_found {
+            /* Translators: This is the empty state page label which states that there are no devices ready. */
+            title: _("No fingerprint device");
+            icon-name: "fingerprint-detection-symbolic";
 
-        Stack stack {
-          transition-duration: 300;
-          margin-start: 20;
-          margin-end: 20;
-          margin-top: 30;
-          margin-bottom: 30;
+            description: _("Ensure the device is properly connected");
+          };
+        }
 
-          StackPage {
-            child: Adw.StatusPage no_devices_found {
-              /* Translators: This is the empty state page label which states that there are no devices ready. */
-              title: _("No fingerprint device");
-              icon-name: "fingerprint-detection-symbolic";
+        StackPage {
+          name: "fingerprint-device";
+          title: _("Fingerprint Device");
 
-              description: _("Ensure the device is properly connected");
-            };
-          }
+          child: Box device_selector {
+            can-focus: false;
+            halign: center;
+            valign: center;
+            spacing: 10;
+            orientation: vertical;
 
-          StackPage {
-            name: "fingerprint-device";
-            title: _("Fingerprint Device");
-
-            child: Box device_selector {
-              can-focus: false;
-              halign: center;
-              valign: center;
-              spacing: 10;
-              orientation: vertical;
-
-              Label {
-                label: _("Choose the fingerprint device you want to configure");
-                wrap: true;
-                halign: start;
-
-                styles [
-                  "heading",
-                ]
-              }
-
-              ScrolledWindow {
-                can-focus: false;
-                hscrollbar-policy: never;
-                propagate-natural-height: true;
-
-                ListBox devices_list {
-                  selection-mode: none;
-                  valign: center;
-                  row-activated => $select_device_row(template);
-
-                  styles [
-                    "frame",
-                  ]
-                }
-              }
-            };
-          }
-
-          StackPage {
-            title: _("Fingerprint Login");
-
-            child: Box prints_manager {
-              orientation: vertical;
-              valign: fill;
-              spacing: 12;
-
-              Label {
-                label: _("Fingerprint login allows you to unlock and log into your device with your finger");
-                wrap: true;
-              }
-
-              FlowBox prints_gallery {
-                styles [
-                  "prints-gallery",
-                ]
-
-                column-spacing: 12;
-                row-spacing: 12;
-                homogeneous: true;
-                halign: center;
-                valign: center;
-                vexpand: true;
-                min-children-per-line: 1;
-                max-children-per-line: 3;
-                activate-on-single-click: true;
-                selection-mode: none;
-                child-activated => $on_print_activated_cb(template);
-              }
-
-              Button delete_prints_button {
-                visible: false;
-                halign: end;
-                use-underline: true;
-                label: _("_Delete Fingerprints");
-                margin-top: 10;
-                margin-bottom: 10;
-                clicked => $delete_prints_button_clicked_cb(template);
-
-                styles [
-                  "destructive-action",
-                ]
-              }
-            };
-          }
-
-          StackPage {
-            title: _("Fingerprint Enroll");
-
-            child: Box enrollment_view {
-              orientation: vertical;
-              valign: fill;
-              spacing: 12;
+            Label {
+              label: _("Choose the fingerprint device you want to configure");
+              wrap: true;
+              halign: start;
 
               styles [
-                "enrollment",
+                "heading",
+              ]
+            }
+
+            ScrolledWindow {
+              can-focus: false;
+              hscrollbar-policy: never;
+              propagate-natural-height: true;
+
+              ListBox devices_list {
+                selection-mode: none;
+                valign: center;
+                row-activated => $select_device_row(template);
+
+                styles [
+                  "frame",
+                ]
+              }
+            }
+          };
+        }
+
+        StackPage {
+          title: _("Fingerprint Login");
+
+          child: Box prints_manager {
+            orientation: vertical;
+            valign: fill;
+            spacing: 12;
+
+            Label {
+              label: _("Fingerprint login allows you to unlock and log into your device with your finger");
+              wrap: true;
+            }
+
+            FlowBox prints_gallery {
+              styles [
+                "prints-gallery",
               ]
 
-              Label enroll_message {
-                wrap: true;
-              }
+              column-spacing: 12;
+              row-spacing: 12;
+              homogeneous: true;
+              halign: center;
+              valign: center;
+              vexpand: true;
+              min-children-per-line: 1;
+              max-children-per-line: 3;
+              activate-on-single-click: true;
+              selection-mode: none;
+              child-activated => $on_print_activated_cb(template);
+            }
 
-              Box {
-                spacing: 12;
-                halign: fill;
-                valign: center;
-                vexpand: true;
+            Button delete_prints_button {
+              visible: false;
+              halign: end;
+              use-underline: true;
+              label: _("_Delete Fingerprints");
+              margin-top: 10;
+              margin-bottom: 10;
+              clicked => $delete_prints_button_clicked_cb(template);
+
+              styles [
+                "destructive-action",
+              ]
+            }
+          };
+        }
+
+        StackPage {
+          title: _("Fingerprint Enroll");
+
+          child: Box enrollment_view {
+            orientation: vertical;
+            valign: fill;
+            spacing: 12;
+
+            styles [
+              "enrollment",
+            ]
+
+            Label enroll_message {
+              wrap: true;
+            }
+
+            Box {
+              spacing: 12;
+              halign: fill;
+              valign: center;
+              vexpand: true;
+              hexpand: true;
+              orientation: vertical;
+
+              Box enroll_print_bin {
                 hexpand: true;
-                orientation: vertical;
-
-                Box enroll_print_bin {
-                  hexpand: true;
-                }
-
-                Entry enroll_print_entry {
-                  valign: end;
-                  halign: center;
-                  editable: false;
-                  sensitive: false;
-                  width-request: 200;
-                }
               }
-            };
-          }
+
+              Entry enroll_print_entry {
+                valign: end;
+                halign: center;
+                editable: false;
+                sensitive: false;
+                width-request: 200;
+              }
+            }
+          };
         }
       }
     };
