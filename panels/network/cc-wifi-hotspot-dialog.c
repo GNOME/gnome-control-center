@@ -207,7 +207,7 @@ hotspot_entry_changed_cb (CcWifiHotspotDialog *self)
 
     g_assert (CC_IS_WIFI_HOTSPOT_DIALOG (self));
 
-    valid_ssid = valid_password = FALSE;
+    valid_ssid = FALSE;
     ssid = gtk_editable_get_text (GTK_EDITABLE (self->name_entry));
     password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
 
