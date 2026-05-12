@@ -993,16 +993,21 @@ gcm_prefs_device_clicked (CcColorPanel *self, CdDevice *device)
 static void
 gcm_prefs_profile_clicked (CcColorPanel *self, CdProfile *profile, CdDevice *device)
 {
-    g_autofree gchar *s = NULL;
+    const gchar *filename;
+
+    filename = cd_profile_get_filename (profile);
 
     /* get profile */
-    g_debug ("selected profile = %s", cd_profile_get_filename (profile));
+    g_debug ("selected profile = %s", filename);
 
     /* allow getting profile info */
-    if (cd_profile_get_filename (profile) != NULL && (s = g_find_program_in_path ("gcm-viewer")) != NULL)
-        gtk_widget_set_sensitive (self->toolbutton_profile_view, TRUE);
-    else
+    if (filename != NULL) {
+        g_autofree gchar *viewer = g_find_program_in_path ("gcm-viewer");
+
+        gtk_widget_set_sensitive (self->toolbutton_profile_view, viewer != NULL);
+    } else {
         gtk_widget_set_sensitive (self->toolbutton_profile_view, FALSE);
+    }
 }
 
 static void
