@@ -77,6 +77,7 @@ struct _CcFingerprintDialog {
     AdwStatusPage *error_page;
     GtkWidget *no_devices_found;
     GtkWidget *no_fingerprints_enrolled_page;
+    GtkProgressBar *progress_bar;
     GtkWidget *prints_manager;
 
     CcFingerprintManager *manager;
@@ -630,9 +631,10 @@ handle_enroll_signal (CcFingerprintDialog *self, const char *result, gboolean do
 
         self->enroll_stages_passed++;
 
-        if (enroll_stages > 0)
+        if (enroll_stages > 0) {
             self->enroll_progress = MIN (1.0f, self->enroll_stages_passed / (double) enroll_stages);
-        else
+            gtk_progress_bar_set_fraction (self->progress_bar, self->enroll_progress);
+        } else
             g_warning ("The device %s requires an invalid number of enroll stages (%u)",
                        cc_fprintd_device_get_name (self->device), enroll_stages);
 
@@ -647,6 +649,7 @@ handle_enroll_signal (CcFingerprintDialog *self, const char *result, gboolean do
             if (!G_APPROX_VALUE (self->enroll_progress, 1.0f, FLT_EPSILON)) {
                 g_warning ("Device marked enroll as completed, but progress is at %.2f", self->enroll_progress);
                 self->enroll_progress = 1.0f;
+                gtk_progress_bar_set_fraction (self->progress_bar, self->enroll_progress);
             }
         }
     } else if (!done) {
@@ -808,6 +811,7 @@ enroll_finger (CcFingerprintDialog *self, const char *finger_id)
     set_enroll_result_message (self, ENROLL_STATE_NORMAL, NULL);
     gtk_stack_set_visible_child (self->stack, self->enrollment_view);
     gtk_label_set_label (self->enroll_message, enroll_message);
+    gtk_progress_bar_set_fraction (self->progress_bar, 0);
 
     cc_fprintd_device_call_enroll_start (self->device, finger_id, self->cancellable, enroll_start_cb, self);
 }
@@ -1215,6 +1219,7 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, no_fingerprints_enrolled_page);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, prints_group);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, prints_manager);
+    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, progress_bar);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, spinner);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, stack);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, titlebar);
