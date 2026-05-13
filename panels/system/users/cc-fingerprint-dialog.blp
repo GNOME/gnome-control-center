@@ -65,6 +65,26 @@ template $CcFingerprintDialog: Adw.Dialog {
       }
 
       StackPage {
+        title: _("Fingerprint Authentication");
+
+        child: Adw.StatusPage no_fingerprints_enrolled_page {
+          title: _("Scan a finger to setup");
+          description: _("Use fingerprint to unlock the screen and identify yourself when prompted");
+          icon-name: "fingerprint-detection-symbolic";
+
+          child: Button {
+            label: _("_Scan Finger");
+            use-underline: true;
+            halign: center;
+
+            clicked => $on_add_fingerprint_button_activated_cb(template);
+
+            styles [ "suggested-action", "pill" ]
+          };
+        };
+      }
+
+      StackPage {
         name: "fingerprint-device";
         title: _("Fingerprint Device");
 
