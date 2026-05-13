@@ -57,7 +57,6 @@ struct _CcFingerprintDialog {
     AdwDialog parent_instance;
 
     GtkButton *back_button;
-    GtkButton *cancel_button;
     GtkButton *delete_prints_button;
     GtkButton *done_button;
     AdwPreferencesGroup *prints_group;
@@ -669,8 +668,7 @@ handle_enroll_signal (CcFingerprintDialog *self, const char *result, gboolean do
             /* TRANSLATORS: This is the message shown when the fingerprint
              * enrollment has been completed successfully */
             set_enroll_result_message (self, ENROLL_STATE_COMPLETED, C_("Fingerprint enroll state", "Complete"));
-            gtk_widget_set_sensitive (GTK_WIDGET (self->cancel_button), FALSE);
-            gtk_widget_set_sensitive (GTK_WIDGET (self->done_button), TRUE);
+            gtk_widget_set_visible (GTK_WIDGET (self->done_button), TRUE);
             gtk_widget_grab_focus (GTK_WIDGET (self->done_button));
         } else {
             const char *message;
@@ -985,11 +983,7 @@ on_stack_child_changed (CcFingerprintDialog *self)
     adw_dialog_set_title (ADW_DIALOG (self), title ? title : "");
 
     gtk_widget_set_visible (GTK_WIDGET (self->back_button), FALSE);
-    gtk_widget_set_visible (GTK_WIDGET (self->cancel_button), FALSE);
     gtk_widget_set_visible (GTK_WIDGET (self->done_button), FALSE);
-
-    adw_header_bar_set_show_start_title_buttons (ADW_HEADER_BAR (self->titlebar), TRUE);
-    adw_header_bar_set_show_end_title_buttons (ADW_HEADER_BAR (self->titlebar), TRUE);
 
     if (visible_child == self->prints_manager || visible_child == self->no_fingerprints_enrolled_page) {
         gtk_widget_set_visible (GTK_WIDGET (self->back_button), have_multiple_devices (self));
@@ -1000,14 +994,7 @@ on_stack_child_changed (CcFingerprintDialog *self)
             update_prints_store (self);
         }
     } else if (visible_child == self->enrollment_view) {
-        adw_header_bar_set_show_start_title_buttons (ADW_HEADER_BAR (self->titlebar), FALSE);
-        adw_header_bar_set_show_end_title_buttons (ADW_HEADER_BAR (self->titlebar), FALSE);
-
-        gtk_widget_set_visible (GTK_WIDGET (self->cancel_button), TRUE);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->cancel_button), TRUE);
-
-        gtk_widget_set_visible (GTK_WIDGET (self->done_button), TRUE);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->done_button), FALSE);
+        gtk_widget_set_visible (GTK_WIDGET (self->done_button), FALSE);
     } else if (visible_child == self->finger_selection_page) { // Do nothing here.
     } else {
         release_device (self);
@@ -1224,7 +1211,6 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
 
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, add_finger_button);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, back_button);
-    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, cancel_button);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, delete_prints_button);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, device_selector);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, devices_list);
