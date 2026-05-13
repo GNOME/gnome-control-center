@@ -122,49 +122,35 @@ template $CcFingerprintDialog: Adw.Dialog {
         }
 
         StackPage {
-          title: _("Fingerprint Login");
+          title: _("Fingerprint Authentication");
 
-          child: Box prints_manager {
-            orientation: vertical;
-            valign: fill;
-            spacing: 12;
-
-            Label {
-              label: _("Fingerprint login allows you to unlock and log into your device with your finger");
-              wrap: true;
+          child: Adw.PreferencesPage prints_manager {
+            Adw.PreferencesGroup prints_group {
+              title: _("Fingerprints");
             }
 
-            FlowBox prints_gallery {
-              styles [
-                "prints-gallery",
-              ]
+            Adw.PreferencesGroup {
+              separate-rows: true;
 
-              column-spacing: 12;
-              row-spacing: 12;
-              homogeneous: true;
-              halign: center;
-              valign: center;
-              vexpand: true;
-              min-children-per-line: 1;
-              max-children-per-line: 3;
-              activate-on-single-click: true;
-              selection-mode: none;
-              child-activated => $on_print_activated_cb(template);
+              Adw.ButtonRow add_finger_button {
+                title: _("Add Fingerprint");
+                end-icon-name: "go-next-symbolic";
+
+                activated => $on_add_fingerprint_button_activated_cb(template);
+              }
+
+              Adw.ButtonRow delete_prints_button {
+                visible: false;
+                use-underline: true;
+                title: _("_Delete Fingerprints");
+                activated => $on_delete_prints_button_activated_cb(template);
+
+                styles [
+                  "destructive-action",
+                ]
+              }
             }
 
-            Button delete_prints_button {
-              visible: false;
-              halign: end;
-              use-underline: true;
-              label: _("_Delete Fingerprints");
-              margin-top: 10;
-              margin-bottom: 10;
-              clicked => $delete_prints_button_clicked_cb(template);
-
-              styles [
-                "destructive-action",
-              ]
-            }
           };
         }
 
@@ -209,19 +195,4 @@ template $CcFingerprintDialog: Adw.Dialog {
       }
     };
   };
-}
-
-Popover add_print_popover {
-  position: bottom;
-
-  ScrolledWindow {
-    propagate-natural-width: true;
-    propagate-natural-height: true;
-
-    Box add_print_popover_box {
-      can-focus: false;
-      spacing: 6;
-      orientation: vertical;
-    }
-  }
 }
