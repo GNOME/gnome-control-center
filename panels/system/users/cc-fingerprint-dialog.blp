@@ -3,7 +3,8 @@ using Adw 1;
 
 template $CcFingerprintDialog: Adw.Dialog {
   content-width: 400;
-  can-close: false;
+
+  closed => $on_dialog_closed_cb(template);
 
   child: Adw.ToolbarView {
     [top]

@@ -1079,10 +1079,8 @@ done_button_clicked_cb (CcFingerprintDialog *self)
 }
 
 static void
-cc_fingerprint_dialog_close_attempt (AdwDialog *dialog)
+on_dialog_closed_cb (CcFingerprintDialog *self)
 {
-    CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (dialog);
-
     cc_fingerprint_manager_update_state (self->manager, NULL, NULL);
 
     g_clear_handle_id (&self->enroll_stage_passed_id, g_source_remove);
@@ -1101,9 +1099,6 @@ cc_fingerprint_dialog_close_attempt (AdwDialog *dialog)
 
     g_cancellable_cancel (self->cancellable);
     g_clear_object (&self->cancellable);
-
-    adw_dialog_set_can_close (ADW_DIALOG (dialog), TRUE);
-    adw_dialog_close (ADW_DIALOG (dialog));
 }
 
 static void
@@ -1111,9 +1106,6 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-    AdwDialogClass *dialog_class = ADW_DIALOG_CLASS (klass);
-
-    gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, GDK_NO_MODIFIER_MASK, "window.close", NULL);
 
     gtk_widget_class_set_template_from_resource (widget_class,
                                                  "/org/gnome/control-center/system/users/cc-fingerprint-dialog.ui");
@@ -1121,8 +1113,6 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
     object_class->constructed = cc_fingerprint_dialog_constructed;
     object_class->get_property = cc_fingerprint_dialog_get_property;
     object_class->set_property = cc_fingerprint_dialog_set_property;
-
-    dialog_class->close_attempt = cc_fingerprint_dialog_close_attempt;
 
     properties[PROP_MANAGER] =
         g_param_spec_object ("fingerprint-manager", NULL, NULL, CC_TYPE_FINGERPRINT_MANAGER,
@@ -1153,5 +1143,6 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
     gtk_widget_class_bind_template_callback (widget_class, done_button_clicked_cb);
     gtk_widget_class_bind_template_callback (widget_class, on_add_fingerprint_button_activated_cb);
     gtk_widget_class_bind_template_callback (widget_class, on_delete_prints_button_activated_cb);
+    gtk_widget_class_bind_template_callback (widget_class, on_dialog_closed_cb);
     gtk_widget_class_bind_template_callback (widget_class, select_device_row);
 }
