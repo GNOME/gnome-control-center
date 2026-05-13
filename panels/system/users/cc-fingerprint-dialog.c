@@ -67,7 +67,6 @@ struct _CcFingerprintDialog {
     GtkLabel *enroll_result_message;
     AdwPreferencesGroup *finger_group;
     GtkWidget *finger_selection_page;
-    GtkLabel *infobar_error;
     GtkListBox *devices_list;
     AdwSpinner *spinner;
     GtkStack *stack;
@@ -76,7 +75,7 @@ struct _CcFingerprintDialog {
     GtkWidget *enroll_print_bin;
     GtkWidget *enroll_result_icon;
     GtkWidget *enrollment_view;
-    GtkWidget *error_infobar;
+    AdwStatusPage *error_page;
     GtkWidget *no_devices_found;
     GtkWidget *prints_manager;
 
@@ -280,10 +279,8 @@ cc_fingerprint_dialog_set_property (GObject *object, guint prop_id, const GValue
 static void
 notify_error (CcFingerprintDialog *self, const char *error_message)
 {
-    if (error_message)
-        gtk_label_set_label (self->infobar_error, error_message);
-
-    gtk_widget_set_visible (self->error_infobar, error_message != NULL);
+    adw_status_page_set_description (self->error_page, error_message);
+    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->error_page));
 }
 
 static GtkWidget *
@@ -948,6 +945,7 @@ claim_device_cb (GObject *object, GAsyncResult *res, gpointer user_data)
         return;
 
     gtk_widget_set_sensitive (self->prints_manager, TRUE);
+    update_prints_store (self);
     self->device_signal_id =
         g_signal_connect_object (self->device, "g-signal", G_CALLBACK (on_device_signal), self, G_CONNECT_SWAPPED);
     self->device_name_owner_id =
@@ -992,11 +990,12 @@ on_stack_child_changed (CcFingerprintDialog *self)
 
     if (visible_child == self->prints_manager) {
         gtk_widget_set_visible (GTK_WIDGET (self->back_button), have_multiple_devices (self));
-        notify_error (self, NULL);
-        update_prints_store (self);
 
-        if (!(self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
+        if (!(self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED)) {
             claim_device (self);
+        } else if (visible_child == self->prints_manager) {
+            update_prints_store (self);
+        }
     } else if (visible_child == self->enrollment_view) {
         adw_header_bar_set_show_start_title_buttons (ADW_HEADER_BAR (self->titlebar), FALSE);
         adw_header_bar_set_show_end_title_buttons (ADW_HEADER_BAR (self->titlebar), FALSE);
@@ -1112,7 +1111,6 @@ static void
 back_button_clicked_cb (CcFingerprintDialog *self)
 {
     if (gtk_stack_get_visible_child (self->stack) == self->prints_manager) {
-        notify_error (self, NULL);
         gtk_stack_set_visible_child (self->stack, self->device_selector);
         return;
     }
@@ -1231,10 +1229,9 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, enroll_message);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, enroll_print_bin);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, enrollment_view);
-    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, error_infobar);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, finger_group);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, finger_selection_page);
-    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, infobar_error);
+    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, error_page);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, no_devices_found);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, prints_group);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, prints_manager);
