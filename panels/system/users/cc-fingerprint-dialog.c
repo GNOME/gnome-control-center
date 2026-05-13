@@ -77,6 +77,7 @@ struct _CcFingerprintDialog {
     GtkWidget *enrollment_view;
     AdwStatusPage *error_page;
     GtkWidget *no_devices_found;
+    GtkWidget *no_fingerprints_enrolled_page;
     GtkWidget *prints_manager;
 
     CcFingerprintManager *manager;
@@ -494,6 +495,8 @@ list_enrolled_cb (GObject *object, GAsyncResult *res, gpointer user_data)
 
     if (n_enrolled_fingers > 0)
         gtk_widget_set_visible (GTK_WIDGET (self->delete_prints_button), TRUE);
+    else
+        gtk_stack_set_visible_child (self->stack, self->no_fingerprints_enrolled_page);
 }
 
 static void
@@ -988,7 +991,7 @@ on_stack_child_changed (CcFingerprintDialog *self)
     adw_header_bar_set_show_start_title_buttons (ADW_HEADER_BAR (self->titlebar), TRUE);
     adw_header_bar_set_show_end_title_buttons (ADW_HEADER_BAR (self->titlebar), TRUE);
 
-    if (visible_child == self->prints_manager) {
+    if (visible_child == self->prints_manager || visible_child == self->no_fingerprints_enrolled_page) {
         gtk_widget_set_visible (GTK_WIDGET (self->back_button), have_multiple_devices (self));
 
         if (!(self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED)) {
@@ -1233,6 +1236,7 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, finger_selection_page);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, error_page);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, no_devices_found);
+    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, no_fingerprints_enrolled_page);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, prints_group);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, prints_manager);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, spinner);
