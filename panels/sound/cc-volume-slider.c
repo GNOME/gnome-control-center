@@ -240,6 +240,8 @@ cc_volume_slider_set_mixer_control (CcVolumeSlider *self, GvcMixerControl *mixer
 void
 cc_volume_slider_set_stream (CcVolumeSlider *self, GvcMixerStream *stream, CcStreamType type)
 {
+    const char *label;
+
     g_return_if_fail (CC_IS_VOLUME_SLIDER (self));
 
     if (self->stream != NULL) {
@@ -261,6 +263,21 @@ cc_volume_slider_set_stream (CcVolumeSlider *self, GvcMixerStream *stream, CcStr
             stream, "notify::is-muted", G_CALLBACK (notify_is_muted_cb), self, G_CONNECT_SWAPPED);
         notify_volume_cb (self);
         notify_is_muted_cb (self);
+
+        switch (type) {
+        case CC_STREAM_TYPE_INPUT:
+            label = _("Input Volume");
+            break;
+
+        case CC_STREAM_TYPE_OUTPUT:
+            label = _("Output Volume");
+            break;
+
+        default:
+            g_return_if_reached ();
+        }
+
+        gtk_accessible_update_property (GTK_ACCESSIBLE (self->volume_scale), GTK_ACCESSIBLE_PROPERTY_LABEL, label, -1);
     }
 }
 
