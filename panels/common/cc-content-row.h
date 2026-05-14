@@ -50,6 +50,8 @@ void cc_content_row_remove (CcContentRow *self, GtkWidget *widget);
 const char *cc_content_row_get_subtitle (CcContentRow *self);
 void cc_content_row_set_subtitle (CcContentRow *self, const char *subtitle);
 
+GtkWidget *cc_content_row_get_title_label (CcContentRow *self);
+
 GtkWidget *cc_content_row_get_activatable_widget (CcContentRow *self);
 void cc_content_row_set_activatable_widget (CcContentRow *self, GtkWidget *widget);
 

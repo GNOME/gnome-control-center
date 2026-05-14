@@ -520,6 +520,21 @@ cc_content_row_set_subtitle (CcContentRow *self, const char *subtitle)
 }
 
 /**
+ * cc_content_row_get_title_label:
+ * @self: a content row
+ *
+ * Gets the internal label widget used to display the row title.
+ *
+ * Returns: (transfer none): the title label widget
+ */
+GtkWidget *
+cc_content_row_get_title_label (CcContentRow *self)
+{
+    CcContentRowPrivate *priv = cc_content_row_get_instance_private (self);
+    g_return_val_if_fail (CC_IS_CONTENT_ROW (self), NULL);
+    return GTK_WIDGET (priv->title);
+}
+/**
  * cc_content_row_get_activatable_widget:
  * @self: a content row
  *
