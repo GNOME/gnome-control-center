@@ -717,66 +717,20 @@ levelbar .strength-high {
 }
 
 /* Fingerprint dialog */
-.fingerprint-icon {
-  padding: 3px;
+.fingerprint-status-page image {
+  -gtk-icon-size: 48px;
+  background-color: color-mix(in srgb, var(--window-fg-color) 13%, transparent);
+  border-radius: 6em;
+  padding: 25px;
+  border: 3px solid var(--window-bg-color);
 }
 
-.fingerprint-icon > button,
-.fingerprint-icon > image {
-  padding: 15px;
-  min-width: 32px;
-  min-height: 32px;
-  border-radius: 64px;
-  border: 1px solid color-mix(in srgb, currentColor 15%, transparent);
-  background-color: var(--view-bg-color);
-  color: color-mix(in srgb, var(--window-fg-color) 50%, transparent);
+.fingerprint-status-page.fingerprint-warning image {
+  border: 3px solid var(--warning-color);
 }
 
-.fingerprint-print-add image:not(:disabled):not(:backdrop),
-.fingerprint-print-add button:not(:disabled):not(:backdrop) {
-  color: var(--window-fg-color);
-}
-
-.fingerprint-icon.enroll-status image {
-  outline-color: var(--accent-bg-color);
-  outline-offset: 0px;
-  outline-width: 4px;
-}
-
-.fingerprint-icon.enroll-status image:backdrop {
-  outline-color: var(--accent-bg-color);
-}
-
-.fingerprint-icon.enroll-status {
-  font-weight: bold;
-}
-
-.fingerprint-icon.enroll-status.completed image {
-  outline-color: var(--success-color);
-}
-
-.fingerprint-icon.enroll-status.warning image {
-  outline-color: var(--warning-color);
-}
-
-.fingerprint-icon.enroll-status.error image {
-  outline-color: var(--error-color);
-  /* Given we don't have an error image, we can just recolorize the warning one */
-  -gtk-icon-palette: warning var(--error-color);
-}
-
-.fingerprint-icon.enroll-status.success image:not(:backdrop) {
-  color: var(--accent-bg-color);
-}
-
-.fingerprint-icon.enroll-status.warning image:not(:backdrop),
-.fingerprint-icon.enroll-status.warning label:not(:backdrop) {
-  color: var(--warning-color);
-}
-
-.fingerprint-icon.enroll-status.error image:not(:backdrop),
-.fingerprint-icon.enroll-status.error label:not(:backdrop) {
-  color: var(--error-color);
+.fingerprint-status-page.retry image {
+  border: 3px solid var(--accent-bg-color);
 }
 
 @keyframes wiggle {
@@ -792,13 +746,6 @@ levelbar .strength-high {
   80% { padding-left: 4px; padding-right: 0; }
   90% { padding-left: 0; padding-right: 2px; }
   100% { padding-left: 0; padding-right: 0; }
-}
-
-.fingerprint-icon.enroll-status.retry label {
-  animation-name: wiggle;
-  animation-duration: 850ms;
-  animation-timing-function: ease-in;
-  animation-iteration-count: 1;
 }
 
 /* Wellbeing Settings */

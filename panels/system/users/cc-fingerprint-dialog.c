@@ -71,7 +71,6 @@ struct _CcFingerprintDialog {
     GtkStack *stack;
     GtkWidget *add_finger_button;
     GtkWidget *device_selector;
-    GtkWidget *enroll_print_bin;
     GtkWidget *enroll_result_icon;
     GtkWidget *enrollment_view;
     AdwStatusPage *error_page;
@@ -133,7 +132,7 @@ typedef enum {
 
 const char *ENROLL_STATE_CLASSES[N_ENROLL_STATES] = {
     "normal", /* undefined */
-    "retry",  "success", "warning", "error", "completed",
+    "retry",  "normal", "fingerprint-warning", "fingerprint-warning", "normal",
 };
 
 static GParamSpec *properties[N_PROPS];
@@ -282,55 +281,6 @@ notify_error (CcFingerprintDialog *self, const char *error_message)
 {
     adw_status_page_set_description (self->error_page, error_message);
     gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->error_page));
-}
-
-static GtkWidget *
-fingerprint_icon_new (const char *icon_name, const char *label_text, GType icon_widget_type, gpointer progress_data,
-                      GtkWidget **out_icon, GtkWidget **out_label)
-{
-    GtkWidget *box;
-    GtkWidget *label;
-    GtkWidget *image;
-    GtkWidget *icon_widget;
-
-    g_return_val_if_fail (g_type_is_a (icon_widget_type, GTK_TYPE_WIDGET), NULL);
-
-    box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);
-    gtk_widget_set_name (box, "fingerprint-box");
-    gtk_widget_set_hexpand (box, TRUE);
-
-    image = gtk_image_new_from_icon_name (icon_name);
-
-    if (icon_widget_type == GTK_TYPE_IMAGE)
-        icon_widget = image;
-    else
-        icon_widget = g_object_new (icon_widget_type, NULL);
-
-    if (g_type_is_a (icon_widget_type, GTK_TYPE_MENU_BUTTON)) {
-        gtk_menu_button_set_child (GTK_MENU_BUTTON (icon_widget), image);
-        gtk_widget_set_can_focus (icon_widget, FALSE);
-    }
-
-    gtk_widget_set_halign (icon_widget, GTK_ALIGN_CENTER);
-    gtk_widget_set_valign (icon_widget, GTK_ALIGN_CENTER);
-    gtk_widget_set_name (icon_widget, "fingerprint-image");
-
-    gtk_box_append (GTK_BOX (box), icon_widget);
-
-    gtk_widget_add_css_class (icon_widget, "circular");
-
-    label = gtk_label_new_with_mnemonic (label_text);
-    gtk_box_append (GTK_BOX (box), label);
-
-    gtk_widget_add_css_class (box, "fingerprint-icon");
-
-    if (out_icon)
-        *out_icon = icon_widget;
-
-    if (out_label)
-        *out_label = label;
-
-    return box;
 }
 
 static const char *
@@ -590,13 +540,12 @@ set_enroll_result_message (CcFingerprintDialog *self, EnrollState enroll_state, 
     }
 
     for (i = 0; i < N_ENROLL_STATES; ++i)
-        gtk_widget_remove_css_class (self->enroll_result_icon, ENROLL_STATE_CLASSES[i]);
+        gtk_widget_remove_css_class (self->enrollment_view, ENROLL_STATE_CLASSES[i]);
 
-    gtk_widget_add_css_class (self->enroll_result_icon, ENROLL_STATE_CLASSES[enroll_state]);
-
-    gtk_image_set_from_icon_name (self->enroll_result_image, icon_name);
-    gtk_label_set_label (self->enroll_result_message, message);
-    gtk_label_set_wrap (self->enroll_result_message, TRUE);
+    gtk_widget_add_css_class (self->enrollment_view, ENROLL_STATE_CLASSES[enroll_state]);
+    adw_status_page_set_icon_name (ADW_STATUS_PAGE (self->enrollment_view), icon_name);
+    adw_status_page_set_description (ADW_STATUS_PAGE (self->enrollment_view),
+                                     message ? message : _("Multiple scans need to be taken of your fingerprint"));
 }
 
 static gboolean
@@ -605,7 +554,7 @@ stage_passed_timeout_cb (gpointer user_data)
     CcFingerprintDialog *self = user_data;
     const char *current_message;
 
-    current_message = gtk_label_get_label (self->enroll_result_message);
+    current_message = adw_status_page_get_description (ADW_STATUS_PAGE (self->enrollment_view));
     set_enroll_result_message (self, ENROLL_STATE_NORMAL, current_message);
     self->enroll_stage_passed_id = 0;
 
@@ -810,22 +759,10 @@ enroll_finger (CcFingerprintDialog *self, const char *finger_id)
 
     set_enroll_result_message (self, ENROLL_STATE_NORMAL, NULL);
     gtk_stack_set_visible_child (self->stack, self->enrollment_view);
-    gtk_label_set_label (self->enroll_message, enroll_message);
     gtk_progress_bar_set_fraction (self->progress_bar, 0);
+    adw_status_page_set_title (ADW_STATUS_PAGE (self->enrollment_view), enroll_message);
 
     cc_fprintd_device_call_enroll_start (self->device, finger_id, self->cancellable, enroll_start_cb, self);
-}
-
-static void
-populate_enrollment_view (CcFingerprintDialog *self)
-{
-    self->enroll_result_icon =
-        fingerprint_icon_new ("fingerprint-detection-symbolic", NULL, GTK_TYPE_IMAGE, &self->enroll_progress,
-                              (GtkWidget **) &self->enroll_result_image, (GtkWidget **) &self->enroll_result_message);
-
-    gtk_box_prepend (GTK_BOX (self->enroll_print_bin), self->enroll_result_icon);
-
-    gtk_widget_add_css_class (self->enroll_result_icon, "enroll-status");
 }
 
 static void
@@ -1023,8 +960,6 @@ cc_fingerprint_dialog_init (CcFingerprintDialog *self)
     on_stack_child_changed (self);
     g_signal_connect_object (self->stack, "notify::visible-child", G_CALLBACK (on_stack_child_changed), self,
                              G_CONNECT_SWAPPED);
-
-    populate_enrollment_view (self);
 }
 
 static void
@@ -1209,8 +1144,6 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, device_selector);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, devices_list);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, done_button);
-    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, enroll_message);
-    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, enroll_print_bin);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, enrollment_view);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, finger_group);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, finger_selection_page);
