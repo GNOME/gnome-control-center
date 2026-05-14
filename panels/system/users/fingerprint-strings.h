@@ -49,8 +49,8 @@ struct {
     const char *swipe_str_specific;
 } fingers[] = {
     { "any",
-      N_("Place your finger on the fingerprint reader"),
-         N_("Place your finger on %s"),
+      N_("Hold finger on reader"),
+         N_("Hold finger on %s"),
             N_("Swipe your finger across the fingerprint reader"), N_("Swipe your finger across %s") },
             { "left-thumb",
               N_("Place your left thumb on the fingerprint reader"),
@@ -198,7 +198,7 @@ enroll_result_str_to_msg (const char *result, bool is_swipe)
 
     if (strcmp (result, "enroll-retry-scan") == 0 || strcmp (result, "enroll-stage-passed") == 0) {
         if (is_swipe == false)
-            return TR (N_("Place your finger on the reader again"));
+            return TR (N_("Please lift finger and try again"));
         else
             return TR (N_("Swipe your finger again"));
     }
