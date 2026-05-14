@@ -534,7 +534,7 @@ handle_enroll_signal (CcFingerprintDialog *self, const char *result, gboolean do
         if (completed) {
             /* TRANSLATORS: This is the message shown when the fingerprint
              * enrollment has been completed successfully */
-            set_enroll_result_message (self, ENROLL_STATE_COMPLETED, C_("Fingerprint enroll state", "Complete"));
+            set_enroll_result_message (self, ENROLL_STATE_COMPLETED, _("Fingerprint is ready to be used"));
             gtk_widget_set_visible (GTK_WIDGET (self->done_button), TRUE);
             gtk_widget_grab_focus (GTK_WIDGET (self->done_button));
         } else {
@@ -647,7 +647,7 @@ get_enrollment_string (CcFingerprintDialog *self, const char *finger_id)
     if (have_multiple_devices (self))
         device_name = cc_fprintd_device_get_name (self->device);
 
-    ret = finger_str_to_msg (finger_id, device_name, is_swipe);
+    ret = finger_str_to_msg ("any", device_name, is_swipe);
 
     if (ret)
         return ret;
