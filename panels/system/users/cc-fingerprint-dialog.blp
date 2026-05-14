@@ -66,37 +66,10 @@ template $CcFingerprintDialog: Adw.Dialog {
         name: "fingerprint-device";
         title: _("Fingerprint Device");
 
-        child: Box device_selector {
-          can-focus: false;
-          halign: center;
-          valign: center;
-          spacing: 10;
-          orientation: vertical;
+        child: Adw.PreferencesPage device_selector {
+          description: _("Choose the fingerprint device you want to configure");
 
-          Label {
-            label: _("Choose the fingerprint device you want to configure");
-            wrap: true;
-            halign: start;
-
-            styles [
-              "heading",
-            ]
-          }
-
-          ScrolledWindow {
-            can-focus: false;
-            hscrollbar-policy: never;
-            propagate-natural-height: true;
-
-            ListBox devices_list {
-              selection-mode: none;
-              valign: center;
-              row-activated => $select_device_row(template);
-
-              styles [
-                "frame",
-              ]
-            }
+          Adw.PreferencesGroup devices_list {
           }
         };
       }
