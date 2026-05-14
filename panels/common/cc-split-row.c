@@ -393,8 +393,15 @@ cc_split_row_class_init (CcSplitRowClass *klass)
 static void
 cc_split_row_init (CcSplitRow *self)
 {
+    GtkWidget *title_label;
+
     gtk_widget_init_template (GTK_WIDGET (self));
     gtk_widget_add_css_class (GTK_WIDGET (self), "illustrated");
+
+    title_label = cc_content_row_get_title_label (CC_CONTENT_ROW (self));
+    gtk_accessible_update_relation (GTK_ACCESSIBLE (self->box),
+                                    GTK_ACCESSIBLE_RELATION_LABELLED_BY, title_label,
+                                    NULL, -1);
 }
 
 /*
