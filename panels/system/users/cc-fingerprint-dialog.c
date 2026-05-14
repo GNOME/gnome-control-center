@@ -66,7 +66,7 @@ struct _CcFingerprintDialog {
     GtkLabel *enroll_result_message;
     AdwPreferencesGroup *finger_group;
     GtkWidget *finger_selection_page;
-    GtkListBox *devices_list;
+    AdwPreferencesGroup *devices_list;
     AdwSpinner *spinner;
     GtkStack *stack;
     GtkWidget *add_finger_button;
@@ -963,8 +963,9 @@ cc_fingerprint_dialog_init (CcFingerprintDialog *self)
 }
 
 static void
-select_device_row (CcFingerprintDialog *self, GtkListBoxRow *row, GtkListBox *listbox)
+select_device_row (AdwActionRow *row, gpointer user_data)
 {
+    CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (user_data);
     CcFprintdDevice *device = g_object_get_data (G_OBJECT (row), "device");
 
     g_return_if_fail (CC_FPRINTD_DEVICE (device));
@@ -1011,10 +1012,11 @@ on_devices_list (GObject *object, GAsyncResult *res, gpointer user_data)
             CcFprintdDevice *device = l->data;
             CcListRow *device_row;
 
-            device_row = g_object_new (CC_TYPE_LIST_ROW, "visible", TRUE, "icon-name", "go-next-symbolic", "title",
-                                       cc_fprintd_device_get_name (device), NULL);
+            device_row =
+                g_object_new (CC_TYPE_LIST_ROW, "show-arrow", TRUE, "title", cc_fprintd_device_get_name (device), NULL);
 
-            gtk_list_box_insert (self->devices_list, GTK_WIDGET (device_row), -1);
+            adw_preferences_group_add (self->devices_list, GTK_WIDGET (device_row));
+            g_signal_connect (device_row, "activated", G_CALLBACK (select_device_row), self);
             g_object_set_data_full (G_OBJECT (device_row), "device", g_object_ref (device), g_object_unref);
         }
 
@@ -1163,5 +1165,4 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
     gtk_widget_class_bind_template_callback (widget_class, on_add_fingerprint_button_activated_cb);
     gtk_widget_class_bind_template_callback (widget_class, on_delete_prints_button_activated_cb);
     gtk_widget_class_bind_template_callback (widget_class, on_dialog_closed_cb);
-    gtk_widget_class_bind_template_callback (widget_class, select_device_row);
 }
