@@ -127,7 +127,7 @@ typedef enum {
 
 const char *ENROLL_STATE_CLASSES[N_ENROLL_STATES] = {
     "normal", /* undefined */
-    "retry",  "normal", "fingerprint-warning", "fingerprint-warning", "normal",
+    "retry",  "normal", "fingerprint-warning", "fingerprint-warning", "completed",
 };
 
 static GParamSpec *properties[N_PROPS];
@@ -448,7 +448,8 @@ set_enroll_result_message (CcFingerprintDialog *self, EnrollState enroll_state, 
         icon_name = "fingerprint-detection-warning-symbolic";
         break;
     case ENROLL_STATE_COMPLETED:
-        icon_name = "fingerprint-detection-complete-symbolic";
+        icon_name = "object-select-symbolic";
+        adw_status_page_set_title (ADW_STATUS_PAGE (self->enrollment_view), _("Scan complete!"));
         break;
     default:
         icon_name = "fingerprint-detection-symbolic";
