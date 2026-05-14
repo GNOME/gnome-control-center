@@ -35,6 +35,8 @@ template $CcFingerprintDialog: Adw.Dialog {
           icon-name: "fingerprint-detection-symbolic";
 
           description: _("Ensure the device is properly connected");
+
+          styles [ "fingerprint-status-page" ]
         };
       }
 
@@ -45,6 +47,8 @@ template $CcFingerprintDialog: Adw.Dialog {
           title: _("Scan a finger to setup");
           description: _("Use fingerprint to unlock the screen and identify yourself when prompted");
           icon-name: "fingerprint-detection-symbolic";
+
+          styles [ "fingerprint-status-page" ]
 
           child: Button {
             label: _("_Scan Finger");
@@ -131,30 +135,18 @@ template $CcFingerprintDialog: Adw.Dialog {
       }
 
       StackPage {
-        child: Box enrollment_view {
-          orientation: vertical;
-          valign: fill;
-          spacing: 12;
+        child: Adw.StatusPage enrollment_view {
+          icon-name: "fingerprint-detection-symbolic";
 
-          styles [
-            "enrollment",
-          ]
+          styles [ "fingerprint-status-page" ]
 
-          Label enroll_message {
-            wrap: true;
-          }
-
-          Box {
+          child: Box {
             spacing: 12;
             halign: fill;
             valign: center;
             vexpand: true;
             hexpand: true;
             orientation: vertical;
-
-            Box enroll_print_bin {
-              hexpand: true;
-            }
 
             ProgressBar progress_bar {
               halign: center;
@@ -186,7 +178,7 @@ template $CcFingerprintDialog: Adw.Dialog {
 
               styles [ "suggested-action", "pill" ]
             }
-          }
+          };
         };
       }
     };
