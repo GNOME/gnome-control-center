@@ -126,7 +126,7 @@ main (int argc, char **argv)
     GApplication *app;
     g_autoptr(GError) error = NULL;
 
-    if (!gxdp_init_gtk (GXDP_SERVICE_CLIENT_TYPE_GLOBAL_SHORTCUTS, &error)) {
+    if (!gxdp_init_gtk (GXDP_SERVICE_CLIENT_TYPE_GLOBAL_SHORTCUTS, NULL, &error)) {
         g_warning ("Failed to initialize windowing system connection: %s", error->message);
         return EXIT_FAILURE;
     }
