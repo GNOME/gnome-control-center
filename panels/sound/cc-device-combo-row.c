@@ -90,6 +90,17 @@ factory_setup_cb (CcDeviceComboRow *self, GtkListItem *list_item)
     gtk_list_item_set_child (list_item, box);
 }
 
+static char *
+get_device_display_name (GvcMixerUIDevice *device)
+{
+    const gchar *origin = gvc_mixer_ui_device_get_origin (device);
+
+    if (origin && origin[0] != '\0')
+        return g_strdup_printf ("%s - %s", gvc_mixer_ui_device_get_description (device), origin);
+    else
+        return g_strdup (gvc_mixer_ui_device_get_description (device));
+}
+
 static void
 factory_bind_cb (CcDeviceComboRow *self, GtkListItem *list_item)
 {
@@ -99,7 +110,6 @@ factory_bind_cb (CcDeviceComboRow *self, GtkListItem *list_item)
     GtkWidget *label;
     g_autofree gchar *icon_name = NULL;
     g_autofree gchar *description = NULL;
-    const gchar *origin;
 
     device = gtk_list_item_get_item (list_item);
     box = gtk_list_item_get_child (list_item);
@@ -111,12 +121,7 @@ factory_bind_cb (CcDeviceComboRow *self, GtkListItem *list_item)
 
     gtk_image_set_from_icon_name (GTK_IMAGE (device_icon), icon_name);
 
-    origin = gvc_mixer_ui_device_get_origin (device);
-    if (origin && origin[0] != '\0') {
-        description = g_strdup_printf ("%s - %s", gvc_mixer_ui_device_get_description (device), origin);
-    } else {
-        description = g_strdup (gvc_mixer_ui_device_get_description (device));
-    }
+    description = get_device_display_name (device);
 
     gtk_label_set_label (GTK_LABEL (label), description);
 
