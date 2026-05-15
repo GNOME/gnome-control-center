@@ -254,9 +254,15 @@ cc_device_combo_row_class_init (CcDeviceComboRowClass *klass)
 void
 cc_device_combo_row_init (CcDeviceComboRow *self)
 {
+    g_autoptr (GtkExpression) expression = NULL;
+
     g_resources_register (cc_sound_get_resource ());
 
     gtk_widget_init_template (GTK_WIDGET (self));
+
+    expression =
+        gtk_cclosure_expression_new (G_TYPE_STRING, NULL, 0, NULL, G_CALLBACK (get_device_display_name_cb), self, NULL);
+    adw_combo_row_set_expression (ADW_COMBO_ROW (self), expression);
 }
 
 void
