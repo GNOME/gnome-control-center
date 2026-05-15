@@ -91,14 +91,26 @@ factory_setup_cb (CcDeviceComboRow *self, GtkListItem *list_item)
 }
 
 static char *
-get_device_display_name (GvcMixerUIDevice *device)
+get_device_display_name (CcDeviceComboRow *self, GvcMixerUIDevice *device)
 {
     const gchar *origin = gvc_mixer_ui_device_get_origin (device);
 
-    if (origin && origin[0] != '\0')
-        return g_strdup_printf ("%s - %s", gvc_mixer_ui_device_get_description (device), origin);
-    else
+    if (origin && origin[0] != '\0') {
+        const gchar *description = gvc_mixer_ui_device_get_description (device);
+
+        if (gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL)
+            return g_strdup_printf ("%s - %s", origin, description);
+        else
+            return g_strdup_printf ("%s - %s", description, origin);
+    } else
         return g_strdup (gvc_mixer_ui_device_get_description (device));
+}
+
+/* Wrapper with single-argument signature for use as a GtkExpression closure */
+static char *
+get_device_display_name_cb (GvcMixerUIDevice *device, CcDeviceComboRow *self)
+{
+    return get_device_display_name (self, device);
 }
 
 static void
@@ -121,7 +133,7 @@ factory_bind_cb (CcDeviceComboRow *self, GtkListItem *list_item)
 
     gtk_image_set_from_icon_name (GTK_IMAGE (device_icon), icon_name);
 
-    description = get_device_display_name (device);
+    description = get_device_display_name (self, device);
 
     gtk_label_set_label (GTK_LABEL (label), description);
 
