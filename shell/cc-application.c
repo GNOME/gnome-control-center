@@ -105,10 +105,10 @@ about_activated (GSimpleAction *action, GVariant *parameter, gpointer user_data)
     about_dialog = adw_about_dialog_new_from_appdata ("/org/gnome/Settings/metainfo", NULL);
     adw_about_dialog_set_version (ADW_ABOUT_DIALOG (about_dialog), VERSION);
     developer_name = adw_about_dialog_get_developer_name (ADW_ABOUT_DIALOG (about_dialog));
-    /* Translators should localize the following string which will be displayed in the About dialog giving credit to the
-     * translator(s). */
+    /* Translators should localize the following string which will be displayed in the
+     * About dialog giving credit to the translator(s). */
     adw_about_dialog_set_translator_credits (ADW_ABOUT_DIALOG (about_dialog), _("translator-credits"));
-    adw_about_dialog_set_copyright (ADW_ABOUT_DIALOG (about_dialog), g_strdup_printf (_("© 1998 %s"), developer_name));
+    adw_about_dialog_set_copyright (ADW_ABOUT_DIALOG (about_dialog), g_strdup_printf ("© 1998 %s", developer_name));
 
     adw_dialog_present (about_dialog, GTK_WIDGET (self->window));
 }
