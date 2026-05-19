@@ -13,7 +13,6 @@ template $CcFingerprintDialog: Adw.Dialog {
       [start]
       Button back_button {
         tooltip-text: _("Back");
-        can-focus: false;
         receives-default: false;
         valign: center;
         icon-name: "go-previous-symbolic";
@@ -135,7 +134,6 @@ template $CcFingerprintDialog: Adw.Dialog {
 
             Button cancel_button {
               visible: bind done_button.visible inverted;
-              can-focus: false;
               receives-default: false;
               halign: center;
               use-underline: true;
