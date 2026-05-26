@@ -87,6 +87,8 @@ template $CcScreenTimeStatisticsRow: Adw.PreferencesRow {
             Label selected_average_label {
               halign: start;
               label: "Average Sunday"; /* placeholder */
+              wrap: true;
+              wrap-mode: word_char;
 
               layout {
                 column: 0;
@@ -162,6 +164,8 @@ template $CcScreenTimeStatisticsRow: Adw.PreferencesRow {
             Label week_average_label {
               halign: start;
               label: _("Average Week");
+              wrap: true;
+              wrap-mode: word_char;
 
               layout {
                 column: 1;
