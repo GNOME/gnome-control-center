@@ -49,7 +49,6 @@ sources = files(
   'pp-print-device.c',
   'pp-printer-entry.c',
   'pp-printer.c',
-  'pp-samba.c',
   'pp-utils.c'
 )
 
@@ -65,8 +64,17 @@ deps = common_deps + [
   cups_dep,
   m_dep,
   polkit_gobject_dep,
-  dependency('smbclient')
 ]
+
+samba_dep = dependency('smbclient', required: false)
+samba_dep_found = samba_dep.found()
+config_h.set('HAVE_SAMBA', samba_dep_found)
+if samba_dep_found
+  deps += samba_dep
+  sources += 'pp-samba.c'
+else
+  sources += 'pp-samba-stub.c'
+endif
 
 printers_panel_lib = static_library(
   cappletname,
