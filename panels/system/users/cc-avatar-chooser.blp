@@ -2,6 +2,7 @@ using Gtk 4.0;
 
 template $CcAvatarChooser: Popover {
   visible: false;
+  width-request: 320;
 
   Box {
     orientation: vertical;
@@ -10,7 +11,7 @@ template $CcAvatarChooser: Popover {
     FlowBox flowbox {
       selection-mode: none;
       homogeneous: true;
-      max-children-per-line: 5;
+      max-children-per-line: 3;
       column-spacing: 10;
       accessible-role: group;
       accessibility {
