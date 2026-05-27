@@ -28,10 +28,23 @@ fi
 
 source_branch="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-${CI_COMMIT_BRANCH}}"
 target_branch="${CI_MERGE_REQUEST_TARGET_BRANCH_NAME:-${CI_DEFAULT_BRANCH}}"
-git fetch --shallow-since="$(date --date="${ancestor_horizon} days ago" +%Y-%m-%d)" origin "${source_branch}"
+
+# By default, fetch the source branch from origin
+source_remote="origin"
+
+# When running in a fork MR, we need to fetch the source branch from the fork,
+# not from origin (which might be the upstream repo where the branch doesn't exist)
+if [ -n "${CI_MERGE_REQUEST_SOURCE_PROJECT_URL}" ] && [ "${CI_MERGE_REQUEST_SOURCE_PROJECT_URL}" != "${CI_MERGE_REQUEST_PROJECT_URL}" ]; then
+    if ! git ls-remote --exit-code source-project >/dev/null 2>&1 ; then
+        git remote add source-project "${CI_MERGE_REQUEST_SOURCE_PROJECT_URL}.git"
+    fi
+    source_remote="source-project"
+fi
+
+git fetch --shallow-since="$(date --date="${ancestor_horizon} days ago" +%Y-%m-%d)" ${source_remote} "${source_branch}"
 git fetch --shallow-since="$(date --date="${ancestor_horizon} days ago" +%Y-%m-%d)" upstream "${target_branch}"
 
-newest_common_ancestor_sha=$(git merge-base upstream/${target_branch} origin/${source_branch})
+newest_common_ancestor_sha=$(git merge-base upstream/${target_branch} ${source_remote}/${source_branch})
 if [ -z "${newest_common_ancestor_sha}" ]; then
     echo "Couldn’t find common ancestor with upstream main branch. This typically"
     echo "happens if you branched from main a long time ago. Please update"
