@@ -89,7 +89,6 @@ sources += gnome.mkenums_simple(
 libsecret_dep = dependency('libsecret-1')
 gnutls_dep = dependency('gnutls')
 libgtop2 = dependency('libgtop-2.0')
-udisks2 = dependency('udisks2', version: '>= 2.8.2')
 
 # Kerberos support
 krb_dep = dependency('krb5', required: false)
@@ -108,7 +107,6 @@ deps = common_deps + [
   krb_dep,
   polkit_gobject_dep,
   pwquality_dep,
-  udisks2,
 ]
 
 if gmobile_dep.found()

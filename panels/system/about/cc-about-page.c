@@ -39,7 +39,6 @@
 #include <glibtop/mountlist.h>
 #include <glibtop/sysinfo.h>
 #include <gudev/gudev.h>
-#include <udisks/udisks.h>
 #ifdef HAVE_GMOBILE
 #define GMOBILE_USE_UNSTABLE_API
 #include <gmobile.h>
@@ -411,37 +410,67 @@ get_os_type (void)
         return g_strdup_printf (_("32-bit"));
 }
 
-char *
-get_primary_disk_info (void)
+static GVariant *
+get_property_from_udisks2_object_path (const char *obj_path, const char *name)
 {
-    g_autoptr(UDisksClient) client = NULL;
-    GDBusObjectManager *manager;
-    g_autolist(GDBusObject) objects = NULL;
-    GList *l;
-    guint64 total_size;
+    g_autoptr(GDBusProxy) udisks2_proxy = NULL;
     g_autoptr(GError) error = NULL;
+    GVariant *variant;
 
-    total_size = 0;
+    udisks2_proxy =
+        g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM, G_DBUS_PROXY_FLAGS_NONE, NULL, "org.freedesktop.UDisks2",
+                                       obj_path, "org.freedesktop.UDisks2.Drive", NULL, &error);
 
-    client = udisks_client_new_sync (NULL, &error);
-    if (client == NULL) {
-        g_warning ("Unable to get UDisks client: %s. Disk information will not be available.", error->message);
+    if (udisks2_proxy == NULL) {
+        g_debug ("Failed to get UDisks2 proxy for '%s': %s", obj_path, error->message);
         return NULL;
     }
 
-    manager = udisks_client_get_object_manager (client);
-    objects = g_dbus_object_manager_get_objects (manager);
+    variant = g_dbus_proxy_get_cached_property (udisks2_proxy, name);
+    if (variant == NULL) {
+        g_debug ("Couldn't get UDisks2 cached property '%s' for '%s': %s", name, obj_path, error->message);
+        return NULL;
+    }
 
-    for (l = objects; l != NULL; l = l->next) {
-        UDisksDrive *drive;
-        drive = udisks_object_peek_drive (UDISKS_OBJECT (l->data));
+    return variant;
+}
 
-        /* Skip removable devices */
-        if (drive == NULL || udisks_drive_get_removable (drive) || udisks_drive_get_ejectable (drive)) {
+char *
+get_primary_disk_info (void)
+{
+    guint64 total_size = 0;
+    g_autoptr(GError) error = NULL;
+    g_autoptr(GDBusProxy) udisks2_proxy = NULL;
+    g_autoptr(GVariant) variant = NULL;
+    GVariantBuilder b;
+    g_autoptr(GVariantIter) iter = NULL;
+    const char *obj_path;
+
+    udisks2_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM, G_DBUS_PROXY_FLAGS_NONE, NULL,
+                                                   "org.freedesktop.UDisks2", "/org/freedesktop/UDisks2/Manager",
+                                                   "org.freedesktop.UDisks2.Manager", NULL, &error);
+
+    if (udisks2_proxy == NULL) {
+        g_warning ("Failed to get UDisks2 proxy: %s", error->message);
+        return NULL;
+    }
+
+    g_variant_builder_init (&b, G_VARIANT_TYPE ("a{sv}"));
+    variant = g_dbus_proxy_call_sync (udisks2_proxy, "GetDrives", g_variant_new ("(a{sv})", &b), G_DBUS_CALL_FLAGS_NONE,
+                                      -1, NULL, &error);
+    if (variant == NULL) {
+        g_debug ("Couldn't call GetDrives: %s", error->message);
+        return NULL;
+    }
+
+    g_variant_get (variant, "(ao)", &iter);
+    while (g_variant_iter_loop (iter, "o", &obj_path)) {
+        g_autoptr(GVariant) variant = get_property_from_udisks2_object_path (obj_path, "Size");
+        if (variant == NULL) {
+            /* Only this instance could have failed, so keep going gracefully */
             continue;
         }
-
-        total_size += udisks_drive_get_size (drive);
+        total_size += g_variant_get_uint64 (variant);
     }
 
     if (total_size > 0)
