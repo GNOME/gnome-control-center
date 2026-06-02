@@ -563,83 +563,103 @@ stage_passed_timeout_cb (gpointer user_data)
 }
 
 static void
+update_enroll_progress (CcFingerprintDialog *self)
+{
+    guint enroll_stages = cc_fprintd_device_get_num_enroll_stages (self->device);
+
+    self->enroll_stages_passed++;
+
+    if (enroll_stages > 0) {
+        self->enroll_progress = MIN (1.0f, self->enroll_stages_passed / (double) enroll_stages);
+        gtk_progress_bar_set_fraction (self->progress_bar, self->enroll_progress);
+    } else {
+        g_warning ("The device %s requires an invalid number of enroll stages (%u)",
+                   cc_fprintd_device_get_name (self->device), enroll_stages);
+    }
+
+    g_debug ("Enroll state passed, %u/%u (%.2f%%)", self->enroll_stages_passed, enroll_stages,
+             self->enroll_progress);
+}
+
+static void
+handle_enroll_stage_passed (CcFingerprintDialog *self)
+{
+    update_enroll_progress (self);
+    set_enroll_result_message (self, ENROLL_STATE_SUCCESS, NULL);
+    self->enroll_stage_passed_id = g_timeout_add (750, stage_passed_timeout_cb, self);
+}
+
+static void
+handle_enroll_completed (CcFingerprintDialog *self)
+{
+    update_enroll_progress (self);
+
+    if (!G_APPROX_VALUE (self->enroll_progress, 1.0f, FLT_EPSILON)) {
+        g_warning ("Device marked enroll as completed, but progress is at %.2f", self->enroll_progress);
+        self->enroll_progress = 1.0f;
+        gtk_progress_bar_set_fraction (self->progress_bar, self->enroll_progress);
+    }
+
+    set_enroll_result_message (self, ENROLL_STATE_COMPLETED, _("Fingerprint is ready to be used"));
+    gtk_widget_set_visible (GTK_WIDGET (self->done_button), TRUE);
+    gtk_widget_grab_focus (GTK_WIDGET (self->done_button));
+}
+
+static void
+handle_enroll_retry (CcFingerprintDialog *self, const char *result)
+{
+    const char *scan_type = cc_fprintd_device_get_scan_type (self->device);
+    gboolean is_swipe = g_str_equal (scan_type, "swipe");
+    const char *message = enroll_result_str_to_msg (result, is_swipe);
+
+    set_enroll_result_message (self, ENROLL_STATE_RETRY, message);
+    self->enroll_stage_passed_id = g_timeout_add (850, stage_passed_timeout_cb, self);
+}
+
+static void
+handle_enroll_failed (CcFingerprintDialog *self, const char *result)
+{
+    const char *message;
+
+    if (g_str_equal (result, "enroll-disconnected")) {
+        message = _("Fingerprint device disconnected");
+        remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED | DIALOG_STATE_DEVICE_ENROLLING);
+    } else if (g_str_equal (result, "enroll-data-full")) {
+        message = _("Fingerprint device storage is full");
+    } else if (g_str_equal (result, "enroll-duplicate")) {
+        message = _("Fingerprint is duplicate");
+    } else {
+        message = _("Failed to enroll new fingerprint");
+    }
+
+    set_enroll_result_message (self, ENROLL_STATE_WARNING, message);
+}
+
+static void
 handle_enroll_signal (CcFingerprintDialog *self, const char *result, gboolean done)
 {
-    gboolean completed;
-
     g_return_if_fail (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING);
 
     g_debug ("Device enroll result message: %s, done: %d", result, done);
 
-    completed = g_str_equal (result, "enroll-completed");
     g_clear_handle_id (&self->enroll_stage_passed_id, g_source_remove);
 
-    if (g_str_equal (result, "enroll-stage-passed") || completed) {
-        guint enroll_stages;
+    if (g_str_equal (result, "enroll-completed")) {
+        handle_enroll_completed (self);
+        return;
+    }
 
-        enroll_stages = cc_fprintd_device_get_num_enroll_stages (self->device);
-
-        self->enroll_stages_passed++;
-
-        if (enroll_stages > 0) {
-            self->enroll_progress = MIN (1.0f, self->enroll_stages_passed / (double) enroll_stages);
-            gtk_progress_bar_set_fraction (self->progress_bar, self->enroll_progress);
-        } else
-            g_warning ("The device %s requires an invalid number of enroll stages (%u)",
-                       cc_fprintd_device_get_name (self->device), enroll_stages);
-
-        g_debug ("Enroll state passed, %u/%u (%.2f%%)", self->enroll_stages_passed, (guint) enroll_stages,
-                 self->enroll_progress);
-
-        if (!completed) {
-            set_enroll_result_message (self, ENROLL_STATE_SUCCESS, NULL);
-
-            self->enroll_stage_passed_id = g_timeout_add (750, stage_passed_timeout_cb, self);
-        } else {
-            if (!G_APPROX_VALUE (self->enroll_progress, 1.0f, FLT_EPSILON)) {
-                g_warning ("Device marked enroll as completed, but progress is at %.2f", self->enroll_progress);
-                self->enroll_progress = 1.0f;
-                gtk_progress_bar_set_fraction (self->progress_bar, self->enroll_progress);
-            }
-        }
-    } else if (!done) {
-        const char *scan_type;
-        const char *message;
-        gboolean is_swipe;
-
-        scan_type = cc_fprintd_device_get_scan_type (self->device);
-        is_swipe = g_str_equal (scan_type, "swipe");
-
-        message = enroll_result_str_to_msg (result, is_swipe);
-        set_enroll_result_message (self, ENROLL_STATE_RETRY, message);
-
-        self->enroll_stage_passed_id = g_timeout_add (850, stage_passed_timeout_cb, self);
+    if (g_str_equal (result, "enroll-stage-passed")) {
+        handle_enroll_stage_passed (self);
+        return;
     }
 
     if (done) {
-        if (completed) {
-            /* TRANSLATORS: This is the message shown when the fingerprint
-             * enrollment has been completed successfully */
-            set_enroll_result_message (self, ENROLL_STATE_COMPLETED, _("Fingerprint is ready to be used"));
-            gtk_widget_set_visible (GTK_WIDGET (self->done_button), TRUE);
-            gtk_widget_grab_focus (GTK_WIDGET (self->done_button));
-        } else {
-            const char *message;
-
-            if (g_str_equal (result, "enroll-disconnected")) {
-                message = _("Fingerprint device disconnected");
-                remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED | DIALOG_STATE_DEVICE_ENROLLING);
-            } else if (g_str_equal (result, "enroll-data-full")) {
-                message = _("Fingerprint device storage is full");
-            } else if (g_str_equal (result, "enroll-duplicate")) {
-                message = _("Fingerprint is duplicate");
-            } else {
-                message = _("Failed to enroll new fingerprint");
-            }
-
-            set_enroll_result_message (self, ENROLL_STATE_WARNING, message);
-        }
+        handle_enroll_failed (self, result);
+        return;
     }
+
+    handle_enroll_retry (self, result);
 }
 
 static void
