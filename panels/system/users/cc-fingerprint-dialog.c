@@ -573,6 +573,11 @@ update_enroll_progress (CcFingerprintDialog *self)
 
     self->enroll_stages_passed++;
 
+    if (self->enroll_stages_passed == 1) {
+        g_debug ("Ignoring spurious enroll-stage-passed at startup (count now 1)");
+        return;
+    }
+
     if (enroll_stages > 0) {
         self->enroll_progress = MIN (1.0f, self->enroll_stages_passed / (double) enroll_stages);
         gtk_progress_bar_set_fraction (self->progress_bar, self->enroll_progress);
@@ -589,6 +594,11 @@ static void
 handle_enroll_stage_passed (CcFingerprintDialog *self)
 {
     update_enroll_progress (self);
+
+    /* We are getting an enroll stage pass on startup, so let's ignore the first one. */
+    if (self->enroll_stages_passed <= 1)
+        return;
+
     set_enroll_result_message (self, ENROLL_STATE_SUCCESS, NULL);
     self->enroll_stage_passed_id = g_timeout_add (750, stage_passed_timeout_cb, self);
 }
