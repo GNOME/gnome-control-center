@@ -131,8 +131,12 @@ typedef enum {
 } EnrollState;
 
 const char *ENROLL_STATE_CLASSES[N_ENROLL_STATES] = {
-    "normal", /* undefined */
-    "retry",  "normal", "fingerprint-warning", "fingerprint-warning", "completed",
+    "normal",               /* ENROLL_STATE_NORMAL (undefined) */
+    "fingerprint-warning",  /* ENROLL_STATE RETRY */
+    "fingerprint-enrolled", /* ENROLL_STATE_SUCCESS */
+    "fingerprint-warning",  /* ENROLL_STATE_WARNING */
+    "fingerprint-warning",  /* ENROLL_STATE_ERROR */
+    "completed",            /* ENROLL_STATE_COMPLETED */
 };
 
 static GParamSpec *properties[N_PROPS];
