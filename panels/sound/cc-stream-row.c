@@ -137,7 +137,7 @@ cc_stream_row_new (GtkSizeGroup *size_group, GvcMixerStream *stream, guint id, C
     gtk_label_set_label (self->name_label, gvc_mixer_stream_get_name (stream));
     cc_volume_slider_set_stream (self->volume_slider, stream, stream_type);
     cc_volume_slider_set_mixer_control (self->volume_slider, mixer_control);
-    cc_level_bar_set_stream (self->level_bar, stream);
+    cc_level_bar_set_stream (self->level_bar, stream, stream_type);
 
     gtk_size_group_add_widget (size_group, GTK_WIDGET (self->label_box));
 
