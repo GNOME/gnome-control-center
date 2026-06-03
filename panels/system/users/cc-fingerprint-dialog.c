@@ -142,6 +142,7 @@ const char *ENROLL_STATE_CLASSES[N_ENROLL_STATES] = {
 static GParamSpec *properties[N_PROPS];
 
 static void enroll_finger (CcFingerprintDialog *self, const char *finger_id);
+static void update_prints_store (CcFingerprintDialog *self);
 
 CcFingerprintDialog *
 cc_fingerprint_dialog_new (CcFingerprintManager *manager)
@@ -314,15 +315,59 @@ get_finger_name (const char *finger_id)
     g_return_val_if_reached (_("Unknown Finger"));
 }
 
+static void
+on_fingerprint_deleted_cb (GObject *object, GAsyncResult *res, gpointer user_data)
+{
+    g_autoptr(GError) error = NULL;
+    CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
+    CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (user_data);
+
+    cc_fprintd_device_call_delete_enrolled_finger_finish (fprintd_device, res, &error);
+
+    if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        return;
+
+    if (error) {
+        g_autofree char *error_message = NULL;
+
+        error_message = g_strdup_printf (_("Failed to delete fingerprint: %s"), dbus_error_to_human (self, error));
+        g_warning ("Deletion of fingerprints on device %s failed: %s", cc_fprintd_device_get_name (self->device),
+                   error->message);
+        notify_error (self, error_message);
+    }
+
+    update_prints_store (self);
+    cc_fingerprint_manager_update_state (self->manager, NULL, NULL);
+}
+
+static void
+delete_fingerprint (GtkButton *button, gpointer user_data)
+{
+    CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (user_data);
+    const gchar *finger_id = g_object_get_data (G_OBJECT (button), "finger-id");
+
+    cc_fprintd_device_call_delete_enrolled_finger (self->device, finger_id, self->cancellable,
+                                                   on_fingerprint_deleted_cb, self);
+}
+
 static GtkWidget *
-create_fingerprint_row (GObject *item)
+create_fingerprint_row (GObject *item, gpointer user_data)
 {
     GtkStringObject *fingerprint = GTK_STRING_OBJECT (item);
     const gchar *finger_id = gtk_string_object_get_string (fingerprint);
     GtkWidget *row = adw_action_row_new ();
+    GtkWidget *delete_button = gtk_button_new ();
 
     adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), get_finger_name (finger_id));
     adw_preferences_row_set_use_underline (ADW_PREFERENCES_ROW (row), TRUE);
+
+    g_object_set_data (G_OBJECT (delete_button), "finger-id", g_strdup (finger_id));
+    g_signal_connect (delete_button, "clicked", G_CALLBACK (delete_fingerprint), user_data);
+
+    gtk_button_set_icon_name (GTK_BUTTON (delete_button), "edit-delete-symbolic");
+    gtk_widget_add_css_class (delete_button, "flat");
+    gtk_widget_set_valign (delete_button, GTK_ALIGN_CENTER);
+    adw_action_row_add_suffix (ADW_ACTION_ROW (row), delete_button);
 
     return row;
 }
@@ -490,7 +535,7 @@ delete_prints_cb (GObject *object, GAsyncResult *res, gpointer user_data)
 
         error_message =
             g_strdup_printf (_("Failed to delete saved fingerprints: %s"), dbus_error_to_human (self, error));
-        g_warning ("Deletion of fingerprints on device %s failed: %s", cc_fprintd_device_get_name (self->device),
+        g_warning ("Deletion of fingerprints on device %s failed: %s", cc_fprintd_device_get_name (fprintd_device),
                    error->message);
         notify_error (self, error_message);
     }
@@ -976,7 +1021,7 @@ cc_fingerprint_dialog_init (CcFingerprintDialog *self)
 
     self->fingerprints_store = g_list_store_new (GTK_TYPE_STRING_OBJECT);
     adw_preferences_group_bind_model (self->prints_group, G_LIST_MODEL (self->fingerprints_store),
-                                      (GtkListBoxCreateWidgetFunc) create_fingerprint_row, NULL, NULL);
+                                      (GtkListBoxCreateWidgetFunc) create_fingerprint_row, self, NULL);
     self->finger_options = g_list_store_new (GTK_TYPE_STRING_OBJECT);
     adw_preferences_group_bind_model (self->finger_group, G_LIST_MODEL (self->finger_options),
                                       (GtkListBoxCreateWidgetFunc) create_finger_option_row, self, NULL);
