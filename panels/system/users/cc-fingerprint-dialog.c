@@ -92,6 +92,8 @@ struct _CcFingerprintDialog {
 
     GListStore *fingerprints_store;
     GListStore *finger_options;
+
+    gboolean finger_on_reader;
 };
 
 /* TODO - fprintd and API changes required:
@@ -570,6 +572,23 @@ have_multiple_devices (CcFingerprintDialog *self)
 }
 
 static void
+set_enroll_result_message (CcFingerprintDialog *self, EnrollState enroll_state, const char *message);
+
+static void
+on_finger_present (CcFingerprintDialog *self)
+{
+    g_print ("finger is touching the reader: %d\n", (int)!self->finger_on_reader);
+
+    if (self->finger_on_reader) {
+        for (int i = 0; i < N_ENROLL_STATES; ++i)
+            gtk_widget_remove_css_class (self->enrollment_view, ENROLL_STATE_CLASSES[i]);
+        set_enroll_result_message (self, ENROLL_STATE_NORMAL, NULL);
+    }
+
+    self->finger_on_reader = !self->finger_on_reader;
+}
+
+static void
 set_enroll_result_message (CcFingerprintDialog *self, EnrollState enroll_state, const char *message)
 {
     const char *icon_name;
@@ -590,8 +609,12 @@ set_enroll_result_message (CcFingerprintDialog *self, EnrollState enroll_state, 
         icon_name = "fingerprint-detection-symbolic";
     }
 
-    for (i = 0; i < N_ENROLL_STATES; ++i)
-        gtk_widget_remove_css_class (self->enrollment_view, ENROLL_STATE_CLASSES[i]);
+    g_print ("   State %s\n", ENROLL_STATE_CLASSES[enroll_state]);
+
+    if (enroll_state == ENROLL_STATE_NORMAL && !self->finger_on_reader) {
+        for (int i = 0; i < N_ENROLL_STATES; ++i)
+            gtk_widget_remove_css_class (self->enrollment_view, ENROLL_STATE_CLASSES[i]);
+    }
 
     gtk_widget_add_css_class (self->enrollment_view, ENROLL_STATE_CLASSES[enroll_state]);
     adw_status_page_set_icon_name (ADW_STATUS_PAGE (self->enrollment_view), icon_name);
@@ -673,7 +696,7 @@ handle_enroll_retry (CcFingerprintDialog *self, const char *result)
     const char *message = enroll_result_str_to_msg (result, is_swipe);
 
     set_enroll_result_message (self, ENROLL_STATE_RETRY, message);
-    self->enroll_stage_passed_id = g_timeout_add (850, stage_passed_timeout_cb, self);
+    self->enroll_stage_passed_id = g_timeout_add (750, stage_passed_timeout_cb, self);
 }
 
 static void
@@ -973,6 +996,8 @@ claim_device_cb (GObject *object, GAsyncResult *res, gpointer user_data)
         g_signal_connect_object (self->device, "g-signal", G_CALLBACK (on_device_signal), self, G_CONNECT_SWAPPED);
     self->device_name_owner_id =
         g_signal_connect_object (self->device, "notify::g-name-owner", G_CALLBACK (on_device_owner_changed), self, 0);
+
+    g_signal_connect_object (self->device, "notify::finger-present", G_CALLBACK (on_finger_present), self, G_CONNECT_SWAPPED);
 }
 
 static void
