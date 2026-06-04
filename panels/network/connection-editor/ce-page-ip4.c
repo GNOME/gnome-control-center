@@ -138,10 +138,10 @@ method_changed (CEPageIP4 *self)
     gtk_widget_set_sensitive (GTK_WIDGET (self->dns_box), dns_enabled);
     gtk_widget_set_sensitive (GTK_WIDGET (self->routes_box), routes_enabled);
 
-    gtk_widget_set_sensitive (GTK_WIDGET (self->auto_dns_label), auto_enabled);
-    gtk_widget_set_sensitive (GTK_WIDGET (self->auto_dns_switch), auto_enabled);
-    gtk_widget_set_sensitive (GTK_WIDGET (self->auto_routes_label), auto_enabled);
-    gtk_widget_set_sensitive (GTK_WIDGET (self->auto_routes_switch), auto_enabled);
+    gtk_widget_set_visible (GTK_WIDGET (self->auto_dns_label), auto_enabled);
+    gtk_widget_set_visible (GTK_WIDGET (self->auto_dns_switch), auto_enabled);
+    gtk_widget_set_visible (GTK_WIDGET (self->auto_routes_label), auto_enabled);
+    gtk_widget_set_visible (GTK_WIDGET (self->auto_routes_switch), auto_enabled);
 
     sync_dns_entry_warning (self);
 
