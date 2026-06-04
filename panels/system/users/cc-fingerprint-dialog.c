@@ -87,11 +87,12 @@ struct _CcFingerprintDialog {
     GCancellable *cancellable;
     GStrv enrolled_fingers;
     guint enroll_stages_passed;
-    guint enroll_stage_passed_id;
     gdouble enroll_progress;
 
     GListStore *fingerprints_store;
     GListStore *finger_options;
+
+    gboolean finger_on_reader;
 };
 
 /* TODO - fprintd and API changes required:
@@ -133,7 +134,7 @@ typedef enum {
 const char *ENROLL_STATE_CLASSES[N_ENROLL_STATES] = {
     "normal",               /* ENROLL_STATE_NORMAL (undefined) */
     "fingerprint-warning",  /* ENROLL_STATE RETRY */
-    "fingerprint-enrolled", /* ENROLL_STATE_SUCCESS */
+    "fingerprint-touching", /* Used when finger is touching and when result is ENROLL_STATE_SUCCESS */
     "fingerprint-warning",  /* ENROLL_STATE_WARNING */
     "fingerprint-warning",  /* ENROLL_STATE_ERROR */
     "completed",            /* ENROLL_STATE_COMPLETED */
@@ -569,10 +570,18 @@ have_multiple_devices (CcFingerprintDialog *self)
 }
 
 static void
+remove_all_css_classes_from_enrollment_view (gpointer user_data)
+{
+    CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (user_data);
+
+    for (int i = 0; i < N_ENROLL_STATES; ++i)
+        gtk_widget_remove_css_class (self->enrollment_view, ENROLL_STATE_CLASSES[i]);
+}
+
+static void
 set_enroll_result_message (CcFingerprintDialog *self, EnrollState enroll_state, const char *message)
 {
     const char *icon_name;
-    guint i;
 
     g_return_if_fail (enroll_state >= 0 && enroll_state < N_ENROLL_STATES);
 
@@ -589,26 +598,27 @@ set_enroll_result_message (CcFingerprintDialog *self, EnrollState enroll_state, 
         icon_name = "fingerprint-detection-symbolic";
     }
 
-    for (i = 0; i < N_ENROLL_STATES; ++i)
-        gtk_widget_remove_css_class (self->enrollment_view, ENROLL_STATE_CLASSES[i]);
+    remove_all_css_classes_from_enrollment_view (self);
+    if (self->finger_on_reader || enroll_state == ENROLL_STATE_COMPLETED) {
+        gtk_widget_add_css_class (self->enrollment_view, ENROLL_STATE_CLASSES[enroll_state]);
+    }
 
-    gtk_widget_add_css_class (self->enrollment_view, ENROLL_STATE_CLASSES[enroll_state]);
     adw_status_page_set_icon_name (ADW_STATUS_PAGE (self->enrollment_view), icon_name);
     adw_status_page_set_description (ADW_STATUS_PAGE (self->enrollment_view),
                                      message ? message : _("Multiple scans need to be taken of your fingerprint"));
 }
 
-static gboolean
-stage_passed_timeout_cb (gpointer user_data)
+static void
+on_finger_present_cb (CcFingerprintDialog *self)
 {
-    CcFingerprintDialog *self = user_data;
-    const char *current_message;
+    self->finger_on_reader = cc_fprintd_device_get_finger_present (self->device);
+    g_debug ("Finger is touching the fingerprint reader: %s", self->finger_on_reader ? "yes" : "no");
 
-    current_message = adw_status_page_get_description (ADW_STATUS_PAGE (self->enrollment_view));
-    set_enroll_result_message (self, ENROLL_STATE_NORMAL, current_message);
-    self->enroll_stage_passed_id = 0;
-
-    return G_SOURCE_REMOVE;
+    if (self->finger_on_reader) {
+        gtk_widget_add_css_class (self->enrollment_view, "fingerprint-touching");
+    } else {
+        set_enroll_result_message (self, ENROLL_STATE_NORMAL, NULL);
+    }
 }
 
 static void
@@ -634,7 +644,6 @@ handle_enroll_stage_passed (CcFingerprintDialog *self)
 {
     update_enroll_progress (self);
     set_enroll_result_message (self, ENROLL_STATE_SUCCESS, NULL);
-    self->enroll_stage_passed_id = g_timeout_add (750, stage_passed_timeout_cb, self);
 }
 
 static void
@@ -660,8 +669,9 @@ handle_enroll_retry (CcFingerprintDialog *self, const char *result)
     gboolean is_swipe = g_str_equal (scan_type, "swipe");
     const char *message = enroll_result_str_to_msg (result, is_swipe);
 
-    set_enroll_result_message (self, ENROLL_STATE_RETRY, message);
-    self->enroll_stage_passed_id = g_timeout_add (850, stage_passed_timeout_cb, self);
+    /* Only show retry message if finger is still on the reader to avoid stale messages */
+    if (self->finger_on_reader)
+        set_enroll_result_message (self, ENROLL_STATE_RETRY, message);
 }
 
 static void
@@ -689,8 +699,6 @@ handle_enroll_signal (CcFingerprintDialog *self, const char *result, gboolean do
     g_return_if_fail (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING);
 
     g_debug ("Device enroll result message: %s, done: %d", result, done);
-
-    g_clear_handle_id (&self->enroll_stage_passed_id, g_source_remove);
 
     if (g_str_equal (result, "enroll-completed")) {
         handle_enroll_completed (self);
@@ -961,6 +969,8 @@ claim_device_cb (GObject *object, GAsyncResult *res, gpointer user_data)
         g_signal_connect_object (self->device, "g-signal", G_CALLBACK (on_device_signal), self, G_CONNECT_SWAPPED);
     self->device_name_owner_id =
         g_signal_connect_object (self->device, "notify::g-name-owner", G_CALLBACK (on_device_owner_changed), self, 0);
+
+    g_signal_connect_swapped (self->device, "notify::finger-present", G_CALLBACK (on_finger_present_cb), self);
 }
 
 static void
@@ -1171,8 +1181,6 @@ static void
 on_dialog_closed_cb (CcFingerprintDialog *self)
 {
     cc_fingerprint_manager_update_state (self->manager, NULL, NULL);
-
-    g_clear_handle_id (&self->enroll_stage_passed_id, g_source_remove);
 
     if (self->device && (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED)) {
         disconnect_device_signals (self);
