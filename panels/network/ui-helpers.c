@@ -20,6 +20,8 @@
 #include "ui-helpers.h"
 #include "config.h"
 
+#include <glib/gi18n.h>
+
 void
 widget_set_error (GtkWidget *widget)
 {
@@ -28,8 +30,10 @@ widget_set_error (GtkWidget *widget)
     gtk_widget_add_css_class (widget, "error");
     gtk_accessible_update_state (GTK_ACCESSIBLE (widget), GTK_ACCESSIBLE_STATE_INVALID, GTK_ACCESSIBLE_INVALID_TRUE,
                                  -1);
-    if (GTK_IS_ENTRY (widget))
+    if (GTK_IS_ENTRY (widget)) {
         gtk_entry_set_icon_from_icon_name (GTK_ENTRY (widget), GTK_ENTRY_ICON_SECONDARY, "dialog-error-symbolic");
+        gtk_entry_set_icon_tooltip_text (GTK_ENTRY (widget), GTK_ENTRY_ICON_SECONDARY, _("Entry value is invalid"));
+    }
 }
 
 void
