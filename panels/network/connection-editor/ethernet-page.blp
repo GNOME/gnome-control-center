@@ -62,6 +62,13 @@ template $CEPageEthernet: Adw.Bin {
           column: 1;
           row: 1;
         }
+
+        [internal-child entry]
+        Entry {
+          EventControllerFocus {
+            leave => $announce_mac_validation(mac_combo);
+          }
+        }
       }
 
       ComboBoxText cloned_mac_combo {
@@ -75,7 +82,11 @@ template $CEPageEthernet: Adw.Bin {
         }
 
         [internal-child entry]
-        Entry {}
+        Entry {
+          EventControllerFocus {
+            leave => $announce_mac_validation(cloned_mac_combo);
+          }
+        }
       }
 
       Label {
