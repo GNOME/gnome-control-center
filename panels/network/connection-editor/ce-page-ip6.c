@@ -534,6 +534,14 @@ connect_ip6_page (CEPageIP6 *self)
     method_changed (self);
 }
 
+static void
+announce_dns_validation (GtkEntry *dns_entry)
+{
+    if (!dns_entry_valid (dns_entry, AF_INET6))
+        gtk_accessible_announce (GTK_ACCESSIBLE (dns_entry), _("Invalid DNS Address"),
+                                                               GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_HIGH);
+}
+
 static gboolean
 ui_to_setting (CEPageIP6 *self)
 {
@@ -635,28 +643,21 @@ ui_to_setting (CEPageIP6 *self)
     else
         dns_addresses = NULL;
 
-    for (i = 0; dns_addresses && dns_addresses[i]; i++) {
-        const gchar *text;
-        struct in6_addr tmp_addr;
+    if (!dns_entry_valid (self->dns_entry, AF_INET6)) {
+        g_clear_pointer (&dns_addresses, g_strfreev);
+        widget_set_error (GTK_WIDGET (self->dns_entry));
+        ret = FALSE;
+    } else {
+        widget_unset_error (GTK_WIDGET (self->dns_entry));
+        for (i = 0; dns_addresses && dns_addresses[i]; i++) {
+            const gchar *text = dns_addresses[i];
 
-        text = dns_addresses[i];
+            if (!text || !*text)
+                continue;
 
-        if (!text || !*text)
-            continue;
-
-        if (inet_pton (AF_INET6, text, &tmp_addr) <= 0) {
-            g_clear_pointer (&dns_addresses, g_strfreev);
-            widget_set_error (GTK_WIDGET (self->dns_entry));
-            ret = FALSE;
-            break;
-        } else {
-            widget_unset_error (GTK_WIDGET (self->dns_entry));
             nm_setting_ip_config_add_dns (self->setting, text);
         }
     }
-
-    if (dns_text[0] == '\0')
-        widget_unset_error (GTK_WIDGET (self->dns_entry));
 
     nm_setting_ip_config_clear_routes (self->setting);
     add_routes = g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_AUTO)
@@ -837,6 +838,8 @@ ce_page_ip6_class_init (CEPageIP6Class *klass)
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, routes_metric_label);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, routes_metric_sizegroup);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP6, routes_sizegroup);
+
+    gtk_widget_class_bind_template_callback (widget_class, announce_dns_validation);
 }
 
 static void

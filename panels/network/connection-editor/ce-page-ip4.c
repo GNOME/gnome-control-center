@@ -556,6 +556,14 @@ connect_ip4_page (CEPageIP4 *self)
     method_changed (self);
 }
 
+static void
+announce_dns_validation (GtkEntry *dns_entry)
+{
+    if (!dns_entry_valid (dns_entry, AF_INET))
+        gtk_accessible_announce (GTK_ACCESSIBLE (dns_entry), _("Invalid DNS Address"),
+                                                               GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_HIGH);
+}
+
 static gboolean
 ui_to_setting (CEPageIP4 *self)
 {
@@ -655,28 +663,22 @@ ui_to_setting (CEPageIP4 *self)
     else
         dns_addresses = NULL;
 
-    for (i = 0; dns_addresses && dns_addresses[i]; i++) {
-        const gchar *text;
+    if (!dns_entry_valid (self->dns_entry, AF_INET)) {
+        g_ptr_array_remove_range (dns_servers, 0, dns_servers->len);
+        widget_set_error (GTK_WIDGET (self->dns_entry));
+        ret = FALSE;
+    } else {
+        widget_unset_error (GTK_WIDGET (self->dns_entry));
+        for (i = 0; dns_addresses && dns_addresses[i]; i++) {
+            const gchar *text = dns_addresses[i];
 
-        text = dns_addresses[i];
+            if (!text || !*text)
+                continue;
 
-        if (!text || !*text)
-            continue;
-
-        if (!nm_utils_ipaddr_valid (AF_INET, text)) {
-            g_ptr_array_remove_range (dns_servers, 0, dns_servers->len);
-            widget_set_error (GTK_WIDGET (self->dns_entry));
-            ret = FALSE;
-            break;
-        } else {
-            widget_unset_error (GTK_WIDGET (self->dns_entry));
             g_ptr_array_add (dns_servers, g_strdup (text));
         }
     }
     g_clear_pointer (&dns_addresses, g_strfreev);
-
-    if (dns_text[0] == '\0')
-        widget_unset_error (GTK_WIDGET (self->dns_entry));
 
     if (dns_servers->len == 0) {
         g_ptr_array_free (dns_servers, TRUE);
@@ -870,6 +872,8 @@ ce_page_ip4_class_init (CEPageIP4Class *klass)
     gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_gateway_sizegroup);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_metric_sizegroup);
     gtk_widget_class_bind_template_child (widget_class, CEPageIP4, routes_sizegroup);
+
+    gtk_widget_class_bind_template_callback (widget_class, announce_dns_validation);
 }
 
 static void

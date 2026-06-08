@@ -24,4 +24,6 @@
 void widget_set_error (GtkWidget *widget);
 void widget_unset_error (GtkWidget *widget);
 
+gboolean dns_entry_valid (GtkEntry *dns_entry, int family);
+
 #endif /* _UI_HELPERS_H_ */
