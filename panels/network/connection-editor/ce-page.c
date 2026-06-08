@@ -399,3 +399,11 @@ ce_page_get_next_available_name (const GPtrArray *connections, NameFormat format
 
     return cname;
 }
+
+void
+announce_mac_validation (GtkComboBoxText *mac_combo)
+{
+    if (!ce_page_cloned_mac_combo_valid (mac_combo))
+        gtk_accessible_announce (GTK_ACCESSIBLE (mac_combo), _("Invalid Mac Address"),
+                                                               GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_HIGH);
+}

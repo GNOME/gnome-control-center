@@ -56,6 +56,8 @@ gchar *ce_page_trim_address (const gchar *addr);
 char *ce_page_cloned_mac_get (GtkComboBoxText *combo);
 gboolean ce_page_cloned_mac_combo_valid (GtkComboBoxText *combo);
 
+void announce_mac_validation (GtkComboBoxText *mac_combo);
+
 typedef enum {
     NAME_FORMAT_TYPE,
     NAME_FORMAT_PROFILE

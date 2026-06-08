@@ -186,6 +186,8 @@ ce_page_ethernet_class_init (CEPageEthernetClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CEPageEthernet, mtu_spin);
     gtk_widget_class_bind_template_child (widget_class, CEPageEthernet, mtu_label);
     gtk_widget_class_bind_template_child (widget_class, CEPageEthernet, name_entry);
+
+    gtk_widget_class_bind_template_callback (widget_class, announce_mac_validation);
 }
 
 static void

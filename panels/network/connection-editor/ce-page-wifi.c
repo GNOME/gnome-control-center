@@ -179,6 +179,8 @@ ce_page_wifi_class_init (CEPageWifiClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CEPageWifi, cloned_mac_combo);
     gtk_widget_class_bind_template_child (widget_class, CEPageWifi, mac_combo);
     gtk_widget_class_bind_template_child (widget_class, CEPageWifi, ssid_entry);
+
+    gtk_widget_class_bind_template_callback (widget_class, announce_mac_validation);
 }
 
 static void
