@@ -205,6 +205,10 @@ template $CEPageIP6: Adw.Bin {
                   dns_multiple_help,
                 ];
               }
+
+              EventControllerFocus {
+                leave => $announce_dns_validation(dns_entry);
+              }
             }
 
             Label dns_multiple_help {

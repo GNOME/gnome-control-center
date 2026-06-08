@@ -20,6 +20,7 @@
 #include "ui-helpers.h"
 #include "config.h"
 
+#include <NetworkManager.h>
 #include <glib/gi18n.h>
 
 void
@@ -45,4 +46,31 @@ widget_unset_error (GtkWidget *widget)
     gtk_accessible_reset_state (GTK_ACCESSIBLE (widget), GTK_ACCESSIBLE_STATE_INVALID);
     if (GTK_IS_ENTRY (widget))
         gtk_entry_set_icon_from_icon_name (GTK_ENTRY (widget), GTK_ENTRY_ICON_SECONDARY, NULL);
+}
+
+gboolean
+dns_entry_valid (GtkEntry *dns_entry, int family)
+{
+    g_auto(GStrv) dns_addresses = NULL;
+    g_autofree gchar *dns_text = NULL;
+    int i;
+
+    dns_text = g_strstrip (g_strdup (gtk_editable_get_text (GTK_EDITABLE (dns_entry))));
+
+    if (dns_text[0] == '\0')
+        return TRUE;
+
+    dns_addresses = g_strsplit_set (dns_text, ", ", -1);
+
+    for (i = 0; dns_addresses && dns_addresses[i]; i++) {
+        const gchar *text = dns_addresses[i];
+
+        if (!text || !*text)
+            continue;
+
+        if (!nm_utils_ipaddr_valid (family, text))
+            return FALSE;
+    }
+
+    return TRUE;
 }
