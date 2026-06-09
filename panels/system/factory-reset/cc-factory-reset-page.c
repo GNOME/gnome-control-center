@@ -53,9 +53,9 @@ factory_reset_cb (GObject      *source,
                   gpointer      user_data)
 {
   g_autoptr (GError) error = NULL;
-  g_autoptr (GVariant) result = NULL;
+  g_autoptr (GVariant) ret = NULL;
 
-  result = g_dbus_proxy_call_finish(G_DBUS_PROXY (source), result, &error);
+  ret = g_dbus_proxy_call_finish(G_DBUS_PROXY (source), result, &error);
   if (result)
     return; /* We're done! Nothing else to do */
 
