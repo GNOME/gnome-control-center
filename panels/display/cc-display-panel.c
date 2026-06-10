@@ -870,6 +870,8 @@ static void
 apply_current_configuration (CcDisplayPanel *self)
 {
     g_autoptr(GError) error = NULL;
+    CcWindow *window;
+    AdwNavigationView *navigation;
 
     cc_display_config_apply (self->current_config, &error);
 
@@ -879,7 +881,9 @@ apply_current_configuration (CcDisplayPanel *self)
     if (error)
         g_warning ("Error applying configuration: %s", error->message);
 
-    cc_panel_pop_visible_subpage (CC_PANEL (self));
+    window = cc_panel_get_toplevel (CC_PANEL (self));
+    navigation = cc_window_get_navigation_view (window);
+    adw_navigation_view_pop (navigation);
 }
 
 static void
@@ -892,8 +896,14 @@ cancel_current_configuration (CcDisplayPanel *panel)
     current = cc_display_config_manager_get_current (panel->manager);
 
     /* Closes the potentially open monitor page. */
-    if (selected == CC_DISPLAY_CONFIG_JOIN && cc_display_config_is_cloning (current))
-        cc_panel_pop_visible_subpage (CC_PANEL (panel));
+    if (selected == CC_DISPLAY_CONFIG_JOIN && cc_display_config_is_cloning (current)) {
+        CcWindow *window;
+        AdwNavigationView *navigation;
+
+        window = cc_panel_get_toplevel (CC_PANEL (panel));
+        navigation = cc_window_get_navigation_view (window);
+        adw_navigation_view_pop (navigation);
+    }
 
     on_screen_changed (panel);
 }
