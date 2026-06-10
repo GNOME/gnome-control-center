@@ -116,8 +116,6 @@ bolt_device_class_init (BoltDeviceClass *klass)
     props[PROP_LABEL] = g_param_spec_string ("label", NULL, NULL, NULL, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
     g_object_class_install_properties (gobject_class, PROP_LAST, props);
-
-    g_object_class_install_properties (gobject_class, PROP_LAST, props);
 }
 
 static void
