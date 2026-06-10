@@ -59,7 +59,7 @@ typedef enum {
 } CcLocaleTarget;
 
 struct _CcRegionPage {
-    AdwNavigationPage parent_instance;
+    CcPanel parent_instance;
 
     CcListRow *formats_row;
     AdwBanner *banner;
@@ -88,7 +88,7 @@ struct _CcRegionPage {
     GCancellable *cancellable;
 };
 
-G_DEFINE_FINAL_TYPE (CcRegionPage, cc_region_page, ADW_TYPE_NAVIGATION_PAGE)
+G_DEFINE_FINAL_TYPE (CcRegionPage, cc_region_page, CC_TYPE_PANEL)
 
 /* Auxiliary methods */
 
