@@ -94,8 +94,6 @@ void cc_panel_push_subpage (CcPanel *panel, AdwNavigationPage *subpage);
 
 void cc_panel_enable_single_page_mode (CcPanel *panel);
 
-AdwNavigationPage *cc_panel_get_visible_subpage (CcPanel *panel);
-
 GList *cc_panel_get_subpages (CcPanel *panel);
 
 AdwNavigationPage *cc_panel_get_static_subpage (CcPanel *panel, const gchar *tag);

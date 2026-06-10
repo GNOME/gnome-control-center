@@ -20,6 +20,7 @@
 #include <config.h>
 
 #include "cc-privacy-panel.h"
+#include "shell/cc-window.h"
 
 #ifdef BUILD_THUNDERBOLT
 #include "bolt/cc-bolt-page.h"
@@ -45,8 +46,16 @@ CC_PANEL_REGISTER (CcPrivacyPanel, cc_privacy_panel)
 static const char *
 cc_privacy_panel_get_help_uri (CcPanel *panel)
 {
-    AdwNavigationPage *page = cc_panel_get_visible_subpage (panel);
-    const char *page_tag = adw_navigation_page_get_tag (page);
+    CcWindow *window;
+    AdwNavigationView *navigation;
+    AdwNavigationPage *page;
+    const char *page_tag;
+
+    window = cc_panel_get_toplevel (panel);
+    navigation = cc_window_get_navigation_view (window);
+
+    page = adw_navigation_view_get_visible_page (navigation);
+    page_tag = adw_navigation_page_get_tag (page);
 
     if (g_strcmp0 (page_tag, "location") == 0)
         return "help:gnome-help/privacy-location";

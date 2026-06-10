@@ -329,18 +329,6 @@ cc_panel_push_subpage (CcPanel *panel, AdwNavigationPage *subpage)
     adw_navigation_view_push (navigation, subpage);
 }
 
-AdwNavigationPage *
-cc_panel_get_visible_subpage (CcPanel *panel)
-{
-    CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
-    AdwNavigationView *navigation;
-
-    g_return_val_if_fail (CC_IS_PANEL (panel), NULL);
-
-    navigation = cc_window_get_navigation_view (priv->window);
-    return adw_navigation_view_get_visible_page (navigation);
-}
-
 void
 cc_panel_enable_single_page_mode (CcPanel *panel)
 {
