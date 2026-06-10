@@ -50,6 +50,7 @@ struct _CcWindow {
 
     AdwBreakpoint *break_point;
 
+    AdwNavigationView *navigation;
     AdwNavigationSplitView *split_view;
     CcPanelList *panel_list;
     GtkSearchBar *search_bar;
@@ -688,6 +689,7 @@ cc_window_class_init (CcWindowClass *klass)
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/gtk/cc-window.ui");
 
     gtk_widget_class_bind_template_child (widget_class, CcWindow, break_point);
+    gtk_widget_class_bind_template_child (widget_class, CcWindow, navigation);
     gtk_widget_class_bind_template_child (widget_class, CcWindow, split_view);
     gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
     gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
@@ -749,4 +751,10 @@ cc_window_enable_single_panel_mode (CcWindow *self)
     adw_navigation_split_view_set_collapsed (self->split_view, TRUE);
     adw_navigation_split_view_set_sidebar (self->split_view, NULL);
     adw_breakpoint_set_condition (self->break_point, NULL);
+}
+
+AdwNavigationView *
+cc_window_get_navigation_view (CcWindow *self)
+{
+    return self->navigation;
 }

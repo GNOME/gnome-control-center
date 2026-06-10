@@ -40,4 +40,6 @@ void cc_window_set_search_item (CcWindow *window, const char *search);
 
 void cc_window_enable_single_panel_mode (CcWindow *self);
 
+AdwNavigationView *cc_window_get_navigation_view (CcWindow *self);
+
 G_END_DECLS
