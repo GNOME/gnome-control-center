@@ -97,12 +97,27 @@ load_window_state (CcWindow *self)
         gtk_window_maximize (GTK_WINDOW (self));
 }
 
+static void
+load_panel_subpages (CcWindow *self)
+{
+    GList *subpages, *l;
+
+    subpages = cc_panel_get_subpages (CC_PANEL (self->current_panel));
+    for (l = subpages; l != NULL; l = l->next) {
+        const gchar *page_tag = adw_navigation_page_get_tag (l->data);
+
+        if (adw_navigation_view_find_page (self->navigation, page_tag) == NULL)
+            adw_navigation_view_add (self->navigation, l->data);
+    }
+}
+
 static gboolean
 activate_panel (CcWindow *self, const gchar *id, GVariant *parameters, const gchar *name, GIcon *gicon,
                 CcPanelVisibility visibility)
 {
     g_autoptr(GTimer) timer = NULL;
     gdouble elapsed_time;
+    GPtrArray *page_stack;
 
     CC_ENTRY;
 
@@ -120,9 +135,12 @@ activate_panel (CcWindow *self, const gchar *id, GVariant *parameters, const gch
     if (self->current_panel)
         g_signal_handlers_disconnect_by_data (self->current_panel, self);
     self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_WINDOW (self), id, name, parameters));
+
     cc_window_set_active_panel (CC_WINDOW (self), CC_PANEL (self->current_panel));
 
-    adw_navigation_split_view_set_content (self->split_view, ADW_NAVIGATION_PAGE (self->current_panel));
+    page_stack = cc_panel_get_navigation_stack (CC_PANEL (self->current_panel));
+    adw_navigation_view_replace (self->navigation, (AdwNavigationPage **) page_stack->pdata, page_stack->len);
+    load_panel_subpages (self);
 
     /* Finish profiling */
     g_timer_stop (timer);
@@ -660,6 +678,29 @@ search_entry_key_pressed_cb (CcWindow *self, guint keyval, guint keycode, GdkMod
 }
 
 static void
+navigation_push_cb (CcWindow *self, const gchar *action_name, GVariant *params)
+{
+    const gchar *tag = g_variant_get_string (params, NULL);
+    AdwNavigationPage *subpage;
+
+    subpage = adw_navigation_view_find_page (self->navigation, tag);
+    if (subpage) {
+        adw_navigation_view_push_by_tag (self->navigation, g_variant_get_string (params, NULL));
+
+        return;
+    }
+
+    subpage = cc_panel_get_static_subpage (CC_PANEL (self->current_panel), tag);
+    if (subpage == NULL) {
+        g_warning ("Invalid page '%s'", tag);
+
+        return;
+    }
+
+    adw_navigation_view_push (self->navigation, subpage);
+}
+
+static void
 cc_window_class_init (CcWindowClass *klass)
 {
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -687,6 +728,9 @@ cc_window_class_init (CcWindowClass *klass)
         g_param_spec_boolean ("collapsed", NULL, NULL, FALSE, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS));
 
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/gtk/cc-window.ui");
+
+    gtk_widget_class_install_action (widget_class, "navigation.push", "s",
+                                     (GtkWidgetActionActivateFunc) navigation_push_cb);
 
     gtk_widget_class_bind_template_child (widget_class, CcWindow, break_point);
     gtk_widget_class_bind_template_child (widget_class, CcWindow, navigation);

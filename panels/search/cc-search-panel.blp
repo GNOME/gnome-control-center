@@ -2,63 +2,60 @@ using Gtk 4.0;
 using Adw 1;
 
 template $CcSearchPanel: $CcPanel {
-  [subpage]
-  Adw.NavigationPage {
-    title: _("Search");
+  title: _("Search");
 
-    Adw.ToolbarView {
-      [top]
-      Adw.HeaderBar {}
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
 
-      content: Adw.PreferencesPage {
-        Adw.PreferencesGroup {
-          Adw.SwitchRow app_search_row {
-            title: _("_App Search");
-            subtitle: _("Include app-provided search results");
-            use-underline: true;
-          }
-
-          $CcListRow settings_row {
-            title: _("Search _Locations");
-            subtitle: _("Filesystem locations which are searched by system apps");
-            show-arrow: true;
-            action-name: "navigation.push";
-            action-target: "'locations'";
-          }
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        Adw.SwitchRow app_search_row {
+          title: _("_App Search");
+          subtitle: _("Include app-provided search results");
+          use-underline: true;
         }
 
-        Adw.PreferencesGroup search_group {
-          title: _("Search Results");
-          description: _("Results are displayed according to the list order");
+        $CcListRow settings_row {
+          title: _("Search _Locations");
+          subtitle: _("Filesystem locations which are searched by system apps");
+          show-arrow: true;
+          action-name: "navigation.push";
+          action-target: "'locations'";
+        }
+      }
 
-          ListBox list_box {
-            selection-mode: none;
-            keynav-failed => $cc_util_keynav_propagate_vertical();
+      Adw.PreferencesGroup search_group {
+        title: _("Search Results");
+        description: _("Results are displayed according to the list order");
 
-            accessibility {
-              labelled-by: [
-                search_group,
-              ];
-            }
+        ListBox list_box {
+          selection-mode: none;
+          keynav-failed => $cc_util_keynav_propagate_vertical();
+
+          accessibility {
+            labelled-by: [
+              search_group,
+            ];
+          }
+
+          styles [
+            "boxed-list",
+          ]
+
+          [placeholder]
+          Label {
+            label: _("No Apps Found");
+            wrap: true;
+            max-width-chars: 50;
 
             styles [
-              "boxed-list",
+              "dim-label",
+              "cc-placeholder-row",
             ]
-
-            [placeholder]
-            Label {
-              label: _("No Apps Found");
-              wrap: true;
-              max-width-chars: 50;
-
-              styles [
-                "dim-label",
-                "cc-placeholder-row",
-              ]
-            }
           }
         }
-      };
-    }
-  }
+      }
+    };
+  };
 }

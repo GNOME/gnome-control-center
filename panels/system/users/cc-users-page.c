@@ -34,6 +34,7 @@
 #include "cc-list-row.h"
 #include "cc-user-page.h"
 #include "cc-users-page.h"
+#include "shell/cc-window.h"
 #include "user-utils.h"
 
 #include <act/act.h>

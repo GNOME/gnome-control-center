@@ -2,109 +2,106 @@ using Gtk 4.0;
 using Adw 1;
 
 template $CcApplicationsPanel: $CcPanel {
-  [subpage]
-  Adw.NavigationPage {
-    title: _("Apps");
+  title: _("Apps");
 
-    child: Adw.ToolbarView {
-      [top]
-      Adw.HeaderBar {}
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
 
-      [top]
-      SearchBar {
-        search-mode-enabled: true;
+    [top]
+    SearchBar {
+      search-mode-enabled: true;
 
-        child: Adw.Clamp {
-          maximum-size: 400;
-          hexpand: true;
-          margin-start: 6;
-          margin-end: 6;
+      child: Adw.Clamp {
+        maximum-size: 400;
+        hexpand: true;
+        margin-start: 6;
+        margin-end: 6;
 
-          SearchEntry app_search_entry {
-            placeholder-text: _("Search apps");
-            activate => $on_app_search_entry_activated_cb(template);
-            search-changed => $on_app_search_entry_search_changed_cb(template);
-            stop-search => $on_app_search_entry_search_stopped_cb(template);
+        SearchEntry app_search_entry {
+          placeholder-text: _("Search apps");
+          activate => $on_app_search_entry_activated_cb(template);
+          search-changed => $on_app_search_entry_search_changed_cb(template);
+          stop-search => $on_app_search_entry_search_stopped_cb(template);
+        }
+      };
+    }
+
+    content: Stack main_page_stack {
+      StackPage {
+        name: "apps-page";
+
+        child: Adw.PreferencesPage {
+          Adw.PreferencesGroup {
+            $CcListRow {
+              title: _("_Default Apps");
+              subtitle: _("Set which apps open links, files, and media");
+              show-arrow: true;
+              action-name: "navigation.push";
+              action-target: "'default-apps'";
+            }
+          }
+
+          Adw.PreferencesGroup {
+            ListBox app_listbox {
+              selection-mode: none;
+
+              styles [
+                "boxed-list",
+              ]
+
+              accessibility {
+                label: _("Apps");
+              }
+            }
           }
         };
       }
 
-      content: Stack main_page_stack {
-        StackPage {
-          name: "apps-page";
+      StackPage {
+        name: "no-search-results-page";
 
-          child: Adw.PreferencesPage {
-            Adw.PreferencesGroup {
-              $CcListRow {
-                title: _("_Default Apps");
-                subtitle: _("Set which apps open links, files, and media");
-                show-arrow: true;
-                action-name: "navigation.push";
-                action-target: "'default-apps'";
-              }
-            }
+        child: Adw.StatusPage {
+          icon-name: "edit-find-symbolic";
+          title: _("No Results Found");
+          description: _("Try a different search");
+        };
+      }
 
-            Adw.PreferencesGroup {
-              ListBox app_listbox {
-                selection-mode: none;
+      StackPage {
+        name: "no-apps-found-page";
 
-                styles [
-                  "boxed-list",
-                ]
+        child: Adw.StatusPage {
+          icon-name: "computer-fail-symbolic";
+          title: _("No Apps Found");
 
-                accessibility {
-                  label: _("Apps");
-                }
-              }
-            }
-          };
-        }
+          Button install_button {
+            label: _("_Find in Software");
+            use-underline: true;
+            halign: center;
+            clicked => $open_software_cb(template);
 
-        StackPage {
-          name: "no-search-results-page";
+            styles [
+              "pill",
+              "suggested-action",
+            ]
+          }
+        };
+      }
 
-          child: Adw.StatusPage {
-            icon-name: "edit-find-symbolic";
-            title: _("No Results Found");
-            description: _("Try a different search");
-          };
-        }
+      StackPage {
+        name: "malcontent-not-found-page";
 
-        StackPage {
-          name: "no-apps-found-page";
+        child: Adw.StatusPage {
+          icon-name: "dialog-error-symbolic";
+          title: _("Unable to List Apps");
 
-          child: Adw.StatusPage {
-            icon-name: "computer-fail-symbolic";
-            title: _("No Apps Found");
-
-            Button install_button {
-              label: _("_Find in Software");
-              use-underline: true;
-              halign: center;
-              clicked => $open_software_cb(template);
-
-              styles [
-                "pill",
-                "suggested-action",
-              ]
-            }
-          };
-        }
-
-        StackPage {
-          name: "malcontent-not-found-page";
-
-          child: Adw.StatusPage {
-            icon-name: "dialog-error-symbolic";
-            title: _("Unable to List Apps");
-
-            /* Translators: Parental Controls here refers to the features provided by 'malcontent' */
-            description: _("An error has occurred and apps cannot be listed.\nError details: Parental Controls are not installed.");
-          };
-        }
-      };
+          /* Translators: Parental Controls here refers to the features provided by 'malcontent' */
+          description: _("An error has occurred and apps cannot be listed.\nError details: Parental Controls are not installed.");
+        };
+      }
     };
-  }
+  };
 
   [subpage]
   $CcDefaultAppsPage default_apps_page {}
