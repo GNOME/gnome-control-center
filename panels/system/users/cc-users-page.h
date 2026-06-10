@@ -24,10 +24,10 @@
 
 #pragma once
 
-#include <adwaita.h>
+#include "shell/cc-panel.h"
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_USERS_PAGE (cc_users_page_get_type ())
-G_DECLARE_FINAL_TYPE (CcUsersPage, cc_users_page, CC, USERS_PAGE, AdwNavigationPage);
+G_DECLARE_FINAL_TYPE (CcUsersPage, cc_users_page, CC, USERS_PAGE, CcPanel);
 G_END_DECLS
