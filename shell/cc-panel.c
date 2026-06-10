@@ -45,10 +45,12 @@ typedef struct {
     CcWindow *window;
     GCancellable *cancellable;
 
-    AdwNavigationView *navigation;
     gboolean single_page_mode;
 
     GHashTable *subpages;
+    GHashTable *static_subpages;
+
+    GPtrArray *navigation_stack;
 } CcPanelPrivate;
 
 static GtkBuildableIface *parent_buildable_iface;
@@ -75,11 +77,18 @@ cc_panel_buildable_add_child (GtkBuildable *buildable, GtkBuilder *builder, GObj
 
     /* This is a hub panel (with subpages) such as System and Privacy. */
     if (ADW_IS_NAVIGATION_PAGE (child)) {
+        AdwNavigationPage *page;
+        const gchar *page_tag;
+
         if (!is_subpage_child) {
             g_warning ("<child type=\"subpage\" is expected for an AdwNavigationPage child widget");
             return;
         }
-        adw_navigation_view_add (priv->navigation, ADW_NAVIGATION_PAGE (child));
+
+        page = ADW_NAVIGATION_PAGE (child);
+        page_tag = adw_navigation_page_get_tag (page);
+
+        g_hash_table_insert (priv->subpages, g_strdup (page_tag), g_object_ref (page));
     } else if (is_subpage_child) {
         g_warning ("<child type=\"subpage\" expects an AdwNavigationPage child widget");
         return;
@@ -100,29 +109,26 @@ static void
 set_subpage (CcPanel *panel, const gchar *tag)
 {
     CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+    AdwNavigationView *navigation;
     AdwNavigationPage *page;
 
-    page = adw_navigation_view_find_page (priv->navigation, tag);
-    if (!page) {
-        if (g_hash_table_contains (priv->subpages, tag)) {
-            GType page_type = GPOINTER_TO_TYPE (g_hash_table_lookup (priv->subpages, tag));
+    navigation = cc_window_get_navigation_view (priv->window);
+    page = adw_navigation_view_find_page (navigation, tag);
+    if (page == NULL) {
+        page = g_hash_table_lookup (priv->subpages, tag);
 
-            page = ADW_NAVIGATION_PAGE (g_object_new (page_type, NULL));
-            adw_navigation_page_set_can_pop (page, !priv->single_page_mode);
-            adw_navigation_view_add (priv->navigation, page);
-        } else {
-            g_warning ("Invalid subpage: '%s'", tag);
-            return;
+        if (page == NULL) {
+            page = cc_panel_get_static_subpage (panel, tag);
+
+            if (page == NULL) {
+                g_warning ("Invalid subpage: '%s'", tag);
+                return;
+            }
         }
     }
 
-    adw_navigation_view_push_by_tag (priv->navigation, tag);
-}
-
-static void
-navigation_push_cb (CcPanel *panel, const gchar *action_name, GVariant *params)
-{
-    set_subpage (panel, g_variant_get_string (params, NULL));
+    adw_navigation_page_set_can_pop (page, !priv->single_page_mode);
+    g_ptr_array_add (priv->navigation_stack, page);
 }
 
 static void
@@ -196,6 +202,8 @@ cc_panel_finalize (GObject *object)
     g_cancellable_cancel (priv->cancellable);
     g_clear_object (&priv->cancellable);
     g_clear_pointer (&priv->subpages, g_hash_table_unref);
+    g_clear_pointer (&priv->static_subpages, g_hash_table_unref);
+    g_clear_pointer (&priv->navigation_stack, g_ptr_array_unref);
 
     G_OBJECT_CLASS (cc_panel_parent_class)->finalize (object);
 }
@@ -218,12 +226,7 @@ cc_panel_class_init (CcPanelClass *klass)
 
     g_object_class_install_properties (object_class, N_PROPS, properties);
 
-    gtk_widget_class_install_action (widget_class, "navigation.push", "s",
-                                     (GtkWidgetActionActivateFunc) navigation_push_cb);
-
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/gtk/cc-panel.ui");
-
-    gtk_widget_class_bind_template_child_private (widget_class, CcPanel, navigation);
 }
 
 static void
@@ -233,7 +236,11 @@ cc_panel_init (CcPanel *panel)
 
     gtk_widget_init_template (GTK_WIDGET (panel));
 
-    priv->subpages = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+    priv->subpages = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_object_unref);
+    priv->static_subpages = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+
+    priv->navigation_stack = g_ptr_array_new ();
+    g_ptr_array_add (priv->navigation_stack, ADW_NAVIGATION_PAGE (panel));
 }
 
 /**
@@ -296,7 +303,7 @@ cc_panel_add_subpage (CcPanel *panel, const gchar *page_tag, AdwNavigationPage *
     g_return_if_fail (CC_IS_PANEL (panel));
     g_return_if_fail (ADW_IS_NAVIGATION_PAGE (subpage));
 
-    adw_navigation_view_add (priv->navigation, subpage);
+    g_hash_table_insert (priv->subpages, g_strdup (page_tag), g_object_ref (subpage));
 }
 
 void
@@ -306,50 +313,99 @@ cc_panel_add_static_subpage (CcPanel *panel, const gchar *page_tag, GType page_t
 
     g_return_if_fail (CC_IS_PANEL (panel));
 
-    g_hash_table_insert (priv->subpages, g_strdup (page_tag), GTYPE_TO_POINTER (page_type));
+    g_hash_table_insert (priv->static_subpages, g_strdup (page_tag), GTYPE_TO_POINTER (page_type));
 }
 
 void
 cc_panel_push_subpage (CcPanel *panel, AdwNavigationPage *subpage)
 {
     CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+    AdwNavigationView *navigation;
 
     g_return_if_fail (CC_IS_PANEL (panel));
     g_return_if_fail (ADW_IS_NAVIGATION_PAGE (subpage));
 
-    adw_navigation_view_push (priv->navigation, subpage);
+    navigation = cc_window_get_navigation_view (priv->window);
+    adw_navigation_view_push (navigation, subpage);
 }
 
 void
 cc_panel_pop_visible_subpage (CcPanel *panel)
 {
     CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+    AdwNavigationView *navigation;
 
     g_return_if_fail (CC_IS_PANEL (panel));
 
-    adw_navigation_view_pop (priv->navigation);
+    navigation = cc_window_get_navigation_view (priv->window);
+    adw_navigation_view_pop (navigation);
 }
 
 AdwNavigationPage *
 cc_panel_get_visible_subpage (CcPanel *panel)
 {
     CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+    AdwNavigationView *navigation;
 
     g_return_val_if_fail (CC_IS_PANEL (panel), NULL);
 
-    return adw_navigation_view_get_visible_page (priv->navigation);
+    navigation = cc_window_get_navigation_view (priv->window);
+    return adw_navigation_view_get_visible_page (navigation);
 }
 
 void
 cc_panel_enable_single_page_mode (CcPanel *panel)
 {
     CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+    AdwNavigationView *navigation;
     AdwNavigationPage *page;
 
     g_return_if_fail (CC_IS_PANEL (panel));
 
     priv->single_page_mode = TRUE;
-    page = adw_navigation_view_get_visible_page (priv->navigation);
+    navigation = cc_window_get_navigation_view (priv->window);
+    page = adw_navigation_view_get_visible_page (navigation);
     if (page)
         adw_navigation_page_set_can_pop (page, FALSE);
+}
+
+GList *
+cc_panel_get_subpages (CcPanel *panel)
+{
+    CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+
+    g_return_val_if_fail (CC_IS_PANEL (panel), NULL);
+
+    return g_hash_table_get_values (priv->subpages);
+}
+
+AdwNavigationPage *
+cc_panel_get_static_subpage (CcPanel *panel, const gchar *tag)
+{
+    CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+    gpointer page_type_ptr;
+    GType page_type;
+
+    g_return_val_if_fail (CC_IS_PANEL (panel), NULL);
+
+    page_type_ptr = g_hash_table_lookup (priv->static_subpages, tag);
+    if (page_type_ptr == NULL)
+        return NULL;
+
+    page_type = GPOINTER_TO_TYPE (page_type_ptr);
+
+    if (g_type_is_a (page_type, CC_TYPE_PANEL))
+        return g_object_new (page_type, "window", priv->window, NULL);
+
+    return g_object_new (page_type, NULL);
+}
+
+GPtrArray *
+cc_panel_get_navigation_stack (CcPanel *panel)
+{
+    CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+
+    g_return_val_if_fail (CC_IS_PANEL (panel), NULL);
+
+    return priv->navigation_stack;
 }

@@ -2,46 +2,43 @@ using Gtk 4.0;
 using Adw 1;
 
 template $CcSharingPanel: $CcPanel {
-  [subpage]
-  Adw.NavigationPage {
-    title: _("Sharing");
+  title: _("Sharing");
 
-    child: Adw.ToolbarView {
-      [top]
-      Adw.HeaderBar {}
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
 
-      content: Adw.PreferencesPage {
-        Adw.PreferencesGroup {
-          margin-bottom: 12;
+    content: Adw.PreferencesPage {
+      Adw.PreferencesGroup {
+        margin-bottom: 12;
 
-          $CcHostnameEntry hostname_entry {
-            title: _("_Device Name");
-            use-underline: true;
-          }
+        $CcHostnameEntry hostname_entry {
+          title: _("_Device Name");
+          use-underline: true;
+        }
+      }
+
+      Adw.PreferencesGroup {
+        $CcListRow personal_file_sharing_row {
+          icon-name: "folder-remote-symbolic";
+          show-arrow: true;
+          subtitle: _("Share files with other devices on the current network");
+          title: _("_File Sharing");
+          action-name: "navigation.push";
+          action-target: "'file-sharing'";
         }
 
-        Adw.PreferencesGroup {
-          $CcListRow personal_file_sharing_row {
-            icon-name: "folder-remote-symbolic";
-            show-arrow: true;
-            subtitle: _("Share files with other devices on the current network");
-            title: _("_File Sharing");
-            action-name: "navigation.push";
-            action-target: "'file-sharing'";
-          }
-
-          $CcListRow media_sharing_row {
-            icon-name: "applications-multimedia-symbolic";
-            show-arrow: true;
-            subtitle: _("Stream music, photos and videos to devices on the current network");
-            title: _("_Media Sharing");
-            action-name: "navigation.push";
-            action-target: "'media-sharing'";
-          }
+        $CcListRow media_sharing_row {
+          icon-name: "applications-multimedia-symbolic";
+          show-arrow: true;
+          subtitle: _("Stream music, photos and videos to devices on the current network");
+          title: _("_Media Sharing");
+          action-name: "navigation.push";
+          action-target: "'media-sharing'";
         }
-      };
+      }
     };
-  }
+  };
 
   [subpage]
   Adw.NavigationPage {
