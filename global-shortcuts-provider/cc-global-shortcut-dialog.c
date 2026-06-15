@@ -172,6 +172,18 @@ cc_global_shortcut_dialog_set_property (GObject *object, guint prop_id, const GV
     }
 }
 
+static gboolean
+is_variant_empty (GVariant *variant)
+{
+    if (!variant)
+        return TRUE;
+
+    if (g_variant_is_of_type (variant, G_VARIANT_TYPE_ARRAY))
+        return g_variant_get_size (variant) == 0;
+
+    return FALSE;
+}
+
 static GVariant *
 lookup_in_settings_variant (GVariant *settings, const char *shortcut_id)
 {
@@ -245,7 +257,12 @@ cc_global_shortcut_dialog_constructed (GObject *object)
 
     saved_shortcuts = cc_keyboard_manager_get_global_shortcuts (self->manager, self->app_id);
 
-    shortcuts = app_shortcuts_to_settings_variant (self->app_shortcuts, saved_shortcuts, &self->has_new_shortcuts);
+    if (self->app_shortcuts) {
+        shortcuts = app_shortcuts_to_settings_variant (self->app_shortcuts, saved_shortcuts, &self->has_new_shortcuts);
+    } else {
+        self->has_new_shortcuts = !is_variant_empty (saved_shortcuts);
+        shortcuts = g_variant_ref (saved_shortcuts);
+    }
 
     populate_shortcuts_model (self, self->app_id, cc_util_app_id_to_display_name (self->app_id));
 

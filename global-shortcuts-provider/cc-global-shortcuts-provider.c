@@ -61,7 +61,9 @@ handle_dialog_done (CcGlobalShortcutsProvider *self, CcGlobalShortcutDialog *sho
 {
     GDBusMethodInvocation *invocation;
 
-    invocation = g_hash_table_lookup (self->dialogs, shortcut_dialog);
+    invocation = g_object_get_data (G_OBJECT (shortcut_dialog), "dbus-invocation");
+    if (!invocation)
+        return;
 
     if (response) {
         cc_settings_global_shortcuts_provider_complete_bind_shortcuts (self->skeleton, invocation,
@@ -76,6 +78,33 @@ on_dialog_done (CcGlobalShortcutDialog *shortcut_dialog, GVariant *response, CcG
 {
     handle_dialog_done (self, shortcut_dialog, response);
     g_hash_table_remove (self->dialogs, shortcut_dialog);
+}
+
+static gboolean
+handle_configure_shortcuts (CcGlobalShortcutsProvider *self, GDBusMethodInvocation *invocation, const char *app_id,
+                            const char *parent_window)
+{
+    g_autoptr(CcGlobalShortcutDialog) shortcut_dialog = NULL;
+
+    if (!g_application_id_is_valid (app_id)) {
+        g_warning ("Discarded shortcut configure request from application with an invalid app_id >%s<.", app_id);
+        g_dbus_method_invocation_return_error (invocation, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS, "Invalid app_id");
+        return G_DBUS_METHOD_INVOCATION_HANDLED;
+    }
+
+    shortcut_dialog = cc_global_shortcut_dialog_new (app_id, parent_window, NULL);
+
+    g_signal_connect (shortcut_dialog, "done", G_CALLBACK (on_dialog_done), self);
+
+    g_hash_table_add (self->dialogs, g_object_ref (shortcut_dialog));
+
+    gtk_application_add_window (self->app, GTK_WINDOW (shortcut_dialog));
+
+    cc_global_shortcut_dialog_present (shortcut_dialog);
+
+    cc_settings_global_shortcuts_provider_complete_configure_shortcuts (self->skeleton, invocation);
+
+    return G_DBUS_METHOD_INVOCATION_HANDLED;
 }
 
 static gboolean
@@ -95,7 +124,8 @@ handle_bind_shortcuts (CcGlobalShortcutsProvider *self, GDBusMethodInvocation *i
 
     gtk_application_add_window (self->app, GTK_WINDOW (shortcut_dialog));
 
-    g_hash_table_insert (self->dialogs, g_object_ref (shortcut_dialog), g_object_ref (invocation));
+    g_object_set_data_full (G_OBJECT (shortcut_dialog), "dbus-invocation", g_object_ref (invocation), g_object_unref);
+    g_hash_table_add (self->dialogs, g_object_ref (shortcut_dialog));
 
     cc_global_shortcut_dialog_present (shortcut_dialog);
 
@@ -105,11 +135,12 @@ handle_bind_shortcuts (CcGlobalShortcutsProvider *self, GDBusMethodInvocation *i
 static void
 cc_global_shortcuts_provider_init (CcGlobalShortcutsProvider *self)
 {
-    self->dialogs =
-        g_hash_table_new_full (NULL, NULL, (GDestroyNotify) gtk_window_destroy, (GDestroyNotify) g_object_unref);
+    self->dialogs = g_hash_table_new_full (NULL, NULL, (GDestroyNotify) gtk_window_destroy, NULL);
     self->skeleton = cc_settings_global_shortcuts_provider_skeleton_new ();
 
     g_signal_connect_swapped (self->skeleton, "handle-bind-shortcuts", G_CALLBACK (handle_bind_shortcuts), self);
+    g_signal_connect_swapped (self->skeleton, "handle-configure-shortcuts", G_CALLBACK (handle_configure_shortcuts),
+                              self);
 }
 
 gboolean

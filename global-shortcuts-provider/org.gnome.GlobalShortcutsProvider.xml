@@ -50,5 +50,17 @@
       <arg type="a(sa{sv})" name="shortcuts" direction="in"/>
       <arg type="a(sa{sv})" name="results" direction="out"/>
     </method>
+
+    <!--
+        ConfigureShortcuts:
+        @app_id: Application ID
+        @parent_window: Parent window handle
+
+        Presents the shortcuts configuration dialog to the user.
+    -->
+    <method name="ConfigureShortcuts">
+      <arg type="s" name="app_id" direction="in"/>
+      <arg type="s" name="parent_window" direction="in"/>
+    </method>
   </interface>
 </node>
