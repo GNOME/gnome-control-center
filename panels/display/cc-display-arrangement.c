@@ -337,9 +337,15 @@ find_best_snapping (CcDisplayConfig *config, CcDisplayMonitor *snap_output, Snap
         maybe_update_snap (snap_data, x1, y1, _x1, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
         maybe_update_snap (snap_data, x1, y1, _x2 - w, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
 
+        /* Centers aligned on the top */
+        maybe_update_snap (snap_data, x1, y1, _x1 + _w / 2 - w / 2, top_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+
         /* Left/right edge identical on the bottom */
         maybe_update_snap (snap_data, x1, y1, _x1, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
         maybe_update_snap (snap_data, x1, y1, _x2 - w, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
+
+        /* Centers aligned on the bottom */
+        maybe_update_snap (snap_data, x1, y1, _x1 + _w / 2 - w / 2, bottom_snap_pos, SNAP_DIR_BOTH, SNAP_DIR_Y, 0);
 
         /* Top/bottom edge identical on the left */
         maybe_update_snap (snap_data, x1, y1, left_snap_pos, _y1, SNAP_DIR_BOTH, SNAP_DIR_X, 0);
