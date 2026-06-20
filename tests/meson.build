@@ -4,10 +4,9 @@ Xvfb = find_program('Xvfb', required: false)
 subdir('common')
 #subdir('datetime')
 
-# FIXME: network tests are disabled due to CI failure
-#if host_is_linux
-#  subdir('network')
-#endif
+if host_is_linux
+  subdir('network')
+endif
 
 # FIXME: this is a workaround because interactive-tests don't work with libadwaita as a subproject. See !1754
 if not libadwaita_is_subproject
