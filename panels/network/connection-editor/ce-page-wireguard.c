@@ -282,10 +282,13 @@ handle_peer_changed_cb (GtkButton *apply_button, WireguardPeer *wg_peer)
         g_strfreev (strv);
     }
 
-    if (!nm_wireguard_peer_is_valid (nm_wg_peer, TRUE, TRUE, NULL) || !peer_is_valid)
+    if (!nm_wireguard_peer_is_valid (nm_wg_peer, TRUE, TRUE, NULL) || !peer_is_valid) {
+        nm_wireguard_peer_unref (nm_wg_peer);
         return;
+    }
 
     if (nm_wireguard_peer_cmp (wg_peer->nm_wg_peer, nm_wg_peer, NM_SETTING_COMPARE_FLAG_EXACT) == 0) {
+        nm_wireguard_peer_unref (nm_wg_peer);
         gtk_popover_popdown (wg_peer->peer_popover);
         return;
     }
@@ -296,6 +299,8 @@ handle_peer_changed_cb (GtkButton *apply_button, WireguardPeer *wg_peer)
     // Update peer list
     gtk_label_set_text (wg_peer->peer_label, gtk_editable_get_text (GTK_EDITABLE (wg_peer->entry_endpoint)));
 
+    /* Replace the previously owned peer with the new clone. */
+    nm_wireguard_peer_unref (wg_peer->nm_wg_peer);
     wg_peer->nm_wg_peer = nm_wg_peer;
     g_signal_emit_by_name (wg_peer->ce_pg_wg, "changed", wg_peer->ce_pg_wg);
     gtk_popover_popdown (wg_peer->peer_popover);
@@ -304,7 +309,7 @@ handle_peer_changed_cb (GtkButton *apply_button, WireguardPeer *wg_peer)
 static void
 destroy_peer (WireguardPeer *wg_peer)
 {
-    nm_wireguard_peer_unref (wg_peer->nm_wg_peer);
+    /* nm_wg_peer is released in wireguard_peer_dispose() when the widget dies. */
     GtkWidget *parent = gtk_widget_get_parent (GTK_WIDGET (wg_peer));
     gtk_box_remove (GTK_BOX (parent), GTK_WIDGET (wg_peer));
     gtk_widget_set_visible (GTK_WIDGET (wg_peer->ce_pg_wg->empty_listbox),
@@ -351,7 +356,8 @@ add_nm_wg_peer_to_list (CEPageWireguard *self, NMWireGuardPeer *peer)
     }
 
     wg_peer = wireguard_peer_new (self);
-    wg_peer->nm_wg_peer = peer;
+    /* Own our reference uniformly (@peer may be borrowed from the setting). */
+    wg_peer->nm_wg_peer = nm_wireguard_peer_ref (peer);
     wg_peer->is_unsaved = FALSE;
 
     gtk_label_set_text (wg_peer->peer_label, endpoint);
@@ -382,6 +388,8 @@ handle_peer_add_cb (CEPageWireguard *self)
 {
     NMWireGuardPeer *nm_wg_peer = nm_wireguard_peer_new ();
     WireguardPeer *wg_peer = add_nm_wg_peer_to_list (self, nm_wg_peer);
+    /* add_nm_wg_peer_to_list() took its own reference; drop ours. */
+    nm_wireguard_peer_unref (nm_wg_peer);
     wg_peer->is_unsaved = TRUE;
     wg_peer->ce_pg_wg = self;
 
@@ -465,9 +473,21 @@ wireguard_peer_new (CEPageWireguard *parent)
 }
 
 static void
+wireguard_peer_dispose (GObject *object)
+{
+    WireguardPeer *self = WIREGUARD_PEER (object);
+
+    g_clear_pointer (&self->nm_wg_peer, nm_wireguard_peer_unref);
+    G_OBJECT_CLASS (wireguard_peer_parent_class)->dispose (object);
+}
+
+static void
 wireguard_peer_class_init (WireguardPeerClass *klass)
 {
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+    object_class->dispose = wireguard_peer_dispose;
 
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/wireguard-peer.ui");
 
