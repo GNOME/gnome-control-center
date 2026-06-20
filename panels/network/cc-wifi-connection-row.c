@@ -595,7 +595,8 @@ cc_wifi_connection_row_remove_access_point (CcWifiConnectionRow *self, NMAccessP
 {
     g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (self), FALSE);
 
-    if (!g_ptr_array_remove (self->aps, g_object_ref (ap)))
+    /* The array's free func unrefs the stored element; an extra ref would leak. */
+    if (!g_ptr_array_remove (self->aps, ap))
         return FALSE;
 
     /* Object might be invalid; this is alright if it is deleted right away */
