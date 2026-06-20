@@ -57,8 +57,11 @@ vpn_get_plugins (void)
     static GSList *plugins = NULL;
     GSList *p;
 
+    /* Cached for the process lifetime; rebuilding leaked the previous list. */
+    if (plugins != NULL)
+        return plugins;
+
     p = nm_vpn_plugin_info_list_load ();
-    plugins = NULL;
     while (p) {
         g_autoptr(NMVpnPluginInfo) plugin_info = NM_VPN_PLUGIN_INFO (p->data);
         g_autoptr(GError) error = NULL;
