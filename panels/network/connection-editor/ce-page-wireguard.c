@@ -87,8 +87,10 @@ ce_page_wireguard_dispose (GObject *object)
 {
     CEPageWireguard *self = CE_PAGE_WIREGUARD (object);
 
-    g_clear_object (&self->setting_connection);
-    g_clear_object (&self->setting_wireguard);
+    /* setting_* are borrowed from self->connection (transfer-none); don't unref. */
+    self->setting_connection = NULL;
+    self->setting_wireguard = NULL;
+    g_clear_object (&self->connection);
     G_OBJECT_CLASS (ce_page_wireguard_parent_class)->dispose (object);
 }
 
