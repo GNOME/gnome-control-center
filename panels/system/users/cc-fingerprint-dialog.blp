@@ -96,24 +96,11 @@ template $CcFingerprintDialog: Adw.Dialog {
           }
 
           Adw.PreferencesGroup {
-            separate-rows: true;
-
             Adw.ButtonRow add_finger_button {
               title: _("Add Fingerprint");
               end-icon-name: "go-next-symbolic";
 
               activated => $on_add_fingerprint_button_activated_cb(template);
-            }
-
-            Adw.ButtonRow delete_prints_button {
-              visible: false;
-              use-underline: true;
-              title: _("_Delete Fingerprints");
-              activated => $on_delete_prints_button_activated_cb(template);
-
-              styles [
-                "destructive-action",
-              ]
             }
           }
 
