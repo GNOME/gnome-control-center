@@ -294,8 +294,8 @@ on_manager_proxy (GObject *object, GAsyncResult *res, gpointer user_data)
 
     g_debug ("Fprintd manager connected");
 
-    cc_fprintd_manager_call_get_devices (fprintd_manager, g_task_get_cancellable (task), on_devices_list,
-                                         g_object_ref (task));
+    cc_fprintd_manager_call_get_devices (fprintd_manager, G_DBUS_CALL_FLAGS_NONE, -1, g_task_get_cancellable (task),
+                                         on_devices_list, g_object_ref (task));
 }
 
 static void
@@ -474,8 +474,9 @@ on_manager_devices_list (GObject *object, GAsyncResult *res, gpointer user_data)
         g_debug ("Connected to device %s, looking for enrolled fingers", cc_fprintd_device_get_name (device));
 
         data->waiting_devices++;
-        cc_fprintd_device_call_list_enrolled_fingers (device, user_name, g_task_get_cancellable (task),
-                                                      on_device_list_enrolled, g_object_ref (task));
+        cc_fprintd_device_call_list_enrolled_fingers (
+            device, user_name, G_DBUS_CALL_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION, -1, g_task_get_cancellable (task),
+            on_device_list_enrolled, g_object_ref (task));
     }
 }
 
