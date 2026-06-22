@@ -57,7 +57,6 @@ struct _CcFingerprintDialog {
     AdwDialog parent_instance;
 
     GtkButton *back_button;
-    GtkButton *delete_prints_button;
     GtkButton *done_button;
     AdwPreferencesGroup *prints_group;
     AdwHeaderBar *titlebar;
@@ -515,9 +514,7 @@ list_enrolled_cb (GObject *object, GAsyncResult *res, gpointer user_data)
     if (n_enrolled_fingers == N_VALID_FINGERS)
         gtk_widget_set_sensitive (self->add_finger_button, FALSE);
 
-    if (n_enrolled_fingers > 0)
-        gtk_widget_set_visible (GTK_WIDGET (self->delete_prints_button), TRUE);
-    else
+    if (n_enrolled_fingers == 0)
         gtk_stack_set_visible_child (self->stack, self->no_fingerprints_enrolled_page);
 }
 
@@ -532,53 +529,12 @@ update_prints_store (CcFingerprintDialog *self)
         return;
 
     gtk_widget_set_sensitive (GTK_WIDGET (self->add_finger_button), FALSE);
-    gtk_widget_set_visible (GTK_WIDGET (self->delete_prints_button), FALSE);
 
     g_clear_pointer (&self->enrolled_fingers, g_strfreev);
 
     user = cc_fingerprint_manager_get_user (self->manager);
     cc_fprintd_device_call_list_enrolled_fingers (self->device, act_user_get_user_name (user), self->cancellable,
                                                   list_enrolled_cb, self);
-}
-
-static void
-delete_prints_cb (GObject *object, GAsyncResult *res, gpointer user_data)
-{
-    g_autoptr(GError) error = NULL;
-    CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
-    CcFingerprintDialog *self = user_data;
-
-    cc_fprintd_device_call_delete_enrolled_fingers2_finish (fprintd_device, res, &error);
-
-    if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        return;
-
-    if (error) {
-        g_autofree char *error_message = NULL;
-
-        error_message =
-            g_strdup_printf (_("Failed to delete saved fingerprints: %s"), dbus_error_to_human (self, error));
-        g_warning ("Deletion of fingerprints on device %s failed: %s", cc_fprintd_device_get_name (fprintd_device),
-                   error->message);
-        notify_error (self, error_message);
-    }
-
-    update_prints_store (self);
-    cc_fingerprint_manager_update_state (self->manager, NULL, NULL);
-    remove_dialog_state (self, DIALOG_STATE_DEVICE_DELETING);
-}
-
-static void
-delete_enrolled_prints (CcFingerprintDialog *self)
-{
-    g_return_if_fail (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED);
-
-    if (!add_dialog_state (self, DIALOG_STATE_DEVICE_DELETING))
-        return;
-
-    gtk_widget_set_sensitive (GTK_WIDGET (self->prints_manager), FALSE);
-
-    cc_fprintd_device_call_delete_enrolled_fingers2 (self->device, self->cancellable, delete_prints_cb, self);
 }
 
 static gboolean
@@ -1155,32 +1111,6 @@ back_button_clicked_cb (CcFingerprintDialog *self)
 }
 
 static void
-on_delete_all_response (CcFingerprintDialog *self)
-{
-    delete_enrolled_prints (self);
-}
-
-static void
-on_delete_prints_button_activated_cb (CcFingerprintDialog *self)
-{
-    AdwDialog *dialog;
-
-    dialog =
-        adw_alert_dialog_new (_("Delete All Fingerprints?"),
-                                _("Deleting all enrolled fingerprints will disable Fingerprint Login. "
-                                   "To re-enable Fingerprint Login at least one fingerprint will have to be enrolled."));
-
-    adw_alert_dialog_add_responses (ADW_ALERT_DIALOG (dialog), "cancel",
-                                    _("_Cancel"), "delete-all", _("_Delete All"), NULL);
-    adw_alert_dialog_set_response_appearance (ADW_ALERT_DIALOG (dialog), "delete-all", ADW_RESPONSE_DESTRUCTIVE);
-    adw_alert_dialog_set_default_response (ADW_ALERT_DIALOG (dialog), "cancel");
-    adw_alert_dialog_set_close_response (ADW_ALERT_DIALOG (dialog), "cancel");
-
-    g_signal_connect_swapped (dialog, "response::delete-all", G_CALLBACK (on_delete_all_response), self);
-    adw_dialog_present (dialog, GTK_WIDGET (self));
-}
-
-static void
 cancel_button_clicked_cb (CcFingerprintDialog *self)
 {
     if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING) {
@@ -1245,7 +1175,6 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
 
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, add_finger_button);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, back_button);
-    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, delete_prints_button);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, device_selector);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, devices_list);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, done_button);
@@ -1267,6 +1196,5 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
     gtk_widget_class_bind_template_callback (widget_class, cancel_button_clicked_cb);
     gtk_widget_class_bind_template_callback (widget_class, done_button_clicked_cb);
     gtk_widget_class_bind_template_callback (widget_class, on_add_fingerprint_button_activated_cb);
-    gtk_widget_class_bind_template_callback (widget_class, on_delete_prints_button_activated_cb);
     gtk_widget_class_bind_template_callback (widget_class, on_dialog_closed_cb);
 }
