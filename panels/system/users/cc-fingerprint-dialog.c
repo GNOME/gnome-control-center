@@ -393,6 +393,8 @@ create_finger_option_row (gpointer *item, gpointer *user_data)
     gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
     adw_preferences_row_set_use_underline (ADW_PREFERENCES_ROW (row), TRUE);
 
+    adw_action_row_set_icon_name (ADW_ACTION_ROW (row), "fingerprint-detection-symbolic");
+
     adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), get_finger_name (finger_id));
     g_object_set_data_full (G_OBJECT (row), "finger-id", g_strdup (finger_id), g_free);
 
