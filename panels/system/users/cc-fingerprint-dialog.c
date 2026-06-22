@@ -626,8 +626,8 @@ set_enroll_result_message (CcFingerprintDialog *self, EnrollState enroll_state, 
     }
 
     adw_status_page_set_icon_name (ADW_STATUS_PAGE (self->enrollment_view), icon_name);
-    adw_status_page_set_description (ADW_STATUS_PAGE (self->enrollment_view),
-                                     message ? message : _("Multiple scans need to be taken of your fingerprint"));
+    adw_status_page_set_title (ADW_STATUS_PAGE (self->enrollment_view),
+                               message ? message : _("Touch finger on reader"));
 }
 
 static void
@@ -679,7 +679,7 @@ handle_enroll_completed (CcFingerprintDialog *self)
         gtk_progress_bar_set_fraction (self->progress_bar, self->enroll_progress);
     }
 
-    set_enroll_result_message (self, ENROLL_STATE_COMPLETED, _("Fingerprint is ready to be used"));
+    set_enroll_result_message (self, ENROLL_STATE_COMPLETED, _("Scan complete"));
     gtk_widget_set_visible (GTK_WIDGET (self->done_button), TRUE);
     gtk_widget_grab_focus (GTK_WIDGET (self->done_button));
 }
