@@ -64,7 +64,8 @@ struct _CcFingerprintDialog {
     GtkImage *enroll_result_image;
     GtkLabel *enroll_message;
     GtkLabel *enroll_result_message;
-    AdwPreferencesGroup *finger_group;
+    AdwPreferencesGroup *left_hand_finger_group;
+    AdwPreferencesGroup *right_hand_finger_group;
     GtkWidget *finger_selection_page;
     AdwPreferencesGroup *devices_list;
     AdwSpinner *spinner;
@@ -90,7 +91,8 @@ struct _CcFingerprintDialog {
     gdouble enroll_progress;
 
     GListStore *fingerprints_store;
-    GListStore *finger_options;
+    GListStore *left_hand_finger_options;
+    GListStore *right_hand_finger_options;
 
     gboolean finger_on_reader;
 };
@@ -113,12 +115,17 @@ enum {
     N_PROPS
 };
 
-#define N_VALID_FINGERS G_N_ELEMENTS (FINGER_IDS) - 1
+#define N_VALID_FINGERS G_N_ELEMENTS (RIGHT_HAND_FINGER_IDS) + G_N_ELEMENTS (LEFT_HAND_FINGER_IDS)
 /* The order of the fingers here will affect the UI order */
-const char *FINGER_IDS[] = {
-    "right-index-finger", "left-index-finger",   "right-thumb", "right-middle-finger",
-    "right-ring-finger",  "right-little-finger", "left-thumb",  "left-middle-finger",
-    "left-ring-finger",   "left-little-finger",  "any",
+const char *RIGHT_HAND_FINGER_IDS[] = {
+    "right-thumb",
+    "right-index-finger",
+    "right-middle-finger",
+};
+const char *LEFT_HAND_FINGER_IDS[] = {
+    "left-thumb",
+    "left-index-finger",
+    "left-middle-finger",
 };
 
 typedef enum {
@@ -404,22 +411,35 @@ create_finger_option_row (gpointer *item, gpointer *user_data)
 }
 
 static void
-populate_finger_group (CcFingerprintDialog *self)
+populate_finger_groups (CcFingerprintDialog *self)
 {
     int i;
 
-    g_list_store_remove_all (self->finger_options);
+    g_list_store_remove_all (self->right_hand_finger_options);
+    g_list_store_remove_all (self->left_hand_finger_options);
 
-    for (i = 0; i < N_VALID_FINGERS; i++) {
+    for (i = 0; i < G_N_ELEMENTS (RIGHT_HAND_FINGER_IDS); i++) {
         GtkStringObject *finger;
-        const gchar *finger_id = FINGER_IDS[i];
+        const gchar *finger_id = RIGHT_HAND_FINGER_IDS[i];
 
         if (self->enrolled_fingers != NULL)
             if (g_strv_contains ((const gchar **) self->enrolled_fingers, finger_id))
                 continue;
 
         finger = gtk_string_object_new (finger_id);
-        g_list_store_append (self->finger_options, finger);
+        g_list_store_append (self->right_hand_finger_options, finger);
+    }
+
+    for (i = 0; i < G_N_ELEMENTS (LEFT_HAND_FINGER_IDS); i++) {
+        GtkStringObject *finger;
+        const gchar *finger_id = LEFT_HAND_FINGER_IDS[i];
+
+        if (self->enrolled_fingers != NULL)
+            if (g_strv_contains ((const gchar **) self->enrolled_fingers, finger_id))
+                continue;
+
+        finger = gtk_string_object_new (finger_id);
+        g_list_store_append (self->left_hand_finger_options, finger);
     }
 }
 
@@ -490,7 +510,7 @@ list_enrolled_cb (GObject *object, GAsyncResult *res, gpointer user_data)
         }
     }
 
-    populate_finger_group (self);
+    populate_finger_groups (self);
 
     if (n_enrolled_fingers == N_VALID_FINGERS)
         gtk_widget_set_sensitive (self->add_finger_button, FALSE);
@@ -1034,8 +1054,12 @@ cc_fingerprint_dialog_init (CcFingerprintDialog *self)
     self->fingerprints_store = g_list_store_new (GTK_TYPE_STRING_OBJECT);
     adw_preferences_group_bind_model (self->prints_group, G_LIST_MODEL (self->fingerprints_store),
                                       (GtkListBoxCreateWidgetFunc) create_fingerprint_row, self, NULL);
-    self->finger_options = g_list_store_new (GTK_TYPE_STRING_OBJECT);
-    adw_preferences_group_bind_model (self->finger_group, G_LIST_MODEL (self->finger_options),
+
+    self->right_hand_finger_options = g_list_store_new (GTK_TYPE_STRING_OBJECT);
+    adw_preferences_group_bind_model (self->right_hand_finger_group, G_LIST_MODEL (self->right_hand_finger_options),
+                                      (GtkListBoxCreateWidgetFunc) create_finger_option_row, self, NULL);
+    self->left_hand_finger_options = g_list_store_new (GTK_TYPE_STRING_OBJECT);
+    adw_preferences_group_bind_model (self->left_hand_finger_group, G_LIST_MODEL (self->left_hand_finger_options),
                                       (GtkListBoxCreateWidgetFunc) create_finger_option_row, self, NULL);
 
     on_stack_child_changed (self);
@@ -1226,14 +1250,15 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, devices_list);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, done_button);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, enrollment_view);
-    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, finger_group);
-    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, finger_selection_page);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, error_page);
+    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, left_hand_finger_group);
+    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, finger_selection_page);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, no_devices_found);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, no_fingerprints_enrolled_page);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, prints_group);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, prints_manager);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, progress_bar);
+    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, right_hand_finger_group);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, spinner);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, stack);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, titlebar);
