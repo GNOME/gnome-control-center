@@ -78,7 +78,12 @@ template $CcFingerprintDialog: Adw.Dialog {
         title: _("Select Finger");
 
         child: Adw.PreferencesPage finger_selection_page {
-          Adw.PreferencesGroup finger_group {}
+          Adw.PreferencesGroup right_hand_finger_group {
+            title: _("Right Hand");
+          }
+          Adw.PreferencesGroup left_hand_finger_group {
+            title: _("Left Hand");
+          }
         };
       }
 
