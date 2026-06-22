@@ -89,6 +89,9 @@ sources += gnome.gdbus_codegen(
   interface_prefix: fprintd_namespace + '.',
   namespace: 'CcFprintd',
   autocleanup: 'all',
+  extra_args: [
+    '--glib-min-required', glib_dep.version(),
+  ]
 )
 
 # Kerberos support
