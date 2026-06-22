@@ -353,8 +353,8 @@ delete_fingerprint (GtkButton *button, gpointer user_data)
     CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (user_data);
     const gchar *finger_id = g_object_get_data (G_OBJECT (button), "finger-id");
 
-    cc_fprintd_device_call_delete_enrolled_finger (self->device, finger_id, self->cancellable,
-                                                   on_fingerprint_deleted_cb, self);
+    cc_fprintd_device_call_delete_enrolled_finger (self->device, finger_id, G_DBUS_CALL_FLAGS_NONE, -1,
+                                                   self->cancellable, on_fingerprint_deleted_cb, self);
 }
 
 static GtkWidget *
@@ -533,8 +533,9 @@ update_prints_store (CcFingerprintDialog *self)
     g_clear_pointer (&self->enrolled_fingers, g_strfreev);
 
     user = cc_fingerprint_manager_get_user (self->manager);
-    cc_fprintd_device_call_list_enrolled_fingers (self->device, act_user_get_user_name (user), self->cancellable,
-                                                  list_enrolled_cb, self);
+    cc_fprintd_device_call_list_enrolled_fingers (self->device, act_user_get_user_name (user),
+                                                  G_DBUS_CALL_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION, -1,
+                                                  self->cancellable, list_enrolled_cb, self);
 }
 
 static gboolean
@@ -769,7 +770,8 @@ enroll_stop (CcFingerprintDialog *self)
         return;
 
     gtk_widget_set_sensitive (self->enrollment_view, FALSE);
-    cc_fprintd_device_call_enroll_stop (self->device, self->cancellable, enroll_stop_cb, self);
+    cc_fprintd_device_call_enroll_stop (self->device, G_DBUS_CALL_FLAGS_NONE, -1, self->cancellable, enroll_stop_cb,
+                                        self);
 }
 
 static char *
@@ -817,7 +819,8 @@ enroll_finger (CcFingerprintDialog *self, const char *finger_id)
     gtk_progress_bar_set_fraction (self->progress_bar, 0);
     adw_status_page_set_title (ADW_STATUS_PAGE (self->enrollment_view), enroll_message);
 
-    cc_fprintd_device_call_enroll_start (self->device, finger_id, self->cancellable, enroll_start_cb, self);
+    cc_fprintd_device_call_enroll_start (self->device, finger_id, G_DBUS_CALL_FLAGS_NONE, -1, self->cancellable,
+                                         enroll_start_cb, self);
 }
 
 static void
@@ -861,7 +864,8 @@ release_device (CcFingerprintDialog *self)
 
     disconnect_device_signals (self);
 
-    cc_fprintd_device_call_release (self->device, self->cancellable, release_device_cb, self);
+    cc_fprintd_device_call_release (self->device, G_DBUS_CALL_FLAGS_NONE, -1, self->cancellable, release_device_cb,
+                                    self);
 }
 
 static void
@@ -964,8 +968,9 @@ claim_device (CcFingerprintDialog *self)
     user = cc_fingerprint_manager_get_user (self->manager);
     gtk_widget_set_sensitive (self->prints_manager, FALSE);
 
-    cc_fprintd_device_call_claim (self->device, act_user_get_user_name (user), self->cancellable, claim_device_cb,
-                                  self);
+    cc_fprintd_device_call_claim (self->device, act_user_get_user_name (user),
+                                  G_DBUS_CALL_FLAGS_ALLOW_INTERACTIVE_AUTHORIZATION, -1, self->cancellable,
+                                  claim_device_cb, self);
 }
 
 static void
@@ -1141,9 +1146,11 @@ on_dialog_closed_cb (CcFingerprintDialog *self)
     if (self->device && (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED)) {
         disconnect_device_signals (self);
 
-        if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
-            cc_fprintd_device_call_enroll_stop_sync (self->device, NULL, NULL);
-        cc_fprintd_device_call_release (self->device, NULL, NULL, NULL);
+        if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING) {
+            cc_fprintd_device_call_enroll_stop_sync (self->device, G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+        }
+
+        cc_fprintd_device_call_release (self->device, G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, NULL);
     }
 
     g_clear_object (&self->manager);
