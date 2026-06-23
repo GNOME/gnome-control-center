@@ -336,6 +336,7 @@ on_fingerprint_deleted_cb (GObject *object, GAsyncResult *res, gpointer user_dat
         g_warning ("Deletion of fingerprints on device %s failed: %s", cc_fprintd_device_get_name (self->device),
                    error->message);
         notify_error (self, error_message);
+        return;
     }
 
     update_prints_store (self);
