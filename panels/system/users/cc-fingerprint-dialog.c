@@ -84,6 +84,7 @@ struct _CcFingerprintDialog {
     CcFprintdDevice *device;
     gulong device_signal_id;
     gulong device_name_owner_id;
+    gulong device_finger_status_id;
     GCancellable *cancellable;
     GStrv enrolled_fingers;
     guint enroll_stages_passed;
@@ -249,6 +250,7 @@ disconnect_device_signals (CcFingerprintDialog *self)
 
     g_clear_signal_handler (&self->device_signal_id, self->device);
     g_clear_signal_handler (&self->device_name_owner_id, self->device);
+    g_clear_signal_handler (&self->device_finger_status_id, self->device);
 }
 
 static void
@@ -945,7 +947,8 @@ claim_device_cb (GObject *object, GAsyncResult *res, gpointer user_data)
     self->device_name_owner_id =
         g_signal_connect_object (self->device, "notify::g-name-owner", G_CALLBACK (on_device_owner_changed), self, 0);
 
-    g_signal_connect_swapped (self->device, "notify::finger-present", G_CALLBACK (on_finger_present_cb), self);
+    self->device_finger_status_id = g_signal_connect_object (
+        self->device, "notify::finger-present", G_CALLBACK (on_finger_present_cb), self, G_CONNECT_SWAPPED);
 }
 
 static void
