@@ -247,15 +247,8 @@ disconnect_device_signals (CcFingerprintDialog *self)
     if (!self->device)
         return;
 
-    if (self->device_signal_id) {
-        g_signal_handler_disconnect (self->device, self->device_signal_id);
-        self->device_signal_id = 0;
-    }
-
-    if (self->device_name_owner_id) {
-        g_signal_handler_disconnect (self->device, self->device_name_owner_id);
-        self->device_name_owner_id = 0;
-    }
+    g_clear_signal_handler (&self->device_signal_id, self->device);
+    g_clear_signal_handler (&self->device_name_owner_id, self->device);
 }
 
 static void
