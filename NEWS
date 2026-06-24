@@ -1,3 +1,133 @@
+================
+Version 51.alpha
+================
+
+- Various translation updates
+- Remove Flatpak build support
+- Merge all panels CSS files into a single global stylesheet
+- Apply clang-format globally and update coding style
+- Drop "development" profile
+
+Build
+- Post-release version bump
+- Make style check mandatory in CI
+- Switch CI to GNOME OS
+
+Accessibility
+- Add description to the screen reader settings button
+- Add semantic accessible names to cursor sizes
+- Fix keyboard navigation between cursor sizes
+- Give CcSplitRow's radio group a label and role
+
+About (System Details)
+- Remove Windowing System field
+- Reorder "Software/Hardware" information groups
+- Merge system details into toplevel about page
+- Port "Copy" button to AdwButtonRow
+
+Applications
+- Call GNOME Software via D-Bus instead of CLI
+- Define GNOME Software desktop id only once
+
+Color
+- Avoid dead nested assignment
+
+Date & Time
+- Use GtkEnumList
+
+Display
+- Add "Auto Rotate" row for devices with accelerometer
+- Add center-aligned snapping for horizontal edges
+- Don't allow disabling if it's the last display available
+- Update cursor styles for hover and drag interactions
+
+Keyboard
+- Fix compose key 'á' example
+- Don't update shortcuts when closing dialog
+- Improve "Press Esc to cancel [...]" hint
+- Drop only the colliding combo when rebinding shortcuts
+- Turn CcKeyboardShortcutDialog into a subpage
+- Drop nested navigation view in shortcuts page
+- Port GtkShortcutLabel to AdwShortcutLabel
+
+Mouse
+- Add ability to disable a touchpad while a mouse is plugged in
+- Remove superfluous "Touchpad" string from Disable While Typing
+
+Network
+- Add DNS domain search settings
+- Use GNOME QR Code Widget for WiFi sharing
+- Drop WEP support
+- Fix confusing proxy descriptions
+- Fix WireGuard peer reference ownership
+- Fix "Wired" section appearing broken when empty
+- Cache the VPN plugin list
+- Port WiFi Hotspot dialog to AdwDialog and AdwToolbarView
+- Always recreate hotspot dialog
+
+Power
+- Use @bg_color in battery levels
+- Remove dead nested assignment for time string
+
+Printers
+- Make "samba" dependency optional
+- Use AdwPreferencesPage/Group
+
+Privacy
+- Fix adding location sub page
+- Fit Device Security in mobile view
+- Port Device Dialog to AdwToolbarView and AdwDialog
+- Add mnemonics to device dialog action buttons
+- Allow device dialog height to expand
+- Do not leak AppInfo and time in location/camera pages
+- Manage reference counts properly in light of duplicates
+
+Region
+- Initialize locale variables
+
+Remote Desktop
+- Set page description on AdwPreferencesPage
+- Correctly handle nullable error from secret_collection_for_alias_sync
+
+Remote Login
+- Support both sshd service and socket systemd units
+- Add option to support SSH socket servers
+
+Sharing
+- Port Media Sharing dialog to a subpage
+- Port File Sharing dialog to a subpage
+- Save media sharing folder list whenever they change
+- Add tooltip to the remove button in sharing-networks
+- Use a GtkListBox placeholder widget
+
+Global Shortcuts Provider
+- Relax app-id validation
+- Adjust to libgxdp init API change
+
+Sound
+- Set pa_stream sink monitor for input rows
+- Order device name and origin correctly for RTL locales
+- Expose selected device name to accessibility
+- Improve accessibility label of volume slider
+
+Users
+- Ensure newly added user have set an avatar
+- Remove nested navigation view
+- Justify title label of fingerprint empty state
+- Set wrapping of fingerprint empty state title label
+- Make select fingerprint popup scroll
+
+Wacom
+- Append the serial number to the tool description
+- Remove an xf86-input-wacom-specific hack
+- Fix -Wcast-align errors with clang
+
+Wellbeing
+- Fit into mobile width
+
+WWAN
+- Use early returns in APN data and EPS bearer getters
+
 =============
 Version 50.0
 =============
