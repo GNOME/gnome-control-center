@@ -56,6 +56,7 @@
 #define KEY_MOUSE_CURSOR_SIZE "cursor-size"
 #define KEY_OVERLAY_SCROLLING "overlay-scrolling"
 #define KEY_TEXT_SCALING_FACTOR "text-scaling-factor"
+#define KEY_KEYBOARD_FOCUS_VISIBLE_TIMEOUT "keyboard-focus-visible-timeout"
 
 /* application settings */
 #define APPLICATION_SETTINGS "org.gnome.desktop.a11y.applications"

@@ -55,6 +55,7 @@ struct _CcUaSeeingPage {
     CcListRow *cursor_size_row;
     AdwSwitchRow *sound_keys_row;
     AdwSwitchRow *show_scrollbars_row;
+    AdwSwitchRow *keyboard_focus_always_visible_row;
 
     AdwSwitchRow *screen_reader_row;
     AdwButtonRow *configure_screen_reader_row;
@@ -292,6 +293,7 @@ cc_ua_seeing_page_class_init (CcUaSeeingPageClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, cursor_size_row);
     gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, sound_keys_row);
     gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, show_scrollbars_row);
+    gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, keyboard_focus_always_visible_row);
 
     gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, screen_reader_row);
     gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, configure_screen_reader_row);
@@ -305,6 +307,15 @@ cc_ua_seeing_page_class_init (CcUaSeeingPageClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcUaSeeingPage, text_size_label_large);
 
     gtk_widget_class_bind_template_callback (widget_class, apply_text_size_changes);
+}
+
+static void
+set_keyboard_focus_always_visible (GObject *widget, GParamSpec *pspec, gpointer user_data)
+{
+    CcUaSeeingPage *self = (CcUaSeeingPage *) user_data;
+
+    g_settings_set_int (self->a11y_interface_settings, KEY_KEYBOARD_FOCUS_VISIBLE_TIMEOUT,
+                        adw_switch_row_get_active (ADW_SWITCH_ROW (self->keyboard_focus_always_visible_row)) ? 0 : -1);
 }
 
 static void
@@ -346,6 +357,14 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
     /* Overlay Scrollbars */
     g_settings_bind (self->interface_settings, KEY_OVERLAY_SCROLLING, self->show_scrollbars_row, "active",
                      G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
+
+    /* Always show focus */
+    // Enable it if the timeout is 0 (thus, "infinite"); any other value should mean "disabled".
+    adw_switch_row_set_active (ADW_SWITCH_ROW (self->keyboard_focus_always_visible_row),
+                               g_settings_get_int (self->a11y_interface_settings, KEY_KEYBOARD_FOCUS_VISIBLE_TIMEOUT)
+                                   == 0);
+    g_signal_connect (GTK_WIDGET (self->keyboard_focus_always_visible_row), "notify::active",
+                      G_CALLBACK (set_keyboard_focus_always_visible), self);
 
     /* Screen Reader */
     g_settings_bind (self->application_settings, KEY_SCREEN_READER_ENABLED, self->screen_reader_row, "active",
