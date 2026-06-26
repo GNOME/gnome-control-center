@@ -209,7 +209,7 @@ static void on_month_selection_changed_cb (CcDateTimePage *self);
 static void time_changed_cb (CcDateTimePage *self, CcTimeEditor *editor);
 
 static gchar *
-get_weekday_name (GtkEnumListItem *item, gpointer user_data)
+get_weekday_name (GtkEnumListItem *item)
 {
     gint selected_value;
 
@@ -761,7 +761,6 @@ cc_date_time_page_class_init (CcDateTimePageClass *klass)
     gtk_widget_class_bind_template_callback (widget_class, list_box_row_activated);
     gtk_widget_class_bind_template_callback (widget_class, change_clock_settings_cb);
     gtk_widget_class_bind_template_callback (widget_class, on_date_box_row_activated_cb);
-    gtk_widget_class_bind_template_callback (widget_class, get_weekday_name);
 
     bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");
 }
@@ -797,9 +796,33 @@ get_week_start_day_setting (GValue *property_value, GVariant *setting_source, gp
 }
 
 static void
+on_factory_setup_week_start_day (GtkSignalListItemFactory *factory, GtkListItem *item, gpointer user_data)
+{
+    GtkWidget *label = gtk_label_new (NULL);
+    gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_NONE);
+    gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+    gtk_list_item_set_child (item, label);
+}
+
+static void
+on_factory_bind_week_start_day (GtkSignalListItemFactory *factory, GtkListItem *item, gpointer user_data)
+{
+    GtkLabel *label = GTK_LABEL (gtk_list_item_get_child (item));
+    GtkEnumListItem *enum_item = GTK_ENUM_LIST_ITEM (gtk_list_item_get_item (item));
+    gchar *text = get_weekday_name (enum_item);
+
+    if (text) {
+        gtk_label_set_text (label, text);
+        g_free (text);
+    }
+}
+
+static void
 cc_date_time_page_init (CcDateTimePage *self)
 {
     g_autoptr(GError) error = NULL;
+    g_autoptr (GtkListItemFactory) factory = NULL;
+    g_autoptr (GtkListItemFactory) list_factory = NULL;
 
     gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -919,4 +942,16 @@ cc_date_time_page_init (CcDateTimePage *self)
     /* We ignore UTC <--> LocalRTC changes at the moment */
 
     self->filechooser_settings = g_settings_new (FILECHOOSER_SCHEMA);
+
+    /* Setup custom factories for AdwComboRow week_start_day_row to avoid default ellipzation #3735 */
+    factory = gtk_signal_list_item_factory_new ();
+    g_signal_connect (factory, "setup", G_CALLBACK (on_factory_setup_week_start_day), NULL);
+    g_signal_connect (factory, "bind", G_CALLBACK (on_factory_bind_week_start_day), NULL);
+
+    list_factory = gtk_signal_list_item_factory_new ();
+    g_signal_connect (list_factory, "setup", G_CALLBACK (on_factory_setup_week_start_day), NULL);
+    g_signal_connect (list_factory, "bind", G_CALLBACK (on_factory_bind_week_start_day), NULL);
+
+    adw_combo_row_set_factory (self->week_start_day_row, factory);
+    adw_combo_row_set_list_factory (self->week_start_day_row, list_factory);
 }

@@ -156,8 +156,6 @@ template $CcDateTimePage: Adw.NavigationPage {
           Adw.ComboRow week_start_day_row {
             title: _("F_irst Day of the Week");
             use-underline: true;
-            expression: expr $get_weekday_name() as <string>;
-
             model: EnumList {
               enum-type: typeof<$GDesktopWeekday>;
             };
