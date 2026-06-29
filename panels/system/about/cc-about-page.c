@@ -132,6 +132,16 @@ on_donate_button_clicked_cb (CcAboutPage *self)
     g_app_info_launch_default_for_uri ("https://donate.gnome.org/", NULL, NULL);
 }
 
+static void
+on_release_notes_button_clicked_cb (CcAboutPage *self)
+{
+    g_autofree char *uri = g_strdup_printf ("https://release.gnome.org/%s/", MAJOR_VERSION);
+    g_autoptr(GtkUriLauncher) launcher = NULL;
+
+    launcher = gtk_uri_launcher_new (uri);
+    gtk_uri_launcher_launch (launcher, GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))), NULL, NULL, NULL);
+}
+
 static char *
 get_renderer_from_session (void)
 {
@@ -904,6 +914,7 @@ cc_about_page_class_init (CcAboutPageClass *klass)
 
     gtk_widget_class_bind_template_callback (widget_class, on_copy_row_activated_cb);
     gtk_widget_class_bind_template_callback (widget_class, on_donate_button_clicked_cb);
+    gtk_widget_class_bind_template_callback (widget_class, on_release_notes_button_clicked_cb);
 }
 
 static void

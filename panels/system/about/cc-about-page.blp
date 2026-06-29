@@ -61,6 +61,18 @@ template $CcAboutPage: Adw.NavigationPage {
             styles [
               "property",
             ]
+
+            [suffix]
+            Button {
+              icon-name: "adw-external-link-symbolic";
+              valign: center;
+              tooltip-text: _("Read the GNOME release notes");
+              clicked => $on_release_notes_button_clicked_cb(template);
+
+              styles [
+                "flat",
+              ]
+            }
           }
 
           Adw.ActionRow os_name_row {
@@ -119,7 +131,6 @@ template $CcAboutPage: Adw.NavigationPage {
               "property",
             ]
           }
-
         }
 
         Adw.PreferencesGroup hardware_group {
