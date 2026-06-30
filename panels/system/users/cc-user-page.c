@@ -384,12 +384,29 @@ delete_user_done (ActUserManager *manager, GAsyncResult *res, void *user_data)
 }
 
 static void
-remove_local_user_response (CcUserPage *self)
+delete_fingerprints_done (CcFingerprintManager *manager, GAsyncResult *res, void *user_data)
 {
+    CcUserPage *self = user_data;
     gboolean remove_files;
+    g_autoptr(GError) error = NULL;
 
     g_assert (ADW_IS_SWITCH_ROW (self->remove_local_files_choice));
 
+    if (!cc_fingerprint_manager_delete_enrolled_fingers_finish (manager, res, &error)) {
+        if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+            g_critical ("Failed to delete enrolled fingerprints: %s", error->message);
+    } else {
+        g_debug ("Deleted enrolled fingerprints for user %s", act_user_get_user_name (self->user));
+    }
+
+    remove_files = adw_switch_row_get_active (self->remove_local_files_choice);
+    act_user_manager_delete_user_async (act_user_manager_get_default (), self->user, remove_files, NULL,
+                                        (GAsyncReadyCallback) delete_user_done, NULL);
+}
+
+static void
+remove_local_user_response (CcUserPage *self)
+{
     /* remove autologin */
     if (act_user_get_automatic_login (self->user)) {
         act_user_set_automatic_login (self->user, FALSE);
@@ -398,9 +415,8 @@ remove_local_user_response (CcUserPage *self)
     /* Prevent user to click again while deleting, issue #2341 */
     gtk_widget_set_sensitive (GTK_WIDGET (self->remove_user_button), FALSE);
 
-    remove_files = adw_switch_row_get_active (self->remove_local_files_choice);
-    act_user_manager_delete_user_async (act_user_manager_get_default (), self->user, remove_files, NULL,
-                                        (GAsyncReadyCallback) delete_user_done, NULL);
+    cc_fingerprint_manager_delete_enrolled_fingers (self->fingerprint_manager, NULL,
+                                                    (GAsyncReadyCallback) delete_fingerprints_done, self);
 }
 
 static void
