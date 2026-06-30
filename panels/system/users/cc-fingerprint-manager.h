@@ -62,4 +62,10 @@ void cc_fingerprint_manager_get_devices (CcFingerprintManager *fp_manager, GCanc
 
 GList *cc_fingerprint_manager_get_devices_finish (CcFingerprintManager *fp_manager, GAsyncResult *res, GError **error);
 
+void cc_fingerprint_manager_delete_enrolled_fingers (CcFingerprintManager *fp_manager, GCancellable *cancellable,
+                                                     GAsyncReadyCallback res, gpointer user_data);
+
+gboolean cc_fingerprint_manager_delete_enrolled_fingers_finish (CcFingerprintManager *fp_manager, GAsyncResult *res,
+                                                                GError **error);
+
 G_END_DECLS
