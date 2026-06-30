@@ -345,7 +345,7 @@ update_fingerprint_row_state (CcUserPage *self, GParamSpec *spec, CcFingerprintM
     CcFingerprintState state = cc_fingerprint_manager_get_state (manager);
     gboolean visible = FALSE;
 
-    visible = (act_user_get_uid (self->user) == getuid () && act_user_is_local_account (self->user)
+    visible = (act_user_get_uid (self->user) == getuid ()
                && (self->login_screen_settings
                    && g_settings_get_boolean (self->login_screen_settings, "enable-fingerprint-authentication")));
     gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), visible);
