@@ -700,6 +700,21 @@ navigation_push_cb (CcWindow *self, const gchar *action_name, GVariant *params)
     adw_navigation_view_push (self->navigation, subpage);
 }
 
+static gboolean
+navigation_show_sidebar_at_root_cb (CcWindow *self)
+{
+    GListModel *navigation_stack;
+
+    if (!adw_navigation_split_view_get_collapsed (self->split_view))
+        return GDK_EVENT_PROPAGATE;
+
+    navigation_stack = adw_navigation_view_get_navigation_stack (self->navigation);
+    if (g_list_model_get_n_items (navigation_stack) <= 1)
+        adw_navigation_split_view_set_show_content (self->split_view, FALSE);
+
+    return GDK_EVENT_PROPAGATE;
+}
+
 static void
 cc_window_class_init (CcWindowClass *klass)
 {
@@ -739,6 +754,7 @@ cc_window_class_init (CcWindowClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
     gtk_widget_class_bind_template_child (widget_class, CcWindow, search_entry);
 
+    gtk_widget_class_bind_template_callback (widget_class, navigation_show_sidebar_at_root_cb);
     gtk_widget_class_bind_template_callback (widget_class, on_split_view_collapsed_changed_cb);
     gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
     gtk_widget_class_bind_template_callback (widget_class, show_panel_cb);

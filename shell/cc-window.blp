@@ -67,6 +67,7 @@ template $CcWindow: Adw.ApplicationWindow {
 
     content: Adw.NavigationPage {
       child: Adw.NavigationView navigation {
+        get-next-page => $navigation_show_sidebar_at_root_cb(template);
       };
     };
   };
