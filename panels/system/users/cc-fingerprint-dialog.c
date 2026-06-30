@@ -34,6 +34,8 @@
 
 #define CC_FPRINTD_NAME "net.reactivated.Fprint"
 
+#define VERIFY_RESET_TIMEOUT_SECONDS 3
+
 /* Translate fprintd strings */
 #define TR(s) dgettext ("fprintd", s)
 #include "fingerprint-strings.h"
@@ -49,8 +51,13 @@ typedef enum {
     DIALOG_STATE_DEVICE_ENROLLING = (1 << 6),
     DIALOG_STATE_DEVICE_ENROLL_STOPPING = (1 << 7),
     DIALOG_STATE_DEVICE_DELETING = (1 << 8),
+    DIALOG_STATE_DEVICE_VERIFY_STARTING = (1 << 9),
+    DIALOG_STATE_DEVICE_VERIFYING = (1 << 10),
+    DIALOG_STATE_DEVICE_VERIFY_STOPPING = (1 << 11),
 
-    DIALOG_STATE_IDLE = DIALOG_STATE_DEVICE_CLAIMED | DIALOG_STATE_DEVICE_ENROLLING,
+    DIALOG_STATE_IDLE = DIALOG_STATE_DEVICE_CLAIMED | DIALOG_STATE_DEVICE_ENROLLING
+                        | DIALOG_STATE_DEVICE_VERIFY_STARTING | DIALOG_STATE_DEVICE_VERIFYING
+                        | DIALOG_STATE_DEVICE_VERIFY_STOPPING,
 } DialogState;
 
 struct _CcFingerprintDialog {
@@ -78,6 +85,8 @@ struct _CcFingerprintDialog {
     GtkWidget *no_fingerprints_enrolled_page;
     GtkProgressBar *progress_bar;
     GtkWidget *prints_manager;
+    GtkWidget *verify_state_menu_button;
+    GtkWidget *verify_state_image;
 
     CcFingerprintManager *manager;
     DialogState dialog_state;
@@ -95,6 +104,8 @@ struct _CcFingerprintDialog {
     GListStore *right_hand_finger_options;
 
     gboolean finger_on_reader;
+
+    guint verify_reset_timeout_id;
 };
 
 /* TODO - fprintd and API changes required:
@@ -151,6 +162,8 @@ static GParamSpec *properties[N_PROPS];
 
 static void enroll_finger (CcFingerprintDialog *self, const char *finger_id);
 static void update_prints_store (CcFingerprintDialog *self);
+static void maybe_start_identification (CcFingerprintDialog *self);
+static void stop_identification (CcFingerprintDialog *self);
 
 CcFingerprintDialog *
 cc_fingerprint_dialog_new (CcFingerprintManager *manager)
@@ -349,6 +362,8 @@ delete_fingerprint (GtkButton *button, gpointer user_data)
     CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (user_data);
     const gchar *finger_id = g_object_get_data (G_OBJECT (button), "finger-id");
 
+    stop_identification (self);
+
     cc_fprintd_device_call_delete_enrolled_finger (self->device, finger_id, G_DBUS_CALL_FLAGS_NONE, -1,
                                                    self->cancellable, on_fingerprint_deleted_cb, self);
 }
@@ -457,6 +472,112 @@ get_container_children (GtkWidget *container)
 }
 
 static void
+on_verify_start_cb (GObject *object, GAsyncResult *res, gpointer user_data)
+{
+    g_autoptr(GError) error = NULL;
+    g_autoptr(DialogStateRemover) state_remover = NULL;
+    CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
+    CcFingerprintDialog *self = user_data;
+
+    cc_fprintd_device_call_verify_start_finish (fprintd_device, res, &error);
+
+    if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        return;
+
+    state_remover = auto_state_remover (self, DIALOG_STATE_DEVICE_VERIFY_STARTING);
+
+    if (error) {
+        remove_dialog_state (self, DIALOG_STATE_DEVICE_VERIFYING);
+        g_warning ("Failed to start fingerprint identification: %s", error->message);
+        return;
+    }
+}
+
+static void
+identification_stop_cb (GObject *object, GAsyncResult *res, gpointer user_data)
+{
+    g_autoptr(GError) error = NULL;
+    CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
+    CcFingerprintDialog *self = user_data;
+
+    cc_fprintd_device_call_verify_stop_finish (fprintd_device, res, &error);
+
+    if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        return;
+
+    if (error)
+        g_debug ("Failed to stop fingerprint identification: %s", error->message);
+
+    remove_dialog_state (self, DIALOG_STATE_DEVICE_VERIFYING | DIALOG_STATE_DEVICE_VERIFY_STOPPING);
+
+    /* Resume identification if it is still appropriate (e.g. after a match). */
+    maybe_start_identification (self);
+}
+
+static void
+stop_identification (CcFingerprintDialog *self)
+{
+    if (!(self->dialog_state & DIALOG_STATE_DEVICE_VERIFYING))
+        return;
+
+    if (!add_dialog_state (self, DIALOG_STATE_DEVICE_VERIFY_STOPPING))
+        return;
+
+    cc_fprintd_device_call_verify_stop (self->device, G_DBUS_CALL_FLAGS_NONE, -1, self->cancellable,
+                                        identification_stop_cb, self);
+}
+static void
+reset_verify_state_cb (gpointer user_data)
+{
+    CcFingerprintDialog *self = user_data;
+
+    self->verify_reset_timeout_id = 0;
+
+    gtk_widget_set_css_classes (self->verify_state_image, (const char *[]){ NULL });
+}
+
+static gboolean
+supports_identification (CcFingerprintDialog *self)
+{
+    if (self->dialog_state & DIALOG_STATE_DEVICE_VERIFYING)
+        return FALSE;
+
+    if (!self->device || !(self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
+        return FALSE;
+
+    if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
+        return FALSE;
+
+    if (!g_list_model_get_n_items (G_LIST_MODEL (self->fingerprints_store)))
+        return FALSE;
+
+    return TRUE;
+}
+
+static void
+maybe_start_identification (CcFingerprintDialog *self)
+{
+    const char *verify_finger;
+    guint n_enrolled_fingers;
+
+    if (!supports_identification (self)
+        || !add_dialog_state (self, DIALOG_STATE_DEVICE_VERIFYING | DIALOG_STATE_DEVICE_VERIFY_STARTING)) {
+        gtk_widget_set_visible (GTK_WIDGET (self->verify_state_menu_button), FALSE);
+        return;
+    }
+
+    gtk_widget_set_visible (GTK_WIDGET (self->verify_state_menu_button), TRUE);
+
+    /* A device may not support identification, so in case only a finger is enrolled, use that finger */
+    n_enrolled_fingers = g_list_model_get_n_items (G_LIST_MODEL (self->fingerprints_store));
+    verify_finger = n_enrolled_fingers == 1 ? self->enrolled_fingers[0] : "any";
+    g_debug ("Starting fingerprint identification for finger '%s'", verify_finger);
+
+    cc_fprintd_device_call_verify_start (self->device, verify_finger, G_DBUS_CALL_FLAGS_NONE, -1, self->cancellable,
+                                         on_verify_start_cb, self);
+}
+
+static void
 list_enrolled_cb (GObject *object, GAsyncResult *res, gpointer user_data)
 {
     g_auto(GStrv) enrolled_fingers = NULL;
@@ -512,6 +633,8 @@ list_enrolled_cb (GObject *object, GAsyncResult *res, gpointer user_data)
 
     if (n_enrolled_fingers == 0)
         gtk_stack_set_visible_child (self->stack, self->no_fingerprints_enrolled_page);
+
+    maybe_start_identification (self);
 }
 
 static void
@@ -591,8 +714,10 @@ on_finger_present_cb (CcFingerprintDialog *self)
 
     if (self->finger_on_reader) {
         gtk_widget_add_css_class (self->enrollment_view, "fingerprint-touching");
+        gtk_widget_add_css_class (self->verify_state_image, "fingerprint-touching");
     } else {
         set_enroll_result_message (self, ENROLL_STATE_NORMAL, NULL);
+        gtk_widget_remove_css_class (self->verify_state_image, "fingerprint-touching");
     }
 }
 
@@ -815,6 +940,8 @@ enroll_finger (CcFingerprintDialog *self, const char *finger_id)
     gtk_progress_bar_set_fraction (self->progress_bar, 0);
     adw_status_page_set_title (ADW_STATUS_PAGE (self->enrollment_view), enroll_message);
 
+    stop_identification (self);
+
     cc_fprintd_device_call_enroll_start (self->device, finger_id, G_DBUS_CALL_FLAGS_NONE, -1, self->cancellable,
                                          enroll_start_cb, self);
 }
@@ -879,6 +1006,42 @@ on_device_signal (CcFingerprintDialog *self, gchar *sender_name, gchar *signal_n
 
         g_variant_get (parameters, "(&sb)", &result, &done);
         handle_enroll_signal (self, result, done);
+    } else if (g_str_equal (signal_name, "VerifyFingerSelected")) {
+        const char *finger_name;
+
+        if (!g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(s)"))) {
+            g_warning ("Unexpected verify finger parameters type %s", g_variant_get_type_string (parameters));
+            return;
+        }
+
+        g_variant_get (parameters, "(&s)", &finger_name);
+        g_debug ("Device verify finger selected: %s", finger_name);
+    } else if (g_str_equal (signal_name, "VerifyStatus")) {
+        const char *result;
+        gboolean done;
+
+        if (!g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(sb)"))) {
+            g_warning ("Unexpected verify parameters type %s", g_variant_get_type_string (parameters));
+            return;
+        }
+
+        g_variant_get (parameters, "(&sb)", &result, &done);
+        g_debug ("Device verify result message: %s, done: %d", result, done);
+
+        if (g_str_equal (result, "verify-match")) {
+            gtk_widget_set_css_classes (self->verify_state_image, (const char *[]){ "fingerprint-match", NULL });
+        } else if (g_str_equal (result, "verify-no-match")) {
+            gtk_widget_set_css_classes (self->verify_state_image, (const char *[]){ "fingerprint-no-match", NULL });
+        } else {
+            gtk_widget_set_css_classes (self->verify_state_image, (const char *[]){ "fingerprint-error", NULL });
+        }
+
+        if (done) {
+            g_clear_handle_id (&self->verify_reset_timeout_id, g_source_remove);
+            self->verify_reset_timeout_id =
+                g_timeout_add_seconds_once (VERIFY_RESET_TIMEOUT_SECONDS, reset_verify_state_cb, self);
+            stop_identification (self);
+        }
     }
 }
 
@@ -1147,12 +1310,17 @@ on_dialog_closed_cb (CcFingerprintDialog *self)
             cc_fprintd_device_call_enroll_stop_sync (self->device, G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
         }
 
+        if (self->dialog_state & DIALOG_STATE_DEVICE_VERIFYING) {
+            cc_fprintd_device_call_verify_stop_sync (self->device, G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+        }
+
         cc_fprintd_device_call_release (self->device, G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, NULL);
     }
 
     g_clear_object (&self->manager);
     g_clear_object (&self->device);
     g_clear_pointer (&self->enrolled_fingers, g_strfreev);
+    g_clear_handle_id (&self->verify_reset_timeout_id, g_source_remove);
 
     g_cancellable_cancel (self->cancellable);
     g_clear_object (&self->cancellable);
@@ -1183,6 +1351,8 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, devices_list);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, done_button);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, enrollment_view);
+    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, verify_state_menu_button);
+    gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, verify_state_image);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, error_page);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, left_hand_finger_group);
     gtk_widget_class_bind_template_child (widget_class, CcFingerprintDialog, finger_selection_page);
