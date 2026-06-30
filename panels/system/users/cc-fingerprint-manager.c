@@ -399,6 +399,18 @@ update_state_callback (GObject *object, GAsyncResult *res, gpointer user_data)
         data->callback (self, state, data->user_data, error);
 }
 
+static gboolean
+is_no_enrolled_prints_error (GError *error)
+{
+    g_autofree char *dbus_error = NULL;
+
+    if (!error)
+        return FALSE;
+
+    dbus_error = g_dbus_error_get_remote_error (error);
+    return g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoEnrolledPrints");
+}
+
 static void
 on_device_list_enrolled (GObject *object, GAsyncResult *res, gpointer user_data)
 {
@@ -416,17 +428,13 @@ on_device_list_enrolled (GObject *object, GAsyncResult *res, gpointer user_data)
 
     data->waiting_devices--;
 
-    if (error) {
-        g_autofree char *dbus_error = g_dbus_error_get_remote_error (error);
+    if (error && !is_no_enrolled_prints_error (error)) {
+        if (data->waiting_devices == 0)
+            g_task_return_error (task, g_steal_pointer (&error));
+        else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+            g_warning ("Impossible to list enrolled fingers: %s", error->message);
 
-        if (!g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoEnrolledPrints")) {
-            if (data->waiting_devices == 0)
-                g_task_return_error (task, g_steal_pointer (&error));
-            else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-                g_warning ("Impossible to list enrolled fingers: %s", error->message);
-
-            return;
-        }
+        return;
     }
 
     num_enrolled_fingers = enrolled_fingers ? g_strv_length (enrolled_fingers) : 0;
