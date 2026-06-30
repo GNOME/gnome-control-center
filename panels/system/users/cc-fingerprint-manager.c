@@ -497,7 +497,7 @@ cc_fingerprint_manager_update_state (CcFingerprintManager *self, CcFingerprintSt
 
     g_return_if_fail (priv->current_task == NULL);
 
-    if (act_user_get_uid (priv->user) != getuid () || !act_user_is_local_account (priv->user)) {
+    if (act_user_get_uid (priv->user) != getuid ()) {
         set_state (self, CC_FINGERPRINT_STATE_NONE);
 
         if (callback)
