@@ -714,12 +714,17 @@ cc_user_page_set_user (CcUserPage *self, ActUser *user, GPermission *permission)
     user_language = get_user_language (user);
     cc_list_row_set_secondary_label (self->language_row, user_language);
 
-    if (!self->fingerprint_manager) {
+    if (!self->fingerprint_manager
+        || g_strcmp0 (act_user_get_user_name (cc_fingerprint_manager_get_user (self->fingerprint_manager)),
+                      act_user_get_user_name (user))
+               != 0) {
+        g_clear_object (&self->fingerprint_manager);
         self->fingerprint_manager = cc_fingerprint_manager_new (user);
         g_signal_connect_object (self->fingerprint_manager, "notify::state", G_CALLBACK (update_fingerprint_row_state),
                                  self, G_CONNECT_SWAPPED);
-        update_fingerprint_row_state (self, NULL, self->fingerprint_manager);
     }
+
+    update_fingerprint_row_state (self, NULL, self->fingerprint_manager);
 
     cc_permission_infobar_set_permission (self->permission_infobar, permission);
     g_object_bind_property (permission, "allowed", self, "locked", G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
