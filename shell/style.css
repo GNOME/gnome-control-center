@@ -717,7 +717,8 @@ levelbar .strength-high {
 }
 
 /* Fingerprint dialog */
-.fingerprint-status-page image {
+.fingerprint-status-page image,
+.fingerprint-status-menu image {
   -gtk-icon-size: 48px;
   background-color: color-mix(in srgb, var(--window-fg-color) 13%, transparent);
   border-radius: 6em;
@@ -725,15 +726,37 @@ levelbar .strength-high {
   border: 3px solid var(--window-bg-color);
 }
 
+.fingerprint-status-menu image {
+  -gtk-icon-size: 35px;
+  background-color: color-mix(in srgb, var(--window-fg-color) 5%, transparent);
+  padding: 12px;
+}
+
 .fingerprint-status-page.fingerprint-warning image {
   border: 3px solid var(--error-color);
 }
 
+.fingerprint-status-menu image.fingerprint-warning {
+  color: var(--warning-color);
+}
+
+.fingerprint-status-menu image.fingerprint-match {
+  color: var(--success-color);
+}
+
+.fingerprint-status-menu image.fingerprint-no-match {
+  color: var(--error-color);
+}
+
+.fingerprint-status-menu image.fingerprint-touching {
+  background-color: var(--window-bg-color);
+}
 .fingerprint-status-page.fingerprint-touching image {
   border: 3px solid var(--accent-bg-color);
 }
 
-.fingerprint-status-page.completed image {
+.fingerprint-status-page.completed image,
+.fingerprint-status-menu.completed image {
   background-color: var(--accent-bg-color);
   border: 3px solid var(--accent-bg-color);
   color: var(--accent-fg-color);
