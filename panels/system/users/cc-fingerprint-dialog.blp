@@ -104,6 +104,34 @@ template $CcFingerprintDialog: Adw.Dialog {
             }
           }
 
+          MenuButton verify_state_menu_button {
+            visible: false;
+            halign: center;
+            valign: center;
+            styles [
+              "fingerprint-status-menu",
+              "circular",
+              "flat",
+            ]
+
+            Image verify_state_image {
+              icon-name: "fingerprint-detection-symbolic";
+            }
+
+            popover: Popover {
+              Label {
+                halign: center;
+                margin-bottom: 6;
+                margin-end: 6;
+                margin-start: 6;
+                margin-top: 6;
+                max-width-chars: 30;
+                valign: center;
+                wrap: true;
+                label: _("Touch the fingerprint reader to check the scanned fingers");
+              }
+            };
+          }
         };
       }
 
