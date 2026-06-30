@@ -375,9 +375,19 @@ create_fingerprint_row (GObject *item, gpointer user_data)
     const gchar *finger_id = gtk_string_object_get_string (fingerprint);
     GtkWidget *row = adw_action_row_new ();
     GtkWidget *delete_button = gtk_button_new ();
+    GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+    GtkWidget *label = gtk_label_new_with_mnemonic (get_finger_name (finger_id));
+    GtkWidget *identified_icon = gtk_image_new_from_icon_name ("emblem-ok-symbolic");
 
-    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), get_finger_name (finger_id));
-    adw_preferences_row_set_use_underline (ADW_PREFERENCES_ROW (row), TRUE);
+    gtk_widget_add_css_class (identified_icon, "success");
+    gtk_widget_set_visible (identified_icon, FALSE);
+
+    gtk_box_append (GTK_BOX (box), label);
+    gtk_box_append (GTK_BOX (box), identified_icon);
+    adw_action_row_add_prefix (ADW_ACTION_ROW (row), box);
+
+    g_object_set_data_full (G_OBJECT (row), "finger-id", g_strdup (finger_id), g_free);
+    g_object_set_data (G_OBJECT (row), "identified-icon", identified_icon);
 
     g_object_set_data_full (G_OBJECT (delete_button), "finger-id", g_strdup (finger_id), g_free);
     g_signal_connect (delete_button, "clicked", G_CALLBACK (delete_fingerprint), user_data);
@@ -526,6 +536,32 @@ stop_identification (CcFingerprintDialog *self)
     cc_fprintd_device_call_verify_stop (self->device, G_DBUS_CALL_FLAGS_NONE, -1, self->cancellable,
                                         identification_stop_cb, self);
 }
+
+static void
+update_identified_rows (GtkWidget *widget, const char *finger_id)
+{
+    GtkWidget *child;
+    const char *row_finger_id = g_object_get_data (G_OBJECT (widget), "finger-id");
+
+    if (row_finger_id && ADW_IS_ACTION_ROW (widget)) {
+        GtkWidget *icon = g_object_get_data (G_OBJECT (widget), "identified-icon");
+
+        if (icon)
+            gtk_widget_set_visible (icon, finger_id && g_str_equal (row_finger_id, finger_id));
+    }
+
+    for (child = gtk_widget_get_first_child (widget); child != NULL; child = gtk_widget_get_next_sibling (child))
+        update_identified_rows (child, finger_id);
+}
+
+static void
+mark_finger_identified (CcFingerprintDialog *self, const char *finger_id)
+{
+    g_debug ("Identified enrolled finger %s", finger_id);
+
+    update_identified_rows (GTK_WIDGET (self->prints_group), finger_id);
+}
+
 static void
 reset_verify_state_cb (gpointer user_data)
 {
@@ -534,6 +570,7 @@ reset_verify_state_cb (gpointer user_data)
     self->verify_reset_timeout_id = 0;
 
     gtk_widget_set_css_classes (self->verify_state_image, (const char *[]){ NULL });
+    update_identified_rows (GTK_WIDGET (self->prints_group), NULL);
 }
 
 static gboolean
@@ -1032,8 +1069,10 @@ on_device_signal (CcFingerprintDialog *self, gchar *sender_name, gchar *signal_n
             gtk_widget_set_css_classes (self->verify_state_image, (const char *[]){ "fingerprint-match", NULL });
         } else if (g_str_equal (result, "verify-no-match")) {
             gtk_widget_set_css_classes (self->verify_state_image, (const char *[]){ "fingerprint-no-match", NULL });
+            mark_finger_identified (self, NULL);
         } else {
             gtk_widget_set_css_classes (self->verify_state_image, (const char *[]){ "fingerprint-error", NULL });
+            mark_finger_identified (self, NULL);
         }
 
         if (done) {
@@ -1042,6 +1081,11 @@ on_device_signal (CcFingerprintDialog *self, gchar *sender_name, gchar *signal_n
                 g_timeout_add_seconds_once (VERIFY_RESET_TIMEOUT_SECONDS, reset_verify_state_cb, self);
             stop_identification (self);
         }
+    } else if (g_str_equal (signal_name, "VerifyFingerMatched")) {
+        const char *finger_id;
+
+        g_variant_get (parameters, "(&s)", &finger_id);
+        mark_finger_identified (self, finger_id);
     }
 }
 
