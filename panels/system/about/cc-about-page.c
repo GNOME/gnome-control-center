@@ -71,6 +71,9 @@ struct _CcAboutPage {
     AdwActionRow *gnome_version_row;
     AdwActionRow *virtualization_row;
     AdwActionRow *kernel_row;
+
+    /* Cached version string */
+    char *gnome_version_str;
 };
 
 G_DEFINE_FINAL_TYPE (CcAboutPage, cc_about_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -653,6 +656,42 @@ cc_about_page_setup_virt (CcAboutPage *self)
     set_virtualization_label (self, g_variant_get_string (inner, NULL));
 }
 
+static void
+get_gnome_shell_version_cb (GObject *source, GAsyncResult *res, gpointer user_data)
+{
+    CcAboutPage *self = CC_ABOUT_PAGE (user_data);
+    g_autoptr(GDBusProxy) proxy = NULL;
+    g_autoptr(GVariant) variant = NULL;
+    g_autoptr(GError) error = NULL;
+    const char *version;
+
+    proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+    if (error != NULL) {
+        g_debug ("Unable to connect to GNOME Shell: %s", error->message);
+        return;
+    }
+
+    variant = g_dbus_proxy_get_cached_property (proxy, "ShellVersion");
+
+    if (!variant) {
+        g_debug ("Unable to retrieve org.gnome.Shell.ShellVersion property");
+        return;
+    }
+
+    version = g_variant_get_string (variant, NULL);
+    self->gnome_version_str = g_strdup (version);
+
+    adw_action_row_set_subtitle (self->gnome_version_row, self->gnome_version_str);
+    gtk_widget_set_visible (GTK_WIDGET (self->gnome_version_row), TRUE);
+}
+
+static void
+get_gnome_version_string (CcAboutPage *self)
+{
+    g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION, G_DBUS_PROXY_FLAGS_NONE, NULL, "org.gnome.Shell", "/org/gnome/Shell",
+                              "org.gnome.Shell", NULL, get_gnome_shell_version_cb, self);
+}
+
 guint64
 get_ram_size_libgtop (void)
 {
@@ -810,9 +849,11 @@ on_copy_row_activated_cb (GtkWidget *widget, CcAboutPage *self)
     os_type_text = get_os_type ();
     g_string_append_printf (result_str, "%s\n", os_type_text);
 
-    g_string_append (result_str, "- ");
-    system_details_window_title_print_padding ("**GNOME Version:**", result_str, 0);
-    g_string_append_printf (result_str, "%s\n", MAJOR_VERSION);
+    if (self->gnome_version_str) {
+        g_string_append (result_str, "- ");
+        system_details_window_title_print_padding ("**GNOME Shell Version:**", result_str, 0);
+        g_string_append_printf (result_str, "%s\n", self->gnome_version_str);
+    }
 
     g_string_append (result_str, "- ");
     system_details_window_title_print_padding ("**Kernel Version:**", result_str, 0);
@@ -880,7 +921,7 @@ cc_about_page_setup_overview (CcAboutPage *self)
     os_type_text = get_os_type ();
     adw_action_row_set_subtitle (self->os_type_row, os_type_text);
 
-    adw_action_row_set_subtitle (self->gnome_version_row, MAJOR_VERSION);
+    get_gnome_version_string (self);
 
     kernel_version_text = get_kernel_version_string ();
     adw_action_row_set_subtitle (self->kernel_row, kernel_version_text);
@@ -888,9 +929,22 @@ cc_about_page_setup_overview (CcAboutPage *self)
 }
 
 static void
+cc_about_page_finalize (GObject *object)
+{
+    CcAboutPage *self = CC_ABOUT_PAGE (object);
+
+    g_clear_pointer (&self->gnome_version_str, g_free);
+
+    G_OBJECT_CLASS (cc_about_page_parent_class)->finalize (object);
+}
+
+static void
 cc_about_page_class_init (CcAboutPageClass *klass)
 {
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+    object_class->finalize = cc_about_page_finalize;
 
     g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
 

@@ -55,8 +55,9 @@ template $CcAboutPage: Adw.NavigationPage {
           title: _("Software Information");
 
           Adw.ActionRow gnome_version_row {
-            title: _("GNOME Version");
+            title: _("GNOME Shell Version");
             subtitle-selectable: true;
+            visible: false;
 
             styles [
               "property",
