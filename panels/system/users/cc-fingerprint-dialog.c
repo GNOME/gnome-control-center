@@ -106,6 +106,9 @@ struct _CcFingerprintDialog {
     gboolean finger_on_reader;
 
     guint verify_reset_timeout_id;
+
+    GDBusProxy *screensaver_proxy;
+    gulong screensaver_lock_signal_id;
 };
 
 /* TODO - fprintd and API changes required:
@@ -1092,6 +1095,62 @@ on_device_signal (CcFingerprintDialog *self, gchar *sender_name, gchar *signal_n
 static void claim_device (CcFingerprintDialog *self);
 
 static void
+abort_operations_and_close (CcFingerprintDialog *self)
+{
+    if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING) {
+        g_debug ("Stopping enrollment due to screen lock");
+        cc_fprintd_device_call_enroll_stop_sync (self->device, G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+        remove_dialog_state (self, DIALOG_STATE_DEVICE_ENROLLING | DIALOG_STATE_DEVICE_ENROLL_STOPPING
+                                       | DIALOG_STATE_DEVICE_ENROLL_STARTING);
+    }
+
+    if (self->dialog_state & DIALOG_STATE_DEVICE_VERIFYING) {
+        g_debug ("Stopping verification due to screen lock");
+        cc_fprintd_device_call_verify_stop_sync (self->device, G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+        remove_dialog_state (self, DIALOG_STATE_DEVICE_VERIFYING | DIALOG_STATE_DEVICE_VERIFY_STOPPING
+                                       | DIALOG_STATE_DEVICE_VERIFY_STARTING);
+    }
+
+    adw_dialog_force_close (ADW_DIALOG (self));
+}
+
+static void
+on_screensaver_signal (GDBusProxy *proxy, gchar *sender_name, gchar *signal_name, GVariant *parameters,
+                       gpointer user_data)
+{
+    CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (user_data);
+
+    if (g_str_equal (signal_name, "ActiveChanged")) {
+        gboolean active;
+
+        g_variant_get (parameters, "(b)", &active);
+        g_debug ("ScreenSaver ActiveChanged (%d) signal received, aborting fingerprint operations", active);
+
+        if (active)
+            abort_operations_and_close (self);
+    }
+}
+
+static void
+setup_screensaver_proxy (CcFingerprintDialog *self)
+{
+    if (self->screensaver_proxy != NULL)
+        return;
+
+    self->screensaver_proxy = g_dbus_proxy_new_for_bus_sync (
+        G_BUS_TYPE_SESSION, G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION, NULL, "org.gnome.ScreenSaver",
+        "/org/gnome/ScreenSaver", "org.gnome.ScreenSaver", NULL, NULL);
+
+    if (self->screensaver_proxy == NULL) {
+        g_warning ("Failed to connect to org.gnome.ScreenSaver");
+        return;
+    }
+
+    self->screensaver_lock_signal_id =
+        g_signal_connect (self->screensaver_proxy, "g-signal", G_CALLBACK (on_screensaver_signal), self);
+}
+
+static void
 on_device_owner_changed (CcFprintdDevice *device, GParamSpec *spec, CcFingerprintDialog *self)
 {
     g_autofree char *name_owner = NULL;
@@ -1147,6 +1206,8 @@ claim_device_cb (GObject *object, GAsyncResult *res, gpointer user_data)
 
     if (!add_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED))
         return;
+
+    setup_screensaver_proxy (self);
 
     gtk_widget_set_sensitive (self->prints_manager, TRUE);
     update_prints_store (self);
@@ -1360,6 +1421,9 @@ on_dialog_closed_cb (CcFingerprintDialog *self)
 
         cc_fprintd_device_call_release (self->device, G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, NULL);
     }
+
+    g_clear_signal_handler (&self->screensaver_lock_signal_id, self->screensaver_proxy);
+    g_clear_object (&self->screensaver_proxy);
 
     g_clear_object (&self->manager);
     g_clear_object (&self->device);
