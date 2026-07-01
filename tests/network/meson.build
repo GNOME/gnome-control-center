@@ -26,29 +26,11 @@ if Xvfb.found()
                  c_args : cflags
   )
 
-  # FIXME: this integration test is flaky in CI (a connection add/activate
-  # race), so it is built but not registered. See the prior FIXME in
-  # tests/meson.build.
-  # test(
-  #   'test-network-panel',
-  #   find_program('test-network-panel.py'),
-  #       env : envs,
-  #   timeout : 120
-  # )
-
-  test_wireguard = executable(
-    'test-wireguard',
-    ['test-wireguard.c'],
-    include_directories : includes + [common_inc],
-           dependencies : common_deps + network_manager_deps + [libtestshell_dep, network_panel_dep],
-                 c_args : cflags
-  )
-
   test(
-    'test-wireguard',
-    find_program('test-wireguard.py'),
+    'test-network-panel',
+    find_program('test-network-panel.py'),
         env : envs,
-    timeout : 60
+    timeout : 120
   )
 endif
 
