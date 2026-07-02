@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-06-24 09:18+0000\n"
-"PO-Revision-Date: 2026-06-26 11:28+0200\n"
+"POT-Creation-Date: 2026-07-01 13:40+0000\n"
+"PO-Revision-Date: 2026-07-02 09:26+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -2272,10 +2272,8 @@ msgid "Compose Key"
 msgstr "Tòca de composicion"
 
 #: panels/keyboard/cc-keyboard-panel.c:79
-#, fuzzy
-#| msgid "The compose key allows a wide variety of characters to be entered. To use it, press compose then a sequence of characters.  For example, compose key followed by <b>o</b> and <b>c</b> will enter <b>©</b>, <b>a</b> followed by <b>'</b> will enter <b>á</b>."
 msgid "The compose key allows a wide variety of characters to be entered. To use it, press compose then a sequence of characters.  For example, compose key followed by <b>o</b> and <b>c</b> will enter <b>©</b>, <b>'</b> followed by <b>a</b> will enter <b>á</b>."
-msgstr "La tòca de composicion permet de picar una brava varietat de caractèrs. Per l’utilizar, tenètz-la quichada e quichatz una sequéncia de caractèrs. Per exemple, la tòca de composicion seguida de <b>o</b> e <b>c</b> donarà <b>©</b>, <b>a</b> seguit de <b>'</b> donarà <b>á</b>."
+msgstr "La tòca de composicion permet de picar una brava varietat de caractèrs. Per l’utilizar, tenètz-la quichada e quichatz una sequéncia de caractèrs. Per exemple, la tòca de composicion seguida de <b>o</b> e <b>c</b> donarà <b>©</b>, <b>'</b> seguida de <b>a</b> donarà <b>á</b>."
 
 #: panels/keyboard/cc-keyboard-panel.c:88
 msgctxt "keyboard key"
@@ -2333,10 +2331,8 @@ msgid "Shortcut"
 msgstr "Acorchi"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:178
-#, fuzzy
-#| msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut"
 msgid "Press <b>Esc</b> to cancel. Press <b>Backspace</b> to disable the keyboard shortcut for this action."
-msgstr "Quichar sus Escap per anullar o sus Retorn arrièr per desactivar l'acorchi de clavièr"
+msgstr "Quichar <b>Escap</b> per anullar. Quichar <b>Retorn arrièr</b> per desactivar l'acorchi de clavièr per aquesta accion."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:179
 msgid "Press <b>Esc</b> to cancel."
@@ -2344,10 +2340,9 @@ msgstr "Quichar<b> Escap</b> per anullar."
 
 #. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:396
-#, fuzzy, c-format
-#| msgid "<b>%s</b> is already being used for %s. If you replace it, %s will be disabled"
+#, c-format
 msgid "<b>This key combination is already being used for “%s”. This shortcut will be disabled.</b>"
-msgstr "<b>%s</b> es ja utilizat per %s. Se lo remplaçatz, %s serà desactivat"
+msgstr "<b>Aquesta tòca de composicion es ja utilizada per « %s ». Aqueste acorchi serà desactivat.</b>"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:505
 msgid "Enter the new shortcut"
@@ -2465,7 +2460,7 @@ msgid "_Right"
 msgstr "_Drech"
 
 #. Translators: This will be presented as the text of a link to the Mouse & Touchpad panel
-#: panels/mouse/cc-mouse-panel.blp:92 panels/wacom/cc-wacom-page.c:659
+#: panels/mouse/cc-mouse-panel.blp:92 panels/wacom/cc-wacom-page.c:661
 msgid "Mouse"
 msgstr "Mirga"
 
@@ -2531,7 +2526,7 @@ msgstr "_Desactivar en picant"
 
 #: panels/mouse/cc-mouse-panel.blp:183
 msgid "Disable While a _Mouse Is Connected"
-msgstr ""
+msgstr "Desactivar quand una _mirga es connectada"
 
 #: panels/mouse/cc-mouse-panel.blp:213
 msgid "Clicking"
@@ -2751,7 +2746,7 @@ msgstr "_Ret mandatari"
 msgid "C_onfiguration"
 msgstr "C_onfiguracion"
 
-#: panels/network/cc-net-proxy-page.blp:54 panels/network/cc-net-proxy-page.c:188 panels/network/connection-editor/ip4-page.blp:176 panels/network/connection-editor/ip4-page.blp:268 panels/network/connection-editor/ip6-page.blp:36 panels/network/connection-editor/ip6-page.blp:187 panels/network/connection-editor/ip6-page.blp:279 panels/wacom/cc-wacom-page.c:632
+#: panels/network/cc-net-proxy-page.blp:54 panels/network/cc-net-proxy-page.c:188 panels/network/connection-editor/ip4-page.blp:176 panels/network/connection-editor/ip4-page.blp:268 panels/network/connection-editor/ip6-page.blp:36 panels/network/connection-editor/ip6-page.blp:187 panels/network/connection-editor/ip6-page.blp:279 panels/wacom/cc-wacom-page.c:634
 msgid "Automatic"
 msgstr "Automatic"
 
@@ -3269,7 +3264,7 @@ msgid "WireGuard"
 msgstr "WireGuard"
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
-#: panels/network/connection-editor/ce-page-wireguard.c:355 panels/privacy/firmware-security/cc-firmware-security-dialog.c:155 panels/sound/cc-alert-chooser-page.c:324 panels/system/about/cc-about-page.c:323 panels/system/about/cc-about-page.c:377 panels/system/about/cc-about-page.c:860 panels/wwan/cc-wwan-details-dialog.c:98
+#: panels/network/connection-editor/ce-page-wireguard.c:355 panels/privacy/firmware-security/cc-firmware-security-dialog.c:155 panels/sound/cc-alert-chooser-page.c:324 panels/system/about/cc-about-page.c:336 panels/system/about/cc-about-page.c:390 panels/system/about/cc-about-page.c:911 panels/wwan/cc-wwan-details-dialog.c:98
 msgid "Unknown"
 msgstr "Desconegut"
 
@@ -3390,16 +3385,12 @@ msgid "Separate IP addresses with commas"
 msgstr "Separar las adreças IP amb de virgulas"
 
 #: panels/network/connection-editor/ip4-page.blp:219 panels/network/connection-editor/ip4-page.blp:228 panels/network/connection-editor/ip6-page.blp:230 panels/network/connection-editor/ip6-page.blp:239
-#, fuzzy
-#| msgid "Search Locations"
 msgid "DNS Search Domains"
-msgstr "Emplaçaments de la recèrca"
+msgstr "Domenis de recèrca DNS"
 
 #: panels/network/connection-editor/ip4-page.blp:238 panels/network/connection-editor/ip6-page.blp:249
-#, fuzzy
-#| msgid "Separate IP addresses with commas"
 msgid "Separate search domains with commas"
-msgstr "Separar las adreças IP amb de virgulas"
+msgstr "Separar los domenis de recèrca amb de virgulas"
 
 #: panels/network/connection-editor/ip4-page.blp:258 panels/network/connection-editor/ip6-page.blp:269
 msgid "Routes"
@@ -5081,7 +5072,7 @@ msgstr "Fabricant"
 msgid "No Active Jobs"
 msgstr "Cap de prètzfaches d’impression actiu"
 
-#: panels/printers/pp-printer-entry.blp:57 panels/system/about/cc-about-page.blp:129 panels/wwan/cc-wwan-details-dialog.blp:70
+#: panels/printers/pp-printer-entry.blp:57 panels/system/about/cc-about-page.blp:141 panels/wwan/cc-wwan-details-dialog.blp:70
 msgid "Model"
 msgstr "Modèl"
 
@@ -6399,82 +6390,86 @@ msgid "Software Information"
 msgstr "Informacions logicials"
 
 #: panels/system/about/cc-about-page.blp:58
-msgid "GNOME Version"
-msgstr "Version de GNOME"
+msgid "GNOME Shell Version"
+msgstr "Version del Shell de GNOME"
+
+#: panels/system/about/cc-about-page.blp:70
+msgid "Release Notes"
+msgstr "Nòtas de version"
 
 #. Translators: this field contains the distro name and version
-#: panels/system/about/cc-about-page.blp:68
+#: panels/system/about/cc-about-page.blp:81
 msgid "Operating System Name"
 msgstr "Nom del sistèma operatiu"
 
 #. Translators: this field contains the distro build
-#: panels/system/about/cc-about-page.blp:78
+#: panels/system/about/cc-about-page.blp:91
 msgid "Operating System Build"
 msgstr "Compilacion del sistèma operatiu"
 
 #. Translators: this field contains the distro type
-#: panels/system/about/cc-about-page.blp:88
+#: panels/system/about/cc-about-page.blp:101
 msgid "Operating System Type"
 msgstr "Tipe de sistèma operatiu"
 
-#: panels/system/about/cc-about-page.blp:97
+#: panels/system/about/cc-about-page.blp:110
 msgid "Virtualization"
 msgstr "Virtualizacion"
 
-#: panels/system/about/cc-about-page.blp:106
+#: panels/system/about/cc-about-page.blp:119
 msgid "Kernel Version"
 msgstr "Version del nuclèu"
 
-#: panels/system/about/cc-about-page.blp:115 panels/wwan/cc-wwan-details-dialog.blp:78
+#: panels/system/about/cc-about-page.blp:128 panels/wwan/cc-wwan-details-dialog.blp:78
 msgid "Firmware Version"
 msgstr "Version del micrologicial"
 
-#: panels/system/about/cc-about-page.blp:126
+#: panels/system/about/cc-about-page.blp:138
 msgid "Hardware Information"
 msgstr "Informacions del material"
 
-#: panels/system/about/cc-about-page.blp:138
+#: panels/system/about/cc-about-page.blp:150
 msgid "Memory"
 msgstr "Memòria"
 
-#: panels/system/about/cc-about-page.blp:147
+#: panels/system/about/cc-about-page.blp:159
 msgid "Processor"
 msgstr "Processor"
 
-#: panels/system/about/cc-about-page.blp:156
+#: panels/system/about/cc-about-page.blp:168
 msgid "Disk Capacity"
 msgstr "Capacitat del disc"
 
-#: panels/system/about/cc-about-page.blp:157
+#: panels/system/about/cc-about-page.blp:169
 msgid "Calculating…"
 msgstr "Calcul en cors…"
 
-#: panels/system/about/cc-about-page.blp:169
+#: panels/system/about/cc-about-page.blp:181
 msgid "_Copy"
 msgstr "_Copiar"
 
-#: panels/system/about/cc-about-page.c:347
+#: panels/system/about/cc-about-page.c:360
 msgid "Graphics"
 msgstr "Grafisme"
 
-#: panels/system/about/cc-about-page.c:349
+#: panels/system/about/cc-about-page.c:362
 #, c-format
 msgid "Graphics %d"
 msgstr "Grafisme %d"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-about-page.c:395
+#: panels/system/about/cc-about-page.c:408
 #, c-format
 msgid "64-bit"
 msgstr "64-bit"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-about-page.c:398
+#: panels/system/about/cc-about-page.c:411
 #, c-format
 msgid "32-bit"
 msgstr "32-bit"
 
-#: panels/system/about/cc-about-page.c:820
+#: panels/system/about/cc-about-page.c:871
 msgid "Details copied to clipboard"
 msgstr "Detalhs copiats al quichapapièrs"
 
@@ -6599,79 +6594,79 @@ msgstr "AM / _PM"
 msgid "F_irst Day of the Week"
 msgstr "Pr_imièr jorn de la setmana"
 
-#: panels/system/datetime/cc-datetime-page.blp:168
+#: panels/system/datetime/cc-datetime-page.blp:166
 msgid "Clock &amp; Calendar"
 msgstr "Relòtge e calandièr"
 
-#: panels/system/datetime/cc-datetime-page.blp:169
+#: panels/system/datetime/cc-datetime-page.blp:167
 msgid "Control how the time and date is shown in the top bar"
 msgstr "Contrarotlar coma la data e l’ora s‘afichan a la barra superior"
 
-#: panels/system/datetime/cc-datetime-page.blp:172
+#: panels/system/datetime/cc-datetime-page.blp:170
 msgid "_Week Day"
 msgstr "_Jorn de la setmana"
 
-#: panels/system/datetime/cc-datetime-page.blp:177
+#: panels/system/datetime/cc-datetime-page.blp:175
 msgid "D_ate"
 msgstr "D_ata"
 
-#: panels/system/datetime/cc-datetime-page.blp:182
+#: panels/system/datetime/cc-datetime-page.blp:180
 msgid "_Seconds"
 msgstr "_Segondas"
 
-#: panels/system/datetime/cc-datetime-page.blp:187
+#: panels/system/datetime/cc-datetime-page.blp:185
 msgid "Week _Numbers"
 msgstr "_Numèro de las setmanas"
 
-#: panels/system/datetime/cc-datetime-page.blp:188
+#: panels/system/datetime/cc-datetime-page.blp:186
 msgid "Shown in the dropdown calendar"
 msgstr "Afichar al menú desplegable de l’agenda"
 
-#: panels/system/datetime/cc-datetime-page.blp:221
+#: panels/system/datetime/cc-datetime-page.blp:219
 msgid "January"
 msgstr "genièr"
 
-#: panels/system/datetime/cc-datetime-page.blp:222
+#: panels/system/datetime/cc-datetime-page.blp:220
 msgid "February"
 msgstr "febrièr"
 
-#: panels/system/datetime/cc-datetime-page.blp:223
+#: panels/system/datetime/cc-datetime-page.blp:221
 msgid "March"
 msgstr "març"
 
-#: panels/system/datetime/cc-datetime-page.blp:224
+#: panels/system/datetime/cc-datetime-page.blp:222
 msgid "April"
 msgstr "abril"
 
-#: panels/system/datetime/cc-datetime-page.blp:225
+#: panels/system/datetime/cc-datetime-page.blp:223
 msgid "May"
 msgstr "mai"
 
-#: panels/system/datetime/cc-datetime-page.blp:226
+#: panels/system/datetime/cc-datetime-page.blp:224
 msgid "June"
 msgstr "junh"
 
-#: panels/system/datetime/cc-datetime-page.blp:227
+#: panels/system/datetime/cc-datetime-page.blp:225
 msgid "July"
 msgstr "julhet"
 
-#: panels/system/datetime/cc-datetime-page.blp:228
+#: panels/system/datetime/cc-datetime-page.blp:226
 msgid "August"
 msgstr "agost"
 
-#: panels/system/datetime/cc-datetime-page.blp:229
+#: panels/system/datetime/cc-datetime-page.blp:227
 msgid "September"
 msgstr "setembre"
 
-#: panels/system/datetime/cc-datetime-page.blp:230
+#: panels/system/datetime/cc-datetime-page.blp:228
 msgid "October"
 msgstr "octobre"
 
-#: panels/system/datetime/cc-datetime-page.blp:231
+#: panels/system/datetime/cc-datetime-page.blp:229
 msgid "November"
 msgstr "novembre"
 
-#: panels/system/datetime/cc-datetime-page.blp:232
+#: panels/system/datetime/cc-datetime-page.blp:230
 msgid "December"
 msgstr "decembre"
 
@@ -8269,7 +8264,7 @@ msgstr "Clavièr;mirga;accessibilitat;universal;contraste;cursor;son;zoom;ecran;
 msgid "Map Buttons"
 msgstr "Associar los botons"
 
-#: panels/wacom/button-mapping.blp:25
+#: panels/wacom/button-mapping.blp:24
 msgid "Map buttons to functions"
 msgstr "Associar los botons a las foncions"
 
@@ -8277,7 +8272,7 @@ msgstr "Associar los botons a las foncions"
 msgid "To edit a shortcut, choose the “Send Keystroke” action, press the keyboard shortcut button and hold down the new keys or press Backspace to clear"
 msgstr "Per modificar un acorchi, causissètz l’accion « Mandar las quichadas sus las tòcas », quichatz sul boton de l'acorchi de clavièr e tenètz quichadas las novèlas tòcas. o quichatz sus la tòca Retorn arrièr per anullar"
 
-#: panels/wacom/button-mapping.blp:59
+#: panels/wacom/button-mapping.blp:64
 msgid "_Close"
 msgstr "_Tampar"
 
@@ -8289,7 +8284,7 @@ msgstr "Picatz sus las ciblas quand apareisson a l'ecran per escandalhar la taul
 msgid "Mis-click detected, restarting…"
 msgstr "Marrit clic detectat, reaviada…"
 
-#: panels/wacom/cc-wacom-button-row.c:223
+#: panels/wacom/cc-wacom-button-row.c:222
 #, c-format
 msgid "Button %d"
 msgstr "Boton %d"
@@ -8374,12 +8369,12 @@ msgid "_Calibrate"
 msgstr "_Calibrar"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:620
+#: panels/wacom/cc-wacom-page.c:622
 msgid "All Displays"
 msgstr "Totes los ecrans"
 
 #. Translators: %s is a link to the Mouse & Touchpad panel with the label "Mouse"
-#: panels/wacom/cc-wacom-page.c:661
+#: panels/wacom/cc-wacom-page.c:663
 #, c-format
 msgid "Mouse devices can be configured in %s settings"
 msgstr "Se pòt ajustar los periferics de mirga als paramètres de %s"
@@ -8482,7 +8477,7 @@ msgstr "Pression de la punta de l’estilet"
 #: panels/wacom/cc-wacom-tool.c:344
 #, c-format
 msgid ", serial 0x%<PRIX64>"
-msgstr ""
+msgstr ", serial 0x%<PRIX64>"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in:2
 msgid "Graphics Tablets"
