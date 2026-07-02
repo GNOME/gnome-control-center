@@ -289,6 +289,8 @@ set_using_ntp_cb (GObject *source, GAsyncResult *res, gpointer user_data)
     } else {
         gtk_switch_set_state (self->network_time_switch, self->pending_ntp_state);
     }
+
+    gtk_widget_set_sensitive (GTK_WIDGET (self->network_time_switch), TRUE);
 }
 
 static void
@@ -460,6 +462,7 @@ on_clock_changed (CcDateTimePage *self, GParamSpec *pspec)
 static gboolean
 change_ntp (CcDateTimePage *self, gboolean state)
 {
+    gtk_widget_set_sensitive (GTK_WIDGET (self->network_time_switch), FALSE);
     queue_set_ntp (self, state);
 
     /* The new state will be visible once we see the reply. */
