@@ -41,7 +41,7 @@ typedef struct {
 #define CC_SEARCH_PROVIDER_APP(obj)                                                                                    \
     (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TYPE_SEARCH_PROVIDER_APP, CcSearchProviderApp))
 
-GType cc_search_provider_app_get_type (void) G_GNUC_CONST;
+GType cc_search_provider_app_get_type (void);
 
 CcSearchProviderApp *cc_search_provider_app_get (void);
 
