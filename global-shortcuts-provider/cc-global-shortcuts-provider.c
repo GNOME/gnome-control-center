@@ -61,15 +61,27 @@ handle_dialog_done (CcGlobalShortcutsProvider *self, CcGlobalShortcutDialog *sho
 {
     GDBusMethodInvocation *invocation;
 
-    invocation = g_object_get_data (G_OBJECT (shortcut_dialog), "dbus-invocation");
-    if (!invocation)
+    invocation = g_object_get_data (G_OBJECT (shortcut_dialog), "dbus-invocation-bind");
+    if (invocation) {
+        if (response) {
+            cc_settings_global_shortcuts_provider_complete_bind_shortcuts (self->skeleton, invocation,
+                                                                           g_variant_ref_sink (response));
+        } else {
+            g_dbus_method_invocation_return_error (invocation, G_DBUS_ERROR, G_DBUS_ERROR_ACCESS_DENIED,
+                                                   "Access denied");
+        }
         return;
+    }
 
-    if (response) {
-        cc_settings_global_shortcuts_provider_complete_bind_shortcuts (self->skeleton, invocation,
-                                                                       g_variant_ref_sink (response));
-    } else {
-        g_dbus_method_invocation_return_error (invocation, G_DBUS_ERROR, G_DBUS_ERROR_ACCESS_DENIED, "Access denied");
+    invocation = g_object_get_data (G_OBJECT (shortcut_dialog), "dbus-invocation-configure");
+    if (invocation) {
+        if (response) {
+            cc_settings_global_shortcuts_provider_complete_configure_shortcuts (self->skeleton, invocation,
+                                                                                g_variant_ref_sink (response));
+        } else {
+            g_dbus_method_invocation_return_error (invocation, G_DBUS_ERROR, G_DBUS_ERROR_ACCESS_DENIED,
+                                                   "Access denied");
+        }
     }
 }
 
@@ -96,13 +108,13 @@ handle_configure_shortcuts (CcGlobalShortcutsProvider *self, GDBusMethodInvocati
 
     g_signal_connect (shortcut_dialog, "done", G_CALLBACK (on_dialog_done), self);
 
+    g_object_set_data_full (G_OBJECT (shortcut_dialog), "dbus-invocation-configure", g_object_ref (invocation),
+                            g_object_unref);
     g_hash_table_add (self->dialogs, g_object_ref (shortcut_dialog));
 
     gtk_application_add_window (self->app, GTK_WINDOW (shortcut_dialog));
 
     cc_global_shortcut_dialog_present (shortcut_dialog);
-
-    cc_settings_global_shortcuts_provider_complete_configure_shortcuts (self->skeleton, invocation);
 
     return G_DBUS_METHOD_INVOCATION_HANDLED;
 }
@@ -124,7 +136,8 @@ handle_bind_shortcuts (CcGlobalShortcutsProvider *self, GDBusMethodInvocation *i
 
     gtk_application_add_window (self->app, GTK_WINDOW (shortcut_dialog));
 
-    g_object_set_data_full (G_OBJECT (shortcut_dialog), "dbus-invocation", g_object_ref (invocation), g_object_unref);
+    g_object_set_data_full (G_OBJECT (shortcut_dialog), "dbus-invocation-bind", g_object_ref (invocation),
+                            g_object_unref);
     g_hash_table_add (self->dialogs, g_object_ref (shortcut_dialog));
 
     cc_global_shortcut_dialog_present (shortcut_dialog);

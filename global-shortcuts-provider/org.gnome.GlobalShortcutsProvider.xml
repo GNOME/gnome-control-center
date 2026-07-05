@@ -56,11 +56,25 @@
         @app_id: Application ID
         @parent_window: Parent window handle
 
-        Presents the shortcuts configuration dialog to the user.
+        Presents the shortcuts configuration dialog to the user,
+        stores the preference, and returns the updated shortcuts.
+
+        The @results array is made of tuples composed of a shortcut id, and
+        a vardict with the following keys:
+
+        * ``description`` (``s``)
+
+          User-readable text describing what the shortcut does. Optional.
+
+        * ``shortcut`` (``as``)
+
+          A list of shortcuts to bind to the associated shortcut id, for
+          example: ``['<alt>C', '<ctrl>Q']``
     -->
     <method name="ConfigureShortcuts">
       <arg type="s" name="app_id" direction="in"/>
       <arg type="s" name="parent_window" direction="in"/>
+      <arg type="a(sa{sv})" name="results" direction="out"/>
     </method>
   </interface>
 </node>
