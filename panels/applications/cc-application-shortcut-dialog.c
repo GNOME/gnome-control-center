@@ -66,13 +66,12 @@ populate_shortcuts_model (CcApplicationShortcutDialog *self, const char *section
 }
 
 static void
-shortcut_changed_cb (CcApplicationShortcutDialog *self)
+portal_rebind_shortcuts (CcApplicationShortcutDialog *self)
 {
     GVariant *shortcuts;
     g_autoptr(GError) error = NULL;
     g_autoptr(CcGlobalShortcutsRebind) proxy = NULL;
 
-    cc_keyboard_manager_store_global_shortcuts (self->manager, self->app_id);
     shortcuts = cc_keyboard_manager_get_global_shortcuts (self->manager, self->app_id);
     proxy = cc_global_shortcuts_rebind_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION, G_DBUS_PROXY_FLAGS_NONE,
                                                                "org.freedesktop.impl.portal.desktop.gnome",
@@ -86,6 +85,13 @@ shortcut_changed_cb (CcApplicationShortcutDialog *self)
     if (error) {
         g_warning ("Can't connect to Global Shortcuts Rebind service: %s", error->message);
     }
+}
+
+static void
+shortcut_changed_cb (CcApplicationShortcutDialog *self)
+{
+    cc_keyboard_manager_store_global_shortcuts (self->manager, self->app_id);
+    portal_rebind_shortcuts (self);
 }
 
 static void
@@ -103,6 +109,7 @@ static void
 on_remove_dialog_response_cb (CcApplicationShortcutDialog *self)
 {
     cc_keyboard_manager_reset_global_shortcuts (self->manager, self->app_id);
+    portal_rebind_shortcuts (self);
     adw_dialog_close (ADW_DIALOG (self));
 }
 
