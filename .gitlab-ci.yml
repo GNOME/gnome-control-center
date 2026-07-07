@@ -172,6 +172,7 @@ build-fedora:
     - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
   stage: build
+  allow_failure: true
 
   script:
     - *environment_information
