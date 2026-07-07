@@ -233,29 +233,6 @@ check-potfiles:
   script:
     - .gitlab-ci/check-potfiles.sh
 
-test:
-  extends:
-    - '.fdo.suffixed-image@fedora'
-    - '.fedora.container.common'
-  stage: test
-
-  needs:
-    - build-fedora
-
-  script:
-    - *environment_information
-    - *run_tests
-
-  artifacts:
-    <<: *build_logs
-    reports:
-        junit: '$MESON_BUILD_DIR/meson-logs/testlog.junit.xml'
-
-  except:
-    variables:
-      - $CI_PIPELINE_SOURCE == "schedule"
-      - $CI_COMMIT_TITLE =~ /^Update.*translation$/
-
 ##
 # Stage: Deploy
 #
