@@ -167,7 +167,7 @@ build.container.fedora@x86_64:
 # most important stage of the CI, and no MR should ever be merged if it breaks
 # any of them.
 ##
-build:
+build-fedora:
   extends:
     - '.fdo.suffixed-image@fedora'
     - '.fedora.container.common'
@@ -192,7 +192,7 @@ build:
 # Same as build but with various off-by-default options enabled
 conditional builds:
   extends:
-    - build
+    - build-fedora
   allow_failure: true
   artifacts:
     # Only save build logs for these
@@ -239,7 +239,7 @@ test:
   stage: test
 
   needs:
-    - build
+    - build-fedora
 
   script:
     - *environment_information
