@@ -74,7 +74,7 @@ stages:
     # Should probably also switch away from 'rawhide',
     # to stable fedora branch as well.
     BRANCH_NAME: 'main'
-    CONTAINER_TAG: '2026-07-10'
+    CONTAINER_TAG: '2026-07-13'
     FEDORA_VERSION: rawhide
     # Derive FDO variables from this automatically.
     # DO NOT edit, instead change the variables above
@@ -104,6 +104,7 @@ build.container.fedora@x86_64:
     # - libsass-devel, sassc are often needed for building libadwaita, gtk, etc.
     # - libsoup3-devel required for malcontent is not included in its build depends yet
     FDO_DISTRIBUTION_PACKAGES: >-
+      clang-tools-extra
       dnf5-plugins
       gawk
       git
