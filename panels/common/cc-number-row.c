@@ -738,6 +738,9 @@ cc_number_row_bind_settings (CcNumberRow *self, GSettings *settings, const char 
         g_signal_connect (self, "notify::selected", G_CALLBACK (number_row_selected_changed_cb), NULL);
 
     number_row_settings_changed_cb (self);
+
+    /* Make insensitive if dconf setting is locked, same as g_settings_bind does */
+    g_settings_bind_writable (settings, key, self, "sensitive", FALSE);
 }
 
 /**
