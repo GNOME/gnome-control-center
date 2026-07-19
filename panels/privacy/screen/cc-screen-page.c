@@ -174,8 +174,6 @@ cc_screen_page_init (CcScreenPage *self)
     g_settings_bind (self->lock_settings, "lock-enabled", self->automatic_screen_lock_row, "active",
                      G_SETTINGS_BIND_DEFAULT);
 
-    g_settings_bind (self->lock_settings, "lock-enabled", self->lock_after_row, "sensitive", G_SETTINGS_BIND_GET);
-
     cc_number_row_bind_settings (self->lock_after_row, self->lock_settings, "lock-delay");
 
     g_settings_bind (self->notification_settings, "show-in-lock-screen", self->show_notifications_row, "active",
