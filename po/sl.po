@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-07-01 13:40+0000\n"
-"PO-Revision-Date: 2026-07-01 19:14+0200\n"
+"POT-Creation-Date: 2026-07-21 15:22+0000\n"
+"PO-Revision-Date: 2026-07-22 16:36+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -2250,7 +2250,7 @@ msgstr "Tipka za izmenjavo omogoča uporabo dodatnih znakov. Ti so pogosto natis
 msgid "Layout Default"
 msgstr "Privzeta postavitev"
 
-#: panels/keyboard/cc-keyboard-panel.c:65 panels/universal-access/cc-cursor-size-page.c:78 panels/universal-access/cc-ua-seeing-page.c:115
+#: panels/keyboard/cc-keyboard-panel.c:65 panels/universal-access/cc-cursor-size-page.c:78 panels/universal-access/cc-ua-seeing-page.c:116
 msgid "Default"
 msgstr "Privzeto"
 
@@ -3636,7 +3636,7 @@ msgstr "Kako pogosto naj bo soležniku poslan overjen prazen paket za ohranjanje
 msgid "seconds"
 msgstr "sekund"
 
-#: panels/network/connection-editor/wireguard-peer.blp:227 panels/universal-access/cc-ua-seeing-page.blp:109
+#: panels/network/connection-editor/wireguard-peer.blp:227 panels/universal-access/cc-ua-seeing-page.blp:115
 msgid "Apply"
 msgstr "Uveljavi"
 
@@ -7742,7 +7742,7 @@ msgstr "Velikost kazalke je za lažje spremljanje mogoče povečati"
 msgid "Medium"
 msgstr "Srednja"
 
-#: panels/universal-access/cc-cursor-size-page.c:79 panels/universal-access/cc-ua-mouse-page.blp:128 panels/universal-access/cc-ua-seeing-page.c:115
+#: panels/universal-access/cc-cursor-size-page.c:79 panels/universal-access/cc-ua-mouse-page.blp:128 panels/universal-access/cc-ua-seeing-page.c:116
 msgid "Large"
 msgstr "Velika"
 
@@ -7986,55 +7986,63 @@ msgstr "_Vedno pokaži vrstice drsnika"
 msgid "Make scrollbars always visible"
 msgstr "Drsniki so vedno vidni"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:91
+#: panels/universal-access/cc-ua-seeing-page.blp:87
+msgid "Always Show Keyboard Focus"
+msgstr "Vedno pokaži pozornost tipkovnice"
+
+#: panels/universal-access/cc-ua-seeing-page.blp:88
+msgid "Keep the focus always visible when navigating with the keyboard"
+msgstr "Ohrani pozornost vedno vidno ob krmarjenju s tipkovnico"
+
+#: panels/universal-access/cc-ua-seeing-page.blp:97
 msgid "Text Size"
 msgstr "Velikost besedila"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:103 panels/wwan/cc-wwan-device-page.c:184
+#: panels/universal-access/cc-ua-seeing-page.blp:109 panels/wwan/cc-wwan-device-page.c:184
 msgid "Cancel"
 msgstr "Prekliči"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:119
+#: panels/universal-access/cc-ua-seeing-page.blp:125
 msgid "Use the slider to adjust the size of user interface text"
 msgstr "Uporabite drsnik za prilagajanje velikosti besedila v uporabniškem vmesniku"
 
 #. Translators: Single letter next to the text size slider
-#: panels/universal-access/cc-ua-seeing-page.blp:131 panels/universal-access/cc-ua-seeing-page.blp:151
+#: panels/universal-access/cc-ua-seeing-page.blp:137 panels/universal-access/cc-ua-seeing-page.blp:157
 msgid "A"
 msgstr "A"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:162
+#: panels/universal-access/cc-ua-seeing-page.blp:168
 msgid "Sample text"
 msgstr "Vzorčno besedilo"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-seeing-page.c:196
+#: panels/universal-access/cc-ua-seeing-page.c:197
 msgctxt "cursor size"
 msgid "Default"
 msgstr "privzeta"
 
-#: panels/universal-access/cc-ua-seeing-page.c:199
+#: panels/universal-access/cc-ua-seeing-page.c:200
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "srednja"
 
-#: panels/universal-access/cc-ua-seeing-page.c:202
+#: panels/universal-access/cc-ua-seeing-page.c:203
 msgctxt "cursor size"
 msgid "Large"
 msgstr "velika"
 
-#: panels/universal-access/cc-ua-seeing-page.c:205
+#: panels/universal-access/cc-ua-seeing-page.c:206
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "zelo velika"
 
-#: panels/universal-access/cc-ua-seeing-page.c:208
+#: panels/universal-access/cc-ua-seeing-page.c:209
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "največja"
 
-#: panels/universal-access/cc-ua-seeing-page.c:211
+#: panels/universal-access/cc-ua-seeing-page.c:212
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -9429,7 +9437,7 @@ msgid "Settings is the primary interface for configuring your system."
 msgstr "Program je osnovni vmesnik za prilagajanje nastavitev sistema."
 
 #. developer_name tag deprecated with Appstream 1.0
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:40
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:40 shell/appdata/org.gnome.Settings.metainfo.xml.in.in:42
 msgid "The GNOME Project"
 msgstr "Projekt GNOME"
 
@@ -9579,10 +9587,3 @@ msgstr[3] "%u vhodi"
 #: subprojects/gvc/gvc-mixer-control.c:2919
 msgid "System Sounds"
 msgstr "Sistemski zvoki"
-
-#~ msgid "DNS search domain(s)"
-#~ msgstr "Domene iskanja DNS"
-
-#, c-format
-#~ msgid "© 1998 %s"
-#~ msgstr "© 1998 %s"
