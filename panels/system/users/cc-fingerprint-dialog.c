@@ -730,7 +730,7 @@ set_enroll_result_message (CcFingerprintDialog *self, EnrollState enroll_state, 
         break;
     case ENROLL_STATE_COMPLETED:
         icon_name = "object-select-symbolic";
-        adw_status_page_set_title (ADW_STATUS_PAGE (self->enrollment_view), _("Scan complete!"));
+        adw_status_page_set_title (ADW_STATUS_PAGE (self->enrollment_view), _("Scan Complete!"));
         break;
     default:
         icon_name = "fingerprint-detection-symbolic";
@@ -797,7 +797,7 @@ handle_enroll_completed (CcFingerprintDialog *self)
         gtk_progress_bar_set_fraction (self->progress_bar, self->enroll_progress);
     }
 
-    set_enroll_result_message (self, ENROLL_STATE_COMPLETED, _("Scan complete"));
+    set_enroll_result_message (self, ENROLL_STATE_COMPLETED, _("Scan Complete"));
     gtk_widget_set_visible (GTK_WIDGET (self->done_button), TRUE);
     gtk_widget_grab_focus (GTK_WIDGET (self->done_button));
 }
@@ -823,11 +823,11 @@ handle_enroll_failed (CcFingerprintDialog *self, const char *result)
         message = _("Fingerprint device disconnected");
         remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED | DIALOG_STATE_DEVICE_ENROLLING);
     } else if (g_str_equal (result, "enroll-data-full")) {
-        message = _("Fingerprint device storage is full");
+        message = _("Fingerprint Storage is Full");
     } else if (g_str_equal (result, "enroll-duplicate")) {
-        message = _("Fingerprint is duplicate");
+        message = _("Finger Already Scanned");
     } else {
-        message = _("Failed to enroll new fingerprint");
+        message = _("Failed to Scan Finger");
     }
 
     set_enroll_result_message (self, ENROLL_STATE_WARNING, message);

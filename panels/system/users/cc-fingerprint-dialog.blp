@@ -41,11 +41,9 @@ template $CcFingerprintDialog: Adw.Dialog {
       }
 
       StackPage {
-        title: _("Fingerprint Authentication");
-
         child: Adw.StatusPage no_fingerprints_enrolled_page {
-          title: _("Scan a finger to setup");
-          description: _("Use fingerprint to unlock the screen and identify yourself when prompted");
+          title: _("Fingerprint Authentication");
+          description: _("Use fingerprints to unlock the screen and identify yourself when prompted");
           icon-name: "fingerprint-detection-symbolic";
 
           styles [ "fingerprint-status-page" ]
@@ -91,6 +89,11 @@ template $CcFingerprintDialog: Adw.Dialog {
         title: _("Fingerprint Authentication");
 
         child: Adw.PreferencesPage prints_manager {
+
+          description: _("The following fingerprints can be used for authentication");
+          margin-start: 6;
+          margin-end: 6;
+
           Adw.PreferencesGroup prints_group {
             title: _("Fingerprints");
           }
