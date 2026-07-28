@@ -2,8 +2,8 @@ using Gtk 4.0;
 using Adw 1;
 
 template $CcFingerprintDialog: Adw.Dialog {
-  content-width: 400;
-  content-height: 500;
+  content-width: 480;
+  content-height: 540;
 
   closed => $on_dialog_closed_cb(template);
 
@@ -45,6 +45,8 @@ template $CcFingerprintDialog: Adw.Dialog {
           title: _("Fingerprint Authentication");
           description: _("Use fingerprints to unlock the screen and identify yourself when prompted");
           icon-name: "fingerprint-detection-symbolic";
+          margin-start: 32;
+          margin-end: 32;
 
           styles [ "fingerprint-status-page" ]
 
@@ -145,7 +147,7 @@ template $CcFingerprintDialog: Adw.Dialog {
           styles [ "fingerprint-status-page" ]
 
           child: Box {
-            spacing: 32;
+            spacing: 24;
             orientation: vertical;
 
             ProgressBar progress_bar {
