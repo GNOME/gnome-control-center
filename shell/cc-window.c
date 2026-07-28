@@ -52,6 +52,7 @@ struct _CcWindow {
 
     AdwNavigationView *navigation;
     AdwNavigationSplitView *split_view;
+    AdwNavigationPage *panel_list_page;
     CcPanelList *panel_list;
     GtkSearchBar *search_bar;
     GtkSearchEntry *search_entry;
@@ -111,13 +112,37 @@ load_panel_subpages (CcWindow *self)
     }
 }
 
+static void
+reparent_sidebar_for_collapsed_state (CcWindow *self)
+{
+    g_autoptr(GPtrArray) stack = g_ptr_array_new ();
+    gboolean collapsed;
+
+    collapsed = adw_navigation_split_view_get_collapsed (self->split_view);
+
+    if (collapsed) {
+        adw_navigation_split_view_set_sidebar (self->split_view, NULL);
+        g_ptr_array_add (stack, self->panel_list_page);
+    }
+
+    if (self->current_panel != NULL) {
+        GPtrArray *panel_stack = cc_panel_get_navigation_stack (CC_PANEL (self->current_panel));
+        for (guint i = 0; i < panel_stack->len; i++)
+            g_ptr_array_add (stack, g_ptr_array_index (panel_stack, i));
+    }
+
+    adw_navigation_view_replace (self->navigation, (AdwNavigationPage **) stack->pdata, stack->len);
+
+    if (!collapsed)
+        adw_navigation_split_view_set_sidebar (self->split_view, self->panel_list_page);
+}
+
 static gboolean
 activate_panel (CcWindow *self, const gchar *id, GVariant *parameters, const gchar *name, GIcon *gicon,
                 CcPanelVisibility visibility)
 {
     g_autoptr(GTimer) timer = NULL;
     gdouble elapsed_time;
-    GPtrArray *page_stack;
 
     CC_ENTRY;
 
@@ -137,9 +162,7 @@ activate_panel (CcWindow *self, const gchar *id, GVariant *parameters, const gch
     self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_WINDOW (self), id, name, parameters));
 
     cc_window_set_active_panel (CC_WINDOW (self), CC_PANEL (self->current_panel));
-
-    page_stack = cc_panel_get_navigation_stack (CC_PANEL (self->current_panel));
-    adw_navigation_view_replace (self->navigation, (AdwNavigationPage **) page_stack->pdata, page_stack->len);
+    reparent_sidebar_for_collapsed_state (self);
     load_panel_subpages (self);
 
     /* Finish profiling */
@@ -290,8 +313,13 @@ set_active_panel_from_id (CcWindow *self, const gchar *start_id, GVariant *param
     /* When loading the same panel again, just set its parameters */
     if (g_strcmp0 (self->current_panel_id, start_id) == 0) {
         g_object_set (G_OBJECT (self->current_panel), "parameters", parameters, NULL);
-        if (force_moving_to_the_panel || self->previous_list_view == view)
-            adw_navigation_split_view_set_show_content (self->split_view, TRUE);
+        if (force_moving_to_the_panel || self->previous_list_view == view) {
+            if (adw_navigation_split_view_get_collapsed (self->split_view))
+                reparent_sidebar_for_collapsed_state (self);
+            else
+                adw_navigation_split_view_set_show_content (self->split_view, TRUE);
+        }
+
         self->previous_list_view = view;
         CC_RETURN (TRUE);
     }
@@ -409,6 +437,8 @@ on_split_view_collapsed_changed_cb (CcWindow *self)
 
     selection_mode = collapsed ? GTK_SELECTION_NONE : GTK_SELECTION_SINGLE;
     cc_panel_list_set_selection_mode (self->panel_list, selection_mode);
+
+    reparent_sidebar_for_collapsed_state (self);
 
     g_object_notify (G_OBJECT (self), "collapsed");
 }
@@ -639,6 +669,7 @@ cc_window_dispose (GObject *object)
     g_clear_pointer (&self->current_panel_id, g_free);
     g_clear_object (&self->store);
     g_clear_object (&self->active_panel);
+    g_clear_object (&self->panel_list_page);
 
     G_OBJECT_CLASS (cc_window_parent_class)->dispose (object);
 }
@@ -735,6 +766,7 @@ cc_window_class_init (CcWindowClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcWindow, break_point);
     gtk_widget_class_bind_template_child (widget_class, CcWindow, navigation);
     gtk_widget_class_bind_template_child (widget_class, CcWindow, split_view);
+    gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list_page);
     gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
     gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
     gtk_widget_class_bind_template_child (widget_class, CcWindow, search_entry);
@@ -765,6 +797,9 @@ cc_window_init (CcWindow *self)
     self->previous_list_view = cc_panel_list_get_view (self->panel_list);
 
     gtk_search_bar_set_key_capture_widget (self->search_bar, GTK_WIDGET (self));
+
+    /* We need to keep panel_list_page around when reparenting the sidebar for mobile */
+    g_object_ref (self->panel_list_page);
 }
 
 CcWindow *

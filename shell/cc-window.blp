@@ -16,7 +16,7 @@ template $CcWindow: Adw.ApplicationWindow {
   content: Adw.NavigationSplitView split_view {
     notify::collapsed => $on_split_view_collapsed_changed_cb(template);
 
-    sidebar: Adw.NavigationPage {
+    sidebar: Adw.NavigationPage panel_list_page {
       title: _("Settings");
 
       child: Adw.ToolbarView {
