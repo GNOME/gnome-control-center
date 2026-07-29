@@ -106,8 +106,12 @@ load_panel_subpages (CcWindow *self)
     subpages = cc_panel_get_subpages (CC_PANEL (self->current_panel));
     for (l = subpages; l != NULL; l = l->next) {
         const gchar *page_tag = adw_navigation_page_get_tag (l->data);
+        AdwNavigationPage *existing = adw_navigation_view_find_page (self->navigation, page_tag);
 
-        if (adw_navigation_view_find_page (self->navigation, page_tag) == NULL)
+        if (existing != NULL && existing != l->data)
+            adw_navigation_view_remove (self->navigation, existing);
+
+        if (gtk_widget_get_parent (l->data) != GTK_WIDGET (self->navigation))
             adw_navigation_view_add (self->navigation, l->data);
     }
 }
