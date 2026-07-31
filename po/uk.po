@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2026-07-30 09:51+0000\n"
-"PO-Revision-Date: 2026-07-30 21:49+0300\n"
+"POT-Creation-Date: 2026-07-31 08:43+0000\n"
+"PO-Revision-Date: 2026-07-31 15:36+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -55,7 +55,7 @@ msgstr "Додати клавіатурні скорочення"
 #: panels/system/users/cc-fingerprint-dialog.blp:18
 #: panels/system/users/cc-fingerprint-dialog.c:1217
 #: panels/system/users/cc-password-dialog.blp:17
-#: panels/system/users/cc-user-page.blp:197
+#: panels/system/users/cc-user-page.blp:196
 #: panels/wwan/cc-wwan-mode-dialog.blp:27
 #: panels/wwan/cc-wwan-network-dialog.blp:95
 #: panels/wwan/cc-wwan-sim-lock-dialog.blp:202
@@ -101,7 +101,7 @@ msgstr ""
 
 #: panels/applications/cc-application-shortcut-dialog.c:121
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:156
-#: panels/system/users/cc-user-page.blp:198
+#: panels/system/users/cc-user-page.blp:197
 msgid "_Remove"
 msgstr "Ви_лучити"
 
@@ -223,8 +223,8 @@ msgstr "Отримання сигналів системи про пошук і 
 #: panels/applications/cc-applications-panel.blp:296
 #: panels/keyboard/cc-keyboard-panel.c:83
 #: panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331
-#: panels/system/users/cc-user-page.c:363
-#: panels/system/users/cc-user-page.c:689 panels/wwan/cc-wwan-device-page.c:423
+#: panels/system/users/cc-user-page.c:365
+#: panels/system/users/cc-user-page.c:705 panels/wwan/cc-wwan-device-page.c:423
 #: subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "Вимкнено"
@@ -1976,7 +1976,6 @@ msgid "This could be due to hardware limitations."
 msgstr "Причиною можуть бути апаратні обмеження."
 
 #: panels/display/cc-display-settings.blp:31
-#| msgid "Automatic Routes"
 msgctxt "display setting"
 msgid "_Auto Rotate"
 msgstr "_Автоматичне обертання"
@@ -2379,7 +2378,6 @@ msgid "Other"
 msgstr "Інше"
 
 #: panels/keyboard/cc-input-list-box.blp:15
-#| msgid "Input Sources"
 msgid "Input sources"
 msgstr "Джерела введення"
 
@@ -2592,8 +2590,6 @@ msgid "None"
 msgstr "Немає"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:96
-#| msgctxt "Password mode"
-#| msgid "Account disabled"
 msgid "Shortcut Disabled"
 msgstr "Скорочення вимкнено"
 
@@ -2611,34 +2607,26 @@ msgid "Shortcut"
 msgstr "Скорочення"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:178
-#| msgid ""
-#| "Press <b>Esc</b> to cancel or <b>Backspace</b> to disable the keyboard "
-#| "shortcut"
 msgid ""
 "Press <b>Esc</b> to cancel. Press <b>Backspace</b> to disable the keyboard "
 "shortcut for this action."
 msgstr ""
-"Натисніть <b>Esc</b>, щоб скасувати. Натисніть <b>Backspace</b>, щоб вимкнути"
-" "
-"комбінацію клавіш для цієї дії."
+"Натисніть <b>Esc</b>, щоб скасувати. Натисніть <b>Backspace</b>, щоб "
+"вимкнути комбінацію клавіш для цієї дії."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:179
-#| msgid "Press Esc to cancel"
 msgid "Press <b>Esc</b> to cancel."
 msgstr "Натисніть <b>Esc</b>, щоб скасувати."
 
 #. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:396
 #, c-format
-#| msgid ""
-#| "<b>%s</b> is already being used for %s. If you replace it, %s will be "
-#| "disabled"
 msgid ""
 "<b>This key combination is already being used for “%s”. This shortcut will "
 "be disabled.</b>"
 msgstr ""
-"<b>Цю комбінацію клавіш вже використано для дії «%s». Це скорочення буде вимк"
-"нено.</b>"
+"<b>Цю комбінацію клавіш вже використано для дії «%s». Це скорочення буде "
+"вимкнено.</b>"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:505
 msgid "Enter the new shortcut"
@@ -2651,7 +2639,6 @@ msgstr "Уведіть нове скорочення"
 #.
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:530
 #, c-format
-#| msgid "Enter new shortcut to change <b>%s</b>"
 msgid "Enter new keyboard shortcut for <b>“%s”</b>"
 msgstr "Введіть нове клавіатурне скорочення для <b>«%s»</b>"
 
@@ -2661,12 +2648,10 @@ msgstr "Додати своє скорочення"
 
 #. Headerbar
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:871
-#| msgid "Custom Shortcuts"
 msgid "Custom Shortcut"
 msgstr "Нетипове скорочення"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:871
-#| msgid "Set Shortcut"
 msgid "Edit Shortcut"
 msgstr "Змінити скорочення"
 
@@ -3872,13 +3857,11 @@ msgstr "IP-адреси слід відокремлювати комами"
 #: panels/network/connection-editor/ip4-page.blp:228
 #: panels/network/connection-editor/ip6-page.blp:230
 #: panels/network/connection-editor/ip6-page.blp:239
-#| msgid "Search Locations"
 msgid "DNS Search Domains"
 msgstr "Домени пошуку DNS"
 
 #: panels/network/connection-editor/ip4-page.blp:238
 #: panels/network/connection-editor/ip6-page.blp:249
-#| msgid "Separate IP addresses with commas"
 msgid "Separate search domains with commas"
 msgstr "Домени пошуку у списку слід відокремлювати комами"
 
@@ -4257,7 +4240,6 @@ msgid "VPN Options"
 msgstr "Параметри VPN"
 
 #: panels/network/network-wifi.blp:25
-#| msgid "## Report details\n"
 msgid "Hotspot details"
 msgstr "Подробиці щодо точки доступу"
 
@@ -5879,12 +5861,10 @@ msgid "Depends on other devices"
 msgstr "Залежить від інших пристроїв"
 
 #: panels/privacy/bolt/cc-bolt-device-dialog.blp:53
-#| msgid "Authorize and Connect"
 msgid "_Authorize and Connect"
 msgstr "_Уповноважити і з'єднатися"
 
 #: panels/privacy/bolt/cc-bolt-device-dialog.blp:64
-#| msgid "Forget Device"
 msgid "_Forget Device"
 msgstr "З_абути про пристрій"
 
@@ -6505,8 +6485,8 @@ msgstr "Нечинний"
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:42
-#: panels/system/users/cc-user-page.c:361
-#: panels/system/users/cc-user-page.c:688 panels/wwan/cc-wwan-device-page.c:421
+#: panels/system/users/cc-user-page.c:363
+#: panels/system/users/cc-user-page.c:704 panels/wwan/cc-wwan-device-page.c:421
 msgid "Enabled"
 msgstr "Увімкнено"
 
@@ -6837,7 +6817,6 @@ msgstr "Вибрати регіон"
 
 #. Translators: This is the title of the Search page, used to configure search providers
 #: panels/search/cc-search-panel.blp:6
-#| msgid "Search"
 msgctxt "panel title"
 msgid "Search"
 msgstr "Пошук"
@@ -6883,12 +6862,10 @@ msgid "Networks"
 msgstr "Мережі"
 
 #: panels/sharing/cc-sharing-networks.blp:12
-#| msgid "No networks selected for sharing"
 msgid "No networks available for sharing"
 msgstr "Немає жодної мережі для оприлюднення"
 
 #: panels/sharing/cc-sharing-networks.c:201
-#| msgid "Choose Network"
 msgid "Remove Network"
 msgstr "Вилучити мережу"
 
@@ -7197,12 +7174,10 @@ msgid "100%"
 msgstr "100%"
 
 #: panels/sound/cc-volume-slider.c:269
-#| msgid "I_nput Volume"
 msgid "Input Volume"
 msgstr "Вхідна гучність"
 
 #: panels/sound/cc-volume-slider.c:273
-#| msgid "O_utput Volume"
 msgid "Output Volume"
 msgstr "Вихідна гучність"
 
@@ -7246,7 +7221,6 @@ msgid "Software Information"
 msgstr "Дані щодо програмного забезпечення"
 
 #: panels/system/about/cc-about-page.blp:58
-#| msgid "GNOME Version"
 msgid "GNOME Shell Version"
 msgstr "Версія GNOME Shell"
 
@@ -7256,19 +7230,16 @@ msgstr "Нотатки щодо випуску"
 
 #. Translators: this field contains the distro name and version
 #: panels/system/about/cc-about-page.blp:81
-#| msgid "Operating System"
 msgid "Operating System Name"
 msgstr "Назва операційної системи"
 
 #. Translators: this field contains the distro build
 #: panels/system/about/cc-about-page.blp:91
-#| msgid "Operating System"
 msgid "Operating System Build"
 msgstr "Збірка операційної системи"
 
 #. Translators: this field contains the distro type
 #: panels/system/about/cc-about-page.blp:101
-#| msgid "Operating System"
 msgid "Operating System Type"
 msgstr "Тип операційної системи"
 
@@ -8433,38 +8404,50 @@ msgstr "Відкрийте вікно програми «Батьківськи�
 msgid "_Remove User…"
 msgstr "Ви_лучити користувача…"
 
-#: panels/system/users/cc-user-page.blp:191
+#: panels/system/users/cc-user-page.blp:203
+msgid "_Delete Files and Settings"
+msgstr "Ви_лучити файли і параметри"
+
+#: panels/system/users/cc-user-page.c:209
+msgctxt "Password mode"
+msgid "Account disabled"
+msgstr "Обліковий запис вимкнено"
+
+#: panels/system/users/cc-user-page.c:216
+msgctxt "Password mode"
+msgid "To be set at next login"
+msgstr "Буде встановлено при наступному вході"
+
+#: panels/system/users/cc-user-page.c:219
+msgctxt "Password mode"
+msgid "None"
+msgstr "Немає"
+
+#. TODO: Handle enterprise accounts
+#: panels/system/users/cc-user-page.c:414
+#, c-format
+msgid "Remove %s?"
+msgstr "Вилучити %s?"
+
+#: panels/system/users/cc-user-page.c:419
+#| msgid ""
+#| "The user will not be able to use this device once their account has been "
+#| "removed"
+msgid ""
+"The user's files and settings will be deleted, and they will not be able to "
+"use this device once their account has been removed"
+msgstr ""
+"Після вилучення облікового запису буде вилучено файли і параметри користувача"
+", а його власник або власниця не зможе "
+"користуватися цим пристроєм"
+
+#: panels/system/users/cc-user-page.c:423
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed"
 msgstr ""
 "Після вилучення облікового запису його власник або власниця не зможе "
 "користуватися цим пристроєм"
-
-#: panels/system/users/cc-user-page.blp:204
-msgid "_Delete Files and Settings"
-msgstr "Ви_лучити файли і параметри"
-
-#: panels/system/users/cc-user-page.c:207
-msgctxt "Password mode"
-msgid "Account disabled"
-msgstr "Обліковий запис вимкнено"
-
-#: panels/system/users/cc-user-page.c:214
-msgctxt "Password mode"
-msgid "To be set at next login"
-msgstr "Буде встановлено при наступному вході"
-
-#: panels/system/users/cc-user-page.c:217
-msgctxt "Password mode"
-msgid "None"
-msgstr "Немає"
-
-#. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:410
-#, c-format
-msgid "Remove %s?"
-msgstr "Вилучити %s?"
 
 #: panels/system/users/cc-users-page.blp:6
 #: panels/system/users/cc-users-page.blp:9
@@ -8899,7 +8882,6 @@ msgid "The screen reader reads displayed text as you move the focus"
 msgstr "Зчитувач екрана читає показаний текст у міру пересування фокуса"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:32
-#| msgid "Screen Reader"
 msgid "Co_nfigure Screen Reader"
 msgstr "Н_алаштувати читання з екрана"
 
@@ -8961,7 +8943,6 @@ msgid "Make scrollbars always visible"
 msgstr "Зробити смужки гортання завжди видимими"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:87
-#| msgid "Always Show Scroll_bars"
 msgid "Always Show Keyboard Focus"
 msgstr "Завжди показувати фокус клавіатури"
 
