@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-07-30 09:51+0000\n"
-"PO-Revision-Date: 2026-07-31 06:58+0200\n"
+"POT-Creation-Date: 2026-07-31 08:43+0000\n"
+"PO-Revision-Date: 2026-08-01 02:24+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -30,7 +30,7 @@ msgstr "კლავიატურის მალსახმობები�
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:17 panels/applications/cc-application-shortcut-dialog.c:121 panels/color/cc-color-calibrate.blp:22 panels/common/cc-language-chooser.blp:17 panels/display/cc-display-panel.blp:26 panels/display/cc-display-panel.blp:136 panels/display/cc-display-panel.blp:184 panels/keyboard/cc-input-chooser.blp:16
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:15 panels/keyboard/cc-keyboard-shortcut-page.blp:130 panels/network/cc-net-proxy-page.blp:15 panels/network/cc-wifi-hotspot-dialog.blp:16 panels/network/cc-wifi-panel.blp:182 panels/network/connection-editor/ce-page-details.c:87 panels/network/connection-editor/connection-editor.blp:17 panels/printers/pp-jobs-dialog.blp:112
 #: panels/printers/pp-new-printer-dialog.ui:65 panels/printers/pp-ppd-selection-dialog.blp:19 panels/privacy/usage/cc-usage-page.blp:114 panels/privacy/usage/cc-usage-page.blp:127 panels/privacy/usage/cc-usage-page.blp:140 panels/system/region/cc-format-chooser.blp:32 panels/system/users/cc-add-user-dialog.blp:19 panels/system/users/cc-avatar-chooser.c:90
-#: panels/system/users/cc-enterprise-login-dialog.blp:39 panels/system/users/cc-fingerprint-dialog.blp:18 panels/system/users/cc-fingerprint-dialog.c:1217 panels/system/users/cc-password-dialog.blp:17 panels/system/users/cc-user-page.blp:197 panels/wwan/cc-wwan-mode-dialog.blp:27 panels/wwan/cc-wwan-network-dialog.blp:95 panels/wwan/cc-wwan-sim-lock-dialog.blp:202
+#: panels/system/users/cc-enterprise-login-dialog.blp:39 panels/system/users/cc-fingerprint-dialog.blp:18 panels/system/users/cc-fingerprint-dialog.c:1217 panels/system/users/cc-password-dialog.blp:17 panels/system/users/cc-user-page.blp:196 panels/wwan/cc-wwan-mode-dialog.blp:27 panels/wwan/cc-wwan-network-dialog.blp:95 panels/wwan/cc-wwan-sim-lock-dialog.blp:202
 msgid "_Cancel"
 msgstr "_გაუქმება"
 
@@ -56,7 +56,7 @@ msgstr "წავშალო ყველა მალსახმობი?"
 msgid "All actions from %s that have been registered for global shortcuts will be removed."
 msgstr "ყველა ქმედება %s-დან, რომელიც რეგისტრირებულია გლობალური მალსახმობებისთვის, წაიშლება."
 
-#: panels/applications/cc-application-shortcut-dialog.c:121 panels/keyboard/cc-keyboard-shortcut-editor.blp:156 panels/system/users/cc-user-page.blp:198
+#: panels/applications/cc-application-shortcut-dialog.c:121 panels/keyboard/cc-keyboard-shortcut-editor.blp:156 panels/system/users/cc-user-page.blp:197
 msgid "_Remove"
 msgstr "_წაშლა"
 
@@ -155,7 +155,7 @@ msgstr "სისტემის ძებნის მიღება და �
 #. translators:
 #. * The device has been disabled
 #: panels/applications/cc-applications-panel.blp:205 panels/applications/cc-applications-panel.blp:247 panels/applications/cc-applications-panel.blp:268 panels/applications/cc-applications-panel.blp:282 panels/applications/cc-applications-panel.blp:296 panels/keyboard/cc-keyboard-panel.c:83 panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331
-#: panels/system/users/cc-user-page.c:363 panels/system/users/cc-user-page.c:689 panels/wwan/cc-wwan-device-page.c:423 subprojects/gvc/gvc-mixer-control.c:1919
+#: panels/system/users/cc-user-page.c:365 panels/system/users/cc-user-page.c:705 panels/wwan/cc-wwan-device-page.c:423 subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "გამორთული"
 
@@ -2334,7 +2334,7 @@ msgstr "მალსახმობი"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:178
 msgid "Press <b>Esc</b> to cancel. Press <b>Backspace</b> to disable the keyboard shortcut for this action."
-msgstr "დააწექით <b>Esc</b>-ს რომ გააუქმოთ ან <b>Backspace</b>-ს, რომ გამორთოთ კლავიატურის მალსახმობი ამ ქმედებისთვის"
+msgstr "დააწექით <b>Esc</b>-ს რომ გააუქმოთ ან <b>Backspace</b>-ს, რომ გამორთოთ კლავიატურის მალსახმობი ამ ქმედებისთვის."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:179
 msgid "Press <b>Esc</b> to cancel."
@@ -2343,7 +2343,6 @@ msgstr "<b>Esc</b> გასაუქმებლად."
 #. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:396
 #, c-format
-#| msgid "<b>%s</b> is already being used for %s. If you replace it, %s will be disabled"
 msgid "<b>This key combination is already being used for “%s”. This shortcut will be disabled.</b>"
 msgstr "<b>ეს ღილაკების კომბინაცია უკვე გამოიყენება “%s”-ისთვის. ეს მალსახმობი გაითიშება.</b>"
 
@@ -2358,7 +2357,6 @@ msgstr "შეიყვანეთ ახალი მალსახმობ�
 #.
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:530
 #, c-format
-#| msgid "Enter new shortcut to change <b>%s</b>"
 msgid "Enter new keyboard shortcut for <b>“%s”</b>"
 msgstr "შეიყვანეთ ახალი კლავიატურის მალსახმობი ქმედებისთვის <b>“%s”</b>"
 
@@ -5756,7 +5754,7 @@ msgstr "არასწორია"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/firmware-security/cc-firmware-security-utils.c:42 panels/system/users/cc-user-page.c:361 panels/system/users/cc-user-page.c:688 panels/wwan/cc-wwan-device-page.c:421
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:42 panels/system/users/cc-user-page.c:363 panels/system/users/cc-user-page.c:704 panels/wwan/cc-wwan-device-page.c:421
 msgid "Enabled"
 msgstr "ჩართულია"
 
@@ -6400,7 +6398,6 @@ msgid "Software Information"
 msgstr "ინფორმაცია პროგრამებზე"
 
 #: panels/system/about/cc-about-page.blp:58
-#| msgid "GNOME Version"
 msgid "GNOME Shell Version"
 msgstr "GNOME Shell-ის ვერსია"
 
@@ -7461,34 +7458,38 @@ msgstr "მშობლის კონტროლის აპის გახ
 msgid "_Remove User…"
 msgstr "მომხმა_რებლის წაშლა…"
 
-#: panels/system/users/cc-user-page.blp:191
-msgid "The user will not be able to use this device once their account has been removed"
-msgstr "მომხმარებელი ვერ გამოიყენებს ამ მოწყობილობას, თუ მათ ანგარიშს წაშლით"
-
-#: panels/system/users/cc-user-page.blp:204
+#: panels/system/users/cc-user-page.blp:203
 msgid "_Delete Files and Settings"
 msgstr "_ფაილებისა და პარამეტრების წაშლა"
 
-#: panels/system/users/cc-user-page.c:207
+#: panels/system/users/cc-user-page.c:209
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "ანგარიში გათიშულია"
 
-#: panels/system/users/cc-user-page.c:214
+#: panels/system/users/cc-user-page.c:216
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "დაყენებული იქნება შემდეგი შემოსვლისას"
 
-#: panels/system/users/cc-user-page.c:217
+#: panels/system/users/cc-user-page.c:219
 msgctxt "Password mode"
 msgid "None"
 msgstr "არა"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:410
+#: panels/system/users/cc-user-page.c:414
 #, c-format
 msgid "Remove %s?"
 msgstr "წავშალო %s?"
+
+#: panels/system/users/cc-user-page.c:419
+msgid "The user's files and settings will be deleted, and they will not be able to use this device once their account has been removed"
+msgstr "მომხმარებლის ფაილები და პარამეტრები წაიშლება და ისინი ვეღარ გამოიყენებენ ამ მოწყობილობას მათი ანგარიშის წაშლის შემდეგ"
+
+#: panels/system/users/cc-user-page.c:423
+msgid "The user will not be able to use this device once their account has been removed"
+msgstr "მომხმარებელი ვერ გამოიყენებს ამ მოწყობილობას, თუ მათ ანგარიშს წაშლით"
 
 #: panels/system/users/cc-users-page.blp:6 panels/system/users/cc-users-page.blp:9 panels/system/users/gnome-users-panel.desktop.in:2
 msgid "Users"
