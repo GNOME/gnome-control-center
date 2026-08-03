@@ -113,9 +113,23 @@ on_combo_row_selected_changed (AdwComboRow *combo_row, GParamSpec *pspec, GtkLis
 static void
 cc_default_apps_row_setup_cb (GtkSignalListItemFactory *factory, GtkListItem *list_item, gpointer user_data)
 {
+    GtkWidget *label;
+
+    label = gtk_label_new (NULL);
+    gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+    gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
+    gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+
+    gtk_list_item_set_child (list_item, label);
+}
+
+static void
+cc_default_apps_row_setup_list_cb (GtkSignalListItemFactory *factory, GtkListItem *list_item, gpointer user_data)
+{
     GtkWidget *box;
     GtkWidget *icon_image;
     GtkWidget *label;
+    GtkWidget *checkmark_image;
 
     box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 8);
 
@@ -128,31 +142,33 @@ cc_default_apps_row_setup_cb (GtkSignalListItemFactory *factory, GtkListItem *li
     gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
     gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
 
+    checkmark_image = gtk_image_new_from_icon_name ("object-select-symbolic");
+    gtk_widget_set_valign (checkmark_image, GTK_ALIGN_CENTER);
+    gtk_widget_set_opacity (checkmark_image, 0.0);
+
     gtk_box_append (GTK_BOX (box), icon_image);
     gtk_box_append (GTK_BOX (box), label);
+    gtk_box_append (GTK_BOX (box), checkmark_image);
 
     gtk_list_item_set_child (list_item, box);
 }
 
 static void
-cc_default_apps_row_setup_list_cb (GtkSignalListItemFactory *factory, GtkListItem *list_item, gpointer user_data)
+cc_default_apps_row_bind_cb (GtkSignalListItemFactory *factory, GtkListItem *list_item, gpointer user_data)
 {
-    GtkWidget *box;
-    GtkWidget *checkmark_image;
+    GAppInfo *info;
+    GtkWidget *label;
 
-    cc_default_apps_row_setup_cb (factory, list_item, user_data);
+    info = gtk_list_item_get_item (list_item);
+    if (!G_IS_APP_INFO (info))
+        return;
 
-    box = gtk_list_item_get_child (list_item);
-
-    checkmark_image = gtk_image_new_from_icon_name ("object-select-symbolic");
-    gtk_widget_set_valign (checkmark_image, GTK_ALIGN_CENTER);
-
-    gtk_widget_set_opacity (checkmark_image, 0.0);
-    gtk_box_append (GTK_BOX (box), checkmark_image);
+    label = gtk_list_item_get_child (list_item);
+    gtk_label_set_label (GTK_LABEL (label), g_app_info_get_display_name (info));
 }
 
 static void
-cc_default_apps_row_bind_cb (GtkSignalListItemFactory *factory, GtkListItem *list_item, gpointer user_data)
+cc_default_apps_row_bind_list_cb (GtkSignalListItemFactory *factory, GtkListItem *list_item, gpointer user_data)
 {
     GAppInfo *info;
     GIcon *app_icon;
@@ -169,21 +185,13 @@ cc_default_apps_row_bind_cb (GtkSignalListItemFactory *factory, GtkListItem *lis
     label = gtk_widget_get_next_sibling (icon_image);
 
     gtk_widget_set_tooltip_text (box, g_app_info_get_id (info));
-
     gtk_label_set_label (GTK_LABEL (label), g_app_info_get_display_name (info));
 
     app_icon = g_app_info_get_icon (info);
-
     if (app_icon != NULL)
         gtk_image_set_from_gicon (GTK_IMAGE (icon_image), app_icon);
     else
         gtk_image_clear (GTK_IMAGE (icon_image));
-}
-
-static void
-cc_default_apps_row_bind_list_cb (GtkSignalListItemFactory *factory, GtkListItem *list_item, gpointer user_data)
-{
-    cc_default_apps_row_bind_cb (factory, list_item, user_data);
 
     update_checkmark (CC_DEFAULT_APPS_ROW (user_data), list_item);
 
