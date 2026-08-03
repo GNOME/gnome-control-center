@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-07-31 08:43+0000\n"
-"PO-Revision-Date: 2026-07-31 14:26+0200\n"
+"POT-Creation-Date: 2026-08-03 08:18+0000\n"
+"PO-Revision-Date: 2026-08-03 18:38+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -28,7 +28,7 @@ msgstr "Apondre un acorchi de clavièr"
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:17 panels/applications/cc-application-shortcut-dialog.c:121 panels/color/cc-color-calibrate.blp:22 panels/common/cc-language-chooser.blp:17 panels/display/cc-display-panel.blp:26 panels/display/cc-display-panel.blp:136 panels/display/cc-display-panel.blp:184 panels/keyboard/cc-input-chooser.blp:16
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:15 panels/keyboard/cc-keyboard-shortcut-page.blp:130 panels/network/cc-net-proxy-page.blp:15 panels/network/cc-wifi-hotspot-dialog.blp:16 panels/network/cc-wifi-panel.blp:182 panels/network/connection-editor/ce-page-details.c:87 panels/network/connection-editor/connection-editor.blp:17 panels/printers/pp-jobs-dialog.blp:112
 #: panels/printers/pp-new-printer-dialog.ui:65 panels/printers/pp-ppd-selection-dialog.blp:19 panels/privacy/usage/cc-usage-page.blp:114 panels/privacy/usage/cc-usage-page.blp:127 panels/privacy/usage/cc-usage-page.blp:140 panels/system/region/cc-format-chooser.blp:32 panels/system/users/cc-add-user-dialog.blp:19 panels/system/users/cc-avatar-chooser.c:90
-#: panels/system/users/cc-enterprise-login-dialog.blp:39 panels/system/users/cc-fingerprint-dialog.blp:18 panels/system/users/cc-fingerprint-dialog.c:1217 panels/system/users/cc-password-dialog.blp:17 panels/system/users/cc-user-page.blp:196 panels/wwan/cc-wwan-mode-dialog.blp:27 panels/wwan/cc-wwan-network-dialog.blp:95 panels/wwan/cc-wwan-sim-lock-dialog.blp:202
+#: panels/system/users/cc-enterprise-login-dialog.blp:39 panels/system/users/cc-fingerprint-dialog.blp:166 panels/system/users/cc-password-dialog.blp:17 panels/system/users/cc-user-page.blp:196 panels/wwan/cc-wwan-mode-dialog.blp:27 panels/wwan/cc-wwan-network-dialog.blp:95 panels/wwan/cc-wwan-sim-lock-dialog.blp:202
 msgid "_Cancel"
 msgstr "_Anullar"
 
@@ -153,7 +153,7 @@ msgstr "Recebre las recèrcas sistèma e enviar los resultats"
 #. translators:
 #. * The device has been disabled
 #: panels/applications/cc-applications-panel.blp:205 panels/applications/cc-applications-panel.blp:247 panels/applications/cc-applications-panel.blp:268 panels/applications/cc-applications-panel.blp:282 panels/applications/cc-applications-panel.blp:296 panels/keyboard/cc-keyboard-panel.c:83 panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331 panels/system/users/cc-user-page.c:365
-#: panels/system/users/cc-user-page.c:705 panels/wwan/cc-wwan-device-page.c:423 subprojects/gvc/gvc-mixer-control.c:1919
+#: panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:423 subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "Desactivat"
 
@@ -484,7 +484,7 @@ msgstr "Aviada auto mèd_ia"
 msgid "Start apps or prompt when media is connected"
 msgstr "Lançar una aplicacion o demandar quand se connècta un mèdia"
 
-#: panels/applications/cc-default-apps-row.c:128
+#: panels/applications/cc-default-apps-row.c:240
 msgid "No Apps Available"
 msgstr "Cap d’aplicacion pas disponibla"
 
@@ -1010,7 +1010,7 @@ msgid "_Resume"
 msgstr "_Reprene"
 
 #. Translators: This button returns the user back to the color control panel
-#: panels/color/cc-color-calibrate.blp:40 panels/keyboard/cc-keyboard-shortcut-editor.blp:34 panels/system/users/cc-fingerprint-dialog.blp:39
+#: panels/color/cc-color-calibrate.blp:40 panels/keyboard/cc-keyboard-shortcut-editor.blp:34 panels/system/users/cc-fingerprint-dialog.blp:177
 msgid "_Done"
 msgstr "_Acabat"
 
@@ -4169,7 +4169,7 @@ msgctxt "Online Account"
 msgid "Other"
 msgstr "Autre"
 
-#: panels/online-accounts/cc-online-account-row.blp:25
+#: panels/online-accounts/cc-online-account-row.blp:25 panels/system/users/cc-fingerprint-dialog.blp:26
 msgid "Error"
 msgstr "Error"
 
@@ -4879,7 +4879,7 @@ msgid "Server requires authentication"
 msgstr "Lo servidor requerís una autentificacion"
 
 #. Translators: this is the "go back" action of a button
-#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:24 panels/wacom/cc-wacom-stylus-page.c:389 panels/wwan/cc-wwan-apn-dialog.blp:20
+#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:15 panels/wacom/cc-wacom-stylus-page.c:389 panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
 msgstr "Precedent"
 
@@ -5752,7 +5752,7 @@ msgstr "Pas valid"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/firmware-security/cc-firmware-security-utils.c:42 panels/system/users/cc-user-page.c:363 panels/system/users/cc-user-page.c:704 panels/wwan/cc-wwan-device-page.c:421
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:42 panels/system/users/cc-user-page.c:363 panels/system/users/cc-user-page.c:720 panels/wwan/cc-wwan-device-page.c:421
 msgid "Enabled"
 msgstr "Activat"
 
@@ -7148,207 +7148,211 @@ msgstr "Verificacion del domeni…"
 msgid "Failed to contact realmd service"
 msgstr "La connexion al servici realmd a fracassat"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:90
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/system/users/cc-fingerprint-dialog.blp:34
 msgid "No fingerprint device"
 msgstr "Cap de periferic d’emprenta"
 
-#. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.blp:106
-msgid "No Fingerprint device"
-msgstr "Cap de periferics d’emprenta"
-
-#: panels/system/users/cc-fingerprint-dialog.blp:116
+#: panels/system/users/cc-fingerprint-dialog.blp:37
 msgid "Ensure the device is properly connected"
 msgstr "Asseguratz-vos que lo periferic es connectat coma cal"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:124
+#: panels/system/users/cc-fingerprint-dialog.blp:45 panels/system/users/cc-fingerprint-dialog.blp:91
+msgid "Fingerprint Authentication"
+msgstr "Autentificacion per emprenta digitala"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:46
+msgid "Use fingerprints to unlock the screen and identify yourself when prompted"
+msgstr "Utilizar las emprentas digitalas per desverrolhar l’ecran e vos identificar quand òm o vos demanda"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:54
+msgid "_Scan Finger"
+msgstr "_Numerizar det"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:67
 msgid "Fingerprint Device"
 msgstr "Lector d’emprentas"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:134
+#: panels/system/users/cc-fingerprint-dialog.blp:70
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Seleccionar lo lector d'emprentas digitalas que volètz configurar"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:162
-msgid "Fingerprint Login"
-msgstr "Connexion per reconeissença d'emprentas"
+#: panels/system/users/cc-fingerprint-dialog.blp:78
+msgid "Select Finger"
+msgstr "Seleccionar lo det"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:170
-msgid "Fingerprint login allows you to unlock and log into your device with your finger"
-msgstr "La connexion per reconeissença d'emprentas vos permet de desverrolhar e vos connectar a vòstre aparelh amb vòstre det"
+#: panels/system/users/cc-fingerprint-dialog.blp:82
+msgid "Right Hand"
+msgstr "Man drecha"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:196
-msgid "_Delete Fingerprints"
-msgstr "_Suprimir las emprentas"
+#: panels/system/users/cc-fingerprint-dialog.blp:85
+msgid "Left Hand"
+msgstr "Man esquèrra"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:209
-msgid "Fingerprint Enroll"
-msgstr "Aprentissatge d’una emprenta"
+#: panels/system/users/cc-fingerprint-dialog.blp:95
+msgid "The following fingerprints can be used for authentication"
+msgstr "Se pòt utilizar las emprentas digitalas seguentas per l’autentificacion"
 
-#: panels/system/users/cc-fingerprint-dialog.c:208
+#: panels/system/users/cc-fingerprint-dialog.blp:100
+msgid "Fingerprints"
+msgstr "Emprentas"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:105
+msgid "Add Fingerprint"
+msgstr "Apondre una emprenta"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:136
+msgid "Touch the fingerprint reader to check the scanned fingers"
+msgstr "Tocatz lo lector d’emprentas digitals per verificar los dets numerizats"
+
+#: panels/system/users/cc-fingerprint-dialog.c:240
 msgid "the device needs to be claimed to perform this action"
 msgstr "aqueste aparelh deu èsser declarat per realizar aquesta accion"
 
-#: panels/system/users/cc-fingerprint-dialog.c:210
+#: panels/system/users/cc-fingerprint-dialog.c:242
 msgid "the device is already claimed by another process"
 msgstr "aqueste aparelh es ja declarat per un autre processús"
 
-#: panels/system/users/cc-fingerprint-dialog.c:212
+#: panels/system/users/cc-fingerprint-dialog.c:244
 msgid "you do not have permission to perform the action"
 msgstr "avètz pas la permission de realizar l’accion"
 
-#: panels/system/users/cc-fingerprint-dialog.c:214
+#: panels/system/users/cc-fingerprint-dialog.c:246
 msgid "no prints have been enrolled"
 msgstr "cap d’inscripcion marcada"
 
-#: panels/system/users/cc-fingerprint-dialog.c:221
+#: panels/system/users/cc-fingerprint-dialog.c:253
 msgid "Failed to communicate with the device during enrollment"
 msgstr "Fracàs de la comunicacion amb l’aparelh pendent l’inscripcion"
 
-#: panels/system/users/cc-fingerprint-dialog.c:224
+#: panels/system/users/cc-fingerprint-dialog.c:256
 msgid "Failed to communicate with the fingerprint reader"
 msgstr "Fracàs de la comunicacion amb lo lector d'emprentas digitalas"
 
-#: panels/system/users/cc-fingerprint-dialog.c:226
+#: panels/system/users/cc-fingerprint-dialog.c:258
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "Fracàs de la comunicacion amb lo daemon d'emprentas digitalas"
 
-#: panels/system/users/cc-fingerprint-dialog.c:452
+#: panels/system/users/cc-fingerprint-dialog.c:313
+msgid "Left thumb"
+msgstr "Poce esquèrre"
+
+#: panels/system/users/cc-fingerprint-dialog.c:315
+msgid "Left middle finger"
+msgstr "Major esquèrre"
+
+#: panels/system/users/cc-fingerprint-dialog.c:317
+msgid "_Left index finger"
+msgstr "Indèx _esquèrra"
+
+#: panels/system/users/cc-fingerprint-dialog.c:319
+msgid "Left ring finger"
+msgstr "Anular esquèrre"
+
+#: panels/system/users/cc-fingerprint-dialog.c:321
+msgid "Left little finger"
+msgstr "Auricular esquèrre"
+
+#: panels/system/users/cc-fingerprint-dialog.c:323
+msgid "Right thumb"
+msgstr "Poce drech"
+
+#: panels/system/users/cc-fingerprint-dialog.c:325
+msgid "Right middle finger"
+msgstr "Major drech"
+
+#: panels/system/users/cc-fingerprint-dialog.c:327
+msgid "_Right index finger"
+msgstr "Indèx _drech"
+
+#: panels/system/users/cc-fingerprint-dialog.c:329
+msgid "Right ring finger"
+msgstr "Anular drecha"
+
+#: panels/system/users/cc-fingerprint-dialog.c:331
+msgid "Right little finger"
+msgstr "Auricular drech"
+
+#: panels/system/users/cc-fingerprint-dialog.c:333
+msgid "Unknown Finger"
+msgstr "Det desconegut"
+
+#: panels/system/users/cc-fingerprint-dialog.c:351
+#, c-format
+msgid "Failed to delete fingerprint: %s"
+msgstr "Fracàs de la supression de l’emprenta : %s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:648
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "Fracàs del cargament de la lista d’emprentas : %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:510
-#, c-format
-msgid "Failed to delete saved fingerprints: %s"
-msgstr "Fracàs de la supression de las emprentas enregistradas : %s"
+#: panels/system/users/cc-fingerprint-dialog.c:733
+msgid "Scan Complete!"
+msgstr "Numerizacion acabada !"
 
-#: panels/system/users/cc-fingerprint-dialog.c:538
-msgid "Left thumb"
-msgstr "Poce esquèrre"
+#: panels/system/users/cc-fingerprint-dialog.c:746
+msgid "Touch finger on reader"
+msgstr "Pausar lo det sul lector"
 
-#: panels/system/users/cc-fingerprint-dialog.c:540
-msgid "Left middle finger"
-msgstr "Major esquèrre"
+#: panels/system/users/cc-fingerprint-dialog.c:800
+msgid "Scan Complete"
+msgstr "Numerizacion acabada"
 
-#: panels/system/users/cc-fingerprint-dialog.c:542
-msgid "_Left index finger"
-msgstr "Indèx _esquèrra"
-
-#: panels/system/users/cc-fingerprint-dialog.c:544
-msgid "Left ring finger"
-msgstr "Anular esquèrre"
-
-#: panels/system/users/cc-fingerprint-dialog.c:546
-msgid "Left little finger"
-msgstr "Auricular esquèrre"
-
-#: panels/system/users/cc-fingerprint-dialog.c:548
-msgid "Right thumb"
-msgstr "Poce drech"
-
-#: panels/system/users/cc-fingerprint-dialog.c:550
-msgid "Right middle finger"
-msgstr "Major drech"
-
-#: panels/system/users/cc-fingerprint-dialog.c:552
-msgid "_Right index finger"
-msgstr "Indèx _drech"
-
-#: panels/system/users/cc-fingerprint-dialog.c:554
-msgid "Right ring finger"
-msgstr "Anular drecha"
-
-#: panels/system/users/cc-fingerprint-dialog.c:556
-msgid "Right little finger"
-msgstr "Auricular drech"
-
-#: panels/system/users/cc-fingerprint-dialog.c:558
-msgid "Unknown Finger"
-msgstr "Det desconegut"
-
-#. TRANSLATORS: This is the message shown when the fingerprint
-#. * enrollment has been completed successfully
-#: panels/system/users/cc-fingerprint-dialog.c:670
-msgctxt "Fingerprint enroll state"
-msgid "Complete"
-msgstr "Acabat"
-
-#: panels/system/users/cc-fingerprint-dialog.c:678
+#: panels/system/users/cc-fingerprint-dialog.c:823
 msgid "Fingerprint device disconnected"
 msgstr "Lector d’emprentas desconnectat"
 
-#: panels/system/users/cc-fingerprint-dialog.c:681
-msgid "Fingerprint device storage is full"
-msgstr "L’espaci d’emmagazinatge del lector d'emprentas digitalas es plen"
+#: panels/system/users/cc-fingerprint-dialog.c:826
+msgid "Fingerprint Storage is Full"
+msgstr "L’espaci d’emmagazinatge de las emprentas digitalas es plen"
 
-#: panels/system/users/cc-fingerprint-dialog.c:683
-msgid "Fingerprint is duplicate"
-msgstr "Emprentas duplicadas"
+#: panels/system/users/cc-fingerprint-dialog.c:828
+msgid "Finger Already Scanned"
+msgstr "Det ja numerizat"
 
-#: panels/system/users/cc-fingerprint-dialog.c:685
-msgid "Failed to enroll new fingerprint"
-msgstr "Fracàs de l’aprentissatge de l’emprenta novèla"
+#: panels/system/users/cc-fingerprint-dialog.c:830
+msgid "Failed to Scan Finger"
+msgstr "La numerizacion del det a fracassat"
 
-#: panels/system/users/cc-fingerprint-dialog.c:713
+#: panels/system/users/cc-fingerprint-dialog.c:881
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "L’aprentissatge a pas pogut s’aviar : %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:719
+#: panels/system/users/cc-fingerprint-dialog.c:887
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "Fracàs de l’aprentissatge de l’emprenta novèla"
 
-#: panels/system/users/cc-fingerprint-dialog.c:746
+#: panels/system/users/cc-fingerprint-dialog.c:914
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "Fracàs de l'arrèst de l’inscripcion de l’emprenta digitala : %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:789
+#: panels/system/users/cc-fingerprint-dialog.c:958
 msgid "Repeatedly lift and place your finger on the reader to enroll your fingerprint"
 msgstr "Plaçatz lo det sul lector d'emprentas digitalas mantun còp per inscriure vòstra emprenta"
 
-#: panels/system/users/cc-fingerprint-dialog.c:890
-msgid "_Re-enroll this finger…"
-msgstr "_Renovar l’inscripcion d’aqueste det…"
-
-#. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:902
-msgid "Scan new fingerprint"
-msgstr "Enregistrar una emprenta novèla"
-
-#: panels/system/users/cc-fingerprint-dialog.c:934
+#: panels/system/users/cc-fingerprint-dialog.c:1011
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "Impossible de desliurar lo lector d'emprentas digitalas%s : %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:990
+#: panels/system/users/cc-fingerprint-dialog.c:1167
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Problèma pendent la lectura de l’aparelh"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1023
+#: panels/system/users/cc-fingerprint-dialog.c:1200
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "Fracàs de la temptativa de revendicacion del lector d'emprentas digitalas %s: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1146
+#: panels/system/users/cc-fingerprint-dialog.c:1329
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Fracàs de la temptativa d’obtencion del lector d'emprentas digitalas : %s"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1212
-msgid "Delete All Fingerprints?"
-msgstr "Suprimir totas las emprentas ?"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1213
-msgid "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-enable Fingerprint Login at least one fingerprint will have to be enrolled."
-msgstr "La supression de totas las emprentas inscrichas desactivarà la connexion via reconeissença d'emprentas. Per la reactivar se deurà inscriure almens una emprenta digitala."
-
-#: panels/system/users/cc-fingerprint-dialog.c:1217
-msgid "_Delete All"
-msgstr "_Suprimir tot"
 
 #: panels/system/users/cc-password-dialog.blp:5
 msgid "Change Password"
@@ -7476,16 +7480,16 @@ msgid "None"
 msgstr "Pas cap"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:414
+#: panels/system/users/cc-user-page.c:430
 #, c-format
 msgid "Remove %s?"
 msgstr "Suprimir %s ?"
 
-#: panels/system/users/cc-user-page.c:419
+#: panels/system/users/cc-user-page.c:435
 msgid "The user's files and settings will be deleted, and they will not be able to use this device once their account has been removed"
 msgstr "Los fichièrs e reglatges de l’utilizaire seràn suprimits, e poirá pas utilizar aqueste periferic un còp son compte suprimit"
 
-#: panels/system/users/cc-user-page.c:423
+#: panels/system/users/cc-user-page.c:439
 msgid "The user will not be able to use this device once their account has been removed"
 msgstr "L'utilizaire poirà pas utilizar aqueste periferic un còp son compte suprimit"
 
@@ -9530,6 +9534,39 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2919
 msgid "System Sounds"
 msgstr "Sons sistèma"
+
+#~ msgid "No Fingerprint device"
+#~ msgstr "Cap de periferics d’emprenta"
+
+#~ msgid "Fingerprint login allows you to unlock and log into your device with your finger"
+#~ msgstr "La connexion per reconeissença d'emprentas vos permet de desverrolhar e vos connectar a vòstre aparelh amb vòstre det"
+
+#~ msgid "_Delete Fingerprints"
+#~ msgstr "_Suprimir las emprentas"
+
+#~ msgid "Fingerprint Enroll"
+#~ msgstr "Aprentissatge d’una emprenta"
+
+#~ msgid "Fingerprint is duplicate"
+#~ msgstr "Emprentas duplicadas"
+
+#~ msgid "Failed to enroll new fingerprint"
+#~ msgstr "Fracàs de l’aprentissatge de l’emprenta novèla"
+
+#~ msgid "_Re-enroll this finger…"
+#~ msgstr "_Renovar l’inscripcion d’aqueste det…"
+
+#~ msgid "Scan new fingerprint"
+#~ msgstr "Enregistrar una emprenta novèla"
+
+#~ msgid "Delete All Fingerprints?"
+#~ msgstr "Suprimir totas las emprentas ?"
+
+#~ msgid "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-enable Fingerprint Login at least one fingerprint will have to be enrolled."
+#~ msgstr "La supression de totas las emprentas inscrichas desactivarà la connexion via reconeissença d'emprentas. Per la reactivar se deurà inscriure almens una emprenta digitala."
+
+#~ msgid "_Delete All"
+#~ msgstr "_Suprimir tot"
 
 #~ msgid "Re_place"
 #~ msgstr "Rem_plaçar"
@@ -12199,9 +12236,6 @@ msgstr "Sons sistèma"
 
 #~ msgid "To enable fingerprint login, you need to save one of your fingerprints, using the “%s” device."
 #~ msgstr "Per activar l’autentificacion per emprentas digitalas, vos cal enregistrar una de vòstras emprentas amb l’ajuda del periferic « %s »."
-
-#~ msgid "Selecting finger"
-#~ msgstr "Seleccion del det"
 
 #~ msgid "_Background"
 #~ msgstr "_Rèireplan"
