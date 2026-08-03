@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-07-31 08:43+0000\n"
-"PO-Revision-Date: 2026-08-01 02:24+0200\n"
+"POT-Creation-Date: 2026-08-03 08:18+0000\n"
+"PO-Revision-Date: 2026-08-03 17:22+0200\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -30,7 +30,7 @@ msgstr "კლავიატურის მალსახმობები�
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:17 panels/applications/cc-application-shortcut-dialog.c:121 panels/color/cc-color-calibrate.blp:22 panels/common/cc-language-chooser.blp:17 panels/display/cc-display-panel.blp:26 panels/display/cc-display-panel.blp:136 panels/display/cc-display-panel.blp:184 panels/keyboard/cc-input-chooser.blp:16
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:15 panels/keyboard/cc-keyboard-shortcut-page.blp:130 panels/network/cc-net-proxy-page.blp:15 panels/network/cc-wifi-hotspot-dialog.blp:16 panels/network/cc-wifi-panel.blp:182 panels/network/connection-editor/ce-page-details.c:87 panels/network/connection-editor/connection-editor.blp:17 panels/printers/pp-jobs-dialog.blp:112
 #: panels/printers/pp-new-printer-dialog.ui:65 panels/printers/pp-ppd-selection-dialog.blp:19 panels/privacy/usage/cc-usage-page.blp:114 panels/privacy/usage/cc-usage-page.blp:127 panels/privacy/usage/cc-usage-page.blp:140 panels/system/region/cc-format-chooser.blp:32 panels/system/users/cc-add-user-dialog.blp:19 panels/system/users/cc-avatar-chooser.c:90
-#: panels/system/users/cc-enterprise-login-dialog.blp:39 panels/system/users/cc-fingerprint-dialog.blp:18 panels/system/users/cc-fingerprint-dialog.c:1217 panels/system/users/cc-password-dialog.blp:17 panels/system/users/cc-user-page.blp:196 panels/wwan/cc-wwan-mode-dialog.blp:27 panels/wwan/cc-wwan-network-dialog.blp:95 panels/wwan/cc-wwan-sim-lock-dialog.blp:202
+#: panels/system/users/cc-enterprise-login-dialog.blp:39 panels/system/users/cc-fingerprint-dialog.blp:166 panels/system/users/cc-password-dialog.blp:17 panels/system/users/cc-user-page.blp:196 panels/wwan/cc-wwan-mode-dialog.blp:27 panels/wwan/cc-wwan-network-dialog.blp:95 panels/wwan/cc-wwan-sim-lock-dialog.blp:202
 msgid "_Cancel"
 msgstr "_გაუქმება"
 
@@ -155,7 +155,7 @@ msgstr "სისტემის ძებნის მიღება და �
 #. translators:
 #. * The device has been disabled
 #: panels/applications/cc-applications-panel.blp:205 panels/applications/cc-applications-panel.blp:247 panels/applications/cc-applications-panel.blp:268 panels/applications/cc-applications-panel.blp:282 panels/applications/cc-applications-panel.blp:296 panels/keyboard/cc-keyboard-panel.c:83 panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331
-#: panels/system/users/cc-user-page.c:365 panels/system/users/cc-user-page.c:705 panels/wwan/cc-wwan-device-page.c:423 subprojects/gvc/gvc-mixer-control.c:1919
+#: panels/system/users/cc-user-page.c:365 panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:423 subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "გამორთული"
 
@@ -486,7 +486,7 @@ msgstr "მედას ავტოგაშვება"
 msgid "Start apps or prompt when media is connected"
 msgstr "აპის გაშვება ან კითხვა, როცა მედია მიერთებულია"
 
-#: panels/applications/cc-default-apps-row.c:128
+#: panels/applications/cc-default-apps-row.c:240
 msgid "No Apps Available"
 msgstr "აპების გარეშე"
 
@@ -1012,7 +1012,7 @@ msgid "_Resume"
 msgstr "_გაგრძელება"
 
 #. Translators: This button returns the user back to the color control panel
-#: panels/color/cc-color-calibrate.blp:40 panels/keyboard/cc-keyboard-shortcut-editor.blp:34 panels/system/users/cc-fingerprint-dialog.blp:39
+#: panels/color/cc-color-calibrate.blp:40 panels/keyboard/cc-keyboard-shortcut-editor.blp:34 panels/system/users/cc-fingerprint-dialog.blp:177
 msgid "_Done"
 msgstr "_დასრულებულია"
 
@@ -1076,7 +1076,7 @@ msgstr "თეთრის სამიზნე წერტილის მი
 #. TRANSLATORS: the display calibration process is finished
 #: panels/color/cc-color-calibrate.c:393
 msgid "Complete!"
-msgstr "დასურლდა!"
+msgstr "დასრულდა!"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
@@ -4171,7 +4171,7 @@ msgctxt "Online Account"
 msgid "Other"
 msgstr "სხვა"
 
-#: panels/online-accounts/cc-online-account-row.blp:25
+#: panels/online-accounts/cc-online-account-row.blp:25 panels/system/users/cc-fingerprint-dialog.blp:26
 msgid "Error"
 msgstr "შეცდომა"
 
@@ -4881,7 +4881,7 @@ msgid "Server requires authentication"
 msgstr "სერვერი ითხოვს ავთენტიკაციას"
 
 #. Translators: this is the "go back" action of a button
-#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:24 panels/wacom/cc-wacom-stylus-page.c:389 panels/wwan/cc-wwan-apn-dialog.blp:20
+#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:15 panels/wacom/cc-wacom-stylus-page.c:389 panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
 msgstr "უკან"
 
@@ -5754,7 +5754,7 @@ msgstr "არასწორია"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/firmware-security/cc-firmware-security-utils.c:42 panels/system/users/cc-user-page.c:363 panels/system/users/cc-user-page.c:704 panels/wwan/cc-wwan-device-page.c:421
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:42 panels/system/users/cc-user-page.c:363 panels/system/users/cc-user-page.c:720 panels/wwan/cc-wwan-device-page.c:421
 msgid "Enabled"
 msgstr "ჩართულია"
 
@@ -7150,207 +7150,211 @@ msgstr "დომენის შემოწმება…"
 msgid "Failed to contact realmd service"
 msgstr "ჩავარდა მიერთება სერვისთან realmd"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:90
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/system/users/cc-fingerprint-dialog.blp:34
 msgid "No fingerprint device"
 msgstr "ანაბეჭდების წამკითხველი მოწყობილობა ნაპოვნი არაა"
 
-#. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.blp:106
-msgid "No Fingerprint device"
-msgstr "ანაბეჭდების წამკითხველი მოწყობილობა ნაპოვნი არაა"
-
-#: panels/system/users/cc-fingerprint-dialog.blp:116
+#: panels/system/users/cc-fingerprint-dialog.blp:37
 msgid "Ensure the device is properly connected"
 msgstr "დარწმუნდით, რომ მოწყობილობა სწორადაა მითითებული"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:124
+#: panels/system/users/cc-fingerprint-dialog.blp:45 panels/system/users/cc-fingerprint-dialog.blp:91
+msgid "Fingerprint Authentication"
+msgstr "ავთენტიკაცია თითის ანაბეჭდით"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:46
+msgid "Use fingerprints to unlock the screen and identify yourself when prompted"
+msgstr "თითის ანაბეჭდის გამოყენება ეკრანის განბლოკვისთვის და, მოთხოვნის შემთხვევაში, თქვენი იდენტიფიკაციისთვის"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:54
+msgid "_Scan Finger"
+msgstr "თითის _სკანირება"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:67
 msgid "Fingerprint Device"
 msgstr "ანაბეჭდების წამკითხველი მოწყობილობა"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:134
+#: panels/system/users/cc-fingerprint-dialog.blp:70
 msgid "Choose the fingerprint device you want to configure"
 msgstr "აირჩიეთ ანაბეჭდის მოწყობილობა, რომელიც გსურთ, მოირგოთ"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:162
-msgid "Fingerprint Login"
-msgstr "ანაბეჭდით შესვლა"
+#: panels/system/users/cc-fingerprint-dialog.blp:78
+msgid "Select Finger"
+msgstr "აირჩიეთ თითი"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:170
-msgid "Fingerprint login allows you to unlock and log into your device with your finger"
-msgstr "ანაბეჭდით შესვლა საშუალებას მოგცემთ, თითით განბლოკოთ და შეხვიდეთ თქვენს კომპიუტერში"
+#: panels/system/users/cc-fingerprint-dialog.blp:82
+msgid "Right Hand"
+msgstr "მარჯვენა ხელი"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:196
-msgid "_Delete Fingerprints"
-msgstr "ანაბეჭდების _წაშლა"
+#: panels/system/users/cc-fingerprint-dialog.blp:85
+msgid "Left Hand"
+msgstr "მარცხენა ხელი"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:209
-msgid "Fingerprint Enroll"
-msgstr "ანაბეჭდის დამატება"
+#: panels/system/users/cc-fingerprint-dialog.blp:95
+msgid "The following fingerprints can be used for authentication"
+msgstr "ავთენტიკაციისთვის შეიძლება შემდეგი თითის ანაბეჭდების გამოყენება"
 
-#: panels/system/users/cc-fingerprint-dialog.c:208
+#: panels/system/users/cc-fingerprint-dialog.blp:100
+msgid "Fingerprints"
+msgstr "თითის ანაბეჭდები"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:105
+msgid "Add Fingerprint"
+msgstr "თითის ანაბეჭდის დამატება"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:136
+msgid "Touch the fingerprint reader to check the scanned fingers"
+msgstr "შეეხეთ თითის ანაბეჭდის წამკითხველს დასკანირებული თითების შესამოწმებლად"
+
+#: panels/system/users/cc-fingerprint-dialog.c:240
 msgid "the device needs to be claimed to perform this action"
 msgstr "ამ ქმედების შესასრულებლად საჭიროა მოწყობილობის გამოთხოვა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:210
+#: panels/system/users/cc-fingerprint-dialog.c:242
 msgid "the device is already claimed by another process"
 msgstr "მოწყობილობა უკვე გამოთხოვილია სხვა პროცესის მიერ"
 
-#: panels/system/users/cc-fingerprint-dialog.c:212
+#: panels/system/users/cc-fingerprint-dialog.c:244
 msgid "you do not have permission to perform the action"
 msgstr "ამ ქმედების შესრულების წვდომა არ გაგაჩნიათ"
 
-#: panels/system/users/cc-fingerprint-dialog.c:214
+#: panels/system/users/cc-fingerprint-dialog.c:246
 msgid "no prints have been enrolled"
 msgstr "დასკანერებულია ანაბეჭდების გარეშე"
 
-#: panels/system/users/cc-fingerprint-dialog.c:221
+#: panels/system/users/cc-fingerprint-dialog.c:253
 msgid "Failed to communicate with the device during enrollment"
 msgstr "შეყვანისას მოწყობილობასთან კავშირი ჩავარდა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:224
+#: panels/system/users/cc-fingerprint-dialog.c:256
 msgid "Failed to communicate with the fingerprint reader"
 msgstr "ანაბეჭდების მოწყობილობასთან ურთიერთობის შეცდომა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:226
+#: panels/system/users/cc-fingerprint-dialog.c:258
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "ანაბეჭდის დემონთან ურთიერთობის შეცდომა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:452
+#: panels/system/users/cc-fingerprint-dialog.c:313
+msgid "Left thumb"
+msgstr "მარცხენა ცერა"
+
+#: panels/system/users/cc-fingerprint-dialog.c:315
+msgid "Left middle finger"
+msgstr "მარცხენა შუა თითი"
+
+#: panels/system/users/cc-fingerprint-dialog.c:317
+msgid "_Left index finger"
+msgstr "_მარცხენა საჩვენებელი თითი"
+
+#: panels/system/users/cc-fingerprint-dialog.c:319
+msgid "Left ring finger"
+msgstr "მარცხენა არათითი"
+
+#: panels/system/users/cc-fingerprint-dialog.c:321
+msgid "Left little finger"
+msgstr "მარცხენა პატარა თითი"
+
+#: panels/system/users/cc-fingerprint-dialog.c:323
+msgid "Right thumb"
+msgstr "მარჯვენა ცერა"
+
+#: panels/system/users/cc-fingerprint-dialog.c:325
+msgid "Right middle finger"
+msgstr "მარჯვენა შუა თითი"
+
+#: panels/system/users/cc-fingerprint-dialog.c:327
+msgid "_Right index finger"
+msgstr "_მარჯვენა საჩვენებელი თითი"
+
+#: panels/system/users/cc-fingerprint-dialog.c:329
+msgid "Right ring finger"
+msgstr "მარჯვენა არათითი"
+
+#: panels/system/users/cc-fingerprint-dialog.c:331
+msgid "Right little finger"
+msgstr "მარჯვენა პატარა თითი"
+
+#: panels/system/users/cc-fingerprint-dialog.c:333
+msgid "Unknown Finger"
+msgstr "უცნობი თითი"
+
+#: panels/system/users/cc-fingerprint-dialog.c:351
+#, c-format
+msgid "Failed to delete fingerprint: %s"
+msgstr "თითის ანაბეჭდის წაშლის შეცდომა: %s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:648
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "ანაბეჭდების ჩამოთვლის შეცდომა: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:510
-#, c-format
-msgid "Failed to delete saved fingerprints: %s"
-msgstr "შენახული ანაბეჭდის წაშლის შეცდომა: %s"
+#: panels/system/users/cc-fingerprint-dialog.c:733
+msgid "Scan Complete!"
+msgstr "სკანირება დასრულდა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:538
-msgid "Left thumb"
-msgstr "მარცხენა ცერა"
+#: panels/system/users/cc-fingerprint-dialog.c:746
+msgid "Touch finger on reader"
+msgstr "შეახეთ თითი წამკითხველს"
 
-#: panels/system/users/cc-fingerprint-dialog.c:540
-msgid "Left middle finger"
-msgstr "მარცხენა შუა თითი"
+#: panels/system/users/cc-fingerprint-dialog.c:800
+msgid "Scan Complete"
+msgstr "სკანირება დასრულდა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:542
-msgid "_Left index finger"
-msgstr "_მარცხენა საჩვენებელი თითი"
-
-#: panels/system/users/cc-fingerprint-dialog.c:544
-msgid "Left ring finger"
-msgstr "მარცხენა ბეჭედი თითი"
-
-#: panels/system/users/cc-fingerprint-dialog.c:546
-msgid "Left little finger"
-msgstr "მარცხენა პატარა თითი"
-
-#: panels/system/users/cc-fingerprint-dialog.c:548
-msgid "Right thumb"
-msgstr "მარჯვენა ცერა"
-
-#: panels/system/users/cc-fingerprint-dialog.c:550
-msgid "Right middle finger"
-msgstr "მარჯვენა შუა თითი"
-
-#: panels/system/users/cc-fingerprint-dialog.c:552
-msgid "_Right index finger"
-msgstr "_მარჯვენა საჩვენებელი თითი"
-
-#: panels/system/users/cc-fingerprint-dialog.c:554
-msgid "Right ring finger"
-msgstr "მარჯვენა ბეჭედი თითი"
-
-#: panels/system/users/cc-fingerprint-dialog.c:556
-msgid "Right little finger"
-msgstr "მარჯვენა პატარა თითი"
-
-#: panels/system/users/cc-fingerprint-dialog.c:558
-msgid "Unknown Finger"
-msgstr "უცნობი თითი"
-
-#. TRANSLATORS: This is the message shown when the fingerprint
-#. * enrollment has been completed successfully
-#: panels/system/users/cc-fingerprint-dialog.c:670
-msgctxt "Fingerprint enroll state"
-msgid "Complete"
-msgstr "დასრულებულია"
-
-#: panels/system/users/cc-fingerprint-dialog.c:678
+#: panels/system/users/cc-fingerprint-dialog.c:823
 msgid "Fingerprint device disconnected"
 msgstr "ანაბეჭდების წამკითხველი მოწყობილობა გამოერთებულია"
 
-#: panels/system/users/cc-fingerprint-dialog.c:681
-msgid "Fingerprint device storage is full"
-msgstr "ანაბეჭდების წამკითხველი მოწყობილობის საცავი სავსეა"
+#: panels/system/users/cc-fingerprint-dialog.c:826
+msgid "Fingerprint Storage is Full"
+msgstr "თითის ანაბეჭდების წამკითხველი მოწყობილობის საცავი სავსეა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:683
-msgid "Fingerprint is duplicate"
-msgstr "დუბლირებული ანაბეჭდი"
+#: panels/system/users/cc-fingerprint-dialog.c:828
+msgid "Finger Already Scanned"
+msgstr "თითი უკვე დასკანერებულია"
 
-#: panels/system/users/cc-fingerprint-dialog.c:685
-msgid "Failed to enroll new fingerprint"
-msgstr "ახალი ანაბეჭდის დამატება ჩავარდა"
+#: panels/system/users/cc-fingerprint-dialog.c:830
+msgid "Failed to Scan Finger"
+msgstr "თითის სკანირება ჩავარდა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:713
+#: panels/system/users/cc-fingerprint-dialog.c:881
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "სკანირების დაწყება ჩავარდა: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:719
+#: panels/system/users/cc-fingerprint-dialog.c:887
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "ახალი ანაბეჭდის დამატება ჩავარდა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:746
+#: panels/system/users/cc-fingerprint-dialog.c:914
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "სკანირების გაჩერება ჩავარდა: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:789
+#: panels/system/users/cc-fingerprint-dialog.c:958
 msgid "Repeatedly lift and place your finger on the reader to enroll your fingerprint"
 msgstr "მრავალჯერ აიღეთ და დაადეთ თითი წამკითხავს, რომ თქვენი ანაბეჭდი შევიყვანო"
 
-#: panels/system/users/cc-fingerprint-dialog.c:890
-msgid "_Re-enroll this finger…"
-msgstr "_ამ თითის თავიდან სკანირება…"
-
-#. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:902
-msgid "Scan new fingerprint"
-msgstr "ახალი ანაბეჭდის სკანირება"
-
-#: panels/system/users/cc-fingerprint-dialog.c:934
+#: panels/system/users/cc-fingerprint-dialog.c:1011
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "ანაბეჭდის მოწყობილობის '%s' გათავისუფლება ჩავარდა: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:990
+#: panels/system/users/cc-fingerprint-dialog.c:1167
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "მოწყობილობის წაკითხვის შეცდოა"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1023
+#: panels/system/users/cc-fingerprint-dialog.c:1200
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "ანაბეჭდის მოწყობილობის '%s' გამოყოფა ჩავარდა: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1146
+#: panels/system/users/cc-fingerprint-dialog.c:1329
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "ანაბეჭდის მოწყობილობის მიღება ჩავარდა: %s"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1212
-msgid "Delete All Fingerprints?"
-msgstr "წავშალო ყველა ანაბეჭდი?"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1213
-msgid "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-enable Fingerprint Login at least one fingerprint will have to be enrolled."
-msgstr "ყველა ჩაწერილი ანაბეჭდის წაშლა ანაბეჭდით შესვლას გამორთავს. იმისათვის, რომ ანაბეჭდით შესვლა თავიდან ჩართოთ, საჭიროა, სულ ცოტა, ერთი ანაბეჭდის რეგისტრაცია."
-
-#: panels/system/users/cc-fingerprint-dialog.c:1217
-msgid "_Delete All"
-msgstr "_ყველას წაშლა"
 
 #: panels/system/users/cc-password-dialog.blp:5
 msgid "Change Password"
@@ -7478,16 +7482,16 @@ msgid "None"
 msgstr "არა"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:414
+#: panels/system/users/cc-user-page.c:430
 #, c-format
 msgid "Remove %s?"
 msgstr "წავშალო %s?"
 
-#: panels/system/users/cc-user-page.c:419
+#: panels/system/users/cc-user-page.c:435
 msgid "The user's files and settings will be deleted, and they will not be able to use this device once their account has been removed"
 msgstr "მომხმარებლის ფაილები და პარამეტრები წაიშლება და ისინი ვეღარ გამოიყენებენ ამ მოწყობილობას მათი ანგარიშის წაშლის შემდეგ"
 
-#: panels/system/users/cc-user-page.c:423
+#: panels/system/users/cc-user-page.c:439
 msgid "The user will not be able to use this device once their account has been removed"
 msgstr "მომხმარებელი ვერ გამოიყენებს ამ მოწყობილობას, თუ მათ ანგარიშს წაშლით"
 
@@ -9530,6 +9534,39 @@ msgstr[1] "%u შეტანა"
 #: subprojects/gvc/gvc-mixer-control.c:2919
 msgid "System Sounds"
 msgstr "სისტემური ხმები"
+
+#~ msgid "No Fingerprint device"
+#~ msgstr "ანაბეჭდების წამკითხველი მოწყობილობა ნაპოვნი არაა"
+
+#~ msgid "Fingerprint login allows you to unlock and log into your device with your finger"
+#~ msgstr "ანაბეჭდით შესვლა საშუალებას მოგცემთ, თითით განბლოკოთ და შეხვიდეთ თქვენს კომპიუტერში"
+
+#~ msgid "_Delete Fingerprints"
+#~ msgstr "ანაბეჭდების _წაშლა"
+
+#~ msgid "Fingerprint Enroll"
+#~ msgstr "ანაბეჭდის დამატება"
+
+#~ msgid "Fingerprint is duplicate"
+#~ msgstr "დუბლირებული ანაბეჭდი"
+
+#~ msgid "Failed to enroll new fingerprint"
+#~ msgstr "ახალი ანაბეჭდის დამატება ჩავარდა"
+
+#~ msgid "_Re-enroll this finger…"
+#~ msgstr "_ამ თითის თავიდან სკანირება…"
+
+#~ msgid "Scan new fingerprint"
+#~ msgstr "ახალი ანაბეჭდის სკანირება"
+
+#~ msgid "Delete All Fingerprints?"
+#~ msgstr "წავშალო ყველა ანაბეჭდი?"
+
+#~ msgid "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-enable Fingerprint Login at least one fingerprint will have to be enrolled."
+#~ msgstr "ყველა ჩაწერილი ანაბეჭდის წაშლა ანაბეჭდით შესვლას გამორთავს. იმისათვის, რომ ანაბეჭდით შესვლა თავიდან ჩართოთ, საჭიროა, სულ ცოტა, ერთი ანაბეჭდის რეგისტრაცია."
+
+#~ msgid "_Delete All"
+#~ msgstr "_ყველას წაშლა"
 
 #~ msgid "Re_place"
 #~ msgstr "_ჩანაცვლება"
