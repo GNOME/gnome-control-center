@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-07-31 08:43+0000\n"
-"PO-Revision-Date: 2026-07-31 11:19+0200\n"
+"POT-Creation-Date: 2026-08-03 08:18+0000\n"
+"PO-Revision-Date: 2026-08-03 15:54+0200\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -68,8 +68,7 @@ msgstr "Adaugă scurtături"
 #: panels/system/users/cc-add-user-dialog.blp:19
 #: panels/system/users/cc-avatar-chooser.c:90
 #: panels/system/users/cc-enterprise-login-dialog.blp:39
-#: panels/system/users/cc-fingerprint-dialog.blp:18
-#: panels/system/users/cc-fingerprint-dialog.c:1217
+#: panels/system/users/cc-fingerprint-dialog.blp:166
 #: panels/system/users/cc-password-dialog.blp:17
 #: panels/system/users/cc-user-page.blp:196
 #: panels/wwan/cc-wwan-mode-dialog.blp:27
@@ -238,7 +237,7 @@ msgstr "Primește căutările sistemului și trimite rezultatele"
 #: panels/keyboard/cc-keyboard-panel.c:83
 #: panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331
 #: panels/system/users/cc-user-page.c:365
-#: panels/system/users/cc-user-page.c:705 panels/wwan/cc-wwan-device-page.c:423
+#: panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:423
 #: subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "Dezactivat"
@@ -609,7 +608,7 @@ msgstr ""
 "Pornește aplicațiile sau întreabă ce trebuie făcut când suportul media este "
 "conectat"
 
-#: panels/applications/cc-default-apps-row.c:128
+#: panels/applications/cc-default-apps-row.c:240
 msgid "No Apps Available"
 msgstr "Nicio aplicație disponibilă"
 
@@ -1159,7 +1158,7 @@ msgstr "_Continuă"
 #. Translators: This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.blp:40
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:34
-#: panels/system/users/cc-fingerprint-dialog.blp:39
+#: panels/system/users/cc-fingerprint-dialog.blp:177
 msgid "_Done"
 msgstr "_Gata"
 
@@ -4696,6 +4695,7 @@ msgid "Other"
 msgstr "Altele"
 
 #: panels/online-accounts/cc-online-account-row.blp:25
+#: panels/system/users/cc-fingerprint-dialog.blp:26
 msgid "Error"
 msgstr "Eroare"
 
@@ -5455,7 +5455,7 @@ msgstr "Serverul necesită autentificare"
 
 #. Translators: this is the "go back" action of a button
 #: panels/printers/pp-new-printer-dialog.ui:78
-#: panels/system/users/cc-fingerprint-dialog.blp:24
+#: panels/system/users/cc-fingerprint-dialog.blp:15
 #: panels/wacom/cc-wacom-stylus-page.c:389
 #: panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
@@ -6465,7 +6465,7 @@ msgstr "Greșită"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:42
 #: panels/system/users/cc-user-page.c:363
-#: panels/system/users/cc-user-page.c:704 panels/wwan/cc-wwan-device-page.c:421
+#: panels/system/users/cc-user-page.c:720 panels/wwan/cc-wwan-device-page.c:421
 msgid "Enabled"
 msgstr "Activată"
 
@@ -8013,168 +8013,194 @@ msgstr "Se verifică domeniul…"
 msgid "Failed to contact realmd service"
 msgstr "Nu s-a putut contacta serviciul realmd"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:90
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/system/users/cc-fingerprint-dialog.blp:34
 msgid "No fingerprint device"
 msgstr "Niciun dispozitiv de amprente"
 
-#. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.blp:106
-msgid "No Fingerprint device"
-msgstr "Niciun dispozitiv de amprente"
-
-#: panels/system/users/cc-fingerprint-dialog.blp:116
+#: panels/system/users/cc-fingerprint-dialog.blp:37
 msgid "Ensure the device is properly connected"
 msgstr "Dispozitivul trebuie conectat corespunzător"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:124
+#: panels/system/users/cc-fingerprint-dialog.blp:45
+#: panels/system/users/cc-fingerprint-dialog.blp:91
+msgid "Fingerprint Authentication"
+msgstr "Autentificare cu amprentă"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:46
+msgid ""
+"Use fingerprints to unlock the screen and identify yourself when prompted"
+msgstr ""
+"Folosește amprentele pentru a debloca ecranul și pentru a te identifica "
+"atunci când ți se solicită"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:54
+msgid "_Scan Finger"
+msgstr "_Scanează degetul"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:67
 msgid "Fingerprint Device"
 msgstr "Dispozitiv de amprente"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:134
+#: panels/system/users/cc-fingerprint-dialog.blp:70
 msgid "Choose the fingerprint device you want to configure"
-msgstr "Alegeți un dispozitiv pentru amprente pentru configurare"
+msgstr "Alege dispozitivul pentru amprente pe care vrei să îl folosești"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:162
-msgid "Fingerprint Login"
-msgstr "Autentificare prin amprentă"
+#: panels/system/users/cc-fingerprint-dialog.blp:78
+msgid "Select Finger"
+msgstr "Alege degetul"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:170
-msgid ""
-"Fingerprint login allows you to unlock and log into your device with your "
-"finger"
-msgstr ""
-"Autentificarea cu amprentă digitală permite deblocarea și autentificarea cu "
-"degetul"
+#: panels/system/users/cc-fingerprint-dialog.blp:82
+msgid "Right Hand"
+msgstr "Mâna dreaptă"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:196
-msgid "_Delete Fingerprints"
-msgstr "Ș_terge amprentele"
+#: panels/system/users/cc-fingerprint-dialog.blp:85
+msgid "Left Hand"
+msgstr "Mâna stângă"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:209
-msgid "Fingerprint Enroll"
-msgstr "Înregistrarea amprentei"
+#: panels/system/users/cc-fingerprint-dialog.blp:95
+msgid "The following fingerprints can be used for authentication"
+msgstr "Următoarele amprente pot fi folosite pentru autentificare"
 
-#: panels/system/users/cc-fingerprint-dialog.c:208
+#: panels/system/users/cc-fingerprint-dialog.blp:100
+msgid "Fingerprints"
+msgstr "Amprente"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:105
+msgid "Add Fingerprint"
+msgstr "Adaugă amprenta"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:136
+msgid "Touch the fingerprint reader to check the scanned fingers"
+msgstr "Atinge cititorul de amprente pentru a verifica degetele scanate"
+
+#: panels/system/users/cc-fingerprint-dialog.c:240
 msgid "the device needs to be claimed to perform this action"
-msgstr "aparatul trebuie să fie înregistrat pentru a efectua această acțiune"
+msgstr ""
+"dispozitivul trebuie să fie disponibil pentru a efectua această acțiune"
 
-#: panels/system/users/cc-fingerprint-dialog.c:210
+#: panels/system/users/cc-fingerprint-dialog.c:242
 msgid "the device is already claimed by another process"
-msgstr "aparatul este deja utilizat de un alt proces"
+msgstr "dispozitivul este deja utilizat de un alt proces"
 
-#: panels/system/users/cc-fingerprint-dialog.c:212
+#: panels/system/users/cc-fingerprint-dialog.c:244
 msgid "you do not have permission to perform the action"
 msgstr "nu este permisă efectuarea acestei acțiuni"
 
-#: panels/system/users/cc-fingerprint-dialog.c:214
+#: panels/system/users/cc-fingerprint-dialog.c:246
 msgid "no prints have been enrolled"
 msgstr "nicio amprentă înregistrată"
 
-#: panels/system/users/cc-fingerprint-dialog.c:221
+#: panels/system/users/cc-fingerprint-dialog.c:253
 msgid "Failed to communicate with the device during enrollment"
-msgstr "Nu s-a putut comunica cu aparatul în timpul înregistrării"
+msgstr "Nu s-a putut comunica cu dispozitivul în timpul înregistrării"
 
-#: panels/system/users/cc-fingerprint-dialog.c:224
+#: panels/system/users/cc-fingerprint-dialog.c:256
 msgid "Failed to communicate with the fingerprint reader"
 msgstr "Nu s-a putut comunica cu cititorul de amprente"
 
-#: panels/system/users/cc-fingerprint-dialog.c:226
+#: panels/system/users/cc-fingerprint-dialog.c:258
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "Nu s-a putut comunica cu serviciul de amprente"
 
-#: panels/system/users/cc-fingerprint-dialog.c:452
+#: panels/system/users/cc-fingerprint-dialog.c:313
+msgid "Left thumb"
+msgstr "Degetul mare stâng"
+
+#: panels/system/users/cc-fingerprint-dialog.c:315
+msgid "Left middle finger"
+msgstr "Degetul mijlociu stâng"
+
+#: panels/system/users/cc-fingerprint-dialog.c:317
+msgid "_Left index finger"
+msgstr "Arătătoru_l mâinii stângi"
+
+#: panels/system/users/cc-fingerprint-dialog.c:319
+msgid "Left ring finger"
+msgstr "Degetul inelar stâng"
+
+#: panels/system/users/cc-fingerprint-dialog.c:321
+msgid "Left little finger"
+msgstr "Degetul mic stâng"
+
+#: panels/system/users/cc-fingerprint-dialog.c:323
+msgid "Right thumb"
+msgstr "Degetul mare drept"
+
+#: panels/system/users/cc-fingerprint-dialog.c:325
+msgid "Right middle finger"
+msgstr "Degetul mijlociu drept"
+
+#: panels/system/users/cc-fingerprint-dialog.c:327
+msgid "_Right index finger"
+msgstr "Arătătorul mâinii d_repte"
+
+#: panels/system/users/cc-fingerprint-dialog.c:329
+msgid "Right ring finger"
+msgstr "Degetul inelar drept"
+
+#: panels/system/users/cc-fingerprint-dialog.c:331
+msgid "Right little finger"
+msgstr "Degetul mic drept"
+
+#: panels/system/users/cc-fingerprint-dialog.c:333
+msgid "Unknown Finger"
+msgstr "Deget necunoscut"
+
+#: panels/system/users/cc-fingerprint-dialog.c:351
+#, c-format
+msgid "Failed to delete fingerprint: %s"
+msgstr "Nu s-au putut șterge amprenta: %s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:648
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "Nu s-a putut încărca lista amprentelor: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:510
-#, c-format
-msgid "Failed to delete saved fingerprints: %s"
-msgstr "Nu s-au putut șterge amprentele salvate: %s"
+#: panels/system/users/cc-fingerprint-dialog.c:733
+msgid "Scan Complete!"
+msgstr "Scanare completată!"
 
-#: panels/system/users/cc-fingerprint-dialog.c:538
-msgid "Left thumb"
-msgstr "Degetul mare stâng"
+#: panels/system/users/cc-fingerprint-dialog.c:746
+msgid "Touch finger on reader"
+msgstr "Atinge cititorul cu degetul"
 
-#: panels/system/users/cc-fingerprint-dialog.c:540
-msgid "Left middle finger"
-msgstr "Degetul mijlociu stâng"
+#: panels/system/users/cc-fingerprint-dialog.c:800
+msgid "Scan Complete"
+msgstr "Scanare completată"
 
-#: panels/system/users/cc-fingerprint-dialog.c:542
-msgid "_Left index finger"
-msgstr "Arătătoru_l mâinii stângi"
-
-#: panels/system/users/cc-fingerprint-dialog.c:544
-msgid "Left ring finger"
-msgstr "Degetul inelar stâng"
-
-#: panels/system/users/cc-fingerprint-dialog.c:546
-msgid "Left little finger"
-msgstr "Degetul mic stâng"
-
-#: panels/system/users/cc-fingerprint-dialog.c:548
-msgid "Right thumb"
-msgstr "Degetul mare drept"
-
-#: panels/system/users/cc-fingerprint-dialog.c:550
-msgid "Right middle finger"
-msgstr "Degetul mijlociu drept"
-
-#: panels/system/users/cc-fingerprint-dialog.c:552
-msgid "_Right index finger"
-msgstr "Arătătorul mâinii d_repte"
-
-#: panels/system/users/cc-fingerprint-dialog.c:554
-msgid "Right ring finger"
-msgstr "Degetul inelar drept"
-
-#: panels/system/users/cc-fingerprint-dialog.c:556
-msgid "Right little finger"
-msgstr "Degetul mic drept"
-
-#: panels/system/users/cc-fingerprint-dialog.c:558
-msgid "Unknown Finger"
-msgstr "Deget necunoscut"
-
-#. TRANSLATORS: This is the message shown when the fingerprint
-#. * enrollment has been completed successfully
-#: panels/system/users/cc-fingerprint-dialog.c:670
-msgctxt "Fingerprint enroll state"
-msgid "Complete"
-msgstr "Complet"
-
-#: panels/system/users/cc-fingerprint-dialog.c:678
+#: panels/system/users/cc-fingerprint-dialog.c:823
 msgid "Fingerprint device disconnected"
 msgstr "Dispozitivul de amprente este deconectat"
 
-#: panels/system/users/cc-fingerprint-dialog.c:681
-msgid "Fingerprint device storage is full"
-msgstr "Dispozitivul de stocat amprente este plin"
+#: panels/system/users/cc-fingerprint-dialog.c:826
+msgid "Fingerprint Storage is Full"
+msgstr "Memoria pentru amprente este plină"
 
-#: panels/system/users/cc-fingerprint-dialog.c:683
-msgid "Fingerprint is duplicate"
-msgstr "Amprenta este un duplicat"
+#: panels/system/users/cc-fingerprint-dialog.c:828
+msgid "Finger Already Scanned"
+msgstr "Deget deja scanat"
 
-#: panels/system/users/cc-fingerprint-dialog.c:685
-msgid "Failed to enroll new fingerprint"
-msgstr "Eșec la înregistrarea noii amprente"
+#: panels/system/users/cc-fingerprint-dialog.c:830
+msgid "Failed to Scan Finger"
+msgstr "Nu s-a putut scana degetul"
 
-#: panels/system/users/cc-fingerprint-dialog.c:713
+#: panels/system/users/cc-fingerprint-dialog.c:881
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "Eșec la pornirea înregistrării: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:719
+#: panels/system/users/cc-fingerprint-dialog.c:887
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "Eșec la înregistrarea noii amprente"
 
-#: panels/system/users/cc-fingerprint-dialog.c:746
+#: panels/system/users/cc-fingerprint-dialog.c:914
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "Eșec la oprirea înregistrării: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:789
+#: panels/system/users/cc-fingerprint-dialog.c:958
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
@@ -8182,52 +8208,25 @@ msgstr ""
 "Degetul trebuie ridicat și așezat pe cititor în mod repetat pentru a "
 "înregistra amprenta"
 
-#: panels/system/users/cc-fingerprint-dialog.c:890
-msgid "_Re-enroll this finger…"
-msgstr "_Reînregistrează acest deget…"
-
-#. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:902
-msgid "Scan new fingerprint"
-msgstr "Scanează amprenta nouă"
-
-#: panels/system/users/cc-fingerprint-dialog.c:934
+#: panels/system/users/cc-fingerprint-dialog.c:1011
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "Nu s-a putut detașa dispozitivul de amprente %s: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:990
+#: panels/system/users/cc-fingerprint-dialog.c:1167
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Problemă la citirea dispozitivului"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1023
+#: panels/system/users/cc-fingerprint-dialog.c:1200
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "Nu s-a putut controla dispozitivul de amprente %s: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1146
+#: panels/system/users/cc-fingerprint-dialog.c:1329
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Nu s-au putut accesa dispozitivele de amprente: %s"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1212
-msgid "Delete All Fingerprints?"
-msgstr "Șterg toate amprentele?"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1213
-msgid ""
-"Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
-"enable Fingerprint Login at least one fingerprint will have to be enrolled."
-msgstr ""
-"Ștergerea tuturor amprentelor digitale înregistrate va dezactiva "
-"autentificarea prin amprentă digitală. Pentru a activa din nou "
-"autentificarea prin amprentă digitală, va trebui înregistrată cel puțin o "
-"amprentă digitală."
-
-#: panels/system/users/cc-fingerprint-dialog.c:1217
-msgid "_Delete All"
-msgstr "Ș_terge tot"
 
 #: panels/system/users/cc-password-dialog.blp:5
 msgid "Change Password"
@@ -8369,12 +8368,12 @@ msgid "None"
 msgstr "Niciuna"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:414
+#: panels/system/users/cc-user-page.c:430
 #, c-format
 msgid "Remove %s?"
 msgstr "Se elimină %s?"
 
-#: panels/system/users/cc-user-page.c:419
+#: panels/system/users/cc-user-page.c:435
 msgid ""
 "The user's files and settings will be deleted, and they will not be able to "
 "use this device once their account has been removed"
@@ -8382,7 +8381,7 @@ msgstr ""
 "Fișierele și preferințele utilizatorului vor fi șterse, iar el nu va mai "
 "putea utiliza acest aparat odată ce contul său a fost eliminat"
 
-#: panels/system/users/cc-user-page.c:423
+#: panels/system/users/cc-user-page.c:439
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed"
