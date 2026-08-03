@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2026-07-31 08:43+0000\n"
-"PO-Revision-Date: 2026-07-31 15:36+0300\n"
+"POT-Creation-Date: 2026-08-03 08:18+0000\n"
+"PO-Revision-Date: 2026-08-03 14:06+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -52,8 +52,7 @@ msgstr "Додати клавіатурні скорочення"
 #: panels/system/users/cc-add-user-dialog.blp:19
 #: panels/system/users/cc-avatar-chooser.c:90
 #: panels/system/users/cc-enterprise-login-dialog.blp:39
-#: panels/system/users/cc-fingerprint-dialog.blp:18
-#: panels/system/users/cc-fingerprint-dialog.c:1217
+#: panels/system/users/cc-fingerprint-dialog.blp:166
 #: panels/system/users/cc-password-dialog.blp:17
 #: panels/system/users/cc-user-page.blp:196
 #: panels/wwan/cc-wwan-mode-dialog.blp:27
@@ -224,7 +223,7 @@ msgstr "Отримання сигналів системи про пошук і 
 #: panels/keyboard/cc-keyboard-panel.c:83
 #: panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331
 #: panels/system/users/cc-user-page.c:365
-#: panels/system/users/cc-user-page.c:705 panels/wwan/cc-wwan-device-page.c:423
+#: panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:423
 #: subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "Вимкнено"
@@ -596,7 +595,7 @@ msgstr "Автозапуск н_осіїв"
 msgid "Start apps or prompt when media is connected"
 msgstr "Запускати програми або запити при з'єднанні носія даних"
 
-#: panels/applications/cc-default-apps-row.c:128
+#: panels/applications/cc-default-apps-row.c:240
 msgid "No Apps Available"
 msgstr "Немає доступних програм"
 
@@ -1148,7 +1147,7 @@ msgstr "_Відновити"
 #. Translators: This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.blp:40
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:34
-#: panels/system/users/cc-fingerprint-dialog.blp:39
+#: panels/system/users/cc-fingerprint-dialog.blp:177
 msgid "_Done"
 msgstr "_Завершити"
 
@@ -4698,6 +4697,7 @@ msgid "Other"
 msgstr "Інше"
 
 #: panels/online-accounts/cc-online-account-row.blp:25
+#: panels/system/users/cc-fingerprint-dialog.blp:26
 msgid "Error"
 msgstr "Помилка"
 
@@ -5473,7 +5473,7 @@ msgstr "Сервер потребує засвідчення"
 
 #. Translators: this is the "go back" action of a button
 #: panels/printers/pp-new-printer-dialog.ui:78
-#: panels/system/users/cc-fingerprint-dialog.blp:24
+#: panels/system/users/cc-fingerprint-dialog.blp:15
 #: panels/wacom/cc-wacom-stylus-page.c:389
 #: panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
@@ -6486,7 +6486,7 @@ msgstr "Нечинний"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:42
 #: panels/system/users/cc-user-page.c:363
-#: panels/system/users/cc-user-page.c:704 panels/wwan/cc-wwan-device-page.c:421
+#: panels/system/users/cc-user-page.c:720 panels/wwan/cc-wwan-device-page.c:421
 msgid "Enabled"
 msgstr "Увімкнено"
 
@@ -8070,168 +8070,208 @@ msgstr "Перевіряємо домен…"
 msgid "Failed to contact realmd service"
 msgstr "Не вдалося встановити зв'язок зі службою realmd"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:90
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/system/users/cc-fingerprint-dialog.blp:34
 msgid "No fingerprint device"
 msgstr "Немає пристроїв для зчитування відбитків"
 
-#. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.blp:106
-msgid "No Fingerprint device"
-msgstr "Немає пристроїв для зчитування відбитків"
-
-#: panels/system/users/cc-fingerprint-dialog.blp:116
+#: panels/system/users/cc-fingerprint-dialog.blp:37
 msgid "Ensure the device is properly connected"
 msgstr "Переконайтеся, що пристрій з'єднано належним чином"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:124
+#: panels/system/users/cc-fingerprint-dialog.blp:45
+#: panels/system/users/cc-fingerprint-dialog.blp:91
+#| msgid "Enterprise Authentication"
+msgid "Fingerprint Authentication"
+msgstr "Розпізнавання за відбитком"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:46
+msgid ""
+"Use fingerprints to unlock the screen and identify yourself when prompted"
+msgstr ""
+"Використовувати відбитки для розблокування екрана і розпізнавання вас, якщо н"
+"адійде запит"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:54
+#| msgid "T_wo Finger"
+msgid "_Scan Finger"
+msgstr "С_канувати палець"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:67
 msgid "Fingerprint Device"
 msgstr "Пристрій для зчитування відбитків"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:134
+#: panels/system/users/cc-fingerprint-dialog.blp:70
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Виберіть пристрій для читання відбитків, який ви хочете налаштувати"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:162
-msgid "Fingerprint Login"
-msgstr "Вхід за відбитком пальця"
+#: panels/system/users/cc-fingerprint-dialog.blp:78
+#| msgid "Select Language"
+msgid "Select Finger"
+msgstr "Виберіть палець"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:170
-msgid ""
-"Fingerprint login allows you to unlock and log into your device with your "
-"finger"
+#: panels/system/users/cc-fingerprint-dialog.blp:82
+#| msgid "Right Half"
+msgid "Right Hand"
+msgstr "Права рука"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:85
+#| msgid "Left Half"
+msgid "Left Hand"
+msgstr "Ліва рука"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:95
+msgid "The following fingerprints can be used for authentication"
+msgstr "Вказані нижче відбитки можна використовувати для розпізнавання"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:100
+#| msgid "Fingerprint Login"
+msgid "Fingerprints"
+msgstr "Відбитки"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:105
+#| msgid "_Verify Fingerprint"
+msgid "Add Fingerprint"
+msgstr "Додати відбиток пальця"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:136
+msgid "Touch the fingerprint reader to check the scanned fingers"
 msgstr ""
-"Вхід за допомогою відбитка пальця надасть вам змогу розблоковувати систему і "
-"входити до вашого облікового запису за допомогою вашого пальця"
+"Торкніться пальцем зчитувача відбитків, щоб перевірити скановані пальці"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:196
-msgid "_Delete Fingerprints"
-msgstr "В_илучити відбитки"
-
-#: panels/system/users/cc-fingerprint-dialog.blp:209
-msgid "Fingerprint Enroll"
-msgstr "Реєстрація відбитка"
-
-#: panels/system/users/cc-fingerprint-dialog.c:208
+#: panels/system/users/cc-fingerprint-dialog.c:240
 msgid "the device needs to be claimed to perform this action"
 msgstr "для виконання цієї дії пристрій має бути зарезервовано"
 
-#: panels/system/users/cc-fingerprint-dialog.c:210
+#: panels/system/users/cc-fingerprint-dialog.c:242
 msgid "the device is already claimed by another process"
 msgstr "пристрій вже зарезервовано іншим процесом"
 
-#: panels/system/users/cc-fingerprint-dialog.c:212
+#: panels/system/users/cc-fingerprint-dialog.c:244
 msgid "you do not have permission to perform the action"
 msgstr "у вас немає прав доступу для виконання цієї дії"
 
-#: panels/system/users/cc-fingerprint-dialog.c:214
+#: panels/system/users/cc-fingerprint-dialog.c:246
 msgid "no prints have been enrolled"
 msgstr "ролі не було надано жодному відбитку"
 
-#: panels/system/users/cc-fingerprint-dialog.c:221
+#: panels/system/users/cc-fingerprint-dialog.c:253
 msgid "Failed to communicate with the device during enrollment"
 msgstr "Не вдалося виконати обмін даними з пристроєм під час надання ролей"
 
-#: panels/system/users/cc-fingerprint-dialog.c:224
+#: panels/system/users/cc-fingerprint-dialog.c:256
 msgid "Failed to communicate with the fingerprint reader"
 msgstr "Не вдалося виконати обмін даних із засобом читання відбитків"
 
-#: panels/system/users/cc-fingerprint-dialog.c:226
+#: panels/system/users/cc-fingerprint-dialog.c:258
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "Не вдалося виконати обмін даних із фоновою службою відбитків"
 
-#: panels/system/users/cc-fingerprint-dialog.c:452
+#: panels/system/users/cc-fingerprint-dialog.c:313
+msgid "Left thumb"
+msgstr "Великий палець лівої руки"
+
+#: panels/system/users/cc-fingerprint-dialog.c:315
+msgid "Left middle finger"
+msgstr "Середній палець лівої руки"
+
+#: panels/system/users/cc-fingerprint-dialog.c:317
+msgid "_Left index finger"
+msgstr "Вказівний палець _лівої руки"
+
+#: panels/system/users/cc-fingerprint-dialog.c:319
+msgid "Left ring finger"
+msgstr "Безіменний палець лівої руки"
+
+#: panels/system/users/cc-fingerprint-dialog.c:321
+msgid "Left little finger"
+msgstr "Мізинець лівої руки"
+
+#: panels/system/users/cc-fingerprint-dialog.c:323
+msgid "Right thumb"
+msgstr "Великий палець правої руки"
+
+#: panels/system/users/cc-fingerprint-dialog.c:325
+msgid "Right middle finger"
+msgstr "Середній палець правої руки"
+
+#: panels/system/users/cc-fingerprint-dialog.c:327
+msgid "_Right index finger"
+msgstr "Вказівний палець _правої руки"
+
+#: panels/system/users/cc-fingerprint-dialog.c:329
+msgid "Right ring finger"
+msgstr "Безіменний палець правої руки"
+
+#: panels/system/users/cc-fingerprint-dialog.c:331
+msgid "Right little finger"
+msgstr "Мізинець палець правої руки"
+
+#: panels/system/users/cc-fingerprint-dialog.c:333
+msgid "Unknown Finger"
+msgstr "Невідомий палець"
+
+#: panels/system/users/cc-fingerprint-dialog.c:351
+#, c-format
+#| msgid "Failed to delete saved fingerprints: %s"
+msgid "Failed to delete fingerprint: %s"
+msgstr "Не вдалося вилучити відбиток: %s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:648
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "Не вдалося побудувати список відбитків: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:510
-#, c-format
-msgid "Failed to delete saved fingerprints: %s"
-msgstr "Не вдалося вилучити збережені відбитки пальців: %s"
+#: panels/system/users/cc-fingerprint-dialog.c:733
+#| msgid "Complete!"
+msgid "Scan Complete!"
+msgstr "Сканування завершено!"
 
-#: panels/system/users/cc-fingerprint-dialog.c:538
-msgid "Left thumb"
-msgstr "Великий палець лівої руки"
+#: panels/system/users/cc-fingerprint-dialog.c:746
+#| msgid "Drag one finger on the edge"
+msgid "Touch finger on reader"
+msgstr "Торкніться пальцем зчитувача"
 
-#: panels/system/users/cc-fingerprint-dialog.c:540
-msgid "Left middle finger"
-msgstr "Середній палець лівої руки"
+#: panels/system/users/cc-fingerprint-dialog.c:800
+#| msgctxt "Fingerprint enroll state"
+#| msgid "Complete"
+msgid "Scan Complete"
+msgstr "Сканування завершено"
 
-#: panels/system/users/cc-fingerprint-dialog.c:542
-msgid "_Left index finger"
-msgstr "Вказівний палець _лівої руки"
-
-#: panels/system/users/cc-fingerprint-dialog.c:544
-msgid "Left ring finger"
-msgstr "Безіменний палець лівої руки"
-
-#: panels/system/users/cc-fingerprint-dialog.c:546
-msgid "Left little finger"
-msgstr "Мізинець лівої руки"
-
-#: panels/system/users/cc-fingerprint-dialog.c:548
-msgid "Right thumb"
-msgstr "Великий палець правої руки"
-
-#: panels/system/users/cc-fingerprint-dialog.c:550
-msgid "Right middle finger"
-msgstr "Середній палець правої руки"
-
-#: panels/system/users/cc-fingerprint-dialog.c:552
-msgid "_Right index finger"
-msgstr "Вказівний палець _правої руки"
-
-#: panels/system/users/cc-fingerprint-dialog.c:554
-msgid "Right ring finger"
-msgstr "Безіменний палець правої руки"
-
-#: panels/system/users/cc-fingerprint-dialog.c:556
-msgid "Right little finger"
-msgstr "Мізинець палець правої руки"
-
-#: panels/system/users/cc-fingerprint-dialog.c:558
-msgid "Unknown Finger"
-msgstr "Невідомий палець"
-
-#. TRANSLATORS: This is the message shown when the fingerprint
-#. * enrollment has been completed successfully
-#: panels/system/users/cc-fingerprint-dialog.c:670
-msgctxt "Fingerprint enroll state"
-msgid "Complete"
-msgstr "Завершено"
-
-#: panels/system/users/cc-fingerprint-dialog.c:678
+#: panels/system/users/cc-fingerprint-dialog.c:823
 msgid "Fingerprint device disconnected"
 msgstr "Пристрій для зчитування відбитків від'єднано"
 
-#: panels/system/users/cc-fingerprint-dialog.c:681
-msgid "Fingerprint device storage is full"
-msgstr "Сховище даних пристрою зчитування відбитків переповнено"
+#: panels/system/users/cc-fingerprint-dialog.c:826
+#| msgid "Fingerprint device storage is full"
+msgid "Fingerprint Storage is Full"
+msgstr "Сховище відбитків заповнено"
 
-#: panels/system/users/cc-fingerprint-dialog.c:683
-msgid "Fingerprint is duplicate"
-msgstr "Відбиток є повтором"
+#: panels/system/users/cc-fingerprint-dialog.c:828
+msgid "Finger Already Scanned"
+msgstr "Відбиток вже відскановано"
 
-#: panels/system/users/cc-fingerprint-dialog.c:685
-msgid "Failed to enroll new fingerprint"
-msgstr "Не вдалося зареєструвати новий відбиток"
+#: panels/system/users/cc-fingerprint-dialog.c:830
+#| msgid "Failed to add new printer."
+msgid "Failed to Scan Finger"
+msgstr "Не вдалося засканувати палець"
 
-#: panels/system/users/cc-fingerprint-dialog.c:713
+#: panels/system/users/cc-fingerprint-dialog.c:881
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "Не вдалося розпочати реєстрацію: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:719
+#: panels/system/users/cc-fingerprint-dialog.c:887
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "Не вдалося зареєструвати новий відбиток"
 
-#: panels/system/users/cc-fingerprint-dialog.c:746
+#: panels/system/users/cc-fingerprint-dialog.c:914
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "Не вдалося зупинити реєстрацію: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:789
+#: panels/system/users/cc-fingerprint-dialog.c:958
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
@@ -8239,51 +8279,25 @@ msgstr ""
 "Знімайте і притискайте ваш палець до пристрою зчитування, щоб зареєструвати "
 "відбиток пальця"
 
-#: panels/system/users/cc-fingerprint-dialog.c:890
-msgid "_Re-enroll this finger…"
-msgstr "П_еревизначити цей палець…"
-
-#. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:902
-msgid "Scan new fingerprint"
-msgstr "Сканувати новий відбиток"
-
-#: panels/system/users/cc-fingerprint-dialog.c:934
+#: panels/system/users/cc-fingerprint-dialog.c:1011
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "Не вдалося звільнити пристрій зчитування відбитків %s: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:990
+#: panels/system/users/cc-fingerprint-dialog.c:1167
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Проблема з читанням з пристрою"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1023
+#: panels/system/users/cc-fingerprint-dialog.c:1200
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "Не вдалося зайняти пристрій зчитування відбитків %s: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1146
+#: panels/system/users/cc-fingerprint-dialog.c:1329
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Не вдалося отримати список пристроїв для зчитування відбитків: %s"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1212
-msgid "Delete All Fingerprints?"
-msgstr "Вилучити усі відбитки?"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1213
-msgid ""
-"Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
-"enable Fingerprint Login at least one fingerprint will have to be enrolled."
-msgstr ""
-"Вилучення усіх зареєстрованих відбитків призведе до вимикання входу за "
-"відбитком. Щоб повторно увімкнути вхід за відбитком, має бути зареєстровано "
-"принаймні один відбиток."
-
-#: panels/system/users/cc-fingerprint-dialog.c:1217
-msgid "_Delete All"
-msgstr "В_идалити всі"
 
 #: panels/system/users/cc-password-dialog.blp:5
 msgid "Change Password"
@@ -8424,24 +8438,20 @@ msgid "None"
 msgstr "Немає"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:414
+#: panels/system/users/cc-user-page.c:430
 #, c-format
 msgid "Remove %s?"
 msgstr "Вилучити %s?"
 
-#: panels/system/users/cc-user-page.c:419
-#| msgid ""
-#| "The user will not be able to use this device once their account has been "
-#| "removed"
+#: panels/system/users/cc-user-page.c:435
 msgid ""
 "The user's files and settings will be deleted, and they will not be able to "
 "use this device once their account has been removed"
 msgstr ""
-"Після вилучення облікового запису буде вилучено файли і параметри користувача"
-", а його власник або власниця не зможе "
-"користуватися цим пристроєм"
+"Після вилучення облікового запису буде вилучено файли і параметри "
+"користувача, а його власник або власниця не зможе користуватися цим пристроєм"
 
-#: panels/system/users/cc-user-page.c:423
+#: panels/system/users/cc-user-page.c:439
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed"
@@ -10620,6 +10630,49 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2919
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "No Fingerprint device"
+#~ msgstr "Немає пристроїв для зчитування відбитків"
+
+#~ msgid ""
+#~ "Fingerprint login allows you to unlock and log into your device with your "
+#~ "finger"
+#~ msgstr ""
+#~ "Вхід за допомогою відбитка пальця надасть вам змогу розблоковувати "
+#~ "систему і входити до вашого облікового запису за допомогою вашого пальця"
+
+#~ msgid "_Delete Fingerprints"
+#~ msgstr "В_илучити відбитки"
+
+#~ msgid "Fingerprint Enroll"
+#~ msgstr "Реєстрація відбитка"
+
+#~ msgid "Fingerprint is duplicate"
+#~ msgstr "Відбиток є повтором"
+
+#~ msgid "Failed to enroll new fingerprint"
+#~ msgstr "Не вдалося зареєструвати новий відбиток"
+
+#~ msgid "_Re-enroll this finger…"
+#~ msgstr "П_еревизначити цей палець…"
+
+#~ msgid "Scan new fingerprint"
+#~ msgstr "Сканувати новий відбиток"
+
+#~ msgid "Delete All Fingerprints?"
+#~ msgstr "Вилучити усі відбитки?"
+
+#~ msgid ""
+#~ "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
+#~ "enable Fingerprint Login at least one fingerprint will have to be "
+#~ "enrolled."
+#~ msgstr ""
+#~ "Вилучення усіх зареєстрованих відбитків призведе до вимикання входу за "
+#~ "відбитком. Щоб повторно увімкнути вхід за відбитком, має бути "
+#~ "зареєстровано принаймні один відбиток."
+
+#~ msgid "_Delete All"
+#~ msgstr "В_идалити всі"
 
 #~ msgid "Re_place"
 #~ msgstr "За_мінити"
