@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-07-31 08:43+0000\n"
-"PO-Revision-Date: 2026-07-31 22:35+0200\n"
+"POT-Creation-Date: 2026-08-03 08:18+0000\n"
+"PO-Revision-Date: 2026-08-03 15:25+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -31,8 +31,8 @@ msgstr "Dodaj tipkovne bližnjice"
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:17 panels/applications/cc-application-shortcut-dialog.c:121 panels/color/cc-color-calibrate.blp:22 panels/common/cc-language-chooser.blp:17 panels/display/cc-display-panel.blp:26 panels/display/cc-display-panel.blp:136 panels/display/cc-display-panel.blp:184
 #: panels/keyboard/cc-input-chooser.blp:16 panels/keyboard/cc-keyboard-shortcut-editor.blp:15 panels/keyboard/cc-keyboard-shortcut-page.blp:130 panels/network/cc-net-proxy-page.blp:15 panels/network/cc-wifi-hotspot-dialog.blp:16 panels/network/cc-wifi-panel.blp:182 panels/network/connection-editor/ce-page-details.c:87
 #: panels/network/connection-editor/connection-editor.blp:17 panels/printers/pp-jobs-dialog.blp:112 panels/printers/pp-new-printer-dialog.ui:65 panels/printers/pp-ppd-selection-dialog.blp:19 panels/privacy/usage/cc-usage-page.blp:114 panels/privacy/usage/cc-usage-page.blp:127 panels/privacy/usage/cc-usage-page.blp:140
-#: panels/system/region/cc-format-chooser.blp:32 panels/system/users/cc-add-user-dialog.blp:19 panels/system/users/cc-avatar-chooser.c:90 panels/system/users/cc-enterprise-login-dialog.blp:39 panels/system/users/cc-fingerprint-dialog.blp:18 panels/system/users/cc-fingerprint-dialog.c:1217
-#: panels/system/users/cc-password-dialog.blp:17 panels/system/users/cc-user-page.blp:196 panels/wwan/cc-wwan-mode-dialog.blp:27 panels/wwan/cc-wwan-network-dialog.blp:95 panels/wwan/cc-wwan-sim-lock-dialog.blp:202
+#: panels/system/region/cc-format-chooser.blp:32 panels/system/users/cc-add-user-dialog.blp:19 panels/system/users/cc-avatar-chooser.c:90 panels/system/users/cc-enterprise-login-dialog.blp:39 panels/system/users/cc-fingerprint-dialog.blp:166 panels/system/users/cc-password-dialog.blp:17
+#: panels/system/users/cc-user-page.blp:196 panels/wwan/cc-wwan-mode-dialog.blp:27 panels/wwan/cc-wwan-network-dialog.blp:95 panels/wwan/cc-wwan-sim-lock-dialog.blp:202
 msgid "_Cancel"
 msgstr "_Prekliči"
 
@@ -157,7 +157,7 @@ msgstr "Prejme sistemska iskanja in pošlji zadetke"
 #. translators:
 #. * The device has been disabled
 #: panels/applications/cc-applications-panel.blp:205 panels/applications/cc-applications-panel.blp:247 panels/applications/cc-applications-panel.blp:268 panels/applications/cc-applications-panel.blp:282 panels/applications/cc-applications-panel.blp:296 panels/keyboard/cc-keyboard-panel.c:83
-#: panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331 panels/system/users/cc-user-page.c:365 panels/system/users/cc-user-page.c:705 panels/wwan/cc-wwan-device-page.c:423 subprojects/gvc/gvc-mixer-control.c:1919
+#: panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331 panels/system/users/cc-user-page.c:365 panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:423 subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "Onemogočeno"
 
@@ -496,7 +496,7 @@ msgstr "Samodejn_i zagon nosilca"
 msgid "Start apps or prompt when media is connected"
 msgstr "Zaženi programe ali vprašaj za odziv, ko je povezan nov nosilec"
 
-#: panels/applications/cc-default-apps-row.c:128
+#: panels/applications/cc-default-apps-row.c:240
 msgid "No Apps Available"
 msgstr "Noben program ni na voljo"
 
@@ -1024,7 +1024,7 @@ msgid "_Resume"
 msgstr "Na_daljuj"
 
 #. Translators: This button returns the user back to the color control panel
-#: panels/color/cc-color-calibrate.blp:40 panels/keyboard/cc-keyboard-shortcut-editor.blp:34 panels/system/users/cc-fingerprint-dialog.blp:39
+#: panels/color/cc-color-calibrate.blp:40 panels/keyboard/cc-keyboard-shortcut-editor.blp:34 panels/system/users/cc-fingerprint-dialog.blp:177
 msgid "_Done"
 msgstr "_Končano"
 
@@ -4202,7 +4202,7 @@ msgctxt "Online Account"
 msgid "Other"
 msgstr "Drugi"
 
-#: panels/online-accounts/cc-online-account-row.blp:25
+#: panels/online-accounts/cc-online-account-row.blp:25 panels/system/users/cc-fingerprint-dialog.blp:26
 msgid "Error"
 msgstr "Napaka"
 
@@ -4922,7 +4922,7 @@ msgid "Server requires authentication"
 msgstr "Strežnik zahteva overitev"
 
 #. Translators: this is the "go back" action of a button
-#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:24 panels/wacom/cc-wacom-stylus-page.c:389 panels/wwan/cc-wwan-apn-dialog.blp:20
+#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:15 panels/wacom/cc-wacom-stylus-page.c:389 panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
 msgstr "Nazaj"
 
@@ -5799,7 +5799,7 @@ msgstr "Ni veljavno"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/firmware-security/cc-firmware-security-utils.c:42 panels/system/users/cc-user-page.c:363 panels/system/users/cc-user-page.c:704 panels/wwan/cc-wwan-device-page.c:421
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:42 panels/system/users/cc-user-page.c:363 panels/system/users/cc-user-page.c:720 panels/wwan/cc-wwan-device-page.c:421
 msgid "Enabled"
 msgstr "Omogočeno"
 
@@ -7199,207 +7199,211 @@ msgstr "Poteka predpomnjenje domene ..."
 msgid "Failed to contact realmd service"
 msgstr "Povezovanje s storitvijo realmd je spodletelo"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:90
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/system/users/cc-fingerprint-dialog.blp:34
 msgid "No fingerprint device"
 msgstr "Ni naprave za branje prstnega odtisa"
 
-#. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.blp:106
-msgid "No Fingerprint device"
-msgstr "Ni naprave za branje prstnega odtisa"
-
-#: panels/system/users/cc-fingerprint-dialog.blp:116
+#: panels/system/users/cc-fingerprint-dialog.blp:37
 msgid "Ensure the device is properly connected"
 msgstr "Zagotovite, da je naprava pravilno povezana."
 
-#: panels/system/users/cc-fingerprint-dialog.blp:124
+#: panels/system/users/cc-fingerprint-dialog.blp:45 panels/system/users/cc-fingerprint-dialog.blp:91
+msgid "Fingerprint Authentication"
+msgstr "Overjanje pristnosti s prstnim odtisom"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:46
+msgid "Use fingerprints to unlock the screen and identify yourself when prompted"
+msgstr "Uporabi prstne odtise za odklep zaslona in identifikacijo, ko je ta zahtevana"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:54
+msgid "_Scan Finger"
+msgstr "_Optično preberi prst"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:67
 msgid "Fingerprint Device"
 msgstr "Naprava za branje prstnega odtisa"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:134
+#: panels/system/users/cc-fingerprint-dialog.blp:70
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Izberite napravo za branje prstnega odtisa, ki jo želite nastaviti"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:162
-msgid "Fingerprint Login"
-msgstr "Prijava s prstnim odtisom"
+#: panels/system/users/cc-fingerprint-dialog.blp:78
+msgid "Select Finger"
+msgstr "Izberite prst"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:170
-msgid "Fingerprint login allows you to unlock and log into your device with your finger"
-msgstr "Prijava s prstnim odtisom omogoča odklepanje in prijavo v napravo s prstom"
+#: panels/system/users/cc-fingerprint-dialog.blp:82
+msgid "Right Hand"
+msgstr "Desna roka"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:196
-msgid "_Delete Fingerprints"
-msgstr "_Izbriši prstne odtise"
+#: panels/system/users/cc-fingerprint-dialog.blp:85
+msgid "Left Hand"
+msgstr "Leva roka"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:209
-msgid "Fingerprint Enroll"
-msgstr "Prijava s prstnim odtisom"
+#: panels/system/users/cc-fingerprint-dialog.blp:95
+msgid "The following fingerprints can be used for authentication"
+msgstr "Naslednje prstne odtise lahko uporabljate za overjanje pristnosti"
 
-#: panels/system/users/cc-fingerprint-dialog.c:208
+#: panels/system/users/cc-fingerprint-dialog.blp:100
+msgid "Fingerprints"
+msgstr "Prstni odtisi"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:105
+msgid "Add Fingerprint"
+msgstr "Dodaj prstni odtis"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:136
+msgid "Touch the fingerprint reader to check the scanned fingers"
+msgstr "Dotaknite se bralnika prstnih odtisov, da preverite pregledane prste"
+
+#: panels/system/users/cc-fingerprint-dialog.c:240
 msgid "the device needs to be claimed to perform this action"
 msgstr "pred izvajanjem tega opravila mora biti vzpostavljena povezava z napravo"
 
-#: panels/system/users/cc-fingerprint-dialog.c:210
+#: panels/system/users/cc-fingerprint-dialog.c:242
 msgid "the device is already claimed by another process"
 msgstr "naprava je že v uporabi v drugem opravilu"
 
-#: panels/system/users/cc-fingerprint-dialog.c:212
+#: panels/system/users/cc-fingerprint-dialog.c:244
 msgid "you do not have permission to perform the action"
 msgstr "ni ustreznih dovoljenj za izvajanje tega dejanja"
 
-#: panels/system/users/cc-fingerprint-dialog.c:214
+#: panels/system/users/cc-fingerprint-dialog.c:246
 msgid "no prints have been enrolled"
 msgstr "ni poslanih opravil za tiskanje"
 
-#: panels/system/users/cc-fingerprint-dialog.c:221
+#: panels/system/users/cc-fingerprint-dialog.c:253
 msgid "Failed to communicate with the device during enrollment"
 msgstr "Povezovanje z napravo med vpisovanjem je spodletelo."
 
-#: panels/system/users/cc-fingerprint-dialog.c:224
+#: panels/system/users/cc-fingerprint-dialog.c:256
 msgid "Failed to communicate with the fingerprint reader"
 msgstr "Povezovanje s čitalcem prstnih odtisov je spodletelo."
 
-#: panels/system/users/cc-fingerprint-dialog.c:226
+#: panels/system/users/cc-fingerprint-dialog.c:258
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "Povezovanje z ozadnjim programom čitalca prstnih odtisov je spodletelo."
 
-#: panels/system/users/cc-fingerprint-dialog.c:452
+#: panels/system/users/cc-fingerprint-dialog.c:313
+msgid "Left thumb"
+msgstr "Levi palec"
+
+#: panels/system/users/cc-fingerprint-dialog.c:315
+msgid "Left middle finger"
+msgstr "Levi sredinec"
+
+#: panels/system/users/cc-fingerprint-dialog.c:317
+msgid "_Left index finger"
+msgstr "_Levi kazalec"
+
+#: panels/system/users/cc-fingerprint-dialog.c:319
+msgid "Left ring finger"
+msgstr "Levi prstanec"
+
+#: panels/system/users/cc-fingerprint-dialog.c:321
+msgid "Left little finger"
+msgstr "Levi mezinec"
+
+#: panels/system/users/cc-fingerprint-dialog.c:323
+msgid "Right thumb"
+msgstr "Desni palec"
+
+#: panels/system/users/cc-fingerprint-dialog.c:325
+msgid "Right middle finger"
+msgstr "Desni sredinec"
+
+#: panels/system/users/cc-fingerprint-dialog.c:327
+msgid "_Right index finger"
+msgstr "_Desni kazalec"
+
+#: panels/system/users/cc-fingerprint-dialog.c:329
+msgid "Right ring finger"
+msgstr "Desni prstanec"
+
+#: panels/system/users/cc-fingerprint-dialog.c:331
+msgid "Right little finger"
+msgstr "Desni mezinec"
+
+#: panels/system/users/cc-fingerprint-dialog.c:333
+msgid "Unknown Finger"
+msgstr "Neznan prst"
+
+#: panels/system/users/cc-fingerprint-dialog.c:351
+#, c-format
+msgid "Failed to delete fingerprint: %s"
+msgstr "Brisanje prstnega odtisa je spodletelo: %s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:648
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "Prikaz prstnih odtisov je spodletel: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:510
-#, c-format
-msgid "Failed to delete saved fingerprints: %s"
-msgstr "Brisanje prstnih odtisov je spodletelo: %s"
+#: panels/system/users/cc-fingerprint-dialog.c:733
+msgid "Scan Complete!"
+msgstr "Optično branje je dokončano!"
 
-#: panels/system/users/cc-fingerprint-dialog.c:538
-msgid "Left thumb"
-msgstr "Levi palec"
+#: panels/system/users/cc-fingerprint-dialog.c:746
+msgid "Touch finger on reader"
+msgstr "Dotaknite se s prstom bralnika"
 
-#: panels/system/users/cc-fingerprint-dialog.c:540
-msgid "Left middle finger"
-msgstr "Levi sredinec"
+#: panels/system/users/cc-fingerprint-dialog.c:800
+msgid "Scan Complete"
+msgstr "Branje končano"
 
-#: panels/system/users/cc-fingerprint-dialog.c:542
-msgid "_Left index finger"
-msgstr "_Levi kazalec"
-
-#: panels/system/users/cc-fingerprint-dialog.c:544
-msgid "Left ring finger"
-msgstr "Levi prstanec"
-
-#: panels/system/users/cc-fingerprint-dialog.c:546
-msgid "Left little finger"
-msgstr "Levi mezinec"
-
-#: panels/system/users/cc-fingerprint-dialog.c:548
-msgid "Right thumb"
-msgstr "Desni palec"
-
-#: panels/system/users/cc-fingerprint-dialog.c:550
-msgid "Right middle finger"
-msgstr "Desni sredinec"
-
-#: panels/system/users/cc-fingerprint-dialog.c:552
-msgid "_Right index finger"
-msgstr "_Desni kazalec"
-
-#: panels/system/users/cc-fingerprint-dialog.c:554
-msgid "Right ring finger"
-msgstr "Desni prstanec"
-
-#: panels/system/users/cc-fingerprint-dialog.c:556
-msgid "Right little finger"
-msgstr "Desni mezinec"
-
-#: panels/system/users/cc-fingerprint-dialog.c:558
-msgid "Unknown Finger"
-msgstr "Neznan prst"
-
-#. TRANSLATORS: This is the message shown when the fingerprint
-#. * enrollment has been completed successfully
-#: panels/system/users/cc-fingerprint-dialog.c:670
-msgctxt "Fingerprint enroll state"
-msgid "Complete"
-msgstr "Končano"
-
-#: panels/system/users/cc-fingerprint-dialog.c:678
+#: panels/system/users/cc-fingerprint-dialog.c:823
 msgid "Fingerprint device disconnected"
 msgstr "Naprava za prijavo s prstnim odtisom ni priklopljena"
 
-#: panels/system/users/cc-fingerprint-dialog.c:681
-msgid "Fingerprint device storage is full"
-msgstr "Shramba naprave za branje prstnega odtisa je polna"
+#: panels/system/users/cc-fingerprint-dialog.c:826
+msgid "Fingerprint Storage is Full"
+msgstr "Shramba prstnih odtisov je polna"
 
-#: panels/system/users/cc-fingerprint-dialog.c:683
-msgid "Fingerprint is duplicate"
-msgstr "Prstni odtis je podvojen"
+#: panels/system/users/cc-fingerprint-dialog.c:828
+msgid "Finger Already Scanned"
+msgstr "Prst je že prebran"
 
-#: panels/system/users/cc-fingerprint-dialog.c:685
-msgid "Failed to enroll new fingerprint"
-msgstr "Odčitavanje novega prstnega odtisa je spodletelo."
+#: panels/system/users/cc-fingerprint-dialog.c:830
+msgid "Failed to Scan Finger"
+msgstr "Optično branje prta je spodletelo"
 
-#: panels/system/users/cc-fingerprint-dialog.c:713
+#: panels/system/users/cc-fingerprint-dialog.c:881
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "Začenjanje odčitavanja je spodletelo: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:719
+#: panels/system/users/cc-fingerprint-dialog.c:887
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "Odčitavanje novega prstnega odtisa je spodletelo."
 
-#: panels/system/users/cc-fingerprint-dialog.c:746
+#: panels/system/users/cc-fingerprint-dialog.c:914
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "Zaustavljanje odčitavanja je spodletelo: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:789
+#: panels/system/users/cc-fingerprint-dialog.c:958
 msgid "Repeatedly lift and place your finger on the reader to enroll your fingerprint"
 msgstr "Ponavljajoče dvignite in položite prst na bralnik za odčitavanje prstnega odtisa"
 
-#: panels/system/users/cc-fingerprint-dialog.c:890
-msgid "_Re-enroll this finger…"
-msgstr "_Ponovno odčitaj ta prst …"
-
-#. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:902
-msgid "Scan new fingerprint"
-msgstr "Odčitaj nov prstni odtis"
-
-#: panels/system/users/cc-fingerprint-dialog.c:934
+#: panels/system/users/cc-fingerprint-dialog.c:1011
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "Sproščanje naprave za branje prstnega odtisa %s je spodletelo: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:990
+#: panels/system/users/cc-fingerprint-dialog.c:1167
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Napaka branja naprave"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1023
+#: panels/system/users/cc-fingerprint-dialog.c:1200
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "Povezovanje naprave za branje prstnega odtisa %s je spodletelo: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1146
+#: panels/system/users/cc-fingerprint-dialog.c:1329
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Pridobivanje naprav za prstni odtis je spodletelo: %s"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1212
-msgid "Delete All Fingerprints?"
-msgstr "Želite izbrisati vse prstne odtise?"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1213
-msgid "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-enable Fingerprint Login at least one fingerprint will have to be enrolled."
-msgstr "Če izbrišete vse vpisane prstne odtise, onemogočite prijavo s prstnim odtisom. Če želite znova omogočiti prijavo s prstnim odtisom, boste morali vnesti vsaj en prstni odtis."
-
-#: panels/system/users/cc-fingerprint-dialog.c:1217
-msgid "_Delete All"
-msgstr "_Izbriši vse"
 
 #: panels/system/users/cc-password-dialog.blp:5
 msgid "Change Password"
@@ -7527,16 +7531,16 @@ msgid "None"
 msgstr "Brez"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:414
+#: panels/system/users/cc-user-page.c:430
 #, c-format
 msgid "Remove %s?"
 msgstr "Ali želite odstraniti %s?"
 
-#: panels/system/users/cc-user-page.c:419
+#: panels/system/users/cc-user-page.c:435
 msgid "The user's files and settings will be deleted, and they will not be able to use this device once their account has been removed"
 msgstr "Datoteke in nastavitve uporabnika bodo izbrisane in  po odstranitvi računa uporabniki do te naprave ne bo imeli več dostopa."
 
-#: panels/system/users/cc-user-page.c:423
+#: panels/system/users/cc-user-page.c:439
 msgid "The user will not be able to use this device once their account has been removed"
 msgstr "Po odstranitvi računa uporabniki do te naprave ne bo imeli več dostopa."
 
