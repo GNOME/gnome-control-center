@@ -285,6 +285,12 @@ maybe_add_app_id (CcNotificationsPanel *self, const char *canonical_app_id)
         return;
     }
 
+    if (!g_desktop_app_info_get_show_in (G_DESKTOP_APP_INFO (app_info), NULL)) {
+        g_debug ("Not adding application '%s' (canonical app ID: %s), not shown in current desktop", full_app_id,
+                 canonical_app_id);
+        return;
+    }
+
     if (app_is_system_service (G_DESKTOP_APP_INFO (app_info))) {
         /* We don't want to show system services in the notification list */
         return;
@@ -372,6 +378,12 @@ load_apps (CcNotificationsPanel *self)
 
         app = iter->data;
         if (g_desktop_app_info_get_boolean (app, "X-GNOME-UsesNotifications")) {
+            if (!g_desktop_app_info_get_show_in (app, NULL)) {
+                g_debug ("Skipped app '%s', not shown in current desktop (NotShowIn/OnlyShowIn)",
+                         g_app_info_get_id (G_APP_INFO (app)));
+                continue;
+            }
+
             if (app_is_system_service (app)) {
                 g_debug ("Skipped app '%s', as it is a system service", g_app_info_get_id (G_APP_INFO (app)));
                 continue;
