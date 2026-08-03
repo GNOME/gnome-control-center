@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-02-10 13:00+0000\n"
+"POT-Creation-Date: 2026-07-31 10:18+0000\n"
 "PO-Revision-Date: 2026-02-12 15:06+0100\n"
 "Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
@@ -48,7 +48,7 @@ msgstr "Añadir atajos del teclado"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.blp:144
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:13
 #: panels/network/cc-net-proxy-page.blp:15
-#: panels/network/cc-wifi-hotspot-dialog.blp:122
+#: panels/network/cc-wifi-hotspot-dialog.blp:129
 #: panels/network/cc-wifi-panel.blp:180
 #: panels/network/connection-editor/ce-page-details.c:89
 #: panels/network/connection-editor/connection-editor.blp:17
@@ -170,8 +170,7 @@ msgstr "_Buscar en Software"
 msgid "Unable to List Apps"
 msgstr "No se pueden listar las aplicaciones"
 
-#. Translators: Parental Controls here refers to the features provided by
-#. 'malcontent'
+#. Translators: Parental Controls here refers to the features provided by 'malcontent'
 #: panels/applications/cc-applications-panel.blp:98
 msgid ""
 "An error has occurred and apps cannot be listed.\n"
@@ -226,9 +225,7 @@ msgstr "_Detalles de la aplicación"
 msgid "Permissions"
 msgstr "Permisos"
 
-#. Translators: This row shows/sets whether the app shown in this page can add
-#. results to the GNOME Shell search results. Internally this enables/disables
-#. the app's Shell Search Provider
+#. Translators: This row shows/sets whether the app shown in this page can add results to the GNOME Shell search results. Internally this enables/disables the app's Shell Search Provider
 #: panels/applications/cc-applications-panel.blp:218
 msgid "_Search"
 msgstr "_Buscar"
@@ -239,6 +236,7 @@ msgstr "Recibir búsquedas del sistema y enviar los resultados"
 
 #. This label is displayed in a treeview cell displaying
 #. * a disabled accelerator key combination.
+#.
 #. TRANSLATORS: device status
 #. translators:
 #. * The device has been disabled
@@ -252,7 +250,7 @@ msgstr "Recibir búsquedas del sistema y enviar los resultados"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/panel-common.c:336
 #: panels/system/users/cc-user-page.c:368
 #: panels/system/users/cc-user-page.c:753 panels/wwan/cc-wwan-device-page.c:483
-#: subprojects/gvc/gvc-mixer-control.c:1910
+#: subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "Desactivado"
 
@@ -483,12 +481,12 @@ msgstr "Sólo lectura"
 #: panels/applications/cc-applications-panel.c:891
 #: panels/applications/cc-applications-panel.c:893
 msgid "File System"
-msgstr "Sistema de achivos"
+msgstr "Sistema de archivos"
 
 #: panels/applications/cc-applications-panel.c:897
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:7 shell/cc-window.blp:20
-#: shell/cc-window.c:804 shell/org.gnome.Settings.desktop.in:2
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:8 shell/cc-window.blp:20
+#: shell/cc-window.c:842 shell/org.gnome.Settings.desktop.in:2
 msgid "Settings"
 msgstr "Configuración"
 
@@ -641,13 +639,14 @@ msgstr "Seleccionar una aplicación para CD de software"
 #. * strings, just here to fix capitalization of the English originals.
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
+#.
 #: panels/applications/cc-removable-media-settings.c:391
 msgid "audio DVD"
 msgstr "DVD de sonido"
 
 #: panels/applications/cc-removable-media-settings.c:392
 msgid "blank Blu-ray disc"
-msgstr "disco Blu-ray virgen"
+msgstr "Disco Blu-ray virgen"
 
 #: panels/applications/cc-removable-media-settings.c:393
 msgid "blank CD disc"
@@ -659,7 +658,7 @@ msgstr "DVD virgen"
 
 #: panels/applications/cc-removable-media-settings.c:395
 msgid "blank HD DVD disc"
-msgstr "disco HD DVD virgen"
+msgstr "Disco HD DVD virgen"
 
 #: panels/applications/cc-removable-media-settings.c:396
 msgid "Blu-ray video disc"
@@ -667,7 +666,7 @@ msgstr "Disco Blu-ray de vídeo"
 
 #: panels/applications/cc-removable-media-settings.c:397
 msgid "e-book reader"
-msgstr "lector de libros electrónicos"
+msgstr "Lector de libros electrónicos"
 
 #: panels/applications/cc-removable-media-settings.c:398
 msgid "HD DVD video disc"
@@ -951,8 +950,7 @@ msgstr "Acceso de lectura/escritura a dispositivos U2F expuestos"
 msgid "Control various app permissions and settings"
 msgstr "Controlar la configuración y los permisos de varias aplicaciones"
 
-#. Translators: Search terms to find the Apps panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Apps panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in:15
 msgid "application;flatpak;permission;setting;default;preferred;media;autorun;cd;dvd;usb;audio;video;disc;removable;device;system;"
 msgstr "aplicación;flatpak;permisos;configuracion;predeterminada;favorita;media;autoejecutar;cd;dvd;usb;sonido;vídeo;disco;extraíble;dispositivo;sistema;"
@@ -1065,8 +1063,7 @@ msgstr "Apariencia"
 msgid "Change your background image or the UI colors"
 msgstr "Cambiar la imagen de fondo de escritorio o los colores de la IU"
 
-#. Translators: Search terms to find the Appearance panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Appearance panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in:14
 msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;"
 msgstr "Fondo;Pantalla;Escritorio;Estilo;Oscuro;Claro;Estilo;Oscuro;Claro;Apariencia;"
@@ -1124,8 +1121,7 @@ msgstr "Bluetooth"
 msgid "Turn Bluetooth on and off and connect your devices"
 msgstr "Activar y desactivar Bluetooth y conectar sus dispositivos"
 
-#. Translators: Search terms to find the Bluetooth panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Bluetooth panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:14
 msgid "share;sharing;bluetooth;obex;"
 msgstr "compartir;compartición;bluetooth;obex;"
@@ -1230,14 +1226,12 @@ msgstr "Falló la configuración."
 msgid "You can remove the calibration device."
 msgstr "Puede quitar el dispositivo de calibración."
 
-#. TRANSLATORS: This refers to the embedded display on e.g. a smartphone, a
-#. laptop, an all-in-one desktop…
+#. TRANSLATORS: This refers to the embedded display on e.g. a smartphone, a laptop, an all-in-one desktop…
 #: panels/color/cc-color-common.c:41
 msgid "Built-In Screen"
 msgstr "Pantalla integrada"
 
-#. TRANSLATORS: This refers to the embedded webcam on e.g. a smartphone, a
-#. laptop, an all-in-one desktop…
+#. TRANSLATORS: This refers to the embedded webcam on e.g. a smartphone, a laptop, an all-in-one desktop…
 #: panels/color/cc-color-common.c:50
 msgid "Built-In Webcam"
 msgstr "Cámara web integrada"
@@ -1352,11 +1346,9 @@ msgstr ""
 msgid "The device type is not currently supported."
 msgstr "El tipo de dispositivo actualmente no está soportado."
 
-#. Translators: This will be presented as the text of a link to the
-#. documentation
+#. Translators: This will be presented as the text of a link to the documentation
 #. translators: Text used in link to privacy policy
-#. Translators: This will be presented as the text of a link to the
-#. documentation
+#. Translators: This will be presented as the text of a link to the documentation
 #: panels/color/cc-color-panel.c:1935
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:122
 #: panels/wacom/cc-wacom-device.c:168
@@ -1728,9 +1720,7 @@ msgid ""
 msgstr ""
 "Calibrar el color de sus dispositivos, como pantallas, cámaras o impresoras"
 
-#. Translators: Search terms to find the Color Management panel. Do NOT
-#. translate or localize the semicolons! The list MUST also end with a
-#. semicolon!
+#. Translators: Search terms to find the Color Management panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/color/gnome-color-panel.desktop.in:14
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Color;ICC;Perfil;Calibrado;Impresora;Pantalla;"
@@ -1898,8 +1888,7 @@ msgstr "%s"
 msgid "0 seconds"
 msgstr "0 segundos"
 
-#. translators: This is the default hotspot name, need to be less than
-#. 32-bytes
+#. translators: This is the default hotspot name, need to be less than 32-bytes
 #: panels/common/hostname-helper.c:221
 msgctxt "hotspot"
 msgid "Hotspot"
@@ -1942,8 +1931,7 @@ msgstr "Contiene la barra superior y de Actividades"
 msgid "_Primary Display"
 msgstr "Pantalla _primaria"
 
-#. Translators: This is the redshift functionality where we suppress blue
-#. light when the sun has gone down
+#. Translators: This is the redshift functionality where we suppress blue light when the sun has gone down
 #: panels/display/cc-display-panel.blp:113
 #: panels/display/cc-night-light-page.blp:63
 msgid "_Night Light"
@@ -2080,6 +2068,7 @@ msgstr "%.2lf Hz"
 #. * 1. "Variable" is an adjective that refers to the refresh rate
 #. * 2. The formatting sequence is a range separated by an en-dash
 #. *    (unicode "\u2013"). For example: "Variable (48–144.97 Hz)"
+#.
 #: panels/display/cc-display-settings.c:256
 msgid "Variable (%d–%.2lf Hz)"
 msgstr "Variable (%d–%.2lf Hz)"
@@ -2179,8 +2168,7 @@ msgstr ""
 "Usar la luz nocturna y elegir cómo usar las pantallas y los proyectores "
 "conectados"
 
-#. Translators: Search terms to find the Displays panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Displays panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/display/gnome-display-panel.desktop.in:14
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;redshift;color;sunset;sunrise;"
 msgstr "Panel;Proyector;xranrd;Pantalla;Resolución;Actualizar;Monitor;Noche;Luz;Azul;color;amanecer;atardecer;ocaso;"
@@ -2271,8 +2259,7 @@ msgid "Home folder"
 msgstr "Carpeta personal"
 
 #. Translators: this is a verb.
-#. Translators: "Search" should be phrased as a verb (in both "Name" and
-#. "Keywords" fields).
+#. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
 #. Translators: this is a verb.
 #: panels/keyboard/01-launchers.xml.in:16
 #: panels/printers/cc-printers-panel.blp:23 panels/search/cc-search-panel.blp:7
@@ -2662,8 +2649,7 @@ msgstr "Ninguna"
 msgid "_Set Shortcut…"
 msgstr "E_stablecer atajo…"
 
-#. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the
-#. accelerator used
+#. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:373
 #, c-format
 msgid ""
@@ -2684,8 +2670,10 @@ msgid "Set Shortcut"
 msgstr "Establecer atajo"
 
 #. Setup the top label
+#.
 #. * TRANSLATORS: %s is replaced with a description of the keyboard shortcut,
 #. * don't translate/transliterate <b>%s</b>
+#.
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:543
 #, c-format
 msgid "Enter new shortcut to change <b>%s</b>"
@@ -2714,8 +2702,7 @@ msgstr ""
 "Cambiar los atajos del teclado y establecer sus preferencias de escritura, "
 "teclado y fuentes de entrada"
 
-#. Translators: Search terms to find the Keyboard panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:14
 msgid "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;Hotkey;Compose;Character;"
 msgstr "Atajo;Área;trabajo;Ventana:Redimensionar;Ampliación;Contraste;Entrada;Fuente;Bloqueo;Volumen;tecla;rápida;Compositor;Carácter;"
@@ -2740,8 +2727,7 @@ msgstr "_Izquierdo"
 msgid "_Right"
 msgstr "_Derecho"
 
-#. Translators: This will be presented as the text of a link to the Mouse &
-#. Touchpad panel
+#. Translators: This will be presented as the text of a link to the Mouse & Touchpad panel
 #: panels/mouse/cc-mouse-panel.blp:92 panels/wacom/cc-wacom-page.c:712
 msgid "Mouse"
 msgstr "Ratón"
@@ -2933,9 +2919,7 @@ msgstr ""
 "Cambiar la sensibilidad de su ratón o su panel táctil y configurarlos para "
 "zurdos o diestros"
 
-#. Translators: Search terms to find the Mouse and Touchpad panel. Do NOT
-#. translate or localize the semicolons! The list MUST also end with a
-#. semicolon!
+#. Translators: Search terms to find the Mouse and Touchpad panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/mouse/gnome-mouse-panel.desktop.in:14
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "trackpad;puntero;pulsar;pulsación;doble;botón;trackball;desplazamiento;"
@@ -3028,8 +3012,7 @@ msgstr "Multitarea"
 msgid "Manage preferences for productivity and multitasking"
 msgstr "Gestionar las preferencias para productividad y multitarea"
 
-#. Translators: Search terms to find the Search panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/multitasking/gnome-multitasking-panel.desktop.in:14
 msgid "Multitasking;Multitask;Productivity;Customize;Desktop;Hot;Corner;Workspaces;"
 msgstr ""
@@ -3169,7 +3152,7 @@ msgstr "Nombre de red"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-qr-code-dialog.blp:64
-#: panels/network/cc-wifi-hotspot-dialog.blp:79
+#: panels/network/cc-wifi-hotspot-dialog.blp:83
 #: panels/printers/pp-jobs-dialog.blp:171
 #: panels/printers/pp-new-printer-dialog.ui:300
 #: panels/system/users/cc-add-user-dialog.blp:89
@@ -3187,8 +3170,7 @@ msgstr "Opciones de la red"
 msgid "Forget Network"
 msgstr "Olvidar red"
 
-#. TRANSLATORS: This happens when the connection name does not contain the
-#. SSID.
+#. TRANSLATORS: This happens when the connection name does not contain the SSID.
 #: panels/network/cc-wifi-connection-row.c:222
 #, c-format
 msgctxt "Wi-Fi Connection"
@@ -3240,15 +3222,15 @@ msgstr ""
 "esto debe tener una conexión a Internet por otro medio que no sea la "
 "conexión inalámbrica."
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:92
+#: panels/network/cc-wifi-hotspot-dialog.blp:96
 msgid "Generate Random Password"
 msgstr "Generar una contraseña aleatoria"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:93
+#: panels/network/cc-wifi-hotspot-dialog.blp:97
 msgid "Autogenerate Password"
 msgstr "Generar una contraseña automáticamente"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:128
+#: panels/network/cc-wifi-hotspot-dialog.blp:135
 msgid "_Turn On"
 msgstr "_Activar"
 
@@ -4113,7 +4095,7 @@ msgid "seconds"
 msgstr "segundos"
 
 #: panels/network/connection-editor/wireguard-peer.blp:227
-#: panels/universal-access/cc-ua-seeing-page.blp:115
+#: panels/universal-access/cc-ua-seeing-page.blp:109
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -4121,8 +4103,7 @@ msgstr "Aplicar"
 msgid "Control how you connect to the Internet"
 msgstr "Controlar cómo se conecta a Internet"
 
-#. Translators: Search terms to find the Network panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in:14
 msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
 msgstr "Red;IP;LAN;Proxy;WAN;Banda;ancha;Módem;Bluetooth;vpn;DNS;"
@@ -4131,8 +4112,7 @@ msgstr "Red;IP;LAN;Proxy;WAN;Banda;ancha;Módem;Bluetooth;vpn;DNS;"
 msgid "Control how you connect to Wi-Fi networks"
 msgstr "Controlar cómo se conecta a redes inalámbricas"
 
-#. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in:14
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr ""
@@ -4165,6 +4145,7 @@ msgstr "%'d Mb/s"
 #. * details window for ethernet, if there is only a single
 #. * profile. It is also used to display ethernet in the
 #. * device list.
+#.
 #: panels/network/net-device-ethernet.c:265
 #: panels/network/network-bluetooth.blp:6 panels/network/network-ethernet.blp:5
 msgid "Wired"
@@ -4531,8 +4512,7 @@ msgstr "_Notificaciones"
 msgid "Show in notifications list"
 msgstr "Mostrar en la lista de notificaciones"
 
-#. Translators: This is the setting to configure sounds associated with
-#. notifications.
+#. Translators: This is the setting to configure sounds associated with notifications.
 #: panels/notifications/cc-app-notifications-page.blp:24
 msgctxt "notifications"
 msgid "_Sound"
@@ -4555,8 +4535,7 @@ msgstr "Mostrar _banners"
 msgid "Show notifications above apps"
 msgstr "Mostrar notificaciones encima de las aplicaciones"
 
-#. Translators: Popups here refers to message tray notifications in the middle
-#. of the screen.
+#. Translators: Popups here refers to message tray notifications in the middle of the screen.
 #: panels/notifications/cc-app-notifications-page.blp:44
 msgctxt "notifications"
 msgid "Show _Content"
@@ -4611,8 +4590,7 @@ msgstr "Notificaciones de aplicaciones"
 msgid "Control which notifications are displayed and what they show"
 msgstr "Controlar qué notificaciones se muestran"
 
-#. Translators: Search terms to find the Notifications panel. Do NOT translate
-#. or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Notifications panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/notifications/gnome-notifications-panel.desktop.in:14
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "notificaciones;banner;mensaje;bandeja;emergente;"
@@ -4717,8 +4695,7 @@ msgstr "Conectarse a sus cuentas en línea y decidir para qué usarlas"
 #. Translators: Search terms to find the Online Accounts panel.
 #. Do NOT translate or localize the semicolons!
 #. The list MUST also end with a semicolon!
-#. For ReadItLater and Pocket, see
-#. http://en.wikipedia.org/wiki/Pocket_(application)
+#. For ReadItLater and Pocket, see http://en.wikipedia.org/wiki/Pocket_(application)
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in:17
 msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
 msgstr ""
@@ -4866,9 +4843,7 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Adicional"
 
-#. TRANSLATORS: This is the battery charge level percentage (e.g. 50%). This
-#. could be localized to account for local Percent sign formatting guidelines.
-#. See https://en.wikipedia.org/wiki/Percent_sign#Correct_style
+#. TRANSLATORS: This is the battery charge level percentage (e.g. 50%). This could be localized to account for local Percent sign formatting guidelines. See https://en.wikipedia.org/wiki/Percent_sign#Correct_style
 #: panels/power/cc-battery-row.c:295
 #, c-format
 msgid "%d %%"
@@ -4878,8 +4853,7 @@ msgstr "%d %%"
 msgid "_General"
 msgstr "_General"
 
-#. Translators: 'battery charging' means the settings to handle the way
-#. battery charges, not that the battery is currently charging.
+#. Translators: 'battery charging' means the settings to handle the way battery charges, not that the battery is currently charging.
 #: panels/power/cc-power-panel.blp:72
 msgid "Battery Charging"
 msgstr "La batería se está cargando"
@@ -4991,49 +4965,48 @@ msgstr ""
 "Desactivar la suspensión automática aumentará el consumo de energía. Se "
 "recomienda mantenerla activada."
 
-#. TRANSLATORS: This is the same title as the title from the .ui file, but
-#. without mnemonic
-#: panels/power/cc-power-panel.c:211
+#. TRANSLATORS: This is the same title as the title from the .ui file, but without mnemonic
+#: panels/power/cc-power-panel.c:228
 msgid "Power Saving"
 msgstr "Ahorro de energía"
 
-#: panels/power/cc-power-panel.c:311
+#: panels/power/cc-power-panel.c:328
 msgid "Battery Levels"
 msgstr "Niveles de la batería"
 
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
-#: panels/power/cc-power-panel.c:316
+#: panels/power/cc-power-panel.c:333
 msgid "UPS"
 msgstr "SAI"
 
-#: panels/power/cc-power-panel.c:319
+#: panels/power/cc-power-panel.c:336
 msgid "Battery Level"
 msgstr "Nivel de la batería"
 
-#: panels/power/cc-power-panel.c:569
+#: panels/power/cc-power-panel.c:580
 msgid "Suspend"
 msgstr "Suspender"
 
-#: panels/power/cc-power-panel.c:570
+#: panels/power/cc-power-panel.c:581
 msgid "Power Off"
 msgstr "Apagar"
 
-#: panels/power/cc-power-panel.c:571
+#: panels/power/cc-power-panel.c:582
 msgid "Hibernate"
 msgstr "Hibernar"
 
-#: panels/power/cc-power-panel.c:572
+#: panels/power/cc-power-panel.c:583
 msgid "Nothing"
 msgstr "Nada"
 
-#: panels/power/cc-power-panel.c:877
+#: panels/power/cc-power-panel.c:967
 msgid "Performance mode temporarily disabled due to high operating temperature"
 msgstr ""
 "Modo rendimiento desactivado temporalmente debido a la alta temperatura de "
 "operación"
 
-#: panels/power/cc-power-panel.c:879
+#: panels/power/cc-power-panel.c:969
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -5041,11 +5014,11 @@ msgstr ""
 "Portátil detectado: modo rendimiento desactivado temporalmente. Mueva el "
 "dispositivo a una superficie estable para restaurarlo."
 
-#: panels/power/cc-power-panel.c:881
+#: panels/power/cc-power-panel.c:971
 msgid "Performance mode temporarily disabled"
 msgstr "Modo de rendimiento desactivado temporalmente"
 
-#: panels/power/cc-power-panel.c:923
+#: panels/power/cc-power-panel.c:1013
 msgid ""
 "Power saver enabled due to low battery. Previous mode will be restored when "
 "battery is charged."
@@ -5054,13 +5027,13 @@ msgstr ""
 "cuando la batería esté cargada."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:931
+#: panels/power/cc-power-panel.c:1021
 #, c-format
 msgid "Power Saver mode activated by “%s”"
 msgstr "Modo de ahorro de energía activado por «%s»"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:935
+#: panels/power/cc-power-panel.c:1025
 #, c-format
 msgid "Performance mode activated by “%s”"
 msgstr "Modo de rendimiento activado por «%s»"
@@ -5101,8 +5074,7 @@ msgid "View your battery status and change power saving settings"
 msgstr ""
 "Ver el estado de la batería y cambiar la configuración de ahorro de energía"
 
-#. Translators: Search terms to find the Power panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in:14
 msgid "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;Energy;"
 msgstr "Energía;Dormir;Suspender;Hibernar;Batería;Brillo;Apagar;Monitor;DPMS;inactivo;"
@@ -5122,14 +5094,12 @@ msgstr "Buscar impresoras"
 msgid "No Printers"
 msgstr "No hay impresoras"
 
-#. Translators: Title if the CUPS server is not running (we can not connect to
-#. it).
+#. Translators: Title if the CUPS server is not running (we can not connect to it).
 #: panels/printers/cc-printers-panel.blp:134
 msgid "No Print Service"
 msgstr "No hay servicio de impresión"
 
-#. Translators: Description if the CUPS server is not running (we can not
-#. connect to it).
+#. Translators: Description if the CUPS server is not running (we can not connect to it).
 #: panels/printers/cc-printers-panel.blp:137
 msgid "The system printing service doesn’t seem to be available"
 msgstr "El servicio del sistema de impresión parece no estar disponible"
@@ -5154,8 +5124,7 @@ msgstr ""
 "Añadir impresoras, ver los trabajos de la impresora y decidir cuál quiere "
 "imprimir"
 
-#. Translators: Search terms to find the Printers panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Printers panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/printers/gnome-printers-panel.desktop.in:15
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Impresora;Cola;Imprimir;Papel;Tinta;Tóner;"
@@ -5331,20 +5300,17 @@ msgstr "Completado"
 msgid "Active Jobs"
 msgstr "Trabajos activos"
 
-#. Translators: this action removes (purges) all the listed jobs from the
-#. list.
+#. Translators: this action removes (purges) all the listed jobs from the list.
 #: panels/printers/pp-jobs-dialog.blp:15
 msgid "_Clear All"
 msgstr "_Limpiar todos"
 
-#. Translators: this label describes the dialog empty state, with no jobs
-#. listed.
+#. Translators: this label describes the dialog empty state, with no jobs listed.
 #: panels/printers/pp-jobs-dialog.blp:36
 msgid "No Active Printer Jobs"
 msgstr "No hay trabajos de impresión activos"
 
-#. Translators: This button pop up authentication dialog for print jobs which
-#. need credentials.
+#. Translators: This button pop up authentication dialog for print jobs which need credentials.
 #: panels/printers/pp-jobs-dialog.blp:77
 msgid "_Authenticate"
 msgstr "_Autenticar"
@@ -5373,14 +5339,12 @@ msgstr "Dominio"
 msgid "Username"
 msgstr "Nombre de usuario"
 
-#. Translators: This button authenticates all print jobs and send them for
-#. printing.
+#. Translators: This button authenticates all print jobs and send them for printing.
 #: panels/printers/pp-jobs-dialog.blp:219
 msgid "A_uthenticate"
 msgstr "A_utenticar"
 
-#. Translators: This label shows how many jobs of this printer needs to be
-#. authenticated to be printed.
+#. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
 #: panels/printers/pp-jobs-dialog.c:319
 #, c-format
 msgid "%u Job Requires Authentication"
@@ -5411,15 +5375,13 @@ msgstr "Añadir impresora"
 msgid "Unlock Print Server"
 msgstr "Desbloquear servidor de impresión"
 
-#. Translators: Samba server needs authentication of the user to show list of
-#. its printers.
+#. Translators: Samba server needs authentication of the user to show list of its printers.
 #: panels/printers/pp-new-printer-dialog.c:272
 #, c-format
 msgid "Unlock %s."
 msgstr "Desbloquear %s."
 
-#. Translators: Samba server needs authentication of the user to show list of
-#. its printers.
+#. Translators: Samba server needs authentication of the user to show list of its printers.
 #: panels/printers/pp-new-printer-dialog.c:276
 #, c-format
 msgid "Enter username and password to view printers on %s."
@@ -5454,8 +5416,7 @@ msgstr "Ubicación: %s"
 msgid "Address: %s"
 msgstr "Dirección: %s"
 
-#. Translators: This item is a server which needs authentication to show its
-#. printers
+#. Translators: This item is a server which needs authentication to show its printers
 #: panels/printers/pp-new-printer-dialog.c:1437
 msgid "Server requires authentication"
 msgstr "El servidor requiere autenticación"
@@ -5485,8 +5446,7 @@ msgstr "No se han encontrado impresoras"
 msgid "Searching for Printers"
 msgstr "Buscando impresoras"
 
-#. Translators: The entered text should contain network address of a printer
-#. or a text which will filter found devices (their names and locations)
+#. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
 #: panels/printers/pp-new-printer-dialog.ui:213
 msgid "Enter a network address or search for a printer"
 msgstr "Introduzca una dirección de red o busque una impresora"
@@ -5561,15 +5521,13 @@ msgctxt "Printer Option Group"
 msgid "General"
 msgstr "General"
 
-#. Translators: "Page Setup" tab contains settings related to pages (page
-#. size, paper source, etc.)
+#. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
 #: panels/printers/pp-options-dialog.c:634
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Configuración de página"
 
-#. Translators: "Installable Options" tab contains settings of presence of
-#. installed options (amount of RAM, duplex unit, etc.)
+#. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
 #: panels/printers/pp-options-dialog.c:637
 msgctxt "Printer Option Group"
 msgid "Installable Options"
@@ -5581,8 +5539,7 @@ msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Trabajo"
 
-#. Translators: "Image Quality" tab contains settings for quality of output
-#. print (e.g. resolution)
+#. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
 #: panels/printers/pp-options-dialog.c:643
 msgctxt "Printer Option Group"
 msgid "Image Quality"
@@ -5594,8 +5551,7 @@ msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Color"
 
-#. Translators: "Finishing" tab contains finishing settings (e.g. booklet
-#. printing)
+#. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
 #: panels/printers/pp-options-dialog.c:649
 msgctxt "Printer Option Group"
 msgid "Finishing"
@@ -5707,8 +5663,7 @@ msgstr "Opciones de impresión"
 msgid "Use Printer by Default"
 msgstr "Impresora de usuario predeterminada"
 
-#. Translators: This button executes command which cleans print heads of the
-#. printer.
+#. Translators: This button executes command which cleans print heads of the printer.
 #: panels/printers/pp-printer-entry.blp:239
 msgid "Clean Print Heads"
 msgstr "Limpiar cabezales de impresión"
@@ -6110,8 +6065,7 @@ msgstr "Informar de un error"
 msgid "_Automatic Problem Reporting"
 msgstr "Informar de un problema _automáticamente"
 
-#. translators: The first '%s' is the distributor's name, such as 'Fedora',
-#. the second '%s' is a link to the privacy policy
+#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
 #: panels/privacy/diagnostics/cc-diagnostics-page.c:125
 #, c-format
 msgid ""
@@ -6284,8 +6238,7 @@ msgstr ""
 msgid "Checks Unavailable"
 msgstr "Comprobaciones no disponibles"
 
-#. TRANSLATORS: When the security result is unavailable, this description is
-#. shown.
+#. TRANSLATORS: When the security result is unavailable, this description is shown.
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:146
 msgid ""
 "Device security checks are not available for this device. It is not possible "
@@ -6357,11 +6310,11 @@ msgstr ""
 "La seguridad del dispositivo sólo está disponible en hardware físico. No se "
 "ha detectado hardware físico."
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.blp:160
+#: panels/privacy/firmware-security/cc-firmware-security-page.blp:162
 msgid "Security Events"
 msgstr "Eventos de seguridad"
 
-#: panels/privacy/firmware-security/cc-firmware-security-page.blp:167
+#: panels/privacy/firmware-security/cc-firmware-security-page.blp:169
 msgid "No Events"
 msgstr "No hay eventos"
 
@@ -6421,14 +6374,12 @@ msgstr ""
 msgid "%1$s"
 msgstr "%1$s"
 
-#. TRANSLATOR: This is the text event status output when the event status is
-#. "success"
+#. TRANSLATOR: This is the text event status output when the event status is "success"
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:235
 msgid "Pass"
 msgstr "Correcto"
 
-#. TRANSLATOR: This is the text event status output when the event status is
-#. not "success"
+#. TRANSLATOR: This is the text event status output when the event status is not "success"
 #: panels/privacy/firmware-security/cc-firmware-security-page.c:238
 msgid "! Fail"
 msgstr "Falló"
@@ -6459,8 +6410,7 @@ msgstr "Comprobaciones de seguridad no disponibles"
 msgid "Security levels are not available for this device."
 msgstr "Los niveles de seguridad no están disponibles para este dispositivo."
 
-#. TRANSLATORS: if the status is valid. For example security check is valid
-#. and key is valid.
+#. TRANSLATORS: if the status is valid. For example security check is valid and key is valid.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:35
 msgid "Valid"
 msgstr "Válido"
@@ -6483,8 +6433,7 @@ msgstr "Activada"
 msgid "Not Enabled"
 msgstr "No activada"
 
-#. TRANSLATORS: the memory space or system mode is locked to prevent from
-#. malicious modification.
+#. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:55
 msgid "Locked"
 msgstr "Bloqueada"
@@ -6538,8 +6487,7 @@ msgstr "No soportada"
 msgid "Control access to your data and hardware, device security"
 msgstr "Control de acceso al hardware y datos, seguridad del dispositivo"
 
-#. Translators: Search terms to find the Privacy panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/privacy/gnome-privacy-panel.desktop.in:14
 msgid "Privacy;Screen;Lock;Private;Usage;Recent;History;Files;Temporary;Tmp;Trash;Purge;Retain;Diagnostics;Crash;Location;Gps;Camera;Photos;Video;Webcam;Recording;Security;Firmware;Thunderbolt;"
 msgstr "Privacidad;Pantalla;Bloqueo;Privado;Uso;Reciente;Histórico;Archivos;Temporales;Tmp;Papelera;Limpiar;Conservar;Diagnósticos;Error;Ubicación;Gps;Cámara;Fotos;Vídeo;Webcam;Micrófono;Grabación;Seguridad;Firmware;Thunderbolt;"
@@ -6694,8 +6642,7 @@ msgstr "Eliminar los a_rchivos temporales automáticamente"
 msgid "Automatic Deletion _Period"
 msgstr "_Período de vaciado automático"
 
-#. Translators: Option for Automatically Delete Period in Trash and Temporary
-#. Files group
+#. Translators: Option for Automatically Delete Period in Trash and Temporary Files group
 #: panels/privacy/usage/cc-usage-page.blp:74
 msgid "1 hour"
 msgstr "1 hora"
@@ -6822,8 +6769,7 @@ msgstr ""
 "Controlar qué aplicaciones muestran resultados de búsqueda en la vista de "
 "actividades"
 
-#. Translators: Search terms to find the Search panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/search/gnome-search-panel.desktop.in:15
 msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "buscar;búsqueda;índice;ocultar;privacidad;resultados;"
@@ -6966,8 +6912,7 @@ msgstr "Compartir"
 msgid "Control what you want to share with others"
 msgstr "Controla qué quiere compartir con otros"
 
-#. Translators: Search terms to find the Sharing panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Sharing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sharing/gnome-sharing-panel.desktop.in:14
 msgid "share;sharing;host;name;media;audio;video;pictures;photos;movies;server;renderer;"
 msgstr "compartir;compartición;nombre;equipo;medio;multimedia;sonido:vídeo;imágenes;fotos;películas;servidor;renderizador;"
@@ -7138,8 +7083,7 @@ msgstr "100%"
 msgid "Change sound levels, inputs, outputs, and alert sounds"
 msgstr "Cambiar el volumen de entrada y salida de sonido y las alertas sonoras"
 
-#. Translators: Search terms to find the Sound panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/gnome-sound-panel.desktop.in:14
 msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Output;Input;"
 msgstr "tarjeta;micrófono;volumen;desvanecer;balance;bluetooth;cascos;auriculares;sonido;entrada;salida;"
@@ -7530,8 +7474,7 @@ msgstr "Buscar ciudades"
 msgid "Change the date and time, including time zone"
 msgstr "Cambiar la fecha y la hora, incluyendo la zona horaria"
 
-#. Translators: Search terms to find the Date and Time panel. Do NOT translate
-#. or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Date and Time panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/datetime/gnome-datetime-panel.desktop.in:14
 msgid "Clock;Timezone;Location;"
 msgstr "Reloj;Zona horaria;Ubicación;"
@@ -7549,8 +7492,7 @@ msgstr ""
 msgid "Language and time settings, system information"
 msgstr "Configuración de idioma y hora, información del sistema"
 
-#. Translators: Search terms to find the System panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the System panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/gnome-system-panel.desktop.in:14
 msgid "device;system;information;details;hostname;memory;processor;version;software;operating;os;model;language;region;country;formats;numbers;units;clock;timezone;date;location;remote;desktop;rdp;vnc;ssh;"
 msgstr "dispositivo;sistema,información;detalles;nombre;equipo;memoria;procesador;versión;software;sistema;operativo;modelo;idioma;región;país;formatos;números;unidades;reloj;zona;horaria;fecha;ubicación;escritorio;remoto;rdp;vnc;ssh;"
@@ -7604,8 +7546,7 @@ msgstr "Medida"
 msgid "Paper"
 msgstr "Papel"
 
-#. Translators: "US Customary" refers to the measurement system as used in the
-#. USA
+#. Translators: "US Customary" refers to the measurement system as used in the USA
 #: panels/system/region/cc-format-preview.c:149
 msgctxt "measurement format"
 msgid "US Customary"
@@ -7666,9 +7607,7 @@ msgstr "Fo_rmatos"
 msgid "Select your display language and formats"
 msgstr "Seleccionar el idioma que mostrar y los formatos"
 
-#. Translators: Search terms to find the Region and Language panel. Do NOT
-#. translate or localize the semicolons! The list MUST also end with a
-#. semicolon!
+#. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/region/gnome-region-panel.desktop.in:14
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Idioma;Distribución;Teclado;Entrada;"
@@ -8053,8 +7992,7 @@ msgstr "Falló al contactar con el servicio realmd"
 msgid "No fingerprint device"
 msgstr "No hay ningún dispositivo de huella dactilar"
 
-#. Translators: This is the empty state page label which states that there are
-#. no devices ready.
+#. Translators: This is the empty state page label which states that there are no devices ready.
 #: panels/system/users/cc-fingerprint-dialog.blp:106
 msgid "No Fingerprint device"
 msgstr "No hay ningún dispositivo de huella dactilar"
@@ -8437,8 +8375,7 @@ msgstr "Añadir inicio de s_esión corporativo"
 msgid "Add or remove users and change your password"
 msgstr "Añadir o quitar usuarios y cambiar su contraseña"
 
-#. Translators: Search terms to find the Users panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/system/users/gnome-users-panel.desktop.in:14
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental;Restrictions;Usage;Kid;Child;"
 msgstr ""
@@ -8683,8 +8620,7 @@ msgstr "Ventana completa"
 msgid "_Test Flash"
 msgstr "_Probar destellos"
 
-#. Translators: This will be presented as the text of a link to the Sound
-#. panel
+#. Translators: This will be presented as the text of a link to the Sound panel
 #: panels/universal-access/cc-ua-hearing-page.c:156
 msgctxt "Sound panel name"
 msgid "Sound"
@@ -8841,7 +8777,7 @@ msgstr ""
 
 #: panels/universal-access/cc-ua-seeing-page.blp:32
 msgid "Co_nfigure"
-msgstr "Co_nfiguraa"
+msgstr "Co_nfigurar"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:43
 msgid "_High Contrast"
@@ -8870,87 +8806,87 @@ msgid "Toggle reduced motion animations throughout the user interface"
 msgstr ""
 "Conmutar animaciones de movimiento reducido en toda la interfaz de usuario"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:67
+#: panels/universal-access/cc-ua-seeing-page.blp:61
 msgid "_Text Size"
 msgstr "_Tamaño del texto"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:74
+#: panels/universal-access/cc-ua-seeing-page.blp:68
 msgid "_Cursor Size"
 msgstr "_Tamaño del cursor"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:75
+#: panels/universal-access/cc-ua-seeing-page.blp:69
 msgid "Increase the size of the cursor"
 msgstr "Aumentar el tamaño del cursor"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:81
+#: panels/universal-access/cc-ua-seeing-page.blp:75
 msgid "_Sound Keys"
 msgstr "Teclas _sonoras"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:82
+#: panels/universal-access/cc-ua-seeing-page.blp:76
 msgid "Beep when Num Lock or Caps Lock are turned on or off"
 msgstr "Pitar cuando se activen o desactiven las teclas Bloq Num o Bloq Mayús."
 
-#: panels/universal-access/cc-ua-seeing-page.blp:87
+#: panels/universal-access/cc-ua-seeing-page.blp:81
 msgid "Always Show Scroll_bars"
 msgstr "Mostrar siempre las _barras de desplazamiento"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:88
+#: panels/universal-access/cc-ua-seeing-page.blp:82
 msgid "Make scrollbars always visible"
 msgstr "Hacer que las barras de desplazamiento sean visibles"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:97
+#: panels/universal-access/cc-ua-seeing-page.blp:91
 msgid "Text Size"
 msgstr "Tamaño del texto"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:109
+#: panels/universal-access/cc-ua-seeing-page.blp:103
 #: panels/wwan/cc-wwan-device-page.c:191
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:125
+#: panels/universal-access/cc-ua-seeing-page.blp:119
 msgid "Use the slider to adjust the size of user interface text"
 msgstr ""
 "Utilice el control deslizante para ajustar el tamaño del texto de la "
 "interfaz de usuario"
 
 #. Translators: Single letter next to the text size slider
-#: panels/universal-access/cc-ua-seeing-page.blp:137
-#: panels/universal-access/cc-ua-seeing-page.blp:157
+#: panels/universal-access/cc-ua-seeing-page.blp:131
+#: panels/universal-access/cc-ua-seeing-page.blp:151
 msgid "A"
 msgstr "A"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:168
+#: panels/universal-access/cc-ua-seeing-page.blp:162
 msgid "Sample text"
 msgstr "Texto de muestra"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-seeing-page.c:215
+#: panels/universal-access/cc-ua-seeing-page.c:213
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Predeterminado"
 
-#: panels/universal-access/cc-ua-seeing-page.c:218
+#: panels/universal-access/cc-ua-seeing-page.c:216
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Mediano"
 
-#: panels/universal-access/cc-ua-seeing-page.c:221
+#: panels/universal-access/cc-ua-seeing-page.c:219
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Grande"
 
-#: panels/universal-access/cc-ua-seeing-page.c:224
+#: panels/universal-access/cc-ua-seeing-page.c:222
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Más grande"
 
-#: panels/universal-access/cc-ua-seeing-page.c:227
+#: panels/universal-access/cc-ua-seeing-page.c:225
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "El más grande"
 
-#: panels/universal-access/cc-ua-seeing-page.c:231
+#: panels/universal-access/cc-ua-seeing-page.c:229
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -9232,8 +9168,7 @@ msgstr "Completa"
 msgid "Make it easier to see, hear, type, point and click"
 msgstr "Hacer más sencillo de ver, escuchar, escribir y apuntar y pulsar"
 
-#. Translators: Search terms to find the Accessibility panel. Do NOT translate
-#. or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in:14
 msgid "Keyboard;Mouse;a11y;Accessibility;Universal;Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;Pointer;find;locate;visual;hearing;audio;typing;animations;overamplification;magnify;magnifier;magnification;"
 msgstr "Teclado;Ratón;a11y;Accesibilidad;Universal;Acceso;Contraste;Cursor;Sonido;Zoom;Pantalla;Lector;grande;alto;grande;texto;fuente;tipografía;tamaño;AccessX;Sticky;Teclas;Lento;Rebote;ratón;doble;pulsación;Retardo;Velovidad;Asistente;Repetir;Parpadeo;Puntero;Buscar;encontrar;visual;audición;sonido:escritura;sobreamplificación;ampliador;amplicación; "
@@ -9316,8 +9251,7 @@ msgstr "Tableta montada en una pantalla externa"
 msgid "External tablet device"
 msgstr "Tableta externa"
 
-#. Translators: this is a drawing tablet pad, i.e. a collection of buttons and
-#. knobs
+#. Translators: this is a drawing tablet pad, i.e. a collection of buttons and knobs
 #: panels/wacom/cc-wacom-ekr-page.blp:10
 msgid "External pad device"
 msgstr "Tableta externa"
@@ -9366,8 +9300,7 @@ msgstr "_Calibrar"
 msgid "All Displays"
 msgstr "Todas las pantallas"
 
-#. Translators: %s is a link to the Mouse & Touchpad panel with the label
-#. "Mouse"
+#. Translators: %s is a link to the Mouse & Touchpad panel with the label "Mouse"
 #: panels/wacom/cc-wacom-page.c:714
 #, c-format
 msgid "Mouse devices can be configured in %s settings"
@@ -9482,9 +9415,7 @@ msgstr ""
 "Establecer el mapeado de botones y ajustar la sensibilidad del lápiz para "
 "tabletas gráficas"
 
-#. Translators: Search terms to find the Graphics Tablets panel. Do NOT
-#. translate or localize the semicolons! The list MUST also end with a
-#. semicolon!
+#. Translators: Search terms to find the Graphics Tablets panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wacom/gnome-wacom-panel.desktop.in:14
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
 msgstr "Tableta;Wacom;Stylus;Borrador;Ratón;"
@@ -9518,15 +9449,15 @@ msgstr ""
 "La información del tiempo de pantalla aparecerá aquí después de un período "
 "de uso"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.blp:164
+#: panels/wellbeing/cc-screen-time-statistics-row.blp:166
 msgid "Average Week"
 msgstr "Media semanal"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.blp:208
+#: panels/wellbeing/cc-screen-time-statistics-row.blp:212
 msgid "Previous Week"
 msgstr "Semana anterior"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.blp:218
+#: panels/wellbeing/cc-screen-time-statistics-row.blp:222
 msgid "Next Week"
 msgstr "Siguiente semana"
 
@@ -9565,8 +9496,7 @@ msgctxt "abbreviated weekday name for Saturday"
 msgid "S"
 msgstr "S"
 
-#. Translators: This is a duration in minutes, for example ‘15m’ for 15
-#. minutes.
+#. Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
 #. * Use whatever shortest unit label is used for minutes in your locale.
 #: panels/wellbeing/cc-screen-time-statistics-row.c:393
 #, c-format
@@ -9797,8 +9727,7 @@ msgstr "Bienestar"
 msgid "Review and limit the amount of time you spend at the computer screen"
 msgstr "Revisa y limita el tiempo que pasa frente a la pantalla del equipo"
 
-#. Translators: Search terms to find the Wellbeing panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Wellbeing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wellbeing/gnome-wellbeing-panel.desktop.in:17
 msgid ""
 "Wellbeing;Screen Time;Breaks;Break Reminders;Health Breaks;Daily "
@@ -10375,22 +10304,22 @@ msgstr "Red móvil"
 msgid "Configure Telephony and mobile data connections"
 msgstr "Configurar telefonía y conexiones de datos móviles"
 
-#. Translators: Search terms to find the WWAN panel. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wwan/gnome-wwan-panel.desktop.in:15
 msgid "cellular;wwan;telephony;sim;mobile;"
 msgstr "teléfono;wwan;telefonía;sim;móvil;"
 
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:8
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:9
 msgid "Utility to configure the GNOME desktop"
 msgstr "Utilidad para configurar el escritorio GNOME"
 
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:10
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:11
 msgid "Settings is the primary interface for configuring your system."
 msgstr "Configuración es la interfaz principal para configurar su sistema."
 
 #. developer_name tag deprecated with Appstream 1.0
-#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:39
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:40
+#: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:42
 msgid "The GNOME Project"
 msgstr "El Proyecto GNOME"
 
@@ -10420,8 +10349,7 @@ msgstr "Panel que mostrar"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENTO…]"
 
-#. Translators should localize the following string which will be displayed in
-#. the About dialog giving credit to the translator(s).
+#. Translators should localize the following string which will be displayed in the About dialog giving credit to the translator(s).
 #: shell/cc-application.c:126
 msgid "translator-credits"
 msgstr ""
@@ -10485,8 +10413,7 @@ msgstr "_Ayuda"
 msgid "_About Settings"
 msgstr "_Acerca de Configuración"
 
-#. Translators: Search terms to find this app. Do NOT translate or localize
-#. the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this app. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: shell/org.gnome.Settings.desktop.in:14
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
@@ -10569,7 +10496,7 @@ msgstr "Cancelar búsqueda"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1926
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -10578,14 +10505,14 @@ msgstr[1] "%u salidas"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1927
+#: subprojects/gvc/gvc-mixer-control.c:1936
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u entrada"
 msgstr[1] "%u entradas"
 
-#: subprojects/gvc/gvc-mixer-control.c:2910
+#: subprojects/gvc/gvc-mixer-control.c:2919
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
 
