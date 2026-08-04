@@ -37,8 +37,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-07-31 08:43+0000\n"
-"PO-Revision-Date: 2026-08-03 09:00+0800\n"
+"POT-Creation-Date: 2026-08-03 08:18+0000\n"
+"PO-Revision-Date: 2026-08-04 09:09+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -77,8 +77,7 @@ msgstr "添加键盘快捷键"
 #: panels/system/users/cc-add-user-dialog.blp:19
 #: panels/system/users/cc-avatar-chooser.c:90
 #: panels/system/users/cc-enterprise-login-dialog.blp:39
-#: panels/system/users/cc-fingerprint-dialog.blp:18
-#: panels/system/users/cc-fingerprint-dialog.c:1217
+#: panels/system/users/cc-fingerprint-dialog.blp:166
 #: panels/system/users/cc-password-dialog.blp:17
 #: panels/system/users/cc-user-page.blp:196
 #: panels/wwan/cc-wwan-mode-dialog.blp:27
@@ -242,7 +241,7 @@ msgstr "接收系统搜索并发送结果"
 #: panels/keyboard/cc-keyboard-panel.c:83
 #: panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331
 #: panels/system/users/cc-user-page.c:365
-#: panels/system/users/cc-user-page.c:705 panels/wwan/cc-wwan-device-page.c:423
+#: panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:423
 #: subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "已禁用"
@@ -601,7 +600,7 @@ msgstr "介质自动启动(_I)"
 msgid "Start apps or prompt when media is connected"
 msgstr "连接介质时启动应用或提示"
 
-#: panels/applications/cc-default-apps-row.c:128
+#: panels/applications/cc-default-apps-row.c:240
 msgid "No Apps Available"
 msgstr "无可用应用"
 
@@ -713,11 +712,11 @@ msgstr "软件(_T)"
 
 #: panels/applications/cc-removable-media-settings.ui:71
 msgid "_Other Media Types"
-msgstr "其它介质类型(_O)"
+msgstr "其他介质类型(_O)"
 
 #: panels/applications/cc-removable-media-settings.ui:89
 msgid "Other Media Types"
-msgstr "其它介质类型"
+msgstr "其他介质类型"
 
 #: panels/applications/cc-removable-media-settings.ui:104
 msgid "_Type"
@@ -1142,7 +1141,7 @@ msgstr "恢复(_R)"
 #. Translators: This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.blp:40
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:34
-#: panels/system/users/cc-fingerprint-dialog.blp:39
+#: panels/system/users/cc-fingerprint-dialog.blp:177
 msgid "_Done"
 msgstr "完成(_D)"
 
@@ -1423,7 +1422,7 @@ msgstr "请选择通常使用的显示亮度。色彩管理在此亮度下将最
 msgid ""
 "Alternatively, you can use the brightness level used with one of the other "
 "profiles for this device."
-msgstr "或者，也可以使用此设备其它特性文件所对应的亮度级别。"
+msgstr "或者，也可以使用此设备其他特性文件所对应的亮度级别。"
 
 #: panels/color/cc-color-panel.ui:214
 msgid "Profile Name"
@@ -1707,7 +1706,7 @@ msgstr ""
 
 #: panels/common/cc-common-language.c:278
 msgid "Other…"
-msgstr "其它…"
+msgstr "其他…"
 
 #: panels/common/cc-language-chooser.blp:5
 msgid "Select Language"
@@ -2331,7 +2330,7 @@ msgstr "查看键盘布局"
 #: panels/keyboard/cc-input-chooser.c:904
 msgctxt "Input Source"
 msgid "Other"
-msgstr "其它"
+msgstr "其他"
 
 #: panels/keyboard/cc-input-list-box.blp:15
 msgid "Input sources"
@@ -2428,7 +2427,7 @@ msgstr "备用字符键"
 msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
-msgstr "备用字符键可用于输入其它字符。这些有时会作为第三选项打印在键盘上。"
+msgstr "备用字符键可用于输入其他字符。这些有时会作为第三选项打印在键盘上。"
 
 #: panels/keyboard/cc-keyboard-panel.c:64
 msgid "Layout Default"
@@ -3181,7 +3180,7 @@ msgid ""
 "internet connection through a source other than Wi-Fi."
 msgstr ""
 "Wi-Fi 热点会创建一个其他人可以加入的 Wi-Fi 网络，从而让他们共享您的网络连接。"
-"要使用此功能，您必须通过 Wi-Fi 以外的其它方式连接至互联网。"
+"要使用此功能，您必须通过 Wi-Fi 以外的其他方式连接至互联网。"
 
 #: panels/network/cc-wifi-hotspot-dialog.blp:115
 msgid "Generate Random Password"
@@ -3259,7 +3258,7 @@ msgid ""
 "Scan with another device to connect to the hotspot.\n"
 "Turn off the hotspot to use Wi-Fi with this device."
 msgstr ""
-"用其它设备扫描来连接至该热点。\n"
+"用其他设备扫描来连接至该热点。\n"
 "关闭热点可使用该设备的 Wi-Fi。"
 
 #: panels/network/cc-wifi-panel.blp:121
@@ -3678,7 +3677,7 @@ msgstr "计费连接：有数据限制或可能产生费用(_M)"
 #: panels/network/connection-editor/details-page.blp:434
 msgid ""
 "Software updates and other large downloads will not be started automatically."
-msgstr "软件更新和其它大型下载将不会自动启动。"
+msgstr "软件更新和其他大型下载将不会自动启动。"
 
 #: panels/network/connection-editor/ethernet-page.blp:46
 #: panels/network/connection-editor/wifi-page.blp:54
@@ -3719,7 +3718,7 @@ msgstr "禁用"
 
 #: panels/network/connection-editor/ip4-page.blp:80
 msgid "Shared to other computers"
-msgstr "与其它计算机共享"
+msgstr "与其他计算机共享"
 
 #: panels/network/connection-editor/ip4-page.blp:105
 #: panels/network/connection-editor/ip6-page.blp:116
@@ -3803,7 +3802,7 @@ msgstr "自动，仅 DHCP"
 
 #: panels/network/connection-editor/ip6-page.blp:91
 msgid "Shared to other devices"
-msgstr "与其它设备共享"
+msgstr "与其他设备共享"
 
 #: panels/network/connection-editor/ip6-page.blp:140
 #: panels/network/connection-editor/ip6-page.blp:310
@@ -4591,9 +4590,10 @@ msgstr "Kerberos"
 #: panels/online-accounts/cc-online-account-provider-row.c:129
 msgctxt "Online Account"
 msgid "Other"
-msgstr "其它"
+msgstr "其他"
 
 #: panels/online-accounts/cc-online-account-row.blp:25
+#: panels/system/users/cc-fingerprint-dialog.blp:26
 msgid "Error"
 msgstr "错误"
 
@@ -5329,7 +5329,7 @@ msgstr "服务器要求认证"
 
 #. Translators: this is the "go back" action of a button
 #: panels/printers/pp-new-printer-dialog.ui:78
-#: panels/system/users/cc-fingerprint-dialog.blp:24
+#: panels/system/users/cc-fingerprint-dialog.blp:15
 #: panels/wacom/cc-wacom-stylus-page.c:389
 #: panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
@@ -5710,7 +5710,7 @@ msgstr "时间戳"
 
 #: panels/privacy/bolt/cc-bolt-device-dialog.blp:42
 msgid "Depends on other devices"
-msgstr "依赖于其它设备"
+msgstr "依赖于其他设备"
 
 #: panels/privacy/bolt/cc-bolt-device-dialog.blp:53
 msgid "_Authorize and Connect"
@@ -5794,7 +5794,7 @@ msgstr "无法忘记设备："
 #, c-format
 msgid "Depends on %u other device"
 msgid_plural "Depends on %u other devices"
-msgstr[0] "依赖于 %u 个其它设备"
+msgstr[0] "依赖于 %u 个其他设备"
 
 #: panels/privacy/bolt/cc-bolt-device-entry.c:123
 msgctxt "Thunderbolt Device Status"
@@ -6100,7 +6100,7 @@ msgid ""
 "some hardware security threats. However, it lacks other recommended "
 "protections."
 msgstr ""
-"此设备符合基本安全需求且可以抵御一些硬件安全威胁。然而，其缺乏其它推荐的保"
+"此设备符合基本安全需求且可以抵御一些硬件安全威胁。然而，其缺乏其他推荐的保"
 "护。"
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
@@ -6292,7 +6292,7 @@ msgstr "未验证"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:42
 #: panels/system/users/cc-user-page.c:363
-#: panels/system/users/cc-user-page.c:704 panels/wwan/cc-wwan-device-page.c:421
+#: panels/system/users/cc-user-page.c:720 panels/wwan/cc-wwan-device-page.c:421
 msgid "Enabled"
 msgstr "已启用"
 
@@ -6663,7 +6663,7 @@ msgstr "设备名称(_D)"
 
 #: panels/sharing/cc-sharing-panel.blp:25
 msgid "Share files with other devices on the current network"
-msgstr "与当前网络上的其它设备共享文件"
+msgstr "与当前网络上的其他设备共享文件"
 
 #: panels/sharing/cc-sharing-panel.blp:26
 #: panels/sharing/cc-sharing-panel.blp:56
@@ -6714,7 +6714,7 @@ msgid ""
 "It may still be possible for devices on this network to see what content is "
 "being shared."
 msgstr ""
-"其它设备需要密码来访问共享的内容。\n"
+"其他设备需要密码来访问共享的内容。\n"
 "但该网络上的设备仍可能看到共享的内容。"
 
 #: panels/sharing/cc-sharing-panel.blp:112
@@ -6769,7 +6769,7 @@ msgstr "添加文件夹(_A)"
 msgid ""
 "File sharing allows sharing the Public folder with other devices on the "
 "current network. This device will be visible as “%s”."
-msgstr "文件共享可与当前网络上的其它设备共享“公共”文件夹。该设备将显示为“%s”。"
+msgstr "文件共享可与当前网络上的其他设备共享“公共”文件夹。该设备将显示为“%s”。"
 
 #: panels/sharing/gnome-sharing-panel.desktop.in:3
 msgid "Control what you want to share with others"
@@ -7462,7 +7462,7 @@ msgstr "解锁…"
 msgid ""
 "Share your existing desktop with other devices. The remote connection uses "
 "the existing screen resolution."
-msgstr "与其它设备共享您的现有桌面。远程连接使用现有的屏幕分辨率。"
+msgstr "与其他设备共享您的现有桌面。远程连接使用现有的屏幕分辨率。"
 
 #: panels/system/remote-desktop/cc-desktop-sharing-page.blp:21
 msgid "_Desktop Sharing"
@@ -7807,214 +7807,215 @@ msgstr "正在检查域…"
 msgid "Failed to contact realmd service"
 msgstr "联系 realmd 服务失败"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:90
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/system/users/cc-fingerprint-dialog.blp:34
 msgid "No fingerprint device"
 msgstr "无指纹设备"
 
-#. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.blp:106
-msgid "No Fingerprint device"
-msgstr "无指纹设备"
-
-#: panels/system/users/cc-fingerprint-dialog.blp:116
+#: panels/system/users/cc-fingerprint-dialog.blp:37
 msgid "Ensure the device is properly connected"
 msgstr "请确保设备已正常连接"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:124
+#: panels/system/users/cc-fingerprint-dialog.blp:45
+#: panels/system/users/cc-fingerprint-dialog.blp:91
+msgid "Fingerprint Authentication"
+msgstr "指纹认证"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:46
+msgid ""
+"Use fingerprints to unlock the screen and identify yourself when prompted"
+msgstr "使用指纹解锁屏幕并在提示时验证身份"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:54
+msgid "_Scan Finger"
+msgstr "扫描指纹(_S)"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:67
 msgid "Fingerprint Device"
 msgstr "指纹设备"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:134
+#: panels/system/users/cc-fingerprint-dialog.blp:70
 msgid "Choose the fingerprint device you want to configure"
 msgstr "选择您想要配置的指纹设备"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:162
-msgid "Fingerprint Login"
-msgstr "指纹登录"
+#: panels/system/users/cc-fingerprint-dialog.blp:78
+msgid "Select Finger"
+msgstr "选择手指"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:170
-msgid ""
-"Fingerprint login allows you to unlock and log into your device with your "
-"finger"
-msgstr "指纹登录可让您使用手指解锁和登录您的设备"
+#: panels/system/users/cc-fingerprint-dialog.blp:82
+msgid "Right Hand"
+msgstr "右手指"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:196
-msgid "_Delete Fingerprints"
-msgstr "删除指纹(_D)"
+#: panels/system/users/cc-fingerprint-dialog.blp:85
+msgid "Left Hand"
+msgstr "左手指"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:209
-msgid "Fingerprint Enroll"
-msgstr "指纹登记"
+#: panels/system/users/cc-fingerprint-dialog.blp:95
+msgid "The following fingerprints can be used for authentication"
+msgstr "以下指纹可用于身份验证"
 
-#: panels/system/users/cc-fingerprint-dialog.c:208
+#: panels/system/users/cc-fingerprint-dialog.blp:100
+msgid "Fingerprints"
+msgstr "指纹"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:105
+msgid "Add Fingerprint"
+msgstr "添加指纹"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:136
+msgid "Touch the fingerprint reader to check the scanned fingers"
+msgstr "触摸指纹传感器核对已扫描的手指"
+
+#: panels/system/users/cc-fingerprint-dialog.c:240
 msgid "the device needs to be claimed to perform this action"
 msgstr "执行此操作前需要独占设备"
 
-#: panels/system/users/cc-fingerprint-dialog.c:210
+#: panels/system/users/cc-fingerprint-dialog.c:242
 msgid "the device is already claimed by another process"
 msgstr "该设备已经被另一个进程占用"
 
-#: panels/system/users/cc-fingerprint-dialog.c:212
+#: panels/system/users/cc-fingerprint-dialog.c:244
 msgid "you do not have permission to perform the action"
 msgstr "您没有权限执行该动作"
 
-#: panels/system/users/cc-fingerprint-dialog.c:214
+#: panels/system/users/cc-fingerprint-dialog.c:246
 msgid "no prints have been enrolled"
 msgstr "尚未登记任何指纹"
 
-#: panels/system/users/cc-fingerprint-dialog.c:221
+#: panels/system/users/cc-fingerprint-dialog.c:253
 msgid "Failed to communicate with the device during enrollment"
 msgstr "注册时连接设备失败"
 
-#: panels/system/users/cc-fingerprint-dialog.c:224
+#: panels/system/users/cc-fingerprint-dialog.c:256
 msgid "Failed to communicate with the fingerprint reader"
 msgstr "连接指纹读取器失败"
 
-#: panels/system/users/cc-fingerprint-dialog.c:226
+#: panels/system/users/cc-fingerprint-dialog.c:258
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "连接指纹守护程序失败"
 
-#: panels/system/users/cc-fingerprint-dialog.c:452
+#: panels/system/users/cc-fingerprint-dialog.c:313
+msgid "Left thumb"
+msgstr "左手拇指"
+
+#: panels/system/users/cc-fingerprint-dialog.c:315
+msgid "Left middle finger"
+msgstr "左手中指"
+
+#: panels/system/users/cc-fingerprint-dialog.c:317
+msgid "_Left index finger"
+msgstr "左手食指(_L)"
+
+#: panels/system/users/cc-fingerprint-dialog.c:319
+msgid "Left ring finger"
+msgstr "左手无名指"
+
+#: panels/system/users/cc-fingerprint-dialog.c:321
+msgid "Left little finger"
+msgstr "左手小指"
+
+#: panels/system/users/cc-fingerprint-dialog.c:323
+msgid "Right thumb"
+msgstr "右手拇指"
+
+#: panels/system/users/cc-fingerprint-dialog.c:325
+msgid "Right middle finger"
+msgstr "右手中指"
+
+#: panels/system/users/cc-fingerprint-dialog.c:327
+msgid "_Right index finger"
+msgstr "右手食指(_R)"
+
+#: panels/system/users/cc-fingerprint-dialog.c:329
+msgid "Right ring finger"
+msgstr "右手无名指"
+
+#: panels/system/users/cc-fingerprint-dialog.c:331
+msgid "Right little finger"
+msgstr "右手小指"
+
+#: panels/system/users/cc-fingerprint-dialog.c:333
+msgid "Unknown Finger"
+msgstr "未知手指"
+
+#: panels/system/users/cc-fingerprint-dialog.c:351
+#, c-format
+msgid "Failed to delete fingerprint: %s"
+msgstr "删除指纹失败：%s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:648
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "列出指纹失败：%s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:510
-#, c-format
-msgid "Failed to delete saved fingerprints: %s"
-msgstr "删除已保存的指纹失败：%s"
+#: panels/system/users/cc-fingerprint-dialog.c:733
+msgid "Scan Complete!"
+msgstr "扫描完成！"
 
-#: panels/system/users/cc-fingerprint-dialog.c:538
-msgid "Left thumb"
-msgstr "左手拇指"
+#: panels/system/users/cc-fingerprint-dialog.c:746
+msgid "Touch finger on reader"
+msgstr "让手指触摸读取器"
 
-#: panels/system/users/cc-fingerprint-dialog.c:540
-msgid "Left middle finger"
-msgstr "左手中指"
+#: panels/system/users/cc-fingerprint-dialog.c:800
+msgid "Scan Complete"
+msgstr "扫描完成"
 
-#: panels/system/users/cc-fingerprint-dialog.c:542
-msgid "_Left index finger"
-msgstr "左手食指(_L)"
-
-#: panels/system/users/cc-fingerprint-dialog.c:544
-msgid "Left ring finger"
-msgstr "左手无名指"
-
-#: panels/system/users/cc-fingerprint-dialog.c:546
-msgid "Left little finger"
-msgstr "左手小指"
-
-#: panels/system/users/cc-fingerprint-dialog.c:548
-msgid "Right thumb"
-msgstr "右手拇指"
-
-#: panels/system/users/cc-fingerprint-dialog.c:550
-msgid "Right middle finger"
-msgstr "右手中指"
-
-#: panels/system/users/cc-fingerprint-dialog.c:552
-msgid "_Right index finger"
-msgstr "右手食指(_R)"
-
-#: panels/system/users/cc-fingerprint-dialog.c:554
-msgid "Right ring finger"
-msgstr "右手无名指"
-
-#: panels/system/users/cc-fingerprint-dialog.c:556
-msgid "Right little finger"
-msgstr "右手小指"
-
-#: panels/system/users/cc-fingerprint-dialog.c:558
-msgid "Unknown Finger"
-msgstr "未知手指"
-
-#. TRANSLATORS: This is the message shown when the fingerprint
-#. * enrollment has been completed successfully
-#: panels/system/users/cc-fingerprint-dialog.c:670
-msgctxt "Fingerprint enroll state"
-msgid "Complete"
-msgstr "完成"
-
-#: panels/system/users/cc-fingerprint-dialog.c:678
+#: panels/system/users/cc-fingerprint-dialog.c:823
 msgid "Fingerprint device disconnected"
 msgstr "指纹设备已断开连接"
 
-#: panels/system/users/cc-fingerprint-dialog.c:681
-msgid "Fingerprint device storage is full"
-msgstr "指纹设备存储已满"
+#: panels/system/users/cc-fingerprint-dialog.c:826
+msgid "Fingerprint Storage is Full"
+msgstr "指纹存储已满"
 
-#: panels/system/users/cc-fingerprint-dialog.c:683
-msgid "Fingerprint is duplicate"
-msgstr "指纹是重复的"
+#: panels/system/users/cc-fingerprint-dialog.c:828
+msgid "Finger Already Scanned"
+msgstr "手指已扫描"
 
-#: panels/system/users/cc-fingerprint-dialog.c:685
-msgid "Failed to enroll new fingerprint"
-msgstr "登记新指纹失败"
+#: panels/system/users/cc-fingerprint-dialog.c:830
+msgid "Failed to Scan Finger"
+msgstr "扫描手指失败"
 
-#: panels/system/users/cc-fingerprint-dialog.c:713
+#: panels/system/users/cc-fingerprint-dialog.c:881
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "登记过程初始化失败：%s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:719
+#: panels/system/users/cc-fingerprint-dialog.c:887
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "登记新指纹失败"
 
-#: panels/system/users/cc-fingerprint-dialog.c:746
+#: panels/system/users/cc-fingerprint-dialog.c:914
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "停止登记过程失败：%s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:789
+#: panels/system/users/cc-fingerprint-dialog.c:958
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr "请重复将手指放上并抬离读取器以登记指纹"
 
-#: panels/system/users/cc-fingerprint-dialog.c:890
-msgid "_Re-enroll this finger…"
-msgstr "重新登记该手指(_R)…"
-
-#. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:902
-msgid "Scan new fingerprint"
-msgstr "扫描新指纹"
-
-#: panels/system/users/cc-fingerprint-dialog.c:934
+#: panels/system/users/cc-fingerprint-dialog.c:1011
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "释放指纹设备 %s 失败：%s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:990
+#: panels/system/users/cc-fingerprint-dialog.c:1167
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "读取设备时出现问题"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1023
+#: panels/system/users/cc-fingerprint-dialog.c:1200
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "无法请求指纹设备 %s：%s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1146
+#: panels/system/users/cc-fingerprint-dialog.c:1329
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "获取指纹设备失败：%s"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1212
-msgid "Delete All Fingerprints?"
-msgstr "删除所有指纹吗？"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1213
-msgid ""
-"Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
-"enable Fingerprint Login at least one fingerprint will have to be enrolled."
-msgstr ""
-"删除所有登记的指纹将禁用指纹登录。要重新启用指纹登录必须至少登记一个指纹。"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1217
-msgid "_Delete All"
-msgstr "全部删除(_D)"
 
 #: panels/system/users/cc-password-dialog.blp:5
 msgid "Change Password"
@@ -8115,7 +8116,7 @@ msgid ""
 "requiring authentication. Authentication is still required at other times, "
 "such as when unlocking the screen."
 msgstr ""
-"自动登录会在设备启动时打开用户账户，无需身份验证。 其它时候仍然需要身份验证，"
+"自动登录会在设备启动时打开用户账户，无需身份验证。 其他时候仍然需要身份验证，"
 "例如解锁屏幕时。"
 
 #: panels/system/users/cc-user-page.blp:132
@@ -8154,18 +8155,18 @@ msgid "None"
 msgstr "无"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:414
+#: panels/system/users/cc-user-page.c:430
 #, c-format
 msgid "Remove %s?"
 msgstr "移除 %s？"
 
-#: panels/system/users/cc-user-page.c:419
+#: panels/system/users/cc-user-page.c:435
 msgid ""
 "The user's files and settings will be deleted, and they will not be able to "
 "use this device once their account has been removed"
 msgstr "一旦用户的账户被移除，则会删除其用户文件和设置且其将无法使用此设备"
 
-#: panels/system/users/cc-user-page.c:423
+#: panels/system/users/cc-user-page.c:439
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed"
@@ -10194,7 +10195,8 @@ msgstr ""
 "Boyuan Yang <073plan@gmail.com>, 2023.\n"
 "Victor_Trista <ljlzjzm@hotmail.com>, 2023.\n"
 "Chengbing Wu <cbing2002@outlook.com>, 2025.\n"
-"Luke Na <narukeu@outlook.com>, 2026."
+"Luke Na <narukeu@outlook.com>, 2026.\n"
+"Zeqian Sun <jianshusdd@outlook.com>, 2026."
 
 #: shell/cc-panel-list.blp:15
 msgid "Settings categories"
@@ -10309,6 +10311,45 @@ msgstr[0] "%u 路输入"
 #: subprojects/gvc/gvc-mixer-control.c:2919
 msgid "System Sounds"
 msgstr "系统声音"
+
+#~ msgid "No Fingerprint device"
+#~ msgstr "无指纹设备"
+
+#~ msgid ""
+#~ "Fingerprint login allows you to unlock and log into your device with your "
+#~ "finger"
+#~ msgstr "指纹登录可让您使用手指解锁和登录您的设备"
+
+#~ msgid "_Delete Fingerprints"
+#~ msgstr "删除指纹(_D)"
+
+#~ msgid "Fingerprint Enroll"
+#~ msgstr "指纹登记"
+
+#~ msgid "Fingerprint is duplicate"
+#~ msgstr "指纹是重复的"
+
+#~ msgid "Failed to enroll new fingerprint"
+#~ msgstr "登记新指纹失败"
+
+#~ msgid "_Re-enroll this finger…"
+#~ msgstr "重新登记该手指(_R)…"
+
+#~ msgid "Scan new fingerprint"
+#~ msgstr "扫描新指纹"
+
+#~ msgid "Delete All Fingerprints?"
+#~ msgstr "删除所有指纹吗？"
+
+#~ msgid ""
+#~ "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
+#~ "enable Fingerprint Login at least one fingerprint will have to be "
+#~ "enrolled."
+#~ msgstr ""
+#~ "删除所有登记的指纹将禁用指纹登录。要重新启用指纹登录必须至少登记一个指纹。"
+
+#~ msgid "_Delete All"
+#~ msgstr "全部删除(_D)"
 
 #~ msgid "Re_place"
 #~ msgstr "替换(_P)"
@@ -13067,9 +13108,6 @@ msgstr "系统声音"
 #~ "To enable fingerprint login, you need to save one of your fingerprints, "
 #~ "using the “%s” device."
 #~ msgstr "要启用指纹登录，您需要使用设备“%s”保存一个指纹。"
-
-#~ msgid "Selecting finger"
-#~ msgstr "选择手指"
 
 #~ msgid "Version %s"
 #~ msgstr "版本 %s"
