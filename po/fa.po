@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: amberol\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-07-31 08:43+0000\n"
-"PO-Revision-Date: 2026-08-01 19:17+0330\n"
+"POT-Creation-Date: 2026-08-05 07:12+0000\n"
+"PO-Revision-Date: 2026-08-05 23:48+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Farsi\n"
 "Language: fa\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:7
 msgid "Add Keyboard Shortcuts"
@@ -22,7 +22,7 @@ msgstr "افزودن میان‌برهای صفحه‌کلید"
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:17 panels/applications/cc-application-shortcut-dialog.c:121 panels/color/cc-color-calibrate.blp:22 panels/common/cc-language-chooser.blp:17 panels/display/cc-display-panel.blp:26 panels/display/cc-display-panel.blp:136 panels/display/cc-display-panel.blp:184 panels/keyboard/cc-input-chooser.blp:16
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:15 panels/keyboard/cc-keyboard-shortcut-page.blp:130 panels/network/cc-net-proxy-page.blp:15 panels/network/cc-wifi-hotspot-dialog.blp:16 panels/network/cc-wifi-panel.blp:182 panels/network/connection-editor/ce-page-details.c:87 panels/network/connection-editor/connection-editor.blp:17 panels/printers/pp-jobs-dialog.blp:112
 #: panels/printers/pp-new-printer-dialog.ui:65 panels/printers/pp-ppd-selection-dialog.blp:19 panels/privacy/usage/cc-usage-page.blp:114 panels/privacy/usage/cc-usage-page.blp:127 panels/privacy/usage/cc-usage-page.blp:140 panels/system/region/cc-format-chooser.blp:32 panels/system/users/cc-add-user-dialog.blp:19 panels/system/users/cc-avatar-chooser.c:90
-#: panels/system/users/cc-enterprise-login-dialog.blp:39 panels/system/users/cc-fingerprint-dialog.blp:18 panels/system/users/cc-fingerprint-dialog.c:1217 panels/system/users/cc-password-dialog.blp:17 panels/system/users/cc-user-page.blp:196 panels/wwan/cc-wwan-mode-dialog.blp:27 panels/wwan/cc-wwan-network-dialog.blp:95 panels/wwan/cc-wwan-sim-lock-dialog.blp:202
+#: panels/system/users/cc-enterprise-login-dialog.blp:39 panels/system/users/cc-fingerprint-dialog.blp:166 panels/system/users/cc-password-dialog.blp:17 panels/system/users/cc-user-page.blp:196 panels/wwan/cc-wwan-mode-dialog.blp:27 panels/wwan/cc-wwan-network-dialog.blp:95 panels/wwan/cc-wwan-sim-lock-dialog.blp:202
 msgid "_Cancel"
 msgstr "_لغو"
 
@@ -147,7 +147,7 @@ msgstr "گرفتن جست‌وجوهای سامانه و فرستادن نتیج
 #. translators:
 #. * The device has been disabled
 #: panels/applications/cc-applications-panel.blp:205 panels/applications/cc-applications-panel.blp:247 panels/applications/cc-applications-panel.blp:268 panels/applications/cc-applications-panel.blp:282 panels/applications/cc-applications-panel.blp:296 panels/keyboard/cc-keyboard-panel.c:83 panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331
-#: panels/system/users/cc-user-page.c:365 panels/system/users/cc-user-page.c:705 panels/wwan/cc-wwan-device-page.c:423 subprojects/gvc/gvc-mixer-control.c:1919
+#: panels/system/users/cc-user-page.c:365 panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:423 subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "از کار افتاده"
 
@@ -331,7 +331,7 @@ msgstr "دسترسی کامل"
 msgid "Session Bus"
 msgstr "گذرگاه نشست"
 
-#: panels/applications/cc-applications-panel.c:817 panels/color/cc-color-panel.ui:451 panels/privacy/bolt/cc-bolt-page.blp:118 panels/privacy/bolt/cc-bolt-page.blp:143 panels/privacy/cc-privacy-panel.blp:55
+#: panels/applications/cc-applications-panel.c:817 panels/color/cc-color-panel.ui:452 panels/privacy/bolt/cc-bolt-page.blp:118 panels/privacy/bolt/cc-bolt-page.blp:143 panels/privacy/cc-privacy-panel.blp:55
 msgid "Devices"
 msgstr "افزاره‌ها"
 
@@ -478,7 +478,7 @@ msgstr "_آغاز خودکار رسانه"
 msgid "Start apps or prompt when media is connected"
 msgstr "آغاز کاره‌ها یا اعلان هنگام وصل شدن رسانه"
 
-#: panels/applications/cc-default-apps-row.c:128
+#: panels/applications/cc-default-apps-row.c:240
 msgid "No Apps Available"
 msgstr "هیچ کاره‌ای در دسترس نیست"
 
@@ -1004,7 +1004,7 @@ msgid "_Resume"
 msgstr "از _سر گیری"
 
 #. Translators: This button returns the user back to the color control panel
-#: panels/color/cc-color-calibrate.blp:40 panels/keyboard/cc-keyboard-shortcut-editor.blp:34 panels/system/users/cc-fingerprint-dialog.blp:39
+#: panels/color/cc-color-calibrate.blp:40 panels/keyboard/cc-keyboard-shortcut-editor.blp:34 panels/system/users/cc-fingerprint-dialog.blp:177
 msgid "_Done"
 msgstr "_انجام شد"
 
@@ -1314,134 +1314,134 @@ msgstr "درون‌ریزی _پرونده…"
 msgid "Problems detected. The profile may not work correctly. <a href=\"\">Show details.</a>"
 msgstr "مشکلاتی شناسایی شدند. ممکن است نماگر درست کار نکند. <a href=\"\">نمایش جزییات.</a>"
 
-#: panels/color/cc-color-panel.ui:469
+#: panels/color/cc-color-panel.ui:470
 msgid "_Set for All Users"
 msgstr "_تنظیم برای تمام کاربران"
 
-#: panels/color/cc-color-panel.ui:470
+#: panels/color/cc-color-panel.ui:471
 msgid "Set this profile for all users on this device"
 msgstr "تنظیم این نماگر برای تمام کاربران روی این افزاره"
 
-#: panels/color/cc-color-panel.ui:477
+#: panels/color/cc-color-panel.ui:478
 msgid "_Enable"
 msgstr "_به کار انداختن"
 
-#: panels/color/cc-color-panel.ui:478
+#: panels/color/cc-color-panel.ui:479
 msgid "Enable profile"
 msgstr "به کار انداختن نماگر"
 
-#: panels/color/cc-color-panel.ui:492
+#: panels/color/cc-color-panel.ui:493
 msgid "_Add Profile"
 msgstr "_افزودن نماگر"
 
-#: panels/color/cc-color-panel.ui:499
+#: panels/color/cc-color-panel.ui:500
 msgid "_Calibrate…"
 msgstr "_واسنجی…"
 
-#: panels/color/cc-color-panel.ui:500
+#: panels/color/cc-color-panel.ui:501
 msgid "Calibrate the device"
 msgstr "واسنجی افزاره"
 
-#: panels/color/cc-color-panel.ui:507
+#: panels/color/cc-color-panel.ui:508
 msgid "_Remove Profile"
 msgstr "_برداشتن نماگر"
 
-#: panels/color/cc-color-panel.ui:514
+#: panels/color/cc-color-panel.ui:515
 msgid "_View Details"
 msgstr "_دیدن جزییات"
 
-#: panels/color/cc-color-panel.ui:542
+#: panels/color/cc-color-panel.ui:543
 msgid "No Devices"
 msgstr "بدون افزاره"
 
-#: panels/color/cc-color-panel.ui:543
+#: panels/color/cc-color-panel.ui:544
 msgid "Unable to detect any devices that can be color managed"
 msgstr "هیچگونه افزاره‌ای که بتواند مدیریت رنگ شود پیدا نشد"
 
-#: panels/color/cc-color-panel.ui:564
+#: panels/color/cc-color-panel.ui:565
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/cc-color-panel.ui:569
+#: panels/color/cc-color-panel.ui:570
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/cc-color-panel.ui:574
+#: panels/color/cc-color-panel.ui:575
 msgid "CRT"
 msgstr "سی‌آرتی"
 
-#: panels/color/cc-color-panel.ui:579
+#: panels/color/cc-color-panel.ui:580
 msgid "Projector"
 msgstr "پروژکتور"
 
-#: panels/color/cc-color-panel.ui:584
+#: panels/color/cc-color-panel.ui:585
 msgid "Plasma"
 msgstr "پلاسما"
 
-#: panels/color/cc-color-panel.ui:589
+#: panels/color/cc-color-panel.ui:590
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (CCFL backlight)"
 
-#: panels/color/cc-color-panel.ui:594
+#: panels/color/cc-color-panel.ui:595
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (RGB LED backlight)"
 
-#: panels/color/cc-color-panel.ui:599
+#: panels/color/cc-color-panel.ui:600
 msgid "LCD (white LED backlight)"
 msgstr "LCD (white LED backlight)"
 
-#: panels/color/cc-color-panel.ui:604
+#: panels/color/cc-color-panel.ui:605
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "Wide gamut LCD (CCFL backlight)"
 
-#: panels/color/cc-color-panel.ui:609
+#: panels/color/cc-color-panel.ui:610
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "Wide gamut LCD (RGB LED backlight)"
 
-#: panels/color/cc-color-panel.ui:626
+#: panels/color/cc-color-panel.ui:627
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "زیاد"
 
-#: panels/color/cc-color-panel.ui:627
+#: panels/color/cc-color-panel.ui:628
 msgid "40 minutes"
 msgstr "۴۰ دقیقه"
 
-#: panels/color/cc-color-panel.ui:631
+#: panels/color/cc-color-panel.ui:632
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "متوسّط"
 
-#: panels/color/cc-color-panel.ui:632
+#: panels/color/cc-color-panel.ui:633
 msgid "30 minutes"
 msgstr "۳۰ دقیقه"
 
-#: panels/color/cc-color-panel.ui:636
+#: panels/color/cc-color-panel.ui:637
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "کم"
 
-#: panels/color/cc-color-panel.ui:637
+#: panels/color/cc-color-panel.ui:638
 msgid "15 minutes"
 msgstr "۱۵ دقیقه"
 
-#: panels/color/cc-color-panel.ui:659
+#: panels/color/cc-color-panel.ui:660
 msgid "Native to display"
 msgstr "محلی برای نمایشگر"
 
-#: panels/color/cc-color-panel.ui:663
+#: panels/color/cc-color-panel.ui:664
 msgid "D50 (Printing and publishing)"
 msgstr "‫D50 (چاپ و انتشار)"
 
-#: panels/color/cc-color-panel.ui:667
+#: panels/color/cc-color-panel.ui:668
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/cc-color-panel.ui:671
+#: panels/color/cc-color-panel.ui:672
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (عکسبرداری و نگاشتار)"
 
-#: panels/color/cc-color-panel.ui:675
+#: panels/color/cc-color-panel.ui:676
 msgid "D75"
 msgstr "D75"
 
@@ -4163,7 +4163,7 @@ msgctxt "Online Account"
 msgid "Other"
 msgstr "موارد دیگر"
 
-#: panels/online-accounts/cc-online-account-row.blp:25
+#: panels/online-accounts/cc-online-account-row.blp:25 panels/system/users/cc-fingerprint-dialog.blp:26
 msgid "Error"
 msgstr "خطا"
 
@@ -4873,7 +4873,7 @@ msgid "Server requires authentication"
 msgstr "کارساز نیاز به تصدیق هویت دارد"
 
 #. Translators: this is the "go back" action of a button
-#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:24 panels/wacom/cc-wacom-stylus-page.c:389 panels/wwan/cc-wwan-apn-dialog.blp:20
+#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:15 panels/wacom/cc-wacom-stylus-page.c:389 panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
 msgstr "بازگشت"
 
@@ -5746,7 +5746,7 @@ msgstr "نامعتبر"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/privacy/firmware-security/cc-firmware-security-utils.c:42 panels/system/users/cc-user-page.c:363 panels/system/users/cc-user-page.c:704 panels/wwan/cc-wwan-device-page.c:421
+#: panels/privacy/firmware-security/cc-firmware-security-utils.c:42 panels/system/users/cc-user-page.c:363 panels/system/users/cc-user-page.c:720 panels/wwan/cc-wwan-device-page.c:421
 msgid "Enabled"
 msgstr "به کار افتاده"
 
@@ -7142,207 +7142,211 @@ msgstr "بررسی کردن دامنه…"
 msgid "Failed to contact realmd service"
 msgstr "شکست در ارتباط با خدمت realmd"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:90
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/system/users/cc-fingerprint-dialog.blp:34
 msgid "No fingerprint device"
 msgstr "افزارهٔ اثر انگشتی نیست"
 
-#. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.blp:106
-msgid "No Fingerprint device"
-msgstr "افزارهٔ اثر انگشتی نیست"
-
-#: panels/system/users/cc-fingerprint-dialog.blp:116
+#: panels/system/users/cc-fingerprint-dialog.blp:37
 msgid "Ensure the device is properly connected"
 msgstr "مطمئن شوید افزاره به درستی وصل شده"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:124
+#: panels/system/users/cc-fingerprint-dialog.blp:45 panels/system/users/cc-fingerprint-dialog.blp:91
+msgid "Fingerprint Authentication"
+msgstr "هویت‌سنجی اثر انگشتی"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:46
+msgid "Use fingerprints to unlock the screen and identify yourself when prompted"
+msgstr "استفاده از اثر انگشت برای قفل‌گشایی صفحه و هویت‌سنجیتان هنگام اعلان"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:54
+msgid "_Scan Finger"
+msgstr "_پویش انگشت"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:67
 msgid "Fingerprint Device"
 msgstr "افزارهٔ اثر انگشت"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:134
+#: panels/system/users/cc-fingerprint-dialog.blp:70
 msgid "Choose the fingerprint device you want to configure"
 msgstr "گزینش افزارهٔ اثر انگشتی که می‌خواهید پیکربندی کنید"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:162
-msgid "Fingerprint Login"
-msgstr "ورود با اثر انگشت"
+#: panels/system/users/cc-fingerprint-dialog.blp:78
+msgid "Select Finger"
+msgstr "گزینش انگشت"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:170
-msgid "Fingerprint login allows you to unlock and log into your device with your finger"
-msgstr "ورود با اثر انگشت می‌گذارد افزاره را با اثر انگشتتان قفل‌گشایی کرده و به آن وارد شوید"
+#: panels/system/users/cc-fingerprint-dialog.blp:82
+msgid "Right Hand"
+msgstr "دست راست"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:196
-msgid "_Delete Fingerprints"
-msgstr "_حذف اثرانگشت‌ها"
+#: panels/system/users/cc-fingerprint-dialog.blp:85
+msgid "Left Hand"
+msgstr "دست چپ"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:209
-msgid "Fingerprint Enroll"
-msgstr "ثبت اثر انگشت"
+#: panels/system/users/cc-fingerprint-dialog.blp:95
+msgid "The following fingerprints can be used for authentication"
+msgstr "این اثر انگشت‌ها می‌توانند برای تأیید هویت استفاده شوند"
 
-#: panels/system/users/cc-fingerprint-dialog.c:208
+#: panels/system/users/cc-fingerprint-dialog.blp:100
+msgid "Fingerprints"
+msgstr "اثر انگشت‌ها"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:105
+msgid "Add Fingerprint"
+msgstr "افزودن اثر انگشت"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:136
+msgid "Touch the fingerprint reader to check the scanned fingers"
+msgstr "لمس اثر انگشت‌خوان برای بررسی انگشت‌های پوییده"
+
+#: panels/system/users/cc-fingerprint-dialog.c:240
 msgid "the device needs to be claimed to perform this action"
 msgstr "پیش از انجام این کنش،‌ افزاره باید درخواست شود"
 
-#: panels/system/users/cc-fingerprint-dialog.c:210
+#: panels/system/users/cc-fingerprint-dialog.c:242
 msgid "the device is already claimed by another process"
 msgstr "افزاره به دست فرایندی دیگر درخواست شده است"
 
-#: panels/system/users/cc-fingerprint-dialog.c:212
+#: panels/system/users/cc-fingerprint-dialog.c:244
 msgid "you do not have permission to perform the action"
 msgstr "اجازهٔ انجام این کنش را ندارید"
 
-#: panels/system/users/cc-fingerprint-dialog.c:214
+#: panels/system/users/cc-fingerprint-dialog.c:246
 msgid "no prints have been enrolled"
 msgstr "هیچ اثر انگشتی ثبت نشده"
 
-#: panels/system/users/cc-fingerprint-dialog.c:221
+#: panels/system/users/cc-fingerprint-dialog.c:253
 msgid "Failed to communicate with the device during enrollment"
 msgstr "شکست در ارتباط با افزاره هنگام ثبت"
 
-#: panels/system/users/cc-fingerprint-dialog.c:224
+#: panels/system/users/cc-fingerprint-dialog.c:256
 msgid "Failed to communicate with the fingerprint reader"
 msgstr "شکست در ارتباط با خوانندهٔ اثر انگشت"
 
-#: panels/system/users/cc-fingerprint-dialog.c:226
+#: panels/system/users/cc-fingerprint-dialog.c:258
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "شکست در ارتباط با خدمت اثر انگشت"
 
-#: panels/system/users/cc-fingerprint-dialog.c:452
+#: panels/system/users/cc-fingerprint-dialog.c:313
+msgid "Left thumb"
+msgstr "شصت چپ"
+
+#: panels/system/users/cc-fingerprint-dialog.c:315
+msgid "Left middle finger"
+msgstr "انگشت وسط چپ"
+
+#: panels/system/users/cc-fingerprint-dialog.c:317
+msgid "_Left index finger"
+msgstr "انگشت اشاره _چپ"
+
+#: panels/system/users/cc-fingerprint-dialog.c:319
+msgid "Left ring finger"
+msgstr "انگشت حلقه چپ"
+
+#: panels/system/users/cc-fingerprint-dialog.c:321
+msgid "Left little finger"
+msgstr "انگشت کوچک چپ"
+
+#: panels/system/users/cc-fingerprint-dialog.c:323
+msgid "Right thumb"
+msgstr "شصت راست"
+
+#: panels/system/users/cc-fingerprint-dialog.c:325
+msgid "Right middle finger"
+msgstr "انگشت وسط راست"
+
+#: panels/system/users/cc-fingerprint-dialog.c:327
+msgid "_Right index finger"
+msgstr "انگشت اشاره _راست"
+
+#: panels/system/users/cc-fingerprint-dialog.c:329
+msgid "Right ring finger"
+msgstr "انگشت حلقه راست"
+
+#: panels/system/users/cc-fingerprint-dialog.c:331
+msgid "Right little finger"
+msgstr "انگشت کوچک راست"
+
+#: panels/system/users/cc-fingerprint-dialog.c:333
+msgid "Unknown Finger"
+msgstr "اثر انگشت نامشخّص"
+
+#: panels/system/users/cc-fingerprint-dialog.c:351
+#, c-format
+msgid "Failed to delete fingerprint: %s"
+msgstr "شکست در حذف اثر انگشت: %s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:648
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "شکست در فهرست اثر انگشت‌ها: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:510
-#, c-format
-msgid "Failed to delete saved fingerprints: %s"
-msgstr "شکست در حذف اثر انگشت‌های ذخیره‌شده: %s"
+#: panels/system/users/cc-fingerprint-dialog.c:733
+msgid "Scan Complete!"
+msgstr "پویش کامل شد!"
 
-#: panels/system/users/cc-fingerprint-dialog.c:538
-msgid "Left thumb"
-msgstr "شصت چپ"
+#: panels/system/users/cc-fingerprint-dialog.c:746
+msgid "Touch finger on reader"
+msgstr "لمس خواننده با انگشت"
 
-#: panels/system/users/cc-fingerprint-dialog.c:540
-msgid "Left middle finger"
-msgstr "انگشت وسط چپ"
+#: panels/system/users/cc-fingerprint-dialog.c:800
+msgid "Scan Complete"
+msgstr "پویش کامل شد"
 
-#: panels/system/users/cc-fingerprint-dialog.c:542
-msgid "_Left index finger"
-msgstr "انگشت اشاره _چپ"
-
-#: panels/system/users/cc-fingerprint-dialog.c:544
-msgid "Left ring finger"
-msgstr "انگشت حلقه چپ"
-
-#: panels/system/users/cc-fingerprint-dialog.c:546
-msgid "Left little finger"
-msgstr "انگشت کوچک چپ"
-
-#: panels/system/users/cc-fingerprint-dialog.c:548
-msgid "Right thumb"
-msgstr "شصت راست"
-
-#: panels/system/users/cc-fingerprint-dialog.c:550
-msgid "Right middle finger"
-msgstr "انگشت وسط راست"
-
-#: panels/system/users/cc-fingerprint-dialog.c:552
-msgid "_Right index finger"
-msgstr "انگشت اشاره _راست"
-
-#: panels/system/users/cc-fingerprint-dialog.c:554
-msgid "Right ring finger"
-msgstr "انگشت حلقه راست"
-
-#: panels/system/users/cc-fingerprint-dialog.c:556
-msgid "Right little finger"
-msgstr "انگشت کوچک راست"
-
-#: panels/system/users/cc-fingerprint-dialog.c:558
-msgid "Unknown Finger"
-msgstr "اثر انگشت نامشخّص"
-
-#. TRANSLATORS: This is the message shown when the fingerprint
-#. * enrollment has been completed successfully
-#: panels/system/users/cc-fingerprint-dialog.c:670
-msgctxt "Fingerprint enroll state"
-msgid "Complete"
-msgstr "تمام"
-
-#: panels/system/users/cc-fingerprint-dialog.c:678
+#: panels/system/users/cc-fingerprint-dialog.c:823
 msgid "Fingerprint device disconnected"
 msgstr "افزارهٔ اثر انگشت قطع شد"
 
-#: panels/system/users/cc-fingerprint-dialog.c:681
-msgid "Fingerprint device storage is full"
-msgstr "فضای ذخیرهٔ افزارهٔ اثر انگشتتان پر است"
+#: panels/system/users/cc-fingerprint-dialog.c:826
+msgid "Fingerprint Storage is Full"
+msgstr "فضای ذخیرهٔ اثر انگشت پر است"
 
-#: panels/system/users/cc-fingerprint-dialog.c:683
-msgid "Fingerprint is duplicate"
-msgstr "اثر انگشت تکراریست"
+#: panels/system/users/cc-fingerprint-dialog.c:828
+msgid "Finger Already Scanned"
+msgstr "انگشت از پیش پویش شده"
 
-#: panels/system/users/cc-fingerprint-dialog.c:685
-msgid "Failed to enroll new fingerprint"
-msgstr "شکست در ثبت اثر انگشت جدید"
+#: panels/system/users/cc-fingerprint-dialog.c:830
+msgid "Failed to Scan Finger"
+msgstr "شکست در پویش انگشت"
 
-#: panels/system/users/cc-fingerprint-dialog.c:713
+#: panels/system/users/cc-fingerprint-dialog.c:881
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "شکست در آغاز ثبت: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:719
+#: panels/system/users/cc-fingerprint-dialog.c:887
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "شکست در ثبت اثر انگشت جدید"
 
-#: panels/system/users/cc-fingerprint-dialog.c:746
+#: panels/system/users/cc-fingerprint-dialog.c:914
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "شکست در توقّف ثبت: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:789
+#: panels/system/users/cc-fingerprint-dialog.c:958
 msgid "Repeatedly lift and place your finger on the reader to enroll your fingerprint"
 msgstr "برایثبت انگشتتان، چند بار بلندش کرده و روی حسگر بگذارید"
 
-#: panels/system/users/cc-fingerprint-dialog.c:890
-msgid "_Re-enroll this finger…"
-msgstr "ثبت _دوبارهٔ این انگشت…"
-
-#. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:902
-msgid "Scan new fingerprint"
-msgstr "پویش اثر انگشت جدید"
-
-#: panels/system/users/cc-fingerprint-dialog.c:934
+#: panels/system/users/cc-fingerprint-dialog.c:1011
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "شکست در آزاد کردن افزارهٔ اثر انگشت %s: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:990
+#: panels/system/users/cc-fingerprint-dialog.c:1167
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "مشکل در خواندن از افزاره"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1023
+#: panels/system/users/cc-fingerprint-dialog.c:1200
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "شکست در درخواست افزارهٔ اثر انگشت %s: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1146
+#: panels/system/users/cc-fingerprint-dialog.c:1329
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "شکست در گرفتن افزارهٔ اثر انگشت: %s"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1212
-msgid "Delete All Fingerprints?"
-msgstr "حذف همهٔ اثرانگشت‌ها؟"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1213
-msgid "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-enable Fingerprint Login at least one fingerprint will have to be enrolled."
-msgstr "حذف همهٔ اثر انگشت‌های ثبت شده، ورود با اثر انگشت را از کار خواهد انداخت. برای به کار انداختن دوبارهٔ ورود با اثر انگشت باید لااقل یک اثر انگشت ثبت شود."
-
-#: panels/system/users/cc-fingerprint-dialog.c:1217
-msgid "_Delete All"
-msgstr "_حذف همه"
 
 #: panels/system/users/cc-password-dialog.blp:5
 msgid "Change Password"
@@ -7470,16 +7474,16 @@ msgid "None"
 msgstr "هیچ‌کدام"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:414
+#: panels/system/users/cc-user-page.c:430
 #, c-format
 msgid "Remove %s?"
 msgstr "برداشتن %s؟"
 
-#: panels/system/users/cc-user-page.c:419
+#: panels/system/users/cc-user-page.c:435
 msgid "The user's files and settings will be deleted, and they will not be able to use this device once their account has been removed"
 msgstr "پرونده‌ها و تنظیمات کاربر حذف خواهند شد و پس از برداشته شدن حسابش نخواهد توانست از این افزاره استفاده کند"
 
-#: panels/system/users/cc-user-page.c:423
+#: panels/system/users/cc-user-page.c:439
 msgid "The user will not be able to use this device once their account has been removed"
 msgstr "کاربر نخواهد توانست پس از برداشتن حساب از این افزاره استفاده کند"
 
@@ -9527,6 +9531,39 @@ msgstr[1] "‏%Iu ورودی"
 #: subprojects/gvc/gvc-mixer-control.c:2919
 msgid "System Sounds"
 msgstr "صداهای سامانه"
+
+#~ msgid "No Fingerprint device"
+#~ msgstr "افزارهٔ اثر انگشتی نیست"
+
+#~ msgid "Fingerprint login allows you to unlock and log into your device with your finger"
+#~ msgstr "ورود با اثر انگشت می‌گذارد افزاره را با اثر انگشتتان قفل‌گشایی کرده و به آن وارد شوید"
+
+#~ msgid "_Delete Fingerprints"
+#~ msgstr "_حذف اثرانگشت‌ها"
+
+#~ msgid "Fingerprint Enroll"
+#~ msgstr "ثبت اثر انگشت"
+
+#~ msgid "Fingerprint is duplicate"
+#~ msgstr "اثر انگشت تکراریست"
+
+#~ msgid "Failed to enroll new fingerprint"
+#~ msgstr "شکست در ثبت اثر انگشت جدید"
+
+#~ msgid "_Re-enroll this finger…"
+#~ msgstr "ثبت _دوبارهٔ این انگشت…"
+
+#~ msgid "Scan new fingerprint"
+#~ msgstr "پویش اثر انگشت جدید"
+
+#~ msgid "Delete All Fingerprints?"
+#~ msgstr "حذف همهٔ اثرانگشت‌ها؟"
+
+#~ msgid "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-enable Fingerprint Login at least one fingerprint will have to be enrolled."
+#~ msgstr "حذف همهٔ اثر انگشت‌های ثبت شده، ورود با اثر انگشت را از کار خواهد انداخت. برای به کار انداختن دوبارهٔ ورود با اثر انگشت باید لااقل یک اثر انگشت ثبت شود."
+
+#~ msgid "_Delete All"
+#~ msgstr "_حذف همه"
 
 #~ msgid "Re_place"
 #~ msgstr "_جایگزینی"
