@@ -12,8 +12,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-07-31 08:43+0000\n"
-"PO-Revision-Date: 2026-08-05 11:40+0200\n"
+"POT-Creation-Date: 2026-08-06 13:18+0000\n"
+"PO-Revision-Date: 2026-08-07 11:40+0200\n"
 "Last-Translator: Asier Saratsua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque\n"
 "Language: eu\n"
@@ -27,7 +27,7 @@ msgid "Add Keyboard Shortcuts"
 msgstr "Gehitu laster-teklak"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:17
-#: panels/applications/cc-application-shortcut-dialog.c:121
+#: panels/applications/cc-application-shortcut-dialog.c:128
 #: panels/color/cc-color-calibrate.blp:22
 #: panels/common/cc-language-chooser.blp:17
 #: panels/display/cc-display-panel.blp:26
@@ -51,8 +51,7 @@ msgstr "Gehitu laster-teklak"
 #: panels/system/users/cc-add-user-dialog.blp:19
 #: panels/system/users/cc-avatar-chooser.c:90
 #: panels/system/users/cc-enterprise-login-dialog.blp:39
-#: panels/system/users/cc-fingerprint-dialog.blp:18
-#: panels/system/users/cc-fingerprint-dialog.c:1217
+#: panels/system/users/cc-fingerprint-dialog.blp:166
 #: panels/system/users/cc-password-dialog.blp:17
 #: panels/system/users/cc-user-page.blp:196
 #: panels/wwan/cc-wwan-mode-dialog.blp:27
@@ -83,29 +82,29 @@ msgstr "Gehitutako laster-teklak modu globalean erabili ahal dira, eta 'Ezarpena
 msgid "Global Shortcuts"
 msgstr "Laster-tekla globalak"
 
-#: panels/applications/cc-application-shortcut-dialog.c:114
+#: panels/applications/cc-application-shortcut-dialog.c:121
 msgid "Remove All Shortcuts?"
 msgstr "Kendu laster-tekla guztiak?"
 
-#: panels/applications/cc-application-shortcut-dialog.c:118
+#: panels/applications/cc-application-shortcut-dialog.c:125
 #, c-format
 msgid ""
 "All actions from %s that have been registered for global shortcuts will be "
 "removed."
 msgstr "Laster-tekla global izateko %s aplikaziotik erregistratu diren ekintza guztiak kenduko dira."
 
-#: panels/applications/cc-application-shortcut-dialog.c:121
+#: panels/applications/cc-application-shortcut-dialog.c:128
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:156
 #: panels/system/users/cc-user-page.blp:197
 msgid "_Remove"
 msgstr "_Kendu"
 
-#: panels/applications/cc-application-shortcut-dialog.c:142
+#: panels/applications/cc-application-shortcut-dialog.c:149
 msgid "_Remove All Shortcuts"
 msgstr "_Kendu laster-tekla guztiak"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-application-shortcut-dialog.c:210
+#: panels/applications/cc-application-shortcut-dialog.c:217
 #, c-format
 msgid "%s has registered the following global shortcuts"
 msgstr "%s aplikazioak honako laster-tekla globalak erregistratu ditu"
@@ -214,7 +213,7 @@ msgstr "Jaso sistema-bilaketak eta bidali emaitzak"
 #: panels/keyboard/cc-keyboard-panel.c:83
 #: panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331
 #: panels/system/users/cc-user-page.c:365
-#: panels/system/users/cc-user-page.c:705 panels/wwan/cc-wwan-device-page.c:423
+#: panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:423
 #: subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "Desgaituta"
@@ -411,7 +410,7 @@ msgid "Session Bus"
 msgstr "Saioaren bus-a"
 
 #: panels/applications/cc-applications-panel.c:817
-#: panels/color/cc-color-panel.ui:451 panels/privacy/bolt/cc-bolt-page.blp:118
+#: panels/color/cc-color-panel.ui:452 panels/privacy/bolt/cc-bolt-page.blp:118
 #: panels/privacy/bolt/cc-bolt-page.blp:143
 #: panels/privacy/cc-privacy-panel.blp:55
 msgid "Devices"
@@ -576,7 +575,7 @@ msgstr "Mult_imedien abiarazte automatikoa"
 msgid "Start apps or prompt when media is connected"
 msgstr "Abiarazi aplikazioak edo galdetu multimediak konektatzen direnean"
 
-#: panels/applications/cc-default-apps-row.c:128
+#: panels/applications/cc-default-apps-row.c:240
 msgid "No Apps Available"
 msgstr "Ez dago aplikaziorik erabilgarri"
 
@@ -1112,7 +1111,7 @@ msgstr "_Jarraitu"
 #. Translators: This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.blp:40
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:34
-#: panels/system/users/cc-fingerprint-dialog.blp:39
+#: panels/system/users/cc-fingerprint-dialog.blp:177
 msgid "_Done"
 msgstr "_Eginda"
 
@@ -1444,134 +1443,134 @@ msgid ""
 "details.</a>"
 msgstr "Arazoak aurkitu dira. Baliteke profilak ongi ez funtzionatzea. <a href=\"\">Erakutsi xehetasunak.</a>"
 
-#: panels/color/cc-color-panel.ui:469
+#: panels/color/cc-color-panel.ui:470
 msgid "_Set for All Users"
 msgstr "_Ezarri erabiltzaile guztientzako"
 
-#: panels/color/cc-color-panel.ui:470
+#: panels/color/cc-color-panel.ui:471
 msgid "Set this profile for all users on this device"
 msgstr "Ezarri profila hau gailuko erabiltzaile guztientzako"
 
-#: panels/color/cc-color-panel.ui:477
+#: panels/color/cc-color-panel.ui:478
 msgid "_Enable"
 msgstr "_Gaitu"
 
-#: panels/color/cc-color-panel.ui:478
+#: panels/color/cc-color-panel.ui:479
 msgid "Enable profile"
 msgstr "Gaitu profila"
 
-#: panels/color/cc-color-panel.ui:492
+#: panels/color/cc-color-panel.ui:493
 msgid "_Add Profile"
 msgstr "Gehitu _profila"
 
-#: panels/color/cc-color-panel.ui:499
+#: panels/color/cc-color-panel.ui:500
 msgid "_Calibrate…"
 msgstr "_Kalibratu…"
 
-#: panels/color/cc-color-panel.ui:500
+#: panels/color/cc-color-panel.ui:501
 msgid "Calibrate the device"
 msgstr "Kalibratu gailua"
 
-#: panels/color/cc-color-panel.ui:507
+#: panels/color/cc-color-panel.ui:508
 msgid "_Remove Profile"
 msgstr "Kendu p_rofila"
 
-#: panels/color/cc-color-panel.ui:514
+#: panels/color/cc-color-panel.ui:515
 msgid "_View Details"
 msgstr "Ikusi _xehetasunak"
 
-#: panels/color/cc-color-panel.ui:542
+#: panels/color/cc-color-panel.ui:543
 msgid "No Devices"
 msgstr "Gailurik ez"
 
-#: panels/color/cc-color-panel.ui:543
+#: panels/color/cc-color-panel.ui:544
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Ezin da koloreak kudea ditzakeen gailurik detektatu"
 
-#: panels/color/cc-color-panel.ui:564
+#: panels/color/cc-color-panel.ui:565
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/cc-color-panel.ui:569
+#: panels/color/cc-color-panel.ui:570
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/cc-color-panel.ui:574
+#: panels/color/cc-color-panel.ui:575
 msgid "CRT"
 msgstr "CRT"
 
-#: panels/color/cc-color-panel.ui:579
+#: panels/color/cc-color-panel.ui:580
 msgid "Projector"
 msgstr "Proiektagailua"
 
-#: panels/color/cc-color-panel.ui:584
+#: panels/color/cc-color-panel.ui:585
 msgid "Plasma"
 msgstr "Plasma"
 
-#: panels/color/cc-color-panel.ui:589
+#: panels/color/cc-color-panel.ui:590
 msgid "LCD (CCFL backlight)"
 msgstr "LCDa (atzeko CCFL argia)"
 
-#: panels/color/cc-color-panel.ui:594
+#: panels/color/cc-color-panel.ui:595
 msgid "LCD (RGB LED backlight)"
 msgstr "LCDa (atzeko LED RGB argia)"
 
-#: panels/color/cc-color-panel.ui:599
+#: panels/color/cc-color-panel.ui:600
 msgid "LCD (white LED backlight)"
 msgstr "LCDa (LED argi zuria)"
 
-#: panels/color/cc-color-panel.ui:604
+#: panels/color/cc-color-panel.ui:605
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "Kolore-gama zabaleko LCDa (atzeko CCFL argia)"
 
-#: panels/color/cc-color-panel.ui:609
+#: panels/color/cc-color-panel.ui:610
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "Kolore-gama zabaleko LCDa (atzeko LED GBU argia)"
 
-#: panels/color/cc-color-panel.ui:626
+#: panels/color/cc-color-panel.ui:627
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Altua"
 
-#: panels/color/cc-color-panel.ui:627
+#: panels/color/cc-color-panel.ui:628
 msgid "40 minutes"
 msgstr "40 minutu"
 
-#: panels/color/cc-color-panel.ui:631
+#: panels/color/cc-color-panel.ui:632
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Tartekoa"
 
-#: panels/color/cc-color-panel.ui:632
+#: panels/color/cc-color-panel.ui:633
 msgid "30 minutes"
 msgstr "30 minutu"
 
-#: panels/color/cc-color-panel.ui:636
+#: panels/color/cc-color-panel.ui:637
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Baxua"
 
-#: panels/color/cc-color-panel.ui:637
+#: panels/color/cc-color-panel.ui:638
 msgid "15 minutes"
 msgstr "15 minutu"
 
-#: panels/color/cc-color-panel.ui:659
+#: panels/color/cc-color-panel.ui:660
 msgid "Native to display"
 msgstr "Pantailarekiko jatorrizkoa"
 
-#: panels/color/cc-color-panel.ui:663
+#: panels/color/cc-color-panel.ui:664
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (inprimazioa eta argitalpena)"
 
-#: panels/color/cc-color-panel.ui:667
+#: panels/color/cc-color-panel.ui:668
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/cc-color-panel.ui:671
+#: panels/color/cc-color-panel.ui:672
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (argazki eta grafikoak)"
 
-#: panels/color/cc-color-panel.ui:675
+#: panels/color/cc-color-panel.ui:676
 msgid "D75"
 msgstr "D75"
 
@@ -4530,6 +4529,7 @@ msgid "Other"
 msgstr "Bestelakoa"
 
 #: panels/online-accounts/cc-online-account-row.blp:25
+#: panels/system/users/cc-fingerprint-dialog.blp:26
 msgid "Error"
 msgstr "Errorea"
 
@@ -5263,7 +5263,7 @@ msgstr "Zerbitzariak autentifikazioa eskatzen du"
 
 #. Translators: this is the "go back" action of a button
 #: panels/printers/pp-new-printer-dialog.ui:78
-#: panels/system/users/cc-fingerprint-dialog.blp:24
+#: panels/system/users/cc-fingerprint-dialog.blp:15
 #: panels/wacom/cc-wacom-stylus-page.c:389
 #: panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
@@ -6209,7 +6209,7 @@ msgstr "Ez baliozkoa"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:42
 #: panels/system/users/cc-user-page.c:363
-#: panels/system/users/cc-user-page.c:704 panels/wwan/cc-wwan-device-page.c:421
+#: panels/system/users/cc-user-page.c:720 panels/wwan/cc-wwan-device-page.c:421
 msgid "Enabled"
 msgstr "Gaituta"
 
@@ -7698,213 +7698,215 @@ msgstr "Domeinua egiaztatzen…"
 msgid "Failed to contact realmd service"
 msgstr "Huts egin du realmd zerbitzuarekin kontaktatzeak"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:90
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/system/users/cc-fingerprint-dialog.blp:34
 msgid "No fingerprint device"
 msgstr "Ez dago hatz-marken gailurik"
 
-#. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/system/users/cc-fingerprint-dialog.blp:106
-msgid "No Fingerprint device"
-msgstr "Ez dago hatz-marken gailurik"
-
-#: panels/system/users/cc-fingerprint-dialog.blp:116
+#: panels/system/users/cc-fingerprint-dialog.blp:37
 msgid "Ensure the device is properly connected"
 msgstr "Ziurtatu gailua ongi konektatuta dagoela"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:124
+#: panels/system/users/cc-fingerprint-dialog.blp:45
+#: panels/system/users/cc-fingerprint-dialog.blp:91
+msgid "Fingerprint Authentication"
+msgstr "Hatz-marken autentifikazioa"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:46
+msgid ""
+"Use fingerprints to unlock the screen and identify yourself when prompted"
+msgstr "Erabili hatz-markak pantaila desblokeatzeko eta zure burua identifikatzeko"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:54
+msgid "_Scan Finger"
+msgstr "E_skaneatu hatz-marka"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:67
 msgid "Fingerprint Device"
 msgstr "Hatz-marken gailua"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:134
+#: panels/system/users/cc-fingerprint-dialog.blp:70
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Aukeratu konfiguratu nahi duzun hatz-marken gailua"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:162
-msgid "Fingerprint Login"
-msgstr "Hatz-marken bidezko saio-hasiera"
+#: panels/system/users/cc-fingerprint-dialog.blp:78
+msgid "Select Finger"
+msgstr "Hautatu hatza"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:170
-msgid ""
-"Fingerprint login allows you to unlock and log into your device with your "
-"finger"
-msgstr "Hatz-marken bidezko saio-hasierak hatza erabilita gailua desblokeatzea eta saioa hastea ahalbidetzen du."
+#: panels/system/users/cc-fingerprint-dialog.blp:82
+msgid "Right Hand"
+msgstr "Eskuineko eskua"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:196
-msgid "_Delete Fingerprints"
-msgstr "_Ezabatu hatz-markak"
+#: panels/system/users/cc-fingerprint-dialog.blp:85
+msgid "Left Hand"
+msgstr "Ezkerreko eskua"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:209
-msgid "Fingerprint Enroll"
-msgstr "Hatz-marken erregistroa"
+#: panels/system/users/cc-fingerprint-dialog.blp:95
+msgid "The following fingerprints can be used for authentication"
+msgstr "Honako hatz-markak erabili daitezke autentifikaziorako"
 
-#: panels/system/users/cc-fingerprint-dialog.c:208
+#: panels/system/users/cc-fingerprint-dialog.blp:100
+msgid "Fingerprints"
+msgstr "Hatz-markak"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:105
+msgid "Add Fingerprint"
+msgstr "Gehitu hatz-marka"
+
+#: panels/system/users/cc-fingerprint-dialog.blp:136
+msgid "Touch the fingerprint reader to check the scanned fingers"
+msgstr "Ukitu hatz-marken irakurgailua eskaneatutako hatzak egiaztatzeko"
+
+#: panels/system/users/cc-fingerprint-dialog.c:240
 msgid "the device needs to be claimed to perform this action"
 msgstr "gailua galdegin behar da ekintza hau gauzatu baino lehen"
 
-#: panels/system/users/cc-fingerprint-dialog.c:210
+#: panels/system/users/cc-fingerprint-dialog.c:242
 msgid "the device is already claimed by another process"
 msgstr "beste prozesu batek galdegin du gailua"
 
-#: panels/system/users/cc-fingerprint-dialog.c:212
+#: panels/system/users/cc-fingerprint-dialog.c:244
 msgid "you do not have permission to perform the action"
 msgstr "ez duzu ekintza gauzatzeko baimenik"
 
-#: panels/system/users/cc-fingerprint-dialog.c:214
+#: panels/system/users/cc-fingerprint-dialog.c:246
 msgid "no prints have been enrolled"
 msgstr "ez da inprimagailurik erregistratu"
 
-#: panels/system/users/cc-fingerprint-dialog.c:221
+#: panels/system/users/cc-fingerprint-dialog.c:253
 msgid "Failed to communicate with the device during enrollment"
 msgstr "Huts egin du erregistroan zehar gailuarekin komunikatzeak"
 
-#: panels/system/users/cc-fingerprint-dialog.c:224
+#: panels/system/users/cc-fingerprint-dialog.c:256
 msgid "Failed to communicate with the fingerprint reader"
 msgstr "Huts egin du hatz-marken irakurgailuarekin komunikatzeak"
 
-#: panels/system/users/cc-fingerprint-dialog.c:226
+#: panels/system/users/cc-fingerprint-dialog.c:258
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "Huts egin du hatz-marken daemonarekin komunikatzeak"
 
-#: panels/system/users/cc-fingerprint-dialog.c:452
+#: panels/system/users/cc-fingerprint-dialog.c:313
+msgid "Left thumb"
+msgstr "Ezkerreko hatz potoloa"
+
+#: panels/system/users/cc-fingerprint-dialog.c:315
+msgid "Left middle finger"
+msgstr "Ezkerreko erdiko hatza"
+
+#: panels/system/users/cc-fingerprint-dialog.c:317
+msgid "_Left index finger"
+msgstr "E_zkerreko hatz erakuslea"
+
+#: panels/system/users/cc-fingerprint-dialog.c:319
+msgid "Left ring finger"
+msgstr "Ezkerreko hatz nagia"
+
+#: panels/system/users/cc-fingerprint-dialog.c:321
+msgid "Left little finger"
+msgstr "Ezkerreko hatz txikia"
+
+#: panels/system/users/cc-fingerprint-dialog.c:323
+msgid "Right thumb"
+msgstr "Eskuineko hatz potoloa"
+
+#: panels/system/users/cc-fingerprint-dialog.c:325
+msgid "Right middle finger"
+msgstr "Eskuineko erdiko hatza"
+
+#: panels/system/users/cc-fingerprint-dialog.c:327
+msgid "_Right index finger"
+msgstr "E_skuineko hatz erakuslea"
+
+#: panels/system/users/cc-fingerprint-dialog.c:329
+msgid "Right ring finger"
+msgstr "Eskuineko hatz nagia"
+
+#: panels/system/users/cc-fingerprint-dialog.c:331
+msgid "Right little finger"
+msgstr "Eskuineko hatz txikia"
+
+#: panels/system/users/cc-fingerprint-dialog.c:333
+msgid "Unknown Finger"
+msgstr "Hatz-marka ezezaguna"
+
+#: panels/system/users/cc-fingerprint-dialog.c:351
+#, c-format
+msgid "Failed to delete fingerprint: %s"
+msgstr "Huts egin du hatz-marka ezabatzeak: %s"
+
+#: panels/system/users/cc-fingerprint-dialog.c:648
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "Huts egin du hatz-markak zerrendatzeak: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:510
-#, c-format
-msgid "Failed to delete saved fingerprints: %s"
-msgstr "Huts egin du gordetako hatz-markak ezabatzeak: %s"
+#: panels/system/users/cc-fingerprint-dialog.c:733
+msgid "Scan Complete!"
+msgstr "Eskaneatzea osatu da"
 
-#: panels/system/users/cc-fingerprint-dialog.c:538
-msgid "Left thumb"
-msgstr "Ezkerreko hatz potoloa"
+#: panels/system/users/cc-fingerprint-dialog.c:746
+msgid "Touch finger on reader"
+msgstr "Jarri hatza irakurgailuan"
 
-#: panels/system/users/cc-fingerprint-dialog.c:540
-msgid "Left middle finger"
-msgstr "Ezkerreko erdiko hatza"
+#: panels/system/users/cc-fingerprint-dialog.c:800
+msgid "Scan Complete"
+msgstr "Eskaneatzea osatu da"
 
-#: panels/system/users/cc-fingerprint-dialog.c:542
-msgid "_Left index finger"
-msgstr "E_zkerreko hatz erakuslea"
-
-#: panels/system/users/cc-fingerprint-dialog.c:544
-msgid "Left ring finger"
-msgstr "Ezkerreko hatz nagia"
-
-#: panels/system/users/cc-fingerprint-dialog.c:546
-msgid "Left little finger"
-msgstr "Ezkerreko hatz txikia"
-
-#: panels/system/users/cc-fingerprint-dialog.c:548
-msgid "Right thumb"
-msgstr "Eskuineko hatz potoloa"
-
-#: panels/system/users/cc-fingerprint-dialog.c:550
-msgid "Right middle finger"
-msgstr "Eskuineko erdiko hatza"
-
-#: panels/system/users/cc-fingerprint-dialog.c:552
-msgid "_Right index finger"
-msgstr "E_skuineko hatz erakuslea"
-
-#: panels/system/users/cc-fingerprint-dialog.c:554
-msgid "Right ring finger"
-msgstr "Eskuineko hatz nagia"
-
-#: panels/system/users/cc-fingerprint-dialog.c:556
-msgid "Right little finger"
-msgstr "Eskuineko hatz txikia"
-
-#: panels/system/users/cc-fingerprint-dialog.c:558
-msgid "Unknown Finger"
-msgstr "Hatz-marka ezezaguna"
-
-#. TRANSLATORS: This is the message shown when the fingerprint
-#. * enrollment has been completed successfully
-#: panels/system/users/cc-fingerprint-dialog.c:670
-msgctxt "Fingerprint enroll state"
-msgid "Complete"
-msgstr "Eginda"
-
-#: panels/system/users/cc-fingerprint-dialog.c:678
+#: panels/system/users/cc-fingerprint-dialog.c:823
 msgid "Fingerprint device disconnected"
 msgstr "Hatz-marken gailua deskonektatu da"
 
-#: panels/system/users/cc-fingerprint-dialog.c:681
-msgid "Fingerprint device storage is full"
-msgstr "Hatz-marken gailuen biltegiratzea beteta dago"
+#: panels/system/users/cc-fingerprint-dialog.c:826
+msgid "Fingerprint Storage is Full"
+msgstr "Hatz-marken biltegia beteta dago"
 
-#: panels/system/users/cc-fingerprint-dialog.c:683
-msgid "Fingerprint is duplicate"
-msgstr "Hatz-marka bikoiztuta dago"
+#: panels/system/users/cc-fingerprint-dialog.c:828
+msgid "Finger Already Scanned"
+msgstr "Hatza jadanik eskaneatu da"
 
-#: panels/system/users/cc-fingerprint-dialog.c:685
-msgid "Failed to enroll new fingerprint"
-msgstr "Huts egin du hatz-marka berria erregistratzeak"
+#: panels/system/users/cc-fingerprint-dialog.c:830
+msgid "Failed to Scan Finger"
+msgstr "Huts egin du hatza eskaneatzeak"
 
-#: panels/system/users/cc-fingerprint-dialog.c:713
+#: panels/system/users/cc-fingerprint-dialog.c:881
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "Huts egin du erregistroa abiarazteak: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:719
+#: panels/system/users/cc-fingerprint-dialog.c:887
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "Huts egin du hatz-marka berria erregistratzeak"
 
-#: panels/system/users/cc-fingerprint-dialog.c:746
+#: panels/system/users/cc-fingerprint-dialog.c:914
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "Huts egin du erregistroa gelditzeak: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:789
+#: panels/system/users/cc-fingerprint-dialog.c:958
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr "Altxatu eta kokatu hatza irakurgailuan behin eta berriro, zure hatz-marka erregistratzeko"
 
-#: panels/system/users/cc-fingerprint-dialog.c:890
-msgid "_Re-enroll this finger…"
-msgstr "Erregistratu berriro hatz hau…"
-
-#. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/system/users/cc-fingerprint-dialog.c:902
-msgid "Scan new fingerprint"
-msgstr "Eskaneatu hatz-marka berria"
-
-#: panels/system/users/cc-fingerprint-dialog.c:934
+#: panels/system/users/cc-fingerprint-dialog.c:1011
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "Huts egin du hatz-marken %s gailua askatzeak: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:990
+#: panels/system/users/cc-fingerprint-dialog.c:1167
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Arazoa gailua irakurtzean"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1023
+#: panels/system/users/cc-fingerprint-dialog.c:1200
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "Huts egin du hatz-marken %s gailuaren jabetza galdegiteak: %s"
 
-#: panels/system/users/cc-fingerprint-dialog.c:1146
+#: panels/system/users/cc-fingerprint-dialog.c:1329
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Huts egin du hatz-marken gailuak eskuratzeak: %s"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1212
-msgid "Delete All Fingerprints?"
-msgstr "Ezabatu hatz-marka guztiak?"
-
-#: panels/system/users/cc-fingerprint-dialog.c:1213
-msgid ""
-"Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
-"enable Fingerprint Login at least one fingerprint will have to be enrolled."
-msgstr "Erregistratutako hatz-marka guztiak ezabatzen badira, hatz-markaren bidezko saio-hasiera desgaituko da. Hura berriro gaitzeko, erregistratu gutxienez hatz-marka bat."
-
-#: panels/system/users/cc-fingerprint-dialog.c:1217
-msgid "_Delete All"
-msgstr "_Ezabatu denak"
 
 #: panels/system/users/cc-password-dialog.blp:5
 msgid "Change Password"
@@ -8042,18 +8044,18 @@ msgid "None"
 msgstr "Bat ere ez"
 
 #. TODO: Handle enterprise accounts
-#: panels/system/users/cc-user-page.c:414
+#: panels/system/users/cc-user-page.c:430
 #, c-format
 msgid "Remove %s?"
 msgstr "Kendu %s?"
 
-#: panels/system/users/cc-user-page.c:419
+#: panels/system/users/cc-user-page.c:435
 msgid ""
 "The user's files and settings will be deleted, and they will not be able to "
 "use this device once their account has been removed"
 msgstr "Erabiltzailearen fitxategiak eta ezarpenak ezabatuko dira eta ezingo dira gailu honetan erabili bere kontua kentzen bada"
 
-#: panels/system/users/cc-user-page.c:423
+#: panels/system/users/cc-user-page.c:439
 msgid ""
 "The user will not be able to use this device once their account has been "
 "removed"
@@ -10151,6 +10153,49 @@ msgstr[1] "%u sarrera"
 #: subprojects/gvc/gvc-mixer-control.c:2919
 msgid "System Sounds"
 msgstr "Sistemaren soinuak"
+
+#~ msgid "No Fingerprint device"
+#~ msgstr "Ez dago hatz-marken gailurik"
+
+#~ msgid ""
+#~ "Fingerprint login allows you to unlock and log into your device with your "
+#~ "finger"
+#~ msgstr ""
+#~ "Hatz-marken bidezko saio-hasierak hatza erabilita gailua desblokeatzea "
+#~ "eta saioa hastea ahalbidetzen du."
+
+#~ msgid "_Delete Fingerprints"
+#~ msgstr "_Ezabatu hatz-markak"
+
+#~ msgid "Fingerprint Enroll"
+#~ msgstr "Hatz-marken erregistroa"
+
+#~ msgid "Fingerprint is duplicate"
+#~ msgstr "Hatz-marka bikoiztuta dago"
+
+#~ msgid "Failed to enroll new fingerprint"
+#~ msgstr "Huts egin du hatz-marka berria erregistratzeak"
+
+#~ msgid "_Re-enroll this finger…"
+#~ msgstr "Erregistratu berriro hatz hau…"
+
+#~ msgid "Scan new fingerprint"
+#~ msgstr "Eskaneatu hatz-marka berria"
+
+#~ msgid "Delete All Fingerprints?"
+#~ msgstr "Ezabatu hatz-marka guztiak?"
+
+#~ msgid ""
+#~ "Deleting all enrolled fingerprints will disable Fingerprint Login. To re-"
+#~ "enable Fingerprint Login at least one fingerprint will have to be "
+#~ "enrolled."
+#~ msgstr ""
+#~ "Erregistratutako hatz-marka guztiak ezabatzen badira, hatz-markaren "
+#~ "bidezko saio-hasiera desgaituko da. Hura berriro gaitzeko, erregistratu "
+#~ "gutxienez hatz-marka bat."
+
+#~ msgid "_Delete All"
+#~ msgstr "_Ezabatu denak"
 
 #~ msgid "Re_place"
 #~ msgstr "O_rdeztu"
@@ -12975,9 +13020,6 @@ msgstr "Sistemaren soinuak"
 #~ msgstr ""
 #~ "Hatz-markarekin saioa-hastea gaitzeko zure hatz-markak gorde behar dituzu "
 #~ "aurrenik, “%s” gailua erabiliz."
-
-#~ msgid "Selecting finger"
-#~ msgstr "Hatzaren hautapena"
 
 #~ msgid "Set Background and Lock Screen"
 #~ msgstr "Ezarri atzeko planoa eta blokeo-pantaila"
