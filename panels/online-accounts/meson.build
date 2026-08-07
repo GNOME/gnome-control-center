@@ -50,12 +50,13 @@ deps = common_deps + [
   dependency('goa-backend-1.0', version: goa_req_version),
 ]
 
-panels_libs += static_library(
+online_accounts_panel_lib = static_library(
   cappletname,
   sources: sources,
   include_directories: [ top_inc, common_inc ],
   dependencies: deps,
   c_args: cflags
 )
+panels_libs += online_accounts_panel_lib
 
 subdir('icons')

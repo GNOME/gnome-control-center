@@ -39,12 +39,13 @@ sources += gnome.compile_resources(
 
 deps = common_deps + [gnome_bluetooth_dep]
 
-panels_libs += static_library(
+bluetooth_panel_lib = static_library(
   cappletname,
   sources: sources,
   include_directories: top_inc,
   dependencies: deps,
   c_args: cflags
 )
+panels_libs += bluetooth_panel_lib
 
 subdir('icons')

@@ -73,13 +73,14 @@ sources += gnome.compile_resources(
   dependencies: blueprints,
 )
 
-panels_libs += static_library(
+sound_panel_lib = static_library(
   cappletname,
   sources: sources,
   include_directories: [top_inc, common_inc],
   dependencies: deps,
   c_args: cflags,
 )
+panels_libs += sound_panel_lib
 
 sound_data = files(
   'sounds/click.ogg',
