@@ -80,7 +80,6 @@ struct _CcWwanDevicePage {
     GDBusProxy *wwan_proxy;
     GCancellable *cancellable;
 
-    GtkWindow *apn_dialog;
     GtkWindow *network_mode_dialog;
     GtkWindow *network_dialog;
     GtkWindow *sim_lock_dialog;
@@ -129,37 +128,29 @@ wwan_device_page_handle_data_row (CcWwanDevicePage *self, AdwSwitchRow *data_row
     cc_wwan_data_save_settings (self->wwan_data, self->cancellable, NULL, NULL);
 }
 
-static gboolean
-wwan_apn_dialog_closed_cb (CcWwanDevicePage *self)
+static void
+wwan_apn_dialog_closed_cb (CcWwanDevicePage *self, AdwDialog *dialog)
 {
     AdwSwitchRow *data_row;
 
-    if (gtk_widget_in_destruction (GTK_WIDGET (self)))
-        return FALSE;
-
-    data_row = g_object_get_data (G_OBJECT (self->apn_dialog), "row");
-    g_object_set_data (G_OBJECT (self->apn_dialog), "row", NULL);
+    data_row = g_object_get_data (G_OBJECT (dialog), "row");
+    g_object_set_data (G_OBJECT (dialog), "row", NULL);
 
     if (data_row)
         wwan_device_page_handle_data_row (self, data_row);
 
-    return FALSE;
+    adw_dialog_force_close (ADW_DIALOG (dialog));
 }
 
-static void
+static AdwDialog *
 wwan_data_show_apn_dialog (CcWwanDevicePage *self)
 {
-    GtkWindow *top_level;
+    AdwDialog *dialog;
 
-    top_level = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
-
-    if (!self->apn_dialog) {
-        self->apn_dialog = cc_wwan_apn_dialog_new (top_level, self->device);
-        g_signal_connect_object (self->apn_dialog, "unmap", G_CALLBACK (wwan_apn_dialog_closed_cb), self,
-                                 G_CONNECT_SWAPPED);
-    }
-
-    gtk_widget_set_visible (GTK_WIDGET (self->apn_dialog), TRUE);
+    dialog = cc_wwan_apn_dialog_new (self->device);
+    g_signal_connect_object (dialog, "close-attempt", G_CALLBACK (wwan_apn_dialog_closed_cb), self, G_CONNECT_SWAPPED);
+    adw_dialog_present (dialog, GTK_WIDGET (self));
+    return dialog;
 }
 
 static GcrPrompt *
@@ -314,8 +305,8 @@ wwan_data_settings_changed_cb (CcWwanDevicePage *self, GParamSpec *pspec, AdwSwi
     }
 
     if (cc_wwan_data_get_default_apn (self->wwan_data) == NULL) {
-        wwan_data_show_apn_dialog (self);
-        g_object_set_data (G_OBJECT (self->apn_dialog), "row", data_row);
+        AdwDialog *dialog = wwan_data_show_apn_dialog (self);
+        g_object_set_data (G_OBJECT (dialog), "row", data_row);
     } else {
         wwan_device_page_handle_data_row (self, data_row);
     }
@@ -520,7 +511,6 @@ cc_wwan_device_page_dispose (GObject *object)
 {
     CcWwanDevicePage *self = (CcWwanDevicePage *) object;
 
-    g_clear_pointer (&self->apn_dialog, gtk_window_destroy);
     g_clear_pointer (&self->network_mode_dialog, gtk_window_destroy);
     g_clear_pointer (&self->network_dialog, gtk_window_destroy);
     g_clear_pointer (&self->sim_lock_dialog, gtk_window_destroy);

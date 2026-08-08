@@ -1,12 +1,10 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $CcWwanApnDialog: Dialog {
-  default-height: 510;
-  default-width: 360;
-  hide-on-close: true;
+template $CcWwanApnDialog: Adw.Dialog {
+  content-height: 510;
+  content-width: 400;
   title: _("Access Points");
-  modal: true;
 
   [titlebar]
   HeaderBar {

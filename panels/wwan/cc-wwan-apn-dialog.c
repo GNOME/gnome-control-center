@@ -39,7 +39,7 @@
  */
 
 struct _CcWwanApnDialog {
-    GtkDialog parent_instance;
+    AdwDialog parent_instance;
 
     GtkButton *add_button;
     GtkButton *back_button;
@@ -64,7 +64,7 @@ struct _CcWwanApnDialog {
     gboolean enable_roaming;
 };
 
-G_DEFINE_FINAL_TYPE (CcWwanApnDialog, cc_wwan_apn_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_FINAL_TYPE (CcWwanApnDialog, cc_wwan_apn_dialog, ADW_TYPE_DIALOG)
 
 enum {
     PROP_0,
@@ -407,12 +407,10 @@ cc_wwan_apn_dialog_init (CcWwanApnDialog *self)
     gtk_widget_init_template (GTK_WIDGET (self));
 }
 
-GtkWindow *
-cc_wwan_apn_dialog_new (GtkWindow *parent_window, CcWwanDevice *device)
+AdwDialog *
+cc_wwan_apn_dialog_new (CcWwanDevice *device)
 {
-    g_return_val_if_fail (GTK_IS_WINDOW (parent_window), NULL);
     g_return_val_if_fail (CC_IS_WWAN_DEVICE (device), NULL);
 
-    return GTK_WINDOW (g_object_new (CC_TYPE_WWAN_APN_DIALOG, "transient-for", parent_window, "use-header-bar", 1,
-                                     "device", device, NULL));
+    return ADW_DIALOG (g_object_new (CC_TYPE_WWAN_APN_DIALOG, "device", device, NULL));
 }
