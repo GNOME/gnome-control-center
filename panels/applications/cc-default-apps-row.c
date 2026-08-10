@@ -142,6 +142,7 @@ cc_default_apps_row_setup_list_cb (GtkSignalListItemFactory *factory, GtkListIte
     icon_image = gtk_image_new ();
     gtk_image_set_icon_size (GTK_IMAGE (icon_image), GTK_ICON_SIZE_LARGE);
     gtk_widget_set_valign (icon_image, GTK_ALIGN_CENTER);
+    gtk_widget_add_css_class (icon_image, "icon-dropshadow");
 
     label = gtk_label_new (NULL);
     gtk_label_set_xalign (GTK_LABEL (label), 0.0);
