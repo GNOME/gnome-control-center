@@ -42,6 +42,12 @@ enum {
 
 static GParamSpec *properties[N_PROPS];
 
+static char *
+get_app_display_name (GAppInfo *info)
+{
+    return g_strdup (g_app_info_get_display_name (info));
+}
+
 static void
 cc_default_apps_row_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec *pspec)
 {
@@ -213,6 +219,7 @@ cc_default_apps_row_constructed (GObject *object)
     GList *l;
     g_autoptr(GtkListItemFactory) factory = NULL;
     g_autoptr(GtkListItemFactory) list_factory = NULL;
+    g_autoptr(GtkExpression) name_expr = NULL;
 
     G_OBJECT_CLASS (cc_default_apps_row_parent_class)->constructed (object);
 
@@ -253,6 +260,10 @@ cc_default_apps_row_constructed (GObject *object)
 
     adw_combo_row_set_factory (ADW_COMBO_ROW (self), factory);
     adw_combo_row_set_list_factory (ADW_COMBO_ROW (self), list_factory);
+
+    name_expr =
+        gtk_cclosure_expression_new (G_TYPE_STRING, NULL, 0, NULL, G_CALLBACK (get_app_display_name), NULL, NULL);
+    adw_combo_row_set_expression (ADW_COMBO_ROW (self), name_expr);
 
     adw_combo_row_set_model (ADW_COMBO_ROW (self), G_LIST_MODEL (self->model));
 }
