@@ -68,6 +68,8 @@ struct _CcWindow {
     CcShellModel *store;
 
     CcPanel *active_panel;
+
+    gboolean inhibit_panel_focus;
     GSettings *settings;
 
     CcPanelListView previous_list_view;
@@ -387,6 +389,12 @@ set_active_panel_from_id (CcWindow *self, const gchar *start_id, GVariant *param
     if (!self->single_panel_mode)
         cc_panel_list_set_active_panel (self->panel_list, start_id);
 
+    /* Move focus to the newly loaded panel so screen readers announce
+     * the category change instead of leaving focus stuck in the sidebar.
+     * Skip this during initial panel loading at startup. */
+    if (!self->inhibit_panel_focus && self->current_panel)
+        gtk_widget_child_focus (GTK_WIDGET (self->current_panel), GTK_DIR_TAB_FORWARD);
+
     CC_RETURN (TRUE);
 }
 
@@ -638,12 +646,16 @@ maybe_load_last_panel (CcWindow *self)
     if (cc_panel_list_get_current_panel (self->panel_list))
         return;
 
+    self->inhibit_panel_focus = TRUE;
+
     /* select the last used panel, if any, or the first visible panel */
     if (id != NULL && cc_shell_model_has_panel (self->store, id)) {
         cc_panel_list_center_activated_row (self->panel_list, TRUE);
         cc_panel_list_set_active_panel (self->panel_list, id);
     } else
         cc_panel_list_activate (self->panel_list);
+
+    self->inhibit_panel_focus = FALSE;
 }
 
 static void
