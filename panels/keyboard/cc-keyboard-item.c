@@ -921,12 +921,13 @@ cc_keyboard_item_remove_key_combo_inner (CcKeyboardItem *self, CcKeyCombo *combo
     g_auto(GStrv) strv = NULL;
     gboolean found;
     int i;
+    GList *l;
 
     strv = g_new0 (gchar *, g_list_length (self->key_combos) + 1);
 
     found = FALSE;
     i = 0;
-    for (GList *l = self->key_combos; l != NULL; l = l->next, i++) {
+    for (l = self->key_combos; l != NULL; l = l->next, i++) {
         if (combo_equal (l->data, combo)) {
             i--;
             found = TRUE;
@@ -935,14 +936,32 @@ cc_keyboard_item_remove_key_combo_inner (CcKeyboardItem *self, CcKeyCombo *combo
         }
     }
 
-    if (found) {
+    if (!found)
+        return;
+
+    if (self->settings) {
         if (self->can_set_multiple)
             g_settings_set_strv (self->settings, self->key, (const gchar **) strv);
         else
             g_settings_set_string (self->settings, self->key, "");
-    }
 
-    binding_changed (self, self->key);
+        binding_changed (self, self->key);
+    } else /* In-memory keyboard item */
+    {
+        l = self->key_combos;
+        while (l != NULL) {
+            GList *next = l->next;
+
+            if (combo_equal (l->data, combo)) {
+                g_free (l->data);
+                self->key_combos = g_list_delete_link (self->key_combos, l);
+            }
+
+            l = next;
+        }
+
+        binding_changed_notify (self);
+    }
 }
 
 void
