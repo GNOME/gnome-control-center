@@ -20,16 +20,16 @@
 # Marek Černocký <marek@manet.cz>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
 # Daniel Rusek <mail@asciiwolf.com>, 2023.
 # Vojtěch Perník <translations@pervoj.cz>, 2021-2024.
-# Patrik Sivek <sivekpatrik@gmail.com>, 2026.
+# Patrik Sivek <patriksivek@gnome.org>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-08-05 07:12+0000\n"
-"PO-Revision-Date: 2026-08-05 21:06+0200\n"
-"Last-Translator: Patrik Sivek <sivekpatrik@gmail.com>\n"
+"POT-Creation-Date: 2026-08-18 13:26+0000\n"
+"PO-Revision-Date: 2026-08-18 19:37+0200\n"
+"Last-Translator: Patrik Sivek <patriksivek@gnome.org>\n"
 "Language-Team: Czech\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -44,7 +44,7 @@ msgid "Add Keyboard Shortcuts"
 msgstr "Přidat klávesové zkratky"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:17
-#: panels/applications/cc-application-shortcut-dialog.c:121
+#: panels/applications/cc-application-shortcut-dialog.c:128
 #: panels/color/cc-color-calibrate.blp:22
 #: panels/common/cc-language-chooser.blp:17
 #: panels/display/cc-display-panel.blp:26
@@ -101,11 +101,11 @@ msgstr ""
 msgid "Global Shortcuts"
 msgstr "Globální zkratky"
 
-#: panels/applications/cc-application-shortcut-dialog.c:114
+#: panels/applications/cc-application-shortcut-dialog.c:121
 msgid "Remove All Shortcuts?"
 msgstr "Odebrat všechny zkratky?"
 
-#: panels/applications/cc-application-shortcut-dialog.c:118
+#: panels/applications/cc-application-shortcut-dialog.c:125
 #, c-format
 msgid ""
 "All actions from %s that have been registered for global shortcuts will be "
@@ -114,18 +114,18 @@ msgstr ""
 "Všechny akce od %s, které byly registrovány pro globální zkratky, budou "
 "odebrány."
 
-#: panels/applications/cc-application-shortcut-dialog.c:121
+#: panels/applications/cc-application-shortcut-dialog.c:128
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:156
 #: panels/system/users/cc-user-page.blp:197
 msgid "_Remove"
 msgstr "Odeb_rat"
 
-#: panels/applications/cc-application-shortcut-dialog.c:142
+#: panels/applications/cc-application-shortcut-dialog.c:149
 msgid "_Remove All Shortcuts"
 msgstr "Odeb_rat všechny zkratky"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-application-shortcut-dialog.c:210
+#: panels/applications/cc-application-shortcut-dialog.c:217
 #, c-format
 msgid "%s has registered the following global shortcuts"
 msgstr "%s má registrovány následující globální zkratky"
@@ -237,7 +237,7 @@ msgstr "Přijímat od systému požadavky na hledání a předávat výsledky"
 #: panels/keyboard/cc-keyboard-panel.c:83
 #: panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331
 #: panels/system/users/cc-user-page.c:365
-#: panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:423
+#: panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:414
 #: subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "Vypnuto"
@@ -447,7 +447,7 @@ msgstr "Úplný přístup k /dev"
 #: panels/applications/cc-applications-panel.c:821
 #: panels/network/cc-network-panel.blp:5
 #: panels/network/gnome-network-panel.desktop.in:2
-#: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.blp:49
+#: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.blp:50
 #: panels/wwan/cc-wwan-network-dialog.blp:5
 msgid "Network"
 msgstr "Síť"
@@ -476,7 +476,7 @@ msgstr "Souborový systém"
 #: panels/applications/cc-applications-panel.c:839
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:8 shell/cc-window.blp:20
-#: shell/cc-window.c:815 shell/org.gnome.Settings.desktop.in:2
+#: shell/cc-window.c:827 shell/org.gnome.Settings.desktop.in:2
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -605,7 +605,7 @@ msgstr "Automat_ické spouštění médií"
 msgid "Start apps or prompt when media is connected"
 msgstr "Spustit aplikace nebo zobrazit výzvu po připojení média"
 
-#: panels/applications/cc-default-apps-row.c:240
+#: panels/applications/cc-default-apps-row.c:248
 msgid "No Apps Available"
 msgstr "Žádné dostupné aplikace"
 
@@ -2574,7 +2574,7 @@ msgstr ""
 #: panels/sound/cc-alert-chooser-page.blp:14
 #: panels/sound/cc-alert-chooser-page.c:314
 #: panels/universal-access/cc-ua-zoom-page.blp:240
-#: panels/wwan/cc-wwan-apn-dialog.blp:226
+#: panels/wwan/cc-wwan-apn-dialog.blp:224
 msgid "None"
 msgstr "Žádná"
 
@@ -2583,7 +2583,7 @@ msgid "Shortcut Disabled"
 msgstr "Klávesová zkratka zakázána"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:125
-#: panels/wwan/cc-wwan-apn-dialog.blp:77
+#: panels/wwan/cc-wwan-apn-dialog.blp:75
 msgid "Name"
 msgstr "Název"
 
@@ -3043,7 +3043,7 @@ msgid "Proxy"
 msgstr "Proxy"
 
 #: panels/network/cc-net-proxy-page.blp:24
-#: panels/wwan/cc-wwan-apn-dialog.blp:39
+#: panels/wwan/cc-wwan-apn-dialog.blp:37
 msgid "_Save"
 msgstr "_Uložit"
 
@@ -3175,7 +3175,7 @@ msgstr "Název sítě"
 #: panels/printers/pp-jobs-dialog.blp:171
 #: panels/printers/pp-new-printer-dialog.ui:300
 #: panels/system/users/cc-add-user-dialog.blp:89
-#: panels/wwan/cc-wwan-apn-dialog.blp:152
+#: panels/wwan/cc-wwan-apn-dialog.blp:150
 msgid "Password"
 msgstr "Heslo"
 
@@ -4792,7 +4792,7 @@ msgstr "Nenabíjí se"
 
 #. TRANSLATORS: primary battery
 #: panels/power/cc-battery-row.c:130 panels/power/cc-battery-row.c:157
-#: panels/wwan/cc-wwan-device-page.c:454
+#: panels/wwan/cc-wwan-device-page.c:445
 msgid "Empty"
 msgstr "Vybitá"
 
@@ -5353,7 +5353,7 @@ msgstr "Doména"
 #. Translators: This is a username on a print server.
 #: panels/printers/pp-jobs-dialog.blp:157
 #: panels/printers/pp-new-printer-dialog.ui:280
-#: panels/wwan/cc-wwan-apn-dialog.blp:129
+#: panels/wwan/cc-wwan-apn-dialog.blp:127
 msgid "Username"
 msgstr "Uživatelské jméno"
 
@@ -5441,7 +5441,7 @@ msgstr "Server požaduje ověření totožnosti"
 #: panels/printers/pp-new-printer-dialog.ui:78
 #: panels/system/users/cc-fingerprint-dialog.blp:15
 #: panels/wacom/cc-wacom-stylus-page.c:389
-#: panels/wwan/cc-wwan-apn-dialog.blp:20
+#: panels/wwan/cc-wwan-apn-dialog.blp:18
 msgid "Back"
 msgstr "Zpět"
 
@@ -5449,7 +5449,7 @@ msgstr "Zpět"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/pp-new-printer-dialog.ui:113
 #: panels/printers/pp-new-printer-dialog.ui:128
-#: panels/wwan/cc-wwan-device-page.blp:31
+#: panels/wwan/cc-wwan-device-page.blp:32
 msgid "_Unlock"
 msgstr "Odemkno_ut"
 
@@ -6446,7 +6446,7 @@ msgstr "Neplatné"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:42
 #: panels/system/users/cc-user-page.c:363
-#: panels/system/users/cc-user-page.c:720 panels/wwan/cc-wwan-device-page.c:421
+#: panels/system/users/cc-user-page.c:720 panels/wwan/cc-wwan-device-page.c:412
 msgid "Enabled"
 msgstr "Zapnuto"
 
@@ -8285,8 +8285,8 @@ msgid "Pa_ssword"
 msgstr "He_slo"
 
 #: panels/system/users/cc-user-page.blp:98
-msgid "_Fingerprint Login"
-msgstr "Přihlášení otiskem _prstu"
+msgid "_Fingerprint Authentication"
+msgstr "Ověření otiskem _prstů"
 
 #: panels/system/users/cc-user-page.blp:106
 msgid "A_utomatic Login"
@@ -8854,7 +8854,7 @@ msgid "Text Size"
 msgstr "Velikost textu"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:109
-#: panels/wwan/cc-wwan-device-page.c:184
+#: panels/wwan/cc-wwan-device-page.c:175
 msgid "Cancel"
 msgstr "Zrušit"
 
@@ -9748,31 +9748,31 @@ msgstr ""
 "pohoda;čas u obrazovky;přestávky;připomenutí přestávek;zdravotní "
 "přestávky;denní použití;limity obrazovky;limit používání;"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:8
+#: panels/wwan/cc-wwan-apn-dialog.blp:7
 msgid "Access Points"
 msgstr "Přístupové body"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:31
+#: panels/wwan/cc-wwan-apn-dialog.blp:29
 msgid "Add"
 msgstr "Přidat"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:103
+#: panels/wwan/cc-wwan-apn-dialog.blp:101
 msgid "APN"
 msgstr "APN"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:177
+#: panels/wwan/cc-wwan-apn-dialog.blp:175
 msgid "APN Type"
 msgstr "Typ APN"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:193
+#: panels/wwan/cc-wwan-apn-dialog.blp:191
 msgid "Internet"
 msgstr "Internet"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:194
+#: panels/wwan/cc-wwan-apn-dialog.blp:192
 msgid "Attach"
 msgstr "Připojit"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:208
+#: panels/wwan/cc-wwan-apn-dialog.blp:206
 msgid "Auth Type"
 msgstr "Typ ověření"
 
@@ -10025,85 +10025,85 @@ msgstr "Žádná SIM"
 msgid "Insert a SIM card to use this modem"
 msgstr "Vložte kartu SIM, abyste mohli modem používat"
 
-#: panels/wwan/cc-wwan-device-page.blp:26
+#: panels/wwan/cc-wwan-device-page.blp:27
 msgid "SIM Locked"
 msgstr "SIM je zamknutá"
 
-#: panels/wwan/cc-wwan-device-page.blp:61
+#: panels/wwan/cc-wwan-device-page.blp:62
 msgid "_Mobile Data"
 msgstr "_Mobilní data"
 
-#: panels/wwan/cc-wwan-device-page.blp:62
+#: panels/wwan/cc-wwan-device-page.blp:63
 msgid "Access data using mobile network"
 msgstr "Přístup k datům pomocí mobilní sítě"
 
-#: panels/wwan/cc-wwan-device-page.blp:68
+#: panels/wwan/cc-wwan-device-page.blp:69
 msgid "_Data Roaming"
 msgstr "_Datový roaming"
 
-#: panels/wwan/cc-wwan-device-page.blp:69
+#: panels/wwan/cc-wwan-device-page.blp:70
 msgid "Use mobile data when roaming"
 msgstr "Používat mobilní data při roamingu"
 
-#: panels/wwan/cc-wwan-device-page.blp:88
+#: panels/wwan/cc-wwan-device-page.blp:89
 msgid "_Network Mode"
 msgstr "_Režim sítě"
 
-#: panels/wwan/cc-wwan-device-page.blp:93
+#: panels/wwan/cc-wwan-device-page.blp:94
 msgid "N_etwork"
 msgstr "_Síť"
 
-#: panels/wwan/cc-wwan-device-page.blp:99
+#: panels/wwan/cc-wwan-device-page.blp:100
 msgid "Advanced"
 msgstr "Pokročilé"
 
-#: panels/wwan/cc-wwan-device-page.blp:112
+#: panels/wwan/cc-wwan-device-page.blp:113
 msgid "_Access Point Names"
 msgstr "_Názvy přístupového bodu"
 
-#: panels/wwan/cc-wwan-device-page.blp:117
+#: panels/wwan/cc-wwan-device-page.blp:118
 msgid "_SIM Lock"
 msgstr "Uzamknout _SIM"
 
-#: panels/wwan/cc-wwan-device-page.blp:118
+#: panels/wwan/cc-wwan-device-page.blp:119
 msgid "Lock SIM with PIN"
 msgstr "Uzamknutí SIM pomocí PIN"
 
-#: panels/wwan/cc-wwan-device-page.blp:123
+#: panels/wwan/cc-wwan-device-page.blp:124
 msgid "M_odem Details"
 msgstr "P_odrobnosti o modemu"
 
-#: panels/wwan/cc-wwan-device-page.blp:128
+#: panels/wwan/cc-wwan-device-page.blp:129
 msgid "Primary S_IM Slot"
 msgstr "Primární slot S_IM"
 
-#: panels/wwan/cc-wwan-device-page.c:182
+#: panels/wwan/cc-wwan-device-page.c:173
 msgid "Unlock SIM card"
 msgstr "Odemknutí karty SIM"
 
-#: panels/wwan/cc-wwan-device-page.c:183 panels/wwan/cc-wwan-device-page.c:223
+#: panels/wwan/cc-wwan-device-page.c:174 panels/wwan/cc-wwan-device-page.c:214
 msgid "Unlock"
 msgstr "Odemknout"
 
-#: panels/wwan/cc-wwan-device-page.c:187
+#: panels/wwan/cc-wwan-device-page.c:178
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "Zadejte prosím kód PIN pro SIM %d"
 
-#: panels/wwan/cc-wwan-device-page.c:188
+#: panels/wwan/cc-wwan-device-page.c:179
 msgid "Enter PIN to unlock your SIM card"
 msgstr "Zadejte PIN pro odemknutí své karty SIM"
 
-#: panels/wwan/cc-wwan-device-page.c:190
+#: panels/wwan/cc-wwan-device-page.c:181
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "Zadejte prosím kód PUK pro SIM %d"
 
-#: panels/wwan/cc-wwan-device-page.c:191
+#: panels/wwan/cc-wwan-device-page.c:182
 msgid "Enter PUK to unlock your SIM card"
 msgstr "Zadejte PUK pro odemknutí své karty SIM"
 
-#: panels/wwan/cc-wwan-device-page.c:206
+#: panels/wwan/cc-wwan-device-page.c:197
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
@@ -10111,7 +10111,7 @@ msgstr[0] "Bylo zadáno nesprávné heslo. Zbývá vám %1$u pokus."
 msgstr[1] "Bylo zadáno nesprávné heslo. Zbývají vám %1$u pokusy."
 msgstr[2] "Bylo zadáno nesprávné heslo. Zbývá vám %1$u pokusů."
 
-#: panels/wwan/cc-wwan-device-page.c:210
+#: panels/wwan/cc-wwan-device-page.c:201
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
@@ -10119,23 +10119,23 @@ msgstr[0] "Zbývá vám %u pokus"
 msgstr[1] "Zbývají vám %u pokusy"
 msgstr[2] "Zbývá vám %u pokusů"
 
-#: panels/wwan/cc-wwan-device-page.c:212
+#: panels/wwan/cc-wwan-device-page.c:203
 msgid "Wrong password entered."
 msgstr "Bylo zadáno nesprávné heslo."
 
-#: panels/wwan/cc-wwan-device-page.c:253
+#: panels/wwan/cc-wwan-device-page.c:244
 msgid "PUK code should be an 8 digit number"
 msgstr "Kód PUK by měl mít 8 číslic"
 
-#: panels/wwan/cc-wwan-device-page.c:275
+#: panels/wwan/cc-wwan-device-page.c:266
 msgid "Enter New PIN"
 msgstr "Zadejte nový PIN"
 
-#: panels/wwan/cc-wwan-device-page.c:279
+#: panels/wwan/cc-wwan-device-page.c:270
 msgid "PIN code should be a 4-8 digit number"
 msgstr "Kód PIN by měl mít 4 až 8 číslic"
 
-#: panels/wwan/cc-wwan-device-page.c:296
+#: panels/wwan/cc-wwan-device-page.c:287
 msgid "Unlocking…"
 msgstr "Odemyká se…"
 
@@ -10143,7 +10143,7 @@ msgstr "Odemyká se…"
 #. * For example: "Slot 1 [Operator Name]", "Slot 1" or "Slot 2 [Empty]".
 #. * Notice that all variations above are valid. Sometimes "Operator Name"
 #. * will be ommitted.
-#: panels/wwan/cc-wwan-device-page.c:467
+#: panels/wwan/cc-wwan-device-page.c:458
 #, c-format
 msgid "Slot %d %s"
 msgstr "Slot %d %s"
@@ -10495,6 +10495,9 @@ msgstr[2] "%u vstupů"
 #: subprojects/gvc/gvc-mixer-control.c:2919
 msgid "System Sounds"
 msgstr "Systémové zvuky"
+
+#~ msgid "_Fingerprint Login"
+#~ msgstr "Přihlášení otiskem _prstu"
 
 #~ msgid "No Fingerprint device"
 #~ msgstr "Není k dispozici žádná čtečka otisku prstu"
