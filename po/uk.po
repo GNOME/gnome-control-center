@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2026-08-03 08:18+0000\n"
-"PO-Revision-Date: 2026-08-03 14:06+0300\n"
+"POT-Creation-Date: 2026-08-18 13:26+0000\n"
+"PO-Revision-Date: 2026-08-18 19:26+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -28,7 +28,7 @@ msgid "Add Keyboard Shortcuts"
 msgstr "Додати клавіатурні скорочення"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:17
-#: panels/applications/cc-application-shortcut-dialog.c:121
+#: panels/applications/cc-application-shortcut-dialog.c:128
 #: panels/color/cc-color-calibrate.blp:22
 #: panels/common/cc-language-chooser.blp:17
 #: panels/display/cc-display-panel.blp:26
@@ -85,11 +85,11 @@ msgstr ""
 msgid "Global Shortcuts"
 msgstr "Загальні клавіатурні скорочення"
 
-#: panels/applications/cc-application-shortcut-dialog.c:114
+#: panels/applications/cc-application-shortcut-dialog.c:121
 msgid "Remove All Shortcuts?"
 msgstr "Вилучити всі скорочення?"
 
-#: panels/applications/cc-application-shortcut-dialog.c:118
+#: panels/applications/cc-application-shortcut-dialog.c:125
 #, c-format
 msgid ""
 "All actions from %s that have been registered for global shortcuts will be "
@@ -98,18 +98,18 @@ msgstr ""
 "Усі дії від %s, які було зареєстровано для загальних скорочень, буде "
 "вилучено."
 
-#: panels/applications/cc-application-shortcut-dialog.c:121
+#: panels/applications/cc-application-shortcut-dialog.c:128
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:156
 #: panels/system/users/cc-user-page.blp:197
 msgid "_Remove"
 msgstr "Ви_лучити"
 
-#: panels/applications/cc-application-shortcut-dialog.c:142
+#: panels/applications/cc-application-shortcut-dialog.c:149
 msgid "_Remove All Shortcuts"
 msgstr "Ви_лучити усі скорочення"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-application-shortcut-dialog.c:210
+#: panels/applications/cc-application-shortcut-dialog.c:217
 #, c-format
 msgid "%s has registered the following global shortcuts"
 msgstr "%s було зареєстровано вказані нижче загальні скорочення"
@@ -223,7 +223,7 @@ msgstr "Отримання сигналів системи про пошук і 
 #: panels/keyboard/cc-keyboard-panel.c:83
 #: panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331
 #: panels/system/users/cc-user-page.c:365
-#: panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:423
+#: panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:414
 #: subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "Вимкнено"
@@ -420,7 +420,7 @@ msgid "Session Bus"
 msgstr "Шина сеансів"
 
 #: panels/applications/cc-applications-panel.c:817
-#: panels/color/cc-color-panel.ui:451 panels/privacy/bolt/cc-bolt-page.blp:118
+#: panels/color/cc-color-panel.ui:452 panels/privacy/bolt/cc-bolt-page.blp:118
 #: panels/privacy/bolt/cc-bolt-page.blp:143
 #: panels/privacy/cc-privacy-panel.blp:55
 msgid "Devices"
@@ -433,7 +433,7 @@ msgstr "Повний доступ до /dev"
 #: panels/applications/cc-applications-panel.c:821
 #: panels/network/cc-network-panel.blp:5
 #: panels/network/gnome-network-panel.desktop.in:2
-#: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.blp:49
+#: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.blp:50
 #: panels/wwan/cc-wwan-network-dialog.blp:5
 msgid "Network"
 msgstr "Мережа"
@@ -462,7 +462,7 @@ msgstr "Файлова система"
 #: panels/applications/cc-applications-panel.c:839
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:8 shell/cc-window.blp:20
-#: shell/cc-window.c:815 shell/org.gnome.Settings.desktop.in:2
+#: shell/cc-window.c:827 shell/org.gnome.Settings.desktop.in:2
 msgid "Settings"
 msgstr "Параметри"
 
@@ -595,7 +595,7 @@ msgstr "Автозапуск н_осіїв"
 msgid "Start apps or prompt when media is connected"
 msgstr "Запускати програми або запити при з'єднанні носія даних"
 
-#: panels/applications/cc-default-apps-row.c:240
+#: panels/applications/cc-default-apps-row.c:248
 msgid "No Apps Available"
 msgstr "Немає доступних програм"
 
@@ -1506,134 +1506,134 @@ msgstr ""
 "Виявлено проблему. Профіль може не працювати правильно. <a "
 "href=\"\">Показати подробиці.</a>"
 
-#: panels/color/cc-color-panel.ui:469
+#: panels/color/cc-color-panel.ui:470
 msgid "_Set for All Users"
 msgstr "_Вказати для всіх користувачів"
 
-#: panels/color/cc-color-panel.ui:470
+#: panels/color/cc-color-panel.ui:471
 msgid "Set this profile for all users on this device"
 msgstr "Встановити цей профіль для всіх користувачів цього пристрою"
 
-#: panels/color/cc-color-panel.ui:477
+#: panels/color/cc-color-panel.ui:478
 msgid "_Enable"
 msgstr "_Увімкнути"
 
-#: panels/color/cc-color-panel.ui:478
+#: panels/color/cc-color-panel.ui:479
 msgid "Enable profile"
 msgstr "Увімкнути профіль"
 
-#: panels/color/cc-color-panel.ui:492
+#: panels/color/cc-color-panel.ui:493
 msgid "_Add Profile"
 msgstr "_Додати профіль"
 
-#: panels/color/cc-color-panel.ui:499
+#: panels/color/cc-color-panel.ui:500
 msgid "_Calibrate…"
 msgstr "_Калібрувати…"
 
-#: panels/color/cc-color-panel.ui:500
+#: panels/color/cc-color-panel.ui:501
 msgid "Calibrate the device"
 msgstr "Калібрувати пристрій"
 
-#: panels/color/cc-color-panel.ui:507
+#: panels/color/cc-color-panel.ui:508
 msgid "_Remove Profile"
 msgstr "_Вилучити профіль"
 
-#: panels/color/cc-color-panel.ui:514
+#: panels/color/cc-color-panel.ui:515
 msgid "_View Details"
 msgstr "_Переглянути подробиці"
 
-#: panels/color/cc-color-panel.ui:542
+#: panels/color/cc-color-panel.ui:543
 msgid "No Devices"
 msgstr "Немає пристроїв"
 
-#: panels/color/cc-color-panel.ui:543
+#: panels/color/cc-color-panel.ui:544
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Неможливо виявити пристрій, на якому можна керувати кольорами"
 
-#: panels/color/cc-color-panel.ui:564
+#: panels/color/cc-color-panel.ui:565
 msgid "LCD"
 msgstr "Рідкокристалічний"
 
-#: panels/color/cc-color-panel.ui:569
+#: panels/color/cc-color-panel.ui:570
 msgid "LED"
 msgstr "Індикатор LED"
 
-#: panels/color/cc-color-panel.ui:574
+#: panels/color/cc-color-panel.ui:575
 msgid "CRT"
 msgstr "Електронна трубка"
 
-#: panels/color/cc-color-panel.ui:579
+#: panels/color/cc-color-panel.ui:580
 msgid "Projector"
 msgstr "Проєктор"
 
-#: panels/color/cc-color-panel.ui:584
+#: panels/color/cc-color-panel.ui:585
 msgid "Plasma"
 msgstr "Плазма"
 
-#: panels/color/cc-color-panel.ui:589
+#: panels/color/cc-color-panel.ui:590
 msgid "LCD (CCFL backlight)"
 msgstr "Рідкокристалічний (підсвічування CCFL)"
 
-#: panels/color/cc-color-panel.ui:594
+#: panels/color/cc-color-panel.ui:595
 msgid "LCD (RGB LED backlight)"
 msgstr "Рідкокристалічний (підсвічування RGB LED)"
 
-#: panels/color/cc-color-panel.ui:599
+#: panels/color/cc-color-panel.ui:600
 msgid "LCD (white LED backlight)"
 msgstr "Рідкокристалічний (підсвічування білий LED)"
 
-#: panels/color/cc-color-panel.ui:604
+#: panels/color/cc-color-panel.ui:605
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "Широка палітра LCD (підсвічування CCFL)"
 
-#: panels/color/cc-color-panel.ui:609
+#: panels/color/cc-color-panel.ui:610
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "Широка палітра LCD (підсвічування RGB LED)"
 
-#: panels/color/cc-color-panel.ui:626
+#: panels/color/cc-color-panel.ui:627
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Висока"
 
-#: panels/color/cc-color-panel.ui:627
+#: panels/color/cc-color-panel.ui:628
 msgid "40 minutes"
 msgstr "40 хвилин"
 
-#: panels/color/cc-color-panel.ui:631
+#: panels/color/cc-color-panel.ui:632
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Середня"
 
-#: panels/color/cc-color-panel.ui:632
+#: panels/color/cc-color-panel.ui:633
 msgid "30 minutes"
 msgstr "30 хвилин"
 
-#: panels/color/cc-color-panel.ui:636
+#: panels/color/cc-color-panel.ui:637
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Низька"
 
-#: panels/color/cc-color-panel.ui:637
+#: panels/color/cc-color-panel.ui:638
 msgid "15 minutes"
 msgstr "15 хвилин"
 
-#: panels/color/cc-color-panel.ui:659
+#: panels/color/cc-color-panel.ui:660
 msgid "Native to display"
 msgstr "Рідний для показу"
 
-#: panels/color/cc-color-panel.ui:663
+#: panels/color/cc-color-panel.ui:664
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (друкування й публікування)"
 
-#: panels/color/cc-color-panel.ui:667
+#: panels/color/cc-color-panel.ui:668
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/cc-color-panel.ui:671
+#: panels/color/cc-color-panel.ui:672
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (фотографії і графіки)"
 
-#: panels/color/cc-color-panel.ui:675
+#: panels/color/cc-color-panel.ui:676
 msgid "D75"
 msgstr "D75"
 
@@ -2584,7 +2584,7 @@ msgstr ""
 #: panels/sound/cc-alert-chooser-page.blp:14
 #: panels/sound/cc-alert-chooser-page.c:314
 #: panels/universal-access/cc-ua-zoom-page.blp:240
-#: panels/wwan/cc-wwan-apn-dialog.blp:226
+#: panels/wwan/cc-wwan-apn-dialog.blp:224
 msgid "None"
 msgstr "Немає"
 
@@ -2593,7 +2593,7 @@ msgid "Shortcut Disabled"
 msgstr "Скорочення вимкнено"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:125
-#: panels/wwan/cc-wwan-apn-dialog.blp:77
+#: panels/wwan/cc-wwan-apn-dialog.blp:75
 msgid "Name"
 msgstr "Назва"
 
@@ -3060,7 +3060,7 @@ msgid "Proxy"
 msgstr "Проксі"
 
 #: panels/network/cc-net-proxy-page.blp:24
-#: panels/wwan/cc-wwan-apn-dialog.blp:39
+#: panels/wwan/cc-wwan-apn-dialog.blp:37
 msgid "_Save"
 msgstr "З_берегти"
 
@@ -3193,7 +3193,7 @@ msgstr "Назва мережі"
 #: panels/printers/pp-jobs-dialog.blp:171
 #: panels/printers/pp-new-printer-dialog.ui:300
 #: panels/system/users/cc-add-user-dialog.blp:89
-#: panels/wwan/cc-wwan-apn-dialog.blp:152
+#: panels/wwan/cc-wwan-apn-dialog.blp:150
 msgid "Password"
 msgstr "Пароль"
 
@@ -4816,7 +4816,7 @@ msgstr "Не заряджається"
 
 #. TRANSLATORS: primary battery
 #: panels/power/cc-battery-row.c:130 panels/power/cc-battery-row.c:157
-#: panels/wwan/cc-wwan-device-page.c:454
+#: panels/wwan/cc-wwan-device-page.c:445
 msgid "Empty"
 msgstr "Вичерпано"
 
@@ -5386,7 +5386,7 @@ msgstr "Домен"
 #. Translators: This is a username on a print server.
 #: panels/printers/pp-jobs-dialog.blp:157
 #: panels/printers/pp-new-printer-dialog.ui:280
-#: panels/wwan/cc-wwan-apn-dialog.blp:129
+#: panels/wwan/cc-wwan-apn-dialog.blp:127
 msgid "Username"
 msgstr "Користувач"
 
@@ -5475,7 +5475,7 @@ msgstr "Сервер потребує засвідчення"
 #: panels/printers/pp-new-printer-dialog.ui:78
 #: panels/system/users/cc-fingerprint-dialog.blp:15
 #: panels/wacom/cc-wacom-stylus-page.c:389
-#: panels/wwan/cc-wwan-apn-dialog.blp:20
+#: panels/wwan/cc-wwan-apn-dialog.blp:18
 msgid "Back"
 msgstr "Назад"
 
@@ -5483,7 +5483,7 @@ msgstr "Назад"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/pp-new-printer-dialog.ui:113
 #: panels/printers/pp-new-printer-dialog.ui:128
-#: panels/wwan/cc-wwan-device-page.blp:31
+#: panels/wwan/cc-wwan-device-page.blp:32
 msgid "_Unlock"
 msgstr "_Розблокувати"
 
@@ -6486,7 +6486,7 @@ msgstr "Нечинний"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/privacy/firmware-security/cc-firmware-security-utils.c:42
 #: panels/system/users/cc-user-page.c:363
-#: panels/system/users/cc-user-page.c:720 panels/wwan/cc-wwan-device-page.c:421
+#: panels/system/users/cc-user-page.c:720 panels/wwan/cc-wwan-device-page.c:412
 msgid "Enabled"
 msgstr "Увімкнено"
 
@@ -8081,7 +8081,6 @@ msgstr "Переконайтеся, що пристрій з'єднано нал
 
 #: panels/system/users/cc-fingerprint-dialog.blp:45
 #: panels/system/users/cc-fingerprint-dialog.blp:91
-#| msgid "Enterprise Authentication"
 msgid "Fingerprint Authentication"
 msgstr "Розпізнавання за відбитком"
 
@@ -8089,11 +8088,10 @@ msgstr "Розпізнавання за відбитком"
 msgid ""
 "Use fingerprints to unlock the screen and identify yourself when prompted"
 msgstr ""
-"Використовувати відбитки для розблокування екрана і розпізнавання вас, якщо н"
-"адійде запит"
+"Використовувати відбитки для розблокування екрана і розпізнавання вас, якщо "
+"надійде запит"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:54
-#| msgid "T_wo Finger"
 msgid "_Scan Finger"
 msgstr "С_канувати палець"
 
@@ -8106,17 +8104,14 @@ msgid "Choose the fingerprint device you want to configure"
 msgstr "Виберіть пристрій для читання відбитків, який ви хочете налаштувати"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:78
-#| msgid "Select Language"
 msgid "Select Finger"
 msgstr "Виберіть палець"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:82
-#| msgid "Right Half"
 msgid "Right Hand"
 msgstr "Права рука"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:85
-#| msgid "Left Half"
 msgid "Left Hand"
 msgstr "Ліва рука"
 
@@ -8125,12 +8120,10 @@ msgid "The following fingerprints can be used for authentication"
 msgstr "Вказані нижче відбитки можна використовувати для розпізнавання"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:100
-#| msgid "Fingerprint Login"
 msgid "Fingerprints"
 msgstr "Відбитки"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:105
-#| msgid "_Verify Fingerprint"
 msgid "Add Fingerprint"
 msgstr "Додати відбиток пальця"
 
@@ -8213,7 +8206,6 @@ msgstr "Невідомий палець"
 
 #: panels/system/users/cc-fingerprint-dialog.c:351
 #, c-format
-#| msgid "Failed to delete saved fingerprints: %s"
 msgid "Failed to delete fingerprint: %s"
 msgstr "Не вдалося вилучити відбиток: %s"
 
@@ -8223,18 +8215,14 @@ msgid "Failed to list fingerprints: %s"
 msgstr "Не вдалося побудувати список відбитків: %s"
 
 #: panels/system/users/cc-fingerprint-dialog.c:733
-#| msgid "Complete!"
 msgid "Scan Complete!"
 msgstr "Сканування завершено!"
 
 #: panels/system/users/cc-fingerprint-dialog.c:746
-#| msgid "Drag one finger on the edge"
 msgid "Touch finger on reader"
 msgstr "Торкніться пальцем зчитувача"
 
 #: panels/system/users/cc-fingerprint-dialog.c:800
-#| msgctxt "Fingerprint enroll state"
-#| msgid "Complete"
 msgid "Scan Complete"
 msgstr "Сканування завершено"
 
@@ -8243,7 +8231,6 @@ msgid "Fingerprint device disconnected"
 msgstr "Пристрій для зчитування відбитків від'єднано"
 
 #: panels/system/users/cc-fingerprint-dialog.c:826
-#| msgid "Fingerprint device storage is full"
 msgid "Fingerprint Storage is Full"
 msgstr "Сховище відбитків заповнено"
 
@@ -8252,7 +8239,6 @@ msgid "Finger Already Scanned"
 msgstr "Відбиток вже відскановано"
 
 #: panels/system/users/cc-fingerprint-dialog.c:830
-#| msgid "Failed to add new printer."
 msgid "Failed to Scan Finger"
 msgstr "Не вдалося засканувати палець"
 
@@ -8385,8 +8371,9 @@ msgid "Pa_ssword"
 msgstr "П_ароль"
 
 #: panels/system/users/cc-user-page.blp:98
-msgid "_Fingerprint Login"
-msgstr "Вхід через відбитки _пальців"
+#| msgid "Fingerprint Authentication"
+msgid "_Fingerprint Authentication"
+msgstr "Розпізнавання за від_битком"
 
 #: panels/system/users/cc-user-page.blp:106
 msgid "A_utomatic Login"
@@ -8966,7 +8953,7 @@ msgid "Text Size"
 msgstr "Розмір шрифту"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:109
-#: panels/wwan/cc-wwan-device-page.c:184
+#: panels/wwan/cc-wwan-device-page.c:175
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -9877,31 +9864,31 @@ msgstr ""
 "Time;Breaks;Break Reminders;Health Breaks;Daily Usage;Screen Limits;Usage "
 "Limit;"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:8
+#: panels/wwan/cc-wwan-apn-dialog.blp:7
 msgid "Access Points"
 msgstr "Точки доступу"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:31
+#: panels/wwan/cc-wwan-apn-dialog.blp:29
 msgid "Add"
 msgstr "Додати"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:103
+#: panels/wwan/cc-wwan-apn-dialog.blp:101
 msgid "APN"
 msgstr "APN"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:177
+#: panels/wwan/cc-wwan-apn-dialog.blp:175
 msgid "APN Type"
 msgstr "Тип APN"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:193
+#: panels/wwan/cc-wwan-apn-dialog.blp:191
 msgid "Internet"
 msgstr "Інтернет"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:194
+#: panels/wwan/cc-wwan-apn-dialog.blp:192
 msgid "Attach"
 msgstr "Долучити"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:208
+#: panels/wwan/cc-wwan-apn-dialog.blp:206
 msgid "Auth Type"
 msgstr "Тип аутентифікації"
 
@@ -10154,85 +10141,85 @@ msgstr "Немає SIM-картки"
 msgid "Insert a SIM card to use this modem"
 msgstr "Вставте SIM-картку, щоб скористатися цим модемом"
 
-#: panels/wwan/cc-wwan-device-page.blp:26
+#: panels/wwan/cc-wwan-device-page.blp:27
 msgid "SIM Locked"
 msgstr "SIM-картку заблоковано"
 
-#: panels/wwan/cc-wwan-device-page.blp:61
+#: panels/wwan/cc-wwan-device-page.blp:62
 msgid "_Mobile Data"
 msgstr "_Мобільні дані"
 
-#: panels/wwan/cc-wwan-device-page.blp:62
+#: panels/wwan/cc-wwan-device-page.blp:63
 msgid "Access data using mobile network"
 msgstr "Доступ до даних за допомогою мобільної мережі"
 
-#: panels/wwan/cc-wwan-device-page.blp:68
+#: panels/wwan/cc-wwan-device-page.blp:69
 msgid "_Data Roaming"
 msgstr "Роумінг _даних"
 
-#: panels/wwan/cc-wwan-device-page.blp:69
+#: panels/wwan/cc-wwan-device-page.blp:70
 msgid "Use mobile data when roaming"
 msgstr "Використовувати мобільний доступ до даних при роумінгу"
 
-#: panels/wwan/cc-wwan-device-page.blp:88
+#: panels/wwan/cc-wwan-device-page.blp:89
 msgid "_Network Mode"
 msgstr "Режим _мережі"
 
-#: panels/wwan/cc-wwan-device-page.blp:93
+#: panels/wwan/cc-wwan-device-page.blp:94
 msgid "N_etwork"
 msgstr "М_ережа"
 
-#: panels/wwan/cc-wwan-device-page.blp:99
+#: panels/wwan/cc-wwan-device-page.blp:100
 msgid "Advanced"
 msgstr "Додатково"
 
-#: panels/wwan/cc-wwan-device-page.blp:112
+#: panels/wwan/cc-wwan-device-page.blp:113
 msgid "_Access Point Names"
 msgstr "Назви _точок доступу"
 
-#: panels/wwan/cc-wwan-device-page.blp:117
+#: panels/wwan/cc-wwan-device-page.blp:118
 msgid "_SIM Lock"
 msgstr "Б_локування SIM"
 
-#: panels/wwan/cc-wwan-device-page.blp:118
+#: panels/wwan/cc-wwan-device-page.blp:119
 msgid "Lock SIM with PIN"
 msgstr "Заблокувати SIM-картку за допомогою пінкоду"
 
-#: panels/wwan/cc-wwan-device-page.blp:123
+#: panels/wwan/cc-wwan-device-page.blp:124
 msgid "M_odem Details"
 msgstr "Параметри м_одему"
 
-#: panels/wwan/cc-wwan-device-page.blp:128
+#: panels/wwan/cc-wwan-device-page.blp:129
 msgid "Primary S_IM Slot"
 msgstr "Основний слот S_IM"
 
-#: panels/wwan/cc-wwan-device-page.c:182
+#: panels/wwan/cc-wwan-device-page.c:173
 msgid "Unlock SIM card"
 msgstr "Розблокувати SIM-картку"
 
-#: panels/wwan/cc-wwan-device-page.c:183 panels/wwan/cc-wwan-device-page.c:223
+#: panels/wwan/cc-wwan-device-page.c:174 panels/wwan/cc-wwan-device-page.c:214
 msgid "Unlock"
 msgstr "Розблокувати"
 
-#: panels/wwan/cc-wwan-device-page.c:187
+#: panels/wwan/cc-wwan-device-page.c:178
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "Будь ласка, вкажіть пінкод для SIM-картки %d"
 
-#: panels/wwan/cc-wwan-device-page.c:188
+#: panels/wwan/cc-wwan-device-page.c:179
 msgid "Enter PIN to unlock your SIM card"
 msgstr "Введіть пінкод для розблокування вашої SIM-картки"
 
-#: panels/wwan/cc-wwan-device-page.c:190
+#: panels/wwan/cc-wwan-device-page.c:181
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "Будь ласка, вкажіть PUK-код для SIM-картки %d"
 
-#: panels/wwan/cc-wwan-device-page.c:191
+#: panels/wwan/cc-wwan-device-page.c:182
 msgid "Enter PUK to unlock your SIM card"
 msgstr "Введіть PUK-код для розблокування вашої SIM-картки"
 
-#: panels/wwan/cc-wwan-device-page.c:206
+#: panels/wwan/cc-wwan-device-page.c:197
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
@@ -10241,7 +10228,7 @@ msgstr[1] "Введено помилковий пароль. У вас лиши�
 msgstr[2] "Введено помилковий пароль. У вас лишилося %1$u спроб"
 msgstr[3] "Введено помилковий пароль. У вас лишилася %1$u спроба"
 
-#: panels/wwan/cc-wwan-device-page.c:210
+#: panels/wwan/cc-wwan-device-page.c:201
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
@@ -10250,23 +10237,23 @@ msgstr[1] "У вас лишилося %u спроби"
 msgstr[2] "У вас лишилося %u спроб"
 msgstr[3] "У вас лишилася одна спроба"
 
-#: panels/wwan/cc-wwan-device-page.c:212
+#: panels/wwan/cc-wwan-device-page.c:203
 msgid "Wrong password entered."
 msgstr "Введено помилковий пароль."
 
-#: panels/wwan/cc-wwan-device-page.c:253
+#: panels/wwan/cc-wwan-device-page.c:244
 msgid "PUK code should be an 8 digit number"
 msgstr "PUK-код має бути 8-цифровим числом"
 
-#: panels/wwan/cc-wwan-device-page.c:275
+#: panels/wwan/cc-wwan-device-page.c:266
 msgid "Enter New PIN"
 msgstr "Введіть новий пінкод"
 
-#: panels/wwan/cc-wwan-device-page.c:279
+#: panels/wwan/cc-wwan-device-page.c:270
 msgid "PIN code should be a 4-8 digit number"
 msgstr "Пінкод має бути числом, у якому має бути від 4 до 8 цифр"
 
-#: panels/wwan/cc-wwan-device-page.c:296
+#: panels/wwan/cc-wwan-device-page.c:287
 msgid "Unlocking…"
 msgstr "Розблокування…"
 
@@ -10274,7 +10261,7 @@ msgstr "Розблокування…"
 #. * For example: "Slot 1 [Operator Name]", "Slot 1" or "Slot 2 [Empty]".
 #. * Notice that all variations above are valid. Sometimes "Operator Name"
 #. * will be ommitted.
-#: panels/wwan/cc-wwan-device-page.c:467
+#: panels/wwan/cc-wwan-device-page.c:458
 #, c-format
 msgid "Slot %d %s"
 msgstr "Слот %d %s"
@@ -10630,6 +10617,9 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2919
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "_Fingerprint Login"
+#~ msgstr "Вхід через відбитки _пальців"
 
 #~ msgid "No Fingerprint device"
 #~ msgstr "Немає пристроїв для зчитування відбитків"
