@@ -187,6 +187,11 @@ on_user_changed (CcUsersPage *self, ActUser *user)
     g_list_store_sort (self->model, sort_users, self);
 
     /* If the user has a page open, refresh that page */
+    if (act_user_get_uid (user) == getuid ()) {
+        cc_user_page_set_user (self->current_user_page, user, self->permission);
+        return;
+    }
+
     page = CC_USER_PAGE (adw_navigation_view_find_page (self->navigation, act_user_get_user_name (user)));
     if (page != NULL)
         cc_user_page_set_user (page, user, self->permission);
