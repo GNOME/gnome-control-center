@@ -374,8 +374,8 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
                              G_CALLBACK (ua_seeing_interface_cursor_size_changed_cb), self,
                              G_CONNECT_SWAPPED | G_CONNECT_AFTER);
 
-    g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION, G_DBUS_PROXY_FLAGS_NONE, NULL, "org.gnome.Orca.Service",
-                              "/org/gnome/Orca/Service", "org.gnome.Orca.Service", NULL, on_orca_proxy_ready, self);
+    g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION, G_DBUS_PROXY_FLAGS_NONE, NULL, "org.gnome.Orca1.Service",
+                              "/org/gnome/Orca1/Service", "org.gnome.Orca1.Service", NULL, on_orca_proxy_ready, self);
 
     ua_seeing_interface_cursor_size_changed_cb (self);
 }
