@@ -18,6 +18,7 @@
 #include <pulse/pulseaudio.h>
 
 #include "cc-level-bar.h"
+#include "gvc-mixer-sink.h"
 #include "gvc-mixer-stream-private.h"
 
 struct _CcLevelBar {
@@ -141,6 +142,7 @@ cc_level_bar_set_stream (CcLevelBar *self, GvcMixerStream *stream, CcStreamType 
     pa_sample_spec sample_spec;
     pa_proplist *proplist;
     pa_buffer_attr attr;
+    pa_stream_flags_t flags;
     g_autofree gchar *device = NULL;
 
     g_return_if_fail (CC_IS_LEVEL_BAR (self));
@@ -185,10 +187,12 @@ cc_level_bar_set_stream (CcLevelBar *self, GvcMixerStream *stream, CcStreamType 
     attr.fragsize = sizeof (float);
     attr.maxlength = (uint32_t) -1;
     device = g_strdup_printf ("%u", gvc_mixer_stream_get_index (stream));
-    if (pa_stream_connect_record (
-            self->level_stream, device, &attr,
-            (pa_stream_flags_t) (PA_STREAM_DONT_MOVE | PA_STREAM_PEAK_DETECT | PA_STREAM_ADJUST_LATENCY))
-        < 0) {
+    flags = PA_STREAM_DONT_MOVE | PA_STREAM_PEAK_DETECT | PA_STREAM_ADJUST_LATENCY;
+
+    if (GVC_IS_MIXER_SINK (stream))
+        flags |= PA_STREAM_DONT_INHIBIT_AUTO_SUSPEND;
+
+    if (pa_stream_connect_record (self->level_stream, device, &attr, flags) < 0) {
         g_warning ("Failed to connect monitoring stream");
     }
 }
