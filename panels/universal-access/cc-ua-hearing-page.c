@@ -72,12 +72,10 @@ ua_hearing_sound_settings_clicked_cb (CcUaHearingPage *self)
 {
     g_autoptr(GError) error = NULL;
     CcWindow *window;
-    CcPanel *panel;
 
     g_assert (CC_IS_UA_HEARING_PAGE (self));
 
-    panel = (CcPanel *) gtk_widget_get_ancestor (GTK_WIDGET (self), CC_TYPE_PANEL);
-    window = cc_panel_get_toplevel (CC_PANEL (panel));
+    window = CC_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
     if (!cc_window_set_active_panel_from_id (window, "sound", NULL, &error))
         g_warning ("Failed to activate 'sound' panel: %s", error->message);
 
