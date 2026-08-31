@@ -12,7 +12,7 @@ git config --global --add safe.directory "$PWD"
 # branches.
 #
 # Limit the fetch to a certain date horizon to limit the amount of data we get.
-# If the branch was forked from origin/main before this horizon, it should
+# If the branch was forked from upstream/main before this horizon, it should
 # probably be rebased.
 if ! git ls-remote --exit-code upstream >/dev/null 2>&1 ; then
     git remote add upstream https://gitlab.gnome.org/GNOME/gnome-control-center.git
@@ -29,11 +29,11 @@ fi
 source_branch="${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:-${CI_COMMIT_BRANCH}}"
 target_branch="${CI_MERGE_REQUEST_TARGET_BRANCH_NAME:-${CI_DEFAULT_BRANCH}}"
 
-# By default, fetch the source branch from origin
-source_remote="origin"
+# By default, fetch the source branch from upstream
+source_remote="upstream"
 
 # When running in a fork MR, we need to fetch the source branch from the fork,
-# not from origin (which might be the upstream repo where the branch doesn't exist)
+# not from upstream (which might be the upstream repo where the branch doesn't exist)
 if [ -n "${CI_MERGE_REQUEST_SOURCE_PROJECT_URL}" ] && [ "${CI_MERGE_REQUEST_SOURCE_PROJECT_URL}" != "${CI_MERGE_REQUEST_PROJECT_URL}" ]; then
     if ! git ls-remote --exit-code source-project >/dev/null 2>&1 ; then
         git remote add source-project "${CI_MERGE_REQUEST_SOURCE_PROJECT_URL}.git"
