@@ -116,6 +116,7 @@ build.container.fedora@x86_64:
       libsass-devel sassc
       libsoup3-devel
     FDO_DISTRIBUTION_EXEC: |-
+      dnf config-manager setopt fedora-cisco-openh264.enabled=0 && \
       dnf builddep -y gnome-control-center && \
       dnf builddep -y gsettings-desktop-schemas && \
       dnf builddep -y gtk4 && \
