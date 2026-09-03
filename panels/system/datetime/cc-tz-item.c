@@ -52,7 +52,7 @@ struct _CcTzItem {
     char *name;
     char *country;
     char *time;
-    char *offset; /* eg: UTC+530 */
+    char *offset; /* eg: UTC+0530 */
     char *zone;
 };
 
@@ -229,10 +229,6 @@ cc_tz_item_new (TzLocation *location)
     /* eg: +05:30 -> +0530*/
     g_string_replace (offset, ":", "", 0);
 
-    /* If the timezone is UTC remove the time, which will always be [+]0000 */
-    if (g_str_has_suffix (offset->str, "0000"))
-        g_string_set_size (offset, 0);
-
     /* eg: +0530 -> UTC+0530 */
     g_string_prepend (offset, "UTC");
 
@@ -247,4 +243,12 @@ cc_tz_item_get_location (CcTzItem *self)
     g_return_val_if_fail (CC_IS_TZ_ITEM (self), NULL);
 
     return self->tz_location;
+}
+
+TzInfo *
+cc_tz_item_get_info (CcTzItem *self)
+{
+    g_return_val_if_fail (CC_IS_TZ_ITEM (self), NULL);
+
+    return self->tz_info;
 }

@@ -71,10 +71,12 @@ match_tz_item (CcTzItem *item, CcTzDialog *self)
     g_auto(GStrv) strv = NULL;
     g_autofree char *country = NULL;
     g_autofree char *name = NULL;
+    g_autofree char *offset = NULL;
     g_autofree char *zone = NULL;
     g_autofree char *name_fold = NULL;
     g_autofree char *zone_fold = NULL;
     g_autofree char *country_fold = NULL;
+    g_autofree char *offset_fold = NULL;
     const char *search_terms;
 
     g_assert (CC_IS_TZ_ITEM (item));
@@ -85,15 +87,17 @@ match_tz_item (CcTzItem *item, CcTzDialog *self)
     if (!search_terms || !*search_terms)
         return TRUE;
 
-    g_object_get (item, "country", &country, "name", &name, "zone", &zone, NULL);
+    g_object_get (item, "country", &country, "name", &name, "offset", &offset, "zone", &zone, NULL);
 
-    if (!name || !zone || !country)
+    if (!name || !zone || !country || !offset)
         return FALSE;
 
     /* Prepare case-folded versions for UTF-8 safe comparison */
     name_fold = g_utf8_casefold (name, -1);
     zone_fold = g_utf8_casefold (zone, -1);
     country_fold = g_utf8_casefold (country, -1);
+    /* Case-folding the offset is mostly moot since it's mostly numeric, but this allows matching lowercase utc+1234 */
+    offset_fold = g_utf8_casefold (offset, -1);
 
     /* Search for each word separated by spaces */
     strv = g_strsplit (search_terms, " ", 0);
@@ -113,11 +117,36 @@ match_tz_item (CcTzItem *item, CcTzDialog *self)
         str_fold = g_utf8_casefold (str, -1);
 
         if (!g_strstr_len (name_fold, -1, str_fold) && !g_strstr_len (zone_fold, -1, str_fold)
-            && !g_strstr_len (country_fold, -1, str_fold))
+            && !g_strstr_len (country_fold, -1, str_fold) && !g_strstr_len (offset_fold, -1, str_fold))
             return FALSE;
     }
 
     return TRUE;
+}
+
+/* Sort items by their UTC offset, falling back to name */
+static gint
+sort_tz_items_by_offset (gconstpointer a, gconstpointer b, gpointer user_data)
+{
+    g_autofree char *name1 = NULL;
+    g_autofree char *name2 = NULL;
+    CcTzItem *item1 = CC_TZ_ITEM ((gpointer) a);
+    CcTzItem *item2 = CC_TZ_ITEM ((gpointer) b);
+    TzInfo *info1;
+    TzInfo *info2;
+
+    info1 = cc_tz_item_get_info (item1);
+    info2 = cc_tz_item_get_info (item2);
+
+    if (info1->utc_offset < info2->utc_offset)
+        return -1;
+    if (info1->utc_offset > info2->utc_offset)
+        return 1;
+
+    g_object_get (item1, "name", &name1, NULL);
+    g_object_get (item2, "name", &name2, NULL);
+
+    return g_utf8_collate (name1, name2);
 }
 
 static void
@@ -259,7 +288,6 @@ static void
 cc_tz_dialog_init (CcTzDialog *self)
 {
     GtkSortListModel *tz_sorted_model;
-    GtkExpression *expression;
     GtkSorter *sorter;
     GtkFilter *filter;
 
@@ -268,9 +296,7 @@ cc_tz_dialog_init (CcTzDialog *self)
     self->tz_store = g_list_store_new (CC_TYPE_TZ_ITEM);
     load_tz (self);
 
-    /* Sort items by name */
-    expression = gtk_property_expression_new (CC_TYPE_TZ_ITEM, NULL, "name");
-    sorter = GTK_SORTER (gtk_string_sorter_new (expression));
+    sorter = GTK_SORTER (gtk_custom_sorter_new (sort_tz_items_by_offset, NULL, NULL));
     tz_sorted_model = gtk_sort_list_model_new (G_LIST_MODEL (self->tz_store), sorter);
 
     filter = (GtkFilter *) gtk_custom_filter_new ((GtkCustomFilterFunc) match_tz_item, self, NULL);

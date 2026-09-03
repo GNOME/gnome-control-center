@@ -34,5 +34,6 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcTzItem, cc_tz_item, CC, TZ_ITEM, GObject);
 CcTzItem *cc_tz_item_new (TzLocation *location);
 TzLocation *cc_tz_item_get_location (CcTzItem *self);
+TzInfo *cc_tz_item_get_info (CcTzItem *self);
 
 G_END_DECLS
