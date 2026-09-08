@@ -117,6 +117,7 @@ template $CcRemoteLoginPage: Adw.Bin {
 
           Adw.ButtonRow verify_encryption_button_row {
             sensitive: false;
+            /* Translators: "Fingerprint" refers to verifying a TLS/cryptographic key fingerprint for Remote Desktop, not a fingerprint scanner for user authentication. */
             title: _("_Verify Fingerprint");
             use-underline: true;
             activated => $on_verify_encryption_button_row_activated(template);
