@@ -42,6 +42,7 @@ struct _CcOnlineAccountsPanel {
     GtkFrame *accounts_frame;
     GtkListBox *accounts_listbox;
     AdwBanner *offline_banner;
+    GtkWidget *providers_group;
     GtkListBox *providers_listbox;
     GtkWidget *toast_overlay;
 
@@ -348,6 +349,7 @@ goa_provider_get_all_cb (GObject *object, GAsyncResult *res, gpointer user_data)
     g_autolist(GoaProvider) providers = NULL;
     g_autolist(GoaAccount) accounts = NULL;
     g_autoptr(GError) error = NULL;
+    GtkListBoxRow *first_row;
 
     /* goa_provider_get_all() doesn't have a cancellable argument, so check if
      * the panel cancellable was triggered.
@@ -369,12 +371,22 @@ goa_provider_get_all_cb (GObject *object, GAsyncResult *res, gpointer user_data)
     for (const GList *iter = accounts; iter != NULL; iter = iter->next)
         add_account (self, GOA_OBJECT (iter->data));
 
+    /* The shell moves the focus into the panel when it is activated (see commit
+     * c6db1574), but at that point both lists are still empty, so the focus ends
+     * up on the scrolled window of the preferences page, which screen readers do
+     * not announce. Move it to a real row now that there is one. */
+    first_row = gtk_list_box_get_row_at_index (self->accounts_listbox, 0);
+    if (first_row == NULL)
+        first_row = gtk_list_box_get_row_at_index (self->providers_listbox, 0);
+    if (first_row != NULL)
+        gtk_widget_grab_focus (GTK_WIDGET (first_row));
+
     g_signal_connect_swapped (self->client, "account-added", G_CALLBACK (on_account_added_cb), self);
 
     g_signal_connect_swapped (self->client, "account-removed", G_CALLBACK (on_account_removed_cb), self);
 
     /* With the client ready, check if we have a pending command */
-    gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->providers_group), TRUE);
 
     if (self->parameters != NULL) {
         g_autoptr(GVariant) parameters = NULL;
@@ -393,7 +405,7 @@ goa_client_new_cb (GObject *object, GAsyncResult *res, gpointer user_data)
     self->client = goa_client_new_finish (res, &error);
     if (self->client == NULL) {
         g_warning ("Error connect to service: %s", error->message);
-        gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->providers_group), FALSE);
         return;
     }
 
@@ -483,6 +495,7 @@ cc_online_accounts_panel_class_init (CcOnlineAccountsPanelClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, accounts_frame);
     gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, accounts_listbox);
     gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, offline_banner);
+    gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, providers_group);
     gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, providers_listbox);
     gtk_widget_class_bind_template_child (widget_class, CcOnlineAccountsPanel, toast_overlay);
 
@@ -510,7 +523,7 @@ cc_online_accounts_panel_init (CcOnlineAccountsPanel *self)
 
     g_object_bind_property (monitor, "network-available", self->providers_listbox, "sensitive", G_BINDING_SYNC_CREATE);
 
-    /* Disable the panel while we wait for the client */
-    gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
+    /* Disable adding accounts while we wait for the client */
+    gtk_widget_set_sensitive (GTK_WIDGET (self->providers_group), FALSE);
     goa_client_new (cc_panel_get_cancellable (CC_PANEL (self)), goa_client_new_cb, g_object_ref (self));
 }
