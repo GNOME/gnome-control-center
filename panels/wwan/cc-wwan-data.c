@@ -316,6 +316,30 @@ wwan_data_update_apn_list_db (CcWwanData *self)
 }
 
 static void
+wwan_data_load_default_apn (CcWwanData *self, CcWwanDataApn *apn)
+{
+    NMSettingConnection *connection_setting;
+    NMSettingIPConfig *ip_setting;
+    NMSettingGsm *setting;
+    NMConnection *connection;
+
+    connection = NM_CONNECTION (apn->remote_connection);
+    setting = nm_connection_get_setting_gsm (connection);
+
+    if (!setting)
+        return;
+
+    self->default_apn = apn;
+    connection_setting = nm_connection_get_setting_connection (connection);
+    self->home_only = nm_setting_gsm_get_home_only (setting);
+    self->data_enabled = nm_setting_connection_get_autoconnect (connection_setting);
+
+    ip_setting = nm_connection_get_setting_ip4_config (connection);
+    if (ip_setting && nm_setting_ip_config_get_route_metric (ip_setting) == CC_WWAN_ROUTE_PRIORITY_HIGH)
+        self->priority = CC_WWAN_APN_PRIORITY_HIGH;
+}
+
+static void
 wwan_data_update_apn_list (CcWwanData *self)
 {
     const GPtrArray *nm_connections;
@@ -328,39 +352,44 @@ wwan_data_update_apn_list (CcWwanData *self)
     if (!self->apn_list)
         self->apn_list = g_list_store_new (CC_TYPE_WWAN_DATA_APN);
 
-    if (self->nm_device) {
-        nm_connections = nm_device_get_available_connections (self->nm_device);
+    nm_connections = nm_device_get_available_connections (self->nm_device);
 
-        for (i = 0; i < nm_connections->len; i++) {
-            g_autoptr(CcWwanDataApn) apn = NULL;
+    for (i = 0; i < nm_connections->len; i++) {
+        g_autoptr(CcWwanDataApn) apn = NULL;
 
-            apn = cc_wwan_data_apn_new ();
-            apn->remote_connection = g_object_ref (nm_connections->pdata[i]);
-            g_list_store_append (self->apn_list, apn);
+        apn = cc_wwan_data_apn_new ();
+        apn->remote_connection = g_object_ref (nm_connections->pdata[i]);
+        g_list_store_append (self->apn_list, apn);
 
-            /* Load the default APN */
-            if (!self->default_apn && self->sim_id) {
-                NMSettingConnection *connection_setting;
-                NMSettingIPConfig *ip_setting;
-                NMSettingGsm *setting;
-                NMConnection *connection;
-                const gchar *sim_id;
+        /* Load the default APN */
+        if (!self->default_apn && self->sim_id) {
+            NMSettingGsm *setting;
+            const gchar *sim_id;
 
-                connection = NM_CONNECTION (apn->remote_connection);
-                setting = nm_connection_get_setting_gsm (connection);
-                connection_setting = nm_connection_get_setting_connection (connection);
-                sim_id = nm_setting_gsm_get_sim_id (setting);
+            setting = nm_connection_get_setting_gsm (NM_CONNECTION (apn->remote_connection));
+            sim_id = setting ? nm_setting_gsm_get_sim_id (setting) : NULL;
 
-                if (sim_id && *sim_id && g_str_equal (sim_id, self->sim_id)) {
-                    self->default_apn = apn;
-                    self->home_only = nm_setting_gsm_get_home_only (setting);
-                    self->data_enabled = nm_setting_connection_get_autoconnect (connection_setting);
+            if (sim_id && *sim_id && g_str_equal (sim_id, self->sim_id))
+                wwan_data_load_default_apn (self, apn);
+        }
+    }
 
-                    /* If any of the APN has a high priority, the device have high priority */
-                    ip_setting = nm_connection_get_setting_ip4_config (connection);
-                    if (nm_setting_ip_config_get_route_metric (ip_setting) == CC_WWAN_ROUTE_PRIORITY_HIGH)
-                        self->priority = CC_WWAN_APN_PRIORITY_HIGH;
-                }
+    if (!self->default_apn && self->active_connection) {
+        NMConnection *active_connection;
+        guint n_items;
+
+        active_connection = NM_CONNECTION (nm_active_connection_get_connection (self->active_connection));
+        if (!active_connection)
+            return;
+
+        n_items = g_list_model_get_n_items (G_LIST_MODEL (self->apn_list));
+
+        for (i = 0; i < n_items; i++) {
+            g_autoptr(CcWwanDataApn) apn = g_list_model_get_item (G_LIST_MODEL (self->apn_list), i);
+
+            if (NM_CONNECTION (apn->remote_connection) == active_connection) {
+                wwan_data_load_default_apn (self, apn);
+                break;
             }
         }
     }
