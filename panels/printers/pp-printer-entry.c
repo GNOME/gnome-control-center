@@ -245,7 +245,9 @@ supply_levels_draw_cb (GtkDrawingArea *drawing_area, cairo_t *cr, int width, int
 
                 if (g_strcmp0 (marker_typesv[i], "ink") == 0 || g_strcmp0 (marker_typesv[i], "toner") == 0
                     || g_strcmp0 (marker_typesv[i], "inkCartridge") == 0
-                    || g_strcmp0 (marker_typesv[i], "tonerCartridge") == 0) {
+                    || g_strcmp0 (marker_typesv[i], "tonerCartridge") == 0
+                    || g_strcmp0 (marker_typesv[i], "ink-cartridge") == 0
+                    || g_strcmp0 (marker_typesv[i], "toner-cartridge") == 0) {
                     marker = g_new0 (MarkerItem, 1);
                     marker->type = g_strdup (marker_typesv[i]);
                     marker->name = g_strdup (marker_namesv[i]);
