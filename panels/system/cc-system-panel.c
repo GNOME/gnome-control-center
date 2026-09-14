@@ -45,7 +45,7 @@ struct _CcSystemPanel {
     AdwActionRow *users_row;
 
     CcSecureShellPage *secure_shell_dialog;
-    AdwNavigationPage *software_updates_group;
+    AdwPreferencesGroup *software_updates_group;
 };
 
 CC_PANEL_REGISTER (CcSystemPanel, cc_system_panel)
