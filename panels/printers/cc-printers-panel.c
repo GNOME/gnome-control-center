@@ -800,19 +800,24 @@ static void
 update_sensitivity (gpointer user_data)
 {
     CcPrintersPanel *self = (CcPrintersPanel *) user_data;
+    const char *visible_child = NULL;
     const char *cups_server = NULL;
     gboolean local_server = TRUE;
     gboolean no_cups = FALSE;
     gboolean empty_state = FALSE;
+    gboolean loading = FALSE;
 
     self->is_authorized = self->permission && g_permission_get_allowed (G_PERMISSION (self->permission))
                           && self->lockdown_settings
                           && !g_settings_get_boolean (self->lockdown_settings, "disable-print-setup");
 
-    if (g_strcmp0 (gtk_stack_get_visible_child_name (self->main_stack), "no-cups-page") == 0)
+    visible_child = gtk_stack_get_visible_child_name (self->main_stack);
+    if (g_strcmp0 (visible_child, "no-cups-page") == 0)
         no_cups = TRUE;
-    else if (g_strcmp0 (gtk_stack_get_visible_child_name (self->main_stack), "empty-state") == 0)
+    else if (g_strcmp0 (visible_child, "empty-state") == 0)
         empty_state = TRUE;
+    else if (g_strcmp0 (visible_child, "loading-page") == 0)
+        loading = TRUE;
 
     cups_server = cupsServer ();
     if (cups_server && g_ascii_strncasecmp (cups_server, "localhost", 9) != 0
@@ -826,7 +831,9 @@ update_sensitivity (gpointer user_data)
     gtk_widget_set_visible (GTK_WIDGET (self->search_bar), !no_cups);
     gtk_widget_set_sensitive (GTK_WIDGET (self->search_bar), !empty_state);
 
-    gtk_widget_set_visible (self->printer_add_button, !empty_state);
+    /* Hidden on the empty state, which shows its own "Add Printer" button, and
+     * while we do not know yet which page the stack is going to settle on. */
+    gtk_widget_set_visible (self->printer_add_button, !empty_state && !loading);
     gtk_widget_set_sensitive (self->printer_add_button,
                               local_server && self->is_authorized && !no_cups && !self->new_printer_name);
 
