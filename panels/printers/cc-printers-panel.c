@@ -73,8 +73,6 @@ struct _CcPrintersPanel {
     CcPermissionInfobar *permission_infobar;
     GtkWidget *printer_add_button;
     GtkWidget *printer_add_button_empty;
-    GtkSearchBar *search_bar;
-    GtkWidget *search_button;
     GtkEditable *search_entry;
     AdwToastOverlay *toast_overlay;
     AdwToast *toast;
@@ -222,16 +220,6 @@ cc_printers_panel_set_property (GObject *object, guint property_id, const GValue
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
-}
-
-static void
-cc_printers_panel_constructed (GObject *object)
-{
-    CcPrintersPanel *self = CC_PRINTERS_PANEL (object);
-
-    G_OBJECT_CLASS (cc_printers_panel_parent_class)->constructed (object);
-
-    gtk_search_bar_connect_entry (self->search_bar, self->search_entry);
 }
 
 static void
@@ -802,17 +790,10 @@ update_sensitivity (gpointer user_data)
     CcPrintersPanel *self = (CcPrintersPanel *) user_data;
     const char *cups_server = NULL;
     gboolean local_server = TRUE;
-    gboolean no_cups = FALSE;
-    gboolean empty_state = FALSE;
 
     self->is_authorized = self->permission && g_permission_get_allowed (G_PERMISSION (self->permission))
                           && self->lockdown_settings
                           && !g_settings_get_boolean (self->lockdown_settings, "disable-print-setup");
-
-    if (g_strcmp0 (gtk_stack_get_visible_child_name (self->main_stack), "no-cups-page") == 0)
-        no_cups = TRUE;
-    else if (g_strcmp0 (gtk_stack_get_visible_child_name (self->main_stack), "empty-state") == 0)
-        empty_state = TRUE;
 
     cups_server = cupsServer ();
     if (cups_server && g_ascii_strncasecmp (cups_server, "localhost", 9) != 0
@@ -820,18 +801,10 @@ update_sensitivity (gpointer user_data)
         && cups_server[0] != '/')
         local_server = FALSE;
 
-    gtk_widget_set_visible (self->search_button, !no_cups);
-    gtk_widget_set_sensitive (self->search_button, !empty_state);
+    /* Each stack page carries its own header bar, so the "Add Printer" buttons
+     * are only ever shown on the pages they make sense on. */
 
-    gtk_widget_set_visible (GTK_WIDGET (self->search_bar), !no_cups);
-    gtk_widget_set_sensitive (GTK_WIDGET (self->search_bar), !empty_state);
-
-    gtk_widget_set_visible (self->printer_add_button, !empty_state);
-    gtk_widget_set_sensitive (self->printer_add_button,
-                              local_server && self->is_authorized && !no_cups && !self->new_printer_name);
-
-    gtk_widget_set_sensitive (self->printer_add_button_empty,
-                              local_server && self->is_authorized && !no_cups && !self->new_printer_name);
+    gtk_widget_set_sensitive (self->printer_add_button, local_server && self->is_authorized && !self->new_printer_name);
 }
 
 static void
@@ -990,7 +963,6 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
 
     object_class->get_property = cc_printers_panel_get_property;
     object_class->set_property = cc_printers_panel_set_property;
-    object_class->constructed = cc_printers_panel_constructed;
     object_class->dispose = cc_printers_panel_dispose;
 
     panel_class->get_help_uri = cc_printers_panel_get_help_uri;
@@ -1010,8 +982,6 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, permission_infobar);
     gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, printer_add_button);
     gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, printer_add_button_empty);
-    gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, search_bar);
-    gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, search_button);
     gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, search_entry);
     gtk_widget_class_bind_template_child (widget_class, CcPrintersPanel, toast_overlay);
 
