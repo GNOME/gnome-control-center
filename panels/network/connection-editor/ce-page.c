@@ -400,10 +400,21 @@ ce_page_get_next_available_name (const GPtrArray *connections, NameFormat format
     return cname;
 }
 
+/* Tracks the last announced validity of a MAC address combo */
+#define MAC_INVALID_KEY "ce-page-mac-invalid"
 void
 announce_mac_validation (GtkComboBoxText *mac_combo)
 {
-    if (!ce_page_cloned_mac_combo_valid (mac_combo))
+    gboolean invalid = !ce_page_cloned_mac_combo_valid (mac_combo);
+    gboolean was_invalid;
+
+    was_invalid = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (mac_combo), MAC_INVALID_KEY));
+
+    /* Only announce the transition from valid to invalid, otherwise the
+     * screen reader would repeat itself while the combo stays invalid. */
+    if (invalid && !was_invalid)
         gtk_accessible_announce (GTK_ACCESSIBLE (mac_combo), _("Invalid Mac Address"),
                                                                GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_HIGH);
+
+    g_object_set_data (G_OBJECT (mac_combo), MAC_INVALID_KEY, GINT_TO_POINTER (invalid));
 }

@@ -73,6 +73,8 @@ struct _CEPageIP4 {
     GtkWidget *routes_list;
 
     GActionGroup *method_group;
+
+    gboolean dns_invalid;
 };
 
 static void ce_page_iface_init (CEPageInterface *);
@@ -557,11 +559,17 @@ connect_ip4_page (CEPageIP4 *self)
 }
 
 static void
-announce_dns_validation (GtkEntry *dns_entry)
+announce_dns_validation (CEPageIP4 *self)
 {
-    if (!dns_entry_valid (dns_entry, AF_INET))
-        gtk_accessible_announce (GTK_ACCESSIBLE (dns_entry), _("Invalid DNS Address"),
-                                                               GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_HIGH);
+    gboolean invalid = !dns_entry_valid (self->dns_entry, AF_INET);
+
+    /* Only announce the transition from valid to invalid, otherwise the
+     * screen reader would repeat itself while the entry stays invalid. */
+    if (invalid && !self->dns_invalid)
+        gtk_accessible_announce (GTK_ACCESSIBLE (self->dns_entry), _("Invalid DNS Address"),
+                                                                     GTK_ACCESSIBLE_ANNOUNCEMENT_PRIORITY_HIGH);
+
+    self->dns_invalid = invalid;
 }
 
 static gboolean
