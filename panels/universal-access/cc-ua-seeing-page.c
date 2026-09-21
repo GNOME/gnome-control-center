@@ -107,24 +107,11 @@ set_label_scale (CcUaSeeingPage *self, GtkLabel *label, double scale)
 }
 
 static void
-update_text_size_row_label (CcUaSeeingPage *self)
-{
-    const gchar *label = NULL;
-    double text_scaling_factor;
-
-    text_scaling_factor = g_settings_get_double (self->interface_settings, KEY_TEXT_SCALING_FACTOR);
-    label = text_scaling_factor > DPI_FACTOR_NORMAL ? _("Large") : _("Default");
-    cc_list_row_set_secondary_label (self->text_size_row, label);
-}
-
-static void
 apply_text_size_changes (CcUaSeeingPage *self)
 {
     g_settings_set_double (self->interface_settings, KEY_TEXT_SCALING_FACTOR,
                            gtk_range_get_value (GTK_RANGE (self->text_size_scale)));
     adw_dialog_close (self->text_size_dialog);
-
-    update_text_size_row_label (self);
 }
 
 static void
@@ -136,6 +123,26 @@ ua_text_size_value_changed (GtkRange *text_size_range, gpointer user_data)
     gtk_range_set_value (text_size_range, value);
 
     set_label_scale (self, self->text_size_preview_label, value);
+}
+
+static void
+on_text_scaling_factor_changed (CcUaSeeingPage *self)
+{
+    g_assert (CC_IS_UA_SEEING_PAGE (self));
+
+    double current_factor = g_settings_get_double (self->interface_settings, KEY_TEXT_SCALING_FACTOR);
+
+    gtk_range_set_value (GTK_RANGE (self->text_size_scale), current_factor);
+}
+
+static gboolean
+get_text_size_label_mapping (GValue *value, GVariant *variant, gpointer user_data)
+{
+    double text_scaling_factor = g_variant_get_double (variant);
+
+    g_value_set_string (value, text_scaling_factor > DPI_FACTOR_NORMAL ? _("Large") : _("Default"));
+
+    return TRUE;
 }
 
 static void
@@ -346,9 +353,14 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
                          g_settings_get_double (self->interface_settings, KEY_TEXT_SCALING_FACTOR));
     g_signal_connect (GTK_RANGE (self->text_size_scale), "value-changed", G_CALLBACK (ua_text_size_value_changed),
                       self);
-    update_text_size_row_label (self);
     set_label_scale (self, self->text_size_label_small, 1.0);
     set_label_scale (self, self->text_size_label_large, 2.0);
+    g_signal_connect_object (self->interface_settings, "changed::" KEY_TEXT_SCALING_FACTOR,
+                             G_CALLBACK (on_text_scaling_factor_changed), self, G_CONNECT_SWAPPED);
+
+    g_settings_bind_with_mapping (self->interface_settings, KEY_TEXT_SCALING_FACTOR, self->text_size_row,
+                                  "secondary-label", G_SETTINGS_BIND_GET, get_text_size_label_mapping, NULL, NULL,
+                                  NULL);
 
     /* Sound Keys */
     g_settings_bind (self->kb_settings, KEY_TOGGLEKEYS_ENABLED, self->sound_keys_row, "active",
