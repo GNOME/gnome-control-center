@@ -84,8 +84,10 @@ update_alert_sound_label (CcSoundPanel *self)
 static void
 allow_amplified_changed_cb (CcSoundPanel *self)
 {
-    cc_volume_slider_set_is_amplified (self->output_volume_slider,
-                                       g_settings_get_boolean (self->sound_settings, "allow-volume-above-100-percent"));
+    gboolean is_amplified = g_settings_get_boolean (self->sound_settings, "allow-volume-above-100-percent");
+
+    cc_volume_slider_set_is_amplified (self->output_volume_slider, is_amplified);
+    cc_volume_slider_set_is_amplified (self->input_volume_slider, is_amplified);
 }
 
 static void
