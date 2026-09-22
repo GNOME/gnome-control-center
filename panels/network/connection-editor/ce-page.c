@@ -142,6 +142,7 @@ ce_page_get_mac_list (NMClient *client, GType device_type, const gchar *mac_prop
     for (i = 0; devices && (i < devices->len); i++) {
         NMDevice *dev = g_ptr_array_index (devices, i);
         const char *iface;
+        const char *mac_str;
         g_autofree gchar *mac = NULL;
         g_autofree gchar *item = NULL;
 
@@ -149,8 +150,16 @@ ce_page_get_mac_list (NMClient *client, GType device_type, const gchar *mac_prop
             continue;
 
         g_object_get (G_OBJECT (dev), mac_property, &mac, NULL);
+
+        /* Devices that can't report a permanent hardware address (virtual NICs,
+         * drivers without ETHTOOL_GPERMADDR) expose none at all. Fall back to the
+         * current one, like libnm does when matching a connection to a device. */
+        mac_str = mac != NULL ? mac : nm_device_get_hw_address (NM_DEVICE (dev));
+        if (mac_str == NULL || mac_str[0] == '\0')
+            continue;
+
         iface = nm_device_get_iface (NM_DEVICE (dev));
-        item = g_strdup_printf ("%s (%s)", mac, iface);
+        item = g_strdup_printf ("%s (%s)", mac_str, iface);
         g_ptr_array_add (macs, g_steal_pointer (&item));
     }
 
