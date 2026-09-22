@@ -788,11 +788,6 @@ ce_page_ip6_init (CEPageIP6 *self)
     gtk_widget_insert_action_group (GTK_WIDGET (self), "ip6page", G_ACTION_GROUP (self->method_group));
 
     gtk_widget_init_template (GTK_WIDGET (self));
-
-    provider = gtk_css_provider_new ();
-    gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/network/ce-page-ip6.css");
-    gtk_style_context_add_provider_for_display (gdk_display_get_default (), GTK_STYLE_PROVIDER (provider),
-                                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 static void
