@@ -145,10 +145,8 @@ add_location_app (CcLocationPage *self, const gchar *app_id, gboolean enabled, g
 {
     LocationAppStateData *data;
     g_autoptr(GDesktopAppInfo) app_info = NULL;
-    g_autoptr(GDateTime) t = NULL;
     GtkWidget *row, *w;
     GIcon *icon;
-    gchar *last_used_str;
     g_autofree gchar *desktop_id = NULL;
 
     w = g_hash_table_lookup (self->location_app_switches, app_id);
@@ -173,16 +171,6 @@ add_location_app (CcLocationPage *self, const gchar *app_id, gboolean enabled, g
     adw_action_row_add_prefix (ADW_ACTION_ROW (row), w);
 
     adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), g_app_info_get_name (G_APP_INFO (app_info)));
-
-    t = g_date_time_new_from_unix_utc (last_used);
-    last_used_str = cc_util_get_smart_date (t);
-    w = gtk_label_new (last_used_str);
-    g_free (last_used_str);
-    gtk_widget_add_css_class (w, "dim-label");
-    gtk_widget_set_margin_start (w, 12);
-    gtk_widget_set_margin_end (w, 12);
-    gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-    adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
 
     w = gtk_switch_new ();
     gtk_switch_set_active (GTK_SWITCH (w), enabled);
