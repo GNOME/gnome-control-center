@@ -11,6 +11,7 @@ i18n.merge_file(
 ui_sources = files(
   'cc-add-user-dialog.blp',
   'cc-avatar-chooser.blp',
+  'cc-cannot-add-user-dialog.blp',
   'cc-enterprise-login-dialog.blp',
   'cc-entry-feedback.blp',
   'cc-fingerprint-dialog.blp',

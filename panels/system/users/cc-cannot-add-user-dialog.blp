@@ -1,0 +1,19 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcCannotAddUserDialog: Adw.Dialog {
+  content-width: 500;
+
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Adw.StatusPage {
+      icon-name: "dialog-warning-symbolic";
+      title: _("Cannot Add New Users");
+      description: _(
+        "Settings cannot create new users at this time due to the encryption scheme of the disk. Support for multiple encrypted users is coming in the future."
+      );
+    };
+  };
+}
