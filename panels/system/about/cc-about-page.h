@@ -31,6 +31,5 @@ char *get_cpu_info (void);
 char *get_os_name (void);
 guint64 get_ram_size_dmi (void);
 guint64 get_ram_size_libgtop (void);
-char *get_primary_disk_info (void);
 
 G_END_DECLS

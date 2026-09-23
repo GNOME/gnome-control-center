@@ -51,6 +51,8 @@
 struct _CcAboutPage {
     AdwNavigationPage parent_instance;
 
+    GCancellable *cancellable;
+
     AdwToastOverlay *toast_overlay;
 
     GtkPicture *os_logo;
@@ -73,6 +75,8 @@ struct _CcAboutPage {
 
     /* Cached version string */
     char *gnome_version_str;
+
+    guint64 primary_disk_size;
 };
 
 G_DEFINE_FINAL_TYPE (CcAboutPage, cc_about_page, ADW_TYPE_NAVIGATION_PAGE)
@@ -410,73 +414,94 @@ get_os_type (void)
         return g_strdup_printf (_("32-bit"));
 }
 
-static GVariant *
-get_property_from_udisks2_object_path (const char *obj_path, const char *name)
+static char *
+get_primary_disk_info (CcAboutPage *self)
 {
-    g_autoptr(GDBusProxy) udisks2_proxy = NULL;
-    g_autoptr(GError) error = NULL;
-    GVariant *variant;
-
-    udisks2_proxy =
-        g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM, G_DBUS_PROXY_FLAGS_NONE, NULL, "org.freedesktop.UDisks2",
-                                       obj_path, "org.freedesktop.UDisks2.Drive", NULL, &error);
-
-    if (udisks2_proxy == NULL) {
-        g_debug ("Failed to get UDisks2 proxy for '%s': %s", obj_path, error->message);
+    if (self->primary_disk_size == 0)
         return NULL;
-    }
 
-    variant = g_dbus_proxy_get_cached_property (udisks2_proxy, name);
-    if (variant == NULL) {
-        g_debug ("Couldn't get UDisks2 cached property '%s' for '%s': %s", name, obj_path, error->message);
-        return NULL;
-    }
-
-    return variant;
+    return g_format_size (self->primary_disk_size);
 }
 
-char *
-get_primary_disk_info (void)
+static void
+update_disk_row (CcAboutPage *self)
 {
-    guint64 total_size = 0;
-    g_autoptr(GError) error = NULL;
-    g_autoptr(GDBusProxy) udisks2_proxy = NULL;
-    g_autoptr(GVariant) variant = NULL;
-    GVariantBuilder b;
+    g_autofree char *disk_capacity_string = get_primary_disk_info (self);
+
+    if (disk_capacity_string == NULL)
+        disk_capacity_string = g_strdup (_("Unknown"));
+
+    adw_action_row_set_subtitle (self->disk_row, disk_capacity_string);
+}
+
+static void
+on_udisks2_objects_ready_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+    CcAboutPage *self = CC_ABOUT_PAGE (user_data);
+    g_autoptr(GVariant) objects = NULL;
     g_autoptr(GVariantIter) iter = NULL;
+    g_autoptr(GError) error = NULL;
     const char *obj_path;
+    GVariant *interfaces;
 
-    udisks2_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM, G_DBUS_PROXY_FLAGS_NONE, NULL,
-                                                   "org.freedesktop.UDisks2", "/org/freedesktop/UDisks2/Manager",
-                                                   "org.freedesktop.UDisks2.Manager", NULL, &error);
+    objects = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object), res, &error);
+    if (objects == NULL) {
+        if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+            return;
 
-    if (udisks2_proxy == NULL) {
-        g_warning ("Failed to get UDisks2 proxy: %s", error->message);
-        return NULL;
+        g_warning ("Unable to list UDisks2 drives: %s. Disk information will not be available.", error->message);
+        update_disk_row (self);
+        return;
     }
 
-    g_variant_builder_init (&b, G_VARIANT_TYPE ("a{sv}"));
-    variant = g_dbus_proxy_call_sync (udisks2_proxy, "GetDrives", g_variant_new ("(a{sv})", &b), G_DBUS_CALL_FLAGS_NONE,
-                                      -1, NULL, &error);
-    if (variant == NULL) {
-        g_debug ("Couldn't call GetDrives: %s", error->message);
-        return NULL;
-    }
+    g_variant_get (objects, "(a{oa{sa{sv}}})", &iter);
+    while (g_variant_iter_loop (iter, "{&o@a{sa{sv}}}", &obj_path, &interfaces)) {
+        g_autoptr(GVariant) drive = NULL;
+        g_autoptr(GVariant) size = NULL;
 
-    g_variant_get (variant, "(ao)", &iter);
-    while (g_variant_iter_loop (iter, "o", &obj_path)) {
-        g_autoptr(GVariant) variant = get_property_from_udisks2_object_path (obj_path, "Size");
-        if (variant == NULL) {
-            /* Only this instance could have failed, so keep going gracefully */
+        drive = g_variant_lookup_value (interfaces, "org.freedesktop.UDisks2.Drive", G_VARIANT_TYPE_VARDICT);
+        if (drive == NULL)
+            continue;
+
+        size = g_variant_lookup_value (drive, "Size", G_VARIANT_TYPE_UINT64);
+        if (size == NULL) {
+            g_debug ("Couldn't get the UDisks2 'Size' property for '%s'", obj_path);
             continue;
         }
-        total_size += g_variant_get_uint64 (variant);
+
+        self->primary_disk_size += g_variant_get_uint64 (size);
     }
 
-    if (total_size > 0)
-        return g_format_size (total_size);
+    update_disk_row (self);
+}
 
-    return NULL;
+static void
+on_system_bus_ready_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+    CcAboutPage *self = CC_ABOUT_PAGE (user_data);
+    g_autoptr(GDBusConnection) connection = NULL;
+    g_autoptr(GError) error = NULL;
+
+    connection = g_bus_get_finish (res, &error);
+    if (connection == NULL) {
+        if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+            return;
+
+        g_warning ("Unable to connect to the system bus: %s. Disk information will not be available.", error->message);
+        update_disk_row (self);
+        return;
+    }
+
+    g_dbus_connection_call (connection, "org.freedesktop.UDisks2", "/org/freedesktop/UDisks2",
+                            "org.freedesktop.DBus.ObjectManager", "GetManagedObjects", NULL,
+                            G_VARIANT_TYPE ("(a{oa{sa{sv}}})"), G_DBUS_CALL_FLAGS_NONE, -1, self->cancellable,
+                            on_udisks2_objects_ready_cb, self);
+}
+
+static void
+load_primary_disk_info (CcAboutPage *self)
+{
+    g_bus_get (G_BUS_TYPE_SYSTEM, self->cancellable, on_system_bus_ready_cb, self);
 }
 
 #ifdef HAVE_GMOBILE
@@ -851,7 +876,9 @@ on_copy_row_activated_cb (GtkWidget *widget, CcAboutPage *self)
 
     g_string_append (result_str, "- ");
     system_details_window_title_print_padding ("**Disk Capacity:**", result_str, 0);
-    disk_capacity_string = get_primary_disk_info ();
+    disk_capacity_string = get_primary_disk_info (self);
+    if (disk_capacity_string == NULL)
+        disk_capacity_string = g_strdup (_("Unknown"));
     g_string_append_printf (result_str, "%s\n", disk_capacity_string);
 
     g_string_append (result_str, "\n");
@@ -913,7 +940,6 @@ cc_about_page_setup_overview (CcAboutPage *self)
     g_autofree char *firmware_version_text = NULL;
     g_autofree char *kernel_version_text = NULL;
     g_autoslist (GpuData) graphics_hardware_list = NULL;
-    g_autofree gchar *disk_capacity_string = NULL;
 
     hardware_model_text = get_hardware_model_string ();
     adw_action_row_set_subtitle (self->hardware_model_row, hardware_model_text);
@@ -935,10 +961,7 @@ cc_about_page_setup_overview (CcAboutPage *self)
     graphics_hardware_list = get_graphics_hardware_list ();
     create_graphics_rows (self, graphics_hardware_list);
 
-    disk_capacity_string = get_primary_disk_info ();
-    if (disk_capacity_string == NULL)
-        disk_capacity_string = g_strdup (_("Unknown"));
-    adw_action_row_set_subtitle (self->disk_row, disk_capacity_string);
+    load_primary_disk_info (self);
 
     os_name_text = get_os_name ();
     adw_action_row_set_subtitle (self->os_name_row, os_name_text);
@@ -958,6 +981,17 @@ cc_about_page_setup_overview (CcAboutPage *self)
 }
 
 static void
+cc_about_page_dispose (GObject *object)
+{
+    CcAboutPage *self = CC_ABOUT_PAGE (object);
+
+    g_cancellable_cancel (self->cancellable);
+    g_clear_object (&self->cancellable);
+
+    G_OBJECT_CLASS (cc_about_page_parent_class)->dispose (object);
+}
+
+static void
 cc_about_page_finalize (GObject *object)
 {
     CcAboutPage *self = CC_ABOUT_PAGE (object);
@@ -973,6 +1007,7 @@ cc_about_page_class_init (CcAboutPageClass *klass)
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+    object_class->dispose = cc_about_page_dispose;
     object_class->finalize = cc_about_page_finalize;
 
     g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
@@ -1006,6 +1041,8 @@ cc_about_page_init (CcAboutPage *self)
     AdwStyleManager *style_manager;
 
     gtk_widget_init_template (GTK_WIDGET (self));
+
+    self->cancellable = g_cancellable_new ();
 
     cc_about_page_setup_overview (self);
     cc_about_page_setup_virt (self);
