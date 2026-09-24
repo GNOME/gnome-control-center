@@ -25,22 +25,6 @@ template $CcNotificationsPanel: $CcPanel {
       Adw.PreferencesGroup app_group {
         /* Translators: List of apps. */
         title: _("App Notifications");
-
-        ListBox app_listbox {
-          selection-mode: none;
-          row-activated => $select_app(template);
-          keynav-failed => $cc_util_keynav_propagate_vertical();
-
-          styles [
-            "boxed-list",
-          ]
-
-          accessibility {
-            labelled-by: [
-              app_group,
-            ];
-          }
-        }
       }
     };
   };

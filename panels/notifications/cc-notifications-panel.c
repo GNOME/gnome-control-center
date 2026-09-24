@@ -30,7 +30,6 @@
 #include "cc-list-row.h"
 #include "cc-notifications-panel.h"
 #include "cc-notifications-resources.h"
-#include "cc-ui-util.h"
 
 #define MASTER_SCHEMA "org.gnome.desktop.notifications"
 #define APP_SCHEMA MASTER_SCHEMA ".application"
@@ -39,7 +38,7 @@
 struct _CcNotificationsPanel {
     CcPanel parent_instance;
 
-    GtkListBox *app_listbox;
+    AdwPreferencesGroup *app_group;
     AdwSwitchRow *lock_screen_row;
     AdwSwitchRow *dnd_row;
 
@@ -59,7 +58,7 @@ struct _CcNotificationsPanelClass {
 };
 
 static void build_app_store (CcNotificationsPanel *self);
-static void select_app (CcNotificationsPanel *self, GtkListBoxRow *row);
+static void select_app (CcNotificationsPanel *self, AdwActionRow *row);
 static int sort_apps (gconstpointer one, gconstpointer two, gpointer user_data);
 static GtkWidget *create_app_row (gpointer item, gpointer user_data);
 
@@ -120,7 +119,7 @@ cc_notifications_panel_init (CcNotificationsPanel *self)
                      G_SETTINGS_BIND_DEFAULT);
 
     self->app_store = g_list_store_new (G_TYPE_APP_INFO);
-    gtk_list_box_bind_model (self->app_listbox, G_LIST_MODEL (self->app_store), create_app_row, self, NULL);
+    adw_preferences_group_bind_model (self->app_group, G_LIST_MODEL (self->app_store), create_app_row, self, NULL);
 
     build_app_store (self);
 
@@ -154,12 +153,9 @@ cc_notifications_panel_class_init (CcNotificationsPanelClass *klass)
     gtk_widget_class_set_template_from_resource (widget_class,
                                                  "/org/gnome/control-center/notifications/cc-notifications-panel.ui");
 
-    gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, app_listbox);
+    gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, app_group);
     gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, lock_screen_row);
     gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, dnd_row);
-
-    gtk_widget_class_bind_template_callback (widget_class, cc_util_keynav_propagate_vertical);
-    gtk_widget_class_bind_template_callback (widget_class, select_app);
 }
 
 static inline GQuark
@@ -223,6 +219,9 @@ create_app_row (gpointer item, gpointer user_data)
     g_settings_bind_with_mapping (settings, "enable", row, "secondary-label",
                                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_NO_SENSITIVITY, on_off_label_mapping_get, NULL,
                                   NULL, NULL);
+
+    g_object_set_data_full (G_OBJECT (row), "app-info", g_object_ref (app_info), g_object_unref);
+    g_signal_connect_object (row, "activated", G_CALLBACK (select_app), user_data, G_CONNECT_SWAPPED);
 
     return GTK_WIDGET (row);
 }
@@ -410,16 +409,14 @@ build_app_store (CcNotificationsPanel *self)
 }
 
 static void
-select_app (CcNotificationsPanel *self, GtkListBoxRow *row)
+select_app (CcNotificationsPanel *self, AdwActionRow *row)
 {
-    g_autoptr(GAppInfo) app_info = NULL;
+    GAppInfo *app_info;
     g_autoptr(GSettings) settings = NULL;
     g_autofree gchar *app_id = NULL;
     CcAppNotificationsPage *page;
 
-    app_info = g_list_model_get_item (G_LIST_MODEL (self->app_store), gtk_list_box_row_get_index (row));
-    if (app_info == NULL)
-        return;
+    app_info = g_object_get_data (G_OBJECT (row), "app-info");
 
     app_id = g_strdup (g_app_info_get_id (app_info));
     if (g_str_has_suffix (app_id, ".desktop"))
