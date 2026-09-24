@@ -43,6 +43,8 @@ struct _CcNotificationsPanel {
     AdwSwitchRow *lock_screen_row;
     AdwSwitchRow *dnd_row;
 
+    GListStore *app_store;
+
     GSettings *master_settings;
 
     GCancellable *cancellable;
@@ -56,19 +58,10 @@ struct _CcNotificationsPanelClass {
     CcPanelClass parent;
 };
 
-typedef struct {
-    char *canonical_app_id;
-    GAppInfo *app_info;
-    GSettings *settings;
-
-    /* Temporary pointer, to pass from the loading thread
-       to the app */
-    CcNotificationsPanel *self;
-} Application;
-
 static void build_app_store (CcNotificationsPanel *self);
 static void select_app (CcNotificationsPanel *self, GtkListBoxRow *row);
 static int sort_apps (gconstpointer one, gconstpointer two, gpointer user_data);
+static GtkWidget *create_app_row (gpointer item, gpointer user_data);
 
 CC_PANEL_REGISTER (CcNotificationsPanel, cc_notifications_panel);
 
@@ -78,6 +71,7 @@ cc_notifications_panel_dispose (GObject *object)
     CcNotificationsPanel *self = CC_NOTIFICATIONS_PANEL (object);
 
     g_clear_object (&self->master_settings);
+    g_clear_object (&self->app_store);
     g_clear_pointer (&self->known_applications, g_hash_table_unref);
 
     G_OBJECT_CLASS (cc_notifications_panel_parent_class)->dispose (object);
@@ -125,7 +119,8 @@ cc_notifications_panel_init (CcNotificationsPanel *self)
     g_settings_bind (self->master_settings, "show-in-lock-screen", self->lock_screen_row, "active",
                      G_SETTINGS_BIND_DEFAULT);
 
-    gtk_list_box_set_sort_func (self->app_listbox, (GtkListBoxSortFunc) sort_apps, NULL, NULL);
+    self->app_store = g_list_store_new (G_TYPE_APP_INFO);
+    gtk_list_box_bind_model (self->app_listbox, G_LIST_MODEL (self->app_store), create_app_row, self, NULL);
 
     build_app_store (self);
 
@@ -178,6 +173,18 @@ application_quark (void)
     return quark;
 }
 
+static GSettings *
+get_app_settings (GAppInfo *app_info)
+{
+    const char *app_id;
+    g_autofree gchar *path = NULL;
+
+    app_id = g_object_get_qdata (G_OBJECT (app_info), application_quark ());
+    path = g_strconcat (APP_PREFIX, app_id, "/", NULL);
+
+    return g_settings_new_with_path (APP_SCHEMA, path);
+}
+
 static gboolean
 on_off_label_mapping_get (GValue *value, GVariant *variant, gpointer user_data)
 {
@@ -186,34 +193,19 @@ on_off_label_mapping_get (GValue *value, GVariant *variant, gpointer user_data)
     return TRUE;
 }
 
-static void
-application_free (Application *app)
+static GtkWidget *
+create_app_row (gpointer item, gpointer user_data)
 {
-    g_free (app->canonical_app_id);
-    g_object_unref (app->app_info);
-    g_object_unref (app->settings);
-    g_object_unref (app->self);
-
-    g_slice_free (Application, app);
-}
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (Application, application_free)
-
-static void
-add_application (CcNotificationsPanel *self, Application *app)
-{
+    GAppInfo *app_info = item;
     CcListRow *row;
     GtkWidget *w;
     g_autoptr(GIcon) icon = NULL;
-    const gchar *app_name;
+    g_autoptr(GSettings) settings = NULL;
     g_autofree gchar *escaped_app_name = NULL;
 
-    app_name = g_app_info_get_name (app->app_info);
-    if (app_name == NULL || *app_name == '\0')
-        return;
-    escaped_app_name = g_markup_escape_text (app_name, -1);
+    escaped_app_name = g_markup_escape_text (g_app_info_get_name (app_info), -1);
 
-    icon = g_app_info_get_icon (app->app_info);
+    icon = g_app_info_get_icon (app_info);
     if (icon == NULL)
         icon = g_themed_icon_new ("application-x-executable");
     else
@@ -222,20 +214,33 @@ add_application (CcNotificationsPanel *self, Application *app)
     row = g_object_new (CC_TYPE_LIST_ROW, "show-arrow", TRUE, NULL);
     adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), escaped_app_name);
 
-    g_object_set_qdata_full (G_OBJECT (row), application_quark (), app, (GDestroyNotify) application_free);
-
-    gtk_list_box_append (self->app_listbox, GTK_WIDGET (row));
-
     w = gtk_image_new_from_gicon (icon);
     gtk_widget_add_css_class (w, "lowres-icon");
     gtk_image_set_icon_size (GTK_IMAGE (w), GTK_ICON_SIZE_LARGE);
     adw_action_row_add_prefix (ADW_ACTION_ROW (row), w);
 
-    g_settings_bind_with_mapping (app->settings, "enable", row, "secondary-label",
+    settings = get_app_settings (app_info);
+    g_settings_bind_with_mapping (settings, "enable", row, "secondary-label",
                                   G_SETTINGS_BIND_GET | G_SETTINGS_BIND_NO_SENSITIVITY, on_off_label_mapping_get, NULL,
                                   NULL, NULL);
 
-    g_hash_table_add (self->known_applications, g_strdup (app->canonical_app_id));
+    return GTK_WIDGET (row);
+}
+
+static void
+add_application (CcNotificationsPanel *self, GAppInfo *app_info, const char *app_id)
+{
+    const gchar *app_name;
+
+    app_name = g_app_info_get_name (app_info);
+    if (app_name == NULL || *app_name == '\0')
+        return;
+
+    g_object_set_qdata_full (G_OBJECT (app_info), application_quark (), g_strdup (app_id), g_free);
+
+    g_list_store_insert_sorted (self->app_store, app_info, sort_apps, NULL);
+
+    g_hash_table_add (self->known_applications, g_strdup (app_id));
 }
 
 static gboolean
@@ -261,7 +266,6 @@ app_is_system_service (GDesktopAppInfo *app)
 static void
 maybe_add_app_id (CcNotificationsPanel *self, const char *canonical_app_id)
 {
-    Application *app;
     g_autofree gchar *path = NULL;
     g_autofree gchar *full_app_id = NULL;
     g_autoptr(GSettings) settings = NULL;
@@ -296,14 +300,9 @@ maybe_add_app_id (CcNotificationsPanel *self, const char *canonical_app_id)
         return;
     }
 
-    app = g_slice_new (Application);
-    app->canonical_app_id = g_strdup (canonical_app_id);
-    app->settings = g_object_ref (settings);
-    app->app_info = g_object_ref (app_info);
-
     g_debug ("Adding application '%s' (canonical app ID: %s)", full_app_id, canonical_app_id);
 
-    add_application (self, app);
+    add_application (self, app_info, canonical_app_id);
 }
 
 static char *
@@ -333,10 +332,7 @@ app_info_get_id (GAppInfo *app_info)
 static void
 process_app_info (CcNotificationsPanel *self, GAppInfo *app_info)
 {
-    Application *app;
     g_autofree gchar *app_id = NULL;
-    g_autofree gchar *path = NULL;
-    g_autoptr(GSettings) settings = NULL;
     guint i;
 
     app_id = app_info_get_id (app_info);
@@ -349,21 +345,12 @@ process_app_info (CcNotificationsPanel *self, GAppInfo *app_info)
     for (i = 0; app_id[i] != '\0'; i++)
         app_id[i] = g_ascii_tolower (app_id[i]);
 
-    path = g_strconcat (APP_PREFIX, app_id, "/", NULL);
-    settings = g_settings_new_with_path (APP_SCHEMA, path);
-
-    app = g_slice_new (Application);
-    app->canonical_app_id = g_steal_pointer (&app_id);
-    app->settings = g_object_ref (settings);
-    app->app_info = g_object_ref (app_info);
-    app->self = g_object_ref (self);
-
-    if (g_hash_table_contains (self->known_applications, app->canonical_app_id))
+    if (g_hash_table_contains (self->known_applications, app_id))
         return;
 
-    g_debug ("Processing queued application %s", app->canonical_app_id);
+    g_debug ("Processing queued application %s", app_id);
 
-    add_application (self, app);
+    add_application (self, app_info, app_id);
 }
 
 static void
@@ -425,28 +412,31 @@ build_app_store (CcNotificationsPanel *self)
 static void
 select_app (CcNotificationsPanel *self, GtkListBoxRow *row)
 {
-    Application *app;
+    g_autoptr(GAppInfo) app_info = NULL;
+    g_autoptr(GSettings) settings = NULL;
     g_autofree gchar *app_id = NULL;
     CcAppNotificationsPage *page;
 
-    app = g_object_get_qdata (G_OBJECT (row), application_quark ());
+    app_info = g_list_model_get_item (G_LIST_MODEL (self->app_store), gtk_list_box_row_get_index (row));
+    if (app_info == NULL)
+        return;
 
-    app_id = g_strdup (g_app_info_get_id (app->app_info));
+    app_id = g_strdup (g_app_info_get_id (app_info));
     if (g_str_has_suffix (app_id, ".desktop"))
         app_id[strlen (app_id) - strlen (".desktop")] = '\0';
 
-    page = cc_app_notifications_page_new (app_id, g_app_info_get_name (app->app_info), app->settings,
-                                          self->master_settings, self->perm_store);
+    settings = get_app_settings (app_info);
+
+    page = cc_app_notifications_page_new (app_id, g_app_info_get_name (app_info), settings, self->master_settings,
+                                          self->perm_store);
     cc_panel_push_subpage (CC_PANEL (self), ADW_NAVIGATION_PAGE (page));
 }
 
 static int
 sort_apps (gconstpointer one, gconstpointer two, gpointer user_data)
 {
-    Application *a1, *a2;
+    GAppInfo *a1 = (GAppInfo *) one;
+    GAppInfo *a2 = (GAppInfo *) two;
 
-    a1 = g_object_get_qdata (G_OBJECT (one), application_quark ());
-    a2 = g_object_get_qdata (G_OBJECT (two), application_quark ());
-
-    return g_utf8_collate (g_app_info_get_name (a1->app_info), g_app_info_get_name (a2->app_info));
+    return g_utf8_collate (g_app_info_get_name (a1), g_app_info_get_name (a2));
 }
