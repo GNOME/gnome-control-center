@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-09-22 10:27+0000\n"
-"PO-Revision-Date: 2026-09-22 22:21+0200\n"
+"POT-Creation-Date: 2026-09-24 09:53+0000\n"
+"PO-Revision-Date: 2026-09-24 18:21+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -1765,11 +1765,11 @@ msgstr "_Nočna osvetlitev"
 msgid "Night Light"
 msgstr "Nočna osvetlitev"
 
-#: panels/display/cc-display-panel.c:457 panels/notifications/cc-notifications-panel.c:184
+#: panels/display/cc-display-panel.c:457 panels/notifications/cc-notifications-panel.c:187
 msgid "On"
 msgstr "Omogočeno"
 
-#: panels/display/cc-display-panel.c:459 panels/network/cc-net-proxy-page.c:186 panels/notifications/cc-notifications-panel.c:184
+#: panels/display/cc-display-panel.c:459 panels/network/cc-net-proxy-page.c:186 panels/notifications/cc-notifications-panel.c:187
 msgid "Off"
 msgstr "Onemogočeno"
 
@@ -2250,7 +2250,7 @@ msgstr "Tipka za izmenjavo omogoča uporabo dodatnih znakov. Ti so pogosto natis
 msgid "Layout Default"
 msgstr "Privzeta postavitev"
 
-#: panels/keyboard/cc-keyboard-panel.c:65 panels/universal-access/cc-cursor-size-page.c:78 panels/universal-access/cc-ua-seeing-page.c:116
+#: panels/keyboard/cc-keyboard-panel.c:65 panels/universal-access/cc-cursor-size-page.c:78 panels/universal-access/cc-ua-seeing-page.c:150
 msgid "Default"
 msgstr "Privzeto"
 
@@ -3467,8 +3467,8 @@ msgid "WireGuard"
 msgstr "WireGuard"
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
-#: panels/network/connection-editor/ce-page-wireguard.c:355 panels/privacy/firmware-security/cc-firmware-security-dialog.c:155 panels/sound/cc-alert-chooser-page.c:324 panels/system/about/cc-about-page.c:336 panels/system/about/cc-about-page.c:390 panels/system/about/cc-about-page.c:911
-#: panels/wwan/cc-wwan-details-dialog.c:98
+#: panels/network/connection-editor/ce-page-wireguard.c:355 panels/privacy/firmware-security/cc-firmware-security-dialog.c:155 panels/sound/cc-alert-chooser-page.c:324 panels/system/about/cc-about-page.c:339 panels/system/about/cc-about-page.c:393 panels/system/about/cc-about-page.c:432
+#: panels/system/about/cc-about-page.c:881 panels/wwan/cc-wwan-details-dialog.c:98
 msgid "Unknown"
 msgstr "Neznano"
 
@@ -6386,15 +6386,15 @@ msgstr "Nizkotonski zvočnik"
 msgid "Volume Levels"
 msgstr "Ravni glasnosti"
 
-#: panels/sound/cc-volume-levels-page.blp:17
+#: panels/sound/cc-volume-levels-page.blp:29
 msgid "No Sound Playing"
 msgstr "Zvok se ne predvaja"
 
-#: panels/sound/cc-volume-levels-page.blp:27
+#: panels/sound/cc-volume-levels-page.blp:39
 msgid "Outputs"
 msgstr "Izhodi"
 
-#: panels/sound/cc-volume-levels-page.blp:32
+#: panels/sound/cc-volume-levels-page.blp:44
 msgid "Inputs"
 msgstr "Vhodi"
 
@@ -6515,28 +6515,28 @@ msgstr "Poteka preračunavanje …"
 msgid "_Copy"
 msgstr "_Kopiraj"
 
-#: panels/system/about/cc-about-page.c:360
+#: panels/system/about/cc-about-page.c:363
 msgid "Graphics"
 msgstr "Grafika"
 
-#: panels/system/about/cc-about-page.c:362
+#: panels/system/about/cc-about-page.c:365
 #, c-format
 msgid "Graphics %d"
 msgstr "Grafika %d"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-about-page.c:408
+#: panels/system/about/cc-about-page.c:411
 #, c-format
 msgid "64-bit"
 msgstr "64-bitni sistem"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-about-page.c:411
+#: panels/system/about/cc-about-page.c:414
 #, c-format
 msgid "32-bit"
 msgstr "32-bitni sistem"
 
-#: panels/system/about/cc-about-page.c:871
+#: panels/system/about/cc-about-page.c:927
 msgid "Details copied to clipboard"
 msgstr "Podrobnosti so kopirane v odložišče"
 
@@ -7122,6 +7122,14 @@ msgstr "Izberi"
 #: panels/system/users/cc-avatar-chooser.c:154
 msgid "Browse for more pictures"
 msgstr "Brskanje med več slikami"
+
+#: panels/system/users/cc-cannot-add-user-dialog.blp:13
+msgid "Cannot Add New Users"
+msgstr "Novih uporabnikov ni mogoče dodati"
+
+#: panels/system/users/cc-cannot-add-user-dialog.blp:15
+msgid "Settings cannot create new users at this time due to the encryption scheme of the disk. Support for multiple encrypted users is coming in the future."
+msgstr "V nastavitvah trenutno ni mogoče ustvariti novih uporabnikov zaradi načina šifriranja diska. Podpora za več šifriranih uporabnikov bo na voljo v prihodnosti."
 
 #: panels/system/users/cc-enterprise-login-dialog.blp:13 panels/system/users/cc-enterprise-login-dialog.blp:28
 msgid "Add Enterprise Login"
@@ -7769,7 +7777,7 @@ msgstr "Velikost kazalke je za lažje spremljanje mogoče povečati"
 msgid "Medium"
 msgstr "Srednja"
 
-#: panels/universal-access/cc-cursor-size-page.c:79 panels/universal-access/cc-ua-mouse-page.blp:128 panels/universal-access/cc-ua-seeing-page.c:116
+#: panels/universal-access/cc-cursor-size-page.c:79 panels/universal-access/cc-ua-mouse-page.blp:128 panels/universal-access/cc-ua-seeing-page.c:150
 msgid "Large"
 msgstr "Velika"
 
@@ -8044,32 +8052,32 @@ msgstr "Vzorčno besedilo"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-seeing-page.c:197
+#: panels/universal-access/cc-ua-seeing-page.c:211
 msgctxt "cursor size"
 msgid "Default"
 msgstr "privzeta"
 
-#: panels/universal-access/cc-ua-seeing-page.c:200
+#: panels/universal-access/cc-ua-seeing-page.c:214
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "srednja"
 
-#: panels/universal-access/cc-ua-seeing-page.c:203
+#: panels/universal-access/cc-ua-seeing-page.c:217
 msgctxt "cursor size"
 msgid "Large"
 msgstr "velika"
 
-#: panels/universal-access/cc-ua-seeing-page.c:206
+#: panels/universal-access/cc-ua-seeing-page.c:220
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "zelo velika"
 
-#: panels/universal-access/cc-ua-seeing-page.c:209
+#: panels/universal-access/cc-ua-seeing-page.c:223
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "največja"
 
-#: panels/universal-access/cc-ua-seeing-page.c:212
+#: panels/universal-access/cc-ua-seeing-page.c:226
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
