@@ -120,7 +120,7 @@ cc_wwan_apn_back_clicked_cb (CcWwanApnDialog *self)
         gtk_widget_set_visible (GTK_WIDGET (self->add_button), TRUE);
         gtk_stack_set_visible_child (self->apn_settings_stack, GTK_WIDGET (self->apn_list_view));
     } else {
-        gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
+        adw_dialog_close (ADW_DIALOG (self));
     }
 }
 
