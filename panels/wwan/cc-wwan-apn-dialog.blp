@@ -5,240 +5,243 @@ template $CcWwanApnDialog: Adw.Dialog {
   content-height: 510;
   content-width: 400;
   title: _("Access Points");
+  can-close: false;
 
-  [titlebar]
-  HeaderBar {
-    [start]
-    Button back_button {
-      use-underline: true;
-      icon-name: "go-previous-symbolic";
-      clicked => $cc_wwan_apn_back_clicked_cb(template);
+  child: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [start]
+      Button back_button {
+        use-underline: true;
+        icon-name: "go-previous-symbolic";
+        clicked => $cc_wwan_apn_back_clicked_cb(template);
 
-      accessibility {
-        label: _("Back");
-      }
-    }
-
-    [end]
-    Button add_button {
-      use-underline: true;
-      icon-name: "list-add-symbolic";
-      clicked => $cc_wwan_apn_add_clicked_cb(template);
-
-      accessibility {
-        label: _("Add");
-      }
-    }
-
-    [end]
-    Button save_button {
-      visible: false;
-      use-underline: true;
-      label: _("_Save");
-      clicked => $cc_wwan_apn_save_clicked_cb(template);
-
-      styles [
-        "default",
-      ]
-    }
-  }
-
-  Stack apn_settings_stack {
-    transition-type: slide_left_right;
-
-    Adw.PreferencesPage apn_list_view {
-      Adw.PreferencesGroup {
-        ListBox apn_list {
-          valign: start;
-          selection-mode: none;
-          row-activated => $cc_wwan_apn_activated_cb(template);
-
-          styles [
-            "boxed-list",
-          ]
+        accessibility {
+          label: _("Back");
         }
       }
+
+      [end]
+      Button add_button {
+        use-underline: true;
+        icon-name: "list-add-symbolic";
+        clicked => $cc_wwan_apn_add_clicked_cb(template);
+
+        accessibility {
+          label: _("Add");
+        }
+      }
+
+      [end]
+      Button save_button {
+        visible: false;
+        use-underline: true;
+        label: _("_Save");
+        clicked => $cc_wwan_apn_save_clicked_cb(template);
+
+        styles [
+          "default",
+        ]
+      }
     }
 
-    Adw.PreferencesPage apn_edit_view {
-      Adw.PreferencesGroup {
-        Grid {
-          orientation: vertical;
-          hexpand: true;
-          vexpand: true;
-          row-spacing: 6;
-          column-spacing: 12;
+    content: Stack apn_settings_stack {
+      transition-type: slide_left_right;
 
-          Label {
-            halign: end;
-            valign: center;
-            label: _("Name");
-            mnemonic-widget: name_entry;
+      Adw.PreferencesPage apn_list_view {
+        Adw.PreferencesGroup {
+          ListBox apn_list {
+            valign: start;
+            selection-mode: none;
+            row-activated => $cc_wwan_apn_activated_cb(template);
 
             styles [
-              "dim-label",
+              "boxed-list",
             ]
-
-            layout {
-              column: 0;
-              row: 0;
-            }
           }
+        }
+      }
 
-          Entry name_entry {
+      Adw.PreferencesPage apn_edit_view {
+        Adw.PreferencesGroup {
+          Grid {
+            orientation: vertical;
             hexpand: true;
-            changed => $cc_wwan_apn_entry_changed_cb(template);
+            vexpand: true;
+            row-spacing: 6;
+            column-spacing: 12;
 
-            layout {
-              column: 1;
-              row: 0;
-            }
-          }
+            Label {
+              halign: end;
+              valign: center;
+              label: _("Name");
+              mnemonic-widget: name_entry;
 
-          Label {
-            halign: end;
-            valign: center;
-            label: _("APN");
-            mnemonic-widget: apn_entry;
-
-            styles [
-              "dim-label",
-            ]
-
-            layout {
-              column: 0;
-              row: 1;
-            }
-          }
-
-          Entry apn_entry {
-            margin-bottom: 12;
-            changed => $cc_wwan_apn_entry_changed_cb(template);
-
-            layout {
-              column: 1;
-              row: 1;
-            }
-          }
-
-          Label {
-            halign: end;
-            valign: center;
-            label: _("Username");
-            mnemonic-widget: username_entry;
-
-            styles [
-              "dim-label",
-            ]
-
-            layout {
-              column: 0;
-              row: 2;
-            }
-          }
-
-          Entry username_entry {
-            layout {
-              column: 1;
-              row: 2;
-            }
-          }
-
-          Label {
-            halign: end;
-            valign: center;
-            label: _("Password");
-            mnemonic-widget: password_entry;
-
-            styles [
-              "dim-label",
-            ]
-
-            layout {
-              column: 0;
-              row: 3;
-            }
-          }
-
-          Entry password_entry {
-            margin-bottom: 12;
-
-            layout {
-              column: 1;
-              row: 3;
-            }
-          }
-
-          Label {
-            halign: end;
-            valign: center;
-            label: _("APN Type");
-            mnemonic-widget: lte_attach_combo;
-
-            styles [
-              "dim-label",
-            ]
-
-            layout {
-              column: 0;
-              row: 4;
-            }
-          }
-
-          DropDown lte_attach_combo {
-            model: StringList {
-              strings [
-                _("Internet"),
-                _("Attach"),
+              styles [
+                "dim-label",
               ]
-            };
 
-            layout {
-              column: 1;
-              row: 4;
+              layout {
+                column: 0;
+                row: 0;
+              }
             }
-          }
 
-          Label {
-            visible: bind lte_attach_combo.selected bidirectional;
-            halign: end;
-            valign: center;
-            label: _("Auth Type");
-            mnemonic-widget: lte_auth_combo;
+            Entry name_entry {
+              hexpand: true;
+              changed => $cc_wwan_apn_entry_changed_cb(template);
 
-            styles [
-              "dim-label",
-            ]
-
-            layout {
-              column: 0;
-              row: 5;
+              layout {
+                column: 1;
+                row: 0;
+              }
             }
-          }
 
-          DropDown lte_auth_combo {
-            visible: bind lte_attach_combo.selected bidirectional;
+            Label {
+              halign: end;
+              valign: center;
+              label: _("APN");
+              mnemonic-widget: apn_entry;
 
-            model: StringList {
-              strings [
-                _("None"),
-                "PAP",
-                "CHAP",
-                "EAP",
-                "MSCHAP",
-                "MSCHAPV2",
+              styles [
+                "dim-label",
               ]
-            };
 
-            layout {
-              column: 1;
-              row: 5;
+              layout {
+                column: 0;
+                row: 1;
+              }
+            }
+
+            Entry apn_entry {
+              margin-bottom: 12;
+              changed => $cc_wwan_apn_entry_changed_cb(template);
+
+              layout {
+                column: 1;
+                row: 1;
+              }
+            }
+
+            Label {
+              halign: end;
+              valign: center;
+              label: _("Username");
+              mnemonic-widget: username_entry;
+
+              styles [
+                "dim-label",
+              ]
+
+              layout {
+                column: 0;
+                row: 2;
+              }
+            }
+
+            Entry username_entry {
+              layout {
+                column: 1;
+                row: 2;
+              }
+            }
+
+            Label {
+              halign: end;
+              valign: center;
+              label: _("Password");
+              mnemonic-widget: password_entry;
+
+              styles [
+                "dim-label",
+              ]
+
+              layout {
+                column: 0;
+                row: 3;
+              }
+            }
+
+            Entry password_entry {
+              margin-bottom: 12;
+
+              layout {
+                column: 1;
+                row: 3;
+              }
+            }
+
+            Label {
+              halign: end;
+              valign: center;
+              label: _("APN Type");
+              mnemonic-widget: lte_attach_combo;
+
+              styles [
+                "dim-label",
+              ]
+
+              layout {
+                column: 0;
+                row: 4;
+              }
+            }
+
+            DropDown lte_attach_combo {
+              model: StringList {
+                strings [
+                  _("Internet"),
+                  _("Attach"),
+                ]
+              };
+
+              layout {
+                column: 1;
+                row: 4;
+              }
+            }
+
+            Label {
+              visible: bind lte_attach_combo.selected bidirectional;
+              halign: end;
+              valign: center;
+              label: _("Auth Type");
+              mnemonic-widget: lte_auth_combo;
+
+              styles [
+                "dim-label",
+              ]
+
+              layout {
+                column: 0;
+                row: 5;
+              }
+            }
+
+            DropDown lte_auth_combo {
+              visible: bind lte_attach_combo.selected bidirectional;
+
+              model: StringList {
+                strings [
+                  _("None"),
+                  "PAP",
+                  "CHAP",
+                  "EAP",
+                  "MSCHAP",
+                  "MSCHAPV2",
+                ]
+              };
+
+              layout {
+                column: 1;
+                row: 5;
+              }
             }
           }
         }
       }
-    }
-  }
+    };
+  };
 }
 
 /* A simple hack to create a radio button group */
