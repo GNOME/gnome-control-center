@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-08-18 13:26+0000\n"
-"PO-Revision-Date: 2026-08-21 12:18+0200\n"
+"POT-Creation-Date: 2026-09-24 09:53+0000\n"
+"PO-Revision-Date: 2026-09-26 22:37+0300\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -56,7 +56,7 @@ msgstr "Adaugă scurtături"
 #: panels/network/cc-net-proxy-page.blp:15
 #: panels/network/cc-wifi-hotspot-dialog.blp:16
 #: panels/network/cc-wifi-panel.blp:182
-#: panels/network/connection-editor/ce-page-details.c:87
+#: panels/network/connection-editor/ce-page-details.c:88
 #: panels/network/connection-editor/connection-editor.blp:17
 #: panels/printers/pp-jobs-dialog.blp:112
 #: panels/printers/pp-new-printer-dialog.ui:65
@@ -68,7 +68,7 @@ msgstr "Adaugă scurtături"
 #: panels/system/users/cc-add-user-dialog.blp:19
 #: panels/system/users/cc-avatar-chooser.c:90
 #: panels/system/users/cc-enterprise-login-dialog.blp:39
-#: panels/system/users/cc-fingerprint-dialog.blp:166
+#: panels/system/users/cc-fingerprint-dialog.blp:168
 #: panels/system/users/cc-password-dialog.blp:17
 #: panels/system/users/cc-user-page.blp:196
 #: panels/wwan/cc-wwan-mode-dialog.blp:27
@@ -80,7 +80,7 @@ msgstr "_Renunță"
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:25
 #: panels/color/cc-color-panel.ui:349 panels/keyboard/cc-input-chooser.blp:24
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:22
-#: panels/network/connection-editor/net-connection-editor.c:614
+#: panels/network/connection-editor/net-connection-editor.c:612
 #: panels/printers/pp-new-printer-dialog.ui:96
 #: panels/system/users/cc-add-user-dialog.blp:27
 #: panels/system/users/cc-add-user-dialog.blp:134
@@ -284,7 +284,7 @@ msgid "Reproduce sounds"
 msgstr "Reproduce sunete"
 
 #: panels/applications/cc-applications-panel.blp:245
-#: panels/sound/cc-sound-panel.blp:202
+#: panels/sound/cc-sound-panel.blp:201
 msgid "Sounds"
 msgstr "Sunete"
 
@@ -476,7 +476,7 @@ msgstr "Sistem de fișiere"
 #: panels/applications/cc-applications-panel.c:839
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:8 shell/cc-window.blp:20
-#: shell/cc-window.c:827 shell/org.gnome.Settings.desktop.in:2
+#: shell/cc-window.c:792 shell/org.gnome.Settings.desktop.in:2
 msgid "Settings"
 msgstr "Preferințe"
 
@@ -1158,7 +1158,7 @@ msgstr "_Continuă"
 #. Translators: This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.blp:40
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:34
-#: panels/system/users/cc-fingerprint-dialog.blp:177
+#: panels/system/users/cc-fingerprint-dialog.blp:179
 msgid "_Done"
 msgstr "_Gata"
 
@@ -1810,13 +1810,13 @@ msgid "Decrement Minute"
 msgstr "Decrementează minutul"
 
 #: panels/common/cc-util.c:121
-#: panels/network/connection-editor/ce-page-details.c:173
+#: panels/network/connection-editor/ce-page-details.c:174
 #: panels/wellbeing/cc-screen-time-statistics-row.c:901
 msgid "Today"
 msgstr "Azi"
 
 #: panels/common/cc-util.c:123
-#: panels/network/connection-editor/ce-page-details.c:175
+#: panels/network/connection-editor/ce-page-details.c:176
 msgid "Yesterday"
 msgstr "Ieri"
 
@@ -1958,12 +1958,12 @@ msgid "Night Light"
 msgstr "Lumină de noapte"
 
 #: panels/display/cc-display-panel.c:457
-#: panels/notifications/cc-notifications-panel.c:184
+#: panels/notifications/cc-notifications-panel.c:187
 msgid "On"
 msgstr "Pornit"
 
 #: panels/display/cc-display-panel.c:459 panels/network/cc-net-proxy-page.c:186
-#: panels/notifications/cc-notifications-panel.c:184
+#: panels/notifications/cc-notifications-panel.c:187
 msgid "Off"
 msgstr "Oprit"
 
@@ -2357,7 +2357,7 @@ msgstr "Contrast mărit Activat/Dezactivat"
 
 #: panels/keyboard/cc-input-chooser.blp:5
 msgid "Add Input Source"
-msgstr "Adaugă o sursă de intrare"
+msgstr "Adaugă o limbă"
 
 #: panels/keyboard/cc-input-chooser.blp:44
 msgid "Search languages and countries"
@@ -2365,7 +2365,7 @@ msgstr "Caută limbi și țări"
 
 #: panels/keyboard/cc-input-chooser.c:187
 msgid "No input sources found"
-msgstr "Nu s-au găsit surse de intrare"
+msgstr "Nicio sursă"
 
 #: panels/keyboard/cc-input-chooser.c:236 panels/keyboard/cc-input-row.blp:52
 msgid "View Keyboard Layout"
@@ -2378,11 +2378,11 @@ msgstr "Altele"
 
 #: panels/keyboard/cc-input-list-box.blp:15
 msgid "Input sources"
-msgstr "Surse de intrare"
+msgstr "Surse de introducere"
 
 #: panels/keyboard/cc-input-list-box.blp:19
 msgid "_Add Input Source"
-msgstr "_Adaugă o sursă de intrare"
+msgstr "_Adaugă o sursă de introducere"
 
 #: panels/keyboard/cc-input-row.blp:18 panels/printers/pp-printer-entry.blp:41
 #: panels/search/cc-search-panel-row.blp:40
@@ -2420,15 +2420,15 @@ msgstr "Tastatură"
 
 #: panels/keyboard/cc-keyboard-panel.blp:13
 msgid "Input Sources"
-msgstr "Surse de intrare"
+msgstr "Surse de introducere"
 
 #: panels/keyboard/cc-keyboard-panel.blp:14
 msgid "Includes keyboard layouts and input methods"
-msgstr "Include aranjamentele de tastatură și metodele de intrare"
+msgstr "Includ aranjamentele tastaturilor și metodele de introducere"
 
 #: panels/keyboard/cc-keyboard-panel.blp:22
 msgid "Input Source Switching"
-msgstr "Comutarea sursei de intrare"
+msgstr "Schimbarea sursei de introducere"
 
 #: panels/keyboard/cc-keyboard-panel.blp:25
 msgid "Use the _same source for all windows"
@@ -2436,7 +2436,7 @@ msgstr "Folosește aceeași _limbă pentru toate ferestrele"
 
 #: panels/keyboard/cc-keyboard-panel.blp:36
 msgid "Switch input sources _individually for each window"
-msgstr "Comută sursele de intrare _individual pentru fiecare fereastră"
+msgstr "Schimbă sursele de _introducere pentru fiecare fereastră"
 
 #: panels/keyboard/cc-keyboard-panel.blp:50
 msgid "Special Character Entry"
@@ -2474,8 +2474,8 @@ msgid ""
 "These are sometimes printed as a third-option on your keyboard."
 msgstr ""
 "Tasta de caractere alternative poate fi utilizată pentru a introduce "
-"caractere adiționale. Acestea sunt câteodată tipărite ca o a treia opțiune "
-"pe tastatură."
+"caractere adiționale. Acestea sunt uneori însemnate pe tastatură ca o a "
+"treia opțiune."
 
 #: panels/keyboard/cc-keyboard-panel.c:64
 msgid "Layout Default"
@@ -2483,7 +2483,7 @@ msgstr "Aranjament prestabilit"
 
 #: panels/keyboard/cc-keyboard-panel.c:65
 #: panels/universal-access/cc-cursor-size-page.c:78
-#: panels/universal-access/cc-ua-seeing-page.c:116
+#: panels/universal-access/cc-ua-seeing-page.c:150
 msgid "Default"
 msgstr "Prestabilită"
 
@@ -2576,7 +2576,7 @@ msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
 "This can be changed in the keyboard shortcut settings."
 msgstr ""
-"Sursele de intrare pot fi schimbate folosind scurtătura %s.\n"
+"Sursele de introducere pot fi schimbate folosind scurtătura %s.\n"
 "Aceasta poate fi schimbată din opțiunile pentru scurtături."
 
 #. Translators: This is a mark in the Grayscale scale
@@ -2723,14 +2723,15 @@ msgid ""
 "and input sources"
 msgstr ""
 "Schimbă scurtăturile și stabilește preferințele de tastare, aranjamentele "
-"tastaturii și sursele de intrare"
+"tastaturilor și sursele de introducere"
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:14
 msgid "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;Hotkey;Compose;Character;"
 msgstr ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;Hotkey;Compose;Character;Scurtătură;Spațiu "
-"de lucru;Fereastră;Redimensionează;Lupă;Intrare;Sursă;Blochează;Volum;Tastă "
+"de "
+"lucru;Fereastră;Redimensionează;Lupă;Intrare;Introducere;Sursă;Blochează;Volum;Tastă "
 "rapidă;Compune;Caracter;"
 
 #: panels/mouse/cc-mouse-panel.blp:52
@@ -3073,19 +3074,19 @@ msgstr "C_onfigurare"
 
 #: panels/network/cc-net-proxy-page.blp:54
 #: panels/network/cc-net-proxy-page.c:188
-#: panels/network/connection-editor/ip4-page.blp:176
-#: panels/network/connection-editor/ip4-page.blp:268
-#: panels/network/connection-editor/ip6-page.blp:36
-#: panels/network/connection-editor/ip6-page.blp:187
-#: panels/network/connection-editor/ip6-page.blp:279
+#: panels/network/connection-editor/ce-page-ip4.blp:134
+#: panels/network/connection-editor/ce-page-ip4.blp:173
+#: panels/network/connection-editor/ce-page-ip6.blp:12
+#: panels/network/connection-editor/ce-page-ip6.blp:141
+#: panels/network/connection-editor/ce-page-ip6.blp:180
 #: panels/wacom/cc-wacom-page.c:634
 msgid "Automatic"
 msgstr "Automat"
 
 #: panels/network/cc-net-proxy-page.blp:55
 #: panels/network/cc-net-proxy-page.c:190
-#: panels/network/connection-editor/ip4-page.blp:58
-#: panels/network/connection-editor/ip6-page.blp:69
+#: panels/network/connection-editor/ce-page-ip4.blp:38
+#: panels/network/connection-editor/ce-page-ip6.blp:48
 msgid "Manual"
 msgstr "Manual"
 
@@ -3150,12 +3151,12 @@ msgstr ""
 
 #: panels/network/cc-network-panel.blp:53
 #: panels/network/cc-network-panel.blp:82
-#: panels/network/connection-editor/net-connection-editor.c:701
+#: panels/network/connection-editor/net-connection-editor.c:699
 msgid "VPN"
 msgstr "VPN"
 
 #: panels/network/cc-network-panel.blp:56
-#: panels/network/connection-editor/net-connection-editor.c:862
+#: panels/network/connection-editor/net-connection-editor.c:860
 msgid "Add VPN"
 msgstr "Adaugă VPN"
 
@@ -3379,18 +3380,6 @@ msgstr "_Oprește"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/connection-editor/8021x-security-page.blp:21
-msgid "802.1x _Security"
-msgstr "_Securitate 802.1x"
-
-#: panels/network/connection-editor/bluetooth-page.blp:15
-#: panels/network/connection-editor/ethernet-page.blp:27
-#: panels/network/connection-editor/vpn-page.blp:21
-#: panels/printers/pp-details-dialog.blp:20
-#: panels/system/users/cc-user-page.blp:77
-msgid "_Name"
-msgstr "_Nume"
-
 #: panels/network/connection-editor/ce-ip-address-entry.c:49
 msgid "IP address value not valid"
 msgstr "Valoarea adresei IP nu este corectă"
@@ -3399,19 +3388,33 @@ msgstr "Valoarea adresei IP nu este corectă"
 msgid "Netmask value not valid"
 msgstr "Valoarea măștii de rețea nu este corectă"
 
-#: panels/network/connection-editor/ce-page-8021x-security.c:107
-#: panels/network/connection-editor/ce-page-security.c:344
-#: panels/network/connection-editor/details-page.blp:85
+#: panels/network/connection-editor/ce-page-8021x-security.blp:5
+#: panels/network/connection-editor/ce-page-details.blp:29
+#: panels/network/connection-editor/ce-page-security.blp:5
 #: panels/sharing/cc-sharing-panel.blp:93
 msgid "Security"
 msgstr "Securitate"
 
-#: panels/network/connection-editor/ce-page-bluetooth.c:58
-#: panels/network/connection-editor/ce-page-ethernet.c:135
-#: panels/network/connection-editor/ce-page-vpn.c:144
-#: panels/network/connection-editor/ce-page-wifi.c:124
+#: panels/network/connection-editor/ce-page-8021x-security.blp:9
+msgid "802.1x _Security"
+msgstr "_Securitate 802.1x"
+
+#: panels/network/connection-editor/ce-page-bluetooth.blp:5
+#: panels/network/connection-editor/ce-page-ethernet.blp:5
+#: panels/network/connection-editor/ce-page-vpn.blp:5
+#: panels/network/connection-editor/ce-page-wifi.blp:5
+#: panels/network/connection-editor/ce-page-wifi.blp:8
 msgid "Identity"
 msgstr "Identitate"
+
+#: panels/network/connection-editor/ce-page-bluetooth.blp:9
+#: panels/network/connection-editor/ce-page-ethernet.blp:9
+#: panels/network/connection-editor/ce-page-vpn.blp:9
+#: panels/network/connection-editor/ce-page-vpn.blp:14
+#: panels/printers/pp-details-dialog.blp:20
+#: panels/system/users/cc-user-page.blp:77
+msgid "_Name"
+msgstr "_Nume"
 
 #: panels/network/connection-editor/ce-page.c:209
 #: panels/network/connection-editor/ce-page.c:212
@@ -3448,172 +3451,73 @@ msgstr ""
 "caracteristică este cunoscută sub numele de clonare sau falsificare MAC. "
 "Exemplu: 00:11:22:33:44:55"
 
-#: panels/network/connection-editor/ce-page.c:383
+#: panels/network/connection-editor/ce-page.c:349
 #, c-format
 msgid "Profile %d"
 msgstr "Profilul %d"
 
-#: panels/network/connection-editor/ce-page-details.c:83
-#, c-format
-msgid ""
-"Saved details for “%s” will be permanently lost. This includes passwords and "
-"any network changes."
-msgstr ""
-"Detaliile salvate pentru „%s” se vor pierde definitiv. Acest lucru include "
-"parolele și orice schimbări ale rețelei."
+#: panels/network/connection-editor/ce-page.c:382
+msgid "Invalid Mac Address"
+msgstr "Adresă Mac greșită"
 
-#: panels/network/connection-editor/ce-page-details.c:85
-msgid "Forget Connection?"
-msgstr "Să uit conexiunea?"
+#: panels/network/connection-editor/ce-page-details.blp:5
+msgid "Details"
+msgstr "Detalii"
 
-#: panels/network/connection-editor/ce-page-details.c:87
-msgid "_Forget"
-msgstr "_Uită"
+#: panels/network/connection-editor/ce-page-details.blp:9
+#: panels/wwan/cc-wwan-details-dialog.blp:34
+msgid "Signal Strength"
+msgstr "Putere semnal"
 
-#. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:108
-#: panels/network/net-device-wifi.c:223
-msgid "WPA"
-msgstr "WPA"
-
-#. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:114
-msgid "WPA3"
-msgstr "WPA3"
-
-#. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:119
-#: panels/network/connection-editor/ce-page-security.c:249
-msgid "Enhanced Open"
-msgstr "Enhanced Open"
-
-#. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:131
-msgid "WPA2"
-msgstr "WPA2"
-
-#. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:136
-msgid "Enterprise"
-msgstr "Enterprise"
-
-#: panels/network/connection-editor/ce-page-details.c:141
-#: panels/network/net-device-wifi.c:218
-msgctxt "Wifi security"
-msgid "None"
-msgstr "Nimic"
-
-#. Translators: Option for Blank Screen in Screen Lock page
-#: panels/network/connection-editor/ce-page-details.c:162
-#: panels/privacy/screen/cc-screen-page.blp:27
-msgid "Never"
-msgstr "Niciodată"
-
-#: panels/network/connection-editor/ce-page-details.c:177
-#: panels/network/net-device-ethernet.c:105
-#, c-format
-msgid "%i day ago"
-msgid_plural "%i days ago"
-msgstr[0] "acum %i zi"
-msgstr[1] "acum %i zile"
-msgstr[2] "acum %i de zile"
-
-#: panels/network/connection-editor/ce-page-details.c:305
-#, c-format
-msgid "%d Mb/s (%1.1f GHz)"
-msgstr "%d Mb/s (%1.1f GHz)"
-
-#: panels/network/connection-editor/ce-page-details.c:307
-#, c-format
-msgid "%d Mb/s"
-msgstr "%d Mb/s"
-
-#: panels/network/connection-editor/ce-page-details.c:324
-msgid "2.4 GHz / 5 GHz / 6 GHz"
-msgstr "2.4 GHz / 5 GHz / 6 GHz"
-
-#: panels/network/connection-editor/ce-page-details.c:326
-msgid "5 GHz / 6 GHz"
-msgstr "5 GHz / 6 GHz"
-
-#: panels/network/connection-editor/ce-page-details.c:330
-msgid "2.4 GHz / 5 GHz"
-msgstr "2.4 GHz / 5 GHz"
-
-#: panels/network/connection-editor/ce-page-details.c:332
-msgid "2.4 GHz"
-msgstr "2.4 GHz"
-
-#: panels/network/connection-editor/ce-page-details.c:334
-msgid "5 GHz"
-msgstr "5 GHz"
-
-#: panels/network/connection-editor/ce-page-details.c:354
-msgctxt "Signal strength"
-msgid "None"
-msgstr "Nimic"
-
-#: panels/network/connection-editor/ce-page-details.c:356
-msgctxt "Signal strength"
+#: panels/network/connection-editor/ce-page-details.blp:10
 msgid "Weak"
-msgstr "Slab"
+msgstr "Slabă"
 
-#: panels/network/connection-editor/ce-page-details.c:358
-msgctxt "Signal strength"
-msgid "Ok"
-msgstr "În regulă"
+#: panels/network/connection-editor/ce-page-details.blp:19
+msgid "Link speed"
+msgstr "Viteză legătură"
 
-#: panels/network/connection-editor/ce-page-details.c:360
-msgctxt "Signal strength"
-msgid "Good"
-msgstr "Bun"
+#: panels/network/connection-editor/ce-page-details.blp:20
+msgid "1Mb/sec"
+msgstr "1Mb/sec"
 
-#: panels/network/connection-editor/ce-page-details.c:362
-msgctxt "Signal strength"
-msgid "Excellent"
-msgstr "Excelent"
-
-#: panels/network/connection-editor/ce-page-details.c:429
-#: panels/network/connection-editor/details-page.blp:102
+#: panels/network/connection-editor/ce-page-details.blp:39
+#: panels/network/connection-editor/ce-page-details.c:424
 #: panels/network/net-device-ethernet.c:144
 #: panels/network/net-device-mobile.c:407
 msgid "IPv4 Address"
 msgstr "Adresa IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:430
-#: panels/network/connection-editor/details-page.blp:119
+#: panels/network/connection-editor/ce-page-details.blp:49
+#: panels/network/connection-editor/ce-page-details.c:425
 #: panels/network/net-device-ethernet.c:146
 #: panels/network/net-device-mobile.c:408 panels/network/network-mobile.ui:177
 msgid "IPv6 Address"
 msgstr "Adresa IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:432
-#: panels/network/connection-editor/ce-page-details.c:433
-#: panels/network/net-device-ethernet.c:149
-#: panels/network/net-device-ethernet.c:151
-#: panels/network/net-device-mobile.c:410
-#: panels/network/net-device-mobile.c:411 panels/network/network-mobile.ui:163
-msgid "IP Address"
-msgstr "Adresa IP"
+#: panels/network/connection-editor/ce-page-details.blp:59
+#: panels/network/net-device-ethernet.c:154
+msgid "Hardware Address"
+msgstr "Adresa fizică"
 
-#: panels/network/connection-editor/ce-page-details.c:437
-#: panels/network/net-device-ethernet.c:166
-#: panels/network/net-device-mobile.c:415
-msgid "DNS4"
-msgstr "DNS4"
+#: panels/network/connection-editor/ce-page-details.blp:69
+msgid "Supported Frequencies"
+msgstr "Frecvențe acceptate"
 
-#: panels/network/connection-editor/ce-page-details.c:438
-#: panels/network/net-device-ethernet.c:167
-#: panels/network/net-device-mobile.c:416
-msgid "DNS6"
-msgstr "DNS6"
+#: panels/network/connection-editor/ce-page-details.blp:79
+#: panels/network/net-device-ethernet.c:158
+#: panels/network/net-device-ethernet.c:160
+#: panels/network/net-device-ethernet.c:162
+#: panels/network/network-mobile.ui:191
+msgid "Default Route"
+msgstr "Traseu prestabilit"
 
-#: panels/network/connection-editor/ce-page-details.c:440
-#: panels/network/connection-editor/ce-page-details.c:441
-#: panels/network/connection-editor/details-page.blp:188
-#: panels/network/connection-editor/details-page.blp:206
-#: panels/network/connection-editor/ip4-page.blp:166
-#: panels/network/connection-editor/ip6-page.blp:177
+#: panels/network/connection-editor/ce-page-details.blp:89
+#: panels/network/connection-editor/ce-page-details.blp:99
+#: panels/network/connection-editor/ce-page-details.c:435
+#: panels/network/connection-editor/ce-page-details.c:436
+#: panels/network/connection-editor/ce-page-ip4.blp:131
+#: panels/network/connection-editor/ce-page-ip6.blp:138
 #: panels/network/net-device-ethernet.c:169
 #: panels/network/net-device-ethernet.c:171
 #: panels/network/net-device-mobile.c:418
@@ -3622,76 +3526,381 @@ msgstr "DNS6"
 msgid "DNS"
 msgstr "DNS"
 
-#: panels/network/connection-editor/ce-page-details.c:494
+#: panels/network/connection-editor/ce-page-details.blp:109
+msgid "Last Used"
+msgstr "Ultima utilizare"
+
+#: panels/network/connection-editor/ce-page-details.blp:121
+msgid "Connect _automatically"
+msgstr "Conectare _automată"
+
+#: panels/network/connection-editor/ce-page-details.blp:126
+msgid "Make available to _other users"
+msgstr "Disp_onibil și pentru alți utilizatori"
+
+#: panels/network/connection-editor/ce-page-details.blp:131
+msgid "_Metered connection: has data limits or can incur charges"
+msgstr "Conexiune li_mitată: are limită de date și poate percepe taxe"
+
+#: panels/network/connection-editor/ce-page-details.blp:132
+msgid ""
+"Software updates and other large downloads will not be started automatically."
+msgstr ""
+"Actualizările programelor și alte descărcări mai mari nu vor fi începute "
+"automat."
+
+#: panels/network/connection-editor/ce-page-details.c:84
+#, c-format
+msgid ""
+"Saved details for “%s” will be permanently lost. This includes passwords and "
+"any network changes."
+msgstr ""
+"Detaliile salvate pentru „%s” se vor pierde definitiv. Acest lucru include "
+"parolele și orice schimbări ale rețelei."
+
+#: panels/network/connection-editor/ce-page-details.c:86
+msgid "Forget Connection?"
+msgstr "Să uit conexiunea?"
+
+#: panels/network/connection-editor/ce-page-details.c:88
+msgid "_Forget"
+msgstr "_Uită"
+
+#. TRANSLATORS: this WPA WiFi security
+#: panels/network/connection-editor/ce-page-details.c:109
+#: panels/network/net-device-wifi.c:223
+msgid "WPA"
+msgstr "WPA"
+
+#. TRANSLATORS: this WPA3 WiFi security
+#: panels/network/connection-editor/ce-page-details.c:115
+msgid "WPA3"
+msgstr "WPA3"
+
+#. TRANSLATORS: this Enhanced Open WiFi security
+#: panels/network/connection-editor/ce-page-details.c:120
+#: panels/network/connection-editor/ce-page-security.c:202
+msgid "Enhanced Open"
+msgstr "Enhanced Open"
+
+#. TRANSLATORS: this WPA WiFi security
+#: panels/network/connection-editor/ce-page-details.c:132
+msgid "WPA2"
+msgstr "WPA2"
+
+#. TRANSLATORS: this Enterprise WiFi security
+#: panels/network/connection-editor/ce-page-details.c:137
+msgid "Enterprise"
+msgstr "Enterprise"
+
+#: panels/network/connection-editor/ce-page-details.c:142
+#: panels/network/net-device-wifi.c:218
+msgctxt "Wifi security"
+msgid "None"
+msgstr "Nimic"
+
+#. Translators: Option for Blank Screen in Screen Lock page
+#: panels/network/connection-editor/ce-page-details.c:163
+#: panels/privacy/screen/cc-screen-page.blp:27
+msgid "Never"
+msgstr "Niciodată"
+
+#: panels/network/connection-editor/ce-page-details.c:178
+#: panels/network/net-device-ethernet.c:105
+#, c-format
+msgid "%i day ago"
+msgid_plural "%i days ago"
+msgstr[0] "acum %i zi"
+msgstr[1] "acum %i zile"
+msgstr[2] "acum %i de zile"
+
+#: panels/network/connection-editor/ce-page-details.c:313
+#, c-format
+msgid "%d Mb/s (%1.1f GHz)"
+msgstr "%d Mb/s (%1.1f GHz)"
+
+#: panels/network/connection-editor/ce-page-details.c:315
+#, c-format
+msgid "%d Mb/s"
+msgstr "%d Mb/s"
+
+#: panels/network/connection-editor/ce-page-details.c:330
+msgid "2.4 GHz / 5 GHz / 6 GHz"
+msgstr "2.4 GHz / 5 GHz / 6 GHz"
+
+#: panels/network/connection-editor/ce-page-details.c:332
+msgid "5 GHz / 6 GHz"
+msgstr "5 GHz / 6 GHz"
+
+#: panels/network/connection-editor/ce-page-details.c:336
+msgid "2.4 GHz / 5 GHz"
+msgstr "2.4 GHz / 5 GHz"
+
+#: panels/network/connection-editor/ce-page-details.c:338
+msgid "2.4 GHz"
+msgstr "2.4 GHz"
+
+#: panels/network/connection-editor/ce-page-details.c:340
+msgid "5 GHz"
+msgstr "5 GHz"
+
+#: panels/network/connection-editor/ce-page-details.c:358
+msgctxt "Signal strength"
+msgid "None"
+msgstr "Nimic"
+
+#: panels/network/connection-editor/ce-page-details.c:360
+msgctxt "Signal strength"
+msgid "Weak"
+msgstr "Slab"
+
+#: panels/network/connection-editor/ce-page-details.c:362
+msgctxt "Signal strength"
+msgid "Ok"
+msgstr "În regulă"
+
+#: panels/network/connection-editor/ce-page-details.c:364
+msgctxt "Signal strength"
+msgid "Good"
+msgstr "Bun"
+
+#: panels/network/connection-editor/ce-page-details.c:366
+msgctxt "Signal strength"
+msgid "Excellent"
+msgstr "Excelent"
+
+#: panels/network/connection-editor/ce-page-details.c:427
+#: panels/network/connection-editor/ce-page-details.c:428
+#: panels/network/net-device-ethernet.c:149
+#: panels/network/net-device-ethernet.c:151
+#: panels/network/net-device-mobile.c:410
+#: panels/network/net-device-mobile.c:411 panels/network/network-mobile.ui:163
+msgid "IP Address"
+msgstr "Adresa IP"
+
+#: panels/network/connection-editor/ce-page-details.c:432
+#: panels/network/net-device-ethernet.c:166
+#: panels/network/net-device-mobile.c:415
+msgid "DNS4"
+msgstr "DNS4"
+
+#: panels/network/connection-editor/ce-page-details.c:433
+#: panels/network/net-device-ethernet.c:167
+#: panels/network/net-device-mobile.c:416
+msgid "DNS6"
+msgstr "DNS6"
+
+#: panels/network/connection-editor/ce-page-details.c:486
 msgid "Forget Connection…"
 msgstr "Uită conexiunea…"
 
-#: panels/network/connection-editor/ce-page-details.c:496
+#: panels/network/connection-editor/ce-page-details.c:488
 msgid "Remove Connection Profile…"
 msgstr "Elimină profilul conexiunii…"
 
-#: panels/network/connection-editor/ce-page-details.c:498
+#: panels/network/connection-editor/ce-page-details.c:490
 msgid "Remove Connection…"
 msgstr "Elimină conexiunea…"
 
-#: panels/network/connection-editor/ce-page-details.c:501
+#: panels/network/connection-editor/ce-page-details.c:493
 msgid "Remove VPN…"
 msgstr "Elimină VPN-ul…"
 
-#: panels/network/connection-editor/ce-page-details.c:522
-msgid "Details"
-msgstr "Detalii"
+#: panels/network/connection-editor/ce-page-ethernet.blp:15
+#: panels/network/connection-editor/ce-page-wifi.blp:30
+msgid "_MAC Address"
+msgstr "Adresa _MAC"
 
-#: panels/network/connection-editor/ce-page-ethernet.c:67
-msgid "automatic"
-msgstr "automat"
+#: panels/network/connection-editor/ce-page-ethernet.blp:35
+#: panels/network/connection-editor/ce-page-wifi.blp:50
+msgid "_Cloned Address"
+msgstr "Adresa _clonată"
 
-#: panels/network/connection-editor/ce-page-ip4.c:101
-#: panels/network/connection-editor/ce-page-ip6.c:102
-msgid "Automatic DNS is enabled. Did you intend to disable Automatic DNS?"
-msgstr "DNS-ul automat este activat. Se intenționa dezactivarea lui?"
+#: panels/network/connection-editor/ce-page-ethernet.blp:55
+msgid "Maximum Transmission Unit"
+msgstr "Unitatea maximă de transmitere"
 
-#: panels/network/connection-editor/ce-page-ip4.c:281
-#: panels/network/connection-editor/ce-page-ip6.c:266
-msgid "Delete Address"
-msgstr "Șterge adresa"
+#: panels/network/connection-editor/ce-page-ethernet.blp:58
+msgid "_Automatic Sizing"
+msgstr "Dimensionare _automată"
 
-#: panels/network/connection-editor/ce-page-ip4.c:469
-#: panels/network/connection-editor/ce-page-ip6.c:443
-msgid "Delete Route"
-msgstr "Șterge traseul"
+#: panels/network/connection-editor/ce-page-ethernet.blp:65
+msgid "_Size in Bytes"
+msgstr "Mărimea în _octeți"
 
-#: panels/network/connection-editor/ce-page-ip4.c:813
+#: panels/network/connection-editor/ce-page-ip4.blp:5
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:780
+#: panels/network/connection-editor/ce-page-ip4.blp:9
+msgid "IPv4 Method"
+msgstr "Metoda IPv4"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:12
+msgid "Automatic (DHCP)"
+msgstr "Automat (DHCP)"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:25
+#: panels/network/connection-editor/ce-page-ip6.blp:36
+msgid "Link-Local Only"
+msgstr "Doar link-local"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:51
+#: panels/network/connection-editor/ce-page-ip6.blp:60
+msgid "Disable"
+msgstr "Dezactivează"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:64
+msgid "Shared to other computers"
+msgstr "Împărtășită cu alte calculatoare"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:78
+#: panels/network/connection-editor/ce-page-ip6.blp:85
+msgid "Addresses"
+msgstr "Adrese"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:93
+#: panels/network/connection-editor/ce-page-ip4.blp:199
+#: panels/network/connection-editor/ce-page-ip6.blp:100
+#: panels/network/connection-editor/ce-page-ip6.blp:206
+msgid "Address"
+msgstr "Adresa"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:103
+#: panels/network/connection-editor/ce-page-ip4.blp:209
+msgid "Netmask"
+msgstr "Netmask"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:113
+#: panels/network/connection-editor/ce-page-ip4.blp:219
+#: panels/network/connection-editor/ce-page-ip6.blp:120
+#: panels/network/connection-editor/ce-page-ip6.blp:226
+msgid "Gateway"
+msgstr "Gateway"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:138
+#: panels/network/connection-editor/ce-page-ip6.blp:145
+msgid "Automatic DNS"
+msgstr "DNS automat"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:144
+#: panels/network/connection-editor/ce-page-ip6.blp:151
+msgid "Separate IP addresses with commas"
+msgstr "Adrese IP separate cu virgulă"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:147
+#: panels/network/connection-editor/ce-page-ip6.blp:154
+msgid "DNS server address(es)"
+msgstr "Adresa(e) de server DNS"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:157
+#: panels/network/connection-editor/ce-page-ip4.blp:164
+#: panels/network/connection-editor/ce-page-ip6.blp:164
+#: panels/network/connection-editor/ce-page-ip6.blp:171
+msgid "DNS Search Domains"
+msgstr "Domenii de căutare DNS"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:161
+#: panels/network/connection-editor/ce-page-ip6.blp:168
+msgid "Separate search domains with commas"
+msgstr "Domenii de căutare separate cu virgulă"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:170
+#: panels/network/connection-editor/ce-page-ip6.blp:177
+msgid "Routes"
+msgstr "Trasee"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:177
+#: panels/network/connection-editor/ce-page-ip6.blp:184
+msgid "Automatic Routes"
+msgstr "Trasee automate"
+
+#: panels/network/connection-editor/ce-page-ip4.blp:182
+#: panels/network/connection-editor/ce-page-ip6.blp:189
+msgid "Use this connection _only for resources on its network"
+msgstr "Folosește conexiunea d_oar pentru resurse aflate în rețeaua proprie"
+
+#. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
+#: panels/network/connection-editor/ce-page-ip4.blp:231
+#: panels/network/connection-editor/ce-page-ip6.blp:238
+msgid "Metric"
+msgstr "Metric"
+
+#: panels/network/connection-editor/ce-page-ip4.c:275
+#: panels/network/connection-editor/ce-page-ip6.c:258
+msgid "Delete Address"
+msgstr "Șterge adresa"
+
+#: panels/network/connection-editor/ce-page-ip4.c:463
+#: panels/network/connection-editor/ce-page-ip6.c:435
+msgid "Delete Route"
+msgstr "Șterge traseul"
+
+#: panels/network/connection-editor/ce-page-ip4.c:560
+#: panels/network/connection-editor/ce-page-ip6.c:530
+msgid "Invalid DNS Address"
+msgstr "Adresă DNS greșită"
+
+#: panels/network/connection-editor/ce-page-ip6.blp:5
 msgid "IPv6"
 msgstr "IPv6"
 
-#: panels/network/connection-editor/ce-page-security.c:240
+#: panels/network/connection-editor/ce-page-ip6.blp:9
+msgid "IPv6 Method"
+msgstr "Metoda IPv6"
+
+#: panels/network/connection-editor/ce-page-ip6.blp:24
+msgid "Automatic, DHCP only"
+msgstr "Automat, doar DHCP"
+
+#: panels/network/connection-editor/ce-page-ip6.blp:72
+msgid "Shared to other devices"
+msgstr "Împărtășită cu alte aparate"
+
+#: panels/network/connection-editor/ce-page-ip6.blp:110
+#: panels/network/connection-editor/ce-page-ip6.blp:216
+msgid "Prefix"
+msgstr "Prefix"
+
+#: panels/network/connection-editor/ce-page-security.blp:9
+msgid "S_ecurity"
+msgstr "S_ecuritate"
+
+#: panels/network/connection-editor/ce-page-security.c:191
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Nimic"
 
-#: panels/network/connection-editor/ce-page-security.c:261
+#: panels/network/connection-editor/ce-page-security.c:217
 msgid "LEAP"
 msgstr "LEAP"
 
-#: panels/network/connection-editor/ce-page-security.c:274
+#: panels/network/connection-editor/ce-page-security.c:230
 msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 Personal"
 
-#: panels/network/connection-editor/ce-page-security.c:287
+#: panels/network/connection-editor/ce-page-security.c:244
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Enterprise"
 
-#: panels/network/connection-editor/ce-page-security.c:300
+#: panels/network/connection-editor/ce-page-security.c:258
 msgid "WPA3 Personal"
 msgstr "WPA3 personal"
 
+#: panels/network/connection-editor/ce-page-vpn.blp:21
+msgid "<i>(Error: unable to load VPN connection editor)</i>"
+msgstr "<i>(Eroare: nu se pot încărca opțiunile de conectare VPN)</i>"
+
+#: panels/network/connection-editor/ce-page-wifi.blp:11
+msgid "_SSID"
+msgstr "_SSID"
+
+#: panels/network/connection-editor/ce-page-wifi.blp:17
+msgid "_BSSID"
+msgstr "_BSSID"
+
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:830
+#: panels/network/connection-editor/net-connection-editor.c:826
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3699,9 +3908,10 @@ msgstr "WireGuard"
 #: panels/network/connection-editor/ce-page-wireguard.c:355
 #: panels/privacy/firmware-security/cc-firmware-security-dialog.c:155
 #: panels/sound/cc-alert-chooser-page.c:324
-#: panels/system/about/cc-about-page.c:336
-#: panels/system/about/cc-about-page.c:390
-#: panels/system/about/cc-about-page.c:911
+#: panels/system/about/cc-about-page.c:339
+#: panels/system/about/cc-about-page.c:393
+#: panels/system/about/cc-about-page.c:432
+#: panels/system/about/cc-about-page.c:881
 #: panels/wwan/cc-wwan-details-dialog.c:98
 msgid "Unknown"
 msgstr "Necunoscut"
@@ -3710,219 +3920,32 @@ msgstr "Necunoscut"
 msgid "Unsaved peer"
 msgstr "Partener nesalvat"
 
-#: panels/network/connection-editor/details-page.blp:19
-#: panels/wwan/cc-wwan-details-dialog.blp:34
-msgid "Signal Strength"
-msgstr "Putere semnal"
-
-#: panels/network/connection-editor/details-page.blp:37
-msgid "Weak"
-msgstr "Slabă"
-
-#: panels/network/connection-editor/details-page.blp:52
-msgid "Link speed"
-msgstr "Viteză legătură"
-
-#: panels/network/connection-editor/details-page.blp:69
-msgid "1Mb/sec"
-msgstr "1Mb/sec"
-
-#: panels/network/connection-editor/details-page.blp:136
-#: panels/network/net-device-ethernet.c:154
-msgid "Hardware Address"
-msgstr "Adresa fizică"
-
-#: panels/network/connection-editor/details-page.blp:153
-msgid "Supported Frequencies"
-msgstr "Frecvențe acceptate"
-
-#: panels/network/connection-editor/details-page.blp:170
-#: panels/network/net-device-ethernet.c:158
-#: panels/network/net-device-ethernet.c:160
-#: panels/network/net-device-ethernet.c:162
-#: panels/network/network-mobile.ui:191
-msgid "Default Route"
-msgstr "Traseu prestabilit"
-
-#: panels/network/connection-editor/details-page.blp:223
-msgid "Last Used"
-msgstr "Ultima utilizare"
-
-#: panels/network/connection-editor/details-page.blp:385
-msgid "Connect _automatically"
-msgstr "Conectare _automată"
-
-#: panels/network/connection-editor/details-page.blp:399
-msgid "Make available to _other users"
-msgstr "Disp_onibil și pentru alți utilizatori"
-
-#: panels/network/connection-editor/details-page.blp:425
-msgid "_Metered connection: has data limits or can incur charges"
-msgstr "Conexiune li_mitată: are limită de date și poate percepe taxe"
-
-#: panels/network/connection-editor/details-page.blp:434
-msgid ""
-"Software updates and other large downloads will not be started automatically."
-msgstr ""
-"Actualizările programelor și alte descărcări mai mari nu vor fi începute "
-"automat."
-
-#: panels/network/connection-editor/ethernet-page.blp:46
-#: panels/network/connection-editor/wifi-page.blp:54
-msgid "_MAC Address"
-msgstr "Adresa _MAC"
-
-#: panels/network/connection-editor/ethernet-page.blp:83
-msgid "M_TU"
-msgstr "M_TU"
-
-#: panels/network/connection-editor/ethernet-page.blp:96
-#: panels/network/connection-editor/wifi-page.blp:79
-msgid "_Cloned Address"
-msgstr "Adresa _clonată"
-
-#: panels/network/connection-editor/ethernet-page.blp:107
-#: panels/network/connection-editor/wireguard-page.blp:188
-msgid "bytes"
-msgstr "bytes"
-
-#: panels/network/connection-editor/ip4-page.blp:20
-msgid "IPv_4 Method"
-msgstr "Metoda IPv_4"
-
-#: panels/network/connection-editor/ip4-page.blp:36
-msgid "Automatic (DHCP)"
-msgstr "Automat (DHCP)"
-
-#: panels/network/connection-editor/ip4-page.blp:47
-#: panels/network/connection-editor/ip6-page.blp:58
-msgid "Link-Local Only"
-msgstr "Doar link-local"
-
-#: panels/network/connection-editor/ip4-page.blp:69
-#: panels/network/connection-editor/ip6-page.blp:80
-msgid "Disable"
-msgstr "Dezactivează"
-
-#: panels/network/connection-editor/ip4-page.blp:80
-msgid "Shared to other computers"
-msgstr "Împărtășită cu alte calculatoare"
-
-#: panels/network/connection-editor/ip4-page.blp:105
-#: panels/network/connection-editor/ip6-page.blp:116
-msgid "Addresses"
-msgstr "Adrese"
-
-#: panels/network/connection-editor/ip4-page.blp:119
-#: panels/network/connection-editor/ip4-page.blp:289
-#: panels/network/connection-editor/ip6-page.blp:130
-#: panels/network/connection-editor/ip6-page.blp:300
-msgid "Address"
-msgstr "Adresa"
-
-#: panels/network/connection-editor/ip4-page.blp:129
-#: panels/network/connection-editor/ip4-page.blp:299
-msgid "Netmask"
-msgstr "Netmask"
-
-#: panels/network/connection-editor/ip4-page.blp:139
-#: panels/network/connection-editor/ip4-page.blp:309
-#: panels/network/connection-editor/ip6-page.blp:150
-#: panels/network/connection-editor/ip6-page.blp:320
-msgid "Gateway"
-msgstr "Gateway"
-
-#: panels/network/connection-editor/ip4-page.blp:184
-#: panels/network/connection-editor/ip6-page.blp:195
-msgid "Automatic DNS"
-msgstr "DNS automat"
-
-#: panels/network/connection-editor/ip4-page.blp:191
-#: panels/network/connection-editor/ip6-page.blp:202
-msgid "DNS server address(es)"
-msgstr "Adresa(e) de server DNS"
-
-#: panels/network/connection-editor/ip4-page.blp:201
-#: panels/network/connection-editor/ip6-page.blp:212
-msgid "Separate IP addresses with commas"
-msgstr "Adrese IP separate cu virgulă"
-
-#: panels/network/connection-editor/ip4-page.blp:219
-#: panels/network/connection-editor/ip4-page.blp:228
-#: panels/network/connection-editor/ip6-page.blp:230
-#: panels/network/connection-editor/ip6-page.blp:239
-msgid "DNS Search Domains"
-msgstr "Domenii de căutare DNS"
-
-#: panels/network/connection-editor/ip4-page.blp:238
-#: panels/network/connection-editor/ip6-page.blp:249
-msgid "Separate search domains with commas"
-msgstr "Domenii de căutare separate cu virgulă"
-
-#: panels/network/connection-editor/ip4-page.blp:258
-#: panels/network/connection-editor/ip6-page.blp:269
-msgid "Routes"
-msgstr "Trasee"
-
-#: panels/network/connection-editor/ip4-page.blp:276
-#: panels/network/connection-editor/ip6-page.blp:287
-msgid "Automatic Routes"
-msgstr "Trasee automate"
-
-#. Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking)
-#: panels/network/connection-editor/ip4-page.blp:321
-#: panels/network/connection-editor/ip6-page.blp:332
-msgid "Metric"
-msgstr "Metric"
-
-#: panels/network/connection-editor/ip4-page.blp:338
-#: panels/network/connection-editor/ip6-page.blp:349
-msgid "Use this connection _only for resources on its network"
-msgstr "Folosește conexiunea d_oar pentru resurse aflate în rețeaua proprie"
-
-#: panels/network/connection-editor/ip6-page.blp:20
-msgid "IPv_6 Method"
-msgstr "Metoda IPv_6"
-
-#: panels/network/connection-editor/ip6-page.blp:47
-msgid "Automatic, DHCP only"
-msgstr "Automat, doar DHCP"
-
-#: panels/network/connection-editor/ip6-page.blp:91
-msgid "Shared to other devices"
-msgstr "Împărtășită cu alte aparate"
-
-#: panels/network/connection-editor/ip6-page.blp:140
-#: panels/network/connection-editor/ip6-page.blp:310
-msgid "Prefix"
-msgstr "Prefix"
-
-#: panels/network/connection-editor/net-connection-editor.c:386
+#: panels/network/connection-editor/net-connection-editor.c:384
 #, c-format
 msgid "Unable to open connection editor: %s"
 msgstr "Nu pot fi deschise opțiunile de conectare: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:407
+#: panels/network/connection-editor/net-connection-editor.c:405
 msgid "New Profile"
 msgstr "Profil nou"
 
-#: panels/network/connection-editor/net-connection-editor.c:474
+#: panels/network/connection-editor/net-connection-editor.c:472
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "Configurare greșită %s: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:477
+#: panels/network/connection-editor/net-connection-editor.c:475
 #, c-format
 msgid "Invalid setting %s"
 msgstr "Configurare greșită %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:738
+#: panels/network/connection-editor/net-connection-editor.c:736
 #, c-format
 msgid "Invalid VPN configuration file"
 msgstr "Fișierul de configurare VPN e incorect"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:824
+#: panels/network/connection-editor/net-connection-editor.c:820
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -3930,13 +3953,9 @@ msgstr ""
 "Soluție VPN gratuită și cu sursă publică concepută pentru ușurință în "
 "utilizare, performanță de mare viteză și suprafață de atac redusă."
 
-#: panels/network/connection-editor/net-connection-editor.c:839
+#: panels/network/connection-editor/net-connection-editor.c:836
 msgid "Import from file…"
 msgstr "Importă din fișier…"
-
-#: panels/network/connection-editor/security-page.blp:21
-msgid "S_ecurity"
-msgstr "S_ecuritate"
 
 #: panels/network/connection-editor/vpn-helpers.c:139
 msgid "Cannot Import VPN Connection"
@@ -3964,18 +3983,6 @@ msgstr "_Bine"
 #: panels/network/connection-editor/vpn-helpers.c:159
 msgid "Select file to import"
 msgstr "Alege fișierul de importat"
-
-#: panels/network/connection-editor/vpn-page.blp:34
-msgid "<i>(Error: unable to load VPN connection editor)</i>"
-msgstr "<i>(Eroare: nu se pot încărca opțiunile de conectare VPN)</i>"
-
-#: panels/network/connection-editor/wifi-page.blp:21
-msgid "_SSID"
-msgstr "_SSID"
-
-#: panels/network/connection-editor/wifi-page.blp:33
-msgid "_BSSID"
-msgstr "_BSSID"
 
 #: panels/network/connection-editor/wireguard-page.blp:20
 msgid "_Connection Name"
@@ -4027,6 +4034,10 @@ msgstr ""
 #: panels/network/connection-editor/wireguard-page.blp:158
 msgid "_MTU"
 msgstr "_MTU"
+
+#: panels/network/connection-editor/wireguard-page.blp:188
+msgid "bytes"
+msgstr "bytes"
 
 #: panels/network/connection-editor/wireguard-page.blp:198
 msgid "_Add peer routes"
@@ -4527,12 +4538,16 @@ msgstr "Dependeță de conectare eșuată"
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:323
 msgid "Firmware missing"
-msgstr "Lipsă firmware"
+msgstr "Firmware lipsă"
 
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:327
 msgid "Cable unplugged"
 msgstr "Cablu neconectat"
+
+#: panels/network/ui-helpers.c:36
+msgid "Entry value is invalid"
+msgstr "Valoarea introdusă este greșită"
 
 #. Translators: This is the per app switch for message tray usage.
 #: panels/notifications/cc-app-notifications-page.blp:15
@@ -4552,7 +4567,7 @@ msgstr "_Sunete"
 
 #: panels/notifications/cc-app-notifications-page.blp:24
 msgid "Allow notification sounds from app"
-msgstr "Permite emiterea de sunete de notificare de către aplicație"
+msgstr "Permite emiterea sunetelor de notificare de către aplicație"
 
 #: panels/notifications/cc-app-notifications-page.blp:29
 msgid "Banners"
@@ -5658,7 +5673,7 @@ msgstr "Producător"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
 #: panels/printers/pp-printer-entry.blp:35
-#: panels/printers/pp-printer-entry.c:465
+#: panels/printers/pp-printer-entry.c:467
 msgid "No Active Jobs"
 msgstr "Nicio lucrare activă"
 
@@ -5706,7 +5721,7 @@ msgid "Remove Printer"
 msgstr "Elimină imprimanta"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:468
+#: panels/printers/pp-printer-entry.c:470
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5715,113 +5730,113 @@ msgstr[1] "%u lucrări"
 msgstr[2] "%u de lucrări"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:575
+#: panels/printers/pp-printer-entry.c:577
 msgid "Clean print heads"
 msgstr "Curăță capetele de imprimare"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:633
+#: panels/printers/pp-printer-entry.c:635
 msgid "Low on toner"
 msgstr "Toner puțin"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:635
+#: panels/printers/pp-printer-entry.c:637
 msgid "Out of toner"
 msgstr "Fără toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:638
+#: panels/printers/pp-printer-entry.c:640
 msgid "Low on developer"
 msgstr "Developator puțin"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:641
+#: panels/printers/pp-printer-entry.c:643
 msgid "Out of developer"
 msgstr "Fără developator"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:643
+#: panels/printers/pp-printer-entry.c:645
 msgid "Low on a marker supply"
 msgstr "Stoc de culoare scăzut"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:645
+#: panels/printers/pp-printer-entry.c:647
 msgid "Out of a marker supply"
 msgstr "Stoc de culoare terminat"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:647
+#: panels/printers/pp-printer-entry.c:649
 msgid "Open cover"
 msgstr "Capac deschis"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:649
+#: panels/printers/pp-printer-entry.c:651
 msgid "Open door"
 msgstr "Ușă deschisă"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:651
+#: panels/printers/pp-printer-entry.c:653
 msgid "Low on paper"
 msgstr "Hârtie puțină"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:653
+#: panels/printers/pp-printer-entry.c:655
 msgid "Out of paper"
 msgstr "Fără hârtie"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:655
+#: panels/printers/pp-printer-entry.c:657
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Deconectată"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:657
-#: panels/printers/pp-printer-entry.c:770
+#: panels/printers/pp-printer-entry.c:659
+#: panels/printers/pp-printer-entry.c:772
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Oprită"
 
 #. Translators: The printer marker supply waste receptacle is almost full
 #.
-#: panels/printers/pp-printer-entry.c:660
+#: panels/printers/pp-printer-entry.c:662
 msgid "Waste receptacle almost full"
 msgstr "Recipientul pentru deșeuri este aproape plin"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:662
+#: panels/printers/pp-printer-entry.c:664
 msgid "Waste receptacle full"
 msgstr "Recipientul pentru deșeuri este plin"
 
 #. Translators: Optical photo conductors are used in laser printers
 #.
-#: panels/printers/pp-printer-entry.c:665
+#: panels/printers/pp-printer-entry.c:667
 msgid "The optical photo conductor is near end of life"
 msgstr "Foto-conductorul optic este aproape de sfârșitul vieții"
 
 #. Translators: Optical photo conductors are used in laser
 #. printers
-#: panels/printers/pp-printer-entry.c:668
+#: panels/printers/pp-printer-entry.c:670
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Foto-conductorul optic nu mai funcționează"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:758
+#: panels/printers/pp-printer-entry.c:760
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Pregătită"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:761
+#: panels/printers/pp-printer-entry.c:763
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Nu acceptă lucrări de imprimare"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:766
+#: panels/printers/pp-printer-entry.c:768
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesează"
@@ -7018,79 +7033,79 @@ msgstr "Probă difuzoare"
 msgid "Sound"
 msgstr "Sunet"
 
-#: panels/sound/cc-sound-panel.blp:13 panels/sound/cc-sound-panel.blp:139
+#: panels/sound/cc-sound-panel.blp:13 panels/sound/cc-sound-panel.blp:138
 msgid "Output"
 msgstr "Ieșire"
 
-#: panels/sound/cc-sound-panel.blp:25
+#: panels/sound/cc-sound-panel.blp:24
 msgid "_Test…"
 msgstr "_Test…"
 
-#: panels/sound/cc-sound-panel.blp:32
+#: panels/sound/cc-sound-panel.blp:31
 msgid "_Output Device"
 msgstr "Dispozitiv de _ieșire"
 
-#: panels/sound/cc-sound-panel.blp:37
+#: panels/sound/cc-sound-panel.blp:36
 msgid "_Configuration"
 msgstr "_Configurare"
 
-#: panels/sound/cc-sound-panel.blp:45
+#: panels/sound/cc-sound-panel.blp:44
 msgid "Master volume"
 msgstr "Volumul principal"
 
-#: panels/sound/cc-sound-panel.blp:58
+#: panels/sound/cc-sound-panel.blp:57
 msgid "O_utput Volume"
 msgstr "Volum _ieșire"
 
-#: panels/sound/cc-sound-panel.blp:81
+#: panels/sound/cc-sound-panel.blp:80
 msgid "_Balance"
 msgstr "Echili_bru"
 
-#: panels/sound/cc-sound-panel.blp:104
+#: panels/sound/cc-sound-panel.blp:103
 msgid "Fad_e"
 msgstr "D_ecrescendo"
 
-#: panels/sound/cc-sound-panel.blp:127
+#: panels/sound/cc-sound-panel.blp:126
 msgid "_Subwoofer"
 msgstr "_Subwoofer"
 
-#: panels/sound/cc-sound-panel.blp:142
+#: panels/sound/cc-sound-panel.blp:141
 msgid "Output Device"
 msgstr "Dispozitiv de ieșire"
 
-#: panels/sound/cc-sound-panel.blp:143
+#: panels/sound/cc-sound-panel.blp:142
 msgid "No Output Devices"
 msgstr "Niciun dispozitiv de ieșire"
 
-#: panels/sound/cc-sound-panel.blp:149 panels/sound/cc-sound-panel.blp:192
+#: panels/sound/cc-sound-panel.blp:148 panels/sound/cc-sound-panel.blp:191
 msgid "Input"
 msgstr "Intrare"
 
-#: panels/sound/cc-sound-panel.blp:158
+#: panels/sound/cc-sound-panel.blp:157
 msgid "_Input Device"
 msgstr "Dispozitiv de _intrare"
 
-#: panels/sound/cc-sound-panel.blp:163
+#: panels/sound/cc-sound-panel.blp:162
 msgid "Con_figuration"
 msgstr "Con_figurare"
 
-#: panels/sound/cc-sound-panel.blp:180
+#: panels/sound/cc-sound-panel.blp:179
 msgid "I_nput Volume"
 msgstr "Volum i_ntrare"
 
-#: panels/sound/cc-sound-panel.blp:195
+#: panels/sound/cc-sound-panel.blp:194
 msgid "Input Device"
 msgstr "Dispozitiv de intrare"
 
-#: panels/sound/cc-sound-panel.blp:196
+#: panels/sound/cc-sound-panel.blp:195
 msgid "No Input Devices"
 msgstr "Niciun dispozitiv de intrare"
 
-#: panels/sound/cc-sound-panel.blp:205
+#: panels/sound/cc-sound-panel.blp:204
 msgid "Vo_lume Levels"
 msgstr "Niveluri vo_lum"
 
-#: panels/sound/cc-sound-panel.blp:211
+#: panels/sound/cc-sound-panel.blp:210
 msgid "_Alert Sound"
 msgstr "Sunet de _atenționare"
 
@@ -7102,15 +7117,15 @@ msgstr "Subwoofer"
 msgid "Volume Levels"
 msgstr "Niveluri volum"
 
-#: panels/sound/cc-volume-levels-page.blp:17
+#: panels/sound/cc-volume-levels-page.blp:29
 msgid "No Sound Playing"
 msgstr "Nu se redă niciun sunet"
 
-#: panels/sound/cc-volume-levels-page.blp:27
+#: panels/sound/cc-volume-levels-page.blp:39
 msgid "Outputs"
 msgstr "Ieșiri"
 
-#: panels/sound/cc-volume-levels-page.blp:32
+#: panels/sound/cc-volume-levels-page.blp:44
 msgid "Inputs"
 msgstr "Intrări"
 
@@ -7234,28 +7249,28 @@ msgstr "Se calculează…"
 msgid "_Copy"
 msgstr "_Copiază"
 
-#: panels/system/about/cc-about-page.c:360
+#: panels/system/about/cc-about-page.c:363
 msgid "Graphics"
 msgstr "Grafică"
 
-#: panels/system/about/cc-about-page.c:362
+#: panels/system/about/cc-about-page.c:365
 #, c-format
 msgid "Graphics %d"
 msgstr "Grafică %d"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-about-page.c:408
+#: panels/system/about/cc-about-page.c:411
 #, c-format
 msgid "64-bit"
 msgstr "64-biți"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-about-page.c:411
+#: panels/system/about/cc-about-page.c:414
 #, c-format
 msgid "32-bit"
 msgstr "32-biți"
 
-#: panels/system/about/cc-about-page.c:871
+#: panels/system/about/cc-about-page.c:927
 msgid "Details copied to clipboard"
 msgstr "Detaliile au fost copiate"
 
@@ -7711,8 +7726,9 @@ msgstr "P_arola"
 msgid "_Generate New Password"
 msgstr "_Generează o parolă nouă"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:129
-#: panels/system/remote-desktop/cc-remote-login-page.blp:120
+#. Translators: "Fingerprint" refers to verifying a TLS/cryptographic key fingerprint for Remote Desktop, not a fingerprint scanner for user authentication.
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:130
+#: panels/system/remote-desktop/cc-remote-login-page.blp:121
 msgid "_Verify Fingerprint"
 msgstr "_Verifică amprenta"
 
@@ -7907,6 +7923,19 @@ msgstr "Alege"
 msgid "Browse for more pictures"
 msgstr "Răsfoiește pentru mai multe imagini"
 
+#: panels/system/users/cc-cannot-add-user-dialog.blp:13
+msgid "Cannot Add New Users"
+msgstr "Nu se pot adăuga utilizatori noi"
+
+#: panels/system/users/cc-cannot-add-user-dialog.blp:15
+msgid ""
+"Settings cannot create new users at this time due to the encryption scheme "
+"of the disk. Support for multiple encrypted users is coming in the future."
+msgstr ""
+"Sistemul de cifrare a discului nu permite crearea de utilizatori noi în "
+"acest moment. Posibilitatea de a avea mai mulți utilizatori cu date cifrate "
+"va fi adăugată în viitor."
+
 #: panels/system/users/cc-enterprise-login-dialog.blp:13
 #: panels/system/users/cc-enterprise-login-dialog.blp:28
 msgid "Add Enterprise Login"
@@ -8070,7 +8099,7 @@ msgstr "Amprente"
 msgid "Add Fingerprint"
 msgstr "Adaugă amprenta"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:136
+#: panels/system/users/cc-fingerprint-dialog.blp:137
 msgid "Touch the fingerprint reader to check the scanned fingers"
 msgstr "Atinge cititorul de amprente pentru a verifica degetele scanate"
 
@@ -8615,7 +8644,7 @@ msgstr "Medie"
 
 #: panels/universal-access/cc-cursor-size-page.c:79
 #: panels/universal-access/cc-ua-mouse-page.blp:128
-#: panels/universal-access/cc-ua-seeing-page.c:116
+#: panels/universal-access/cc-ua-seeing-page.c:150
 msgid "Large"
 msgstr "Mare"
 
@@ -8668,13 +8697,13 @@ msgid "_Test Flash"
 msgstr "_Testează iluminarea"
 
 #. Translators: This will be presented as the text of a link to the Sound panel
-#: panels/universal-access/cc-ua-hearing-page.c:154
+#: panels/universal-access/cc-ua-hearing-page.c:152
 msgctxt "Sound panel name"
 msgid "Sound"
 msgstr "Sunet"
 
 #. Translators: %s is a link to the Sound panel with the label "Sound"
-#: panels/universal-access/cc-ua-hearing-page.c:156
+#: panels/universal-access/cc-ua-hearing-page.c:154
 #, c-format
 msgid "System volume can be adjusted in %s settings"
 msgstr "Volumul sunetului sistemului poate fi reglat din %s"
@@ -8912,32 +8941,32 @@ msgstr "Text exemplu"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-seeing-page.c:197
+#: panels/universal-access/cc-ua-seeing-page.c:211
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Prestabilită"
 
-#: panels/universal-access/cc-ua-seeing-page.c:200
+#: panels/universal-access/cc-ua-seeing-page.c:214
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Medie"
 
-#: panels/universal-access/cc-ua-seeing-page.c:203
+#: panels/universal-access/cc-ua-seeing-page.c:217
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Mare"
 
-#: panels/universal-access/cc-ua-seeing-page.c:206
+#: panels/universal-access/cc-ua-seeing-page.c:220
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Mai mare"
 
-#: panels/universal-access/cc-ua-seeing-page.c:209
+#: panels/universal-access/cc-ua-seeing-page.c:223
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Cea mai mare"
 
-#: panels/universal-access/cc-ua-seeing-page.c:212
+#: panels/universal-access/cc-ua-seeing-page.c:226
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
