@@ -103,21 +103,37 @@ cc_panel_buildable_init (GtkBuildableIface *iface)
     iface->add_child = cc_panel_buildable_add_child;
 }
 
-/* GObject overrides */
-
-static void
-set_subpage (CcPanel *panel, const gchar *tag)
+/**
+ * cc_panel_set_subpage:
+ * @panel: a #CcPanel
+ * @tag: the tag of the subpage
+ *
+ * Adds the subpage matching @tag on top of the navigation stack of @panel, so
+ * that it is the visible page once the window activates the panel.
+ *
+ * Panels handling the #CcPanel:parameters property themselves need to call
+ * this to support subpage tags as command line arguments.
+ */
+void
+cc_panel_set_subpage (CcPanel *panel, const gchar *tag)
 {
-    CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+    CcPanelPrivate *priv;
     AdwNavigationView *navigation;
     AdwNavigationPage *page;
+
+    g_return_if_fail (CC_IS_PANEL (panel));
+    g_return_if_fail (tag != NULL);
+
+    priv = cc_panel_get_instance_private (panel);
 
     navigation = cc_window_get_navigation_view (priv->window);
     page = adw_navigation_view_find_page (navigation, tag);
     if (page == NULL) {
         page = g_hash_table_lookup (priv->subpages, tag);
 
-        if (page == NULL) {
+        if (page != NULL) {
+            adw_navigation_view_add (navigation, page);
+        } else {
             page = cc_panel_get_static_subpage (panel, tag);
 
             if (page == NULL) {
@@ -159,7 +175,7 @@ cc_panel_set_property (GObject *object, guint prop_id, const GValue *value, GPar
         g_variant_get_child (parameters, 0, "v", &v);
 
         if (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING)) {
-            set_subpage (CC_PANEL (object), g_variant_get_string (v, NULL));
+            cc_panel_set_subpage (CC_PANEL (object), g_variant_get_string (v, NULL));
         } else if (!g_variant_is_of_type (v, G_VARIANT_TYPE_DICTIONARY))
             g_warning ("Wrong type for the first argument GVariant, expected 'a{sv}' but got '%s'",
                        (gchar *) g_variant_get_type (v));
