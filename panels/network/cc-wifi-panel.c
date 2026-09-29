@@ -219,11 +219,10 @@ add_wifi_device (CcWifiPanel *self, NMDevice *device)
     /* Setup custom title properties */
     g_ptr_array_add (self->devices, net_device);
 
-    update_devices_names (self);
-
     /* Needs to be added after the device is added to the self->devices array */
-    gtk_stack_add_titled (self->stack, GTK_WIDGET (net_device), nm_device_get_udi (device),
-                          nm_device_get_description (device));
+    gtk_stack_add_named (self->stack, GTK_WIDGET (net_device), nm_device_get_udi (device));
+
+    update_devices_names (self);
     g_signal_connect_object (device, "state-changed", G_CALLBACK (wifi_panel_update_qr_image_cb), self,
                              G_CONNECT_SWAPPED);
 }
@@ -358,6 +357,17 @@ sync_airplane_mode_switch (CcWifiPanel *self)
 }
 
 static void
+set_device_title (CcWifiPanel *self, NetDeviceWifi *net_device, const gchar *title)
+{
+    GtkStackPage *page;
+
+    net_device_wifi_set_title (net_device, title);
+
+    page = gtk_stack_get_page (self->stack, GTK_WIDGET (net_device));
+    gtk_stack_page_set_title (page, title);
+}
+
+static void
 update_devices_names (CcWifiPanel *self)
 {
     guint number_of_devices = self->devices->len;
@@ -372,7 +382,7 @@ update_devices_names (CcWifiPanel *self)
         gtk_stack_add_named (self->center_stack, title_widget, "single");
         gtk_stack_set_visible_child_name (self->center_stack, "single");
 
-        net_device_wifi_set_title (net_device, _("Wi-Fi"));
+        set_device_title (self, net_device, _("Wi-Fi"));
     } else {
         GtkWidget *single_page_widget;
         guint i;
@@ -384,7 +394,7 @@ update_devices_names (CcWifiPanel *self)
             net_device = g_ptr_array_index (self->devices, i);
             device = net_device_wifi_get_device (net_device);
 
-            net_device_wifi_set_title (net_device, nm_device_get_description (device));
+            set_device_title (self, net_device, nm_device_get_description (device));
         }
 
         /* Remove the widget at the "single" page */
