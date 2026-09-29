@@ -48,7 +48,8 @@
 typedef enum {
     OPERATION_NULL,
     OPERATION_SHOW_DEVICE,
-    OPERATION_CONNECT_MOBILE
+    OPERATION_CONNECT_MOBILE,
+    OPERATION_CONFIGURE_PROXY
 } CmdlineOperation;
 
 struct _CcNetworkPanel {
@@ -106,6 +107,8 @@ cmdline_operation_from_string (const gchar *string)
         return OPERATION_CONNECT_MOBILE;
     if (g_strcmp0 (string, "show-device") == 0)
         return OPERATION_SHOW_DEVICE;
+    if (g_strcmp0 (string, "configure-proxy") == 0)
+        return OPERATION_CONFIGURE_PROXY;
 
     g_warning ("Invalid additional argument %s", string);
     return OPERATION_NULL;
@@ -183,6 +186,14 @@ cc_network_panel_set_property (GObject *object, guint property_id, const GValue 
                 reset_command_line_args (self);
                 return;
             }
+
+            /* The proxy page is a subpage of the panel, let CcPanel show it */
+            if (self->arg_operation == OPERATION_CONFIGURE_PROXY) {
+                cc_panel_set_subpage (CC_PANEL (self), "proxy");
+                reset_command_line_args (self);
+                return;
+            }
+
             g_debug ("Calling handle_argv() after setting property");
             handle_argv (self);
         }
