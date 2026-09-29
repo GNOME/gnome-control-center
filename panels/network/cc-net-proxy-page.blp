@@ -1,7 +1,7 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $CcNetProxyPage: Adw.NavigationPage {
+template $CcNetProxyPage: $CcPanel {
   title: _("Proxy");
   tag: "proxy";
   can-pop: bind template.modified inverted;
