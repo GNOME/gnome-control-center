@@ -1062,6 +1062,7 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
     gtk_box_append (self->listbox_box, GTK_WIDGET (list));
 
     listbox = cc_wifi_connection_list_get_list_box (list);
+    gtk_accessible_update_property (GTK_ACCESSIBLE (listbox), GTK_ACCESSIBLE_PROPERTY_LABEL, _("Visible Networks"), -1);
     gtk_list_box_set_sort_func (listbox, (GtkListBoxSortFunc) ap_sort, self, NULL);
 
     g_signal_connect_object (listbox, "row-activated", G_CALLBACK (ap_activated), self, G_CONNECT_SWAPPED);
