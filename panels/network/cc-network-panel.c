@@ -74,6 +74,8 @@ struct _CcNetworkPanel {
     GtkWidget *proxy_row;
     GtkWidget *save_button;
 
+    GtkWidget *proxy_page;
+
     /* wireless dialog stuff */
     CmdlineOperation arg_operation;
     gchar *arg_device;
@@ -190,6 +192,17 @@ cc_network_panel_set_property (GObject *object, guint property_id, const GValue 
             /* The proxy page is a subpage of the panel, let CcPanel show it */
             if (self->arg_operation == OPERATION_CONFIGURE_PROXY) {
                 cc_panel_set_subpage (CC_PANEL (self), "proxy");
+
+                /* Forward the remaining arguments to the proxy page */
+                if (args[1]) {
+                    g_auto (GVariantBuilder) builder = G_VARIANT_BUILDER_INIT (G_VARIANT_TYPE ("av"));
+
+                    for (guint i = 1; args[i]; i++)
+                        g_variant_builder_add (&builder, "v", g_variant_new_string (args[i]));
+
+                    g_object_set (self->proxy_page, "parameters", g_variant_builder_end (&builder), NULL);
+                }
+
                 reset_command_line_args (self);
                 return;
             }
@@ -702,6 +715,7 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_vpn);
     gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
     gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, container_bluetooth);
+    gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, proxy_page);
     gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, proxy_row);
 
     gtk_widget_class_bind_template_callback (widget_class, create_connection_cb);

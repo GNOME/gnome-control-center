@@ -83,7 +83,10 @@ enum {
     PROP_MODIFIED,
     PROP_STATE_TEXT,
     PROP_ENABLED,
-    N_PROPS
+    N_PROPS,
+
+    /* Overridden CcPanel property */
+    PROP_PARAMETERS = N_PROPS
 };
 
 static GParamSpec *properties[N_PROPS];
@@ -298,6 +301,24 @@ cc_net_proxy_page_set_property (GObject *object, guint prop_id, const GValue *va
         cc_net_proxy_page_set_enabled (self, g_value_get_boolean (value));
         break;
 
+    case PROP_PARAMETERS: {
+        GVariant *parameters;
+        g_autoptr (GVariant) v = NULL;
+
+        parameters = g_value_get_variant (value);
+        if (parameters == NULL || g_variant_n_children (parameters) == 0)
+            break;
+
+        g_variant_get_child (parameters, 0, "v", &v);
+        if (!g_variant_is_of_type (v, G_VARIANT_TYPE_STRING)) {
+            g_warning ("Wrong type for the proxy page parameter");
+            break;
+        }
+
+        g_print ("PARAMETERS %s\n", g_variant_get_string (v, NULL));
+        break;
+    }
+
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -333,6 +354,7 @@ cc_net_proxy_page_class_init (CcNetProxyPageClass *klass)
         g_param_spec_boolean ("enabled", NULL, NULL, FALSE, G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
     g_object_class_install_properties (object_class, N_PROPS, properties);
+    g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
     gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/"
                                                                "network/cc-net-proxy-page.ui");
