@@ -1,0 +1,70 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $CcRemovableMediaSettings: Adw.PreferencesGroup {
+  Adw.ActionRow {
+    title: _("CD _Audio");
+    use-underline: true;
+    activatable-widget: audio_cdda_chooser;
+
+    AppChooserButton audio_cdda_chooser {
+      valign: center;
+      content-type: "x-content/audio-cdda";
+    }
+  }
+
+  Adw.ActionRow {
+    title: _("_DVD Video");
+    use-underline: true;
+    activatable-widget: video_dvd_chooser;
+
+    AppChooserButton video_dvd_chooser {
+      valign: center;
+      content-type: "x-content/video-dvd";
+    }
+  }
+
+  Adw.ActionRow {
+    title: _("Music Pla_yer");
+    use-underline: true;
+    activatable-widget: music_player_chooser;
+
+    AppChooserButton music_player_chooser {
+      valign: center;
+      content-type: "x-content/audio-player";
+    }
+  }
+
+  Adw.ActionRow {
+    title: _("P_hotos");
+    use-underline: true;
+    activatable-widget: dcf_chooser;
+
+    AppChooserButton dcf_chooser {
+      valign: center;
+      content-type: "x-content/image-dcf";
+    }
+  }
+
+  Adw.ActionRow {
+    title: _("Sof_tware");
+    use-underline: true;
+    activatable-widget: software_chooser;
+
+    AppChooserButton software_chooser {
+      valign: center;
+      content-type: "x-content/unix-software";
+    }
+  }
+}
+
+SizeGroup chooser_size_group {
+  widgets [
+    audio_cdda_chooser,
+    video_dvd_chooser,
+    music_player_chooser,
+    dcf_chooser,
+    software_chooser,
+  ]
+}
+

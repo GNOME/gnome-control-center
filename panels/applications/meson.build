@@ -15,6 +15,7 @@ ui_sources = files(
   'cc-applications-panel.blp',
   'cc-applications-row.blp',
   'cc-default-apps-page.blp',  
+  'cc-removable-media-settings.blp',
 )
 
 ui_compiled = []
