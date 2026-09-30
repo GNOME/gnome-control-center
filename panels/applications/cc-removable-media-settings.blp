@@ -2,69 +2,38 @@ using Gtk 4.0;
 using Adw 1;
 
 template $CcRemovableMediaSettings: Adw.PreferencesGroup {
-  Adw.ActionRow {
+  $CcRemovableMediaRow {
     title: _("CD _Audio");
     use-underline: true;
-    activatable-widget: audio_cdda_chooser;
-
-    AppChooserButton audio_cdda_chooser {
-      valign: center;
-      content-type: "x-content/audio-cdda";
-    }
+    content-type: "x-content/audio-cdda";
+    heading: _("Select an app for audio CDs");
   }
 
-  Adw.ActionRow {
+  $CcRemovableMediaRow {
     title: _("_DVD Video");
     use-underline: true;
-    activatable-widget: video_dvd_chooser;
-
-    AppChooserButton video_dvd_chooser {
-      valign: center;
-      content-type: "x-content/video-dvd";
-    }
+    content-type: "x-content/video-dvd";
+    heading: _("Select an app for video DVDs");
   }
 
-  Adw.ActionRow {
+  $CcRemovableMediaRow {
     title: _("Music Pla_yer");
     use-underline: true;
-    activatable-widget: music_player_chooser;
-
-    AppChooserButton music_player_chooser {
-      valign: center;
-      content-type: "x-content/audio-player";
-    }
+    content-type: "x-content/audio-player";
+    heading: _("Select an app to run when a music player is connected");
   }
 
-  Adw.ActionRow {
+  $CcRemovableMediaRow {
     title: _("P_hotos");
     use-underline: true;
-    activatable-widget: dcf_chooser;
-
-    AppChooserButton dcf_chooser {
-      valign: center;
-      content-type: "x-content/image-dcf";
-    }
+    content-type: "x-content/image-dcf";
+    heading: _("Select an app to run when a camera is connected");
   }
 
-  Adw.ActionRow {
+  $CcRemovableMediaRow {
     title: _("Sof_tware");
     use-underline: true;
-    activatable-widget: software_chooser;
-
-    AppChooserButton software_chooser {
-      valign: center;
-      content-type: "x-content/unix-software";
-    }
+    content-type: "x-content/unix-software";
+    heading: _("Select an app for software CDs");
   }
 }
-
-SizeGroup chooser_size_group {
-  widgets [
-    audio_cdda_chooser,
-    video_dvd_chooser,
-    music_player_chooser,
-    dcf_chooser,
-    software_chooser,
-  ]
-}
-

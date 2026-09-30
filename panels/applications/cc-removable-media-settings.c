@@ -27,247 +27,21 @@
 #include <shell/cc-panel.h>
 
 #include "cc-applications-panel.h"
+#include "cc-removable-media-row.h"
 #include "cc-removable-media-settings.h"
 
 /* Autorun options */
 #define PREF_MEDIA_AUTORUN_NEVER "autorun-never"
-#define PREF_MEDIA_AUTORUN_X_CONTENT_START_APP "autorun-x-content-start-app"
-#define PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE "autorun-x-content-ignore"
-#define PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER "autorun-x-content-open-folder"
-
-#define CUSTOM_ITEM_ASK "cc-item-ask"
-#define CUSTOM_ITEM_DO_NOTHING "cc-item-do-nothing"
-#define CUSTOM_ITEM_OPEN_FOLDER "cc-item-open-folder"
 
 #define MEDIA_HANDLING_SCHEMA "org.gnome.desktop.media-handling"
 
 struct _CcRemovableMediaSettings {
     AdwPreferencesGroup parent;
 
-    GtkAppChooserButton *audio_cdda_chooser;
-    GtkAppChooserButton *dcf_chooser;
-    GtkAppChooserButton *music_player_chooser;
-    GtkAppChooserButton *software_chooser;
-    GtkAppChooserButton *video_dvd_chooser;
-    GtkSizeGroup *chooser_size_group;
-
     GSettings *settings;
 };
 
 G_DEFINE_FINAL_TYPE (CcRemovableMediaSettings, cc_removable_media_settings, ADW_TYPE_PREFERENCES_GROUP)
-
-static char **
-remove_elem_from_str_array (char **v, const char *s)
-{
-    GPtrArray *array;
-    guint idx;
-
-    array = g_ptr_array_new ();
-
-    for (idx = 0; v[idx] != NULL; idx++) {
-        if (g_strcmp0 (v[idx], s) == 0) {
-            continue;
-        }
-
-        g_ptr_array_add (array, v[idx]);
-    }
-
-    g_ptr_array_add (array, NULL);
-
-    g_free (v);
-
-    return (char **) g_ptr_array_free (array, FALSE);
-}
-
-static char **
-add_elem_to_str_array (char **v, const char *s)
-{
-    GPtrArray *array;
-    guint idx;
-
-    array = g_ptr_array_new ();
-
-    for (idx = 0; v[idx] != NULL; idx++) {
-        g_ptr_array_add (array, v[idx]);
-    }
-
-    g_ptr_array_add (array, g_strdup (s));
-    g_ptr_array_add (array, NULL);
-
-    g_free (v);
-
-    return (char **) g_ptr_array_free (array, FALSE);
-}
-
-static void
-autorun_get_preferences (CcRemovableMediaSettings *self, const char *x_content_type, gboolean *pref_start_app,
-                         gboolean *pref_ignore, gboolean *pref_open_folder)
-{
-    g_auto(GStrv) x_content_start_app = NULL;
-    g_auto(GStrv) x_content_ignore = NULL;
-    g_auto(GStrv) x_content_open_folder = NULL;
-
-    g_return_if_fail (pref_start_app != NULL);
-    g_return_if_fail (pref_ignore != NULL);
-    g_return_if_fail (pref_open_folder != NULL);
-
-    *pref_start_app = FALSE;
-    *pref_ignore = FALSE;
-    *pref_open_folder = FALSE;
-    x_content_start_app = g_settings_get_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_START_APP);
-    x_content_ignore = g_settings_get_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE);
-    x_content_open_folder = g_settings_get_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
-    if (x_content_start_app != NULL) {
-        *pref_start_app = g_strv_contains ((const gchar *const *) x_content_start_app, x_content_type);
-    }
-    if (x_content_ignore != NULL) {
-        *pref_ignore = g_strv_contains ((const gchar *const *) x_content_ignore, x_content_type);
-    }
-    if (x_content_open_folder != NULL) {
-        *pref_open_folder = g_strv_contains ((const gchar *const *) x_content_open_folder, x_content_type);
-    }
-}
-
-static void
-autorun_set_preferences (CcRemovableMediaSettings *self, const char *x_content_type, gboolean pref_start_app,
-                         gboolean pref_ignore, gboolean pref_open_folder)
-{
-    g_auto(GStrv) x_content_start_app = NULL;
-    g_auto(GStrv) x_content_ignore = NULL;
-    g_auto(GStrv) x_content_open_folder = NULL;
-
-    g_assert (x_content_type != NULL);
-
-    x_content_start_app = g_settings_get_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_START_APP);
-    x_content_ignore = g_settings_get_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE);
-    x_content_open_folder = g_settings_get_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
-
-    x_content_start_app = remove_elem_from_str_array (x_content_start_app, x_content_type);
-    if (pref_start_app) {
-        x_content_start_app = add_elem_to_str_array (x_content_start_app, x_content_type);
-    }
-    g_settings_set_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_START_APP,
-                         (const gchar *const *) x_content_start_app);
-
-    x_content_ignore = remove_elem_from_str_array (x_content_ignore, x_content_type);
-    if (pref_ignore) {
-        x_content_ignore = add_elem_to_str_array (x_content_ignore, x_content_type);
-    }
-    g_settings_set_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE, (const gchar *const *) x_content_ignore);
-
-    x_content_open_folder = remove_elem_from_str_array (x_content_open_folder, x_content_type);
-    if (pref_open_folder) {
-        x_content_open_folder = add_elem_to_str_array (x_content_open_folder, x_content_type);
-    }
-    g_settings_set_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER,
-                         (const gchar *const *) x_content_open_folder);
-}
-
-static void
-on_custom_item_activated_cb (CcRemovableMediaSettings *self, const gchar *item, GtkAppChooser *app_chooser)
-{
-    g_autofree gchar *content_type = NULL;
-
-    content_type = gtk_app_chooser_get_content_type (app_chooser);
-
-    if (g_strcmp0 (item, CUSTOM_ITEM_ASK) == 0) {
-        autorun_set_preferences (self, content_type, FALSE, FALSE, FALSE);
-    } else if (g_strcmp0 (item, CUSTOM_ITEM_OPEN_FOLDER) == 0) {
-        autorun_set_preferences (self, content_type, FALSE, FALSE, TRUE);
-    } else if (g_strcmp0 (item, CUSTOM_ITEM_DO_NOTHING) == 0) {
-        autorun_set_preferences (self, content_type, FALSE, TRUE, FALSE);
-    }
-}
-
-static void
-on_chooser_changed_cb (CcRemovableMediaSettings *self, GtkAppChooser *chooser)
-{
-    g_autoptr(GAppInfo) info = NULL;
-    g_autofree gchar *content_type = NULL;
-
-    info = gtk_app_chooser_get_app_info (chooser);
-
-    if (info == NULL)
-        return;
-
-    content_type = gtk_app_chooser_get_content_type (chooser);
-    autorun_set_preferences (self, content_type, TRUE, FALSE, FALSE);
-    g_app_info_set_as_default_for_type (info, content_type, NULL);
-}
-
-/* FIXME: Port away from GtkAppChooserButton entirely */
-static void
-ellipsize_app_chooser (GtkAppChooserButton *button)
-{
-    GtkWidget *child;
-    g_autoptr(GList) cells = NULL;
-    GtkCellRenderer *renderer;
-
-    g_assert (GTK_IS_APP_CHOOSER_BUTTON (button));
-
-    child = gtk_widget_get_first_child (GTK_WIDGET (button));
-
-    g_assert (GTK_IS_CELL_LAYOUT (child));
-
-    cells = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (child));
-
-    g_assert (g_list_length (cells) > 0);
-
-    renderer = g_list_last (cells)->data;
-
-    g_assert (GTK_IS_CELL_RENDERER_TEXT (renderer));
-
-    g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
-}
-
-static void
-prepare_chooser (CcRemovableMediaSettings *self, GtkAppChooserButton *button, const gchar *heading)
-{
-    gboolean pref_ask;
-    gboolean pref_start_app;
-    gboolean pref_ignore;
-    gboolean pref_open_folder;
-    g_autoptr(GAppInfo) info = NULL;
-    g_autofree gchar *content_type = NULL;
-
-    content_type = gtk_app_chooser_get_content_type (GTK_APP_CHOOSER (button));
-
-    /* fetch preferences for this content type */
-    autorun_get_preferences (self, content_type, &pref_start_app, &pref_ignore, &pref_open_folder);
-    pref_ask = !pref_start_app && !pref_ignore && !pref_open_folder;
-
-    info = gtk_app_chooser_get_app_info (GTK_APP_CHOOSER (button));
-
-    /* append the separator only if we have >= 1 apps in the chooser */
-    if (info != NULL) {
-        gtk_app_chooser_button_append_separator (button);
-    }
-
-    gtk_app_chooser_button_append_custom_item (button, CUSTOM_ITEM_ASK, _("Ask what to do"), NULL);
-
-    gtk_app_chooser_button_append_custom_item (button, CUSTOM_ITEM_DO_NOTHING, _("Do nothing"), NULL);
-
-    gtk_app_chooser_button_append_custom_item (button, CUSTOM_ITEM_OPEN_FOLDER, _("Open folder"), NULL);
-
-    gtk_app_chooser_button_set_show_dialog_item (button, TRUE);
-
-    if (heading)
-        gtk_app_chooser_button_set_heading (button, _(heading));
-
-    if (pref_ask) {
-        gtk_app_chooser_button_set_active_custom_item (button, CUSTOM_ITEM_ASK);
-    } else if (pref_ignore) {
-        gtk_app_chooser_button_set_active_custom_item (button, CUSTOM_ITEM_DO_NOTHING);
-    } else if (pref_open_folder) {
-        gtk_app_chooser_button_set_active_custom_item (button, CUSTOM_ITEM_OPEN_FOLDER);
-    }
-
-    g_signal_connect_object (button, "changed", G_CALLBACK (on_chooser_changed_cb), self, G_CONNECT_SWAPPED);
-    g_signal_connect_object (button, "custom-item-activated", G_CALLBACK (on_custom_item_activated_cb), self,
-                             G_CONNECT_SWAPPED);
-
-    ellipsize_app_chooser (button);
-}
 
 typedef struct {
     gchar *description;
@@ -294,27 +68,16 @@ other_media_type_sort (gconstpointer a, gconstpointer b)
 static void
 add_other_type_row (CcRemovableMediaSettings *self, const OtherMediaType *other)
 {
-    GtkAppChooserButton *chooser;
-    AdwActionRow *row;
+    CcRemovableMediaRow *row;
 
-    chooser = GTK_APP_CHOOSER_BUTTON (gtk_app_chooser_button_new (other->content_type));
-    gtk_widget_set_valign (GTK_WIDGET (chooser), GTK_ALIGN_CENTER);
-    gtk_size_group_add_widget (self->chooser_size_group, GTK_WIDGET (chooser));
-    prepare_chooser (self, chooser, NULL);
-
-    row = ADW_ACTION_ROW (adw_action_row_new ());
+    row = cc_removable_media_row_new (other->content_type);
     /* The descriptions come from shared-mime-info, so they may contain
      * characters that would otherwise be interpreted as Pango markup */
     adw_preferences_row_set_use_markup (ADW_PREFERENCES_ROW (row), FALSE);
     adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), other->description);
-    adw_action_row_add_suffix (row, GTK_WIDGET (chooser));
-    adw_action_row_set_activatable_widget (row, GTK_WIDGET (chooser));
 
     adw_preferences_group_add (ADW_PREFERENCES_GROUP (self), GTK_WIDGET (row));
 }
-
-#define OFFSET(x) (G_STRUCT_OFFSET (CcRemovableMediaSettings, x))
-#define WIDGET_FROM_OFFSET(x) (G_STRUCT_MEMBER (GtkWidget *, self, x))
 
 static void
 info_panel_setup_media (CcRemovableMediaSettings *self)
@@ -323,18 +86,10 @@ info_panel_setup_media (CcRemovableMediaSettings *self)
     GList *l, *content_types;
     g_autoptr(GPtrArray) other_types = NULL;
 
-    struct {
-        gint widget_offset;
-        const gchar *content_type;
-        const gchar *heading;
-    } const defs[] = {
-        { OFFSET (audio_cdda_chooser), "x-content/audio-cdda", N_("Select an app for audio CDs") },
-          { OFFSET (video_dvd_chooser), "x-content/video-dvd", N_("Select an app for video DVDs") },
-            { OFFSET (music_player_chooser), "x-content/audio-player",
-              N_("Select an app to run when a music player is connected") },
-              { OFFSET (dcf_chooser), "x-content/image-dcf", N_("Select an app to run when a camera is connected") },
-                { OFFSET (software_chooser), "x-content/unix-software", N_("Select an app for software CDs") },
-              };
+    const gchar *const defs[] = {
+        "x-content/audio-cdda", "x-content/video-dvd",     "x-content/audio-player",
+        "x-content/image-dcf",  "x-content/unix-software",
+    };
 
     struct {
         const gchar *content_type;
@@ -359,10 +114,6 @@ info_panel_setup_media (CcRemovableMediaSettings *self)
                               { "x-content/win32-software", N_("Windows software") },
                             };
 
-    for (n = 0; n < G_N_ELEMENTS (defs); n++) {
-        prepare_chooser (self, GTK_APP_CHOOSER_BUTTON (WIDGET_FROM_OFFSET (defs[n].widget_offset)), defs[n].heading);
-    }
-
     other_types = g_ptr_array_new_with_free_func ((GDestroyNotify) other_media_type_free);
 
     content_types = g_content_types_get_registered ();
@@ -376,7 +127,7 @@ info_panel_setup_media (CcRemovableMediaSettings *self)
             continue;
 
         for (n = 0; n < G_N_ELEMENTS (defs); n++) {
-            if (g_content_type_is_a (content_type, defs[n].content_type)) {
+            if (g_content_type_is_a (content_type, defs[n])) {
                 goto skip;
             }
         }
@@ -437,18 +188,13 @@ cc_removable_media_settings_class_init (CcRemovableMediaSettingsClass *klass)
 
     gtk_widget_class_set_template_from_resource (
         widget_class, "/org/gnome/control-center/applications/cc-removable-media-settings.ui");
-
-    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, audio_cdda_chooser);
-    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, dcf_chooser);
-    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, music_player_chooser);
-    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, software_chooser);
-    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, video_dvd_chooser);
-    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, chooser_size_group);
 }
 
 static void
 cc_removable_media_settings_init (CcRemovableMediaSettings *self)
 {
+    g_type_ensure (CC_TYPE_REMOVABLE_MEDIA_ROW);
+
     gtk_widget_init_template (GTK_WIDGET (self));
     self->settings = g_settings_new (MEDIA_HANDLING_SCHEMA);
 

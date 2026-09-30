@@ -15,6 +15,7 @@ ui_sources = files(
   'cc-applications-panel.blp',
   'cc-applications-row.blp',
   'cc-default-apps-page.blp',  
+  'cc-removable-media-row.blp',
   'cc-removable-media-settings.blp',
 )
 
@@ -35,6 +36,7 @@ sources = files(
   'cc-application-shortcut-dialog.c',
   'cc-default-apps-page.c',
   'cc-default-apps-row.c',
+  'cc-removable-media-row.c',
   'cc-removable-media-settings.c',
   'globs.c',
   'search.c',

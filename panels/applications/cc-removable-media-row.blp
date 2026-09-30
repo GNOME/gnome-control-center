@@ -1,0 +1,37 @@
+using Gtk 4.0;
+using Gio 2.0;
+using Adw 1;
+
+template $CcRemovableMediaRow: Adw.ComboRow {
+  model: FlattenListModel {
+    model: Gio.ListStore sections {
+      item-type: typeof<Gio.ListModel>;
+    };
+  };
+
+  factory: SignalListItemFactory {
+    setup => $factory_setup_cb(template);
+    bind => $factory_bind_cb(template);
+  };
+
+  list-factory: SignalListItemFactory {
+    setup => $list_factory_setup_cb(template);
+    bind => $list_factory_bind_cb(template);
+    unbind => $list_factory_unbind_cb(template);
+  };
+
+  notify::selected => $selected_changed_cb(template);
+}
+
+Gio.ListStore apps {
+  item-type: typeof<Gio.AppInfo>;
+}
+
+StringList actions {
+  strings [
+    _("Ask what to do"),
+    _("Do nothing"),
+    _("Open folder"),
+    _("Other Application…"),
+  ]
+}
