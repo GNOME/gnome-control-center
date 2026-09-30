@@ -23,8 +23,6 @@
 
 #include <config.h>
 
-#include <glib/gi18n.h>
-
 #include "cc-removable-media-row.h"
 
 #define PREF_MEDIA_AUTORUN_X_CONTENT_START_APP "autorun-x-content-start-app"
@@ -48,7 +46,7 @@ struct _CcRemovableMediaRow {
     GtkStringList *actions;
 
     GSettings *settings;
-    char *content_type;
+    GStrv content_types;
     char *heading;
 
     guint last_selected;
@@ -60,7 +58,7 @@ static void selected_changed_cb (CcRemovableMediaRow *self);
 
 enum {
     PROP_0,
-    PROP_CONTENT_TYPE,
+    PROP_CONTENT_TYPES,
     PROP_HEADING,
     N_PROPS
 };
@@ -110,68 +108,58 @@ add_elem_to_str_array (char **v, const char *s)
     return (char **) g_ptr_array_free (array, FALSE);
 }
 
-static void
-autorun_get_preferences (CcRemovableMediaRow *self, gboolean *pref_start_app, gboolean *pref_ignore,
-                         gboolean *pref_open_folder)
+static gboolean
+autorun_get_preference (CcRemovableMediaRow *self, const char *key)
 {
-    g_auto(GStrv) x_content_start_app = NULL;
-    g_auto(GStrv) x_content_ignore = NULL;
-    g_auto(GStrv) x_content_open_folder = NULL;
+    g_auto(GStrv) content_types = NULL;
+    guint idx;
 
-    g_return_if_fail (pref_start_app != NULL);
-    g_return_if_fail (pref_ignore != NULL);
-    g_return_if_fail (pref_open_folder != NULL);
+    content_types = g_settings_get_strv (self->settings, key);
 
-    *pref_start_app = FALSE;
-    *pref_ignore = FALSE;
-    *pref_open_folder = FALSE;
-    x_content_start_app = g_settings_get_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_START_APP);
-    x_content_ignore = g_settings_get_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE);
-    x_content_open_folder = g_settings_get_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
-    if (x_content_start_app != NULL) {
-        *pref_start_app = g_strv_contains ((const gchar *const *) x_content_start_app, self->content_type);
+    for (idx = 0; self->content_types[idx] != NULL; idx++) {
+        if (!g_strv_contains ((const gchar *const *) content_types, self->content_types[idx])) {
+            return FALSE;
+        }
     }
-    if (x_content_ignore != NULL) {
-        *pref_ignore = g_strv_contains ((const gchar *const *) x_content_ignore, self->content_type);
+
+    return TRUE;
+}
+
+static void
+autorun_set_preference (CcRemovableMediaRow *self, const char *key, gboolean enabled)
+{
+    g_auto(GStrv) content_types = NULL;
+    guint idx;
+
+    content_types = g_settings_get_strv (self->settings, key);
+
+    for (idx = 0; self->content_types[idx] != NULL; idx++) {
+        content_types = remove_elem_from_str_array (content_types, self->content_types[idx]);
+        if (enabled) {
+            content_types = add_elem_to_str_array (content_types, self->content_types[idx]);
+        }
     }
-    if (x_content_open_folder != NULL) {
-        *pref_open_folder = g_strv_contains ((const gchar *const *) x_content_open_folder, self->content_type);
-    }
+
+    g_settings_set_strv (self->settings, key, (const gchar *const *) content_types);
 }
 
 static void
 autorun_set_preferences (CcRemovableMediaRow *self, gboolean pref_start_app, gboolean pref_ignore,
                          gboolean pref_open_folder)
 {
-    g_auto(GStrv) x_content_start_app = NULL;
-    g_auto(GStrv) x_content_ignore = NULL;
-    g_auto(GStrv) x_content_open_folder = NULL;
+    autorun_set_preference (self, PREF_MEDIA_AUTORUN_X_CONTENT_START_APP, pref_start_app);
+    autorun_set_preference (self, PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE, pref_ignore);
+    autorun_set_preference (self, PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER, pref_open_folder);
+}
 
-    g_assert (self->content_type != NULL);
+static void
+set_default_app (CcRemovableMediaRow *self, GAppInfo *info)
+{
+    guint idx;
 
-    x_content_start_app = g_settings_get_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_START_APP);
-    x_content_ignore = g_settings_get_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE);
-    x_content_open_folder = g_settings_get_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
-
-    x_content_start_app = remove_elem_from_str_array (x_content_start_app, self->content_type);
-    if (pref_start_app) {
-        x_content_start_app = add_elem_to_str_array (x_content_start_app, self->content_type);
+    for (idx = 0; self->content_types[idx] != NULL; idx++) {
+        g_app_info_set_as_default_for_type (info, self->content_types[idx], NULL);
     }
-    g_settings_set_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_START_APP,
-                         (const gchar *const *) x_content_start_app);
-
-    x_content_ignore = remove_elem_from_str_array (x_content_ignore, self->content_type);
-    if (pref_ignore) {
-        x_content_ignore = add_elem_to_str_array (x_content_ignore, self->content_type);
-    }
-    g_settings_set_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE, (const gchar *const *) x_content_ignore);
-
-    x_content_open_folder = remove_elem_from_str_array (x_content_open_folder, self->content_type);
-    if (pref_open_folder) {
-        x_content_open_folder = add_elem_to_str_array (x_content_open_folder, self->content_type);
-    }
-    g_settings_set_strv (self->settings, PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER,
-                         (const gchar *const *) x_content_open_folder);
 }
 
 static char *
@@ -336,7 +324,7 @@ on_app_chooser_dialog_response (GtkDialog *dialog, int response, CcRemovableMedi
     self->last_selected = 0;
 
     autorun_set_preferences (self, TRUE, FALSE, FALSE);
-    g_app_info_set_as_default_for_type (info, self->content_type, NULL);
+    set_default_app (self, info);
 }
 
 static void
@@ -348,7 +336,7 @@ present_app_chooser_dialog (CcRemovableMediaRow *self)
     root = gtk_widget_get_root (GTK_WIDGET (self));
 
     dialog = gtk_app_chooser_dialog_new_for_content_type (
-        GTK_WINDOW (root), GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT, self->content_type);
+        GTK_WINDOW (root), GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT, self->content_types[0]);
 
     if (self->heading != NULL)
         gtk_app_chooser_dialog_set_heading (GTK_APP_CHOOSER_DIALOG (dialog), self->heading);
@@ -375,7 +363,7 @@ selected_changed_cb (CcRemovableMediaRow *self)
 
         self->last_selected = selected;
         autorun_set_preferences (self, TRUE, FALSE, FALSE);
-        g_app_info_set_as_default_for_type (info, self->content_type, NULL);
+        set_default_app (self, info);
 
         return;
     }
@@ -413,18 +401,20 @@ cc_removable_media_row_constructed (GObject *object)
 
     G_OBJECT_CLASS (cc_removable_media_row_parent_class)->constructed (object);
 
-    g_assert (self->content_type != NULL);
+    g_assert (self->content_types != NULL && self->content_types[0] != NULL);
 
     g_signal_handlers_block_by_func (self, selected_changed_cb, self);
 
-    default_app = g_app_info_get_default_for_type (self->content_type, FALSE);
+    default_app = g_app_info_get_default_for_type (self->content_types[0], FALSE);
     if (G_IS_APP_INFO (default_app))
         g_list_store_append (self->apps, default_app);
 
     g_list_store_append (self->sections, self->apps);
     g_list_store_append (self->sections, self->actions);
 
-    autorun_get_preferences (self, &pref_start_app, &pref_ignore, &pref_open_folder);
+    pref_start_app = autorun_get_preference (self, PREF_MEDIA_AUTORUN_X_CONTENT_START_APP);
+    pref_ignore = autorun_get_preference (self, PREF_MEDIA_AUTORUN_X_CONTENT_IGNORE);
+    pref_open_folder = autorun_get_preference (self, PREF_MEDIA_AUTORUN_X_CONTENT_OPEN_FOLDER);
 
     n_apps = g_list_model_get_n_items (G_LIST_MODEL (self->apps));
 
@@ -448,8 +438,8 @@ cc_removable_media_row_get_property (GObject *object, guint prop_id, GValue *val
     CcRemovableMediaRow *self = CC_REMOVABLE_MEDIA_ROW (object);
 
     switch (prop_id) {
-    case PROP_CONTENT_TYPE:
-        g_value_set_string (value, self->content_type);
+    case PROP_CONTENT_TYPES:
+        g_value_set_boxed (value, self->content_types);
         break;
     case PROP_HEADING:
         g_value_set_string (value, self->heading);
@@ -465,8 +455,8 @@ cc_removable_media_row_set_property (GObject *object, guint prop_id, const GValu
     CcRemovableMediaRow *self = CC_REMOVABLE_MEDIA_ROW (object);
 
     switch (prop_id) {
-    case PROP_CONTENT_TYPE:
-        self->content_type = g_value_dup_string (value);
+    case PROP_CONTENT_TYPES:
+        self->content_types = g_value_dup_boxed (value);
         break;
     case PROP_HEADING:
         self->heading = g_value_dup_string (value);
@@ -482,7 +472,7 @@ cc_removable_media_row_finalize (GObject *object)
     CcRemovableMediaRow *self = CC_REMOVABLE_MEDIA_ROW (object);
 
     g_clear_object (&self->settings);
-    g_clear_pointer (&self->content_type, g_free);
+    g_clear_pointer (&self->content_types, g_strfreev);
     g_clear_pointer (&self->heading, g_free);
 
     G_OBJECT_CLASS (cc_removable_media_row_parent_class)->finalize (object);
@@ -499,8 +489,8 @@ cc_removable_media_row_class_init (CcRemovableMediaRowClass *klass)
     object_class->set_property = cc_removable_media_row_set_property;
     object_class->finalize = cc_removable_media_row_finalize;
 
-    properties[PROP_CONTENT_TYPE] = g_param_spec_string (
-        "content-type", NULL, NULL, NULL, G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+    properties[PROP_CONTENT_TYPES] = g_param_spec_boxed (
+        "content-types", NULL, NULL, G_TYPE_STRV, G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
     properties[PROP_HEADING] = g_param_spec_string (
         "heading", NULL, NULL, NULL, G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
@@ -527,10 +517,4 @@ cc_removable_media_row_init (CcRemovableMediaRow *self)
     gtk_widget_init_template (GTK_WIDGET (self));
 
     self->settings = g_settings_new (MEDIA_HANDLING_SCHEMA);
-}
-
-CcRemovableMediaRow *
-cc_removable_media_row_new (const char *content_type)
-{
-    return g_object_new (CC_TYPE_REMOVABLE_MEDIA_ROW, "content-type", content_type, NULL);
 }

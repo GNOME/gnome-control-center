@@ -22,7 +22,6 @@
 #include <config.h>
 
 #include <glib.h>
-#include <glib/gi18n.h>
 
 #include <shell/cc-panel.h>
 
@@ -42,131 +41,6 @@ struct _CcRemovableMediaSettings {
 };
 
 G_DEFINE_FINAL_TYPE (CcRemovableMediaSettings, cc_removable_media_settings, ADW_TYPE_PREFERENCES_GROUP)
-
-typedef struct {
-    gchar *description;
-    gchar *content_type;
-} OtherMediaType;
-
-static void
-other_media_type_free (OtherMediaType *other)
-{
-    g_free (other->description);
-    g_free (other->content_type);
-    g_free (other);
-}
-
-static gint
-other_media_type_sort (gconstpointer a, gconstpointer b)
-{
-    const OtherMediaType *other_a = *((OtherMediaType **) a);
-    const OtherMediaType *other_b = *((OtherMediaType **) b);
-
-    return g_utf8_collate (other_a->description, other_b->description);
-}
-
-static void
-add_other_type_row (CcRemovableMediaSettings *self, const OtherMediaType *other)
-{
-    CcRemovableMediaRow *row;
-
-    row = cc_removable_media_row_new (other->content_type);
-    /* The descriptions come from shared-mime-info, so they may contain
-     * characters that would otherwise be interpreted as Pango markup */
-    adw_preferences_row_set_use_markup (ADW_PREFERENCES_ROW (row), FALSE);
-    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), other->description);
-
-    adw_preferences_group_add (ADW_PREFERENCES_GROUP (self), GTK_WIDGET (row));
-}
-
-static void
-info_panel_setup_media (CcRemovableMediaSettings *self)
-{
-    guint n;
-    GList *l, *content_types;
-    g_autoptr(GPtrArray) other_types = NULL;
-
-    const gchar *const defs[] = {
-        "x-content/audio-cdda", "x-content/video-dvd",     "x-content/audio-player",
-        "x-content/image-dcf",  "x-content/unix-software",
-    };
-
-    struct {
-        const gchar *content_type;
-        const gchar *description;
-    } const other_defs[] = {
-        /* translators: these strings are duplicates of shared-mime-info
-         * strings, just here to fix capitalization of the English originals.
-         * If the shared-mime-info translation works for your language,
-         * simply leave these untranslated.
-         */
-        { "x-content/audio-dvd", N_("audio DVD") },
-          { "x-content/blank-bd", N_("blank Blu-ray disc") },
-            { "x-content/blank-cd", N_("blank CD disc") },
-              { "x-content/blank-dvd", N_("blank DVD disc") },
-                { "x-content/blank-hddvd", N_("blank HD DVD disc") },
-                  { "x-content/video-bluray", N_("Blu-ray video disc") },
-                    { "x-content/ebook-reader", N_("e-book reader") },
-                      { "x-content/video-hddvd", N_("HD DVD video disc") },
-                        { "x-content/image-picturecd", N_("Picture CD") },
-                          { "x-content/video-svcd", N_("Super Video CD") },
-                            { "x-content/video-vcd", N_("Video CD") },
-                              { "x-content/win32-software", N_("Windows software") },
-                            };
-
-    other_types = g_ptr_array_new_with_free_func ((GDestroyNotify) other_media_type_free);
-
-    content_types = g_content_types_get_registered ();
-
-    for (l = content_types; l != NULL; l = l->next) {
-        char *content_type = l->data;
-        g_autofree char *description = NULL;
-        OtherMediaType *other;
-
-        if (!g_str_has_prefix (content_type, "x-content/"))
-            continue;
-
-        for (n = 0; n < G_N_ELEMENTS (defs); n++) {
-            if (g_content_type_is_a (content_type, defs[n])) {
-                goto skip;
-            }
-        }
-
-        for (n = 0; n < G_N_ELEMENTS (other_defs); n++) {
-            if (strcmp (content_type, other_defs[n].content_type) == 0) {
-                const gchar *s = other_defs[n].description;
-                if (s == _(s))
-                    description = g_content_type_get_description (content_type);
-                else
-                    description = g_strdup (_(s));
-
-                break;
-            }
-        }
-
-        if (description == NULL) {
-            g_debug ("Content type '%s' is missing from the info panel", content_type);
-            description = g_content_type_get_description (content_type);
-        }
-
-        other = g_new0 (OtherMediaType, 1);
-        other->description = g_steal_pointer (&description);
-        other->content_type = g_strdup (content_type);
-
-        g_ptr_array_add (other_types, other);
-    skip:;
-    }
-
-    g_list_free_full (content_types, g_free);
-
-    g_ptr_array_sort (other_types, other_media_type_sort);
-
-    for (n = 0; n < other_types->len; n++) {
-        add_other_type_row (self, g_ptr_array_index (other_types, n));
-    }
-
-    g_settings_bind (self->settings, PREF_MEDIA_AUTORUN_NEVER, self, "sensitive", G_SETTINGS_BIND_INVERT_BOOLEAN);
-}
 
 static void
 cc_removable_media_settings_finalize (GObject *object)
@@ -198,7 +72,7 @@ cc_removable_media_settings_init (CcRemovableMediaSettings *self)
     gtk_widget_init_template (GTK_WIDGET (self));
     self->settings = g_settings_new (MEDIA_HANDLING_SCHEMA);
 
-    info_panel_setup_media (self);
+    g_settings_bind (self->settings, PREF_MEDIA_AUTORUN_NEVER, self, "sensitive", G_SETTINGS_BIND_INVERT_BOOLEAN);
 }
 
 CcRemovableMediaSettings *

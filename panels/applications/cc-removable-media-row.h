@@ -30,6 +30,4 @@ G_BEGIN_DECLS
 #define CC_TYPE_REMOVABLE_MEDIA_ROW (cc_removable_media_row_get_type ())
 G_DECLARE_FINAL_TYPE (CcRemovableMediaRow, cc_removable_media_row, CC, REMOVABLE_MEDIA_ROW, AdwComboRow)
 
-CcRemovableMediaRow *cc_removable_media_row_new (const char *content_type);
-
 G_END_DECLS

@@ -3,37 +3,73 @@ using Adw 1;
 
 template $CcRemovableMediaSettings: Adw.PreferencesGroup {
   $CcRemovableMediaRow {
-    title: _("CD _Audio");
+    title: _("Audio _Disc");
     use-underline: true;
-    content-type: "x-content/audio-cdda";
-    heading: _("Select an app for audio CDs");
+    content-types: [
+      "x-content/audio-cdda",
+      "x-content/audio-dvd",
+    ];
+    heading: _("Select an app for audio discs");
   }
 
   $CcRemovableMediaRow {
-    title: _("_DVD Video");
+    title: _("_Video Disc");
     use-underline: true;
-    content-type: "x-content/video-dvd";
-    heading: _("Select an app for video DVDs");
+    content-types: [
+      "x-content/video-dvd",
+      "x-content/video-bluray",
+      "x-content/video-hddvd",
+      "x-content/video-svcd",
+      "x-content/video-vcd",
+    ];
+    heading: _("Select an app for video discs");
+  }
+
+  $CcRemovableMediaRow {
+    title: _("_Blank Disc");
+    use-underline: true;
+    content-types: [
+      "x-content/blank-cd",
+      "x-content/blank-dvd",
+      "x-content/blank-bd",
+      "x-content/blank-hddvd",
+    ];
+    heading: _("Select an app for blank discs");
   }
 
   $CcRemovableMediaRow {
     title: _("Music Pla_yer");
     use-underline: true;
-    content-type: "x-content/audio-player";
+    content-types: ["x-content/audio-player"];
     heading: _("Select an app to run when a music player is connected");
   }
 
   $CcRemovableMediaRow {
-    title: _("P_hotos");
+    title: _("P_ictures");
     use-underline: true;
-    content-type: "x-content/image-dcf";
+    content-types: [
+      "x-content/image-dcf",
+      "x-content/image-picturecd",
+    ];
     heading: _("Select an app to run when a camera is connected");
   }
 
   $CcRemovableMediaRow {
     title: _("Sof_tware");
     use-underline: true;
-    content-type: "x-content/unix-software";
+    content-types: [
+      "x-content/software",
+      "x-content/unix-software",
+      "x-content/win32-software",
+      "x-content/ostree-repository",
+    ];
     heading: _("Select an app for software CDs");
+  }
+
+  $CcRemovableMediaRow {
+    title: _("_E-Book Reader");
+    use-underline: true;
+    content-types: ["x-content/ebook-reader"];
+    heading: _("Select an app to run when an e-book reader is connected");
   }
 }
