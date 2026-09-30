@@ -66,16 +66,9 @@
         </child>
       </object>
     </child>
-    <child>
-      <object class="CcListRow">
-        <property name="title" translatable="yes">_Other Media Types</property>
-        <property name="show-arrow">True</property>
-        <signal name="activated" handler="on_extra_options_button_clicked" object="CcRemovableMediaSettings"/>
-      </object>
-    </child>
   </template>
 
-  <object class="GtkSizeGroup">
+  <object class="GtkSizeGroup" id="chooser_size_group">
     <widgets>
       <widget name="audio_cdda_chooser"/>
       <widget name="video_dvd_chooser"/>
@@ -83,66 +76,5 @@
       <widget name="dcf_chooser"/>
       <widget name="software_chooser"/>
     </widgets>
-  </object>
-
-  <object class="AdwDialog" id="other_type_dialog">
-    <property name="title" translatable="yes">Other Media Types</property>
-    <property name="content-width">360</property>
-    <property name="content-height">294</property>
-    <signal name="close-attempt" handler="on_extra_options_dialog_close_attempt" object="CcRemovableMediaSettings" swapped="yes"/>
-    <property name="child">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar"/>
-        </child>
-        <property name="content">
-          <object class="AdwPreferencesPage">
-            <child>
-              <object class="AdwPreferencesGroup">
-                <child>
-                  <object class="AdwActionRow" id="other_type_action_row">
-                    <property name="title" translatable="yes">_Type</property>
-                    <property name="use-underline">True</property>
-                    <property name="activatable-widget">other_type_combo_box</property>
-                    <child>
-                      <object class="GtkComboBox" id="other_type_combo_box">
-                        <property name="model">other_type_list_store</property>
-                        <property name="valign">center</property>
-                        <signal name="changed" handler="on_other_type_combo_box_changed" object="CcRemovableMediaSettings" swapped="yes"/>
-                        <child>
-                          <object class="GtkCellRendererText"/>
-                          <attributes>
-                            <attribute name="text">0</attribute>
-                          </attributes>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwActionRow" id="other_action_row">
-                    <property name="title" translatable="yes">_Action</property>
-                    <property name="use-underline">True</property>
-                    <child>
-                      <object class="GtkBox" id="other_action_box">
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </property>
-      </object>
-    </property>
-  </object>
-  <object class="GtkListStore" id="other_type_list_store">
-    <columns>
-      <!-- column-name description -->
-      <column type="gchararray"/>
-      <!-- column-name content-type -->
-      <column type="gchararray"/>
-    </columns>
   </object>
 </interface>

@@ -47,16 +47,10 @@ struct _CcRemovableMediaSettings {
     GtkAppChooserButton *audio_cdda_chooser;
     GtkAppChooserButton *dcf_chooser;
     GtkAppChooserButton *music_player_chooser;
-    AdwDialog *other_type_dialog;
-    AdwActionRow *other_action_row;
-    GtkBox *other_action_box;
-    AdwPreferencesRow *other_type_action_row;
-    GtkComboBox *other_type_combo_box;
-    GtkListStore *other_type_list_store;
     GtkAppChooserButton *software_chooser;
     GtkAppChooserButton *video_dvd_chooser;
+    GtkSizeGroup *chooser_size_group;
 
-    GtkAppChooserButton *other_application_chooser;
     GSettings *settings;
 };
 
@@ -275,49 +269,48 @@ prepare_chooser (CcRemovableMediaSettings *self, GtkAppChooserButton *button, co
     ellipsize_app_chooser (button);
 }
 
+typedef struct {
+    gchar *description;
+    gchar *content_type;
+} OtherMediaType;
+
 static void
-on_other_type_combo_box_changed (CcRemovableMediaSettings *self)
+other_media_type_free (OtherMediaType *other)
 {
-    GtkTreeIter iter;
-    g_autofree gchar *x_content_type = NULL;
-
-    if (!gtk_combo_box_get_active_iter (self->other_type_combo_box, &iter)) {
-        return;
-    }
-
-    gtk_tree_model_get (GTK_TREE_MODEL (self->other_type_list_store), &iter, 1, &x_content_type, -1);
-
-    if (self->other_application_chooser != NULL) {
-        gtk_box_remove (self->other_action_box, GTK_WIDGET (self->other_application_chooser));
-        self->other_application_chooser = NULL;
-    }
-
-    self->other_application_chooser = GTK_APP_CHOOSER_BUTTON (gtk_app_chooser_button_new (x_content_type));
-    gtk_box_append (self->other_action_box, GTK_WIDGET (self->other_application_chooser));
-    prepare_chooser (self, self->other_application_chooser, NULL);
-
-    adw_action_row_set_activatable_widget (self->other_action_row, GTK_WIDGET (self->other_application_chooser));
+    g_free (other->description);
+    g_free (other->content_type);
+    g_free (other);
 }
 
-static gboolean
-on_extra_options_dialog_close_attempt (CcRemovableMediaSettings *self)
+static gint
+other_media_type_sort (gconstpointer a, gconstpointer b)
 {
-    gtk_widget_set_visible (GTK_WIDGET (self->other_type_dialog), FALSE);
+    const OtherMediaType *other_a = *((OtherMediaType **) a);
+    const OtherMediaType *other_b = *((OtherMediaType **) b);
 
-    if (self->other_application_chooser != NULL) {
-        gtk_box_remove (self->other_action_box, GTK_WIDGET (self->other_application_chooser));
-        self->other_application_chooser = NULL;
-    }
-
-    return GDK_EVENT_PROPAGATE;
+    return g_utf8_collate (other_a->description, other_b->description);
 }
 
 static void
-on_extra_options_button_clicked (CcRemovableMediaSettings *self)
+add_other_type_row (CcRemovableMediaSettings *self, const OtherMediaType *other)
 {
-    /* update other_application_chooser */
-    on_other_type_combo_box_changed (self);
-    adw_dialog_present (self->other_type_dialog, GTK_WIDGET (self));
+    GtkAppChooserButton *chooser;
+    AdwActionRow *row;
+
+    chooser = GTK_APP_CHOOSER_BUTTON (gtk_app_chooser_button_new (other->content_type));
+    gtk_widget_set_valign (GTK_WIDGET (chooser), GTK_ALIGN_CENTER);
+    gtk_size_group_add_widget (self->chooser_size_group, GTK_WIDGET (chooser));
+    prepare_chooser (self, chooser, NULL);
+
+    row = ADW_ACTION_ROW (adw_action_row_new ());
+    /* The descriptions come from shared-mime-info, so they may contain
+     * characters that would otherwise be interpreted as Pango markup */
+    adw_preferences_row_set_use_markup (ADW_PREFERENCES_ROW (row), FALSE);
+    adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), other->description);
+    adw_action_row_add_suffix (row, GTK_WIDGET (chooser));
+    adw_action_row_set_activatable_widget (row, GTK_WIDGET (chooser));
+
+    adw_preferences_group_add (ADW_PREFERENCES_GROUP (self), GTK_WIDGET (row));
 }
 
 #define OFFSET(x) (G_STRUCT_OFFSET (CcRemovableMediaSettings, x))
@@ -328,7 +321,7 @@ info_panel_setup_media (CcRemovableMediaSettings *self)
 {
     guint n;
     GList *l, *content_types;
-    GtkTreeIter iter;
+    g_autoptr(GPtrArray) other_types = NULL;
 
     struct {
         gint widget_offset;
@@ -370,13 +363,14 @@ info_panel_setup_media (CcRemovableMediaSettings *self)
         prepare_chooser (self, GTK_APP_CHOOSER_BUTTON (WIDGET_FROM_OFFSET (defs[n].widget_offset)), defs[n].heading);
     }
 
-    gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (self->other_type_list_store), 1, GTK_SORT_ASCENDING);
+    other_types = g_ptr_array_new_with_free_func ((GDestroyNotify) other_media_type_free);
 
     content_types = g_content_types_get_registered ();
 
     for (l = content_types; l != NULL; l = l->next) {
         char *content_type = l->data;
         g_autofree char *description = NULL;
+        OtherMediaType *other;
 
         if (!g_str_has_prefix (content_type, "x-content/"))
             continue;
@@ -404,15 +398,21 @@ info_panel_setup_media (CcRemovableMediaSettings *self)
             description = g_content_type_get_description (content_type);
         }
 
-        gtk_list_store_append (self->other_type_list_store, &iter);
+        other = g_new0 (OtherMediaType, 1);
+        other->description = g_steal_pointer (&description);
+        other->content_type = g_strdup (content_type);
 
-        gtk_list_store_set (self->other_type_list_store, &iter, 0, description, 1, content_type, -1);
+        g_ptr_array_add (other_types, other);
     skip:;
     }
 
     g_list_free_full (content_types, g_free);
 
-    gtk_combo_box_set_active (self->other_type_combo_box, 0);
+    g_ptr_array_sort (other_types, other_media_type_sort);
+
+    for (n = 0; n < other_types->len; n++) {
+        add_other_type_row (self, g_ptr_array_index (other_types, n));
+    }
 
     g_settings_bind (self->settings, PREF_MEDIA_AUTORUN_NEVER, self, "sensitive", G_SETTINGS_BIND_INVERT_BOOLEAN);
 }
@@ -428,23 +428,12 @@ cc_removable_media_settings_finalize (GObject *object)
 }
 
 static void
-cc_removable_media_settings_dispose (GObject *object)
-{
-    CcRemovableMediaSettings *self = CC_REMOVABLE_MEDIA_SETTINGS (object);
-
-    g_clear_pointer ((AdwDialog **) &self->other_type_dialog, adw_dialog_force_close);
-
-    G_OBJECT_CLASS (cc_removable_media_settings_parent_class)->dispose (object);
-}
-
-static void
 cc_removable_media_settings_class_init (CcRemovableMediaSettingsClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
     object_class->finalize = cc_removable_media_settings_finalize;
-    object_class->dispose = cc_removable_media_settings_dispose;
 
     gtk_widget_class_set_template_from_resource (
         widget_class, "/org/gnome/control-center/applications/cc-removable-media-settings.ui");
@@ -452,36 +441,18 @@ cc_removable_media_settings_class_init (CcRemovableMediaSettingsClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, audio_cdda_chooser);
     gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, dcf_chooser);
     gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, music_player_chooser);
-    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_dialog);
-    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_action_row);
-    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_action_box);
-    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_action_row);
-    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_combo_box);
-    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, other_type_list_store);
     gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, software_chooser);
     gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, video_dvd_chooser);
-
-    gtk_widget_class_bind_template_callback (widget_class, on_extra_options_dialog_close_attempt);
-    gtk_widget_class_bind_template_callback (widget_class, on_extra_options_button_clicked);
-    gtk_widget_class_bind_template_callback (widget_class, on_other_type_combo_box_changed);
+    gtk_widget_class_bind_template_child (widget_class, CcRemovableMediaSettings, chooser_size_group);
 }
 
 static void
 cc_removable_media_settings_init (CcRemovableMediaSettings *self)
 {
-    const char *type_title;
-    g_autofree gchar *type_title_markup = NULL;
-
     gtk_widget_init_template (GTK_WIDGET (self));
     self->settings = g_settings_new (MEDIA_HANDLING_SCHEMA);
 
     info_panel_setup_media (self);
-
-    /* Fix for #3478 using approach in code rather than exposing
-     * translators to ugly escaped tags in the property string */
-    type_title = adw_preferences_row_get_title (self->other_type_action_row);
-    type_title_markup = g_markup_printf_escaped ("<span allow_breaks='false'>%s</span>", type_title);
-    adw_preferences_row_set_title (self->other_type_action_row, type_title_markup);
 }
 
 CcRemovableMediaSettings *
