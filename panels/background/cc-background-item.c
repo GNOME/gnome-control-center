@@ -159,15 +159,31 @@ run_in_thread (GTask *task, GTaskThreadFunc func)
 static const char *
 item_get_thumbnail_uri (CcBackgroundItem *item)
 {
-    if (item->placement == G_DESKTOP_BACKGROUND_STYLE_WALLPAPER
-        || item->placement == G_DESKTOP_BACKGROUND_STYLE_CENTERED)
+    if (item->placement != G_DESKTOP_BACKGROUND_STYLE_ZOOM && item->placement != G_DESKTOP_BACKGROUND_STYLE_STRETCHED)
         return NULL;
 
     return item->thumbnail_uri;
 }
 
+/* Bypass GnomeBg thumbnail generation.
+ */
+static GdkPixbuf *
+load_thumbnail_file (const char *uri, int width, int height)
+{
+    g_autoptr(GFile) file = NULL;
+    g_autoptr(GFileInputStream) stream = NULL;
+
+    file = g_file_new_for_uri (uri);
+    stream = g_file_read (file, NULL, NULL);
+
+    if (stream == NULL)
+        return NULL;
+
+    return gdk_pixbuf_new_from_stream_at_scale (G_INPUT_STREAM (stream), width, height, TRUE, NULL, NULL);
+}
+
 static GnomeBG *
-item_to_gnome_bg (CcBackgroundItem *item, gboolean dark, gboolean use_thumbnail)
+item_to_gnome_bg (CcBackgroundItem *item, gboolean dark)
 {
     GnomeBG *bg;
     const char *uri;
@@ -179,13 +195,6 @@ item_to_gnome_bg (CcBackgroundItem *item, gboolean dark, gboolean use_thumbnail)
     uri = dark ? item->uri_dark : item->uri;
 
     g_return_val_if_fail (uri != NULL, NULL);
-
-    if (use_thumbnail) {
-        const char *thumbnail_uri = item_get_thumbnail_uri (item);
-
-        if (thumbnail_uri != NULL)
-            uri = thumbnail_uri;
-    }
 
     bg = gnome_bg_new ();
 
@@ -216,11 +225,11 @@ cc_background_item_changes_with_time (CcBackgroundItem *item)
     g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), FALSE);
 
     if (item->uri != NULL) {
-        bg = item_to_gnome_bg (item, FALSE, FALSE);
+        bg = item_to_gnome_bg (item, FALSE);
         changes |= gnome_bg_changes_with_time (bg);
     }
     if (item->uri_dark != NULL && !changes) {
-        bg_dark = item_to_gnome_bg (item, TRUE, FALSE);
+        bg_dark = item_to_gnome_bg (item, TRUE);
         changes |= gnome_bg_changes_with_time (bg_dark);
     }
 
@@ -245,7 +254,7 @@ update_size (CcBackgroundItem *item)
     if (item->uri == NULL) {
         item->size = g_strdup ("");
     } else {
-        bg = item_to_gnome_bg (item, FALSE, FALSE);
+        bg = item_to_gnome_bg (item, FALSE);
         if (gnome_bg_has_multiple_sizes (bg) || gnome_bg_changes_with_time (bg)) {
             item->size = g_strdup (_("multiple sizes"));
         } else {
@@ -284,7 +293,9 @@ cc_background_item_get_thumbnail_worker (GTask *task, gpointer source_object, gp
 {
     GetThumbnailAsync *state = task_data;
     CcBackgroundItem *item = source_object;
-    GdkPixbuf *pixbuf;
+    const char *thumbnail_uri;
+    int width, height;
+    GdkPixbuf *pixbuf = NULL;
 
     g_assert (G_IS_TASK (task));
     g_assert (CC_IS_BACKGROUND_ITEM (item));
@@ -292,8 +303,15 @@ cc_background_item_get_thumbnail_worker (GTask *task, gpointer source_object, gp
     g_assert (state != NULL);
     g_assert (state->thumbs != NULL);
 
-    pixbuf = gnome_bg_create_thumbnail (state->bg, state->thumbs, &state->monitor_layout,
-                                        state->scale_factor * state->width, state->scale_factor * state->height);
+    width = state->scale_factor * state->width;
+    height = state->scale_factor * state->height;
+
+    thumbnail_uri = item_get_thumbnail_uri (item);
+    if (thumbnail_uri != NULL)
+        pixbuf = load_thumbnail_file (thumbnail_uri, width, height);
+
+    if (pixbuf == NULL)
+        pixbuf = gnome_bg_create_thumbnail (state->bg, state->thumbs, &state->monitor_layout, width, height);
 
     if (pixbuf != NULL)
         g_task_return_pointer (task, pixbuf, g_object_unref);
@@ -344,7 +362,7 @@ cc_background_item_get_thumbnail_async (CcBackgroundItem *item, GnomeDesktopThum
     state->height = height;
     state->scale_factor = scale_factor;
     state->dark = !!dark;
-    state->bg = item_to_gnome_bg (item, dark, TRUE);
+    state->bg = item_to_gnome_bg (item, dark);
 
     /* g_task_run_in_thread() will use a threadpool which may jump the
      * number of parallel workers to around 10. On low-memory systems, that
