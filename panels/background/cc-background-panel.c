@@ -272,6 +272,36 @@ update_preview (CcBackgroundPanel *self)
 }
 
 static void
+on_wallpapers_changed_cb (CcBackgroundPanel *self, guint position, guint removed, guint added, GListModel *wallpapers)
+{
+    const char *uri, *uri_dark;
+    guint i;
+
+    if (self->current_background == NULL)
+        return;
+
+    uri = cc_background_item_get_uri (self->current_background);
+    uri_dark = cc_background_item_get_uri_dark (self->current_background);
+
+    for (i = position; i < position + added; i++) {
+        g_autoptr (CcBackgroundItem) item = g_list_model_get_item (wallpapers, i);
+        g_autofree char *thumbnail_uri = NULL;
+
+        if (g_strcmp0 (cc_background_item_get_uri (item), uri) != 0
+            || g_strcmp0 (cc_background_item_get_uri_dark (item), uri_dark) != 0)
+            continue;
+
+        g_object_get (G_OBJECT (item), "thumbnail-uri", &thumbnail_uri, NULL);
+        if (thumbnail_uri == NULL)
+            break;
+
+        g_object_set (G_OBJECT (self->current_background), "thumbnail-uri", thumbnail_uri, NULL);
+        update_preview (self);
+        break;
+    }
+}
+
+static void
 reload_current_bg (CcBackgroundPanel *self)
 {
     CcBackgroundItem *configured;
@@ -497,6 +527,9 @@ cc_background_panel_init (CcBackgroundPanel *self)
     /* Load the background */
     reload_current_bg (self);
     update_preview (self);
+
+    g_signal_connect_object (cc_background_chooser_get_wallpapers (self->background_chooser), "items-changed",
+                             G_CALLBACK (on_wallpapers_changed_cb), self, G_CONNECT_SWAPPED);
 
     /* Background settings */
     g_signal_connect_object (self->settings, "changed", G_CALLBACK (on_settings_changed), self, G_CONNECT_SWAPPED);

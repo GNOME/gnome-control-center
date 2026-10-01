@@ -445,6 +445,14 @@ flow_box_set_active_item (GtkFlowBox *flowbox, CcBackgroundItem *active_item)
     }
 }
 
+GListModel *
+cc_background_chooser_get_wallpapers (CcBackgroundChooser *self)
+{
+    g_return_val_if_fail (CC_IS_BACKGROUND_CHOOSER (self), NULL);
+
+    return G_LIST_MODEL (bg_source_get_liststore (BG_SOURCE (self->wallpapers_source)));
+}
+
 void
 cc_background_chooser_set_active_item (CcBackgroundChooser *self, CcBackgroundItem *active_item)
 {
