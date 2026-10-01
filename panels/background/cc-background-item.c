@@ -47,6 +47,7 @@ struct _CcBackgroundItem {
     char *name;
     char *uri;
     char *uri_dark;
+    char *thumbnail_uri;
     char *size;
     GDesktopBackgroundStyle placement;
     GDesktopBackgroundShading shading;
@@ -73,6 +74,7 @@ enum {
     PROP_NAME,
     PROP_URI,
     PROP_URI_DARK,
+    PROP_THUMBNAIL_URI,
     PROP_PLACEMENT,
     PROP_SHADING,
     PROP_PRIMARY_COLOR,
@@ -151,11 +153,24 @@ run_in_thread (GTask *task, GTaskThreadFunc func)
     g_mutex_unlock (&thread_mutex);
 }
 
+/* Wallpapers may ship a small stand in image for the panel to draw instead of
+ * the wallpaper itself, which spares us decoding a full sized one.
+ */
+static const char *
+item_get_thumbnail_uri (CcBackgroundItem *item)
+{
+    if (item->placement == G_DESKTOP_BACKGROUND_STYLE_WALLPAPER
+        || item->placement == G_DESKTOP_BACKGROUND_STYLE_CENTERED)
+        return NULL;
+
+    return item->thumbnail_uri;
+}
+
 static GnomeBG *
-item_to_gnome_bg (CcBackgroundItem *item, gboolean dark)
+item_to_gnome_bg (CcBackgroundItem *item, gboolean dark, gboolean use_thumbnail)
 {
     GnomeBG *bg;
-    char *uri;
+    const char *uri;
     g_autoptr(GFile) file = NULL;
     g_autofree gchar *filename = NULL;
     GdkRGBA pcolor = { 0, 0, 0, 0 };
@@ -164,6 +179,13 @@ item_to_gnome_bg (CcBackgroundItem *item, gboolean dark)
     uri = dark ? item->uri_dark : item->uri;
 
     g_return_val_if_fail (uri != NULL, NULL);
+
+    if (use_thumbnail) {
+        const char *thumbnail_uri = item_get_thumbnail_uri (item);
+
+        if (thumbnail_uri != NULL)
+            uri = thumbnail_uri;
+    }
 
     bg = gnome_bg_new ();
 
@@ -194,11 +216,11 @@ cc_background_item_changes_with_time (CcBackgroundItem *item)
     g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), FALSE);
 
     if (item->uri != NULL) {
-        bg = item_to_gnome_bg (item, FALSE);
+        bg = item_to_gnome_bg (item, FALSE, FALSE);
         changes |= gnome_bg_changes_with_time (bg);
     }
     if (item->uri_dark != NULL && !changes) {
-        bg_dark = item_to_gnome_bg (item, TRUE);
+        bg_dark = item_to_gnome_bg (item, TRUE, FALSE);
         changes |= gnome_bg_changes_with_time (bg_dark);
     }
 
@@ -223,7 +245,7 @@ update_size (CcBackgroundItem *item)
     if (item->uri == NULL) {
         item->size = g_strdup ("");
     } else {
-        bg = item_to_gnome_bg (item, FALSE);
+        bg = item_to_gnome_bg (item, FALSE, FALSE);
         if (gnome_bg_has_multiple_sizes (bg) || gnome_bg_changes_with_time (bg)) {
             item->size = g_strdup (_("multiple sizes"));
         } else {
@@ -322,7 +344,7 @@ cc_background_item_get_thumbnail_async (CcBackgroundItem *item, GnomeDesktopThum
     state->height = height;
     state->scale_factor = scale_factor;
     state->dark = !!dark;
-    state->bg = item_to_gnome_bg (item, dark);
+    state->bg = item_to_gnome_bg (item, dark, TRUE);
 
     /* g_task_run_in_thread() will use a threadpool which may jump the
      * number of parallel workers to around 10. On low-memory systems, that
@@ -472,6 +494,13 @@ _set_uri_dark (CcBackgroundItem *item, const char *value)
         item->uri_dark = g_strdup (value);
     }
     _add_flag (item, CC_BACKGROUND_ITEM_HAS_URI_DARK);
+}
+
+static void
+_set_thumbnail_uri (CcBackgroundItem *item, const char *value)
+{
+    g_free (item->thumbnail_uri);
+    item->thumbnail_uri = (value && *value != '\0') ? g_strdup (value) : NULL;
 }
 
 const char *
@@ -647,6 +676,9 @@ cc_background_item_set_property (GObject *object, guint prop_id, const GValue *v
     case PROP_URI_DARK:
         _set_uri_dark (self, g_value_get_string (value));
         break;
+    case PROP_THUMBNAIL_URI:
+        _set_thumbnail_uri (self, g_value_get_string (value));
+        break;
     case PROP_PLACEMENT:
         _set_placement (self, g_value_get_enum (value));
         break;
@@ -696,6 +728,9 @@ cc_background_item_get_property (GObject *object, guint prop_id, GValue *value, 
         break;
     case PROP_URI_DARK:
         g_value_set_string (value, self->uri_dark);
+        break;
+    case PROP_THUMBNAIL_URI:
+        g_value_set_string (value, self->thumbnail_uri);
         break;
     case PROP_PLACEMENT:
         g_value_set_enum (value, self->placement);
@@ -764,6 +799,8 @@ cc_background_item_class_init (CcBackgroundItemClass *klass)
 
     props[PROP_URI_DARK] = g_param_spec_string ("uri-dark", NULL, NULL, NULL, G_PARAM_READWRITE);
 
+    props[PROP_THUMBNAIL_URI] = g_param_spec_string ("thumbnail-uri", NULL, NULL, NULL, G_PARAM_READWRITE);
+
     props[PROP_PLACEMENT] = g_param_spec_enum ("placement", NULL, NULL, G_DESKTOP_TYPE_BACKGROUND_STYLE,
                                                G_DESKTOP_BACKGROUND_STYLE_SCALED, G_PARAM_READWRITE);
 
@@ -821,6 +858,7 @@ cc_background_item_finalize (GObject *object)
     g_free (item->name);
     g_free (item->uri);
     g_free (item->uri_dark);
+    g_free (item->thumbnail_uri);
     g_free (item->primary_color);
     g_free (item->secondary_color);
     g_free (item->mime_type);
@@ -848,6 +886,7 @@ cc_background_item_copy (CcBackgroundItem *item)
 
     ret = cc_background_item_new (item->uri);
     ret->name = g_strdup (item->name);
+    ret->thumbnail_uri = g_strdup (item->thumbnail_uri);
     ret->size = g_strdup (item->size);
     ret->placement = item->placement;
     ret->shading = item->shading;
