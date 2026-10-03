@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-08-18 13:26+0000\n"
+"POT-Creation-Date: 2026-09-11 11:48+0000\n"
 "PO-Revision-Date: 2026-08-18 18:35+0200\n"
 "Last-Translator: twlvnn kraftwerk <kraft_werk@tutanota.com>\n"
 "Language-Team: Bulgarian <dict-notifications@fsa-bg.org>\n"
@@ -62,7 +62,7 @@ msgstr "Добавяне на клавишни комбинации"
 #: panels/system/users/cc-add-user-dialog.blp:19
 #: panels/system/users/cc-avatar-chooser.c:90
 #: panels/system/users/cc-enterprise-login-dialog.blp:39
-#: panels/system/users/cc-fingerprint-dialog.blp:166
+#: panels/system/users/cc-fingerprint-dialog.blp:168
 #: panels/system/users/cc-password-dialog.blp:17
 #: panels/system/users/cc-user-page.blp:196
 #: panels/wwan/cc-wwan-mode-dialog.blp:27
@@ -471,7 +471,7 @@ msgstr "Файлова система"
 #: panels/applications/cc-applications-panel.c:839
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:8 shell/cc-window.blp:20
-#: shell/cc-window.c:827 shell/org.gnome.Settings.desktop.in:2
+#: shell/cc-window.c:792 shell/org.gnome.Settings.desktop.in:2
 msgid "Settings"
 msgstr "Настройки"
 
@@ -1144,7 +1144,7 @@ msgstr "_Продължаване"
 #. Translators: This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.blp:40
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:34
-#: panels/system/users/cc-fingerprint-dialog.blp:177
+#: panels/system/users/cc-fingerprint-dialog.blp:179
 msgid "_Done"
 msgstr "_Готово"
 
@@ -2813,7 +2813,7 @@ msgstr "Натискане"
 
 #: panels/mouse/cc-mouse-panel.blp:217 panels/mouse/cc-mouse-test.blp:110
 msgid "Secondary Click"
-msgstr "Повторно натискане"
+msgstr "Контекстно натискане (десен бутон)"
 
 #: panels/mouse/cc-mouse-panel.blp:218
 msgid "Two _Finger Push"
@@ -7688,8 +7688,9 @@ msgstr "_Парола"
 msgid "_Generate New Password"
 msgstr "_Генериране на нова парола"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:129
-#: panels/system/remote-desktop/cc-remote-login-page.blp:120
+#. Translators: "Fingerprint" refers to verifying a TLS/cryptographic key fingerprint for Remote Desktop, not a fingerprint scanner for user authentication.
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:130
+#: panels/system/remote-desktop/cc-remote-login-page.blp:121
 msgid "_Verify Fingerprint"
 msgstr "_Проверка на отпечатъците"
 
@@ -8045,7 +8046,7 @@ msgstr "Отпечатъци"
 msgid "Add Fingerprint"
 msgstr "Добавяне на отпечатък"
 
-#: panels/system/users/cc-fingerprint-dialog.blp:136
+#: panels/system/users/cc-fingerprint-dialog.blp:137
 msgid "Touch the fingerprint reader to check the scanned fingers"
 msgstr "Докоснете четеца на отпечатъци с пръста за проверка"
 
@@ -8635,13 +8636,13 @@ msgid "_Test Flash"
 msgstr "_Проба на проблясването"
 
 #. Translators: This will be presented as the text of a link to the Sound panel
-#: panels/universal-access/cc-ua-hearing-page.c:154
+#: panels/universal-access/cc-ua-hearing-page.c:152
 msgctxt "Sound panel name"
 msgid "Sound"
 msgstr "Звук"
 
 #. Translators: %s is a link to the Sound panel with the label "Sound"
-#: panels/universal-access/cc-ua-hearing-page.c:156
+#: panels/universal-access/cc-ua-hearing-page.c:154
 #, c-format
 msgid "System volume can be adjusted in %s settings"
 msgstr "Силата на звука на системата може да се наглася в настройките за %s"
@@ -8706,11 +8707,11 @@ msgstr "Помощ при натискане"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:61
 msgid "_Simulated Secondary Click"
-msgstr "_Симулирано повторно натискане"
+msgstr "_Симулирано контекстно натискане"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:62
 msgid "Secondary click by holding down the primary mouse button"
-msgstr "Второ натискане при задържане на основния бутон"
+msgstr "Контекстно натискане при задържане на основния бутон"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:67
 #: panels/universal-access/cc-ua-typing-page.blp:155
