@@ -141,6 +141,38 @@ emit_added_in_idle (CcBackgroundXml *xml, GObject *object)
 
 #define NONE "(none)"
 
+/* An optional scaled down version of the wallpaper, so that the panel does not
+ * have to decode a full sized image just to draw a thumbnail of it. Wallpapers
+ * that look the same in both styles can leave out the dark one, in which case
+ * the light thumbnail stands in for it.
+ */
+static void
+set_thumbnail_uri (CcBackgroundItem *item, const gchar *property, xmlNode *node, const gchar *filename)
+{
+    gchar *content;
+    g_autoptr(GFile) file = NULL;
+    g_autofree gchar *dirname = NULL;
+    g_autofree gchar *thumbnail_uri = NULL;
+
+    if (node->last == NULL || node->last->content == NULL)
+        return;
+
+    content = g_strstrip ((gchar *) node->last->content);
+    if (*content == '\0')
+        return;
+
+    dirname = g_path_get_dirname (filename);
+    file = g_file_new_for_commandline_arg_and_cwd (content, dirname);
+    thumbnail_uri = g_file_get_uri (file);
+
+    /* Falling back to the wallpaper itself is only slow, whereas drawing a
+     * thumbnail that is not there is an empty tile. */
+    if (g_file_query_exists (file, NULL))
+        g_object_set (G_OBJECT (item), property, thumbnail_uri, NULL);
+    else
+        g_debug ("Ignoring missing wallpaper thumbnail '%s'", thumbnail_uri);
+}
+
 static gboolean
 cc_background_xml_load_xml_internal (CcBackgroundXml *xml, const gchar *filename, gboolean in_thread)
 {
@@ -217,27 +249,9 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml, const gchar *filename
                         break;
                     }
                 } else if (!strcmp ((gchar *) wpa->name, "thumbnail")) {
-                    /* An optional scaled down version of the wallpaper, so
-                     * that the panel does not have to decode a full sized
-                     * image just to draw a thumbnail of it. */
-                    if (wpa->last != NULL && wpa->last->content != NULL) {
-                        gchar *content = g_strstrip ((gchar *) wpa->last->content);
-                        g_autoptr(GFile) file = NULL;
-                        g_autofree gchar *dirname = NULL;
-                        g_autofree gchar *thumbnail_uri = NULL;
-
-                        dirname = g_path_get_dirname (filename);
-                        file = g_file_new_for_commandline_arg_and_cwd (content, dirname);
-                        thumbnail_uri = g_file_get_uri (file);
-
-                        /* Falling back to the wallpaper itself is only slow,
-                         * whereas drawing a thumbnail that is not there is
-                         * an empty tile. */
-                        if (g_file_query_exists (file, NULL))
-                            g_object_set (G_OBJECT (item), "thumbnail-uri", thumbnail_uri, NULL);
-                        else
-                            g_debug ("Ignoring missing wallpaper thumbnail '%s'", thumbnail_uri);
-                    }
+                    set_thumbnail_uri (item, "thumbnail-uri", wpa, filename);
+                } else if (!strcmp ((gchar *) wpa->name, "thumbnail-dark")) {
+                    set_thumbnail_uri (item, "thumbnail-uri-dark", wpa, filename);
                 } else if (!strcmp ((gchar *) wpa->name, "name")) {
                     if (wpa->last != NULL && wpa->last->content != NULL) {
                         g_autofree gchar *name = NULL;

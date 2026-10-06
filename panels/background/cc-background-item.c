@@ -48,6 +48,7 @@ struct _CcBackgroundItem {
     char *uri;
     char *uri_dark;
     char *thumbnail_uri;
+    char *thumbnail_uri_dark;
     char *size;
     GDesktopBackgroundStyle placement;
     GDesktopBackgroundShading shading;
@@ -75,6 +76,7 @@ enum {
     PROP_URI,
     PROP_URI_DARK,
     PROP_THUMBNAIL_URI,
+    PROP_THUMBNAIL_URI_DARK,
     PROP_PLACEMENT,
     PROP_SHADING,
     PROP_PRIMARY_COLOR,
@@ -154,13 +156,18 @@ run_in_thread (GTask *task, GTaskThreadFunc func)
 }
 
 /* Wallpapers may ship a small stand in image for the panel to draw instead of
- * the wallpaper itself, which spares us decoding a full sized one.
+ * the wallpaper itself, which spares us decoding a full sized one. A wallpaper
+ * that looks the same in both styles only needs the one thumbnail, so the dark
+ * variant falls back to it.
  */
 static const char *
-item_get_thumbnail_uri (CcBackgroundItem *item)
+item_get_thumbnail_uri (CcBackgroundItem *item, gboolean dark)
 {
     if (item->placement != G_DESKTOP_BACKGROUND_STYLE_ZOOM && item->placement != G_DESKTOP_BACKGROUND_STYLE_STRETCHED)
         return NULL;
+
+    if (dark && item->thumbnail_uri_dark != NULL)
+        return item->thumbnail_uri_dark;
 
     return item->thumbnail_uri;
 }
@@ -306,7 +313,7 @@ cc_background_item_get_thumbnail_worker (GTask *task, gpointer source_object, gp
     width = state->scale_factor * state->width;
     height = state->scale_factor * state->height;
 
-    thumbnail_uri = item_get_thumbnail_uri (item);
+    thumbnail_uri = item_get_thumbnail_uri (item, state->dark);
     if (thumbnail_uri != NULL)
         pixbuf = load_thumbnail_file (thumbnail_uri, width, height);
 
@@ -521,6 +528,13 @@ _set_thumbnail_uri (CcBackgroundItem *item, const char *value)
     item->thumbnail_uri = (value && *value != '\0') ? g_strdup (value) : NULL;
 }
 
+static void
+_set_thumbnail_uri_dark (CcBackgroundItem *item, const char *value)
+{
+    g_free (item->thumbnail_uri_dark);
+    item->thumbnail_uri_dark = (value && *value != '\0') ? g_strdup (value) : NULL;
+}
+
 const char *
 cc_background_item_get_uri (CcBackgroundItem *item)
 {
@@ -697,6 +711,9 @@ cc_background_item_set_property (GObject *object, guint prop_id, const GValue *v
     case PROP_THUMBNAIL_URI:
         _set_thumbnail_uri (self, g_value_get_string (value));
         break;
+    case PROP_THUMBNAIL_URI_DARK:
+        _set_thumbnail_uri_dark (self, g_value_get_string (value));
+        break;
     case PROP_PLACEMENT:
         _set_placement (self, g_value_get_enum (value));
         break;
@@ -749,6 +766,9 @@ cc_background_item_get_property (GObject *object, guint prop_id, GValue *value, 
         break;
     case PROP_THUMBNAIL_URI:
         g_value_set_string (value, self->thumbnail_uri);
+        break;
+    case PROP_THUMBNAIL_URI_DARK:
+        g_value_set_string (value, self->thumbnail_uri_dark);
         break;
     case PROP_PLACEMENT:
         g_value_set_enum (value, self->placement);
@@ -819,6 +839,8 @@ cc_background_item_class_init (CcBackgroundItemClass *klass)
 
     props[PROP_THUMBNAIL_URI] = g_param_spec_string ("thumbnail-uri", NULL, NULL, NULL, G_PARAM_READWRITE);
 
+    props[PROP_THUMBNAIL_URI_DARK] = g_param_spec_string ("thumbnail-uri-dark", NULL, NULL, NULL, G_PARAM_READWRITE);
+
     props[PROP_PLACEMENT] = g_param_spec_enum ("placement", NULL, NULL, G_DESKTOP_TYPE_BACKGROUND_STYLE,
                                                G_DESKTOP_BACKGROUND_STYLE_SCALED, G_PARAM_READWRITE);
 
@@ -877,6 +899,7 @@ cc_background_item_finalize (GObject *object)
     g_free (item->uri);
     g_free (item->uri_dark);
     g_free (item->thumbnail_uri);
+    g_free (item->thumbnail_uri_dark);
     g_free (item->primary_color);
     g_free (item->secondary_color);
     g_free (item->mime_type);
@@ -905,6 +928,7 @@ cc_background_item_copy (CcBackgroundItem *item)
     ret = cc_background_item_new (item->uri);
     ret->name = g_strdup (item->name);
     ret->thumbnail_uri = g_strdup (item->thumbnail_uri);
+    ret->thumbnail_uri_dark = g_strdup (item->thumbnail_uri_dark);
     ret->size = g_strdup (item->size);
     ret->placement = item->placement;
     ret->shading = item->shading;
