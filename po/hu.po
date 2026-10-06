@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2026-08-31 11:11+0000\n"
-"PO-Revision-Date: 2026-09-04 11:40+0200\n"
+"POT-Creation-Date: 2026-09-11 11:48+0000\n"
+"PO-Revision-Date: 2026-10-06 08:16+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -470,7 +470,7 @@ msgstr "Fájlrendszer"
 #: panels/applications/cc-applications-panel.c:839
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.metainfo.xml.in.in:8 shell/cc-window.blp:20
-#: shell/cc-window.c:827 shell/org.gnome.Settings.desktop.in:2
+#: shell/cc-window.c:792 shell/org.gnome.Settings.desktop.in:2
 msgid "Settings"
 msgstr "Beállítások"
 
@@ -1963,7 +1963,6 @@ msgid "This could be due to hardware limitations."
 msgstr "Ez hardveres korlátozások miatt is lehet."
 
 #: panels/display/cc-display-settings.blp:31
-#| msgid "Automatic Routes"
 msgctxt "display setting"
 msgid "_Auto Rotate"
 msgstr "_Automatikus forgatás"
@@ -2365,7 +2364,6 @@ msgid "Other"
 msgstr "Egyéb"
 
 #: panels/keyboard/cc-input-list-box.blp:15
-#| msgid "Input Sources"
 msgid "Input sources"
 msgstr "Bemeneti források"
 
@@ -2523,11 +2521,6 @@ msgid "Compose Key"
 msgstr "Kombináló billentyű"
 
 #: panels/keyboard/cc-keyboard-panel.c:79
-#| msgid ""
-#| "The compose key allows a wide variety of characters to be entered. To use "
-#| "it, press compose then a sequence of characters.  For example, compose "
-#| "key followed by <b>o</b> and <b>c</b> will enter <b>©</b>, <b>a</b> "
-#| "followed by <b>'</b> will enter <b>á</b>."
 msgid ""
 "The compose key allows a wide variety of characters to be entered. To use "
 "it, press compose then a sequence of characters.  For example, compose key "
@@ -2583,8 +2576,6 @@ msgid "None"
 msgstr "Nincs"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:96
-#| msgctxt "Password mode"
-#| msgid "Account disabled"
 msgid "Shortcut Disabled"
 msgstr "Gyorsbillentyű letiltva"
 
@@ -2602,31 +2593,26 @@ msgid "Shortcut"
 msgstr "Gyorsbillentyű"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:178
-#| msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut"
 msgid ""
 "Press <b>Esc</b> to cancel. Press <b>Backspace</b> to disable the keyboard "
 "shortcut for this action."
 msgstr ""
-"Nyomja meg az <b>Esc</b> billentyűt a megszakításhoz. Nyomja meg a <b>Backspac"
-"e</b> billentyűt a gyorsbillentyű letiltásához ennél a műveletnél."
+"Nyomja meg az <b>Esc</b> billentyűt a megszakításhoz. Nyomja meg a "
+"<b>Backspace</b> billentyűt a gyorsbillentyű letiltásához ennél a műveletnél."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:179
-#| msgid "Press Esc to cancel"
 msgid "Press <b>Esc</b> to cancel."
 msgstr "Nyomja meg az <b>Esc</b> billentyűt a megszakításhoz."
 
 #. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:396
 #, c-format
-#| msgid ""
-#| "<b>%s</b> is already being used for %s. If you replace it, %s will be "
-#| "disabled"
 msgid ""
 "<b>This key combination is already being used for “%s”. This shortcut will "
 "be disabled.</b>"
 msgstr ""
-"<b>Ez a billentyűkombináció már használatban van ehhez: „%s”. Ez a gyorsbillen"
-"tyű le lesz tiltva.</b>"
+"<b>Ez a billentyűkombináció már használatban van ehhez: „%s”. Ez a "
+"gyorsbillentyű le lesz tiltva.</b>"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:505
 msgid "Enter the new shortcut"
@@ -2639,7 +2625,6 @@ msgstr "Adja meg az új gyorsbillentyűt"
 #.
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:530
 #, c-format
-#| msgid "Enter new shortcut to change <b>%s</b>"
 msgid "Enter new keyboard shortcut for <b>“%s”</b>"
 msgstr "Adja meg az új gyorsbillentyűt ehhez: <b>„%s”</b>"
 
@@ -2649,12 +2634,10 @@ msgstr "Egyéni gyorsbillentyű hozzáadása"
 
 #. Headerbar
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:871
-#| msgid "Custom Shortcuts"
 msgid "Custom Shortcut"
 msgstr "Egyéni gyorsbillentyű"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:871
-#| msgid "Set Shortcut"
 msgid "Edit Shortcut"
 msgstr "Gyorsbillentyű szerkesztése"
 
@@ -2830,7 +2813,6 @@ msgid "T_ouchpad"
 msgstr "Éri_ntőtábla"
 
 #: panels/mouse/cc-mouse-panel.blp:178
-#| msgid "_Disable Touchpad While Typing"
 msgid "_Disable While Typing"
 msgstr "_Letiltás gépelés közben"
 
@@ -3113,7 +3095,6 @@ msgstr "HTTP-proxy"
 #: panels/network/cc-net-proxy-page.blp:109
 #: panels/network/cc-net-proxy-page.blp:126
 #: panels/network/cc-net-proxy-page.blp:143
-#| msgid "_Hostname"
 msgid "Host"
 msgstr "Gép"
 
@@ -3133,7 +3114,6 @@ msgid "FTP Proxy"
 msgstr "FTP-proxy"
 
 #: panels/network/cc-net-proxy-page.blp:140
-#| msgid "SOCKS Host"
 msgid "SOCKS Proxy"
 msgstr "SOCKS-proxy"
 
@@ -3860,13 +3840,11 @@ msgstr "Vesszőkkel válassza el az IP-címeket"
 #: panels/network/connection-editor/ip4-page.blp:228
 #: panels/network/connection-editor/ip6-page.blp:230
 #: panels/network/connection-editor/ip6-page.blp:239
-#| msgid "Search Locations"
 msgid "DNS Search Domains"
 msgstr "DNS keresési tartományok"
 
 #: panels/network/connection-editor/ip4-page.blp:238
 #: panels/network/connection-editor/ip6-page.blp:249
-#| msgid "Separate IP addresses with commas"
 msgid "Separate search domains with commas"
 msgstr "Vesszőkkel válassza el a keresési tartományokat"
 
@@ -4250,8 +4228,6 @@ msgid "VPN Options"
 msgstr "VPN beállítások"
 
 #: panels/network/network-wifi.blp:25
-#| msgctxt "hotspot"
-#| msgid "Hotspot"
 msgid "Hotspot details"
 msgstr "Hozzáférési pont részletei"
 
@@ -5863,12 +5839,10 @@ msgid "Depends on other devices"
 msgstr "Egyéb eszköztől függ"
 
 #: panels/privacy/bolt/cc-bolt-device-dialog.blp:53
-#| msgid "Authorize and Connect"
 msgid "_Authorize and Connect"
 msgstr "_Engedélyezés és kapcsolódás"
 
 #: panels/privacy/bolt/cc-bolt-device-dialog.blp:64
-#| msgid "Forget Device"
 msgid "_Forget Device"
 msgstr "Eszköz _elfelejtése"
 
@@ -6066,7 +6040,7 @@ msgstr "Adatvédelem és biztonság"
 
 #: panels/privacy/cc-privacy-panel.blp:16
 msgid "_Screen Lock"
-msgstr "_Képernyőzárolás"
+msgstr "Képernyő_zárolás"
 
 #: panels/privacy/cc-privacy-panel.blp:17
 msgid "Automatic screen lock"
@@ -6815,7 +6789,6 @@ msgstr "Válasszon régiót"
 
 #. Translators: This is the title of the Search page, used to configure search providers
 #: panels/search/cc-search-panel.blp:6
-#| msgid "Search"
 msgctxt "panel title"
 msgid "Search"
 msgstr "Keresés"
@@ -6860,12 +6833,10 @@ msgid "Networks"
 msgstr "Hálózatok"
 
 #: panels/sharing/cc-sharing-networks.blp:12
-#| msgid "No networks selected for sharing"
 msgid "No networks available for sharing"
 msgstr "Nincs elérhető hálózat a megosztáshoz"
 
 #: panels/sharing/cc-sharing-networks.c:201
-#| msgid "Choose Network"
 msgid "Remove Network"
 msgstr "Hálózat eltávolítása"
 
@@ -7172,12 +7143,10 @@ msgid "100%"
 msgstr "100%"
 
 #: panels/sound/cc-volume-slider.c:269
-#| msgid "I_nput Volume"
 msgid "Input Volume"
 msgstr "Bemeneti hangerő"
 
 #: panels/sound/cc-volume-slider.c:273
-#| msgid "O_utput Volume"
 msgid "Output Volume"
 msgstr "Kimeneti hangerő"
 
@@ -7219,7 +7188,6 @@ msgid "Software Information"
 msgstr "Szoftverinformációk"
 
 #: panels/system/about/cc-about-page.blp:58
-#| msgid "GNOME Version"
 msgid "GNOME Shell Version"
 msgstr "GNOME Shell verziója"
 
@@ -7229,19 +7197,16 @@ msgstr "Kiadási megjegyzések"
 
 #. Translators: this field contains the distro name and version
 #: panels/system/about/cc-about-page.blp:81
-#| msgid "Operating System"
 msgid "Operating System Name"
 msgstr "Operációs rendszer neve"
 
 #. Translators: this field contains the distro build
 #: panels/system/about/cc-about-page.blp:91
-#| msgid "Operating System"
 msgid "Operating System Build"
 msgstr "Operációs rendszer összeállítása"
 
 #. Translators: this field contains the distro type
 #: panels/system/about/cc-about-page.blp:101
-#| msgid "Operating System"
 msgid "Operating System Type"
 msgstr "Operációs rendszer típusa"
 
@@ -7773,8 +7738,9 @@ msgstr "_Jelszó"
 msgid "_Generate New Password"
 msgstr "Új jelszó _előállítása"
 
-#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:129
-#: panels/system/remote-desktop/cc-remote-login-page.blp:120
+#. Translators: "Fingerprint" refers to verifying a TLS/cryptographic key fingerprint for Remote Desktop, not a fingerprint scanner for user authentication.
+#: panels/system/remote-desktop/cc-desktop-sharing-page.blp:130
+#: panels/system/remote-desktop/cc-remote-login-page.blp:121
 msgid "_Verify Fingerprint"
 msgstr "Ujjlenyomat _ellenőrzése"
 
@@ -8088,7 +8054,6 @@ msgstr "Győződjön meg róla, hogy az eszköz helyesen van csatlakoztatva"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:45
 #: panels/system/users/cc-fingerprint-dialog.blp:91
-#| msgid "Enterprise Authentication"
 msgid "Fingerprint Authentication"
 msgstr "Ujjlenyomatos hitelesítés"
 
@@ -8096,11 +8061,10 @@ msgstr "Ujjlenyomatos hitelesítés"
 msgid ""
 "Use fingerprints to unlock the screen and identify yourself when prompted"
 msgstr ""
-"Ujjlenyomatok használata a képernyő feloldásához és önmaga azonosításához, ha "
-"a rendszer kéri"
+"Ujjlenyomatok használata a képernyő feloldásához és önmaga azonosításához, "
+"ha a rendszer kéri"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:54
-#| msgid "T_wo Finger"
 msgid "_Scan Finger"
 msgstr "Ujj _beolvasása"
 
@@ -8113,17 +8077,14 @@ msgid "Choose the fingerprint device you want to configure"
 msgstr "Válasszon ujjlenyomatos eszközt a beállításhoz"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:78
-#| msgid "Select Language"
 msgid "Select Finger"
 msgstr "Ujj kiválasztása"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:82
-#| msgid "Right Half"
 msgid "Right Hand"
 msgstr "Jobb kéz"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:85
-#| msgid "Left Half"
 msgid "Left Hand"
 msgstr "Bal kéz"
 
@@ -8132,12 +8093,10 @@ msgid "The following fingerprints can be used for authentication"
 msgstr "A következő ujjlenyomatok használhatók hitelesítéshez"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:100
-#| msgid "Fingerprint Login"
 msgid "Fingerprints"
 msgstr "Ujjlenyomatok"
 
 #: panels/system/users/cc-fingerprint-dialog.blp:105
-#| msgid "_Verify Fingerprint"
 msgid "Add Fingerprint"
 msgstr "Ujjlenyomat hozzáadása"
 
@@ -8219,7 +8178,6 @@ msgstr "Ismeretlen ujj"
 
 #: panels/system/users/cc-fingerprint-dialog.c:351
 #, c-format
-#| msgid "Failed to delete saved fingerprints: %s"
 msgid "Failed to delete fingerprint: %s"
 msgstr "Nem sikerült törölni az ujjlenyomatot: %s"
 
@@ -8229,18 +8187,14 @@ msgid "Failed to list fingerprints: %s"
 msgstr "Nem sikerült felsorolni az ujjlenyomatokat: %s"
 
 #: panels/system/users/cc-fingerprint-dialog.c:733
-#| msgid "Complete!"
 msgid "Scan Complete!"
 msgstr "Beolvasás kész!"
 
 #: panels/system/users/cc-fingerprint-dialog.c:746
-#| msgid "Drag one finger on the edge"
 msgid "Touch finger on reader"
 msgstr "Érintse az ujját az olvasóhoz"
 
 #: panels/system/users/cc-fingerprint-dialog.c:800
-#| msgctxt "Fingerprint enroll state"
-#| msgid "Complete"
 msgid "Scan Complete"
 msgstr "Beolvasás kész"
 
@@ -8249,7 +8203,6 @@ msgid "Fingerprint device disconnected"
 msgstr "Ujjlenyomatos eszköz leválasztva"
 
 #: panels/system/users/cc-fingerprint-dialog.c:826
-#| msgid "Fingerprint device storage is full"
 msgid "Fingerprint Storage is Full"
 msgstr "Az ujjlenyomat-tároló megtelt"
 
@@ -8258,7 +8211,6 @@ msgid "Finger Already Scanned"
 msgstr "Az ujj már be lett olvasva"
 
 #: panels/system/users/cc-fingerprint-dialog.c:830
-#| msgid "Failed to add new printer."
 msgid "Failed to Scan Finger"
 msgstr "Nem sikerült beolvasni az ujjat"
 
@@ -8391,7 +8343,6 @@ msgid "Pa_ssword"
 msgstr "_Jelszó"
 
 #: panels/system/users/cc-user-page.blp:98
-#| msgid "Enterprise Authentication"
 msgid "_Fingerprint Authentication"
 msgstr "_Ujjlenyomatos hitelesítés"
 
@@ -8451,15 +8402,12 @@ msgid "Remove %s?"
 msgstr "Eltávolítja ezt: „%s”?"
 
 #: panels/system/users/cc-user-page.c:435
-#| msgid ""
-#| "The user will not be able to use this device once their account has been "
-#| "removed"
 msgid ""
 "The user's files and settings will be deleted, and they will not be able to "
 "use this device once their account has been removed"
 msgstr ""
-"A felhasználó fájljai és beállításai törölve lesznek, és nem fogja tudni haszn"
-"álni ezt az eszközt, miután a fiókja eltávolításra került"
+"A felhasználó fájljai és beállításai törölve lesznek, és nem fogja tudni "
+"használni ezt az eszközt, miután a fiókja eltávolításra került"
 
 #: panels/system/users/cc-user-page.c:439
 msgid ""
@@ -8691,8 +8639,6 @@ msgstr ""
 "tételéhez"
 
 #: panels/universal-access/cc-cursor-size-page.c:79
-#| msgctxt "Calibration quality"
-#| msgid "Medium"
 msgid "Medium"
 msgstr "Közepes"
 
@@ -8703,13 +8649,10 @@ msgid "Large"
 msgstr "Nagy"
 
 #: panels/universal-access/cc-cursor-size-page.c:79
-#| msgid "Large"
 msgid "Extra Large"
 msgstr "Rendkívül nagy"
 
 #: panels/universal-access/cc-cursor-size-page.c:79
-#| msgctxt "cursor size"
-#| msgid "Largest"
 msgid "Largest"
 msgstr "Legnagyobb"
 
@@ -8907,7 +8850,6 @@ msgstr ""
 "közben"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:32
-#| msgid "Screen Reader"
 msgid "Co_nfigure Screen Reader"
 msgstr "Képernyőolvasó beá_llítása"
 
@@ -8968,7 +8910,6 @@ msgid "Make scrollbars always visible"
 msgstr "Állandóan láthatóvá teszi a görgetősávokat"
 
 #: panels/universal-access/cc-ua-seeing-page.blp:87
-#| msgid "Always Show Scroll_bars"
 msgid "Always Show Keyboard Focus"
 msgstr "Billentyűfókusz állandó megjelenítése"
 
