@@ -48,33 +48,13 @@ static GParamSpec *props[N_PROPS] = {
 static void
 on_picture_leave_cb (CcIllustratedRow *self)
 {
-    GtkMediaStream *stream;
-    GdkPaintable *paintable;
-
-    paintable = cc_mask_paintable_get_paintable (self->picture_mask);
-
-    if (!GTK_IS_MEDIA_STREAM (paintable))
-        return;
-
-    stream = GTK_MEDIA_STREAM (paintable);
-    gtk_media_stream_set_loop (stream, FALSE);
-    gtk_media_stream_pause (stream);
+    cc_mask_paintable_pause (self->picture_mask);
 }
 
 static void
 on_picture_hover_cb (CcIllustratedRow *self)
 {
-    GtkMediaStream *stream;
-    GdkPaintable *paintable;
-
-    paintable = cc_mask_paintable_get_paintable (self->picture_mask);
-
-    if (!GTK_IS_MEDIA_STREAM (paintable))
-        return;
-
-    stream = GTK_MEDIA_STREAM (paintable);
-    gtk_media_stream_set_loop (stream, TRUE);
-    gtk_media_stream_play (stream);
+    cc_mask_paintable_play (self->picture_mask);
 }
 
 static void

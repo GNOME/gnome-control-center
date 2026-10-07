@@ -47,9 +47,12 @@ struct _CcMaskPaintable {
 };
 
 static void cc_mask_paintable_iface_init (GdkPaintableInterface *iface);
+static void cc_mask_paintable_symbolic_iface_init (GtkSymbolicPaintableInterface *iface);
 
 G_DEFINE_FINAL_TYPE_WITH_CODE (CcMaskPaintable, cc_mask_paintable, G_TYPE_OBJECT,
-                               G_IMPLEMENT_INTERFACE (GDK_TYPE_PAINTABLE, cc_mask_paintable_iface_init))
+                               G_IMPLEMENT_INTERFACE (GDK_TYPE_PAINTABLE, cc_mask_paintable_iface_init)
+                                   G_IMPLEMENT_INTERFACE (GTK_TYPE_SYMBOLIC_PAINTABLE,
+                                                          cc_mask_paintable_symbolic_iface_init))
 
 enum {
     PROP_0,
@@ -105,11 +108,44 @@ on_parent_widget_root_cb (CcMaskPaintable *self)
 }
 
 static void
+update_svg_frame_clock (CcMaskPaintable *self)
+{
+    GdkPaintable *paintable;
+    GdkFrameClock *clock = NULL;
+
+    paintable = self->paintable;
+
+    if (!GTK_IS_SVG (paintable))
+        return;
+
+    if (self->parent_widget)
+        clock = gtk_widget_get_frame_clock (self->parent_widget);
+
+    gtk_svg_set_frame_clock (GTK_SVG (paintable), clock);
+}
+
+static void
+on_svg_parent_widget_root_cb (CcMaskPaintable *self)
+{
+    g_return_if_fail (self->parent_widget != NULL);
+
+    update_svg_frame_clock (self);
+}
+
+static void
+on_svg_error_cb (GtkSvg *svg, const GError *error, CcMaskPaintable *self)
+{
+    g_warning ("Failed to load SVG '%s': %s", self->resource_path ? self->resource_path : "(unknown)",
+               error ? error->message : "unknown error");
+}
+
+static void
 clear_parent_widget (CcMaskPaintable *self)
 {
     if (self->parent_widget) {
         g_signal_handlers_disconnect_by_func (self->parent_widget, on_parent_widget_root_cb, self);
         g_signal_handlers_disconnect_by_func (self->parent_widget, reload_scalable_resource, self);
+        g_signal_handlers_disconnect_by_func (self->parent_widget, on_svg_parent_widget_root_cb, self);
     }
 
     g_clear_weak_pointer (&self->parent_widget);
@@ -220,6 +256,13 @@ cc_mask_paintable_snapshot (GdkPaintable *paintable, GdkSnapshot *snapshot, doub
     if (!self->paintable)
         return;
 
+    /* Plain GtkSvg: use native named/symbolic colors directly,
+     * no accent mask overlay. */
+    if (GTK_IS_SVG (self->paintable)) {
+        gdk_paintable_snapshot (self->paintable, snapshot, width, height);
+        return;
+    }
+
     inner_snapshot = gtk_snapshot_new ();
     gdk_paintable_snapshot (self->paintable, inner_snapshot, width, height);
     node = gtk_snapshot_free_to_node (inner_snapshot);
@@ -270,12 +313,71 @@ cc_mask_paintable_get_intrinsic_aspect_ratio (GdkPaintable *paintable)
 }
 
 static void
+cc_mask_paintable_snapshot_symbolic (GtkSymbolicPaintable *paintable, GdkSnapshot *snapshot, double width,
+                                     double height, const GdkRGBA *colors, gsize n_colors)
+{
+    CcMaskPaintable *self = CC_MASK_PAINTABLE (paintable);
+
+    if (self->paintable && GTK_IS_SYMBOLIC_PAINTABLE (self->paintable)) {
+        /* GtkSvg only knows a single "accent" symbolic color, which widgets
+         * resolve to the standalone accent-color. The illustrations should
+         * match the radio buttons, which use accent-bg-color, so override
+         * the accent slot with the tracked bg color. */
+        if (self->follow_accent && n_colors > GTK_SYMBOLIC_COLOR_ACCENT) {
+            g_autofree GdkRGBA *overridden = g_memdup2 (colors, sizeof (GdkRGBA) * n_colors);
+
+            overridden[GTK_SYMBOLIC_COLOR_ACCENT] = self->rgba;
+            gtk_symbolic_paintable_snapshot_symbolic (GTK_SYMBOLIC_PAINTABLE (self->paintable), snapshot, width, height,
+                                                      overridden, n_colors);
+            return;
+        }
+        gtk_symbolic_paintable_snapshot_symbolic (GTK_SYMBOLIC_PAINTABLE (self->paintable), snapshot, width, height,
+                                                  colors, n_colors);
+        return;
+    }
+
+    /* Non-symbolic inner (e.g. video): fall back to plain snapshot. */
+    cc_mask_paintable_snapshot (GDK_PAINTABLE (paintable), snapshot, width, height);
+}
+
+static void
+cc_mask_paintable_snapshot_with_weight (GtkSymbolicPaintable *paintable, GdkSnapshot *snapshot, double width,
+                                        double height, const GdkRGBA *colors, gsize n_colors, double weight)
+{
+    CcMaskPaintable *self = CC_MASK_PAINTABLE (paintable);
+
+    if (self->paintable && GTK_IS_SYMBOLIC_PAINTABLE (self->paintable)) {
+        /* See cc_mask_paintable_snapshot_symbolic: use accent-bg-color. */
+        if (self->follow_accent && n_colors > GTK_SYMBOLIC_COLOR_ACCENT) {
+            g_autofree GdkRGBA *overridden = g_memdup2 (colors, sizeof (GdkRGBA) * n_colors);
+
+            overridden[GTK_SYMBOLIC_COLOR_ACCENT] = self->rgba;
+            gtk_symbolic_paintable_snapshot_with_weight (GTK_SYMBOLIC_PAINTABLE (self->paintable), snapshot, width,
+                                                         height, overridden, n_colors, weight);
+            return;
+        }
+        gtk_symbolic_paintable_snapshot_with_weight (GTK_SYMBOLIC_PAINTABLE (self->paintable), snapshot, width, height,
+                                                     colors, n_colors, weight);
+        return;
+    }
+
+    cc_mask_paintable_snapshot (GDK_PAINTABLE (paintable), snapshot, width, height);
+}
+
+static void
 cc_mask_paintable_iface_init (GdkPaintableInterface *iface)
 {
     iface->snapshot = cc_mask_paintable_snapshot;
     iface->get_intrinsic_width = cc_mask_paintable_get_intrinsic_width;
     iface->get_intrinsic_height = cc_mask_paintable_get_intrinsic_height;
     iface->get_intrinsic_aspect_ratio = cc_mask_paintable_get_intrinsic_aspect_ratio;
+}
+
+static void
+cc_mask_paintable_symbolic_iface_init (GtkSymbolicPaintableInterface *iface)
+{
+    iface->snapshot_symbolic = cc_mask_paintable_snapshot_symbolic;
+    iface->snapshot_with_weight = cc_mask_paintable_snapshot_with_weight;
 }
 
 GdkPaintable *
@@ -403,10 +505,39 @@ cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self, const char *resour
 
     resource_is_scalable = g_str_has_suffix (self->resource_path, ".svg");
 
+    if (resource_is_scalable) {
+        g_autoptr(GtkSvg) svg = NULL;
+
+        svg = gtk_svg_new_from_resource (self->resource_path);
+        g_signal_connect (svg, "error", G_CALLBACK (on_svg_error_cb), self);
+
+        self->parent_widget = parent_widget;
+        g_object_add_weak_pointer (G_OBJECT (self->parent_widget), (gpointer *) &self->parent_widget);
+
+        self->reloading_resource = TRUE;
+        cc_mask_paintable_set_paintable (self, GDK_PAINTABLE (svg));
+        self->reloading_resource = FALSE;
+
+        update_svg_frame_clock (self);
+
+        /* Keep the frame clock in sync when the widget gets rooted/unrooted.
+         * GtkSvg is vector-based, so no scale-factor reload is needed. */
+        g_signal_connect_swapped (self->parent_widget, "notify::root", G_CALLBACK (on_svg_parent_widget_root_cb), self);
+
+        /* Start paused on the first frame; hover handlers call play(). */
+        gtk_svg_pause (svg);
+
+        return;
+    }
+
     if (!resource_is_scalable) {
         g_autoptr(GtkMediaStream) media_stream = NULL;
 
         media_stream = gtk_media_file_new_for_resource (self->resource_path);
+        /* Loop at the stream level so hover-play restarts cleanly and
+         * repeats indefinitely instead of stopping after one pass. */
+        gtk_media_stream_set_loop (media_stream, TRUE);
+        gtk_media_stream_pause (media_stream);
         cc_mask_paintable_set_paintable (self, GDK_PAINTABLE (media_stream));
 
         return;
@@ -422,4 +553,50 @@ cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self, const char *resour
         on_parent_widget_root_cb (self);
     else
         g_signal_connect_swapped (self->parent_widget, "notify::root", G_CALLBACK (on_parent_widget_root_cb), self);
+}
+
+void
+cc_mask_paintable_play (CcMaskPaintable *self)
+{
+    GdkPaintable *paintable;
+
+    g_return_if_fail (CC_IS_MASK_PAINTABLE (self));
+
+    paintable = self->paintable;
+
+    if (GTK_IS_MEDIA_STREAM (paintable)) {
+        GtkMediaStream *stream = GTK_MEDIA_STREAM (paintable);
+
+        gtk_media_stream_set_loop (stream, TRUE);
+        if (gtk_media_stream_get_ended (stream))
+            gtk_media_stream_seek (stream, 0);
+        gtk_media_stream_play (stream);
+        return;
+    }
+
+    if (GTK_IS_SVG (paintable)) {
+        update_svg_frame_clock (self);
+        gtk_svg_play (GTK_SVG (paintable));
+        return;
+    }
+}
+
+void
+cc_mask_paintable_pause (CcMaskPaintable *self)
+{
+    GdkPaintable *paintable;
+
+    g_return_if_fail (CC_IS_MASK_PAINTABLE (self));
+
+    paintable = self->paintable;
+
+    if (GTK_IS_MEDIA_STREAM (paintable)) {
+        gtk_media_stream_pause (GTK_MEDIA_STREAM (paintable));
+        return;
+    }
+
+    if (GTK_IS_SVG (paintable)) {
+        gtk_svg_pause (GTK_SVG (paintable));
+        return;
+    }
 }
