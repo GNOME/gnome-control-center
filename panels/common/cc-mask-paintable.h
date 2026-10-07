@@ -40,4 +40,7 @@ void cc_mask_paintable_set_follow_accent (CcMaskPaintable *self, gboolean follow
 
 void cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self, const char *resource_path, GtkWidget *parent_widget);
 
+void cc_mask_paintable_play (CcMaskPaintable *self);
+void cc_mask_paintable_pause (CcMaskPaintable *self);
+
 G_END_DECLS
