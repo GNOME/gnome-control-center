@@ -1062,6 +1062,9 @@ cc_display_settings_set_multimonitor (CcDisplaySettings *self, gboolean multimon
                                                              || !cc_display_monitor_is_useful (self->selected_output));
     }
 
-    if (!multimonitor)
+    if (!multimonitor) {
+        self->updating = TRUE;
         adw_switch_row_set_active (self->enabled_row, TRUE);
+        self->updating = FALSE;
+    }
 }
