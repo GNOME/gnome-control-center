@@ -137,10 +137,10 @@ template $CcMousePanel: $CcPanel {
                 title: _("Scroll Direction");
                 default-option-title: _("Tra_ditional");
                 default-option-subtitle: _("Scrolling moves the view");
-                default-illustration-resource: "/org/gnome/control-center/mouse/assets/scroll-traditional.webm";
+                default-illustration-resource: "/org/gnome/control-center/mouse/assets/scroll-traditional.svg";
                 alternative-option-title: _("_Natural");
                 alternative-option-subtitle: _("Scrolling moves the content");
-                alternative-illustration-resource: "/org/gnome/control-center/mouse/assets/scroll-natural.webm";
+                alternative-illustration-resource: "/org/gnome/control-center/mouse/assets/scroll-natural.svg";
               }
             }
 
@@ -217,10 +217,10 @@ template $CcMousePanel: $CcPanel {
                 title: _("Secondary Click");
                 default-option-title: _("Two _Finger Push");
                 default-option-subtitle: _("Push anywhere with 2 fingers");
-                default-illustration-resource: "/org/gnome/control-center/mouse/assets/push-to-click-anywhere.webm";
+                default-illustration-resource: "/org/gnome/control-center/mouse/assets/two-finger-push.svg";
                 alternative-option-title: _("_Corner Push");
                 alternative-option-subtitle: _("Push with a single finger in the corner");
-                alternative-illustration-resource: "/org/gnome/control-center/mouse/assets/push-areas.webm";
+                alternative-illustration-resource: "/org/gnome/control-center/mouse/assets/push-areas.svg";
               }
             }
 
@@ -232,7 +232,7 @@ template $CcMousePanel: $CcPanel {
                 title: _("T_ap to Click");
                 use-underline: true;
                 subtitle: _("Quickly touch the touchpad to click");
-                resource: "/org/gnome/control-center/mouse/assets/tap-to-click.webm";
+                resource: "/org/gnome/control-center/mouse/assets/tap-to-click.svg";
                 activatable-widget: "tap_to_click_switch";
 
                 Switch tap_to_click_switch {
@@ -249,10 +249,10 @@ template $CcMousePanel: $CcPanel {
                 title: _("Scroll Method");
                 default-option-title: _("T_wo Finger");
                 default-option-subtitle: _("Drag two fingers on the touchpad");
-                default-illustration-resource: "/org/gnome/control-center/mouse/assets/scroll-2finger.webm";
+                default-illustration-resource: "/org/gnome/control-center/mouse/assets/two-finger-scroll.svg";
                 alternative-option-title: _("_Edge");
                 alternative-option-subtitle: _("Drag one finger on the edge");
-                alternative-illustration-resource: "/org/gnome/control-center/mouse/assets/edge-scroll.webm";
+                alternative-illustration-resource: "/org/gnome/control-center/mouse/assets/edge-scroll.svg";
                 notify::use-default => $on_touchpad_scroll_method_changed_cb(template);
               }
             }
@@ -264,10 +264,10 @@ template $CcMousePanel: $CcPanel {
                 title: _("Scroll Direction");
                 default-option-title: _("T_raditional");
                 default-option-subtitle: _("Scrolling moves the view");
-                default-illustration-resource: "/org/gnome/control-center/mouse/assets/touch-scroll-traditional.webm";
+                default-illustration-resource: "/org/gnome/control-center/mouse/assets/touch-scroll-traditional.svg";
                 alternative-option-title: _("_Natural");
                 alternative-option-subtitle: _("Scrolling moves the content");
-                alternative-illustration-resource: "/org/gnome/control-center/mouse/assets/touch-scroll-natural.webm";
+                alternative-illustration-resource: "/org/gnome/control-center/mouse/assets/touch-scroll-natural.svg";
               }
             }
 

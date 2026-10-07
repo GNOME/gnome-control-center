@@ -104,33 +104,13 @@ set_use_default (CcSplitRow *self, gboolean use_default)
 static void
 on_option_focus_leave_cb (CcMaskPaintable *mask)
 {
-    GtkMediaStream *stream;
-    GdkPaintable *paintable;
-
-    paintable = cc_mask_paintable_get_paintable (mask);
-
-    if (!GTK_IS_MEDIA_STREAM (paintable))
-        return;
-
-    stream = GTK_MEDIA_STREAM (paintable);
-    gtk_media_stream_set_loop (stream, FALSE);
-    gtk_media_stream_pause (stream);
+    cc_mask_paintable_pause (mask);
 }
 
 static void
 on_option_focus_enter_cb (CcMaskPaintable *mask)
 {
-    GtkMediaStream *stream;
-    GdkPaintable *paintable;
-
-    paintable = cc_mask_paintable_get_paintable (mask);
-
-    if (!GTK_IS_MEDIA_STREAM (paintable))
-        return;
-
-    stream = GTK_MEDIA_STREAM (paintable);
-    gtk_media_stream_set_loop (stream, TRUE);
-    gtk_media_stream_play (stream);
+    cc_mask_paintable_play (mask);
 }
 
 static void
