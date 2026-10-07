@@ -6,4 +6,4 @@ To workaround the issue you can reset the last-opened setting with:
 
 ```gsettings reset org.gnome.Settings last-panel```
 
-Please, try to [obtain a stack trace](https://wiki.gnome.org/GettingInTouch/Bugzilla/GettingTraces/Details) of the crashing panel and [report an issue](https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/new) attaching it.
+Please, try to [obtain a stack trace](https://handbook.gnome.org/issues/stack-traces.html) of the crashing panel and [report an issue](https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/new) attaching it.
