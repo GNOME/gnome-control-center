@@ -84,8 +84,13 @@ template $CcUaTypingPage: Adw.NavigationPage {
           show-enable-switch: true;
 
           Adw.ActionRow {
-            title: _("Speed");
             activatable-widget: repeat_speed_scale;
+
+            [prefix]
+            Label speed_label {
+              label: _("Speed");
+              xalign: 0;
+            }
 
             [suffix]
             Scale repeat_speed_scale {
@@ -107,8 +112,13 @@ template $CcUaTypingPage: Adw.NavigationPage {
           }
 
           Adw.ActionRow {
-            title: _("Delay");
             activatable-widget: repeat_delay_scale;
+
+            [prefix]
+            Label delay_label {
+              label: _("Delay");
+              xalign: 0;
+            }
 
             [suffix]
             Scale repeat_delay_scale {
@@ -220,4 +230,23 @@ template $CcUaTypingPage: Adw.NavigationPage {
       }
     };
   };
+}
+
+
+SizeGroup {
+  mode: horizontal;
+
+  widgets [
+    speed_label,
+    delay_label,
+  ]
+}
+
+SizeGroup {
+  mode: horizontal;
+
+  widgets [
+    repeat_speed_scale,
+    repeat_delay_scale,
+  ]
 }
