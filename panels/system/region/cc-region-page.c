@@ -84,6 +84,8 @@ struct _CcRegionPage {
     gchar *region;
     gchar *system_language;
     gchar *system_region;
+    gchar *session_language;
+    gchar *session_region;
 
     GCancellable *cancellable;
 };
@@ -148,69 +150,8 @@ set_restart_notification_visible (CcRegionPage *self, const gchar *locale, gbool
     }
 }
 
-typedef struct {
-    CcRegionPage *self;
-    int category;
-    gchar *target_locale;
-} MaybeNotifyData;
-
-static void
-maybe_notify_data_free (MaybeNotifyData *data)
-{
-    g_free (data->target_locale);
-    g_free (data);
-}
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (MaybeNotifyData, maybe_notify_data_free)
-
-static void
-maybe_notify_finish (GObject *source, GAsyncResult *res, gpointer data)
-{
-    g_autoptr(MaybeNotifyData) mnd = data;
-    CcRegionPage *self = mnd->self;
-    g_autoptr(GError) error = NULL;
-    g_autoptr(GVariant) retval = NULL;
-    g_autofree gchar *current_lang_code = NULL;
-    g_autofree gchar *current_country_code = NULL;
-    g_autofree gchar *target_lang_code = NULL;
-    g_autofree gchar *target_country_code = NULL;
-    const gchar *current_locale = NULL;
-
-    retval = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
-    if (!retval) {
-        if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-            g_warning ("Failed to get locale: %s\n", error->message);
-        return;
-    }
-
-    g_variant_get (retval, "(&s)", &current_locale);
-
-    if (!gnome_parse_locale (current_locale, &current_lang_code, &current_country_code, NULL, NULL))
-        return;
-
-    if (!gnome_parse_locale (mnd->target_locale, &target_lang_code, &target_country_code, NULL, NULL))
-        return;
-
-    if (g_str_equal (current_lang_code, target_lang_code) == FALSE
-        || g_str_equal (current_country_code, target_country_code) == FALSE)
-        set_restart_notification_visible (self, mnd->category == LC_MESSAGES ? mnd->target_locale : NULL, TRUE);
-    else
-        set_restart_notification_visible (self, mnd->category == LC_MESSAGES ? mnd->target_locale : NULL, FALSE);
-}
-
-static void
-maybe_notify (CcRegionPage *self, int category, const gchar *target_locale)
-{
-    MaybeNotifyData *mnd;
-
-    mnd = g_new0 (MaybeNotifyData, 1);
-    mnd->self = self;
-    mnd->category = category;
-    mnd->target_locale = g_strdup (target_locale);
-
-    g_dbus_proxy_call (self->session, "GetLocale", g_variant_new ("(i)", category), G_DBUS_CALL_FLAGS_NONE, -1,
-                       self->cancellable, maybe_notify_finish, mnd);
-}
+static void maybe_notify (CcRegionPage *self);
+static void update_user_region_row (CcRegionPage *self);
 
 static void
 set_localed_locale (CcRegionPage *self)
@@ -282,9 +223,9 @@ update_language (CcRegionPage *self, CcLocaleTarget target, const gchar *languag
 
         if (self->login_auto_apply)
             set_system_language (self, language);
-        maybe_notify (self, LC_MESSAGES, language);
 
         update_user_language_row (self);
+        maybe_notify (self);
 
         break;
 
@@ -317,18 +258,15 @@ update_region (CcRegionPage *self, CcLocaleTarget target, const gchar *region)
         else
             g_settings_set_string (self->locale_settings, KEY_REGION, region);
 
+        g_set_str (&self->region, region != NULL ? region : "");
+
         set_accountservice_languages (self);
 
         if (self->login_auto_apply)
             set_system_region (self, region);
 
-        if (region == NULL || region[0] == '\0') {
-            // Formats (region) are being reset as part of changing the language,
-            // and that already triggers the notification check.
-            return;
-        }
-
-        maybe_notify (self, LC_TIME, region);
+        update_user_region_row (self);
+        maybe_notify (self);
         break;
 
     case SYSTEM:
@@ -473,6 +411,50 @@ update_user_region_row (CcRegionPage *self)
     cc_list_row_set_secondary_label (self->formats_row, name);
 }
 
+static gboolean
+locale_differs (const gchar *locale1, const gchar *locale2)
+{
+    g_autofree gchar *lang1 = NULL;
+    g_autofree gchar *country1 = NULL;
+    g_autofree gchar *lang2 = NULL;
+    g_autofree gchar *country2 = NULL;
+
+    if (g_strcmp0 (locale1, locale2) == 0)
+        return FALSE;
+
+    if (locale1 == NULL || locale2 == NULL)
+        return TRUE;
+
+    if (!gnome_parse_locale (locale1, &lang1, &country1, NULL, NULL)
+        || !gnome_parse_locale (locale2, &lang2, &country2, NULL, NULL))
+        return TRUE;
+
+    return g_strcmp0 (lang1, lang2) != 0 || g_strcmp0 (country1, country2) != 0;
+}
+
+static void
+maybe_notify (CcRegionPage *self)
+{
+    const gchar *target_language;
+    const gchar *target_region;
+    gboolean language_differs;
+    gboolean region_differs;
+    gboolean needs_restart;
+
+    if (self->session_language == NULL || self->session_region == NULL || !act_user_is_loaded (self->user))
+        return;
+
+    target_language = get_effective_language (self, USER);
+    target_region = get_effective_region (self, USER);
+
+    language_differs = locale_differs (target_language, self->session_language);
+    region_differs = locale_differs (target_region, self->session_region);
+
+    needs_restart = language_differs || region_differs;
+
+    set_restart_notification_visible (self, language_differs ? target_language : NULL, needs_restart);
+}
+
 static void
 update_user_language_row (CcRegionPage *self)
 {
@@ -503,6 +485,7 @@ update_language_from_user (CcRegionPage *self)
 
     g_set_str (&self->language, language);
     update_user_language_row (self);
+    maybe_notify (self);
 }
 
 static void
@@ -511,6 +494,7 @@ update_region_from_setting (CcRegionPage *self)
     g_free (self->region);
     self->region = g_settings_get_string (self->locale_settings, KEY_REGION);
     update_user_region_row (self);
+    maybe_notify (self);
 }
 
 static void
@@ -672,6 +656,51 @@ setup_login_permission (CcRegionPage *self)
     gtk_widget_set_sensitive (self->login_group, can_acquire);
 }
 
+typedef struct {
+    CcRegionPage *self;
+    int category;
+} GetLocaleData;
+
+static void
+session_get_locale_cb (GObject *source, GAsyncResult *res, gpointer user_data)
+{
+    g_autofree GetLocaleData *data = user_data;
+    CcRegionPage *self = data->self;
+    g_autoptr(GError) error = NULL;
+    g_autoptr(GVariant) retval = NULL;
+    const gchar *locale = NULL;
+
+    retval = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
+    if (!retval) {
+        if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+            g_warning ("Failed to get session %s: %s\n", data->category == LC_MESSAGES ? "LC_MESSAGES" : "LC_TIME",
+                       error->message);
+        }
+        return;
+    }
+
+    g_variant_get (retval, "(&s)", &locale);
+    if (data->category == LC_MESSAGES)
+        g_set_str (&self->session_language, locale);
+    else
+        g_set_str (&self->session_region, locale);
+
+    maybe_notify (self);
+}
+
+static void
+request_session_locale (CcRegionPage *self, int category)
+{
+    GetLocaleData *data;
+
+    data = g_new0 (GetLocaleData, 1);
+    data->self = self;
+    data->category = category;
+
+    g_dbus_proxy_call (self->session, "GetLocale", g_variant_new ("(i)", category), G_DBUS_CALL_FLAGS_NONE, -1,
+                       self->cancellable, session_get_locale_cb, data);
+}
+
 static void
 session_proxy_ready (GObject *source, GAsyncResult *res, gpointer data)
 {
@@ -688,6 +717,9 @@ session_proxy_ready (GObject *source, GAsyncResult *res, gpointer data)
     }
 
     self->session = proxy;
+
+    request_session_locale (self, LC_MESSAGES);
+    request_session_locale (self, LC_TIME);
 }
 
 static void
@@ -747,6 +779,8 @@ cc_region_page_finalize (GObject *object)
     g_free (self->region);
     g_free (self->system_language);
     g_free (self->system_region);
+    g_free (self->session_language);
+    g_free (self->session_region);
 
     g_cancellable_cancel (self->cancellable);
     g_clear_object (&self->cancellable);
