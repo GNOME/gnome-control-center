@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-09-24 09:53+0000\n"
-"PO-Revision-Date: 2026-09-24 18:21+0200\n"
+"POT-Creation-Date: 2026-10-19 10:47+0000\n"
+"PO-Revision-Date: 2026-10-20 10:47+0200\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -29,7 +29,7 @@ msgid "Add Keyboard Shortcuts"
 msgstr "Dodaj tipkovne bližnjice"
 
 #: global-shortcuts-provider/cc-global-shortcut-dialog.blp:17 panels/applications/cc-application-shortcut-dialog.c:128 panels/color/cc-color-calibrate.blp:22 panels/common/cc-language-chooser.blp:17 panels/display/cc-display-panel.blp:26 panels/display/cc-display-panel.blp:136 panels/display/cc-display-panel.blp:184
-#: panels/keyboard/cc-input-chooser.blp:16 panels/keyboard/cc-keyboard-shortcut-editor.blp:15 panels/keyboard/cc-keyboard-shortcut-page.blp:130 panels/network/cc-net-proxy-page.blp:15 panels/network/cc-wifi-hotspot-dialog.blp:16 panels/network/cc-wifi-panel.blp:182 panels/network/connection-editor/ce-page-details.c:88
+#: panels/keyboard/cc-input-chooser.blp:16 panels/keyboard/cc-keyboard-shortcut-editor.blp:15 panels/keyboard/cc-keyboard-shortcut-page.blp:130 panels/network/cc-net-proxy-page.blp:15 panels/network/cc-wifi-hotspot-dialog.blp:18 panels/network/cc-wifi-panel.blp:182 panels/network/connection-editor/ce-page-details.c:88
 #: panels/network/connection-editor/connection-editor.blp:17 panels/printers/pp-jobs-dialog.blp:112 panels/printers/pp-new-printer-dialog.ui:65 panels/printers/pp-ppd-selection-dialog.blp:19 panels/privacy/usage/cc-usage-page.blp:114 panels/privacy/usage/cc-usage-page.blp:127 panels/privacy/usage/cc-usage-page.blp:140
 #: panels/system/region/cc-format-chooser.blp:32 panels/system/users/cc-add-user-dialog.blp:19 panels/system/users/cc-avatar-chooser.c:90 panels/system/users/cc-enterprise-login-dialog.blp:39 panels/system/users/cc-fingerprint-dialog.blp:168 panels/system/users/cc-password-dialog.blp:17
 #: panels/system/users/cc-user-page.blp:196 panels/wwan/cc-wwan-mode-dialog.blp:27 panels/wwan/cc-wwan-network-dialog.blp:95 panels/wwan/cc-wwan-sim-lock-dialog.blp:202
@@ -88,11 +88,11 @@ msgstr "_Privzeti programi"
 msgid "Set which apps open links, files, and media"
 msgstr "Določite, kateri programi odpirajo povezave, datoteke in predstavnostne vsebine"
 
-#: panels/applications/cc-applications-panel.blp:66 panels/keyboard/cc-keyboard-shortcut-page.blp:81 panels/printers/cc-printers-panel.blp:94 panels/system/datetime/cc-tz-dialog.blp:37 panels/system/region/cc-format-chooser.blp:114 shell/cc-panel-list.blp:40
+#: panels/applications/cc-applications-panel.blp:66 panels/keyboard/cc-keyboard-shortcut-page.blp:81 panels/printers/cc-printers-panel.blp:87 panels/system/datetime/cc-tz-dialog.blp:37 panels/system/region/cc-format-chooser.blp:114 shell/cc-panel-list.blp:40
 msgid "No Results Found"
 msgstr "Ni najdenih zadetkov."
 
-#: panels/applications/cc-applications-panel.blp:67 panels/keyboard/cc-keyboard-shortcut-page.blp:82 panels/printers/cc-printers-panel.blp:95 panels/system/datetime/cc-tz-dialog.blp:38 panels/system/region/cc-format-chooser.blp:115 shell/cc-panel-list.blp:41
+#: panels/applications/cc-applications-panel.blp:67 panels/keyboard/cc-keyboard-shortcut-page.blp:82 panels/printers/cc-printers-panel.blp:88 panels/system/datetime/cc-tz-dialog.blp:38 panels/system/region/cc-format-chooser.blp:115 shell/cc-panel-list.blp:41
 msgid "Try a different search"
 msgstr "Poskusite z drugačnim iskalnim nizom"
 
@@ -396,7 +396,7 @@ msgstr[3] "%u dovoljenja"
 msgid "Type removed"
 msgstr "Vrsta odstranjena"
 
-#: panels/applications/cc-applications-panel.c:1010 panels/background/cc-background-chooser.c:165 panels/network/net-device-wifi.c:785 panels/printers/cc-printers-panel.c:557
+#: panels/applications/cc-applications-panel.c:1010 panels/background/cc-background-chooser.c:165 panels/network/net-device-wifi.c:785 panels/printers/cc-printers-panel.c:545
 msgid "_Undo"
 msgstr "_Razveljavi"
 
@@ -863,18 +863,18 @@ msgstr "Odstrani ozadje"
 msgid "Select Picture"
 msgstr "Izberite sliko"
 
-#: panels/background/cc-background-item.c:228
+#: panels/background/cc-background-item.c:266
 msgid "multiple sizes"
 msgstr "različne velikosti"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:233
+#: panels/background/cc-background-item.c:271
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:391
+#: panels/background/cc-background-item.c:438
 msgid "No Desktop Background"
 msgstr "Ni ozadja namizja"
 
@@ -1757,7 +1757,7 @@ msgid "_Primary Display"
 msgstr "_Prvi zaslon"
 
 #. Translators: This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.blp:111 panels/display/cc-night-light-page.blp:63
+#: panels/display/cc-display-panel.blp:111 panels/display/cc-night-light-page.blp:34
 msgid "_Night Light"
 msgstr "_Nočna osvetlitev"
 
@@ -1908,62 +1908,62 @@ msgid "Night Light Unavailable"
 msgstr "Nočna osvetlitev ni na voljo"
 
 #. Translators: Inhibit the redshift functionality until the next day starts
-#: panels/display/cc-night-light-page.blp:34
+#: panels/display/cc-night-light-page.blp:23
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Začasno onemogoči do jutri"
 
 #. Translators: This cancels the redshift inhibit.
-#: panels/display/cc-night-light-page.blp:49
+#: panels/display/cc-night-light-page.blp:25
 msgid "Restart Filter"
 msgstr "Filter ponovnega zagona"
 
-#: panels/display/cc-night-light-page.blp:59
+#: panels/display/cc-night-light-page.blp:30
 msgid "Night light makes the screen color warmer. This can help to prevent eye strain and sleeplessness."
 msgstr "Nočna osvetlitev se kaže v toplejših barvah. S tem preprečujemo naprezanje oči in zaspanost."
 
-#: panels/display/cc-night-light-page.blp:68
+#: panels/display/cc-night-light-page.blp:39
 msgid "_Schedule"
 msgstr "_Urnik"
 
-#: panels/display/cc-night-light-page.blp:75
+#: panels/display/cc-night-light-page.blp:46
 msgid "Sunset to Sunrise"
 msgstr "od mraka do zore"
 
-#: panels/display/cc-night-light-page.blp:76
+#: panels/display/cc-night-light-page.blp:47
 msgid "Manual Schedule"
 msgstr "Ročno načrtovanje"
 
-#: panels/display/cc-night-light-page.blp:82
+#: panels/display/cc-night-light-page.blp:53
 msgid "_Times"
 msgstr "_Časi"
 
-#: panels/display/cc-night-light-page.blp:96
+#: panels/display/cc-night-light-page.blp:67
 msgid "From"
 msgstr "Od"
 
-#: panels/display/cc-night-light-page.blp:122 panels/display/cc-night-light-page.blp:214
+#: panels/display/cc-night-light-page.blp:93 panels/display/cc-night-light-page.blp:185
 msgid "Hour"
 msgstr "Ure"
 
-#: panels/display/cc-night-light-page.blp:144 panels/display/cc-night-light-page.blp:236
+#: panels/display/cc-night-light-page.blp:115 panels/display/cc-night-light-page.blp:207
 msgid "Minute"
 msgstr "Minute"
 
 #. Translators: This is the short form for the time period in the morning
-#: panels/display/cc-night-light-page.blp:157 panels/display/cc-night-light-page.blp:248
+#: panels/display/cc-night-light-page.blp:128 panels/display/cc-night-light-page.blp:219
 msgid "AM"
 msgstr "AM"
 
 #. Translators: This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-page.blp:173 panels/display/cc-night-light-page.blp:263
+#: panels/display/cc-night-light-page.blp:144 panels/display/cc-night-light-page.blp:234
 msgid "PM"
 msgstr "PM"
 
-#: panels/display/cc-night-light-page.blp:188
+#: panels/display/cc-night-light-page.blp:159
 msgid "To"
 msgstr "Za"
 
-#: panels/display/cc-night-light-page.blp:291
+#: panels/display/cc-night-light-page.blp:262
 msgid "_Color Temperature"
 msgstr "_Temperatura barve"
 
@@ -2068,10 +2068,9 @@ msgstr "Zagon spletnega brskalnika"
 msgid "Home folder"
 msgstr "Domača mapa"
 
-#. Translators: this is a verb.
 #. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
 #. Translators: this is a verb.
-#: panels/keyboard/01-launchers.xml.in:16 panels/printers/cc-printers-panel.blp:23 panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.blp:29
+#: panels/keyboard/01-launchers.xml.in:16 panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.blp:29
 msgid "Search"
 msgstr "Iskanje"
 
@@ -2333,7 +2332,7 @@ msgstr ""
 "Nastavitve je mogoče spremeniti med nastavitvami bližnjic tipkovnice."
 
 #. Translators: This is a mark in the Grayscale scale
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:92 panels/sound/cc-alert-chooser-page.blp:14 panels/sound/cc-alert-chooser-page.c:314 panels/universal-access/cc-ua-zoom-page.blp:240 panels/wwan/cc-wwan-apn-dialog.blp:224
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:92 panels/sound/cc-alert-chooser-page.blp:14 panels/sound/cc-alert-chooser-page.c:314 panels/universal-access/cc-ua-zoom-page.blp:240 panels/wwan/cc-wwan-apn-dialog.blp:226
 msgid "None"
 msgstr "Brez"
 
@@ -2341,7 +2340,7 @@ msgstr "Brez"
 msgid "Shortcut Disabled"
 msgstr "Tipkovna bližnjica je onemogočena"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:125 panels/wwan/cc-wwan-apn-dialog.blp:75
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:125 panels/wwan/cc-wwan-apn-dialog.blp:77
 msgid "Name"
 msgstr "Ime"
 
@@ -2493,11 +2492,11 @@ msgstr "Miška"
 msgid "Po_inter Speed"
 msgstr "_Hitrost kazalnika"
 
-#: panels/mouse/cc-mouse-panel.blp:104 panels/mouse/cc-mouse-panel.blp:197 panels/mouse/cc-mouse-panel.blp:305 panels/universal-access/cc-ua-typing-page.blp:52 panels/universal-access/cc-ua-typing-page.blp:97
+#: panels/mouse/cc-mouse-panel.blp:104 panels/mouse/cc-mouse-panel.blp:197 panels/mouse/cc-mouse-panel.blp:305 panels/universal-access/cc-ua-typing-page.blp:52 panels/universal-access/cc-ua-typing-page.blp:102
 msgid "Slow"
 msgstr "Počasna"
 
-#: panels/mouse/cc-mouse-panel.blp:106 panels/mouse/cc-mouse-panel.blp:199 panels/mouse/cc-mouse-panel.blp:307 panels/universal-access/cc-ua-typing-page.blp:50 panels/universal-access/cc-ua-typing-page.blp:95
+#: panels/mouse/cc-mouse-panel.blp:106 panels/mouse/cc-mouse-panel.blp:199 panels/mouse/cc-mouse-panel.blp:307 panels/universal-access/cc-ua-typing-page.blp:50 panels/universal-access/cc-ua-typing-page.blp:100
 msgid "Fast"
 msgstr "Hitra"
 
@@ -2759,7 +2758,7 @@ msgstr "večopravilnost;multitasking;produktivnost;prilagodi;namizje;vroč;vogal
 msgid "Proxy"
 msgstr "Posredniški strežnik"
 
-#: panels/network/cc-net-proxy-page.blp:24 panels/wwan/cc-wwan-apn-dialog.blp:37
+#: panels/network/cc-net-proxy-page.blp:24 panels/wwan/cc-wwan-apn-dialog.blp:39
 msgid "_Save"
 msgstr "_Shrani"
 
@@ -2856,12 +2855,12 @@ msgstr "Koda QR"
 msgid "Scan to Connect"
 msgstr "Preišči za povezovanje"
 
-#: panels/network/cc-qr-code-dialog.blp:57 panels/network/cc-wifi-hotspot-dialog.blp:61
+#: panels/network/cc-qr-code-dialog.blp:57 panels/network/cc-wifi-hotspot-dialog.blp:42
 msgid "Network Name"
 msgstr "Ime omrežja"
 
 #. Translators: This is a password needed for printing.
-#: panels/network/cc-qr-code-dialog.blp:66 panels/network/cc-wifi-hotspot-dialog.blp:102 panels/printers/pp-jobs-dialog.blp:171 panels/printers/pp-new-printer-dialog.ui:300 panels/system/users/cc-add-user-dialog.blp:89 panels/wwan/cc-wwan-apn-dialog.blp:150
+#: panels/network/cc-qr-code-dialog.blp:66 panels/network/cc-wifi-hotspot-dialog.blp:53 panels/printers/pp-jobs-dialog.blp:171 panels/printers/pp-new-printer-dialog.ui:300 panels/system/users/cc-add-user-dialog.blp:89 panels/wwan/cc-wwan-apn-dialog.blp:152
 msgid "Password"
 msgstr "Geslo"
 
@@ -2910,49 +2909,54 @@ msgstr "Moč signala %d%%"
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Ali želite omogočiti vročo točko Wi-Fi?"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:23
+#: panels/network/cc-wifi-hotspot-dialog.blp:25
 msgid "_Turn On"
 msgstr "_Vklopi"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:44
+#: panels/network/cc-wifi-hotspot-dialog.blp:36
 msgid "Wi-Fi hotspot allows others to share your internet connection, by creating a Wi-Fi network that they can connect to. To do this, you must have an internet connection through a source other than Wi-Fi."
 msgstr "Vroča točka Wi-Fi omogoča drugim souporabo povezave z internetom. Uporabniki se lahko povežejo v ustvarjeno omrežje Wi-Fi. Za to možnost mora biti na voljo povezava mimo običajne Wi-Fi povezave."
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:115
+#: panels/network/cc-wifi-hotspot-dialog.blp:39
+msgid "Hotspot Details"
+msgstr "Podrobnosti vroče točke"
+
+#: panels/network/cc-wifi-hotspot-dialog.blp:65
 msgid "Generate Random Password"
 msgstr "Ustvari naključno geslo"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:116
-msgid "Autogenerate Password"
-msgstr "Samodejno ustvari geslo"
-
-#. TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name
-#: panels/network/cc-wifi-hotspot-dialog.c:114
+#. TRANSLATORS: ‘%s’ is a Wi-Fi Network (SSID) name
+#: panels/network/cc-wifi-hotspot-dialog.c:112
 #, c-format
-msgid "Turning on the hotspot will disconnect from %s, and it will not be possible to access the internet through Wi-Fi."
-msgstr "Ob priklopu vroče točke se onemogoči povezava z omrežjem %s, zato dostop po Wi-Fi ne bo več mogoč."
+msgid ""
+"Wi-Fi hotspot allows others to share your internet connection, by creating a Wi-Fi network that they can connect to. To do this, you must have an internet connection through a source other than Wi-Fi.\n"
+"\n"
+"Turning on the hotspot will disconnect from %s, and it will not be possible to access the internet through Wi-Fi."
+msgstr ""
+"Dostopna točka Wi-Fi omogoča drugim souporabo povezave z internetom. Uporabniki se lahko povežejo v ustvarjeno omrežje Wi-Fi. Za to možnost mora biti na voljo povezava mimo običajne Wi-Fi povezave.\n"
+"Vključitev dostopne točke vas bo razvezala s/z %s in do interneta prek Wi-Fi ne boste mogli dostopati."
 
-#: panels/network/cc-wifi-hotspot-dialog.c:215
+#: panels/network/cc-wifi-hotspot-dialog.c:216
 msgid "Network name cannot be empty"
 msgstr "Ime omrežja ne sme biti prazno polje"
 
 #. SSID length needs to be in the 1-32 byte range
-#: panels/network/cc-wifi-hotspot-dialog.c:219
+#: panels/network/cc-wifi-hotspot-dialog.c:220
 msgid "Network name is too long"
 msgstr "Ime omrežja je predolgo"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:234
-msgid "Must have a minimum of 8 characters"
-msgstr "Vsebovati mora najmanj 8 znakov"
+#: panels/network/cc-wifi-hotspot-dialog.c:235
+msgid "Password must have a minimum of 8 characters"
+msgstr "Geslo mora vsebovati najmanj 8 znakov"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:240
+#: panels/network/cc-wifi-hotspot-dialog.c:241
 #, c-format
-msgid "Must have a maximum of %d character"
-msgid_plural "Must have a maximum of %d characters"
-msgstr[0] "Vsebovati mora največ %d znakov"
-msgstr[1] "Vsebovati mora največ %d znak"
-msgstr[2] "Vsebovati mora največ %d znaka"
-msgstr[3] "Vsebovati mora največ %d znake"
+msgid "Password must have a maximum of %d character"
+msgid_plural "Password must have a maximum of %d characters"
+msgstr[0] "Geslo sme vsebovati največ %d znakov"
+msgstr[1] "Geslo sme vsebovati največ %d znak"
+msgstr[2] "Geslo sme vsebovati največ %d znaka"
+msgstr[3] "Geslo sme vsebovati največ %d znake"
 
 #: panels/network/cc-wifi-panel.blp:30
 msgid "Airplane Mode"
@@ -3002,7 +3006,7 @@ msgstr ""
 msgid "T_urn Off Hotspot…"
 msgstr "Izklj_uči vročo točko …"
 
-#: panels/network/cc-wifi-panel.blp:139
+#: panels/network/cc-wifi-panel.blp:139 panels/network/net-device-wifi.c:1065
 msgid "Visible Networks"
 msgstr "Vidna omrežja"
 
@@ -3030,7 +3034,7 @@ msgstr "Z izklopom se prekine povezava z vsemi napravami, ki uporabljajo dostopn
 msgid "_Turn Off"
 msgstr "_Izklopi"
 
-#: panels/network/cc-wifi-panel.c:375 panels/network/gnome-wifi-panel.desktop.in:2 panels/network/network-wifi.blp:57 panels/network/network-wifi.blp:62
+#: panels/network/cc-wifi-panel.c:385 panels/network/gnome-wifi-panel.desktop.in:2 panels/network/network-wifi.blp:57 panels/network/network-wifi.blp:62
 msgid "Wi-Fi"
 msgstr "Omrežje Wi-Fi"
 
@@ -3058,36 +3062,36 @@ msgstr "Istovetnost"
 msgid "_Name"
 msgstr "_Ime"
 
-#: panels/network/connection-editor/ce-page.c:209 panels/network/connection-editor/ce-page.c:212
+#: panels/network/connection-editor/ce-page.c:218 panels/network/connection-editor/ce-page.c:221
 msgid "Preserve"
 msgstr "Ohrani"
 
-#: panels/network/connection-editor/ce-page.c:210 panels/network/connection-editor/ce-page.c:213
+#: panels/network/connection-editor/ce-page.c:219 panels/network/connection-editor/ce-page.c:222
 msgid "Permanent"
 msgstr "Trajno"
 
-#: panels/network/connection-editor/ce-page.c:211 panels/network/connection-editor/ce-page.c:214
+#: panels/network/connection-editor/ce-page.c:220 panels/network/connection-editor/ce-page.c:223
 msgid "Random"
 msgstr "Naključno"
 
-#: panels/network/connection-editor/ce-page.c:211 panels/network/connection-editor/ce-page.c:215
+#: panels/network/connection-editor/ce-page.c:220 panels/network/connection-editor/ce-page.c:224
 msgid "Stable"
 msgstr "Stabilo"
 
-#: panels/network/connection-editor/ce-page.c:217
+#: panels/network/connection-editor/ce-page.c:226
 msgid "Stable per SSID"
 msgstr "Stabilno na SSID"
 
-#: panels/network/connection-editor/ce-page.c:225
+#: panels/network/connection-editor/ce-page.c:234
 msgid "The MAC address entered here will be used as hardware address for the network device this connection is activated on. This feature is known as MAC cloning or spoofing. Example: 00:11:22:33:44:55"
 msgstr "Naslov MAC, vpisan na tem mestu, bo uporabljen kot strojni naslov za omrežno napravo, ki ustvarja povezavo. Zmožnost je poznana kot kloniranje naslova MAC oziroma lažno predstavljanje. Primer: 00:11:22:33:44:55"
 
-#: panels/network/connection-editor/ce-page.c:349
+#: panels/network/connection-editor/ce-page.c:358
 #, c-format
 msgid "Profile %d"
 msgstr "Profil %d"
 
-#: panels/network/connection-editor/ce-page.c:382
+#: panels/network/connection-editor/ce-page.c:391
 msgid "Invalid Mac Address"
 msgstr "Neveljavni naslov MAC"
 
@@ -4619,38 +4623,38 @@ msgstr "v delovanju;v pripravljenosti;hiberniranje;v mirovanju;baterija;zaslon;D
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/cc-printers-panel.blp:34 panels/printers/cc-printers-panel.blp:111
+#: panels/printers/cc-printers-panel.blp:46 panels/printers/cc-printers-panel.blp:109
 msgid "_Add Printer…"
 msgstr "_Dodaj tiskalnik …"
 
-#: panels/printers/cc-printers-panel.blp:54
+#: panels/printers/cc-printers-panel.blp:67
 msgid "Search printers"
 msgstr "Poišči tiskalnike"
 
-#: panels/printers/cc-printers-panel.blp:88 panels/printers/gnome-printers-panel.desktop.in:2
+#: panels/printers/cc-printers-panel.blp:81 panels/printers/gnome-printers-panel.desktop.in:2
 msgid "Printers"
 msgstr "Tiskalniki"
 
-#: panels/printers/cc-printers-panel.blp:107
+#: panels/printers/cc-printers-panel.blp:105
 msgid "No Printers"
 msgstr "Ni nastavljenih tiskalnikov"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.blp:132
+#: panels/printers/cc-printers-panel.blp:135
 msgid "No Print Service"
 msgstr "Storitev tiskanja ni zagnana"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.blp:135
+#: panels/printers/cc-printers-panel.blp:138
 msgid "The system printing service doesn’t seem to be available"
 msgstr "Sistemska storitev tiskanja trenutno ni na voljo."
 
-#: panels/printers/cc-printers-panel.c:566
+#: panels/printers/cc-printers-panel.c:554
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Tiskalnik »%s« je bil izbrisan."
 
-#: panels/printers/cc-printers-panel.c:759
+#: panels/printers/cc-printers-panel.c:747
 msgid "Failed to add new printer."
 msgstr "Dodajanje novega tiskalnika je spodletelo."
 
@@ -4852,7 +4856,7 @@ msgid "Domain"
 msgstr "Domena"
 
 #. Translators: This is a username on a print server.
-#: panels/printers/pp-jobs-dialog.blp:157 panels/printers/pp-new-printer-dialog.ui:280 panels/wwan/cc-wwan-apn-dialog.blp:127
+#: panels/printers/pp-jobs-dialog.blp:157 panels/printers/pp-new-printer-dialog.ui:280 panels/wwan/cc-wwan-apn-dialog.blp:129
 msgid "Username"
 msgstr "Uporabniško ime"
 
@@ -4934,7 +4938,7 @@ msgid "Server requires authentication"
 msgstr "Strežnik zahteva overitev"
 
 #. Translators: this is the "go back" action of a button
-#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:15 panels/wacom/cc-wacom-stylus-page.c:389 panels/wwan/cc-wwan-apn-dialog.blp:18
+#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:15 panels/wacom/cc-wacom-stylus-page.c:389 panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
 msgstr "Nazaj"
 
@@ -7874,13 +7878,13 @@ msgid "_Double-Click Delay"
 msgstr "_Časovni zamik dvojnega klika"
 
 #. Translators: This is a mark in the Crosshair Length scale
-#: panels/universal-access/cc-ua-mouse-page.blp:41 panels/universal-access/cc-ua-mouse-page.blp:74 panels/universal-access/cc-ua-mouse-page.blp:103 panels/universal-access/cc-ua-typing-page.blp:118 panels/universal-access/cc-ua-typing-page.blp:163 panels/universal-access/cc-ua-typing-page.blp:203
+#: panels/universal-access/cc-ua-mouse-page.blp:41 panels/universal-access/cc-ua-mouse-page.blp:74 panels/universal-access/cc-ua-mouse-page.blp:103 panels/universal-access/cc-ua-typing-page.blp:128 panels/universal-access/cc-ua-typing-page.blp:173 panels/universal-access/cc-ua-typing-page.blp:213
 #: panels/universal-access/cc-ua-zoom-page.blp:146
 msgid "Short"
 msgstr "Kratko"
 
 #. Translators: This is a mark in the Crosshair Length scale
-#: panels/universal-access/cc-ua-mouse-page.blp:43 panels/universal-access/cc-ua-mouse-page.blp:76 panels/universal-access/cc-ua-mouse-page.blp:105 panels/universal-access/cc-ua-typing-page.blp:120 panels/universal-access/cc-ua-typing-page.blp:165 panels/universal-access/cc-ua-typing-page.blp:205
+#: panels/universal-access/cc-ua-mouse-page.blp:43 panels/universal-access/cc-ua-mouse-page.blp:76 panels/universal-access/cc-ua-mouse-page.blp:105 panels/universal-access/cc-ua-typing-page.blp:130 panels/universal-access/cc-ua-typing-page.blp:175 panels/universal-access/cc-ua-typing-page.blp:215
 #: panels/universal-access/cc-ua-zoom-page.blp:149
 msgid "Long"
 msgstr "Dolgo"
@@ -7897,7 +7901,7 @@ msgstr "_Simulirani drugi klik"
 msgid "Secondary click by holding down the primary mouse button"
 msgstr "Sproži drugotni klik s pritiskom osnovnega gumba miške"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:67 panels/universal-access/cc-ua-typing-page.blp:155 panels/universal-access/cc-ua-typing-page.blp:196
+#: panels/universal-access/cc-ua-mouse-page.blp:67 panels/universal-access/cc-ua-typing-page.blp:165 panels/universal-access/cc-ua-typing-page.blp:206
 msgid "Acceptance Delay"
 msgstr "Zamik sprejetja"
 
@@ -7909,7 +7913,7 @@ msgstr "Klik ob _prehodu"
 msgid "Trigger a click when the pointer hovers"
 msgstr "Sproži klik ob prehodu kazalnika nad točko"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:96 panels/universal-access/cc-ua-typing-page.blp:110
+#: panels/universal-access/cc-ua-mouse-page.blp:96 panels/universal-access/cc-ua-typing-page.blp:119
 msgid "Delay"
 msgstr "Časovni zamik"
 
@@ -8138,51 +8142,51 @@ msgstr "_Ponavljajoče tipke"
 msgid "Key presses repeat when the key is held down"
 msgstr "Ponovi izpis znakov, ko je tipka pritisnjena zadržano"
 
-#: panels/universal-access/cc-ua-typing-page.blp:87
+#: panels/universal-access/cc-ua-typing-page.blp:91
 msgid "Speed"
 msgstr "Hitrost"
 
-#: panels/universal-access/cc-ua-typing-page.blp:134
+#: panels/universal-access/cc-ua-typing-page.blp:144
 msgid "_Sticky Keys"
 msgstr "_Lepljive tipke"
 
-#: panels/universal-access/cc-ua-typing-page.blp:135
+#: panels/universal-access/cc-ua-typing-page.blp:145
 msgid "Sequences of modifier keys act as a key combination"
 msgstr "Zaporedje spremenilnih tipk se obravnava kot kombinacijo tipk"
 
-#: panels/universal-access/cc-ua-typing-page.blp:140
+#: panels/universal-access/cc-ua-typing-page.blp:150
 msgid "Disable if two keys are pressed together"
 msgstr "_Onemogoči, če sta sočasno pritisnjeni dve tipki"
 
-#: panels/universal-access/cc-ua-typing-page.blp:144
+#: panels/universal-access/cc-ua-typing-page.blp:154
 msgid "Beep when modifier key is pressed"
 msgstr "Zapiskaj, ko je pritisnjena _spremenilna tipka"
 
-#: panels/universal-access/cc-ua-typing-page.blp:149
+#: panels/universal-access/cc-ua-typing-page.blp:159
 msgid "S_low Keys"
 msgstr "_Počasne tipke"
 
-#: panels/universal-access/cc-ua-typing-page.blp:150
+#: panels/universal-access/cc-ua-typing-page.blp:160
 msgid "Delay between when a key is pressed and when it is accepted"
 msgstr "Zamik med pritiskom in sprejemom tipke"
 
-#: panels/universal-access/cc-ua-typing-page.blp:177
+#: panels/universal-access/cc-ua-typing-page.blp:187
 msgid "Beep when a key is pressed"
 msgstr "Zapiska, kadar je tipka pritisnjena"
 
-#: panels/universal-access/cc-ua-typing-page.blp:181
+#: panels/universal-access/cc-ua-typing-page.blp:191
 msgid "Beep when a key is accepted"
 msgstr "Zapiska, kadar je tipka sprejeta"
 
-#: panels/universal-access/cc-ua-typing-page.blp:185 panels/universal-access/cc-ua-typing-page.blp:217
+#: panels/universal-access/cc-ua-typing-page.blp:195 panels/universal-access/cc-ua-typing-page.blp:227
 msgid "Beep when a key is rejected"
 msgstr "Zapiska, kadar je tipka zavrnjena"
 
-#: panels/universal-access/cc-ua-typing-page.blp:190
+#: panels/universal-access/cc-ua-typing-page.blp:200
 msgid "B_ounce Keys"
 msgstr "_Odskočne tipke"
 
-#: panels/universal-access/cc-ua-typing-page.blp:191
+#: panels/universal-access/cc-ua-typing-page.blp:201
 msgid "Ignore fast duplicate keypresses"
 msgstr "Prezre hitre podvojene pritiske tipk"
 
@@ -8887,27 +8891,27 @@ msgstr "Dobro počutje;čas pred zaslonom;odmori;opomniki za prekinitev;zdravstv
 msgid "Access Points"
 msgstr "Dostopne točke"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:29
+#: panels/wwan/cc-wwan-apn-dialog.blp:31
 msgid "Add"
 msgstr "Dodaj"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:101
+#: panels/wwan/cc-wwan-apn-dialog.blp:103
 msgid "APN"
 msgstr "APN"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:175
+#: panels/wwan/cc-wwan-apn-dialog.blp:177
 msgid "APN Type"
 msgstr "Vrsta APN"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:191
+#: panels/wwan/cc-wwan-apn-dialog.blp:193
 msgid "Internet"
 msgstr "Internet"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:192
+#: panels/wwan/cc-wwan-apn-dialog.blp:194
 msgid "Attach"
 msgstr "Priloži"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:206
+#: panels/wwan/cc-wwan-apn-dialog.blp:208
 msgid "Auth Type"
 msgstr "Vrsta preverjanja pristnosti"
 
