@@ -243,7 +243,7 @@ add_application (CcNotificationsPanel *self, GAppInfo *app_info, const char *app
 }
 
 static gboolean
-app_is_system_service (GDesktopAppInfo *app)
+app_is_settings_panel (GDesktopAppInfo *app)
 {
     g_auto(GStrv) split = NULL;
     const gchar *categories;
@@ -253,13 +253,8 @@ app_is_system_service (GDesktopAppInfo *app)
         return FALSE;
 
     split = g_strsplit (categories, ";", -1);
-    if (g_strv_contains ((const gchar *const *) split, "X-GNOME-Settings-Panel")
-        || g_strv_contains ((const gchar *const *) split, "Settings")
-        || g_strv_contains ((const gchar *const *) split, "System")) {
-        return TRUE;
-    }
 
-    return FALSE;
+    return g_strv_contains ((const gchar *const *) split, "X-GNOME-Settings-Panel");
 }
 
 static void
@@ -294,8 +289,7 @@ maybe_add_app_id (CcNotificationsPanel *self, const char *canonical_app_id)
         return;
     }
 
-    if (app_is_system_service (G_DESKTOP_APP_INFO (app_info))) {
-        /* We don't want to show system services in the notification list */
+    if (app_is_settings_panel (G_DESKTOP_APP_INFO (app_info))) {
         return;
     }
 
@@ -370,8 +364,8 @@ load_apps (CcNotificationsPanel *self)
                 continue;
             }
 
-            if (app_is_system_service (app)) {
-                g_debug ("Skipped app '%s', as it is a system service", g_app_info_get_id (G_APP_INFO (app)));
+            if (app_is_settings_panel (app)) {
+                g_debug ("Skipped app '%s', as it is a Settings panel", g_app_info_get_id (G_APP_INFO (app)));
                 continue;
             }
 
