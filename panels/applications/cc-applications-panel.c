@@ -1166,6 +1166,7 @@ update_handler_dialog (CcApplicationsPanel *self, GAppInfo *info)
     gtk_widget_set_visible (GTK_WIDGET (self->handler_row), FALSE);
     gtk_widget_set_visible (GTK_WIDGET (self->handler_file_group), FALSE);
     gtk_widget_set_visible (GTK_WIDGET (self->handler_link_group), FALSE);
+    gtk_widget_set_sensitive (GTK_WIDGET (self->handler_reset_button_row), FALSE);
 
     types = g_app_info_get_supported_types (info);
     if (types == NULL || types[0] == NULL)
@@ -1173,7 +1174,6 @@ update_handler_dialog (CcApplicationsPanel *self, GAppInfo *info)
 
     hash = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_free);
 
-    gtk_widget_set_sensitive (GTK_WIDGET (self->handler_reset_button_row), FALSE);
     for (i = 0; types[i]; i++) {
         g_autofree gchar *ctype = g_content_type_from_mime_type (types[i]);
 
