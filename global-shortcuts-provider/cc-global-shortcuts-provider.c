@@ -98,10 +98,9 @@ handle_configure_shortcuts (CcGlobalShortcutsProvider *self, GDBusMethodInvocati
 {
     g_autoptr(CcGlobalShortcutDialog) shortcut_dialog = NULL;
 
-    if (!g_application_id_is_valid (app_id)) {
+    if (!app_id || !app_id[0]) {
         g_warning ("Discarded shortcut configure request from application with an invalid app_id >%s<.", app_id);
-        g_dbus_method_invocation_return_error (invocation, G_DBUS_ERROR, G_DBUS_ERROR_INVALID_ARGS, "Invalid app_id");
-        return G_DBUS_METHOD_INVOCATION_HANDLED;
+        return G_DBUS_METHOD_INVOCATION_UNHANDLED;
     }
 
     shortcut_dialog = cc_global_shortcut_dialog_new (app_id, parent_window, NULL);
