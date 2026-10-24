@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-09-24 09:53+0000\n"
-"PO-Revision-Date: 2026-09-26 22:37+0300\n"
+"POT-Creation-Date: 2026-10-22 15:09+0000\n"
+"PO-Revision-Date: 2026-10-24 22:10+0300\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2);\n"
-"X-Generator: Gtranslator 50.0\n"
+"X-Generator: Gtranslator 51.0\n"
 "X-Launchpad-Export-Date: 2014-07-13 17:08+0000\n"
 "X-Project-Style: gnome\n"
 "X-DL-VCS-Web: https://gitlab.gnome.org/GNOME/gnome-control-center/\n"
@@ -54,7 +54,7 @@ msgstr "Adaugă scurtături"
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:15
 #: panels/keyboard/cc-keyboard-shortcut-page.blp:130
 #: panels/network/cc-net-proxy-page.blp:15
-#: panels/network/cc-wifi-hotspot-dialog.blp:16
+#: panels/network/cc-wifi-hotspot-dialog.blp:18
 #: panels/network/cc-wifi-panel.blp:182
 #: panels/network/connection-editor/ce-page-details.c:88
 #: panels/network/connection-editor/connection-editor.blp:17
@@ -150,7 +150,7 @@ msgstr "Alege aplicațiile care deschid legături, fișiere și media"
 
 #: panels/applications/cc-applications-panel.blp:66
 #: panels/keyboard/cc-keyboard-shortcut-page.blp:81
-#: panels/printers/cc-printers-panel.blp:94
+#: panels/printers/cc-printers-panel.blp:87
 #: panels/system/datetime/cc-tz-dialog.blp:37
 #: panels/system/region/cc-format-chooser.blp:114 shell/cc-panel-list.blp:40
 msgid "No Results Found"
@@ -158,7 +158,7 @@ msgstr "Niciun rezultat"
 
 #: panels/applications/cc-applications-panel.blp:67
 #: panels/keyboard/cc-keyboard-shortcut-page.blp:82
-#: panels/printers/cc-printers-panel.blp:95
+#: panels/printers/cc-printers-panel.blp:88
 #: panels/system/datetime/cc-tz-dialog.blp:38
 #: panels/system/region/cc-format-chooser.blp:115 shell/cc-panel-list.blp:41
 msgid "Try a different search"
@@ -507,7 +507,7 @@ msgstr "Tip eliminat"
 
 #: panels/applications/cc-applications-panel.c:1010
 #: panels/background/cc-background-chooser.c:165
-#: panels/network/net-device-wifi.c:785 panels/printers/cc-printers-panel.c:557
+#: panels/network/net-device-wifi.c:785 panels/printers/cc-printers-panel.c:545
 msgid "_Undo"
 msgstr "An_ulează"
 
@@ -527,7 +527,7 @@ msgstr "Elimină tipul de legătură"
 msgid "Remove File Type"
 msgstr "Elimină tipul de fișier"
 
-#: panels/applications/cc-applications-panel.c:1198
+#: panels/applications/cc-applications-panel.c:1201
 #, c-format
 msgid "%u type"
 msgid_plural "%u types"
@@ -536,19 +536,39 @@ msgstr[1] "%u tipuri"
 msgstr[2] "%u de tipuri"
 
 #. TRANSLATORS: %s is an app name.
-#: panels/applications/cc-applications-panel.c:1204
+#: panels/applications/cc-applications-panel.c:1205
 #, c-format
 msgid "%s is used to open the following types of files and links"
 msgstr ""
 "%s este utilizat pentru a deschide următoarele tipuri de fișiere și legături"
 
-#: panels/applications/cc-applications-panel.c:1241
+#. Translators: This is a mark in the Grayscale scale
+#: panels/applications/cc-applications-panel.c:1207
+#: panels/keyboard/cc-keyboard-shortcut-editor.blp:92
+#: panels/sound/cc-alert-chooser-page.blp:14
+#: panels/sound/cc-alert-chooser-page.c:314
+#: panels/universal-access/cc-ua-zoom-page.blp:240
+#: panels/wwan/cc-wwan-apn-dialog.blp:226
+msgid "None"
+msgstr "Niciuna"
+
+#. TRANSLATORS: %s is an app name.
+#: panels/applications/cc-applications-panel.c:1210
+#, c-format
+msgid ""
+"%s is not used to open any types of files and links. Resetting will "
+"associate all recommended types with it"
+msgstr ""
+"%s nu este utilizat pentru a deschide niciun tip de fișiere sau legături. "
+"Restabilirea va asocia cu acesta toate tipurile recomandate"
+
+#: panels/applications/cc-applications-panel.c:1251
 #, c-format
 msgid "How much disk space %s is occupying with app data and caches"
 msgstr "Cât spațiu pe disc ocupă %s cu datele aplicației și cache"
 
 #. TRANSLATORS: %u is the number of global shortcut actions.
-#: panels/applications/cc-applications-panel.c:1389
+#: panels/applications/cc-applications-panel.c:1399
 #, c-format
 msgid "%u action"
 msgid_plural "%u actions"
@@ -988,18 +1008,18 @@ msgstr "Elimină fundalul"
 msgid "Select Picture"
 msgstr "Alege o fotografie"
 
-#: panels/background/cc-background-item.c:228
+#: panels/background/cc-background-item.c:266
 msgid "multiple sizes"
 msgstr "mărimi multiple"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:233
+#: panels/background/cc-background-item.c:271
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:391
+#: panels/background/cc-background-item.c:438
 msgid "No Desktop Background"
 msgstr "Niciun fundal"
 
@@ -1949,7 +1969,7 @@ msgstr "Ecran _principal"
 
 #. Translators: This is the redshift functionality where we suppress blue light when the sun has gone down
 #: panels/display/cc-display-panel.blp:111
-#: panels/display/cc-night-light-page.blp:63
+#: panels/display/cc-night-light-page.blp:34
 msgid "_Night Light"
 msgstr "Lumină de _noapte"
 
@@ -2104,16 +2124,16 @@ msgid "Night Light Unavailable"
 msgstr "Lumina de noapte nu e disponibilă"
 
 #. Translators: Inhibit the redshift functionality until the next day starts
-#: panels/display/cc-night-light-page.blp:34
+#: panels/display/cc-night-light-page.blp:23
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Dezactivat temporar până mâine"
 
 #. Translators: This cancels the redshift inhibit.
-#: panels/display/cc-night-light-page.blp:49
+#: panels/display/cc-night-light-page.blp:25
 msgid "Restart Filter"
 msgstr "Repornește filtrul"
 
-#: panels/display/cc-night-light-page.blp:59
+#: panels/display/cc-night-light-page.blp:30
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
@@ -2121,53 +2141,53 @@ msgstr ""
 "Lumina nocturnă face culoarea ecranului mai caldă. Aceasta poate ajuta la "
 "prevenirea extenuării ochilor și a lipsei de somn."
 
-#: panels/display/cc-night-light-page.blp:68
+#: panels/display/cc-night-light-page.blp:39
 msgid "_Schedule"
 msgstr "_Planifică"
 
-#: panels/display/cc-night-light-page.blp:75
+#: panels/display/cc-night-light-page.blp:46
 msgid "Sunset to Sunrise"
 msgstr "Apus la răsărit"
 
-#: panels/display/cc-night-light-page.blp:76
+#: panels/display/cc-night-light-page.blp:47
 msgid "Manual Schedule"
 msgstr "Planificare manuală"
 
-#: panels/display/cc-night-light-page.blp:82
+#: panels/display/cc-night-light-page.blp:53
 msgid "_Times"
 msgstr "Repere _orare"
 
-#: panels/display/cc-night-light-page.blp:96
+#: panels/display/cc-night-light-page.blp:67
 msgid "From"
 msgstr "De la"
 
-#: panels/display/cc-night-light-page.blp:122
-#: panels/display/cc-night-light-page.blp:214
+#: panels/display/cc-night-light-page.blp:93
+#: panels/display/cc-night-light-page.blp:185
 msgid "Hour"
 msgstr "Oră"
 
-#: panels/display/cc-night-light-page.blp:144
-#: panels/display/cc-night-light-page.blp:236
+#: panels/display/cc-night-light-page.blp:115
+#: panels/display/cc-night-light-page.blp:207
 msgid "Minute"
 msgstr "Minut"
 
 #. Translators: This is the short form for the time period in the morning
-#: panels/display/cc-night-light-page.blp:157
-#: panels/display/cc-night-light-page.blp:248
+#: panels/display/cc-night-light-page.blp:128
+#: panels/display/cc-night-light-page.blp:219
 msgid "AM"
 msgstr "AM"
 
 #. Translators: This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-page.blp:173
-#: panels/display/cc-night-light-page.blp:263
+#: panels/display/cc-night-light-page.blp:144
+#: panels/display/cc-night-light-page.blp:234
 msgid "PM"
 msgstr "PM"
 
-#: panels/display/cc-night-light-page.blp:188
+#: panels/display/cc-night-light-page.blp:159
 msgid "To"
 msgstr "La"
 
-#: panels/display/cc-night-light-page.blp:291
+#: panels/display/cc-night-light-page.blp:262
 msgid "_Color Temperature"
 msgstr "Temperatura _culorilor"
 
@@ -2279,11 +2299,9 @@ msgstr "Lansează navigatorul web"
 msgid "Home folder"
 msgstr "Dosar personal"
 
-#. Translators: this is a verb.
 #. Translators: "Search" should be phrased as a verb (in both "Name" and "Keywords" fields).
 #. Translators: this is a verb.
 #: panels/keyboard/01-launchers.xml.in:16
-#: panels/printers/cc-printers-panel.blp:23
 #: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.blp:29
 msgid "Search"
 msgstr "Caută"
@@ -2579,21 +2597,12 @@ msgstr ""
 "Sursele de introducere pot fi schimbate folosind scurtătura %s.\n"
 "Aceasta poate fi schimbată din opțiunile pentru scurtături."
 
-#. Translators: This is a mark in the Grayscale scale
-#: panels/keyboard/cc-keyboard-shortcut-editor.blp:92
-#: panels/sound/cc-alert-chooser-page.blp:14
-#: panels/sound/cc-alert-chooser-page.c:314
-#: panels/universal-access/cc-ua-zoom-page.blp:240
-#: panels/wwan/cc-wwan-apn-dialog.blp:224
-msgid "None"
-msgstr "Niciuna"
-
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:96
 msgid "Shortcut Disabled"
 msgstr "Scurtătură dezactivată"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.blp:125
-#: panels/wwan/cc-wwan-apn-dialog.blp:75
+#: panels/wwan/cc-wwan-apn-dialog.blp:77
 msgid "Name"
 msgstr "Nume"
 
@@ -2767,14 +2776,14 @@ msgstr "Viteza _indicatorului"
 #: panels/mouse/cc-mouse-panel.blp:104 panels/mouse/cc-mouse-panel.blp:197
 #: panels/mouse/cc-mouse-panel.blp:305
 #: panels/universal-access/cc-ua-typing-page.blp:52
-#: panels/universal-access/cc-ua-typing-page.blp:97
+#: panels/universal-access/cc-ua-typing-page.blp:102
 msgid "Slow"
 msgstr "Lent"
 
 #: panels/mouse/cc-mouse-panel.blp:106 panels/mouse/cc-mouse-panel.blp:199
 #: panels/mouse/cc-mouse-panel.blp:307
 #: panels/universal-access/cc-ua-typing-page.blp:50
-#: panels/universal-access/cc-ua-typing-page.blp:95
+#: panels/universal-access/cc-ua-typing-page.blp:100
 msgid "Fast"
 msgstr "Rapid"
 
@@ -3060,7 +3069,7 @@ msgid "Proxy"
 msgstr "Proxy"
 
 #: panels/network/cc-net-proxy-page.blp:24
-#: panels/wwan/cc-wwan-apn-dialog.blp:37
+#: panels/wwan/cc-wwan-apn-dialog.blp:39
 msgid "_Save"
 msgstr "_Salvează"
 
@@ -3183,17 +3192,17 @@ msgid "Scan to Connect"
 msgstr "Scanează pentru conectare"
 
 #: panels/network/cc-qr-code-dialog.blp:57
-#: panels/network/cc-wifi-hotspot-dialog.blp:61
+#: panels/network/cc-wifi-hotspot-dialog.blp:42
 msgid "Network Name"
 msgstr "Nume rețea"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-qr-code-dialog.blp:66
-#: panels/network/cc-wifi-hotspot-dialog.blp:102
+#: panels/network/cc-wifi-hotspot-dialog.blp:53
 #: panels/printers/pp-jobs-dialog.blp:171
 #: panels/printers/pp-new-printer-dialog.ui:300
 #: panels/system/users/cc-add-user-dialog.blp:89
-#: panels/wwan/cc-wwan-apn-dialog.blp:150
+#: panels/wwan/cc-wwan-apn-dialog.blp:152
 msgid "Password"
 msgstr "Parola"
 
@@ -3244,11 +3253,11 @@ msgstr "Putere semnal %d%%"
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Pornesc punctul de acces Wi-Fi?"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:23
+#: panels/network/cc-wifi-hotspot-dialog.blp:25
 msgid "_Turn On"
 msgstr "_Pornește"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:44
+#: panels/network/cc-wifi-hotspot-dialog.blp:36
 msgid ""
 "Wi-Fi hotspot allows others to share your internet connection, by creating a "
 "Wi-Fi network that they can connect to. To do this, you must have an "
@@ -3259,44 +3268,53 @@ msgstr ""
 "face acest lucru, trebuie să fii conectat la internet prin altă sursă decât "
 "prin Wi-Fi."
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:115
+#: panels/network/cc-wifi-hotspot-dialog.blp:39
+msgid "Hotspot Details"
+msgstr "Detalii Punct de acces"
+
+#: panels/network/cc-wifi-hotspot-dialog.blp:65
 msgid "Generate Random Password"
 msgstr "Generează o parolă la întâmplare"
 
-#: panels/network/cc-wifi-hotspot-dialog.blp:116
-msgid "Autogenerate Password"
-msgstr "Generează automat o parolă"
-
-#. TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name
-#: panels/network/cc-wifi-hotspot-dialog.c:114
+#. TRANSLATORS: ‘%s’ is a Wi-Fi Network (SSID) name
+#: panels/network/cc-wifi-hotspot-dialog.c:112
 #, c-format
 msgid ""
+"Wi-Fi hotspot allows others to share your internet connection, by creating a "
+"Wi-Fi network that they can connect to. To do this, you must have an "
+"internet connection through a source other than Wi-Fi.\n"
+"\n"
 "Turning on the hotspot will disconnect from %s, and it will not be possible "
 "to access the internet through Wi-Fi."
 msgstr ""
-"Activarea punctului de acces Wi-Fi te va deconecta de la %s, și nu va fi "
-"posibilă accesarea internetului prin Wi-Fi."
+"Punctul de acces Wi-Fi permite altor persoane să utilizeze conexiunea ta la "
+"internet prin crearea unei rețele Wi-Fi la care se pot conecta. Pentru a "
+"face acest lucru, trebuie să fii conectat la internet prin altă sursă decât "
+"prin Wi-Fi.\n"
+"\n"
+"Activarea punctului de acces va întrerupe conexiunea cu %s și nu va mai fi "
+"posibil accesul la internet prin Wi-Fi."
 
-#: panels/network/cc-wifi-hotspot-dialog.c:215
+#: panels/network/cc-wifi-hotspot-dialog.c:216
 msgid "Network name cannot be empty"
 msgstr "Numele rețelei nu poate lipsi"
 
 #. SSID length needs to be in the 1-32 byte range
-#: panels/network/cc-wifi-hotspot-dialog.c:219
+#: panels/network/cc-wifi-hotspot-dialog.c:220
 msgid "Network name is too long"
 msgstr "Numele rețelei este prea lung"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:234
-msgid "Must have a minimum of 8 characters"
-msgstr "Trebuie să aibă minimum 8 caractere"
+#: panels/network/cc-wifi-hotspot-dialog.c:235
+msgid "Password must have a minimum of 8 characters"
+msgstr "Parola trebuie să aibă minimum 8 caractere"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:240
+#: panels/network/cc-wifi-hotspot-dialog.c:241
 #, c-format
-msgid "Must have a maximum of %d character"
-msgid_plural "Must have a maximum of %d characters"
-msgstr[0] "Trebuie să aibă maximum %d caracter"
-msgstr[1] "Trebuie să aibă maximum %d caractere"
-msgstr[2] "Trebuie să aibă maximum %d de caractere"
+msgid "Password must have a maximum of %d character"
+msgid_plural "Password must have a maximum of %d characters"
+msgstr[0] "Parola trebuie să aibă maximum %d caracter"
+msgstr[1] "Parola trebuie să aibă maximum %d caractere"
+msgstr[2] "Parola trebuie să aibă maximum %d de caractere"
 
 #: panels/network/cc-wifi-panel.blp:30
 msgid "Airplane Mode"
@@ -3346,7 +3364,7 @@ msgstr ""
 msgid "T_urn Off Hotspot…"
 msgstr "Oprește p_unctul de acces…"
 
-#: panels/network/cc-wifi-panel.blp:139
+#: panels/network/cc-wifi-panel.blp:139 panels/network/net-device-wifi.c:1065
 msgid "Visible Networks"
 msgstr "Rețele vizibile"
 
@@ -3374,7 +3392,7 @@ msgstr "Oprirea va deconecta toate aparatele care utilizează punctul de acces."
 msgid "_Turn Off"
 msgstr "_Oprește"
 
-#: panels/network/cc-wifi-panel.c:375
+#: panels/network/cc-wifi-panel.c:385
 #: panels/network/gnome-wifi-panel.desktop.in:2
 #: panels/network/network-wifi.blp:57 panels/network/network-wifi.blp:62
 msgid "Wi-Fi"
@@ -3416,31 +3434,31 @@ msgstr "Identitate"
 msgid "_Name"
 msgstr "_Nume"
 
-#: panels/network/connection-editor/ce-page.c:209
-#: panels/network/connection-editor/ce-page.c:212
+#: panels/network/connection-editor/ce-page.c:218
+#: panels/network/connection-editor/ce-page.c:221
 msgid "Preserve"
 msgstr "Păstrează"
 
-#: panels/network/connection-editor/ce-page.c:210
-#: panels/network/connection-editor/ce-page.c:213
+#: panels/network/connection-editor/ce-page.c:219
+#: panels/network/connection-editor/ce-page.c:222
 msgid "Permanent"
 msgstr "Permanent"
 
-#: panels/network/connection-editor/ce-page.c:211
-#: panels/network/connection-editor/ce-page.c:214
+#: panels/network/connection-editor/ce-page.c:220
+#: panels/network/connection-editor/ce-page.c:223
 msgid "Random"
 msgstr "Aleatoriu"
 
-#: panels/network/connection-editor/ce-page.c:211
-#: panels/network/connection-editor/ce-page.c:215
+#: panels/network/connection-editor/ce-page.c:220
+#: panels/network/connection-editor/ce-page.c:224
 msgid "Stable"
 msgstr "Stabil"
 
-#: panels/network/connection-editor/ce-page.c:217
+#: panels/network/connection-editor/ce-page.c:226
 msgid "Stable per SSID"
 msgstr "Stabil per SSID"
 
-#: panels/network/connection-editor/ce-page.c:225
+#: panels/network/connection-editor/ce-page.c:234
 msgid ""
 "The MAC address entered here will be used as hardware address for the "
 "network device this connection is activated on. This feature is known as MAC "
@@ -3451,12 +3469,12 @@ msgstr ""
 "caracteristică este cunoscută sub numele de clonare sau falsificare MAC. "
 "Exemplu: 00:11:22:33:44:55"
 
-#: panels/network/connection-editor/ce-page.c:349
+#: panels/network/connection-editor/ce-page.c:358
 #, c-format
 msgid "Profile %d"
 msgstr "Profilul %d"
 
-#: panels/network/connection-editor/ce-page.c:382
+#: panels/network/connection-editor/ce-page.c:391
 msgid "Invalid Mac Address"
 msgstr "Adresă Mac greșită"
 
@@ -5133,40 +5151,40 @@ msgstr ""
 
 #. Translators: This button adds new printer.
 #. Translators: This button adds a new printer.
-#: panels/printers/cc-printers-panel.blp:34
-#: panels/printers/cc-printers-panel.blp:111
+#: panels/printers/cc-printers-panel.blp:46
+#: panels/printers/cc-printers-panel.blp:109
 msgid "_Add Printer…"
 msgstr "_Adaugă imprimanta…"
 
-#: panels/printers/cc-printers-panel.blp:54
+#: panels/printers/cc-printers-panel.blp:67
 msgid "Search printers"
 msgstr "Caută imprimante"
 
-#: panels/printers/cc-printers-panel.blp:88
+#: panels/printers/cc-printers-panel.blp:81
 #: panels/printers/gnome-printers-panel.desktop.in:2
 msgid "Printers"
 msgstr "Imprimante"
 
-#: panels/printers/cc-printers-panel.blp:107
+#: panels/printers/cc-printers-panel.blp:105
 msgid "No Printers"
 msgstr "Nicio imprimantă"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.blp:132
+#: panels/printers/cc-printers-panel.blp:135
 msgid "No Print Service"
 msgstr "Nu există serviciu de tipărire"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
-#: panels/printers/cc-printers-panel.blp:135
+#: panels/printers/cc-printers-panel.blp:138
 msgid "The system printing service doesn’t seem to be available"
 msgstr "Serviciul de tipărire al sistemului nu pare a fi disponibil"
 
-#: panels/printers/cc-printers-panel.c:566
+#: panels/printers/cc-printers-panel.c:554
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Imprimanta „%s” a fost ștearsă"
 
-#: panels/printers/cc-printers-panel.c:759
+#: panels/printers/cc-printers-panel.c:747
 msgid "Failed to add new printer."
 msgstr "Nu s-a putut adăuga imprimanta nouă."
 
@@ -5383,7 +5401,7 @@ msgstr "Domeniu"
 #. Translators: This is a username on a print server.
 #: panels/printers/pp-jobs-dialog.blp:157
 #: panels/printers/pp-new-printer-dialog.ui:280
-#: panels/wwan/cc-wwan-apn-dialog.blp:127
+#: panels/wwan/cc-wwan-apn-dialog.blp:129
 msgid "Username"
 msgstr "Nume de utilizator"
 
@@ -5472,7 +5490,7 @@ msgstr "Serverul necesită autentificare"
 #: panels/printers/pp-new-printer-dialog.ui:78
 #: panels/system/users/cc-fingerprint-dialog.blp:15
 #: panels/wacom/cc-wacom-stylus-page.c:389
-#: panels/wwan/cc-wwan-apn-dialog.blp:18
+#: panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
 msgstr "Înapoi"
 
@@ -8744,9 +8762,9 @@ msgstr "Întârziere pentru clic _dublu"
 #: panels/universal-access/cc-ua-mouse-page.blp:41
 #: panels/universal-access/cc-ua-mouse-page.blp:74
 #: panels/universal-access/cc-ua-mouse-page.blp:103
-#: panels/universal-access/cc-ua-typing-page.blp:118
-#: panels/universal-access/cc-ua-typing-page.blp:163
-#: panels/universal-access/cc-ua-typing-page.blp:203
+#: panels/universal-access/cc-ua-typing-page.blp:128
+#: panels/universal-access/cc-ua-typing-page.blp:173
+#: panels/universal-access/cc-ua-typing-page.blp:213
 #: panels/universal-access/cc-ua-zoom-page.blp:146
 msgid "Short"
 msgstr "Scurtă"
@@ -8755,9 +8773,9 @@ msgstr "Scurtă"
 #: panels/universal-access/cc-ua-mouse-page.blp:43
 #: panels/universal-access/cc-ua-mouse-page.blp:76
 #: panels/universal-access/cc-ua-mouse-page.blp:105
-#: panels/universal-access/cc-ua-typing-page.blp:120
-#: panels/universal-access/cc-ua-typing-page.blp:165
-#: panels/universal-access/cc-ua-typing-page.blp:205
+#: panels/universal-access/cc-ua-typing-page.blp:130
+#: panels/universal-access/cc-ua-typing-page.blp:175
+#: panels/universal-access/cc-ua-typing-page.blp:215
 #: panels/universal-access/cc-ua-zoom-page.blp:149
 msgid "Long"
 msgstr "Lungă"
@@ -8776,8 +8794,8 @@ msgstr ""
 "Clic-dreapta prin menținerea apăsată a butonului din stânga al mausului"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:67
-#: panels/universal-access/cc-ua-typing-page.blp:155
-#: panels/universal-access/cc-ua-typing-page.blp:196
+#: panels/universal-access/cc-ua-typing-page.blp:165
+#: panels/universal-access/cc-ua-typing-page.blp:206
 msgid "Acceptance Delay"
 msgstr "Întârziere de acceptare"
 
@@ -8790,7 +8808,7 @@ msgid "Trigger a click when the pointer hovers"
 msgstr "Declanșează un clic când se oprește mișcarea indicatorului"
 
 #: panels/universal-access/cc-ua-mouse-page.blp:96
-#: panels/universal-access/cc-ua-typing-page.blp:110
+#: panels/universal-access/cc-ua-typing-page.blp:119
 msgid "Delay"
 msgstr "Întârziere"
 
@@ -9027,53 +9045,53 @@ msgstr "_Repetă tastele"
 msgid "Key presses repeat when the key is held down"
 msgstr "Apăsările de taste se repetă când tasta este menținută apăsată"
 
-#: panels/universal-access/cc-ua-typing-page.blp:87
+#: panels/universal-access/cc-ua-typing-page.blp:91
 msgid "Speed"
 msgstr "Viteza"
 
-#: panels/universal-access/cc-ua-typing-page.blp:134
+#: panels/universal-access/cc-ua-typing-page.blp:144
 msgid "_Sticky Keys"
 msgstr "Ta_ste persistente"
 
-#: panels/universal-access/cc-ua-typing-page.blp:135
+#: panels/universal-access/cc-ua-typing-page.blp:145
 msgid "Sequences of modifier keys act as a key combination"
 msgstr "Secvențele de taste modificatoare se comportă ca o combinație de taste"
 
-#: panels/universal-access/cc-ua-typing-page.blp:140
+#: panels/universal-access/cc-ua-typing-page.blp:150
 msgid "Disable if two keys are pressed together"
 msgstr "Dezactivează dacă două taste sunt apăsate concomitent"
 
-#: panels/universal-access/cc-ua-typing-page.blp:144
+#: panels/universal-access/cc-ua-typing-page.blp:154
 msgid "Beep when modifier key is pressed"
 msgstr "Bip când tasta modificatoare este apăsată"
 
-#: panels/universal-access/cc-ua-typing-page.blp:149
+#: panels/universal-access/cc-ua-typing-page.blp:159
 msgid "S_low Keys"
 msgstr "Taste _lente"
 
-#: panels/universal-access/cc-ua-typing-page.blp:150
+#: panels/universal-access/cc-ua-typing-page.blp:160
 msgid "Delay between when a key is pressed and when it is accepted"
 msgstr ""
 "Întârziere între momentul în care o tastă este apăsată și când este acceptată"
 
-#: panels/universal-access/cc-ua-typing-page.blp:177
+#: panels/universal-access/cc-ua-typing-page.blp:187
 msgid "Beep when a key is pressed"
 msgstr "Bip când o tastă este apăsată"
 
-#: panels/universal-access/cc-ua-typing-page.blp:181
+#: panels/universal-access/cc-ua-typing-page.blp:191
 msgid "Beep when a key is accepted"
 msgstr "Bip când o tastă este acceptată"
 
-#: panels/universal-access/cc-ua-typing-page.blp:185
-#: panels/universal-access/cc-ua-typing-page.blp:217
+#: panels/universal-access/cc-ua-typing-page.blp:195
+#: panels/universal-access/cc-ua-typing-page.blp:227
 msgid "Beep when a key is rejected"
 msgstr "Bip când o tastă este refuzată"
 
-#: panels/universal-access/cc-ua-typing-page.blp:190
+#: panels/universal-access/cc-ua-typing-page.blp:200
 msgid "B_ounce Keys"
 msgstr "Taste fără re_petiție"
 
-#: panels/universal-access/cc-ua-typing-page.blp:191
+#: panels/universal-access/cc-ua-typing-page.blp:201
 msgid "Ignore fast duplicate keypresses"
 msgstr "Ignoră apăsările rapide și repetate ale unei taste"
 
@@ -9826,27 +9844,27 @@ msgstr ""
 msgid "Access Points"
 msgstr "Puncte de acces"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:29
+#: panels/wwan/cc-wwan-apn-dialog.blp:31
 msgid "Add"
 msgstr "Adaugă"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:101
+#: panels/wwan/cc-wwan-apn-dialog.blp:103
 msgid "APN"
 msgstr "APN"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:175
+#: panels/wwan/cc-wwan-apn-dialog.blp:177
 msgid "APN Type"
 msgstr "Tip de APN"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:191
+#: panels/wwan/cc-wwan-apn-dialog.blp:193
 msgid "Internet"
 msgstr "Internet"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:192
+#: panels/wwan/cc-wwan-apn-dialog.blp:194
 msgid "Attach"
 msgstr "Conectează"
 
-#: panels/wwan/cc-wwan-apn-dialog.blp:206
+#: panels/wwan/cc-wwan-apn-dialog.blp:208
 msgid "Auth Type"
 msgstr "Tip autentificare"
 
@@ -9854,15 +9872,15 @@ msgstr "Tip autentificare"
 msgid "Edit"
 msgstr "Modifică"
 
-#: panels/wwan/cc-wwan-data.c:537
+#: panels/wwan/cc-wwan-data.c:566
 msgid "Operation Cancelled"
 msgstr "Operațiune anulată"
 
-#: panels/wwan/cc-wwan-data.c:540
+#: panels/wwan/cc-wwan-data.c:569
 msgid "<b>Error:</b> Access denied changing settings"
 msgstr "<b>Eroare:</b> Acces refuzat la schimbarea preferințelor"
 
-#: panels/wwan/cc-wwan-data.c:543
+#: panels/wwan/cc-wwan-data.c:572
 msgid "<b>Error:</b> Mobile Equipment Error"
 msgstr "<b>Eroare:</b> Eroare la echipamentul mobil"
 
