@@ -35,7 +35,7 @@ template $CcUaMousePage: Adw.NavigationPage {
 
           [suffix]
           Scale double_click_delay_scale {
-            hexpand: true;
+            width-request: 240;
 
             marks [
               mark (100, bottom, _("Short")),
@@ -68,8 +68,6 @@ template $CcUaMousePage: Adw.NavigationPage {
 
             [suffix]
             Scale secondary_delay_scale {
-              hexpand: true;
-
               marks [
                 mark (0.5, bottom, _("Short")),
                 mark (1.2),
@@ -97,8 +95,6 @@ template $CcUaMousePage: Adw.NavigationPage {
 
             [suffix]
             Scale hover_delay_scale {
-              hexpand: true;
-
               marks [
                 mark (0.2, bottom, _("Short")),
                 mark (1.2),
@@ -120,8 +116,6 @@ template $CcUaMousePage: Adw.NavigationPage {
 
             [suffix]
             Scale motion_threshold_scale {
-              hexpand: true;
-
               marks [
                 mark (0, bottom, _("Small")),
                 mark (10),
@@ -139,4 +133,15 @@ template $CcUaMousePage: Adw.NavigationPage {
       }
     };
   };
+}
+
+SizeGroup {
+  mode: horizontal;
+
+  widgets [
+    double_click_delay_scale,
+    secondary_delay_scale,
+    hover_delay_scale,
+    motion_threshold_scale,
+  ]
 }
