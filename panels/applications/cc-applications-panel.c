@@ -1590,7 +1590,7 @@ get_app_filter_cb (GObject *source, GAsyncResult *res, CcApplicationsPanel *self
     g_clear_pointer (&self->app_filter, mct_app_filter_unref);
     self->app_filter = mct_manager_get_app_filter_finish (self->manager, res, &error);
 
-    if (error) {
+    if (error && !g_error_matches (error, MCT_MANAGER_ERROR, MCT_MANAGER_ERROR_DISABLED)) {
         g_debug ("Error retrieving app filter: %s", error->message);
         on_items_changed_cb (self->filter_model, 0, 0, 0, self);
         return;
