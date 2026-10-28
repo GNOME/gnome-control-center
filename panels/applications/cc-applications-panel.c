@@ -1530,6 +1530,20 @@ filter_app_rows (GObject *item, gpointer data)
 }
 
 #ifdef HAVE_MALCONTENT
+static void app_filter_changed_cb (MctManager *policy_manager, uid_t uid, CcApplicationsPanel *self);
+
+static void get_app_filter_cb (GObject *source, GAsyncResult *res, CcApplicationsPanel *self);
+
+static void
+app_filter_changed_cb (MctManager *policy_manager, uid_t uid, CcApplicationsPanel *self)
+{
+    if (uid != getuid ())
+        return;
+
+    mct_manager_get_app_filter_async (self->manager, getuid (), MCT_MANAGER_GET_VALUE_FLAGS_NONE, self->cancellable,
+                                      (GAsyncReadyCallback) get_app_filter_cb, self);
+}
+
 static void
 get_app_filter_cb (GObject *source, GAsyncResult *res, CcApplicationsPanel *self)
 {
@@ -1545,16 +1559,6 @@ get_app_filter_cb (GObject *source, GAsyncResult *res, CcApplicationsPanel *self
     }
 
     populate_applications (self);
-}
-
-static void
-app_filter_changed_cb (MctManager *policy_manager, uid_t uid, CcApplicationsPanel *self)
-{
-    if (uid != getuid ())
-        return;
-
-    mct_manager_get_app_filter_async (self->manager, getuid (), MCT_MANAGER_GET_VALUE_FLAGS_NONE, self->cancellable,
-                                      (GAsyncReadyCallback) get_app_filter_cb, self);
 }
 #endif
 
