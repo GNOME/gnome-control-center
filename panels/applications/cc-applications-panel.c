@@ -1495,7 +1495,8 @@ populate_applications (CcApplicationsPanel *self)
 
     g_list_store_remove_all (G_LIST_STORE (self->app_model));
 #ifdef HAVE_MALCONTENT
-    g_signal_handler_block (self->manager, self->app_filter_id);
+    if (self->manager != NULL)
+        g_signal_handler_block (self->manager, self->app_filter_id);
 #endif
 
     infos = g_app_info_get_all ();
@@ -1507,14 +1508,15 @@ populate_applications (CcApplicationsPanel *self)
             continue;
 
 #ifdef HAVE_MALCONTENT
-        if (!mct_app_filter_is_appinfo_allowed (self->app_filter, info))
+        if (self->app_filter != NULL && !mct_app_filter_is_appinfo_allowed (self->app_filter, info))
             continue;
 #endif
 
         g_list_store_insert_sorted (G_LIST_STORE (self->app_model), info, compare_rows, NULL);
     }
 #ifdef HAVE_MALCONTENT
-    g_signal_handler_unblock (self->manager, self->app_filter_id);
+    if (self->manager != NULL)
+        g_signal_handler_unblock (self->manager, self->app_filter_id);
 #endif
 }
 
@@ -1540,9 +1542,35 @@ filter_app_rows (GObject *item, gpointer data)
 }
 
 #ifdef HAVE_MALCONTENT
+static void bus_get_cb (GObject *source, GAsyncResult *res, CcApplicationsPanel *self);
+
 static void app_filter_changed_cb (MctManager *policy_manager, uid_t uid, CcApplicationsPanel *self);
 
 static void get_app_filter_cb (GObject *source, GAsyncResult *res, CcApplicationsPanel *self);
+
+static void
+bus_get_cb (GObject *source, GAsyncResult *res, CcApplicationsPanel *self)
+{
+    g_autoptr(GDBusConnection) system_bus = NULL;
+    g_autoptr(GError) error = NULL;
+
+    system_bus = g_bus_get_finish (res, &error);
+    if (system_bus == NULL) {
+        if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+            g_warning ("Error getting system bus while setting up app permissions: %s", error->message);
+        }
+        return;
+    }
+
+    /* Load the user’s parental controls settings too, so we can filter the list. */
+    self->manager = mct_manager_new (system_bus);
+
+    self->app_filter_id =
+        g_signal_connect (self->manager, "app-filter-changed", G_CALLBACK (app_filter_changed_cb), self);
+
+    mct_manager_get_app_filter_async (self->manager, getuid (), MCT_MANAGER_GET_VALUE_FLAGS_NONE, self->cancellable,
+                                      (GAsyncReadyCallback) get_app_filter_cb, self);
+}
 
 static void
 app_filter_changed_cb (MctManager *policy_manager, uid_t uid, CcApplicationsPanel *self)
@@ -1855,11 +1883,6 @@ app_row_new (gpointer item, gpointer user_data)
 static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
-#ifdef HAVE_MALCONTENT
-    g_autoptr(GDBusConnection) system_bus = NULL;
-    g_autoptr(GError) error = NULL;
-#endif
-
     g_resources_register (cc_applications_get_resource ());
 
     gtk_widget_init_template (GTK_WIDGET (self));
@@ -1885,24 +1908,7 @@ cc_applications_panel_init (CcApplicationsPanel *self)
     self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
 
 #ifdef HAVE_MALCONTENT
-    /* FIXME: should become asynchronous */
-    system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, self->cancellable, &error);
-    if (system_bus == NULL) {
-        g_warning ("Error getting system bus while setting up app permissions: %s", error->message);
-        return;
-    }
-
-    /* Load the user’s parental controls settings too, so we can filter the list. */
-    self->manager = mct_manager_new (system_bus);
-    self->app_filter = mct_manager_get_app_filter (self->manager, getuid (), MCT_MANAGER_GET_VALUE_FLAGS_NONE,
-                                                   self->cancellable, &error);
-    if (error) {
-        g_warning ("Error retrieving app filter: %s", error->message);
-        return;
-    }
-
-    self->app_filter_id =
-        g_signal_connect (self->manager, "app-filter-changed", G_CALLBACK (app_filter_changed_cb), self);
+    g_bus_get (G_BUS_TYPE_SYSTEM, self->cancellable, (GAsyncReadyCallback) bus_get_cb, self);
 #endif
     populate_applications (self);
 
