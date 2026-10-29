@@ -195,6 +195,15 @@ device_state_to_off_switch (NMDeviceState state)
     }
 }
 
+static gboolean
+device_has_carrier (NetDeviceEthernet *self)
+{
+    if (!NM_IS_DEVICE_ETHERNET (self->device))
+        return TRUE;
+
+    return nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (self->device));
+}
+
 static void
 device_ethernet_refresh_ui (NetDeviceEthernet *self)
 {
@@ -440,7 +449,7 @@ connection_list_row_activated_cb (NetDeviceEthernet *self, GtkListBoxRow *row)
     NMConnection *connection;
     GtkWidget *child;
 
-    if (!NM_IS_DEVICE_ETHERNET (self->device) || !nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (self->device)))
+    if (!device_has_carrier (self))
         return;
 
     child = gtk_list_box_row_get_child (GTK_LIST_BOX_ROW (row));
@@ -508,6 +517,9 @@ net_device_ethernet_new (NMClient *client, NMDevice *device)
                              G_CONNECT_SWAPPED);
 
     g_signal_connect_object (device, "state-changed", G_CALLBACK (device_ethernet_refresh_ui), self, G_CONNECT_SWAPPED);
+    if (NM_IS_DEVICE_ETHERNET (device))
+        g_signal_connect_object (device, "notify::" NM_DEVICE_ETHERNET_CARRIER, G_CALLBACK (device_ethernet_refresh_ui),
+                                 self, G_CONNECT_SWAPPED);
 
     device_ethernet_refresh_ui (self);
 
