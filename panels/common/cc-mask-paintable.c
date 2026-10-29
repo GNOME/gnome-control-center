@@ -43,6 +43,7 @@ struct _CcMaskPaintable {
 
     gboolean reloading_resource;
     char *resource_path;
+    char *last_svg_error;
     GtkWidget *parent_widget;
 };
 
@@ -135,8 +136,15 @@ on_svg_parent_widget_root_cb (CcMaskPaintable *self)
 static void
 on_svg_error_cb (GtkSvg *svg, const GError *error, CcMaskPaintable *self)
 {
-    g_warning ("Failed to load SVG '%s': %s", self->resource_path ? self->resource_path : "(unknown)",
-               error ? error->message : "unknown error");
+    const char *message = error ? error->message : "unknown error";
+
+    /* GtkSvg re-emits the same error every frame; only report it once. */
+    if (g_strcmp0 (self->last_svg_error, message) == 0)
+        return;
+
+    g_set_str (&self->last_svg_error, message);
+
+    g_warning ("Failed to load SVG '%s': %s", self->resource_path ? self->resource_path : "(unknown)", message);
 }
 
 static void
@@ -174,6 +182,7 @@ cc_mask_paintable_finalize (GObject *object)
     CcMaskPaintable *self = CC_MASK_PAINTABLE (object);
 
     g_free (self->resource_path);
+    g_free (self->last_svg_error);
 
     G_OBJECT_CLASS (cc_mask_paintable_parent_class)->finalize (object);
 }
@@ -508,8 +517,12 @@ cc_mask_paintable_set_resource_scaled (CcMaskPaintable *self, const char *resour
     if (resource_is_scalable) {
         g_autoptr(GtkSvg) svg = NULL;
 
-        svg = gtk_svg_new_from_resource (self->resource_path);
+        g_clear_pointer (&self->last_svg_error, g_free);
+
+        /* Connect the error handler before loading, so parse errors are caught too. */
+        svg = gtk_svg_new ();
         g_signal_connect (svg, "error", G_CALLBACK (on_svg_error_cb), self);
+        gtk_svg_load_from_resource (svg, self->resource_path);
 
         self->parent_widget = parent_widget;
         g_object_add_weak_pointer (G_OBJECT (self->parent_widget), (gpointer *) &self->parent_widget);
