@@ -218,7 +218,7 @@ device_ethernet_refresh_ui (NetDeviceEthernet *self)
     gtk_switch_set_active (self->device_off_switch, device_state_to_off_switch (state));
     self->updating_device = FALSE;
 
-    if (state != NM_DEVICE_STATE_UNAVAILABLE) {
+    if (state != NM_DEVICE_STATE_UNAVAILABLE && device_has_carrier (self)) {
         guint speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (self->device));
         if (speed > 0) {
             /* Translators: the %'d is replaced by the network device speed with

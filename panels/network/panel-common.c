@@ -317,15 +317,18 @@ panel_device_status_to_localized_string (NMDevice *nm_device, const gchar *speed
     string = g_string_new (NULL);
 
     state = nm_device_get_state (nm_device);
-    if (state == NM_DEVICE_STATE_UNAVAILABLE) {
-        if (nm_device_get_firmware_missing (nm_device)) {
-            /* TRANSLATORS: device status */
-            state_str = _("Firmware missing");
-        } else if (NM_IS_DEVICE_ETHERNET (nm_device)
-                   && !nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (nm_device))) {
-            /* TRANSLATORS: device status */
-            state_str = _("Cable unplugged");
-        }
+    if (state == NM_DEVICE_STATE_UNAVAILABLE && nm_device_get_firmware_missing (nm_device)) {
+        /* TRANSLATORS: device status */
+        state_str = _("Firmware missing");
+    } else if (state > NM_DEVICE_STATE_UNMANAGED && NM_IS_DEVICE_ETHERNET (nm_device)
+               && !nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (nm_device))) {
+        /* The link is physically down. NetworkManager may well keep the
+         * connection activated regardless (ignore-carrier=yes, static
+         * addressing, carrier-wait-timeout), so the device state alone cannot
+         * be trusted to tell the user the cable is out.
+         */
+        /* TRANSLATORS: device status */
+        state_str = _("Cable unplugged");
     } else if (state == NM_DEVICE_STATE_DISCONNECTED && NM_IS_DEVICE_ETHERNET (nm_device)) {
         /* TRANSLATORS: device status */
         state_str = _("Disabled");
