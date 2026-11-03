@@ -24,11 +24,15 @@
 #include "config.h"
 
 #include <adwaita.h>
+#include <gdesktop-enums.h>
 #include <glib-object.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <json-glib/json-glib.h>
+
+#define CALENDAR_SCHEMA "org.gnome.desktop.calendar"
+#define CALENDAR_WEEK_START_DAY_KEY "week-start-day"
 
 #ifdef HAVE__NL_TIME_FIRST_WEEKDAY
 #include <langinfo.h>
@@ -74,6 +78,8 @@ struct _CcScreenTimeStatisticsRow {
     GtkButton *next_week_button;
 
     GtkStack *data_stack;
+    GSettings *calendar_settings;
+    unsigned int week_start;
 
     /* Model data */
     struct {
@@ -112,7 +118,7 @@ static void cc_screen_time_statistics_row_map (GtkWidget *widget);
 static void cc_screen_time_statistics_row_unmap (GtkWidget *widget);
 
 static void get_today (GDate *today);
-static unsigned int get_week_start (void);
+static unsigned int get_week_start (GSettings *settings);
 static void update_model (CcScreenTimeStatisticsRow *self);
 static char *bar_chart_continuous_axis_label_cb (CcBarChart *chart, double value, void *user_data);
 static double bar_chart_continuous_axis_grid_line_cb (CcBarChart *chart, unsigned int idx, void *user_data);
@@ -121,6 +127,8 @@ static void bar_chart_notify_selected_index_cb (GObject *object, GParamSpec *psp
 static void previous_week_button_clicked_cb (GtkButton *button, gpointer user_data);
 static void next_week_button_clicked_cb (GtkButton *button, gpointer user_data);
 static void maybe_enable_update_timeout (CcScreenTimeStatisticsRow *self);
+static void update_xaxis_labels (CcScreenTimeStatisticsRow *self);
+static void update_ui_for_model_or_selected_date (CcScreenTimeStatisticsRow *self);
 
 static void
 cc_screen_time_statistics_row_class_init (CcScreenTimeStatisticsRowClass *klass)
@@ -197,12 +205,8 @@ cc_screen_time_statistics_row_class_init (CcScreenTimeStatisticsRowClass *klass)
 }
 
 static void
-cc_screen_time_statistics_row_init (CcScreenTimeStatisticsRow *self)
+update_xaxis_labels (CcScreenTimeStatisticsRow *self)
 {
-    GDate today_date;
-
-    gtk_widget_init_template (GTK_WIDGET (self));
-
     /* Bar chart weekday labels. These need to take into account the user’s
      * preferred starting day of the week. */
     const char * const weekdays[] = {
@@ -215,12 +219,35 @@ cc_screen_time_statistics_row_init (CcScreenTimeStatisticsRow *self)
     C_("abbreviated weekday name for Saturday", "S"),
   };
     const char *labels[G_N_ELEMENTS (weekdays) + 1 /* NULL terminator */];
-    unsigned int week_start = get_week_start (); /* 0 = Sunday, 1 = Monday, 2 = Tuesday, etc. */
+    self->week_start = get_week_start (self->calendar_settings); /* 0 = Sunday, 1 = Monday, 2 = Tuesday, etc. */
     for (size_t i = 0; i < G_N_ELEMENTS (weekdays); i++)
-        labels[i] = weekdays[(week_start + i) % G_N_ELEMENTS (weekdays)];
+        labels[i] = weekdays[(self->week_start + i) % G_N_ELEMENTS (weekdays)];
     labels[G_N_ELEMENTS (labels) - 1] = NULL;
 
     cc_bar_chart_set_discrete_axis_labels (self->bar_chart, labels);
+}
+
+static void
+week_start_day_changed_cb (GSettings *settings, const char *key, CcScreenTimeStatisticsRow *self)
+{
+    update_xaxis_labels (self);
+    update_model (self);
+    update_ui_for_model_or_selected_date (self);
+}
+
+static void
+cc_screen_time_statistics_row_init (CcScreenTimeStatisticsRow *self)
+{
+    GDate today_date;
+
+    gtk_widget_init_template (GTK_WIDGET (self));
+
+    self->calendar_settings = g_settings_new (CALENDAR_SCHEMA);
+
+    update_xaxis_labels (self);
+
+    g_signal_connect_object (self->calendar_settings, "changed::" CALENDAR_WEEK_START_DAY_KEY,
+                             G_CALLBACK (week_start_day_changed_cb), self, 0);
 
     cc_bar_chart_set_continuous_axis_label_callback (self->bar_chart, bar_chart_continuous_axis_label_cb, NULL, NULL);
     cc_bar_chart_set_continuous_axis_grid_line_callback (self->bar_chart, bar_chart_continuous_axis_grid_line_cb, NULL,
@@ -286,6 +313,7 @@ cc_screen_time_statistics_row_dispose (GObject *object)
     self->history_file_monitor_changed_id = 0;
     g_clear_object (&self->history_file_monitor);
     g_clear_object (&self->history_file);
+    g_clear_object (&self->calendar_settings);
 
     gtk_widget_dispose_template (GTK_WIDGET (object), CC_TYPE_SCREEN_TIME_STATISTICS_ROW);
 
@@ -389,9 +417,23 @@ label_set_text_hours_and_minutes (GtkLabel *label, unsigned int minutes)
  */
 /* Copied from gtkcalendar.c and shell-util.c */
 static unsigned int
-get_week_start (void)
+get_week_start (GSettings *settings)
 {
     int week_start;
+    GDesktopWeekday weekday_setting;
+
+    /* Check user's preferred override in GSettings first */
+    weekday_setting = g_settings_get_enum (settings, CALENDAR_WEEK_START_DAY_KEY);
+
+    if (weekday_setting != G_DESKTOP_WEEKDAY_DEFAULT) {
+        /* GDesktopWeekday maps: Monday=1, Tuesday=2 ... Sunday=7 */
+        if (weekday_setting == G_DESKTOP_WEEKDAY_SUNDAY)
+            return 0;
+        else
+            return (unsigned int) weekday_setting;
+    }
+
+    /* Fallback to system default */
 #ifdef HAVE__NL_TIME_FIRST_WEEKDAY
     union {
         unsigned int word;
@@ -438,9 +480,9 @@ get_week_start (void)
 }
 
 static void
-get_first_day_of_week (const GDate *date, GDate *out_new_date)
+get_first_day_of_week (CcScreenTimeStatisticsRow *self, const GDate *date, GDate *out_new_date)
 {
-    unsigned int week_start = get_week_start (); /* 0 = Sunday, 1 = Monday, 2 = Tuesday etc. */
+    unsigned int week_start = self->week_start;
     GDateWeekday week_start_as_weekday = (week_start == 0) ? G_DATE_SUNDAY : (GDateWeekday) week_start;
     GDateWeekday date_weekday = g_date_get_weekday (date);
     int weekday_diff;
@@ -457,9 +499,9 @@ get_first_day_of_week (const GDate *date, GDate *out_new_date)
 }
 
 static void
-get_last_day_of_week (const GDate *date, GDate *out_new_date)
+get_last_day_of_week (CcScreenTimeStatisticsRow *self, const GDate *date, GDate *out_new_date)
 {
-    get_first_day_of_week (date, out_new_date);
+    get_first_day_of_week (self, date, out_new_date);
 
     g_date_add_days (out_new_date, 6);
 
@@ -504,9 +546,9 @@ date_get_week_of_year (const GDate *date, GDateWeekday first_day_of_week)
 }
 
 static unsigned int
-get_week_of_year (const GDate *date)
+get_week_of_year (CcScreenTimeStatisticsRow *self, const GDate *date)
 {
-    unsigned int week_start = get_week_start (); /* 0 = Sunday, 1 = Monday, 2 = Tuesday etc. */
+    unsigned int week_start = self->week_start;
     GDateWeekday week_start_as_weekday = (week_start == 0) ? G_DATE_SUNDAY : (GDateWeekday) week_start;
     unsigned int week_of_year = date_get_week_of_year (date, week_start_as_weekday);
 
@@ -520,14 +562,14 @@ get_week_of_year (const GDate *date)
 }
 
 static gboolean
-is_this_week (const GDate *date)
+is_this_week (CcScreenTimeStatisticsRow *self, const GDate *date)
 {
     GDate today;
     unsigned int todays_week, dates_week;
 
     get_today (&today);
-    todays_week = get_week_of_year (&today);
-    dates_week = get_week_of_year (date);
+    todays_week = get_week_of_year (self, &today);
+    dates_week = get_week_of_year (self, date);
 
     return (todays_week == dates_week);
 }
@@ -873,8 +915,8 @@ update_ui_for_model_or_selected_date (CcScreenTimeStatisticsRow *self)
         return;
 
     get_today (&today);
-    get_first_day_of_week (&self->selected_date, &first_day_of_selected_week);
-    get_last_day_of_week (&self->selected_date, &last_day_of_selected_week);
+    get_first_day_of_week (self, &self->selected_date, &first_day_of_selected_week);
+    get_last_day_of_week (self, &self->selected_date, &last_day_of_selected_week);
 
     /* Do we need to change the data in the chart because the selected date is
      * outside the currently shown range? */
@@ -926,7 +968,7 @@ update_ui_for_model_or_selected_date (CcScreenTimeStatisticsRow *self)
     else
         gtk_label_set_text (self->selected_average_value_label, _("No Data"));
 
-    if (is_this_week (&self->selected_date)) {
+    if (is_this_week (self, &self->selected_date)) {
         week_date_text = g_strdup_printf (_("This Week"));
     } else if (g_date_get_month (&first_day_of_selected_week) == g_date_get_month (&last_day_of_selected_week)) {
         char month_name[100] = {
@@ -1003,7 +1045,7 @@ bar_chart_update_accessible_description (CcScreenTimeStatisticsRow *self)
         g_autofree char *daily_limit_str = NULL;
         GDate first_day_of_week;
 
-        get_first_day_of_week (&self->selected_date, &first_day_of_week);
+        get_first_day_of_week (self, &self->selected_date, &first_day_of_week);
         retval = g_date_strftime (date_str, sizeof (date_str), "%x", &first_day_of_week);
         g_assert (retval != 0);
 
@@ -1024,7 +1066,7 @@ bar_chart_update_accessible_description (CcScreenTimeStatisticsRow *self)
         size_t retval;
         GDate first_day_of_week;
 
-        get_first_day_of_week (&self->selected_date, &first_day_of_week);
+        get_first_day_of_week (self, &self->selected_date, &first_day_of_week);
         retval = g_date_strftime (date_str, sizeof (date_str), "%x", &first_day_of_week);
         g_assert (retval != 0);
 
@@ -1053,7 +1095,7 @@ bar_chart_notify_selected_index_cb (GObject *object, GParamSpec *pspec, gpointer
     size_t idx = 0;
 
     if (cc_bar_chart_get_selected_index (self->bar_chart, &idx)) {
-        get_first_day_of_week (&self->selected_date, &new_selected_date);
+        get_first_day_of_week (self, &self->selected_date, &new_selected_date);
         g_date_add_days (&new_selected_date, idx);
         new_selected_date_ptr = &new_selected_date;
     } else {
@@ -1069,7 +1111,7 @@ previous_week_button_clicked_cb (GtkButton *button, gpointer user_data)
     CcScreenTimeStatisticsRow *self = CC_SCREEN_TIME_STATISTICS_ROW (user_data);
     GDate first_day_of_previous_week;
 
-    get_first_day_of_week (&self->selected_date, &first_day_of_previous_week);
+    get_first_day_of_week (self, &self->selected_date, &first_day_of_previous_week);
     g_date_subtract_days (&first_day_of_previous_week, 7);
 
     cc_screen_time_statistics_row_set_selected_date (self, &first_day_of_previous_week);
@@ -1081,7 +1123,7 @@ next_week_button_clicked_cb (GtkButton *button, gpointer user_data)
     CcScreenTimeStatisticsRow *self = CC_SCREEN_TIME_STATISTICS_ROW (user_data);
     GDate first_day_of_next_week;
 
-    get_first_day_of_week (&self->selected_date, &first_day_of_next_week);
+    get_first_day_of_week (self, &self->selected_date, &first_day_of_next_week);
     g_date_add_days (&first_day_of_next_week, 7);
 
     cc_screen_time_statistics_row_set_selected_date (self, &first_day_of_next_week);
