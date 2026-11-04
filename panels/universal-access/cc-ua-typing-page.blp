@@ -86,6 +86,10 @@ template $CcUaTypingPage: Adw.NavigationPage {
           Adw.ActionRow {
             activatable-widget: repeat_speed_scale;
 
+            accessibility {
+              labelled-by: speed_label;
+            }
+
             [prefix]
             Label speed_label {
               label: _("Speed");
@@ -95,6 +99,10 @@ template $CcUaTypingPage: Adw.NavigationPage {
             [suffix]
             Scale repeat_speed_scale {
               hexpand: true;
+
+              accessibility {
+                labelled-by: speed_label;
+              }
 
               marks [
                 mark (-0.5, bottom, _("Fast")),
@@ -114,6 +122,10 @@ template $CcUaTypingPage: Adw.NavigationPage {
           Adw.ActionRow {
             activatable-widget: repeat_delay_scale;
 
+            accessibility {
+              labelled-by: delay_label;
+            }
+
             [prefix]
             Label delay_label {
               label: _("Delay");
@@ -123,6 +135,10 @@ template $CcUaTypingPage: Adw.NavigationPage {
             [suffix]
             Scale repeat_delay_scale {
               hexpand: true;
+
+              accessibility {
+                labelled-by: delay_label;
+              }
 
               marks [
                 mark (100, bottom, _("Short")),
