@@ -16,3 +16,4 @@ endif
 subdir('printers')
 subdir('keyboard')
 subdir('system')
+subdir('universal-access')

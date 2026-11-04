@@ -41,22 +41,30 @@ sources = files(
   'cc-ua-zoom-page.c',
 )
 
-sources += gnome.compile_resources(
+resources_ch = gnome.compile_resources(
   'cc-ua-resources',
   cappletname + '.gresource.xml',
   c_name: 'cc_' + cappletname.underscorify(),
   export: true,
   dependencies: blueprints,
 )
+sources += resources_ch
 
 deps = common_deps + [m_dep]
 
-panels_libs += static_library(
+universal_access_panel_lib = static_library(
   cappletname,
   sources: sources,
   include_directories: [ top_inc, common_inc ],
   dependencies: deps,
   c_args: cflags
+)
+panels_libs += universal_access_panel_lib
+
+universal_access_panel_dep = declare_dependency(
+  include_directories: [ top_inc, include_directories('.') ],
+  sources: [ resources_ch[1] ],
+  link_with: universal_access_panel_lib,
 )
 
 subdir('icons')
