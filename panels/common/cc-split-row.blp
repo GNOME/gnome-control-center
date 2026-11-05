@@ -30,8 +30,8 @@ template $CcSplitRow: $CcContentRow {
       ]
 
       EventControllerMotion {
-        enter => $on_option_focus_enter_cb(default_option_mask);
-        leave => $on_option_focus_leave_cb(default_option_mask);
+        enter => $on_option_focus_enter_cb(default_option_svg);
+        leave => $on_option_focus_leave_cb(default_option_svg);
       }
 
       GestureClick {
@@ -58,9 +58,7 @@ template $CcSplitRow: $CcContentRow {
           margin-end: 6;
           height-request: 128;
 
-          paintable: $CcMaskPaintable default_option_mask {
-            follow-accent: true;
-          };
+          paintable: Gtk.Svg default_option_svg {};
         }
       }
 
@@ -127,8 +125,8 @@ template $CcSplitRow: $CcContentRow {
       ]
 
       EventControllerMotion {
-        enter => $on_option_focus_enter_cb(alternative_option_mask);
-        leave => $on_option_focus_leave_cb(alternative_option_mask);
+        enter => $on_option_focus_enter_cb(alternative_option_svg);
+        leave => $on_option_focus_leave_cb(alternative_option_svg);
       }
 
       GestureClick {
@@ -155,9 +153,7 @@ template $CcSplitRow: $CcContentRow {
           margin-end: 6;
           height-request: 128;
 
-          paintable: $CcMaskPaintable alternative_option_mask {
-            follow-accent: true;
-          };
+          paintable: Gtk.Svg alternative_option_svg {};
         }
       }
 
