@@ -22,14 +22,12 @@
 
 #include "cc-illustrated-row.h"
 
-#include "cc-mask-paintable.h"
-#include "cc-texture-utils.h"
-
 struct _CcIllustratedRow {
     CcContentRow parent;
 
     GtkBox *picture_box;
-    CcMaskPaintable *picture_mask;
+    GtkSvg *svg;
+
     gchar *resource_path;
 };
 
@@ -48,33 +46,13 @@ static GParamSpec *props[N_PROPS] = {
 static void
 on_picture_leave_cb (CcIllustratedRow *self)
 {
-    GtkMediaStream *stream;
-    GdkPaintable *paintable;
-
-    paintable = cc_mask_paintable_get_paintable (self->picture_mask);
-
-    if (!GTK_IS_MEDIA_STREAM (paintable))
-        return;
-
-    stream = GTK_MEDIA_STREAM (paintable);
-    gtk_media_stream_set_loop (stream, FALSE);
-    gtk_media_stream_pause (stream);
+    gtk_svg_pause (self->svg);
 }
 
 static void
 on_picture_hover_cb (CcIllustratedRow *self)
 {
-    GtkMediaStream *stream;
-    GdkPaintable *paintable;
-
-    paintable = cc_mask_paintable_get_paintable (self->picture_mask);
-
-    if (!GTK_IS_MEDIA_STREAM (paintable))
-        return;
-
-    stream = GTK_MEDIA_STREAM (paintable);
-    gtk_media_stream_set_loop (stream, TRUE);
-    gtk_media_stream_play (stream);
+    gtk_svg_play (self->svg);
 }
 
 static void
@@ -114,6 +92,28 @@ cc_illustrated_row_finalize (GObject *object)
     G_OBJECT_CLASS (cc_illustrated_row_parent_class)->finalize (object);
 }
 
+/* GtkSvg only animates while it has a frame clock, which the row only
+ * has between realize and unrealize */
+static void
+cc_illustrated_row_realize (GtkWidget *widget)
+{
+    CcIllustratedRow *self = CC_ILLUSTRATED_ROW (widget);
+
+    GTK_WIDGET_CLASS (cc_illustrated_row_parent_class)->realize (widget);
+
+    gtk_svg_set_frame_clock (self->svg, gtk_widget_get_frame_clock (widget));
+}
+
+static void
+cc_illustrated_row_unrealize (GtkWidget *widget)
+{
+    CcIllustratedRow *self = CC_ILLUSTRATED_ROW (widget);
+
+    gtk_svg_set_frame_clock (self->svg, NULL);
+
+    GTK_WIDGET_CLASS (cc_illustrated_row_parent_class)->unrealize (widget);
+}
+
 static void
 cc_illustrated_row_class_init (CcIllustratedRowClass *klass)
 {
@@ -124,18 +124,19 @@ cc_illustrated_row_class_init (CcIllustratedRowClass *klass)
     object_class->set_property = cc_illustrated_row_set_property;
     object_class->finalize = cc_illustrated_row_finalize;
 
+    widget_class->realize = cc_illustrated_row_realize;
+    widget_class->unrealize = cc_illustrated_row_unrealize;
+
     props[PROP_RESOURCE] = g_param_spec_string ("resource", NULL, NULL, "",
                                                 G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_EXPLICIT_NOTIFY);
 
     g_object_class_install_properties (object_class, N_PROPS, props);
 
-    g_type_ensure (CC_TYPE_MASK_PAINTABLE);
-
     gtk_widget_class_set_template_from_resource (widget_class,
                                                  "/org/gnome/control-center/common/cc-illustrated-row.ui");
 
     gtk_widget_class_bind_template_child (widget_class, CcIllustratedRow, picture_box);
-    gtk_widget_class_bind_template_child (widget_class, CcIllustratedRow, picture_mask);
+    gtk_widget_class_bind_template_child (widget_class, CcIllustratedRow, svg);
 
     gtk_widget_class_bind_template_callback (widget_class, on_picture_hover_cb);
     gtk_widget_class_bind_template_callback (widget_class, on_picture_leave_cb);
@@ -151,14 +152,18 @@ cc_illustrated_row_init (CcIllustratedRow *self)
 void
 cc_illustrated_row_set_resource (CcIllustratedRow *self, const gchar *resource_path)
 {
+    gboolean has_resource;
+
     g_return_if_fail (CC_IS_ILLUSTRATED_ROW (self));
 
     g_set_str (&self->resource_path, resource_path);
 
-    cc_mask_paintable_set_resource_scaled (self->picture_mask, resource_path, GTK_WIDGET (self));
+    has_resource = self->resource_path != NULL && *self->resource_path != '\0';
 
-    gtk_widget_set_visible (GTK_WIDGET (self->picture_box),
-                            self->resource_path != NULL && g_strcmp0 (self->resource_path, "") != 0);
+    if (has_resource)
+        gtk_svg_load_from_resource (self->svg, self->resource_path);
+
+    gtk_widget_set_visible (GTK_WIDGET (self->picture_box), has_resource);
 
     g_object_notify_by_pspec (G_OBJECT (self), props[PROP_RESOURCE]);
 }
