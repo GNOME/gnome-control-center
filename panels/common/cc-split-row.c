@@ -22,8 +22,6 @@
 
 #include "cc-split-row.h"
 
-#include "cc-mask-paintable.h"
-
 /**
  * CcSplitRow:
  *
@@ -39,8 +37,8 @@ struct _CcSplitRow {
     GtkPicture *default_option_picture;
     GtkPicture *alternative_option_picture;
 
-    CcMaskPaintable *default_option_mask;
-    CcMaskPaintable *alternative_option_mask;
+    GtkSvg *default_option_svg;
+    GtkSvg *alternative_option_svg;
 
     GtkWidget *alternative_option_box;
     GtkWidget *default_option_box;
@@ -102,35 +100,15 @@ set_use_default (CcSplitRow *self, gboolean use_default)
 }
 
 static void
-on_option_focus_leave_cb (CcMaskPaintable *mask)
+on_option_focus_leave_cb (GtkSvg *svg)
 {
-    GtkMediaStream *stream;
-    GdkPaintable *paintable;
-
-    paintable = cc_mask_paintable_get_paintable (mask);
-
-    if (!GTK_IS_MEDIA_STREAM (paintable))
-        return;
-
-    stream = GTK_MEDIA_STREAM (paintable);
-    gtk_media_stream_set_loop (stream, FALSE);
-    gtk_media_stream_pause (stream);
+    gtk_svg_pause (svg);
 }
 
 static void
-on_option_focus_enter_cb (CcMaskPaintable *mask)
+on_option_focus_enter_cb (GtkSvg *svg)
 {
-    GtkMediaStream *stream;
-    GdkPaintable *paintable;
-
-    paintable = cc_mask_paintable_get_paintable (mask);
-
-    if (!GTK_IS_MEDIA_STREAM (paintable))
-        return;
-
-    stream = GTK_MEDIA_STREAM (paintable);
-    gtk_media_stream_set_loop (stream, TRUE);
-    gtk_media_stream_play (stream);
+    gtk_svg_play (svg);
 }
 
 static void
@@ -285,6 +263,33 @@ cc_split_row_grab_focus (GtkWidget *widget)
         return gtk_widget_grab_focus (self->alternative_option_box);
 }
 
+/* GtkSvg only animates while it has a frame clock, which the row only
+ * has between realize and unrealize */
+static void
+cc_split_row_realize (GtkWidget *widget)
+{
+    CcSplitRow *self = CC_SPLIT_ROW (widget);
+    GdkFrameClock *frame_clock;
+
+    GTK_WIDGET_CLASS (cc_split_row_parent_class)->realize (widget);
+
+    frame_clock = gtk_widget_get_frame_clock (widget);
+
+    gtk_svg_set_frame_clock (self->default_option_svg, frame_clock);
+    gtk_svg_set_frame_clock (self->alternative_option_svg, frame_clock);
+}
+
+static void
+cc_split_row_unrealize (GtkWidget *widget)
+{
+    CcSplitRow *self = CC_SPLIT_ROW (widget);
+
+    gtk_svg_set_frame_clock (self->default_option_svg, NULL);
+    gtk_svg_set_frame_clock (self->alternative_option_svg, NULL);
+
+    GTK_WIDGET_CLASS (cc_split_row_parent_class)->unrealize (widget);
+}
+
 /*
  * Initialization
  */
@@ -301,6 +306,8 @@ cc_split_row_class_init (CcSplitRowClass *klass)
 
     widget_class->focus = cc_split_row_child_focus;
     widget_class->grab_focus = cc_split_row_grab_focus;
+    widget_class->realize = cc_split_row_realize;
+    widget_class->unrealize = cc_split_row_unrealize;
 
     /**
      * CcSplitRow:use-default:
@@ -381,9 +388,9 @@ cc_split_row_class_init (CcSplitRowClass *klass)
     gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_checkbutton_image);
     gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_checkbutton_image);
     gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_option_picture);
-    gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_option_mask);
+    gtk_widget_class_bind_template_child (widget_class, CcSplitRow, alternative_option_svg);
     gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_picture);
-    gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_mask);
+    gtk_widget_class_bind_template_child (widget_class, CcSplitRow, default_option_svg);
 
     gtk_widget_class_bind_template_callback (widget_class, on_option_focus_enter_cb);
     gtk_widget_class_bind_template_callback (widget_class, on_option_focus_leave_cb);
@@ -431,14 +438,18 @@ cc_split_row_get_default_illustration_resource (CcSplitRow *self)
 void
 cc_split_row_set_default_illustration_resource (CcSplitRow *self, const gchar *resource_path)
 {
+    gboolean has_resource;
+
     g_return_if_fail (CC_IS_SPLIT_ROW (self));
 
     g_set_str (&self->default_resource_path, resource_path);
 
-    cc_mask_paintable_set_resource_scaled (self->default_option_mask, resource_path, GTK_WIDGET (self));
+    has_resource = self->default_resource_path != NULL && *self->default_resource_path != '\0';
 
-    gtk_widget_set_visible (GTK_WIDGET (self->default_option_picture),
-                            resource_path != NULL && g_strcmp0 (resource_path, "") != 0);
+    if (has_resource)
+        gtk_svg_load_from_resource (self->default_option_svg, self->default_resource_path);
+
+    gtk_widget_set_visible (GTK_WIDGET (self->default_option_picture), has_resource);
 
     g_object_notify_by_pspec (G_OBJECT (self), props[PROP_DEFAULT_ILLUSTRATION_RESOURCE]);
 }
@@ -467,14 +478,18 @@ cc_split_row_get_alternative_illustration_resource (CcSplitRow *self)
 void
 cc_split_row_set_alternative_illustration_resource (CcSplitRow *self, const gchar *resource_path)
 {
+    gboolean has_resource;
+
     g_return_if_fail (CC_IS_SPLIT_ROW (self));
 
     g_set_str (&self->alternative_resource_path, resource_path);
 
-    cc_mask_paintable_set_resource_scaled (self->alternative_option_mask, resource_path, GTK_WIDGET (self));
+    has_resource = self->alternative_resource_path != NULL && *self->alternative_resource_path != '\0';
 
-    gtk_widget_set_visible (GTK_WIDGET (self->alternative_option_picture),
-                            resource_path != NULL && g_strcmp0 (resource_path, "") != 0);
+    if (has_resource)
+        gtk_svg_load_from_resource (self->alternative_option_svg, self->alternative_resource_path);
+
+    gtk_widget_set_visible (GTK_WIDGET (self->alternative_option_picture), has_resource);
 
     g_object_notify_by_pspec (G_OBJECT (self), props[PROP_ALTERNATIVE_ILLUSTRATION_RESOURCE]);
 }
