@@ -37,6 +37,10 @@ template $CcUaMousePage: Adw.NavigationPage {
           Scale double_click_delay_scale {
             width-request: 240;
 
+            accessibility {
+              label: _("Double-Click Delay");
+            }
+
             marks [
               mark (100, bottom, _("Short")),
               mark (400),
@@ -68,6 +72,10 @@ template $CcUaMousePage: Adw.NavigationPage {
 
             [suffix]
             Scale secondary_delay_scale {
+              accessibility {
+                label: _("Simulated Secondary Click Acceptance Delay");
+              }
+
               marks [
                 mark (0.5, bottom, _("Short")),
                 mark (1.2),
@@ -95,6 +103,10 @@ template $CcUaMousePage: Adw.NavigationPage {
 
             [suffix]
             Scale hover_delay_scale {
+              accessibility {
+                label: _("Hover Click Delay");
+              }
+
               marks [
                 mark (0.2, bottom, _("Short")),
                 mark (1.2),
@@ -116,6 +128,10 @@ template $CcUaMousePage: Adw.NavigationPage {
 
             [suffix]
             Scale motion_threshold_scale {
+              accessibility {
+                label: _("Hover Click Motion Threshold");
+              }
+
               marks [
                 mark (0, bottom, _("Small")),
                 mark (10),

@@ -116,6 +116,10 @@ template $CcUaZoomPage: Adw.NavigationPage {
 
             [suffix]
             Scale crosshair_thickness_scale {
+              accessibility {
+                label: _("Crosshair Thickness");
+              }
+
               marks [
                 /* Translators: This is a mark in the Thickness scale */
                 mark (1, bottom, _("Thin")),
@@ -141,6 +145,10 @@ template $CcUaZoomPage: Adw.NavigationPage {
             [suffix]
             /* This scale is nonlinearly mapped, changing these values requires C code changes too. */
             Scale crosshair_length_scale {
+              accessibility {
+                label: _("Crosshair Length");
+              }
+
               marks [
                 /* Translators: This is a mark in the Crosshair Length scale */
                 mark (0, bottom, _("Short")),
@@ -187,6 +195,10 @@ template $CcUaZoomPage: Adw.NavigationPage {
           Scale brightness_scale {
             width-request: 240;
 
+            accessibility {
+              label: _("Brightness");
+            }
+
             marks [
               /* Translators: This is a mark in the Brightness scale */
               mark (-0.8, bottom, _("Low")),
@@ -211,6 +223,10 @@ template $CcUaZoomPage: Adw.NavigationPage {
 
           [suffix]
           Scale contrast_scale {
+            accessibility {
+              label: _("Contrast");
+            }
+
             marks [
               /* Translators: This is a mark in the Contrast scale */
               mark (-0.8, bottom, _("Low")),
@@ -235,6 +251,10 @@ template $CcUaZoomPage: Adw.NavigationPage {
 
           [suffix]
           Scale grayscale_scale {
+            accessibility {
+              label: _("Grayscale");
+            }
+
             marks [
               /* Translators: This is a mark in the Grayscale scale */
               mark (0, bottom, _("None")),
