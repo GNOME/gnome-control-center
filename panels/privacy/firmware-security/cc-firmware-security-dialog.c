@@ -31,6 +31,7 @@
 #include "cc-firmware-security-dialog.h"
 #include "cc-firmware-security-page.h"
 #include "cc-firmware-security-utils.h"
+#include "cc-util.h"
 
 struct _CcFirmwareSecurityDialog {
     AdwDialog parent;
@@ -137,25 +138,6 @@ update_dialog (CcFirmwareSecurityDialog *self)
 }
 
 static gchar *
-get_os_name (void)
-{
-    g_autofree gchar *name = NULL;
-    g_autofree gchar *version_id = NULL;
-    g_autofree gchar *pretty_name = NULL;
-
-    name = g_get_os_info (G_OS_INFO_KEY_NAME);
-    version_id = g_get_os_info (G_OS_INFO_KEY_VERSION_ID);
-    pretty_name = g_get_os_info (G_OS_INFO_KEY_PRETTY_NAME);
-
-    if (pretty_name)
-        return g_steal_pointer (&pretty_name);
-    else if (name && version_id)
-        return g_strdup_printf ("%s %s", name, version_id);
-    else
-        return g_strdup (_("Unknown"));
-}
-
-static gchar *
 cpu_get_model ()
 {
     gchar *model;
@@ -256,7 +238,7 @@ on_hsi_detail_button_clicked_cb (CcFirmwareSecurityDialog *self)
 
     g_string_append (result_str, "  ");
     hsi_report_title_print_padding ("OS:", result_str, 0);
-    os_name = get_os_name ();
+    os_name = cc_util_get_os_name ();
     g_string_append_printf (result_str, "%s\n", os_name);
 
     g_string_append (result_str, "  ");

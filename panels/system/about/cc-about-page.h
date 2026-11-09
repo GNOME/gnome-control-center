@@ -28,7 +28,6 @@ G_DECLARE_FINAL_TYPE (CcAboutPage, cc_about_page, CC, ABOUT_PAGE, AdwNavigationP
 
 char *get_hardware_model_string (void);
 char *get_cpu_info (void);
-char *get_os_name (void);
 guint64 get_ram_size_dmi (void);
 guint64 get_ram_size_libgtop (void);
 

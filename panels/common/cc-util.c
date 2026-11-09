@@ -234,3 +234,22 @@ cc_util_get_localized_weekday_name (gint iso_weekday_number)
 
     return g_date_time_format (item_date, "%A");
 }
+
+char *
+cc_util_get_os_name (void)
+{
+    g_autofree char *name = NULL;
+    g_autofree char *version_id = NULL;
+    g_autofree char *pretty_name = NULL;
+
+    name = g_get_os_info (G_OS_INFO_KEY_NAME);
+    version_id = g_get_os_info (G_OS_INFO_KEY_VERSION_ID);
+    pretty_name = g_get_os_info (G_OS_INFO_KEY_PRETTY_NAME);
+
+    if (pretty_name)
+        return g_steal_pointer (&pretty_name);
+    else if (name && version_id)
+        return g_strdup_printf ("%s %s", name, version_id);
+    else
+        return g_strdup (_("Unknown"));
+}

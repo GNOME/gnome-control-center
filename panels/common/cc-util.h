@@ -27,3 +27,4 @@ char *cc_util_get_smart_date_time (GDateTime *date);
 char *cc_util_time_to_string_text (gint64 msecs);
 char *cc_util_app_id_to_display_name (const char *app_id);
 char *cc_util_get_localized_weekday_name (gint iso_weekday_number);
+char *cc_util_get_os_name (void);

@@ -25,6 +25,7 @@
 #include "cc-about-page.h"
 #include "cc-hostname-entry.h"
 #include "cc-hostname.h"
+#include "cc-util.h"
 #include "info-cleanup.h"
 #include "shell/cc-object-storage.h"
 
@@ -372,25 +373,6 @@ create_graphics_rows (CcAboutPage *self, GSList *devices)
 
         adw_preferences_group_add (self->hardware_group, gpu_entry);
     }
-}
-
-char *
-get_os_name (void)
-{
-    g_autofree gchar *name = NULL;
-    g_autofree gchar *version_id = NULL;
-    g_autofree gchar *pretty_name = NULL;
-
-    name = g_get_os_info (G_OS_INFO_KEY_NAME);
-    version_id = g_get_os_info (G_OS_INFO_KEY_VERSION_ID);
-    pretty_name = g_get_os_info (G_OS_INFO_KEY_PRETTY_NAME);
-
-    if (pretty_name)
-        return g_steal_pointer (&pretty_name);
-    else if (name && version_id)
-        return g_strdup_printf ("%s %s", name, version_id);
-    else
-        return g_strdup (_("Unknown"));
 }
 
 static char *
@@ -892,7 +874,7 @@ on_copy_row_activated_cb (GtkWidget *widget, CcAboutPage *self)
 
     g_string_append (result_str, "- ");
     system_details_window_title_print_padding ("**OS Name:**", result_str, 0);
-    os_name_text = get_os_name ();
+    os_name_text = cc_util_get_os_name ();
     g_string_append_printf (result_str, "%s\n", os_name_text);
 
     g_string_append (result_str, "- ");
@@ -963,7 +945,7 @@ cc_about_page_setup_overview (CcAboutPage *self)
 
     load_primary_disk_info (self);
 
-    os_name_text = get_os_name ();
+    os_name_text = cc_util_get_os_name ();
     adw_action_row_set_subtitle (self->os_name_row, os_name_text);
 
     os_build_text = get_os_image_version ();
