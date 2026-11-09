@@ -276,7 +276,7 @@ get_renderer_from_switcheroo (void)
     num_children = g_variant_n_children (variant);
     renderers = NULL;
     for (i = 0; i < num_children; i++) {
-        g_autoptr(GVariant) gpu;
+        g_autoptr(GVariant) gpu = NULL;
         g_autoptr(GVariant) name = NULL;
         g_autoptr(GVariant) env = NULL;
         g_autoptr(GVariant) default_variant = NULL;
