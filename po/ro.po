@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2026-11-10 13:54+0000\n"
-"PO-Revision-Date: 2026-11-10 21:32+0200\n"
+"POT-Creation-Date: 2026-11-11 09:36+0000\n"
+"PO-Revision-Date: 2026-11-11 22:19+0200\n"
 "Last-Translator: Antonio Marin <gnmer.6qxyg@slmail.me>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "Language: ro\n"
@@ -5493,7 +5493,7 @@ msgstr "Serverul necesită autentificare"
 #. Translators: this is the "go back" action of a button
 #: panels/printers/pp-new-printer-dialog.ui:78
 #: panels/system/users/cc-fingerprint-dialog.blp:15
-#: panels/wacom/cc-wacom-stylus-page.c:389
+#: panels/wacom/cc-wacom-stylus-page.c:478
 #: panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
 msgstr "Înapoi"
@@ -6625,7 +6625,7 @@ msgstr "Blochează ecranul după ce devine negru"
 
 #: panels/privacy/screen/cc-screen-page.blp:41
 msgid "Automatic _Screen Lock Delay"
-msgstr "Întârziere automată a blocării _ecranului"
+msgstr "Întârzierea blocării automate a _ecranului"
 
 #: panels/privacy/screen/cc-screen-page.blp:42
 msgid "Time from screen blank to screen lock"
@@ -6650,7 +6650,7 @@ msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked"
 msgstr ""
-"Previne dispozitivele USB noi să interacționeze cu sistemul când ecranul "
+"Împiedică dispozitivele USB noi să interacționeze cu sistemul când ecranul "
 "este blocat"
 
 #: panels/privacy/screen/cc-screen-page.blp:73
@@ -6874,7 +6874,7 @@ msgstr "Elimină rețeaua"
 #: panels/sharing/cc-sharing-panel.blp:5
 #: panels/sharing/gnome-sharing-panel.desktop.in:2
 msgid "Sharing"
-msgstr "Distribuie"
+msgstr "Distribuire"
 
 #: panels/sharing/cc-sharing-panel.blp:16
 #: panels/system/about/cc-about-page.blp:49
@@ -9118,7 +9118,7 @@ msgstr "Ignoră apăsările rapide și repetate ale unei taste"
 
 #: panels/universal-access/cc-ua-typing-page.blp:229
 msgid "Bounce Keys Acceptance Delay"
-msgstr "Întârzierea pentru acceptarea tastelor"
+msgstr "Întârzierea acceptării apăsărilor repetate"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:5
 msgid "Zoom"
@@ -9354,7 +9354,7 @@ msgstr "S-a detectat un clic pierdut, se repornește…"
 #: panels/wacom/cc-wacom-button-row.c:222
 #, c-format
 msgid "Button %d"
-msgstr "Buton %d"
+msgstr "Butonul %d"
 
 #: panels/wacom/cc-wacom-button-row.h:32
 msgctxt "Wacom action-type"
@@ -9459,7 +9459,7 @@ msgstr "Trebuie conectată și pornită tableta Wacom"
 
 #: panels/wacom/cc-wacom-stylus-action-dialog.blp:100
 #: panels/wacom/cc-wacom-stylus-action-dialog.blp:132
-#: panels/wacom/cc-wacom-stylus-page.c:396
+#: panels/wacom/cc-wacom-stylus-page.c:485
 msgid "Assign Keystroke"
 msgstr "Alocă apăsarea tastelor"
 
@@ -9478,57 +9478,85 @@ msgid "Button %d Mapping"
 msgstr "Alocarea butonului %d"
 
 #: panels/wacom/cc-wacom-stylus-page.blp:17
+msgid "Tip Pressure"
+msgstr "Apăsarea pe vârf"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:20
 msgid "Tip _Pressure Feel"
-msgstr "A_păsarea simțită pe vârf"
+msgstr "A_păsarea simțită la vârf"
 
 #. Translators: This is a mark in the 'Tip Pressure Feel' scale
 #. Translators: This is a mark in the 'Erase Pressure Feel' scale
-#: panels/wacom/cc-wacom-stylus-page.blp:26
-#: panels/wacom/cc-wacom-stylus-page.blp:68
+#: panels/wacom/cc-wacom-stylus-page.blp:29
+#: panels/wacom/cc-wacom-stylus-page.blp:83
 msgid "Soft"
 msgstr "Mică"
 
 #. Translators: This is a mark in the 'Tip Pressure Feel' scale
 #. Translators: This is a mark in the 'Erase Pressure Feel' scale
-#: panels/wacom/cc-wacom-stylus-page.blp:29
-#: panels/wacom/cc-wacom-stylus-page.blp:71
+#: panels/wacom/cc-wacom-stylus-page.blp:32
+#: panels/wacom/cc-wacom-stylus-page.blp:86
 msgid "Firm"
 msgstr "Mare"
 
-#: panels/wacom/cc-wacom-stylus-page.blp:41
+#: panels/wacom/cc-wacom-stylus-page.blp:44
+msgid "Tip Pressure _Floor"
+msgstr "Limita m_inimă Apăsare pe vârf"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:57
+msgid "Tip Pressure _Ceiling"
+msgstr "Limita _maximă Apăsare pe vârf"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:71
+msgid "Eraser Pressure"
+msgstr "Apăsarea pe gumă"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:74
+msgid "_Eraser Pressure Feel"
+msgstr "Apăsar_ea simțită la gumă"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:98
+msgid "Eraser Pressure _Floor"
+msgstr "Limita m_inimă Apăsare pe gumă"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:111
+msgid "Eraser Pressure _Ceiling"
+msgstr "Limita _maximă Apăsare pe gumă"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:125
+msgid "Pen Buttons"
+msgstr "Butoanele creionului"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:128
 msgid "Button _1"
 msgstr "Buton _1"
 
-#: panels/wacom/cc-wacom-stylus-page.blp:47
+#: panels/wacom/cc-wacom-stylus-page.blp:134
 msgid "Button _2"
 msgstr "Buton _2"
 
-#: panels/wacom/cc-wacom-stylus-page.blp:53
+#: panels/wacom/cc-wacom-stylus-page.blp:140
 msgid "Button _3"
 msgstr "Buton _3"
 
-#: panels/wacom/cc-wacom-stylus-page.blp:59
-msgid "_Eraser Pressure Feel"
-msgstr "Apăsar_ea simțită pe gumă"
-
-#: panels/wacom/cc-wacom-stylus-page.c:379
+#: panels/wacom/cc-wacom-stylus-page.c:468
 msgid "Left Mousebutton Click"
 msgstr "Clic cu butonul din stânga al mausului"
 
-#: panels/wacom/cc-wacom-stylus-page.c:382
+#: panels/wacom/cc-wacom-stylus-page.c:471
 msgid "Middle Mousebutton Click"
 msgstr "Clic cu butonul din mijloc al mausului"
 
-#: panels/wacom/cc-wacom-stylus-page.c:385
+#: panels/wacom/cc-wacom-stylus-page.c:474
 msgid "Right Mousebutton Click"
 msgstr "Clic cu butonul din dreapta al mausului"
 
 #. Translators: this is the "go forward" action of a button
-#: panels/wacom/cc-wacom-stylus-page.c:393
+#: panels/wacom/cc-wacom-stylus-page.c:482
 msgid "Forward"
 msgstr "Înainte"
 
-#: panels/wacom/cc-wacom-stylus-page.c:399
+#: panels/wacom/cc-wacom-stylus-page.c:488
 msgid "Switch Monitor"
 msgstr "Schimbă monitorul"
 
