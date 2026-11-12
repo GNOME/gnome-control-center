@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-10-22 15:09+0000\n"
-"PO-Revision-Date: 2026-10-24 17:09+0200\n"
+"POT-Creation-Date: 2026-11-11 09:36+0000\n"
+"PO-Revision-Date: 2026-11-12 09:58+0100\n"
 "Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -157,7 +157,7 @@ msgstr "Prejme sistemska iskanja in pošlji zadetke"
 #. translators:
 #. * The device has been disabled
 #: panels/applications/cc-applications-panel.blp:205 panels/applications/cc-applications-panel.blp:247 panels/applications/cc-applications-panel.blp:268 panels/applications/cc-applications-panel.blp:282 panels/applications/cc-applications-panel.blp:296 panels/keyboard/cc-keyboard-panel.c:83
-#: panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:331 panels/system/users/cc-user-page.c:365 panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:414 subprojects/gvc/gvc-mixer-control.c:1919
+#: panels/keyboard/keyboard-shortcuts.c:327 panels/network/panel-common.c:334 panels/system/users/cc-user-page.c:365 panels/system/users/cc-user-page.c:721 panels/wwan/cc-wwan-device-page.c:414 subprojects/gvc/gvc-mixer-control.c:1919
 msgid "Disabled"
 msgstr "Onemogočeno"
 
@@ -433,7 +433,7 @@ msgid "%s is used to open the following types of files and links"
 msgstr "Program %s omogoča odpiranje navedenih datotek in povezav."
 
 #. Translators: This is a mark in the Grayscale scale
-#: panels/applications/cc-applications-panel.c:1207 panels/keyboard/cc-keyboard-shortcut-editor.blp:92 panels/sound/cc-alert-chooser-page.blp:14 panels/sound/cc-alert-chooser-page.c:314 panels/universal-access/cc-ua-zoom-page.blp:240 panels/wwan/cc-wwan-apn-dialog.blp:226
+#: panels/applications/cc-applications-panel.c:1207 panels/keyboard/cc-keyboard-shortcut-editor.blp:92 panels/sound/cc-alert-chooser-page.blp:14 panels/sound/cc-alert-chooser-page.c:314 panels/universal-access/cc-ua-zoom-page.blp:260 panels/wwan/cc-wwan-apn-dialog.blp:226
 msgid "None"
 msgstr "Brez"
 
@@ -994,7 +994,7 @@ msgstr "Omogočen je letalski način"
 msgid "Bluetooth is disabled when airplane mode is on"
 msgstr "Ko je omogočen letalski način, je naprava Bluetooth izklopljena"
 
-#: panels/bluetooth/cc-bluetooth-panel.blp:52 panels/wwan/cc-wwan-panel.blp:59
+#: panels/bluetooth/cc-bluetooth-panel.blp:52 panels/wwan/cc-wwan-panel.blp:58
 msgid "_Turn Off Airplane Mode"
 msgstr "_Onemogoči letalski način"
 
@@ -1634,7 +1634,7 @@ msgstr "Zmanjšanje ure"
 msgid "Decrement Minute"
 msgstr "Zmanjšanje minute"
 
-#: panels/common/cc-util.c:121 panels/network/connection-editor/ce-page-details.c:174 panels/wellbeing/cc-screen-time-statistics-row.c:901
+#: panels/common/cc-util.c:121 panels/network/connection-editor/ce-page-details.c:174 panels/wellbeing/cc-screen-time-statistics-row.c:943
 msgid "Today"
 msgstr "Danes"
 
@@ -1727,6 +1727,11 @@ msgstr "%s"
 #: panels/common/cc-util.c:198
 msgid "0 seconds"
 msgstr "0 sekund"
+
+#. Translators: Unknown endpoint host for WireGuard (invalid setting)
+#: panels/common/cc-util.c:254 panels/network/connection-editor/ce-page-wireguard.c:355 panels/sound/cc-alert-chooser-page.c:324 panels/system/about/cc-about-page.c:340 panels/system/about/cc-about-page.c:414 panels/system/about/cc-about-page.c:863 panels/wwan/cc-wwan-details-dialog.c:98
+msgid "Unknown"
+msgstr "Neznano"
 
 #. translators: This is the default hotspot name, need to be less than 32-bytes
 #: panels/common/hostname-helper.c:221
@@ -2498,11 +2503,11 @@ msgstr "Miška"
 msgid "Po_inter Speed"
 msgstr "_Hitrost kazalnika"
 
-#: panels/mouse/cc-mouse-panel.blp:104 panels/mouse/cc-mouse-panel.blp:197 panels/mouse/cc-mouse-panel.blp:305 panels/universal-access/cc-ua-typing-page.blp:52 panels/universal-access/cc-ua-typing-page.blp:102
+#: panels/mouse/cc-mouse-panel.blp:104 panels/mouse/cc-mouse-panel.blp:197 panels/mouse/cc-mouse-panel.blp:305 panels/universal-access/cc-ua-typing-page.blp:52 panels/universal-access/cc-ua-typing-page.blp:110
 msgid "Slow"
 msgstr "Počasna"
 
-#: panels/mouse/cc-mouse-panel.blp:106 panels/mouse/cc-mouse-panel.blp:199 panels/mouse/cc-mouse-panel.blp:307 panels/universal-access/cc-ua-typing-page.blp:50 panels/universal-access/cc-ua-typing-page.blp:100
+#: panels/mouse/cc-mouse-panel.blp:106 panels/mouse/cc-mouse-panel.blp:199 panels/mouse/cc-mouse-panel.blp:307 panels/universal-access/cc-ua-typing-page.blp:50 panels/universal-access/cc-ua-typing-page.blp:108
 msgid "Fast"
 msgstr "Hitra"
 
@@ -2988,7 +2993,7 @@ msgstr "Ni najdenega vmesnika Wi-Fi"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Prepričajte se, da je vmesnik Wi-Fi priklopljen in omogočen."
 
-#: panels/network/cc-wifi-panel.blp:68 panels/wwan/cc-wwan-panel.blp:52
+#: panels/network/cc-wifi-panel.blp:68 panels/wwan/cc-wwan-panel.blp:51
 msgid "Airplane Mode On"
 msgstr "Letalski način je omogočen"
 
@@ -3476,12 +3481,6 @@ msgstr "_BSSID"
 msgid "WireGuard"
 msgstr "WireGuard"
 
-#. Translators: Unknown endpoint host for WireGuard (invalid setting)
-#: panels/network/connection-editor/ce-page-wireguard.c:355 panels/privacy/firmware-security/cc-firmware-security-dialog.c:155 panels/sound/cc-alert-chooser-page.c:324 panels/system/about/cc-about-page.c:339 panels/system/about/cc-about-page.c:393 panels/system/about/cc-about-page.c:432
-#: panels/system/about/cc-about-page.c:881 panels/wwan/cc-wwan-details-dialog.c:98
-msgid "Unknown"
-msgstr "Neznano"
-
 #: panels/network/connection-editor/ce-page-wireguard.c:397
 msgid "Unsaved peer"
 msgstr "Neshranjen soležnik"
@@ -3606,7 +3605,7 @@ msgstr "Dodaj WireGuard soležnika"
 msgid "No peers set up"
 msgstr "Ni nastavljenih soležnikov"
 
-#: panels/network/connection-editor/wireguard-peer.blp:45 panels/network/net-device-ethernet.c:324 panels/network/network-mobile.ui:328
+#: panels/network/connection-editor/wireguard-peer.blp:45 panels/network/net-device-ethernet.c:333 panels/network/network-mobile.ui:328
 msgid "Options…"
 msgstr "Možnosti …"
 
@@ -3694,7 +3693,7 @@ msgstr "Nazadnje uporabljeno"
 
 #. Translators: the %'d is replaced by the network device speed with
 #. * thousands separator, so do not change to %d
-#: panels/network/net-device-ethernet.c:217
+#: panels/network/net-device-ethernet.c:226
 #, c-format
 msgid "%'d Mb/s"
 msgstr "%'d Mb/s"
@@ -3704,7 +3703,7 @@ msgstr "%'d Mb/s"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:264 panels/network/network-bluetooth.blp:6 panels/network/network-ethernet.blp:5 panels/network/network-ethernet.blp:37 panels/network/network-ethernet.blp:51
+#: panels/network/net-device-ethernet.c:273 panels/network/network-bluetooth.blp:6 panels/network/network-ethernet.blp:5 panels/network/network-ethernet.blp:37 panels/network/network-ethernet.blp:51
 msgid "Wired"
 msgstr "Žično"
 
@@ -4054,12 +4053,17 @@ msgid "Connection dependency failed"
 msgstr "Odvisnost povezave je spodletela"
 
 #. TRANSLATORS: device status
-#: panels/network/panel-common.c:323
+#: panels/network/panel-common.c:322
 msgid "Firmware missing"
 msgstr "Manjka strojna programska oprema"
 
+#. The link is physically down. NetworkManager may well keep the
+#. * connection activated regardless (ignore-carrier=yes, static
+#. * addressing, carrier-wait-timeout), so the device state alone cannot
+#. * be trusted to tell the user the cable is out.
+#.
 #. TRANSLATORS: device status
-#: panels/network/panel-common.c:327
+#: panels/network/panel-common.c:331
 msgid "Cable unplugged"
 msgstr "Kabel ni priklopljen"
 
@@ -4944,7 +4948,7 @@ msgid "Server requires authentication"
 msgstr "Strežnik zahteva overitev"
 
 #. Translators: this is the "go back" action of a button
-#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:15 panels/wacom/cc-wacom-stylus-page.c:389 panels/wwan/cc-wwan-apn-dialog.blp:20
+#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:15 panels/wacom/cc-wacom-stylus-page.c:478 panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
 msgstr "Nazaj"
 
@@ -5630,13 +5634,13 @@ msgid "_Copy Technical Report"
 msgstr "_Kopiraj tehnično poročilo"
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:99 panels/privacy/firmware-security/cc-firmware-security-page.c:453
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:100 panels/privacy/firmware-security/cc-firmware-security-page.c:453
 msgid "Security Checks Failed"
 msgstr "Varnostna preverjanja so spodletela"
 
 #. TRANSLATORS: This is the description to describe the failure on
 #. checking the security items.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:102
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:103
 msgid ""
 "Hardware does not pass checks. This means that you are not protected against common hardware security issues.\n"
 "\n"
@@ -5647,37 +5651,37 @@ msgstr ""
 "Varnostna tveganja strojne opreme je morda mogoče odpraviti s posodobitvijo strojne programske opreme ali s prilagajanjem nastavitev naprave. Napake so lahko tudi neposredno povezane s samo fizično strojno opremo in jih morda ni mogoče odpraviti."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:111 panels/privacy/firmware-security/cc-firmware-security-page.c:458
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:112 panels/privacy/firmware-security/cc-firmware-security-page.c:458
 msgid "Basic Security Checks Passed"
 msgstr "Osnovna varnostna preverjanja so uspela"
 
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:114
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:115
 msgid "This device meets basic security requirements and has protection against some hardware security threats. However, it lacks other recommended protections."
 msgstr "Naprava ustreza osnovnim varnostnim zahtevam in je zaščitena pred nekaterimi varnostnimi grožnjami za strojno opremo."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:123 panels/privacy/firmware-security/cc-firmware-security-page.c:466
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:124 panels/privacy/firmware-security/cc-firmware-security-page.c:466
 msgid "Protected"
 msgstr "Zaščiteno"
 
 #. TRANSLATOR: This description describes the devices passing
 #. the extended security check.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:126
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:127
 msgid "This device passes current security tests. It is protected against the majority of hardware security threats."
 msgstr "Naprava je uspešno opravila trenutne varnostne preizkuse. Strojna oprema je zaščitena pred večino varnostnih groženj za strojno opremo."
 
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:132
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:133
 msgid "Checks Unavailable"
 msgstr "Preizkusi niso na voljo"
 
 #. TRANSLATORS: When the security result is unavailable, this description is shown.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:135
 msgid "Device security checks are not available for this device. It is not possible to tell whether it meets hardware security requirements."
 msgstr "Varnostni pregledi za to napravo niso na voljo. Ni mogoče ugotoviti, ali naprava izpolnjuje varnostne zahteve."
 
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:334
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:316
 msgid "Report copied to clipboard"
 msgstr "Poročilo je kopirano v odložišče"
 
@@ -6525,28 +6529,28 @@ msgstr "Poteka preračunavanje …"
 msgid "_Copy"
 msgstr "_Kopiraj"
 
-#: panels/system/about/cc-about-page.c:363
+#: panels/system/about/cc-about-page.c:364
 msgid "Graphics"
 msgstr "Grafika"
 
-#: panels/system/about/cc-about-page.c:365
+#: panels/system/about/cc-about-page.c:366
 #, c-format
 msgid "Graphics %d"
 msgstr "Grafika %d"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-about-page.c:411
+#: panels/system/about/cc-about-page.c:393
 #, c-format
 msgid "64-bit"
 msgstr "64-bitni sistem"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-about-page.c:414
+#: panels/system/about/cc-about-page.c:396
 #, c-format
 msgid "32-bit"
 msgstr "32-bitni sistem"
 
-#: panels/system/about/cc-about-page.c:927
+#: panels/system/about/cc-about-page.c:909
 msgid "Details copied to clipboard"
 msgstr "Podrobnosti so kopirane v odložišče"
 
@@ -7787,7 +7791,7 @@ msgstr "Velikost kazalke je za lažje spremljanje mogoče povečati"
 msgid "Medium"
 msgstr "Srednja"
 
-#: panels/universal-access/cc-cursor-size-page.c:79 panels/universal-access/cc-ua-mouse-page.blp:128 panels/universal-access/cc-ua-seeing-page.c:150
+#: panels/universal-access/cc-cursor-size-page.c:79 panels/universal-access/cc-ua-mouse-page.blp:138 panels/universal-access/cc-ua-seeing-page.c:150
 msgid "Large"
 msgstr "Velika"
 
@@ -7883,51 +7887,67 @@ msgstr "Postavite kazalec nad okno, da ga aktivirate"
 msgid "_Double-Click Delay"
 msgstr "_Časovni zamik dvojnega klika"
 
+#: panels/universal-access/cc-ua-mouse-page.blp:41
+msgid "Double-Click Delay"
+msgstr "Časovni zamik dvojnega klika"
+
 #. Translators: This is a mark in the Crosshair Length scale
-#: panels/universal-access/cc-ua-mouse-page.blp:41 panels/universal-access/cc-ua-mouse-page.blp:74 panels/universal-access/cc-ua-mouse-page.blp:103 panels/universal-access/cc-ua-typing-page.blp:128 panels/universal-access/cc-ua-typing-page.blp:173 panels/universal-access/cc-ua-typing-page.blp:213
-#: panels/universal-access/cc-ua-zoom-page.blp:146
+#: panels/universal-access/cc-ua-mouse-page.blp:45 panels/universal-access/cc-ua-mouse-page.blp:80 panels/universal-access/cc-ua-mouse-page.blp:111 panels/universal-access/cc-ua-typing-page.blp:144 panels/universal-access/cc-ua-typing-page.blp:189 panels/universal-access/cc-ua-typing-page.blp:233
+#: panels/universal-access/cc-ua-zoom-page.blp:154
 msgid "Short"
 msgstr "Kratko"
 
 #. Translators: This is a mark in the Crosshair Length scale
-#: panels/universal-access/cc-ua-mouse-page.blp:43 panels/universal-access/cc-ua-mouse-page.blp:76 panels/universal-access/cc-ua-mouse-page.blp:105 panels/universal-access/cc-ua-typing-page.blp:130 panels/universal-access/cc-ua-typing-page.blp:175 panels/universal-access/cc-ua-typing-page.blp:215
-#: panels/universal-access/cc-ua-zoom-page.blp:149
+#: panels/universal-access/cc-ua-mouse-page.blp:47 panels/universal-access/cc-ua-mouse-page.blp:82 panels/universal-access/cc-ua-mouse-page.blp:113 panels/universal-access/cc-ua-typing-page.blp:146 panels/universal-access/cc-ua-typing-page.blp:191 panels/universal-access/cc-ua-typing-page.blp:235
+#: panels/universal-access/cc-ua-zoom-page.blp:157
 msgid "Long"
 msgstr "Dolgo"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:58
+#: panels/universal-access/cc-ua-mouse-page.blp:62
 msgid "Click Assist"
 msgstr "Pomočnik za klikanje"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:61
+#: panels/universal-access/cc-ua-mouse-page.blp:65
 msgid "_Simulated Secondary Click"
 msgstr "_Simulirani drugi klik"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:62
+#: panels/universal-access/cc-ua-mouse-page.blp:66
 msgid "Secondary click by holding down the primary mouse button"
 msgstr "Sproži drugotni klik s pritiskom osnovnega gumba miške"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:67 panels/universal-access/cc-ua-typing-page.blp:165 panels/universal-access/cc-ua-typing-page.blp:206
+#: panels/universal-access/cc-ua-mouse-page.blp:71 panels/universal-access/cc-ua-typing-page.blp:181 panels/universal-access/cc-ua-typing-page.blp:222
 msgid "Acceptance Delay"
 msgstr "Zamik sprejetja"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:90
+#: panels/universal-access/cc-ua-mouse-page.blp:76
+msgid "Simulated Secondary Click Acceptance Delay"
+msgstr "Časovni zamik potrditve simuliranega drugega klika"
+
+#: panels/universal-access/cc-ua-mouse-page.blp:96
 msgid "_Hover Click"
 msgstr "Klik ob _prehodu"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:91
+#: panels/universal-access/cc-ua-mouse-page.blp:97
 msgid "Trigger a click when the pointer hovers"
 msgstr "Sproži klik ob prehodu kazalnika nad točko"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:96 panels/universal-access/cc-ua-typing-page.blp:119
+#: panels/universal-access/cc-ua-mouse-page.blp:102 panels/universal-access/cc-ua-typing-page.blp:131
 msgid "Delay"
 msgstr "Časovni zamik"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:119
+#: panels/universal-access/cc-ua-mouse-page.blp:107
+msgid "Hover Click Delay"
+msgstr "Časovni zamik klika ob prehodu"
+
+#: panels/universal-access/cc-ua-mouse-page.blp:127
 msgid "Motion Threshold"
 msgstr "Prag premikanja:"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:126
+#: panels/universal-access/cc-ua-mouse-page.blp:132
+msgid "Hover Click Motion Threshold"
+msgstr "Prag premikanja klika ob prehodu"
+
+#: panels/universal-access/cc-ua-mouse-page.blp:136
 msgid "Small"
 msgstr "Majhen"
 
@@ -8039,7 +8059,7 @@ msgstr "Vedno pokaži pozornost tipkovnice"
 msgid "Keep the focus always visible when navigating with the keyboard"
 msgstr "Ohrani pozornost vedno vidno ob krmarjenju s tipkovnico"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:97
+#: panels/universal-access/cc-ua-seeing-page.blp:97 panels/universal-access/cc-ua-seeing-page.blp:148
 msgid "Text Size"
 msgstr "Velikost besedila"
 
@@ -8052,11 +8072,11 @@ msgid "Use the slider to adjust the size of user interface text"
 msgstr "Uporabite drsnik za prilagajanje velikosti besedila v uporabniškem vmesniku"
 
 #. Translators: Single letter next to the text size slider
-#: panels/universal-access/cc-ua-seeing-page.blp:137 panels/universal-access/cc-ua-seeing-page.blp:157
+#: panels/universal-access/cc-ua-seeing-page.blp:137 panels/universal-access/cc-ua-seeing-page.blp:161
 msgid "A"
 msgstr "A"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:168
+#: panels/universal-access/cc-ua-seeing-page.blp:172
 msgid "Sample text"
 msgstr "Vzorčno besedilo"
 
@@ -8148,53 +8168,57 @@ msgstr "_Ponavljajoče tipke"
 msgid "Key presses repeat when the key is held down"
 msgstr "Ponovi izpis znakov, ko je tipka pritisnjena zadržano"
 
-#: panels/universal-access/cc-ua-typing-page.blp:91
+#: panels/universal-access/cc-ua-typing-page.blp:95
 msgid "Speed"
 msgstr "Hitrost"
 
-#: panels/universal-access/cc-ua-typing-page.blp:144
+#: panels/universal-access/cc-ua-typing-page.blp:160
 msgid "_Sticky Keys"
 msgstr "_Lepljive tipke"
 
-#: panels/universal-access/cc-ua-typing-page.blp:145
+#: panels/universal-access/cc-ua-typing-page.blp:161
 msgid "Sequences of modifier keys act as a key combination"
 msgstr "Zaporedje spremenilnih tipk se obravnava kot kombinacijo tipk"
 
-#: panels/universal-access/cc-ua-typing-page.blp:150
+#: panels/universal-access/cc-ua-typing-page.blp:166
 msgid "Disable if two keys are pressed together"
 msgstr "_Onemogoči, če sta sočasno pritisnjeni dve tipki"
 
-#: panels/universal-access/cc-ua-typing-page.blp:154
+#: panels/universal-access/cc-ua-typing-page.blp:170
 msgid "Beep when modifier key is pressed"
 msgstr "Zapiskaj, ko je pritisnjena _spremenilna tipka"
 
-#: panels/universal-access/cc-ua-typing-page.blp:159
+#: panels/universal-access/cc-ua-typing-page.blp:175
 msgid "S_low Keys"
 msgstr "_Počasne tipke"
 
-#: panels/universal-access/cc-ua-typing-page.blp:160
+#: panels/universal-access/cc-ua-typing-page.blp:176
 msgid "Delay between when a key is pressed and when it is accepted"
 msgstr "Zamik med pritiskom in sprejemom tipke"
 
-#: panels/universal-access/cc-ua-typing-page.blp:187
+#: panels/universal-access/cc-ua-typing-page.blp:203
 msgid "Beep when a key is pressed"
 msgstr "Zapiska, kadar je tipka pritisnjena"
 
-#: panels/universal-access/cc-ua-typing-page.blp:191
+#: panels/universal-access/cc-ua-typing-page.blp:207
 msgid "Beep when a key is accepted"
 msgstr "Zapiska, kadar je tipka sprejeta"
 
-#: panels/universal-access/cc-ua-typing-page.blp:195 panels/universal-access/cc-ua-typing-page.blp:227
+#: panels/universal-access/cc-ua-typing-page.blp:211 panels/universal-access/cc-ua-typing-page.blp:247
 msgid "Beep when a key is rejected"
 msgstr "Zapiska, kadar je tipka zavrnjena"
 
-#: panels/universal-access/cc-ua-typing-page.blp:200
+#: panels/universal-access/cc-ua-typing-page.blp:216
 msgid "B_ounce Keys"
 msgstr "_Odskočne tipke"
 
-#: panels/universal-access/cc-ua-typing-page.blp:201
+#: panels/universal-access/cc-ua-typing-page.blp:217
 msgid "Ignore fast duplicate keypresses"
 msgstr "Prezre hitre podvojene pritiske tipk"
+
+#: panels/universal-access/cc-ua-typing-page.blp:229
+msgid "Bounce Keys Acceptance Delay"
+msgstr "Zamik sprejetja odskočnih tipk"
 
 #: panels/universal-access/cc-ua-zoom-page.blp:5
 msgid "Zoom"
@@ -8302,62 +8326,82 @@ msgstr "_Prekrivanje kazalke miške"
 msgid "_Thickness"
 msgstr "_Debelina"
 
+#: panels/universal-access/cc-ua-zoom-page.blp:120
+msgid "Crosshair Thickness"
+msgstr "Debelina merkov"
+
 #. Translators: This is a mark in the Thickness scale
-#: panels/universal-access/cc-ua-zoom-page.blp:121
+#: panels/universal-access/cc-ua-zoom-page.blp:125
 msgid "Thin"
 msgstr "Tanek"
 
 #. Translators: This is a mark in the Thickness scale
-#: panels/universal-access/cc-ua-zoom-page.blp:123
+#: panels/universal-access/cc-ua-zoom-page.blp:127
 msgid "Thick"
 msgstr "Debel"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:138
+#: panels/universal-access/cc-ua-zoom-page.blp:142
 msgid "Len_gth"
 msgstr "_Dolžina"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:161
+#: panels/universal-access/cc-ua-zoom-page.blp:149
+msgid "Crosshair Length"
+msgstr "Dolžina merkov"
+
+#: panels/universal-access/cc-ua-zoom-page.blp:169
 msgid "Colo_r"
 msgstr "_Barva"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:174
+#: panels/universal-access/cc-ua-zoom-page.blp:182
 msgid "Color Filters"
 msgstr "Filtri barvnega prikaza"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:177
+#: panels/universal-access/cc-ua-zoom-page.blp:185
 msgid "_Inverted"
 msgstr "_Obrnjeno"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:178
+#: panels/universal-access/cc-ua-zoom-page.blp:186
 msgid "Invert colors in the magnifier region"
 msgstr "Obrni barve v polju povečevalnika"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:183
+#: panels/universal-access/cc-ua-zoom-page.blp:191
 msgid "_Brightness"
 msgstr "_Svetlost"
 
+#: panels/universal-access/cc-ua-zoom-page.blp:199
+msgid "Brightness"
+msgstr "Svetlost"
+
 #. Translators: This is a mark in the Brightness scale
 #. Translators: This is a mark in the Contrast scale
-#: panels/universal-access/cc-ua-zoom-page.blp:192 panels/universal-access/cc-ua-zoom-page.blp:216
+#: panels/universal-access/cc-ua-zoom-page.blp:204 panels/universal-access/cc-ua-zoom-page.blp:232
 msgid "Low"
 msgstr "Nizka"
 
 #. Translators: This is a mark in the Brightness scale
 #. Translators: This is a mark in the Contrast scale
-#: panels/universal-access/cc-ua-zoom-page.blp:194 panels/universal-access/cc-ua-zoom-page.blp:218
+#: panels/universal-access/cc-ua-zoom-page.blp:206 panels/universal-access/cc-ua-zoom-page.blp:234
 msgid "High"
 msgstr "Visoka"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:209
+#: panels/universal-access/cc-ua-zoom-page.blp:221
 msgid "Co_ntrast"
 msgstr "Kontrast"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:233
+#: panels/universal-access/cc-ua-zoom-page.blp:227
+msgid "Contrast"
+msgstr "Kontrast"
+
+#: panels/universal-access/cc-ua-zoom-page.blp:249
 msgid "Co_lor"
 msgstr "Ba_rva"
 
+#: panels/universal-access/cc-ua-zoom-page.blp:255
+msgid "Grayscale"
+msgstr "Sivinsko"
+
 #. Translators: This is a mark in the Grayscale scale
-#: panels/universal-access/cc-ua-zoom-page.blp:242
+#: panels/universal-access/cc-ua-zoom-page.blp:262
 msgid "Full"
 msgstr "Polna"
 
@@ -8499,7 +8543,7 @@ msgstr "Ni zaznane tablice"
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Priklopite in prižgite tablico Wacom."
 
-#: panels/wacom/cc-wacom-stylus-action-dialog.blp:100 panels/wacom/cc-wacom-stylus-action-dialog.blp:132 panels/wacom/cc-wacom-stylus-page.c:396
+#: panels/wacom/cc-wacom-stylus-action-dialog.blp:100 panels/wacom/cc-wacom-stylus-action-dialog.blp:132 panels/wacom/cc-wacom-stylus-page.c:485
 msgid "Assign Keystroke"
 msgstr "Dodeli tipkovno bližnjico"
 
@@ -8518,55 +8562,83 @@ msgid "Button %d Mapping"
 msgstr "Preslikava gumba %d"
 
 #: panels/wacom/cc-wacom-stylus-page.blp:17
+msgid "Tip Pressure"
+msgstr "Pritisk konice"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:20
 msgid "Tip _Pressure Feel"
 msgstr "Občutek _pritiska konice"
 
 #. Translators: This is a mark in the 'Tip Pressure Feel' scale
 #. Translators: This is a mark in the 'Erase Pressure Feel' scale
-#: panels/wacom/cc-wacom-stylus-page.blp:26 panels/wacom/cc-wacom-stylus-page.blp:68
+#: panels/wacom/cc-wacom-stylus-page.blp:29 panels/wacom/cc-wacom-stylus-page.blp:83
 msgid "Soft"
 msgstr "Mehko"
 
 #. Translators: This is a mark in the 'Tip Pressure Feel' scale
 #. Translators: This is a mark in the 'Erase Pressure Feel' scale
-#: panels/wacom/cc-wacom-stylus-page.blp:29 panels/wacom/cc-wacom-stylus-page.blp:71
+#: panels/wacom/cc-wacom-stylus-page.blp:32 panels/wacom/cc-wacom-stylus-page.blp:86
 msgid "Firm"
 msgstr "Čvrsto"
 
-#: panels/wacom/cc-wacom-stylus-page.blp:41
-msgid "Button _1"
-msgstr "Gumb _1"
+#: panels/wacom/cc-wacom-stylus-page.blp:44
+msgid "Tip Pressure _Floor"
+msgstr "Spodnji prag pritiska konice"
 
-#: panels/wacom/cc-wacom-stylus-page.blp:47
-msgid "Button _2"
-msgstr "Gumb _2"
+#: panels/wacom/cc-wacom-stylus-page.blp:57
+msgid "Tip Pressure _Ceiling"
+msgstr "Zgornji prag pritiska konice"
 
-#: panels/wacom/cc-wacom-stylus-page.blp:53
-msgid "Button _3"
-msgstr "Gumb _3"
+#: panels/wacom/cc-wacom-stylus-page.blp:71
+msgid "Eraser Pressure"
+msgstr "Pritisk radirke"
 
-#: panels/wacom/cc-wacom-stylus-page.blp:59
+#: panels/wacom/cc-wacom-stylus-page.blp:74
 msgid "_Eraser Pressure Feel"
 msgstr "Občutek pritiska _radirke"
 
-#: panels/wacom/cc-wacom-stylus-page.c:379
+#: panels/wacom/cc-wacom-stylus-page.blp:98
+msgid "Eraser Pressure _Floor"
+msgstr "Spodnji prag pritiska radirke"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:111
+msgid "Eraser Pressure _Ceiling"
+msgstr "Zgornji prag pritiska radirke"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:125
+msgid "Pen Buttons"
+msgstr "Gumbi peresa"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:128
+msgid "Button _1"
+msgstr "Gumb _1"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:134
+msgid "Button _2"
+msgstr "Gumb _2"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:140
+msgid "Button _3"
+msgstr "Gumb _3"
+
+#: panels/wacom/cc-wacom-stylus-page.c:468
 msgid "Left Mousebutton Click"
 msgstr "Klik levega gumba miške"
 
-#: panels/wacom/cc-wacom-stylus-page.c:382
+#: panels/wacom/cc-wacom-stylus-page.c:471
 msgid "Middle Mousebutton Click"
 msgstr "Klik srednjega gumba miške"
 
-#: panels/wacom/cc-wacom-stylus-page.c:385
+#: panels/wacom/cc-wacom-stylus-page.c:474
 msgid "Right Mousebutton Click"
 msgstr "Klik desnega gumba miške"
 
 #. Translators: this is the "go forward" action of a button
-#: panels/wacom/cc-wacom-stylus-page.c:393
+#: panels/wacom/cc-wacom-stylus-page.c:482
 msgid "Forward"
 msgstr "Naprej"
 
-#: panels/wacom/cc-wacom-stylus-page.c:399
+#: panels/wacom/cc-wacom-stylus-page.c:488
 msgid "Switch Monitor"
 msgstr "Preklopi zaslon"
 
@@ -8643,51 +8715,51 @@ msgstr "Prejšnji teden"
 msgid "Next Week"
 msgstr "Prihodnji teden"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:209
+#: panels/wellbeing/cc-screen-time-statistics-row.c:213
 msgctxt "abbreviated weekday name for Sunday"
 msgid "S"
 msgstr "Ne"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:210
+#: panels/wellbeing/cc-screen-time-statistics-row.c:214
 msgctxt "abbreviated weekday name for Monday"
 msgid "M"
 msgstr "Po"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:211
+#: panels/wellbeing/cc-screen-time-statistics-row.c:215
 msgctxt "abbreviated weekday name for Tuesday"
 msgid "T"
 msgstr "To"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:212
+#: panels/wellbeing/cc-screen-time-statistics-row.c:216
 msgctxt "abbreviated weekday name for Wednesday"
 msgid "W"
 msgstr "Sr"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:213
+#: panels/wellbeing/cc-screen-time-statistics-row.c:217
 msgctxt "abbreviated weekday name for Thursday"
 msgid "T"
 msgstr "Če"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:214
+#: panels/wellbeing/cc-screen-time-statistics-row.c:218
 msgctxt "abbreviated weekday name for Friday"
 msgid "F"
 msgstr "Pe"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:215
+#: panels/wellbeing/cc-screen-time-statistics-row.c:219
 msgctxt "abbreviated weekday name for Saturday"
 msgid "S"
 msgstr "So"
 
 #. Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
 #. * Use whatever shortest unit label is used for minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:360
+#: panels/wellbeing/cc-screen-time-statistics-row.c:388
 #, c-format
 msgid "%um"
 msgstr "%u min"
 
 #. Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
 #. * Use whatever shortest unit label is used for hours in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:364
+#: panels/wellbeing/cc-screen-time-statistics-row.c:392
 #, c-format
 msgid "%uh"
 msgstr "%u ur"
@@ -8695,80 +8767,80 @@ msgstr "%u ur"
 #. Translators: This is a duration in hours and minutes, for example
 #. * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
 #. * is used for hours and minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:369
+#: panels/wellbeing/cc-screen-time-statistics-row.c:397
 #, c-format
 msgid "%uh %um"
 msgstr "%u ur %u min"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:617 panels/wellbeing/cc-screen-time-statistics-row.c:724
+#: panels/wellbeing/cc-screen-time-statistics-row.c:659 panels/wellbeing/cc-screen-time-statistics-row.c:766
 #, c-format
 msgid "Failed to load session history file ‘%s’: %s"
 msgstr "Ni bilo mogoče naložiti datoteke zgodovine sej »%s«: %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:617
+#: panels/wellbeing/cc-screen-time-statistics-row.c:659
 msgid "Invalid file structure"
 msgstr "Neveljavna struktura datotek"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:651
+#: panels/wellbeing/cc-screen-time-statistics-row.c:693
 #, c-format
 msgid "Failed to load session history file: %s"
 msgstr "Nalaganje datoteke zgodovine sej ni uspelo: %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:651 panels/wellbeing/cc-screen-time-statistics-row.c:724
+#: panels/wellbeing/cc-screen-time-statistics-row.c:693 panels/wellbeing/cc-screen-time-statistics-row.c:766
 msgid "File is empty"
 msgstr "Datoteka je prazna"
 
 #. G_DATE_BAD_WEEKDAY
-#: panels/wellbeing/cc-screen-time-statistics-row.c:851
+#: panels/wellbeing/cc-screen-time-statistics-row.c:893
 msgid "Average Monday"
 msgstr "Povprečni ponedeljek"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:851
+#: panels/wellbeing/cc-screen-time-statistics-row.c:893
 msgid "Average Tuesday"
 msgstr "Povprečni torek"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:851
+#: panels/wellbeing/cc-screen-time-statistics-row.c:893
 msgid "Average Wednesday"
 msgstr "Povprečna sreda"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:851
+#: panels/wellbeing/cc-screen-time-statistics-row.c:893
 msgid "Average Thursday"
 msgstr "Povprečni četrtek"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:852
+#: panels/wellbeing/cc-screen-time-statistics-row.c:894
 msgid "Average Friday"
 msgstr "Povprečen petek"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:852
+#: panels/wellbeing/cc-screen-time-statistics-row.c:894
 msgid "Average Saturday"
 msgstr "Povprečna sobota"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:853
+#: panels/wellbeing/cc-screen-time-statistics-row.c:895
 msgid "Average Sunday"
 msgstr "Povprečna nedelja"
 
 #. Translators: This a medium-length date, for example ‘15 April’
-#: panels/wellbeing/cc-screen-time-statistics-row.c:904
+#: panels/wellbeing/cc-screen-time-statistics-row.c:946
 msgid "%-d %B"
 msgstr "%-d. %B"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:914 panels/wellbeing/cc-screen-time-statistics-row.c:927
+#: panels/wellbeing/cc-screen-time-statistics-row.c:956 panels/wellbeing/cc-screen-time-statistics-row.c:969
 msgid "No Data"
 msgstr "Ni podatkov"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:930
+#: panels/wellbeing/cc-screen-time-statistics-row.c:972
 #, c-format
 msgid "This Week"
 msgstr "Ta teden"
 
 #. Translators: This is a range of days within a given month.
 #. * For example ‘20–27 April’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:941
+#: panels/wellbeing/cc-screen-time-statistics-row.c:983
 #, c-format
 msgid "%u–%u %s"
 msgstr "%u. – %u. %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:959
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1001
 #, c-format
 msgid "%u %s–%u %s"
 msgstr "%u. %s – %u. %s"
@@ -8778,7 +8850,7 @@ msgstr "%u. %s – %u. %s"
 #. * preferred date representation for the current locale without the time).
 #. * The second placeholder is a formatted time duration (for example,
 #. * ‘3 hours’ or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1017
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1059
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s. A line is overlayed at the %s mark to indicate the configured screen time limit."
 msgstr "Stolpčni grafikon uporabe časa pred zaslonom v tednu s pričetkom %s. Na oznaki %s je prekrivna črta, ki označuje nastavljena časovno omejitev zaslona."
@@ -8786,12 +8858,12 @@ msgstr "Stolpčni grafikon uporabe časa pred zaslonom v tednu s pričetkom %s. 
 #. Translators: The placeholder is a formatted date string (formatted
 #. * using the `%x` strftime placeholder, which gives the preferred date
 #. * representation for the current locale without the time).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1034
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1076
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr "Stolpčni grafikon uporabe časa pred zaslonom v tednu od %s."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1038
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1080
 #, c-format
 msgid "Placeholder for a bar chart of screen time usage. No data is currently available."
 msgstr "Označba mesta za stolpčni grafikon uporabe časa pred zaslonom. Trenutno podatki niso na voljo."
@@ -9407,27 +9479,27 @@ msgstr "Osveži omrežne ponudnike"
 msgid "Enable Mobile Network"
 msgstr "Omogoči mobilno omrežje"
 
-#: panels/wwan/cc-wwan-panel.blp:41
+#: panels/wwan/cc-wwan-panel.blp:40
 msgid "No WWAN Adapter Found"
 msgstr "Ni najdenega vmesnika WWAN"
 
-#: panels/wwan/cc-wwan-panel.blp:42
+#: panels/wwan/cc-wwan-panel.blp:41
 msgid "Make sure you have a Wireless Wan/Cellular device"
 msgstr "Prepričajte se, da naprava podpira brezžični protokol WAN/Cellular"
 
-#: panels/wwan/cc-wwan-panel.blp:53
+#: panels/wwan/cc-wwan-panel.blp:52
 msgid "Wireless Wan is disabled when airplane mode is on"
 msgstr "Brezžično omrežje Wan je onemogočeno, kadar je omogočen letalski način"
 
-#: panels/wwan/cc-wwan-panel.blp:74
+#: panels/wwan/cc-wwan-panel.blp:73
 msgid "Loading Devices"
 msgstr "Nalaganje naprav"
 
-#: panels/wwan/cc-wwan-panel.blp:99
+#: panels/wwan/cc-wwan-panel.blp:98
 msgid "Data Connection"
 msgstr "Podatkovna povezava"
 
-#: panels/wwan/cc-wwan-panel.blp:100
+#: panels/wwan/cc-wwan-panel.blp:99
 msgid "SIM card used for internet"
 msgstr "Kartica SIM za dostop do interneta"
 
