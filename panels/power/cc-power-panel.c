@@ -302,7 +302,12 @@ up_client_changed (CcPowerPanel *self)
     for (i = 0; self->devices != NULL && i < self->devices->len; i++) {
         UpDevice *device = (UpDevice *) g_ptr_array_index (self->devices, i);
         gboolean is_power_supply = FALSE;
-        g_object_get (device, "kind", &kind, "power-supply", &is_power_supply, NULL);
+        gboolean is_unreachable;
+        UpDeviceLevel battery_level = UP_DEVICE_LEVEL_NONE;
+
+        g_object_get (device, "kind", &kind, "power-supply", &is_power_supply, "battery-level", &battery_level, NULL);
+        is_unreachable = !is_power_supply && battery_level == UP_DEVICE_LEVEL_UNKNOWN;
+
         if (kind == UP_DEVICE_KIND_LINE_POWER) {
             /* do nothing */
         } else if (kind == UP_DEVICE_KIND_UPS && on_ups) {
@@ -311,7 +316,7 @@ up_client_changed (CcPowerPanel *self)
             add_battery (self, device, TRUE);
         } else if (kind == UP_DEVICE_KIND_BATTERY && is_power_supply) {
             add_battery (self, device, FALSE);
-        } else {
+        } else if (!is_unreachable) {
             add_device (self, device);
         }
     }
