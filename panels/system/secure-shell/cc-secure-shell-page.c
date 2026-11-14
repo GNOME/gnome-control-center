@@ -104,6 +104,6 @@ cc_secure_shell_page_init (CcSecureShellPage *self)
                              G_CONNECT_SWAPPED);
 
     hostname = cc_hostname_get_static_hostname (cc_hostname_get_default ());
-    command = g_strdup_printf ("ssh %s", hostname);
+    command = g_strdup_printf ("ssh %s@%s", g_get_user_name (), hostname);
     adw_action_row_set_subtitle (self->hostname_row, command);
 }
