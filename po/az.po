@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2026-11-05 10:04+0000\n"
-"PO-Revision-Date: 2026-11-06 21:10+0400\n"
-"Last-Translator: Nicat Məmmədov <n1c4t97@gmail.com>\n"
+"POT-Creation-Date: 2026-11-11 09:36+0000\n"
+"PO-Revision-Date: 2026-11-15 18:36+0400\n"
+"Last-Translator: Nicat Xalid <nicat.m@pm.me>\n"
 "Language-Team: Azerbaijani <translation-team-az@lists.sourceforge.net>\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
@@ -424,7 +424,7 @@ msgid "%s is used to open the following types of files and links"
 msgstr "%s aşağıdakı növ faylları və keçidləri açmaq üçün istifadə olunur"
 
 #. Translators: This is a mark in the Grayscale scale
-#: panels/applications/cc-applications-panel.c:1207 panels/keyboard/cc-keyboard-shortcut-editor.blp:92 panels/sound/cc-alert-chooser-page.blp:14 panels/sound/cc-alert-chooser-page.c:314 panels/universal-access/cc-ua-zoom-page.blp:240 panels/wwan/cc-wwan-apn-dialog.blp:226
+#: panels/applications/cc-applications-panel.c:1207 panels/keyboard/cc-keyboard-shortcut-editor.blp:92 panels/sound/cc-alert-chooser-page.blp:14 panels/sound/cc-alert-chooser-page.c:314 panels/universal-access/cc-ua-zoom-page.blp:260 panels/wwan/cc-wwan-apn-dialog.blp:226
 msgid "None"
 msgstr "Heç biri"
 
@@ -1619,7 +1619,7 @@ msgstr "Saatı azalt"
 msgid "Decrement Minute"
 msgstr "Dəqiqəni azalt"
 
-#: panels/common/cc-util.c:121 panels/network/connection-editor/ce-page-details.c:174 panels/wellbeing/cc-screen-time-statistics-row.c:901
+#: panels/common/cc-util.c:121 panels/network/connection-editor/ce-page-details.c:174 panels/wellbeing/cc-screen-time-statistics-row.c:943
 msgid "Today"
 msgstr "Bu gün"
 
@@ -1706,6 +1706,11 @@ msgstr "%s"
 #: panels/common/cc-util.c:198
 msgid "0 seconds"
 msgstr "0 saniyə"
+
+#. Translators: Unknown endpoint host for WireGuard (invalid setting)
+#: panels/common/cc-util.c:254 panels/network/connection-editor/ce-page-wireguard.c:355 panels/sound/cc-alert-chooser-page.c:324 panels/system/about/cc-about-page.c:340 panels/system/about/cc-about-page.c:414 panels/system/about/cc-about-page.c:863 panels/wwan/cc-wwan-details-dialog.c:98
+msgid "Unknown"
+msgstr "Naməlum"
 
 #. translators: This is the default hotspot name, need to be less than 32-bytes
 #: panels/common/hostname-helper.c:221
@@ -3450,12 +3455,6 @@ msgstr "_BSSID"
 msgid "WireGuard"
 msgstr "WireGuard"
 
-#. Translators: Unknown endpoint host for WireGuard (invalid setting)
-#: panels/network/connection-editor/ce-page-wireguard.c:355 panels/privacy/firmware-security/cc-firmware-security-dialog.c:155 panels/sound/cc-alert-chooser-page.c:324 panels/system/about/cc-about-page.c:339 panels/system/about/cc-about-page.c:393 panels/system/about/cc-about-page.c:432
-#: panels/system/about/cc-about-page.c:881 panels/wwan/cc-wwan-details-dialog.c:98
-msgid "Unknown"
-msgstr "Naməlum"
-
 #: panels/network/connection-editor/ce-page-wireguard.c:397
 msgid "Unsaved peer"
 msgstr "Yadda saxlanılmamış tərəfdaş"
@@ -4911,7 +4910,7 @@ msgid "Server requires authentication"
 msgstr "Server kimlik doğrulanması tələb edir"
 
 #. Translators: this is the "go back" action of a button
-#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:15 panels/wacom/cc-wacom-stylus-page.c:389 panels/wwan/cc-wwan-apn-dialog.blp:20
+#: panels/printers/pp-new-printer-dialog.ui:78 panels/system/users/cc-fingerprint-dialog.blp:15 panels/wacom/cc-wacom-stylus-page.c:478 panels/wwan/cc-wwan-apn-dialog.blp:20
 msgid "Back"
 msgstr "Geri"
 
@@ -5593,13 +5592,13 @@ msgid "_Copy Technical Report"
 msgstr "Texniki hesabatı _köçür"
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:99 panels/privacy/firmware-security/cc-firmware-security-page.c:453
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:100 panels/privacy/firmware-security/cc-firmware-security-page.c:453
 msgid "Security Checks Failed"
 msgstr "Təhlükəsizlik yoxlamaları uğursuz oldu"
 
 #. TRANSLATORS: This is the description to describe the failure on
 #. checking the security items.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:102
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:103
 msgid ""
 "Hardware does not pass checks. This means that you are not protected against common hardware security issues.\n"
 "\n"
@@ -5610,37 +5609,37 @@ msgstr ""
 "Aparat təminatı təhlükəsizliyi problemlərini mikroproqram təminatını yeniləməklə və ya cihazın konfiqurasiya seçimlərini dəyişməklə həll etmək mümkün ola bilər. Lakin xətalar fiziki aparat təminatının özündən də qaynaqlana bilər və düzəldilə bilməyəcək vəziyyətdə ola bilər."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:111 panels/privacy/firmware-security/cc-firmware-security-page.c:458
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:112 panels/privacy/firmware-security/cc-firmware-security-page.c:458
 msgid "Basic Security Checks Passed"
 msgstr "Təməl təhlükəsizlik yoxlamalarından uğurla keçildi"
 
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:114
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:115
 msgid "This device meets basic security requirements and has protection against some hardware security threats. However, it lacks other recommended protections."
 msgstr "Bu cihaz əsas təhlükəsizlik tələblərinə cavab verir və bəzi aparat təhlükəsizliyi təhdidlərinə qarşı qorunmaya malikdir. Lakin digər tövsiyə olunan qoruma vasitələri mövcud deyil."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:123 panels/privacy/firmware-security/cc-firmware-security-page.c:466
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:124 panels/privacy/firmware-security/cc-firmware-security-page.c:466
 msgid "Protected"
 msgstr "Qorunan"
 
 #. TRANSLATOR: This description describes the devices passing
 #. the extended security check.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:126
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:127
 msgid "This device passes current security tests. It is protected against the majority of hardware security threats."
 msgstr "Bu cihaz mövcud təhlükəsizlik testlərindən uğurla keçir. O, aparat təhlükəsizliyinə dair təhdidlərin əksəriyyətinə qarşı qorunur."
 
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:132
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:133
 msgid "Checks Unavailable"
 msgstr "Yoxlamalar əlçatan deyil"
 
 #. TRANSLATORS: When the security result is unavailable, this description is shown.
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:134
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:135
 msgid "Device security checks are not available for this device. It is not possible to tell whether it meets hardware security requirements."
 msgstr "Bu cihaz üçün cihaz təhlükəsizliyi yoxlamaları əlçatan deyil. Onun aparat təhlükəsizliyi tələblərinə cavab verib-vermədiyini müəyyən etmək mümkün deyil."
 
-#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:334
+#: panels/privacy/firmware-security/cc-firmware-security-dialog.c:316
 msgid "Report copied to clipboard"
 msgstr "Hesabat mübadilə buferinə köçürüldü"
 
@@ -6486,28 +6485,28 @@ msgstr "Hesablanır…"
 msgid "_Copy"
 msgstr "_Köçür"
 
-#: panels/system/about/cc-about-page.c:363
+#: panels/system/about/cc-about-page.c:364
 msgid "Graphics"
 msgstr "Qrafika"
 
-#: panels/system/about/cc-about-page.c:365
+#: panels/system/about/cc-about-page.c:366
 #, c-format
 msgid "Graphics %d"
 msgstr "Qrafika %d"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-about-page.c:411
+#: panels/system/about/cc-about-page.c:393
 #, c-format
 msgid "64-bit"
 msgstr "64 bit"
 
 #. translators: This is the type of architecture for the OS
-#: panels/system/about/cc-about-page.c:414
+#: panels/system/about/cc-about-page.c:396
 #, c-format
 msgid "32-bit"
 msgstr "32 bit"
 
-#: panels/system/about/cc-about-page.c:927
+#: panels/system/about/cc-about-page.c:909
 msgid "Details copied to clipboard"
 msgstr "Təfərrüatlar mübadilə buferinə köçürüldü"
 
@@ -7744,7 +7743,7 @@ msgstr "Kursor ölçüsü kursoru görməyi asanlaşdırmaq üçün böyütmə i
 msgid "Medium"
 msgstr "Orta"
 
-#: panels/universal-access/cc-cursor-size-page.c:79 panels/universal-access/cc-ua-mouse-page.blp:122 panels/universal-access/cc-ua-seeing-page.c:150
+#: panels/universal-access/cc-cursor-size-page.c:79 panels/universal-access/cc-ua-mouse-page.blp:138 panels/universal-access/cc-ua-seeing-page.c:150
 msgid "Large"
 msgstr "Böyük"
 
@@ -7840,51 +7839,67 @@ msgstr "Pəncərəni aktivləşdirmək üçün göstəricini onun üzərinə gə
 msgid "_Double-Click Delay"
 msgstr "_Qoşa klik gecikməsi"
 
+#: panels/universal-access/cc-ua-mouse-page.blp:41
+msgid "Double-Click Delay"
+msgstr "Qoşa klik gecikməsi"
+
 #. Translators: This is a mark in the Crosshair Length scale
-#: panels/universal-access/cc-ua-mouse-page.blp:41 panels/universal-access/cc-ua-mouse-page.blp:72 panels/universal-access/cc-ua-mouse-page.blp:99 panels/universal-access/cc-ua-typing-page.blp:144 panels/universal-access/cc-ua-typing-page.blp:189 panels/universal-access/cc-ua-typing-page.blp:229
-#: panels/universal-access/cc-ua-zoom-page.blp:146
+#: panels/universal-access/cc-ua-mouse-page.blp:45 panels/universal-access/cc-ua-mouse-page.blp:80 panels/universal-access/cc-ua-mouse-page.blp:111 panels/universal-access/cc-ua-typing-page.blp:144 panels/universal-access/cc-ua-typing-page.blp:189 panels/universal-access/cc-ua-typing-page.blp:233
+#: panels/universal-access/cc-ua-zoom-page.blp:154
 msgid "Short"
 msgstr "Qısa"
 
 #. Translators: This is a mark in the Crosshair Length scale
-#: panels/universal-access/cc-ua-mouse-page.blp:43 panels/universal-access/cc-ua-mouse-page.blp:74 panels/universal-access/cc-ua-mouse-page.blp:101 panels/universal-access/cc-ua-typing-page.blp:146 panels/universal-access/cc-ua-typing-page.blp:191 panels/universal-access/cc-ua-typing-page.blp:231
-#: panels/universal-access/cc-ua-zoom-page.blp:149
+#: panels/universal-access/cc-ua-mouse-page.blp:47 panels/universal-access/cc-ua-mouse-page.blp:82 panels/universal-access/cc-ua-mouse-page.blp:113 panels/universal-access/cc-ua-typing-page.blp:146 panels/universal-access/cc-ua-typing-page.blp:191 panels/universal-access/cc-ua-typing-page.blp:235
+#: panels/universal-access/cc-ua-zoom-page.blp:157
 msgid "Long"
 msgstr "Uzun"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:58
+#: panels/universal-access/cc-ua-mouse-page.blp:62
 msgid "Click Assist"
 msgstr "Klik yardımı"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:61
+#: panels/universal-access/cc-ua-mouse-page.blp:65
 msgid "_Simulated Secondary Click"
 msgstr "_Simulyasiya olunmuş ikinci klik"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:62
+#: panels/universal-access/cc-ua-mouse-page.blp:66
 msgid "Secondary click by holding down the primary mouse button"
 msgstr "Siçanın əsas düyməsini basıb saxlamaqla ikinci klik et"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:67 panels/universal-access/cc-ua-typing-page.blp:181 panels/universal-access/cc-ua-typing-page.blp:222
+#: panels/universal-access/cc-ua-mouse-page.blp:71 panels/universal-access/cc-ua-typing-page.blp:181 panels/universal-access/cc-ua-typing-page.blp:222
 msgid "Acceptance Delay"
 msgstr "Qəbul gecikməsi"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:88
+#: panels/universal-access/cc-ua-mouse-page.blp:76
+msgid "Simulated Secondary Click Acceptance Delay"
+msgstr "Simulyasiya olunmuş ikinci klik"
+
+#: panels/universal-access/cc-ua-mouse-page.blp:96
 msgid "_Hover Click"
 msgstr "_Üzərinə gətirdikdə klikləmə"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:89
+#: panels/universal-access/cc-ua-mouse-page.blp:97
 msgid "Trigger a click when the pointer hovers"
 msgstr "Göstərici obyektin üzərində dayandıqda klikləmə əməliyyatını yerinə yetir"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:94 panels/universal-access/cc-ua-typing-page.blp:131
+#: panels/universal-access/cc-ua-mouse-page.blp:102 panels/universal-access/cc-ua-typing-page.blp:131
 msgid "Delay"
 msgstr "Gecikmə"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:115
+#: panels/universal-access/cc-ua-mouse-page.blp:107
+msgid "Hover Click Delay"
+msgstr "Üzərinə gətirdikdə klikləmə gecikməsi"
+
+#: panels/universal-access/cc-ua-mouse-page.blp:127
 msgid "Motion Threshold"
 msgstr "Hərəkət həddi"
 
-#: panels/universal-access/cc-ua-mouse-page.blp:120
+#: panels/universal-access/cc-ua-mouse-page.blp:132
+msgid "Hover Click Motion Threshold"
+msgstr ""
+
+#: panels/universal-access/cc-ua-mouse-page.blp:136
 msgid "Small"
 msgstr "Kiçik"
 
@@ -7996,7 +8011,7 @@ msgstr "Klaviatura fokusunu həmişə göstər"
 msgid "Keep the focus always visible when navigating with the keyboard"
 msgstr "Klaviatura ilə naviqasiya edərkən fokusu həmişə görünən saxla"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:97
+#: panels/universal-access/cc-ua-seeing-page.blp:97 panels/universal-access/cc-ua-seeing-page.blp:148
 msgid "Text Size"
 msgstr "Mətn ölçüsü"
 
@@ -8009,11 +8024,11 @@ msgid "Use the slider to adjust the size of user interface text"
 msgstr "İstifadəçi interfeysi mətninin ölçüsünü tənzimləmək üçün sürüşdürmə çubuğundan istifadə et"
 
 #. Translators: Single letter next to the text size slider
-#: panels/universal-access/cc-ua-seeing-page.blp:137 panels/universal-access/cc-ua-seeing-page.blp:157
+#: panels/universal-access/cc-ua-seeing-page.blp:137 panels/universal-access/cc-ua-seeing-page.blp:161
 msgid "A"
 msgstr "A"
 
-#: panels/universal-access/cc-ua-seeing-page.blp:168
+#: panels/universal-access/cc-ua-seeing-page.blp:172
 msgid "Sample text"
 msgstr "Nümunə mətn"
 
@@ -8139,7 +8154,7 @@ msgstr "Düymə basıldıqda səs çıxar"
 msgid "Beep when a key is accepted"
 msgstr "Düymə qəbul edildiklə səs çıxar"
 
-#: panels/universal-access/cc-ua-typing-page.blp:211 panels/universal-access/cc-ua-typing-page.blp:243
+#: panels/universal-access/cc-ua-typing-page.blp:211 panels/universal-access/cc-ua-typing-page.blp:247
 msgid "Beep when a key is rejected"
 msgstr "Düymə qəbul edilmədikdə səs çıxar"
 
@@ -8150,6 +8165,10 @@ msgstr "_Sıçrayan düymələr"
 #: panels/universal-access/cc-ua-typing-page.blp:217
 msgid "Ignore fast duplicate keypresses"
 msgstr "Sürətli təkrarlanan düymə basmalarını görməzdən gəl"
+
+#: panels/universal-access/cc-ua-typing-page.blp:229
+msgid "Bounce Keys Acceptance Delay"
+msgstr ""
 
 #: panels/universal-access/cc-ua-zoom-page.blp:5
 msgid "Zoom"
@@ -8257,62 +8276,82 @@ msgstr "Sıçan kursorunun _üzərində göstərilməsi"
 msgid "_Thickness"
 msgstr "_Qalınlıq"
 
+#: panels/universal-access/cc-ua-zoom-page.blp:120
+msgid "Crosshair Thickness"
+msgstr ""
+
 #. Translators: This is a mark in the Thickness scale
-#: panels/universal-access/cc-ua-zoom-page.blp:121
+#: panels/universal-access/cc-ua-zoom-page.blp:125
 msgid "Thin"
 msgstr "Nazik"
 
 #. Translators: This is a mark in the Thickness scale
-#: panels/universal-access/cc-ua-zoom-page.blp:123
+#: panels/universal-access/cc-ua-zoom-page.blp:127
 msgid "Thick"
 msgstr "Qalın"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:138
+#: panels/universal-access/cc-ua-zoom-page.blp:142
 msgid "Len_gth"
 msgstr "_En"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:161
+#: panels/universal-access/cc-ua-zoom-page.blp:149
+msgid "Crosshair Length"
+msgstr ""
+
+#: panels/universal-access/cc-ua-zoom-page.blp:169
 msgid "Colo_r"
 msgstr "_Rəng"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:174
+#: panels/universal-access/cc-ua-zoom-page.blp:182
 msgid "Color Filters"
 msgstr "Rəng süzgəcləri"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:177
+#: panels/universal-access/cc-ua-zoom-page.blp:185
 msgid "_Inverted"
 msgstr "_Tərsinə çevrilmiş"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:178
+#: panels/universal-access/cc-ua-zoom-page.blp:186
 msgid "Invert colors in the magnifier region"
 msgstr "Böyüdücü sahəsində rəngləri tərsinə çevir"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:183
+#: panels/universal-access/cc-ua-zoom-page.blp:191
 msgid "_Brightness"
 msgstr "_Parlaqlıq"
 
+#: panels/universal-access/cc-ua-zoom-page.blp:199
+msgid "Brightness"
+msgstr "Parlaqlıq"
+
 #. Translators: This is a mark in the Brightness scale
 #. Translators: This is a mark in the Contrast scale
-#: panels/universal-access/cc-ua-zoom-page.blp:192 panels/universal-access/cc-ua-zoom-page.blp:216
+#: panels/universal-access/cc-ua-zoom-page.blp:204 panels/universal-access/cc-ua-zoom-page.blp:232
 msgid "Low"
 msgstr "Az"
 
 #. Translators: This is a mark in the Brightness scale
 #. Translators: This is a mark in the Contrast scale
-#: panels/universal-access/cc-ua-zoom-page.blp:194 panels/universal-access/cc-ua-zoom-page.blp:218
+#: panels/universal-access/cc-ua-zoom-page.blp:206 panels/universal-access/cc-ua-zoom-page.blp:234
 msgid "High"
 msgstr "Çox"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:209
+#: panels/universal-access/cc-ua-zoom-page.blp:221
 msgid "Co_ntrast"
 msgstr "_Kontrast"
 
-#: panels/universal-access/cc-ua-zoom-page.blp:233
+#: panels/universal-access/cc-ua-zoom-page.blp:227
+msgid "Contrast"
+msgstr "Kontrast"
+
+#: panels/universal-access/cc-ua-zoom-page.blp:249
 msgid "Co_lor"
 msgstr "Rə_ng"
 
+#: panels/universal-access/cc-ua-zoom-page.blp:255
+msgid "Grayscale"
+msgstr "Boz rəng çaları"
+
 #. Translators: This is a mark in the Grayscale scale
-#: panels/universal-access/cc-ua-zoom-page.blp:242
+#: panels/universal-access/cc-ua-zoom-page.blp:262
 msgid "Full"
 msgstr "Tam"
 
@@ -8454,7 +8493,7 @@ msgstr "Planşet tapılmadı"
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Zəhmət olmasa, Wacom planşetinizi qoşun və ya aktiv edin"
 
-#: panels/wacom/cc-wacom-stylus-action-dialog.blp:100 panels/wacom/cc-wacom-stylus-action-dialog.blp:132 panels/wacom/cc-wacom-stylus-page.c:396
+#: panels/wacom/cc-wacom-stylus-action-dialog.blp:100 panels/wacom/cc-wacom-stylus-action-dialog.blp:132 panels/wacom/cc-wacom-stylus-page.c:485
 msgid "Assign Keystroke"
 msgstr "Düymə kombinasiyası təyin et"
 
@@ -8473,55 +8512,83 @@ msgid "Button %d Mapping"
 msgstr "%d düyməsinin təyinatı"
 
 #: panels/wacom/cc-wacom-stylus-page.blp:17
+msgid "Tip Pressure"
+msgstr ""
+
+#: panels/wacom/cc-wacom-stylus-page.blp:20
 msgid "Tip _Pressure Feel"
 msgstr "Ucluq _təzyiq həssaslığı"
 
 #. Translators: This is a mark in the 'Tip Pressure Feel' scale
 #. Translators: This is a mark in the 'Erase Pressure Feel' scale
-#: panels/wacom/cc-wacom-stylus-page.blp:26 panels/wacom/cc-wacom-stylus-page.blp:68
+#: panels/wacom/cc-wacom-stylus-page.blp:29 panels/wacom/cc-wacom-stylus-page.blp:83
 msgid "Soft"
 msgstr "Yumşaq"
 
 #. Translators: This is a mark in the 'Tip Pressure Feel' scale
 #. Translators: This is a mark in the 'Erase Pressure Feel' scale
-#: panels/wacom/cc-wacom-stylus-page.blp:29 panels/wacom/cc-wacom-stylus-page.blp:71
+#: panels/wacom/cc-wacom-stylus-page.blp:32 panels/wacom/cc-wacom-stylus-page.blp:86
 msgid "Firm"
 msgstr "Bərk"
 
-#: panels/wacom/cc-wacom-stylus-page.blp:41
-msgid "Button _1"
-msgstr "_1-ci düymə"
+#: panels/wacom/cc-wacom-stylus-page.blp:44
+msgid "Tip Pressure _Floor"
+msgstr ""
 
-#: panels/wacom/cc-wacom-stylus-page.blp:47
-msgid "Button _2"
-msgstr "_2-ci düymə"
+#: panels/wacom/cc-wacom-stylus-page.blp:57
+msgid "Tip Pressure _Ceiling"
+msgstr ""
 
-#: panels/wacom/cc-wacom-stylus-page.blp:53
-msgid "Button _3"
-msgstr "_3-cü düymə"
+#: panels/wacom/cc-wacom-stylus-page.blp:71
+msgid "Eraser Pressure"
+msgstr ""
 
-#: panels/wacom/cc-wacom-stylus-page.blp:59
+#: panels/wacom/cc-wacom-stylus-page.blp:74
 msgid "_Eraser Pressure Feel"
 msgstr "_Pozan təzyiq həssaslığı"
 
-#: panels/wacom/cc-wacom-stylus-page.c:379
+#: panels/wacom/cc-wacom-stylus-page.blp:98
+msgid "Eraser Pressure _Floor"
+msgstr ""
+
+#: panels/wacom/cc-wacom-stylus-page.blp:111
+msgid "Eraser Pressure _Ceiling"
+msgstr ""
+
+#: panels/wacom/cc-wacom-stylus-page.blp:125
+msgid "Pen Buttons"
+msgstr "Qələm düymələri"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:128
+msgid "Button _1"
+msgstr "_1-ci düymə"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:134
+msgid "Button _2"
+msgstr "_2-ci düymə"
+
+#: panels/wacom/cc-wacom-stylus-page.blp:140
+msgid "Button _3"
+msgstr "_3-cü düymə"
+
+#: panels/wacom/cc-wacom-stylus-page.c:468
 msgid "Left Mousebutton Click"
 msgstr "Sol siçan düyməsi kliklənməsi"
 
-#: panels/wacom/cc-wacom-stylus-page.c:382
+#: panels/wacom/cc-wacom-stylus-page.c:471
 msgid "Middle Mousebutton Click"
 msgstr "Orta siçan düyməsi kliklənməsi"
 
-#: panels/wacom/cc-wacom-stylus-page.c:385
+#: panels/wacom/cc-wacom-stylus-page.c:474
 msgid "Right Mousebutton Click"
 msgstr "Sağ siçan düyməsi kliklənməsi"
 
 #. Translators: this is the "go forward" action of a button
-#: panels/wacom/cc-wacom-stylus-page.c:393
+#: panels/wacom/cc-wacom-stylus-page.c:482
 msgid "Forward"
 msgstr "İrəli"
 
-#: panels/wacom/cc-wacom-stylus-page.c:399
+#: panels/wacom/cc-wacom-stylus-page.c:488
 msgid "Switch Monitor"
 msgstr "Monitoru dəyiş"
 
@@ -8598,51 +8665,51 @@ msgstr "Öncəki həftə"
 msgid "Next Week"
 msgstr "Növbəti həftə"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:209
+#: panels/wellbeing/cc-screen-time-statistics-row.c:213
 msgctxt "abbreviated weekday name for Sunday"
 msgid "S"
 msgstr "B"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:210
+#: panels/wellbeing/cc-screen-time-statistics-row.c:214
 msgctxt "abbreviated weekday name for Monday"
 msgid "M"
 msgstr "B.e"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:211
+#: panels/wellbeing/cc-screen-time-statistics-row.c:215
 msgctxt "abbreviated weekday name for Tuesday"
 msgid "T"
 msgstr "Ç.a"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:212
+#: panels/wellbeing/cc-screen-time-statistics-row.c:216
 msgctxt "abbreviated weekday name for Wednesday"
 msgid "W"
 msgstr "Ç"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:213
+#: panels/wellbeing/cc-screen-time-statistics-row.c:217
 msgctxt "abbreviated weekday name for Thursday"
 msgid "T"
 msgstr "C.a"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:214
+#: panels/wellbeing/cc-screen-time-statistics-row.c:218
 msgctxt "abbreviated weekday name for Friday"
 msgid "F"
 msgstr "C"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:215
+#: panels/wellbeing/cc-screen-time-statistics-row.c:219
 msgctxt "abbreviated weekday name for Saturday"
 msgid "S"
 msgstr "Ş"
 
 #. Translators: This is a duration in minutes, for example ‘15m’ for 15 minutes.
 #. * Use whatever shortest unit label is used for minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:360
+#: panels/wellbeing/cc-screen-time-statistics-row.c:388
 #, c-format
 msgid "%um"
 msgstr "%udəq."
 
 #. Translators: This is a duration in hours, for example ‘2h’ for 2 hours.
 #. * Use whatever shortest unit label is used for hours in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:364
+#: panels/wellbeing/cc-screen-time-statistics-row.c:392
 #, c-format
 msgid "%uh"
 msgstr "%u saat"
@@ -8650,80 +8717,80 @@ msgstr "%u saat"
 #. Translators: This is a duration in hours and minutes, for example
 #. * ‘3h 15m’ for 3 hours and 15 minutes. Use whatever shortest unit label
 #. * is used for hours and minutes in your locale.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:369
+#: panels/wellbeing/cc-screen-time-statistics-row.c:397
 #, c-format
 msgid "%uh %um"
 msgstr "%u saat %u dəqiqə"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:617 panels/wellbeing/cc-screen-time-statistics-row.c:724
+#: panels/wellbeing/cc-screen-time-statistics-row.c:659 panels/wellbeing/cc-screen-time-statistics-row.c:766
 #, c-format
 msgid "Failed to load session history file ‘%s’: %s"
 msgstr "\"%s\" seans tarixçəsi faylı yüklənə bilmədi: %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:617
+#: panels/wellbeing/cc-screen-time-statistics-row.c:659
 msgid "Invalid file structure"
 msgstr "Etibarsız fayl strukturu"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:651
+#: panels/wellbeing/cc-screen-time-statistics-row.c:693
 #, c-format
 msgid "Failed to load session history file: %s"
 msgstr "Seans tarixçəsi faylı yüklənə bilmədi: %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:651 panels/wellbeing/cc-screen-time-statistics-row.c:724
+#: panels/wellbeing/cc-screen-time-statistics-row.c:693 panels/wellbeing/cc-screen-time-statistics-row.c:766
 msgid "File is empty"
 msgstr "Fayl boşdur"
 
 #. G_DATE_BAD_WEEKDAY
-#: panels/wellbeing/cc-screen-time-statistics-row.c:851
+#: panels/wellbeing/cc-screen-time-statistics-row.c:893
 msgid "Average Monday"
 msgstr "Ortalama bazar ertəsi"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:851
+#: panels/wellbeing/cc-screen-time-statistics-row.c:893
 msgid "Average Tuesday"
 msgstr "Ortalama çərşənbə axşamı"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:851
+#: panels/wellbeing/cc-screen-time-statistics-row.c:893
 msgid "Average Wednesday"
 msgstr "Ortalama çərşənbə"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:851
+#: panels/wellbeing/cc-screen-time-statistics-row.c:893
 msgid "Average Thursday"
 msgstr "Ortalama cümə axşamı"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:852
+#: panels/wellbeing/cc-screen-time-statistics-row.c:894
 msgid "Average Friday"
 msgstr "Ortalama cümə"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:852
+#: panels/wellbeing/cc-screen-time-statistics-row.c:894
 msgid "Average Saturday"
 msgstr "Ortalama şənbə"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:853
+#: panels/wellbeing/cc-screen-time-statistics-row.c:895
 msgid "Average Sunday"
 msgstr "Ortalama bazar"
 
 #. Translators: This a medium-length date, for example ‘15 April’
-#: panels/wellbeing/cc-screen-time-statistics-row.c:904
+#: panels/wellbeing/cc-screen-time-statistics-row.c:946
 msgid "%-d %B"
 msgstr "%-d %B"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:914 panels/wellbeing/cc-screen-time-statistics-row.c:927
+#: panels/wellbeing/cc-screen-time-statistics-row.c:956 panels/wellbeing/cc-screen-time-statistics-row.c:969
 msgid "No Data"
 msgstr "Məlumat yoxdur"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:930
+#: panels/wellbeing/cc-screen-time-statistics-row.c:972
 #, c-format
 msgid "This Week"
 msgstr "Bu həftə"
 
 #. Translators: This is a range of days within a given month.
 #. * For example ‘20–27 April’. The dash is an en-dash.
-#: panels/wellbeing/cc-screen-time-statistics-row.c:941
+#: panels/wellbeing/cc-screen-time-statistics-row.c:983
 #, c-format
 msgid "%u–%u %s"
 msgstr "%u–%u %s"
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:959
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1001
 #, c-format
 msgid "%u %s–%u %s"
 msgstr "%u %s–%u %s"
@@ -8733,7 +8800,7 @@ msgstr "%u %s–%u %s"
 #. * preferred date representation for the current locale without the time).
 #. * The second placeholder is a formatted time duration (for example,
 #. * ‘3 hours’ or ‘25 minutes’).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1017
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1059
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s. A line is overlayed at the %s mark to indicate the configured screen time limit."
 msgstr "%s tarixindən başlayan həftə ərzində ekranın vaxtını göstərən sütunlu diaqram. Müəyyən edilmiş ekran vaxtı limitini göstərmək üçün %s səviyyəsində üfüqi xətt çəkilib."
@@ -8741,12 +8808,12 @@ msgstr "%s tarixindən başlayan həftə ərzində ekranın vaxtını göstərə
 #. Translators: The placeholder is a formatted date string (formatted
 #. * using the `%x` strftime placeholder, which gives the preferred date
 #. * representation for the current locale without the time).
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1034
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1076
 #, c-format
 msgid "Bar chart of screen time usage over the week starting %s."
 msgstr "%s tarixindən başlayan həftə ərzində ekran vaxtı istifadəsinin sütunlu diaqramı."
 
-#: panels/wellbeing/cc-screen-time-statistics-row.c:1038
+#: panels/wellbeing/cc-screen-time-statistics-row.c:1080
 #, c-format
 msgid "Placeholder for a bar chart of screen time usage. No data is currently available."
 msgstr "Ekran vaxtı istifadəsinin sütunlu diaqramı üçün yer tutucu. Hazırda heç bir məlumat mövcud deyil."
