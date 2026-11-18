@@ -152,6 +152,24 @@ set_restart_notification_visible (CcRegionPage *self, const gchar *locale, gbool
 
 static void maybe_notify (CcRegionPage *self);
 static void update_user_region_row (CcRegionPage *self);
+static void update_login_language (CcRegionPage *self);
+
+static void
+set_localed_locale_cb (GObject *source, GAsyncResult *res, gpointer user_data)
+{
+    CcRegionPage *self = user_data;
+    g_autoptr(GError) error = NULL;
+    g_autoptr(GVariant) retval = NULL;
+
+    retval = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
+    if (!retval) {
+        if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+            g_warning ("Failed to set system locale: %s", error->message);
+        return;
+    }
+
+    update_login_language (self);
+}
 
 static void
 set_localed_locale (CcRegionPage *self)
@@ -183,8 +201,8 @@ set_localed_locale (CcRegionPage *self)
     paper_value = g_strconcat ("LC_PAPER=", region, NULL);
     g_variant_builder_add (b, "s", paper_value);
 
-    g_dbus_proxy_call (self->localed, "SetLocale", g_variant_new ("(asb)", b, TRUE), G_DBUS_CALL_FLAGS_NONE, -1, NULL,
-                       NULL, NULL);
+    g_dbus_proxy_call (self->localed, "SetLocale", g_variant_new ("(asb)", b, TRUE), G_DBUS_CALL_FLAGS_NONE, -1,
+                       self->cancellable, set_localed_locale_cb, self);
 }
 
 static void
