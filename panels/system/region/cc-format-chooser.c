@@ -54,7 +54,6 @@ struct _CcFormatChooser {
     gboolean no_results;
     gchar *region;
     gchar *region_group_title;
-    gchar *preview_region;
     gchar **filter_words;
 };
 
@@ -174,7 +173,6 @@ preview_button_clicked_cb (CcFormatChooser *self, GtkWidget *button)
 {
     GtkWidget *row;
     const gchar *region;
-    const gchar *locale_name;
 
     g_assert (CC_IS_FORMAT_CHOOSER (self));
     g_assert (GTK_IS_WIDGET (button));
@@ -183,9 +181,7 @@ preview_button_clicked_cb (CcFormatChooser *self, GtkWidget *button)
     g_assert (row);
 
     region = g_object_get_data (G_OBJECT (row), "locale-id");
-    cc_format_preview_set_region (self->format_preview, region);
-    locale_name = g_object_get_data (G_OBJECT (row), "locale-name");
-    gtk_label_set_label (self->preview_title_label, locale_name);
+    set_locale_id (self, region);
 
     adw_overlay_split_view_set_show_sidebar (self->split_view, TRUE);
 }
