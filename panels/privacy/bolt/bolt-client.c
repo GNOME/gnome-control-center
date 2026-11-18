@@ -91,15 +91,19 @@ bolt_client_class_init (BoltClientClass *klass)
 
     proxy_class->get_dbus_signals = bolt_client_get_dbus_signals;
 
+    /* The nick of each property is the name of the corresponding D-Bus
+     * property. bolt-proxy.c uses it to look up the cached value. It must
+     * not be set to NULL. */
     props[PROP_VERSION] =
-        g_param_spec_uint ("version", NULL, NULL, 0, G_MAXUINT, 0, G_PARAM_READABLE | G_PARAM_STATIC_NAME);
+        g_param_spec_uint ("version", "Version", NULL, 0, G_MAXUINT, 0, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
-    props[PROP_PROBING] = g_param_spec_boolean ("probing", NULL, NULL, FALSE, G_PARAM_READABLE | G_PARAM_STATIC_NAME);
+    props[PROP_PROBING] =
+        g_param_spec_boolean ("probing", "Probing", NULL, FALSE, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
-    props[PROP_SECURITY] = g_param_spec_enum ("security-level", NULL, NULL, BOLT_TYPE_SECURITY, BOLT_SECURITY_UNKNOWN,
-                                              G_PARAM_READABLE | G_PARAM_STATIC_NAME);
+    props[PROP_SECURITY] = g_param_spec_enum ("security-level", "SecurityLevel", NULL, BOLT_TYPE_SECURITY,
+                                              BOLT_SECURITY_UNKNOWN, G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
-    props[PROP_AUTHMODE] = g_param_spec_flags ("auth-mode", NULL, NULL, BOLT_TYPE_AUTH_MODE, BOLT_AUTH_ENABLED,
+    props[PROP_AUTHMODE] = g_param_spec_flags ("auth-mode", "AuthMode", NULL, BOLT_TYPE_AUTH_MODE, BOLT_AUTH_ENABLED,
                                                G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
     g_object_class_install_properties (gobject_class, PROP_LAST, props);
