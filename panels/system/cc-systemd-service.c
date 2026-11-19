@@ -59,6 +59,20 @@ cc_get_service_state (const char *service, GBusType bus_type)
     return CC_SERVICE_STATE_NOT_FOUND;
 }
 
+static void
+reload_systemd (GDBusConnection *connection)
+{
+    g_autoptr(GError) error = NULL;
+    g_autoptr(GVariant) reload_result = NULL;
+
+    reload_result = g_dbus_connection_call_sync (connection, "org.freedesktop.systemd1", "/org/freedesktop/systemd1",
+                                                 "org.freedesktop.systemd1.Manager", "Reload", NULL,
+                                                 (GVariantType *) "()", G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+
+    if (!reload_result)
+        g_warning ("Failed to reload systemd: %s", error->message);
+}
+
 gboolean
 cc_enable_service (const char *service, GBusType bus_type, GError **error)
 {
@@ -82,6 +96,8 @@ cc_enable_service (const char *service, GBusType bus_type, GError **error)
         g_prefix_error_literal (error, "Failed to enable service: ");
         return FALSE;
     }
+
+    reload_systemd (connection);
 
     start_result = g_dbus_connection_call_sync (connection, "org.freedesktop.systemd1", "/org/freedesktop/systemd1",
                                                 "org.freedesktop.systemd1.Manager", "StartUnit",
@@ -128,6 +144,8 @@ cc_disable_service (const char *service, GBusType bus_type, GError **error)
         g_prefix_error_literal (error, "Failed to disable service: ");
         return FALSE;
     }
+
+    reload_systemd (connection);
 
     return TRUE;
 }
