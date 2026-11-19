@@ -63,23 +63,13 @@ gboolean
 cc_enable_service (const char *service, GBusType bus_type, GError **error)
 {
     g_autoptr(GDBusConnection) connection = NULL;
-    g_autoptr(GVariant) start_result = NULL;
     g_autoptr(GVariant) enable_result = NULL;
+    g_autoptr(GVariant) start_result = NULL;
     const char *service_list[] = { service, NULL };
 
     connection = g_bus_get_sync (bus_type, NULL, error);
     if (!connection) {
         g_prefix_error_literal (error, "Failed connecting to D-Bus system bus: ");
-        return FALSE;
-    }
-
-    start_result = g_dbus_connection_call_sync (connection, "org.freedesktop.systemd1", "/org/freedesktop/systemd1",
-                                                "org.freedesktop.systemd1.Manager", "StartUnit",
-                                                g_variant_new ("(ss)", service, "replace"), (GVariantType *) "(o)",
-                                                G_DBUS_CALL_FLAGS_NONE, -1, NULL, error);
-
-    if (!start_result) {
-        g_prefix_error_literal (error, "Failed to start service: ");
         return FALSE;
     }
 
@@ -90,6 +80,16 @@ cc_enable_service (const char *service, GBusType bus_type, GError **error)
 
     if (!enable_result) {
         g_prefix_error_literal (error, "Failed to enable service: ");
+        return FALSE;
+    }
+
+    start_result = g_dbus_connection_call_sync (connection, "org.freedesktop.systemd1", "/org/freedesktop/systemd1",
+                                                "org.freedesktop.systemd1.Manager", "StartUnit",
+                                                g_variant_new ("(ss)", service, "replace"), (GVariantType *) "(o)",
+                                                G_DBUS_CALL_FLAGS_NONE, -1, NULL, error);
+
+    if (!start_result) {
+        g_prefix_error_literal (error, "Failed to start service: ");
         return FALSE;
     }
 
