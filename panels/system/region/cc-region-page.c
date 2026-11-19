@@ -153,6 +153,8 @@ set_restart_notification_visible (CcRegionPage *self, const gchar *locale, gbool
 static void maybe_notify (CcRegionPage *self);
 static void update_user_region_row (CcRegionPage *self);
 static void update_login_language (CcRegionPage *self);
+static void on_localed_properties_changed (GDBusProxy *localed_proxy, GVariant *changed_properties,
+                                           const gchar **invalidated_properties, CcRegionPage *self);
 
 static void
 set_localed_locale_cb (GObject *source, GAsyncResult *res, gpointer user_data)
@@ -163,8 +165,13 @@ set_localed_locale_cb (GObject *source, GAsyncResult *res, gpointer user_data)
 
     retval = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
     if (!retval) {
-        if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-            g_warning ("Failed to set system locale: %s", error->message);
+        if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+            return;
+
+        g_warning ("Failed to set system locale: %s", error->message);
+
+        /* The "SetLocale" call failed, so we need to reset to the system's current state from the cache. */
+        on_localed_properties_changed (self->localed, NULL, NULL, self);
         return;
     }
 
