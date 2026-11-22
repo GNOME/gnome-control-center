@@ -19,6 +19,7 @@
 
 #include "cc-level-bar.h"
 #include "gvc-mixer-sink.h"
+#include "gvc-mixer-source.h"
 #include "gvc-mixer-stream-private.h"
 
 struct _CcLevelBar {
@@ -178,7 +179,7 @@ cc_level_bar_set_stream (CcLevelBar *self, GvcMixerStream *stream, CcStreamType 
     pa_stream_set_read_callback (self->level_stream, read_cb, self);
     pa_stream_set_suspended_callback (self->level_stream, suspended_cb, self);
 
-    if (type == CC_STREAM_TYPE_INPUT) {
+    if (type == CC_STREAM_TYPE_INPUT && !GVC_IS_MIXER_SOURCE (stream)) {
         guint sink_idx = gvc_mixer_stream_get_id (stream);
         pa_stream_set_monitor_stream (self->level_stream, sink_idx);
     }
