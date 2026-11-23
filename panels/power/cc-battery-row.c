@@ -219,6 +219,7 @@ cc_battery_row_new (UpDevice *device, gboolean primary)
     guint64 time_empty, time_full, time;
     gdouble energy_full, energy_rate;
     gboolean is_kind_battery;
+    gboolean is_unreachable;
     UpDeviceLevel battery_level;
 
     self = g_object_new (CC_TYPE_BATTERY_ROW, NULL);
@@ -233,6 +234,7 @@ cc_battery_row_new (UpDevice *device, gboolean primary)
         time = time_full;
 
     is_kind_battery = (kind == UP_DEVICE_KIND_BATTERY || kind == UP_DEVICE_KIND_UPS);
+    is_unreachable = (battery_level == UP_DEVICE_LEVEL_UNKNOWN);
 
     /* Name label */
     if (is_kind_battery) {
@@ -255,7 +257,12 @@ cc_battery_row_new (UpDevice *device, gboolean primary)
         gtk_widget_set_visible (GTK_WIDGET (self->icon), FALSE);
 
     /* Percentage label */
-    if (battery_level == UP_DEVICE_LEVEL_NONE) {
+    if (is_unreachable) {
+        gtk_label_set_text (self->percentage_label, _("Disconnected"));
+        gtk_label_set_text (self->primary_percentage_label, _("Disconnected"));
+
+        gtk_widget_set_hexpand (GTK_WIDGET (self->percentage_label), TRUE);
+    } else if (battery_level == UP_DEVICE_LEVEL_NONE) {
         /* TRANSLATORS: This is the battery charge level percentage (e.g. 50%). This could be localized to account for
          * local Percent sign formatting guidelines. See https://en.wikipedia.org/wiki/Percent_sign#Correct_style */
         s = g_strdup_printf (_("%d %%"), (int) percentage);
@@ -264,11 +271,15 @@ cc_battery_row_new (UpDevice *device, gboolean primary)
     }
 
     /* Level bar */
-    gtk_level_bar_set_value (self->levelbar, percentage / 100.0);
+    gtk_widget_set_visible (GTK_WIDGET (self->levelbar), !is_unreachable);
+    if (!is_unreachable)
+        gtk_level_bar_set_value (self->levelbar, percentage / 100.0);
 
     /* Details label (primary only) */
     details = get_details_string (percentage, state, time);
     gtk_label_set_text (self->details_label, details);
+
+    gtk_widget_set_sensitive (GTK_WIDGET (self), !is_unreachable);
 
     /* Handle "primary" row differently */
     gtk_widget_set_visible (GTK_WIDGET (self->battery_box), !primary);
