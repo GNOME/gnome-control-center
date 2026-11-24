@@ -249,10 +249,15 @@ on_open_address_button_clicked (PpDetailsDialog *self)
 {
     g_autoptr(GFile) file = NULL;
     g_autoptr(GtkFileLauncher) launcher = NULL;
-    g_autofree gchar *printer_url;
+    g_autofree gchar *printer_url = NULL;
+    const gchar *subtitle;
     GtkWindow *toplevel;
 
-    printer_url = g_strdup_printf ("http://%s", adw_action_row_get_subtitle (self->printer_address_row));
+    subtitle = adw_action_row_get_subtitle (self->printer_address_row);
+    if (subtitle == NULL || subtitle[0] == '\0')
+        return;
+
+    printer_url = g_strdup_printf ("http://%s", subtitle);
     file = g_file_new_for_uri (printer_url);
     launcher = gtk_file_launcher_new (file);
     toplevel = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
@@ -328,8 +333,12 @@ pp_details_dialog_new (gchar *printer_name, gchar *printer_location, gchar *prin
 
     adw_window_title_set_subtitle (self->title_widget, printer_name);
 
-    printer_url = g_strdup_printf ("%s:%d", printer_address, ippPort ());
-    adw_action_row_set_subtitle (self->printer_address_row, printer_url);
+    if (printer_address != NULL && printer_address[0] != '\0') {
+        printer_url = g_strdup_printf ("%s:%d", printer_address, ippPort ());
+        adw_action_row_set_subtitle (self->printer_address_row, printer_url);
+    } else {
+        gtk_widget_set_visible (GTK_WIDGET (self->printer_address_row), FALSE);
+    }
 
     gtk_editable_set_text (GTK_EDITABLE (self->printer_name_entry), printer_name);
     gtk_editable_set_text (GTK_EDITABLE (self->printer_location_entry), printer_location);
